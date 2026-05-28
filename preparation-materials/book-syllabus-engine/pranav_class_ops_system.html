@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VC Gurukul — Class Operations System | Pranav Sir</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4ef; color: #1a1a18; line-height: 1.6; }
+.header { background: #1a1a18; color: #f5f4ef; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.header-title { font-size: 16px; font-weight: 500; }
+.header-sub { font-size: 12px; color: #888; }
+.tabs { display: flex; gap: 6px; padding: 1rem 1.5rem 0; flex-wrap: wrap; background: #f5f4ef; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 10; }
+.tab { padding: 7px 14px; border-radius: 8px 8px 0 0; border: 1px solid #ddd; border-bottom: none; font-size: 13px; cursor: pointer; background: #eae9e3; color: #666; transition: all 0.15s; }
+.tab.active { background: #fff; color: #1a1a18; font-weight: 500; border-color: #ccc; }
+.tab:hover:not(.active) { background: #e0dfda; }
+.main { padding: 1.5rem; max-width: 900px; }
+.panel { display: none; }
+.panel.active { display: block; }
+.card { background: #fff; border: 1px solid #e0dfd9; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+.card-title { font-size: 14px; font-weight: 500; color: #1a1a18; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+.badge { font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 500; }
+.badge-offline { background: #dbeafe; color: #1e40af; }
+.badge-online { background: #dcfce7; color: #166534; }
+.badge-both { background: #fef3c7; color: #92400e; }
+.checklist-item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0efe9; font-size: 14px; line-height: 1.5; }
+.checklist-item:last-child { border-bottom: none; }
+.check-circle { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid #ccc; flex-shrink: 0; margin-top: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.check-circle.done { background: #1D9E75; border-color: #1D9E75; }
+.check-circle.done::after { content: '✓'; color: white; font-size: 11px; font-weight: 700; }
+.item-mode { font-size: 11px; margin-top: 3px; display: flex; gap: 4px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+.section-label { font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin: 1.25rem 0 0.5rem; }
+.quote-item { padding: 11px 0; border-bottom: 1px solid #f0efe9; font-size: 13px; }
+.quote-item:last-child { border-bottom: none; }
+.quote-text { font-style: italic; color: #1a1a18; line-height: 1.6; margin-bottom: 4px; }
+.quote-source { font-size: 11px; color: #888; }
+.quote-tag { font-size: 10px; padding: 1px 7px; border-radius: 4px; margin-left: 5px; background: #f0efe9; color: #666; }
+.search-bar { width: 100%; padding: 9px 13px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; background: #fff; color: #1a1a18; margin-bottom: 0.75rem; outline: none; }
+.search-bar:focus { border-color: #999; }
+.template-box { background: #f5f4ef; border-radius: 8px; padding: 0.875rem; font-size: 13px; color: #1a1a18; line-height: 1.8; white-space: pre-wrap; font-family: 'SF Mono', 'Fira Mono', monospace; border-left: 3px solid #1D9E75; }
+.flow-step { display: flex; align-items: flex-start; gap: 12px; padding: 9px 0; border-bottom: 1px solid #f0efe9; }
+.flow-step:last-child { border-bottom: none; }
+.step-num { width: 26px; height: 26px; border-radius: 50%; background: #f0efe9; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; color: #555; }
+.step-title { font-size: 14px; font-weight: 500; color: #1a1a18; }
+.step-desc { font-size: 13px; color: #666; margin-top: 3px; line-height: 1.5; }
+.hw-field { margin-bottom: 0.75rem; }
+.hw-label { font-size: 12px; color: #888; margin-bottom: 3px; }
+.hw-val { font-size: 13px; color: #1a1a18; background: #f5f4ef; border-radius: 7px; padding: 7px 11px; line-height: 1.5; }
+.cs-row { display: flex; align-items: stretch; gap: 0; }
+.cs-time { width: 72px; font-size: 12px; color: #888; padding: 10px 8px 10px 0; flex-shrink: 0; text-align: right; }
+.cs-line { width: 2px; background: #e0dfd9; flex-shrink: 0; position: relative; }
+.cs-dot { width: 12px; height: 12px; border-radius: 50%; position: absolute; left: -5px; top: 11px; border: 2px solid #f5f4ef; }
+.cs-content { flex: 1; padding: 8px 0 12px 18px; }
+.cs-title { font-size: 14px; font-weight: 500; color: #1a1a18; }
+.cs-sub { font-size: 13px; color: #666; margin-top: 3px; }
+.week-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+@media (max-width: 600px) { .week-grid { grid-template-columns: repeat(3, 1fr); } }
+.day-card { border-radius: 8px; border: 1px solid #e0dfd9; padding: 9px; background: #fff; }
+.day-name { font-size: 11px; font-weight: 600; color: #888; margin-bottom: 5px; }
+.day-task { font-size: 11px; color: #1a1a18; line-height: 1.5; }
+.insta-two { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 600px) { .insta-two { grid-template-columns: 1fr; } }
+.count-label { font-size: 12px; color: #888; margin-bottom: 0.75rem; }
+.scrollable { max-height: 520px; overflow-y: auto; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-title">VC Gurukul — Class Operations System</div>
+    <div class="header-sub">Pranav Pratik Tulshyan | CA Inter Accounts | Batch July 13, 2025</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('checklist',this)">Daily Checklist</div>
+  <div class="tab" onclick="switchTab('structure',this)">Class Structure</div>
+  <div class="tab" onclick="switchTab('quotes',this)">Quote Bank</div>
+  <div class="tab" onclick="switchTab('verses',this)">Gita Verses</div>
+  <div class="tab" onclick="switchTab('insta',this)">Insta Pipeline</div>
+  <div class="tab" onclick="switchTab('homework',this)">Homework Format</div>
+  <div class="tab" onclick="switchTab('messages',this)">Message Templates</div>
+  <div class="tab" onclick="switchTab('weekly',this)">Weekly Rhythm</div>
+</div>
+
+<div class="main">
+
+<!-- CHECKLIST -->
+<div id="checklist" class="panel active">
+  <div class="section-label">60 minutes before class</div>
+  <div class="card"><div id="pre60"></div></div>
+  <div class="section-label">15 minutes before class</div>
+  <div class="card"><div id="pre15"></div></div>
+  <div class="section-label">Immediately after class</div>
+  <div class="card"><div id="post"></div></div>
+</div>
+
+<!-- CLASS STRUCTURE -->
+<div id="structure" class="panel">
+  <div class="section-label">Fixed class structure — every session</div>
+  <div class="card"><div id="class-flow"></div></div>
+  <div class="section-label">Offline vs online execution</div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><span class="badge badge-offline">Offline</span> Muzaffarpur classroom</div>
+      <div style="font-size:13px;line-height:1.8;color:#333;">
+        • Projector/TV plays quote slide → you read aloud<br>
+        • Whiteboard for diagrams; camera captures for stream<br>
+        • Mid-break: 5 reels played from phone via projector/TV<br>
+        • Physical homework sheet given at end of class<br>
+        • Gita verse on screen + read aloud to close<br>
+        • Camera angle: wide enough to capture board + face<br>
+        • Recording operator manages file handoff after class
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge badge-online">Online</span> Live stream</div>
+      <div style="font-size:13px;line-height:1.8;color:#333;">
+        • Quote shown as screen graphic / overlay<br>
+        • Diagrams screenshared (tablet or whiteboard cam)<br>
+        • Mid-break: same 5 reels screenshared to live viewers<br>
+        • PDF shared on Telegram 30 min before class starts<br>
+        • Gita verse as closing screen graphic<br>
+        • Recording auto-uploaded same day (for absentees)<br>
+        • Naming: CA-Inter-Accounts_[Date]_[Topic]_PPT
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTES -->
+<div id="quotes" class="panel">
+  <input class="search-bar" type="text" placeholder="Search quotes by text, source, or tag..." oninput="filterQuotes(this.value)">
+  <div class="count-label" id="quote-count"></div>
+  <div class="card scrollable"><div id="quote-list"></div></div>
+</div>
+
+<!-- VERSES -->
+<div id="verses" class="panel">
+  <input class="search-bar" type="text" placeholder="Search by reference, Sanskrit, or meaning..." oninput="filterVerses(this.value)">
+  <div class="count-label" id="verse-count"></div>
+  <div class="card scrollable"><div id="verse-list"></div></div>
+</div>
+
+<!-- INSTA PIPELINE -->
+<div id="insta" class="panel">
+  <div class="section-label">Submission flow — offline + online</div>
+  <div class="insta-two">
+    <div class="card">
+      <div class="card-title"><span class="badge badge-offline">Offline</span> Students</div>
+      <div class="flow-step"><div class="step-num">1</div><div><div class="step-title">WhatsApp group</div><div class="step-desc">Students send reel links with "Insta Submit 🎬" by 10 PM night before class</div></div></div>
+      <div class="flow-step"><div class="step-num">2</div><div><div class="step-title">You curate 5</div><div class="step-desc">Pick funniest/most trending from combined offline+online pool. Save to phone Notes.</div></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div><div class="step-title">Mid-class on projector</div><div class="step-desc">Phone → screen mirror → projector/TV. Play each reel. Class reacts. ~8 min total.</div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge badge-online">Online</span> Students</div>
+      <div class="flow-step"><div class="step-num">1</div><div><div class="step-title">Telegram group</div><div class="step-desc">Online students submit in Telegram with "Insta Submit 🎬" by 10 PM night before</div></div></div>
+      <div class="flow-step"><div class="step-num">2</div><div><div class="step-title">Same 5 reels</div><div class="step-desc">Pick from combined pool. Both batches watch identical 5 reels. No separate curation needed.</div></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div><div class="step-title">Mid-class: screenshare</div><div class="step-desc">Screenshare phone/browser to stream. Online students watch with offline class in real time.</div></div></div>
+    </div>
+  </div>
+  <div class="section-label">Submission rules — post in all groups</div>
+  <div class="card"><div class="template-box">📲 INSTA BREAK RULES
+
+• Submit 1 reel per student per class
+• Tag it exactly: "Insta Submit 🎬"
+• Deadline: 10 PM the night before class
+• No offensive / inappropriate content
+• Funniest, most trending = highest chance of being picked
+• If your reel gets played, you get class shoutout 🎉
+• Pranav sir picks final 5 — decision is final</div></div>
+
+  <div class="section-label">MCQ portal workflow</div>
+  <div class="card">
+    <div class="flow-step"><div class="step-num">1</div><div><div class="step-title">Post-class assignment</div><div class="step-desc">Post-class message specifies MCQ set — linked to today's topic. Portal link shared.</div></div></div>
+    <div class="flow-step"><div class="step-num">2</div><div><div class="step-title">Deadline: before next class</div><div class="step-desc">Students complete on portal. Scores auto-tracked. Evening reminder sent.</div></div></div>
+    <div class="flow-step"><div class="step-num">3</div><div><div class="step-title">Next class: top 3 called out</div><div class="step-desc">2-min recognition at class start. Questions where >30% failed → discussed briefly in class.</div></div></div>
+    <div class="flow-step"><div class="step-num">4</div><div><div class="step-title">Offline students</div><div class="step-desc">Same portal, mobile. No separate system. Offline and online on same leaderboard.</div></div></div>
+  </div>
+</div>
+
+<!-- HOMEWORK FORMAT -->
+<div id="homework" class="panel">
+  <div class="section-label">Standard homework sheet format</div>
+  <div class="card">
+    <div class="card-title">Template (offline: printed | online: PDF on Telegram)</div>
+    <div class="hw-field"><div class="hw-label">Header</div><div class="hw-val">VC Gurukul — CA Inter Accounts | Batch July 2025 | Pranav Sir</div></div>
+    <div class="hw-field"><div class="hw-label">Date & Topic</div><div class="hw-val">Date: [DD/MM] &nbsp;|&nbsp; Topic: [Chapter — Subtopic]</div></div>
+    <div class="hw-field"><div class="hw-label">Section A — Theory questions (10 marks)</div><div class="hw-val">2–3 short answer questions. Max 5 lines each. Write in your own words — no copying from notes.</div></div>
+    <div class="hw-field"><div class="hw-label">Section B — Practical problem (20 marks)</div><div class="hw-val">1–2 journal entry / ledger / adjustment problems. Show all working clearly. ICAI format.</div></div>
+    <div class="hw-field"><div class="hw-label">Section C — Exam question (10 marks)</div><div class="hw-val">1 past ICAI question from this topic. Attempt under timed conditions (15 min). No reference while solving.</div></div>
+    <div class="hw-field"><div class="hw-label">MCQ (portal — tracked separately)</div><div class="hw-val">Attempt [X] MCQs on portal by [time]. Topic: [same as today's class]</div></div>
+    <div class="hw-field"><div class="hw-label">Submission</div><div class="hw-val">Offline: physical copy, bring next class &nbsp;|&nbsp; Online: clear photo sent on Telegram by 9 PM</div></div>
+  </div>
+  <div class="section-label">Distribution & collection — offline vs online</div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><span class="badge badge-offline">Offline</span></div>
+      <div style="font-size:13px;line-height:1.8;color:#333;">
+        • Printed at home / print shop before class<br>
+        • Distributed at end of every class session<br>
+        • Extra copies kept for absentees<br>
+        • Collected next class — spot-check 8–10 copies<br>
+        • Class register tracks submission per student<br>
+        • Non-submitters called out by name in class
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge badge-online">Online</span></div>
+      <div style="font-size:13px;line-height:1.8;color:#333;">
+        • PDF shared on Telegram within 30 min of class end<br>
+        • Students print or attempt digitally<br>
+        • Photo submitted in Telegram group by 9 PM<br>
+        • Spot-check 6–8 submissions randomly per class<br>
+        • Non-submitters: name mentioned in next morning's message<br>
+        • Weekly submission rate tracked and shared Saturday
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MESSAGES -->
+<div id="messages" class="panel">
+  <div id="msg-list"></div>
+</div>
+
+<!-- WEEKLY RHYTHM -->
+<div id="weekly" class="panel">
+  <div class="section-label">Weekly class schedule (Mon–Sat)</div>
+  <div class="card">
+    <div class="week-grid" id="week-grid"></div>
+  </div>
+  <div class="section-label">Weekly operational rhythm</div>
+  <div class="card">
+    <div class="flow-step"><div class="step-num">Su</div><div><div class="step-title">Sunday — Plan the week</div><div class="step-desc">Confirm topics for all 6 classes. Prep/print homework sheets. Queue Telegram messages. Pick quote + verse for each day in advance.</div></div></div>
+    <div class="flow-step"><div class="step-num">M–F</div><div><div class="step-title">Class days — Teach → Post</div><div class="step-desc">Morning reminder → Class (quote → teach → Insta → teach → verse) → Post-class message with HW + MCQ within 30 min → Evening MCQ reminder.</div></div></div>
+    <div class="flow-step"><div class="step-num">Sa</div><div><div class="step-title">Saturday — Recap + Reset</div><div class="step-desc">Lighter class pace. Full week recap post. MCQ leaderboard posted. Weekend revision task given.</div></div></div>
+  </div>
+  <div class="section-label">Recording & upload schedule</div>
+  <div class="card">
+    <div style="font-size:13px;line-height:1.9;color:#333;">
+      <b>Offline recording:</b> Dedicated camera. Operator collects + processes file after class.<br>
+      <b>Live stream:</b> Simultaneous on YouTube / VC Gurukul platform. Auto-recorded.<br>
+      <b>Upload deadline:</b> Same day — recording live before 10 PM for absentees.<br>
+      <b>Naming convention:</b> CA-Inter-Accounts_[DDMMYYYY]_[Topic]_PPT<br>
+      <b>Folder structure:</b> Chapter-wise. Both offline + stream versions stored separately.<br>
+      <b>Online batch access:</b> Telegram link shared with recording within 30 min of upload.
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+const pre60 = [
+  {text:"Confirm today's topic and subtopics", modes:["Both"]},
+  {text:"Select opening motivational quote for today", modes:["Both"]},
+  {text:"Select closing Gita/scripture verse for today", modes:["Both"]},
+  {text:"Spot-check 8–10 homework copies from previous class", modes:["Both"]},
+  {text:"Print homework sheets for offline students", modes:["Offline"]},
+  {text:"Upload today's homework PDF to Telegram", modes:["Online"]},
+  {text:"Curate 5 Insta reels from overnight submissions", modes:["Both"]},
+  {text:"Save 5 reel links in phone Notes / browser tabs ready to play", modes:["Both"]},
+  {text:"Prepare reference diagrams / character sketches on paper", modes:["Both"]},
+  {text:"Check MCQ portal: confirm today's set is live and accessible", modes:["Both"]},
+  {text:"Send morning class reminder to WhatsApp group", modes:["Offline"]},
+  {text:"Send morning class reminder to Telegram group", modes:["Online"]},
+];
+const pre15 = [
+  {text:"Camera positioned — board + face both in frame", modes:["Offline"]},
+  {text:"Projector/TV on and input connected", modes:["Offline"]},
+  {text:"Phone screen mirror tested on projector (for reel playback)", modes:["Offline"]},
+  {text:"Stream setup checked — audio, video, internet stable", modes:["Online"]},
+  {text:"Opening quote slide ready on screen", modes:["Both"]},
+  {text:"Test recording — 30 seconds, play back to confirm audio", modes:["Both"]},
+  {text:"Marker, eraser, duster on board ledge", modes:["Offline"]},
+  {text:"Attendance sheet ready (offline) / Telegram poll posted (online)", modes:["Both"]},
+  {text:"Water bottle on desk", modes:["Both"]},
+];
+const postItems = [
+  {text:"Stop recording — save file immediately, do not close app", modes:["Offline"]},
+  {text:"Hand recording file to operator for processing and upload", modes:["Offline"]},
+  {text:"Send post-class message: HW, MCQ link, tomorrow's topic", modes:["Both"]},
+  {text:"Upload today's homework PDF to Telegram", modes:["Online"]},
+  {text:"Mark attendance in class register / confirm Telegram poll", modes:["Both"]},
+  {text:"Note any concept students struggled with today (2 lines)", modes:["Both"]},
+  {text:"Mark today's quote and verse as USED in the bank", modes:["Both"]},
+  {text:"Post MCQ evening reminder", modes:["Both"]},
+];
+
+function mkChecklist(items, containerId) {
+  document.getElementById(containerId).innerHTML = items.map(item => {
+    const badges = item.modes.map(m => `<span class="badge ${m==='Offline'?'badge-offline':m==='Online'?'badge-online':'badge-both'}">${m}</span>`).join(' ');
+    return `<div class="checklist-item">
+      <div class="check-circle" onclick="this.classList.toggle('done')" title="Mark done"></div>
+      <div><div>${item.text}</div><div class="item-mode">${badges}</div></div>
+    </div>`;
+  }).join('');
+}
+mkChecklist(pre60,'pre60');
+mkChecklist(pre15,'pre15');
+mkChecklist(postItems,'post');
+
+const classFlow = [
+  {time:'0:00', color:'#1D9E75', title:'Opening quote', sub:'Motivational quote — read aloud, ~60 sec. Offline: projected. Online: graphic overlay.'},
+  {time:'0:01', color:'#378ADD', title:'Concept teaching — Block 1', sub:'Characters, stories, whiteboard diagrams. Both batches watch live. ~40–45 min.'},
+  {time:'~0:45', color:'#BA7517', title:'Insta break — "Insta Me Kya Chal Raha Hai"', sub:'5 student-submitted reels. Offline: projector. Online: screenshare. ~8–10 min.'},
+  {time:'~0:55', color:'#378ADD', title:'Concept teaching — Block 2', sub:'Continues. Past question practice, problem solving. ~30–35 min.'},
+  {time:'End', color:'#533AB7', title:'Closing Gita / scripture verse', sub:'Read aloud + 1-line personal context. Offline: on screen. Online: graphic. ~2 min.'},
+];
+document.getElementById('class-flow').innerHTML = classFlow.map((s,i) => `
+  <div class="cs-row">
+    <div class="cs-time">${s.time}</div>
+    <div class="cs-line"><div class="cs-dot" style="background:${s.color};"></div></div>
+    <div class="cs-content">
+      <div class="cs-title">${s.title}</div>
+      <div class="cs-sub">${s.sub}</div>
+      ${i<classFlow.length-1?'<div style="height:14px;"></div>':''}
+    </div>
+  </div>`).join('');
+
+const quotes = [
+  {text:"I am not guaranteeing the result. I am guaranteeing the work.",source:"Pranav Pratik Tulshyan",tag:"Effort"},
+  {text:"The rank was not the achievement. The confidence it gave me for a lifetime — that was the achievement.",source:"Pranav Pratik Tulshyan",tag:"Mindset"},
+  {text:"Be stubborn about your goals. Be flexible about your methods.",source:"Pranav Pratik Tulshyan",tag:"Resilience"},
+  {text:"What you do not revise the day before the exam, you cannot write in the exam.",source:"Pranav Pratik Tulshyan",tag:"Revision"},
+  {text:"Shame only comes when you declared a goal and did not do the work. I was doing the work. So there was nothing to be ashamed of.",source:"Pranav Pratik Tulshyan",tag:"Accountability"},
+  {text:"A teacher's job is to show you the direction. The walking is always yours to do.",source:"Pranav Pratik Tulshyan",tag:"Self-study"},
+  {text:"CA is a self-study course. Always has been. A good teacher makes the path clearer — but they cannot walk it for you.",source:"Pranav Pratik Tulshyan",tag:"Self-study"},
+  {text:"Keep learning. Keep sharing.",source:"Pranav Pratik Tulshyan",tag:"Philosophy"},
+  {text:"I can guarantee what I do. I can never guarantee what comes back.",source:"Pranav Pratik Tulshyan",tag:"Gita-rooted"},
+  {text:"Once you have felt that something impossible is possible — that feeling stays with you for life. No one can take it away.",source:"Pranav Pratik Tulshyan",tag:"Mindset"},
+  {text:"Even if the result does not come, there is no shame — if you were actually studying, if you were actually working.",source:"Pranav Pratik Tulshyan",tag:"Accountability"},
+  {text:"The only way to do great work is to love what you do.",source:"Steve Jobs",tag:"Passion"},
+  {text:"Success is not final, failure is not fatal: it is the courage to continue that counts.",source:"Winston Churchill",tag:"Resilience"},
+  {text:"It does not matter how slowly you go as long as you do not stop.",source:"Confucius",tag:"Consistency"},
+  {text:"The secret of getting ahead is getting started.",source:"Mark Twain",tag:"Action"},
+  {text:"Do not watch the clock. Do what it does — keep going.",source:"Sam Levenson",tag:"Consistency"},
+  {text:"Hard work beats talent when talent doesn't work hard.",source:"Tim Notke",tag:"Effort"},
+  {text:"The difference between ordinary and extraordinary is that little extra.",source:"Jimmy Johnson",tag:"Effort"},
+  {text:"Opportunities don't happen. You create them.",source:"Chris Grosser",tag:"Action"},
+  {text:"Don't let what you cannot do interfere with what you can do.",source:"John Wooden",tag:"Focus"},
+  {text:"Believe you can and you're halfway there.",source:"Theodore Roosevelt",tag:"Mindset"},
+  {text:"You don't have to be great to start, but you have to start to be great.",source:"Zig Ziglar",tag:"Action"},
+  {text:"In the middle of every difficulty lies opportunity.",source:"Albert Einstein",tag:"Resilience"},
+  {text:"The harder I work, the luckier I get.",source:"Samuel Goldwyn",tag:"Effort"},
+  {text:"Success usually comes to those who are too busy to be looking for it.",source:"Henry David Thoreau",tag:"Focus"},
+  {text:"What we fear doing most is usually what we most need to do.",source:"Tim Ferriss",tag:"Courage"},
+  {text:"You miss 100% of the shots you don't take.",source:"Wayne Gretzky",tag:"Action"},
+  {text:"The expert in anything was once a beginner.",source:"Helen Hayes",tag:"Growth"},
+  {text:"An investment in knowledge pays the best interest.",source:"Benjamin Franklin",tag:"Learning"},
+  {text:"Education is the most powerful weapon you can use to change the world.",source:"Nelson Mandela",tag:"Learning"},
+  {text:"It always seems impossible until it's done.",source:"Nelson Mandela",tag:"Resilience"},
+  {text:"Motivation gets you going, but habit gets you there.",source:"Jim Ryun",tag:"Consistency"},
+  {text:"Either you run the day or the day runs you.",source:"Jim Rohn",tag:"Discipline"},
+  {text:"Discipline is the bridge between goals and accomplishment.",source:"Jim Rohn",tag:"Discipline"},
+  {text:"Quality is not an act, it is a habit.",source:"Aristotle",tag:"Consistency"},
+  {text:"We are what we repeatedly do. Excellence, then, is not an act but a habit.",source:"Aristotle",tag:"Consistency"},
+  {text:"Knowing is not enough; we must apply. Wishing is not enough; we must do.",source:"Goethe",tag:"Action"},
+  {text:"Think big, start small, act now.",source:"Robin Sharma",tag:"Action"},
+  {text:"Your attitude, not your aptitude, will determine your altitude.",source:"Zig Ziglar",tag:"Mindset"},
+  {text:"There are no shortcuts to any place worth going.",source:"Beverly Sills",tag:"Effort"},
+  {text:"Do something today that your future self will thank you for.",source:"Sean Patrick Flanery",tag:"Action"},
+  {text:"Strive not to be a success, but rather to be of value.",source:"Albert Einstein",tag:"Purpose"},
+  {text:"The only place where success comes before work is in the dictionary.",source:"Vidal Sassoon",tag:"Effort"},
+  {text:"Pain is temporary. Quitting lasts forever.",source:"Lance Armstrong",tag:"Resilience"},
+  {text:"Great things never come from comfort zones.",source:"Roy T. Bennett",tag:"Growth"},
+  {text:"Push yourself because no one else is going to do it for you.",source:"Unknown",tag:"Discipline"},
+  {text:"Work hard in silence. Let success make the noise.",source:"Frank Ocean",tag:"Discipline"},
+  {text:"Stop wishing. Start doing.",source:"Walt Disney",tag:"Action"},
+  {text:"Success is the sum of small efforts repeated day in and day out.",source:"Robert Collier",tag:"Consistency"},
+  {text:"Preparation is the key to success.",source:"Alexander Graham Bell",tag:"Preparation"},
+  {text:"Vision without action is a dream. Action without vision is a nightmare.",source:"Japanese Proverb",tag:"Action"},
+  {text:"The future belongs to those who believe in the beauty of their dreams.",source:"Eleanor Roosevelt",tag:"Mindset"},
+  {text:"Act as if what you do makes a difference. It does.",source:"William James",tag:"Purpose"},
+];
+
+let allQuotes = [...quotes];
+function renderQuotes(list) {
+  document.getElementById('quote-count').textContent = list.length + ' quotes in bank';
+  document.getElementById('quote-list').innerHTML = list.map(q => `
+    <div class="quote-item">
+      <div class="quote-text">"${q.text}"</div>
+      <div class="quote-source">— ${q.source} <span class="quote-tag">${q.tag}</span></div>
+    </div>`).join('');
+}
+function filterQuotes(v) {
+  const s = v.toLowerCase();
+  renderQuotes(allQuotes.filter(q => q.text.toLowerCase().includes(s) || q.source.toLowerCase().includes(s) || q.tag.toLowerCase().includes(s)));
+}
+renderQuotes(allQuotes);
+
+const verses = [
+  {ref:"Bhagavad Gita 2.47",sk:"Karmanya Vadhikaraste Ma Phaleshu Kadachana",mn:"You have the right to perform your duty, but never to the fruits of your actions. Do your work. The result is not in your hands. This is the most important verse for any CA student."},
+  {ref:"Bhagavad Gita 2.48",sk:"Yoga-sthas kuru karmani",mn:"Perform your duties established in yoga, renouncing attachment, and be even-minded in both success and failure. Evenness of mind is called yoga."},
+  {ref:"Bhagavad Gita 2.14",sk:"Matra-sparshas tu kaunteya",mn:"Sensations of cold and heat, pleasure and pain are temporary. Endure them patiently — they come and go like seasons."},
+  {ref:"Bhagavad Gita 3.8",sk:"Niyatam kuru karma tvam",mn:"Perform your prescribed duties, for action is better than inaction. Even the maintenance of your body cannot be accomplished without action."},
+  {ref:"Bhagavad Gita 6.5",sk:"Uddharet atmanatmanam",mn:"Let a man lift himself by himself. The self is the friend of the self, and the self is also the enemy of the self. You are your own rescuer."},
+  {ref:"Bhagavad Gita 2.40",sk:"Nehabhikrama-naso'sti",mn:"In this path of action, there is no loss or diminution. Even a little progress on this path protects one from the greatest danger."},
+  {ref:"Bhagavad Gita 6.17",sk:"Yuktahara-viharasya",mn:"He who is regulated in eating, sleeping, recreation, and work — can mitigate all sorrows. Balance is not laziness; it is strategy."},
+  {ref:"Bhagavad Gita 4.33",sk:"Sarvam karmakhilam partha",mn:"O Arjuna, the sacrifice of knowledge is greater than any material sacrifice. All actions in their entirety culminate in wisdom."},
+  {ref:"Bhagavad Gita 4.38",sk:"Na hi jnanena sadrsam",mn:"In this world, there is nothing so sublime and pure as transcendental knowledge. It is the mature fruit of all action — and he who achieves it enjoys the self within himself."},
+  {ref:"Bhagavad Gita 4.42",sk:"Tasmat ajnana-sambhutam",mn:"With the sword of knowledge, cut asunder the doubt born of ignorance that has taken shelter in your heart. Take refuge in action. Arise."},
+  {ref:"Bhagavad Gita 2.66",sk:"Nasti buddhir ayuktasya",mn:"For one without discipline, there is no intelligence and no steady mind. Without a steady mind, there is no peace. Without peace, how can there be happiness?"},
+  {ref:"Bhagavad Gita 2.70",sk:"Apuryamanam achala-pratistham",mn:"As the ocean remains undisturbed though rivers constantly flow into it — the one who is not disturbed by the influx of desires attains peace. Not the one who craves them."},
+  {ref:"Bhagavad Gita 3.20",sk:"Karmanaiva hi samsiddhim",mn:"By action alone, King Janaka attained perfection. Considering the welfare of the world, you should perform your duty. Your work is your worship."},
+  {ref:"Bhagavad Gita 5.20",sk:"Na prahrsyet priyam prapya",mn:"He who neither rejoices on obtaining something pleasant nor grieves on obtaining the unpleasant — who is self-intelligent and unbewildered — already knows the Absolute."},
+  {ref:"Bhagavad Gita 6.19",sk:"Yatha dipo nivata-stho",mn:"As a lamp in a windless place does not flicker — so a disciplined mind remains steady in meditation. That is the goal of all study."},
+  {ref:"Bhagavad Gita 6.35",sk:"Asamsayam maha-baho",mn:"Undoubtedly the mind is restless and difficult to restrain. But it can be controlled by practice and detachment. These two together — nothing else."},
+  {ref:"Bhagavad Gita 9.22",sk:"Ananyash chintayanto mam",mn:"For those who are devoted and meditate with single-pointed focus — I carry what they lack and preserve what they have. Show up fully. The rest is taken care of."},
+  {ref:"Bhagavad Gita 11.33",sk:"Tasmat tvam uttistha",mn:"Therefore get up. Prepare. Win glory. Conquer your enemies and enjoy a flourishing life. The work has already been done in the invisible — you are merely the instrument. Act."},
+  {ref:"Bhagavad Gita 16.1-3",sk:"Abhayam sattva-samsuddhih",mn:"Fearlessness, purity of heart, perseverance in knowledge, charity, self-control, straightforwardness, austerity, non-violence — these belong to one born for divine qualities."},
+  {ref:"Bhagavad Gita 17.15",sk:"Anudvega-karam vakyam",mn:"Austerity of speech: speak truthfully, pleasantly, beneficially, and without causing agitation in others. What you say in class — and in life — matters."},
+  {ref:"Bhagavad Gita 18.45",sk:"Sve sve karmany abhiratah",mn:"By performing one's own duty with complete devotion, a person can attain perfection. Not someone else's duty — your own."},
+  {ref:"Bhagavad Gita 18.66",sk:"Sarva-dharman parityajya",mn:"Abandon all varieties of religion and just surrender. I shall deliver you from all sinful reactions. Do not fear. There is a power larger than your anxiety."},
+  {ref:"Bhagavad Gita 2.38",sk:"Sukha-duhkhe same kritva",mn:"Treat alike both pleasure and pain, gain and loss, victory and defeat. Engage in the battle for the sake of the battle. This is the mindset of the topper."},
+  {ref:"Bhagavad Gita 3.27",sk:"Prakriteh kriyamanani",mn:"All activities are carried out by the three modes of material nature. But the foolish think it is the self that acts. Know the difference between ego and effort."},
+  {ref:"Bhagavad Gita 3.30",sk:"Mayi sarvani karmani",mn:"Dedicating all your actions to Me, with full knowledge — fight without expectation of reward, without claims to proprietorship, free from laziness."},
+  {ref:"Bhagavad Gita 13.28",sk:"Samam sarvesu bhutesu",mn:"One who sees the Supreme Lord equally in all living beings, and sees the imperishable within the perishable — truly sees. Look for the principle, not just the formula."},
+  {ref:"Yoga Sutras of Patanjali 1.2",sk:"Yogas chitta vritti nirodhah",mn:"Yoga is the cessation of the fluctuations of the mind. When the mind is still, the true self shines through. Stillness before the exam is earned, not given."},
+  {ref:"Yoga Sutras of Patanjali 1.14",sk:"Sa tu dirgha-kala nairantarya",mn:"Practice becomes firmly grounded when it is done for a long time, without interruption and with sincere devotion. There is no other formula for mastery."},
+  {ref:"Chanakya Niti 1.6",sk:"Before you begin — ask three questions",mn:"Why am I doing this? What might the result be? Will I succeed? Only when you find satisfying answers — proceed. Clarity before action."},
+  {ref:"Chanakya Niti — Vidya",sk:"Vidya dadati vinayam",mn:"Education gives humility. Humility brings character. Character brings wealth. Wealth brings righteousness. Righteousness brings joy. This is the complete cycle."},
+  {ref:"Thirukkural 391",sk:"Karka kasadara karpavai",mn:"Learn thoroughly what is worth learning. Having learned it — live accordingly. The test of learning is in how you live, not in what you scored."},
+  {ref:"Thirukkural 396",sk:"Ennai vittu ezhu perumai",mn:"The wealth of a well-learned education is a fortune that will not perish even if all else does. Every other asset can be taken. This one cannot."},
+  {ref:"Thirukkural 611",sk:"Uyarchi sirumaimai",mn:"The great remain great through perseverance. The small remain small through lack of effort. The difference is never ability — it is consistency."},
+  {ref:"Rig Veda 10.117.5",sk:"Hastaabhyam dasashakhabhyam",mn:"The two hands with ten fingers — let them work. One who works is the one who earns. One who sits idle is the one who loses. Do not worship idleness."},
+  {ref:"Atharva Veda 19.71.1",sk:"Ud vayam tamasas pari",mn:"Rise above the darkness. See the world in its light. We rise above all difficulties when we find the highest light within us."},
+  {ref:"Mundaka Upanishad 3.2.3",sk:"Nayam atma bala-hinena labhyah",mn:"The self cannot be attained by the weak. It requires strength — of body, of mind, and of will. Strength is not given. It is built, daily."},
+  {ref:"Katha Upanishad 1.2.23",sk:"Nayam atma pravacanena labhyah",mn:"The Self cannot be known through reading alone, nor by intellect alone. It reveals itself only to one who actually does the work. Reading is not studying. Doing is studying."},
+  {ref:"Vivekachudamani — Adi Shankaracharya",sk:"Durlabham trayam evaitad",mn:"Three things are rare and happen only by grace: human birth, the longing for liberation, and the company of a great teacher. You have all three right now."},
+  {ref:"Ramcharitmanas — Sundar Kand",sk:"Bina sakhya na bal nahin",mn:"Without effort and without the right company, no strength develops. Action precedes everything. You are in the right class. Now act."},
+  {ref:"Chanakya — On patience",sk:"Dhairye sarva-siddhi",mn:"In patience lies all achievement. He who is in a hurry cannot see clearly. Prepare slowly, perform completely. That is the Chanakya way."},
+  {ref:"Upanishads — On the teacher",sk:"Acharya devo bhava",mn:"The teacher is to be revered as God. Not because the teacher is infallible — but because the relationship of sincere learning is sacred."},
+  {ref:"Bhagavad Gita 10.4-5",sk:"Buddhir jnanam asammohah",mn:"Intelligence, knowledge, freedom from doubt, forgiveness, truth, self-control, calmness, happiness and distress — all these conditions of living beings are created by Me alone. Your clarity is a gift — protect it."},
+  {ref:"Bhagavad Gita 7.8",sk:"Raso'ham apsu kaunteya",mn:"I am the taste of water, the light of the sun and moon, the sound in ether, and the ability in man. The ability you have — it is not yours alone. Use it fully."},
+  {ref:"Bhagavad Gita 12.13-14",sk:"Advesta sarva-bhutanam",mn:"He who has no enemy, is kind and compassionate to all, has no sense of 'I' or 'mine', and is patient in both pain and pleasure — such a person is dear to the Divine."},
+  {ref:"Shiva Mahimna Stotram",sk:"Asita-giri-samam syat kajjalam",mn:"Even if all oceans were ink and all mountains were pens — the praise of the infinite could never be fully written. Some things are beyond examination. Bow to them and return to your work."},
+  {ref:"Bhagavad Gita 2.19",sk:"Ya enam vetti hantaram",mn:"He who thinks this Self is a slayer and he who thinks it is slain — both fail to perceive the truth. The true self is never in danger. Study without fear."},
+  {ref:"Bhagavad Gita 4.7",sk:"Yada yada hi dharmasya",mn:"Whenever righteousness declines, I manifest. Age after age, the right teacher appears at the right time for the right students. You are here at the right time."},
+  {ref:"Bhagavad Gita 2.72",sk:"Esha brahmi sthitih partha",mn:"This is the state of enlightenment — and one who achieves it is no longer deluded. Even at the hour of death, one who abides in it reaches the highest. Study for that — not just for the exam."},
+  {ref:"Chanakya — On knowledge and action",sk:"Pratiniyat kalamanam",mn:"Time passes whether you act or not. The wise use it. The foolish let it pass and then complain. Every day of preparation is a day of advantage."},
+  {ref:"Bhagavad Gita 5.22",sk:"Ye hi samsparsha-ja bhoga",mn:"Pleasures arising from sense contact are sources of suffering — they have a beginning and an end. The wise do not take delight in them. Real satisfaction comes from mastery."},
+];
+
+let allVerses = [...verses];
+function renderVerses(list) {
+  document.getElementById('verse-count').textContent = list.length + ' verses in bank';
+  document.getElementById('verse-list').innerHTML = list.map(v => `
+    <div class="quote-item">
+      <div style="font-weight:500;font-size:13px;margin-bottom:3px;">${v.ref}</div>
+      <div style="font-style:italic;font-size:12px;color:#888;margin-bottom:5px;">${v.sk}</div>
+      <div style="font-size:13px;line-height:1.6;color:#333;">${v.mn}</div>
+    </div>`).join('');
+}
+function filterVerses(v) {
+  const s = v.toLowerCase();
+  renderVerses(allVerses.filter(vs => vs.ref.toLowerCase().includes(s) || vs.mn.toLowerCase().includes(s) || vs.sk.toLowerCase().includes(s)));
+}
+renderVerses(allVerses);
+
+const messages = [
+  {label:"Welcome message — Day 1 (both groups)",mode:"Both",text:`🙏 Welcome to CA Inter Accounts — Batch July 2025.
+
+I'm Pranav Pratik Tulshyan. I will be your Accounts faculty for this journey.
+
+A few things from Day 1:
+→ CA is a self-study course. I give you direction. The walking is yours.
+→ Attend every class. Revise the same day. Attempt every MCQ. Submit every homework.
+→ If you do the work, the result takes care of itself.
+
+This group is for: class schedules, homework, MCQ links, doubt posting, and Insta submissions.
+
+Let's begin.
+— Pranav Sir`},
+  {label:"Morning class reminder (day of class)",mode:"Both",text:`🟠 Good morning, Batch July 2025!
+
+Class today in [X] hours.
+
+📖 Topic: [Chapter — Subtopic]
+🕐 Time: [Time]
+📍 Venue: [Classroom] (offline) | [Stream link] (online)
+
+Yesterday's top MCQ scorer: [Name] 🎯
+
+Come prepared.
+— Pranav Sir`},
+  {label:"Post-class message (after every session)",mode:"Both",text:`✅ Class done. Here's everything for today:
+
+📘 Topic covered: [Chapter — Subtopic]
+📝 Homework: [attached PDF / see printout]
+💻 MCQ set: [Portal link] — Complete by [time]
+📅 Next class: [Day, Date] — Topic: [Next topic]
+
+Revise before you sleep. It sticks better.
+Doubts: drop here or DM.
+
+— Pranav Sir`},
+  {label:"MCQ evening reminder",mode:"Both",text:`⏰ MCQ Reminder — [Today's Topic]
+
+Portal: [link]
+Deadline: [time tonight]
+
+Scores are tracked. Leaderboard every Saturday.
+Don't skip it — these are your exam questions in disguise.
+
+— Pranav Sir`},
+  {label:"Insta submission reminder (night before class)",mode:"Both",text:`🎬 Insta Submit karo!
+
+Tomorrow's "Insta Me Kya Chal Raha Hai" break needs your reels.
+
+→ Drop your funniest / most trending reel link here
+→ Write: "Insta Submit 🎬"
+→ Deadline: 10 PM tonight
+
+5 reels get played in class. If yours is picked = class shoutout.
+
+— Pranav Sir`},
+  {label:"Homework submission reminder (online batch)",mode:"Online",text:`📸 Homework submission — Deadline: [time] tonight
+
+→ Clear photo of your complete attempt
+→ All 3 sections (theory, practical, exam question)
+→ Drop in this group with your name
+
+Even a partial attempt counts. Zero attempt = your name mentioned in tomorrow's class.
+
+— Pranav Sir`},
+  {label:"Saturday weekly recap",mode:"Both",text:`📊 Week [N] Recap — Batch July 2025
+
+Topics covered:
+✅ [Topic 1]
+✅ [Topic 2]
+✅ [Topic 3]
+
+MCQ Leaderboard — Week [N]:
+🥇 [Name] — [Score]%
+🥈 [Name] — [Score]%
+🥉 [Name] — [Score]%
+
+Weekend task: Revise [topic] end-to-end. Be able to solve any question from it without notes by Monday.
+
+See you Monday.
+— Pranav Sir`},
+  {label:"Absentee message (same day of missed class)",mode:"Both",text:`📹 Missed today's class?
+
+Recording: [link]
+Homework sheet: [attached / link]
+MCQ set: [link] — same deadline applies
+
+Next time — inform one day in advance. One message is enough.
+
+— Pranav Sir`},
+  {label:"Monthly progress update",mode:"Both",text:`📈 Month [N] Update — Batch July 2025
+
+Chapters completed: [list]
+Chapters remaining: [list]
+Avg MCQ score this month: [X]%
+Homework submission rate: [X]%
+
+If you're behind — this is your signal. Catch up this week.
+If you're on track — keep the rhythm.
+
+— Pranav Sir`},
+];
+
+document.getElementById('msg-list').innerHTML = messages.map((m,i) => `
+  <div class="section-label" style="margin-top:${i===0?'0':'1.25rem'}">${m.label} <span class="badge ${m.mode==='Online'?'badge-online':m.mode==='Offline'?'badge-offline':'badge-both'}">${m.mode}</span></div>
+  <div class="card"><div class="template-box">${m.text}</div></div>
+`).join('');
+
+const weekDays = [
+  {name:'Mon', tasks:['New topic begins','HW sheet given','MCQ set live','Insta collect open']},
+  {name:'Tue', tasks:['Topic continues','HW spot-check','MCQ set 2','Insta break']},
+  {name:'Wed', tasks:['New subtopic','HW sheet given','MCQ set 3','Insta break']},
+  {name:'Thu', tasks:['Practice session','Past Q solve','MCQ set 4','Doubt clearing']},
+  {name:'Fri', tasks:['New topic','HW sheet given','MCQ set 5','Insta break']},
+  {name:'Sat', tasks:['Week recap','Mixed practice','Leaderboard post','Weekend task given']},
+];
+document.getElementById('week-grid').innerHTML = weekDays.map(d => `
+  <div class="day-card">
+    <div class="day-name">${d.name}</div>
+    ${d.tasks.map(t => `<div class="day-task">• ${t}</div>`).join('')}
+  </div>`).join('');
+
+function switchTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
