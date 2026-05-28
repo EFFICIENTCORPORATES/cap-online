@@ -159,10 +159,12 @@ HTML CLASSES TO USE:
 - class="answer-hint" — answer or hint block
 
 DATA ATTRIBUTES TO ADD ON EVERY BLOCK:
-- data-sequence-id — use format M[x].C[x].U[x].S[x].B[x] 
-  (Module.Chapter.Unit.Section.Block — increment Block for each block in sequence)
 - data-block-type — same as class name
 - data-visibility — set to "both" for all blocks (teacher will change later)
+
+DO NOT ADD data-sequence-id. Block IDs are assigned automatically by the Python
+pipeline using the Base Syllabus JSON (unique_topic_id + incremental block counter).
+Never invent or assign sequence identifiers in the HTML output.
 
 FOR TABLES:
 - Use standard HTML <table>, <thead>, <tbody>, <tr>, <th>, <td> tags
@@ -184,21 +186,13 @@ FOR MATHEMATICAL FORMULAS:
 - If formula text is readable: wrap in <div class="formula"> and use 
   plain text or simple HTML to represent it
 
-SEQUENCE ID FORMAT:
-M1 = Module 1, M2 = Module 2, M3 = Module 3
-C1 = Chapter 1, C2 = Chapter 2 etc.
-U0 = no unit (chapter level), U1 = Unit 1 etc.
-S1 = Section 1 etc.
-B1 = Block 1, B2 = Block 2 (increment for every distinct content block)
-
-Example: data-sequence-id="M1.C4.U2.S3.B5"
-
 OUTPUT FORMAT:
 - Pure HTML only
 - No CSS, no inline styles, no JavaScript
 - No markdown formatting
-- Begin with: <div class="chapter" data-module="1" data-chapter="4" 
-  data-unit="2" data-icai-version="July-2024" data-exam="May-2026">
+- Begin with: <div class="chapter" data-module="2" data-chapter="5" 
+  data-unit="1" data-icai-version="July-2024" data-exam="May-2026">
+  (use the correct module/chapter/unit numbers for the section being extracted)
 - End with: </div>
 - Every content block on its own clearly tagged element
 - No wrapping everything in a single <p> tag
@@ -274,7 +268,8 @@ EXTRACTION FLAGS
 
 FINAL
 [ ] HTML renders correctly in browser — no broken tags
-[ ] Sequence IDs are in correct order — no gaps, no duplicates
+[ ] All section headings carry the correct topic number label (e.g. "1.1 Introduction",
+    "4.10 Suspension of Capitalisation") matching the Base Syllabus JSON topic_no values
 [ ] data-icai-version and data-exam attributes present on root div
 [ ] Extraction checklist comment at end of file updated to all YES
 ```

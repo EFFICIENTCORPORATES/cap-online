@@ -523,6 +523,56 @@ def _extract_extraction_flag(tag: Tag) -> dict[str, Any]:
     }
 
 
+# ---------------------------------------------------------------------------
+# Base Syllabus JSON topic-lookup helpers
+# ---------------------------------------------------------------------------
+
+def _load_base_chapter(base_json_path: str, chapter_id: str) -> dict[str, Any] | None:
+    """Return the chapter entry whose unique_chapter_id matches chapter_id."""
+    try:
+        with open(base_json_path, "r", encoding="utf-8") as f:
+            base = json.load(f)
+    except (OSError, json.JSONDecodeError) as exc:
+        sys.stderr.write(f"WARNING: could not load base JSON '{base_json_path}': {exc}\n")
+        return None
+    for ch in base.get("chapters", []):
+        if ch.get("unique_chapter_id") == chapter_id:
+            return ch
+    sys.stderr.write(
+        f"WARNING: chapter '{chapter_id}' not found in {base_json_path}\n"
+        f"  Available IDs: "
+        + ", ".join(c.get("unique_chapter_id", "?") for c in base.get("chapters", []))
+        + "\n"
+    )
+    return None
+
+
+def _build_topic_lookup(chapter_entry: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """
+    Returns a dict keyed by topic_no (e.g. '1.1', '2.3') plus the special
+    key '__header__' for the chapter-level header row (is_chapter_header_row=true).
+    """
+    lookup: dict[str, dict[str, Any]] = {}
+    for topic in chapter_entry.get("topics", []):
+        if topic.get("is_chapter_header_row"):
+            lookup["__header__"] = topic
+        else:
+            tn = topic.get("topic_no")
+            if tn is not None:
+                lookup[str(tn)] = topic
+    return lookup
+
+
+def _extract_topic_no_from_heading(heading_text: str) -> str | None:
+    """
+    Extract a leading topic number from a section-heading text.
+    Handles '1.1 INTRODUCTION', '4.10 SUSPENSION OF CAPITALISATION', '3 SCOPE' etc.
+    Returns the matched string (e.g. '1.1') or None if no numeric prefix found.
+    """
+    m = re.match(r"^(\d+(?:\.\d+)*)\s", heading_text.strip())
+    return m.group(1) if m else None
+
+
 # Registry mapping block_type → extractor function
 EXTRACTORS = {
     "chapter-heading": _extract_chapter_heading,
@@ -571,6 +621,8 @@ def convert_html_to_json(
     verified_by: str = "",
     verified_on: str = "",
     generated_on: str | None = None,
+    base_json_path: str = "",
+    chapter_id: str = "",
 ) -> dict[str, Any]:
     with open(html_path, "r", encoding="utf-8") as f:
         html_content = f.read()
@@ -598,22 +650,67 @@ def convert_html_to_json(
         "title": _infer_title(chapter_root),
     }
 
+    # ---- BASE SYLLABUS JSON LOOKUP -----------------------------------------
+    # When --base-json and --chapter-id are supplied, IDs are derived from the
+    # pre-verified Base Syllabus JSON (unique_topic_id + incremental block counter).
+    # Without them, the script falls back to reading data-sequence-id from HTML.
+    topic_lookup: dict[str, dict[str, Any]] = {}
+    chapter_syllabus: dict[str, Any] | None = None
+    if base_json_path and chapter_id:
+        chapter_entry = _load_base_chapter(base_json_path, chapter_id)
+        if chapter_entry:
+            topic_lookup = _build_topic_lookup(chapter_entry)
+            chapter_syllabus = {
+                "unique_chapter_id": chapter_entry.get("unique_chapter_id"),
+                "teaching_sequence": chapter_entry.get("teaching_sequence"),
+                "icai_chapter_ref": chapter_entry.get("icai_chapter_ref"),
+                "chapter_name_icai": chapter_entry.get("chapter_name_icai"),
+                "chapter_name_short": chapter_entry.get("chapter_name_short"),
+                "marks_distinct_attempt_count": chapter_entry.get("marks_distinct_attempt_count"),
+                "sn_alternate_order": chapter_entry.get("sn_alternate_order"),
+                "marks_by_attempt": chapter_entry.get("marks_by_attempt"),
+            }
+
     # ---- BLOCKS ------------------------------------------------------------
     blocks: list[dict[str, Any]] = []
     seen_seq_ids: set[str] = set()
     duplicate_seq_ids: list[str] = []
     unknown_block_types: set[str] = set()
+    unmatched_headings: list[str] = []
+
+    # Topic tracking state (used only when topic_lookup is active)
+    current_topic: dict[str, Any] | None = topic_lookup.get("__header__") if topic_lookup else None
+    block_counter: int = 0
 
     for child in chapter_root.children:
         if not isinstance(child, Tag):
             continue
-        # Skip nested wrapper-only nodes (none expected at top level)
         block_type = _detect_block_type(child)
         if block_type is None:
             continue
 
-        seq_id = child.get("data-sequence-id", "")
         visibility = child.get("data-visibility", "both")
+
+        # --- Topic advancement (base JSON mode) ---
+        # A section-heading whose text starts with a known topic_no advances
+        # the current topic and resets the per-topic block counter.
+        if topic_lookup and block_type == "section-heading":
+            raw_heading = _plain_text(child)
+            topic_no = _extract_topic_no_from_heading(raw_heading)
+            if topic_no and topic_no in topic_lookup:
+                current_topic = topic_lookup[topic_no]
+                block_counter = 0
+            elif topic_no:
+                # Heading has a numeric prefix but it's not in the base JSON
+                unmatched_headings.append(raw_heading)
+
+        # --- Sequence ID assignment ---
+        if topic_lookup and current_topic:
+            block_counter += 1
+            seq_id = f"{current_topic['unique_topic_id']}.B{block_counter}"
+        else:
+            # Fallback: use data-sequence-id from HTML (legacy / no base JSON)
+            seq_id = child.get("data-sequence-id", "")
 
         block: dict[str, Any] = {
             "sequence_id": seq_id,
@@ -623,12 +720,24 @@ def convert_html_to_json(
             "raw_html": _inner_html(child),
         }
 
+        # Embed per-block syllabus context fields when base JSON is active
+        if topic_lookup and current_topic:
+            block["syllabus_topic_id"] = current_topic.get("unique_topic_id")
+            block["syllabus_topics_id_name"] = current_topic.get("topics_id_name")
+            block["syllabus_topic_sequence"] = current_topic.get("topic_sequence_in_chapter")
+            block["syllabus_page_ref"] = current_topic.get("page_number_label")
+            block["syllabus_icai_unit_label"] = current_topic.get("icai_unit_no_label")
+
         extractor = EXTRACTORS.get(block_type)
         if extractor is not None:
             block.update(extractor(child))
         else:
             unknown_block_types.add(block_type)
             # Even unknown types are kept — raw_html + plain_text cover them.
+
+        # Fix solution sequence_id now that the parent seq_id is known
+        if block_type == "illustration" and isinstance(block.get("solution"), dict):
+            block["solution"]["sequence_id"] = f"{seq_id}.SOL"
 
         if seq_id:
             if seq_id in seen_seq_ids:
@@ -650,13 +759,17 @@ def convert_html_to_json(
         "blocks_without_sequence_id": [
             i for i, b in enumerate(blocks) if not b["sequence_id"]
         ],
+        "unmatched_topic_headings": unmatched_headings,
     }
 
-    return {
+    result: dict[str, Any] = {
         "meta": meta,
         "diagnostics": diagnostics,
         "blocks": blocks,
     }
+    if chapter_syllabus:
+        result["syllabus_meta"] = chapter_syllabus
+    return result
 
 
 def _coerce_int(value):
@@ -702,6 +815,14 @@ def main():
     parser.add_argument("--generated-on", default=None,
                         help="Override the generated_on date (YYYY-MM-DD). "
                              "Defaults to today.")
+    parser.add_argument("--base-json", default="",
+                        help="Path to the Base Syllabus JSON "
+                             "(0-ca-inter-adv-accounts-subtopics-marks-weightage.json). "
+                             "When provided together with --chapter-id, block IDs are "
+                             "derived from the base JSON instead of data-sequence-id in HTML.")
+    parser.add_argument("--chapter-id", default="",
+                        help="unique_chapter_id from the Base Syllabus JSON for this chapter "
+                             "(e.g. 'M2-C5-U1'). Required when --base-json is supplied.")
     parser.add_argument("--indent", type=int, default=2,
                         help="JSON indentation (default: 2).")
     args = parser.parse_args()
@@ -715,6 +836,8 @@ def main():
         verified_by=args.verified_by,
         verified_on=args.verified_on,
         generated_on=args.generated_on,
+        base_json_path=args.base_json,
+        chapter_id=args.chapter_id,
     )
 
     os.makedirs(os.path.dirname(os.path.abspath(args.output_json)) or ".",
@@ -731,6 +854,20 @@ def main():
         f"  Duplicate sequence IDs: {len(diag['duplicate_sequence_ids'])}\n"
         f"  Unknown block types: {diag['unknown_block_types'] or 'none'}\n"
     )
+    if result.get("syllabus_meta"):
+        sm = result["syllabus_meta"]
+        sys.stderr.write(
+            f"  Syllabus chapter: {sm['unique_chapter_id']} "
+            f"(teaching seq #{sm['teaching_sequence']})\n"
+        )
+    unmatched = diag.get("unmatched_topic_headings", [])
+    if unmatched:
+        sys.stderr.write(
+            f"  WARNING — {len(unmatched)} heading(s) had topic numbers not found "
+            f"in the base JSON (kept under last matched topic):\n"
+        )
+        for h in unmatched:
+            sys.stderr.write(f"    • {h}\n")
 
 
 if __name__ == "__main__":
