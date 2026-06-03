@@ -1,4 +1,4 @@
-from sarvamai import SarvamAI
+from scripts.sarvamai import SarvamAI
 
 client = SarvamAI(
     api_subscription_key="sk_ptfi10n6_FxEUJvtgEjj9wdWOCCflLqMj",

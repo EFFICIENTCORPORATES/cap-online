@@ -1,23 +1,18 @@
-*.pdf
-*.jpg
-*.png
-*.docx
-*.xlsx
-*.pptx
+# Ignore PDF, documents, and spreadsheets at any level
+**/*.pdf
+**/*.docx
+**/*.pptx
+**/*.xlsx
+**/*.jpg
+**/*.png
 
 # Python
-/__pycache__/
+__pycache__/
 *.py[cod]
 *$py.class
 *.pyo
 *.pyd
 *.pyc
-*.pyd
-*.pyo
-*.pyc
-*.pyo
-*.pyd
-*.py[cod]
 .pytest_cache/
 .pyre/
 .mypy_cache/
