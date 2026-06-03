@@ -4,7 +4,7 @@
 
 ## The Walk Out
 
-The last paper always feels different when you know it went wrong.
+The last paper always feels different when you know what went wrong.
 
 Everyone else was walking out in groups -laughing, comparing answers, already
 planning where to eat. Arjun walked alone. Head down. Bag strap held tight
@@ -17,17 +17,16 @@ You okay?* The questions would come and he would have to answer them. He
 couldn't do that right now. So he turned left out of the gate and started
 walking toward the bus stand.
 
-His mind wouldn't stop.
+His mind wouldn't stop. Each scene just keeps flashing one after the other
 
-*Class six.* Teacher going around the room -what do you want to become? Doctor.
-Engineer. Collector. IAS. When it reached him he had said -*successful person.*
-A few people laughed. The teacher smiled and moved on. He hadn't minded. He had
-meant it completely.
+*Class six.* Teacher going around the room asking each student -what do you want to become? Doctor.
+Engineer. Collector. IAS. When the teacher asked him he had said -*A successful person.*
+A few students laughed. The teacher smiled gently and moved on. Arjun hadn't minded. Arjun has actually meant it.
 
-*Class nine.* Rajan uncle, two houses down, collapsed one afternoon. Everyone
-stood outside. The doctor who stepped out of the ambulance -calm, certain,
-knowing exactly what to do -had done something to Arjun that he still couldn't
-explain properly. That night he told his mother: I want to become a doctor. She
+*Class nine.* Rajan uncle, his neighbour two houses down, suddenly collapsed one afternoon. Everyone
+panicked and worried . The doctor who stepped out of the ambulance -calm, certain,
+knowing exactly what to do , the doctor brought everyone out of that fear. The doctor had not only cured Rajan Uncle but had done something to Arjun ( watching from his balcony) that he still couldn't
+explain properly. That night Arjun told his mother: I want to become a doctor. She
 said: then study. He studied.
 
 *Class eleven.* A video going around in the class group. A hospital
@@ -48,8 +47,8 @@ He didn't apply.
 
 ---
 
-He had found the CA idea almost by accident. A friend who had gotten a
-compartment in 12th, whose family was pushing him toward CA. Arjun had looked
+He had found the CA idea almost by accident. A friend who had gotten 2 subjects
+back in 12th, whose family was pushing him toward CA. Arjun had looked
 it up that night. Then found a video -PM Modi speaking at some function to a
 room full of chartered accountants.
 
@@ -57,13 +56,13 @@ There was one line that made him stop scrolling.
 
 *Accountants are partners in nation building.*
 
-That same feeling from the Medanta video came back. And Pranav Bhaiya was a CA.
-Had been saying for years that it was a serious profession, a real path. Arjun
+That same feeling from the Medanta video came back. And Pranav Bhaiya (his relative cum mentor) was a CA.
+Had been saying for years that CA was a serious profession, a real path. Arjun
 had trusted that.
 
 He had enrolled.
 
-And now here he was. Walking to the bus stand after a paper that had taken
+And now here he was. Walking from the exam center to the bus stand after a paper that had taken
 something out of him. The entries he had practiced had disappeared under
 pressure. He had sat staring at one question for twenty minutes and couldn't
 begin.
@@ -139,7 +138,7 @@ bade hokar kya banna hai?
 **Pranav Bhaiya:** Haan.
 
 **Arjun:** Main bolta tha -successful person banna hai. Tab se lekar class
-nine, ten, eleven -har baar kuch na kuch tha. Doctor banna tha. Phir Medanta
+nine, ten, eleven -har baar kuch na kuch bada karna tha. Doctor banna tha. Phir Medanta
 wala video dekha aur laga ki yaar desh ke liye kuch karna hai. Itna bada sapna
 tha Bhaiya. Sach mein itna bada.
 
@@ -217,15 +216,15 @@ tha.
 
 **Pranav Bhaiya:** Phir CA ka idea kaise aaya?
 
-**Arjun:** Ek dost tha. Usse 12th mein compartment laga tha. Uske ghar wale
+**Arjun:** Ek dost tha. Usse 12th mein 2 subject me back laga tha. Uske ghar wale
 usse CA suggest kar rahe the. Usne bataya. Maine socha -dekh lete hain.
 Research ki thodi. Theek laga. *(pause)* Aur Bhaiya -ek video mila YouTube pe.
-PM Modi ka. Ek line thi usme -aapne suni hogi. Woh famous wali -"CA ki
-signature PM ki signature se bhi badi hoti hai."
+PM Modi ka. Saare CAs se bhara hua room me woh speech dete hai.. Aur usme woh ek line ... "
 
-**Pranav Bhaiya:** *(small laugh)* Haan, woh famous line.
+**Pranav Bhaiya:** *(small laugh, cutting in between)* Haan, woh famous line. . "CA ki
+signature PM ki signature se bhi jyada powerful hoti hai.
 
-**Arjun:** Woh line toh mujhe cliche lagi. Kaafi filmy. *(pause)* Par ek aur line thi
+**Arjun:** Nahi Nahi .. Woh line toh mujhe cliche lagi. Kaafi filmy. *(pause)* Par ek aur line thi
 uss video me -"Chartered Accountants are partners in nation building." Woh line sunke -Bhaiya,
 wahi feeling aayi jo Medanta wala video dekhke aayi thi. Wahi desh ke liye kuch
 karna wali feeling. Aur aap the -aap CA ho, aap bol chuke the ki yeh serious
@@ -234,7 +233,7 @@ profession hai. Toh maine socha -haan, yeh karta hoon.
 **Pranav Bhaiya:** Aur aaj -woh line kaisi lagti hai?
 
 **Arjun:** *(short exhale, almost a laugh but not quite)* Marketing lagti hai
-Bhaiya. Kisi ko clap dilane ke liye boli gayi line. Accountants are partners in
+Bhaiya. Bas taaliyaan bajwane ke liye boli gayi line. Accountants are partners in
 nation building -kaunsa nation building? Hum toh bas debit credit karte hain.
 Yeh aaya toh idhar likho, woh gaya toh udhar likho. Yeh toh hospital ka
 receptionist bhi karta hai -jo bhi aaya register mein likho, jo bhi gaya woh
@@ -249,10 +248,10 @@ boring, sabse zyada bekaar kaunsa laga?
 
 **Pranav Bhaiya:** Ek bata. Maine ek hi poochha.
 
-**Arjun:** Accounts.
+**Arjun:** Accounts. Accounts toh bahut hi bekaar, boring subject lagta hai —
+law toh phir bhi samajh aata hai ki important hota hai business k liye.
 
-**Pranav Bhaiya:** Accounts toh bahut hi bekaar, boring subject lagta hai —
-samajh aata hai. *(pause)* Ek cheez poochh sakta hoon?
+**Pranav Bhaiya:** *(pauses)* Ek baat batayega mereko?
 
 **Arjun:** Haan.
 
@@ -263,8 +262,7 @@ beech ke gap mein -tu bahut beemaar pada tha. Typhoid. Yaad hai?
 
 **Pranav Bhaiya:** Kya kiya tha tab?
 
-**Arjun:** Blood test karaya tha. Har teen din mein. Doctor report dekhta tha,
-ussi se medicine change karta tha. Dheere dheere theek hua. Poore 15 din lage
+**Arjun:** Theek hi nahi ho raha tha bhai woh toh... Phir, Blood test karaya tha. Har teen din mein test hota tha. Doctor report dekhta tha, ussi se medicine change karta tha. Dheere dheere theek hua. Poore 15 din lage
 the.
 
 **Pranav Bhaiya:** Theek hone ka asli karan kya tha?
@@ -292,14 +290,15 @@ bank, investors, government -sab ke sab galat ho jaayenge.
 *(The bus hits a pothole. A man sitting ahead gets up -his stop. Arjun slides
 over and takes the window seat. Cool air comes in.)*
 
+**Pranav Bhaiya:** Kya hua? Chup kyu Hogaya?
+
 **Arjun:** *(settling in)* Nahi Bhaiya -bas woh seat mein baith gaya hoon ab.
 Window seat mili. *(pause, then quieter)* Aap aage boliye.
 
 **Pranav Bhaiya:** Toh ek accountant ka role -receptionist ka nahi hota,
-Arjun. Pathologist ka hota hai. Jo woh blood report banata hai -jiske basis pe
-sab kuch decide hota hai. Doctors, investors, banks, ghar wale -sab. Agar woh
-report sahi nahi -toh duniya ka koi bhi sahi decision nahi le sakta us company
-ke baare mein.
+Arjun. Pathologist ka hota hai. Jo uss company ka  blood report banata hai -jiske basis pe
+sab kuch decide hota hai. Use Investors, Employees, givernment, banks, Vendors, Customers sab ka decision
+kahin na kahin uss Blood report (uss Company k Financials ) se judi hoti hai. 
 
 *(Arjun is quiet. Outside, the city is thinning. The road is getting wider.)*
 
@@ -314,8 +313,8 @@ ke baare mein.
 *(Outside, the city is thinning. The road is getting wider. Arjun is watching
 it from the window, phone still at his ear.)*
 
-**Pranav Bhaiya:** Arjun, ek kaam kar. Ek simple sawaal -bata mujhe. Ek
-business ka -koi bhi business -uska blood report kaisa dikhega? Matlab, agar
+**Pranav Bhaiya:** Arjun, ek baat bata. Ek simple sawaal . Ek
+business ka -koi bhi business ho -uska blood report kaisa dikhega? Matlab, agar
 ek company ka bhi blood test hota, toh usme kya kya hota?
 
 **Arjun:** *(frowning)* Business ka blood test? Bhaiya company koi insaan
@@ -358,7 +357,7 @@ loss.
 jaoge, pehle kuch khaa lo, energy aayegi -waise business mein bhi itna hi
 kharcho jitna kamaate ho. Zyada thak gaye toh health kharab.
 
-**Arjun:** *(small smile, almost involuntary)* Net loss ho jaata hai.
+**Arjun:** *(small smile, almost involuntary)* Aur company jyada khele toh Net loss ho jaata hai.
 
 **Pranav Bhaiya:** Bilkul. Ab aage bata -ek insaan ke paas sirf income aur
 expense hi nahi hoti na? Kuch permanent cheezein bhi hoti hain. Ghar hota hai,
@@ -367,11 +366,10 @@ gaadi hoti hai, savings hoti hain.
 **Arjun:** Haan.
 
 **Pranav Bhaiya:** Waise hi company ke paas bhi permanent cheezein hoti hain.
-Inhe hum assets bolte hain. Aur tu biology ka student hai toh seedha samjha
+Inhe hum assets bolte hain. Aur tu biology ka student hai toh tere language me hi samjha
 deta hoon. *(pause)* Company ke paas jo building hai, machinery hai, equipment
 hai -yeh sab uski haddiyan aur muscles hain. Bones structure dete hain, muscles
-kaam karte hain -waise property aur machinery company ko structure deti hai aur
-kaam chalati hai. Dono umar ke saath thakti hain -isi liye hum depreciation
+kaam karte hain -waise property aur machinery company ko structure deti haifuture economic benfeit deti hai. Dono umar ke saath thakti hain -isi liye hum depreciation
 lete hain. Waise hi jaise haddiyan aur muscles umar ke saath kamzor hoti hain.
 
 **Arjun:** *(nodding slowly)* Okay. Yeh toh samajh aaya.
@@ -393,7 +391,7 @@ hai. Koi conversion nahi, koi wait nahi. Seedha kaam aata hai.
 **Arjun:** Aur investments jo books mein hote hain?
 
 **Pranav Bhaiya:** Bone marrow. Body mein ek deep reserve hota hai -koi bada
-kuch ho jaaye toh bone marrow se blood banta hai, body sambhal leti hai. Company
+accident jaisa ho jaaye toh bone marrow se blood banta hai, body sambhal leti hai. Company
 ke investments waise hi hain -daily use mein nahi hain, par kisi badi zaroorat
 ke waqt kaam aate hain. Future ke liye rakhe hue hain.
 
@@ -465,7 +463,7 @@ benefit milega ya nahi -woh financial statements dekhti hai.
 
 **Pranav Bhaiya:** Ek insaan ke blood report ka ek reader hota hai -doctor,
 ghar wale. Ek company ke financial report ke readers hote hain -banks,
-investors, government, employees, vendors -poora ek chain. Aur badi companies
+investors, government, employees, vendors , customers -poora ek chain. Aur badi companies
 toh har teen mahine mein apna blood report nikalti hain. Isko hum interim
 financial reporting bolte hain.
 
@@ -570,7 +568,7 @@ Investors aaye. Lenders aaye. Sab ne us blood report ko dekha aur trust kiya.
 jo actually deliver ho chuka tha -woh bahut kam tha. Company ko naye
 enrollments chahiye the sirf isliye ki purane obligations cover ho sakein.
 Jab growth ruki -cash khatam ho gaya. Salary default hui. Lenders ne cases
-kiye. Teen bade auditors ne ek ke baad ek resign kar diya.
+kiye. Customers ne suffer kiya. Teen bade auditors ne ek ke baad ek resign kar diya.
  
 **Arjun:** Teen auditors?
  
@@ -588,8 +586,7 @@ Arjun, teri tarah ke students ke parents ka paisa bhi gaya. Tera ₹90,000.
 Jo EMI pe liya tha. Woh bhi gaya.
  
 *(Arjun goes quiet. This is not abstract anymore. He remembers the Samsung tablet he got from ByJu's.
-The classes he never finished. The phone call he and his mom did to Customer support , but was never answered. His father's face when the company started
-collapsing in the news.)*
+The classes he never finished. The phone call he and his mom did to Customer support for refund, but was never answered. His father's face when the company started collapsing in the news.)*
  
 **Arjun:** *(after a moment)* Itni badi company. $22 billion. Aur galti kya
 thi? Ek basic si classification mistake.
@@ -612,7 +609,7 @@ nahi rehta. Byju's doobi toh bahar ke investors ka India pe se bharosa uth
 gaya. "Is desh mein safe investment nahi hai" -yeh baat gayi duniya mein.
 Ek company ki galat blood report ne poore desh ki credibility pe daag lagaya.
  
-Bahar se Byju's kya tha? IPL sponsor. Messi sponsor. India ka next unicorn.
+Bahar se Byju's kya tha? IPL sponsor. Messi sponsor. India ka biggest unicorn.
 Andar se? Blood report kabhi sahi tha hi nahi.
  
 *(A long pause.)*
@@ -652,8 +649,6 @@ actually kuch kar raha hoon. Kisi ko pata nahi chalega. Par ho raha hoga.
 **Pranav Bhaiya:** *(quietly)* Haan.
  
 *(Just that. One word. Enough.)*
-
-
  
 ---
  
@@ -704,7 +699,7 @@ nahi hota. Banana padta hai.
 *(The bus is steadily moving. Outside it is almost fully evening now. Arjun
 is relaxed in the window seat -not happy, not sad. Just present. Thinking.)*
  
-**Arjun:** Bhaiya -ek cheez abhi bhi samajh nahi aayi.
+**Arjun:** Bhaiya -par ek cheez abhi bhi samajh nahi aayi.
  
 **Pranav Bhaiya:** Bol.
  
@@ -717,16 +712,16 @@ balance sheet balance rahegi? Body toh hamesha balanced nahi rehti. Company
 bhi toh kharab hoti hai, doobti hai -toh balance kaise rehta hai hamesha?
 Yeh koi gimmick hai kya?
  
-**Pranav Bhaiya:** *(slowly)* Arjun -tu biology ka student hai. Maine
-tujhe biology se samjhaya kyunki woh tera background tha. Par yeh jo double
-entry ka sawaal hai -yeh biology ka sawaal nahi hai. Yeh bahut badi cheez
+**Pranav Bhaiya:** *(slowly)* Arjun -tu biology ka student hai isiliye maine
+tujhe biology ke angle se samjhaya kyunki woh tera background tha. Par yeh jo double
+entry ka sawaal hai -yeh biology ka sawaal nahi hai. Yeh bahut badi principle
 hai.
  
 **Arjun:** Matlab?
  
 **Pranav Bhaiya:** Tune Newton ka Third Law padha hai?
  
-**Arjun:** Haan. Every action has an equal and opposite reaction.
+**Arjun:** Haan. Every action has an equal and opposite reaction, invented by Newton.
  
 **Pranav Bhaiya:** Newton ne yeh law invent kiya tha?
  
@@ -758,7 +753,7 @@ hai. Dono simultaneously. Ek hi waqt mein. Yeh alag nahi ho sakte.
 **Pranav Bhaiya:** Yahi double entry hai. Balance sheet capture karta hai
 jo create hua -kya bana, kya accumulate hua, kya exist karta hai. Aur P&L
 capture karta hai jo experience hua -kya kamaya, kya kharch hua, kya result
-nikla. Yeh dono ek hi event ke do faces hain. Isliye balance sheet hamesha
+nikla. Yeh dono ek hi event ke do faces hain, equal and opposite. Isliye balance sheet hamesha
 balance hoti hai -yeh koi accounting trick nahi hai. Yeh universe ka wahi
 niyam hai jo Newton ne force aur motion ki language mein likha tha.
  
@@ -784,13 +779,14 @@ something actually lands.)*
  
 **Arjun:** *(very quietly)* Matlab... Pacioli ne wahi kiya jo Newton ne
 kiya. Dono ne kuch invent nahi kiya. Dono ne sirf dekha jo pehle se tha.
+Newton ne force and motion ke language me samjhaya and pacioli ne same law , business k language me.
  
 **Pranav Bhaiya:** Haan.
  
 **Arjun:** *(after another pause, a small disbelieving laugh)* Bhaiya —
 aapne toh accounts ko Newton se hi relate kar diya.
  
-**Pranav Bhaiya:** Maine nahi rakha. Woh hamesha saath the. Kisi ne notice
+**Pranav Bhaiya:** Maine nahi kiya. Woh hamesha se hi tha. Kisi ne notice
 nahi kiya tha bas.
  
  
@@ -806,34 +802,29 @@ Condition chahe kuch bhi ho.
 **Arjun:** *(after a moment, genuinely)* Bhaiya -aap toh accounts ke
 Newton nikle. Seriously.
  
-**Pranav Bhaiya:** *(laughs quietly)* Main toh bas ek CA hoon jo kisi
-frightened biology student ko samjhaa  
+**Pranav Bhaiya:** *(laughs quietly)* Main toh bas ek experienced Accountant hoon jo iss waqt ek
+frightened biology student ko samjhaa raha hoon.  
 
-**Arjun:** Nahi sach mein -aapne Newton ke law ke angle se poora course
-explain kar diya.
+**Arjun:** Nahi sach mein -aapne Newton ke law ke angle se poora double entry ka doubt hi clear kar diya.
  
 **Pranav Bhaiya:** *(still smiling)* Theek hai. Par pehle aage suno -abhi
 ek aur cheez baaki hai.
  
 **Arjun:** Kya?
  
-**Pranav Bhaiya:** Tune abhi jaana ki ek company ka balance sheet aur P&L
-kya hota hai. Par main tujhe ek aur cheez poochhna chahta hoon. Kya tujhe
-pata hai -ek insaan ka bhi balance sheet hota hai? Ek human being ka bhi
-P&L hota hai, balance sheet hoti hai, cash flow statement hota hai?
+**Pranav Bhaiya:** Tune abhi jaana ki business me double entry system hota hai. Kya tujhe
+pata hai -hamare life me bhi double entry system work kar raha hota hai.  Ek human being ka bhi P&L hota hai, balance sheet hoti hai, cash flow statement hota hai!
  
 *(Arjun turns from the window and frowns -genuinely confused, genuinely
 curious.)*
  
-**Arjun:** Insaan ka?
+**Arjun:** Insaan ka BS n PNL?
  
-**Pranav Bhaiya:** Haan. Agar woh samajh aaye -toh company ka sab kuch
-automatically samajh aayega. Kyunki dono ek hi law follow karte hain.
+**Pranav Bhaiya:** Haan. Agar tune yeh samajh liya -toh company ka sab kuch
+automatically samajh aa jaayega. Kyunki dono ek hi law follow karte hain.
  
 *(Outside, the first star has appeared. Arjun doesn't notice it. He is
 listening.)*
-
-
 
 
 ## The Balance Sheet of a Human Being
@@ -995,7 +986,6 @@ leaning back in the window seat, looking up slightly -not at anything
 specific. Just up.)*
  
 
-
 ## What's the Point If I've Already Failed
  
 *(The bus is nearly empty. The road outside is dark. Arjun has been quiet
@@ -1056,12 +1046,12 @@ Satisfied hoon apni mehnat se.
  
 **Pranav Bhaiya:** *(after a pause)* Tune abhi ek bahut important cheez
 boli -"kya faayda samajhne ka agar fail ho gaya." Yeh sawaal tune poochha.
-Aur is sawaal ka ek jawab hai jo bahut pehle diya ja chuka hai. *(pause)*
+Aur is sawaal ka ek hi jawab hai jo bahut saalo pehle ek book me diya ja chuka hai. *(pause)*
 Tujhe pata hai tera naam kahan se aaya?
  
 **Arjun:** *(confused)* Matlab?
  
-**Pranav Bhaiya:** Arjun. Tera naam. Mahabharata mein bhi ek Arjun tha.
+**Pranav Bhaiya:** Arjun. Tera naam jesa hi Mahabharata mein bhi ek Arjun tha.
 Aur usne bhi yahi sawaal poochha tha apne waqt mein -kya faayda ladhne
 ka agar itna kuch kho jaayega? Kya faayda karm karne ka agar result pata
 nahi?
@@ -1099,7 +1089,7 @@ Sach mein. *(small pause)* Aur woh kahani -jo shuru mein sunane wale the.
 Socrates wali. Woh bhi sunao na bhaiya.. Ab man kar raha hai.
  
 **Pranav Bhaiya:** *(a quiet laugh)* Haan. Woh agli baar sunaaunga -abhi
-ek kaam hai. Office ka call hai, jaana padega.
+ek kaam hai. Office ka meeting hai ek, jaana padega.
  
 **Arjun:** chha ,, Theek Hai bhaiya .
  

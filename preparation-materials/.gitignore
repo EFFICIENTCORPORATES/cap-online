@@ -4,3 +4,57 @@
 *.docx
 *.xlsx
 *.pptx
+
+# Python
+/__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.pyc
+*.pyd
+*.pyo
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+.pytest_cache/
+.pyre/
+.mypy_cache/
+.python-version
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Spyder project settings
+.spyproject
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Local settings
+local_settings.py
