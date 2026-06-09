@@ -26,8 +26,8 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
     - write-like-the-ca-inter-teacher-skill.md
 - **books/**
   - **about-author/**
-    - Pranav_Pratik_Tulshyan_Master_Profile.md
-    - VC Gurukul PPT Launch Ideas Document (2).md
+    - Pranav_Pratik_Tulshyan_Master_Profile_Journey.md
+    - VC Gurukul PPT Launch Ideas Document.md
   - **concept-book/**
     - **chapter-zero/**
       - chapter0-Original.md
