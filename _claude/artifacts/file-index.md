@@ -42,7 +42,22 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
   - **strategy-book/**
     - **drafts/**
     - **final/**
+    - **sources/**
+      - **extermal/**
+        - Report 1-The Ranker’s Blueprint.txt
+        - Report 2- Time-Bound Roadmaps.txt
+        - Report 3- Tactical Execution Paper presentation and MCQ tips.txt
+        - Report 4 The Productivity Lab
+        - Report 5 Mindset & Recovery Handling failure and logistics
+      - Blueprint-CA-Inter-Exam-Strategy-Guide.md
+      - CA-Inter-General-Exam-Systems.md
+      - SKILL-strategy-book-structural-method.md
+      - SKILL-strategy-book-voice-and-tone.md
+      - summary-strategy-book-memory.md
     - **working/**
+      - CA-Inter-Book-Full-Structure.md
+      - CA-Inter-Strategy-Book-MASTER.md
+    - README.md
 - **content/**
   - **ai-content-pipeline/**
     - ai_content_generation_pipeline.md
@@ -95,6 +110,20 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
   - README.md
   - to-purchase.md
 - **preparations/**
+  - **segment-library/**
+    - **accounting-in-news/**
+    - **ai-updates/**
+    - **career-cv/**
+    - **epic-stories/**
+    - **exam-war-stories/**
+    - **famous-cas/**
+    - **financial-news/**
+    - **mental-side/**
+    - **myth-vs-reality/**
+    - **personal-stories/**
+    - **standup-moments/**
+  - cainter-batch-operations.html
+  - standup-teaching.md
 - **question-bank/**
   - **mtp/**
   - **pyq/**

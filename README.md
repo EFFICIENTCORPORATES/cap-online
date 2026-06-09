@@ -83,7 +83,13 @@ cap-online/
 ├── photo-gallery/             ← originals/ (gitignored) + index.md
 ├── materials/                 ← icai-source/ (gitignored) + reference/ (incl. samples/)
 ├── planning/                  ← future roadmap, to-purchase, execution notes
-├── preparations/              ← personal prep notes, lecture plans
+├── preparations/              ← personal prep notes, lecture plans, batch ops
+│   ├── cainter-batch-operations.html  ← interactive class ops (segment library, week planner, checklists)
+│   ├── standup-teaching.md            ← Standup Teaching philosophy
+│   └── segment-library/               ← saved content for each segment type (flat, one folder per type)
+│       ├── standup-moments/  epic-stories/  personal-stories/  exam-war-stories/
+│       ├── ai-updates/  financial-news/  mental-side/  career-cv/
+│       └── famous-cas/  myth-vs-reality/  accounting-in-news/
 │
 └── tools/                     ← admin scripts + processing utilities
     ├── health_check.py · file_index.py · gitignore_audit.py
@@ -107,6 +113,8 @@ cap-online/
 | Motivation images & content bank | `content/motivation/` |
 | Recovered Claude project docs & skills | `_claude/artifacts/`, `_claude/skills/` |
 | Session history | `_claude/memory/project_log.md` |
+| Batch class operations (checklists, segment library, week planner) | `preparations/cainter-batch-operations.html` |
+| Standup Teaching philosophy | `preparations/standup-teaching.md` |
 
 ---
 

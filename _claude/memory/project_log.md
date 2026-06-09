@@ -4,6 +4,47 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-06-09 — Strategy Book MASTER: harvested from 5 external ranker/faculty reports
+
+- Reviewed the 5 `books/strategy-book/sources/extermal/` reports (YouTube ranker + faculty compilations). ~70% was CA Final (articleship/IBS/CFA/placement) — filtered as out-of-scope; deduped heavy repetition. Harvested 5 Inter-relevant items into `working/CA-Inter-Strategy-Book-MASTER.md`:
+  - **Bucket 5 — new Strategy 1 "Your Exam Kit & Logistics"** (scout centre; TWO identical calculators; 3–4 same-brand black pens; 3–4 hall-ticket copies; stapler/scale/pencils; night-before pack; reach 1hr early; loose clothing; light meal + nimbu-paani/glucose). Renumbered Bucket 5 → 1–17. Folded submission mechanics (tick attempted-question boxes, OMR domino alignment, "1+2" supplement count, pen-cap-off, last-10-min review) into "Presentation & Submission" (Strat 11).
+  - **Bucket 2** — Pause-and-Solve (Undivided-Attention, esp. recorded lectures); study-buddy fixed-call + Author Says (Teach-a-Friend → "and Keep a Study Buddy"); own-the-technical-keywords (theory mnemonics strat).
+  - **Bucket 3** — Hinglish/Hindi revision notes (Build Layer 2); exam answer stays English.
+- **Resolved morning-theory-vs-practical conflict** per Pranav: flipped Bucket 3 "Match Subject to Your Energy" → theory in your most productive window (morning OR night), practical sums when low/sleepy.
+- **Excluded:** all CA-Final content; "lucky break" chapter-gambling; "reject notes/master from source"; rigid 12–14h & Pomodoro mandates; pure motivation/anecdote.
+- health_check green; file_index 72. NOTE: project_log + summary-memory show signs of a **concurrent session/app** (a "Batch Operations" entry appeared that this session didn't write; summary-memory locked EPERM). Layer-3 fix still pending in canonical summary-memory. Commit locally; Pranav pushes.
+
+## 2026-06-09 — Batch Operations system rebuilt + Standup Teaching philosophy doc
+
+- Created `preparations/standup-teaching.md` — working philosophy doc for "Standup Teaching" (Pranav's named teaching style blending deep concept teaching with clean, anchored comedy). Not in books yet; flagged for future `books/about-author/` entry.
+- Rebuilt `preparations/cainter-batch-operations.html` (replacing old `cainter-batch_operations_daily.html` which had a fixed daily quote+verse+insta routine). Key changes:
+  - **Segment Library** (19 types): 6 Opening segments (Motivational Quote, Gita Shlok, Mahabharata/Epic Story, Personal IPCC Story, Standup Moment, Exam War Story) + 13 Mid-class segments (Insta Comedy Feed, Insta Motivation, Spiritual Reels, AI Tool Update, ICAI Updates, Financial News Brief, Mental Side of CA, CV & Career Reality, Famous CA/Finance Stories, Accounting in the News, Myth vs Reality in CA, YT Shorts Comment React, Student Doubt Discussion). Replaces the previous fixed daily routine.
+  - **Week Planner tab**: Sun planning — pick Opening + Mid-class segment per day for 6 days. Saved to localStorage.
+  - **Daily Ops tab**: Simplified checklist (fewer items, segment-aware). localStorage persistence per date — resets daily, survives refresh.
+  - **Quote/Verse banks**: Added "Mark used" toggle per item, saved to localStorage — prevents repetition.
+  - **Class structure**: Updated to 2.5 hr / 150 min flow, batch stats card (100 classes, 240 hrs, 4 months).
+  - Removed: Sunday prep load for 6 separate daily items (now weekly Segment Library planning instead).
+- README.md updated: preparations/ folder map expanded, "Where things are" table updated.
+- Commit locally; Pranav pushes.
+
+## 2026-06-09 — Strategy Book MASTER: harvested missing strategies + reverse-planning
+
+- Compared MASTER vs Full-Structure vs original General-Exam-Systems; harvested everything missing into **MASTER** (the canonical working draft). All edits in `books/strategy-book/working/CA-Inter-Strategy-Book-MASTER.md`.
+- **Bucket 1 restructured:** new Strategy 3 *Pick Your Anchor Book*; new Strategy 4 *Plan Backward From Exam Day* (industry hours + reverse-planning calendar for RANK and a separate PASS/exemption chart + one-group-or-two decision merged in); 3-Question Filter + Golden Rule box added to *Fix Your Boundary*. Renumbered to 1–9 (old standalone Both-Groups removed, folded into Strat 4).
+- **Reverse-planning dates:** kept Pranav's round-number durations (4/21/45; 185/231/308/461) but **recomputed the calendar dates** — his table didn't tie out (second-rev start is 24-02-2027 not 17-03; Scenario A start 23-08-2026 not 28-10). PASS chart: exam-anchored back end fixed, second revision 45→39 days, classes+first-rev −30% (≈1295h) → starts 23-10-2026/21-09/29-07/12-04. **Flagged to Pranav** in case his dates used a different assumption (e.g. study-days only).
+- **Other harvests:** Chapter Rating [RANK] (Exam-Relevant A/B/C + Recall + Simulation, Hinglish, Bucket 3); Paste-It-Where-You-Live (Bucket 3, GST-in-hallway Author Says); Amalgamation 5-times rule [RANK] (Bucket 3, exception only); 15-min Reading-Time strategy (Bucket 5 Strat 6, anecdote softened — dropped the 'not allowed' claim); Revision Marathons (Bucket 4); Dual-coding tip + Write-by-hand 'worse to worst' Author Says (Bucket 2); target-driven-not-hours + Pain Choice + diet (Bucket 0); AI teacher-first caution (AI Section); 'no motivation, gamified journey, warna time chala jayega' positioning (About This Book).
+- **Dropped per Pranav:** Five-Year Rule, Articleship Discipline.
+- **Layer 3 corrected** to one thin BOUND notebook per subject (spiral-bound A4 ok) — updated the sources-copy memory; **canonical `_claude/memory/summary-strategy-book-memory.md` is LOCKED/read-only this session (EPERM) — its Layer-3 line still says 'loose sheets' and needs the same one-line fix.**
+- health_check green (46/46, encoding clean, CLAUDE.md current); file_index 71 files. Commit locally; Pranav pushes.
+
+## 2026-06-09 — Strategy Book (Pillar 1) materials consolidated into books/strategy-book/
+
+- The `books/strategy-book/` folder was empty (only .gitkeep); all real Strategy Book material lived scattered in `_claude/`. Exported (copied, originals kept) into the folder so it's now self-contained.
+- `working/`: `CA-Inter-Strategy-Book-MASTER.md` (lead working draft) + `CA-Inter-Book-Full-Structure.md` (fullest content collection).
+- `sources/` (new subfolder): `CA-Inter-General-Exam-Systems.md` (original topic-based source), `Blueprint-CA-Inter-Exam-Strategy-Guide.md` (decision log), `SKILL-strategy-book-structural-method.md`, `SKILL-strategy-book-voice-and-tone.md`, `summary-strategy-book-memory.md`.
+- Author profile NOT duplicated — stays shared in `books/about-author/`. Added `books/strategy-book/README.md` mapping every file + the lineage.
+- health_check: 46/46 dirs, encoding clean, CLAUDE.md current — all green. file_index regenerated (65 files). Commit locally; Pranav pushes.
+
 ## 2026-06-09 — CLAUDE.md entry point + staleness guard (Session: setup, cont.)
 
 - Added **`CLAUDE.md`** at repo root — the session entry point. Pranav starts new chats with "Read CLAUDE.md ...". It encodes: the read order (CLAUDE.md → README → content/README → _claude/memory), the working rules, the full folder-purpose map, the tools, and the gotchas (Excalidraw, UxPlay, brand split, UTF-8, no binaries, ask-first, sandbox-can't-push).
