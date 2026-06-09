@@ -4,6 +4,18 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-06-09 — animation/recording cleanup + new spaces (Session: setup, cont.)
+
+- **animation-generate/ dissolved:** character bible → `books/concept-book/characters/`; story flow (story first-draft) → `books/concept-book/story-vignettes/`; AI content pipeline + tool stack → `content/ai-content-pipeline/`.
+- **Animation tool locked = Excalidraw** (noted in both ai-content-pipeline docs). Screen mirroring now via **UxPlay** on Windows; ApowerMirror retired (Pranav deleted those files).
+- **recording/ dissolved:** 3 test MP4s → `obs-setup/recordings/test/` (OBS output). recording/ removed; leftover empty `preparation-materials/` tree fully removed.
+- **OBS wallpapers:** explicit `OBS Background IPCC.*` → `obs-setup/assets/`. OPEN: confirm if any other `content/motivation/` wallpapers are OBS-linked (would break scene refs; Pranav fine redoing scene collection, or grant OBS config access for auto path-rewrite).
+- **New spaces:** `vc-gurukul/contracts/` (legal agreements w/ VC Gurukul); `planning/` (future-roadmap.md, to-purchase.md, execution-notes.md) for dumping execution/purchase thoughts.
+- Audit Decoder Question Bank PDF → `materials/reference/` (Audit subject, not Adv-Accounts).
+- **New strict rule:** at first real blocker/doubt, ASK Pranav first — don't spin on workarounds. Saved to Claude memory.
+
+---
+
 ## 2026-06-09 — book/ bifurcation + scope lock-in (Session: setup, cont.)
 
 **Scope clarified by Pranav — six pillars (only 2 self-drafted books):**
@@ -32,15 +44,4 @@ A running status note. Newest entries at the top. One short block per session.
 - Built the full agreed folder skeleton (books, syllabus-engine, vc-gurukul, content, telegram, obs-setup, photo-gallery, materials, preparations, tools, _claude).
 - Migrated unambiguous folders:
   - `motivation/` → `content/motivation/`
-  - `scripts/` → `tools/` (count-line-pdf, sarvamai, split_pdf, translate_chapter0)
-  - `preparation-materials/book-syllabus-engine/` → split into `syllabus-engine/` (scripts, data, html-source, architecture docs) and `materials/icai-source/` (ICAI study materials, AS2 source PDF, PYQ/MTP/RTP).
-- Copied Claude project artifacts into `_claude/` (memory ×2, 5 SKILL files + writing skill → skills/, 7 docs → artifacts/).
-- Wrote master `README.md`, extended `.gitignore` (video/audio/archives/executables/large binaries), created `tools/` admin scripts.
-- Committed locally (not pushed).
-
-**Left in place for review (mixed content — needs your call):**
-- `book/` — contains a Law chapter (Nature of Contracts, out of Adv-Accounts scope), `about-author/`, `chap-0/` (concept-book Chapter 0 + Hindi), `strategy-all-in-one/`, `chapter-zero-concept-bank.md`, `table-of-contents.md`, `write-like...skill.md`.
-- `preparation-materials/animation-generate/` — character bible, story flow, content pipeline, tool stack (could go to books/adv-accounts-book or content/).
-- `preparation-materials/all in one exam strategy for all/` — Audit Decoder Question Bank PDF.
-- `recording/` — ApowerMirror app binaries + live-batch MP4s (large binaries; suggest gitignore + decide home: obs-setup or external).
-- `content/motivation/` includes `OBS Background IPCC.*` — may belong in `obs-setup/`.
+  - `scripts/` → `tools/` (count-line-pdf, sarvama

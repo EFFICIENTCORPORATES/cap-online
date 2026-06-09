@@ -1,6 +1,11 @@
 # Content Creation Tool Stack
 ### YouTube & LinkedIn Tutorial Videos — AI-Powered Pipeline
 
+> **DECISION (locked):** Animation / visual concept explainers are done in **Excalidraw**.
+> All character-universe story animations for the Advanced Accounts concept book use
+> Excalidraw as the drawing/animation tool. Screen mirroring (phone/tablet) is done via
+> **UxPlay** on Windows (ApowerMirror retired).
+
 ---
 
 ## Stage 1: Script & Content Generation

@@ -1,18 +1,8 @@
 #!/usr/bin/env python3
-"""health_check.py — validate cap-online folder structure and README links.
-
-Checks:
-  1. All expected folders from the agreed structure exist.
-  2. Every relative link/path referenced in README.md actually exists.
-  3. Reports any top-level folders not in the agreed structure (review items).
-
-Usage:  python tools/health_check.py
-Exit code 0 = all good, 1 = problems found.
-"""
-from __future__ import annotations
+"""health_check.py - validate cap-online folder structure and README links."""
+from pathlib import Path
 import re
 import sys
-from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -27,66 +17,60 @@ EXPECTED_DIRS = [
     "question-bank/pyq", "question-bank/mtp", "question-bank/rtp", "question-bank/solutions",
     "mcq-platform/question-generation", "mcq-platform/database", "mcq-platform/cloudflare-app",
     "vc-gurukul/management-discussions", "vc-gurukul/events", "vc-gurukul/batch-july-2025",
+    "vc-gurukul/contracts",
     "content/reels", "content/motivation", "content/competitor-analysis",
+    "content/ai-content-pipeline",
     "telegram/bots", "telegram/source-docs",
-    "obs-setup", "photo-gallery/originals",
+    "obs-setup", "obs-setup/assets", "obs-setup/recordings",
+    "photo-gallery/originals",
     "materials/icai-source", "materials/reference",
-    "preparations", "tools",
+    "planning", "preparations", "tools",
 ]
 
-# Top-level folders that are allowed but flagged as "pending review"
 REVIEW_DIRS = {"book", "preparation-materials", "recording"}
 
 
-def check_dirs() -> list[str]:
-    problems = []
-    for d in EXPECTED_DIRS:
-        if not (ROOT / d).is_dir():
-            problems.append(f"MISSING folder: {d}")
-    return problems
+def check_dirs():
+    return ["MISSING folder: " + d for d in EXPECTED_DIRS if not (ROOT / d).is_dir()]
 
 
-def check_readme_links() -> list[str]:
+def check_readme_links():
     readme = ROOT / "README.md"
     if not readme.exists():
         return ["MISSING README.md"]
     text = readme.read_text(encoding="utf-8", errors="ignore")
     problems = []
-    # markdown links [text](path) with non-URL targets
     for m in re.finditer(r"\]\(([^)]+)\)", text):
         target = m.group(1).split("#")[0].strip()
         if not target or target.startswith(("http://", "https://", "mailto:")):
             continue
         if not (ROOT / target).exists():
-            problems.append(f"README link broken: {target}")
+            problems.append("README link broken: " + target)
     return problems
 
 
-def list_review() -> list[str]:
-    found = []
+def list_review():
+    out = []
     for child in sorted(ROOT.iterdir()):
         if child.is_dir() and child.name in REVIEW_DIRS:
-            found.append(f"REVIEW (pending migration): {child.name}/")
-    return found
+            out.append("REVIEW (pending migration): " + child.name + "/")
+    return out
 
 
-def main() -> int:
-    dir_problems = check_dirs()
-    link_problems = check_readme_links()
+def main():
+    dp = check_dirs()
+    lp = check_readme_links()
     review = list_review()
-
     print("=== cap-online health check ===\n")
-    print(f"Expected folders present: {len(EXPECTED_DIRS) - len(dir_problems)}/{len(EXPECTED_DIRS)}")
-
-    for p in dir_problems + link_problems:
-        print("  [FAIL]", p)
+    print("Expected folders present: %d/%d" % (len(EXPECTED_DIRS) - len(dp), len(EXPECTED_DIRS)))
+    for p in dp + lp:
+        print("  [FAIL] " + p)
     for r in review:
-        print("  [warn]", r)
-
-    if not dir_problems and not link_problems:
-        print("\nOK — structure valid and README links resolve.")
+        print("  [warn] " + r)
+    if not dp and not lp:
+        print("\nOK - structure valid and README links resolve.")
         return 0
-    print(f"\n{len(dir_problems) + len(link_problems)} problem(s) found.")
+    print("\n%d problem(s) found." % (len(dp) + len(lp)))
     return 1
 
 

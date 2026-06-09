@@ -54,7 +54,8 @@
 # Explicit heavy-source folders (kept local only)
 materials/icai-source/
 photo-gallery/originals/
-recording/
+obs-setup/recordings/
+obs-setup/tools/
 
 # Python
 __pycache__/

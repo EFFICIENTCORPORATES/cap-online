@@ -1,6 +1,9 @@
 # AI-Based Content Generation Pipeline
 ### Principle: 95% Automation > 100% Manual Accuracy. Speed wins.
 
+> **Animation tool (locked): Excalidraw** — used for all concept-story / character-universe
+> visual explainers. Mirroring via UxPlay (Windows). See `content_creation_tool_stack.md`.
+
 ---
 
 ## Section 1: YouTube Long-Form Video

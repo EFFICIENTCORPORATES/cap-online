@@ -35,13 +35,18 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
       - chapter0_hindi.md
     - **chapters/**
     - **characters/**
+      - character_bible_ca_inter_adv_accounts.md
     - **revision-material/**
     - **story-vignettes/**
+      - story_flow_ca_inter_adv_accounts.md
   - **strategy-book/**
     - **drafts/**
     - **final/**
     - **working/**
 - **content/**
+  - **ai-content-pipeline/**
+    - ai_content_generation_pipeline.md
+    - content_creation_tool_stack.md
   - **competitor-analysis/**
   - **motivation/**
   - **reels/**
@@ -61,19 +66,17 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
   - **question-generation/**
   - README.md
 - **obs-setup/**
+  - **assets/**
+  - **recordings/**
+    - **test/**
+  - **tools/**
 - **photo-gallery/**
   - **originals/**
-- **preparation-materials/**
-  - **all in one exam strategy for all/**
-  - **animation-generate/**
-    - ai_content_generation_pipeline.md
-    - character_bible_ca_inter_adv_accounts.md
-    - content_creation_tool_stack.md
-    - story_flow_ca_inter_adv_accounts.md
-  - **book-syllabus-engine/**
-    - **BOOK-PIPELINE/**
-      - **PYQ MTP RTP/**
-    - **ICAI Study Materials/**
+- **planning/**
+  - execution-notes.md
+  - future-roadmap.md
+  - README.md
+  - to-purchase.md
 - **preparations/**
 - **question-bank/**
   - **mtp/**
@@ -81,13 +84,6 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
   - **rtp/**
   - **solutions/**
   - README.md
-- **recording/**
-  - **Apowersoft_ApowerMirror_1.4.7.16-20240816T105400Z-001/**
-    - **Apowersoft_ApowerMirror_1.4.7.16/**
-      - **Apowersoft_ApowerMirror_1.4.7.16/**
-        - **Crack/**
-        - Readme.txt
-  - **CA-Inter-May27-LiveBatch/**
 - **syllabus-engine/**
   - **data/**
     - 0-ca-inter-adv-accounts-subtopics-marks-weightage.json
@@ -112,6 +108,8 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
   - translate_chapter0.py
 - **vc-gurukul/**
   - **batch-july-2025/**
+  - **contracts/**
+    - README.md
   - **events/**
   - **management-discussions/**
 - README.md
