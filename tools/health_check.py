@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""health_check.py - validate cap-online folder structure, README links, and file encoding.
+"""health_check.py - validate cap-online folder structure, README links, encoding, and CLAUDE.md.
 
 Checks:
   1. All expected folders from the agreed structure exist.
   2. Every relative link/path in README.md resolves.
-  3. No tracked text file contains NUL bytes / invalid UTF-8 (catches the
-     cross-mount corruption + stray UTF-16 conversions before they're committed).
-  4. Reports top-level folders not in the agreed structure (review items).
+  3. No tracked text file contains NUL bytes / invalid UTF-8.
+  4. CLAUDE.md exists and is not stale (every live top-level folder is documented in it).
+  5. Reports top-level folders not in the agreed structure (review items).
 
 Usage:  python tools/health_check.py
 Exit code 0 = all good, 1 = problems found.
@@ -43,7 +43,6 @@ EXPECTED_DIRS = [
 
 REVIEW_DIRS = {"book", "preparation-materials", "recording"}
 
-# Text files we expect to be clean UTF-8 (no NUL bytes).
 TEXT_EXT = {".md", ".py", ".html", ".json", ".csv", ".txt",
             ".yml", ".yaml", ".toml", ".cfg", ".ini", ".js", ".css"}
 SKIP_PARTS = {".git", ".venv", "__pycache__", "node_modules"}
@@ -78,6 +77,20 @@ def _git_ignored(path):
         return False
 
 
+def _live_top_level_dirs():
+    """Top-level folders that should be documented (skip hidden / ignored / build dirs)."""
+    out = []
+    for child in sorted(ROOT.iterdir()):
+        if not child.is_dir():
+            continue
+        if child.name.startswith(".") or child.name in SKIP_PARTS:
+            continue
+        if _git_ignored(child):
+            continue
+        out.append(child.name)
+    return out
+
+
 def check_encoding():
     """Flag tracked text files that contain NUL bytes or aren't valid UTF-8."""
     problems = []
@@ -102,6 +115,19 @@ def check_encoding():
     return problems
 
 
+def check_claude_md():
+    """CLAUDE.md must exist and mention every live top-level folder (staleness guard)."""
+    f = ROOT / "CLAUDE.md"
+    if not f.exists():
+        return ["MISSING CLAUDE.md (the session entry point)"]
+    text = f.read_text(encoding="utf-8", errors="ignore")
+    problems = []
+    for name in _live_top_level_dirs():
+        if name not in text:
+            problems.append("CLAUDE.md may be stale: top-level '%s/' is not documented" % name)
+    return problems
+
+
 def list_review():
     out = []
     for child in sorted(ROOT.iterdir()):
@@ -114,18 +140,20 @@ def main():
     dp = check_dirs()
     lp = check_readme_links()
     ep = check_encoding()
+    cp = check_claude_md()
     review = list_review()
     print("=== cap-online health check ===\n")
     print("Expected folders present: %d/%d" % (len(EXPECTED_DIRS) - len(dp), len(EXPECTED_DIRS)))
     print("Text files checked for NUL/UTF-8: %s" % ("FAIL" if ep else "clean"))
-    for prob in dp + lp + ep:
+    print("CLAUDE.md up to date: %s" % ("FAIL" if cp else "yes"))
+    for prob in dp + lp + ep + cp:
         print("  [FAIL] " + prob)
     for r in review:
         print("  [warn] " + r)
-    if not dp and not lp and not ep:
-        print("\nOK - structure valid, README links resolve, encodings clean.")
+    if not dp and not lp and not ep and not cp:
+        print("\nOK - structure valid, README links resolve, encodings clean, CLAUDE.md current.")
         return 0
-    print("\n%d problem(s) found." % (len(dp) + len(lp) + len(ep)))
+    print("\n%d problem(s) found." % (len(dp) + len(lp) + len(ep) + len(cp)))
     return 1
 
 

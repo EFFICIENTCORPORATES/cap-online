@@ -129,4 +129,5 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
     - README.md
   - **events/**
   - **management-discussions/**
+- CLAUDE.md
 - README.md
