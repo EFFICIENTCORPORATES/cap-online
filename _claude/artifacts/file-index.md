@@ -47,9 +47,26 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
   - **ai-content-pipeline/**
     - ai_content_generation_pipeline.md
     - content_creation_tool_stack.md
+  - **assets/**
+    - **b-roll/**
+    - **brand-kit/**
+    - **flyers/**
+    - **green-screen/**
+    - **intros-outros/**
+    - **music-sfx/**
+    - **raw-footage/**
+    - **thumbnails/**
+  - **calendar/**
+    - personal-private.md
+    - vc-gurukul-shared.md
   - **competitor-analysis/**
   - **motivation/**
-  - **reels/**
+  - **scripts/**
+    - gsheet_sync.py
+  - **social/**
+    - **personal/**
+    - **vc-gurukul/**
+  - README.md
 - **materials/**
   - **icai-source/**
     - **ICAI-Study-Materials/**
