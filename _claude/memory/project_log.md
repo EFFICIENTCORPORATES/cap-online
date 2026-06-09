@@ -4,6 +4,20 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-06-09 — CLAUDE.md entry point + staleness guard (Session: setup, cont.)
+
+- Added **`CLAUDE.md`** at repo root — the session entry point. Pranav starts new chats with "Read CLAUDE.md ...". It encodes: the read order (CLAUDE.md → README → content/README → _claude/memory), the working rules, the full folder-purpose map, the tools, and the gotchas (Excalidraw, UxPlay, brand split, UTF-8, no binaries, ask-first, sandbox-can't-push).
+- Added **`check_claude_md()`** to `health_check.py`: fails if CLAUDE.md is missing or if any live top-level folder isn't documented in it — so structural changes can't leave CLAUDE.md stale. Verified with a negative test (temp folder → check failed → removed → clean).
+- Health check now reports: dirs 46/46 + README links + encoding + CLAUDE.md current — all green.
+- Prior 5 commits already pushed to origin/main by Pranav. This adds CLAUDE.md + guard (commit locally; Pranav pushes).
+
+## 2026-06-09 — content/ studio + encoding guard (Session: setup, cont.)
+
+- Built `content/` creative studio: `assets/{raw-footage,intros-outros,green-screen,b-roll,music-sfx,brand-kit,thumbnails,flyers}`, `social/{personal,vc-gurukul}`, `calendar/{personal-private,vc-gurukul-shared}.md`, `scripts/gsheet_sync.py` (stub), `content/README.md`. Base clip → `assets/b-roll/`. Retired empty `reels/`.
+- Brand rule: `social/personal` = entirely Pranav's; `social/vc-gurukul` = co-branded Pranav + VCG. Two calendars (private vs shared) sync to a Google Sheet via gsheet_sync.py for editor collaboration.
+- Converted law-faculty sample `.md` (was UTF-16) → clean UTF-8. Fixed stray NULs in README.md; about-author `.md` files were empty UTF-16 stubs (real content in their PDFs) → replaced with proper UTF-8 placeholder stubs.
+- **Added encoding guard to `tools/health_check.py`:** new `check_encoding()` flags any tracked text file with NUL bytes or invalid UTF-8 (skips gitignored binaries via `git check-ignore`). Run it after edits — it caught the corruption this session. Health check now: dirs 46/46 + links + encoding, all clean.
+
 ## 2026-06-09 — animation/recording cleanup + new spaces (Session: setup, cont.)
 
 - **animation-generate/ dissolved:** character bible → `books/concept-book/characters/`; story flow (story first-draft) → `books/concept-book/story-vignettes/`; AI content pipeline + tool stack → `content/ai-content-pipeline/`.
