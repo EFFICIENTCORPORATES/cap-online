@@ -1,10 +1,60 @@
-# Ignore PDF, documents, and spreadsheets at any level
+# ─── cap-online .gitignore ───────────────────────────────────────────
+# Principle: no binary files in git. Source/text (.md, .html, .py, .json,
+# .csv, small .svg) is tracked; everything heavy or binary is excluded.
+
+# Documents / office binaries
 **/*.pdf
 **/*.docx
+**/*.doc
 **/*.pptx
+**/*.ppt
 **/*.xlsx
+**/*.xls
+
+# Images (raster)
 **/*.jpg
+**/*.jpeg
 **/*.png
+**/*.gif
+**/*.bmp
+**/*.tiff
+**/*.tif
+**/*.webp
+**/*.psd
+**/*.ico
+
+# Audio
+**/*.mp3
+**/*.wav
+**/*.m4a
+**/*.aac
+**/*.flac
+**/*.ogg
+
+# Video
+**/*.mp4
+**/*.mov
+**/*.mkv
+**/*.avi
+**/*.webm
+**/*.wmv
+
+# Archives & executables / large binaries
+**/*.zip
+**/*.rar
+**/*.7z
+**/*.tar
+**/*.gz
+**/*.exe
+**/*.dll
+**/*.msi
+**/*.bin
+**/*.iso
+
+# Explicit heavy-source folders (kept local only)
+materials/icai-source/
+photo-gallery/originals/
+recording/
 
 # Python
 __pycache__/
@@ -12,44 +62,31 @@ __pycache__/
 *$py.class
 *.pyo
 *.pyd
-*.pyc
 .pytest_cache/
-.pyre/
 .mypy_cache/
 .python-version
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-.python-version
 pip-log.txt
-pip-delete-this-directory.txt
 
 # Virtual environments
 .venv/
 venv/
 ENV/
 env/
+env.bak/
+venv.bak/
 
-# Distribution / packaging
+# Packaging
 build/
 dist/
 *.egg-info/
 .installed.cfg
 *.egg
 
-# Jupyter Notebook checkpoints
-.ipynb_checkpoints/
-
-# Spyder project settings
-.spyproject
-
-# PyCharm
+# Editor / OS
 .idea/
-
-# VS Code
 .vscode/
-
-# Local settings
+.ipynb_checkpoints/
+.spyproject
+.DS_Store
+Thumbs.db
 local_settings.py
