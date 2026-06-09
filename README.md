@@ -1,8 +1,23 @@
 # cap-online — CA Inter Teaching Journey (VC Gurukul)
 
-Master repository for **CA Pranav Pratik Tulshyan**'s CA Inter Advanced Accounting teaching ecosystem at VC Gurukul, Noida — books, syllabus-engine pipeline, class materials, content, and recording setup.
+Master repository for **CA Pranav Pratik Tulshyan**'s CA Inter Advanced Accounting teaching ecosystem at VC Gurukul, Noida — books, syllabus engine, question bank, online practice platform, content, and recording setup.
 
 > **Git root:** `D:\EffCorp_Projects\cap-online` · **Remote:** `EFFICIENTCORPORATES/cap-online` · **Branch:** `main`
+
+---
+
+## What we're building
+
+| # | Pillar | Folder | What it is |
+|---|--------|--------|-----------|
+| 1 | **Exam Strategy Book** *(self-drafted)* | `books/strategy-book/` | General prep book + author's journey + exam-specific strategy. |
+| 2 | **Concept Book — Advanced Accounts** *(self-drafted)* | `books/concept-book/` | All concepts for all chapters, with stories, characters, and space for error register + exam markings. *(This is the Advanced Accounts book.)* |
+| 3 | **Syllabus Engine** | `syllabus-engine/` | Structural breakdown of the entire ICAI study material into JSON/MD so AI agents can navigate it and pull insights via scripts. |
+| 4 | **Question Bank** | `question-bank/` | Curated collection of questions **not** in the ICAI study material — PYQ, MTP, RTP + solutions. Scope: last 7–10 years (depending on book size). |
+| 5 | **AI MCQ / Online Test Platform** | `mcq-platform/` | AI-generated MCQ bank in a DBMS, hosted as a Cloudflare project. Students take tests online and get results. |
+| 6 | **Telegram Bots** | `telegram/` | Study-centric bots and tools students use to augment study, practice, and exam prep. |
+
+Supporting: `vc-gurukul/` (institute ops), `content/` (reels, motivation, competitor analysis), `obs-setup/`, `photo-gallery/`, `materials/` (ICAI source + reference), `preparations/`, `tools/`, and `_claude/` (Claude memory & context).
 
 ---
 
@@ -37,34 +52,41 @@ cap-online/
 │   └── skills/                ← writing/voice skill files worth preserving
 │
 ├── books/
-│   ├── strategy-book/         ← 7-bucket exam strategy book   (drafts/ working/ final/)
-│   ├── concept-book/          ← Chapter 0, Arjun/Pranav Bhaiya (chapter-zero/ characters/)
-│   └── adv-accounts-book/     ← CA Inter Advanced Accounting textbook
-│                                 (chapters/ story-vignettes/ revision-material/)
+│   ├── strategy-book/         ← Pillar 1: exam strategy (drafts/ working/ final/)
+│   ├── concept-book/          ← Pillar 2: Advanced Accounts concept book
+│   │   ├── chapter-zero/      ← Chapter 0 (Arjun / Pranav Bhaiya); EN + Hindi drafts
+│   │   ├── characters/        ← recurring cast (Sethji, Rolly, Diya, CFO Sir…)
+│   │   ├── chapters/          ← concept chapters
+│   │   ├── story-vignettes/   ← error-point stories
+│   │   └── revision-material/ ← revision + error-register / exam-marking space
+│   └── about-author/          ← shared: author profile + journey (used by both books)
 │
-├── syllabus-engine/           ← JSON pipeline + Python extraction
+├── syllabus-engine/           ← Pillar 3: JSON/MD pipeline + extraction
 │   ├── data/                  ← syllabus JSON + Excel weightage source
 │   ├── scripts/               ← extract_json_from_html.py
-│   └── html-source/           ← ICAI Base HTML chapters (e.g. AS2_Inventories.html)
+│   └── html-source/           ← ICAI Base HTML chapters
+│
+├── question-bank/             ← Pillar 4: non-study-material questions (7–10 yr)
+│   ├── pyq/  mtp/  rtp/        ← by source
+│   └── solutions/
+│
+├── mcq-platform/              ← Pillar 5: AI MCQs in DBMS, Cloudflare online tests
+│   ├── question-generation/   ← AI generation pipeline
+│   ├── database/              ← schema, seed data
+│   └── cloudflare-app/        ← hosted test app
+│
+├── telegram/                  ← Pillar 6: bots/ source-docs/
 │
 ├── vc-gurukul/                ← management-discussions/ events/ batch-july-2025/
-│
-├── content/
-│   ├── reels/                 ← scripts, ideas, references (no video files)
-│   ├── motivation/            ← content bank, quotes, story ideas, images
-│   └── competitor-analysis/   ← research on other CA educators/platforms
-│
-├── telegram/                  ← bots/ source-docs/
+├── content/                   ← reels/ motivation/ competitor-analysis/
 ├── obs-setup/                 ← OBS config, scene notes, recording setup
 ├── photo-gallery/             ← originals/ (gitignored) + index.md
-├── materials/                 ← icai-source/ (gitignored) + reference/
+├── materials/                 ← icai-source/ (gitignored) + reference/ (incl. samples/)
 ├── preparations/              ← personal prep notes, lecture plans
 │
-└── tools/                     ← Python admin scripts + processing utilities
-    ├── health_check.py        ← validates folder structure & README links
-    ├── file_index.py          ← auto-generates a file listing
-    ├── gitignore_audit.py     ← flags large/binary files not in .gitignore
-    ├── split_pdf.py · count-line-pdf.py · sarvamai.py · translate_chapter0.py
+└── tools/                     ← admin scripts + processing utilities
+    ├── health_check.py · file_index.py · gitignore_audit.py
+    └── split_pdf.py · count-line-pdf.py · sarvamai.py · translate_chapter0.py
 ```
 
 ---
@@ -73,11 +95,14 @@ cap-online/
 
 | You want… | Look in |
 |---|---|
-| Exam strategy book (7 buckets) | `books/strategy-book/` |
-| Concept book — Chapter 0, characters | `books/concept-book/` |
-| Advanced Accounting textbook chapters | `books/adv-accounts-book/` |
+| Exam strategy book | `books/strategy-book/` |
+| Advanced Accounts concept book (Ch.0, characters, stories) | `books/concept-book/` |
+| Author profile & journey | `books/about-author/` |
 | Syllabus JSON / extraction scripts | `syllabus-engine/` |
-| ICAI study material, PYQ/MTP/RTP | `materials/icai-source/` *(local only)* |
+| PYQ / MTP / RTP question bank + solutions | `question-bank/` |
+| Online MCQ test platform | `mcq-platform/` |
+| ICAI study material, raw PYQ/MTP/RTP PDFs | `materials/icai-source/` *(local only)* |
+| Reference samples (e.g. law-faculty chapter sample) | `materials/reference/samples/` |
 | Motivation images & content bank | `content/motivation/` |
 | Recovered Claude project docs & skills | `_claude/artifacts/`, `_claude/skills/` |
 | Session history | `_claude/memory/project_log.md` |
@@ -86,12 +111,11 @@ cap-online/
 
 ## ⚠️ Pending review (not yet migrated)
 
-These hold mixed content and were left in place pending your call:
+Mixed-content folders left in place pending your call:
 
-- **`book/`** — mixed: a Law chapter (Nature of Contracts, *out of Adv-Accounts scope*), `about-author/`, `chap-0/` (concept-book Chapter 0 + Hindi), `strategy-all-in-one/`, concept bank, TOC, writing skill. → likely splits across `books/concept-book/`, `books/strategy-book/`, `_claude/skills/`.
-- **`preparation-materials/animation-generate/`** — character bible, story flow, content pipeline. → `books/adv-accounts-book/` or `content/`.
-- **`preparation-materials/all in one exam strategy for all/`** — Audit Decoder Question Bank. → `materials/reference/` or `books/strategy-book/`.
-- **`recording/`** — ApowerMirror binaries + live-batch MP4s (large). → keep local, decide home.
+- **`preparation-materials/animation-generate/`** — character bible, story flow, content pipeline. → likely `books/concept-book/` (characters/story-vignettes) and/or `content/`.
+- **`preparation-materials/all in one exam strategy for all/`** — Audit Decoder Question Bank PDF. → `question-bank/` or `materials/reference/`.
+- **`recording/`** — ApowerMirror binaries + live-batch MP4s (large, gitignored). → keep local, decide home (`obs-setup/`?).
 - **`content/motivation/OBS Background IPCC.*`** — may belong in `obs-setup/`.
 
 ---

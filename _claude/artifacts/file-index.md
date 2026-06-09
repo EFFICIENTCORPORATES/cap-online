@@ -11,6 +11,7 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
     - CA-Inter-Strategy-Book-MASTER.md
     - chapter-zero-concept-bank.md
     - chapter-zero-draft.md
+    - file-index.md
     - to-the-reader.md
   - **memory/**
     - adv-accounts-vc-gurukul-memory.md
@@ -23,28 +24,19 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
     - SKILL-strategy-book-structural-method.md
     - SKILL-strategy-book-voice-and-tone.md
     - write-like-the-ca-inter-teacher-skill.md
-- **book/**
+- **books/**
   - **about-author/**
     - Pranav_Pratik_Tulshyan_Master_Profile.md
     - VC Gurukul PPT Launch Ideas Document (2).md
-  - **chap-0/**
-    - chapter0-Original.md
-    - chapter0_hin.md
-    - chapter0_hindi.md
-  - **strategy-all-in-one/**
-    - CA-Inter-General-Exam-Systems.md
-  - 21Chapter-02-UNIT_1_AND_2_-_Nature_of_Contracts_and_Consideration_surjeet_sir_Raushan.md
-  - chapter-zero-concept-bank.md
-  - table-of-contents.md
-  - write-like-the-ca-inter-teacher-skill.md
-- **books/**
-  - **adv-accounts-book/**
-    - **chapters/**
-    - **revision-material/**
-    - **story-vignettes/**
   - **concept-book/**
     - **chapter-zero/**
+      - chapter0-Original.md
+      - chapter0_hin.md
+      - chapter0_hindi.md
+    - **chapters/**
     - **characters/**
+    - **revision-material/**
+    - **story-vignettes/**
   - **strategy-book/**
     - **drafts/**
     - **final/**
@@ -61,6 +53,13 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
       - ICAI STUDY MATERIAL MODULE 3.md
     - **PYQ-MTP-RTP/**
   - **reference/**
+    - **samples/**
+      - 21Chapter-02-UNIT_1_AND_2_-_Nature_of_Contracts_and_Consideration_surjeet_sir_Raushan.md
+- **mcq-platform/**
+  - **cloudflare-app/**
+  - **database/**
+  - **question-generation/**
+  - README.md
 - **obs-setup/**
 - **photo-gallery/**
   - **originals/**
@@ -76,6 +75,12 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
       - **PYQ MTP RTP/**
     - **ICAI Study Materials/**
 - **preparations/**
+- **question-bank/**
+  - **mtp/**
+  - **pyq/**
+  - **rtp/**
+  - **solutions/**
+  - README.md
 - **recording/**
   - **Apowersoft_ApowerMirror_1.4.7.16-20240816T105400Z-001/**
     - **Apowersoft_ApowerMirror_1.4.7.16/**
