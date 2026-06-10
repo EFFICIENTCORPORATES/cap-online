@@ -59,6 +59,7 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
     - **working/**
       - CA-Inter-Book-Full-Structure.md
       - CA-Inter-Strategy-Book-MASTER.md
+      - MASTER-component-index.md
     - README.md
 - **content/**
   - **ai-content-pipeline/**

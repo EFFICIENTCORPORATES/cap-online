@@ -99,7 +99,8 @@ Content to cover:
 ---
 ---
 
-# ROUTING PAGE — WHERE ARE YOU RIGHT NOW IN YOUR INTERMEDIATE JOURNEY?
+# ROUTING PAGE
+## Where Are You Right Now in Your Intermediate Journey?
 
 > **Read this before anything else — this whole guide runs SUBJECT BY SUBJECT.**
 > There is no single "where am I." Each subject sits in its own phase at any given
@@ -112,6 +113,9 @@ Content to cover:
 
 Answer honestly — once for **each subject**, not once for all of CA. Go where it
 sends you.
+
+> **DIAGRAM: Routing Flowchart**
+> Decision-tree flowchart showing options A through G, each routing to the corresponding bucket or section.
 
 ```
 A. Not started yet. Classes haven't begun, or just began.
@@ -155,7 +159,6 @@ costs you in the exam hall.
 **Subject-specific guide:** This book gives the system. Your faculty's guide
 gives the subject. When they differ, the faculty's guide wins.
 
-
 ---
 ---
 
@@ -169,20 +172,18 @@ No "Starting Late" box here. If you haven't been doing these — start today. Be
 late than never: the day you realise this, put it into practice that same day — and
 then every single day after.
 
-> **One line before we begin.** There are two kinds of pain: 
->1. The pain of discipline NOW
->OR
->2. The Pain of Regret at time of result.
-
+> **One line before we begin.** There are two kinds of pain:
+> 1. The pain of discipline NOW
+> OR
+> 2. The Pain of Regret at time of result.
 
 > You must choose 1 out of the above 2 today. CHOOSE WISELY.
-
 
 (That's the only philosophy line in this whole book. We're done. Now the system.)
 
 ---
 
-### Priorities from today onwards till the last day of Intermediate Exam [ALL]
+### PRIORITIES FROM TODAY ONWARDS TILL THE LAST DAY OF INTERMEDIATE EXAM
 
 Set these three. Everything else comes after.
 
@@ -220,17 +221,17 @@ In this space, install only what serves the exam:
 Instagram, WhatsApp chats, everything else — they stay in your main space.
 This space is study only. You'll start living here more and more.
 
-**HOW TO DO THIS:**
-Android: Settings → Users / Second Space → create new user → install only the
-apps above → use a different or the same Gmail, your choice.
-
-Note: on 8GB RAM, switching is smooth. On lower RAM, expect a 5–10 second delay
-when you switch spaces. Annoying, not a dealbreaker. A slow switch still beats no
-separation. Don't use a slow phone as your excuse.
-
-iPhone / iOS: iOS doesn't support a second user. Do the next best thing — hide
-the distracting apps, lock and restrict them, turn off their notifications, mute
-the groups, and filter contacts so nothing pulls you mid-study.
+> **HOW TO DO THIS:**
+> Android: Settings → Users / Second Space → create new user → install only the
+> apps above → use a different or the same Gmail, your choice.
+>
+> Note: on 8GB RAM, switching is smooth. On lower RAM, expect a 5–10 second delay
+> when you switch spaces. Annoying, not a dealbreaker. A slow switch still beats no
+> separation. Don't use a slow phone as your excuse.
+>
+> iPhone / iOS: iOS doesn't support a second user. Do the next best thing — hide
+> the distracting apps, lock and restrict them, turn off their notifications, mute
+> the groups, and filter contacts so nothing pulls you mid-study.
 
 ---
 
@@ -250,9 +251,10 @@ argue works. The full playbook on how and for what purpose to use AI is in the "
 next day work. Your brain reinforces everything you studied while you sleep. Cut sleep
 and you cut the reinforcement.
 
-Author Says: I have personally tried the "Polyphasic Sleep", a famous sleep strategy by "Leonardo da Vinci". I tried multiple other sleep strategy like  Dymaxion Schedule , The Everyman Schedule, Triphasic Schedule, but trust me , NOTHING WORKS, and NEITHER is required. The only strategy worked for me is : A Fixed Sleep timing , without fail, and 6 hours fixed sleep at night (10:00 pm to 4:00 am) and a 20-30 mins nap during the day.
-
-While I agree, timings may differ for everyone, but ensure minimum 6 hours and maximum 8 hours of sleep is NON NEGOTIABLE.
+> **AUTHOR SAYS:**
+> I have personally tried the "Polyphasic Sleep", a famous sleep strategy by "Leonardo da Vinci". I tried multiple other sleep strategy like  Dymaxion Schedule , The Everyman Schedule, Triphasic Schedule, but trust me , NOTHING WORKS, and NEITHER is required. The only strategy worked for me is : A Fixed Sleep timing , without fail, and 6 hours fixed sleep at night (10:00 pm to 4:00 am) and a 20-30 mins nap during the day.
+>
+> While I agree, timings may differ for everyone, but ensure minimum 6 hours and maximum 8 hours of sleep is NON NEGOTIABLE.
 
 ---
 
@@ -266,8 +268,9 @@ minutes of movement resets it.
 **Eyes — the 20-20-20 rule:** every 20 minutes, look at something 20 feet away
 for 20 seconds. Your screen time is brutal on your eyes. This one habit protects
 them.
-[POSTURE + EYE EXERCISE PAGE — line-drawing diagrams: neck rolls, shoulder
-shrugs, back stretch, wrist rotations, palming, eye rolling. One page.]
+
+> **DIAGRAM: Posture and Eye Exercise**
+> One page of line-drawing diagrams: neck rolls, shoulder shrugs, back stretch, wrist rotations, palming, eye rolling.
 
 ---
 
@@ -288,10 +291,10 @@ idli. , all easy on a student's budget, all kinder to your brain than
 a plate of oily or Junk foods. Keep the heavy, oily stuff for after the day's targets —
 or for an off day.
 
-**AUTHOR SAYS:**
-"I never drank coffee or tea until my first year of articleship. My drinks during
-preparation were water, lemon-salt water, jeera-lemon-salt water, and coconut
-water. Simple. Cheap. Worked."
+> **AUTHOR SAYS:**
+> "I never drank coffee or tea until my first year of articleship. My drinks during
+> preparation were water, lemon-salt water, jeera-lemon-salt water, and coconut
+> water. Simple. Cheap. Worked."
 
 ---
 
@@ -301,17 +304,17 @@ There is exactly one thing in front of you: your Dream Marksheet, with your
 attempt written on top. That's it. No topper celebrations, no comparing whose
 syllabus is further along, no doing the maths on someone else's progress.
 
-**HOW TO DO THIS:**
-- Mute every WhatsApp group where batchmates compare progress. Mute, don't leave.
-- When family asks how prep is going, one answer: "On track." Don't elaborate.
-- When someone posts a celebration, reply "Congratulations, happy for you." Then
-  move on, no matter what you feel inside.
+> **HOW TO DO THIS:**
+> - Mute every WhatsApp group where batchmates compare progress. Mute, don't leave.
+> - When family asks how prep is going, one answer: "On track." Don't elaborate.
+> - When someone posts a celebration, reply "Congratulations, happy for you." Then
+>   move on, no matter what you feel inside.
 
-**AUTHOR SAYS:**
-"In my Foundation (Formerly CPT) internal exams, there was a girl who beat me about three times. I was
-the first to congratulate her every single time she came first and I came fifth
-in Law. Only I know how that felt. But I never let it turn into anything ugly
-inside me. She became one of my best friends. Your real competition is you."
+> **AUTHOR SAYS:**
+> "In my Foundation (Formerly CPT) internal exams, there was a girl who beat me about three times. I was
+> the first to congratulate her every single time she came first and I came fifth
+> in Law. Only I know how that felt. But I never let it turn into anything ugly
+> inside me. She became one of my best friends. Your real competition is you."
 
 ---
 
@@ -321,9 +324,9 @@ Whatever is going on outside — family, a fight, a hard day , personal issues �
 study room. Not because it doesn't matter. Because you can't fix it in the next
 two hours, and you can definitely lose those two hours to it.
 
-**HOW TO DO THIS:**
-Before you sit, take 2 minutes. Write down what's bothering you on a scrap of
-paper (Just a per, not a notebook). Write in Complete detail whatever comes to your mind. Fold it. It's parked and noted. Store it in paper and not your mind.  Open your notebook. Come back to the paper later.
+> **HOW TO DO THIS:**
+> Before you sit, take 2 minutes. Write down what's bothering you on a scrap of
+> paper (Just a per, not a notebook). Write in Complete detail whatever comes to your mind. Fold it. It's parked and noted. Store it in paper and not your mind.  Open your notebook. Come back to the paper later.
 
 ---
 
@@ -334,11 +337,11 @@ down, eyes closed, and replay your whole day. What happened, what you studied,
 what you understood. Not judging it good or bad. Just recalling, in detail.
 You're training your brain's recall muscle — the exact muscle the exam tests.
 
-**AUTHOR SAYS:**
-"If you overthink like I do, here's my hack. Pick the one concept or problem you
-didn't understand that day and just turn it over in your head — no Google, no
-notes, only your brain — until you fall asleep. Believe me, I solved a lot of
-maths problems this way during Foundation."
+> **AUTHOR SAYS:**
+> "If you overthink like I do, here's my hack. Pick the one concept or problem you
+> didn't understand that day and just turn it over in your head — no Google, no
+> notes, only your brain — until you fall asleep. Believe me, I solved a lot of
+> maths problems this way during Foundation."
 
 ---
 
@@ -363,8 +366,9 @@ Carry the misses forward honestly. Don't quietly delete them.
 finish the list beat twelve foggy hours that don't. Hours are the cost; finished
 targets are the result. Track the result.
 
-★ [RANK] Keep a weekly tally — hours, chapters, questions. Review every Sunday.
-Adjust next week on data, not mood.
+> **RANK ONLY:**
+> Keep a weekly tally — hours, chapters, questions. Review every Sunday.
+> Adjust next week on data, not mood.
 
 ---
 
@@ -381,30 +385,29 @@ work. You stay the one who controls your schedule.
 Continue on to at least one hobby through these preparation months — guitar, singing, sketching,
 whatever it is.
 
-**AUTHOR SAYS:**
-"Keep a hobby. Otherwise the articleship interview gets very boring — mine was
-quite boring. Lolzz" (Said with a smile. But he's not fully joking.)
+> **AUTHOR SAYS:**
+> "Keep a hobby. Otherwise the articleship interview gets very boring — mine was
+> quite boring. Lolzz" (Said with a smile. But he's not fully joking.)
 
 ---
 
-### Your Bucket 0 Daily Tick [ALL]
+### YOUR BUCKET 0 DAILY TICK
 
 Bucket 0 isn't a phase you finish — it's a list you run *every single day*. Copy
 this onto a sheet, stick it on your wall, and tick it each night:
-```
-□ Slept 7–8 hours
-□ Studied inside the Second Space (study profile only)
-□ Moved 15–20 min + eye breaks (20-20-20)
-□ Ate light before study blocks, stayed hydrated
-□ Wrote the day's targets in the morning
-□ Wore my blinders — didn't compare with anyone today
-□ Parked my emotions before sitting to study
-□ 10-minute flashback before sleep
-□ Night voice-note to my self-WhatsApp — what got done, what didn't
-★ [RANK] Weekly tally reviewed on Sunday (hours, chapters, questions)
-```
-Missed a box? No drama — tick it tomorrow. The streak is the point, not perfection.
 
+- [ ] Slept 7–8 hours
+- [ ] Studied inside the Second Space (study profile only)
+- [ ] Moved 15–20 min + eye breaks (20-20-20)
+- [ ] Ate light before study blocks, stayed hydrated
+- [ ] Wrote the day's targets in the morning
+- [ ] Wore my blinders — didn't compare with anyone today
+- [ ] Parked my emotions before sitting to study
+- [ ] 10-minute flashback before sleep
+- [ ] Night voice-note to my self-WhatsApp — what got done, what didn't
+★ [RANK] Weekly tally reviewed on Sunday (hours, chapters, questions)
+
+Missed a box? No drama — tick it tomorrow. The streak is the point, not perfection.
 
 ---
 ---
@@ -412,19 +415,18 @@ Missed a box? No drama — tick it tomorrow. The streak is the point, not perfec
 # BUCKET 1 — BEFORE THE JOURNEY BEGINS
 ## One-Time Setup. Before You Open a Single Textbook.
 
-**End Goal of This Bucket — done when every box is ticked:**
-```
-□ "Why CA?" written and completely clear to you
-□ Month-wise clarity of how every month looks from now till the exam (your reverse-plan)
-□ Anchor book fixed for each subject
-□ Boundary years — RTP / MTP / PYQ — decided per subject (can still change as prep moves)
-□ The ONE Gmail and ONE phone number for all study/digital activity, fixed and locked
-   (pick one set you already have and stick to it — not a fresh account every week)
-□ Notebooks bought, labelled and numbered (P01-001 …)
-□ Every chapter classified A / B / C
-□ Vision Board ready
-★ [RANK] Your own by-hand analysis of the last 10 attempts — not a borrowed faculty sheet
-```
+> **END GOAL:**
+> Done when every box is ticked:
+> - [ ] "Why CA?" written and completely clear to you
+> - [ ] Month-wise clarity of how every month looks from now till the exam (your reverse-plan)
+> - [ ] Anchor book fixed for each subject
+> - [ ] Boundary years — RTP / MTP / PYQ — decided per subject (can still change as prep moves)
+> - [ ] The ONE Gmail and ONE phone number for all study/digital activity, fixed and locked
+>   (pick one set you already have and stick to it — not a fresh account every week)
+> - [ ] Notebooks bought, labelled and numbered (P01-001 …)
+> - [ ] Every chapter classified A / B / C
+> - [ ] Vision Board ready
+> ★ [RANK] Your own by-hand analysis of the last 10 attempts — not a borrowed faculty sheet
 
 **Time needed:** One full day. Don't rush it. Skipping this and studying straight
 away is a road trip with no fuel, no map, no destination — busy, but you won't arrive.
@@ -436,14 +438,14 @@ away is a road trip with no fuel, no map, no destination — busy, but you won't
 Write it. Three sentences. Not what your parents want, not what sounds good —
 what you actually want, even if it's messy.
 
-**HOW TO DO THIS:**
-On a page:
-"I'm doing CA because ___."
-"What I want from it is ___."
-"The person I want to become is ___."
-Keep that page somewhere you'll see it. When motivation dies — and it will — read
-it. Let the answer change over time. Just always have one.
-[This connects to the "Why I Am Doing CA" page in the personal section.]
+> **HOW TO DO THIS:**
+> On a page:
+> "I'm doing CA because ___."
+> "What I want from it is ___."
+> "The person I want to become is ___."
+> Keep that page somewhere you'll see it. When motivation dies — and it will — read
+> it. Let the answer change over time. Just always have one.
+> [This connects to the "Why I Am Doing CA" page in the personal section.]
 
 ---
 
@@ -479,9 +481,10 @@ primary source halfway loses the one thing that makes revision possible —
 continuity. You'll keep meeting the same concept in the same place, and that's how
 it sticks.
 
-**HOW TO DO THIS:** On a page, for each subject, write: *"My anchor for [subject]
-is [source]."* Put a date on it. That decision is now closed — you don't reopen it
-every time a friend recommends a new book.
+> **HOW TO DO THIS:**
+> On a page, for each subject, write: *"My anchor for [subject]
+> is [source]."* Put a date on it. That decision is now closed — you don't reopen it
+> every time a friend recommends a new book.
 
 ---
 
@@ -601,7 +604,8 @@ and what you won't.
   in the last 5 attempts (attempts, not years).
 - **Maximum:** all of the Study Material + the last 5 attempts' papers.
 
-★ [RANK] Cover the last 5 years of RTPs, MTPs, and PYQs in full.
+> **RANK ONLY:**
+> Cover the last 5 years of RTPs, MTPs, and PYQs in full.
 
 **It looks like this (example):**
 ```
@@ -637,17 +641,17 @@ something just because it's hard. In or out — decide. Once it's in, it gets do
 > is no prize for owning 10,000 questions if you can only revise 2,000. A smaller,
 > fully-revised boundary beats a bigger, half-covered one every single time.
 
-**AUTHOR SAYS:**
-"My personal rule: if I can't revise something in the last 24 hours before the
-exam, it doesn't belong in my boundary. Whatever you promise yourself you'll
-cover — you must be able to revise all of it the day before the exam. If you
-can't, your boundary is too big."
+> **AUTHOR SAYS:**
+> "My personal rule: if I can't revise something in the last 24 hours before the
+> exam, it doesn't belong in my boundary. Whatever you promise yourself you'll
+> cover — you must be able to revise all of it the day before the exam. If you
+> can't, your boundary is too big."
 
-**AUTHOR SAYS:**
-"Say you fixed 5 years of RTP/MTP/PYQ, and you bought a question bank that brags
-about 15 years of questions. Finish your boundary first — all of it. Only if you
-still feel short, add one more year at a time, going backwards. And update your
-boundary page when you do."
+> **AUTHOR SAYS:**
+> "Say you fixed 5 years of RTP/MTP/PYQ, and you bought a question bank that brags
+> about 15 years of questions. Finish your boundary first — all of it. Only if you
+> still feel short, add one more year at a time, going backwards. And update your
+> boundary page when you do."
 
 ---
 
@@ -696,9 +700,10 @@ seconds per chapter. Saves you minutes every time you revise.
 
 When you cross-reference anywhere: "Refer P01-003, Page 42."
 
-★ [RANK] **Drill-Down Table of Contents** — don't stop at chapter + page. List
-the important questions and the key topics inside each chapter too. So during
-last-mile revision you jump straight to what matters.
+> **RANK ONLY:**
+> **Drill-Down Table of Contents** — don't stop at chapter + page. List
+> the important questions and the key topics inside each chapter too. So during
+> last-mile revision you jump straight to what matters.
 
 ---
 
@@ -735,14 +740,14 @@ don't have one yet, count the marks yourself — one hour per subject. Do it.
 target marks, what clearing this means, who you want to become. Look at it for a
 few minutes daily. Not decoration — daily reinforcement.
 
-**HOW TO DO THIS:** Collect images into a Word file. Print the page. Cut them out,
-paste them on your vision board page, decorate with a marker. Make it yours.
+> **HOW TO DO THIS:**
+> Collect images into a Word file. Print the page. Cut them out,
+> paste them on your vision board page, decorate with a marker. Make it yours.
 
 **Plans-After-Exams List** (2 pages near the end): every movie, show, trip, or
 skill you're putting off — write it down as the urge hits. This becomes your
 reward plan for Bucket 6. Knowing the reward is waiting makes saying "not now"
 feel like a choice, not a loss.
-
 
 ---
 ---
@@ -753,22 +758,21 @@ feel like a choice, not a loss.
 classes. You may be in Bucket 2 for one subject and a later bucket for another —
 that's fine.*
 
-**End Goal of This Bucket — done when every box is ticked (per subject):**
-```
-□ Every concept inside your boundary understood
-□ Every concept preserved somewhere retrievable — notebook, audio, video or notes
-□ Nothing inside the boundary left un-captured
-□ Error register built up as you went
-□ Tricky / trap questions flagged
-□ List of important questions to recheck in revision, ready
-★ [RANK] Every ICAI illustration attempted at least twice
-★ [RANK] Presentation of suggested answers studied
-```
+> **END GOAL:**
+> Done when every box is ticked (per subject):
+> - [ ] Every concept inside your boundary understood
+> - [ ] Every concept preserved somewhere retrievable — notebook, audio, video or notes
+> - [ ] Nothing inside the boundary left un-captured
+> - [ ] Error register built up as you went
+> - [ ] Tricky / trap questions flagged
+> - [ ] List of important questions to recheck in revision, ready
+> ★ [RANK] Every ICAI illustration attempted at least twice
+> ★ [RANK] Presentation of suggested answers studied
 
 **Prerequisite:** Bucket 1 done — boundary fixed, notebooks numbered, digital
 setup ready.
 
-> **Starting Late or Falling Behind?**
+> **STARTING LATE? BARE MINIMUM:**
 > Bucket 1 not done? Take one day before your next class — pick anchor materials,
 > fix your boundary, number your notebooks. An imperfect setup beats no setup.
 > Don't delay classes waiting for things to be perfect.
@@ -776,7 +780,7 @@ setup ready.
 ---
 
 ## THE 3-LAYER STUDY ARCHITECTURE
-### Understand this before any class strategy.
+### UNDERSTAND THIS BEFORE ANY CLASS STRATEGY
 
 Your notes work in three layers. Each has a different job, a different shape, and
 a different phase where it's built. Get this clear now, or you'll build the wrong
@@ -815,12 +819,12 @@ While classes are on, it will constantly feel like you don't remember things, or
 you've already forgotten a chapter, or there's no way you'll hold all this by exam
 day. That feeling is normal. It happens to everyone.
 
-**AUTHOR SAYS:**
-"I got that anxiety many times during IPCC — this fear that I'd forget everything.
-It's normal. Your only job during classes is to understand the concept and store
-it somewhere you can return to. Don't carry the pressure of how you'll remember
-it all. The human brain has far more capacity than you think — and there are many
-ways to revise and retain later. Just keep documenting, cleanly."
+> **AUTHOR SAYS:**
+> "I got that anxiety many times during IPCC — this fear that I'd forget everything.
+> It's normal. Your only job during classes is to understand the concept and store
+> it somewhere you can return to. Don't carry the pressure of how you'll remember
+> it all. The human brain has far more capacity than you think — and there are many
+> ways to revise and retain later. Just keep documenting, cleanly."
 
 ---
 
@@ -831,20 +835,20 @@ ways to revise and retain later. Just keep documenting, cleanly."
 Before a class, get a quick sense of what's coming. Not a deep dive — just enough
 to walk in with your brain primed.
 
-**HOW TO DO THIS:**
-On the way to class, ask your AI tool: *"Give me 5 lines on what [topic] is about —
-just enough to know what's coming in today's class. No details."* You want
-curiosity, not a head start that makes you switch off in class.
+> **HOW TO DO THIS:**
+> On the way to class, ask your AI tool: *"Give me 5 lines on what [topic] is about —
+> just enough to know what's coming in today's class. No details."* You want
+> curiosity, not a head start that makes you switch off in class.
 
 ---
 
 ### Strategy 2 — Undivided Attention in Class [ALL]
 
-**AUTHOR SAYS:**
-"Reach class at least 10 minutes early. If it's a live online batch, join 10
-minutes before. If it's recorded — still fix a dedicated class time and treat it
-exactly like an offline class. And hit your minimum study hours every day. Don't
-break the streak."
+> **AUTHOR SAYS:**
+> "Reach class at least 10 minutes early. If it's a live online batch, join 10
+> minutes before. If it's recorded — still fix a dedicated class time and treat it
+> exactly like an offline class. And hit your minimum study hours every day. Don't
+> break the streak."
 
 **Pause and solve — especially if you watch recorded lectures.** When the teacher
 sets up an illustration, pause the video and attempt it yourself first. Then play
@@ -853,11 +857,11 @@ a live class doesn't. The student who pauses and tries first *learns the questio
 the one who only watches it being solved learns to *recognise* it — and that
 recognition is gone by the next day.
 
-**AUTHOR SAYS:**
-"Completing every class, end to end, is one of the hardest things in this whole
-journey. I had so many days I felt sleepy in class, or just didn't want to open
-the laptop. On those days I reminded myself: you get about 270 days, and you're
-aiming for 350+ marks. Every single day counts — the same way every mark counts."
+> **AUTHOR SAYS:**
+> "Completing every class, end to end, is one of the hardest things in this whole
+> journey. I had so many days I felt sleepy in class, or just didn't want to open
+> the laptop. On those days I reminded myself: you get about 270 days, and you're
+> aiming for 350+ marks. Every single day counts — the same way every mark counts."
 
 ---
 
@@ -893,10 +897,14 @@ which. What matters: nothing inside your boundary is left un-captured.
 After reading a section, close the book and pull it back from memory. The struggle
 to retrieve is the learning. Re-reading feels productive and teaches little.
 
+---
+
 ### Strategy 7 — Blind Sheet [ALL]
 
 Finish a topic, then take a blank page and write everything you remember. The
 gaps you hit are exactly where to go back. Don't re-study what already flows.
+
+---
 
 ### Strategy 8 — Explain It Out Loud [ALL]
 
@@ -904,6 +912,8 @@ Say the concept aloud, in plain words, as if teaching someone. Wherever you stal
 is a gap. Write it down, fill it.
 *AI version: "I'll explain [concept] to you — tell me where my explanation has
 gaps or errors," then explain it in the chat.*
+
+---
 
 ### Strategy 9 — Teach a Friend (and Keep a Study Buddy) [ALL]
 
@@ -915,10 +925,12 @@ same slot every day. Solve each other's doubts, check in, stay accountable. It a
 kills the isolation of long prep months. One real, consistent partner — not a noisy
 group of ten.
 
-**AUTHOR SAYS:**
-"During my preparation I had one friend, and we had a fixed time to call every
-evening after classes. Mostly he'd bring his doubts and I'd solve them — and
-teaching him like that locked the concepts in for me too."
+> **AUTHOR SAYS:**
+> "During my preparation I had one friend, and we had a fixed time to call every
+> evening after classes. Mostly he'd bring his doubts and I'd solve them — and
+> teaching him like that locked the concepts in for me too."
+
+---
 
 ### Strategy 10 — Scribble While You Read [ALL]
 
@@ -934,9 +946,9 @@ energy and focus higher than grinding one subject for 8 hours. Try it. If it
 improves your output, keep it. If a different rhythm works better for you, use
 that. This is a suggestion, not a rule.
 
-**AUTHOR SAYS:**
-"When you study — morning, evening, or night — is a personal choice. I'm a fan of
-5 AM. That freshness is unmatchable. But find your own window."
+> **AUTHOR SAYS:**
+> "When you study — morning, evening, or night — is a personal choice. I'm a fan of
+> 5 AM. That freshness is unmatchable. But find your own window."
 
 ---
 
@@ -947,25 +959,26 @@ build mnemonics early — don't wait for revision.
 
 But mnemonics have a trap.
 
-**AUTHOR SAYS:**
-"The biggest problem with mnemonics is they grow fast. A month before the exam
-you're drowning in them, and they start clashing across chapters and even across
-subjects. So always revise a mnemonic together with the question hint or the topic
-it belongs to — never floating on its own."
+> **AUTHOR SAYS:**
+> "The biggest problem with mnemonics is they grow fast. A month before the exam
+> you're drowning in them, and they start clashing across chapters and even across
+> subjects. So always revise a mnemonic together with the question hint or the topic
+> it belongs to — never floating on its own."
 
-**AUTHOR SAYS:**
-"In an Audit mock test, I pulled up the wrong mnemonic for a question. The entire
-answer came out wrong. Zero marks. That's what a stray mnemonic does."
+> **AUTHOR SAYS:**
+> "In an Audit mock test, I pulled up the wrong mnemonic for a question. The entire
+> answer came out wrong. Zero marks. That's what a stray mnemonic does."
 
 The rule: a mnemonic is a substitute for **recall**, not a substitute for
 **concept clarity**. Clarity has to exist first, no exceptions.
 
-**HOW TO DO THIS (self-test):** After building a mnemonic, close your notes, write
-it down, then explain what each part actually means — in your own words, without
-looking. Can explain it? It's working. Can only write the letters but not explain
-them? You've memorised sounds, not concepts. Go back to the concept.
-*AI version: ask your AI to build a mnemonic using your favourite character or a
-domain you love — it sticks far better when it's personal.*
+> **HOW TO DO THIS:**
+> After building a mnemonic, close your notes, write
+> it down, then explain what each part actually means — in your own words, without
+> looking. Can explain it? It's working. Can only write the letters but not explain
+> them? You've memorised sounds, not concepts. Go back to the concept.
+> *AI version: ask your AI to build a mnemonic using your favourite character or a
+> domain you love — it sticks far better when it's personal.*
 
 **Small tip — draw it, don't just write it.** Your brain holds a picture longer
 than a paragraph. For dense or confusing concepts — a process, a set of
@@ -1002,12 +1015,12 @@ exam handwriting and speed get built.** The student who only reads and watches
 solutions reaches the hall with slow, messy writing and runs out of time. So when
 you write, write properly — keep it legible *and* push your speed, every session.
 
-**AUTHOR SAYS:**
-"After six months of pure MCQ practice during CPT, my handwriting went from worse to
-worst — I barely wrote anything those months. Going into IPCC that was my biggest
-fear, because IPCC is all writing. So I made it a point to write a lot, and to
-always work on speed *and* a readable hand at the same time. Both, together — not
-one at the cost of the other."
+> **AUTHOR SAYS:**
+> "After six months of pure MCQ practice during CPT, my handwriting went from worse to
+> worst — I barely wrote anything those months. Going into IPCC that was my biggest
+> fear, because IPCC is all writing. So I made it a point to write a lot, and to
+> always work on speed *and* a readable hand at the same time. Both, together — not
+> one at the cost of the other."
 
 ---
 
@@ -1046,8 +1059,9 @@ real concept/trick worth rechecking. (These are A4 flags, not little sticky tabs
 For every topic you finish, have a plan for how you'll practise its MCQs. Don't
 leave MCQs for the end.
 
-**HOW TO DO THIS:** Ask your AI to generate an MCQ quiz as an HTML page that shows
-the answers only at the end — so you actually test yourself instead of peeking.
+> **HOW TO DO THIS:**
+> Ask your AI to generate an MCQ quiz as an HTML page that shows
+> the answers only at the end — so you actually test yourself instead of peeking.
 
 ---
 
@@ -1057,32 +1071,30 @@ Never finish a chapter without testing it the same day — Test Your Knowledge
 questions, ICAI practice questions, MCQs, or an AI quiz. Closing a chapter without
 testing it is leaving the door open for it to quietly leak out.
 
-
 ---
 ---
 
 # BUCKET 3 — AFTER CLASSES: THE REVISION PHASE
 
-**End Goal of This Bucket — done when every box is ticked (per subject):**
-This is where prep actually begins: classes were the raw material, this is the product.
-```
-□ Layer 2 built — one clean notebook per subject in your boundary
-□ Revision flow taped into Layer 2 for each chapter
-□ Error register active — and read *before* each revision
-□ At least 2 full revisions done
-□ Past-paper questions attempted chapter-wise as your tests
-□ Suggested Answers / Examiner Comments read for key chapters
-□ Boundary still intact — nothing dropped, nothing un-revised
-★ [RANK] At least one full exam-mode MTP, written like the real thing
-★ [RANK] 3–4 full revisions done
-★ [RANK] Drill-down TOC / important-question index maintained
-★ [RANK] Every chapter rated — high-relevance, low-simulation chapters drilled hardest
-```
+> **END GOAL:**
+> Done when every box is ticked (per subject).
+> This is where prep actually begins: classes were the raw material, this is the product.
+> - [ ] Layer 2 built — one clean notebook per subject in your boundary
+> - [ ] Revision flow taped into Layer 2 for each chapter
+> - [ ] Error register active — and read *before* each revision
+> - [ ] At least 2 full revisions done
+> - [ ] Past-paper questions attempted chapter-wise as your tests
+> - [ ] Suggested Answers / Examiner Comments read for key chapters
+> - [ ] Boundary still intact — nothing dropped, nothing un-revised
+> ★ [RANK] At least one full exam-mode MTP, written like the real thing
+> ★ [RANK] 3–4 full revisions done
+> ★ [RANK] Drill-down TOC / important-question index maintained
+> ★ [RANK] Every chapter rated — high-relevance, low-simulation chapters drilled hardest
 
 **Prerequisite:** Layer 1 exists — class notes + anchor book marked. Boundary
 fixed.
 
-> **Starting Late or Falling Behind?**
+> **STARTING LATE? BARE MINIMUM:**
 > Work through this in order — don't panic, just go step by step:
 > 1. **Boundary fixed?** If not, fix it now. Minimum = chapters from the Study
 >    Material asked even once in the last 5 attempts. Maximum = all Study Material
@@ -1099,10 +1111,10 @@ fixed.
 > 5. **Error register / tricky questions / important questions marked?** If not,
 >    use a faculty's important-question marking to build your recheck list.
 
-**AUTHOR SAYS:**
-"When classes end, you'll find some chapters you feel you never understood, and
-others you feel you've completely forgotten. This is normal — it happens to every
-student. Just trust this: you understood it once, you will understand it again."
+> **AUTHOR SAYS:**
+> "When classes end, you'll find some chapters you feel you never understood, and
+> others you feel you've completely forgotten. This is normal — it happens to every
+> student. Just trust this: you understood it once, you will understand it again."
 
 ---
 
@@ -1143,13 +1155,13 @@ chapter in your boundary stays. You're summarising, not deleting.
 Revision isn't just re-reading. Every time you sit to revise, have a test plan
 ready before you start.
 
-**HOW TO DO THIS:**
-Before opening your notes for a chapter, decide the test: "after this revision I'll
-solve these 3 questions / attempt these 10 MCQs / do a blind sheet / let AI quiz
-me." Do the test before moving on. This is exactly how your RTP, MTP, and PYQ
-coverage happens — each chapter's revision is "done" only when its matching
-past-paper questions have been attempted as the test. Revision and past-paper
-coverage are the same activity, not two separate ones.
+> **HOW TO DO THIS:**
+> Before opening your notes for a chapter, decide the test: "after this revision I'll
+> solve these 3 questions / attempt these 10 MCQs / do a blind sheet / let AI quiz
+> me." Do the test before moving on. This is exactly how your RTP, MTP, and PYQ
+> coverage happens — each chapter's revision is "done" only when its matching
+> past-paper questions have been attempted as the test. Revision and past-paper
+> coverage are the same activity, not two separate ones.
 
 ---
 
@@ -1165,14 +1177,15 @@ and PYQ. So don't pretend to. Instead: each revision day, fully write a *selecti
 of questions in exam mode, and speed-revise the rest. Quality of a few, awareness
 of the many.
 
-★ [RANK] Sit for at least one full examination-mode simulation in this bucket — a
-complete MTP, 3 hours, 15-minute reading time, written exactly like the real exam.
+> **RANK ONLY:**
+> Sit for at least one full examination-mode simulation in this bucket — a
+> complete MTP, 3 hours, 15-minute reading time, written exactly like the real exam.
 
-**AUTHOR SAYS:**
-"I gave an Audit MTP and scored 32. It forced me to rebuild my whole audit
-revision — I added one extra hour every day purely on concept clarity and fixing
-mnemonics, instead of just rote-learning mnemonics and bolting them onto
-questions. That one bad mock changed my approach."
+> **AUTHOR SAYS:**
+> "I gave an Audit MTP and scored 32. It forced me to rebuild my whole audit
+> revision — I added one extra hour every day purely on concept clarity and fixing
+> mnemonics, instead of just rote-learning mnemonics and bolting them onto
+> questions. That one bad mock changed my approach."
 
 ---
 
@@ -1236,15 +1249,15 @@ energy on re-orientation and feels like variety while delivering nothing.
 Bad days, bad weeks, illness, disruptions — universal. The skill isn't avoiding
 them. It's restarting fast. One missed day is a missed day, not a failed attempt.
 
-**HOW TO DO THIS:**
-Don't try to "make up" a lost day by cramming double the next day — that just
-breaks two days instead of one. Adjust the plan forward, trim scope if you must,
-keep the system running. A missed day is a calendar problem, not a verdict on you.
+> **HOW TO DO THIS:**
+> Don't try to "make up" a lost day by cramming double the next day — that just
+> breaks two days instead of one. Adjust the plan forward, trim scope if you must,
+> keep the system running. A missed day is a calendar problem, not a verdict on you.
 
-**AUTHOR SAYS:**
-[STRUCTURE ONLY — author to add a real, practical insight here: a specific time he
-fell off track during CPT/IPCC and exactly how he restarted. Keep it concrete, not
-motivational.]
+> **AUTHOR SAYS:**
+> [STRUCTURE ONLY — author to add a real, practical insight here: a specific time he
+> fell off track during CPT/IPCC and exactly how he restarted. Keep it concrete, not
+> motivational.]
 
 ---
 
@@ -1276,12 +1289,12 @@ the dining table, the hallway, the window, the mirror you brush at. You'll end u
 revising them a hundred times without ever "sitting down to revise." The moment a
 sheet's content is truly locked, take it down and put up the next weak one.
 
-**AUTHOR SAYS:**
-"I pasted the GST place-of-supply rules in the hallway I walked through to eat. The
-front window was covered with mnemonics and rules. On both sides of the mirror
-where I brushed, I kept the errors I made most and the concepts that confused me
-most — and once something was genuinely memorised, I'd pull it down and put up the
-next one."
+> **AUTHOR SAYS:**
+> "I pasted the GST place-of-supply rules in the hallway I walked through to eat. The
+> front window was covered with mnemonics and rules. On both sides of the mirror
+> where I brushed, I kept the errors I made most and the concepts that confused me
+> most — and once something was genuinely memorised, I'd pull it down and put up the
+> next one."
 
 ---
 
@@ -1295,37 +1308,35 @@ entries, and the adjustment sequence come out automatically, without thinking.
 That's muscle memory, not recall. Keep it narrow: this is for the 2–3 monsters per
 subject, not the whole question bank.
 
-**AUTHOR SAYS:**
-"I solved 2 Amalgamation questions five times each — just so the whole thing would
-come out right in the first shot in the exam. Some questions genuinely deserve that
-special treatment. Most don't — so don't turn this into an excuse to re-solve
-everything."
-
+> **AUTHOR SAYS:**
+> "I solved 2 Amalgamation questions five times each — just so the whole thing would
+> come out right in the first shot in the exam. Some questions genuinely deserve that
+> special treatment. Most don't — so don't turn this into an excuse to re-solve
+> everything."
 
 ---
 ---
 
 # BUCKET 4 — 45 DAYS BEFORE EXAM
 
-**End Goal of This Bucket — done when every box is ticked (per subject):**
-Your boundary navigation plan: map and execute exactly how you'll cover the whole
-boundary in the time left, sharpen everything, add nothing new.
-```
-□ Layer 3 built — one thin bound notebook per subject, all subjects
-□ One more full revision done (3+ total)
-□ At least 2 mocks written and analysed
-□ Error register reviewed for every chapter
-□ Important-questions list rechecked
-□ Everything you'll re-revise, printed
-□ Exam-centre material ready (your Layer 3 book)
-★ [RANK] 5+ mocks analysed with time-per-question data
-★ [RANK] 100% boundary coverage — A, B and C (no chapter left light, no shortcuts)
-```
+> **END GOAL:**
+> Done when every box is ticked (per subject).
+> Your boundary navigation plan: map and execute exactly how you'll cover the whole
+> boundary in the time left, sharpen everything, add nothing new.
+> - [ ] Layer 3 built — one thin bound notebook per subject, all subjects
+> - [ ] One more full revision done (3+ total)
+> - [ ] At least 2 mocks written and analysed
+> - [ ] Error register reviewed for every chapter
+> - [ ] Important-questions list rechecked
+> - [ ] Everything you'll re-revise, printed
+> - [ ] Exam-centre material ready (your Layer 3 book)
+> ★ [RANK] 5+ mocks analysed with time-per-question data
+> ★ [RANK] 100% boundary coverage — A, B and C (no chapter left light, no shortcuts)
 
 **Prerequisite:** Layer 2 exists. At least 1–2 revisions done. Error register
 maintained.
 
-> **Starting Late or Falling Behind?**
+> **STARTING LATE? BARE MINIMUM:**
 > Behind, with 45 days left? Not ideal, not hopeless. In order:
 > 1. Tighten the boundary hard — Study Material only, last 3 years PYQ/MTP/RTP
 >    only.
@@ -1379,8 +1390,9 @@ haven't pretended it's gone.
 A student who owns A-category cold will out-score a student who did everything at
 60% depth — and won't be left confused about why, after "preparing everything."
 
-★ [RANK] Rankers don't get to choose. 100% across the board — A, B, and C. No
-shortcuts. If it's in the syllabus, it's prepared.
+> **RANK ONLY:**
+> Rankers don't get to choose. 100% across the board — A, B, and C. No
+> shortcuts. If it's in the syllabus, it's prepared.
 
 ---
 
@@ -1391,9 +1403,10 @@ For practical subjects: 20 minutes each morning, draw the key formats from memor
 pressure, a half-remembered format costs you minutes and confidence. An automatic
 one costs nothing.
 
-**HOW TO DO THIS:** Blank sheet each morning, draw the format from memory, check
-against Layer 2, and log anything you missed into your error register. Repeat
-tomorrow.
+> **HOW TO DO THIS:**
+> Blank sheet each morning, draw the format from memory, check
+> against Layer 2, and log anything you missed into your error register. Repeat
+> tomorrow.
 
 ---
 
@@ -1409,8 +1422,9 @@ questions only:
 ```
 Roll the findings into your error register.
 
-★ [RANK] Track time per question across mocks. Find the question types eating
-disproportionate time and adjust your hall strategy.
+> **RANK ONLY:**
+> Track time per question across mocks. Find the question types eating
+> disproportionate time and adjust your hall strategy.
 
 ---
 
@@ -1462,21 +1476,20 @@ close in, that's a boundary call (drop it, or give it a proper focused first-stu
 
 # BUCKET 5 — THE 15 DAYS OF EXAMS + THE FEW DAYS BEFORE
 
-**End Goal of This Bucket — pure execution. You're on track when, every paper:**
-Nothing new is learned here — it's all about delivering what you've already
-prepared, and protecting your body and mind across the exam stretch.
-```
-□ Kit packed the night before; reached the centre early
-□ Used the full 15-minute reading time to fix your sequence
-□ MCQs done first; opened with your most confident question
-□ Presentation + submission mechanics clean; nothing left blank
-□ Slept 7–8 hours; didn't dissect the finished paper with anyone
-□ Light Layer-3 + error-register pass before the next paper
-```
+> **END GOAL:**
+> Pure execution. You're on track when, every paper:
+> Nothing new is learned here — it's all about delivering what you've already
+> prepared, and protecting your body and mind across the exam stretch.
+> - [ ] Kit packed the night before; reached the centre early
+> - [ ] Used the full 15-minute reading time to fix your sequence
+> - [ ] MCQs done first; opened with your most confident question
+> - [ ] Presentation + submission mechanics clean; nothing left blank
+> - [ ] Slept 7–8 hours; didn't dissect the finished paper with anyone
+> - [ ] Light Layer-3 + error-register pass before the next paper
 
 **Prerequisite:** Layer 3 exists. A few revisions done. Some mock experience.
 
-> **Starting Late or Falling Behind?**
+> **STARTING LATE? BARE MINIMUM:**
 > No Layer 3? Carry your Layer 2, or your best notes. No mocks done? Treat your
 > first paper as the mock — watch what goes wrong and adjust for the papers that
 > follow.
@@ -1485,7 +1498,8 @@ prepared, and protecting your body and mind across the exam stretch.
 
 ### SET THIS UP BEFORE THE EXAMS BEGIN
 
-**Strategy 1 — Your Exam Kit & Logistics [ALL]**
+### Strategy 1 — Your Exam Kit & Logistics [ALL]
+
 An entire attempt can be lost to a dead calculator or a misread bubble — not to
 weak preparation. Don't let a logistics slip undo nine months. Sort this out
 *before* the exams start, then just repeat the night-before checklist for each
@@ -1518,19 +1532,29 @@ paper.
 
 ### THE DAY BEFORE A PAPER
 
-**Strategy 2 — Error Register First [ALL]**
+### Strategy 2 — Error Register First [ALL]
+
 Read the error register for tomorrow's subject. These are the exact spots you've
 lost marks before. Most targeted revision there is. 30–45 minutes.
 
-**Strategy 3 — Hotspots Only [ALL]**
+---
+
+### Strategy 3 — Hotspots Only [ALL]
+
 A-category areas, the hard bits you've prepared, the things you keep forgetting.
 No new chapters. No new concepts.
 
-**Strategy 4 — Stop and Breathe [ALL]**
+---
+
+### Strategy 4 — Stop and Breathe [ALL]
+
 Stop studying about 2 hours before sleep. Walk, eat with family, rest. Not
 scrolling. Let the mind settle.
 
-**Strategy 5 — Last 10 Minutes [ALL]**
+---
+
+### Strategy 5 — Last 10 Minutes [ALL]
+
 Eyes closed, rehearse tomorrow: arrive, sit, read the paper, mark questions, begin.
 Not cramming. Rehearsal.
 
@@ -1538,7 +1562,8 @@ Not cramming. Rehearsal.
 
 ### EXAM MORNING
 
-**Strategy 6 — Layer 3 at the Centre [ALL]**
+### Strategy 6 — Layer 3 at the Centre [ALL]
+
 Reach early. Flip through your Layer 3 book — 20–30 minutes, the whole subject.
 Everything familiar. Nothing new. Just confirmation.
 
@@ -1546,23 +1571,29 @@ Everything familiar. Nothing new. Just confirmation.
 
 ### INSIDE THE HALL
 
-**Strategy 7 — Use the 15 Minutes Reading Time [ALL]**
+### Strategy 7 — Use the 15 Minutes Reading Time [ALL]
+
 Before writing begins you get 15 minutes of reading time. This is not a break — it
 is where the paper is half-won. Scan the whole paper and mark every question:
 ✓ (know it well, will attempt), ? (know parts, maybe), ✗ (skip). Then decide two
 things: your **sequence**, and roughly how long each question gets. Those 15
 minutes change how the next 3 hours go.
-★ [RANK] Pencil the time plan lightly on the question paper — "Q1: 25 min,
-Q2: 20 min..." — so you're executing a plan, not improvising mid-paper.
 
-**AUTHOR SAYS:**
-"I always used the reading time to first pencil-scan the whole paper and see exactly
-what's asked — it's easier in theory papers, harder in the practical ones. The
-first job is to fix the sequence; most of those ~12 minutes go in reading and
-deciding the order. Then I'd open with the question I was most confident in — a
-strong first answer sets the impression on the examiner."
+> **RANK ONLY:**
+> Pencil the time plan lightly on the question paper — "Q1: 25 min,
+> Q2: 20 min..." — so you're executing a plan, not improvising mid-paper.
 
-**Strategy 8 — Perseverance, at the Highest Level [ALL]**
+> **AUTHOR SAYS:**
+> "I always used the reading time to first pencil-scan the whole paper and see exactly
+> what's asked — it's easier in theory papers, harder in the practical ones. The
+> first job is to fix the sequence; most of those ~12 minutes go in reading and
+> deciding the order. Then I'd open with the question I was most confident in — a
+> strong first answer sets the impression on the examiner."
+
+---
+
+### Strategy 8 — Perseverance, at the Highest Level [ALL]
+
 There will be questions you read and your mind goes blank — even things you
 revised yesterday. This is normal under pressure. Do not panic. Breathe, move to
 a question you can do, and come back. The exam tests nerve as much as knowledge.
@@ -1570,7 +1601,10 @@ Hold steady through the full 3 hours.
 [AUTHOR TO CONFIRM — a specific exam-hall example was attempted in dictation but
 came through garbled; author to supply the real anecdote here.]
 
-**Strategy 9 — MCQs First [ALL]**
+---
+
+### Strategy 9 — MCQs First [ALL]
+
 Always start with the MCQ section. It warms up the brain, secures those marks
 early, and builds confidence before the big subjective questions.
 
@@ -1581,12 +1615,18 @@ early, and builds confidence before the big subjective questions.
   wrong options are wrong, so you eliminate fast.
 - No negative marking — never leave an MCQ blank. A reasoned guess beats an empty box.
 
-**Strategy 10 — Build Momentum [ALL]**
+---
+
+### Strategy 10 — Build Momentum [ALL]
+
 After MCQs, start with the question you're most confident about. Strong early
 answers steady your nerves. Don't open with the hardest one. Hit the hard
 questions once you're in flow, ~45–60 minutes in.
 
-**Strategy 11 — Presentation & Submission [ALL]**
+---
+
+### Strategy 11 — Presentation & Submission [ALL]
+
 Readable handwriting — not pretty, readable. Working notes numbered and labelled
 right below each answer. Every statement and account gets a heading. Cite the
 standard/section when you use it ("As per AS 16..."). Underline final answers and
@@ -1604,20 +1644,30 @@ And the small mechanics that quietly cost marks:
 - Save the **last ~10 minutes to review** — check totals, underline final answers
   and keywords, confirm nothing is left half-marked.
 
-★ [RANK] Add disclosure notes even when not asked — each valid one can carry
-half a mark to a mark, and signals depth.
+> **RANK ONLY:**
+> Add disclosure notes even when not asked — each valid one can carry
+> half a mark to a mark, and signals depth.
 
-**Strategy 12 — Never Leave It Blank [ALL]**
+---
+
+### Strategy 12 — Never Leave It Blank [ALL]
+
 Stuck? Show what you can — the opening entry, the format headings, working note 1.
 State your approach in a line: "Proceeding with Purchase Method as per AS 14."
 Partial marks are real. An empty page is a zero. A half-attempt is 3–5 marks.
 
-**Strategy 13 — Time Discipline [ALL]**
+---
+
+### Strategy 13 — Time Discipline [ALL]
+
 No single question gets more than 1.5× its allotted time before you move on.
 Forty minutes on a 12-mark question while three others sit blank is an expensive
 mistake.
 
-**Strategy 14 — When the Balance Sheet Won't Tally [ALL]**
+---
+
+### Strategy 14 — When the Balance Sheet Won't Tally [ALL]
+
 Don't erase everything. Write: "Note: difference of ₹___, likely from [area];
 approach and working notes are correct." Examiners reward honesty and award step
 marks for correct working notes and schedules even when the final figure is off.
@@ -1626,44 +1676,51 @@ marks for correct working notes and schedules even when the final figure is off.
 
 ### BETWEEN PAPERS
 
-**Strategy 15 — Don't Discuss the Paper [ALL]**
+### Strategy 15 — Don't Discuss the Paper [ALL]
+
 Walk out, don't dissect it with anyone. Finding out someone wrote something
 differently only breeds anxiety you can't act on. That energy belongs to the next
 paper.
 
-**Strategy 16 — Keep Sleeping 7–8 Hours [ALL]**
+---
+
+### Strategy 16 — Keep Sleeping 7–8 Hours [ALL]
+
 Exam week is the time to sleep most *consistently*, not least. Every paper deserves
 a rested brain.
 
-**Strategy 17 — Light Prep for the Next Paper [ALL]**
+---
+
+### Strategy 17 — Light Prep for the Next Paper [ALL]
+
 After resting, do light evening revision for the next paper — Layer 3 + error
 register for that subject. You're reminding, not relearning.
 
-**AUTHOR SAYS:**
-[STRUCTURE ONLY — author to add a real "between papers" or revision-week insight
-here. One of the dictated lines for this spot came through garbled; author to
-supply the intended anecdote.]
-
+> **AUTHOR SAYS:**
+> [STRUCTURE ONLY — author to add a real "between papers" or revision-week insight
+> here. One of the dictated lines for this spot came through garbled; author to
+> supply the intended anecdote.]
 
 ---
 ---
 
 # BUCKET 6 — AFTER THE EXAM TILL RESULT DAY
 
-**End Goal of This Bucket — recover, reward, train, set up what's next. Done when:**
-```
-□ ICITSS (IT Training + Orientation) completed
-□ Reward phase taken — your Plans-After-Exams list cashed in, guilt-free
-□ Honest subject-by-subject look-back done (spotting gaps, not guessing your result)
-□ Next step set up — interviews + articleship (Track A), or a clean re-attempt plan (Track B)
-```
+> **END GOAL:**
+> Recover, reward, train, set up what's next. Done when:
+> - [ ] ICITSS (IT Training + Orientation) completed
+> - [ ] Reward phase taken — your Plans-After-Exams list cashed in, guilt-free
+> - [ ] Honest subject-by-subject look-back done (spotting gaps, not guessing your result)
+> - [ ] Next step set up — interviews + articleship (Track A), or a clean re-attempt plan (Track B)
+
 Pick your track below.
 
 ---
 
 ## TRACK A — You Wrote All Your Papers
 
-**Strategy 1 — Do Your ICITSS Training [ALL]**
+### Strategy 1 — Do Your ICITSS Training [ALL]
+
 Under the current scheme, ICITSS is mandatory before you start articleship. Two
 parts:
 - IT Training (about 15 days)
@@ -1674,28 +1731,43 @@ you'll need anyway, plus genuine learning. You can even do it in a new city for 
 change of scene. (Verify the current schedule and registration at icai.org —
 requirements get updated.)
 
-**Strategy 2 — Cash In Your Reward List [ALL]**
+---
+
+### Strategy 2 — Cash In Your Reward List [ALL]
+
 Open the Plans-After-Exams list you started in Bucket 1. Every movie, series,
 trip, and thing you deferred — now. 10–15 days of full, guilt-free enjoyment after
 ICITSS. You earned it. Don't skip it — students who go straight from exams into
 result-anxiety carry weight they don't need to.
 
-**Strategy 3 — Build a Skill [ALL]**
+---
+
+### Strategy 3 — Build a Skill [ALL]
+
 The gap before results is the best time to build something that makes your
 articleship stronger — Excel, AI tools, communication, a language, any deferred
 course. Not mandatory. But it compounds.
 
-**Strategy 4 — Honest Look-Back [ALL]**
+---
+
+### Strategy 4 — Honest Look-Back [ALL]
+
 After the reward phase, review how the papers actually went — subject by subject,
 topic by topic. Not to guess your result (wasted energy) but to find your gaps
 before articleship.
 
-**Strategy 5 — Revise Weak Topics for Interviews [ALL]**
+---
+
+### Strategy 5 — Revise Weak Topics for Interviews [ALL]
+
 Lightly revise the topics you were weak in. Not to re-sit the exam — because
 articleship interviews test technical soundness. A firm will ask basics from the
 subjects you just wrote. You should be able to answer.
 
-**Strategy 6 — Prep for Interviews [ALL]**
+---
+
+### Strategy 6 — Prep for Interviews [ALL]
+
 Watch interview-tips videos, practise common questions. Firms look for technical
 basics, communication, willingness to learn, and reliability. The knowledge you
 just built is your edge — use it with confidence.
@@ -1704,21 +1776,31 @@ just built is your edge — use it with confidence.
 
 ## TRACK B — You Missed One or More Papers
 
-**Strategy 1 — Do ICITSS Anyway [ALL]**
+### Strategy 1 — Do ICITSS Anyway [ALL]
+
 You'll need it regardless. Use this time for it. Combine it with a change of
 environment if that helps.
 
-**Strategy 2 — Don't Spiral [ALL]**
+---
+
+### Strategy 2 — Don't Spiral [ALL]
+
 A missed paper is a delayed attempt, not a failed career. Process it, accept it,
 plan forward. Don't measure yourself against those who wrote everything — different
 timelines, both valid.
 
-**Strategy 3 — Restart the Missed Subject [ALL]**
+---
+
+### Strategy 3 — Restart the Missed Subject [ALL]
+
 Begin focused prep for the missed paper — a clean single-subject run. Fix the
 boundary and re-enter at the right bucket: Bucket 2 if prep was minimal, Bucket 3
 if classes were done.
 
-**Strategy 4 — Keep the Others Warm [ALL]**
+---
+
+### Strategy 4 — Keep the Others Warm [ALL]
+
 Light revision of the subjects you cleared — Layer 3 level, once a week — so they
 don't fade before the next attempt.
 
@@ -1828,7 +1910,6 @@ single full answer.
 ✗ No checking what others are studying.
 ```
 
-
 ---
 ---
 
@@ -1837,7 +1918,10 @@ single full answer.
 ---
 
 ## Why I Am Doing CA
-[ONE PAGE — light heading, mostly blank for the student]
+
+> **FILL-IN: Why I Am Doing CA**
+> One-page writable form: student writes their reason for CA, what they want from it, and the person they want to become.
+
 ```
 WHY I AM DOING CA
 
@@ -1854,8 +1938,10 @@ The person I want to become is...
 ```
 
 ## My Vision Board
-[TWO PAGES — structured but blank; student pastes printed/cut-out images and
-decorates with marker]
+
+> **FILL-IN: My Vision Board**
+> Two-page spread: student pastes printed/cut-out images and decorates with a marker. Sets target rank, what clearing CA Inter means, and a daily affirmation line.
+
 ```
 MY CA INTERMEDIATE VISION BOARD
 
@@ -1871,7 +1957,10 @@ The one line I'll read every morning:
 ```
 
 ## My Dream Marksheet
-[ONE PAGE — simple table, student fills target + actual]
+
+> **FILL-IN: My Dream Marksheet**
+> One-page fill-in table: student writes target marks per subject and fills in actual marks after results.
+
 ```
 MY DREAM MARKSHEET        Attempt: ______   Date: ______
 
@@ -1893,7 +1982,10 @@ find your real strength. Lock it by the 45-day phase.
 ```
 
 ## Plans to Do After Exams
-[TWO BLANK PAGES — light heading]
+
+> **FILL-IN: Plans to Do After Exams**
+> Two blank pages for the student to list every movie, show, trip, or skill deferred during prep — the reward list for after the last paper.
+
 ```
 PLANS TO DO AFTER EXAMS
 Every movie, show, trip, or thing you're putting off — write it here as the urge
@@ -1901,7 +1993,10 @@ hits. This is your reward list for after the last paper.
 ```
 
 ## My Boundary
-[ONE PAGE PER SUBJECT — pencil recommended; "this will evolve"]
+
+> **FILL-IN: My Boundary**
+> One page per subject (pencil recommended): defines Study Material scope, past-paper years, digital file location, and excluded chapters.
+
 ```
 MY BOUNDARY — [Subject]            (use pencil — this will evolve)
 
