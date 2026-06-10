@@ -4,6 +4,17 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-06-10 — Video planning: Sep 2026 strategy video brief
+
+- Planning discussion for a YouTube video targeting CA Inter Sep 2026 students ("exactly what to do in the next 40 days").
+- Decided format: face-to-camera primary, slides only for data-heavy blocks (timelines, templates, checklists).
+- Content scope: Bucket 3-to-4 transition. Core: Boundary fixation, 3-Layer material framework, three "Sanjeevani Bootis" (Golden Nuggets register, Error Register, Paste-It-Where-You-Live), AI usage for memory, post-25th-July phase. Bucket 0 compressed to 90 seconds at end. Bucket 5 deferred to separate video.
+- Positioning: "Big Brother, not topper, not faculty" — no planners, no motivation, raw strategies only.
+- Created `books/strategy-book/working/video-brief-sep26-strategy.md` — full run-of-show + 6 critical flags + open decisions table for Pranav.
+- health_check green (46/46); file_index 83 files.
+
+---
+
 ## 2026-06-10 — Strategy Book: md_to_html.py converter + Bucket 0 HTML output
 
 - Built `books/strategy-book/design/templates/md_to_html.py` — state-machine line-by-line parser that converts MASTER.md → print-ready B5 HTML implementing design-spec.md visual system. Self-contained CSS (Archivo/Source Sans 3/Kalam, Google Fonts), embedded in output HTML.
