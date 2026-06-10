@@ -1128,7 +1128,7 @@ def main():
         print('Sections found in', src)
         for k in sections:
             meta = get_section_meta(k)
-            print(f'  {k}  →  slug: {meta["slug"]}')
+            print(f'  {k}  (slug: {meta["slug"]})')
         return
 
     if args.section.lower() == 'all':
