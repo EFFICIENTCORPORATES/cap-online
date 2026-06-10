@@ -29,7 +29,7 @@ A concept-first teaching tool to accompany ICAI study materials (not replace the
 - Emergency Section: 10 Days Left (fully independent, subject-neutral)
 - AI Section: standalone, placed after all buckets, before Emergency Section
 
-*Each bucket format:* End Goal of This Bucket (short, includes ranker version, prerequisite, grey box titled "Starting Late or Falling Behind? Bare Minimum to Continue") → strategies → closing checklist (rank items starred). Rank additions appear inline with star symbol, only where the action is genuinely different.
+*Each bucket format:* **End Goal of This Bucket is now a single tick-list** (□ items + ★ for rank) placed at the START as the "done when" checklist — there is NO separate closing checklist any more (consolidated 2026-06-10). Then: prerequisite + grey "Starting Late or Falling Behind?" box + strategies. Bucket 0 is the exception — it carries a **Daily Tick** habit-tracker (run every day, no end). Rank additions appear inline with ★, only where the action is genuinely different.
 
 *The 3-Layer Study Architecture:*
 - Layer 1: Raw working material built during classes (anchor book, classroom notes, homework notes — thick, messy, rarely opened after Layer 2 exists)
@@ -81,7 +81,7 @@ A concept-first teaching tool to accompany ICAI study materials (not replace the
 10. "I gave an Audit MTP and got 32 marks. I revamped my audit revision — added 1 extra hour every day on concept clarity and fixing mnemonics, instead of just rote-learning mnemonics and linking to questions."
 11. "Mixed wrong mnemonic in Audit mock test — entire answer wrong, zero marks."
 
-*Current phase:* Feedback collection and memory saving. No further changes to the MD file until clearly instructed. Three documents produced: compressed strategies markdown, internal blueprint (decision log + bucket-by-bucket strategy mapping), and full book structure + collected content (near-complete working draft).
+*Current phase:* Active drafting/refinement of the working MASTER (`books/strategy-book/working/CA-Inter-Strategy-Book-MASTER.md`). See the dated **UPDATE** section at the end of this file for everything added/changed since this snapshot — that section wins where it conflicts with the lines above. A visual **design spec** now also exists at `books/strategy-book/design/design-spec.md`.
 
 **Concept Book — confirmed architecture:**
 
@@ -121,3 +121,34 @@ A concept-first teaching tool to accompany ICAI study materials (not replace the
 - Decision log maintained separately from working draft (internal blueprint document).
 - Explicit instruction style: phases are named (e.g., "feedback collection and memory saving only"), file states are locked until further instruction, and changes require clear instruction before proceeding.
 - Tone rules enforced strictly: Raj Shamani/Alex Hormozi register; no Sandeep Maheshwari style; no outdated advice.
+
+---
+
+## UPDATE — Strategy Book MASTER current state (2026-06-10)
+
+Everything below was added or changed in the working MASTER since the snapshot above. Where it conflicts with earlier lines, **this section wins**.
+
+**Routing & structure**
+- Routing page leads with a **SUBJECT-BY-SUBJECT** headline: the whole guide runs per subject; every subject sits in its own bucket at once (true even for both-groups students). Ask "which bucket" once per subject, not once for all of CA.
+- **Repeat/multiple-attempt self-check** on the routing page (per subject): ~70%+ concepts clear → Bucket 3; ~50–70% → Bucket 2; under 50% → fresh start at Bucket 1 (+ Bucket 0).
+- Every bucket's **End Goal is a tick-list** (□/★); the old separate end-of-bucket checklists were folded in (one checklist per bucket). Bucket 0 has a daily-habit tracker instead.
+
+**Bucket 0** — added: Pain Choice (one-line, the only philosophy line); "better late than never, start the same day"; Indian pure-veg budget diet examples (sprouts, roasted chana, curd/chhaas, fruit, peanuts/almonds, paneer, makhana, poha/idli); target-driven-not-hours. Daily Tick tracker at the end.
+
+**Bucket 1** — new explicit steps: **Pick Your Anchor Book**; **Plan Backward From Exam Day** (reverse-planning: industry hours table + RANK calendar + separate PASS/exemption calendar + one-group-or-two decision merged in). **3-Question Filter + Golden Rule** box in Fix Your Boundary. End-goal tick-list includes a **FIXED (not new) single Gmail + phone number** for all study/digital activity. Reverse-plan uses round-number durations with recomputed calendar dates; PASS chart = exam-anchored back end fixed, 2nd revision 45→39 days, classes+1st-rev −30%.
+
+**Bucket 2** — added: **Pause-and-Solve** (attempt before watching the solution; esp. recorded lectures); **study-buddy fixed daily call** (+ Author Says: evening call, he solved his friend's doubts); **own-the-technical-keywords** (Law/Audit); dual-coding tip; write-by-hand + handwriting "worse to worst" Author Says.
+
+**Bucket 3** — added: **Chapter Rating [RANK]** — Exam-Relevant (A/B/C, "kitni baar exam mein aata hai") + Recall ("topics kitne achhe yaad hai", /10) + Simulation ("question solve ho raha hai", /10); **Paste-It-Where-You-Live** (Author Says: GST place-of-supply in hallway, errors on the mirror); **Amalgamation 5-times rule [RANK]** (Author Says: 2 Amalgamation Qs 5× each). **Revision notes written in Hindi/Hinglish** (exam answer stays English). **ENERGY MATCHING FLIPPED**: theory in your most productive window (morning OR night); practical sums when low/sleepy — supersedes any "high-energy→practical" wording.
+
+**Bucket 4** — added Revision Marathons (reinforce, never catch up).
+
+**Bucket 5** — new **Strategy 1 "Your Exam Kit & Logistics"**: scout centre; **TWO IDENTICAL calculators**; 3–4 same-brand black pens; 3–4 hall-ticket copies (one with a parent); stapler/scale/pencils; pack night-before; reach 1hr early; loose clothing; light meal + nimbu-paani/glucose. Submission mechanics folded into **"Presentation & Submission"**: tick attempted-question boxes, OMR "domino" alignment, "1+2" supplement count, pen-cap-off, last-10-min review. Added **15-min Reading-Time** strategy (softened Author Says).
+
+**AI Section** — teacher-first caution: AI only for diagrams/mnemonics/easier revision; conceptual clarity + what-to-study come from the teacher first.
+
+**About This Book** — positioning: NOT a motivation book; only job = make the ~10-month journey crystal-clear and gamified; "warna time toh chala hi jayega, it won't wait."
+
+**Dropped** — Five-Year Rule; Articleship Discipline. **Filtered from external ranker reports** — all CA-Final content, "lucky break" chapter-gambling, "reject notes/master from source," rigid 12–14h & Pomodoro mandates, pure motivation.
+
+**Sources** — lineage: original `CA-Inter-General-Exam-Systems` + `CA-Inter-Book-Full-Structure`; plus 5 external ranker/faculty YouTube compilations in `sources/extermal/`.
