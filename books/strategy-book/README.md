@@ -13,6 +13,7 @@ strategy-book/
 ├── README.md      ← this file
 ├── sources/       ← upstream source, governance (skills) + memory — reference, do not edit casually
 ├── working/       ← the active drafts being built
+├── design/        ← visual design system: design-spec.md (+ diagrams/ and templates/ when build starts)
 ├── drafts/        ← scratch / in-progress sections
 └── final/         ← finished, student-ready output (empty for now)
 ```
@@ -39,6 +40,12 @@ These files were exported here from `_claude/artifacts/`, `_claude/skills/`, and
 | `SKILL-strategy-book-structural-method.md` | Governance: the organizing logic — time-not-topic, the Routing Page, the seven buckets. Read before adding/moving any strategy. |
 | `SKILL-strategy-book-voice-and-tone.md` | Governance: the voice & tone rules. Read before drafting or editing any content. |
 | `summary-strategy-book-memory.md` | The full confirmed architecture: front-matter sequence, Buckets 0–6 + Emergency + AI section, 3-Layer Study Architecture, notebook/boundary systems, every locked strategy, and all 11 "Author Says" moments. |
+
+### `design/` — visual design system
+
+| File | What it is |
+|------|-----------|
+| `design-spec.md` | **Locked design spec v1** (2026-06-10): B5 7"×10" full-colour, bucket colour system, stepped edge tabs, footer journey strip, component library (How to Do This / Author Says / RANK gold / Bare-Minimum grey box…), typography, 11-diagram Excalidraw inventory, HTML+paged.js pipeline. Read before any layout/template work. |
 
 ### Shared (not copied here)
 
