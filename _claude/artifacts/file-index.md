@@ -43,7 +43,13 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
     - **design/**
       - **templates/**
         - **build/**
+          - ai-section.html
           - bucket-0.html
+          - emergency.html
+          - front-matter.html
+          - personal-pages.html
+          - routing.html
+          - section.html
         - md_to_html.py
       - design-spec.md
     - **drafts/**
@@ -64,6 +70,7 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
       - CA-Inter-Book-Full-Structure.md
       - CA-Inter-Strategy-Book-MASTER.md
       - MASTER-component-index.md
+      - video-brief-sep26-strategy.md
     - README.md
 - **content/**
   - **ai-content-pipeline/**
