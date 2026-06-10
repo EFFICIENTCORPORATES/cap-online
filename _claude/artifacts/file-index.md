@@ -41,6 +41,10 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
       - story_flow_ca_inter_adv_accounts.md
   - **strategy-book/**
     - **design/**
+      - **templates/**
+        - **build/**
+          - bucket-0.html
+        - md_to_html.py
       - design-spec.md
     - **drafts/**
     - **final/**
