@@ -99,9 +99,19 @@ Content to cover:
 ---
 ---
 
-# ROUTING PAGE — WHERE ARE YOU RIGHT NOW?
+# ROUTING PAGE — WHERE ARE YOU RIGHT NOW IN YOUR INTERMEDIATE JOURNEY?
 
-Answer honestly. Go where it sends you.
+> **Read this before anything else — this whole guide runs SUBJECT BY SUBJECT.**
+> There is no single "where am I." Each subject sits in its own phase at any given
+> moment. You might have finished Accounts classes (Bucket 3) while Law classes are
+> still running (Bucket 2) and Costing hasn't even started (Bucket 1). This stays
+> true even if you're attempting both groups together. So never ask "which bucket
+> am I in?" — ask it **once for every subject**, and walk that subject through its
+> own bucket. The buckets are the map; you carry a separate copy of it for each
+> subject.
+
+Answer honestly — once for **each subject**, not once for all of CA. Go where it
+sends you.
 
 ```
 A. Not started yet. Classes haven't begun, or just began.
@@ -126,9 +136,21 @@ G. 10 days or less. Just need to pass.
    → Emergency Section, at the back. Read only that.
 ```
 
-**One group at a time?** You may be in two buckets at once — taking classes for
-one group while revising for another. Normal. Apply each bucket to the subjects
-currently in that phase.
+**One group or both — same rule.** Whether you take one group at a time or both
+together, you'll be in different buckets for different subjects at the same time.
+That's normal, not a problem. Run each subject through its own bucket — don't try
+to force all six into one phase.
+
+**Not your first attempt?** Don't assume you start from the top. Judge each subject
+honestly, on how clear your concepts actually are:
+
+- **70%+ clear** → treat that subject as classes-done → go to **Bucket 3** (Revision).
+- **Roughly 50–70% clear** → you're still in the classes phase → **Bucket 2**.
+- **Under 50% clear** → be honest and treat it as a fresh start → **Bucket 1** setup,
+  with **Bucket 0** running alongside from day one.
+
+Be real with these numbers. Overrating yourself here doesn't cost you today — it
+costs you in the exam hall.
 
 **Subject-specific guide:** This book gives the system. Your faculty's guide
 gives the subject. When they differ, the faculty's guide wins.
@@ -143,16 +165,24 @@ gives the subject. When they differ, the faculty's guide wins.
 This bucket has no start date and no end date. It runs from the day you begin
 until the day your result comes. Read it once. Then live it.
 
-No "Starting Late" box here. If you haven't been doing these — start today.
+No "Starting Late" box here. If you haven't been doing these — start today. Better
+late than never: the day you realise this, put it into practice that same day — and
+then every single day after.
 
-> **One line before we begin.** There are two kinds of pain: the pain of
-> discipline now, and the pain of regret later. You only get to skip one. Pick.
+> **One line before we begin.** There are two kinds of pain: 
+>1. The pain of discipline NOW
+>OR
+>2. The Pain of Regret at time of result.
+
+
+> You must choose 1 out of the above 2 today. CHOOSE WISELY.
+
 
 (That's the only philosophy line in this whole book. We're done. Now the system.)
 
 ---
 
-### Priorities for the Next 9 Months [ALL]
+### Priorities from today onwards till the last day of Intermediate Exam [ALL]
 
 Set these three. Everything else comes after.
 
@@ -170,11 +200,11 @@ order until your last paper is done.
 
 ---
 
-### Strategy 1 — The Second Space [ALL]
+### Strategy 1 — The Second Space in your Phone [ALL]
 
 Your phone is your study tool now — your classes, notes, PDFs, and AI all live
-on it. "Keep your phone away" is useless advice in 2026. So don't keep it away.
-Split it.
+on it. "Keep your phone away" is useless advice in 2026. So you literally can't put it away.
+So, Split it.
 
 Create a **Second Space / New User** on your phone. A second profile. A clean
 phone inside your phone, for the next 9 months.
@@ -206,10 +236,10 @@ the groups, and filter contacts so nothing pulls you mid-study.
 
 ### Strategy 2 — AI Tools, Installed and Ready [ALL]
 
-Install these in your Second Space and actually use them:
-ChatGPT, Claude, Gemini, Perplexity, KIMI, and an India-native option like
+Install these in your Second Space and ensure that you actually use them as well (for the Right things):
+Mobile apps available for ChatGPT, Claude, Gemini, Perplexity, KIMI, and an India-native option like
 Indus / Sarvam AI (good for Hindi). Any conversational AI that lets you ask and
-argue works. The full playbook is in the AI Section near the end of this book.
+argue works. The full playbook on how and for what purpose to use AI is in the "AI Section" near the end of this book.
 [REF: AI Section]
 
 ---
@@ -217,8 +247,12 @@ argue works. The full playbook is in the AI Section near the end of this book.
 ### Strategy 3 — Sleep [ALL]
 
 7–8 hours. Every night. This isn't a reward for a good day — it's what makes the
-next day work. Your brain files everything you studied while you sleep. Cut sleep
-and you cut the filing.
+next day work. Your brain reinforces everything you studied while you sleep. Cut sleep
+and you cut the reinforcement.
+
+Author Says: I have personally tried the "Polyphasic Sleep", a famous sleep strategy by "Leonardo da Vinci". I tried multiple other sleep strategy like  Dymaxion Schedule , The Everyman Schedule, Triphasic Schedule, but trust me , NOTHING WORKS, and NEITHER is required. The only strategy worked for me is : A Fixed Sleep timing , without fail, and 6 hours fixed sleep at night (10:00 pm to 4:00 am) and a 20-30 mins nap during the day.
+
+While I agree, timings may differ for everyone, but ensure minimum 6 hours and maximum 8 hours of sleep is NON NEGOTIABLE.
 
 ---
 
@@ -247,6 +281,13 @@ minutes. Eat lighter before study blocks; save the heavy meal for after the day'
 targets are done. This isn't a diet plan. It's just not sabotaging your next two
 hours with your last twenty minutes.
 
+Food that keeps you sharp instead of sleepy: a bowl of sprouts
+(moong or chana), roasted chana, curd or chhaas, a banana or any seasonal fruit, a
+handful of peanuts or 4–5 soaked almonds, paneer, makhana, or a light veg poha or
+idli. , all easy on a student's budget, all kinder to your brain than
+a plate of oily or Junk foods. Keep the heavy, oily stuff for after the day's targets —
+or for an off day.
+
 **AUTHOR SAYS:**
 "I never drank coffee or tea until my first year of articleship. My drinks during
 preparation were water, lemon-salt water, jeera-lemon-salt water, and coconut
@@ -267,7 +308,7 @@ syllabus is further along, no doing the maths on someone else's progress.
   move on, no matter what you feel inside.
 
 **AUTHOR SAYS:**
-"In my CPT internal exams, there was a girl who beat me about three times. I was
+"In my Foundation (Formerly CPT) internal exams, there was a girl who beat me about three times. I was
 the first to congratulate her every single time she came first and I came fifth
 in Law. Only I know how that felt. But I never let it turn into anything ugly
 inside me. She became one of my best friends. Your real competition is you."
@@ -276,13 +317,13 @@ inside me. She became one of my best friends. Your real competition is you."
 
 ### Strategy 7 — Park Your Emotions Before You Study [ALL]
 
-Whatever is going on outside — family, a fight, a hard day — it stays outside the
+Whatever is going on outside — family, a fight, a hard day , personal issues — it stays outside the
 study room. Not because it doesn't matter. Because you can't fix it in the next
 two hours, and you can definitely lose those two hours to it.
 
 **HOW TO DO THIS:**
 Before you sit, take 2 minutes. Write down what's bothering you on a scrap of
-paper. Fold it. It's parked. Open your notebook. Come back to the paper later.
+paper (Just a per, not a notebook). Write in Complete detail whatever comes to your mind. Fold it. It's parked and noted. Store it in paper and not your mind.  Open your notebook. Come back to the paper later.
 
 ---
 
@@ -337,12 +378,32 @@ work. You stay the one who controls your schedule.
 
 ### Strategy 12 — Keep a Hobby [ALL]
 
-Hold on to at least one hobby through these months — guitar, singing, sketching,
+Continue on to at least one hobby through these preparation months — guitar, singing, sketching,
 whatever it is.
 
 **AUTHOR SAYS:**
 "Keep a hobby. Otherwise the articleship interview gets very boring — mine was
-quite boring." (Said with a smile. But he's not fully joking.)
+quite boring. Lolzz" (Said with a smile. But he's not fully joking.)
+
+---
+
+### Your Bucket 0 Daily Tick [ALL]
+
+Bucket 0 isn't a phase you finish — it's a list you run *every single day*. Copy
+this onto a sheet, stick it on your wall, and tick it each night:
+```
+□ Slept 7–8 hours
+□ Studied inside the Second Space (study profile only)
+□ Moved 15–20 min + eye breaks (20-20-20)
+□ Ate light before study blocks, stayed hydrated
+□ Wrote the day's targets in the morning
+□ Wore my blinders — didn't compare with anyone today
+□ Parked my emotions before sitting to study
+□ 10-minute flashback before sleep
+□ Night voice-note to my self-WhatsApp — what got done, what didn't
+★ [RANK] Weekly tally reviewed on Sunday (hours, chapters, questions)
+```
+Missed a box? No drama — tick it tomorrow. The streak is the point, not perfection.
 
 
 ---
@@ -351,19 +412,22 @@ quite boring." (Said with a smile. But he's not fully joking.)
 # BUCKET 1 — BEFORE THE JOURNEY BEGINS
 ## One-Time Setup. Before You Open a Single Textbook.
 
-**End Goal of This Bucket:**
-Walk out of this phase with your destination fixed, your boundary drawn, and
-your systems set up — so that when you start studying, you're driving with a map,
-not just driving.
+**End Goal of This Bucket — done when every box is ticked:**
+```
+□ "Why CA?" written and completely clear to you
+□ Month-wise clarity of how every month looks from now till the exam (your reverse-plan)
+□ Anchor book fixed for each subject
+□ Boundary years — RTP / MTP / PYQ — decided per subject (can still change as prep moves)
+□ The ONE Gmail and ONE phone number for all study/digital activity, fixed and locked
+   (pick one set you already have and stick to it — not a fresh account every week)
+□ Notebooks bought, labelled and numbered (P01-001 …)
+□ Every chapter classified A / B / C
+□ Vision Board ready
+★ [RANK] Your own by-hand analysis of the last 10 attempts — not a borrowed faculty sheet
+```
 
-★ [RANK] End goal for rank: same setup, plus your own independent analysis of
-the last 10 attempts done by hand — not just borrowed from a faculty sheet.
-
-Skipping this and jumping straight into studying is like starting a road trip
-without checking the fuel, the map, or where you're going. You'll drive. You'll
-be busy. You won't arrive.
-
-**Time needed:** One full day. Don't rush it.
+**Time needed:** One full day. Don't rush it. Skipping this and studying straight
+away is a road trip with no fuel, no map, no destination — busy, but you won't arrive.
 
 ---
 
@@ -689,15 +753,17 @@ feel like a choice, not a loss.
 classes. You may be in Bucket 2 for one subject and a later bucket for another —
 that's fine.*
 
-**End Goal of This Bucket:**
-By the end of classes, you have understood every concept inside your boundary and
-preserved it somewhere you can actually get back to — notebook, audio, video, or
-notes. Nothing in your boundary is left un-captured. Plus: a built-up error
-register, marked tricky questions, and a list of important questions to recheck
-in revision.
-
-★ [RANK] End goal for rank: all of the above, plus every ICAI illustration
-attempted at least twice, and the presentation of suggested answers studied.
+**End Goal of This Bucket — done when every box is ticked (per subject):**
+```
+□ Every concept inside your boundary understood
+□ Every concept preserved somewhere retrievable — notebook, audio, video or notes
+□ Nothing inside the boundary left un-captured
+□ Error register built up as you went
+□ Tricky / trap questions flagged
+□ List of important questions to recheck in revision, ready
+★ [RANK] Every ICAI illustration attempted at least twice
+★ [RANK] Presentation of suggested answers studied
+```
 
 **Prerequisite:** Bucket 1 done — boundary fixed, notebooks numbered, digital
 setup ready.
@@ -937,7 +1003,7 @@ solutions reaches the hall with slow, messy writing and runs out of time. So whe
 you write, write properly — keep it legible *and* push your speed, every session.
 
 **AUTHOR SAYS:**
-"After six months of pure CPT MCQ practice, my handwriting went from worse to
+"After six months of pure MCQ practice during CPT, my handwriting went from worse to
 worst — I barely wrote anything those months. Going into IPCC that was my biggest
 fear, because IPCC is all writing. So I made it a point to write a lot, and to
 always work on speed *and* a readable hand at the same time. Both, together — not
@@ -997,14 +1063,21 @@ testing it is leaving the door open for it to quietly leak out.
 
 # BUCKET 3 — AFTER CLASSES: THE REVISION PHASE
 
-**End Goal of This Bucket:**
-Build your Layer 2 for every subject, and practise hard enough — in real
-exam-pattern mode — that your boundary moves from "I studied this" to "I can write
-this." This is where preparation actually begins. Classes were the raw material.
-This is the product.
-
-★ [RANK] End goal for rank: all of the above, plus at least one full
-examination-mode simulation (a proper MTP, written like the real thing).
+**End Goal of This Bucket — done when every box is ticked (per subject):**
+This is where prep actually begins: classes were the raw material, this is the product.
+```
+□ Layer 2 built — one clean notebook per subject in your boundary
+□ Revision flow taped into Layer 2 for each chapter
+□ Error register active — and read *before* each revision
+□ At least 2 full revisions done
+□ Past-paper questions attempted chapter-wise as your tests
+□ Suggested Answers / Examiner Comments read for key chapters
+□ Boundary still intact — nothing dropped, nothing un-revised
+★ [RANK] At least one full exam-mode MTP, written like the real thing
+★ [RANK] 3–4 full revisions done
+★ [RANK] Drill-down TOC / important-question index maintained
+★ [RANK] Every chapter rated — high-relevance, low-simulation chapters drilled hardest
+```
 
 **Prerequisite:** Layer 1 exists — class notes + anchor book marked. Boundary
 fixed.
@@ -1228,38 +1301,26 @@ come out right in the first shot in the exam. Some questions genuinely deserve t
 special treatment. Most don't — so don't turn this into an excuse to re-solve
 everything."
 
----
-
-### By the End of This Bucket, You Should Have: [ALL]
-```
-□ Layer 2 built for every subject in your boundary
-□ Revision flow taped into Layer 2 for each chapter
-□ Error register active and used before each revision
-□ At least 2 full revisions done
-□ Past-paper questions attempted chapter-wise as your tests
-□ Suggested Answers / Examiner Comments read for key chapters
-□ Boundary still intact — nothing dropped, nothing un-revised
-★ At least one full exam-mode MTP written and analysed
-★ 3–4 full revisions done
-★ Drill-down TOC / important-question index maintained
-★ Every chapter rated — high-relevance, low-simulation chapters drilled hardest
-```
-
 
 ---
 ---
 
 # BUCKET 4 — 45 DAYS BEFORE EXAM
 
-**End Goal of This Bucket:**
-This is your **boundary navigation plan** — the phase where you map out and
-execute exactly how you'll cover your entire boundary in the time left. You build
-your Layer 3, you sharpen everything, and you stop adding anything new. By the end,
-your whole boundary is revisable fast, and you've tested yourself under real exam
-conditions.
-
-★ [RANK] End goal for rank: 100% of the boundary covered — no chapter left light,
-no shortcuts — plus multiple full exam-mode mocks analysed.
+**End Goal of This Bucket — done when every box is ticked (per subject):**
+Your boundary navigation plan: map and execute exactly how you'll cover the whole
+boundary in the time left, sharpen everything, add nothing new.
+```
+□ Layer 3 built — one thin bound notebook per subject, all subjects
+□ One more full revision done (3+ total)
+□ At least 2 mocks written and analysed
+□ Error register reviewed for every chapter
+□ Important-questions list rechecked
+□ Everything you'll re-revise, printed
+□ Exam-centre material ready (your Layer 3 book)
+★ [RANK] 5+ mocks analysed with time-per-question data
+★ [RANK] 100% boundary coverage — A, B and C (no chapter left light, no shortcuts)
+```
 
 **Prerequisite:** Layer 2 exists. At least 1–2 revisions done. Error register
 maintained.
@@ -1397,29 +1458,21 @@ close in, that's a boundary call (drop it, or give it a proper focused first-stu
 — not marathon fuel.
 
 ---
-
-### By the End of This Bucket, You Should Have: [ALL]
-```
-□ Layer 3 built — one bound book per subject, all subjects
-□ One more full revision done (3+ total)
-□ At least 2 mocks written and analysed
-□ Error register reviewed for every chapter
-□ Important-questions list rechecked
-□ Everything you'll re-revise, printed
-□ Exam-centre material ready (your Layer 3 book)
-★ 5+ mocks analysed with time-per-question data
-★ 100% boundary coverage — A, B and C
-```
-
----
 ---
 
 # BUCKET 5 — THE 15 DAYS OF EXAMS + THE FEW DAYS BEFORE
 
-**End Goal of This Bucket:**
-Pure execution. Nothing new is learned here. Everything is about delivering, paper
-by paper, what you've already prepared — and protecting your body and mind across
-the exam stretch.
+**End Goal of This Bucket — pure execution. You're on track when, every paper:**
+Nothing new is learned here — it's all about delivering what you've already
+prepared, and protecting your body and mind across the exam stretch.
+```
+□ Kit packed the night before; reached the centre early
+□ Used the full 15-minute reading time to fix your sequence
+□ MCQs done first; opened with your most confident question
+□ Presentation + submission mechanics clean; nothing left blank
+□ Slept 7–8 hours; didn't dissect the finished paper with anyone
+□ Light Layer-3 + error-register pass before the next paper
+```
 
 **Prerequisite:** Layer 3 exists. A few revisions done. Some mock experience.
 
@@ -1597,9 +1650,14 @@ supply the intended anecdote.]
 
 # BUCKET 6 — AFTER THE EXAM TILL RESULT DAY
 
-**End Goal of This Bucket:**
-Recover, reward yourself, finish your mandatory training, and set up the next step
-— interviews and articleship, or a clean re-attempt. Pick your track.
+**End Goal of This Bucket — recover, reward, train, set up what's next. Done when:**
+```
+□ ICITSS (IT Training + Orientation) completed
+□ Reward phase taken — your Plans-After-Exams list cashed in, guilt-free
+□ Honest subject-by-subject look-back done (spotting gaps, not guessing your result)
+□ Next step set up — interviews + articleship (Track A), or a clean re-attempt plan (Track B)
+```
+Pick your track below.
 
 ---
 
