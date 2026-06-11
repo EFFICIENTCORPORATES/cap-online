@@ -40,7 +40,7 @@ EXPECTED_DIRS = [
     "obs-setup", "obs-setup/assets", "obs-setup/recordings",
     "photo-gallery/originals",
     "materials/icai-source", "materials/reference",
-    "planning", "preparations", "tools",
+    "planning", "preparations", "student-toolkit", "tools",
 ]
 
 REVIEW_DIRS = {"book", "preparation-materials", "recording"}
