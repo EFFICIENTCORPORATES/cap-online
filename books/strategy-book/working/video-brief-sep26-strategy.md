@@ -363,7 +363,7 @@ A / B / C reveal with color fills.
 >
 > "Layer 3 is your flow sequence — for each subject, what to revise, from which source, in which order. If you haven't built a sequence, use this: Category A chapters first, B after, C last. We've already discussed how to find A, B, C — count the marks per chapter across the last 10 papers."
 >
-> "The main mission of those 45 days: confidence in your boundary coverage, and at least one full pass through your Error Register."
+> "The main mission of those 45 days: confidence in your boundary coverage, and at least one full go through your Error Register."
 
 ---
 
@@ -626,7 +626,7 @@ Time split: A = 60%, B = 30%, C = 10%
 
 **Main mission of the 45 days:**
 - Confidence in your boundary — everything in it is revisable
-- At least one full pass through your Error Register
+- At least one full go through your Error Register
 - Layer 3 built and in your hand
 
 Exam-day hall strategies (15 days of exams) — that will be a separate video.
