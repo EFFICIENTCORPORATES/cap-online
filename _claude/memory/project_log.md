@@ -4,6 +4,49 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-06-11 — CA-Inter-90-Days-Strategy.md fully rewritten, HTML-synced
+
+Complete rewrite of `books/strategy-book/working/CA-Inter-90-Days-Strategy.md`.
+Now fully in sync with the sep26-strategy HTML slide deck and standalone as an
+independent book.
+
+**Structure:** FRONT MATTER (Title, Copyright, Dedication, Socrates Story, About
+the Author, About This Book, How to Read) → ROUTING PAGE → BUCKET 3 (Phase 1:
+Build Your Arsenal, 18 strategies) → BUCKET 4 (Phase 2: Delivery Mode, 10
+strategies) → BUCKET 5 (The 15 Days, 17 strategies) → BUCKET 0 (Daily
+Foundation, 13 strategies + Discipline Bridge) → PERSONAL PAGES → AUTHOR'S STORY.
+
+**Sync gaps closed vs slides:**
+- Booti 3: "Paste It Where You Live" → "The Visual Vault" (Flowcharts / Tables
+  & Formats / Skeletons / Dates·Rates·Limits / Mnemonics); paste-it is now the
+  usage rule, not the name
+- Level 1 gate: 3-check system (Boundary written + Layer 1&2 documented + 3
+  Bootis) → LEVEL 1 CLEARED → NO NEW MATERIAL
+- Mock Analysis Protocol: routing decision tree (recall-fail → Visual Vault;
+  didn't-know-in-Boundary → Golden Nuggets; outside Boundary → decide)
+- Discipline Bridge: before Bucket 0 — "CA is game of PREPARATION not talent"
+  + Atomic Habits framing
+- Student Toolkit promise (20+ tools, comment guarantee)
+- "ON GROUND Strategies" / "No Gyaan Baazi" language in About This Book
+- North Star escalates to 3× per day in Bucket 4
+- Layer 3 size: "10–40 pages per subject"
+- Gamify frame: Level 1 / Final Boss (tied to Level 1 CLEARED milestone)
+
+**Parser compliance:** Section headings map to existing SECTION_META keys
+(BUCKET 3/4/5/0, FRONT MATTER, ROUTING PAGE, PERSONAL PAGES). 58 strategy
+headings. 48 component markers. Health check clean.
+
+**Stats:** ~1520 lines. Gallery skipped (per Pranav). About Author added.
+
+---
+
+## 2026-06-11 — Book-promo silent slide (book-promo.html) + CTA bug confirmed fixed
+
+- **CTA stray `</div>` bug**: confirmed already fixed on disk (Pranav's edit); his local `node --check slides-part4.js` passes. Deck is now **29 slides** — Pranav added Mock Analysis Protocol (24B), Discipline Bridge (24C), and a Manifest line on the CTA; deck README still says 27 (update pending).
+- **New: `books/strategy-book/video-presentations/sep26-strategy/book-promo.html`** — standalone silent promo slide for the Complete Strategy Book PDF (end of Sep-26 video, no voiceover). Floating 3D A4 book cover (dark, brand blue/green edge, gold accents, shine sweep, float + floor-shadow animation) with Pranav's photo **chroma-keyed from green-screen** (`content/assets/green-screen/Book-cover-green.png` → transparent cutout, embedded base64 — file ~386 KB, fully self-contained). Right panel: LAUNCHING SOON badge, facts (90+ strategies, **20+ frameworks** — actual count 23, Pranav chose the safe number, 30+ Pranav's Tips, 7 buckets, 3 Bootis, 17 exam-day strategies, fill-in pages), CTA "For **Jan 27 & May 27** attempts" (Pranav confirmed; original brief said Jan 26) + PRE-BOOK NOW / Early Bird / UP TO 30% OFF / link in description. 1920×1080 stage, auto-scales to window.
+- **Note**: the base64-embedded image makes this HTML a ~386 KB blob in git — Pranav to decide: commit as-is or gitignore it.
+- Sandbox health_check: known stale-mount false flags (slides.js, parser, video-brief) + **component-index STALE (MASTER.md changed: 86bb07d8 → efdc37ad)** — Pranav to run `python tools/generate_component_index.py` + health_check locally. file_index regenerated (200 files).
+
 ## 2026-06-09 — reconcile Pranav's edits + new spaces (Session: setup, cont.)
 
 - Confirmed Pranav's build-out: strategy-book `sources/ design/ working/ video-presentations/`, new tools (`generate_component_index.py`, `strategy_book_parser.py`), component-index MD5 check in health_check, segment-library + standup material in `preparations/`, all motivation images moved to `obs-setup/assets/` (content/motivation now a daily-quote media library, kept).
