@@ -50,7 +50,6 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
           - personal-pages.html
           - routing.html
           - section.html
-        - md_to_html.py
       - design-spec.md
     - **drafts/**
     - **final/**
@@ -66,11 +65,23 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
       - SKILL-strategy-book-structural-method.md
       - SKILL-strategy-book-voice-and-tone.md
       - summary-strategy-book-memory.md
+    - **video-presentations/**
+      - **sep26-strategy/**
+        - **css/**
+          - slides.css
+          - theme.css
+        - **js/**
+          - engine.js
+          - slides.js
+        - index.html
+        - README.md
     - **working/**
+      - CA-Inter-90-Days-Strategy.md
       - CA-Inter-Book-Full-Structure.md
       - CA-Inter-Strategy-Book-MASTER.md
       - MASTER-component-index.md
       - video-brief-sep26-strategy.md
+      - video-presentation-sep26.html
     - README.md
 - **content/**
   - **ai-content-pipeline/**
@@ -165,6 +176,7 @@ _Lists tracked source/text files only; binaries are gitignored and omitted._
   - health_check.py
   - sarvamai.py
   - split_pdf.py
+  - strategy_book_parser.py
   - translate_chapter0.py
 - **vc-gurukul/**
   - **batch-july-2025/**
