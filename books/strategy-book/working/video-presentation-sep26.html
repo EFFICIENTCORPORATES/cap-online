@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>83 Days — Presentation (Sep 2026)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bucket3:#E8A13D; /* amber */
+      --bucket4:#E07A2F; /* orange */
+      --gold:#C9A227;
+      --ink:#1F2933;
+      --warn:#E03131;
+      --bg-dark:#0f1720; /* near-black for dark slides (slightly different from ink) */
+      --light:#f9fafb;
+      --muted:#8a9bac;
+      --ease: cubic-bezier(.2,.9,.2,1);
+    }
+    html,body{height:100%;}
+    body{
+      margin:0; font-family: 'Source Sans 3', sans-serif; background:var(--ink); color:var(--ink);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .viewport{
+      width:1280px; height:720px; background:var(--light); overflow:hidden; position:relative; box-shadow:0 10px 40px rgba(0,0,0,.4);
+      border-radius:8px;
+    }
+    .slide{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:48px; box-sizing:border-box;}
+    .slide.hidden{display:none}
+    .frame{max-width:1100px; width:100%;}
+    h1,h2,h3,p{margin:0}
+    .dark{background:var(--bg-dark); color:var(--light);}
+    .light{background:var(--light); color:var(--ink);}
+
+    /* typography */
+    .title-huge{font-family:'Archivo',sans-serif; font-weight:900; font-size:160px; line-height:1; text-align:center;}
+    .title-large{font-family:'Archivo',sans-serif; font-weight:800; font-size:48px; text-align:center;}
+    .lead{font-size:20px; color:inherit; text-align:center}
+    .mono{font-family: 'Courier New', monospace; background:#f7f7fb; padding:12px; border-radius:6px; display:inline-block}
+
+    /* reveal mechanics */
+    .step{opacity:0; transform:translateY(12px); transition:opacity .28s var(--ease), transform .28s var(--ease); will-change:opacity,transform}
+    .step.visible{opacity:1; transform:none}
+    .step.slow{transition-duration:.5s}
+
+    /* hook specifics */
+    .hook-number{font-family:'Archivo',sans-serif; font-weight:900; font-size:200px; letter-spacing:-8px;}
+    .hook-days{font-family:'Archivo',sans-serif; font-weight:700; font-size:48px; margin-top:6px}
+
+    /* central frame */
+    .central{display:flex; align-items:center; gap:28px; justify-content:center}
+    .state{font-family:'Archivo',sans-serif; font-size:34px; font-weight:700}
+    .arrow{font-size:42px; opacity:0.8}
+    .levelup{color:var(--bucket3); font-weight:900}
+
+    /* two column */
+    .split{display:flex; gap:32px}
+    .col{flex:1}
+    .tmpl{background:#f7f8fa; border:1px solid #dde3e8; padding:18px; font-family:monospace; white-space:pre-wrap}
+
+    /* physical/digital */
+    .col-list{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px}
+    .check{color:green}
+    .cloud{color:#4a5568}
+    .warning-banner{background:var(--warn); color:white; padding:12px; border-radius:6px; text-align:center; font-weight:700}
+    .pulse{animation:pulse .45s ease-in-out both}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+    /* booti numbers */
+    .booti-num{font-size:120px; font-family:'Archivo',sans-serif; font-weight:900; color:var(--bucket3)}
+    .booti-title{font-size:34px; font-family:'Archivo',sans-serif; font-weight:800; margin-top:8px}
+
+    /* A/B/C blocks */
+    .abc{display:flex; gap:16px}
+    .block{flex:1; padding:24px; border-radius:8px; color:white; text-align:center}
+    .block.A{background:var(--warn)}
+    .block.B{background:var(--bucket3)}
+    .block.C{background:#8a9bac}
+
+    /* checklist */
+    .checklist{list-style:none; padding:0; display:flex; flex-direction:column; gap:14px}
+    .chk-box{width:28px; height:28px; border:2px solid #cbd5e1; display:inline-flex; align-items:center; justify-content:center; border-radius:6px; margin-right:10px}
+    .checked{background:var(--bucket3); color:white; border-color:var(--bucket3); transform:scale(1.05); transition:transform .18s}
+
+    /* footer / counter / hint */
+    .footer{position:absolute; right:18px; bottom:14px; font-family:'Archivo',sans-serif; color:rgba(0,0,0,0.6);}
+    .counter{background:rgba(255,255,255,0.9); padding:6px 8px; border-radius:6px; font-weight:700}
+    .hint{position:absolute; left:18px; bottom:14px; background:rgba(0,0,0,0.6); color:white; padding:8px 10px; border-radius:6px; opacity:0.95}
+    .hint.fade{transition:opacity 600ms ease; opacity:0}
+
+    /* small utilities */
+    .center-col{display:flex; flex-direction:column; align-items:center; gap:12px}
+    .grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+    .ai-chip{background:white; border-radius:6px; padding:10px; box-shadow:0 2px 6px rgba(0,0,0,0.08); text-align:center}
+
+  </style>
+</head>
+<body>
+  <div class="viewport" id="viewport" role="application" aria-label="Presentation">
+
+    <!-- Slide container -->
+    <section class="slide dark" data-slide="1">
+      <div class="frame center-col">
+        <div class="step hook-number slow" id="s1-1">83</div>
+        <div class="step hook-days" id="s1-2">days</div>
+        <div class="step lead" id="s1-3">You have 83 days. September 2026 exams.</div>
+      </div>
+    </section>
+
+    <section class="slide dark hidden" data-slide="2">
+      <div class="frame center-col">
+        <div class="step" id="s2-1"><h2 class="title-large">Not a planner.</h2></div>
+        <div class="step" id="s2-2"><h2 class="title-large">Not motivation.</h2></div>
+        <div class="step" id="s2-3"><h2 class="title-large">Not subject-specific.</h2></div>
+        <div class="step" id="s2-4"><h2 class="title-large">Raw strategies. For exactly where you are right now.</h2></div>
+      </div>
+    </section>
+
+    <section class="slide light hidden" data-slide="3">
+      <div class="frame central">
+        <div class="step state" id="s3-1">YOU ARE HERE → I'm Revising</div>
+        <div class="step arrow" id="s3-2">→</div>
+        <div class="step state" id="s3-3">YOU NEED TO BE HERE → I'm Exam Ready</div>
+        <div class="step levelup" id="s3-4">25th July</div>
+      </div>
+    </section>
+
+    <section class="slide light hidden" data-slide="4">
+      <div class="frame center-col">
+        <div class="step" id="s4-1"><h2 class="title-large">What will I study...</h2></div>
+        <div class="step" id="s4-2"><h2 class="title-large">...in the 21 hours...</h2></div>
+        <div class="step" id="s4-3"><h2 class="title-large">...before my exam?</h2></div>
+        <div class="step" id="s4-4"><p class="lead">You must be able to answer this — for every subject, for every chapter, with exact sources — by 25th July.</p></div>
+      </div>
+    </section>
+
+    <section class="slide light hidden" data-slide="5">
+      <div class="frame split">
+        <div class="col">
+          <div class="step" id="s5-1"><h3 class="title-large">MY BOUNDARY — [Subject]</h3></div>
+          <div class="step tmpl" id="s5-2">Study Material:
+Past papers (years):
+Where it lives:
+= NOTHING ELSE</div>
+        </div>
+        <div class="col">
+          <div class="step" id="s5-3"><p class="lead">Fix this for every subject in next 4 days. Review & tighten.</p></div>
+          <div class="step tmpl" id="s5-4">Layer 1 — Anchor Material
+Layer 2 — Revision Notes
+Layer 3 — Exam Day Prep</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide light hidden" data-slide="6">
+      <div class="frame split">
+        <div class="col center-col">
+          <div class="step" id="s6-1"><h3 class="title-large">📁 Google Drive</h3></div>
+          <pre class="step mono" id="s6-2">📁 Google Drive
+  📁 Advanced Accounts
+    📁 Layer 1 — Anchor Material
+    📁 Layer 2 — Revision Notes
+    📁 Layer 3 — Exam Day Prep
+  📁 Law
+    ...</pre>
+        </div>
+        <div class="col center-col">
+          <div class="step" id="s6-3"><h3 class="title-large">Physical vs Digital</h3></div>
+          <ul class="col-list step" id="s6-4">
+            <li>PHYSICAL — Layer 1 notebooks, Layer 2 notes, Error Register</li>
+          </ul>
+          <ul class="col-list step" id="s6-5">
+            <li>DIGITAL — PYQs, MTPs, PDFs, audio, cloud backups</li>
+          </ul>
+          <div class="step" id="s6-6"><div class="warning-banner">NEVER DIGITAL AS PRIMARY — Layer 3</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dark hidden" data-slide="7">
+      <div class="frame center-col">
+        <div class="step title-large" id="s7-1">Before 25th July — 3 things. For every chapter.</div>
+        <div class="step title-large" id="s7-2">We call them... the Sanjeevani Bootis.</div>
+        <div class="step" id="s7-3">
+          <div style="display:flex;gap:18px;align-items:center">
+            <div style="font-family:Archivo;font-size:48px;color:var(--bucket3)">①</div>
+            <div style="font-family:Archivo;font-size:48px;color:var(--bucket3)">②</div>
+            <div style="font-family:Archivo;font-size:48px;color:var(--bucket3)">③</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide light hidden" data-slide="8">
+      <div class="frame center-col">
+        <div class="step booti-num" id="s8-1">①</div>
+        <div class="step booti-title" id="s8-2">The Golden Nuggets Register</div>
+        <div class="step tmpl" id="s8-3">Important Concepts: → ref: Layer 2 / Layer 1 page
+Exam Tips: → how to build working notes
+Examiner Tricks: → what the examiner does to trap you</div>
+      </div>
+    </section>
+
+    <section class="slide light hidden" data-slide="9">
+      <div class="frame center-col">
+        <div class="step booti-num" id="s9-1">②</div>
+        <div class="step booti-title" id="s9-2">The Error Register</div>
+        <div class="step tmpl" id="s9-3">Where is this question? (book + page / drive + file)
+Where is the solution?
+What was asked?
+Where did you mess up?
+Why did you mess up?</div>
+      </div>
+    </section>
+
+    <section class="slide light hidden" data-slide="10">
+      <div class="frame center-col">
+        <div class="step booti-num" id="s10-1">③</div>
+        <div class="step booti-title" id="s10-2">Paste It Where You Live</div>
+        <div class="step" id="s10-3">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div>washbasin ✓</div><div>hallway ✓</div><div>breakfast table ✓</div><div>study table ✓</div>
+          </div>
+        </div>
+        <div class="step grid" id="s10-4" style="margin-top:16px">
+          <div class="ai-chip">ChatGPT</div>
+          <div class="ai-chip">Claude</div>
+          <div class="ai-chip">Gemini</div>
+          <div class="ai-chip">NotebookLM</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide light hidden" data-slide="11">
+      <div class="frame center-col">
+        <div class="step title-large" id="s11-1">25th JULY</div>
+        <div class="step lead" id="s11-2">Three Bootis ready — for every chapter — for every subject.</div>
+        <div class="step" id="s11-3"><div class="warning-banner">After this: ZERO new material. Strictly.</div></div>
+      </div>
+    </section>
+
+    <section class="slide light hidden" data-slide="12">
+      <div class="frame center-col">
+        <div class="step title-large" id="s12-1">25th July → Exam Day</div>
+        <div class="step lead" id="s12-2">Layer 2 only → Layer 3 being built</div>
+        <div class="step" id="s12-3">Revision → Delivery · 45 days</div>
+      </div>
+    </section>
+
+    <section class="slide light hidden" data-slide="13">
+      <div class="frame">
+        <div class="step" id="s13-1"><h3 class="title-large">No sequence of your own? Use this:</h3></div>
+        <div class="step abc" id="s13-2">
+          <div class="block A">① Category A first<br><small>(50+ marks across 10 papers)</small></div>
+          <div class="block B">② Category B next<br><small>(20–50 marks)</small></div>
+          <div class="block C">③ Category C last<br><small>(&lt;20 marks)</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide light hidden" data-slide="14">
+      <div class="frame center-col">
+        <div class="step title-large" id="s14-1">Bucket 0 — Non-negotiables</div>
+        <ul class="checklist">
+          <li class="step" id="s14-2"><span class="chk-box">☐</span> Sleep 7–8 hours — every night</li>
+          <li class="step" id="s14-3"><span class="chk-box">☐</span> Write today's specific targets — every morning</li>
+          <li class="step" id="s14-4"><span class="chk-box">☐</span> Blinders on — no comparing anyone's progress</li>
+          <li class="step" id="s14-5"><span class="chk-box">☐</span> Park emotions before sitting — 2 min</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide dark hidden" data-slide="15">
+      <div class="frame center-col">
+        <div class="step title-large" id="s15-1">PDF is free. Link in description.</div>
+        <div class="step lead" id="s15-2">Comment with your exact, specific issue. I will reply.</div>
+      </div>
+    </section>
+
+    <!-- Footer / controls -->
+    <div class="footer">
+      <div class="counter" id="counter">1 / 17</div>
+    </div>
+    <div class="hint" id="hint">Click or → to advance</div>
+
+  </div>
+
+  <script>
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      let current = 0;
+
+      // Initialize: hide all except first
+      function showSlide(index){
+        slides.forEach((s,i)=>{
+          if(i===index){ s.classList.remove('hidden'); } else { s.classList.add('hidden'); }
+        });
+        current = index;
+        prepareSteps(slides[current]);
+        updateCounter();
+      }
+
+      function prepareSteps(slide){
+        // hide all step elements inside slide
+        const steps = Array.from(slide.querySelectorAll('.step'));
+        steps.forEach(el=>el.classList.remove('visible'));
+        slide._steps = steps;
+        slide._pos = 0;
+        // reveal nothing yet; require user action
+      }
+
+      function revealNext(){
+        const slide = slides[current];
+        if(!slide) return;
+        const steps = slide._steps || Array.from(slide.querySelectorAll('.step'));
+        if(slide._pos < steps.length){
+          steps[slide._pos].classList.add('visible');
+          // special pulse for warning banners
+          if(steps[slide._pos].querySelector && steps[slide._pos].classList.contains('warning-banner')){
+            steps[slide._pos].classList.add('pulse');
+            setTimeout(()=>steps[slide._pos].classList.remove('pulse'),500);
+          }
+          // extra: if element contains .warning-banner inside, pulse it
+          const warn = steps[slide._pos].querySelector('.warning-banner');
+          if(warn){ warn.classList.add('pulse'); setTimeout(()=>warn.classList.remove('pulse'),600); }
+          slide._pos += 1;
+          updateCounter();
+        } else {
+          // go next slide if exists
+          if(current < slides.length -1) showSlide(current+1);
+        }
+      }
+
+      function revealPrev(){
+        const slide = slides[current];
+        if(!slide) return;
+        if(slide._pos > 0){
+          slide._pos -=1;
+          slide._steps[slide._pos].classList.remove('visible');
+          updateCounter();
+        } else {
+          if(current > 0) {
+            showSlide(current-1);
+            // reveal all steps of previous slide
+            const prev = slides[current];
+            prev._steps = prev._steps || Array.from(prev.querySelectorAll('.step'));
+            prev._pos = prev._steps.length;
+            prev._steps.forEach(el=>el.classList.add('visible'));
+          }
+        }
+      }
+
+      // click anywhere to advance
+      document.getElementById('viewport').addEventListener('click', (e)=>{
+        // prevent clicks on any potential interactive controls (none exist), so advance
+        revealNext();
+      });
+
+      // keyboard
+      window.addEventListener('keydown', (e)=>{
+        if(e.key === 'ArrowRight' || e.key === ' '){ revealNext(); }
+        else if(e.key === 'ArrowLeft'){ revealPrev(); }
+      });
+
+      function updateCounter(){
+        const slide = slides[current];
+        const total = slides.length;
+        const stepNum = (slide._pos || 0);
+        const counter = document.getElementById('counter');
+        counter.textContent = (current+1) + ' / ' + total;
+      }
+
+      // initial
+      slides.forEach(s=>{ s._steps = Array.from(s.querySelectorAll('.step')); s._pos = 0; });
+      showSlide(0);
+
+      // hint fade
+      setTimeout(()=>{ document.getElementById('hint').classList.add('fade'); }, 2800);
+
+      // ensure each slide has at least 2 steps; if not, split by children (defensive)
+      slides.forEach(s=>{
+        if((s._steps||[]).length < 2){
+          // find child elements and mark first two as steps
+          const children = Array.from(s.querySelectorAll('div, h1, h2, p, pre'));
+          for(let i=0;i<children.length && (s._steps||[]).length<2;i++){
+            if(!children[i].classList.contains('step')){ children[i].classList.add('step'); }
+          }
+          s._steps = Array.from(s.querySelectorAll('.step'));
+        }
+      });
+
+      // expose for debugging
+      window.__present = {slides:slides, showSlide:showSlide};
+    })();
+  </script>
+</body>
+</html><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>83 Days — Presentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800;900&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-dark: #1F2933;
+      --ink: #1F2933;
+      --amber: #E8A13D;
+      --orange: #E07A2F;
+      --gold: #C9A227;
+      --warn: #E03131;
+      --light: #f9fafb;
+      --muted: #8a9bac;
+      --grey-box: #EEF1F4;
+      --a: 250ms;
+      --easing: cubic-bezier(.2,.9,.2,1);
+      --head-f: 'Archivo', sans-serif;
+      --body-f: 'Source Sans 3', sans-serif;
+      --hand-f: 'Kalam', cursive;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0; background:var(--bg-dark); font-family:var(--body-f); color:var(--ink); display:flex; align-items:center; justify-content:center;
+    }
+    .viewer{width:1280px;height:720px;background:var(--light);box-shadow:0 12px 40px rgba(0,0,0,.35);position:relative;overflow:hidden}
+    .slide{position:absolute; inset:0; padding:64px; display:flex; align-items:center; justify-content:center; flex-direction:column; background:transparent;}
+    .slide.light{background:var(--light); color:var(--ink)}
+    .slide.dark{background:var(--bg-dark); color:white}
+
+    /* common heading */
+    h1,h2,h3,p{margin:0}
+    .huge{font-family:var(--head-f); font-weight:900; letter-spacing:-2px}
+    .big{font-family:var(--head-f); font-weight:800}
+
+    /* reveal steps */
+    .step{opacity:0; transform:translateY(12px); transition:opacity var(--a) var(--easing), transform var(--a) var(--easing); will-change:opacity,transform}
+    .step.visible{opacity:1; transform:translateY(0)}
+    /* slower dramatic */
+    .slow{transition-duration:500ms}
+
+    /* slide counter */
+    .counter{position:absolute; right:18px; bottom:12px; font-family:var(--head-f); font-size:14px; color:rgba(255,255,255,0.9); background:rgba(0,0,0,0.18); padding:6px 10px; border-radius:6px}
+    .viewer .counter{color:var(--ink); background:rgba(255,255,255,0.85)}
+
+    /* keyboard hint */
+    .hint{position:absolute; left:18px; bottom:12px; font-size:13px; color:var(--muted); opacity:0.95; transition:opacity 400ms}
+    .hint.fadeout{opacity:0}
+
+    /* specific slide styles */
+    /* S1 hook */
+    .s1 .num{font-size:200px}
+    .s1 .days{font-size:48px; margin-top:8px}
+    .s1 .line{margin-top:18px; font-size:20px; color:rgba(255,255,255,0.9)}
+
+    /* S2 text reveal */
+    .s2 .list{display:flex; flex-direction:column; gap:18px; align-items:center}
+    .s2 .list .item{font-size:34px; font-weight:700; font-family:var(--head-f)}
+
+    /* S3 central frame */
+    .s3 .states{display:flex; gap:40px; align-items:center; font-size:28px}
+    .s3 .arrow{font-size:40px; opacity:0.6}
+    .tag{padding:8px 12px;border-radius:8px;font-weight:700}
+    .tag.amber{background:var(--amber); color:var(--bg-dark)}
+
+    /* S4 north star */
+    .s4 .question{font-size:40px; text-align:center; line-height:1.1}
+    .s4 .sub{margin-top:16px; color:var(--muted); font-size:14px}
+
+    /* S5 boundary template */
+    .s5 .split{display:flex;gap:40px;width:100%;max-width:1000px}
+    .s5 .left{flex:1}
+    .s5 .right{flex:1}
+    .tmpl{background:var(--grey-box); padding:18px; border-radius:6px; font-family:monospace; white-space:pre-wrap}
+    .subtle{color:var(--muted)}
+
+    /* S6 code tree */
+    .code{font-family:monospace; background:#fff; padding:18px;border-radius:6px; border:1px solid #e6e9ec; color:#273742}
+
+    /* S7 phys vs digital */
+    .two-col{display:flex; gap:40px; width:100%; max-width:1100px}
+    .col{flex:1; background:#fff; padding:18px;border-radius:8px; min-height:220px}
+    .col h3{margin-bottom:10px}
+    .check{color:green; margin-right:10px}
+    .cloud{color:#6c7b8a; margin-right:10px}
+    .warning{margin-top:16px; padding:12px; background:var(--warn); color:#fff; border-radius:6px; text-align:center; transform-origin:center}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+    .warning.pulse{animation:pulse 420ms ease-in-out 2}
+
+    /* S8 Booti intro */
+    .s8 .lead{font-size:28px; margin-bottom:10px}
+    .booti-numbers{display:flex;gap:28px;margin-top:22px}
+    .circle{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800}
+    .circle.amber{background:var(--amber); color:var(--bg-dark)}
+
+    /* S9/10 Booti pages */
+    .booti-big{font-size:120px;color:var(--amber); font-family:var(--head-f); font-weight:900}
+    .booti-title{font-size:28px;margin-top:8px}
+    .fields{margin-top:18px; display:flex; flex-direction:column; gap:12px; align-items:flex-start}
+    .field{background:#fff;padding:12px 14px;border-radius:6px;border:1px solid #e6e9ec;width:720px}
+
+    /* S11 paste-it locations */
+    .locations{display:flex;gap:18px;align-items:center}
+    .loc{background:#fff;padding:14px;border-radius:8px;min-width:160px;text-align:center}
+
+    /* S12 AI grid */
+    .grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .chip{background:#fff;padding:10px 14px;border-radius:8px;border:1px solid #e6e9ec}
+
+    /* S13 25th July */
+    .big-date{font-size:120px;font-weight:900;color:var(--amber);font-family:var(--head-f)}
+    .zero{margin-top:18px;color:var(--warn);font-weight:800}
+
+    /* S14 flow */
+    .flow{font-size:20px}
+
+    /* S15 ABC blocks */
+    .abc{display:flex; gap:12px}
+    .block{flex:1;padding:22px;border-radius:8px;color:#fff;font-weight:800;text-align:center; transform:scaleX(0); transform-origin:left; transition:transform 360ms var(--easing)}
+    .block.show{transform:scaleX(1)}
+    .A{background:var(--warn)} .B{background:var(--amber)} .C{background:#8a9bac}
+
+    /* S16 checklist */
+    .checklist{display:flex;flex-direction:column;gap:18px}
+    .cl-item{display:flex;gap:12px;align-items:center}
+    .box{width:28px;height:28px;border-radius:6px;border:2px solid #cfd8df;display:flex;align-items:center;justify-content:center;font-weight:800;transform:scale(1);transition:transform 220ms}
+    .box.checked{background:var(--amber);border-color:var(--amber);color:var(--bg-dark);transform:scale(1.08)}
+
+    /* S17 CTA */
+    .cta{font-size:22px}
+
+    /* utility */
+    .mt{margin-top:18px}
+  </style>
+</head>
+<body>
+  <div class="viewer" id="viewer">
+    <!-- Slides -->
+    <!-- S1 Hook -->
+    <section class="slide dark s1" data-index="1">
+      <div class="step slow num" data-step="1"><div class="huge num">83</div></div>
+      <div class="step" data-step="2"><div class="days">days</div></div>
+      <div class="step" data-step="3"><div class="line">If you're watching this — the clock is running.</div></div>
+    </section>
+
+    <!-- S2 Differentiation -->
+    <section class="slide dark s2" data-index="2" style="padding:80px">
+      <div class="list">
+        <div class="step item" data-step="1">Not a planner.</div>
+        <div class="step item" data-step="2">Not motivation.</div>
+        <div class="step item" data-step="3">Not subject-specific.</div>
+        <div class="step item" data-step="4">Raw strategies. For exactly where you are right now.</div>
+      </div>
+    </section>
+
+    <!-- S3 Central Frame -->
+    <section class="slide light s3" data-index="3">
+      <div class="states">
+        <div class="step" data-step="1">YOU ARE HERE → <strong>I'm Revising</strong></div>
+        <div class="step" data-step="2"><div class="arrow">→</div></div>
+        <div class="step" data-step="3">YOU NEED TO BE HERE → <strong>I'm Exam Ready</strong></div>
+      </div>
+      <div class="step mt" data-step="4"><span class="tag amber">25th July — Your Level-Up Date</span></div>
+    </section>
+
+    <!-- S4 North Star -->
+    <section class="slide light s4" data-index="4">
+      <div class="step" data-step="1"><div class="question">What will I study...</div></div>
+      <div class="step" data-step="2"><div class="question">...in the 21 hours...</div></div>
+      <div class="step" data-step="3"><div class="question">...before my exam?</div></div>
+      <div class="step sub" data-step="4"><div class="sub">You must be able to answer this — for every subject, for every chapter, with exact sources — by 25th July.</div></div>
+    </section>
+
+    <!-- S5 Boundary template -->
+    <section class="slide light s5" data-index="5">
+      <div class="split">
+        <div class="left">
+          <div class="step" data-step="1"><h3 class="big">Your Subjects</h3></div>
+          <div class="step" data-step="2"><p class="subtle">Fill-in: Subject rows — one per subject. Tighten your boundary.</p></div>
+        </div>
+        <div class="right">
+          <div class="step" data-step="3"><div class="tmpl">MY BOUNDARY — [Subject]\nStudy Material:\nPast papers (years):\nWhere it lives:\n= NOTHING ELSE</div></div>
+          <div class="step" data-step="4"><p class="subtle mt">Layer 1 Anchor + Question Bank — lock the sources.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S6 Google Drive tree -->
+    <section class="slide light s6" data-index="6">
+      <div class="step" data-step="1"><div class="code">📁 Google Drive</div></div>
+      <div class="step" data-step="2"><div class="code">  📁 Advanced Accounts\n    📁 Layer 1 — Anchor Material</div></div>
+      <div class="step" data-step="3"><div class="code">    📁 Layer 2 — Revision Notes\n    📁 Layer 3 — Exam Day Prep</div></div>
+      <div class="step" data-step="4"><div class="subtle mt">30 minutes this week — setup subject folders.</div></div>
+    </section>
+
+    <!-- S7 Physical vs Digital -->
+    <section class="slide light s7" data-index="7">
+      <div class="two-col">
+        <div class="col">
+          <div class="step" data-step="1"><h3>PHYSICAL</h3></div>
+          <div class="step" data-step="2"><p><span class="check">✓</span> Layer 1 notebooks</p></div>
+          <div class="step" data-step="3"><p><span class="check">✓</span> Layer 2 revision notebook</p></div>
+        </div>
+        <div class="col">
+          <div class="step" data-step="4"><h3>DIGITAL</h3></div>
+          <div class="step" data-step="5"><p><span class="cloud">☁</span> PYQs / MTPs / Audio notes — keep on Drive</p></div>
+          <div class="step" data-step="6"><p><span class="cloud">☁</span> Unlisted videos for heavy files</p></div>
+        </div>
+      </div>
+      <div class="step" data-step="7"><div class="warning" id="never-digital">NEVER DIGITAL AS PRIMARY — Layer 3</div></div>
+    </section>
+
+    <!-- S8 Sanjeevani Booti Intro -->
+    <section class="slide dark s8" data-index="8">
+      <div class="step" data-step="1"><div class="lead">Before 25th July — 3 things. For every chapter. For every subject.</div></div>
+      <div class="step" data-step="2"><div class="lead">We call them... the Sanjeevani Bootis.</div></div>
+      <div class="step" data-step="3"><div class="booti-numbers">
+        <div class="circle amber">①</div>
+        <div class="circle amber">②</div>
+        <div class="circle amber">③</div>
+      </div></div>
+    </section>
+
+    <!-- S9 Booti 1 -->
+    <section class="slide light s9" data-index="9">
+      <div class="step" data-step="1"><div class="booti-big">①</div></div>
+      <div class="step" data-step="2"><div class="booti-title">The Golden Nuggets Register</div></div>
+      <div class="fields">
+        <div class="step field" data-step="3">Important Concepts → ref: Layer 2 / Layer 1 page</div>
+        <div class="step field" data-step="4">Exam Tips → how to build working notes</div>
+        <div class="step field" data-step="5">Examiner Tricks → what the examiner does to trap you</div>
+      </div>
+    </section>
+
+    <!-- S10 Booti 2 -->
+    <section class="slide light s10" data-index="10">
+      <div class="step" data-step="1"><div class="booti-big">②</div></div>
+      <div class="step" data-step="2"><div class="booti-title">The Error Register</div></div>
+      <div class="fields">
+        <div class="step field" data-step="3">Where is this question? (book + page / drive + file)</div>
+        <div class="step field" data-step="4">Where is the solution?</div>
+        <div class="step field" data-step="5">What was asked? Where did you mess up? Why?</div>
+      </div>
+    </section>
+
+    <!-- S11 Booti 3 -->
+    <section class="slide light s11" data-index="11">
+      <div class="step" data-step="1"><div class="booti-big">③</div></div>
+      <div class="step" data-step="2"><div class="booti-title">Paste It Where You Live</div></div>
+      <div class="step" data-step="3"><div class="locations">
+        <div class="loc">Washbasin ✓</div>
+        <div class="loc">Hallway ✓</div>
+        <div class="loc">Breakfast table ✓</div>
+        <div class="loc">Study table ✓</div>
+      </div></div>
+      <div class="step" data-step="4"><div class="subtle mt">Use AI to generate printable summary sheets, mnemonics, and checklists.</div></div>
+    </section>
+
+    <!-- S12 AI grid -->
+    <section class="slide light s12" data-index="12">
+      <div class="step" data-step="1"><div class="grid">
+        <div class="chip">ChatGPT</div>
+        <div class="chip">Claude</div>
+        <div class="chip">Gemini</div>
+        <div class="chip">Perplexity</div>
+        <div class="chip">KIMI</div>
+        <div class="chip">NotebookLM</div>
+        <div class="chip">Indus / Sarvam AI (Hindi)</div>
+      </div></div>
+      <div class="step" data-step="2"><div class="subtle mt">Best job: mnemonics, memory hooks, revision checklists</div></div>
+    </section>
+
+    <!-- S13 25th July deadline -->
+    <section class="slide dark s13" data-index="13">
+      <div class="step" data-step="1"><div class="big-date">25th JULY</div></div>
+      <div class="step" data-step="2"><div class="subtle mt">Three Bootis ready — for every chapter — for every subject.</div></div>
+      <div class="step" data-step="3"><div class="zero">After this: ZERO new material. Strictly.</div></div>
+    </section>
+
+    <!-- S14 Post-25th flow -->
+    <section class="slide light s14" data-index="14">
+      <div class="step" data-step="1"><div class="flow">25th July → Exam Day — Layer 2 only → Layer 3 being built → Revision → Delivery</div></div>
+      <div class="step" data-step="2"><div class="subtle mt">45 days = Final Boss. Mission: confidence in boundary + full pass through Error Register.</div></div>
+    </section>
+
+    <!-- S15 A/B/C sequence -->
+    <section class="slide light s15" data-index="15">
+      <div class="step" data-step="1"><div class="abc">
+        <div class="block A" data-block="A">Category A</div>
+        <div class="block B" data-block="B">Category B</div>
+        <div class="block C" data-block="C">Category C</div>
+      </div></div>
+      <div class="step" data-step="2"><div class="subtle mt">Default: A = 50+ marks across 10 papers; B = 20–50; C = &lt;20</div></div>
+    </section>
+
+    <!-- S16 Bucket 0 checklist -->
+    <section class="slide light s16" data-index="16">
+      <div class="step" data-step="1"><h3 class="big">Bucket 0 — The Non-Negotiables</h3></div>
+      <div class="step" data-step="2">
+        <div class="checklist">
+          <div class="cl-item"><div class="box" data-box="1">☐</div><div>Sleep 7–8 hours — every night</div></div>
+          <div class="cl-item"><div class="box" data-box="2">☐</div><div>Write today's specific targets — every morning</div></div>
+          <div class="cl-item"><div class="box" data-box="3">☐</div><div>Blinders on — no comparing progress</div></div>
+          <div class="cl-item"><div class="box" data-box="4">☐</div><div>Park emotions before sitting — 2 min scrap paper</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S17 CTA -->
+    <section class="slide dark s17" data-index="17">
+      <div class="step" data-step="1"><div class="cta">PDF is free — link in description. Full book + exam-day strategies.</div></div>
+      <div class="step" data-step="2"><div class="subtle mt">Comment with a specific, real problem. I reply. Most-liked comment → Instagram video.</div></div>
+    </section>
+
+    <div class="counter" id="counter">1 / 17</div>
+    <div class="hint" id="hint">Click or → to advance</div>
+  </div>
+
+  <script>
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      let idx = 0; // slide index
+      let step = 0; // current step within slide
+
+      function getMaxStep(sl){
+        const steps = sl.querySelectorAll('[data-step]');
+        let max = 0; steps.forEach(s=>{ const n = parseInt(s.getAttribute('data-step')); if(n>max) max=n; }); return max;
+      }
+
+      function showSlide(i){
+        slides.forEach((s,si)=>{
+          s.style.display = si===i? 'flex':'none';
+        });
+        idx = i; step = 0; updateCounter(); updateSteps();
+      }
+
+      function updateCounter(){
+        document.getElementById('counter').textContent = (idx+1) + ' / ' + slides.length;
+      }
+
+      function updateSteps(){
+        const sl = slides[idx];
+        const max = getMaxStep(sl);
+        const nodes = sl.querySelectorAll('[data-step]');
+        nodes.forEach(n=>{
+          const nstep = parseInt(n.getAttribute('data-step'));
+          if(nstep<=step) n.classList.add('visible'); else n.classList.remove('visible');
+        });
+        // special: reveal ABC blocks with transform
+        const blocks = sl.querySelectorAll('.block');
+        if(blocks.length){
+          blocks.forEach((b,i)=>{ if(step>=1){ setTimeout(()=>b.classList.add('show'), i*120); } else { b.classList.remove('show'); }});
+        }
+        // checklist boxes: mark checked when their item revealed beyond
+        if(sl.classList.contains('s16')){
+          const boxes = sl.querySelectorAll('.box');
+          boxes.forEach((bx,i)=>{ if(step>=2) bx.classList.add('checked'); else bx.classList.remove('checked'); });
+        }
+        // warning pulse
+        const warn = sl.querySelector('#never-digital');
+        if(warn){ if(step>=7){ warn.classList.add('pulse'); } else { warn.classList.remove('pulse'); } }
+      }
+
+      function next(){
+        const sl = slides[idx];
+        const max = getMaxStep(sl);
+        if(step < max) { step++; updateSteps(); } else { if(idx < slides.length-1) showSlide(idx+1); }
+      }
+      function prev(){
+        if(step>0){ step--; updateSteps(); } else if(idx>0){ showSlide(idx-1); const prevSl = slides[idx]; step = getMaxStep(prevSl); updateSteps(); updateCounter(); }
+      }
+
+      // click anywhere advances
+      document.getElementById('viewer').addEventListener('click', (e)=>{ // ignore clicks on counter
+        if(e.target.closest('#counter')) return; next(); });
+
+      document.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight') next(); else if(e.key==='ArrowLeft') prev(); });
+
+      // initial show
+      showSlide(0);
+
+      // hint fadeout
+      setTimeout(()=>document.getElementById('hint').classList.add('fadeout'), 2800);
+
+      // expose for debugging
+      window.preset = {slides:slides};
+    })();
+  </script>
+</body>
+</html>

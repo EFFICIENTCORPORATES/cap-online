@@ -1,0 +1,264 @@
+/* ============================================================
+   SLIDES — per-slide layouts
+   0 Shlok · 1 Hook · 2 Pain Mirror · 3 Positioning
+   4 Reality Check · 5 Bucket Analysis timeline
+   ============================================================ */
+
+/* ---------- shared bits ---------- */
+
+.kicker {
+  font: 700 30px/1.3 var(--font-head);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+body.theme-dark  .kicker { color: var(--dark-dim); }
+body.theme-light .kicker { color: var(--light-dim); }
+
+.accent  { color: var(--b3); }
+.accent2 { color: var(--b4); }
+.danger  { color: var(--red); }
+.brand-b { color: var(--brand-blue); }
+.brand-g { color: var(--brand-green); }
+
+/* ============================================================
+   SLIDE 0 — GITA SHLOK
+   ============================================================ */
+
+.s-shlok .shlok-text {
+  font-size: 84px;
+  font-weight: 700;
+  line-height: 1.6;
+  max-width: 1500px;
+  background: linear-gradient(90deg, var(--brand-blue-soft), var(--brand-green-soft));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.s-shlok .shlok-src {
+  font-size: 34px;
+  color: var(--dark-dim);
+  margin-top: 60px;
+}
+
+/* ============================================================
+   SLIDE 1 — THE HOOK
+   ============================================================ */
+
+.s-hook .hook-number {
+  font: 900 400px/0.95 var(--font-head);
+  letter-spacing: -14px;
+  color: var(--dark-text);
+}
+
+.s-hook .hook-days {
+  font: 800 84px/1 var(--font-head);
+  letter-spacing: 26px;
+  text-transform: uppercase;
+  color: var(--b3);
+  margin-top: 14px;
+  padding-left: 26px;   /* compensate letter-spacing, keeps it centered */
+}
+
+.s-hook .hook-line {
+  font: 600 38px/1.5 var(--font-body);
+  color: var(--dark-dim);
+  margin-top: 56px;
+}
+.s-hook .hook-line strong { color: var(--dark-text); font-weight: 700; }
+
+/* ============================================================
+   SLIDE 2 — PAIN MIRROR
+   ============================================================ */
+
+.s-pain .pain-list {
+  display: flex;
+  flex-direction: column;
+  gap: 46px;
+}
+
+.s-pain .pain-line {
+  font: 600 50px/1.35 var(--font-head);
+  color: var(--dark-text);
+  position: relative;
+  padding-left: 66px;
+  text-align: left;
+  max-width: 1400px;
+}
+.s-pain .pain-line::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -8px;
+  font: 900 78px/1 var(--font-head);
+  color: var(--b3);
+}
+
+.s-pain .pain-closer {
+  font: 800 58px/1.3 var(--font-head);
+  color: var(--b3);
+  margin-top: 76px;
+}
+
+/* ============================================================
+   SLIDE 3 — POSITIONING
+   ============================================================ */
+
+.s-not .not-list {
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+}
+
+.s-not .not-line {
+  font: 700 56px/1.3 var(--font-head);
+  color: var(--dark-dim);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  text-align: left;
+}
+.s-not .not-line .x {
+  font: 900 52px/1 var(--font-head);
+  color: var(--red);
+  flex: 0 0 auto;
+}
+
+.s-not .not-final {
+  font: 900 76px/1.25 var(--font-head);
+  color: var(--b3);
+  margin-top: 90px;
+  max-width: 1500px;
+}
+.s-not .not-final span {
+  display: block;
+  font: 600 40px/1.4 var(--font-body);
+  color: var(--dark-text);
+  margin-top: 22px;
+}
+
+/* ============================================================
+   SLIDE 4 — REALITY CHECK (section title)
+   ============================================================ */
+
+.s-reality .reality-en {
+  font: 900 150px/1 var(--font-head);
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--brand-blue-soft), var(--brand-green-soft));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.s-reality .reality-hi {
+  font-size: 76px;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin-top: 44px;
+}
+
+.s-reality .reality-sub {
+  font: 700 34px/1 var(--font-head);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: var(--dark-dim);
+  margin-top: 70px;
+}
+
+/* ============================================================
+   SLIDE 5 — BUCKET ANALYSIS TIMELINE
+   Proportional segments · date markers · Bucket-0 base band
+   ============================================================ */
+
+.s-buckets { width: 1640px; }
+
+.bt-bar {
+  display: flex;
+  width: 100%;
+  height: 190px;
+  gap: 6px;
+}
+
+.bt-seg {
+  background: var(--c);
+  border-radius: 14px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 6px;
+  overflow: hidden;
+}
+.bt-seg .bt-n {
+  font: 900 40px/1 var(--font-head);
+  opacity: .95;
+}
+.bt-seg .bt-l {
+  font: 700 23px/1.2 var(--font-head);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  text-align: center;
+}
+
+/* date markers under the bar */
+.bt-dates {
+  position: relative;
+  height: 120px;
+  margin-top: 6px;
+}
+.bt-mark {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font: 800 26px/1.25 var(--font-head);
+  color: var(--light-text);
+  text-align: center;
+  white-space: nowrap;
+}
+.bt-mark i {
+  display: block;
+  width: 4px;
+  height: 26px;
+  margin: 0 auto 8px;
+  background: var(--light-dim);
+  border-radius: 2px;
+}
+.bt-mark span {
+  display: block;
+  font: 600 20px/1.3 var(--font-body);
+  color: var(--light-dim);
+  text-transform: none;
+}
+.bt-mark.bt-key {
+  color: var(--b4);
+  font-size: 34px;
+  border-radius: 10px;
+}
+.bt-mark.bt-key i { background: var(--b4); height: 34px; width: 6px; }
+.bt-mark.bt-key span { color: var(--b4); font-weight: 700; }
+
+/* Bucket 0 foundation band */
+.bt-b0 {
+  width: 100%;
+  background: var(--b0);
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px 30px;
+  font: 600 30px/1.3 var(--font-body);
+}
+.bt-b0 .bt-b0-tag {
+  font: 900 30px/1 var(--font-head);
+  letter-spacing: 2px;
+  margin-right: 18px;
+}
+.bt-b0 .dev { font-size: 28px; }
+
+.bt-note {
+  font: 600 36px/1.5 var(--font-body);
+  color: var(--light-text);
+  margin-top: 44px;
+  max-width: 1450px;
+}
+.bt-note b { color: var(--b4); font-weight: 800; }

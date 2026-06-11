@@ -14,6 +14,7 @@ strategy-book/
 ├── sources/       ← upstream source, governance (skills) + memory — reference, do not edit casually
 ├── working/       ← the active drafts being built
 ├── design/        ← visual design system: design-spec.md (+ diagrams/ and templates/ when build starts)
+├── video-presentations/ ← HTML slide decks for YouTube strategy videos (one folder per video)
 ├── drafts/        ← scratch / in-progress sections
 └── final/         ← finished, student-ready output (empty for now)
 ```
@@ -46,6 +47,12 @@ These files were exported here from `_claude/artifacts/`, `_claude/skills/`, and
 | File | What it is |
 |------|-----------|
 | `design-spec.md` | **Locked design spec v1** (2026-06-10): B5 7"×10" full-colour, bucket colour system, stepped edge tabs, footer journey strip, component library (How to Do This / Author Says / RANK gold / Bare-Minimum grey box…), typography, 11-diagram Excalidraw inventory, HTML+paged.js pipeline. Read before any layout/template work. |
+
+### `video-presentations/` — slide decks for YouTube videos
+
+| Folder | What it is |
+|------|-----------|
+| `sep26-strategy/` | HTML/CSS/JS slide deck for the Sep-26 "next 40 days" video (built from `working/video-brief-sep26-strategy.md`). Vanilla-JS engine, step reveals, live days-to-exam counter. See its README for controls. |
 
 ### Shared (not copied here)
 
