@@ -325,9 +325,14 @@ Kahan rakha hai : ________</div>
     html: `
       <div class="s-deadline">
         <div class="dl-date step" data-step="1" data-fx="scale">15 JULY</div>
-        <div class="dl-check step" data-step="2">3 Bootis &#10003; &nbsp; har chapter &#10003; &nbsp; har subject &#10003;</div>
-        <div class="dl-level step" data-step="3">&#9733; LEVEL 1 CLEARED &#9733;</div>
-        <div class="dl-warn step" data-step="4" data-fx="flash">Iske baad: NO NEW MATERIAL. ZERO. STRICTLY.</div>
+        <div class="dl-checks">
+          <div class="dl-c step" data-step="2"><span>&#10003;</span>Boundary likhi hui — har subject, har chapter</div>
+          <div class="dl-c step" data-step="3"><span>&#10003;</span>Anchor Material + Layer 1 &amp; 2 — ready aur documented (physical ya digital)</div>
+          <div class="dl-c step" data-step="4"><span>&#10003;</span>3 Sanjeevani Bootis — har chapter, har subject</div>
+        </div>
+        <div class="dl-then step" data-step="5">Tab — aur sirf tab —</div>
+        <div class="dl-level step" data-step="6">&#9733; LEVEL 1 CLEARED &#9733;</div>
+        <div class="dl-warn step" data-step="7" data-fx="flash">Iske baad: NO NEW MATERIAL. ZERO. STRICTLY.</div>
       </div>
     `
   }

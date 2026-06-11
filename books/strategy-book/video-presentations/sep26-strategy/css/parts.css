@@ -589,16 +589,36 @@
   letter-spacing: -4px;
   color: var(--b4);
 }
-.s-deadline .dl-check {
-  font: 700 44px/1.4 var(--font-head);
-  color: var(--dark-text);
+.s-deadline .dl-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
   margin-top: 50px;
+  align-items: flex-start;
+}
+.s-deadline .dl-c {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font: 700 36px/1.35 var(--font-head);
+  color: var(--dark-text);
+  text-align: left;
+}
+.s-deadline .dl-c span {
+  color: var(--brand-green-soft);
+  font-size: 42px;
+  flex: 0 0 auto;
+}
+.s-deadline .dl-then {
+  font: 600 30px/1 var(--font-body);
+  color: var(--dark-dim);
+  margin-top: 46px;
 }
 .s-deadline .dl-level {
   font: 900 54px/1 var(--font-head);
   letter-spacing: 4px;
   color: var(--brand-green-soft);
-  margin-top: 44px;
+  margin-top: 22px;
 }
 .s-deadline .dl-warn {
   font: 900 54px/1.3 var(--font-head);
@@ -751,3 +771,100 @@
   text-align: center;
 }
 .cta-final span { display: block; color: var(--b3); }
+
+/* ============================================================
+   SLIDE 24B — MOCK ANALYSIS PROTOCOL
+   ============================================================ */
+
+.s-mxa { width: 1520px; }
+.s-mxa .mx-when { margin-bottom: 54px; }
+.s-mxa .mx-when b { color: var(--b4); }
+
+.mx-rows { display: flex; flex-direction: column; gap: 28px; }
+.mx-row {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  font: 700 34px/1.35 var(--font-head);
+  text-align: left;
+  background: var(--light-bg-2);
+  border: 2px solid #E3DFD6;
+  border-radius: 14px;
+  padding: 26px 40px;
+}
+.mx-row span { color: var(--light-dim); flex: 1; }
+.mx-row i { font-style: normal; color: var(--b4); flex: 0 0 auto; }
+.mx-row b { flex: 0 0 auto; }
+.mx-row .mx-gold { color: var(--gold); }
+.mx-row .mx-blue { color: var(--brand-blue); }
+
+.mx-note {
+  margin-top: 50px;
+  font: 600 32px/1.6 var(--font-body);
+  color: var(--light-text);
+  text-align: left;
+}
+.mx-note b { color: var(--b4); }
+
+/* ============================================================
+   SLIDE 24C — DISCIPLINE BRIDGE
+   ============================================================ */
+
+.s-disc .di-q {
+  font: 700 44px/1.4 var(--font-head);
+  color: var(--dark-dim);
+}
+.s-disc .di-q b { color: var(--dark-text); }
+
+.s-disc .di-main {
+  font: 900 92px/1.15 var(--font-head);
+  color: var(--dark-text);
+  margin-top: 44px;
+}
+.s-disc .di-main b { color: var(--brand-green-soft); }
+.s-disc .di-main span {
+  display: block;
+  font: 700 44px/1.3 var(--font-head);
+  color: var(--dark-dim);
+  margin-top: 12px;
+}
+
+.s-disc .di-line {
+  font: 700 44px/1.4 var(--font-head);
+  color: var(--dark-text);
+  margin-top: 44px;
+}
+.s-disc .di-line b { color: var(--brand-blue-soft); }
+
+.s-disc .di-nots {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 40px;
+  align-items: flex-start;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+.s-disc .di-not {
+  font: 600 34px/1.4 var(--font-head);
+  color: var(--dark-dim);
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.s-disc .di-not .x { color: var(--red); font-weight: 900; }
+
+.s-disc .di-yes {
+  font: 600 36px/1.5 var(--font-body);
+  color: var(--dark-text);
+  margin-top: 40px;
+}
+.s-disc .di-yes b { color: var(--brand-green-soft); }
+
+.s-disc .di-atomic {
+  font: 600 34px/1.7 var(--font-body);
+  color: var(--dark-dim);
+  margin-top: 44px;
+}
+.s-disc .di-atomic b { color: var(--gold); }
