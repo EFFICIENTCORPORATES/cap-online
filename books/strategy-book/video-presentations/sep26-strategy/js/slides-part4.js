@@ -21,7 +21,7 @@ SLIDES.push(
         </div>
         <div class="b4-note step" data-step="5">
           45 din ka mission: <b>boundary pe poora bharosa</b> + Error Register ka
-          <b>ek full pass</b>.
+          <b>ek full go through</b>.
         </div>
       </div>
     `
