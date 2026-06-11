@@ -213,7 +213,7 @@ it gets done.
 > If any answer is No — don't add it. Smaller, fully-revised boundary beats
 > bigger, half-covered boundary every single time.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "My personal rule: if I can't revise something in the last 24 hours before the
 > exam, it doesn't belong in my boundary. Whatever you promise yourself you'll
 > cover — you must be able to revise all of it the day before the exam. If you
@@ -331,7 +331,7 @@ These pages fold naturally into your Layer 2 when you build it.
 If your Layer 2 already captures all of this — you already have Booti 1.
 You're ahead. If not — build it now, chapter by chapter, while watching.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "The most valuable things a teacher says are the throwaway lines — 'students
 > always mess up this step,' 'this is where the examiner puts the trap,' 'write
 > your working note like this, not like that.' Those lines are gold. I wrote them
@@ -392,7 +392,7 @@ a mnemonic, whatever form makes it stick. Then paste:
 When a sheet's content is genuinely locked — you know it without looking —
 take it down. Put up the next weak one.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I pasted the GST place-of-supply rules in the hallway I walked through to eat.
 > The front window was covered with mnemonics and rules. On both sides of the
 > mirror where I brushed, I kept the errors I made most and the concepts that
@@ -903,7 +903,7 @@ two things: your **sequence**, and roughly how long each question gets.
 > Pencil the time plan lightly on the question paper — "Q1: 25 min, Q2: 20 min"
 > — so you're executing a plan, not improvising mid-paper.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I always used the reading time to pencil-scan the whole paper and see exactly
 > what's asked. The first job is to fix the sequence. Then I'd open with the
 > question I was most confident in — a strong first answer sets the impression
@@ -1092,7 +1092,7 @@ on how to use AI for revision is in the First 45 Days section and in Strategy 6
 7–8 hours. Every night. Your brain reinforces everything you studied while you
 sleep. Cut sleep and you cut the reinforcement.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I have personally tried polyphasic sleep and multiple other sleep strategies.
 > Nothing worked and nothing was required. The only thing that worked: a fixed
 > sleep timing, without fail, and 6 hours fixed sleep at night plus a 20–30
@@ -1124,7 +1124,7 @@ and your eyes start closing inside twenty minutes. Eat lighter before study
 blocks. Food that keeps you sharp: sprouts, roasted chana, curd, banana, peanuts,
 soaked almonds, paneer, makhana, light poha or idli.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I never drank coffee or tea until my first year of articleship. My drinks during
 > preparation were water, lemon-salt water, jeera-lemon-salt water, and coconut
 > water. Simple. Cheap. Worked."
@@ -1142,7 +1142,7 @@ on someone else's progress.
 > - When family asks how prep is going, one answer: "On track." Don't elaborate.
 > - When someone posts a celebration, reply "Congratulations." Then move on.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "In my Foundation internal exams, there was a girl who beat me about three times.
 > I was the first to congratulate her every single time. Only I know how that felt.
 > But I never let it turn into anything ugly inside me. She became one of my best
@@ -1170,7 +1170,7 @@ whole day. What happened, what you studied, what you understood. Not judging
 it good or bad. Just recalling, in detail. You're training your brain's recall
 muscle — the exact muscle the exam tests.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "If you overthink like I do, here's my hack. Pick the one concept or problem you
 > didn't understand that day and just turn it over in your head — no Google, no
 > notes, only your brain — until you fall asleep. I solved a lot of maths problems
@@ -1214,7 +1214,7 @@ This isn't punishment. It's deciding in advance that the fun follows the work.
 
 Continue at least one hobby through these preparation months.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "Keep a hobby. Otherwise the articleship interview gets very boring — mine was
 > quite boring. Lolzz" (Said with a smile. But he's not fully joking.)
 
@@ -1230,7 +1230,7 @@ register entry you write, every Sanjeevani Booti you complete — that's XP earn
 
 The goal isn't to *survive* the preparation. It's to *play* it well.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I always kept a mental scoreboard. Not comparing with anyone else — just
 > against my own yesterday. Did I do more today? Did I understand something
 > I didn't understand last week? That small internal game kept the energy alive

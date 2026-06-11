@@ -45,7 +45,6 @@ GREY   = "#EEF1F4"
 
 # Known component markers (all-caps, may contain space / ? / — / -)
 COMPONENT_MARKERS = {
-    "AUTHOR SAYS",
     "HOW TO DO THIS",
     "STARTING LATE? BARE MINIMUM",
     "END GOAL",
@@ -434,18 +433,6 @@ class Renderer:
         title   = t.get('title', '')
         content = self._component_body(t.get('content_lines', []))
 
-        if marker == 'AUTHOR SAYS':
-            return (
-                f'<div class="comp author-says" style="background:{self.color_15};'
-                f'border-left:4px solid {self.color}">'
-                f'<div class="comp-head">'
-                f'<span class="avatar" style="background:{self.color}">P</span>'
-                f'<span class="comp-label" style="color:{self.color}">AUTHOR SAYS</span>'
-                f'</div>'
-                f'<div class="comp-body handwritten">{content}</div>'
-                f'</div>'
-            )
-
         if marker == 'HOW TO DO THIS':
             return (
                 f'<div class="comp how-to" style="border-left:4px solid {self.color}">'
@@ -542,7 +529,7 @@ class Renderer:
                 f'<span class="comp-icon">💡</span>'
                 f'<span class="comp-label" style="color:{self.color}">PRANAV\'S TIP</span>'
                 f'</div>'
-                f'<div class="comp-body">{content}</div>'
+                f'<div class="comp-body handwritten">{content}</div>'
                 f'</div>'
             )
 
@@ -958,7 +945,7 @@ ul.comp-list, ol.comp-list {
 }
 .comp-list li { margin-bottom: 1.5mm; }
 
-/* ── Author Says ── */
+/* ── Pranav's Tip (handwritten style, formerly Author Says) ── */
 .author-says { border-radius: 6pt; }
 .handwritten, .handwritten p {
   font-family: var(--hand-f) !important;

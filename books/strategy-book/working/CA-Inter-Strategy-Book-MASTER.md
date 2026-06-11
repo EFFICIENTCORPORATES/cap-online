@@ -259,12 +259,12 @@ argue works. The full playbook on how and for what purpose to use AI is in the "
 next day work. Your brain reinforces everything you studied while you sleep. Cut sleep
 and you cut the reinforcement.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > I have personally tried the "Polyphasic Sleep", a famous sleep strategy by "Leonardo da Vinci". I tried multiple other sleep strategy like  Dymaxion Schedule , The Everyman Schedule, Triphasic Schedule, but trust me , NOTHING WORKS, and NEITHER is required. The only strategy worked for me is : A Fixed Sleep timing , without fail, and 6 hours fixed sleep at night (10:00 pm to 4:00 am) and a 20-30 mins nap during the day.
 >
 > While I agree, timings may differ for everyone, but ensure minimum 6 hours and maximum 8 hours of sleep is NON NEGOTIABLE.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > There is one more thing I noticed — and I think almost everyone experiences this. When you wake up after a good night of sleep, there is a first natural wakeup that happens. In that moment, your mind is genuinely fresh. Sharp. You feel ready. Now here is what almost every student does: they look at the time, decide it is "too early," and go back to sleep for one more hour. When they wake up that second time — even though they technically slept more — they feel more tired, more sluggish, harder to get going.
 >
 > The sleep was extra. The freshness is gone. That first wakeup — that is your real window. The moment you notice it, get up. Don't negotiate.
@@ -318,7 +318,7 @@ idli. , all easy on a student's budget, all kinder to your brain than
 a plate of oily or Junk foods. Keep the heavy, oily stuff for after the day's targets —
 or for an off day.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I never drank coffee or tea until my first year of articleship. My drinks during
 > preparation were water, lemon-salt water, jeera-lemon-salt water, and coconut
 > water. Simple. Cheap. Worked."
@@ -337,7 +337,7 @@ syllabus is further along, no doing the maths on someone else's progress.
 > - When someone posts a celebration, reply "Congratulations, happy for you." Then
 >   move on, no matter what you feel inside.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "In my Foundation (Formerly CPT) internal exams, there was a girl who beat me about three times. I was
 > the first to congratulate her every single time she came first and I came fifth
 > in Law. Only I know how that felt. But I never let it turn into anything ugly
@@ -381,7 +381,7 @@ down, eyes closed, and replay your whole day. What happened, what you studied,
 what you understood. Not judging it good or bad. Just recalling, in detail.
 You're training your brain's recall muscle — the exact muscle the exam tests.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "If you overthink like I do, here's my hack. Pick the one concept or problem you
 > didn't understand that day and just turn it over in your head — no Google, no
 > notes, only your brain — until you fall asleep. Believe me, I solved a lot of
@@ -445,7 +445,7 @@ work. You stay the one who controls your schedule.
 Continue on to at least one hobby through these preparation months — guitar, singing, sketching,
 whatever it is.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "Keep a hobby. Otherwise the articleship interview gets very boring — mine was
 > quite boring. Lolzz" (Said with a smile. But he's not fully joking.)
 
@@ -461,7 +461,7 @@ register entry you write, every Sanjeevani Booti you complete — that's XP earn
 
 The goal isn't to *survive* the preparation. It's to *play* it well.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I always kept a mental scoreboard. Not comparing with anyone else — just against
 > my own yesterday. Did I do more today? Did I understand something I didn't
 > understand last week? That small internal game kept the energy alive across months.
@@ -761,13 +761,13 @@ something just because it's hard. In or out — decide. Once it's in, it gets do
 > is no prize for owning 10,000 questions if you can only revise 2,000. A smaller,
 > fully-revised boundary beats a bigger, half-covered one every single time.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "My personal rule: if I can't revise something in the last 24 hours before the
 > exam, it doesn't belong in my boundary. Whatever you promise yourself you'll
 > cover — you must be able to revise all of it the day before the exam. If you
 > can't, your boundary is too big."
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "Say you fixed 5 years of RTP/MTP/PYQ, and you bought a question bank that brags
 > about 15 years of questions. Finish your boundary first — all of it. Only if you
 > still feel short, add one more year at a time, going backwards. And update your
@@ -1031,7 +1031,7 @@ While classes are on, it will constantly feel like you don't remember things, or
 you've already forgotten a chapter, or there's no way you'll hold all this by exam
 day. That feeling is normal. It happens to everyone.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I got that anxiety many times during IPCC — this fear that I'd forget everything.
 > It's normal. Your only job during classes is to understand the concept and store
 > it somewhere you can return to. Don't carry the pressure of how you'll remember
@@ -1056,7 +1056,7 @@ to walk in with your brain primed.
 
 ### Strategy 2 — Undivided Attention in Class [ALL]
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "Reach class at least 10 minutes early. If it's a live online batch, join 10
 > minutes before. If it's recorded — still fix a dedicated class time and treat it
 > exactly like an offline class. And hit your minimum study hours every day. Don't
@@ -1069,7 +1069,7 @@ a live class doesn't. The student who pauses and tries first *learns the questio
 the one who only watches it being solved learns to *recognise* it — and that
 recognition is gone by the next day.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "Completing every class, end to end, is one of the hardest things in this whole
 > journey. I had so many days I felt sleepy in class, or just didn't want to open
 > the laptop. On those days I reminded myself: you get about 270 days, and you're
@@ -1171,7 +1171,7 @@ same slot every day. Solve each other's doubts, check in, stay accountable. It a
 kills the isolation of long prep months. One real, consistent partner — not a noisy
 group of ten.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "During my preparation I had one friend, and we had a fixed time to call every
 > evening after classes. Mostly he'd bring his doubts and I'd solve them — and
 > teaching him like that locked the concepts in for me too."
@@ -1215,7 +1215,7 @@ energy and focus higher than grinding one subject for 8 hours. Try it. If it
 improves your output, keep it. If a different rhythm works better for you, use
 that. This is a suggestion, not a rule.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "When you study — morning, evening, or night — is a personal choice. I'm a fan of
 > 5 AM. That freshness is unmatchable. But find your own window."
 
@@ -1228,13 +1228,13 @@ build mnemonics early — don't wait for revision.
 
 But mnemonics have a trap.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "The biggest problem with mnemonics is they grow fast. A month before the exam
 > you're drowning in them, and they start clashing across chapters and even across
 > subjects. So always revise a mnemonic together with the question hint or the topic
 > it belongs to — never floating on its own."
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "In an Audit mock test, I pulled up the wrong mnemonic for a question. The entire
 > answer came out wrong. Zero marks. That's what a stray mnemonic does."
 
@@ -1284,7 +1284,7 @@ exam handwriting and speed get built.** The student who only reads and watches
 solutions reaches the hall with slow, messy writing and runs out of time. So when
 you write, write properly — keep it legible *and* push your speed, every session.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "After six months of pure MCQ practice during CPT, my handwriting went from worse to
 > worst — I barely wrote anything those months. Going into IPCC that was my biggest
 > fear, because IPCC is all writing. So I made it a point to write a lot, and to
@@ -1354,7 +1354,7 @@ A4 flag-sheet into your answer — taped on one side only, so nothing is hidden 
 it never falls off — marking whether that question was straightforward or had a
 real concept/trick worth rechecking. (These are A4 flags, not little sticky tabs.)
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "This register is my single favourite strategy across everything in this book.
 > The day I started maintaining it properly during IPCC, my mock scores started
 > climbing. Because I stopped making the same mistakes twice. Every error I made
@@ -1434,7 +1434,7 @@ These golden nugget pages fold naturally into your Layer 2 when you build it in
 Bucket 3. If your Layer 2 already captures all of this — you already have this
 register. You're ahead.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "The most valuable things a teacher says are the throwaway lines — 'students
 > always mess up this step,' 'this is where the examiner puts the trap,' 'write
 > your working note like this, not like that.' Those lines are gold. I wrote them
@@ -1480,7 +1480,7 @@ fixed.
 > 5. **Error register / tricky questions / important questions marked?** If not,
 >    use a faculty's important-question marking to build your recheck list.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "When classes end, you'll find some chapters you feel you never understood, and
 > others you feel you've completely forgotten. This is normal — it happens to every
 > student. Just trust this: you understood it once, you will understand it again."
@@ -1589,7 +1589,7 @@ of the many.
 > Sit for at least one full examination-mode simulation in this bucket — a
 > complete MTP, 3 hours, 15-minute reading time, written exactly like the real exam.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I gave an Audit MTP and scored 32. It forced me to rebuild my whole audit
 > revision — I added one extra hour every day purely on concept clarity and fixing
 > mnemonics, instead of just rote-learning mnemonics and bolting them onto
@@ -1652,7 +1652,7 @@ energy on re-orientation and feels like variety while delivering nothing.
 
 One thing students get very anxious about during this phase: "I haven't touched Subject X in three weeks. I must have forgotten everything." That anxiety is almost always wrong. You documented it. It's in your Layer 1. It's in your Sanjeevani Bootis. It will come back when you return to it.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "During IPCC I had 7 subjects. After my first full revision was done, I used to
 > go one subject per day — rotating through all 7. Just one day each. The
 > important thing is: once your first revision is complete, you should not be
@@ -1699,7 +1699,7 @@ them. It's restarting fast. One missed day is a missed day, not a failed attempt
 >   Never confuse the two.
 > ```
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > [STRUCTURE ONLY — author to add a real, practical insight here: a specific time he
 > fell off track during CPT/IPCC and exactly how he restarted. Keep it concrete, not
 > motivational.]
@@ -1756,7 +1756,7 @@ the dining table, the hallway, the window, the mirror you brush at. You'll end u
 revising them a hundred times without ever "sitting down to revise." The moment a
 sheet's content is truly locked, take it down and put up the next weak one.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I pasted the GST place-of-supply rules in the hallway I walked through to eat. The
 > front window was covered with mnemonics and rules. On both sides of the mirror
 > where I brushed, I kept the errors I made most and the concepts that confused me
@@ -1775,7 +1775,7 @@ entries, and the adjustment sequence come out automatically, without thinking.
 That's muscle memory, not recall. Keep it narrow: this is for the 2–3 monsters per
 subject, not the whole question bank.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I solved 2 Amalgamation questions five times each — just so the whole thing would
 > come out right in the first shot in the exam. Some questions genuinely deserve that
 > special treatment. Most don't — so don't turn this into an excuse to re-solve
@@ -1872,7 +1872,7 @@ This bound book is what you carry into the exam hall.
 >   Tabular form. Nothing else.
 > ```
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "During my second revision of Audit, I found that I had made so many mnemonics
 > that I remembered the mnemonics but had completely forgotten which question each
 > one was for. I could recite the letters but couldn't tell you what topic they
@@ -1983,7 +1983,7 @@ At least 2 of your mocks must be in complete exam mode — same start time as th
 >            Do not wait until the next morning.
 > ```
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I had a habit of getting my sister to check my mock tests immediately after I
 > gave them. No gap. The day she wasn't available, I sat with the suggested answers
 > myself, right then — comparing my answers to the official solution line by line.
@@ -2174,7 +2174,7 @@ minutes change how the next 3 hours go.
 > Pencil the time plan lightly on the question paper — "Q1: 25 min,
 > Q2: 20 min..." — so you're executing a plan, not improvising mid-paper.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "I always used the reading time to first pencil-scan the whole paper and see exactly
 > what's asked — it's easier in theory papers, harder in the practical ones. The
 > first job is to fix the sequence; most of those ~12 minutes go in reading and
@@ -2207,7 +2207,7 @@ And if any MCQ is genuinely taking too long — mark it, move to the next one. D
   wrong options are wrong, so you eliminate fast.
 - No negative marking — never leave an MCQ blank. A reasoned guess beats an empty box.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "Keep your watch on the desk in front of you — do not wear it on your wrist.
 > Glancing at the desk is faster and less disruptive than tilting your wrist mid-sentence.
 > The time is always visible, always in your line of sight. Apply the same rule in
@@ -2331,7 +2331,7 @@ Walk out and immediately do one physical thing: **remove all the books, notes, a
 
 Don't discuss the paper with anyone. Finding out that someone wrote something differently only creates anxiety you cannot act on. There is no benefit. There is only cost.
 
-> **AUTHOR SAYS:**
+> **PRANAV'S TIP:**
 > "The moment I came out of a paper, the first thing I did — every single time —
 > was physically remove all the material of that subject and put it in a different
 > room. It was a deliberate mental signal: that chapter is closed. My mind is
