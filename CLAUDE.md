@@ -33,14 +33,15 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 
 | Folder | Purpose |
 |--------|---------|
-| `books/strategy-book/` | **Pillar 1** — Exam Strategy book (general prep + author journey + exam-specific strategy). `drafts/ working/ final/` |
+| `books/strategy-book/` | **Pillar 1** — Exam Strategy book (general + journey + exam-specific). `sources/` (research, skills, external reports), `design/` (spec + HTML build templates), `working/` (MASTER + component-index), `video-presentations/`, `drafts/ final/` |
 | `books/concept-book/` | **Pillar 2** — Advanced Accounts **Concept Book** (this IS the Adv-Accounts book): `chapter-zero/ characters/ chapters/ story-vignettes/ revision-material/` |
 | `books/about-author/` | Shared author profile + journey (used by both books) |
 | `syllabus-engine/` | **Pillar 3** — ICAI material → JSON/MD. `data/ scripts/ html-source/` |
 | `question-bank/` | **Pillar 4** — non-study-material questions (7–10 yrs): `pyq/ mtp/ rtp/ solutions/` |
 | `mcq-platform/` | **Pillar 5** — AI MCQs in a DBMS, Cloudflare online tests: `question-generation/ database/ cloudflare-app/` |
 | `telegram/` | **Pillar 6** — study bots + their source docs: `bots/ source-docs/` |
-| `content/` | Creative studio: `assets/` (raw-footage, intros-outros, green-screen, b-roll, music-sfx, brand-kit, thumbnails, flyers), `social/{personal,vc-gurukul}`, `calendar/`, `scripts/`, `motivation/`, `competitor-analysis/`, `ai-content-pipeline/`. See `content/README.md`. |
+| `student-toolkit/` | Standalone student tools (e.g. exam date calculator). A subset of student-facing utilities; the Telegram bots may also surface these. |
+| `content/` | Creative studio: `assets/` (raw-footage, intros-outros, green-screen, b-roll, music-sfx, brand-kit, thumbnails, flyers), `social/{personal,vc-gurukul}`, `calendar/`, `scripts/`, `motivation/` (daily-quote media library), `competitor-analysis/`, `ai-content-pipeline/`. See `content/README.md`. |
 | `vc-gurukul/` | Institute side (NOT content brand): `management-discussions/ events/ batch-july-2025/ contracts/` |
 | `materials/` | `icai-source/` (study material, PYQ/MTP/RTP — **gitignored/local**) + `reference/` (incl. `samples/`) |
 | `obs-setup/` | Recording/streaming setup: `assets/` (OBS wallpapers), `recordings/` (output), `tools/` |

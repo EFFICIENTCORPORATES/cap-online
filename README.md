@@ -83,13 +83,14 @@ cap-online/
 ├── photo-gallery/             ← originals/ (gitignored) + index.md
 ├── materials/                 ← icai-source/ (gitignored) + reference/ (incl. samples/)
 ├── planning/                  ← future roadmap, to-purchase, execution notes
-├── preparations/              ← personal prep notes, lecture plans, batch ops
+├── preparations/              ← personal prep notes, lecture plans, class ops
 │   ├── cainter-batch-operations.html  ← interactive class ops (segment library, week planner, checklists)
 │   ├── standup-teaching.md            ← Standup Teaching philosophy
 │   └── segment-library/               ← saved content for each segment type (flat, one folder per type)
 │       ├── standup-moments/  epic-stories/  personal-stories/  exam-war-stories/
 │       ├── ai-updates/  financial-news/  mental-side/  career-cv/
 │       └── famous-cas/  myth-vs-reality/  accounting-in-news/
+├── student-toolkit/            ← standalone student tools (e.g. exam date calculator)
 │
 └── tools/                     ← admin scripts + processing utilities
     ├── health_check.py · file_index.py · gitignore_audit.py
