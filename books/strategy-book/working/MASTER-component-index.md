@@ -2,28 +2,29 @@
 ## CA-Inter-Strategy-Book-MASTER.md
 
 Generated: 2026-06-10 · Normalization pass on the working master draft.
+Last updated: 2026-06-10 · Added IF column; corrected AS (20→30), WA (3→1), strategy counts (94→91), PRANAV'S TIP (4→3); added IMPLEMENTATION FRAMEWORK to key and global summary.
 
 ---
 
 ## A. Per-Section Table
 
-Key: AS = AUTHOR SAYS · HTD = HOW TO DO THIS · SL = STARTING LATE? BARE MINIMUM · EG = END GOAL · RO = RANK ONLY · FI = FILL-IN · DI = DIAGRAM · EX = EXAMPLE · WA = WARNING
+Key: AS = AUTHOR SAYS · HTD = HOW TO DO THIS · SL = STARTING LATE? BARE MINIMUM · EG = END GOAL · RO = RANK ONLY · FI = FILL-IN · DI = DIAGRAM · EX = EXAMPLE · WA = WARNING · PT = PRANAV'S TIP · IF = IMPLEMENTATION FRAMEWORK
 
-| Section | Strategies (tag) | AS | HTD | SL | EG | RO | FI | DI | EX | WA |
-|---------|------------------|----|-----|----|----|----|----|----|----|-----|
-| FRONT MATTER | — | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| ROUTING PAGE | — | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
-| BUCKET 0 | 12 × [ALL] | 5 | 3 | 0 | 0 | 1 | 0 | 1 | 0 | 0 |
-| BUCKET 1 | 9 × [ALL] | 2 | 3 | 0 | 1 | 2 | 0 | 0 | 0 | 0 |
-| BUCKET 2 | 17 × [ALL] | 8 | 3 | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
-| BUCKET 3 | 10 × [ALL], 1 × [RANK], 1 × [ALL], 1 × [RANK] | 5 | 2 | 1 | 1 | 1 | 0 | 0 | 0 | 0 |
-| BUCKET 4 | 10 × [ALL] | 0 | 1 | 1 | 1 | 2 | 0 | 0 | 0 | 0 |
-| BUCKET 5 | 17 × [ALL] | 2 | 0 | 1 | 1 | 2 | 0 | 0 | 0 | 0 |
-| BUCKET 6 | 6 × [ALL] (Tk-A), 4 × [ALL] (Tk-B) | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
-| AI SECTION | — | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| EMERGENCY SECTION | — | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| PERSONAL PAGES | — | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 |
-| AUTHOR'S JOURNEY | — | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Section | Strategies (tag) | AS | IF | HTD | SL | EG | RO | FI | DI | EX | WA |
+|---------|------------------|----|----|-----|----|----|----|----|----|----|-----|
+| FRONT MATTER | — | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| ROUTING PAGE | — | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
+| BUCKET 0 | 13 × [ALL] | 7 | 3 | 3 | 0 | 0 | 1 | 0 | 1 | 0 | 0 |
+| BUCKET 1 | 10 × [ALL] | 2 | 2 | 3 | 0 | 1 | 2 | 0 | 0 | 0 | 1 |
+| BUCKET 2 | 18 × [ALL] | 10 | 6 | 3 | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| BUCKET 3 | 11 × [ALL], 2 × [RANK] | 6 | 4 | 2 | 1 | 1 | 1 | 0 | 0 | 0 | 0 |
+| BUCKET 4 | 10 × [ALL] | 2 | 3 | 1 | 1 | 1 | 2 | 0 | 0 | 0 | 0 |
+| BUCKET 5 | 17 × [ALL] | 3 | 3 | 0 | 1 | 1 | 2 | 0 | 0 | 0 | 0 |
+| BUCKET 6 | 6 × [ALL] (Tk-A), 4 × [ALL] (Tk-B) | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
+| AI SECTION | — | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| EMERGENCY SECTION | — | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| PERSONAL PAGES | — | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 |
+| AUTHOR'S JOURNEY | — | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
 **Strategy detail (tag + title) per section — Bucket 0:**
 
@@ -41,6 +42,7 @@ Key: AS = AUTHOR SAYS · HTD = HOW TO DO THIS · SL = STARTING LATE? BARE MINIMU
 | 10 | Daily Targets, Not a Daily Lecture | [ALL] |
 | 11 | Earn Your Breaks | [ALL] |
 | 12 | Keep a Hobby | [ALL] |
+| 13 | Make It a Game | [ALL] |
 
 **Bucket 1:**
 
@@ -55,6 +57,7 @@ Key: AS = AUTHOR SAYS · HTD = HOW TO DO THIS · SL = STARTING LATE? BARE MINIMU
 | 7 | Number Your Notebooks | [ALL] |
 | 8 | Chapter Weightage: Where Your Effort Goes | [ALL] |
 | 9 | Vision Board + Plans-After-Exams List | [ALL] |
+| 10 | Physical vs Digital: Know What Lives Where | [ALL] |
 
 **Bucket 2:**
 
@@ -77,6 +80,7 @@ Key: AS = AUTHOR SAYS · HTD = HOW TO DO THIS · SL = STARTING LATE? BARE MINIMU
 | 15 | The Error Register | [ALL] |
 | 16 | Practise MCQs from Day One | [ALL] |
 | 17 | Test Yourself the Same Day | [ALL] |
+| 18 | The Golden Nuggets Register | [ALL] |
 
 **Bucket 3:**
 
@@ -159,19 +163,21 @@ Key: AS = AUTHOR SAYS · HTD = HOW TO DO THIS · SL = STARTING LATE? BARE MINIMU
 
 | Component Type | Total Count |
 |----------------|-------------|
-| AUTHOR SAYS | 20 |
+| AUTHOR SAYS | 30 |
+| IMPLEMENTATION FRAMEWORK | 22 (content blocks; 23 grep hits includes the header definition) |
 | HOW TO DO THIS | 12 |
 | STARTING LATE? BARE MINIMUM | 4 |
 | END GOAL | 6 |
 | RANK ONLY | 8 |
 | FILL-IN | 5 |
 | DIAGRAM | 2 |
-| WARNING | 0 |
+| WARNING | 1 (B1 S10 — Layer 3 never digital) |
 | EXAMPLE | 0 |
 | CHECKLIST — END OF BUCKET | 0 |
-| **Total strategies** | **88** (B0:12, B1:9, B2:17, B3:13, B4:10, B5:17, B6:10) |
-| [ALL] strategies | 84 |
-| [RANK] strategies | 4 (B3 Strat 11, B3 Strat 13, plus 2 in development) |
+| PRANAV'S TIP | 3 (B1 S6, B1 S10, B4 S1) |
+| **Total strategies** | **91** (B0:13, B1:10, B2:18, B3:13, B4:10, B5:17, B6:10) |
+| [ALL] strategies | 89 |
+| [RANK] strategies | 2 (B3 S11 — Rate Your Chapters, B3 S13 — The 5-Times Rule) |
 
 ---
 

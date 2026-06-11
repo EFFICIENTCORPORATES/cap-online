@@ -55,6 +55,7 @@ COMPONENT_MARKERS = {
     "WARNING",
     "EXAMPLE",
     "CHECKLIST — END OF BUCKET",
+    "PRANAV'S TIP",
 }
 
 JOURNEY_LABELS  = ["0", "1", "2", "3", "4", "5", "6", "AI", "EMG"]
@@ -533,6 +534,18 @@ class Renderer:
                 f'</div>'
             )
 
+        if marker == "PRANAV'S TIP":
+            return (
+                f'<div class="comp pran-tip" style="background:#fffdf5;'
+                f'border-left:4px solid {self.color}">'
+                f'<div class="comp-head">'
+                f'<span class="comp-icon">💡</span>'
+                f'<span class="comp-label" style="color:{self.color}">PRANAV\'S TIP</span>'
+                f'</div>'
+                f'<div class="comp-body">{content}</div>'
+                f'</div>'
+            )
+
         # Generic fallback (NEEDS HUMAN DECISION items, NOTE:, FILTER: etc.)
         return (
             f'<div class="comp generic-callout" style="border-left:3px solid {self.color_40}">'
@@ -1005,6 +1018,9 @@ ul.comp-list, ol.comp-list {
   padding: 2.5mm 4mm;
   border-radius: 5pt 5pt 0 0;
 }
+
+/* ── PRANAV'S TIP ── */
+.pran-tip { border-radius: 4pt; }
 
 /* ── Generic callout ── */
 .generic-callout {

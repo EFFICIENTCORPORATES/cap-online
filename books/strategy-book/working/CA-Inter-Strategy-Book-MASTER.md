@@ -8,6 +8,8 @@
 >
 > **Tags:** [ALL] applies to everyone · [RANK] single-digit-rank addition ·
 > [REF] points to where the full content lives.
+> **IMPLEMENTATION FRAMEWORK** = a decision rule, formula, or template that solves
+> a specific implementation problem for that strategy. Countable for the front cover.
 >
 > **Tone rule enforced throughout:** Raw, direct, warm-underneath. Older brother,
 > not professor, not consultant, not Instagram coach. No gyaan. No lines stating
@@ -68,10 +70,16 @@ Content to cover:
   guide, which follows this book's structure and takes priority where it deviates.
 - It is written from the experience of clearing CA with AIR 1, twice. Lived, not
   theorised.
+- **What makes this book different from every other strategy book**: most strategy
+  books tell you WHAT to do. This book tells you HOW to actually do it. For every
+  strategy discussed, there is an implementation plan — a concrete decision rule,
+  formula, or template that answers the question every student actually has: *"I
+  understand the strategy. But when I sit down, how exactly do I execute it?"*
+  That implementation layer is what this book is built around.
 - **What this book is NOT, part two — and read this carefully:** this is not a
   motivation book. There is no emotional gyaan here, no "believe in yourself," no
   life advice. There are plenty of those, and they are not this. The only job of
-  this book is to lay out the next ~10 months in front of you so clearly that you
+  this book is to lay out the next ~9 months in front of you so clearly that you
   always know what to do next — and to turn that journey into something you can
   actually play and enjoy, like a game with levels. Because here is the one true
   thing: *warna time toh chala hi jayega. It won't wait for you. So let's walk it
@@ -256,6 +264,25 @@ and you cut the reinforcement.
 >
 > While I agree, timings may differ for everyone, but ensure minimum 6 hours and maximum 8 hours of sleep is NON NEGOTIABLE.
 
+> **AUTHOR SAYS:**
+> There is one more thing I noticed — and I think almost everyone experiences this. When you wake up after a good night of sleep, there is a first natural wakeup that happens. In that moment, your mind is genuinely fresh. Sharp. You feel ready. Now here is what almost every student does: they look at the time, decide it is "too early," and go back to sleep for one more hour. When they wake up that second time — even though they technically slept more — they feel more tired, more sluggish, harder to get going.
+>
+> The sleep was extra. The freshness is gone. That first wakeup — that is your real window. The moment you notice it, get up. Don't negotiate.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The Wake Anchor Rule:**
+> Fix one non-negotiable wake-up time. That time does not move, regardless of when you slept.
+> ```
+> Fixed wake time     → non-negotiable. Same every day.
+> Slept 30 min late?  → Still wake at the same time. Don't shift.
+> Missed sleep?       → Take a 20–30 min nap in the afternoon.
+>                       Do NOT sleep extra the next morning.
+>
+> When the first natural wakeup happens → GET UP.
+> Going back to sleep from that point gives you more hours, less freshness.
+> The first wakeup window is real. Use it.
+> ```
+
 ---
 
 ### Strategy 4 — Move Your Body [ALL]
@@ -324,9 +351,26 @@ Whatever is going on outside — family, a fight, a hard day , personal issues �
 study room. Not because it doesn't matter. Because you can't fix it in the next
 two hours, and you can definitely lose those two hours to it.
 
+This is not just a mindset trick. It is proven to work. When something is bothering you and you write it down completely — every detail, everything on your mind — your brain registers it as "noted and stored." The mental loop that keeps pulling your attention back to the problem quiets down. You're not suppressing the problem. You're parking it, on paper, so your mind can let go of it for now.
+
 > **HOW TO DO THIS:**
 > Before you sit, take 2 minutes. Write down what's bothering you on a scrap of
-> paper (Just a per, not a notebook). Write in Complete detail whatever comes to your mind. Fold it. It's parked and noted. Store it in paper and not your mind.  Open your notebook. Come back to the paper later.
+> paper (Just a paper, not a notebook). Write in complete detail whatever comes to your mind. Fold it. It's parked and noted. Store it on paper and not in your mind. Open your notebook. Come back to the paper later — that evening, or the next day. You must return to it. If you never return, the brain figures out that "parking" means abandoning, and the technique stops working.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 2-Minute Park Protocol:**
+> ```
+> Step 1  →  Sit down. Take one blank scrap of paper.
+> Step 2  →  Write everything. Speed matters more than structure. 2–5 minutes max.
+>            If you're still writing at 5 minutes → you're processing, not parking.
+>            Stop. Fold it.
+> Step 3  →  The fold is the physical signal: "parked."
+>            Do not skip the fold. It is part of the technique.
+> Step 4  →  Open your notebook. Begin studying.
+> Step 5  →  Return to the paper that evening or the next morning.
+>            Decide then: is action needed? If yes, schedule it.
+>            If no → tear up the paper. Done.
+> ```
 
 ---
 
@@ -366,6 +410,22 @@ Carry the misses forward honestly. Don't quietly delete them.
 finish the list beat twelve foggy hours that don't. Hours are the cost; finished
 targets are the result. Track the result.
 
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 4-Part Target Rule:**
+> A target is only valid if it passes all four parts. If any one is missing, it is not a target — it is a wish.
+> ```
+> [Chapter / Topic]  +  [Activity Type]  +  [Quantity]  +  [Completeness Signal]
+>
+> INVALID:  "Study Accounts"
+> INVALID:  "Finish Consolidation"
+> VALID:    "Consolidation — solve illustrations 5–9, write working notes,
+>            log errors. Done when all 5 are attempted and checked."
+> VALID:    "GST Ch 3 — read Layer 2 notes + attempt 10 MCQs from ICAI bank.
+>            Done when MCQs are checked and gaps are marked."
+> ```
+> The Completeness Signal is the most important part. It is the one sentence that
+> tells you when today's target is actually done. No signal = no target.
+
 > **RANK ONLY:**
 > Keep a weekly tally — hours, chapters, questions. Review every Sunday.
 > Adjust next week on data, not mood.
@@ -388,6 +448,24 @@ whatever it is.
 > **AUTHOR SAYS:**
 > "Keep a hobby. Otherwise the articleship interview gets very boring — mine was
 > quite boring. Lolzz" (Said with a smile. But he's not fully joking.)
+
+---
+
+### Strategy 13 — Make It a Game [ALL]
+
+Learning without a target is just punishment. Learning without fun is incomplete.
+
+Think of your preparation as a game with levels: each bucket you complete is a level cleared.
+Bucket 0 runs on every level. The exam is the Final Boss. Every chapter you nail, every error
+register entry you write, every Sanjeevani Booti you complete — that's XP earned.
+
+The goal isn't to *survive* the preparation. It's to *play* it well.
+
+> **AUTHOR SAYS:**
+> "I always kept a mental scoreboard. Not comparing with anyone else — just against
+> my own yesterday. Did I do more today? Did I understand something I didn't
+> understand last week? That small internal game kept the energy alive across months.
+> 'Princess ko bachana hai' — you just have to find your own princess."
 
 ---
 
@@ -485,6 +563,48 @@ it sticks.
 > On a page, for each subject, write: *"My anchor for [subject]
 > is [source]."* Put a date on it. That decision is now closed — you don't reopen it
 > every time a friend recommends a new book.
+
+This is trying to solve a very common CA student problem: **"Should I study from ICAI Study Material or from coaching notes?"**
+
+The answer: don't think of them as competing. Give each source a specific role.
+
+**Every source you use plays one of two roles:**
+
+**Role 1 — Understanding.** This source helps you understand the concept. Examples: your faculty's lectures, YouTube videos, coaching notes, AI explanations, mind maps. If a teacher explains overhead absorption in Cost Accounting with a brilliant factory story that finally makes it click — that teacher is serving Role 1. That's the role of the teacher.
+
+**Role 2 — Boundary.** This source tells you what ICAI expects: how deep to go, what language to use, what type of questions are asked. For CA exams, the ICAI Study Material is always the Boundary source. No substitute.
+
+**How they work together:**
+
+Suppose your teacher spends 30 minutes explaining a concept using cricket analogies, extra examples, and a shortcut formula. You finally understand it.
+
+Now ask: *"Can I locate this concept in the ICAI Study Material?"*
+
+- **YES** → The teacher did their job. Now anchor yourself back to the SM. "Oh, this was explaining Para 8.4 of the SM." The coaching source has served its Role 1 purpose.
+
+- **NO** → This content is outside your official boundary. It may help understanding. But consciously decide: *do I want to add this or not?* Don't silently carry extra material. Many students carry faculty shortcuts and extra formulas for months without knowing they are outside the SM. Then during revision, they don't know what is actually examinable. That confusion is expensive.
+
+**Why "Anchor Book"?** An anchor keeps a ship from drifting. You can travel anywhere to understand — faculty notes, videos, AI, reference books. But after understanding, you return to the anchor: *"Where does this sit inside the ICAI Study Material?"*
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 2-Role Test — use after every outside source:**
+> ```
+> After learning from any coaching notes, video, or AI:
+>
+> Ask: "Can I find this in the ICAI Study Material now that I understand it?"
+>
+>   YES → Good. Teacher served Role 1 (Understanding).
+>          Refer to SM going forward. Coaching source has done its job.
+>
+>   NO  → Stop. Consciously decide:
+>          Option A: Add it deliberately.
+>                    Write: "This is extra material beyond SM. I am choosing
+>                    to include it." Then include it in your boundary.
+>          Option B: Ignore it.
+>                    If it doesn't add marks and isn't in the boundary, let it go.
+>
+>   DEFAULT: Never silently carry extra material. In or out — decide.
+> ```
 
 ---
 
@@ -679,6 +799,22 @@ On your boundary page you can write where each thing lives:
 RTP, last 5 years → Drive > P01 > RTP folder
 ```
 
+> **PRANAV'S TIP:**
+> Inside each subject folder, keep three named subfolders — this makes it
+> impossible to misplace anything:
+> ```
+> 📁 Advanced Accounts (P01)
+>   📁 Layer 1 — Anchor Material
+>   📁 Layer 2 — Revision Notes
+>   📁 Layer 3 — Exam Day Prep
+> 📁 Law (P02)
+>   📁 Layer 1 — Anchor Material
+>   ...
+> ```
+> File names describe what's inside: `P01-Layer2-Consolidation-RevisionNotes`
+> beats `Chapter3-notes-final-v2` every time. 30 minutes to set this up once.
+> Saves you hours when you're searching under pressure.
+
 ---
 
 ### Strategy 7 — Number Your Notebooks [ALL]
@@ -709,16 +845,13 @@ When you cross-reference anywhere: "Refer P01-003, Page 42."
 
 ### Strategy 8 — Chapter Weightage: Where Your Effort Goes [ALL]
 
-For every subject, look at the last 5 years of attempts (about 10 papers). Count
-how many marks each chapter has carried. Then sort:
+For every subject, look at the last 6 attempts (about 12 papers). For each chapter, count the average marks it has carried per attempt. Then sort:
 
 ```
 A — heavy and almost always asked
 B — medium, comes often
 C — light, rare
 ```
-A rough way to draw the lines: a chapter contributing 50+ marks across 10 attempts
-is A; 20–50 is B; under 20 is C.
 
 Where your time goes:
 ```
@@ -729,8 +862,33 @@ C → ~10%
 This is not permission to skip C. You still cover everything in your boundary. It
 just tells you where depth matters most.
 
-The exact chapter weightages for your subject are in your faculty's guide. If you
-don't have one yet, count the marks yourself — one hour per subject. Do it.
+> **IMPLEMENTATION FRAMEWORK:**
+> **The A/B/C Classification Formula:**
+> ```
+> W  =  Average marks this chapter has carried across the last 6 ICAI attempts
+>
+>   IF W ≥ 5  →  Category A   (high weightage, must own it)
+>   IF W ≥ 2  →  Category B   (medium, solid preparation needed)
+>   ELSE      →  Category C   (low weightage, cover but don't over-invest)
+> ```
+> **How to calculate W for each chapter:**
+> 1. Get the last 6 attempts' question papers with solutions.
+> 2. For each question, identify the chapter it primarily tests.
+>    If a question spans two chapters, split the marks 50-50.
+> 3. Add up the marks for that chapter across all 6 attempts.
+> 4. Divide by 6. That is W.
+> 5. Apply the formula above.
+>
+> Chapter-wise PYQ analysis is also available through the VC Gurukul
+> Telegram Bot and website. If you want a ready-made analysis for any subject,
+> contact VC Gurukul — we will prepare it for you.
+>
+> **One override rule:** If your faculty marks a Cat C chapter as "important this attempt,"
+> bump it to Cat B for this attempt. Write the override on your boundary page with a reason.
+
+The chapter weightages for your specific subject are in your faculty's guide. If you
+don't have one yet, do the calculation yourself — one hour per subject. Do it once,
+write it down, and it stays fixed until your next attempt.
 
 ---
 
@@ -748,6 +906,42 @@ few minutes daily. Not decoration — daily reinforcement.
 skill you're putting off — write it down as the urge hits. This becomes your
 reward plan for Bucket 6. Knowing the reward is waiting makes saying "not now"
 feel like a choice, not a loss.
+
+---
+
+### Strategy 10 — Physical vs Digital: Know What Lives Where [ALL]
+
+Most students never make this decision consciously — and pay for it in a panic at
+the worst possible moment. Draw the line now, once, and never think about it again.
+
+**PHYSICAL — must be physical, no exceptions:**
+- Layer 1 notebooks (class notes, numbered P01-001 etc.)
+- Layer 2 revision notebook (one per subject)
+- Layer 3 bound book (your exam-centre book)
+- Error register (if kept in notebooks)
+- Vision Board + Dream Marksheet + Boundary page
+
+**DIGITAL — drive / phone:**
+- RTPs, MTPs, PYQs (downloaded PDFs)
+- Audio revision notes
+- AI conversations / MCQ HTML files
+- Scanned copies of important pages (backup only, never primary)
+
+> **WARNING:**
+> Layer 3 is NEVER digital as primary. It is your exam-centre book — the thing
+> you carry to the hall and flip through in the 20 minutes before the paper starts.
+> If your phone dies at 7 AM on exam day, your physical Layer 3 notebook doesn't
+> care. It is still there. Always physical. No exceptions.
+
+> **PRANAV'S TIP:**
+> Anything digital must live on cloud — not just on your phone. Google Drive gives
+> you 15 GB free. That is more than enough for every PDF, audio note, and document
+> in your boundary. If your phone is lost, broken, or water-damaged, log in from
+> any device and everything is still there.
+>
+> For heavy files — revision videos you've recorded, screen recordings — upload
+> to YouTube as **Unlisted** or **Private**. Keeps it off your phone storage,
+> accessible from anywhere, and protected. Never store video files only locally.
 
 ---
 ---
@@ -802,17 +996,35 @@ or needs to be tighter.
 
 **LAYER 3 — High-Level Revision Flow** · built later, in Bucket 4
 The glue. The thin top layer that lets you navigate a whole subject fast. You
-should be able to read your full Layer 3 for a subject in about 10 minutes
-(practical) or 15–20 minutes (theory/law). For practical subjects it's a
-chapter-wise revision flow pointing to sources; for theory, question hints +
-mnemonics; for law, section numbers, penalties, limits, and due dates in revision
-order. This is what you carry into the exam centre.
+should be able to read your full Layer 3 for a subject in about 30–40 minutes.
+For practical subjects it's a chapter-wise revision flow pointing to sources; for
+theory, question hints + mnemonics; for law, section numbers, penalties, limits,
+and due dates in revision order. This is what you carry into the exam centre.
 
 ```
 Layer 1  → built in classes   → raw, complete, messy
 Layer 2  → built in revision  → compressed, clean, references Layer 1
 Layer 3  → built 45 days out  → skeleton, fast, carried to exam
 ```
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The Layer Lock Rule — the most common structural mistake in this whole book:**
+> ```
+> BUCKET 2 (classes phase):  ZERO Layer 2 activity. Everything you write is Layer 1.
+>                             Raw. Messy. Incomplete in places. That is correct.
+>
+>   What you CAN do in Bucket 2:
+>   → Tag sections with ★  (meaning: this is good for Layer 2 later)
+>   → Flag pages:          "L2 — compress this"
+>   → Collect digital material (faculty summary PDFs, printed charts) in
+>     your Drive under the subject folder — these will feed Layer 2 in Bucket 3.
+>
+>   What you CANNOT do:
+>   → Build even one page of Layer 2 yet. Not one page.
+>
+> If your Bucket 2 notes look clean and organized → you've built Layer 2 too early.
+> Acceptable Layer 1 = dog-eared, scribbled, uneven. That is the right look.
+> ```
 
 **Important — about forgetting:**
 While classes are on, it will constantly feel like you don't remember things, or
@@ -872,6 +1084,24 @@ again — just capture the parts that aren't in the book: the teacher's stories,
 the real examples, the side-comments that make it click. Write keywords and logic,
 not dictation.
 
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 3-Question Class Filter:**
+> Before writing anything in class, ask these three questions in 3 seconds:
+> ```
+> Q1: Is this already in my anchor book, word-for-word or close?
+>     YES → Don't write. Put a star/dot in the book margin. Move on.
+>
+> Q2: Did the teacher say "this is important / students always get confused
+>     here / this is commonly asked / this is a trap"?
+>     YES → Write it. Verbatim if short, paraphrase if long.
+>
+> Q3: Is this a real example, story, cross-subject connection, or shortcut
+>     that is NOT in the book at all?
+>     YES → Write it. These are the most valuable class notes.
+>
+> DEFAULT: If none of the three fires → don't write. Be present instead.
+> ```
+
 ---
 
 ### Strategy 4 — Recall the Class on the Way Home [ALL]
@@ -896,6 +1126,22 @@ which. What matters: nothing inside your boundary is left un-captured.
 
 After reading a section, close the book and pull it back from memory. The struggle
 to retrieve is the learning. Re-reading feels productive and teaches little.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 25-5 Rhythm:**
+> ```
+> 25 min → Read / study the material.
+>  5 min → Close everything. Write or say — from memory only — what you just covered.
+>           Do NOT check yet. Let yourself struggle.
+>  2 min → Open notes. Check what you missed. Mark those gaps.
+> 25 min → Continue reading (or go deeper on the gaps you just found).
+> 10 min → Recall the full 50 minutes of material. Blind sheet or out-loud.
+> ```
+> The 5-minute recall is not optional. It is where the actual learning happens.
+> The 25 minutes of reading just loads the material. The 5-minute recall is
+> where it fires and gets stored.
+> The moments you mark as gaps are exactly what goes into your next Layer 1 note
+> and, later, your Layer 2.
 
 ---
 
@@ -929,6 +1175,29 @@ group of ten.
 > "During my preparation I had one friend, and we had a fixed time to call every
 > evening after classes. Mostly he'd bring his doubts and I'd solve them — and
 > teaching him like that locked the concepts in for me too."
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 3-Item Buddy Agenda:**
+> Every call follows this script and ends within 20 minutes. No exceptions.
+> ```
+> Item 1  (3 min)  — Yesterday's reckoning:
+>   "What was your target? Did you complete it? Yes / No / Partial."
+>   No explanation needed unless it was a genuine emergency.
+>
+> Item 2  (10 min) — One doubt, together:
+>   The person with the doubt explains it first.
+>   The other responds.
+>   If unresolved in 10 minutes → both mark it for faculty or AI follow-up.
+>   Move on. Don't let one doubt eat the whole call.
+>
+> Item 3  (3 min)  — Tomorrow's target:
+>   Say it out loud. The other person notes it down.
+>   This is the accountability lock.
+>
+> After the 3 items → call ends.
+> If you want to chat → separate call. Mixing them kills both.
+> The discipline of keeping it under 20 minutes is the entire point.
+> ```
 
 ---
 
@@ -1037,20 +1306,59 @@ Write an entry whenever:
 - the faculty flags "this is where students get confused"
 - you hit a question that has exactly that kind of trick or trap
 
-**Error entry format:**
-```
-Question No · Source · What I did · Why I did it · What was true · Why it was true
-```
-
-**Exam-trick entry format:**
-```
-Question No · The trick · What to ensure next time
-```
+> **IMPLEMENTATION FRAMEWORK:**
+> **Sanjeevani Booti 2 — The Error Register:**
+> This is the full format for every error entry. Keep it chapter-wise — either a
+> separate register or 3–4 pages at the end of each chapter in your notebook.
+>
+> ```
+> ERROR REGISTER — [Subject] — [Chapter]
+>
+> Question No:
+> Where is this question?   (book + page number / Drive file + page)
+> Where is the solution?    (same — exact location, not "somewhere in notes")
+> What was asked?           (one line — the core question)
+> Where did I mess up?      (the exact step, entry, or concept)
+> Why did I mess up?        (what I thought the treatment was vs. what it actually is)
+> What to ensure next time: (one actionable rule)
+> ```
+>
+> **For exam tricks and traps (faculty flags or pattern-based traps):**
+> ```
+> The trap:             (what the paper-setter does here)
+> What students do:     (the wrong path most take)
+> What to do instead:   (the correct approach, in one line)
+> ```
+>
+> **Three types of entries that qualify:**
+> ```
+> Type 1 — Wrong Answer:
+>   You got it wrong AND you understood the concept.
+>   (If you never understood it → understand first, THEN enter.)
+>   Skip pure arithmetic slips — write "arithmetic check" in margin.
+>
+> Type 2 — Lucky Right:
+>   You got it right but couldn't explain why.
+>   Always enter. A lucky right is a future wrong.
+>
+> Type 3 — Teacher Flag:
+>   Faculty said "this is a trap / students always lose marks here."
+>   Always enter, even if you got it right today.
+> ```
+>
+> The "why did I mess up" line is the most important field.
+> Writing it forces you to understand the gap — not just note that one exists.
 
 **While practising, flag your questions:** when you solve a question, tape a small
 A4 flag-sheet into your answer — taped on one side only, so nothing is hidden and
 it never falls off — marking whether that question was straightforward or had a
 real concept/trick worth rechecking. (These are A4 flags, not little sticky tabs.)
+
+> **AUTHOR SAYS:**
+> "This register is my single favourite strategy across everything in this book.
+> The day I started maintaining it properly during IPCC, my mock scores started
+> climbing. Because I stopped making the same mistakes twice. Every error I made
+> once, I made only once. The register is why."
 
 ---
 
@@ -1059,9 +1367,35 @@ real concept/trick worth rechecking. (These are A4 flags, not little sticky tabs
 For every topic you finish, have a plan for how you'll practise its MCQs. Don't
 leave MCQs for the end.
 
+The target for every student is to have solved at least 30 MCQs per chapter before the exam. This is the number that builds real pattern recognition — not 5, not 10. 30 is the target.
+
 > **HOW TO DO THIS:**
 > Ask your AI to generate an MCQ quiz as an HTML page that shows
 > the answers only at the end — so you actually test yourself instead of peeking.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **MCQ Quota by Category:**
+> ```
+> Category A chapter → 30 MCQs minimum before exam
+>   First 10  → within 48 hrs of finishing the chapter in class
+>   Next 10   → during 1st revision (Bucket 3)
+>   Final 10  → during 45-day phase (Bucket 4)
+>
+> Category B chapter → 15 MCQs minimum
+>   First 5   → within 48 hrs
+>   Next 5    → during 1st revision
+>   Final 5   → during 45-day phase
+>
+> Category C chapter → 5–8 MCQs (one focused session)
+>
+> Sources in priority order:
+>   1. ICAI MCQ booklet (official, highest priority — this is what is tested)
+>   2. Faculty MCQ bank
+>   3. AI-generated HTML quiz (supplement, not primary)
+> ```
+>
+> For daily MCQ practice with chapter-wise questions and auto-scoring, connect with
+> the VC Gurukul Admin to get access to the online MCQ practice platform.
 
 ---
 
@@ -1070,6 +1404,41 @@ leave MCQs for the end.
 Never finish a chapter without testing it the same day — Test Your Knowledge
 questions, ICAI practice questions, MCQs, or an AI quiz. Closing a chapter without
 testing it is leaving the door open for it to quietly leak out.
+
+---
+
+### Strategy 18 — The Golden Nuggets Register [ALL]
+
+This is separate from your Error Register. The Error Register captures mistakes
+you make *while practising*. The Golden Nuggets Register captures gold your
+faculty gives you *while teaching* — and these are two very different things.
+
+Every time you attend a class or watch a revision video — One Shot batch, Exam
+Oriented batch, or any faculty's lecture — your teacher is handing you coins.
+Important concepts framed the right way, the exact traps the examiner sets, how
+to structure your working notes for that chapter. Most students let this pass. You
+collect it.
+
+For every chapter, keep one page — in your notebook or a separate section — with
+three things:
+
+```
+GOLDEN NUGGETS — [Subject] — [Chapter]
+
+Important Concepts:    (with ref — "see P01-002, p.14" or "Layer 2, Chapter 3")
+Exam Tips:             (how to build working notes for this chapter; format tips)
+Examiner Tricks:       (what the paper-setter uses to trap students here)
+```
+
+These golden nugget pages fold naturally into your Layer 2 when you build it in
+Bucket 3. If your Layer 2 already captures all of this — you already have this
+register. You're ahead.
+
+> **AUTHOR SAYS:**
+> "The most valuable things a teacher says are the throwaway lines — 'students
+> always mess up this step,' 'this is where the examiner puts the trap,' 'write
+> your working note like this, not like that.' Those lines are gold. I wrote them
+> down the moment they were said. Half my edge in the exam came from those lines."
 
 ---
 ---
@@ -1148,6 +1517,24 @@ shorter so you can read it *faster* and understand *more per minute*. It does NO
 mean dropping chapters or shrinking your boundary to make the pile smaller. Every
 chapter in your boundary stays. You're summarising, not deleting.
 
+**Also — don't build Layer 2 in isolation.** As you go through your Layer 1 notes, you'll find places you had flagged with ★ or "L2 — compress this." Those flags are your starting material. Any summary PDFs or charts you collected in your digital vault during Bucket 2 also fold in here — check your Drive folder for each subject before starting that subject's Layer 2.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The Compression Time Test:**
+> After building Layer 2 for a chapter, time yourself reading it end to end.
+> ```
+>   Under 20 minutes?   → Layer 2 is right.
+>   Over 20 minutes?    → Too thick. Find pages where you re-wrote content that
+>                          already exists in Layer 1. Replace those pages with
+>                          a single pointer: "Refer P01-002, p.14"
+>   Under 5 minutes?    → Too thin. Missing critical content — exam tricks, error
+>                          patterns, key formats. Add those back.
+>
+>   Target range:  10–20 minutes per chapter, reading at revision pace.
+> ```
+> A Layer 2 that fails this test isn't wrong — it just needs one more pass.
+> Run the compression test after every chapter, not after the whole subject.
+
 ---
 
 ### Strategy 2 — Revise, Then Test — That's How You Cover RTP/MTP/PYQ [ALL]
@@ -1162,6 +1549,27 @@ ready before you start.
 > coverage happens — each chapter's revision is "done" only when its matching
 > past-paper questions have been attempted as the test. Revision and past-paper
 > coverage are the same activity, not two separate ones.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 3-Gate Revision Standard:**
+> A chapter revision is only complete when all three gates are cleared.
+> Miss any one gate and the revision does not count — carry it forward.
+> ```
+> Gate 1 — Notes:
+>   Layer 2 notes for that chapter fully read.
+>
+> Gate 2 — Test:
+>   At least one past-paper question attempted (RTP / MTP / PYQ):
+>   Cat A chapter  →  minimum 2–3 questions
+>   Cat B chapter  →  minimum 1 question
+>   Cat C chapter  →  1 MCQ set or 1 short question
+>
+> Gate 3 — Error:
+>   Error register for that chapter reviewed BEFORE sitting down.
+>   (Before — not after. It primes you for the exact traps that have caught you.)
+>
+> All three gates cleared = one complete revision. Not one. Not two. All three.
+> ```
 
 ---
 
@@ -1242,6 +1650,17 @@ find your own peak and guard it for whatever is hardest for you to retain.
 Pick one chapter order per subject and stick to it. Constantly reshuffling wastes
 energy on re-orientation and feels like variety while delivering nothing.
 
+One thing students get very anxious about during this phase: "I haven't touched Subject X in three weeks. I must have forgotten everything." That anxiety is almost always wrong. You documented it. It's in your Layer 1. It's in your Sanjeevani Bootis. It will come back when you return to it.
+
+> **AUTHOR SAYS:**
+> "During IPCC I had 7 subjects. After my first full revision was done, I used to
+> go one subject per day — rotating through all 7. Just one day each. The
+> important thing is: once your first revision is complete, you should not be
+> completely cut off from any subject for too long. You don't need to revise
+> deeply every day — just touch it regularly. Trust the process. Your documentation
+> — the notes, the error register, the Golden Nuggets — is what keeps everything
+> retrievable. You're not losing it. It's all written down and waiting for you."
+
 ---
 
 ### Strategy 10 — Recovery & Restart [ALL]
@@ -1253,6 +1672,32 @@ them. It's restarting fast. One missed day is a missed day, not a failed attempt
 > Don't try to "make up" a lost day by cramming double the next day — that just
 > breaks two days instead of one. Adjust the plan forward, trim scope if you must,
 > keep the system running. A missed day is a calendar problem, not a verdict on you.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 3-Day Triage Protocol:**
+> ```
+> Missed 1 day:
+>   No adjustment. Carry today's targets as tomorrow's first block.
+>   Add 30 min to tomorrow. Nothing else changes.
+>
+> Missed 2–3 days:
+>   Triage all missed targets into two piles:
+>   CRITICAL   = Cat A chapter content + anything tied to an upcoming mock
+>   DEFERRABLE = Cat B/C items, extra practice questions
+>   Do Critical first. Spread Deferrable over the next 5 days.
+>   Do NOT compress both piles into tomorrow.
+>
+> Missed 4+ days (illness, emergency, family):
+>   Emergency boundary review.
+>   Ask honestly: "What can I NOW complete AND revise before the exam?"
+>   Shrink boundary to that honest answer.
+>   Update the boundary page. Do not carry ghost targets from the lost days.
+>
+> The principle:
+>   A missed day    = a planning problem. Adjust the calendar.
+>   A missed week   = a boundary problem. Adjust the scope.
+>   Never confuse the two.
+> ```
 
 > **AUTHOR SAYS:**
 > [STRUCTURE ONLY — author to add a real, practical insight here: a specific time he
@@ -1277,6 +1722,28 @@ gap is exactly where your next hours go. A C-chapter at 4/10 can wait; an A-chap
 at 4/10 is a mark-leak waiting to happen. Re-rate every week and watch your
 A-chapter scores climb toward 9–10. When the important chapters all sit high on
 Simulation, you're ranking-ready.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The Action Matrix — what to do when your rating signals a gap:**
+> ```
+> Recall ≥ 7  AND  Simulation ≥ 7  →  MOVE ON. Weekly light check only.
+>
+> Recall ≥ 7  AND  Simulation 5–6  →  Solve 3–5 questions this session.
+>                                      Concept is clear — execution needs reps.
+>
+> Recall 5–6  AND  Simulation ≥ 7  →  Re-read Layer 2 notes (30 min).
+>                                      Understand is there, access is slow.
+>
+> Recall 5–6  AND  Simulation 5–6  →  Re-read Layer 2 + solve 3 questions.
+>
+> Recall < 5  (any Simulation)     →  DANGER. Full chapter re-read from Layer 2.
+>                                      Rebuild, don't just skim.
+>
+> Priority rule:
+>   A Cat A chapter with ANY score below 7/7 goes to the TOP of tomorrow's session.
+>   No other work comes before it.
+>   A Cat C chapter at 4/10 waits. A Cat A chapter at 4/10 does not.
+> ```
 
 ---
 
@@ -1350,6 +1817,20 @@ maintained.
 
 ---
 
+### THE NORTH STAR QUESTION FOR THIS BUCKET
+
+Before you read a single strategy here, fix this question in your head:
+
+> **What will I study in the 21 hours before my exam?**
+> For every subject. For every chapter. From which exact source. In which order.
+
+That is the answer you are building in this bucket. Every strategy below serves
+that question. When your Layer 3 is complete and your Error Register is front and
+centre, you should be able to answer it — subject by subject — without hesitation.
+Ask yourself this every single day from now until exam week.
+
+---
+
 ### Strategy 1 — Build Layer 3 [ALL]
 
 Layer 3 is the glue — the high-level revision flow that lets you move through a
@@ -1364,11 +1845,54 @@ can't fall out, can't get out of order, and it's easy to carry to the exam centr
 - **Law-type subjects:** section numbers, penalty clauses, time limits, monetary
   limits, due dates — compiled in the order you'll revise them.
 
-The test of a good Layer 3: you can read a full subject's worth in about 10 minutes
-(practical) or 15–20 (theory/law). Longer than that, and it's not Layer 3 — it's
-Layer 2 in disguise. Compress more.
+The test of a good Layer 3: you can read a full subject's worth in about 30–40 minutes.
+If it takes significantly longer, it's turning into Layer 2 — compress more.
 
 This bound book is what you carry into the exam hall.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 4-Type Layer 3 Filter:**
+> Layer 3 contains ONLY these 4 types of content. If a page can't be assigned to one
+> of these 4 types, it belongs in Layer 2, not Layer 3.
+> ```
+> Type 1 — Question Pointers:
+>   "Chapter X → SM Illus 7, RTP Nov24 Q3, PYQ May23 Q2b"
+>   Not the questions or solutions. Only the pointers.
+>
+> Type 2 — Format Skeletons:
+>   The blank structure of key formats: Balance Sheet headings, Cash Flow layout,
+>   P&L skeleton, Consolidation working. Headings only. No filled data.
+>
+> Type 3 — Mnemonics in Context:
+>   Mnemonic + its trigger question title. Paired. Never floating.
+>   Example: "Conditions for merger (AS 14) → ABCDE mnemonic"
+>
+> Type 4 — Numbers (Law and Tax subjects):
+>   Section numbers, penalties, time limits, monetary limits, due dates.
+>   Tabular form. Nothing else.
+> ```
+
+> **AUTHOR SAYS:**
+> "During my second revision of Audit, I found that I had made so many mnemonics
+> that I remembered the mnemonics but had completely forgotten which question each
+> one was for. I could recite the letters but couldn't tell you what topic they
+> belonged to. Completely useless in the exam. Lolzz.
+>
+> That's why Type 3 in the Layer 3 filter is not just 'mnemonic' — it is
+> 'mnemonic + trigger question.' They must be paired. A floating mnemonic is worse
+> than no mnemonic — because you think you know the answer, but you don't."
+
+> **PRANAV'S TIP:**
+> If you haven't built a custom revision sequence for a subject, use this default
+> until you have one:
+> ```
+> Step 1 — Category A chapters first  (highest marks across past papers)
+> Step 2 — Category B chapters next
+> Step 3 — Category C chapters last
+> ```
+> The A/B/C classification you built in Bucket 1 (Strategy 8) tells you which
+> chapters go where. Don't overthink the sequence — this default beats a blank
+> page every time. Adjust it after your first mock when you know where the gaps are.
 
 ---
 
@@ -1377,6 +1901,27 @@ This bound book is what you carry into the exam hall.
 If it wasn't studied before Day 45, it won't get prepared well enough to help —
 and chasing it costs you revision time on what you *do* know. Secure what you have.
 Don't expand the boundary now.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **New Material vs Boundary Gap — the Decision Tree:**
+> Students often confuse "new material" (skip it) with "a gap in my existing boundary" (which may need triage).
+> ```
+>   Is this chapter INSIDE your boundary?
+>   /                               \
+>  NO                               YES
+>   |                                |
+> True new material.          Did you plan to study it but ran out of time?
+> SKIP. No debate.             /                              \
+>                             YES                             NO
+>                              |                               |
+>                    This is a BOUNDARY GAP.         You did study it.
+>                    Triage it:                       You've just forgotten.
+>                    Cat A → 1 focused day            This is a REVISION PROBLEM,
+>                            (ICAI Illus + MCQs only) not a content problem.
+>                    Cat B → 4-hour sprint             Open your Layer 2.
+>                    Cat C → Drop it from boundary.    Start there.
+>                            Write it out explicitly.
+> ```
 
 ---
 
@@ -1421,6 +1966,32 @@ questions only:
 4. Did I attempt everything, or did I leave blanks?
 ```
 Roll the findings into your error register.
+
+At least 2 of your mocks must be in complete exam mode — same start time as the actual ICAI exam, same 3-hour duration, no breaks, no phone, no pausing. This is the only way to build real exam-hall endurance. Sitting a mock at 2 PM because it's convenient, when your actual exam starts at 2 PM, is one thing. Sitting it at 9 AM when your exam is in the afternoon is practice for the wrong race.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **Mock Sequence Rule:**
+> ```
+> Sequence:  Mock papers in the same order as your actual exam schedule.
+>            If Paper 1 (Accounts) is your first exam, that's your first mock.
+>
+> Timing:    Sit the mock at the same time of day as the actual exam.
+>            ICAI exams are typically at 2 PM. Your mock should also be at 2 PM.
+>            Your body and mind need to be ready at that specific time.
+>
+> Analysis:  Do the analysis immediately after the mock — same day, right after.
+>            Do not wait until the next morning.
+> ```
+
+> **AUTHOR SAYS:**
+> "I had a habit of getting my sister to check my mock tests immediately after I
+> gave them. No gap. The day she wasn't available, I sat with the suggested answers
+> myself, right then — comparing my answers to the official solution line by line.
+> Immediately. Because that is the best possible use of your time in those hours
+> after a mock — your mind is sharp, the paper is fresh, you remember exactly what
+> you wrote and why. Every error you find and log in those two hours will not repeat
+> in the exam. Don't delay. The errors you find immediately — write them straight
+> into the error register. Don't keep them in your head."
 
 > **RANK ONLY:**
 > Track time per question across mocks. Find the question types eating
@@ -1579,6 +2150,26 @@ is where the paper is half-won. Scan the whole paper and mark every question:
 things: your **sequence**, and roughly how long each question gets. Those 15
 minutes change how the next 3 hours go.
 
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 4-Step Reading Time Protocol:**
+> ```
+> Minutes 1–10:  Read every question. Assign ✓ / ? / ✗ to each.
+>                Do not start writing anything yet.
+>
+> Minutes 10–13: Among your ✓ questions — sequence them.
+>                MCQs always go first (Strategy 9 explains why).
+>                Among subjective: sequence by CONFIDENCE, not by marks.
+>                Your most confident question opens your paper.
+>
+> Minutes 13–15: Write the question numbers in your planned order on the first
+>                page of your answer booklet.
+>                That is your execution plan for the next 3 hours.
+>
+> Result:  You enter the writing phase knowing exactly what you'll write,
+>          in what order, and roughly how long each gets.
+>          You are executing a plan, not improvising under pressure.
+> ```
+
 > **RANK ONLY:**
 > Pencil the time plan lightly on the question paper — "Q1: 25 min,
 > Q2: 20 min..." — so you're executing a plan, not improvising mid-paper.
@@ -1605,8 +2196,9 @@ came through garbled; author to supply the real anecdote here.]
 
 ### Strategy 9 — MCQs First [ALL]
 
-Always start with the MCQ section. It warms up the brain, secures those marks
-early, and builds confidence before the big subjective questions.
+Solve MCQs first. Here is why: when you read through the MCQ options, your brain starts seeing patterns, terms, and numbers that are directly related to the descriptive questions in the same paper. Many times, a concept you see in the MCQ section will unlock an answer — or at least the right approach — for a subjective question you were unsure about. It works the other way too: the focused reading mode that MCQs require settles your nerves before you tackle the bigger questions.
+
+And if any MCQ is genuinely taking too long — mark it, move to the next one. Don't let one stubborn MCQ eat 5 minutes while 29 others wait.
 
 *How to actually get good at the MCQ section:*
 - For numerical MCQs, calculate first, then match — never eliminate by guesswork.
@@ -1614,6 +2206,13 @@ early, and builds confidence before the big subjective questions.
 - For concept MCQs, the habit you built in revision pays off — you know why the
   wrong options are wrong, so you eliminate fast.
 - No negative marking — never leave an MCQ blank. A reasoned guess beats an empty box.
+
+> **AUTHOR SAYS:**
+> "Keep your watch on the desk in front of you — do not wear it on your wrist.
+> Glancing at the desk is faster and less disruptive than tilting your wrist mid-sentence.
+> The time is always visible, always in your line of sight. Apply the same rule in
+> your mock tests. Your exam-day habits should be identical to your mock habits —
+> including where your watch sits."
 
 ---
 
@@ -1636,7 +2235,10 @@ And the small mechanics that quietly cost marks:
 - **Tick the attempted-question boxes** on the cover of the answer booklet — every
   one you attempt. An un-ticked answer can go unmarked.
 - On the MCQ/OMR sheet, **align every bubble carefully** — one row out of place and
-  every answer after it is wrong (the "domino" mistake).
+  every answer after it is wrong (the "domino" mistake). After every 5th MCQ bubble,
+  pause for 3 seconds and verify: "Is the bubble I just filled in row 5 actually for
+  Question 5?" Check every 5 — not every 1 (too slow) and not every 10 (too risky).
+  30 seconds of checking protects 25 marks.
 - Before submitting, **count your supplements** ("1 + 2 = 3") so every extra sheet
   is attached and accounted for.
 - Keep the **pen cap off the back** of the pen while writing — less weight, less
@@ -1656,6 +2258,30 @@ Stuck? Show what you can — the opening entry, the format headings, working not
 State your approach in a line: "Proceeding with Purchase Method as per AS 14."
 Partial marks are real. An empty page is a zero. A half-attempt is 3–5 marks.
 
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 4-Line Fallback — use when your mind goes blank on a question:**
+> ```
+> Line 1:  Write the heading / format title.
+>          "Statement of Profit & Loss for the year ended 31 March 20XX"
+>          "Computation of Total Income — Mr. X (A.Y. 20XX-XX)"
+>
+> Line 2:  State your approach.
+>          "Proceeding under the Purchase Method as per AS 14."
+>          "Treating as revenue expenditure on the basis of matching concept."
+>
+> Line 3:  Write whatever working note you can.
+>          A formula. A partially filled table. Even just the column headings.
+>          "Goodwill = Purchase Consideration – Net Assets Acquired"
+>
+> Line 4:  Carry it as far as you can. Even if you can't complete it —
+>          write what you know, then move on and return if time permits.
+>
+> Rule:  An empty page = 0 marks.
+>        A 4-line attempt = 2–5 marks.
+>        In a paper where 5 marks separates pass from fail, this protocol
+>        is not optional.
+> ```
+
 ---
 
 ### Strategy 13 — Time Discipline [ALL]
@@ -1663,6 +2289,27 @@ Partial marks are real. An empty page is a zero. A half-attempt is 3–5 marks.
 No single question gets more than 1.5× its allotted time before you move on.
 Forty minutes on a 12-mark question while three others sit blank is an expensive
 mistake.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **CA Inter Time Budget:**
+> ```
+> Total: 180 minutes for 100 marks = 1.8 minutes per mark.
+>
+> Standard time per question:
+>   16-mark question  →  29 min allotted  →  MAX 43 min (1.5×) before moving on
+>   12-mark question  →  22 min allotted  →  MAX 33 min
+>    8-mark question  →  14 min allotted  →  MAX 21 min
+>    5-mark question  →   9 min allotted  →  MAX 14 min
+>   MCQ section (30 marks, 30 questions)  →  aim for 1.0–1.2 min each
+>                                            complete in 30–36 min
+>
+> Target for review buffer:
+>   Aim to finish at 1.6 min/mark (not 1.8) → saves ~10 min for final review.
+>
+> During mock: Note actual time per question after each attempt.
+>              After 2–3 mocks you will know exactly which question types
+>              eat your time. Those specific types → format drills in Bucket 4.
+> ```
 
 ---
 
@@ -1676,30 +2323,57 @@ marks for correct working notes and schedules even when the final figure is off.
 
 ### BETWEEN PAPERS
 
+CA Inter papers have a gap of one day between them. That one day is not a rest day — it is a working day. You effectively have about 20–22 hours. Here is how those hours are used.
+
 ### Strategy 15 — Don't Discuss the Paper [ALL]
 
-Walk out, don't dissect it with anyone. Finding out someone wrote something
-differently only breeds anxiety you can't act on. That energy belongs to the next
-paper.
+Walk out and immediately do one physical thing: **remove all the books, notes, and material of the subject you just wrote and move them to a different room.** Out of sight. Done. That subject's chapter of your life is over for this attempt. You are not going to review it, calculate what you got, or recheck your answers. That energy belongs to the next paper.
 
----
-
-### Strategy 16 — Keep Sleeping 7–8 Hours [ALL]
-
-Exam week is the time to sleep most *consistently*, not least. Every paper deserves
-a rested brain.
-
----
-
-### Strategy 17 — Light Prep for the Next Paper [ALL]
-
-After resting, do light evening revision for the next paper — Layer 3 + error
-register for that subject. You're reminding, not relearning.
+Don't discuss the paper with anyone. Finding out that someone wrote something differently only creates anxiety you cannot act on. There is no benefit. There is only cost.
 
 > **AUTHOR SAYS:**
-> [STRUCTURE ONLY — author to add a real "between papers" or revision-week insight
-> here. One of the dictated lines for this spot came through garbled; author to
-> supply the intended anecdote.]
+> "The moment I came out of a paper, the first thing I did — every single time —
+> was physically remove all the material of that subject and put it in a different
+> room. It was a deliberate mental signal: that chapter is closed. My mind is
+> now fully available for the next one. If I kept those books in sight, I kept
+> thinking about them. Remove the books, remove the loop."
+
+---
+
+### Strategy 16 — The Between-Paper Day: 20–22 Hours [ALL]
+
+ICAI exams have a one-day gap between papers. That is effectively 20–22 usable hours. Here is how they go:
+
+```
+IMMEDIATELY AFTER THE EXAM  (~2 hours):
+  Remove completed subject material.
+  Do NOT discuss the paper.
+  Brief break — eat, walk, decompress for 30–45 min.
+  Then: open error register or Layer 3 of the NEXT subject.
+  Light, familiar reading. You are just reactivating what you know.
+  2 hours of low-intensity first contact with tomorrow's subject.
+
+THE NEXT DAY  (~16 hours):
+  Morning: Error register for tomorrow's subject. 45 min.
+  Then: Full Layer 2 pass for the most important chapters (Cat A first).
+  Afternoon: Hotspots — the concepts and formats you keep forgetting.
+  Evening: Layer 3 read-through, the whole subject. 30–40 min.
+  Stop studying 2 hours before sleep.
+
+ON THE DAY OF THE NEXT PAPER  (~4 hours before exam time):
+  Morning: Light Layer 3 flip. No new material. Nothing unfamiliar.
+  At the exam centre: 20–30 min Layer 3 review before entering the hall.
+```
+
+This is 20–22 hours of genuine preparation time. Use it. Every paper deserves a full run of its error register and Layer 3. You have the time. The students who coast on rest between papers are handing marks to the students who don't.
+
+Sleep is non-negotiable — 7–8 hours, fixed. But sleep and preparation are not enemies. You sleep, and you still prepare for 14–16 waking hours. Both happen.
+
+---
+
+### Strategy 17 — Hold the System Through the Exam Stretch [ALL]
+
+The Bucket 0 habits matter most in exam week. The blinders, the emotion parking, the daily targets — don't let exam pressure erode what you've been building for months. Each paper is its own day. That's the only scale that matters now.
 
 ---
 ---
@@ -1755,6 +2429,32 @@ course. Not mandatory. But it compounds.
 After the reward phase, review how the papers actually went — subject by subject,
 topic by topic. Not to guess your result (wasted energy) but to find your gaps
 before articleship.
+
+> **IMPLEMENTATION FRAMEWORK:**
+> **The 3-Column Look-Back Table:**
+> Fill this out once, 3–5 days after exams. Then do not look at it again until result day.
+> ```
+> Subject: ________________
+>
+> Topic / Chapter          | Confidence going in (1–5) | How it went in the hall (1–5)
+> ─────────────────────────────────────────────────────────────────────────
+>                          |                           |
+>
+> Reading the gaps:
+>
+>   Confident → went poorly  (e.g., 4 in, 2 out):
+>     Overconfidence gap. This type of chapter → more simulation-focused
+>     revision in the next attempt or articleship review.
+>
+>   Not confident → went well  (e.g., 2 in, 4 out):
+>     Underconfidence gap. Your system worked. Don't cut time on this type
+>     of chapter next attempt — it rewards the prep even when it doesn't feel like it.
+>
+>   Both low  (e.g., 2 in, 2 out):
+>     True gap. Needs structured relearning before articleship interviews.
+> ```
+> This table is not about guessing your score. It is about what you carry into
+> articleship and what you fix before the next attempt — if there is one.
 
 ---
 
