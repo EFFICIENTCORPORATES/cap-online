@@ -1,0 +1,753 @@
+/* ============================================================
+   PARTS — styles for Phase 2-4 slides (6–26) + booti tracker
+   ============================================================ */
+
+/* ---------- shared ---------- */
+
+.pt {
+  font: 600 34px/1.5 var(--font-body);
+  color: var(--light-text);
+  text-align: left;
+  max-width: 1500px;
+}
+.pt b { color: var(--brand-blue); font-weight: 800; }
+
+.mono-box {
+  font: 600 30px/1.7 var(--font-mono);
+  text-align: left;
+  background: var(--light-bg-2);
+  border: 2px solid var(--b0);
+  border-radius: 14px;
+  padding: 34px 44px;
+  white-space: pre;
+  color: var(--light-text);
+}
+
+.split { display: flex; align-items: center; gap: 80px; width: 1640px; }
+.split-l, .split-r { flex: 1; display: flex; flex-direction: column; gap: 36px; align-items: flex-start; }
+.split-r { align-items: center; }
+
+/* ============================================================
+   SLIDE 6 — SUBJECT SLIDER BOARD
+   ============================================================ */
+
+.sb { width: 1660px; position: relative; cursor: default; }
+
+.sb-goalrow { position: relative; height: 52px; margin-left: 300px; margin-right: 0; }
+.sb-goallabel {
+  position: absolute;
+  left: 64%;
+  transform: translateX(-50%);
+  font: 800 26px/1 var(--font-head);
+  color: var(--b4);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.sb-goallabel::after {
+  content: "\25BC";
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 4px;
+}
+
+.sb-row { display: flex; align-items: center; gap: 40px; margin-bottom: 30px; }
+.sb-sub {
+  width: 260px;
+  flex: 0 0 auto;
+  text-align: right;
+  font: 700 28px/1.2 var(--font-head);
+  color: var(--light-text);
+}
+
+.sb-track {
+  flex: 1;
+  position: relative;
+  height: 52px;
+  border-radius: 26px;
+  cursor: pointer;
+  touch-action: none;
+  /* the 6 buckets painted as proportional color bands */
+  background: linear-gradient(90deg,
+    var(--b1) 0%,   var(--b1) 8%,
+    var(--b2) 8%,   var(--b2) 42%,
+    var(--b3) 42%,  var(--b3) 64%,
+    var(--b4) 64%,  var(--b4) 80%,
+    var(--b5) 80%,  var(--b5) 87%,
+    var(--b6) 87%,  var(--b6) 100%);
+  opacity: .92;
+}
+/* the 15 July / B4 goal line on every track */
+.sb-track::after {
+  content: "";
+  position: absolute;
+  left: 64%;
+  top: -8px;
+  bottom: -8px;
+  width: 5px;
+  transform: translateX(-50%);
+  background: var(--b4);
+  border-radius: 3px;
+  box-shadow: 0 0 0 3px rgba(250, 247, 241, .9);
+}
+
+.sb-marker {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: var(--brand-blue-deep);
+  border: 5px solid #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+  color: #fff;
+  font: 800 24px/1 var(--font-head);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  z-index: 2;
+  transition: background-color .25s;
+}
+.sb-marker:active { cursor: grabbing; }
+.sb-marker.ok { background: var(--brand-green-deep); }
+
+/* LEVEL UP state — appears when every subject crosses the B4 line */
+.sb-win {
+  display: none;
+  margin: 26px auto 0;
+  width: fit-content;
+  font: 900 40px/1 var(--font-head);
+  letter-spacing: 2px;
+  color: #fff;
+  background: linear-gradient(90deg, var(--brand-green-deep), var(--brand-green));
+  padding: 22px 54px;
+  border-radius: 16px;
+  box-shadow: 0 0 0 4px rgba(46, 158, 107, .25);
+}
+.sb.win .sb-win { display: block; animation: popIn .5s cubic-bezier(.16, 1, .3, 1); }
+.sb.win .sb-hint { display: none; }
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(.7); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.sb-hint {
+  margin-top: 26px;
+  font: 600 30px/1.5 var(--font-body);
+  color: var(--light-dim);
+  text-align: center;
+}
+.sb-hint b { color: var(--b4); }
+
+/* visible reset button (top-right of the board) */
+.sb-reset {
+  position: absolute;
+  top: -6px;
+  right: 0;
+  font: 800 24px/1 var(--font-head);
+  letter-spacing: 2px;
+  color: var(--brand-blue);
+  background: var(--light-bg-2);
+  border: 3px solid var(--brand-blue);
+  border-radius: 999px;
+  padding: 14px 30px;
+  cursor: pointer;
+  transition: background-color .2s, color .2s;
+}
+.sb-reset:hover { background: var(--brand-blue); color: #fff; }
+
+/* ============================================================
+   SLIDE 7 — MISSION
+   ============================================================ */
+
+.s-mission .mi-days {
+  font: 900 380px/0.95 var(--font-head);
+  letter-spacing: -12px;
+  color: var(--dark-text);
+}
+.s-mission .mi-label {
+  font: 800 64px/1 var(--font-head);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: var(--b4);
+  margin-top: 16px;
+}
+.s-mission .mi-line {
+  font: 600 44px/1.5 var(--font-body);
+  color: var(--dark-text);
+  margin-top: 60px;
+}
+.s-mission .mi-line b { color: var(--b4); font-weight: 800; }
+.s-mission .mi-sub {
+  font: 600 32px/1.5 var(--font-body);
+  color: var(--dark-dim);
+  margin-top: 24px;
+}
+
+/* ============================================================
+   SLIDE 8 — ROADMAP
+   ============================================================ */
+
+.s-roadmap .rm-list { display: flex; flex-direction: column; gap: 30px; width: 1300px; }
+.rm-item {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  background: var(--light-bg-2);
+  border: 2px solid #E3DFD6;
+  border-left: 10px solid var(--b3);
+  border-radius: 14px;
+  padding: 22px 36px;
+  text-align: left;
+}
+.rm-n {
+  font: 900 44px/1 var(--font-head);
+  color: var(--b3);
+  width: 56px;
+  flex: 0 0 auto;
+}
+.rm-t { font: 800 36px/1.2 var(--font-head); color: var(--light-text); }
+.rm-t span {
+  display: block;
+  font: 600 26px/1.4 var(--font-body);
+  color: var(--light-dim);
+  margin-top: 4px;
+}
+.rm-note {
+  margin-top: 44px;
+  font: 600 34px/1.5 var(--font-body);
+  color: var(--light-text);
+}
+.rm-note b { color: var(--brand-green-deep); }
+
+/* ============================================================
+   SLIDE 9 — NORTH STAR
+   ============================================================ */
+
+.s-north .ns-q {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  margin-top: 70px;
+}
+.s-north .ns-q span {
+  font: 900 88px/1.15 var(--font-head);
+  color: var(--dark-text);
+}
+.s-north .ns-hi {
+  font-size: 44px;
+  font-weight: 600;
+  color: var(--b3);
+  margin-top: 64px;
+}
+.s-north .ns-rule {
+  font: 600 34px/1.5 var(--font-body);
+  color: var(--dark-dim);
+  margin-top: 50px;
+}
+.s-north .ns-rule b { color: var(--dark-text); }
+
+/* ============================================================
+   SLIDE 10 — BOUNDARY
+   ============================================================ */
+
+.filter-box {
+  background: var(--light-bg-2);
+  border: 2px dashed var(--b0);
+  border-radius: 14px;
+  padding: 28px 38px;
+  font: 600 30px/1.7 var(--font-body);
+  color: var(--light-text);
+  text-align: left;
+}
+.filter-box .fb-h { font: 800 30px/1.4 var(--font-head); margin-bottom: 12px; }
+.filter-box .fb-no { color: var(--red); font-weight: 800; margin-top: 12px; }
+
+.ne-stamp {
+  font: 900 64px/1 var(--font-head);
+  color: var(--red);
+  letter-spacing: 2px;
+  margin-top: 14px;
+}
+
+/* ============================================================
+   SLIDE 11 — TOOLKIT
+   ============================================================ */
+
+.s-toolkit { width: 1500px; }
+.tk-line {
+  font: 600 38px/1.5 var(--font-body);
+  color: var(--light-text);
+  margin-bottom: 48px;
+}
+.tk-line b { color: var(--brand-blue); }
+
+.tk-steps { display: flex; flex-direction: column; gap: 24px; }
+.tk-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font: 700 32px/1.4 var(--font-head);
+  color: var(--light-text);
+  background: var(--light-bg-2);
+  border: 2px solid #E3DFD6;
+  border-radius: 14px;
+  padding: 22px 34px;
+  text-align: left;
+}
+.tk-card span {
+  font: 900 36px/1 var(--font-head);
+  color: #fff;
+  background: var(--brand-blue);
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.tk-badge {
+  margin-top: 48px;
+  font: 600 32px/1.6 var(--font-body);
+  color: var(--light-text);
+  background: rgba(201, 162, 39, .12);
+  border: 3px solid var(--gold);
+  border-radius: 16px;
+  padding: 30px 40px;
+  text-align: left;
+}
+.tk-badge b { color: var(--brand-green-deep); }
+.tk-tag {
+  display: inline-block;
+  font: 900 26px/1 var(--font-head);
+  letter-spacing: 3px;
+  color: #fff;
+  background: var(--gold);
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-right: 22px;
+}
+
+/* ============================================================
+   SLIDE 12 — 3 LAYERS
+   ============================================================ */
+
+.s-layers { width: 1500px; }
+.ly-card {
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  border-left: 14px solid var(--c);
+  background: var(--light-bg-2);
+  border-radius: 14px;
+  padding: 30px 44px;
+  margin-bottom: 26px;
+  text-align: left;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+}
+.ly-n { font: 900 38px/1 var(--font-head); color: var(--c); width: 220px; flex: 0 0 auto; }
+.ly-t { font: 800 36px/1.2 var(--font-head); color: var(--light-text); flex: 1; }
+.ly-t span {
+  display: block;
+  font: 600 27px/1.4 var(--font-body);
+  color: var(--light-dim);
+  margin-top: 6px;
+}
+.ly-when {
+  font: 700 26px/1.35 var(--font-head);
+  color: var(--light-dim);
+  text-align: right;
+  width: 240px;
+  flex: 0 0 auto;
+}
+.ly-when b { color: var(--b3); }
+.ly-note {
+  margin-top: 30px;
+  font: 600 34px/1.5 var(--font-body);
+  color: var(--light-text);
+}
+.ly-note b { color: var(--brand-blue); }
+
+/* ============================================================
+   SLIDE 13 — DRIVE
+   ============================================================ */
+
+.mono-tree { line-height: 2.0; font-size: 32px; }
+.mono-tree .step { display: block; }
+.dr-note {
+  margin-top: 44px;
+  font: 600 32px/1.7 var(--font-body);
+  color: var(--light-text);
+  text-align: center;
+}
+.dr-note b { color: var(--brand-blue); }
+
+/* ============================================================
+   SLIDE 14 — PHYSICAL vs DIGITAL
+   ============================================================ */
+
+.s-pd { width: 1500px; }
+.pd-cols { display: flex; gap: 60px; }
+.pd-col {
+  flex: 1;
+  border-top: 12px solid var(--c);
+  background: var(--light-bg-2);
+  border-radius: 14px;
+  padding: 36px 44px;
+  font: 600 34px/2.0 var(--font-body);
+  color: var(--light-text);
+  text-align: left;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+}
+.pd-h {
+  font: 900 40px/1 var(--font-head);
+  color: var(--c);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+.pd-warn {
+  margin-top: 48px;
+  font: 900 42px/1.3 var(--font-head);
+  color: var(--red);
+}
+
+/* ============================================================
+   SLIDE 15 — BOOTI INTRO
+   ============================================================ */
+
+.s-bintro .bi-l1 { font: 700 56px/1.4 var(--font-head); color: var(--dark-text); }
+.s-bintro .bi-l1 b { color: var(--gold); }
+.s-bintro .bi-l2 { font: 600 40px/1.4 var(--font-body); color: var(--dark-dim); margin-top: 22px; }
+.s-bintro .kicker { margin-top: 70px; }
+.s-bintro .bi-name {
+  font: 900 110px/1.1 var(--font-head);
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-top: 26px;
+}
+.s-bintro .bi-name .dev {
+  display: block;
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--dark-text);
+  letter-spacing: 0;
+  margin-top: 14px;
+}
+.s-bintro .bi-nums { display: flex; gap: 70px; justify-content: center; margin-top: 64px; }
+.s-bintro .bi-nums span { font: 900 96px/1 var(--font-head); color: var(--gold); }
+
+/* ============================================================
+   SLIDES 16–18 — BOOTI DETAIL
+   ============================================================ */
+
+.s-booti .bo-num { font: 900 150px/1 var(--font-head); color: var(--gold); }
+.s-booti .bo-name {
+  font: 900 76px/1.15 var(--font-head);
+  color: var(--dark-text);
+  margin-top: 10px;
+}
+.s-booti .bo-line {
+  font: 600 36px/1.5 var(--font-body);
+  color: var(--dark-dim);
+  margin-top: 34px;
+  max-width: 1400px;
+}
+.s-booti .bo-line b { color: var(--gold); }
+
+.field-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 46px;
+  width: 1240px;
+}
+.fl-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 40px;
+  background: var(--dark-bg-2);
+  border-left: 8px solid var(--gold);
+  border-radius: 10px;
+  padding: 20px 34px;
+  text-align: left;
+}
+.fl-row b { font: 800 32px/1.3 var(--font-head); color: var(--dark-text); }
+.fl-row span { font: 600 26px/1.4 var(--font-body); color: var(--dark-dim); text-align: right; }
+.fl-row.fl-key { border-left-color: var(--red); }
+.fl-row.fl-key b { color: var(--red); }
+
+.s-booti .bo-close {
+  font: 600 32px/1.5 var(--font-body);
+  color: var(--dark-dim);
+  margin-top: 44px;
+}
+.s-booti .bo-close b { color: var(--dark-text); }
+
+/* booti tracker — footer slots */
+.booti-slots { display: flex; gap: 16px; }
+.booti-slots .bs {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 800 26px/1 var(--font-head);
+  color: var(--gold);
+  opacity: .3;
+}
+.booti-slots .bs.on {
+  opacity: 1;
+  background: rgba(201, 162, 39, .18);
+  box-shadow: 0 0 16px rgba(201, 162, 39, .45);
+}
+
+/* ============================================================
+   SLIDE 19 — AI
+   ============================================================ */
+
+.s-ai { width: 1500px; }
+.ai-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.ai-grid span {
+  font: 800 30px/1 var(--font-head);
+  color: var(--ai);
+  border: 3px solid var(--ai);
+  border-radius: 999px;
+  padding: 16px 34px;
+}
+.ai-grid .ai-hi { color: #fff; background: var(--ai); }
+
+.ai-jobs { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
+.ai-jobs .pt b { color: var(--ai); }
+
+.ai-warn {
+  margin-top: 46px;
+  font: 700 36px/1.4 var(--font-head);
+  color: var(--light-text);
+  background: rgba(108, 79, 184, .1);
+  border: 3px solid var(--ai);
+  border-radius: 14px;
+  padding: 26px 44px;
+}
+.ai-warn b { color: var(--ai); }
+
+/* ============================================================
+   SLIDE 20 — GROUP DECISION
+   ============================================================ */
+
+.s-group .gr-steps { display: flex; flex-direction: column; gap: 30px; width: 1340px; }
+.gr-row {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  font: 700 38px/1.35 var(--font-head);
+  color: var(--light-text);
+  text-align: left;
+}
+.gr-row span {
+  font: 900 32px/1 var(--font-head);
+  color: #fff;
+  background: var(--brand-blue);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+.gr-row.gr-final span { background: var(--brand-green-deep); }
+.gr-row.gr-final b { color: var(--brand-green-deep); }
+.gr-note {
+  margin-top: 54px;
+  font: 600 34px/1.5 var(--font-body);
+  color: var(--light-dim);
+}
+.gr-note b { color: var(--light-text); }
+
+/* ============================================================
+   SLIDE 21 — 15 JULY DEADLINE
+   ============================================================ */
+
+.s-deadline .dl-date {
+  font: 900 240px/1 var(--font-head);
+  letter-spacing: -4px;
+  color: var(--b4);
+}
+.s-deadline .dl-check {
+  font: 700 44px/1.4 var(--font-head);
+  color: var(--dark-text);
+  margin-top: 50px;
+}
+.s-deadline .dl-level {
+  font: 900 54px/1 var(--font-head);
+  letter-spacing: 4px;
+  color: var(--brand-green-soft);
+  margin-top: 44px;
+}
+.s-deadline .dl-warn {
+  font: 900 54px/1.3 var(--font-head);
+  color: var(--red);
+  margin-top: 56px;
+}
+
+/* ============================================================
+   SLIDE 22 — BUCKET 4 RULES
+   ============================================================ */
+
+.s-b4 .b4-rows { display: flex; flex-direction: column; gap: 28px; width: 1340px; }
+.b4-row {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  font: 700 40px/1.3 var(--font-head);
+  text-align: left;
+  background: var(--light-bg-2);
+  border: 2px solid #E3DFD6;
+  border-radius: 14px;
+  padding: 26px 44px;
+}
+.b4-row span { color: var(--light-dim); width: 420px; flex: 0 0 auto; }
+.b4-row i { font-style: normal; color: var(--b4); }
+.b4-row b { color: var(--light-text); }
+.b4-row.b4-zero b { color: var(--red); }
+.b4-note {
+  margin-top: 50px;
+  font: 600 34px/1.6 var(--font-body);
+  color: var(--light-text);
+}
+.b4-note b { color: var(--b4); }
+
+/* ============================================================
+   SLIDE 23 — LAYER 3 A/B/C
+   ============================================================ */
+
+.abc-intro { font: 600 38px/1.4 var(--font-body); color: var(--light-text); margin-bottom: 50px; }
+.abc-blocks { display: flex; gap: 44px; }
+.abc-b {
+  width: 420px;
+  border-top: 14px solid var(--c);
+  background: var(--light-bg-2);
+  border-radius: 14px;
+  padding: 36px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+}
+.abc-l { font: 900 100px/1 var(--font-head); color: var(--c); }
+.abc-d { font: 800 36px/1.3 var(--font-head); color: var(--light-text); margin-top: 18px; }
+.abc-d span { display: block; font: 600 26px/1.4 var(--font-body); color: var(--light-dim); margin-top: 6px; }
+.abc-t {
+  font: 900 34px/1 var(--font-head);
+  color: #fff;
+  background: var(--c);
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 26px;
+}
+.abc-note { margin-top: 54px; font: 600 34px/1.5 var(--font-body); color: var(--light-text); }
+.abc-note b { color: var(--b4); }
+
+/* ============================================================
+   SLIDE 24 — MOCK WINDOW
+   ============================================================ */
+
+.s-mock { width: 1520px; }
+.mk-tl {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  justify-content: center;
+  margin-bottom: 64px;
+}
+.mk-pt { font: 900 40px/1 var(--font-head); color: var(--light-text); white-space: nowrap; }
+.mk-pt.mk-key { color: var(--b4); font-size: 48px; }
+.mk-bar {
+  flex: 1;
+  height: 30px;
+  border-radius: 15px;
+  background: var(--b4);
+  color: #fff;
+  font: 800 20px/30px var(--font-head);
+  letter-spacing: 3px;
+  text-align: center;
+}
+.mk-bar.mk-rest { flex: 0 0 220px; background: #D8D4CB; }
+
+.mk-rules { display: flex; flex-direction: column; gap: 26px; align-items: flex-start; }
+.mk-rules .pt b { color: var(--b4); }
+.mk-note { margin-top: 46px; font: 600 34px/1.5 var(--font-body); color: var(--light-text); }
+.mk-note b { color: var(--red); }
+
+/* ============================================================
+   SLIDE 25 — BUCKET 0
+   ============================================================ */
+
+.tick-list { display: flex; flex-direction: column; gap: 34px; width: 1400px; }
+.tick-item {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  font: 600 36px/1.4 var(--font-body);
+  color: var(--light-text);
+  text-align: left;
+}
+.tick-item b { color: var(--b0); font-weight: 800; }
+.tick-item .box {
+  width: 56px;
+  height: 56px;
+  border: 4px solid var(--b0);
+  border-radius: 12px;
+  flex: 0 0 auto;
+  position: relative;
+}
+.tick-item .box::after {
+  content: "\2713";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 900 40px/1 var(--font-head);
+  color: var(--brand-green-deep);
+  opacity: 0;
+  transform: scale(.4);
+  transition: opacity .35s ease .25s, transform .35s cubic-bezier(.16, 1, .3, 1) .25s;
+}
+.tick-item.on .box::after { opacity: 1; transform: scale(1); }
+
+.b0-note { margin-top: 54px; font: 600 32px/1.5 var(--font-body); color: var(--light-dim); }
+.b0-note b { color: var(--light-text); }
+
+/* ============================================================
+   SLIDE 26 — CTA
+   ============================================================ */
+
+.s-cta { width: 1440px; }
+.cta-row {
+  font: 600 36px/1.6 var(--font-body);
+  color: var(--dark-dim);
+  text-align: left;
+  margin-bottom: 38px;
+}
+.cta-row b { color: var(--dark-text); font-weight: 800; }
+.cta-final {
+  font: 900 84px/1.2 var(--font-head);
+  color: var(--dark-text);
+  margin-top: 50px;
+  text-align: center;
+}
+.cta-final span { display: block; color: var(--b3); }

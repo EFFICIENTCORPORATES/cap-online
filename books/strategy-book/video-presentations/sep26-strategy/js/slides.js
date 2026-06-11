@@ -80,7 +80,7 @@ const SLIDES = [
         <div class="not-list">
           <div class="not-line step" data-step="1"><span class="x">✕</span> Not a planner.</div>
           <div class="not-line step" data-step="2"><span class="x">✕</span> Not motivation.</div>
-          <div class="not-line step" data-step="3"><span class="x">✕</span> Not subject-specific.</div>
+          <div class="not-line step" data-step="3"><span class="x">✕</span> Not 1 or 2 subject. Entire CA Inter.</div>
         </div>
         <div class="not-final step" data-step="4">
           ON GROUND Strategies.
@@ -151,3 +151,4 @@ const SLIDES = [
   }
 
 ];
+/* end of slides */
