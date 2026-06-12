@@ -25,7 +25,8 @@ content/
 │   └── gsheet_sync.py   ← pull/push the calendar to/from a shared Google Sheet
 ├── motivation/          ← student-motivation creatives (quotes, wallpapers, reels, articles)
 ├── competitor-analysis/ ← research on other CA educators / platforms
-└── ai-content-pipeline/ ← AI content-generation method + tool stack (animation = Excalidraw)
+├── ai-content-pipeline/ ← AI content-generation method + tool stack (animation = Excalidraw)
+└── productions/         ← one folder per video/content piece (outline, deck, giveaway, publish)
 ```
 
 ## Conventions
