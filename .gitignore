@@ -51,6 +51,9 @@
 **/*.bin
 **/*.iso
 
+# Base64-encoded image blobs (derived from images, kept local)
+content/assets/green-screen/book-cover-image-base-64.txt
+
 # Explicit heavy-source folders (kept local only)
 materials/icai-source/
 photo-gallery/originals/
