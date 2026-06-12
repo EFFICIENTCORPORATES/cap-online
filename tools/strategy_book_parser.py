@@ -186,6 +186,21 @@ def tokenize(lines: list) -> list:
             tokens.append({'type': 'checklist', 'items': items})
             continue
 
+        # Markdown table  (line starts with |)
+        if stripped.startswith('|'):
+            rows = []
+            while i < n and _rstrip(lines[i]).startswith('|'):
+                rows.append(_rstrip(lines[i]))
+                i += 1
+            def _parse_row(r):
+                r = r.strip().strip('|')
+                return [c.strip() for c in r.split('|')]
+            if len(rows) >= 2:
+                headers  = _parse_row(rows[0])
+                data     = [_parse_row(r) for r in rows[2:]]  # skip separator row
+                tokens.append({'type': 'table', 'headers': headers, 'rows': data})
+            continue
+
         # Unordered list
         if stripped.startswith('- '):
             items = []
@@ -347,6 +362,7 @@ class Renderer:
         if kind == 'checklist':       return self._checklist(t['items'])
         if kind == 'rank_item':
             return f'<p class="rank-line"><span class="star">★</span> {inline_md(t["text"])}</p>'
+        if kind == 'table':            return self._table(t)
         if kind == 'blockquote':      return self._plain_bq(t['lines'])
         if kind == 'component':       return self._component(t)
         if kind == 'hr':              return '<hr class="strat-rule">'
@@ -408,6 +424,23 @@ class Renderer:
                     f'<span class="cl-text">{inline_md(item["text"])}</span></li>'
                 )
         return '<ul class="checklist">' + ''.join(rows) + '</ul>'
+
+    # ── Markdown table ──
+
+    def _table(self, t: dict) -> str:
+        th = ''.join(f'<th>{inline_md(h)}</th>' for h in t['headers'])
+        body = ''
+        for row in t['rows']:
+            cells = ''.join(f'<td>{inline_md(c)}</td>' for c in row)
+            body += f'<tr>{cells}</tr>'
+        return (
+            f'<div class="table-wrap">'
+            f'<table class="content-table">'
+            f'<thead><tr>{th}</tr></thead>'
+            f'<tbody>{body}</tbody>'
+            f'</table>'
+            f'</div>'
+        )
 
     # ── Plain blockquote ──
 
@@ -562,6 +595,8 @@ class Renderer:
                 parts.append(self._checklist(t['items']))
             elif k == 'code_block':
                 parts.append(self._code(t))
+            elif k == 'table':
+                parts.append(self._table(t))
             elif k == 'rank_item':
                 parts.append(f'<p class="rank-line"><span class="star">★</span> {inline_md(t["text"])}</p>')
             elif k == 'blockquote':
@@ -846,6 +881,32 @@ ul.body-list, ol.body-list {
 ul.body-list li, ol.body-list li {
   margin-bottom: 1.5mm;
 }
+
+/* ── Markdown table ── */
+.table-wrap { overflow-x: auto; margin: 3mm 0; }
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9.5pt;
+}
+.content-table th {
+  background: #eef1f4;
+  font-family: var(--head-f);
+  font-weight: 700;
+  font-size: 8pt;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2mm 3mm;
+  text-align: left;
+  border: 1px solid #c8d0da;
+}
+.content-table td {
+  padding: 2mm 3mm;
+  border: 1px solid #dde3e8;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.content-table tbody tr:nth-child(even) { background: #f7f8fa; }
 
 /* ── Checklist ── */
 ul.checklist {

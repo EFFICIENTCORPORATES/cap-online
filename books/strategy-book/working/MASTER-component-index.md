@@ -1,9 +1,9 @@
 # MASTER Component Index
 ## CA-Inter-Strategy-Book-MASTER.md
 
-Generated: 2026-06-11  ·  `tools/generate_component_index.py`
+Generated: 2026-06-13  ·  `tools/generate_component_index.py`
 Source: `books/strategy-book/working/CA-Inter-Strategy-Book-MASTER.md`
-Lines: 2751  ·  MD5: `86bb07d8`
+Lines: 2815  ·  MD5: `5805c527`
 
 ---
 
@@ -167,14 +167,14 @@ _No strategies detected._
 
 ## B. Non-Bucket Sections
 
-| Section | ID | IF | FI | DI |
-|---------|-----|-----|-----|-----|
-| The Comprehensive CA Intermediate Exam Preparation Guide | `THE` | ✓ | — | — |
-| FRONT MATTER | `FM` | — | — | — |
-| ROUTING PAGE | `RP` | — | — | ✓ |
-| THE AI SECTION | `AI` | — | — | — |
-| PERSONAL PAGES | `PP` | — | (5) | — |
-| THE AUTHOR'S JOURNEY — CPT & IPCC | `AJ` | — | — | — |
+| Section | ID | IF | PT | HTD | FI | DI |
+|---------|-----|-----|-----|-----|-----|-----|
+| The Comprehensive CA Intermediate Exam Preparation Guide | `THE` | ✓ | — | — | — | — |
+| FRONT MATTER | `FM` | — | — | — | — | — |
+| ROUTING PAGE | `RP` | — | — | — | — | ✓ |
+| THE AI SECTION | `AI` | — | ✓ | ✓ | — | — |
+| PERSONAL PAGES | `PP` | — | — | — | (5) | — |
+| THE AUTHOR'S JOURNEY — CPT & IPCC | `AJ` | — | — | — | — | — |
 
 ---
 
@@ -183,8 +183,8 @@ _No strategies detected._
 | Component | Total | Breakdown by bucket |
 |-----------|-------|---------------------|
 | **IF** | 23 | BTHE:1 B0:3 B1:2 B2:6 B3:4 B4:3 B5:3 B6:1 |
-| **PT** | 33 | B0:7 B1:4 B2:10 B3:6 B4:3 B5:3 |
-| **HTD** | 12 | B0:3 B1:3 B2:3 B3:2 B4:1 |
+| **PT** | 34 | B0:7 B1:4 B2:10 B3:6 B4:3 B5:3 BAI:1 |
+| **HTD** | 13 | B0:3 B1:3 B2:3 B3:2 B4:1 BAI:1 |
 | **SL** | 4 | B2:1 B3:1 B4:1 B5:1 |
 | **EG** | 6 | B1:1 B2:1 B3:1 B4:1 B5:1 B6:1 |
 | **RO** | 8 | B0:1 B1:2 B3:1 B4:2 B5:2 |

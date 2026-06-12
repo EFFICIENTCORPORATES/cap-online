@@ -2557,6 +2557,70 @@ foundational understanding to AI. Use the teacher to *understand*; use AI to
 Verify anything legal or numerical against your Study Material.
 
 ---
+
+### TOOL PICKER — WHICH AI FOR WHICH JOB
+
+One tool trying to do everything is fine to start. But once you're comfortable, this is the sharper version:
+
+| Task | Best Tool | Why |
+|------|-----------|-----|
+| Query across SM + RTP + MTP + YouTube together | **NotebookLM** | Add all PDFs and YouTube links as sources; ask anything across all of them at once |
+| Concept stuck at 11 PM, need a proper explanation | **Claude** | Best at long structured explanations; handles full chapter PDFs cleanly |
+| Latest GST amendment / recent ICAI circular | **Perplexity** | Web-connected; always shows the source link so you can verify before trusting |
+| Mnemonic / story / memory hook | **ChatGPT** | Most creative and playful; best at building personal hooks tied to movies, cricket, characters |
+| "Mark my answer like a CA examiner" | **ChatGPT or Claude** | Both handle complex role-play instructions well |
+| Hindi explanations | **Sarvam AI or Gemini** | Better Hindi support; Indian context built in |
+| Flowchart or diagram from a concept | **Claude → HTML output** | Ask for HTML; opens in any browser; no extra software needed |
+| Revision audio while walking | **NotebookLM Audio Overview** | Generates a 2-person podcast on your uploaded notes — listen on your walk |
+| Watch a YouTube lecture and extract notes | **Gemini** | Paste the YouTube link directly; it reads the video and answers questions |
+| Very long chapter (200+ pages) | **Claude or KIMI** | Largest context windows; won't cut off mid-chapter |
+
+---
+
+### OUTPUT FORMAT — ASK FOR HTML OR MD, NEVER PDF
+
+This is the one tip most students never figure out. It changes everything.
+
+**When you want a flowchart, diagram, or interactive page — ask for HTML.**
+An HTML file opens in any browser. No software, no downloads. It can have colour, tables, buttons, collapsible sections. AI builds it correctly. PDF cannot do any of this.
+
+Prompt to use: *"Create this as an HTML file I can open in my browser."*
+
+**When you want a text summary, key points, or notes — ask for Markdown (MD).**
+Markdown is plain text with light formatting. It opens in any text editor or notes app. More importantly: when you paste it back into AI for further work, Markdown uses far fewer tokens than a PDF — meaning your conversation lasts longer before hitting the free-plan limit.
+
+Prompt to use: *"Give me this as a Markdown file, no PDF."*
+
+**Never ask for PDF.**
+AI cannot actually create a real PDF. It either gives you a Word document or a workaround that rarely works cleanly. Scanned PDFs — the kind your SM might be — are processed by AI as images, which cost much more in tokens. A clean MD file of the same content is a fraction of the cost.
+
+> **HOW TO DO THIS:**
+> - Flowchart of a concept: *"Explain the consolidation process as an HTML page with a visual flowchart."*
+> - Chapter summary to study from: *"Summarise Chapter 3 of GST as a Markdown file — key points only, no intro, under 300 words."*
+> - Revision cheat-sheet: *"Create a one-page HTML cheat-sheet for Amalgamation — key journal entries, ratios, and common exam traps. Colour-coded."*
+> - Feeding notes back into AI: Copy-paste the MD content directly into the chat. Don't upload the PDF version.
+
+---
+
+### TOKEN MINIMIZATION — MAKE FREE PLANS GO FURTHER
+
+Every AI conversation has a context limit — how much it can hold in memory at once. Free plans hit this faster. These habits stretch it:
+
+1. **Use MD, not PDF, when feeding notes back to AI.** Plain text = fewer tokens = a longer conversation within the same window.
+2. **Upload text-PDFs, not scanned ones.** Scanned pages are processed as images, which cost significantly more. If your SM is scanned, type the specific passage you need instead.
+3. **Ask for compact output.** Add *"under 200 words, no intro, no conclusion"* to your prompt. Don't let AI pad its answer.
+4. **Start fresh chats for new topics.** A 40-message conversation carries all that history into every new reply. New topic = new chat.
+5. **One task per message.** *"Explain this AND make MCQs AND give a mnemonic"* in one message = AI splits attention. Three separate messages = better answers AND more efficient token use.
+6. **Use structure wisely.** *"Give me only a table, no explanation"* cuts output tokens by half — and is often more useful.
+
+> **PRANAV'S TIP:**
+> The single most effective habit: whenever I finish studying a topic with AI, I ask it
+> to give me a compact Markdown summary — under 150 words, key points only. I save that
+> file locally. Next session, I paste just that summary into a fresh chat, not the whole
+> previous conversation. The AI gets clean context. My tokens reset. And I'm not
+> carrying yesterday's mistakes into today's session.
+
+---
 ---
 
 # EMERGENCY SECTION
