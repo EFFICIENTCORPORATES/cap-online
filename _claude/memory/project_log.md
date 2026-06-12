@@ -4,6 +4,41 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-06-13 — Working tree cleanup: 4-block atomic commit plan completed
+
+Resumed from previous context (session ran out). Committed remaining 2 blocks:
+
+- **Block 3** (`a6b3e18`): CLAUDE.md + content/README.md — documented `productions/` folder in both files
+- **Block 4** (this entry): file-index regeneration + project log
+
+**Sep26-strategy relocation** (done in prior session, committed as Block 1):
+All 14 old paths under `books/strategy-book/video-presentations/sep26-strategy/` moved to `content/productions/sep26-strategy/deck/`. Git detected renames correctly.
+
+**Pending decision (Pranav):** `content/assets/green-screen/book-cover-image-base-64.txt` — 573KB base64-encoded PNG. Used by `book-promo.html` for self-containment. Per "no binary files in git" rule, recommend adding to `.gitignore`. If Pranav wants it committed, can do so explicitly.
+
+**Pending tasks:**
+- Add `--input` flag to `tools/strategy_book_parser.py` so it can process `CA-Inter-90-Days-Strategy.md` (currently defaults to MASTER.md only)
+- Generate 90-day book HTML → PDF once `--input` flag added
+
+---
+
+## 2026-06-11 — AI section expanded + parser table support added
+
+**MASTER.md — THE AI SECTION:** Added 3 new sub-sections after the existing 7 use-cases:
+- **TOOL PICKER** — markdown table: 10 rows mapping task → best tool → why (NotebookLM, Claude, Perplexity, ChatGPT, Sarvam/Gemini, KIMI)
+- **OUTPUT FORMAT** — HTML vs MD vs PDF guidance with ready-to-use prompts; explains token cost of scanned PDFs
+- **TOKEN MINIMIZATION** — 6 numbered habits for free-plan users + PRANAV'S TIP (compact MD summary habit)
+
+**Parser (`tools/strategy_book_parser.py`) — markdown table support added:**
+- Tokenizer: detects `|`-prefixed lines, parses header/separator/data rows → `{'type': 'table'}` token
+- Renderer: `_table()` method → `<table class="content-table">` with thead/tbody
+- `_component_body()`: table token wired in (tables inside components work too)
+- CSS: `.content-table` / `.table-wrap` — zebra-striped, uppercase headers, border-collapse
+
+Verified: parser renders AI section cleanly; all 7 checks pass (content-table, NotebookLM, headings, HOW TO DO THIS, PRANAV'S TIP, handwritten class, file size 20KB). health_check green (47/47, MD5: 5805c527).
+
+---
+
 ## 2026-06-11 — CA-Inter-90-Days-Strategy.md fully rewritten, HTML-synced
 
 Complete rewrite of `books/strategy-book/working/CA-Inter-90-Days-Strategy.md`.
