@@ -4,6 +4,71 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-06-15 — teaching_sequence.md: ALL 10 chapters complete
+
+Multi-session task concluded. Built `books/bridge-course/teaching_sequence.md` — 7-column table (CA Level | Chapter No. | Unit No. + Unit Name | Topic/SubTopic ID | Topic Name | Page No. | One-Line Summary) from all 10 base-studymaterial OCR files.
+
+This session (continuation): CA Inter Chapter 2 (24 rows) + CA Inter Chapter 3 (9 rows) appended.
+
+- Ch3 sections: 1 (Status of AS), 2 (Applicability intro), 2.1 (MSME/Large criteria, effective 1 Apr 2024), 2.1-Illus (Example 1), 2.3 (Companies), 2.3.1 (20 AS in entirety), 2.3.2 (SMC exemptions), UNTSMRY, TYK (ranking: 2.1 \ 1)
+- Full file: header + Foundation Units 1–7 + Inter Ch1 (16 rows) + Inter Ch2 (24 rows) + Inter Ch3 (9 rows)
+- `file_index.py` run (116 files); `health_check.py` 15 pre-existing failures only (same as before — not caused by this work)
+
+---
+
+## 2026-06-15 — Bridge Course Topics to cover.md — full final rewrite completed
+
+Continuation session (prior context was exhausted mid-task). Wrote the complete final version of `books/bridge-course/Topics to cover.md` covering ALL source chapters:
+- Foundation Ch1 Units 1–7: every numbered sub-topic, all illustrations with concept-test note, Summary, TYK with sub-topic IDs
+- Inter Ch1 (Intro to AS): all 14 sections including 8-step process, IFRS components, carve outs/ins, Ind AS roadmap for all 4 entity categories
+- Inter Ch2 (Framework): all 11 sections — 8 elements of the Framework, 7 user groups, 3 fundamental assumptions, 4 qualitative characteristics + sub-qualities, 5 elements (formal definitions), 4 measurement bases, all 3 capital maintenance concepts; all illustrations/examples with concept-test notes
+- Inter Ch3 (Applicability): Status, 3-question test, ICDS (10 standards), MSME vs Large entity revised criteria (Aug 2024), SMC vs Non-SMC exemptions; all MCQs with sub-topic IDs, case scenarios
+- Ran `file_index.py` (116 files); `health_check.py` shows 15 pre-existing failures only (no new issues)
+
+---
+
+## 2026-06-15 — Bridge Course Layer 2 revision map written
+
+Created `books/bridge-course/Topics to cover.md` — point-wise, topic-wise raw concept summary of all source chapters:
+
+- **CA Foundation Ch1 Units 1, 2, 5, 6, 7:** 6-step accounting cycle, evolution (Egypt → Pacioli), objectives, functions, book-keeping vs accounting, sub-fields, users, disciplines; all 12 GAAPs with key pointer each; 3 Fundamental Assumptions; Accounting Policies (selection + change); 4 Valuation Bases + Accounting Estimates; AS objectives, benefits, limitations, ASB process (8 steps), 3 sets of standards, AS 1-29 full list, key Ind AS list
+- **CA Inter Ch1:** GAAP at Inter depth, IFRS/IASB, Convergence vs Adoption, Ind AS, Carve-outs, Phase-wise Roadmap
+- **CA Inter Ch2:** Framework (objectives, users, 4 qualitative characteristics with sub-qualities), 5 elements with formal definitions, 2 recognition criteria, 4 measurement bases, Financial vs Physical Capital Maintenance
+- **CA Inter Ch3:** Status of AS, 3-question applicability test, Companies Act Sec 129/133/143, non-corporate applicability, CA's professional responsibility
+- Purpose: "Layer 2 skeleton" — Pranav Sir will insert story anchors and concept teaching between these raw topics
+- `file_index.py` run (116 files: 106 text, 10 local); `health_check.py` has 15 pre-existing failures (9 NUL-byte files in base-studymaterials, 5 missing gitignored folders, component-index stale) — none caused by today's work
+
+---
+
+## 2026-06-15 — Bridge Course master teaching document complete
+
+Rewrote `books/bridge-course/bridge-story.md` into a full structured teaching guide:
+
+- **3-class × 1-hour structure** with story, chapter maps, cliffhangers
+- **Class 1 (Foundation):** Going Concern, Money Measurement, Matching, Consistency, Conservatism, Materiality, Accounting Policies, Valuation Bases, Why AS exist — all with blood-report / Byju's / Arjun story thread
+- **Class 2 (Inter Ch 1):** GAAP, AS-setting process (ASB), IFRS/IASB, Convergence vs Adoption, Ind AS, Carve-outs, Roadmap
+- **Class 3 (Inter Ch 2 + 3):** Framework (4 qualitative characteristics), Elements (formal definitions), Recognition criteria, Capital Maintenance, 3-Question Test, Companies Act Sec 129/133/143, CA's responsibility
+- Every class ends with a story cliffhanger except Class 3 (which is a resolution)
+- AI fear not resolved — one paragraph: focus on studies, conversation for later
+- Ran `file_index.py` (updated); `generate_component_index.py` (regenerated)
+- `health_check.py` has 13 pre-existing failures (NUL bytes in base-studymaterials files from cross-mount edit, 5 missing gitignored folders, component-index stale) — none caused by today's work
+
+---
+
+## 2026-06-14 — Bridge course story written
+
+Created `books/bridge-course/bridge-story.md` — a Chapter 0-style Hinglish dialogue story bridging CA Foundation → CA Inter. Same characters (Arjun + Pranav Bhaiya), same narrative style. Covers:
+
+- Foundation concept recap (Entity, Dual Aspect, Accrual, Matching, Going Concern, Consistency, Conservatism)
+- Why Accounting Standards exist (the 5-accountants-5-profits problem)
+- What Accounting Standards are and how ICAI formulates them
+- AS vs Ind AS vs IFRS — India's convergence journey
+- Framework for financial statements (Reliable, Relevant, Comparable, Understandable)
+
+Setting: Arjun receives his Foundation result (passed), calls Pranav Bhaiya, conversation bridges him into the Inter level. Content is ICAI curriculum-accurate throughout.
+
+---
+
 ## 2026-06-13 — Working tree cleanup: 4-block atomic commit plan completed
 
 Resumed from previous context (session ran out). Committed remaining 2 blocks:

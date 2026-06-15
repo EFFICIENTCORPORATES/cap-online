@@ -1,7 +1,7 @@
 # MASTER Component Index
 ## CA-Inter-Strategy-Book-MASTER.md
 
-Generated: 2026-06-13  ·  `tools/generate_component_index.py`
+Generated: 2026-06-15  ·  `tools/generate_component_index.py`
 Source: `books/strategy-book/working/CA-Inter-Strategy-Book-MASTER.md`
 Lines: 2815  ·  MD5: `5805c527`
 
