@@ -1,0 +1,91 @@
+
+========================================================================
+Run timestamp : 2026-06-16 11:57:04
+Total files   : 1  |  Success: 0  |  Failed: 1  |  Skipped: 0  |  Dry-run: 0
+========================================================================
+  [FAILED  ]  Advance Accounting _PYQ_May_24 CA-INTER-ACCOUNTS.pdf  ->  Advance Accounting _PYQ_May_24 CA-INTER-ACCOUNTS.md  -> File conversion failed after 1 attempts:
+ - PdfConverter threw MissingDependencyException with message: PdfConverter recognized the input as a potential .pdf file, but the dependencies needed to read .pdf files have not been installed. To resolve this error, include the optional dependency [pdf] or [all] when installing MarkItDown. For example:
+
+* pip install markitdown[pdf]
+* pip install markitdown[all]
+* pip install markitdown[pdf, ...]
+* etc.
+
+
+========================================================================
+Run timestamp : 2026-06-16 11:57:40
+Total files   : 1  |  Success: 1  |  Failed: 0  |  Skipped: 0  |  Dry-run: 0
+========================================================================
+  [SUCCESS ]  Advance Accounting _PYQ_May_24 CA-INTER-ACCOUNTS.pdf  ->  Advance Accounting _PYQ_May_24 CA-INTER-ACCOUNTS.md [CHARFIX]
+
+========================================================================
+Run timestamp : 2026-06-16 11:57:47
+Total files   : 1  |  Success: 1  |  Failed: 0  |  Skipped: 0  |  Dry-run: 0
+========================================================================
+  [SUCCESS ]  MTP_May-24_Set-1 CA-INTER-ACCOUNTS.pdf  ->  MTP_May-24_Set-1 CA-INTER-ACCOUNTS.md
+
+========================================================================
+Run timestamp : 2026-06-16 11:58:57
+Total files   : 1  |  Success: 1  |  Failed: 0  |  Skipped: 0  |  Dry-run: 0
+========================================================================
+  [SUCCESS ]  Suggested Answers January, 2026 CA-INTER-ACCOUNTS.pdf  ->  Suggested Answers January, 2026 CA-INTER-ACCOUNTS.md
+
+========================================================================
+Run timestamp : 2026-06-16 20:55:48
+Total files   : 55  |  Success: 54  |  Failed: 0  |  Skipped: 1  |  Dry-run: 0
+========================================================================
+  [SKIPPED ]  CAInter-AdvAcc-MTP-ICAI-Practice-Ans.pdf  ->  CAInter-AdvAcc-MTP-ICAI-Practice-Ans.md  -> .md already exists — pass --overwrite to re-convert
+  [SUCCESS ]  CAInter-AdvAcc-MTP-ICAI-Practice-Q.pdf  ->  CAInter-AdvAcc-MTP-ICAI-Practice-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Jan2025-Set1-Ans.pdf  ->  CAInter-AdvAcc-MTP-Jan2025-Set1-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Jan2025-Set1-Q.pdf  ->  CAInter-AdvAcc-MTP-Jan2025-Set1-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Jan2025-Set2-Ans.pdf  ->  CAInter-AdvAcc-MTP-Jan2025-Set2-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Jan2025-Set2-Q.pdf  ->  CAInter-AdvAcc-MTP-Jan2025-Set2-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Jan2026-Set1-Ans.pdf  ->  CAInter-AdvAcc-MTP-Jan2026-Set1-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Jan2026-Set1-Q.pdf  ->  CAInter-AdvAcc-MTP-Jan2026-Set1-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Jan2026-Set2-Ans.pdf  ->  CAInter-AdvAcc-MTP-Jan2026-Set2-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Jan2026-Set2-Q.pdf  ->  CAInter-AdvAcc-MTP-Jan2026-Set2-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2023-Set1-Ans.pdf  ->  CAInter-AdvAcc-MTP-May2023-Set1-Ans.md [CHARFIX]
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2023-Set1-Q.pdf  ->  CAInter-AdvAcc-MTP-May2023-Set1-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2023-Set2-Ans.pdf  ->  CAInter-AdvAcc-MTP-May2023-Set2-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2023-Set2-Q.pdf  ->  CAInter-AdvAcc-MTP-May2023-Set2-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2024-Set1-Ans.pdf  ->  CAInter-AdvAcc-MTP-May2024-Set1-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2024-Set1-Q.pdf  ->  CAInter-AdvAcc-MTP-May2024-Set1-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2024-Set2-Ans.pdf  ->  CAInter-AdvAcc-MTP-May2024-Set2-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2024-Set2-Q.pdf  ->  CAInter-AdvAcc-MTP-May2024-Set2-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2025-Set1-Ans.pdf  ->  CAInter-AdvAcc-MTP-May2025-Set1-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2025-Set1-Q.pdf  ->  CAInter-AdvAcc-MTP-May2025-Set1-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2025-Set2-Ans.pdf  ->  CAInter-AdvAcc-MTP-May2025-Set2-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2025-Set2-Q.pdf  ->  CAInter-AdvAcc-MTP-May2025-Set2-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2026-Set1-Ans.pdf  ->  CAInter-AdvAcc-MTP-May2026-Set1-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2026-Set1-Q.pdf  ->  CAInter-AdvAcc-MTP-May2026-Set1-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2026-Set2-Ans.pdf  ->  CAInter-AdvAcc-MTP-May2026-Set2-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-May2026-Set2-Q.pdf  ->  CAInter-AdvAcc-MTP-May2026-Set2-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Nov2023-Set1-Ans.pdf  ->  CAInter-AdvAcc-MTP-Nov2023-Set1-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Nov2023-Set1-Q.pdf  ->  CAInter-AdvAcc-MTP-Nov2023-Set1-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Nov2023-Set2-Ans.pdf  ->  CAInter-AdvAcc-MTP-Nov2023-Set2-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Nov2023-Set2-Q.pdf  ->  CAInter-AdvAcc-MTP-Nov2023-Set2-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Sep2024-Set1-Ans.pdf  ->  CAInter-AdvAcc-MTP-Sep2024-Set1-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Sep2024-Set1-Q.pdf  ->  CAInter-AdvAcc-MTP-Sep2024-Set1-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Sep2024-Set2-Ans.pdf  ->  CAInter-AdvAcc-MTP-Sep2024-Set2-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Sep2024-Set2-Q.pdf  ->  CAInter-AdvAcc-MTP-Sep2024-Set2-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Sep2025-Set1-Ans.pdf  ->  CAInter-AdvAcc-MTP-Sep2025-Set1-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Sep2025-Set1-Q.pdf  ->  CAInter-AdvAcc-MTP-Sep2025-Set1-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Sep2025-Set2-Ans.pdf  ->  CAInter-AdvAcc-MTP-Sep2025-Set2-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-MTP-Sep2025-Set2-Q.pdf  ->  CAInter-AdvAcc-MTP-Sep2025-Set2-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-Jan2025-Ans.pdf  ->  CAInter-AdvAcc-PYQ-Jan2025-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-Jan2025-Q.pdf  ->  CAInter-AdvAcc-PYQ-Jan2025-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-Jan2026-Ans.pdf  ->  CAInter-AdvAcc-PYQ-Jan2026-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-Jan2026-Q.pdf  ->  CAInter-AdvAcc-PYQ-Jan2026-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-May2024-Ans.pdf  ->  CAInter-AdvAcc-PYQ-May2024-Ans.md [CHARFIX]
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-May2024-Q.pdf  ->  CAInter-AdvAcc-PYQ-May2024-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-May2025-Ans.pdf  ->  CAInter-AdvAcc-PYQ-May2025-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-May2026-Q.pdf  ->  CAInter-AdvAcc-PYQ-May2026-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-Sep2024-Ans.pdf  ->  CAInter-AdvAcc-PYQ-Sep2024-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-Sep2025-Ans.pdf  ->  CAInter-AdvAcc-PYQ-Sep2025-Ans.md
+  [SUCCESS ]  CAInter-AdvAcc-RTP-Jan2025-Q.pdf  ->  CAInter-AdvAcc-RTP-Jan2025-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-RTP-Jan2026-Q.pdf  ->  CAInter-AdvAcc-RTP-Jan2026-Q.md [CHARFIX]
+  [SUCCESS ]  CAInter-AdvAcc-RTP-May2024-Q.pdf  ->  CAInter-AdvAcc-RTP-May2024-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-RTP-May2025-Q.pdf  ->  CAInter-AdvAcc-RTP-May2025-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-RTP-May2026-Q.pdf  ->  CAInter-AdvAcc-RTP-May2026-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-RTP-Sep2024-Q.pdf  ->  CAInter-AdvAcc-RTP-Sep2024-Q.md
+  [SUCCESS ]  CAInter-AdvAcc-RTP-Sep2025-Q.pdf  ->  CAInter-AdvAcc-RTP-Sep2025-Q.md [CHARFIX]
