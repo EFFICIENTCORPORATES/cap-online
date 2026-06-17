@@ -48,6 +48,7 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 | `photo-gallery/` | `originals/` (gitignored) + `index.md` |
 | `planning/` | Future planning: `future-roadmap.md`, `to-purchase.md`, `execution-notes.md` |
 | `preparations/` | Personal prep notes, lecture plans |
+| `final-deliverables/` | Print-ready teaching documents: teaching method (01), batch planner (02/02A), bridge course skeleton (03/03A), and future student-facing exports. MD only. |
 | `tools/` | Admin/processing scripts (see section 5) |
 | `_claude/` | Claude's context: `memory/` (incl. `project_log.md`), `artifacts/`, `skills/` |
 

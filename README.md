@@ -91,6 +91,7 @@ cap-online/
 │       ├── ai-updates/  financial-news/  mental-side/  career-cv/
 │       └── famous-cas/  myth-vs-reality/  accounting-in-news/
 ├── student-toolkit/            ← standalone student tools (e.g. exam date calculator)
+├── final-deliverables/         ← print-ready teaching docs: teaching method, batch planner, bridge course skeleton
 │
 └── tools/                     ← admin scripts + processing utilities
     ├── health_check.py · file_index.py · gitignore_audit.py
@@ -116,6 +117,7 @@ cap-online/
 | Session history | `_claude/memory/project_log.md` |
 | Batch class operations (checklists, segment library, week planner) | `preparations/cainter-batch-operations.html` |
 | Standup Teaching philosophy | `preparations/standup-teaching.md` |
+| Teaching method, batch planner, bridge course skeleton | `final-deliverables/` |
 
 ---
 

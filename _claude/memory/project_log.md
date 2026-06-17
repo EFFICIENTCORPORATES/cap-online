@@ -4,6 +4,20 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-06-17 — final-deliverables: 02A and 03A light versions created
+
+Continuation session (context exhausted in previous turn). Tasks from previous session pending were:
+
+1. `final-deliverables/02A-batch-day-wise-planner-light.md` — lighter version of 02. Stripped Kahaani/Koncept/Karma narrative from Day Focus column; removed Notes column. Kept all 97 rows, 6 phase headers, chapter tests, ITD tests, holiday markers. Day Focus is now just topic/subtopic name (e.g. "Why AS exist; ASB formation; 8-step standard setting; benefits and limitations"). Phase summary table retained at bottom.
+
+2. `final-deliverables/03A-bridge-course-skeleton-light.md` — lighter version of 03. Removed all Kahaani narration (story beats, dialogues, Arjun/bus scenes). Kept: time budget tables for both sessions, Kahaani slot with just the anchor concept (blood report metaphor / why rules exist), full Koncept topic list in sequence, all Karma items (MCQ topics + illustration details), Layer 3 one-liners, vision close content list. 1.5 hrs × 2 session format maintained.
+
+3. `final-deliverables/` folder documented in CLAUDE.md section 3 and README.md (folder map + Where things are table). This was overdue from when the folder was created last session.
+
+4. `file_index.py` run: 326 files. `generate_component_index.py` run (regenerated). `health_check.py`: 22 pre-existing failures — 12 missing gitignored/local folders, 9 NUL-byte OCR files from last session's base-studymaterials, 1 component-index CRLF/LF hash mismatch (systematic tooling bug — generator hashes text, health_check hashes raw bytes on Windows). No new failures from this session's work.
+
+---
+
 ## 2026-06-15 — teaching_sequence.md: ALL 10 chapters complete
 
 Multi-session task concluded. Built `books/bridge-course/teaching_sequence.md` — 7-column table (CA Level | Chapter No. | Unit No. + Unit Name | Topic/SubTopic ID | Topic Name | Page No. | One-Line Summary) from all 10 base-studymaterial OCR files.
