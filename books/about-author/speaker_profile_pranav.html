@@ -1,0 +1,121 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.page{font-family:'DM Sans',sans-serif;background:#0a1628;color:#e8e0d0;min-height:600px;padding:0;position:relative;overflow:hidden;}
+.page::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#b8960c,#e8c84a,#b8960c);}
+.inner{max-width:720px;margin:0 auto;padding:2rem 2.5rem 1.5rem;}
+.top{display:flex;gap:2rem;align-items:flex-start;margin-bottom:1.5rem;}
+.photo-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:0.5rem;}
+.oval{width:96px;height:116px;border-radius:50%;border:2px solid #b8960c;background:rgba(184,150,12,0.08);display:flex;align-items:center;justify-content:center;}
+.oval-letter{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:#b8960c;opacity:0.7;}
+.photo-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#7a6f5e;text-align:center;}
+.header{flex:1;}
+.name{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:#e8c84a;line-height:1.2;margin-bottom:0.25rem;}
+.designation{font-size:0.78rem;letter-spacing:1.8px;text-transform:uppercase;color:#b8960c;margin-bottom:0.6rem;font-weight:500;}
+.tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.5rem;}
+.tag{font-size:0.68rem;padding:3px 10px;border:0.5px solid rgba(184,150,12,0.4);border-radius:20px;color:#c9b07a;letter-spacing:0.5px;background:rgba(184,150,12,0.06);}
+.divider{height:0.5px;background:rgba(184,150,12,0.25);margin:1rem 0;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1rem;}
+.section-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#b8960c;margin-bottom:0.6rem;font-weight:500;}
+.bullet-list{list-style:none;padding:0;}
+.bullet-list li{font-size:0.78rem;color:#c8c0b0;padding:3px 0 3px 14px;position:relative;line-height:1.45;}
+.bullet-list li::before{content:'▸';position:absolute;left:0;color:#b8960c;font-size:0.7rem;top:4px;}
+.bullet-list li strong{color:#e8e0d0;font-weight:500;}
+.full-section{margin-bottom:1rem;}
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 1.5rem;}
+.tools-grid li{font-size:0.75rem;}
+.stats-row{display:flex;gap:1.5rem;margin-bottom:1rem;}
+.stat{background:rgba(184,150,12,0.07);border:0.5px solid rgba(184,150,12,0.2);border-radius:6px;padding:0.6rem 1rem;flex:1;text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:#e8c84a;}
+.stat-lbl{font-size:0.64rem;letter-spacing:1px;text-transform:uppercase;color:#7a6f5e;margin-top:2px;}
+.contact-bar{background:rgba(184,150,12,0.06);border-top:0.5px solid rgba(184,150,12,0.2);padding:0.75rem 2.5rem;display:flex;justify-content:center;align-items:center;gap:2.5rem;margin-top:0.5rem;}
+.contact-item{display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:#c9b07a;}
+.contact-icon{font-size:0.9rem;color:#b8960c;}
+.tagline{font-size:0.72rem;font-style:italic;color:#7a6f5e;text-align:center;margin:0.25rem 0 0.5rem;letter-spacing:0.3px;}
+</style>
+<div class="page">
+  <div class="inner">
+    <div class="top">
+      <div class="photo-wrap">
+        <div class="oval"><span class="oval-letter">P</span></div>
+        <div class="photo-label">Photograph</div>
+      </div>
+      <div class="header">
+        <div class="name">CA Pranav Pratik Tulshyan</div>
+        <div class="designation">Chartered Accountant &nbsp;·&nbsp; Finance Technologist &nbsp;·&nbsp; Educator</div>
+        <div class="tags">
+          <span class="tag">AIR 1 — CPT & IPC</span>
+          <span class="tag">AIR 5 — CA Final</span>
+          <span class="tag">DU Rank Holder</span>
+          <span class="tag">Ex-IOCL</span>
+          <span class="tag">Ex-MoPNG</span>
+        </div>
+        <div class="tagline">"Combining financial expertise with technology-driven execution."</div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">6,000+</div><div class="stat-lbl">Community Members</div></div>
+      <div class="stat"><div class="stat-num">4 yrs</div><div class="stat-lbl">Training Professionals</div></div>
+      <div class="stat"><div class="stat-num">PSU + MoPNG</div><div class="stat-lbl">Government Experience</div></div>
+      <div class="stat"><div class="stat-num">D2C * V-CFO</div><div class="stat-lbl">Startup Consulting</div></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="two-col">
+      <div>
+        <div class="section-label">Career Milestones</div>
+        <ul class="bullet-list">
+          <li><strong>IOCL</strong> — Bihar & Jharkhand Finance Operations (2019–2024)</li>
+          <li><strong>Addl. Director (Finance)</strong> — PPAC, Ministry of Petroleum & Natural Gas</li>
+          <li><strong>Independent Consultant</strong> — D2C startups: fundraising, AOPs, finance systems (June 2025–)</li>
+          <li><strong>CA Practice</strong> — Active, Muzaffarpur-based</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-label">Areas of Expertise</div>
+        <ul class="bullet-list">
+          <li>Financial Reporting & Compliance</li>
+          <li>IT Security & IT Compliance</li>
+          <li>SaaS Systems & IT Infrastructure</li>
+          <li>Python, AI & Automation for Finance</li>
+          <li>AOP Structuring & Fund Raise Advisory</li>
+          <li>CA Practice Tech Transformation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="full-section">
+      <div class="section-label">Solutions Built — Efficient Corporates Platform</div>
+      <ul class="bullet-list tools-grid">
+        <li>Efficient Document Management System</li>
+        <li>GST Reconciliation Automation</li>
+        <li>Interactive Client Portals for CA Firms</li>
+        <li>PDF & Excel Automation Tools</li>
+        <li>File & Folder Management Utilities</li>
+        <li>GST Automation via Power Query</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="full-section">
+      <div class="section-label">Teaching & Community</div>
+      <ul class="bullet-list" style="columns:2;gap:1.5rem;">
+        <li>Python, AI & automation — 4 years, 6,000+ subscribers</li>
+        <li>Courses: Power Query, Python for Finance, Tally Automation</li>
+        <li>Mentors CA Final students & finance professionals actively</li>
+        <li>Publishes tools, articles & resources for CA firms</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="contact-bar">
+    <div class="contact-item"><span class="contact-icon">✉</span> pptulshyan@gmail.com</div>
+    <div style="width:0.5px;height:20px;background:rgba(184,150,12,0.25);"></div>
+    <div class="contact-item"><span class="contact-icon">✆</span> +91-7464098001</div>
+  </div>
+</div>
