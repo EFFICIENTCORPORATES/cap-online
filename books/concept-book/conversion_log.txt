@@ -1,0 +1,45 @@
+
+========================================================================
+Run timestamp : 2026-06-16 13:25:01
+Total files   : 40  |  Success: 40  |  Failed: 0  |  Skipped: 0  |  Dry-run: 0
+========================================================================
+  [SUCCESS ]  M1_C1_U1_ Initial Pages.pdf  ->  M1_C1_U1_ Initial Pages.md [CHARFIX]
+  [SUCCESS ]  M1_C1_U1_ Introduction to Accounting Standards.pdf  ->  M1_C1_U1_ Introduction to Accounting Standards.md
+  [SUCCESS ]  M1_C2_U1_ Framework for Preparation and Presentation of Financial Statements.pdf  ->  M1_C2_U1_ Framework for Preparation and Presentation of Financial Statements.md
+  [SUCCESS ]  M1_C3_U1_ Applicability of Accounting Standards.pdf  ->  M1_C3_U1_ Applicability of Accounting Standards.md
+  [SUCCESS ]  M1_C4_U1_ Accounting Standard 1 Disclosure of Accounting Policies.pdf  ->  M1_C4_U1_ Accounting Standard 1 Disclosure of Accounting Policies.md
+  [SUCCESS ]  M1_C4_U2_ Accounting Standard 3 Cash Flow Statement.pdf  ->  M1_C4_U2_ Accounting Standard 3 Cash Flow Statement.md
+  [SUCCESS ]  M1_C4_U3_ Accounting Standard 17 Segment Reporting.pdf  ->  M1_C4_U3_ Accounting Standard 17 Segment Reporting.md
+  [SUCCESS ]  M1_C4_U4_ Accounting Standard 18 Related Party Disclosures.pdf  ->  M1_C4_U4_ Accounting Standard 18 Related Party Disclosures.md
+  [SUCCESS ]  M1_C4_U5_ Accounting Standard 20 Earnings Per Share.pdf  ->  M1_C4_U5_ Accounting Standard 20 Earnings Per Share.md
+  [SUCCESS ]  M1_C4_U6_ Accounting Standard 24 Discontinuing Operations.pdf  ->  M1_C4_U6_ Accounting Standard 24 Discontinuing Operations.md
+  [SUCCESS ]  M1_C4_U7_ Accounting Standard 25 Interim Financial Reporting.pdf  ->  M1_C4_U7_ Accounting Standard 25 Interim Financial Reporting.md
+  [SUCCESS ]  M2_C10_U1_ Accounting Standard 21 Consolidated Financial Statements.pdf  ->  M2_C10_U1_ Accounting Standard 21 Consolidated Financial Statements.md
+  [SUCCESS ]  M2_C10_U2_ Accounting Standard 23 Accounting for Investments in Associates in Consolidated Financial Statements.pdf  ->  M2_C10_U2_ Accounting Standard 23 Accounting for Investments in Associates in Consolidated Financial Statements.md
+  [SUCCESS ]  M2_C10_U3_ Accounting Standard 27 Financial Reporting of Interests in Joint Ventures.pdf  ->  M2_C10_U3_ Accounting Standard 27 Financial Reporting of Interests in Joint Ventures.md
+  [SUCCESS ]  M2_C5_U1_ Accounting Standard 2 Valuation of Inventory.pdf  ->  M2_C5_U1_ Accounting Standard 2 Valuation of Inventory.md
+  [SUCCESS ]  M2_C5_U1_ Initial Pages.pdf  ->  M2_C5_U1_ Initial Pages.md
+  [SUCCESS ]  M2_C5_U2_ Accounting Standard 10 Property, Plant and Equipment.pdf  ->  M2_C5_U2_ Accounting Standard 10 Property, Plant and Equipment.md
+  [SUCCESS ]  M2_C5_U3_ Accounting Standard 13 Accounting for Investments.pdf  ->  M2_C5_U3_ Accounting Standard 13 Accounting for Investments.md
+  [SUCCESS ]  M2_C5_U4_ Accounting Standard 16 Borrowing Costs.pdf  ->  M2_C5_U4_ Accounting Standard 16 Borrowing Costs.md
+  [SUCCESS ]  M2_C5_U5_ Accounting Standard 19 Leases.pdf  ->  M2_C5_U5_ Accounting Standard 19 Leases.md
+  [SUCCESS ]  M2_C5_U6_ Accounting Standard 26 Intangible Assets.pdf  ->  M2_C5_U6_ Accounting Standard 26 Intangible Assets.md
+  [SUCCESS ]  M2_C5_U7_ Accounting Standard 28 Impairment of Assets.pdf  ->  M2_C5_U7_ Accounting Standard 28 Impairment of Assets.md
+  [SUCCESS ]  M2_C6_U1_ Accounting Standard 15 Employee Benefits.pdf  ->  M2_C6_U1_ Accounting Standard 15 Employee Benefits.md
+  [SUCCESS ]  M2_C6_U2_ AS 29 (Revised) Provisions, Contingent Liabilities and Contingent Assets.pdf  ->  M2_C6_U2_ AS 29 (Revised) Provisions, Contingent Liabilities and Contingent Assets.md
+  [SUCCESS ]  M2_C7_U1_ Accounting Standard 4 Contingencies and Events occurring after the Balance Sheet Date.pdf  ->  M2_C7_U1_ Accounting Standard 4 Contingencies and Events occurring after the Balance Sheet Date.md
+  [SUCCESS ]  M2_C7_U2_ Accounting Standard 5 Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies.pdf  ->  M2_C7_U2_ Accounting Standard 5 Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies.md
+  [SUCCESS ]  M2_C7_U3_ Accounting Standard 11 The Effects of Changes in Foreign Exchange Rates.pdf  ->  M2_C7_U3_ Accounting Standard 11 The Effects of Changes in Foreign Exchange Rates.md
+  [SUCCESS ]  M2_C7_U4_ Accounting Standard 22 Accounting for Taxes on Income.pdf  ->  M2_C7_U4_ Accounting Standard 22 Accounting for Taxes on Income.md
+  [SUCCESS ]  M2_C8_U1_ Accounting Standard 7 Construction Contracts.pdf  ->  M2_C8_U1_ Accounting Standard 7 Construction Contracts.md
+  [SUCCESS ]  M2_C8_U2_ Accounting Standard 9 Revenue Recognition.pdf  ->  M2_C8_U2_ Accounting Standard 9 Revenue Recognition.md
+  [SUCCESS ]  M2_C9_U1_ Accounting Standard 12 Accounting for Government Grants.pdf  ->  M2_C9_U1_ Accounting Standard 12 Accounting for Government Grants.md
+  [SUCCESS ]  M2_C9_U2_ Accounting Standard 14 Accounting for Amalgamations.pdf  ->  M2_C9_U2_ Accounting Standard 14 Accounting for Amalgamations.md
+  [SUCCESS ]  M3_C11_U1_ Annexure.pdf  ->  M3_C11_U1_ Annexure.md
+  [SUCCESS ]  M3_C11_U1_ Initial Pages.pdf  ->  M3_C11_U1_ Initial Pages.md [CHARFIX]
+  [SUCCESS ]  M3_C11_U1_ Preparation of Financial Statements.pdf  ->  M3_C11_U1_ Preparation of Financial Statements.md
+  [SUCCESS ]  M3_C11_U2_ Cash Flow Statement.pdf  ->  M3_C11_U2_ Cash Flow Statement.md
+  [SUCCESS ]  M3_C12_U1_ Buyback of Securities.pdf  ->  M3_C12_U1_ Buyback of Securities.md
+  [SUCCESS ]  M3_C13_U1_ Amalgamation of Companies.pdf  ->  M3_C13_U1_ Amalgamation of Companies.md
+  [SUCCESS ]  M3_C14_U1_ Internal Reconstruction.pdf  ->  M3_C14_U1_ Internal Reconstruction.md
+  [SUCCESS ]  M3_C15_U1_ Accounting for Branches including Foreign Branches.pdf  ->  M3_C15_U1_ Accounting for Branches including Foreign Branches.md
