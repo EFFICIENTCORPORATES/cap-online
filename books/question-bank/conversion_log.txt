@@ -89,3 +89,9 @@ Total files   : 55  |  Success: 54  |  Failed: 0  |  Skipped: 1  |  Dry-run: 0
   [SUCCESS ]  CAInter-AdvAcc-RTP-May2026-Q.pdf  ->  CAInter-AdvAcc-RTP-May2026-Q.md
   [SUCCESS ]  CAInter-AdvAcc-RTP-Sep2024-Q.pdf  ->  CAInter-AdvAcc-RTP-Sep2024-Q.md
   [SUCCESS ]  CAInter-AdvAcc-RTP-Sep2025-Q.pdf  ->  CAInter-AdvAcc-RTP-Sep2025-Q.md [CHARFIX]
+
+========================================================================
+Run timestamp : 2026-06-18 17:38:08
+Total files   : 1  |  Success: 1  |  Failed: 0  |  Skipped: 0  |  Dry-run: 0
+========================================================================
+  [SUCCESS ]  CAInter-AdvAcc-MTP-ICAI-Practice-Ans.pdf  ->  CAInter-AdvAcc-MTP-ICAI-Practice-Ans.md
