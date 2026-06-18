@@ -94,3 +94,4 @@ dist/
 .DS_Store
 Thumbs.db
 local_settings.py
+books/bridge-course/YogaMembersListNameMumbers.md
