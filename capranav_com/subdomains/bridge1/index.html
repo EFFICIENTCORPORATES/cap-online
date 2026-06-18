@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kahaani — VC Gurukul Bridge </title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Noto+Serif:ital@0;1&display=swap');
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black:  #080808;
+      --white:  #f0f0f0;
+      --dim:    #888888;
+      --red:    #c0392b;
+      --teal:   #00c2a8;
+      --gold:   #e8a13d;
+      --blue:   #2980b9;
+    }
+
+    body {
+      background: var(--black);
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      color: var(--white);
+      cursor: none;
+    }
+
+    /* ── PERSISTENT HEADER ───────────────────────── */
+    #site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      border-bottom: 1px solid #111;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+    }
+    #site-header .h-left {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--teal);
+      text-transform: uppercase;
+    }
+    #site-header .h-center {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: #666;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    #site-header .h-right {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #666;
+      text-align: right;
+      line-height: 1.6;
+    }
+    #site-header .h-right span {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ── SLIDE ENGINE ─────────────────────────────── */
+    .slide {
+      position: absolute;
+      inset: 0;
+      top: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 80px 60px;
+      opacity: 0;
+      transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1);
+      pointer-events: none;
+    }
+    .slide.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ── SLIDE EMOJI ──────────────────────────────── */
+    .slide-emoji {
+      position: absolute;
+      bottom: 36px;
+      left: 52px;
+      font-size: 56px;
+      line-height: 1;
+      opacity: 0;
+      animation: fadeUp 0.8s 1.6s forwards;
+      user-select: none;
+      filter: drop-shadow(0 0 18px rgba(255,255,255,0.08));
+    }
+
+    /* ── PROGRESS BAR ─────────────────────────────── */
+    #progress {
+      position: fixed;
+      bottom: 0; left: 0;
+      height: 2px;
+      background: var(--teal);
+      transition: width 0.6s ease;
+      z-index: 100;
+    }
+
+    /* ── SLIDE COUNTER ────────────────────────────── */
+    #counter {
+      position: fixed;
+      bottom: 18px; right: 32px;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: #282828;
+      z-index: 100;
+      font-weight: 500;
+    }
+
+    /* ── NAV HINT ─────────────────────────────────── */
+    #hint {
+      position: fixed;
+      bottom: 18px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: #222;
+      text-transform: uppercase;
+      z-index: 100;
+      transition: opacity 2s ease;
+    }
+
+    /* ── GRAIN OVERLAY ───────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 50;
+      opacity: 0.6;
+    }
+
+    /* ── SHARED ANIMATIONS ───────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes strikeThrough {
+      to { width: 100%; }
+    }
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* ══════════════════════════════════════════════
+       CARD 1 — Scene Setter
+    ══════════════════════════════════════════════ */
+    #s1 { background: var(--black); text-align: center; gap: 28px; }
+
+    #s1 .main {
+      font-size: clamp(32px, 4.5vw, 58px);
+      font-weight: 300;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      max-width: 800px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+    #s1 .main em {
+      font-family: 'Noto Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--teal);
+    }
+    #s1 .sub {
+      font-size: 13px;
+      color: #333;
+      letter-spacing: 0.06em;
+      opacity: 0;
+      animation: fadeUp 0.8s 1.0s forwards;
+    }
+
+    /* ══════════════════════════════════════════════
+       CARD 2 — The Question
+    ══════════════════════════════════════════════ */
+    #s2 { background: var(--black); text-align: center; gap: 32px; }
+
+    #s2 .big {
+      font-size: clamp(36px, 5.5vw, 72px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.3s forwards;
+    }
+    #s2 .big .strike {
+      position: relative;
+      color: var(--dim);
+    }
+    #s2 .big .strike::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      width: 0; height: 2px;
+      background: var(--red);
+      animation: strikeThrough 0.5s 1.4s forwards;
+    }
+    #s2 .replace {
+      font-size: clamp(18px, 2.8vw, 36px);
+      font-weight: 300;
+      color: var(--dim);
+      letter-spacing: 0.01em;
+      opacity: 0;
+      animation: fadeUp 0.7s 1.8s forwards;
+    }
+    #s2 .replace span { color: var(--red); font-weight: 500; }
+
+    /* ══════════════════════════════════════════════
+       CARD 3 — Blood Report Reveal
+    ══════════════════════════════════════════════ */
+    #s3 {
+      background: var(--black);
+      flex-direction: row;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .report-card {
+      background: #0f0f0f;
+      border: 1px solid #1e1e1e;
+      border-radius: 4px;
+      padding: 28px 32px;
+      min-width: 260px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.4s forwards;
+    }
+    .report-card .report-header {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: var(--dim);
+      text-transform: uppercase;
+      border-bottom: 1px solid #1e1e1e;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+    .report-card .report-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid #111;
+      font-size: 11.5px;
+      color: #aaa;
+    }
+    .report-card .report-row .val { color: var(--white); font-weight: 500; }
+    .report-card .report-row .val.flag { color: var(--red); }
+    .report-card .report-footer {
+      margin-top: 14px;
+      font-size: 9px;
+      color: #333;
+      letter-spacing: 0.1em;
+    }
+    .report-card .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .s3-text {
+      max-width: 480px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.8s forwards;
+    }
+    .s3-text .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .s3-text .headline {
+      font-size: clamp(26px, 3.2vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .s3-text .headline em { font-style: normal; color: var(--teal); }
+    .s3-text .body {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: #999;
+    }
+
+    /* ══════════════════════════════════════════════
+       CARD 4 — 5 Labs Problem
+    ══════════════════════════════════════════════ */
+    #s4 { background: var(--black); text-align: center; gap: 44px; }
+
+    #s4 .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--dim);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s forwards;
+    }
+    .labs-row {
+      display: flex;
+      gap: 20px;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.5s forwards;
+    }
+    .lab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .lab-num {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .lab-label {
+      font-size: 9px;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .lab-item:nth-child(1) .lab-num { color: #e74c3c; }
+    .lab-item:nth-child(2) .lab-num { color: #e67e22; }
+    .lab-item:nth-child(3) .lab-num { color: #2ecc71; }
+    .lab-item:nth-child(4) .lab-num { color: #e67e22; }
+    .lab-item:nth-child(5) .lab-num { color: #e74c3c; }
+
+    .lab-arrow { font-size: 16px; color: #222; margin-bottom: 22px; }
+
+    #s4 .chaos-line {
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      opacity: 0;
+      animation: fadeUp 0.7s 1.0s forwards;
+    }
+    #s4 .chaos-line span { color: var(--red); }
+
+    #s4 .sub-line {
+      font-size: 15px;
+      color: var(--dim);
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeUp 0.7s 1.4s forwards;
+    }
+    #s4 .sub-line em { color: var(--teal); font-style: normal; font-weight: 500; }
+
+    /* ══════════════════════════════════════════════
+       CARD 5 — Byju's: The Rise
+    ══════════════════════════════════════════════ */
+    #s5 { background: var(--black); text-align: center; gap: 24px; }
+
+    #s5 .brand {
+      font-size: clamp(60px, 9vw, 116px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--gold);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s forwards;
+      line-height: 1;
+    }
+    #s5 .valuation {
+      font-size: clamp(16px, 2.2vw, 28px);
+      font-weight: 300;
+      color: #666;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.8s forwards;
+    }
+    #s5 .valuation strong { color: var(--white); font-weight: 700; }
+
+    .graph-line {
+      width: 320px; height: 60px;
+      opacity: 0;
+      animation: fadeUp 0.6s 1.1s forwards;
+    }
+    #s5 .tags {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s 1.3s forwards;
+    }
+    #s5 .tag {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid #1e1e1e;
+      padding: 5px 12px;
+      border-radius: 2px;
+    }
+
+    /* ══════════════════════════════════════════════
+       CARD 6 — The Collapse: All Stakeholders
+    ══════════════════════════════════════════════ */
+    #s6 { background: var(--black); gap: 28px; text-align: center; }
+
+    #s6 .mistake {
+      font-size: clamp(13px, 1.6vw, 18px);
+      font-weight: 300;
+      color: #555;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s forwards;
+    }
+    #s6 .mistake strong { color: var(--white); }
+
+    .stakeholders {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+    .sh-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 0 6px;
+    }
+    .sh-icon {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      border: 1px solid #1c1c1c;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      background: #0d0d0d;
+    }
+    .sh-name {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #444;
+      max-width: 64px;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .sh-arrow {
+      font-size: 14px;
+      color: #1e1e1e;
+      margin-bottom: 20px;
+      padding: 0 2px;
+    }
+
+    #s6 .outcomes {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 1.1s forwards;
+    }
+    .outcome-item {
+      text-align: center;
+    }
+    .outcome-item .o-val {
+      font-size: clamp(18px, 2.5vw, 28px);
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: -0.02em;
+    }
+    .outcome-item .o-label {
+      font-size: 10px;
+      color: #444;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    #s6 .india-line {
+      font-size: clamp(13px, 1.5vw, 17px);
+      color: #444;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      border-top: 1px solid #141414;
+      padding-top: 16px;
+      opacity: 0;
+      animation: fadeUp 0.7s 1.6s forwards;
+    }
+    #s6 .india-line strong { color: var(--red); font-weight: 500; }
+
+    /* ══════════════════════════════════════════════
+       CARD 7 — Nation Building
+    ══════════════════════════════════════════════ */
+    #s7 { background: #030303; text-align: center; gap: 20px; }
+
+    #s7 .not-line {
+      font-size: clamp(14px, 1.8vw, 20px);
+      font-weight: 300;
+      color: #666;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+    #s7 .ca-title {
+      font-size: clamp(28px, 4.5vw, 58px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeUp 0.9s 0.9s forwards;
+    }
+    #s7 .not-receptionist {
+      font-size: clamp(14px, 1.8vw, 20px);
+      font-weight: 300;
+      color: var(--red);
+      letter-spacing: 0.06em;
+      opacity: 0;
+      animation: fadeUp 0.8s 1.4s forwards;
+      text-decoration: line-through;
+      text-decoration-color: var(--red);
+    }
+    #s7 .but {
+      font-size: clamp(13px, 1.5vw, 17px);
+      font-weight: 300;
+      color: #666;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.7s 1.9s forwards;
+    }
+    #s7 .nation {
+      font-size: clamp(32px, 5.5vw, 72px);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--gold);
+      text-shadow: 0 0 60px rgba(232,161,61,0.3);
+      opacity: 0;
+      animation: fadeUp 1s 2.3s forwards;
+    }
+    #s7 .attr {
+      margin-top: 28px;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.6s 3.0s forwards;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── PERSISTENT HEADER ──────────────────────── -->
+<header id="site-header">
+  <div class="h-left">VC Gurukul</div>
+  <div class="h-center">K1 — Kahaani</div>
+  <div class="h-right">
+    CA Pranav P Tulshyan &nbsp;·&nbsp; #PranavBhaiya &nbsp;·&nbsp; <span>Newton of Accounts</span>
+  </div>
+</header>
+
+<!-- PROGRESS BAR -->
+<div id="progress"></div>
+<div id="counter">1 / 7</div>
+<div id="hint">SPACE or → to advance</div>
+
+<!-- ══════════════════════════════════════════════
+     CARD 1 — Scene Setter
+══════════════════════════════════════════════ -->
+<section class="slide active" id="s1">
+  <div class="main">
+    After CPT — <em>Holidays.</em><br>
+    Relaxed days. Bas relax and enjoy .
+  </div>
+  <div class="sub">Bridge Course  &nbsp;·&nbsp; CA Inter Advanced Accounts</div>
+  <div class="slide-emoji">😌</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CARD 2 — The Question
+══════════════════════════════════════════════ -->
+<section class="slide" id="s2">
+  <div class="big">
+    <span class="strike">Chartered Accountant</span>
+  </div>
+  <div class="replace">
+    Yeh toh bas ek <span>glorified receptionist</span> ka kaam hai.
+  </div>
+  <div class="slide-emoji">😑</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CARD 3 — Blood Report Reveal
+══════════════════════════════════════════════ -->
+<section class="slide" id="s3">
+  <div class="report-card">
+    <div class="report-header">
+      PATHOLOGY REPORT · PATIENT: ARJUN · DOB: 2005
+    </div>
+    <div class="report-row">
+      <span>Haemoglobin</span>
+      <span class="val flag">11.2 g/dL ↓</span>
+    </div>
+    <div class="report-row">
+      <span>WBC Count</span>
+      <span class="val">8,400 /μL</span>
+    </div>
+    <div class="report-row">
+      <span>Widal (O antigen)</span>
+      <span class="val flag">1:160 +ve</span>
+    </div>
+    <div class="report-row">
+      <span>Platelet Count</span>
+      <span class="val flag">1.2 L/μL ↓</span>
+    </div>
+    <div class="report-row">
+      <span>Blood Sugar (F)</span>
+      <span class="val">92 mg/dL</span>
+    </div>
+    <div class="report-footer">
+      <span class="dot"></span>Typhoid confirmed. Treatment advised.
+    </div>
+  </div>
+
+  <div class="s3-text">
+    <div class="eyebrow">The Analogy</div>
+    <div class="headline">
+      Ek company ka<br>financial statement<br>
+      uska <em>blood report</em> hota hai.
+    </div>
+    <div class="body">
+      Bahar se company kitni bhi healthy dikhe —<br>
+      asli haal sirf is report mein hota hai.<br><br>
+      Aur jo insaan yeh report banata hai —<br>
+      woh receptionist nahi hota.
+    </div>
+  </div>
+  <div class="slide-emoji">🤔</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CARD 4 — 5 Labs Problem
+══════════════════════════════════════════════ -->
+<section class="slide" id="s4">
+  <div class="eyebrow">Ek hi blood sample &nbsp;·&nbsp; 5 different labs</div>
+
+  <div class="labs-row">
+    <div class="lab-item">
+      <svg width="40" height="56" viewBox="0 0 40 56" fill="none">
+        <path d="M15 4 L15 28 L6 48 Q4 52 8 52 L32 52 Q36 52 34 48 L25 28 L25 4 Z" stroke="#2a2a2a" stroke-width="1.5" fill="none"/>
+        <path d="M15 32 L6 48 Q4 52 8 52 L32 52 Q36 52 34 48 L25 32 Z" fill="#c0392b" opacity="0.35"/>
+        <line x1="12" y1="4" x2="28" y2="4" stroke="#2a2a2a" stroke-width="1.5"/>
+      </svg>
+      <div class="lab-num">11.2</div>
+      <div class="lab-label">Lab A</div>
+    </div>
+    <div class="lab-arrow">→</div>
+    <div class="lab-item">
+      <svg width="40" height="56" viewBox="0 0 40 56" fill="none">
+        <path d="M15 4 L15 28 L6 48 Q4 52 8 52 L32 52 Q36 52 34 48 L25 28 L25 4 Z" stroke="#2a2a2a" stroke-width="1.5" fill="none"/>
+        <path d="M15 36 L8 48 Q4 52 8 52 L32 52 Q36 52 34 48 L25 36 Z" fill="#e67e22" opacity="0.35"/>
+        <line x1="12" y1="4" x2="28" y2="4" stroke="#2a2a2a" stroke-width="1.5"/>
+      </svg>
+      <div class="lab-num">12.8</div>
+      <div class="lab-label">Lab B</div>
+    </div>
+    <div class="lab-arrow">→</div>
+    <div class="lab-item">
+      <svg width="40" height="56" viewBox="0 0 40 56" fill="none">
+        <path d="M15 4 L15 28 L6 48 Q4 52 8 52 L32 52 Q36 52 34 48 L25 28 L25 4 Z" stroke="#2a2a2a" stroke-width="1.5" fill="none"/>
+        <path d="M15 20 L6 48 Q4 52 8 52 L32 52 Q36 52 34 48 L25 20 Z" fill="#2ecc71" opacity="0.2"/>
+        <line x1="12" y1="4" x2="28" y2="4" stroke="#2a2a2a" stroke-width="1.5"/>
+      </svg>
+      <div class="lab-num">13.5</div>
+      <div class="lab-label">Lab C</div>
+    </div>
+    <div class="lab-arrow">→</div>
+    <div class="lab-item">
+      <svg width="40" height="56" viewBox="0 0 40 56" fill="none">
+        <path d="M15 4 L15 28 L6 48 Q4 52 8 52 L32 52 Q36 52 34 48 L25 28 L25 4 Z" stroke="#2a2a2a" stroke-width="1.5" fill="none"/>
+        <path d="M15 30 L7 48 Q4 52 8 52 L32 52 Q36 52 34 48 L25 30 Z" fill="#e67e22" opacity="0.35"/>
+        <line x1="12" y1="4" x2="28" y2="4" stroke="#2a2a2a" stroke-width="1.5"/>
+      </svg>
+      <div class="lab-num">10.6</div>
+      <div class="lab-label">Lab D</div>
+    </div>
+    <div class="lab-arrow">→</div>
+    <div class="lab-item">
+      <svg width="40" height="56" viewBox="0 0 40 56" fill="none">
+        <path d="M15 4 L15 28 L6 48 Q4 52 8 52 L32 52 Q36 52 34 48 L25 28 L25 4 Z" stroke="#2a2a2a" stroke-width="1.5" fill="none"/>
+        <path d="M15 24 L6 48 Q4 52 8 52 L32 52 Q36 52 34 48 L25 24 Z" fill="#c0392b" opacity="0.35"/>
+        <line x1="12" y1="4" x2="28" y2="4" stroke="#2a2a2a" stroke-width="1.5"/>
+      </svg>
+      <div class="lab-num">14.1</div>
+      <div class="lab-label">Lab E</div>
+    </div>
+  </div>
+
+  <div class="chaos-line">5 labs. 5 different results. <span>Trust khatam.</span></div>
+  <div class="sub-line">Accounts mein bhi yahi hua — jab tak <em>GAAP</em> nahi the.</div>
+  <div class="slide-emoji">😱</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CARD 5 — Byju's: The Rise
+══════════════════════════════════════════════ -->
+<section class="slide" id="s5">
+  <div class="brand">BYJU'S</div>
+
+  <div class="valuation">
+    India ka <strong>biggest edtech.</strong>&nbsp;&nbsp;
+    Valuation: <strong>$22 Billion.</strong>
+  </div>
+
+  <svg class="graph-line" viewBox="0 0 320 60" fill="none">
+    <polyline
+      points="0,55 40,48 80,38 120,28 160,18 200,12 250,6 320,2"
+      stroke="#e8a13d" stroke-width="1.5" fill="none"
+      stroke-dasharray="420" stroke-dashoffset="420"
+      style="animation: drawLine 1.2s 1.2s ease forwards;"
+    />
+    <circle cx="320" cy="2" r="3" fill="#e8a13d" opacity="0"
+      style="animation: fadeUp 0.4s 2.3s forwards;" />
+  </svg>
+
+  <div class="tags">
+    <div class="tag">IPL Title Sponsor</div>
+    <div class="tag">Lionel Messi</div>
+    <div class="tag">FIFA World Cup</div>
+    <div class="tag">SoftBank backed</div>
+    <div class="tag">BlackRock</div>
+    <div class="tag">Foreign Investors (USA)</div>
+  </div>
+  <div class="slide-emoji">😎</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CARD 6 — The Collapse: All Stakeholders
+══════════════════════════════════════════════ -->
+<section class="slide" id="s6">
+  <div class="mistake">
+    ₹90,000 &nbsp;·&nbsp; 3-year course &nbsp;·&nbsp;
+    <strong>Intentional misstatement — poora Year 1 mein income book kar liya.</strong>
+  </div>
+
+  <!-- All users of financial statements -->
+  <div class="stakeholders">
+    <div class="sh-item">
+      <div class="sh-icon">🏦</div>
+      <div class="sh-name">Banks<br>(Loans given)</div>
+    </div>
+    <div class="sh-arrow">→</div>
+    <div class="sh-item">
+      <div class="sh-icon">🌍</div>
+      <div class="sh-name">Foreign Investors<br>(USA)</div>
+    </div>
+    <div class="sh-arrow">→</div>
+    <div class="sh-item">
+      <div class="sh-icon">📈</div>
+      <div class="sh-name">Indian Investors</div>
+    </div>
+    <div class="sh-arrow">→</div>
+    <div class="sh-item">
+      <div class="sh-icon">👩‍💼</div>
+      <div class="sh-name">Employees<br>(Salaries delayed)</div>
+    </div>
+    <div class="sh-arrow">→</div>
+    <div class="sh-item">
+      <div class="sh-icon">🏭</div>
+      <div class="sh-name">Creditors<br>&amp; Vendors</div>
+    </div>
+    <div class="sh-arrow">→</div>
+    <div class="sh-item">
+      <div class="sh-icon">🎓</div>
+      <div class="sh-name">Students<br>(Aapka Ghar)</div>
+    </div>
+    <div class="sh-arrow">→</div>
+    <div class="sh-item">
+      <div class="sh-icon">🏛️</div>
+      <div class="sh-name">Government</div>
+    </div>
+  </div>
+
+  <div class="outcomes">
+    <div class="outcome-item">
+      <div class="o-val">Zero</div>
+      <div class="o-label">Valuation</div>
+    </div>
+    <div class="outcome-item">
+      <div class="o-val">3</div>
+      <div class="o-label">Auditors resigned</div>
+    </div>
+    <div class="outcome-item">
+      <div class="o-val">Cases</div>
+      <div class="o-label">On Management</div>
+    </div>
+    <div class="outcome-item">
+      <div class="o-val">₹90,000</div>
+      <div class="o-label">Doob gaya</div>
+    </div>
+  </div>
+
+  <div class="india-line">
+    Foreign investors ne kaha: <strong>"India mein invest nahi karenge."</strong>
+    &nbsp;·&nbsp; India ki global image — damaged.
+  </div>
+  <div class="slide-emoji">🤒</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CARD 7 — Partner in Nation Building
+══════════════════════════════════════════════ -->
+<section class="slide" id="s7">
+  <div class="not-line">A Chartered Accountant is</div>
+  <div class="ca-title">Protecting this entire Chain.</div>
+  <div class="not-receptionist">NOT a Receptionist.</div>
+  <div class="but">But a</div>
+  <div class="nation">Partner in<br>Nation Building.</div>
+  <div class="attr">VC Gurukul &nbsp;·&nbsp; CA Pranav P Tulshyan &nbsp;·&nbsp; #PranavBhaiya</div>
+  <div class="slide-emoji">💪</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     NAVIGATION ENGINE
+══════════════════════════════════════════════ -->
+<script>
+  let cur   = 0;
+  const total = 7;
+
+  const progress = document.getElementById('progress');
+  const counter  = document.getElementById('counter');
+  const hint     = document.getElementById('hint');
+
+  setTimeout(() => { hint.style.opacity = '0'; }, 4000);
+
+  function getSlides() { return document.querySelectorAll('.slide'); }
+
+  function updateUI() {
+    progress.style.width = ((cur + 1) / total * 100) + '%';
+    counter.textContent  = (cur + 1) + ' / ' + total;
+  }
+
+  function advance() {
+    const all = getSlides();
+    if (cur >= all.length - 1) return;
+    all[cur].classList.remove('active');
+    cur++;
+    const next  = all[cur];
+    const clone = next.cloneNode(true);
+    clone.classList.add('active');
+    next.parentNode.replaceChild(clone, next);
+    updateUI();
+  }
+
+  function retreat() {
+    const all = getSlides();
+    if (cur <= 0) return;
+    all[cur].classList.remove('active');
+    cur--;
+    const prev  = all[cur];
+    const clone = prev.cloneNode(true);
+    clone.classList.add('active');
+    prev.parentNode.replaceChild(clone, prev);
+    updateUI();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); advance(); }
+    if (e.key === 'ArrowLeft')                    { e.preventDefault(); retreat(); }
+  });
+
+  document.addEventListener('click', () => advance());
+
+  updateUI();
+</script>
+
+</body>
+</html>
