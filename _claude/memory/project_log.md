@@ -4,6 +4,16 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-06-17 — AS 2 Concept Book chapter: HTML print version complete
+
+Created `books/concept-book/chapters/seq04-as02-valuation-of-inventories.html` — print-ready A4 HTML for the AS 2 Concept Book chapter. Self-contained file (Google Fonts CDN, all CSS inline).
+
+Design: 7 pages — (1) cover (navy gradient, watermark AS2, gold-orange accent bar, badges), (2) story "Godown Ka Hisaab", (3–5) Layer 2 concept notes [AS2-1.2] to [AS2-1.15], (6) Illustration Guide, (7) TYK Guide + Layer 3. Color system: Story = orange border on warm cream; Kaam Ki Baat = green border on mint; Story Reference = purple border on lavender; Exam Note = red border on light red; Layer 3 = dark navy background with orange numbered circles. Print: @page A4, position:fixed header/footer repeating on each printed page. Fonts: Poppins (headings/badges), Merriweather (story prose), Lato (body).
+
+All 4 Kaam Ki Baat boxes, 3 Story References, and Exam Notes from the MD chapter are fully reproduced in the HTML.
+
+---
+
 ## 2026-06-17 — final-deliverables: 02A and 03A light versions created
 
 Continuation session (context exhausted in previous turn). Tasks from previous session pending were:
