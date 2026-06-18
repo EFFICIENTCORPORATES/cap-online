@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AS 2 — Valuation of Inventories | Concept Book | VC Gurukul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== VARIABLES ===== */
+    :root {
+      --navy:          #1a1a2e;
+      --navy-light:    #2a2a4e;
+      --orange:        #e8813a;
+      --orange-light:  #fff4ed;
+      --orange-dark:   #c96d25;
+      --green:         #2d8653;
+      --green-light:   #edf7f2;
+      --green-dark:    #1e5e38;
+      --purple:        #6b3fa0;
+      --purple-light:  #f3eeff;
+      --purple-dark:   #4a2a72;
+      --red:           #c0392b;
+      --red-light:     #fdf1f0;
+      --red-dark:      #922b21;
+      --gold:          #f0a500;
+      --gray-100:      #f8f9fa;
+      --gray-200:      #e9ecef;
+      --gray-300:      #dee2e6;
+      --gray-600:      #6c757d;
+      --gray-700:      #495057;
+      --text:          #2c2c2c;
+      --text-light:    #555;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.65;
+      color: var(--text);
+      background: #d0d0d8;
+    }
+
+    /* ===== SCREEN WRAPPER ===== */
+    @media screen {
+      .page-wrapper {
+        max-width: 220mm;
+        margin: 0 auto;
+        padding: 24px 0 48px;
+      }
+      .page {
+        background: white;
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto 28px;
+        box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+        border-radius: 3px;
+        position: relative;
+        overflow: hidden;
+      }
+      .page-content {
+        padding: 38px 44px 38px;
+      }
+      .print-header, .print-footer { display: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white; font-size: 10pt; }
+      .page { box-shadow: none; margin: 0; border-radius: 0; }
+      .page-content { padding: 0; }
+
+      .print-header {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 44px;
+        border-bottom: 2px solid var(--orange);
+        background: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 7pt;
+        color: var(--gray-600);
+        font-weight: 600;
+      }
+
+      .print-footer {
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 44px;
+        border-top: 1px solid var(--gray-300);
+        background: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 7pt;
+        color: var(--gray-600);
+      }
+
+      @page {
+        size: A4;
+        margin: 36px 44px 30px 44px;
+      }
+      @page :first {
+        margin: 0;
+      }
+
+      .cover-page { page-break-after: always; }
+      .page-break-before { page-break-before: always; }
+      .no-break { page-break-inside: avoid; }
+      .kaam-ki-baat, .story-reference, .exam-note, .illustration-item, .layer3-container { page-break-inside: avoid; }
+      h3 { page-break-after: avoid; }
+    }
+
+    /* ===== COVER ===== */
+    .cover-page {
+      background: linear-gradient(150deg, #12122a 0%, #2a2a5a 45%, #1a1a3a 100%);
+      min-height: 297mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover-watermark {
+      position: absolute;
+      right: -20px;
+      bottom: 60px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 280pt;
+      font-weight: 900;
+      color: rgba(255,255,255,0.035);
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .cover-top-bar {
+      width: 100%;
+      height: 7px;
+      background: linear-gradient(90deg, var(--orange) 0%, var(--gold) 55%, var(--orange-dark) 100%);
+      flex-shrink: 0;
+    }
+
+    .cover-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 52px 64px 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-series-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 20px;
+    }
+
+    .cover-seq-line {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10pt;
+      font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 6px;
+    }
+
+    .cover-as-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 72pt;
+      font-weight: 900;
+      color: white;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .cover-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 21pt;
+      font-weight: 700;
+      color: var(--orange);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .cover-divider {
+      width: 72px;
+      height: 4px;
+      background: var(--orange);
+      border-radius: 2px;
+      margin-bottom: 22px;
+    }
+
+    .cover-story-name {
+      font-family: 'Merriweather', serif;
+      font-size: 13pt;
+      font-style: italic;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 36px;
+    }
+
+    .cover-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cover-badge {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.75);
+      font-family: 'Poppins', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 20px;
+    }
+
+    .cover-badge.accent {
+      background: rgba(232,129,58,0.15);
+      border-color: var(--orange);
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .cover-footer-bar {
+      padding: 20px 64px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .cover-footer-left {
+      font-family: 'Poppins', sans-serif;
+      font-size: 7.5pt;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.6;
+    }
+
+    .cover-footer-right {
+      font-family: 'Poppins', sans-serif;
+      font-size: 8pt;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* ===== SECTION HEADERS ===== */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 18px;
+      padding-bottom: 12px;
+      border-bottom: 2.5px solid var(--orange);
+    }
+
+    .section-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13pt;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .section-icon.navy   { background: var(--navy); }
+    .section-icon.green  { background: var(--green); }
+    .section-icon.purple { background: var(--purple); }
+    .section-icon.gold   { background: var(--gold); }
+
+    .section-header-text h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      font-family: 'Lato', sans-serif;
+      font-size: 8pt;
+      color: var(--gray-600);
+      font-style: italic;
+    }
+
+    /* ===== STORY ===== */
+    .story-container {
+      background: #fffbf7;
+      border: 1px solid #f0d9c0;
+      border-left: 5px solid var(--orange);
+      border-radius: 8px;
+      padding: 28px 32px;
+    }
+
+    .story-eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 3px;
+    }
+
+    .story-heading {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14pt;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    .story-container p {
+      font-family: 'Merriweather', serif;
+      font-size: 10pt;
+      line-height: 1.9;
+      color: #3a2e20;
+      margin-bottom: 14px;
+    }
+
+    .story-container p:last-child { margin-bottom: 0; }
+
+    .story-break {
+      border: none;
+      border-top: 1px solid #e8d5bc;
+      margin: 18px 0;
+    }
+
+    .story-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-family: 'Lato', sans-serif;
+      font-size: 9.5pt;
+    }
+
+    .story-table th {
+      background: var(--orange);
+      color: white;
+      font-weight: 700;
+      padding: 7px 12px;
+      text-align: left;
+      font-family: 'Poppins', sans-serif;
+      font-size: 8.5pt;
+    }
+
+    .story-table td {
+      padding: 7px 12px;
+      border-bottom: 1px solid #f0d9c0;
+      color: #3a2e20;
+    }
+
+    .story-table tr:nth-child(even) td { background: rgba(232,129,58,0.06); }
+    .story-table tr.total-row td { font-weight: 700; background: rgba(232,129,58,0.1); border-top: 2px solid var(--orange); }
+
+    /* ===== LAYER 2 CONCEPT NOTES ===== */
+    .icai-ref-note {
+      font-family: 'Lato', sans-serif;
+      font-size: 8.5pt;
+      color: var(--gray-600);
+      font-style: italic;
+      margin-bottom: 22px;
+      padding: 8px 14px;
+      background: var(--gray-100);
+      border-radius: 4px;
+      border-left: 3px solid var(--gray-300);
+    }
+
+    .concept-section {
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .concept-section:last-of-type { border-bottom: none; margin-bottom: 0; }
+
+    .concept-id-badge {
+      display: inline-block;
+      background: var(--navy);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 7pt;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 3px;
+      margin-bottom: 5px;
+      letter-spacing: 0.5px;
+    }
+
+    .concept-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11.5pt;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .concept-section p {
+      font-family: 'Lato', sans-serif;
+      font-size: 10pt;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 9px;
+    }
+
+    .concept-section ul,
+    .concept-section ol {
+      margin: 6px 0 10px 22px;
+      font-family: 'Lato', sans-serif;
+      font-size: 10pt;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .concept-section li { margin-bottom: 3px; }
+    strong { font-weight: 700; color: var(--navy); }
+
+    /* ===== DATA TABLES ===== */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 14px;
+      font-family: 'Lato', sans-serif;
+      font-size: 9.5pt;
+    }
+
+    .data-table th {
+      background: var(--navy);
+      color: white;
+      font-weight: 700;
+      padding: 8px 12px;
+      text-align: left;
+      font-family: 'Poppins', sans-serif;
+      font-size: 8.5pt;
+    }
+
+    .data-table td {
+      padding: 7px 12px;
+      border-bottom: 1px solid var(--gray-300);
+      vertical-align: top;
+    }
+
+    .data-table tr:nth-child(even) td { background: var(--gray-100); }
+
+    /* ===== KAAM KI BAAT ===== */
+    .kaam-ki-baat {
+      background: var(--green-light);
+      border: 1px solid #b5d9c4;
+      border-left: 5px solid var(--green);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 16px 0;
+    }
+
+    .kkb-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .kkb-tag {
+      background: var(--green);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 6.5pt;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .kkb-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10pt;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+
+    .kaam-ki-baat p {
+      font-family: 'Lato', sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: #1e4030;
+      margin-bottom: 8px;
+    }
+
+    .kaam-ki-baat p:last-child { margin-bottom: 0; }
+    .kaam-ki-baat strong { color: var(--green-dark); }
+
+    /* ===== STORY REFERENCE ===== */
+    .story-reference {
+      background: var(--purple-light);
+      border: 1px solid #d4c5ee;
+      border-left: 5px solid var(--purple);
+      border-radius: 8px;
+      padding: 12px 18px;
+      margin: 12px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .sr-tag {
+      flex-shrink: 0;
+      background: var(--purple);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 6pt;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    .story-reference p {
+      font-family: 'Lato', sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.65;
+      color: #3a2060;
+      margin: 0;
+      font-style: italic;
+    }
+
+    .story-reference strong { color: var(--purple-dark); }
+
+    /* ===== EXAM NOTE ===== */
+    .exam-note {
+      background: var(--red-light);
+      border: 1px solid #f5c6c2;
+      border-left: 5px solid var(--red);
+      border-radius: 8px;
+      padding: 12px 18px;
+      margin: 12px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .en-tag {
+      flex-shrink: 0;
+      background: var(--red);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 6pt;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    .exam-note p {
+      font-family: 'Lato', sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.65;
+      color: #5a1a14;
+      margin: 0;
+    }
+
+    .exam-note strong { color: var(--red-dark); }
+
+    /* ===== DIAGRAM / CODE BLOCK ===== */
+    .diagram-block {
+      background: #f0f4f8;
+      border: 1px solid var(--gray-300);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 8pt;
+      line-height: 1.5;
+      color: var(--navy);
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* ===== ILLUSTRATION GUIDE ===== */
+    .illustration-item {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+    }
+
+    .illus-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10pt;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .illus-badge {
+      background: var(--orange-light);
+      color: var(--orange-dark);
+      border: 1px solid #e8c4a0;
+      font-family: 'Poppins', sans-serif;
+      font-size: 7pt;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .illus-tests {
+      font-family: 'Lato', sans-serif;
+      font-size: 9.5pt;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+
+    .illus-approach {
+      font-family: 'Lato', sans-serif;
+      font-size: 9.5pt;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.65;
+    }
+
+    /* ===== TYK GUIDE ===== */
+    .tyk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px;
+      font-family: 'Lato', sans-serif;
+      font-size: 9.5pt;
+    }
+
+    .tyk-table th {
+      background: var(--navy);
+      color: white;
+      font-weight: 700;
+      padding: 8px 12px;
+      text-align: left;
+      font-family: 'Poppins', sans-serif;
+      font-size: 8.5pt;
+    }
+
+    .tyk-table td {
+      padding: 7px 12px;
+      border-bottom: 1px solid var(--gray-300);
+      vertical-align: middle;
+    }
+
+    .tyk-table tr:nth-child(even) td { background: var(--gray-100); }
+
+    .p-vh {
+      background: #fdf1f0; color: var(--red);
+      font-family: 'Poppins', sans-serif; font-size: 7pt; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; display: inline-block;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .p-h {
+      background: #fff4ed; color: var(--orange-dark);
+      font-family: 'Poppins', sans-serif; font-size: 7pt; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; display: inline-block;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .p-m {
+      background: var(--gray-200); color: var(--gray-700);
+      font-family: 'Poppins', sans-serif; font-size: 7pt; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px; display: inline-block;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .tyk-highlight {
+      background: #fffbf2;
+      border: 1px solid #f0d060;
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-family: 'Lato', sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .tyk-highlight strong { color: #7a5a00; }
+
+    /* ===== LAYER 3 ===== */
+    .layer3-container {
+      background: var(--navy);
+      border-radius: 10px;
+      padding: 30px 34px;
+    }
+
+    .layer3-eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 4px;
+    }
+
+    .layer3-heading {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16pt;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 22px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .layer3-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .layer3-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 11px;
+      padding-bottom: 11px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .layer3-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .layer3-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 8pt;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0;
+    }
+
+    .layer3-text {
+      font-family: 'Lato', sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .layer3-text strong { color: var(--orange); }
+
+    /* ===== CHAPTER FOOTER ===== */
+    .chapter-footer {
+      margin-top: 26px;
+      padding-top: 14px;
+      border-top: 1px solid var(--gray-200);
+      font-family: 'Lato', sans-serif;
+      font-size: 8pt;
+      color: var(--gray-600);
+      font-style: italic;
+      line-height: 1.9;
+    }
+
+    .chapter-footer a { color: var(--purple); text-decoration: none; }
+
+    /* ===== SECTION BREAK ===== */
+    .section-divider {
+      border: none;
+      border-top: 2px dashed var(--gray-200);
+      margin: 22px 0;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- RUNNING HEADER / FOOTER (print only) -->
+<div class="print-header">
+  <span>AS 2 — Valuation of Inventories</span>
+  <span>CA Inter Advanced Accounting | Concept Book | VC Gurukul</span>
+</div>
+<div class="print-footer">
+  <span>CA Pranav Pratik Tulshyan &nbsp;·&nbsp; VC Gurukul, Noida</span>
+  <span>Sequence 4 &nbsp;·&nbsp; Confidential — Not for resale</span>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- ======================================================
+       PAGE 1 — COVER
+  ====================================================== -->
+  <div class="page cover-page">
+    <div class="cover-top-bar"></div>
+
+    <div class="cover-watermark">2</div>
+
+    <div class="cover-body">
+      <div class="cover-series-label">CA Inter Advanced Accounting &nbsp;·&nbsp; Concept Book</div>
+      <div class="cover-seq-line">Sequence 4 &nbsp;·&nbsp; 2 Teaching Days</div>
+      <div class="cover-as-number">AS 2</div>
+      <div class="cover-title">Valuation of<br>Inventories</div>
+      <div class="cover-divider"></div>
+      <div class="cover-story-name">"Godown Ka Hisaab"</div>
+      <div class="cover-badges">
+        <span class="cover-badge accent">9 / 15 CA Inter Attempts</span>
+        <span class="cover-badge">ICAI: Module 2, Chapter 5, Unit 1</span>
+        <span class="cover-badge">Rolly &nbsp;·&nbsp; Sethji &nbsp;·&nbsp; BCPL</span>
+      </div>
+    </div>
+
+    <div class="cover-footer-bar">
+      <div class="cover-footer-left">
+        CA Pranav Pratik Tulshyan<br>
+        VC Gurukul, Noida &nbsp;·&nbsp; Batch July 2026
+      </div>
+      <div class="cover-footer-right">VC Gurukul</div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       PAGE 2 — STORY
+  ====================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="section-header">
+        <div class="section-icon">&#x1F4D6;</div>
+        <div class="section-header-text">
+          <h2>THE STORY</h2>
+          <div class="section-subtitle">Read this first. The concepts in Layer 2 will land better after this.</div>
+        </div>
+      </div>
+
+      <div class="story-container">
+        <div class="story-eyebrow">Kahaani</div>
+        <div class="story-heading">Godown Ka Hisaab</div>
+
+        <p>It was the last week of March. The financial year was closing.</p>
+
+        <p>Rolly had been at BCPL's warehouse in Noida for two days straight — walking the aisles with a clipboard, counting boxes, checking batch numbers, making notes. Sethji's FMCG empire had a big godown: coconut soap in towers of brown cardboard boxes, cooking oil in blue canisters, shampoo sachets in shrink-wrapped bundles, biscuit cartons stacked to the ceiling. Rolly loved this part of the job. Orderly shelves, physical things you could touch and count. No ambiguity.</p>
+
+        <p>Now came the valuation.</p>
+
+        <p>She opened her laptop, pulled up the stock register, and started filling in the numbers. The logic seemed obvious to her: inventory is worth what you can sell it for. Market price. She typed confidently.</p>
+
+        <p>Coconut soap: 2,000 boxes. Current retail price in the market — ₹85 per box. She typed ₹85.<br>
+        Hair oil: 500 bottles. Current market price — ₹195. She typed ₹195.<br>
+        Cooking oil: 300 litres. Market rate — ₹130 per litre. Typed.</p>
+
+        <p>Total inventory value: ₹1.24 crore. A very healthy number.</p>
+
+        <p>Sethji reviewed the sheet that evening and smiled broadly. <em>"Rolly ji, bahut achha! Balance sheet strong dikhega. Bank wale khush ho jaayenge."</em> He was applying for a ₹5 crore expansion loan next month. A strong balance sheet mattered.</p>
+
+        <hr class="story-break">
+
+        <p>Pranav arrived two days later for the statutory audit. He started methodically — invoices matched against entries, physical count reconciliation, then inventory valuation.</p>
+
+        <p>He opened Rolly's valuation working. He saw the coconut soap line: ₹85 per unit. He went to the purchase invoices. The last three batches: ₹58, ₹60, ₹62 per box. He made a note.</p>
+
+        <p>He moved to the hair oil section and spotted something: a batch of 200 bottles purchased in October. He checked the labels — expiry date: May. He calculated quickly. With only two months to expiry, these bottles could now realistically sell at ₹120 each. But there was a 10% selling commission payable to the distributor. Net realisable value = ₹120 − ₹12 = ₹108 per bottle. Cost of purchase: ₹140. Made another note.</p>
+
+        <p>That afternoon, the three of them sat together in the small office at the back of the godown.</p>
+
+        <p><em>"Rolly ji, yeh coconut soap ki valuation — ₹85 per unit. Purchase invoice ₹60 dikhata hai. Yeh ₹85 kahan se aaya?"</em> Pranav's tone was conversational, genuinely curious.</p>
+
+        <p><em>"Market price!"</em> said Rolly. <em>"That's what they're worth right now. If we sold them today, we'd get ₹85."</em></p>
+
+        <p>Sethji leaned forward. <em>"Toh phir kya problem hai, Pranav bhai? Agar bazar mein ₹85 mil raha hai, toh inventory ki value ₹85 hi toh honi chahiye?"</em></p>
+
+        <p>Pranav nodded at the question — it was a fair one. <em>"Sethji, sochiye aage. Agar humne ₹85 pe value ki, toh hum keh rahe hain ki humne ₹25 per box ka profit pehle hi kama liya — jabki soap abhi godown mein hai, bika nahi hai. Ek rupaya bhi nahi aaya. Toh profit kahan hua?"</em></p>
+
+        <p>A pause.</p>
+
+        <p><em>"Jo profit hua nahi, woh balance sheet mein dikhane ka koi haq nahi humein,"</em> Pranav continued. <em>"AS 2 ka rule ek hi hai: inventory ko value karo <strong>lower of cost and net realisable value</strong> pe. Dono mein se jo kam ho. Yahan cost ₹60 hai. NRV ₹85 hai. Cost kam hai. Toh value = ₹60."</em></p>
+
+        <p>Sethji sat with this for a moment. <em>"Toh profit tabhi book hoga jab soap actually bikegi? Delivery hogi, paisa aayega, tab?"</em></p>
+
+        <p><em>"Bilkul sahi."</em></p>
+
+        <p>Rolly, now leaning in: <em>"Aur agar NRV cost se kam ho jaye? Jaise yeh October wali hair oil batch?"</em></p>
+
+        <p>Pranav pulled out his note. <em>"Exactly. October batch — cost ₹140. Lekin ab yeh sirf ₹108 mein bik sakti hai. NRV ₹108 hai, cost ₹140 hai. NRV kam hai. Toh value = ₹108. Aur ₹32 per bottle ka loss — woh is saal ki P&amp;L mein abhi book hoga."</em></p>
+
+        <p>Sethji looked up. <em>"Loss hone wala hai, toh abhi book karo. Profit hone wala hai, toh ruko jab tak ho na jaye."</em></p>
+
+        <p><em>"Exactly, Sethji. <strong>Anticipate no profits. Provide for all losses.</strong> Yahi Conservatism hai. AS 2 isi principle pe khada hai."</em></p>
+
+        <p>Sethji sat back in his chair, nodding slowly. Then he looked at Rolly. <em>"Rolly ji, samajh aayi baat?"</em></p>
+
+        <p>Rolly was already updating the sheet.</p>
+
+        <hr class="story-break">
+
+        <p>Then came the cooking oil question.</p>
+
+        <p><em>"Pranav bhai, ek aur baat."</em> Rolly showed him the cooking oil section. <em>"Teen batches hain — teen alag-alag rates pe purchase kiya tha."</em></p>
+
+        <table class="story-table">
+          <thead>
+            <tr>
+              <th>Batch</th>
+              <th>Quantity</th>
+              <th>Purchase Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Batch 1 (July)</td><td>100 litres</td><td>₹90/litre</td></tr>
+            <tr><td>Batch 2 (November)</td><td>150 litres</td><td>₹95/litre</td></tr>
+            <tr><td>Batch 3 (February)</td><td>200 litres</td><td>₹100/litre</td></tr>
+            <tr><td>Sold during year</td><td>330 litres</td><td>—</td></tr>
+            <tr class="total-row"><td><strong>Closing stock</strong></td><td><strong>120 litres</strong></td><td><strong>?</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p><em>"Closing stock ki cost kya hogi?"</em> she asked.</p>
+
+        <p>Pranav explained two methods.</p>
+
+        <p><strong>FIFO — First In, First Out:</strong> The oldest stock is assumed to be sold first. July batch went first (100L), then November (150L), then 80 litres of the February batch. Closing 120 litres = remaining from February batch. Value = 120 × ₹100 = <strong>₹12,000.</strong></p>
+
+        <p><strong>Weighted Average:</strong> Total cost = (100 × 90) + (150 × 95) + (200 × 100) = ₹42,250. Total quantity = 450 litres. Average = ₹93.89/litre. Closing stock = 120 × ₹93.89 = <strong>₹11,267.</strong></p>
+
+        <p><em>"Both give different closing stock values,"</em> Rolly noted.</p>
+
+        <p><em>"Haan. Aur AS 2 dono allow karta hai. Koi ek choose karo — lekin <strong>consistently</strong> follow karo. Saal-saal switch nahi kar sakte convenience ke hisab se."</em></p>
+
+        <hr class="story-break">
+
+        <p>The revised inventory figure was lower than Rolly's original. She showed Sethji the corrected sheet. He looked at it without any fuss.</p>
+
+        <p><em>"Theek hai, Pranav bhai. Jo sach hai, wahi dikhana chahiye. Bank ko bhi toh asli tasveer chahiye."</em> He paused, then laughed warmly. <em>"Waise — ab godown thoda kam bhaari lag raha hai!"</em></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+       PAGE 3 — LAYER 2: Para 1.2 to 1.6
+  ====================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="section-header">
+        <div class="section-icon navy">L2</div>
+        <div class="section-header-text">
+          <h2>LAYER 2 — Concept Notes</h2>
+          <div class="section-subtitle">Sub-topic wise explanation keyed to ICAI para numbers. Read alongside ICAI Study Material, Module 2, Chapter 5, Unit 1.</div>
+        </div>
+      </div>
+
+      <!-- AS2-1.2 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.2</span>
+        <div class="concept-title">Inventories — Definition and Scope</div>
+        <p>Three categories of inventory:</p>
+        <ol>
+          <li>Assets held <strong>for sale</strong> in the ordinary course of business — finished goods of a trader or manufacturer</li>
+          <li>Assets <strong>in the process of production</strong> for such sale — work in progress</li>
+          <li>Assets held <strong>for consumption</strong> in production of goods/services for sale — raw materials, consumables, stores, loose tools</li>
+        </ol>
+        <p>Key scope exclusions (AS 2 does NOT apply to):</p>
+        <ul>
+          <li>WIP under construction contracts (covered by AS 7)</li>
+          <li>WIP of service providers (cost of part service rendered)</li>
+          <li>Shares, debentures, financial instruments held as stock-in-trade (current practice: value at lower of cost and fair value)</li>
+          <li>Producers' inventory of agricultural/mineral products where NRV valuation is an established industry practice</li>
+        </ul>
+        <p>Quick check for scope: if it will generate future economic benefit by being sold or used in production — it is inventory under AS 2.</p>
+      </div>
+
+      <div class="kaam-ki-baat no-break">
+        <div class="kkb-header">
+          <span class="kkb-tag">Kaam Ki Baat</span>
+          <span class="kkb-title">Stock in Transit — Whose Inventory Is It?</span>
+        </div>
+        <p>At IOCL, total inventory across refineries, depots and retail was approximately <strong>₹26,000 crore</strong>. At that scale, even a small question — <em>does this belong to us or not?</em> — becomes a crore-rupee entry.</p>
+        <p><strong>Purchase side — Ethanol from Tamil Nadu to Patna:</strong> IOCL's Patna depot procured Ethanol from sugar refineries in Tamil Nadu. Transit time: approximately 8 days by tanker. The moment the tanker left the supplier's premises, risk and reward transferred to IOCL. Even though the Ethanol had not reached Patna, it was IOCL's inventory from that point. It appeared in the books as <em>Stock in Transit (Inward)</em>. Not booking it would understate our inventory and overstate the supplier's.</p>
+        <p><strong>Sales side — Petrol tankers to retail outlets:</strong> When IOCL dispatched petrol tankers to petrol pumps, the sale was complete only when the tanker reached the pump and delivery was confirmed. Transit: sometimes 3–4 days. At year-end, any tanker still in transit was NOT a sale. That quantity was reversed from sales and added back to closing inventory as <em>Stock in Transit (Outward)</em>.</p>
+        <p>The principle: <strong>inventory belongs to you when risk and reward belong to you.</strong> Legal title may transfer on invoice. But risk and reward — that is the real test.</p>
+      </div>
+
+      <!-- AS2-1.3 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.3</span>
+        <div class="concept-title">Measurement — Lower of Cost and Net Realisable Value</div>
+        <p><strong>Rule:</strong> Inventories should be valued at <strong>lower of cost and net realisable value.</strong></p>
+        <p><strong>NRV definition:</strong> Estimated selling price in the ordinary course of business, less estimated costs of completion, less estimated costs necessary to make the sale.</p>
+
+        <div class="story-reference">
+          <span class="sr-tag">Story Ref</span>
+          <p>In the opening story: fresh coconut soap (cost ₹60, market price ₹85) → value at ₹60, because cost is lower. Near-expiry hair oil (cost ₹140, NRV ₹108 after selling commission) → value at ₹108, and the ₹32 loss was booked immediately. Same principle, two directions.</p>
+        </div>
+
+        <p>The logic: an asset should not be carried at a value exceeding what it can realise through sale or use. If market value has fallen below cost, carry the loss now — do not defer it to the period of sale.</p>
+
+        <div class="diagram-block">            Inventory
+                │
+     ┌──────────┴──────────┐
+  Finished Goods      Raw Materials
+  &amp; WIP                   │
+     │              If finished goods
+  Lower of:          sell at or above cost:
+  Cost vs NRV              ↓ Cost
+     │              If finished goods
+     ↓              fall below cost:
+  Value                    ↓ Replacement Cost</div>
+      </div>
+
+      <!-- AS2-1.4 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.4</span>
+        <div class="concept-title">Costs of Inventory — The Three Buckets</div>
+        <p>Cost of inventory = <strong>Cost of Purchase + Cost of Conversion + Other Costs</strong></p>
+        <p>All three must be costs that bring inventory to its <strong>present location and condition.</strong> That phrase is the test for inclusion.</p>
+      </div>
+
+      <!-- AS2-1.5 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.5</span>
+        <div class="concept-title">Cost of Purchase</div>
+        <p>Cost of Purchase = Purchase price + duties and taxes (excluding those recoverable from tax authorities) + other directly attributable acquisition expenditure</p>
+        <p><strong>Deduct:</strong> trade discounts, rebates, duty drawbacks.</p>
+
+        <div class="exam-note">
+          <span class="en-tag">Exam Note</span>
+          <p>Customs duty paid at import is <strong>included</strong> in cost of purchase (not recoverable in ordinary course). But <strong>GST input credit</strong> that will be set off against output tax is <strong>NOT included</strong> — it is recoverable from the tax authority. Students often include both. Only include taxes that cannot be recovered.</p>
+        </div>
+      </div>
+
+      <!-- AS2-1.6 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.6</span>
+        <div class="concept-title">Cost of Conversion — The Normal Capacity Rule</div>
+        <p>Conversion costs = direct labour + production overheads (fixed and variable).</p>
+        <p>The critical rule is for <strong>fixed production overheads:</strong></p>
+        <p>Fixed overheads are absorbed based on <strong>normal capacity</strong> — the production level the enterprise expects to achieve on average over a number of periods under normal circumstances.</p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Situation</th>
+              <th>Fixed Overhead Treatment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Actual production ≈ normal capacity</td>
+              <td>Absorb at normal capacity rate — same result either way</td>
+            </tr>
+            <tr>
+              <td>Actual production &lt; normal capacity</td>
+              <td>Absorb at normal capacity rate; under-recovery → P&amp;L expense (NOT loaded on inventory)</td>
+            </tr>
+            <tr>
+              <td>Actual production &gt; normal capacity</td>
+              <td>Use actual rate per unit (lower than normal rate); do NOT inflate inventory above cost</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Variable overheads: absorbed at actual use of production facilities.</p>
+      </div>
+
+      <div class="kaam-ki-baat no-break">
+        <div class="kkb-header">
+          <span class="kkb-tag">Kaam Ki Baat</span>
+          <span class="kkb-title">When Production Goes High and When It Comes Down</span>
+        </div>
+        <p>At an IOCL refinery, production varies significantly with demand. In certain months, when demand for diesel rises — say, during peak agricultural or harvesting season — the refinery processes crude at a higher throughput than its standard planned rate. In other periods, when demand softens, throughput falls below the base level.</p>
+        <p><strong>When production is higher than planned:</strong> The same fixed refinery overheads (maintenance, depreciation on plant, fixed utilities) are now spread across more units. The per-unit cost of fixed overhead falls. AS 2 says to use the actual (lower) rate in this case — we do not inflate inventory by keeping it at the higher normal rate.</p>
+        <p><strong>When production is lower than planned:</strong> The same fixed overheads are now spread across fewer units. If we used actual rate, per-unit cost would be inflated — inventory would absorb losses that belong to the period. AS 2 says: use the normal capacity rate. The unabsorbed overhead goes directly to P&amp;L for that period.</p>
+        <p>The principle: <strong>inventory should reflect what it actually cost to make, not distorted by abnormally high or low production in a period.</strong></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+       PAGE 4 — LAYER 2: Para 1.7 to 1.10
+  ====================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <!-- AS2-1.7 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.7</span>
+        <div class="concept-title">Joint or By-Products</div>
+        <p>When a single production process yields two or more products simultaneously, costs up to the <strong>split-off point</strong> cannot be traced to individual products. They are allocated on a <strong>rational and consistent basis</strong> — commonly the relative sale value at split-off point.</p>
+        <p><strong>By-products, scrap, and waste:</strong> Usually not material in value. Valued at NRV. That NRV is then deducted from the cost of the main product.</p>
+        <p>Memory hook: Joint cost minus by-product NRV = cost of main product. The by-product "pays for itself" from the joint cost.</p>
+      </div>
+
+      <!-- AS2-1.8 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.8</span>
+        <div class="concept-title">Other Costs</div>
+        <p>Other costs are included in inventory cost <strong>only if</strong> they are incurred to bring the inventory to its present location and condition.</p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Included?</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Design cost for a custom-made product</td>
+              <td><strong>Yes</strong></td>
+              <td>Directly brings that specific inventory to condition for intended sale</td>
+            </tr>
+            <tr>
+              <td>Interest / borrowing costs</td>
+              <td><strong>Generally No</strong></td>
+              <td>Not related to location/condition. Exception: inventory that takes substantial time to get ready (wine, aged cheese, certain matured products)</td>
+            </tr>
+            <tr>
+              <td>Amortisation of production-related patents</td>
+              <td><strong>Yes</strong></td>
+              <td>Part of production cost</td>
+            </tr>
+            <tr>
+              <td>Exchange differences</td>
+              <td><strong>No</strong></td>
+              <td>AS 11 governs; not part of inventory cost</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- AS2-1.9 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.9</span>
+        <div class="concept-title">Exclusions from Cost of Inventories</div>
+        <p>Four costs must <strong>NEVER</strong> be included in inventory cost. They are period expenses:</p>
+        <ol>
+          <li><strong>Abnormal amounts</strong> of wasted materials, labour, or other production costs</li>
+          <li><strong>Storage costs</strong>, unless storage is a necessary stage in the production process before a further production stage (e.g., wine ageing, cheese ripening)</li>
+          <li><strong>Administrative overheads</strong> that do not contribute to bringing inventory to its present location and condition</li>
+          <li><strong>Selling and distribution costs</strong></li>
+        </ol>
+        <p>The test: if the cost does not make the inventory more available or more ready for its intended use — expense it.</p>
+      </div>
+
+      <div class="kaam-ki-baat no-break">
+        <div class="kkb-header">
+          <span class="kkb-tag">Kaam Ki Baat</span>
+          <span class="kkb-title">Normal Loss and Abnormal Loss in Transit</span>
+        </div>
+        <p>Picture an IOCL petrol tanker leaving IOCL's premises and driving to the petrol pump in your neighbourhood. In summer, petrol evaporates a little during the journey — the heat, the long road, the time in transit. This happens every single time, on every tanker. A small variation of up to <strong>0.5%</strong> from evaporation was considered normal loss. Expected. Built into the cost.</p>
+        <p>So if 1,000 litres left IOCL and 995 arrived at the pump, the cost of those 1,000 litres was now divided by 995. Cost per litre went up slightly. The normal loss is absorbed into the cost of the inventory that arrived safely.</p>
+        <p>But if that tanker met with an accident — or there was theft — that is an <strong>abnormal loss.</strong> Not expected. Not every day. That quantity is valued and charged directly to P&amp;L. It does not get loaded onto the cost of the petrol that arrived safely.</p>
+        <p>The principle: <strong>normal loss = part of cost, absorbed quietly. Abnormal loss = P&amp;L expense, shown separately.</strong></p>
+      </div>
+
+      <!-- AS2-1.10 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.10</span>
+        <div class="concept-title">Cost Formula — FIFO and Weighted Average</div>
+        <p>When inventory items are identical and interchangeable, individual identification is impractical. AS 2 permits:</p>
+        <p><strong>Specific Identification:</strong> Match the actual cost to the actual item in stock. Best method where items are individually identifiable (e.g., high-value unique assets held as inventory, cars at a dealership).</p>
+        <p><strong>FIFO (First In, First Out):</strong> Oldest stock sold first. Closing inventory = most recent purchases. In a rising price environment, FIFO gives higher closing stock and lower COGS → higher profit.</p>
+        <p><strong>Weighted Average Cost:</strong> Total cost ÷ total units. All units carry the same average cost. Updated on each new purchase (perpetual) or computed on period-end basis.</p>
+        <p>AS 2 rule: apply the <strong>same cost formula</strong> to all inventories of similar nature and use. If two items have different natures or uses, different formulas may be applied to each group — but within a group, consistency is mandatory.</p>
+
+        <div class="story-reference">
+          <span class="sr-tag">Story Ref</span>
+          <p>In the opening story, Rolly had three batches of cooking oil at ₹90, ₹95 and ₹100 per litre. FIFO valued 120 litres of closing stock at <strong>₹12,000</strong>. Weighted Average valued the same 120 litres at <strong>₹11,267</strong>. Same physical stock — different cost number — depending on the method. Either is correct; what matters is consistency across years.</p>
+        </div>
+      </div>
+
+      <!-- AS2-1.11 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.11</span>
+        <div class="concept-title">Other Measurement Techniques</div>
+        <p><strong>Standard Cost Method:</strong> Assign a predetermined standard cost instead of actual. Permitted only if standards <strong>fairly approximate actual costs.</strong> Standards must be set at normal levels of material consumption, labour efficiency, and capacity utilisation. Regularly review and revise.</p>
+        <p><strong>Retail Method:</strong> Used in retail businesses where large volumes of rapidly changing items make actual cost tracking impractical. Method: take the selling price of unsold stock → reduce by an appropriate gross margin percentage → arrives at approximate cost.</p>
+        <p>Both are simplification methods and acceptable only where they reliably approximate actual cost.</p>
+
+        <div class="exam-note">
+          <span class="en-tag">Exam Note</span>
+          <p><strong>Margin is on sales; markup is on cost</strong> — these are different percentages and produce different results. The question will specify one; do not confuse the two. If margin = 25% on sales: cost = 75% of selling price. If markup = 25% on cost: selling price = 125% of cost. Read the question carefully.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+       PAGE 5 — LAYER 2: Para 1.12 to 1.15
+  ====================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <!-- AS2-1.12 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.12</span>
+        <div class="concept-title">Estimates of Net Realisable Value</div>
+        <p>NRV estimates are based on the <strong>most reliable evidence available</strong> at the time of estimation — including price movements after the balance sheet date, but only where those movements <strong>confirm conditions existing at the balance sheet date</strong> (not new developments).</p>
+        <p>NRV is reassessed at each balance sheet date. If the circumstances that caused a write-down no longer exist (e.g., market price has recovered), the write-down is reversed. The inventory is written back up — but <strong>not above original cost.</strong></p>
+      </div>
+
+      <!-- AS2-1.13 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.13</span>
+        <div class="concept-title">Item-by-Item vs Group Comparison</div>
+        <p>The comparison of cost and NRV is normally done <strong>item by item.</strong> Each item stands alone.</p>
+        <p>Exception: it may be appropriate to group items that are <strong>similar or related</strong> — for example, items in the same product line that serve the same purpose or end use and cannot practically be evaluated separately.</p>
+
+        <div class="exam-note">
+          <span class="en-tag">Exam Note</span>
+          <p>Do <strong>not</strong> apply the lower-of-cost-or-NRV test on a <strong>portfolio or total inventory basis.</strong> A profitable item cannot offset a loss-making item. The comparison must be item by item. Students who add up total cost vs total NRV will often get the wrong answer in a question with mixed items.</p>
+        </div>
+
+        <div class="story-reference">
+          <span class="sr-tag">Story Ref</span>
+          <p>In the opening story, Sethji's coconut soap had NRV above cost (no write-down needed), while the near-expiry hair oil had NRV below cost (write-down required). These were valued separately — the soap's surplus did not cancel the oil's write-down. <strong>Item by item, always.</strong></p>
+        </div>
+      </div>
+
+      <!-- AS2-1.14 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.14</span>
+        <div class="concept-title">NRV of Materials Held for Use</div>
+        <p>Raw materials and supplies held for production are <strong>NOT</strong> written down below cost if the <strong>finished goods they will become are expected to sell at or above their full cost.</strong></p>
+        <p>But if the selling price of finished goods has fallen below their cost of production, then the raw materials are written down. The most appropriate measure in that situation: <strong>replacement cost of the raw material</strong> (what it would cost to buy that raw material today).</p>
+      </div>
+
+      <div class="kaam-ki-baat no-break">
+        <div class="kkb-header">
+          <span class="kkb-tag">Kaam Ki Baat</span>
+          <span class="kkb-title">Crude Oil and the Petrol/Diesel Price Test</span>
+        </div>
+        <p>Crude oil is IOCL's primary raw material. Petrol (MS — Motor Spirit) and diesel (HSD — High Speed Diesel) are the finished products.</p>
+        <p>The question at year-end: should we write down the crude oil inventory?</p>
+        <p>The AS 2 test: <strong>are finished products expected to sell at or above their cost?</strong> As long as the price at which petrol and diesel can be sold in the market covers the full cost of production (crude cost + refining + transport + overheads), we do NOT write down crude. It stays at cost.</p>
+        <p>But if petrol and diesel market prices have fallen below the cost of production — meaning selling at market price would result in a loss — then we need to write down the crude. The measure used: current <strong>replacement cost of crude oil</strong> (today's market price per barrel for the relevant crude grade).</p>
+        <p>The finished goods test is the gateway. Pass the test (finished goods recoverable) → crude stays at cost. Fail the test (finished goods unrecoverable) → crude written to replacement cost.</p>
+      </div>
+
+      <!-- AS2-1.15 -->
+      <div class="concept-section no-break">
+        <span class="concept-id-badge">AS2-1.15</span>
+        <div class="concept-title">Disclosures</div>
+        <p>Financial statements must disclose:</p>
+        <ol>
+          <li><strong>Accounting policies</strong> adopted for measuring inventories, including the cost formula used (FIFO / Weighted Average / Specific Identification)</li>
+          <li><strong>Total carrying amount</strong> of inventories with classification:
+            <ul>
+              <li>Raw materials and components</li>
+              <li>Work in progress</li>
+              <li>Finished goods</li>
+              <li>Stock-in-trade (goods acquired for trading)</li>
+              <li>Stores and spares</li>
+              <li>Loose tools</li>
+              <li>Others (specify nature)</li>
+            </ul>
+          </li>
+        </ol>
+        <p>Schedule III to Companies Act 2013 also requires the valuation method to be stated in the notes.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+       PAGE 6 — ILLUSTRATION GUIDE
+  ====================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="section-header">
+        <div class="section-icon" style="background: var(--orange-dark); font-size:11pt;">&#x1F4DD;</div>
+        <div class="section-header-text">
+          <h2>ILLUSTRATION GUIDE</h2>
+          <div class="section-subtitle">Use ICAI Study Material for full working. These notes tell you what each illustration is testing and where students go wrong.</div>
+        </div>
+      </div>
+
+      <div class="illustration-item no-break">
+        <div class="illus-title">
+          <span>Example 1 (Para 1.3) — NRV of Partly Finished Unit</span>
+          <span class="illus-badge">NRV Computation</span>
+        </div>
+        <div class="illus-tests"><strong>Tests:</strong> NRV computation for WIP. NRV = Estimated selling price of finished unit − Cost to complete − Selling expenses (brokerage, commission). Then compare with cost.</div>
+        <div class="illus-approach"><strong>Common mistake:</strong> Students forget to deduct selling expenses from the selling price before arriving at NRV. NRV is <em>net</em> — after all costs to complete AND to sell.</div>
+        <div class="exam-note" style="margin-top: 0;">
+          <span class="en-tag">Exam Note</span>
+          <p>NRV ≠ Estimated selling price. Always deduct <strong>cost of completion</strong> and <strong>cost of selling</strong> before comparing with cost. If the question says "agent commission 5%", that goes in the NRV deduction, not as a separate line.</p>
+        </div>
+      </div>
+
+      <div class="illustration-item no-break">
+        <div class="illus-title">
+          <span>Example 2 (Para 1.6) — ABC Ltd, Normal Capacity</span>
+          <span class="illus-badge">Fixed Overhead</span>
+        </div>
+        <div class="illus-tests"><strong>Tests:</strong> Fixed overhead absorption. Three cases: actual = normal (straightforward), actual &lt; normal (under-recovery to P&amp;L), actual &gt; normal (use actual rate — do not over-absorb).</div>
+        <div class="illus-approach"><strong>Common mistake:</strong> In Case 2 (low production), students absorb at actual rate → overstates per-unit cost → inflates inventory. The rule is always normal capacity rate when actual is lower.</div>
+        <div class="exam-note" style="margin-top: 0;">
+          <span class="en-tag">Exam Note</span>
+          <p>When actual production &lt; normal capacity: <strong>per-unit fixed overhead = Total Fixed OH ÷ Normal Capacity</strong> (not actual). The balance unabsorbed = period expense, not inventory. Never load the under-recovery onto remaining units.</p>
+        </div>
+      </div>
+
+      <div class="illustration-item no-break">
+        <div class="illus-title">
+          <span>Example 3 (Para 1.11) — Retail Method</span>
+          <span class="illus-badge">Retail / Standard Cost</span>
+        </div>
+        <div class="illus-tests"><strong>Tests:</strong> How to back-calculate cost from selling price using gross margin or markup.</div>
+        <div class="exam-note" style="margin-top: 6px;">
+          <span class="en-tag">Exam Note</span>
+          <p><strong>Margin is on sales; markup is on cost</strong> — these are different percentages and produce different results. If margin = 25% on sales: cost = 75% of selling price. If markup = 25% on cost: selling price = 125% of cost. Read the question carefully.</p>
+        </div>
+      </div>
+
+      <div class="illustration-item no-break">
+        <div class="illus-title">
+          <span>Illustration 1 — Items A, B, C (Lower of Cost/NRV)</span>
+          <span class="illus-badge">Item-by-Item</span>
+        </div>
+        <div class="illus-tests"><strong>Tests:</strong> Para 1.13 — item-by-item comparison.</div>
+        <div class="illus-approach">Classic trap: computing portfolio-level total and taking lower of total cost vs total NRV. Wrong. Each item is compared separately — a profitable item cannot cancel a loss-making item.</div>
+      </div>
+
+      <div class="illustration-item no-break">
+        <div class="illus-title">
+          <span>Illustration 2 — X Co. (NRV with Agent Commission)</span>
+          <span class="illus-badge">NRV Deductions</span>
+        </div>
+        <div class="illus-tests"><strong>Tests:</strong> NRV deduction for selling costs.</div>
+        <div class="illus-approach">NRV = Expected selling price × (1 − commission%). Do not forget the commission. Selling expenses always reduce NRV — they are a cost necessary to make the sale.</div>
+      </div>
+
+      <div class="illustration-item no-break">
+        <div class="illus-title">
+          <span>Illustration 3 — Normal vs Abnormal Wastage</span>
+          <span class="illus-badge">Normal Loss</span>
+        </div>
+        <div class="illus-tests"><strong>Tests:</strong> Para 1.9(a). Normal wastage → included in cost of good output (cost per unit rises). Abnormal wastage → charged to P&amp;L at the per-unit cost of normal output.</div>
+        <div class="illus-approach">Calculation: normal loss is budgeted from input quantity; any excess loss = abnormal. Cost of normal output = Total input cost ÷ Normal expected output.</div>
+        <div class="exam-note" style="margin-top: 0;">
+          <span class="en-tag">Exam Note</span>
+          <p>Abnormal loss is valued at the <strong>cost of normal output per unit</strong>, not at a proportionate share of total input cost. This is the most common calculation error in this illustration.</p>
+        </div>
+      </div>
+
+      <div class="illustration-item no-break">
+        <div class="illus-title">
+          <span>Illustration 4 — Fixed Overhead at Normal Capacity</span>
+          <span class="illus-badge">Normal Capacity</span>
+        </div>
+        <div class="illus-tests"><strong>Tests:</strong> Para 1.6. Per-unit fixed overhead = Total fixed overhead ÷ Normal capacity (units). Multiply by actual production = overhead absorbed into inventory. Closing stock × cost per unit (including absorbed fixed overhead).</div>
+        <div class="illus-approach">Set up a cost per unit table first: direct material + direct labour + variable OH + fixed OH per unit (at normal capacity). Apply to closing stock quantity.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+       PAGE 7 — TYK GUIDE + LAYER 3
+  ====================================================== -->
+  <div class="page">
+    <div class="page-content">
+
+      <div class="section-header">
+        <div class="section-icon gold" style="font-size:11pt;">&#x2605;</div>
+        <div class="section-header-text">
+          <h2>TYK GUIDE</h2>
+          <div class="section-subtitle">Priority questions for exam readiness. Match each to the concept tested. Full questions and solutions in ICAI Study Material.</div>
+        </div>
+      </div>
+
+      <table class="tyk-table">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Concept Tested</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MCQ 1</td>
+            <td>Scope — what IS in AS 2 (raw materials ✓)</td>
+            <td><span class="p-m">Medium</span></td>
+          </tr>
+          <tr>
+            <td>MCQ 2</td>
+            <td>NRV of materials — when NOT to write below cost</td>
+            <td><span class="p-h">High</span></td>
+          </tr>
+          <tr>
+            <td>MCQ 3</td>
+            <td>Exclusions from cost</td>
+            <td><span class="p-h">High</span></td>
+          </tr>
+          <tr>
+            <td>MCQ 4</td>
+            <td>Admin overheads — always/never included?</td>
+            <td><span class="p-h">High</span></td>
+          </tr>
+          <tr>
+            <td>Theory Q5</td>
+            <td>List exclusions from cost (Para 1.9)</td>
+            <td><span class="p-m">Medium</span></td>
+          </tr>
+          <tr>
+            <td>Scenario Q6 (Capital Cables)</td>
+            <td>Normal loss + abnormal loss calculation</td>
+            <td><span class="p-vh">Very High ★</span></td>
+          </tr>
+          <tr>
+            <td>Scenario Q7 (Mr. Mehul)</td>
+            <td>Raw material + WIP + finished goods — all three tested together</td>
+            <td><span class="p-vh">Very High ★</span></td>
+          </tr>
+          <tr>
+            <td>Scenario Q8 (Partly finished unit)</td>
+            <td>NRV computation with brokerage for WIP</td>
+            <td><span class="p-vh">Very High ★</span></td>
+          </tr>
+          <tr>
+            <td>Scenario Q9 (Empty bottles)</td>
+            <td>What qualifies as inventory — applying the definition</td>
+            <td><span class="p-h">High</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tyk-highlight no-break">
+        <p><strong>Q7 (Mr. Mehul)</strong> is the most comprehensive TYK question — it simultaneously tests raw material (write to replacement cost when finished goods below cost), WIP (cost vs NRV), and finished goods (cost vs NRV). If you can solve Q7 cleanly, you have understood AS 2.</p>
+      </div>
+
+      <div class="tyk-highlight no-break">
+        <p><strong>Q6 (Capital Cables)</strong> tests the normal vs abnormal loss calculation — an entry that confuses most students on first attempt. The cost per unit is computed based on normal expected output (not actual output), and only the abnormal quantity is separately charged.</p>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- LAYER 3 -->
+      <div class="section-header" style="border-bottom-color: rgba(255,255,255,0.1);">
+        <div class="section-icon navy" style="font-size:10pt;">L3</div>
+        <div class="section-header-text">
+          <h2>LAYER 3</h2>
+          <div class="section-subtitle">One-liners for fast recall. Cover each line and try to recite it. These are your exam anchors for AS 2.</div>
+        </div>
+      </div>
+
+      <div class="layer3-container">
+        <div class="layer3-eyebrow">Layer 3 — Rapid Recall</div>
+        <div class="layer3-heading">One-Liners for AS 2</div>
+
+        <ul class="layer3-list">
+          <li class="layer3-item">
+            <div class="layer3-num">1</div>
+            <div class="layer3-text"><strong>Inventory</strong> = assets held for sale in ordinary course of business, OR in process of production for such sale, OR for consumption in production of goods/services for sale.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">2</div>
+            <div class="layer3-text">Inventory is valued at <strong>lower of cost and NRV</strong> — whichever is less, item by item.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">3</div>
+            <div class="layer3-text"><strong>NRV</strong> = Estimated selling price − Estimated costs of completion − Estimated costs necessary to make the sale.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">4</div>
+            <div class="layer3-text"><strong>Cost of inventory</strong> = Cost of Purchase + Cost of Conversion + Other Costs (all incurred to bring inventory to its present location and condition).</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">5</div>
+            <div class="layer3-text"><strong>Cost of Purchase</strong> = Purchase price + duties + attributable costs − trade discounts − rebates − duty drawbacks.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">6</div>
+            <div class="layer3-text"><strong>Fixed production overheads</strong> absorbed at normal capacity rate. Under-recovery when actual &lt; normal → P&amp;L expense, not inventory. Over-production → use actual (lower) rate.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">7</div>
+            <div class="layer3-text"><strong>Variable production overheads</strong> → absorbed at actual use of production facilities.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">8</div>
+            <div class="layer3-text"><strong>Joint products:</strong> common costs allocated on rational and consistent basis. <strong>By-products</strong> valued at NRV; NRV deducted from cost of main product.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">9</div>
+            <div class="layer3-text"><strong>Exclusions from cost:</strong> abnormal wastage, storage costs (unless required by production process), admin overheads not contributing to location/condition, selling and distribution costs.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">10</div>
+            <div class="layer3-text"><strong>Cost formulas:</strong> Specific identification (where possible) → FIFO or Weighted Average (all other cases). Same formula for all inventories of similar nature. Cannot switch formula for convenience.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">11</div>
+            <div class="layer3-text"><strong>Materials held for use:</strong> NOT written below cost if finished goods sell at or above cost. If finished goods below cost → write materials to replacement cost.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">12</div>
+            <div class="layer3-text"><strong>NRV comparison is item by item</strong> — a profitable item cannot mask a loss-making item.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">13</div>
+            <div class="layer3-text"><strong>Write-down reversal:</strong> If reason for write-down no longer exists — reverse it. But reversal is capped at original cost.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">14</div>
+            <div class="layer3-text"><strong>Disclosure:</strong> accounting policy + cost formula used + carrying amount with classification (raw materials, WIP, finished goods, stock-in-trade, stores/spares, loose tools, others).</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="chapter-footer">
+        <em>Next chapter: Seq 5 — AS 10 Property, Plant and Equipment</em><br>
+        <em>Previous chapter: Seq 3 — Framework for Preparation and Presentation of Financial Statements</em><br><br>
+        <em>For full ICAI theory text, illustrations and TYK solutions: ICAI Study Material, Module 2, Chapter 5, Unit 1.</em>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /page-wrapper -->
+</body>
+</html>
