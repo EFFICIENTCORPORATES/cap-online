@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Framework — Koncept Reference | VC Gurukul</title>
+
+  <!-- ── PYTHON EXTRACTION METADATA ─────────────────────────
+       BeautifulSoup pattern:
+         soup.find_all('section', attrs={'data-type': 'concept'})
+         soup.find_all(attrs={'data-extract': 'definition'})
+         soup.find_all(attrs={'data-exam-weight': 'very-high'})
+  ──────────────────────────────────────────────────────── -->
+  <script type="application/json" id="chapter-meta">
+  {
+    "chapter": "Framework for Preparation and Presentation of Financial Statements",
+    "icai_ref": "Module 1, Chapter 2, Unit 1",
+    "sequence": "SEQ-03",
+    "subject": "Advanced Accounting — CA Inter",
+    "institute": "VC Gurukul, Noida",
+    "teacher": "CA Pranav P Tulshyan",
+    "sections": ["FW-STORY","FW-1","FW-2","FW-3","FW-4","FW-5","FW-6","FW-7","FW-8","FW-9","FW-10","FW-11","FW-L3","FW-TYK"]
+  }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --bg:      #080808;
+      --surface: #0e0e0e;
+      --card:    #121212;
+      --border:  #1e1e1e;
+      --border2: #2a2a2a;
+      --white:   #e8e8e8;
+      --dim:     #666;
+      --dim2:    #444;
+      --teal:    #00c2a8;
+      --gold:    #e8a13d;
+      --red:     #c0392b;
+      --blue:    #2980b9;
+      --green:   #27ae60;
+      --sidebar: 220px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* ── FIXED HEADER ─────────────────────────────────── */
+    #site-header {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 44px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+      background: rgba(8,8,8,0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+    }
+    #site-header .h-left  { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: var(--teal); text-transform: uppercase; }
+    #site-header .h-center{ font-size: 10px; letter-spacing: 0.25em; color: var(--dim); text-transform: uppercase; }
+    #site-header .h-right { font-size: 10px; color: var(--dim); letter-spacing: 0.06em; }
+    #site-header .h-right span { color: var(--gold); font-weight: 600; }
+
+    /* ── SIDEBAR NAV ──────────────────────────────────── */
+    #sidebar {
+      position: fixed; top: 44px; left: 0; bottom: 0;
+      width: var(--sidebar);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      z-index: 100;
+      padding: 16px 0;
+    }
+    #sidebar::-webkit-scrollbar { width: 3px; }
+    #sidebar::-webkit-scrollbar-track { background: transparent; }
+    #sidebar::-webkit-scrollbar-thumb { background: var(--border2); }
+
+    .nav-group { margin-bottom: 8px; }
+    .nav-label {
+      display: block; padding: 6px 16px;
+      font-size: 9px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--dim2);
+      font-weight: 600;
+    }
+    .nav-link {
+      display: block; padding: 5px 16px;
+      font-size: 11px; color: var(--dim);
+      text-decoration: none; letter-spacing: 0.02em;
+      transition: color 0.2s, background 0.2s;
+      border-left: 2px solid transparent;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--teal);
+      background: rgba(0,194,168,0.05);
+      border-left-color: var(--teal);
+    }
+    .nav-link .tag {
+      display: inline-block; font-size: 9px;
+      color: var(--dim2); font-family: 'JetBrains Mono', monospace;
+      margin-right: 5px;
+    }
+    .nav-link .weight-vh { color: var(--red); }
+    .nav-link .weight-h  { color: var(--gold); }
+
+    /* ── MAIN CONTENT ─────────────────────────────────── */
+    #main {
+      margin-left: var(--sidebar);
+      padding: 44px 0 80px;
+    }
+
+    /* ── SECTIONS ─────────────────────────────────────── */
+    section {
+      padding: 40px 48px;
+      border-bottom: 1px solid var(--border);
+      scroll-margin-top: 60px;
+    }
+
+    section:target > .section-header { color: var(--teal); }
+
+    .section-header {
+      display: flex; align-items: baseline; gap: 14px;
+      margin-bottom: 24px;
+    }
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; color: var(--dim2);
+      background: var(--card); padding: 2px 8px;
+      border: 1px solid var(--border); border-radius: 2px;
+      white-space: nowrap;
+    }
+    .section-title {
+      font-size: 18px; font-weight: 700;
+      letter-spacing: -0.02em; color: var(--white);
+    }
+    .exam-badge {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 2px;
+    }
+    .badge-vh { background: rgba(192,57,43,0.15); color: var(--red); border: 1px solid rgba(192,57,43,0.3); }
+    .badge-h  { background: rgba(232,161,61,0.12); color: var(--gold); border: 1px solid rgba(232,161,61,0.3); }
+    .badge-m  { background: rgba(102,102,102,0.12); color: var(--dim); border: 1px solid var(--border2); }
+
+    /* ── STORY CARDS ──────────────────────────────────── */
+    .story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .story-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 4px; padding: 20px;
+      border-top: 2px solid var(--gold);
+    }
+    .story-card .story-tag {
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 8px;
+    }
+    .story-card .story-title {
+      font-size: 13px; font-weight: 600; color: var(--white);
+      margin-bottom: 10px; line-height: 1.4;
+    }
+    .story-card .story-body {
+      font-size: 12px; color: #888; line-height: 1.6;
+    }
+    .story-card .story-maps-to {
+      margin-top: 12px; padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 10px; color: var(--dim2);
+    }
+    .story-card .story-maps-to span {
+      color: var(--teal); font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── DEFINITION BLOCK ─────────────────────────────── */
+    .def-block {
+      background: var(--card); border-left: 3px solid var(--teal);
+      border-radius: 0 4px 4px 0; padding: 14px 18px;
+      margin: 14px 0; font-size: 13.5px; color: #bbb;
+    }
+    .def-block strong { color: var(--teal); font-weight: 600; }
+    .def-block em { color: var(--white); font-style: normal; }
+
+    /* ── TABLES ───────────────────────────────────────── */
+    table {
+      width: 100%; border-collapse: collapse;
+      margin: 14px 0; font-size: 12.5px;
+    }
+    th {
+      background: var(--card); color: var(--teal);
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      font-weight: 600; padding: 8px 12px; text-align: left;
+      border-bottom: 1px solid var(--border2);
+    }
+    td {
+      padding: 8px 12px; border-bottom: 1px solid var(--border);
+      color: #aaa; vertical-align: top; line-height: 1.5;
+    }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--white); font-weight: 600; }
+    td em { color: var(--teal); font-style: normal; }
+    tr:hover td { background: rgba(255,255,255,0.015); }
+
+    /* ── EXAM NOTES ───────────────────────────────────── */
+    .exam-note {
+      background: rgba(192,57,43,0.07); border: 1px solid rgba(192,57,43,0.25);
+      border-left: 3px solid var(--red); border-radius: 0 4px 4px 0;
+      padding: 12px 16px; margin: 14px 0; font-size: 12.5px;
+    }
+    .exam-note .en-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 5px;
+    }
+    .exam-note p { color: #bbb; line-height: 1.6; }
+    .exam-note strong { color: var(--white); }
+
+    /* ── KAAM KI BAAT ─────────────────────────────────── */
+    .kkb {
+      background: rgba(41,128,185,0.07); border: 1px solid rgba(41,128,185,0.25);
+      border-left: 3px solid var(--blue); border-radius: 0 4px 4px 0;
+      padding: 16px 18px; margin: 14px 0; font-size: 12.5px;
+    }
+    .kkb .kkb-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 5px;
+    }
+    .kkb .kkb-title { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+    .kkb p { color: #999; line-height: 1.65; margin-bottom: 6px; }
+    .kkb p:last-child { margin-bottom: 0; }
+    .kkb strong { color: var(--white); }
+    .kkb em { color: var(--blue); font-style: normal; }
+
+    /* ── HIERARCHY BOXES ──────────────────────────────── */
+    .tag-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+    .tag-pill {
+      font-size: 11px; padding: 4px 12px;
+      border-radius: 2px; border: 1px solid var(--border2);
+      color: #888; background: var(--card);
+    }
+    .tag-pill.teal  { border-color: rgba(0,194,168,0.4); color: var(--teal); background: rgba(0,194,168,0.05); }
+    .tag-pill.gold  { border-color: rgba(232,161,61,0.4); color: var(--gold); background: rgba(232,161,61,0.05); }
+    .tag-pill.red   { border-color: rgba(192,57,43,0.4);  color: var(--red);  background: rgba(192,57,43,0.05); }
+    .tag-pill.green { border-color: rgba(39,174,96,0.4);  color: var(--green);background: rgba(39,174,96,0.05); }
+
+    /* ── ONE-LINERS ───────────────────────────────────── */
+    .oneliner-list { list-style: none; }
+    .oneliner-list li {
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+      font-size: 12.5px; color: #999; display: flex; gap: 12px;
+    }
+    .oneliner-list li:last-child { border-bottom: none; }
+    .oneliner-list .ol-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; color: var(--dim2);
+      min-width: 24px; padding-top: 2px;
+    }
+    .oneliner-list .ol-text strong { color: var(--teal); }
+    .oneliner-list .ol-text em { color: var(--gold); font-style: normal; }
+
+    /* ── TYK TABLE ────────────────────────────────────── */
+    .tyk-vh td:first-child { color: var(--white); font-weight: 600; }
+    .tyk-vh td:last-child  { color: var(--red); font-weight: 700; }
+    .tyk-h  td:last-child  { color: var(--gold); font-weight: 600; }
+    .tyk-m  td:last-child  { color: var(--dim); }
+
+    /* ── ELEMENT CARDS ────────────────────────────────── */
+    .element-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 14px 0; }
+    .element-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 3px; padding: 14px 12px; text-align: center;
+    }
+    .element-card .e-name { font-size: 13px; font-weight: 700; color: var(--teal); margin-bottom: 6px; }
+    .element-card .e-def  { font-size: 10.5px; color: #666; line-height: 1.5; }
+
+    /* ── MEASUREMENT CARDS ────────────────────────────── */
+    .meas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 14px 0; }
+    .meas-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 3px; padding: 16px;
+    }
+    .meas-card .m-name { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+    .meas-card .m-asset { font-size: 11.5px; color: #888; margin-bottom: 4px; }
+    .meas-card .m-asset strong { color: var(--teal); }
+    .meas-card .m-liab  { font-size: 11.5px; color: #888; }
+    .meas-card .m-liab  strong { color: var(--gold); }
+    .meas-card .m-note  { font-size: 10.5px; color: var(--dim2); margin-top: 8px; border-top: 1px solid var(--border); padding-top: 8px; }
+
+    /* ── FORMULA BOX ──────────────────────────────────── */
+    .formula {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--white);
+      background: var(--card); border: 1px solid var(--border2);
+      padding: 12px 16px; border-radius: 3px; margin: 12px 0;
+    }
+    .formula .f-label { font-size: 9px; color: var(--dim2); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px; }
+    .formula .f-expr  { color: var(--gold); }
+
+    /* ── UTILITY ──────────────────────────────────────── */
+    p  { margin: 8px 0; color: #999; font-size: 13px; }
+    h3 { font-size: 14px; font-weight: 600; color: var(--white); margin: 20px 0 8px; }
+    h4 { font-size: 13px; font-weight: 600; color: #aaa; margin: 14px 0 6px; }
+    ul { padding-left: 18px; }
+    li { color: #888; font-size: 12.5px; margin-bottom: 3px; }
+    li strong { color: var(--white); }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--teal);
+      background: rgba(0,194,168,0.08); padding: 1px 5px; border-radius: 2px;
+    }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    /* ── PRINT ────────────────────────────────────────── */
+    @media print {
+      #sidebar, #site-header { display: none; }
+      #main { margin-left: 0; padding-top: 0; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── FIXED HEADER ──────────────────────────────────── -->
+<header id="site-header">
+  <div class="h-left">VC Gurukul</div>
+  <div class="h-center">Framework — K2 Koncept Reference</div>
+  <div class="h-right">CA Pranav P Tulshyan &nbsp;·&nbsp; #pranavBhaiya &nbsp;·&nbsp; <span>Newton of Accounts</span></div>
+</header>
+
+<!-- ── SIDEBAR NAV ───────────────────────────────────── -->
+<nav id="sidebar">
+  <div class="nav-group">
+    <span class="nav-label">Stories</span>
+    <a href="#fw-story" class="nav-link"><span class="tag">STORY</span>3 Kahaani Hooks</a>
+  </div>
+  <div class="nav-group">
+    <span class="nav-label">Framework Basics</span>
+    <a href="#fw-1" class="nav-link"><span class="tag">FW-1</span>Introduction</a>
+    <a href="#fw-2" class="nav-link"><span class="tag">FW-2</span>Purpose</a>
+    <a href="#fw-3" class="nav-link"><span class="tag">FW-3</span>Status &amp; Scope</a>
+    <a href="#fw-4" class="nav-link"><span class="tag">FW-4</span>Components of FS</a>
+  </div>
+  <div class="nav-group">
+    <span class="nav-label">Users &amp; Objectives</span>
+    <a href="#fw-5" class="nav-link"><span class="tag weight-h">FW-5</span>7 Users <span class="weight-h">●</span></a>
+  </div>
+  <div class="nav-group">
+    <span class="nav-label">Assumptions</span>
+    <a href="#fw-6a" class="nav-link"><span class="tag weight-vh">FW-6a</span>Going Concern <span class="weight-vh">●</span></a>
+    <a href="#fw-6b" class="nav-link"><span class="tag weight-h">FW-6b</span>Accrual <span class="weight-h">●</span></a>
+    <a href="#fw-6c" class="nav-link"><span class="tag">FW-6c</span>Consistency</a>
+  </div>
+  <div class="nav-group">
+    <span class="nav-label">Quality &amp; Truth</span>
+    <a href="#fw-7" class="nav-link"><span class="tag weight-h">FW-7</span>Qualitative Chars. <span class="weight-h">●</span></a>
+    <a href="#fw-8" class="nav-link"><span class="tag">FW-8</span>True &amp; Fair View</a>
+  </div>
+  <div class="nav-group">
+    <span class="nav-label">Elements</span>
+    <a href="#fw-9" class="nav-link"><span class="tag weight-h">FW-9</span>5 Elements <span class="weight-h">●</span></a>
+    <a href="#fw-9a" class="nav-link"><span class="tag">FW-9a</span>Asset Conditions</a>
+    <a href="#fw-9b" class="nav-link"><span class="tag weight-vh">FW-9b</span>Liability Rules <span class="weight-vh">●</span></a>
+    <a href="#fw-9c" class="nav-link"><span class="tag">FW-9c</span>A − L = E</a>
+  </div>
+  <div class="nav-group">
+    <span class="nav-label">Measurement</span>
+    <a href="#fw-10" class="nav-link"><span class="tag">FW-10</span>4 Bases</a>
+    <a href="#fw-11" class="nav-link"><span class="tag weight-vh">FW-11</span>Capital Maintenance <span class="weight-vh">●</span></a>
+  </div>
+  <div class="nav-group">
+    <span class="nav-label">Revision</span>
+    <a href="#fw-l3" class="nav-link"><span class="tag">L3</span>One-Liners (22)</a>
+    <a href="#fw-tyk" class="nav-link"><span class="tag weight-vh">TYK</span>Question Priority <span class="weight-vh">●</span></a>
+  </div>
+</nav>
+
+<!-- ── MAIN CONTENT ──────────────────────────────────── -->
+<main id="main">
+
+<!-- ═══════════════════════════════════════════════════════
+     STORY SECTION
+═══════════════════════════════════════════════════════ -->
+<section id="fw-story" data-tag="FW-STORY" data-type="story" data-exam-weight="none">
+  <div class="section-header">
+    <span class="section-tag">KAHAANI HOOKS</span>
+    <span class="section-title">3 Stories — Before the Theory</span>
+  </div>
+
+  <div class="story-grid">
+
+    <div class="story-card" data-extract="story" data-story-id="S1">
+      <div class="story-tag">Story 1 — 5 Pathology Labs</div>
+      <div class="story-title">Same blood. 5 labs. 5 different haemoglobin readings.</div>
+      <div class="story-body">
+        Arjun's typhoid report — one blood sample, sent to 5 labs. Lab A: 11.2. Lab B: 12.8. Lab C: 13.5. Lab D: 10.6. Lab E: 14.1.<br><br>
+        Who is right? Which doctor treats the patient? When the measurement method is different, the result is meaningless.<br><br>
+        <strong>Every lab follows the same standard now — NABL accreditation. One method. One result. Trust restored.</strong><br><br>
+        Accounts ki duniya mein yahi GAAP karta hai.
+      </div>
+      <div class="story-maps-to">Maps to: <span>FW-1 (Introduction) · FW-2 (Purpose) · FW-5 (Users need comparable data)</span></div>
+    </div>
+
+    <div class="story-card" data-extract="story" data-story-id="S2">
+      <div class="story-tag">Story 2 — 5 Accountants, 5 Years</div>
+      <div class="story-title">Surat ka textile company. 5 accountants in 5 years.</div>
+      <div class="story-body">
+        Year 1: Accountant A — stock at market price. Profit: ₹40L.<br>
+        Year 2: Accountant B — FIFO method. Profit: ₹28L.<br>
+        Year 3: Accountant C — Weighted Average. Profit: ₹34L.<br>
+        Year 4: Owner's nephew — liberal estimates. Profit: ₹52L.<br>
+        Year 5: New CA firm — conservative approach. Profit: ₹19L.<br><br>
+        <strong>Bank ne loan dene se mana kar diya. "Hum samajh nahi pa rahe — yeh company grow kar rahi hai ya sink kar rahi hai?"</strong><br><br>
+        GAAP + Consistency = comparable, trustworthy accounts.
+      </div>
+      <div class="story-maps-to">Maps to: <span>FW-6c (Consistency) · FW-7 (Comparability) · FW-2 (Purpose — assists users)</span></div>
+    </div>
+
+    <div class="story-card" data-extract="story" data-story-id="S3">
+      <div class="story-tag">Story 3 — Byju's Passport</div>
+      <div class="story-title">₹22 billion. Foreign investors. One problem.</div>
+      <div class="story-body">
+        Byju's needed capital from Prosus (Netherlands), Sequoia (USA), BlackRock (global). These investors speak IFRS. India had AS — a different grammar.<br><br>
+        India's solution: <strong>Ind AS</strong> — converge with IFRS, adapted for Indian conditions. Not copy-paste. Convergence.<br><br>
+        But before Ind AS, before AS, before any specific rule — there is a <strong>Constitution</strong>. That Constitution tells us: who are we preparing accounts for? What must a financial statement contain? What counts as an asset, a liability, income?<br><br>
+        <strong>That Constitution = the Framework.</strong>
+      </div>
+      <div class="story-maps-to">Maps to: <span>FW-1 (Introduction) · FW-2 (Purpose — assists ASB) · FW-5 (Users — foreign investors)</span></div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FW-1: INTRODUCTION
+═══════════════════════════════════════════════════════ -->
+<section id="fw-1" data-tag="FW-1" data-type="concept" data-exam-weight="medium"
+         data-title="Introduction — What the Framework Is">
+  <div class="section-header">
+    <span class="section-tag">FW-1</span>
+    <span class="section-title">Introduction — What the Framework Is</span>
+    <span class="exam-badge badge-m">Medium</span>
+  </div>
+
+  <div class="def-block" data-extract="definition">
+    The <strong>Framework for Preparation and Presentation of Financial Statements</strong> is <em>NOT an Accounting Standard.</em> It sets out the underlying <strong>concepts and principles</strong> on which all Accounting Standards are built.<br><br>
+    Issued by: <strong>Accounting Standards Board (ASB) of ICAI — July 2000.</strong>
+  </div>
+
+  <h3>What the Framework Covers</h3>
+  <div class="tag-grid" data-extract="list">
+    <span class="tag-pill teal">Components of FS</span>
+    <span class="tag-pill teal">Objectives of FS</span>
+    <span class="tag-pill teal">Underlying Assumptions</span>
+    <span class="tag-pill teal">Qualitative Characteristics</span>
+    <span class="tag-pill teal">Elements (Asset · Liability · Equity · Income · Expense)</span>
+    <span class="tag-pill teal">Recognition Criteria</span>
+    <span class="tag-pill teal">Measurement Principles</span>
+    <span class="tag-pill teal">Capital &amp; Capital Maintenance</span>
+  </div>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">Exam Rule — Hierarchy</div>
+    <p><strong>In case of conflict between an Accounting Standard and the Framework — the Accounting Standard always prevails.</strong> The Framework is foundational, not overriding. Specific AS have been debated, tested, and refined; they override the Constitution when there's conflict.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FW-2: PURPOSE
+═══════════════════════════════════════════════════════ -->
+<section id="fw-2" data-tag="FW-2" data-type="concept" data-exam-weight="medium"
+         data-title="Purpose of the Framework">
+  <div class="section-header">
+    <span class="section-tag">FW-2</span>
+    <span class="section-title">Purpose of the Framework</span>
+    <span class="exam-badge badge-m">Medium</span>
+  </div>
+
+  <table data-extract="table" data-table-id="fw2-purpose">
+    <thead><tr><th>Who It Assists</th><th>How</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Enterprises</strong></td><td>Prepare FS in compliance with AS; handle topics not yet covered by any AS</td></tr>
+      <tr><td><strong>ASB</strong> (develop)</td><td>Develop and review Accounting Standards consistently</td></tr>
+      <tr><td><strong>ASB</strong> (harmonise)</td><td>Reduce alternative accounting treatments → promote harmonisation of regulations</td></tr>
+      <tr><td><strong>Auditors</strong></td><td>Form an opinion on whether FS conform to Accounting Standards</td></tr>
+      <tr><td><strong>Users</strong></td><td>Interpret financial statements</td></tr>
+      <tr><td><strong>Interested parties</strong></td><td>Understand ASB's approach to standard-setting</td></tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FW-3: STATUS AND SCOPE
+═══════════════════════════════════════════════════════ -->
+<section id="fw-3" data-tag="FW-3" data-type="concept" data-exam-weight="low"
+         data-title="Status and Scope">
+  <div class="section-header">
+    <span class="section-tag">FW-3</span>
+    <span class="section-title">Status and Scope</span>
+    <span class="exam-badge badge-m">Low–Medium</span>
+  </div>
+
+  <div class="row2">
+    <div>
+      <h3>In Scope ✓</h3>
+      <div class="def-block" data-extract="definition">
+        <strong>General-purpose financial statements</strong> — prepared annually for <em>external users</em>, by all commercial, industrial and business enterprises (public or private sector).
+      </div>
+    </div>
+    <div>
+      <h3>Out of Scope ✗</h3>
+      <div class="def-block" data-extract="definition">
+        <strong>Special-purpose reports</strong> — e.g., computations prepared for income tax purposes. The Framework <em>may</em> be applied to these, to the extent not inconsistent with their requirements.
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">Key Rule</div>
+    <p><strong>Nothing in the Framework overrides any specific Accounting Standard.</strong> In conflict → AS wins. Always.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FW-4: COMPONENTS OF FINANCIAL STATEMENTS
+═══════════════════════════════════════════════════════ -->
+<section id="fw-4" data-tag="FW-4" data-type="concept" data-exam-weight="medium"
+         data-title="Components of Financial Statements">
+  <div class="section-header">
+    <span class="section-tag">FW-4</span>
+    <span class="section-title">Components of Financial Statements</span>
+    <span class="exam-badge badge-m">Medium</span>
+  </div>
+
+  <table data-extract="table" data-table-id="fw4-components">
+    <thead><tr><th>Component</th><th>Primary Information Provided</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Balance Sheet</strong></td>
+        <td>Value of economic resources controlled by the enterprise; liquidity and solvency position; ability to meet financial commitments</td>
+      </tr>
+      <tr>
+        <td><strong>Statement of Profit &amp; Loss</strong></td>
+        <td>Results of operations for the period; profitability performance</td>
+      </tr>
+      <tr>
+        <td><strong>Cash Flow Statement</strong></td>
+        <td>How cash was generated and used; analysis of operating, investing and financing activities</td>
+      </tr>
+      <tr>
+        <td><strong>Notes &amp; Other Statements</strong></td>
+        <td>Supplementary information — accounting policies, segment reporting, related party disclosures, EPS, other explanatory material</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">MCQ Trap — FW-4</div>
+    <p>All components are <strong>interrelated</strong> — they reflect different aspects of the same transactions. No single statement in isolation serves all purposes. Common MCQ option: "Human Responsibility Report" or "Social Responsibility Report" are NOT components of financial statements.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FW-5: USERS OF FINANCIAL STATEMENTS
+═══════════════════════════════════════════════════════ -->
+<section id="fw-5" data-tag="FW-5" data-type="concept" data-exam-weight="high"
+         data-title="Objectives and 7 Users of Financial Statements">
+  <div class="section-header">
+    <span class="section-tag">FW-5</span>
+    <span class="section-title">Objectives &amp; 7 Users of Financial Statements</span>
+    <span class="exam-badge badge-h">High</span>
+  </div>
+
+  <div class="def-block" data-extract="definition">
+    <strong>Objective:</strong> Provide information about <em>financial position, performance and cash flows</em> of an enterprise — useful to a wide range of users in making <strong>economic decisions.</strong>
+  </div>
+
+  <table data-extract="table" data-table-id="fw5-users">
+    <thead><tr><th>#</th><th>User</th><th>What They Are Looking For</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Investors</strong></td>
+        <td>Risk and return on investment; ability of enterprise to pay dividends</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>Employees</strong></td>
+        <td>Stability and profitability; ability to provide remuneration, retirement benefits and employment continuity</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Lenders</strong></td>
+        <td>Whether loans and interest will be repaid when due</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>Suppliers &amp; Trade Creditors</strong></td>
+        <td>Whether amounts owing will be paid when due; shorter-term interest than lenders (unless dependent on enterprise as major customer)</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><strong>Customers</strong></td>
+        <td>Continuance of the enterprise, especially for long-term product/service dependency</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><strong>Governments &amp; Agencies</strong></td>
+        <td>Allocation of resources; regulation of activities; determination of taxation policy; national income statistics</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><strong>Public</strong></td>
+        <td>Contribution to local economy; employment provided; patronage of local suppliers; trends in enterprise prosperity</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Financial statements provide information to suit <strong>common needs of most users</strong> — they cannot and do not provide all information (e.g., no non-financial data like management quality or brand strength).</p>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FW-6: FUNDAMENTAL ACCOUNTING ASSUMPTIONS
+═══════════════════════════════════════════════════════ -->
+
+<!-- 6a — GOING CONCERN -->
+<section id="fw-6a" data-tag="FW-6a" data-type="concept" data-exam-weight="very-high"
+         data-title="Going Concern Assumption">
+  <div class="section-header">
+    <span class="section-tag">FW-6a</span>
+    <span class="section-title">Fundamental Assumption 1 — Going Concern</span>
+    <span class="exam-badge badge-vh">Very High</span>
+  </div>
+
+  <div class="def-block" data-extract="definition">
+    Financial statements are prepared on the assumption that the enterprise will <strong>continue in operation in the foreseeable future</strong> — with no intention and no need to materially curtail the scale of operations.
+  </div>
+
+  <h3>Going Concern → Not Going Concern: What Changes</h3>
+  <table data-extract="table" data-table-id="fw6a-going-concern-comparison">
+    <thead><tr><th>Item</th><th>Going Concern Treatment</th><th>Not Going Concern Treatment</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>PPE / Fixed Assets</strong></td>
+        <td>Cost less depreciation (SLM over remaining useful life)</td>
+        <td>Net Realisable Value (what you'd get on forced sale)</td>
+      </tr>
+      <tr>
+        <td><strong>Depreciation</strong></td>
+        <td>Based on useful life — spread over years</td>
+        <td>Difference between book value and current NRV</td>
+      </tr>
+      <tr>
+        <td><strong>Deferred Expenditure</strong></td>
+        <td>Amortised over agreed period (e.g., 4 years — ₹X per year)</td>
+        <td><em>Entire remaining balance written off immediately</em></td>
+      </tr>
+      <tr>
+        <td><strong>Doubtful Debts</strong></td>
+        <td>Provision on estimated doubtful amounts only</td>
+        <td>Write off ALL dependent/uncertain receivables immediately</td>
+      </tr>
+      <tr>
+        <td><strong>Loan Prepayment Penalty</strong></td>
+        <td>Not applicable (loan continuing)</td>
+        <td><em>Recognised immediately as expense</em></td>
+      </tr>
+      <tr>
+        <td><strong>Trade Payables</strong></td>
+        <td>At book value (no discount expected)</td>
+        <td>At likely settlement value (deduct discount if likely)</td>
+      </tr>
+      <tr>
+        <td><strong>Stock</strong></td>
+        <td>Lower of Cost and NRV (selling in ordinary course)</td>
+        <td>NRV only (forced liquidation assumption)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">TYK Q10 — Very High Priority</div>
+    <p>ICAI Illustration 1 and TYK Q10 (Anurag Trading Co.) both require full P&amp;L and Balance Sheet under (i) Going Concern and (ii) Not Going Concern for the same data. <strong>Every single line changes.</strong> Master this. The most common trap: students forget deferred expenditure is written off in FULL under Not GC (not just current year's portion), and forget the loan penalty is recognised immediately.</p>
+  </div>
+
+  <p><strong>Disclosure rule:</strong> If followed → no separate disclosure needed. If NOT followed → must specifically disclose which basis is used and why.</p>
+</section>
+
+
+<!-- 6b — ACCRUAL -->
+<section id="fw-6b" data-tag="FW-6b" data-type="concept" data-exam-weight="high"
+         data-title="Accrual Assumption">
+  <div class="section-header">
+    <span class="section-tag">FW-6b</span>
+    <span class="section-title">Fundamental Assumption 2 — Accrual</span>
+    <span class="exam-badge badge-h">High</span>
+  </div>
+
+  <div class="def-block" data-extract="definition">
+    Revenues and costs are <strong>recognised when earned or incurred</strong> — not when cash is received or paid. They are recorded in the financial statements of the <em>periods to which they relate.</em>
+  </div>
+
+  <table data-extract="table" data-table-id="fw6b-accrual-vs-cash">
+    <thead><tr><th></th><th>Cash Basis</th><th>Accrual Basis</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Income recognised when</strong></td><td>Cash received</td><td>Earned / service performed</td></tr>
+      <tr><td><strong>Expense recognised when</strong></td><td>Cash paid</td><td>Incurred (benefit received)</td></tr>
+      <tr><td><strong>Outstanding income</strong></td><td>Not recorded</td><td>Recorded as receivable (asset)</td></tr>
+      <tr><td><strong>Prepaid expense</strong></td><td>Full expense in period paid</td><td>Only current-period portion as expense; balance = asset</td></tr>
+      <tr><td><strong>Mandatory for companies?</strong></td><td>No</td><td><strong>Yes — Section 128(1), Companies Act 2013</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="kkb" data-extract="kaam-ki-baat" data-kkb-id="accrual-ppac">
+    <div class="kkb-label">Kaam Ki Baat — PPAC / Ministry of Petroleum &amp; Natural Gas</div>
+    <div class="kkb-title">Subsidy Receivable — Earned Before Cash Arrives</div>
+    <p>At PPAC (under MoPNG), the Government pays subsidy to oil PSUs (IOCL, BPCL, HPCL) for selling fuel below cost. But the actual disbursement from the Union Budget happens months after the financial year ends.</p>
+    <p>Recognition: <strong>in the year the subsidy was earned</strong> — the year the fuel was sold below cost. Not when the cash arrived. IOCL shows "Subsidy Receivable from Government of India" as an asset — sometimes ₹10,000+ crore — waiting for cash.</p>
+    <p><em>The earnings event drives recognition. Not the payment event.</em> This is accrual at scale.</p>
+  </div>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">Byju's Connection</div>
+    <p>₹90,000 received. 3-year course. Accrual says: recognise income only as service is delivered — 1/3rd per year. <strong>Booking full ₹90,000 in Year 1 = Accrual violation.</strong> The income was not yet earned; the obligation to deliver 3 years of education was still outstanding.</p>
+  </div>
+</section>
+
+
+<!-- 6c — CONSISTENCY -->
+<section id="fw-6c" data-tag="FW-6c" data-type="concept" data-exam-weight="medium"
+         data-title="Consistency Assumption">
+  <div class="section-header">
+    <span class="section-tag">FW-6c</span>
+    <span class="section-title">Fundamental Assumption 3 — Consistency</span>
+    <span class="exam-badge badge-m">Medium</span>
+  </div>
+
+  <div class="def-block" data-extract="definition">
+    Accounting policies are assumed to be <strong>consistent from one period to another.</strong> Consistency improves <em>comparability of financial statements across time.</em>
+  </div>
+
+  <h3>When Can You Change an Accounting Policy?</h3>
+  <div class="tag-grid" data-extract="list">
+    <span class="tag-pill gold">1. Required by a statute</span>
+    <span class="tag-pill gold">2. Required by an Accounting Standard</span>
+    <span class="tag-pill gold">3. For more appropriate presentation of financial statements</span>
+  </div>
+  <p style="margin-top:10px;">If changed → <strong>disclose the financial effect</strong> of the change.</p>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">MCQ Trap — FW-6c</div>
+    <p>MCQ 4 option (d) says policy can be changed "by statute <em>as well as</em> accounting standards" (both simultaneously required). <strong>Wrong.</strong> The correct rule is: ANY ONE of the three grounds is sufficient. Option (c) "Both (a) and (b)" is the right answer — meaning by statute OR by AS OR for more appropriate presentation.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FW-7: QUALITATIVE CHARACTERISTICS
+═══════════════════════════════════════════════════════ -->
+<section id="fw-7" data-tag="FW-7" data-type="concept" data-exam-weight="high"
+         data-title="Qualitative Characteristics of Financial Statements">
+  <div class="section-header">
+    <span class="section-tag">FW-7</span>
+    <span class="section-title">Qualitative Characteristics of Financial Statements</span>
+    <span class="exam-badge badge-h">High</span>
+  </div>
+
+  <p>Four attributes that improve the <strong>usefulness</strong> of financial information — to be maintained as far as possible within limits of reasonable cost/benefit.</p>
+
+  <table data-extract="table" data-table-id="fw7-qualitative">
+    <thead><tr><th>Characteristic</th><th>Core Meaning</th><th>Sub-points / Constraints</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Understandability</strong></td>
+        <td>Information presented so it can be understood by users with <em>reasonable knowledge</em> of business, economics and accounting</td>
+        <td>Complex information cannot be omitted just because some users may find it difficult — it must be explained clearly</td>
+      </tr>
+      <tr>
+        <td><strong>Relevance</strong></td>
+        <td>Information that is likely to <em>influence economic decisions</em> of users — evaluating past/present/future events or confirming/correcting past evaluations</td>
+        <td>
+          <strong>Materiality:</strong> threshold for relevance — item is material if its misstatement (omission or error) could influence decisions. Judged by size and nature.<br><br>
+          <strong>Constraint — Timeliness:</strong> Delayed info loses relevance. But rushing before all facts known impairs reliability. Balance required.<br><br>
+          <strong>Constraint — Benefit vs Cost:</strong> Benefits of providing information must exceed the cost. A pervasive constraint — not a qualitative characteristic itself.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Reliability</strong></td>
+        <td>Free from <em>material error and bias</em>. Five sub-requirements:</td>
+        <td>
+          (a) <strong>Faithful representation</strong> — transactions reported as they actually occurred<br>
+          (b) <strong>Substance over form</strong> — reported on economic reality, not just legal form<br>
+          (c) <strong>Neutrality</strong> — free from bias; presentation does not skew conclusions<br>
+          (d) <strong>Prudence</strong> — caution in uncertain outcomes: anticipate no profits, provide for all losses<br>
+          (e) <strong>Completeness</strong> — no material information omitted
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Comparability</strong></td>
+        <td>FS should permit <em>inter-firm</em> (same industry, different companies) and <em>intra-firm</em> (same company, different years) comparison</td>
+        <td><strong>Comparability ≠ Uniformity.</strong> Do not retain an inferior accounting policy just to maintain consistency. If a better, more relevant policy exists → change it, disclose the effect, move forward.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">Theory Q7 — Neutrality</div>
+    <p>"One of the characteristics of financial statements is neutrality" — <strong>Yes, agree.</strong> Neutrality is a sub-component of Reliability. FS are not neutral if, by selection or presentation of information, the focus of analysis could shift from one area of business to another, arriving at a totally different conclusion.</p>
+  </div>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">Byju's — Reliability Violations (All 5)</div>
+    <p><strong>Faithful representation:</strong> income booked before earned. <strong>Substance over form:</strong> cash received ≠ income earned. <strong>Neutrality:</strong> accounts designed to attract investors. <strong>Prudence:</strong> profits anticipated before earned. <strong>Completeness:</strong> 3-year delivery obligation not disclosed as liability. <em>All five violated by one company, one transaction.</em></p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FW-8: TRUE AND FAIR VIEW
+═══════════════════════════════════════════════════════ -->
+<section id="fw-8" data-tag="FW-8" data-type="concept" data-exam-weight="low"
+         data-title="True and Fair View">
+  <div class="section-header">
+    <span class="section-tag">FW-8</span>
+    <span class="section-title">True and Fair View</span>
+    <span class="exam-badge badge-m">Low</span>
+  </div>
+
+  <div class="def-block" data-extract="definition">
+    Financial statements are required to show a <strong>true and fair view</strong> of performance, financial position and cash flows.<br><br>
+    The Framework <em>does not define</em> "true and fair view" directly. However: application of the four qualitative characteristics + appropriate Accounting Standards <strong>normally results in</strong> financial statements portraying a true and fair view.
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FW-9: ELEMENTS OF FINANCIAL STATEMENTS
+═══════════════════════════════════════════════════════ -->
+<section id="fw-9" data-tag="FW-9" data-type="concept" data-exam-weight="high"
+         data-title="Elements of Financial Statements">
+  <div class="section-header">
+    <span class="section-tag">FW-9</span>
+    <span class="section-title">Elements of Financial Statements — 5 Elements</span>
+    <span class="exam-badge badge-h">High</span>
+  </div>
+
+  <div class="element-grid" data-extract="list" data-list-id="fw9-elements">
+    <div class="element-card">
+      <div class="e-name">Asset</div>
+      <div class="e-def">Resource <strong>controlled</strong> by enterprise, from <strong>past event</strong>, generating <strong>probable future economic benefits</strong></div>
+    </div>
+    <div class="element-card">
+      <div class="e-name">Liability</div>
+      <div class="e-def"><strong>Present obligation</strong> from past event, settlement expected to cause <strong>outflow of economic resources</strong></div>
+    </div>
+    <div class="element-card">
+      <div class="e-name">Equity</div>
+      <div class="e-def"><strong>Residual interest</strong> in assets after deducting all liabilities<br>(A − L = E)</div>
+    </div>
+    <div class="element-card">
+      <div class="e-name">Income</div>
+      <div class="e-def">Increase in economic benefits → <strong>inflows / asset enhancement / liability decrease</strong> → equity increase (excl. owner contributions)</div>
+    </div>
+    <div class="element-card">
+      <div class="e-name">Expense</div>
+      <div class="e-def">Decrease in economic benefits → <strong>outflows / asset depletion / liability increase</strong> → equity decrease (excl. owner drawings)</div>
+    </div>
+  </div>
+
+  <h3>Key Rules for Income and Expense</h3>
+  <table data-extract="table" data-table-id="fw9-income-expense-rules">
+    <thead><tr><th>Rule</th><th>Income</th><th>Expense</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Always accompanied by</strong></td>
+        <td>Increase in an asset OR decrease in a liability</td>
+        <td>Decrease in an asset OR increase in a liability</td>
+      </tr>
+      <tr>
+        <td><strong>Gains/Losses</strong></td>
+        <td>Gains (not in ordinary course) = part of Income element</td>
+        <td>Losses (not in ordinary course) = part of Expense element</td>
+      </tr>
+      <tr>
+        <td><strong>NOT a separate element</strong></td>
+        <td>Gains are included in Income (not a 6th element)</td>
+        <td>Losses are included in Expenses (not a 6th element)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">Byju's — ₹90,000 — Element Test</div>
+    <p>₹90,000 received for 3-year course, Year 1. <strong>Income? No.</strong> Income requires the economic benefit to have been earned. The service (3 years of teaching) is not yet delivered. <strong>First it is a Liability</strong> — a present obligation (to deliver education) arising from a past event (receipt of ₹90,000), expected to result in outflow of resources (faculty, content, infrastructure). As each year's course is delivered → portion converts to Income.</p>
+  </div>
+</section>
+
+
+<!-- FW-9a: ASSET CONDITIONS -->
+<section id="fw-9a" data-tag="FW-9a" data-type="concept" data-exam-weight="medium"
+         data-title="Asset — 5 Conditions">
+  <div class="section-header">
+    <span class="section-tag">FW-9a</span>
+    <span class="section-title">Asset — 5 Conditions for Recognition</span>
+    <span class="exam-badge badge-m">Medium</span>
+  </div>
+
+  <table data-extract="table" data-table-id="fw9a-asset-conditions">
+    <thead><tr><th>#</th><th>Condition</th><th>Key Point / Example</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Need not have physical substance</strong></td>
+        <td>Patents, copyrights, trade receivables are assets — no physical form required</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>Controlled by enterprise</strong> (not necessarily owned)</td>
+        <td>Finance lease: lessee recognises the asset (controls it) even without legal ownership. Lessor does NOT recognise it in their books.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Control must be sufficient</strong></td>
+        <td>Specific management talent / technical expertise of an employee <em>cannot be recognised as an asset</em> — insufficient control (employee can resign)</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>Probable future economic benefits beyond current period</strong></td>
+        <td>If benefit exhausted in current period → it is an expense, not an asset. E.g., machinery bought by machinery dealer for resale in current period = expense (not capitalised)</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><strong>Cost or value must be reliably measurable</strong></td>
+        <td>Cannot recognise an asset if its value cannot be determined with reasonable reliability</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- FW-9b: LIABILITY CONDITIONS -->
+<section id="fw-9b" data-tag="FW-9b" data-type="concept" data-exam-weight="very-high"
+         data-title="Liability — 3 Key Rules">
+  <div class="section-header">
+    <span class="section-tag">FW-9b</span>
+    <span class="section-title">Liability — 3 Key Rules</span>
+    <span class="exam-badge badge-vh">Very High</span>
+  </div>
+
+  <table data-extract="table" data-table-id="fw9b-liability-rules">
+    <thead><tr><th>#</th><th>Rule</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Present obligation — not a future commitment</strong></td>
+        <td>A management decision to buy an asset in the future does NOT create a present liability. Obligation arises when: (a) asset is delivered, OR (b) enterprise enters an <em>irrevocable agreement</em> to acquire it (binding contract)</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>Provisions as liabilities — careful distinction</strong></td>
+        <td>Provision for warranty, litigation = liability (probable present obligation). BUT: provision for doubtful debts, depreciation, impairment = <em>NOT liabilities</em> — they represent diminution in asset value</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Liability recognised only when outflow is anticipated AND reliably measurable</strong></td>
+        <td>Both conditions must be met. If probability is too uncertain (contingent) or amount cannot be measured → disclose as contingent liability, do not recognise on balance sheet</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">TYK Q11 — Very High Priority (Binding Agreement)</div>
+    <p>A Ltd. has a <strong>binding (irrevocable) agreement</strong> to buy a custom machine for ₹1,00,000. Before delivery, the production method changes — machine will be scrapped on arrival (zero scrap value).<br><br>
+    Step 1: Recognise a <strong>liability of ₹1,00,000</strong> to Gamma Ltd. — binding irrevocable agreement creates present obligation.<br>
+    Step 2: No future economic benefit → machine cost = <strong>expense immediately</strong> (not capitalised as asset).<br><br>
+    Entry: <code>Loss on change in production method Dr. 1,00,000 / To Gamma Ltd. 1,00,000</code><br>
+    Then: <code>P&amp;L A/c Dr. 1,00,000 / To Loss on change... 1,00,000</code><br><br>
+    <strong>Common wrong answer:</strong> students wait for delivery to recognise liability. Wrong — irrevocable agreement = present obligation now.</p>
+  </div>
+</section>
+
+
+<!-- FW-9c: A-L=E -->
+<section id="fw-9c" data-tag="FW-9c" data-type="concept" data-exam-weight="high"
+         data-title="A − L = E Relationship">
+  <div class="section-header">
+    <span class="section-tag">FW-9c</span>
+    <span class="section-title">The A − L = E Relationship</span>
+    <span class="exam-badge badge-h">High</span>
+  </div>
+
+  <div class="formula" data-extract="formula">
+    <div class="f-label">Fundamental Accounting Equation</div>
+    <div class="f-expr">Assets − Liabilities = Equity</div>
+  </div>
+
+  <div class="formula" data-extract="formula">
+    <div class="f-label">Expanded Equity Formula</div>
+    <div class="f-expr">Closing Equity = Opening Equity + Capital Introduced + Income − Expenses − Drawings</div>
+  </div>
+
+  <div class="formula" data-extract="formula">
+    <div class="f-label">Profit (derived)</div>
+    <div class="f-expr">Profit = (Closing Assets − Closing Liabilities) − (Opening Assets − Opening Liabilities) − Capital Introduced + Drawings</div>
+  </div>
+
+  <p><strong>Key insight:</strong> Profit depends on how assets and liabilities are valued. Change the valuation basis → reported profit changes. This is the conceptual foundation of Capital Maintenance (FW-11).</p>
+
+  <h3>Transaction Effects on A − L = E</h3>
+  <table data-extract="table" data-table-id="fw9c-transaction-effects">
+    <thead><tr><th>Transaction</th><th>Assets</th><th>Liabilities</th><th>Equity</th></tr></thead>
+    <tbody>
+      <tr><td>Capital introduced</td><td>↑</td><td>—</td><td>↑</td></tr>
+      <tr><td>Income earned (cash)</td><td>↑ (cash)</td><td>—</td><td>↑</td></tr>
+      <tr><td>Income earned (accrual)</td><td>↑ (receivable)</td><td>—</td><td>↑</td></tr>
+      <tr><td>Expense paid (cash)</td><td>↓ (cash)</td><td>—</td><td>↓</td></tr>
+      <tr><td>Expense outstanding</td><td>—</td><td>↑</td><td>↓</td></tr>
+      <tr><td>Liability settled at discount</td><td>↓ (less than liability)</td><td>↓</td><td>↑ (discount = gain)</td></tr>
+      <tr><td>Drawings</td><td>↓</td><td>—</td><td>↓</td></tr>
+      <tr><td>Asset purchased on credit</td><td>↑</td><td>↑</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">TYK Q9 — Transaction Tracking</div>
+    <p>Mr. A — opening A: ₹8L, L: ₹3L, E: ₹5L. Four transactions: (1) dividend earned, (2) creditor settled at discount, (3) rent outstanding, (4) drawings. Track each transaction through the A−L=E table. <strong>Common error:</strong> treating drawings as a liability decrease instead of an asset decrease (equity decrease).</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FW-10: MEASUREMENT BASES
+═══════════════════════════════════════════════════════ -->
+<section id="fw-10" data-tag="FW-10" data-type="concept" data-exam-weight="medium"
+         data-title="Measurement of Elements — 4 Bases">
+  <div class="section-header">
+    <span class="section-tag">FW-10</span>
+    <span class="section-title">Measurement of Elements — 4 Bases</span>
+    <span class="exam-badge badge-m">Medium</span>
+  </div>
+
+  <p>Measurement = determining the <strong>money value</strong> at which an element is recognised in Balance Sheet or P&amp;L. Four alternative bases:</p>
+
+  <div class="meas-grid" data-extract="list" data-list-id="fw10-measurement-bases">
+    <div class="meas-card" data-item="historical-cost">
+      <div class="m-name">1. Historical Cost</div>
+      <div class="m-asset"><strong>Assets:</strong> Amount paid / fair value at time of acquisition</div>
+      <div class="m-liab"><strong>Liabilities:</strong> Amount of proceeds received in exchange for the obligation</div>
+      <div class="m-note">Primary basis used by most AS. Machine bought for ₹7L recorded at ₹7L even if replacement cost is now ₹25L.</div>
+    </div>
+    <div class="meas-card" data-item="current-cost">
+      <div class="m-name">2. Current Cost</div>
+      <div class="m-asset"><strong>Assets:</strong> Amount that would be paid to acquire the same/equivalent asset currently</div>
+      <div class="m-liab"><strong>Liabilities:</strong> <strong>Undiscounted</strong> amount required to settle the obligation currently</div>
+      <div class="m-note">Note: liabilities under current cost = undiscounted (not present value of future payments)</div>
+    </div>
+    <div class="meas-card" data-item="realisable-value">
+      <div class="m-name">3. Realisable (Settlement) Value</div>
+      <div class="m-asset"><strong>Assets:</strong> Amount currently realisable on orderly disposal/sale</div>
+      <div class="m-liab"><strong>Liabilities:</strong> <strong>Undiscounted</strong> amount expected to be paid on settlement in normal course of business</div>
+      <div class="m-note">Example: NRV used for inventory valuation at year-end (AS 2). Assets not carried above what they can realise.</div>
+    </div>
+    <div class="meas-card" data-item="present-value">
+      <div class="m-name">4. Present Value</div>
+      <div class="m-asset"><strong>Assets:</strong> Present value of future net cash inflows expected in normal course of business</div>
+      <div class="m-liab"><strong>Liabilities:</strong> Present value of future net cash outflows required to settle in normal course</div>
+      <div class="m-note">PV = A ÷ (1+R)ⁿ. Called "Value in Use" for assets. Used in impairment testing.</div>
+    </div>
+  </div>
+
+  <div class="kkb" data-extract="kaam-ki-baat" data-kkb-id="measurement-d2c">
+    <div class="kkb-label">Kaam Ki Baat — D2C Startup CFO Advisory</div>
+    <div class="kkb-title">Same Formula, Four Different Values</div>
+    <p>A D2C beauty startup — proprietary skincare formula, 2 years of R&amp;D, ₹40L spent.<br>
+    Under <em>Historical Cost:</em> ₹40L (capitalised if AS 26 conditions met).<br>
+    Under <em>Present Value:</em> ₹3.2 crore (estimated future cash flows over commercial life, discounted at required rate).</p>
+    <p>Same formula. Same product. <strong>₹40L vs ₹3.2 crore.</strong></p>
+    <p>Neither is wrong — they answer different questions. Historical cost: <em>what did we spend to create this?</em> Present value: <em>what will this earn us?</em> The Framework recognises all four bases because different users and different decisions need different answers.</p>
+  </div>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">Practice Standard — Historical Cost Dominates</div>
+    <p>In practice, Accounting Standards primarily use <strong>Historical Cost</strong>, with modifications where specific AS require it: Inventory → Lower of Cost and NRV (realisable value); PPE → Cost less depreciation (with optional revaluation); Financial instruments → Fair value in some cases.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FW-11: CAPITAL MAINTENANCE
+═══════════════════════════════════════════════════════ -->
+<section id="fw-11" data-tag="FW-11" data-type="concept" data-exam-weight="very-high"
+         data-title="Capital Maintenance">
+  <div class="section-header">
+    <span class="section-tag">FW-11</span>
+    <span class="section-title">Capital Maintenance — 3 Approaches</span>
+    <span class="exam-badge badge-vh">Very High</span>
+  </div>
+
+  <div class="def-block" data-extract="definition">
+    <strong>Capital</strong> = net assets of a business. Capital Maintenance = ensuring the business can replace its assets and continue operations at the same level — i.e., dividends should not exceed profit after adequate provision for asset replacement.
+  </div>
+
+  <div class="formula" data-extract="formula">
+    <div class="f-label">Retained Profit Formula (all three bases)</div>
+    <div class="f-expr">Retained Profit = Closing Capital (at chosen basis) − Opening Capital (at chosen basis) − Capital Introduced</div>
+  </div>
+  <p style="margin-top:4px; font-size:12px; color:var(--dim);">If Retained Profit is <strong style="color:var(--red);">negative</strong> → capital NOT maintained → drawings were excessive.</p>
+
+  <table data-extract="table" data-table-id="fw11-capital-maintenance">
+    <thead>
+      <tr>
+        <th>Basis</th>
+        <th>How Opening Equity Is Restated</th>
+        <th>What It Ensures</th>
+        <th>Limitation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Financial Capital at Historical Cost</strong></td>
+        <td>Opening and closing assets at their respective historical costs. No restatement.</td>
+        <td>Business has enough funds to replace assets at their <em>original purchase prices</em></td>
+        <td>Works only if prices do not rise. In inflation → insufficient to replace assets at current prices.</td>
+      </tr>
+      <tr>
+        <td><strong>Financial Capital at Current Purchasing Power</strong></td>
+        <td>Opening equity restated to closing prices using an <em>average price index</em><br>(Opening equity × Closing Index ÷ Opening Index)</td>
+        <td>Business has enough to replace assets at <em>average current prices</em></td>
+        <td>Average index doesn't reflect specific asset price changes. Machine may rise 30% while average is 20%.</td>
+      </tr>
+      <tr>
+        <td><strong>Physical Capital at Current Costs</strong></td>
+        <td>Opening assets restated using <em>specific price indices</em> for each individual asset</td>
+        <td>Business has enough to replace <em>each specific asset</em> at its own current price</td>
+        <td>Most realistic but most complex to compute.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-note" data-extract="exam-note">
+    <div class="en-label">Illustration 2 &amp; TYK Q8 — Very High Priority</div>
+    <p><strong>Common trap:</strong> Students apply the price index to <em>closing</em> equity rather than <em>opening</em> equity. The restatement is always of <strong>opening equity (or opening assets) to closing-period prices.</strong> Closing equity stays at its actual/book value.<br><br>
+    <strong>TYK Q8:</strong> Mohan — 60,000 units × ₹20 = opening equity ₹12,00,000. Sold all at ₹30. Maximum drawings = Closing equity (₹18L) − Opening equity (₹12L) = <strong>₹6,00,000</strong> under Historical Cost basis.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     LAYER 3 — ONE-LINERS
+═══════════════════════════════════════════════════════ -->
+<section id="fw-l3" data-tag="FW-L3" data-type="one-liners" data-exam-weight="revision"
+         data-title="Layer 3 — One-Liners">
+  <div class="section-header">
+    <span class="section-tag">LAYER 3</span>
+    <span class="section-title">One-Liners — Rapid Revision (22 points)</span>
+  </div>
+
+  <ul class="oneliner-list" data-extract="one-liners">
+    <li><span class="ol-num">01</span><span class="ol-text">Framework = <strong>Constitution of Accounting</strong>. Sets underlying concepts on which all AS are built. Is NOT an Accounting Standard itself.</span></li>
+    <li><span class="ol-num">02</span><span class="ol-text"><strong>Framework vs AS conflict: AS prevails. Always.</strong></span></li>
+    <li><span class="ol-num">03</span><span class="ol-text">Framework issued by: <strong>ASB of ICAI — July 2000.</strong></span></li>
+    <li><span class="ol-num">04</span><span class="ol-text">Scope: General-purpose FS for external users. <em>Special-purpose reports (e.g., tax computations) = outside scope.</em></span></li>
+    <li><span class="ol-num">05</span><span class="ol-text">Complete FS = <strong>Balance Sheet + P&amp;L + Cash Flow Statement + Notes.</strong> All interrelated.</span></li>
+    <li><span class="ol-num">06</span><span class="ol-text">Seven users: <strong>Investors · Employees · Lenders · Suppliers/Creditors · Customers · Government · Public.</strong></span></li>
+    <li><span class="ol-num">07</span><span class="ol-text">Three fundamental assumptions: <strong>Going Concern · Accrual · Consistency.</strong> If followed → no disclosure. If NOT followed → must disclose.</span></li>
+    <li><span class="ol-num">08</span><span class="ol-text"><strong>Going Concern:</strong> Enterprise continues in operation; no intention/need to curtail scale.</span></li>
+    <li><span class="ol-num">09</span><span class="ol-text"><strong>Accrual:</strong> Recognise when earned/incurred — not when cash received/paid. Mandatory for companies under Section 128(1) of Companies Act 2013.</span></li>
+    <li><span class="ol-num">10</span><span class="ol-text"><strong>Consistency:</strong> Same policies across periods. Change only if: required by statute / required by AS / for more appropriate presentation.</span></li>
+    <li><span class="ol-num">11</span><span class="ol-text">Four qualitative characteristics: <strong>Understandability · Relevance · Reliability · Comparability.</strong></span></li>
+    <li><span class="ol-num">12</span><span class="ol-text"><strong>Materiality</strong> = threshold for Relevance. Material if misstatement could influence economic decisions. Judged by size AND nature.</span></li>
+    <li><span class="ol-num">13</span><span class="ol-text">Reliability sub-components: <em>Faithful representation · Substance over form · Neutrality · Prudence · Completeness.</em></span></li>
+    <li><span class="ol-num">14</span><span class="ol-text"><strong>Comparability ≠ Uniformity.</strong> Do not retain inferior policies just for consistency.</span></li>
+    <li><span class="ol-num">15</span><span class="ol-text">Five elements: <strong>Asset · Liability · Equity · Income · Expense.</strong> Gains = Income. Losses = Expenses. Not separate elements.</span></li>
+    <li><span class="ol-num">16</span><span class="ol-text"><strong>Asset:</strong> Controlled (not necessarily owned) + past event + probable future economic benefit beyond current period.</span></li>
+    <li><span class="ol-num">17</span><span class="ol-text"><strong>Liability:</strong> Present obligation (NOT future commitment) + past event + expected outflow. Binding irrevocable agreement = present obligation.</span></li>
+    <li><span class="ol-num">18</span><span class="ol-text"><strong>Equity = Assets − Liabilities.</strong> Changes through: owner contributions/drawings + income − expenses.</span></li>
+    <li><span class="ol-num">19</span><span class="ol-text">Income always → asset increase OR liability decrease. Expense always → asset decrease OR liability increase.</span></li>
+    <li><span class="ol-num">20</span><span class="ol-text">Four measurement bases: <strong>Historical Cost · Current Cost · Realisable Value · Present Value.</strong> Historical cost primarily used; others per specific AS.</span></li>
+    <li><span class="ol-num">21</span><span class="ol-text">Capital Maintenance: three approaches — <em>Historical Cost</em> (no restatement) · <em>Current Purchasing Power</em> (average price index) · <em>Physical Capital</em> (specific price indices).</span></li>
+    <li><span class="ol-num">22</span><span class="ol-text"><strong>Retained Profit = Closing Capital − Opening Capital − Capital Introduced.</strong> If negative → capital not maintained.</span></li>
+  </ul>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     TYK PRIORITY GUIDE
+═══════════════════════════════════════════════════════ -->
+<section id="fw-tyk" data-tag="FW-TYK" data-type="tyk-guide" data-exam-weight="very-high"
+         data-title="TYK Question Priority">
+  <div class="section-header">
+    <span class="section-tag">TYK</span>
+    <span class="section-title">TYK Question Priority Guide</span>
+    <span class="exam-badge badge-vh">Exam Reference</span>
+  </div>
+
+  <table data-extract="table" data-table-id="tyk-priority">
+    <thead><tr><th>Question</th><th>Concept Tested</th><th>Tag</th><th>Priority</th></tr></thead>
+    <tbody>
+      <tr class="tyk-vh">
+        <td><strong>Scenario Q10</strong><br><small>Anurag Trading Co.</small></td>
+        <td>Complete P&amp;L — Going Concern vs Not Going Concern. Every line differs.</td>
+        <td><code>FW-6a</code></td>
+        <td>Very High</td>
+      </tr>
+      <tr class="tyk-vh">
+        <td><strong>Scenario Q11</strong><br><small>A Ltd. + Gamma Ltd.</small></td>
+        <td>Liability under irrevocable binding agreement; full cost = expense (no asset — no future benefit)</td>
+        <td><code>FW-9b</code></td>
+        <td>Very High</td>
+      </tr>
+      <tr class="tyk-vh">
+        <td><strong>Scenario Q8</strong><br><small>Mohan, 60,000 units</small></td>
+        <td>Capital Maintenance at Historical Cost — maximum permissible drawings</td>
+        <td><code>FW-11</code></td>
+        <td>Very High</td>
+      </tr>
+      <tr class="tyk-h">
+        <td><strong>Illustration 2</strong><br><small>All 3 Capital Maintenance bases</small></td>
+        <td>Financial Capital at Historical Cost + Current Purchasing Power + Physical Capital — all three computed for same data</td>
+        <td><code>FW-11</code></td>
+        <td>High</td>
+      </tr>
+      <tr class="tyk-h">
+        <td><strong>Scenario Q9</strong><br><small>Mr. A, 4 transactions</small></td>
+        <td>A − L = E transaction tracking across 4 events</td>
+        <td><code>FW-9c</code></td>
+        <td>High</td>
+      </tr>
+      <tr class="tyk-h">
+        <td><strong>MCQ 4</strong></td>
+        <td>When can accounting policy be changed? Answer: (c) Both (a) and (b) — not (d)</td>
+        <td><code>FW-6c</code></td>
+        <td>High</td>
+      </tr>
+      <tr class="tyk-h">
+        <td><strong>MCQ 2</strong></td>
+        <td>Two principal qualitative characteristics = Relevance + Reliability</td>
+        <td><code>FW-7</code></td>
+        <td>High</td>
+      </tr>
+      <tr class="tyk-m">
+        <td><strong>Theory Q6</strong></td>
+        <td>List and explain 4 qualitative characteristics</td>
+        <td><code>FW-7</code></td>
+        <td>Medium</td>
+      </tr>
+      <tr class="tyk-m">
+        <td><strong>Theory Q7</strong></td>
+        <td>Is neutrality a characteristic? Yes — sub-component of Reliability</td>
+        <td><code>FW-7</code></td>
+        <td>Medium</td>
+      </tr>
+      <tr class="tyk-m">
+        <td><strong>MCQ 1</strong></td>
+        <td>Going Concern = enterprise continues in operation in foreseeable future</td>
+        <td><code>FW-6a</code></td>
+        <td>Medium</td>
+      </tr>
+      <tr class="tyk-m">
+        <td><strong>MCQ 3</strong></td>
+        <td>Components of FS — Human Responsibility Report and Social Responsibility Report are NOT components</td>
+        <td><code>FW-4</code></td>
+        <td>Medium</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<!-- ── SIDEBAR ACTIVE STATE SCRIPT ─────────────────────── -->
+<script>
+  const links = document.querySelectorAll('#sidebar .nav-link');
+  const sections = document.querySelectorAll('section[id]');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`#sidebar a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-44px 0px -60% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

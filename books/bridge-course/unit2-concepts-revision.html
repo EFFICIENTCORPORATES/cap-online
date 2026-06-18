@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 2 — Accounting Concepts, Principles &amp; Conventions | Bridge Course | VC Gurukul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:          #1a1a2e;
+      --navy-light:    #2a2a4e;
+      --orange:        #e8813a;
+      --orange-light:  #fff4ed;
+      --orange-dark:   #c96d25;
+      --green:         #2d8653;
+      --green-light:   #edf7f2;
+      --green-dark:    #1e5e38;
+      --purple:        #6b3fa0;
+      --purple-light:  #f3eeff;
+      --purple-dark:   #4a2a72;
+      --red:           #c0392b;
+      --red-light:     #fdf1f0;
+      --red-dark:      #922b21;
+      --gold:          #f0a500;
+      --gray-100:      #f8f9fa;
+      --gray-200:      #e9ecef;
+      --gray-300:      #dee2e6;
+      --gray-600:      #6c757d;
+      --gray-700:      #495057;
+      --text:          #2c2c2c;
+      --text-light:    #555;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.65;
+      color: var(--text);
+      background: #d0d0d8;
+    }
+
+    @media screen {
+      .page-wrapper {
+        max-width: 220mm;
+        margin: 0 auto;
+        padding: 24px 0 48px;
+      }
+      .page {
+        background: white;
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto 28px;
+        box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+        border-radius: 3px;
+        position: relative;
+        overflow: hidden;
+      }
+      .page-content { padding: 38px 44px 38px; }
+      .print-header, .print-footer { display: none; }
+    }
+
+    @media print {
+      body { background: white; font-size: 10pt; }
+      .page { box-shadow: none; margin: 0; border-radius: 0; }
+      .page-content { padding: 0; }
+      .print-header {
+        position: fixed; top: 0; left: 0; right: 0; height: 26px;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0 44px; border-bottom: 2px solid var(--orange); background: white;
+        font-family: 'Poppins', sans-serif; font-size: 7pt; color: var(--gray-600); font-weight: 600;
+      }
+      .print-footer {
+        position: fixed; bottom: 0; left: 0; right: 0; height: 22px;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0 44px; border-top: 1px solid var(--gray-300); background: white;
+        font-family: 'Poppins', sans-serif; font-size: 7pt; color: var(--gray-600);
+      }
+      @page { size: A4; margin: 36px 44px 30px 44px; }
+      @page :first { margin: 0; }
+      .cover-page { page-break-after: always; }
+      .page-break-before { page-break-before: always; }
+      .no-break { page-break-inside: avoid; }
+      .kaam-ki-baat, .story-reference, .exam-note, .illustration-item, .layer3-container { page-break-inside: avoid; }
+      h3 { page-break-after: avoid; }
+    }
+
+    /* ===== COVER ===== */
+    .cover-page {
+      background: linear-gradient(150deg, #12122a 0%, #2a2a5a 45%, #1a1a3a 100%);
+      min-height: 297mm;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+    }
+    .cover-watermark {
+      position: absolute; right: -20px; bottom: 60px;
+      font-family: 'Poppins', sans-serif; font-size: 240pt; font-weight: 900;
+      color: rgba(255,255,255,0.03); line-height: 1; user-select: none; pointer-events: none;
+    }
+    .cover-top-bar {
+      width: 100%; height: 7px;
+      background: linear-gradient(90deg, var(--orange) 0%, var(--gold) 55%, var(--orange-dark) 100%);
+      flex-shrink: 0;
+    }
+    .cover-body {
+      flex: 1; display: flex; flex-direction: column; justify-content: center;
+      padding: 52px 64px 36px; position: relative; z-index: 1;
+    }
+    .cover-series-label {
+      font-family: 'Poppins', sans-serif; font-size: 7.5pt; font-weight: 700;
+      letter-spacing: 3.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px;
+    }
+    .cover-seq-line {
+      font-family: 'Poppins', sans-serif; font-size: 10pt; font-weight: 500;
+      color: rgba(255,255,255,0.45); margin-bottom: 6px;
+    }
+    .cover-as-number {
+      font-family: 'Poppins', sans-serif; font-size: 64pt; font-weight: 900;
+      color: white; line-height: 1; margin-bottom: 2px;
+    }
+    .cover-title {
+      font-family: 'Poppins', sans-serif; font-size: 20pt; font-weight: 700;
+      color: var(--orange); line-height: 1.2; margin-bottom: 24px;
+    }
+    .cover-divider {
+      width: 72px; height: 4px; background: var(--orange); border-radius: 2px; margin-bottom: 22px;
+    }
+    .cover-story-name {
+      font-family: 'Merriweather', serif; font-size: 12pt; font-style: italic;
+      color: rgba(255,255,255,0.55); margin-bottom: 36px;
+    }
+    .cover-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+    .cover-badge {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.75); font-family: 'Poppins', sans-serif;
+      font-size: 7.5pt; font-weight: 500; padding: 5px 14px; border-radius: 20px;
+    }
+    .cover-badge.accent {
+      background: rgba(232,129,58,0.15); border-color: var(--orange);
+      color: var(--orange); font-weight: 700;
+    }
+    .cover-footer-bar {
+      padding: 20px 64px; border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex; justify-content: space-between; align-items: center;
+      position: relative; z-index: 1; flex-shrink: 0;
+    }
+    .cover-footer-left {
+      font-family: 'Poppins', sans-serif; font-size: 7.5pt;
+      color: rgba(255,255,255,0.35); line-height: 1.6;
+    }
+    .cover-footer-right {
+      font-family: 'Poppins', sans-serif; font-size: 8pt; font-weight: 700;
+      color: var(--orange); letter-spacing: 1.5px; text-transform: uppercase;
+    }
+
+    /* ===== SECTION HEADERS ===== */
+    .section-header {
+      display: flex; align-items: center; gap: 14px;
+      margin: 0 0 18px; padding-bottom: 12px; border-bottom: 2.5px solid var(--orange);
+    }
+    .section-icon {
+      width: 38px; height: 38px; border-radius: 50%; background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif; font-size: 13pt; color: white; flex-shrink: 0;
+    }
+    .section-icon.navy   { background: var(--navy); }
+    .section-icon.green  { background: var(--green); }
+    .section-icon.purple { background: var(--purple); }
+    .section-icon.gold   { background: var(--gold); }
+    .section-icon.red    { background: var(--red); }
+    .section-header-text h2 {
+      font-family: 'Poppins', sans-serif; font-size: 13pt; font-weight: 700;
+      color: var(--navy); line-height: 1.2;
+    }
+    .section-subtitle {
+      font-family: 'Lato', sans-serif; font-size: 8pt; color: var(--gray-600); font-style: italic;
+    }
+
+    /* ===== STORY ===== */
+    .story-container {
+      background: #fffbf7; border: 1px solid #f0d9c0;
+      border-left: 5px solid var(--orange); border-radius: 8px; padding: 28px 32px;
+    }
+    .story-eyebrow {
+      font-family: 'Poppins', sans-serif; font-size: 7pt; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 3px;
+    }
+    .story-heading {
+      font-family: 'Poppins', sans-serif; font-size: 14pt; font-weight: 700;
+      color: var(--navy); margin-bottom: 20px;
+    }
+    .story-container p {
+      font-family: 'Merriweather', serif; font-size: 10pt; line-height: 1.9;
+      color: #3a2e20; margin-bottom: 14px;
+    }
+    .story-container p:last-child { margin-bottom: 0; }
+    .story-break { border: none; border-top: 1px solid #e8d5bc; margin: 18px 0; }
+
+    /* ===== LAYER 2 CONCEPT NOTES ===== */
+    .icai-ref-note {
+      font-family: 'Lato', sans-serif; font-size: 8.5pt; color: var(--gray-600);
+      font-style: italic; margin-bottom: 22px; padding: 8px 14px;
+      background: var(--gray-100); border-radius: 4px; border-left: 3px solid var(--gray-300);
+    }
+    .concept-section {
+      margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--gray-200);
+    }
+    .concept-section:last-of-type { border-bottom: none; margin-bottom: 0; }
+    .concept-id-badge {
+      display: inline-block; background: var(--navy); color: white;
+      font-family: 'Poppins', sans-serif; font-size: 7pt; font-weight: 700;
+      padding: 3px 10px; border-radius: 3px; margin-bottom: 5px; letter-spacing: 0.5px;
+    }
+    .concept-title {
+      font-family: 'Poppins', sans-serif; font-size: 11.5pt; font-weight: 700;
+      color: var(--navy); margin-bottom: 10px;
+    }
+    .concept-section p {
+      font-family: 'Lato', sans-serif; font-size: 10pt; line-height: 1.7;
+      color: var(--text); margin-bottom: 9px;
+    }
+    .concept-section ul, .concept-section ol {
+      margin: 6px 0 10px 22px; font-family: 'Lato', sans-serif;
+      font-size: 10pt; line-height: 1.7; color: var(--text);
+    }
+    .concept-section li { margin-bottom: 3px; }
+    strong { font-weight: 700; color: var(--navy); }
+
+    /* ===== DATA TABLES ===== */
+    .data-table {
+      width: 100%; border-collapse: collapse; margin: 12px 0 14px;
+      font-family: 'Lato', sans-serif; font-size: 9.5pt;
+    }
+    .data-table th {
+      background: var(--navy); color: white; font-weight: 700;
+      padding: 8px 12px; text-align: left; font-family: 'Poppins', sans-serif; font-size: 8.5pt;
+    }
+    .data-table td { padding: 7px 12px; border-bottom: 1px solid var(--gray-300); vertical-align: top; }
+    .data-table tr:nth-child(even) td { background: var(--gray-100); }
+
+    /* ===== KAAM KI BAAT ===== */
+    .kaam-ki-baat {
+      background: var(--green-light); border: 1px solid #b5d9c4;
+      border-left: 5px solid var(--green); border-radius: 8px; padding: 18px 22px; margin: 16px 0;
+    }
+    .kkb-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .kkb-tag {
+      background: var(--green); color: white; font-family: 'Poppins', sans-serif;
+      font-size: 6.5pt; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 3px; flex-shrink: 0;
+    }
+    .kkb-title {
+      font-family: 'Poppins', sans-serif; font-size: 10pt;
+      font-weight: 700; color: var(--green-dark);
+    }
+    .kaam-ki-baat p {
+      font-family: 'Lato', sans-serif; font-size: 9.5pt; line-height: 1.7;
+      color: #1e4030; margin-bottom: 8px;
+    }
+    .kaam-ki-baat p:last-child { margin-bottom: 0; }
+    .kaam-ki-baat strong { color: var(--green-dark); }
+
+    /* ===== STORY REFERENCE ===== */
+    .story-reference {
+      background: var(--purple-light); border: 1px solid #d4c5ee;
+      border-left: 5px solid var(--purple); border-radius: 8px;
+      padding: 12px 18px; margin: 12px 0; display: flex; gap: 12px; align-items: flex-start;
+    }
+    .sr-tag {
+      flex-shrink: 0; background: var(--purple); color: white;
+      font-family: 'Poppins', sans-serif; font-size: 6pt; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px;
+      border-radius: 3px; margin-top: 2px; white-space: nowrap;
+    }
+    .story-reference p {
+      font-family: 'Lato', sans-serif; font-size: 9.5pt; line-height: 1.65;
+      color: #3a2060; margin: 0; font-style: italic;
+    }
+    .story-reference strong { color: var(--purple-dark); }
+
+    /* ===== EXAM NOTE ===== */
+    .exam-note {
+      background: var(--red-light); border: 1px solid #f5c6c2;
+      border-left: 5px solid var(--red); border-radius: 8px;
+      padding: 12px 18px; margin: 12px 0; display: flex; gap: 12px; align-items: flex-start;
+    }
+    .en-tag {
+      flex-shrink: 0; background: var(--red); color: white;
+      font-family: 'Poppins', sans-serif; font-size: 6pt; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px;
+      border-radius: 3px; margin-top: 2px; white-space: nowrap;
+    }
+    .exam-note p {
+      font-family: 'Lato', sans-serif; font-size: 9.5pt; line-height: 1.65; color: #5a1a14; margin: 0;
+    }
+    .exam-note strong { color: var(--red-dark); }
+
+    /* ===== ILLUSTRATION GUIDE ===== */
+    .illustration-item {
+      background: white; border: 1px solid var(--gray-200); border-radius: 8px;
+      padding: 16px 20px; margin-bottom: 14px;
+    }
+    .illus-title {
+      font-family: 'Poppins', sans-serif; font-size: 10pt; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .illus-badge {
+      background: var(--orange-light); color: var(--orange-dark); border: 1px solid #e8c4a0;
+      font-family: 'Poppins', sans-serif; font-size: 7pt; font-weight: 700;
+      padding: 2px 9px; border-radius: 20px; letter-spacing: 0.5px;
+    }
+    .illus-tests { font-family: 'Lato', sans-serif; font-size: 9.5pt; color: var(--text-light); margin-bottom: 6px; }
+    .illus-approach {
+      font-family: 'Lato', sans-serif; font-size: 9.5pt;
+      color: var(--text); margin-bottom: 10px; line-height: 1.65;
+    }
+
+    /* ===== TYK GUIDE ===== */
+    .tyk-table {
+      width: 100%; border-collapse: collapse; margin: 12px 0 16px;
+      font-family: 'Lato', sans-serif; font-size: 9.5pt;
+    }
+    .tyk-table th {
+      background: var(--navy); color: white; font-weight: 700;
+      padding: 8px 12px; text-align: left; font-family: 'Poppins', sans-serif; font-size: 8.5pt;
+    }
+    .tyk-table td { padding: 7px 12px; border-bottom: 1px solid var(--gray-300); vertical-align: middle; }
+    .tyk-table tr:nth-child(even) td { background: var(--gray-100); }
+
+    .p-vh {
+      background: #fdf1f0; color: var(--red);
+      font-family: 'Poppins', sans-serif; font-size: 7pt; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; display: inline-block;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .p-h {
+      background: #fff4ed; color: var(--orange-dark);
+      font-family: 'Poppins', sans-serif; font-size: 7pt; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; display: inline-block;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .p-m {
+      background: var(--gray-200); color: var(--gray-700);
+      font-family: 'Poppins', sans-serif; font-size: 7pt; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px; display: inline-block;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .tyk-highlight {
+      background: #fffbf2; border: 1px solid #f0d060; border-left: 4px solid var(--gold);
+      border-radius: 6px; padding: 14px 18px; margin: 12px 0;
+      font-family: 'Lato', sans-serif; font-size: 9.5pt; line-height: 1.7; color: var(--text);
+    }
+    .tyk-highlight strong { color: #7a5a00; }
+
+    /* ===== LAYER 3 ===== */
+    .layer3-container {
+      background: var(--navy); border-radius: 10px; padding: 30px 34px;
+    }
+    .layer3-eyebrow {
+      font-family: 'Poppins', sans-serif; font-size: 7pt; font-weight: 700;
+      letter-spacing: 3.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px;
+    }
+    .layer3-heading {
+      font-family: 'Poppins', sans-serif; font-size: 16pt; font-weight: 800;
+      color: white; margin-bottom: 22px; padding-bottom: 12px;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+    .layer3-list { list-style: none; padding: 0; margin: 0; }
+    .layer3-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      margin-bottom: 11px; padding-bottom: 11px; border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .layer3-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .layer3-num {
+      width: 26px; height: 26px; border-radius: 50%; background: var(--orange); color: white;
+      font-family: 'Poppins', sans-serif; font-size: 8pt; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .layer3-text {
+      font-family: 'Lato', sans-serif; font-size: 9.5pt; line-height: 1.65;
+      color: rgba(255,255,255,0.82);
+    }
+    .layer3-text strong { color: var(--orange); }
+
+    /* ===== SUMMARY BOX ===== */
+    .summary-box {
+      background: var(--gray-100); border: 1px solid var(--gray-300); border-radius: 8px;
+      padding: 20px 24px; margin: 20px 0;
+    }
+    .summary-box h4 {
+      font-family: 'Poppins', sans-serif; font-size: 10pt; font-weight: 700;
+      color: var(--navy); margin-bottom: 12px;
+    }
+    .summary-box ul {
+      margin: 0 0 0 20px; font-family: 'Lato', sans-serif; font-size: 9.5pt;
+      line-height: 1.75; color: var(--text);
+    }
+    .summary-box li { margin-bottom: 4px; }
+
+    /* ===== CHAPTER FOOTER ===== */
+    .chapter-footer {
+      margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--gray-200);
+      font-family: 'Lato', sans-serif; font-size: 8pt; color: var(--gray-600); font-style: italic;
+      display: flex; justify-content: space-between;
+    }
+
+    /* ===== GAAP GRID ===== */
+    .gaap-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0;
+    }
+    .gaap-card {
+      background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 6px;
+      padding: 12px 14px;
+    }
+    .gaap-card-id {
+      font-family: 'Poppins', sans-serif; font-size: 6.5pt; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; color: var(--orange); margin-bottom: 3px;
+    }
+    .gaap-card-name {
+      font-family: 'Poppins', sans-serif; font-size: 9.5pt; font-weight: 700;
+      color: var(--navy); margin-bottom: 5px;
+    }
+    .gaap-card p {
+      font-family: 'Lato', sans-serif; font-size: 9pt; line-height: 1.6;
+      color: var(--text-light); margin: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- PRINT HEADER/FOOTER (hidden on screen) -->
+  <div class="print-header">
+    <span>CA Foundation | Ch. 1, Unit 2 — Accounting Concepts, Principles &amp; Conventions</span>
+    <span>VC Gurukul | Bridge Course Revision</span>
+  </div>
+  <div class="print-footer">
+    <span>CA Pranav Pratik Tulshyan · VC Gurukul, Noida</span>
+    <span>Bridge Course · Session 1 Revision</span>
+  </div>
+
+  <!-- ===== PAGE 1: COVER ===== -->
+  <div class="page">
+    <div class="cover-page">
+      <div class="cover-watermark">U2</div>
+      <div class="cover-top-bar"></div>
+      <div class="cover-body">
+        <div class="cover-series-label">Bridge Course · Revision Material</div>
+        <div class="cover-seq-line">CA Foundation · Chapter 1</div>
+        <div class="cover-as-number">Unit 2</div>
+        <div class="cover-title">Accounting Concepts,<br>Principles &amp; Conventions</div>
+        <div class="cover-divider"></div>
+        <div class="cover-story-name">"5 Accountants. 5 Different Profits. One Problem."</div>
+        <div class="cover-badges">
+          <span class="cover-badge accent">Session 1 Revision</span>
+          <span class="cover-badge">12 GAAPs</span>
+          <span class="cover-badge">3 Fundamental Assumptions</span>
+          <span class="cover-badge">11 Qualitative Characteristics</span>
+          <span class="cover-badge">Layer 2 + Layer 3</span>
+        </div>
+      </div>
+      <div class="cover-footer-bar">
+        <div class="cover-footer-left">
+          CA Pranav Pratik Tulshyan<br>
+          VC Gurukul, Noida · CA Inter Adv. Accounts Batch July 2025
+        </div>
+        <div class="cover-footer-right">VC Gurukul</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE 2: KAHAANI ===== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="section-header">
+        <div class="section-icon" style="font-size:16pt;">📖</div>
+        <div class="section-header-text">
+          <h2>Kahaani — The Story</h2>
+          <div class="section-subtitle">Context before Concept · Why GAAP exists</div>
+        </div>
+      </div>
+
+      <div class="story-container">
+        <div class="story-eyebrow">Kahaani</div>
+        <div class="story-heading">5 Accountants. 5 Different Profits. One Problem.</div>
+
+        <p>Imagine a single company hands its books to five different accountants and asks each one to compute the profit for the year. All five are qualified. All five are working with the same set of transactions. And yet — when the results come back — all five give a different number. Not slightly different. <em>Significantly</em> different.</p>
+
+        <p>One accountant values inventory at FIFO. Another uses weighted average. One depreciates at 10%, the next at 15%. One books revenue the moment an order is confirmed. Another waits for cash to arrive. The result? Five accountants, five profits, and zero trust in any of the numbers.</p>
+
+        <p>This is the problem GAAP was born to solve. <strong>Generally Accepted Accounting Principles</strong> — a set of conventions, rules, and procedures — exist for one reason: so that any accountant, anywhere, working on the same company's books, produces a result that is comparable, consistent, and trustworthy.</p>
+
+        <hr class="story-break">
+
+        <div class="story-eyebrow">Real World — What Happens When You Get It Wrong</div>
+
+        <p>In 2022–23, Byju's was the world's most valued edtech company. Billions of dollars from global investors like SoftBank and BlackRock. The outside looked perfect — aggressive growth, global expansion, celebrity endorsements. But when auditors examined the internal "blood report," the financial statements told a completely different story.</p>
+
+        <p>Byju's was booking <strong>three years of subscription revenue in Year 1 itself</strong> — without matching the expenses (server costs, teacher salaries, course delivery) that would be incurred in Years 2 and 3. The <strong>Matching Concept</strong> and <strong>Accrual Concept</strong> were both violated. Profits looked astronomical. And when investors finally saw the reality, the company's valuation collapsed, auditors resigned, and global trust evaporated — all because two fundamental accounting concepts were ignored.</p>
+
+        <p>This unit gives you those exact concepts. Not theory for theory's sake — the rules that, when broken, collapse billion-dollar companies.</p>
+      </div>
+
+      <div class="chapter-footer">
+        <span>CA Foundation · Ch. 1, Unit 2</span>
+        <span>Bridge Course · VC Gurukul</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE 3: LAYER 2 — Intro + Concepts/Principles/Conventions + GAAPs (a–e) ===== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="section-header">
+        <div class="section-icon navy">L2</div>
+        <div class="section-header-text">
+          <h2>Layer 2 — Concept Notes</h2>
+          <div class="section-subtitle">ICAI Reference: Foundation Ch. 1, Unit 2 · Sections 2.1–2.5</div>
+        </div>
+      </div>
+
+      <div class="icai-ref-note">
+        These notes follow the ICAI study material sequence exactly. Read alongside your physical book. Sub-topic IDs match the TYK guide at the end.
+      </div>
+
+      <!-- 2.1 -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.1</span>
+        <div class="concept-title">Introduction — The Need for GAAP</div>
+        <p>If 5 accountants independently compute profit using their own methods, they will produce 5 different results. GAAP solves this by providing a common framework — so financial statements are comparable, consistent, and trustworthy across all enterprises.</p>
+        <p><strong>GAAP</strong> = a set of conventions, rules, and procedures that define accepted accounting practice at any point in time.</p>
+      </div>
+
+      <!-- 2.2 -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.2</span>
+        <div class="concept-title">Accounting Concepts</div>
+        <p>Fundamental assumptions on which financial statements are prepared. They govern how transactions are <strong>recognised and recorded</strong>. Broad and pervasive in nature — e.g. Going Concern, Dual Aspect.</p>
+      </div>
+
+      <!-- 2.3 -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.3</span>
+        <div class="concept-title">Accounting Principles</div>
+        <p>A body of doctrines that explain current accounting practices and guide the selection of conventions. A principle must satisfy <strong>5 conditions</strong>:</p>
+        <ol>
+          <li>Based on real assumptions (objective)</li>
+          <li>Simple, understandable, and explanatory</li>
+          <li>Followed consistently across periods</li>
+          <li>Able to reflect future predictions</li>
+          <li>Informational for users making economic decisions</li>
+        </ol>
+      </div>
+
+      <!-- 2.4 -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.4</span>
+        <div class="concept-title">Accounting Conventions</div>
+        <p>Customs or practices that have emerged from accounting tradition over time. Need not have universal application. Examples: <strong>Conservatism, Consistency, Materiality.</strong></p>
+        <p><em>Key distinction:</em> Concepts are theoretical foundations; conventions are practical traditions; principles are the formal rules that govern application.</p>
+      </div>
+
+      <!-- 2.5 Overview -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5</span>
+        <div class="concept-title">The 12 GAAPs — Overview</div>
+        <div class="gaap-grid">
+          <div class="gaap-card"><div class="gaap-card-id">2.5(a)</div><div class="gaap-card-name">Entity Concept</div><p>Business ≠ Owner</p></div>
+          <div class="gaap-card"><div class="gaap-card-id">2.5(b)</div><div class="gaap-card-name">Money Measurement</div><p>Only monetary items recorded</p></div>
+          <div class="gaap-card"><div class="gaap-card-id">2.5(c)</div><div class="gaap-card-name">Periodicity</div><p>Accounts for defined periods</p></div>
+          <div class="gaap-card"><div class="gaap-card-id">2.5(d)</div><div class="gaap-card-name">Accrual</div><p>Earned/incurred, not cash-based</p></div>
+          <div class="gaap-card"><div class="gaap-card-id">2.5(e)</div><div class="gaap-card-name">Matching</div><p>Expenses matched to revenues</p></div>
+          <div class="gaap-card"><div class="gaap-card-id">2.5(f)</div><div class="gaap-card-name">Going Concern</div><p>Entity continues indefinitely</p></div>
+          <div class="gaap-card"><div class="gaap-card-id">2.5(g)</div><div class="gaap-card-name">Cost (Historical)</div><p>Assets at acquisition cost</p></div>
+          <div class="gaap-card"><div class="gaap-card-id">2.5(h)</div><div class="gaap-card-name">Realisation</div><p>Change recorded only when realised</p></div>
+          <div class="gaap-card"><div class="gaap-card-id">2.5(i)</div><div class="gaap-card-name">Dual Aspect</div><p>Every transaction has two effects</p></div>
+          <div class="gaap-card"><div class="gaap-card-id">2.5(j)</div><div class="gaap-card-name">Conservatism</div><p>Anticipate losses; ignore gains</p></div>
+          <div class="gaap-card"><div class="gaap-card-id">2.5(k)</div><div class="gaap-card-name">Consistency</div><p>Same method every period</p></div>
+          <div class="gaap-card"><div class="gaap-card-id">2.5(l)</div><div class="gaap-card-name">Materiality</div><p>Significant items get strict treatment</p></div>
+        </div>
+      </div>
+
+      <!-- 2.5(a) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(a)</span>
+        <div class="concept-title">Entity Concept</div>
+        <p>The business is a <strong>legally and financially separate entity</strong> from its owner. Owner's personal transactions are never recorded in business books. Capital invested by the owner is treated as a <em>liability of the business to the owner</em>. Drawings reduce capital.</p>
+        <p><em>Example:</em> Mr. X invests ₹7,00,000 to start a business. His personal car is not an asset of the business.</p>
+      </div>
+
+      <!-- 2.5(b) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(b)</span>
+        <div class="concept-title">Money Measurement Concept</div>
+        <p>Only transactions that can be <strong>expressed in monetary terms</strong> are recorded. Non-monetary factors — employee morale, management quality, brand reputation — are excluded from accounts.</p>
+        <p><em>Limitation:</em> Land bought at ₹40 crore in 2000 is still shown at ₹40 crore even if current market value is ₹400 crore. Inflation distorts real value over time.</p>
+      </div>
+
+      <!-- 2.5(c) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(c)</span>
+        <div class="concept-title">Periodicity Concept</div>
+        <p>The economic life of a business is divided into defined <strong>accounting periods</strong> (typically 1 April – 31 March) rather than waiting until the business ends to compute profit.</p>
+        <p>This enables: (i) comparison of results across periods; (ii) uniform matching of revenues and expenses; (iii) timely information to stakeholders.</p>
+        <p><em>Example:</em> Reliance Industries cannot wait until the business closes to calculate profit. On 31 March, factory operations pause, stock is counted, and the period is closed.</p>
+      </div>
+
+      <!-- 2.5(d) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(d)</span>
+        <div class="concept-title">Accrual Concept</div>
+        <p>Revenue and expenses are recognised when <strong>earned or incurred</strong> — not when cash is received or paid. This is also called the <strong>Mercantile basis</strong> of accounting.</p>
+        <p><strong>4 timing cases to remember:</strong></p>
+        <ul>
+          <li>Cash received <em>before</em> earning revenue → <strong>Liability</strong> (advance received)</li>
+          <li>Cash received <em>after</em> earning revenue → <strong>Trade Receivable</strong> (debtor)</li>
+          <li>Cash paid <em>before</em> expense is incurred → <strong>Prepaid Expense</strong> (asset)</li>
+          <li>Cash paid <em>after</em> expense is incurred → <strong>Outstanding Payable</strong> (liability)</li>
+        </ul>
+
+        <div class="exam-note">
+          <div class="en-tag">Exam Tip</div>
+          <p>In subjective answers, <strong>never write "when cash is received or paid."</strong> The mandatory keyword is <strong>"Mercantile basis"</strong> — or the phrase <strong>"when earned or incurred."</strong> Missing this keyword loses marks even if the rest of the answer is correct.</p>
+        </div>
+      </div>
+
+      <div class="chapter-footer">
+        <span>CA Foundation · Ch. 1, Unit 2 · Sections 2.1–2.5(d)</span>
+        <span>Bridge Course · VC Gurukul</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE 4: LAYER 2 — GAAPs (e–l) ===== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="icai-ref-note">
+        Layer 2 continued · ICAI Reference: Foundation Ch. 1, Unit 2 · Sections 2.5(e)–2.5(l)
+      </div>
+
+      <!-- 2.5(e) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(e)</span>
+        <div class="concept-title">Matching Concept</div>
+        <p>Expenses of a period must be <strong>matched with the revenues of that same period</strong>. Periodic Profit = Periodic Revenue − Matched Expenses.</p>
+        <p><em>Example — Mr. PK Garments:</em> Revenue earned ₹12,00,000 (even though only ₹10,00,000 cash received). Rent for 12 months due but only 11 months paid → 1 month outstanding recognised. Accrual + Matching + Periodicity all work together.</p>
+
+        <div class="kaam-ki-baat">
+          <div class="kkb-header">
+            <div class="kkb-tag">Kaam Ki Baat</div>
+            <div class="kkb-title">Byju's — What Happens When Matching Fails</div>
+          </div>
+          <p>Byju's sold 3-year course subscriptions and booked the <strong>entire fee as revenue in Year 1</strong>. But the costs of delivering those courses — server infrastructure, teacher salaries, customer support — would be incurred across all 3 years. Revenue was front-loaded; expenses were deferred. The Matching Concept was violated at scale.</p>
+          <p>When global auditors (Deloitte) examined the books, they resigned citing inability to verify the accounts. The company's valuation collapsed from $22 billion to near zero. <strong>One accounting concept. One violation. Catastrophic outcome.</strong></p>
+        </div>
+      </div>
+
+      <!-- 2.5(f) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(f)</span>
+        <div class="concept-title">Going Concern Concept</div>
+        <p>The entity is assumed to <strong>continue operations indefinitely</strong> in the foreseeable future. There is no intention or need to liquidate or curtail operations materially.</p>
+        <p><strong>Implication:</strong> Assets are valued at historical cost (held for future use), not at liquidation value. If the going concern assumption is in doubt, this fact <em>must be specifically disclosed.</em></p>
+        <p>This assumption is one of the <strong>3 Fundamental Accounting Assumptions</strong> under AS 1.</p>
+      </div>
+
+      <!-- 2.5(g) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(g)</span>
+        <div class="concept-title">Cost Concept (Historical Cost)</div>
+        <p>Assets are recorded at their <strong>original acquisition cost</strong> — the objective, verifiable amount actually paid. Not at market value, not at what they are worth today.</p>
+        <p><em>Example:</em> Land purchased in 1995 for ₹2,000 is shown in the Balance Sheet at ₹2,000 even if today's market value is ₹1,00,000. The pen you bought at ₹10 is recorded at ₹10 — not at your estimate of what it is worth.</p>
+        <p><strong>Limitation:</strong> Historical cost loses relevance over time due to inflation, making comparisons across different periods misleading.</p>
+      </div>
+
+      <!-- 2.5(h) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(h)</span>
+        <div class="concept-title">Realisation Concept</div>
+        <p>A change in the value of an asset is recorded <strong>only when it is realised</strong> (i.e., through an actual transaction). Unrealised gains are not recorded; unrealised losses, however, are provided for under conservatism.</p>
+        <p><em>Example:</em> Computers purchased at ₹20,000 are not restated at ₹30,000 current market value. Revenue of ₹20,000 is recognised only when the sale is completed — not when an order is placed.</p>
+      </div>
+
+      <!-- 2.5(i) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(i)</span>
+        <div class="concept-title">Dual Aspect Concept</div>
+        <p>The core of double-entry bookkeeping. Every transaction has <strong>two equal and opposite aspects.</strong></p>
+        <p style="text-align:center; font-family:'Poppins',sans-serif; font-size:13pt; font-weight:800; color:var(--navy); padding: 10px 0;">Assets = Liabilities + Equity</p>
+        <p>There are 8 possible combinations (asset↑ liability↑; asset↑ equity↑; etc.). This equation always balances — it is used to compute profit: <strong>Profit = Closing Equity − Opening Equity</strong> (adjusted for capital and drawings).</p>
+        <div class="story-reference">
+          <div class="sr-tag">Story Link</div>
+          <p>Think of Newton's Third Law: <strong>every action has an equal and opposite reaction.</strong> In accounting, every transaction does the same — one account goes up, another comes down (or two go up, one on each side). The universe stays balanced. So does the Balance Sheet.</p>
+        </div>
+      </div>
+
+      <!-- 2.5(j) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(j)</span>
+        <div class="concept-title">Conservatism (Prudence)</div>
+        <p><strong>Anticipate no future income. Provide for all possible losses.</strong> When alternatives exist, choose the lesser value for assets / the higher value for liabilities.</p>
+        <p>Golden rule for current assets: <strong>"Cost or NRV — whichever is lower."</strong></p>
+        <p>3 qualitative requirements it ensures: (i) Prudence; (ii) Neutrality; (iii) Faithful Representation.</p>
+
+        <div class="exam-note">
+          <div class="en-tag">Common Trap</div>
+          <p>A tricky T/F question uses the word <strong>"materialised"</strong> in a statement about Conservatism. Students read "materialised" and immediately think of the <strong>Realisation concept</strong> — and get it wrong. Stay alert: the question is testing Conservatism. The word "materialised" means "occurred" or "became real" — not Realisation concept.</p>
+        </div>
+      </div>
+
+      <!-- 2.5(k) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(k)</span>
+        <div class="concept-title">Consistency</div>
+        <p>The same accounting method must be followed <strong>consistently from period to period</strong> so that results are comparable across years. Applies when alternatives are equally acceptable (e.g., WDV vs SLM depreciation; FIFO vs Weighted Average for inventory).</p>
+        <p><strong>Change is allowed only when:</strong> (a) required to comply with an AS or statute; (b) necessary to show a true and fair view. Effect of any change must be disclosed.</p>
+        <p>Consistency is also one of the <strong>3 Fundamental Accounting Assumptions</strong> under AS 1.</p>
+      </div>
+
+      <!-- 2.5(l) -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.5(l)</span>
+        <div class="concept-title">Materiality</div>
+        <p>An item is <strong>material</strong> if its omission or misstatement would likely influence an economic decision. All material items must be disclosed strictly. Insignificant items may be handled practically (e.g., stationery fully expensed in year of purchase rather than depreciated).</p>
+        <p>Materiality depends on: (i) absolute amount; (ii) size of the business; (iii) nature of the information; (iv) level of the decision-maker.</p>
+        <p><em>Materiality is not a separate accounting concept — it is the exception that allows other concepts to be set aside when the effect is trivial.</em></p>
+      </div>
+
+      <div class="chapter-footer">
+        <span>CA Foundation · Ch. 1, Unit 2 · Sections 2.5(e)–2.5(l)</span>
+        <span>Bridge Course · VC Gurukul</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE 5: LAYER 2 — 2.6, 2.7, Illustration 1, Summary ===== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="icai-ref-note">
+        Layer 2 continued · ICAI Reference: Foundation Ch. 1, Unit 2 · Sections 2.6–2.7 + Illustration + Summary
+      </div>
+
+      <!-- 2.6 -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.6</span>
+        <div class="concept-title">Fundamental Accounting Assumptions (AS 1)</div>
+        <p>Three assumptions are presumed to be followed in <em>all</em> financial statements. <strong>If followed, no separate disclosure is required. If any is NOT followed, this fact must be specifically disclosed.</strong></p>
+        <table class="data-table">
+          <thead>
+            <tr><th>Assumption</th><th>What it means</th><th>If not followed</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Going Concern</strong></td>
+              <td>Entity will continue indefinitely; no plan to liquidate or curtail operations</td>
+              <td>Disclose — assets may be stated at NRV/liquidation value instead of cost</td>
+            </tr>
+            <tr>
+              <td><strong>Consistency</strong></td>
+              <td>Same accounting policies applied period to period</td>
+              <td>Disclose — explain change and quantify the effect on financial statements</td>
+            </tr>
+            <tr>
+              <td><strong>Accrual</strong></td>
+              <td>Revenues/expenses recognised when earned/incurred, not on cash basis</td>
+              <td>Disclose — cash basis accounting must be specifically stated</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 2.7 -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.7</span>
+        <div class="concept-title">Financial Statements</div>
+        <p>Structured financial representations of an enterprise's position and performance. Includes:</p>
+        <ul>
+          <li><strong>Balance Sheet</strong> — financial position (what it owns and owes)</li>
+          <li><strong>Statement of Profit &amp; Loss</strong> — performance (profit/loss for the period)</li>
+          <li><strong>Cash Flow Statement</strong> — circulation (how cash was generated and used)</li>
+          <li><strong>Notes</strong> — supplementary disclosures and accounting policies</li>
+        </ul>
+      </div>
+
+      <!-- 2.7.1 -->
+      <div class="concept-section">
+        <span class="concept-id-badge">2.7.1</span>
+        <div class="concept-title">Qualitative Characteristics of Financial Statements</div>
+        <p>11 attributes that make financial information useful to users:</p>
+        <table class="data-table">
+          <thead>
+            <tr><th>#</th><th>Characteristic</th><th>What it means (one line)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>Understandability</strong></td><td>Readily understood by users with reasonable knowledge of business and accounting</td></tr>
+            <tr><td>2</td><td><strong>Relevance</strong></td><td>Influences economic decisions (has predictive or confirmatory value)</td></tr>
+            <tr><td>3</td><td><strong>Reliability</strong></td><td>Free from material error and bias</td></tr>
+            <tr><td>4</td><td><strong>Comparability</strong></td><td>Permits comparison across firms and across time periods</td></tr>
+            <tr><td>5</td><td><strong>Materiality</strong></td><td>Omission or misstatement would influence decisions</td></tr>
+            <tr><td>6</td><td><strong>Faithful Representation</strong></td><td>Transactions represented honestly — what they actually are</td></tr>
+            <tr><td>7</td><td><strong>Substance over Form</strong></td><td>Economic reality governs over strict legal form</td></tr>
+            <tr><td>8</td><td><strong>Neutrality</strong></td><td>Free from bias in selection or presentation of information</td></tr>
+            <tr><td>9</td><td><strong>Prudence</strong></td><td>Degree of caution under uncertainty — do not overstate assets or income</td></tr>
+            <tr><td>10</td><td><strong>Completeness</strong></td><td>All material information included within bounds of cost and materiality</td></tr>
+            <tr><td>11</td><td><strong>Full, fair and adequate disclosure</strong></td><td>Nothing significant omitted; presented without distortion</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Illustration 1 -->
+      <div class="concept-section">
+        <span class="concept-id-badge">Illustration 1</span>
+        <div class="concept-title">Illustration — Accounting Equation (Dual Aspect)</div>
+        <div class="illustration-item">
+          <div class="illus-title">
+            ICAI Illustration 1 — Dual Aspect &amp; Profit Computation
+            <span class="illus-badge">Section 2.5(i)</span>
+          </div>
+          <div class="illus-tests"><strong>Tests:</strong> Dual Aspect Concept — every transaction affects two sides; Assets = Liabilities + Equity always balances.</div>
+          <div class="illus-approach"><strong>Approach:</strong> Given an opening Balance Sheet and 4 transactions, show the dual effect of each transaction. Compute profit using the equation: <strong>Profit = Closing Equity − Opening Equity</strong> (adjusted for capital introduced and drawings). In the ICAI illustration, Profit = ₹6,000 (Closing Equity ₹1,06,000 − Opening Equity ₹1,00,000). Practice until the equation feels automatic.</div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="summary-box">
+        <h4>📋 Unit 2 Summary</h4>
+        <ul>
+          <li>GAAP solves the "5 accountants, 5 profits" problem by providing uniform rules</li>
+          <li>Concepts = theoretical foundations; Principles = formal rules; Conventions = practical traditions</li>
+          <li><strong>12 GAAPs</strong>: Entity, Money Measurement, Periodicity, Accrual, Matching, Going Concern, Cost, Realisation, Dual Aspect, Conservatism, Consistency, Materiality</li>
+          <li><strong>3 Fundamental Assumptions</strong> (AS 1): Going Concern, Consistency, Accrual — disclose if not followed</li>
+          <li><strong>11 Qualitative Characteristics</strong>: Understandability, Relevance, Reliability, Comparability, Materiality, Faithful Representation, Substance over Form, Neutrality, Prudence, Completeness, Full/fair disclosure</li>
+        </ul>
+      </div>
+
+      <div class="chapter-footer">
+        <span>CA Foundation · Ch. 1, Unit 2 · Sections 2.6–2.7 + Summary</span>
+        <span>Bridge Course · VC Gurukul</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE 6: TYK GUIDE ===== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="section-header">
+        <div class="section-icon gold">✓</div>
+        <div class="section-header-text">
+          <h2>Test Your Knowledge — Guided Practice</h2>
+          <div class="section-subtitle">Question-by-question navigator · Attempt from your ICAI book first</div>
+        </div>
+      </div>
+
+      <div class="tyk-highlight">
+        <strong>How to use this guide:</strong> Attempt each question from your ICAI study material first — then check this guide for priority and what to watch out for. Flags: <span class="p-vh">Must Do</span> = non-negotiable exam material · <span class="p-h">Important</span> = high frequency · <span class="p-m">Medium</span> = good practice
+      </div>
+
+      <!-- T/F -->
+      <h3 style="font-family:'Poppins',sans-serif; font-size:10.5pt; font-weight:700; color:var(--navy); margin: 16px 0 8px;">True / False — 7 Questions</h3>
+      <table class="tyk-table">
+        <thead>
+          <tr><th style="width:40px">#</th><th>Topic</th><th style="width:90px">Priority</th><th>Watch Out For</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Q1</td>
+            <td>Matching concept <em>[2.5e]</em></td>
+            <td><span class="p-h">Important</span></td>
+            <td>Core concept; read the statement precisely — it usually tests the timing of expense recognition</td>
+          </tr>
+          <tr>
+            <td>Q2</td>
+            <td>Entity concept <em>[2.5a]</em></td>
+            <td><span class="p-m">Medium</span></td>
+            <td>Usually straightforward; confirm it is asking about owner vs. business separation</td>
+          </tr>
+          <tr>
+            <td>Q3</td>
+            <td>Accrual assumption <em>[2.6]</em></td>
+            <td><span class="p-h">Important</span></td>
+            <td>Tests the <em>Fundamental Assumption</em> version of Accrual — remember: disclose if not followed</td>
+          </tr>
+          <tr>
+            <td>Q4</td>
+            <td>Realisation vs Conservatism <em>[2.5h / 2.5j]</em></td>
+            <td><span class="p-vh">Must Do</span></td>
+            <td><strong>Biggest trap in Unit 2.</strong> Word "materialised" in the statement makes students jump to Realisation concept. Read slowly — the question is testing Conservatism. These two concepts are closely related but distinct.</td>
+          </tr>
+          <tr>
+            <td>Q5</td>
+            <td>Consistency concept <em>[2.5k]</em></td>
+            <td><span class="p-m">Medium</span></td>
+            <td>Often tests whether a change in policy is permissible — remember the two allowed reasons</td>
+          </tr>
+          <tr>
+            <td>Q6</td>
+            <td>Materiality <em>[2.5l]</em></td>
+            <td><span class="p-h">Important</span></td>
+            <td>Materiality is <em>not</em> a standalone concept — it is the exception that modifies other concepts</td>
+          </tr>
+          <tr>
+            <td>Q7</td>
+            <td>Accrual basis <em>[2.6]</em></td>
+            <td><span class="p-h">Important</span></td>
+            <td>Second accrual question — usually tests cash vs. accrual basis comparison</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- MCQ Set 1 -->
+      <h3 style="font-family:'Poppins',sans-serif; font-size:10.5pt; font-weight:700; color:var(--navy); margin: 16px 0 8px;">MCQ Set 1 — Questions (i) to (ix)</h3>
+      <table class="tyk-table">
+        <thead>
+          <tr><th style="width:40px">#</th><th>Topic</th><th style="width:90px">Priority</th><th>Key Pointer</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>(i)</td><td>Fundamental assumptions <em>[2.6]</em></td><td><span class="p-vh">Must Do</span></td><td>Which 3 are fundamental? Must recall all 3 by name: Going Concern, Consistency, Accrual</td></tr>
+          <tr><td>(ii)</td><td>Qualitative characteristics <em>[2.7.1]</em></td><td><span class="p-h">Important</span></td><td>11 characteristics — identify which one the option describes</td></tr>
+          <tr><td>(iii)</td><td>Consistency <em>[2.5k]</em></td><td><span class="p-m">Medium</span></td><td>Usually asks: under what condition can a policy be changed?</td></tr>
+          <tr><td>(iv)</td><td>Dual Aspect / Accounting Equation <em>[2.5i]</em></td><td><span class="p-h">Important</span></td><td>Apply A = L + E; identify the correct two effects of the given transaction</td></tr>
+          <tr><td>(v)</td><td>Matching concept <em>[2.5e]</em></td><td><span class="p-h">Important</span></td><td>Which period should an expense be recognised in?</td></tr>
+          <tr><td>(vi)</td><td>Conservatism <em>[2.5j]</em></td><td><span class="p-h">Important</span></td><td>NRV application — inventory at lower of cost or NRV</td></tr>
+          <tr><td>(vii)</td><td>Dual Aspect <em>[2.5i]</em></td><td><span class="p-m">Medium</span></td><td>Straightforward equation balance check</td></tr>
+          <tr><td>(viii)</td><td>Periodicity <em>[2.5c]</em></td><td><span class="p-m">Medium</span></td><td>Why accounts are prepared for a defined period</td></tr>
+          <tr><td>(ix)</td><td>Going Concern <em>[2.5f]</em></td><td><span class="p-h">Important</span></td><td>What is the implication on asset valuation if this assumption is followed?</td></tr>
+        </tbody>
+      </table>
+
+      <!-- MCQ Set 2 -->
+      <h3 style="font-family:'Poppins',sans-serif; font-size:10.5pt; font-weight:700; color:var(--navy); margin: 16px 0 8px;">MCQ Set 2 — Questions (i) to (vi)</h3>
+      <table class="tyk-table">
+        <thead>
+          <tr><th style="width:40px">#</th><th>Topic</th><th style="width:90px">Priority</th><th>Key Pointer</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>(i)</td><td>Cost concept / Assets held <em>[2.5g]</em></td><td><span class="p-h">Important</span></td><td>Why assets are shown at original cost, not current market value</td></tr>
+          <tr><td>(ii)</td><td>Realisation concept <em>[2.5h]</em></td><td><span class="p-m">Medium</span></td><td>Revenue recognised on completion of sale, not on receipt of order</td></tr>
+          <tr><td>(iii)</td><td>Conservatism on Balance Sheet <em>[2.5j]</em></td><td><span class="p-h">Important</span></td><td>Which treatment is more conservative for a given asset?</td></tr>
+          <tr><td>(iv)</td><td>Decrease in payables / Dual Aspect <em>[2.5i]</em></td><td><span class="p-m">Medium</span></td><td>Effect of paying off a creditor on the accounting equation</td></tr>
+          <tr><td>(v)</td><td>Expenses / Matching concept <em>[2.5e]</em></td><td><span class="p-h">Important</span></td><td>Correct period for recognising a prepaid or accrued expense</td></tr>
+          <tr><td>(vi)</td><td>Periodicity concept <em>[2.5c]</em></td><td><span class="p-m">Medium</span></td><td>Standard accounting period definition</td></tr>
+        </tbody>
+      </table>
+
+      <!-- MCQ Set 3 -->
+      <h3 style="font-family:'Poppins',sans-serif; font-size:10.5pt; font-weight:700; color:var(--navy); margin: 16px 0 8px;">MCQ Set 3 — Questions (i) to (iii) &nbsp;<span style="font-weight:400; color:var(--gray-600); font-size:9pt;">[Numerical / Application]</span></h3>
+      <table class="tyk-table">
+        <thead>
+          <tr><th style="width:40px">#</th><th>Topic</th><th style="width:90px">Priority</th><th>What makes it comprehensive</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>(i)</td><td>Dual Aspect / Accounting Equation <em>[2.5i]</em></td><td><span class="p-vh">Must Do</span></td><td>Full A = L + E equation with multiple transactions — tests whether the equation holds after each step. Must practice until automatic.</td></tr>
+          <tr><td>(ii)</td><td>Purchase of machinery / Dual Aspect <em>[2.5i]</em></td><td><span class="p-h">Important</span></td><td>Identify both sides of the journal entry — asset increases, liability or cash decreases</td></tr>
+          <tr><td>(iii)</td><td>Cost concept — Alpha Ltd. machine ₹11L <em>[2.5g]</em></td><td><span class="p-h">Important</span></td><td>Historical cost application — at what value should a machine be recorded if purchased for ₹11L? Market value is irrelevant.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Theoretical -->
+      <h3 style="font-family:'Poppins',sans-serif; font-size:10.5pt; font-weight:700; color:var(--navy); margin: 16px 0 8px;">Theoretical Questions — 6 Questions</h3>
+      <table class="tyk-table">
+        <thead>
+          <tr><th style="width:40px">#</th><th>Topic</th><th style="width:90px">Priority</th><th>Exam Approach</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Q1</td>
+            <td>Fundamental accounting assumptions <em>[2.6]</em></td>
+            <td><span class="p-vh">Must Do</span></td>
+            <td>Write all 3 by name, define each, state the disclosure rule. This is a guaranteed marks question at Inter level too. Format: Definition → Implication → Disclosure requirement.</td>
+          </tr>
+          <tr>
+            <td>Q2</td>
+            <td>Periodicity concept <em>[2.5c]</em></td>
+            <td><span class="p-m">Medium</span></td>
+            <td>Single-concept question — why accounts are prepared for a period rather than lifetime of the business. Keep it to 3–4 points.</td>
+          </tr>
+          <tr>
+            <td>Q3</td>
+            <td>Accounting conventions <em>[2.4]</em></td>
+            <td><span class="p-m">Medium</span></td>
+            <td>Distinguish conventions from concepts and principles. Give examples (Conservatism, Consistency, Materiality as conventions).</td>
+          </tr>
+          <tr>
+            <td>Q4</td>
+            <td>Money Measurement vs Matching <em>[2.5b / 2.5e]</em></td>
+            <td><span class="p-h">Important</span></td>
+            <td>Comparison question — write a short intro, then define and contrast each concept. These two are frequently confused because both deal with "what gets recorded."</td>
+          </tr>
+          <tr>
+            <td>Q5</td>
+            <td>Going Concern vs Cost Concept <em>[2.5f / 2.5g]</em></td>
+            <td><span class="p-vh">Must Do</span></td>
+            <td><strong>High-value question.</strong> The Going Concern concept is the reason the Cost Concept works — assets are recorded at historical cost because the business is assumed to continue and will use them, not sell them. Connect the two concepts explicitly. Most students write them separately; the linkage earns extra marks.</td>
+          </tr>
+          <tr>
+            <td>Q6</td>
+            <td>Qualitative characteristics <em>[2.7.1]</em></td>
+            <td><span class="p-vh">Must Do</span></td>
+            <td><strong>High yield — 11 characteristics.</strong> Understandability, Relevance, Reliability, Comparability, Materiality, Faithful Representation, Substance over Form, Neutrality, Prudence, Completeness, Full/fair disclosure. Write in a table format in the exam — name + one-line meaning. Saves time and looks organised.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="chapter-footer">
+        <span>CA Foundation · Ch. 1, Unit 2 · TYK Guide</span>
+        <span>Bridge Course · VC Gurukul</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE 7: LAYER 3 — ONE-LINERS ===== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="section-header">
+        <div class="section-icon red">L3</div>
+        <div class="section-header-text">
+          <h2>Layer 3 — Rapid Revision</h2>
+          <div class="section-subtitle">20 one-liners · Read aloud after completing TYK · Mark &amp; revise before every class</div>
+        </div>
+      </div>
+
+      <div class="layer3-container">
+        <div class="layer3-eyebrow">Layer 3 · Unit 2</div>
+        <div class="layer3-heading">Accounting Concepts, Principles &amp; Conventions — 20 One-Liners</div>
+        <ul class="layer3-list">
+          <li class="layer3-item">
+            <div class="layer3-num">1</div>
+            <div class="layer3-text"><strong>Why GAAP:</strong> If 5 accountants compute profit independently, 5 different results arise — GAAP exists to make financial statements comparable, consistent, and trustworthy.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">2</div>
+            <div class="layer3-text"><strong>Concepts:</strong> Define the assumptions on which financial statements are prepared; they govern recognition and recording of transactions.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">3</div>
+            <div class="layer3-text"><strong>Conventions:</strong> Emerge from accounting practice over time; need not have universal application — examples: Conservatism, Consistency, Materiality.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">4</div>
+            <div class="layer3-text"><strong>Entity Concept:</strong> Business is legally and financially separate from its owner — capital invested is a liability of the business to the owner; drawings reduce capital.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">5</div>
+            <div class="layer3-text"><strong>Money Measurement:</strong> Only transactions expressible in money terms are recorded — employee morale, management quality, and brand reputation are excluded.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">6</div>
+            <div class="layer3-text"><strong>Periodicity:</strong> Economic life divided into accounting periods (1 Apr–31 Mar) — enables comparison across periods and timely information to users.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">7</div>
+            <div class="layer3-text"><strong>Accrual (Mercantile Basis):</strong> Revenue and expenses recognised when earned or incurred — NOT when cash is received or paid.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">8</div>
+            <div class="layer3-text"><strong>Matching:</strong> Expenses of a period matched with revenues of that same period — Periodic Profit = Periodic Revenue − Matched Expenses.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">9</div>
+            <div class="layer3-text"><strong>Going Concern:</strong> Entity assumed to continue operations indefinitely — assets valued at historical cost (held for use), not liquidation value; disclose if assumption is in doubt.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">10</div>
+            <div class="layer3-text"><strong>Cost Concept:</strong> Assets recorded at original acquisition cost — objective and verifiable; does not reflect current market value or inflation.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">11</div>
+            <div class="layer3-text"><strong>Realisation:</strong> Change in asset value recorded only when realised through an actual transaction — unrealised gains are NOT recorded.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">12</div>
+            <div class="layer3-text"><strong>Dual Aspect:</strong> Every transaction has two equal and opposite effects — <em>Assets = Liabilities + Equity</em> always balances; core of double-entry bookkeeping.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">13</div>
+            <div class="layer3-text"><strong>Conservatism:</strong> Anticipate no future income; provide for all possible losses — current assets valued at lower of cost or NRV.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">14</div>
+            <div class="layer3-text"><strong>Consistency:</strong> Same accounting method applied consistently period to period — change allowed only for statute compliance, AS compliance, or to show a true and fair view.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">15</div>
+            <div class="layer3-text"><strong>Materiality:</strong> All items with significant economic effect must be disclosed strictly; trivial items may be handled practically — depends on amount, nature, and level of decision-maker.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">16</div>
+            <div class="layer3-text"><strong>3 Fundamental Assumptions (AS 1):</strong> Going Concern · Consistency · Accrual — presumed followed; if NOT followed, must be specifically disclosed.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">17</div>
+            <div class="layer3-text"><strong>Financial Statements:</strong> Balance Sheet (position) + P&amp;L (performance) + Cash Flow Statement (circulation) + Notes (supplementary).</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">18</div>
+            <div class="layer3-text"><strong>Qualitative Characteristics — 4 primary:</strong> Understandability · Relevance · Reliability · Comparability.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">19</div>
+            <div class="layer3-text"><strong>Reliability sub-characteristics (5):</strong> Faithful Representation · Substance over Form · Neutrality · Prudence · Completeness.</div>
+          </li>
+          <li class="layer3-item">
+            <div class="layer3-num">20</div>
+            <div class="layer3-text"><strong>Going Concern ↔ Cost Concept link:</strong> Assets are shown at cost because the business is expected to <em>use</em> them — not sell them. Going Concern is the reason Cost Concept works.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="chapter-footer" style="margin-top:20px;">
+        <span>CA Foundation · Ch. 1, Unit 2 · Layer 3 Rapid Revision</span>
+        <span>CA Pranav Pratik Tulshyan · VC Gurukul, Noida</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
