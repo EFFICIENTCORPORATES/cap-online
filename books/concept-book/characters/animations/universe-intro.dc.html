@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;background:#0d0d14;font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',sans-serif;overflow:hidden;}
+  @keyframes iFade{from{opacity:0}to{opacity:1}}
+  @keyframes iUp{from{transform:translateY(16px)}to{transform:translateY(0)}}
+  @keyframes iBub{from{transform:translateY(12px) scale(.98)}to{transform:translateY(0) scale(1)}}
+  @keyframes iPop{0%{transform:scale(.86)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+  @keyframes iGlow{0%,100%{box-shadow:0 0 0 0 rgba(240,165,0,0)}50%{box-shadow:0 0 34px 8px rgba(240,165,0,.55)}}
+  @keyframes iWalk{0%{transform:translateX(-90px)}100%{transform:translateX(0)}}
+  @keyframes iSpark{0%,100%{opacity:.4;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
+</style>
+</helmet>
+<template id="__bundler_thumbnail"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#1A1A2E"/><circle cx="64" cy="86" r="20" fill="#E8813A"/><circle cx="100" cy="78" r="20" fill="#2A6FDB"/><circle cx="136" cy="86" r="20" fill="#6B3FA0"/><circle cx="82" cy="118" r="20" fill="#F0A500"/><circle cx="118" cy="118" r="20" fill="#23232A"/><text x="100" y="170" font-size="20" fill="#fff" text-anchor="middle" font-family="Segoe UI,sans-serif">UNIVERSE</text></svg></template>
+{{ app }}
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { i: 0, scale: 1, portrait: false };
+
+  C = { navy:'#1A1A2E', orange:'#E8813A', gold:'#F0A500', purple:'#6B3FA0', green:'#2D8653', red:'#C0392B',
+        teal:'#1F8A7A', eblue:'#2A6FDB', black:'#23232A', maroon:'#7E2B3B',
+        bg:'#FDF8F3', skin:'#E7B189', hairD:'#2E2422', grey:'#B0ABA4', shirt:'#EFE9DD', ink:'#1A1A2E' };
+
+  meta = {
+    sethji:   { name:'SETHJI',       color:'#F0A500' },
+    cfo:      { name:'CFO SIR',      color:'#2A6FDB' },
+    diya:     { name:'DIYA (Dr. D)', color:'#6B3FA0' },
+    rolly:    { name:'ROLLY',        color:'#E8813A' },
+    gurpreet: { name:'GURPREET SIR', color:'#23232A' },
+    pranav:   { name:'PRANAV',       color:'#1A1A2E' },
+  };
+
+  componentDidMount(){
+    this._key=(e)=>{ if(e.key==='Enter'||e.key===' '||e.key==='ArrowRight'){ e.preventDefault(); this.next(); }
+      else if(e.key==='ArrowLeft'){ e.preventDefault(); this.back(); } };
+    this._rz=()=>this.measure();
+    this._hash=()=>{ const m=(location.hash||'').match(/step-(\d+)/); if(m){ const n=Math.max(0,Math.min(this.beats.length-1,parseInt(m[1],10)-1)); if(n!==this.state.i) this.setState({ i:n }); } };
+    window.addEventListener('keydown',this._key); window.addEventListener('resize',this._rz); window.addEventListener('hashchange',this._hash);
+    this.measure();
+    let start=0; const m=(location.hash||'').match(/step-(\d+)/);
+    if(m){ start=Math.max(0,Math.min(this.beats.length-1,parseInt(m[1],10)-1)); }
+    else { const s=+(localStorage.getItem('uintro_step')||0); if(s) start=Math.max(0,Math.min(this.beats.length-1,s)); }
+    if(start) this.setState({ i:start });
+  }
+  componentWillUnmount(){ window.removeEventListener('keydown',this._key); window.removeEventListener('resize',this._rz); }
+  measure(){ const vw=window.innerWidth, vh=window.innerHeight; const scale=Math.min(vw/1280, vh/720)*0.97;
+    this.setState({ scale, portrait: vh>vw && vw<760 }); }
+  setI(n){ const i=Math.max(0,Math.min(this.beats.length-1,n));
+    try{ localStorage.setItem('uintro_step',i); history.replaceState(null,'','#step-'+(i+1)); }catch(e){}
+    this.setState({ i }); }
+  next(){ const last=this.beats.length-1; if(this.state.i>=last) this.setI(0); else this.setI(this.state.i+1); }
+  back(){ this.setI(this.state.i-1); }
+
+  // ---------------- character art ----------------
+  head(extra){ const S=this.C; return `<rect x="90" y="98" width="20" height="26" fill="${S.skin}"/><circle cx="100" cy="70" r="40" fill="${S.skin}"/><circle cx="86" cy="72" r="3.4" fill="#3a2c22"/><circle cx="114" cy="72" r="3.4" fill="#3a2c22"/>${extra}`; }
+  svgFor(who){
+    const S=this.C;
+    if(who==='rolly'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="80" y="226" width="18" height="68" rx="8" fill="#2a3450"/><rect x="102" y="226" width="18" height="68" rx="8" fill="#2a3450"/>
+        <rect x="44" y="132" width="17" height="78" rx="8.5" fill="${S.navy}"/><rect x="139" y="132" width="17" height="78" rx="8.5" fill="${S.navy}"/>
+        <circle cx="52" cy="208" r="10" fill="${S.skin}"/><circle cx="148" cy="208" r="10" fill="${S.skin}"/>
+        <rect x="56" y="122" width="88" height="112" rx="22" fill="${S.navy}"/>
+        <path d="M62 126 L122 232 L100 234 L52 138 Z" fill="${S.orange}"/>
+        ${this.head(`<path d="M60 70 a40 40 0 0 1 80 0 q-40 -30 -80 0 Z" fill="${S.hairD}"/><circle cx="100" cy="28" r="13" fill="${S.hairD}"/><path d="M91 88 q9 7 18 0" stroke="#b5704a" stroke-width="3" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    if(who==='pranav'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="80" y="226" width="18" height="68" rx="8" fill="#2a2e44"/><rect x="102" y="226" width="18" height="68" rx="8" fill="#2a2e44"/>
+        <rect x="46" y="132" width="16" height="80" rx="8" fill="#D8E4F2"/><rect x="138" y="132" width="16" height="80" rx="8" fill="#D8E4F2"/>
+        <circle cx="54" cy="210" r="9.5" fill="${S.skin}"/><circle cx="146" cy="210" r="9.5" fill="${S.skin}"/>
+        <rect x="56" y="124" width="88" height="112" rx="16" fill="#D8E4F2"/>
+        <path d="M100 124 L89 124 L97 139 Z" fill="#ffffff"/><path d="M100 124 L111 124 L103 139 Z" fill="#ffffff"/>
+        <path d="M100 130 L105 139 L103 180 L97 180 L95 139 Z" fill="${S.navy}"/>
+        <circle cx="100" cy="194" r="2.4" fill="#b9c6d8"/><circle cx="100" cy="210" r="2.4" fill="#b9c6d8"/>
+        ${this.head(`<path d="M58 74 q-8 -52 42 -52 q50 0 42 52 q-5 -17 -16 -13 q-4 -15 -26 -15 q-23 0 -27 17 q-11 -3 -15 11 Z" fill="#241b18"/><path d="M72 50 q20 12 46 3 q-7 15 -25 15 q-17 0 -21 -18 Z" fill="#2e221d"/><g stroke="${S.navy}" stroke-width="2.4" fill="none"><circle cx="86" cy="73" r="8.5"/><circle cx="114" cy="73" r="8.5"/><path d="M94.5 73 h11"/></g><path d="M91 90 q9 5 18 0" stroke="#b5704a" stroke-width="3" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    if(who==='sethji'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="78" y="232" width="20" height="62" rx="8" fill="#cdbfa0"/><rect x="102" y="232" width="20" height="62" rx="8" fill="#cdbfa0"/>
+        <rect x="44" y="140" width="18" height="74" rx="9" fill="${S.shirt}"/><rect x="138" y="140" width="18" height="74" rx="9" fill="${S.shirt}"/>
+        <circle cx="53" cy="212" r="10" fill="${S.skin}"/><circle cx="147" cy="212" r="10" fill="${S.skin}"/>
+        <rect x="50" y="130" width="100" height="108" rx="22" fill="${S.shirt}"/>
+        <path d="M58 132 q-2 60 26 104 l16 -6 q-26 -46 -24 -100 Z" fill="#dcc79e"/>
+        <rect x="98" y="130" width="4" height="60" fill="#c9b88f"/><circle cx="100" cy="148" r="2.6" fill="#b9a679"/><circle cx="100" cy="166" r="2.6" fill="#b9a679"/>
+        ${this.head(`<path d="M60 66 a40 40 0 0 1 80 0 q-40 -24 -80 0 Z" fill="${S.grey}"/><g stroke="#6a5a48" stroke-width="2" fill="none"><circle cx="86" cy="72" r="8.5"/><circle cx="114" cy="72" r="8.5"/><path d="M94.5 72 h11"/></g><path d="M84 90 q16 7 32 0" stroke="#7a6a5a" stroke-width="4" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    if(who==='diya'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="80" y="226" width="18" height="68" rx="8" fill="#3a2f48"/><rect x="102" y="226" width="18" height="68" rx="8" fill="#3a2f48"/>
+        <rect x="44" y="132" width="17" height="80" rx="8.5" fill="${S.purple}"/><rect x="139" y="132" width="17" height="80" rx="8.5" fill="${S.purple}"/>
+        <circle cx="52" cy="210" r="10" fill="${S.skin}"/><circle cx="148" cy="210" r="10" fill="${S.skin}"/>
+        <rect x="54" y="122" width="92" height="112" rx="20" fill="${S.purple}"/>
+        <path d="M100 124 L122 124 L100 182 L78 124 Z" fill="#efe9f5"/><rect x="96" y="124" width="8" height="42" fill="#8a5cc4"/>
+        ${this.head(`<path d="M58 76 q2 -46 42 -46 q40 0 42 46 q-12 -16 -22 -6 q-6 -10 -20 -10 q-14 0 -20 10 q-10 -10 -22 6 Z" fill="${S.hairD}"/><circle cx="138" cy="92" r="13" fill="${S.hairD}"/><g stroke="${S.purple}" stroke-width="2.4" fill="none"><rect x="77" y="65" width="18" height="14" rx="3"/><rect x="105" y="65" width="18" height="14" rx="3"/><path d="M95 72 h10"/></g><path d="M91 90 q9 5 18 0" stroke="#b5704a" stroke-width="3" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    if(who==='gurpreet'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="80" y="232" width="18" height="62" rx="8" fill="#2a2a30"/><rect x="102" y="232" width="18" height="62" rx="8" fill="#2a2a30"/>
+        <path d="M48 140 q-8 44 22 70 l14 -8 q-22 -22 -16 -58 Z" fill="${S.black}"/>
+        <path d="M152 140 q8 44 -22 70 l-14 -8 q22 -22 16 -58 Z" fill="${S.black}"/>
+        <rect x="54" y="130" width="92" height="108" rx="20" fill="${S.black}"/>
+        <path d="M100 132 L120 132 L100 188 L80 132 Z" fill="#ECECEF"/><rect x="96" y="132" width="8" height="40" fill="${S.maroon}"/>
+        ${this.head(`<path d="M66 96 q4 18 34 18 q30 0 34 -18 q-2 16 -34 16 q-32 0 -34 -16 Z" fill="${S.hairD}"/><path d="M78 86 q22 16 44 0 q-2 16 -22 16 q-20 0 -22 -16 Z" fill="${S.hairD}"/><path d="M54 60 q4 -34 46 -34 q42 0 46 34 q2 8 -8 10 q-38 -14 -76 0 q-10 -2 -8 -10 Z" fill="${S.maroon}"/><path d="M92 30 q8 -8 16 0 q-2 8 -8 8 q-6 0 -8 -8 Z" fill="${S.maroon}"/><path d="M70 56 q30 -10 60 0" stroke="#5e1f2c" stroke-width="2" fill="none"/><path d="M90 88 q10 6 20 0" stroke="#7a4a30" stroke-width="3" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    // cfo
+    return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <rect x="82" y="232" width="17" height="62" rx="8" fill="#23314f"/><rect x="101" y="232" width="17" height="62" rx="8" fill="#23314f"/>
+      <rect x="46" y="132" width="16" height="82" rx="8" fill="${S.eblue}"/><rect x="138" y="132" width="16" height="82" rx="8" fill="${S.eblue}"/>
+      <circle cx="54" cy="212" r="9.5" fill="${S.skin}"/><circle cx="146" cy="212" r="9.5" fill="${S.skin}"/>
+      <rect x="56" y="124" width="88" height="112" rx="18" fill="${S.eblue}"/>
+      <path d="M100 126 L118 126 L100 178 L82 126 Z" fill="#fff"/><path d="M100 126 L107 126 L103 168 L97 152 Z" fill="#1b2d52"/>
+      ${this.head(`<path d="M62 58 q38 -32 76 0 q-4 -24 -38 -24 q-34 0 -38 24 Z" fill="${S.hairD}"/><path d="M88 89 q12 5 24 0" stroke="#b5704a" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M60 70 a40 42 0 0 0 0 6" stroke="#33373d" stroke-width="6" fill="none"/><rect x="52" y="68" width="13" height="20" rx="6" fill="#33373d"/><path d="M62 60 q40 -26 76 2" stroke="#33373d" stroke-width="5" fill="none"/><path d="M58 86 q-10 8 -6 20" stroke="#33373d" stroke-width="3" fill="none"/><circle cx="52" cy="106" r="4" fill="#33373d"/>`)}
+    </svg>`;
+  }
+
+  renderCharacter(c, active){
+    const R=React.createElement, m=this.meta[c.who];
+    const dim=(active!=null && !active)?0.5:1;
+    const sc=c.scale||1;
+    return R('div',{ key:c.who+c.x, style:{ position:'absolute', left:c.x, bottom:34, width:200, height:300,
+        display:'flex', flexDirection:'column', alignItems:'center', zIndex:2, opacity:dim, transition:'opacity .3s ease',
+        transform:'scale('+sc+')', transformOrigin:'bottom center',
+        animation: c.pose==='walk'?'iWalk .6s ease both':'iUp .4s ease both' } },
+      R('div',{ style:{ position:'relative', width:200, height:268 } },
+        R('div',{ style:{ width:'100%', height:'100%', filter:'drop-shadow(0 8px 10px rgba(26,26,46,.12))' }, dangerouslySetInnerHTML:{ __html:this.svgFor(c.who) } }),
+        c.emoji? R('div',{ style:{ position:'absolute', top:8, right:34, width:46, height:46, borderRadius:'50%', background:'#fff',
+            boxShadow:'0 3px 10px rgba(26,26,46,.18)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:26, animation:'iPop .35s ease both' } }, c.emoji):null
+      ),
+      R('div',{ style:{ marginTop:2, padding:'3px 13px', borderRadius:20, background:m.color, color:'#fff',
+          fontSize:13, fontWeight:700, letterSpacing:'.05em', boxShadow:'0 2px 6px rgba(26,26,46,.2)', whiteSpace:'nowrap' } }, m.name)
+    );
+  }
+
+  renderBubble(bu, speakerX){
+    const R=React.createElement, m=this.meta[bu.who];
+    const center=speakerX!=null?speakerX+100:640;
+    const W=560, left=Math.max(50, Math.min(1280-50-W, center-W/2));
+    return R('div',{ key:'bub', style:{ position:'absolute', top:96, left, width:W, zIndex:5, animation:'iBub .28s ease both' } },
+      R('div',{ style:{ fontSize:13, fontWeight:700, color:m.color, letterSpacing:'.05em', marginBottom:6, marginLeft:6 } }, m.name),
+      R('div',{ style:{ position:'relative', background:'#fff', borderRadius:18, padding:'18px 22px',
+          fontSize:22, lineHeight:1.42, color:this.C.ink, boxShadow:'0 8px 24px rgba(26,26,46,.14)' } },
+        bu.text,
+        R('div',{ style:{ position:'absolute', bottom:-11, left:Math.max(28, Math.min(W-48, center-left-12)),
+            width:24, height:24, background:'#fff', transform:'rotate(45deg)', boxShadow:'4px 4px 8px rgba(26,26,46,.06)' } })
+      )
+    );
+  }
+
+  renderNarrator(text){
+    const R=React.createElement;
+    return R('div',{ key:'narr', style:{ position:'absolute', left:0, right:0, bottom:64, display:'flex', justifyContent:'center', zIndex:5 } },
+      R('div',{ style:{ width:900, maxWidth:'88%', animation:'iUp .3s ease', background:'rgba(26,26,46,.92)', color:'#fff',
+          borderRadius:12, padding:'15px 28px', fontSize:21, lineHeight:1.45, textAlign:'center', fontStyle:'italic',
+          boxShadow:'0 8px 22px rgba(26,26,46,.2)' } }, text)
+    );
+  }
+
+  // ---------------- panels ----------------
+  panelMid(child, top){ const R=React.createElement;
+    return R('div',{ key:'panel', style:{ position:'absolute', left:0, right:0, top:top||110, display:'flex', justifyContent:'center', zIndex:4 } }, child); }
+
+  renderPanel(p){
+    const R=React.createElement, S=this.C;
+    if(p.type==='chip'){
+      const col=p.color||S.gold;
+      return this.panelMid(R('div',{ style:{ background:'#fff', border:'2px solid '+col, borderRadius:30, padding:'12px 28px',
+          fontSize:21, fontWeight:800, color:col, boxShadow:'0 10px 24px rgba(26,26,46,.12)', animation:'iPop .3s ease' } }, p.text), 188);
+    }
+    if(p.type==='icai'){
+      return this.panelMid(R('div',{ style:{ width:760, background:S.navy, borderRadius:18, padding:'8px',
+          boxShadow:'0 18px 40px rgba(0,0,0,.4)', animation:'iPop .34s ease' } },
+        R('div',{ style:{ border:'2px solid '+S.gold, borderRadius:12, padding:'26px 32px' } },
+          R('div',{ style:{ display:'flex', alignItems:'center', gap:14, marginBottom:18 } },
+            R('div',{ style:{ width:54, height:54, borderRadius:'50%', border:'2.5px solid '+S.gold, color:S.gold,
+                display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800, fontSize:15 } }, 'ICAI'),
+            R('div',null,
+              R('div',{ style:{ color:S.gold, fontWeight:800, fontSize:18, letterSpacing:'.08em' } }, 'ICAI SAYS'),
+              R('div',{ style:{ color:'rgba(255,255,255,.55)', fontSize:12, fontWeight:600, letterSpacing:'.04em' } }, 'The Standard · the final word'))),
+          R('div',{ style:{ color:'#fff', fontSize:24, fontWeight:600, lineHeight:1.45 } }, p.body))
+      ), 150);
+    }
+    if(p.type==='nugget'){
+      return this.panelMid(R('div',{ style:{ display:'flex', flexDirection:'column', alignItems:'center', gap:18 } },
+        R('div',{ style:{ background:'linear-gradient(135deg,#F0A500,#E8813A)', color:'#1A1A2E', borderRadius:18,
+            padding:'22px 40px', fontSize:30, fontWeight:800, letterSpacing:'.02em', boxShadow:'0 14px 34px rgba(240,165,0,.4)',
+            animation:'iGlow 2s ease infinite', display:'flex', alignItems:'center', gap:14 } },
+          R('span',{ style:{ fontSize:34 } }, '🏅'), 'GOLDEN LEARNING NUGGET'),
+        p.sub? R('div',{ style:{ color:'#fff', fontSize:20, fontWeight:600 } }, p.sub):null), 220);
+    }
+    if(p.type==='ecosystem'){
+      const box=(t,sub,people,color)=> R('div',{ style:{ background:'#fff', borderRadius:12, padding:'12px 18px', minWidth:176, textAlign:'center',
+          boxShadow:'0 8px 22px rgba(26,26,46,.16)', borderTop:'4px solid '+color } },
+        R('div',{ style:{ fontSize:15, fontWeight:800, color:S.ink } }, t),
+        R('div',{ style:{ fontSize:11, color:'#8a857d', marginTop:2, fontWeight:600 } }, sub),
+        R('div',{ style:{ fontSize:12, color:color, fontWeight:700, marginTop:6 } }, people));
+      const arr=(l)=> R('div',{ style:{ textAlign:'center', color:'rgba(26,26,46,.45)', fontSize:11, fontWeight:700, letterSpacing:'.05em', padding:'2px 0' } }, l+' ↓');
+      return this.panelMid(R('div',{ style:{ display:'flex', flexDirection:'column', alignItems:'center', gap:4, animation:'iPop .34s ease' } },
+        box('GP & Associates','Audit Firm · Noida','Gurpreet Sir + Pranav', S.black),
+        arr('audits both'),
+        R('div',{ style:{ display:'flex', gap:48 } },
+          box('BCPL','Bade Chalo Pvt Ltd','Sethji', S.gold),
+          box('ECPL','Effective Corporates Pvt Ltd','CFO Sir', S.eblue)),
+        arr('books kept by'),
+        box('Accounting Doctors','Accounting Firm · Raipur','Diya (Dr. D) + Rolly', S.purple)), 96);
+    }
+    return null;
+  }
+
+  // ---------------- backgrounds ----------------
+  bgEl(kind){
+    const R=React.createElement, S=this.C;
+    const wrap=(bg,kids)=> R('div',{ key:'bg', style:{ position:'absolute', inset:0, zIndex:0, background:bg, overflow:'hidden' } }, kids);
+    const rect=(x,y,w,h,c,o=1,r=2)=> R('div',{ key:x+'_'+y+'_'+c+'_'+w, style:{ position:'absolute', left:x, top:y, width:w, height:h, background:c, opacity:o, borderRadius:r } });
+    if(kind==='godown') return wrap('linear-gradient(180deg,#e9eaf2,#dfe0ec)', [
+      rect(0,150,1280,7,'#b9bccd'), rect(0,300,1280,7,'#b9bccd'), rect(70,86,90,64,'#d8c19a',.95,4), rect(170,90,90,60,'#d8c19a',.95,4),
+      rect(960,232,150,68,'#cbb98e',.9,4), rect(1000,84,60,66,'#9db6d4',.9,8), rect(120,236,80,64,'#e0d2b0',.9,4) ]);
+    if(kind==='doctors') return wrap('linear-gradient(180deg,#f7f1fa,#efe6f4)', [
+      rect(150,86,560,150,'#ffffff',1,8), rect(150,86,560,150,'transparent',1,8),
+      R('div',{ key:'wb', style:{ position:'absolute', left:150, top:86, width:560, height:150, border:'3px solid #d9cce4', borderRadius:8 } }),
+      rect(0,560,1280,160,'#cdb6d8',.4,0) ]);
+    if(kind==='ecpl') return wrap('linear-gradient(180deg,#eef3fb,#e4ecf7)', [
+      rect(120,90,260,150,'#ffffff',1,8), R('div',{ key:'mon', style:{ position:'absolute', left:120, top:90, width:260, height:150, border:'3px solid #c7d6ea', borderRadius:8 } }),
+      rect(140,110,220,16,'#2A6FDB',.5,3), rect(140,134,150,12,'#bcd0ea',.8,3), rect(0,560,1280,160,'#bcd0ea',.5,0) ]);
+    if(kind==='gp') return wrap('linear-gradient(180deg,#fdf8f3,#f4ece1)', [
+      rect(150,86,560,150,'#ffffff',1,8), R('div',{ key:'wb2', style:{ position:'absolute', left:150, top:86, width:560, height:150, border:'3px solid #d8cdbb', borderRadius:8 } }),
+      rect(0,560,1280,160,'#caa874',.4,0) ]);
+    if(kind==='navy') return wrap(S.navy, []);
+    return wrap('linear-gradient(180deg,#fdf8f3,#f4ece1)', []); // warm
+  }
+
+  // ---------------- cards ----------------
+  renderCard(card){
+    const R=React.createElement, S=this.C;
+    if(card.kind==='title'){
+      return R('div',{ key:'card', style:{ position:'absolute', inset:0, zIndex:8, background:S.navy, color:'#fff',
+          display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center' } },
+        R('div',{ style:{ fontSize:18, letterSpacing:'.22em', color:S.orange, fontWeight:700, animation:'iUp .4s ease both' } }, card.eyebrow),
+        R('div',{ style:{ fontSize:20, color:'#cfcadb', marginTop:24, letterSpacing:'.05em', animation:'iUp .45s ease .05s both' } }, card.pre),
+        R('div',{ style:{ fontSize:66, fontWeight:800, margin:'6px 0 10px', lineHeight:1.05, animation:'iUp .5s ease .1s both' } }, card.title),
+        R('div',{ style:{ fontSize:30, color:S.gold, fontWeight:600, animation:'iUp .5s ease .2s both' } }, card.subtitle),
+        R('div',{ style:{ marginTop:48, fontSize:16, letterSpacing:'.1em', opacity:.7, animation:'iFade 1s ease .5s both' } }, card.foot));
+    }
+    if(card.kind==='closing'){
+      return R('div',{ key:'card', style:{ position:'absolute', inset:0, zIndex:8, background:S.navy, color:'#fff',
+          display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center' } },
+        R('div',{ style:{ fontSize:46, fontWeight:800, animation:'iUp .4s ease both' } }, 'The Accounting Universe'),
+        R('div',{ style:{ fontSize:22, opacity:.8, marginTop:8 } }, 'CA Inter · Advanced Accounting'),
+        R('div',{ style:{ width:60, height:3, background:S.orange, margin:'28px 0' } }),
+        R('div',{ style:{ fontSize:20, fontWeight:700, color:S.gold } }, 'VC Gurukul'),
+        R('div',{ style:{ marginTop:12, fontSize:18, color:'#cfcadb', fontWeight:700, letterSpacing:'.06em' } }, '#pranavBhaiya   #NewtonofAccounts'));
+    }
+    // scene
+    return R('div',{ key:'card', style:{ position:'absolute', inset:0, zIndex:8, background:S.navy, color:'#fff',
+        display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center' } },
+      R('div',{ style:{ display:'flex', alignItems:'center', gap:14, color:S.orange, fontSize:18, fontWeight:800, letterSpacing:'.14em', animation:'iUp .4s ease both' } },
+        R('div',{ style:{ width:34, height:2, background:S.orange } }), card.kicker, R('div',{ style:{ width:34, height:2, background:S.orange } })),
+      R('div',{ style:{ fontSize:52, fontWeight:800, margin:'14px 0 10px', lineHeight:1.1, animation:'iUp .5s ease .08s both' } }, card.title),
+      card.sub? R('div',{ style:{ fontSize:22, opacity:.72, animation:'iUp .5s ease .16s both' } }, card.sub):null);
+  }
+
+  // ---------------- stage ----------------
+  renderStage(b){
+    if(b.type==='card') return [ this.bgEl('navy'), this.renderCard(b.card) ];
+    const layers=[ this.bgEl(b.bg) ];
+    const speaker=b.bubble?b.bubble.who:null;
+    (b.chars||[]).forEach(c=> layers.push(this.renderCharacter(c, speaker?c.who===speaker:null)));
+    if(b.panel) layers.push(this.renderPanel(b.panel));
+    if(b.bubble){ const sc=(b.chars||[]).find(c=>c.who===b.bubble.who); layers.push(this.renderBubble(b.bubble, sc?sc.x:null)); }
+    if(b.narrator) layers.push(this.renderNarrator(b.narrator));
+    return layers;
+  }
+
+  // ---------------- data ----------------
+  get beats(){
+    if(this._beats) return this._beats;
+    const c=(who,x,emoji,pose,scale)=>({who,x,emoji,pose,scale});
+    const C1=540, L2=300, R2=760, L3=225, M3=540, R3=855;
+    const six=()=>[ c('sethji',50,null,null,.72), c('cfo',238,null,null,.72), c('diya',426,null,null,.72),
+                    c('rolly',614,null,null,.72), c('gurpreet',802,null,null,.72), c('pranav',990,null,null,.72) ];
+    const B=[
+      { type:'card', card:{ kind:'title', eyebrow:'CA INTER · ADVANCED ACCOUNTING', pre:'Welcome to', title:'The Accounting Universe', subtitle:'by VC Gurukul', foot:'#pranavBhaiya  ·  #NewtonofAccounts' } },
+      { type:'beat', scene:'Welcome', bg:'warm', chars:six(), narrator:'Welcome to the Accounting Universe — by VC Gurukul.' },
+      { type:'beat', scene:'Welcome', bg:'warm', chars:six(), narrator:'Six characters. Two companies. One audit firm. And a lot of accounting drama.' },
+
+      { type:'card', scene:'The Universe', card:{ kind:'scene', kicker:'The Universe', title:'The Map', sub:'Two companies · one accounting firm · one audit firm.' } },
+      { type:'beat', scene:'The Universe', bg:'warm', chars:[], panel:{ type:'ecosystem' }, narrator:'Everything that happens, happens between these four.' },
+
+      { type:'card', scene:'The Companies', card:{ kind:'scene', kicker:'The Companies', title:'Who keeps everyone busy' } },
+      { type:'beat', scene:'The Companies', bg:'godown', chars:[c('sethji',C1,'😄')], bubble:{ who:'sethji', text:'Namaskar! Main Sethji — Bade Chalo Private Limited, Muzaffarpur se. FMCG, cosmetics, ek naphthalene factory, thoda real estate. Karlo Duniya Mutthi Mein!' } },
+      { type:'beat', scene:'The Companies', bg:'godown', chars:[c('sethji',C1,'🙂')], panel:{ type:'chip', color:'#F0A500', text:'₹  Bottom line — bas yahi chahiye' }, bubble:{ who:'sethji', text:'Accounts? Arrey, woh sab Diya sambhal legi. Mujhe toh sirf ek cheez chahiye — bottom line!' } },
+      { type:'beat', scene:'The Companies', bg:'ecpl', chars:[c('cfo',C1,'🧐')], bubble:{ who:'cfo', text:'Hello. I\u2019m the CFO at Effective Corporates Private Limited — Bangalore. SaaS, process-driven, MNC ambitions. Don\u2019t be busy, be efficient.' } },
+      { type:'beat', scene:'The Companies', bg:'ecpl', chars:[c('cfo',C1,'📊')], panel:{ type:'chip', color:'#2A6FDB', text:'MIS · KPIs · monthly closures' }, bubble:{ who:'cfo', text:'Monthly closures on time. Proper MIS. Numbers that match the standard. Vague answers? Yeh acceptable nahi hai.' } },
+
+      { type:'card', scene:'The Accountants', card:{ kind:'scene', kicker:'Accounting Doctors', title:'The Accountants', sub:'Raipur. They keep both companies\u2019 books.' } },
+      { type:'beat', scene:'The Accountants', bg:'doctors', chars:[c('diya',C1,'😌')], bubble:{ who:'diya', text:'I\u2019m Diya — everyone calls me Dr. D. Owner, Accounting Doctors, Raipur. \u201cDr.\u201d bhi — kyunki Debit! Dono companies ke accounts main sambhalti hoon.' } },
+      { type:'beat', scene:'The Accountants', bg:'doctors', chars:[c('diya',C1,'😳')], bubble:{ who:'diya', text:'Basics? Left hand ka khel. Advanced Ind AS, consolidation… main sahi hoon. Hamesha.' } },
+      { type:'beat', scene:'The Accountants', bg:'doctors', chars:[c('diya',L2),c('rolly',R2,'🙂')], bubble:{ who:'rolly', text:'Hi hi! Main Rolly — junior accountant. Log mujhe \u201cRolly\u201d bulaate hain, kyunki meri nature hai \u201cJolly\u201d! Science karna tha… B.Com mein aa gayi — par mazaa aa raha hai!' } },
+      { type:'beat', scene:'The Accountants', bg:'doctors', chars:[c('diya',L2),c('rolly',R2,'😅')], panel:{ type:'chip', color:'#C0392B', text:'Entry slip   ✗' }, bubble:{ who:'rolly', text:'Entry banao, Dr. D ko dikhao… \u201cDone ho gaya!\u201d …wait, yeh kya tha?' } },
+
+      { type:'card', scene:'The Auditors', card:{ kind:'scene', kicker:'GP & Associates', title:'The Auditors', sub:'Noida. The audit firm that signs off on both.' } },
+      { type:'beat', scene:'The Auditors', bg:'gp', chars:[c('gurpreet',C1,'😎')], bubble:{ who:'gurpreet', text:'Sat Sri Akal! Main Gurpreet — partner, GP & Associates. Signing auditor. Law mera pehla pyaar hai… accounts thoda kam.' } },
+      { type:'beat', scene:'The Auditors', bg:'gp', chars:[c('gurpreet',C1,'🙂')], bubble:{ who:'gurpreet', text:'Par tension nahi lena — Pranav sambhal lega!' } },
+      { type:'beat', scene:'The Auditors', bg:'gp', chars:[c('gurpreet',L2),c('pranav',R2,'🤔')], bubble:{ who:'pranav', text:'Main Pranav — article, GP & Associates. CA Inter — All India Ranker. Galat accounting kabhi pass nahi karta.' } },
+      { type:'beat', scene:'The Auditors', bg:'gp', chars:[c('gurpreet',L2),c('pranav',R2,'👉')], bubble:{ who:'pranav', text:'Standard kya kehta hai — wahi final hai. \u201cSir, yahan ek problem hai…\u201d' } },
+
+      { type:'card', scene:'The Final Word', card:{ kind:'scene', kicker:'The Final Word', title:'ICAI Says', sub:'Every debate ends in one place.' } },
+      { type:'beat', scene:'The Final Word', bg:'navy', chars:[], panel:{ type:'icai', body:'When opinions clash and confusion peaks — the Standard speaks. I am the final word in every story.' } },
+
+      { type:'card', scene:'Get Ready', card:{ kind:'scene', kicker:'Get Ready', title:'Stories. Debates. Confusion. Strictness.' } },
+      { type:'beat', scene:'Get Ready', bg:'doctors', chars:[c('rolly',L2,'😅'),c('diya',R2,'😠')], bubble:{ who:'diya', text:'Yeh entry bilkul galat hai, Rolly!' } },
+      { type:'beat', scene:'Get Ready', bg:'ecpl', chars:[c('cfo',L2,'🧐'),c('diya',R2,'😳')], bubble:{ who:'cfo', text:'Standard kya kehta hai? I need it right — today.' } },
+      { type:'beat', scene:'Get Ready', bg:'gp', chars:[c('gurpreet',L2,'🙂'),c('pranav',R2,'🤔')], bubble:{ who:'gurpreet', text:'Acha? Yeh kaise? Samjhao zara…' } },
+      { type:'beat', scene:'Get Ready', bg:'warm', chars:[c('rolly',L3,'💡'),c('pranav',M3,'👉'),c('sethji',R3,'😄')], bubble:{ who:'rolly', text:'Ohhh… ab samajh aaya!' } },
+      { type:'beat', scene:'Get Ready', bg:'navy', chars:[], panel:{ type:'icai', body:'Confusion, debate, strictness — sab chalega. Par har kahani ke end mein milega sirf ek cheez…' } },
+      { type:'beat', scene:'Get Ready', bg:'navy', chars:[], panel:{ type:'nugget', sub:'…every single time.' } },
+
+      { type:'beat', scene:'Ready', bg:'warm', chars:[ c('sethji',50,'🙂',null,.72), c('cfo',238,'🧐',null,.72), c('diya',426,'😌',null,.72), c('rolly',614,'🙂',null,.72), c('gurpreet',802,'😎',null,.72), c('pranav',990,'👉',null,.72) ], narrator:'This is the Accounting Universe. Ready when you are.' },
+      { type:'card', card:{ kind:'closing' } },
+    ];
+    this._beats=B;
+    return B;
+  }
+
+  renderVals(){
+    const R=React.createElement, S=this.C;
+    const { i, scale, portrait }=this.state;
+    const beats=this.beats, total=beats.length, b=beats[i];
+    const isCard=b.type==='card', isClosing=isCard&&b.card.kind==='closing';
+    const stage=R('div',{ key:i, style:{ position:'absolute', inset:0 } }, this.renderStage(b));
+
+    const chrome=[
+      R('div',{ key:'pb', style:{ position:'absolute', top:0, left:0, right:0, height:5, background:'rgba(26,26,46,.1)', zIndex:12 } },
+        R('div',{ style:{ height:'100%', width:((i+1)/total*100)+'%', background:S.orange, transition:'width .3s ease' } })),
+      R('div',{ key:'ct', style:{ position:'absolute', top:14, right:20, fontSize:13, fontWeight:700, color:isCard?'rgba(255,255,255,.6)':'rgba(26,26,46,.55)', zIndex:12, letterSpacing:'.04em' } }, (i+1)+' / '+total),
+      b.scene? R('div',{ key:'sg', style:{ position:'absolute', top:14, left:20, fontSize:13, fontWeight:600, color:isCard?'rgba(255,255,255,.5)':'rgba(26,26,46,.5)', zIndex:12, letterSpacing:'.03em' } }, b.scene):null,
+      (!isCard)? R('div',{ key:'ft', style:{ position:'absolute', bottom:9, left:0, right:0, textAlign:'center', fontSize:11, color:'rgba(26,26,46,.4)', zIndex:12, letterSpacing:'.04em' } }, 'CA Inter · Advanced Accounting    ·    #pranavBhaiya  #NewtonofAccounts    ·    VC Gurukul'):null,
+      R('div',{ key:'hn', style:{ position:'absolute', bottom:26, right:20, fontSize:12, fontWeight:600, color:isCard?'rgba(255,255,255,.55)':'rgba(26,26,46,.45)', zIndex:12 } }, isClosing?'click to restart  ↻':'click  ·  ↵ Enter  ▶'),
+      i>0? R('div',{ key:'bk', onClick:(e)=>{ e.stopPropagation(); this.back(); }, style:{ position:'absolute', bottom:22, left:18, fontSize:12, fontWeight:600, color:isCard?'rgba(255,255,255,.5)':'rgba(26,26,46,.4)', zIndex:13, cursor:'pointer', padding:'4px 8px' } }, '‹ back'):null,
+    ];
+
+    const frame=R('div',{ style:{ width:1280, height:720, position:'relative', background:S.bg, borderRadius:16, overflow:'hidden', boxShadow:'0 30px 80px rgba(0,0,0,.5)', border:'1px solid rgba(255,255,255,.06)' } }, stage, chrome);
+    const wrap=R('div',{ style:{ width:1280, height:720, flex:'none', transform:'scale('+scale+')', transformOrigin:'center center' } }, frame);
+
+    const rotate= portrait ? R('div',{ style:{ position:'absolute', inset:0, background:'rgba(13,13,20,.96)', color:'#fff', zIndex:50,
+        display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:30 } },
+        R('div',{ style:{ fontSize:54, marginBottom:18 } }, '🔄'),
+        R('div',{ style:{ fontSize:20, fontWeight:700, maxWidth:300, lineHeight:1.4 } }, 'Rotate your device to landscape for the best view')) : null;
+
+    return { app: R('div',{ onClick:()=>this.next(), style:{ position:'fixed', inset:0, background:'radial-gradient(circle at 50% 40%, #1a1a26, #0d0d14)',
+        display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', userSelect:'none', overflow:'hidden' } }, wrap, rotate) };
+  }
+}
+</script>
+</body>
+</html>
