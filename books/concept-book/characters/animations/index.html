@@ -160,19 +160,19 @@ class Component extends DCLogic {
   // ---------- narrator ----------
   renderNarrator(text){
     const h=React.createElement;
-    return h('div',{ key:'narr', style:{ position:'absolute', left:'50%', top:340, transform:'translateX(-50%)',
-        width:880, zIndex:5, animation:'asFadeUp .3s ease both' } },
-      h('div',{ style:{ background:'rgba(26,26,46,.9)', color:'#fff', borderRadius:12, padding:'14px 26px',
-          fontSize:20, lineHeight:1.45, textAlign:'center', fontStyle:'italic',
-          boxShadow:'0 8px 22px rgba(26,26,46,.2)' } }, text)
+    return h('div',{ key:'narr', style:{ position:'absolute', left:0, right:0, top:332, display:'flex', justifyContent:'center', zIndex:5 } },
+      h('div',{ style:{ width:880, maxWidth:'90%', animation:'asFadeUp .3s ease', background:'rgba(26,26,46,.92)', color:'#fff', borderRadius:12, padding:'14px 26px',
+          fontSize:20, lineHeight:1.45, textAlign:'center', fontStyle:'italic', boxShadow:'0 8px 22px rgba(26,26,46,.2)' } }, text)
     );
   }
 
   // ---------- panels ----------
   panelBox(children, extra){
-    const h=React.createElement;
-    return h('div',{ key:'panel', style:Object.assign({ position:'absolute', left:'50%', top:104, transform:'translateX(-50%)',
-        zIndex:4, animation:'asPop .34s ease both', maxWidth:860 }, extra||{}) }, children);
+    const h=React.createElement; extra=extra||{};
+    const inner={ animation:'asPop .34s ease', maxWidth:860 };
+    if(extra.width) inner.width=extra.width;
+    return h('div',{ key:'panel', style:{ position:'absolute', left:0, right:0, top:extra.top||104, display:'flex', justifyContent:'center', zIndex:4 } },
+      h('div',{ style:inner }, children));
   }
   tag(kind){
     const h=React.createElement, S=this.C;
