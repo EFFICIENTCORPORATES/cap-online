@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./react.min.js"></script>
+<script src="./react-dom.min.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -19,6 +21,7 @@
   @keyframes asCross{from{opacity:0;transform:scale(1.7) rotate(-14deg)}to{opacity:1;transform:scale(1) rotate(0)}}
   @keyframes asFlow{0%{opacity:0;transform:translateX(-30px)}100%{opacity:1;transform:translateX(0)}}
   @keyframes asWalk{0%,100%{transform:translateX(0)}50%{transform:translateX(120px)}}
+  @keyframes asEnter{from{opacity:0;transform:translateX(280px)}to{opacity:1;transform:translateX(0)}}
 </style>
 </helmet>
 <template id="__bundler_thumbnail"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#1A1A2E"/><rect x="70" y="70" width="60" height="48" rx="6" fill="#E8813A"/><text x="100" y="150" font-size="46" fill="#F0A500" text-anchor="middle" font-family="Segoe UI,sans-serif">₹</text></svg></template>
@@ -26,7 +29,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { i: 0, scale: 1, portrait: false };
+  state = { i: 0, scale: 1, portrait: false, menuOpen: false };
 
   // ---- palette ----
   C = { navy:'#1A1A2E', orange:'#E8813A', gold:'#F0A500', purple:'#6B3FA0', green:'#2D8653', red:'#C0392B',
@@ -41,6 +44,8 @@ class Component extends DCLogic {
 
   componentDidMount(){
     this._key = (e)=>{
+      if(e.key==='Escape'){ this.setState({ menuOpen:false }); return; }
+      if(this.state.menuOpen) return;
       if(e.key==='Enter'||e.key===' '||e.key==='ArrowRight'){ e.preventDefault(); this.next(); }
       else if(e.key==='ArrowLeft'){ e.preventDefault(); this.back(); }
     };
@@ -127,7 +132,7 @@ class Component extends DCLogic {
     const dim = (active!=null && !active) ? 0.55 : 1;
     return h('div',{ key:c.who+c.x, style:{ position:'absolute', left:c.x, bottom:34, width:200, height:300,
         display:'flex', flexDirection:'column', alignItems:'center', zIndex:2, opacity:dim, transition:'opacity .3s ease',
-        animation: c.pose==='walk' ? 'asWalk 1.4s ease-in-out 1' : 'asFadeUp .4s ease both' } },
+        animation: c.pose==='walk' ? 'asWalk 1.4s ease-in-out 1' : c.pose==='enter' ? 'asEnter .7s ease both' : 'asFadeUp .4s ease both' } },
       h('div',{ style:{ position:'relative', width:200, height:268 } },
         h('div',{ style:{ width:'100%', height:'100%', filter:'drop-shadow(0 8px 10px rgba(26,26,46,.12))' }, dangerouslySetInnerHTML:{ __html:this.svgFor(c.who) } }),
         c.emoji ? h('div',{ style:{ position:'absolute', top:8, right:34, width:46, height:46, borderRadius:'50%', background:'#fff',
@@ -163,7 +168,7 @@ class Component extends DCLogic {
   // ---------- narrator ----------
   renderNarrator(text){
     const h=React.createElement;
-    return h('div',{ key:'narr', style:{ position:'absolute', left:0, right:0, top:332, display:'flex', justifyContent:'center', zIndex:5 } },
+    return h('div',{ key:'narr', style:{ position:'absolute', left:0, right:0, bottom:90, display:'flex', justifyContent:'center', zIndex:5 } },
       h('div',{ style:{ width:880, maxWidth:'90%', animation:'asFadeUp .3s ease', background:'rgba(26,26,46,.92)', color:'#fff', borderRadius:12, padding:'14px 26px',
           fontSize:20, lineHeight:1.45, textAlign:'center', fontStyle:'italic', boxShadow:'0 8px 22px rgba(26,26,46,.2)' } }, text)
     );
@@ -420,7 +425,7 @@ class Component extends DCLogic {
       { type:'beat', scene:'Scene 3 · Sethji Reviews', bg:'office', chars:[c('sethji',L2),c('rolly',R2)], panel:{ type:'chip', color:O, text:'₹5 crore expansion loan — next month' }, narrator:'He was applying for a ₹5 crore expansion loan next month. A strong balance sheet mattered.' },
 
       { type:'card', scene:'Scene 4 · The Auditor Arrives', card:{ kind:'scene', n:'Scene 4', title:'The Auditor Arrives' } },
-      { type:'beat', scene:'Scene 4 · The Auditor Arrives', bg:'door', chars:[c('pranav',C1,null,'walk')], narrator:'Pranav arrived two days later for the statutory audit.' },
+      { type:'beat', scene:'Scene 4 · The Auditor Arrives', bg:'door', chars:[c('pranav',C1,null,'enter')], narrator:'Pranav arrived two days later for the statutory audit.' },
       { type:'beat', scene:'Scene 4 · The Auditor Arrives', bg:'door', chars:[c('pranav',C1,'🤔')], panel:{ type:'invoice', label:'PURCHASE INVOICES · coconut soap, per box', chips:['₹58','₹60','₹62'] }, narrator:'He opened Rolly\u2019s working. Coconut soap: ₹85 per unit. He went to the purchase invoices.' },
 
       { type:'card', scene:'Scene 5 · The Hair-Oil Discovery', card:{ kind:'scene', n:'Scene 5', title:'The Hair-Oil Discovery' } },
@@ -480,9 +485,43 @@ class Component extends DCLogic {
     return B;
   }
 
+  getSceneList(){
+    return this.beats.reduce((a,b,idx)=>{
+      if(b.type==='card'&&b.card&&b.card.kind==='scene') a.push({idx,title:b.card.title,n:b.card.n});
+      return a;
+    },[]);
+  }
+
+  renderSceneMenu(){
+    const h=React.createElement, S=this.C, cur=this.state.i;
+    const scenes=this.getSceneList();
+    return h('div',{ key:'smenu', onClick:(e)=>e.stopPropagation(),
+        style:{ position:'absolute',inset:0,zIndex:20,display:'flex',alignItems:'center',justifyContent:'center',
+            background:'rgba(13,13,20,.88)',animation:'asFade .18s ease both' } },
+      h('div',{ style:{ background:'#1e1e30',borderRadius:16,padding:'28px 32px',width:520,
+          boxShadow:'0 30px 90px rgba(0,0,0,.7)',border:'1px solid rgba(255,255,255,.08)' } },
+        h('div',{ style:{ fontSize:12,fontWeight:800,letterSpacing:'.2em',color:S.orange,marginBottom:20,textTransform:'uppercase' } },'Jump to Scene'),
+        scenes.map((s,k)=>{
+          const done=cur>s.idx, active=cur===s.idx;
+          return h('div',{ key:k, onClick:()=>{ this.setI(s.idx); this.setState({menuOpen:false}); },
+              style:{ display:'flex',alignItems:'center',gap:14,padding:'10px 14px',borderRadius:9,cursor:'pointer',
+                  marginBottom:5,transition:'background .15s',
+                  background:active?'rgba(232,129,58,.18)':done?'rgba(255,255,255,.04)':'transparent',
+                  border:active?'1px solid rgba(232,129,58,.4)':'1px solid rgba(255,255,255,.05)' } },
+            h('div',{ style:{ fontSize:12,fontWeight:800,minWidth:20,
+                color:done||active?S.orange:'rgba(255,255,255,.3)' } }, s.n.replace('Scene ','')),
+            h('div',{ style:{ fontSize:15,fontWeight:600,
+                color:active?'#fff':done?'rgba(255,255,255,.75)':'rgba(255,255,255,.4)' } }, s.title)
+          );
+        }),
+        h('div',{ style:{ marginTop:18,textAlign:'center',fontSize:11,color:'rgba(255,255,255,.3)',letterSpacing:'.06em' } },'ESC to close')
+      )
+    );
+  }
+
   renderVals(){
     const h=React.createElement, S=this.C;
-    const { i, scale, portrait } = this.state;
+    const { i, scale, portrait, menuOpen } = this.state;
     const beats=this.beats, total=beats.length, b=beats[i];
     const isCard=b.type==='card', isClosing=isCard&&b.card.kind==='closing';
     const stage = h('div',{ key:i, style:{ position:'absolute', inset:0 } }, this.renderStage(b));
@@ -491,13 +530,18 @@ class Component extends DCLogic {
       h('div',{ key:'pb', style:{ position:'absolute', top:0, left:0, right:0, height:5, background:'rgba(26,26,46,.1)', zIndex:12 } },
         h('div',{ style:{ height:'100%', width:((i+1)/total*100)+'%', background:S.orange, transition:'width .3s ease' } })),
       h('div',{ key:'ct', style:{ position:'absolute', top:14, right:20, fontSize:13, fontWeight:700, color:isCard?'rgba(255,255,255,.6)':'rgba(26,26,46,.55)', zIndex:12, letterSpacing:'.04em' } }, (i+1)+' / '+total),
-      b.scene? h('div',{ key:'sg', style:{ position:'absolute', top:14, left:20, fontSize:13, fontWeight:600, color:'rgba(26,26,46,.5)', zIndex:12, letterSpacing:'.03em' } }, b.scene):null,
+      h('div',{ key:'mn', onClick:(e)=>{ e.stopPropagation(); this.setState(s=>({ menuOpen:!s.menuOpen })); },
+          style:{ position:'absolute', top:9, left:14, zIndex:13, cursor:'pointer', padding:'6px 9px', borderRadius:7, lineHeight:1,
+              background:menuOpen?'rgba(232,129,58,.22)':'rgba(26,26,46,.07)',
+              color:isCard?'rgba(255,255,255,.65)':'rgba(26,26,46,.55)', fontSize:17,
+              transition:'background .15s ease' } }, '≡'),
+      b.scene? h('div',{ key:'sg', style:{ position:'absolute', top:14, left:56, fontSize:13, fontWeight:600, color:'rgba(26,26,46,.5)', zIndex:12, letterSpacing:'.03em' } }, b.scene):null,
       (!isCard)? h('div',{ key:'ft', style:{ position:'absolute', bottom:9, left:0, right:0, textAlign:'center', fontSize:11, color:'rgba(26,26,46,.4)', zIndex:12, letterSpacing:'.04em' } }, 'CA Inter · Advanced Accounting    ·    #pranavBhaiya  #NewtonofAccounts    ·    VC Gurukul, Noida'):null,
       h('div',{ key:'hn', style:{ position:'absolute', bottom:26, right:20, fontSize:12, fontWeight:600, color:isCard?'rgba(255,255,255,.55)':'rgba(26,26,46,.45)', zIndex:12 } }, isClosing? 'click to restart  ↻' : 'click  ·  ↵ Enter  ▶'),
       i>0? h('div',{ key:'bk', onClick:(e)=>{ e.stopPropagation(); this.back(); }, style:{ position:'absolute', bottom:22, left:18, fontSize:12, fontWeight:600, color:isCard?'rgba(255,255,255,.5)':'rgba(26,26,46,.4)', zIndex:13, cursor:'pointer', padding:'4px 8px' } }, '‹ back'):null,
     ];
 
-    const frame = h('div',{ style:{ width:1280, height:720, position:'relative', background:S.bg, borderRadius:16, overflow:'hidden', boxShadow:'0 30px 80px rgba(0,0,0,.5)', border:'1px solid rgba(255,255,255,.06)' } }, stage, chrome);
+    const frame = h('div',{ style:{ width:1280, height:720, position:'relative', background:S.bg, borderRadius:16, overflow:'hidden', boxShadow:'0 30px 80px rgba(0,0,0,.5)', border:'1px solid rgba(255,255,255,.06)' } }, stage, chrome, menuOpen ? this.renderSceneMenu() : null);
     const wrap = h('div',{ style:{ width:1280, height:720, flex:'none', transform:'scale('+scale+')', transformOrigin:'center center' } }, frame);
 
     const rotate = portrait ? h('div',{ style:{ position:'absolute', inset:0, background:'rgba(13,13,20,.96)', color:'#fff', zIndex:50,
@@ -505,7 +549,7 @@ class Component extends DCLogic {
         h('div',{ style:{ fontSize:54, marginBottom:18, animation:'asFade 1.4s ease infinite alternate' } }, '🔄'),
         h('div',{ style:{ fontSize:20, fontWeight:700, maxWidth:300, lineHeight:1.4 } }, 'Rotate your device to landscape for the best view')) : null;
 
-    return { app: h('div',{ onClick:()=>this.next(), style:{ position:'fixed', inset:0, background:'radial-gradient(circle at 50% 40%, #1a1a26, #0d0d14)',
+    return { app: h('div',{ onClick:()=>{ if(!this.state.menuOpen) this.next(); }, style:{ position:'fixed', inset:0, background:'radial-gradient(circle at 50% 40%, #1a1a26, #0d0d14)',
         display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', userSelect:'none', overflow:'hidden' } }, wrap, rotate) };
   }
 }
