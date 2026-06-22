@@ -4,6 +4,19 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-06-19 — AS02.dc.html animation: 4 fixes applied + local React bundled
+
+Applied all 4 agreed fixes to `books/concept-book/characters/animations/AS02.dc.html`:
+
+1. **Narrator position**: `top:332` → `bottom:90` (subtitle band, no longer overlaps characters)
+2. **Pranav walk animation**: Added `asEnter` keyframe (slide in from right); changed his Scene 4 beat pose from `'walk'` (bounce) to `'enter'`
+3. **Jump-to-scene menu**: `≡` button top-left opens an overlay listing all 12 scenes; click to jump; ESC or click-away to close; click-to-advance blocked while menu is open
+4. **Local React**: Downloaded React 18.3.1 UMD as `react.min.js` + `react-dom.min.js` into animations folder; added `<script>` tags before `support.js` in all 3 `.dc.html` files (AS02, universe-intro, Character Universe) — zero CDN dependency at runtime
+
+All changes committed locally. Pranav to `git push origin main` from his machine.
+
+---
+
 ## 2026-06-17 — AS 2 Concept Book chapter: HTML print version complete
 
 Created `books/concept-book/chapters/seq04-as02-valuation-of-inventories.html` — print-ready A4 HTML for the AS 2 Concept Book chapter. Self-contained file (Google Fonts CDN, all CSS inline).
