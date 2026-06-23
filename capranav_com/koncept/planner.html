@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batch Planner | Advanced Accounting | VC Gurukul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:         #1a1a2e;
+      --navy-light:   #2a2a4e;
+      --orange:       #e8813a;
+      --orange-dark:  #c96d25;
+      --green:        #2d8653;
+      --purple:       #6b3fa0;
+      --red:          #c0392b;
+      --gray-100:     #f8f9fa;
+      --gray-200:     #e9ecef;
+      --gray-300:     #dee2e6;
+      --gray-600:     #6c757d;
+      --text:         #2c2c2c;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #0f0f1a;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      background: linear-gradient(150deg, #12122a 0%, #2a2a5a 55%, #1a1a3a 100%);
+      padding: 56px 24px 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .site-header::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(232,129,58,0.12) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+      transition: color 0.18s ease;
+    }
+    .back-link:hover { color: var(--orange); }
+    .header-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .header-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(26px, 4.5vw, 42px);
+      font-weight: 900;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .header-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+    .header-sub span { color: rgba(255,255,255,0.2); margin: 0 8px; }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      max-width: 900px;
+      margin: -44px auto 0;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      position: relative;
+      z-index: 10;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .stat-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .stat-num.orange { color: var(--orange); }
+    .stat-label {
+      font-size: 10px;
+      color: var(--gray-600);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* ===== CONTENT AREA ===== */
+    .content-area {
+      max-width: 900px;
+      margin: 60px auto 80px;
+      padding: 0 24px;
+    }
+
+    /* ===== PHASE HEADER ===== */
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 48px 0 16px;
+    }
+    .phase-pill {
+      background: var(--orange);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .phase-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+    }
+    .phase-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 2px;
+    }
+    .phase-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ===== TABLE ===== */
+    .planner-table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      background: rgba(255,255,255,0.03);
+    }
+    thead th {
+      background: rgba(232,129,58,0.15);
+      color: var(--orange);
+      font-family: 'Poppins', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 11px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(232,129,58,0.2);
+      white-space: nowrap;
+    }
+    tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.15s ease;
+    }
+    tbody tr:hover { background: rgba(255,255,255,0.04); }
+    tbody td {
+      padding: 10px 14px;
+      color: rgba(255,255,255,0.72);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .td-day {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: var(--orange);
+      white-space: nowrap;
+      font-size: 11px;
+    }
+    .td-date {
+      white-space: nowrap;
+      color: rgba(255,255,255,0.45);
+      font-size: 11px;
+    }
+    .td-dow {
+      color: rgba(255,255,255,0.35);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .td-seq {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+    }
+    .td-chapter {
+      font-weight: 600;
+      color: rgba(255,255,255,0.82);
+    }
+    .td-topics {
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    /* Special rows */
+    .row-test td {
+      background: rgba(232,129,58,0.08);
+      border-left: 3px solid var(--orange);
+    }
+    .row-test .td-day { color: white; }
+    .row-test .td-chapter { color: var(--orange); font-weight: 800; }
+
+    .row-holiday td {
+      background: rgba(107,63,160,0.07);
+      border-left: 3px solid var(--purple);
+    }
+    .row-holiday .td-chapter { color: rgba(107,63,160,0.8); }
+
+    .row-zoom td {
+      background: rgba(45,134,83,0.07);
+      border-left: 3px solid var(--green);
+    }
+    .row-zoom .td-chapter { color: rgba(45,134,83,0.9); }
+
+    .row-itd td {
+      background: rgba(192,57,43,0.07);
+      border-left: 3px solid var(--red);
+    }
+    .row-itd .td-chapter { color: rgba(192,57,43,0.9); font-weight: 800; }
+
+    /* ===== KEY DATES ===== */
+    .key-dates {
+      margin-top: 56px;
+    }
+    .key-dates-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 18px;
+    }
+    .key-dates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .key-date-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .key-date-event {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 4px;
+    }
+    .key-date-date {
+      font-size: 11px;
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    /* ===== SUMMARY ===== */
+    .summary-table-wrap {
+      margin-top: 48px;
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      line-height: 1.8;
+    }
+    .site-footer strong { color: rgba(255,255,255,0.4); }
+    .footer-link {
+      color: var(--orange);
+      opacity: 0.7;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .footer-link:hover { opacity: 1; }
+
+    @media (max-width: 600px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); margin-top: -32px; }
+      .phase-title { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <a class="back-link" href="index.html">&#8592; Back to Concept Book</a>
+  <p class="header-label">CA Inter &middot; Advanced Accounting &middot; VC Gurukul &middot; Noida</p>
+  <h1 class="header-title">Batch Planner</h1>
+  <p class="header-sub">
+    July 13 &ndash; November 5, 2026
+    <span>&middot;</span>
+    7:00 AM &ndash; 9:30 AM
+    <span>&middot;</span>
+    Monday &ndash; Saturday
+  </p>
+</header>
+
+<!-- ===== STATS BAR ===== -->
+<div class="stats-bar">
+  <div class="stat-card">
+    <div class="stat-num orange">84</div>
+    <div class="stat-label">Teaching Days</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">210</div>
+    <div class="stat-label">Total Hours</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">34</div>
+    <div class="stat-label">Sequences</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Chapter Tests</div>
+  </div>
+</div>
+
+<!-- ===== CONTENT AREA ===== -->
+<div class="content-area">
+
+  <!-- PHASE 1 -->
+  <div class="phase-header">
+    <span class="phase-pill">Phase 1</span>
+    <div>
+      <div class="phase-title">Theory Foundation</div>
+      <div class="phase-sub">Seq 1–3 &middot; Days 1–7</div>
+    </div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="planner-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Day</th><th>Date</th><th>Day</th><th>Seq</th><th>Chapter</th><th>Topics Covered</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-day">D1</td><td class="td-date">13 Jul</td><td class="td-dow">Mon</td><td class="td-seq">Seq 1</td><td class="td-chapter">Introduction to AS</td><td class="td-topics">Why standards exist; ASB (1977); 8-step standard-setting process; benefits of AS; limitations</td></tr>
+        <tr><td class="td-day">D2</td><td class="td-date">14 Jul</td><td class="td-dow">Tue</td><td class="td-seq">Seq 1</td><td class="td-chapter">Introduction to AS</td><td class="td-topics">How many AS (29 issued, 27 effective); IFRS vs IAS; IASB; convergence vs adoption; Ind AS carve-outs; Ind AS roadmap (Phase I &amp; II)</td></tr>
+        <tr><td class="td-day">D3</td><td class="td-date">15 Jul</td><td class="td-dow">Wed</td><td class="td-seq">Seq 2</td><td class="td-chapter">Applicability of AS</td><td class="td-topics">3 questions for applicability; SMC vs Non-SMC; MSME vs Large (5 conditions, effective Apr 2024); AS not applicable to SMCs; relaxations</td></tr>
+        <tr><td class="td-day">D4</td><td class="td-date">16 Jul</td><td class="td-dow">Thu</td><td class="td-seq">Seq 3</td><td class="td-chapter">Framework</td><td class="td-topics">Purpose; status and scope; components of FS (BS, P&amp;L, CFS, Notes); objectives of FS; 7 user groups</td></tr>
+        <tr><td class="td-day">D5</td><td class="td-date">17 Jul</td><td class="td-dow">Fri</td><td class="td-seq">Seq 3</td><td class="td-chapter">Framework</td><td class="td-topics">3 fundamental assumptions; 4 qualitative characteristics; true and fair view; elements (Asset, Liability, Equity, Income, Expense) — definitions and recognition criteria</td></tr>
+        <tr><td class="td-day">D6</td><td class="td-date">18 Jul</td><td class="td-dow">Sat</td><td class="td-seq">Seq 3</td><td class="td-chapter">Framework</td><td class="td-topics">4 measurement bases; 3 capital maintenance concepts; Illustrations 1–9 (ICAI); Layer 3</td></tr>
+        <tr class="row-test"><td class="td-day">D7</td><td class="td-date">20 Jul</td><td class="td-dow">Mon</td><td class="td-seq">TEST 1</td><td class="td-chapter">Seq 1+2+3</td><td class="td-topics">Chapter Test + Review</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-header">
+    <span class="phase-pill">Phase 2</span>
+    <div>
+      <div class="phase-title">Asset-Based Accounting Standards</div>
+      <div class="phase-sub">Seq 4–10 &middot; Days 8–26</div>
+    </div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="planner-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Day</th><th>Date</th><th>Day</th><th>Seq</th><th>Chapter</th><th>Topics Covered</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-day">D8</td><td class="td-date">21 Jul</td><td class="td-dow">Tue</td><td class="td-seq">Seq 4</td><td class="td-chapter">AS 2 — Inventory</td><td class="td-topics">Cost definition; components of cost; exclusions from cost; cost formulas — FIFO and Weighted Average</td></tr>
+        <tr><td class="td-day">D9</td><td class="td-date">22 Jul</td><td class="td-dow">Wed</td><td class="td-seq">Seq 4</td><td class="td-chapter">AS 2 — Inventory</td><td class="td-topics">Net Realisable Value; lower of cost or NRV rule; write-down; reversal of write-down; specific identification; Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D10</td><td class="td-date">23 Jul</td><td class="td-dow">Thu</td><td class="td-seq">Seq 5</td><td class="td-chapter">AS 10 — PPE</td><td class="td-topics">Definition; initial cost (all costs to bring to location and condition); directly attributable costs; exclusions; dismantling obligation</td></tr>
+        <tr><td class="td-day">D11</td><td class="td-date">24 Jul</td><td class="td-dow">Fri</td><td class="td-seq">Seq 5</td><td class="td-chapter">AS 10 — PPE</td><td class="td-topics">Self-constructed assets; subsequent costs (capitalise vs expense); depreciation — component accounting, useful life review, change in method</td></tr>
+        <tr><td class="td-day">D12</td><td class="td-date">25 Jul</td><td class="td-dow">Sat</td><td class="td-seq">Seq 5</td><td class="td-chapter">AS 10 — PPE</td><td class="td-topics">Derecognition; exchange of assets (commercial substance test); Illustrations 1–8</td></tr>
+        <tr><td class="td-day">D13</td><td class="td-date">27 Jul</td><td class="td-dow">Mon</td><td class="td-seq">Seq 5</td><td class="td-chapter">AS 10 — PPE</td><td class="td-topics">Complex illustrations — trial run costs, pre-operative expenses, exchange of dissimilar assets; Layer 3</td></tr>
+        <tr><td class="td-day">D14</td><td class="td-date">28 Jul</td><td class="td-dow">Tue</td><td class="td-seq">Seq 6</td><td class="td-chapter">AS 26 — Intangibles</td><td class="td-topics">Definition (identifiable, non-monetary, no physical substance); research phase vs development phase; 6 conditions for development capitalisation</td></tr>
+        <tr><td class="td-day">D15</td><td class="td-date">29 Jul</td><td class="td-dow">Wed</td><td class="td-seq">Seq 6</td><td class="td-chapter">AS 26 — Intangibles</td><td class="td-topics">Internally generated goodwill (never capitalised); internally generated brands (never capitalised); amortisation (finite vs indefinite); impairment triggers</td></tr>
+        <tr><td class="td-day">D16</td><td class="td-date">30 Jul</td><td class="td-dow">Thu</td><td class="td-seq">Seq 6</td><td class="td-chapter">AS 26 — Intangibles</td><td class="td-topics">Illustrations (R&amp;D split, amortisation, goodwill claim); Layer 3</td></tr>
+        <tr><td class="td-day">D17</td><td class="td-date">31 Jul</td><td class="td-dow">Fri</td><td class="td-seq">Seq 7</td><td class="td-chapter">AS 16 — Borrowing Costs</td><td class="td-topics">Borrowing costs definition; qualifying asset; commencement / suspension / cessation of capitalisation</td></tr>
+        <tr><td class="td-day">D18</td><td class="td-date">1 Aug</td><td class="td-dow">Sat</td><td class="td-seq">Seq 7</td><td class="td-chapter">AS 16 — Borrowing Costs</td><td class="td-topics">Specific vs general borrowings (weighted average rate); investment income deduction; exchange difference treatment; Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D19</td><td class="td-date">3 Aug</td><td class="td-dow">Mon</td><td class="td-seq">Seq 8</td><td class="td-chapter">AS 19 — Leases</td><td class="td-topics">Finance vs operating — 5 classification criteria; substance over form; lessee accounting (asset + liability at lower of FV or PV of MLP)</td></tr>
+        <tr><td class="td-day">D20</td><td class="td-date">4 Aug</td><td class="td-dow">Tue</td><td class="td-seq">Seq 8</td><td class="td-chapter">AS 19 — Leases</td><td class="td-topics">Lessor accounting (net investment); operating lease (straight-line); minimum lease payments vs contingent rent; implicit rate</td></tr>
+        <tr><td class="td-day">D21</td><td class="td-date">5 Aug</td><td class="td-dow">Wed</td><td class="td-seq">Seq 8</td><td class="td-chapter">AS 19 — Leases</td><td class="td-topics">Sale-and-leaseback; Illustrations (finance lease interest table, MLP PV, operating lease); Layer 3</td></tr>
+        <tr><td class="td-day">D22</td><td class="td-date">6 Aug</td><td class="td-dow">Thu</td><td class="td-seq">Seq 9</td><td class="td-chapter">AS 28 — Impairment</td><td class="td-topics">Indicators of impairment; recoverable amount (FV-CoD vs Value in Use — higher); Cash Generating Unit; impairment loss; reversal; Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D23</td><td class="td-date">7 Aug</td><td class="td-dow">Fri</td><td class="td-seq">Seq 10</td><td class="td-chapter">AS 13 — Investments</td><td class="td-topics">Cost of investment; cum-dividend vs ex-dividend; current vs long-term classification (intent)</td></tr>
+        <tr><td class="td-day">D24</td><td class="td-date">8 Aug</td><td class="td-dow">Sat</td><td class="td-seq">Seq 10</td><td class="td-chapter">AS 13 — Investments</td><td class="td-topics">Valuation — current (lower of cost or FV, portfolio basis); long-term (cost, permanent diminution provision); reclassification; rights shares; bonus shares; disposal (FIFO or WA)</td></tr>
+        <tr><td class="td-day">D25</td><td class="td-date">10 Aug</td><td class="td-dow">Mon</td><td class="td-seq">Seq 10</td><td class="td-chapter">AS 13 — Investments</td><td class="td-topics">Illustrations (cum-dividend trap, portfolio valuation, rights + bonus, reclassification); Layer 3</td></tr>
+        <tr class="row-test"><td class="td-day">D26</td><td class="td-date">11 Aug</td><td class="td-dow">Tue</td><td class="td-seq">TEST 2</td><td class="td-chapter">Seq 4–10</td><td class="td-topics">Chapter Test + Review</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-header">
+    <span class="phase-pill">Phase 3</span>
+    <div>
+      <div class="phase-title">Liabilities, P&amp;L &amp; Revenue AS</div>
+      <div class="phase-sub">Seq 11–21 &middot; Days 27–46</div>
+    </div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="planner-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Day</th><th>Date</th><th>Day</th><th>Seq</th><th>Chapter</th><th>Topics Covered</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-day">D27</td><td class="td-date">12 Aug</td><td class="td-dow">Wed</td><td class="td-seq">Seq 11</td><td class="td-chapter">AS 29 — Provisions</td><td class="td-topics">Present obligation + probable outflow + reliable estimate = provision; constructive vs legal obligation; contingent liability — 2 types, disclosure only</td></tr>
+        <tr><td class="td-day">D28</td><td class="td-date">13 Aug</td><td class="td-dow">Thu</td><td class="td-seq">Seq 11</td><td class="td-chapter">AS 29 — Provisions</td><td class="td-topics">Contingent assets (never recognised; disclose if probable); measurement; changes in provisions; specific provisions (warranties, onerous contracts); Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D29</td><td class="td-date">14 Aug</td><td class="td-dow">Fri</td><td class="td-seq">Seq 12</td><td class="td-chapter">AS 15 — Employee Benefits</td><td class="td-topics">Short-term vs long-term; defined contribution vs defined benefit; PUC method; actuarial gains/losses; gratuity provision; Illustrations + Layer 3</td></tr>
+        <tr class="row-holiday"><td class="td-day">—</td><td class="td-date">15 Aug</td><td class="td-dow">Sat</td><td class="td-seq">—</td><td class="td-chapter">HOLIDAY — Independence Day</td><td class="td-topics">—</td></tr>
+        <tr><td class="td-day">D30</td><td class="td-date">17 Aug</td><td class="td-dow">Mon</td><td class="td-seq">Seq 13</td><td class="td-chapter">AS 4 — Events After BS</td><td class="td-topics">Adjusting events (adjust FS) vs non-adjusting events (disclose only); going concern doubts; dividends declared post year-end; Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D31</td><td class="td-date">18 Aug</td><td class="td-dow">Tue</td><td class="td-seq">Seq 14</td><td class="td-chapter">AS 5 — Net Profit/Loss</td><td class="td-topics">Ordinary vs extraordinary items; prior period items (definition + disclosure); change in accounting estimate (prospective) vs change in accounting policy; Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D32</td><td class="td-date">19 Aug</td><td class="td-dow">Wed</td><td class="td-seq">Seq 15</td><td class="td-chapter">AS 11 — Foreign Exchange</td><td class="td-topics">Transaction date (spot rate); monetary vs non-monetary items; restating monetary items at closing rate; exchange difference on monetary items → P&amp;L</td></tr>
+        <tr><td class="td-day">D33</td><td class="td-date">20 Aug</td><td class="td-dow">Thu</td><td class="td-seq">Seq 15</td><td class="td-chapter">AS 11 — Foreign Exchange</td><td class="td-topics">Integral vs non-integral foreign operations; FCMITDA (exchange differences on qualifying assets); forward contracts; Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D34</td><td class="td-date">21 Aug</td><td class="td-dow">Fri</td><td class="td-seq">Seq 16</td><td class="td-chapter">AS 9 — Revenue Recognition</td><td class="td-topics">Sale of goods — risk and reward transfer; bill-and-hold; agency (gross vs net); timing of recognition</td></tr>
+        <tr><td class="td-day">D35</td><td class="td-date">22 Aug</td><td class="td-dow">Sat</td><td class="td-seq">Seq 16</td><td class="td-chapter">AS 9 — Revenue Recognition</td><td class="td-topics">Rendering of services — stage of completion vs completed contract; interest (time proportion); royalties (accrual); dividends (right to receive); Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D36</td><td class="td-date">24 Aug</td><td class="td-dow">Mon</td><td class="td-seq">Seq 17</td><td class="td-chapter">AS 7 — Construction Contracts</td><td class="td-topics">When AS 7 applies; % of completion — 3 methods; revenue and cost recognised year-by-year</td></tr>
+        <tr><td class="td-day">D37</td><td class="td-date">25 Aug</td><td class="td-dow">Tue</td><td class="td-seq">Seq 17</td><td class="td-chapter">AS 7 — Construction Contracts</td><td class="td-topics">Outcome cannot be estimated (recover cost only); expected loss (recognise immediately in full); variations; claims; incentive payments; Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D38</td><td class="td-date">26 Aug</td><td class="td-dow">Wed</td><td class="td-seq">Seq 18</td><td class="td-chapter">AS 12 — Government Grants</td><td class="td-topics">Revenue grant vs capital grant; 2 methods for capital grant (deduct from asset / deferred income); promoter's contribution</td></tr>
+        <tr><td class="td-day">D39</td><td class="td-date">27 Aug</td><td class="td-dow">Thu</td><td class="td-seq">Seq 18</td><td class="td-chapter">AS 12 — Government Grants</td><td class="td-topics">Non-monetary grants; grants for already-incurred expenses; refund of grant; Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D40</td><td class="td-date">28 Aug</td><td class="td-dow">Fri</td><td class="td-seq">Seq 19</td><td class="td-chapter">AS 22 — Deferred Tax</td><td class="td-topics">Permanent differences (no deferred tax); timing differences; DTL (tax base &lt; book base on asset); DTA (tax base &gt; book base)</td></tr>
+        <tr><td class="td-day">D41</td><td class="td-date">29 Aug</td><td class="td-dow">Sat</td><td class="td-seq">Seq 19</td><td class="td-chapter">AS 22 — Deferred Tax</td><td class="td-topics">Virtual certainty for DTA on carry-forward losses; computation of deferred tax balance; Illustrations + Layer 3</td></tr>
+        <tr class="row-zoom"><td class="td-day">—</td><td class="td-date">30 Aug</td><td class="td-dow">Sun</td><td class="td-seq">—</td><td class="td-chapter">ZOOM 1 — Monthly Zoom Session 1</td><td class="td-topics">—</td></tr>
+        <tr><td class="td-day">D42</td><td class="td-date">31 Aug</td><td class="td-dow">Mon</td><td class="td-seq">Seq 20</td><td class="td-chapter">AS 20 — EPS</td><td class="td-topics">Basic EPS (PAT adjusted / weighted average equity shares); weighted average calculation for mid-year issues</td></tr>
+        <tr><td class="td-day">D43</td><td class="td-date">1 Sep</td><td class="td-dow">Tue</td><td class="td-seq">Seq 20</td><td class="td-chapter">AS 20 — EPS</td><td class="td-topics">Rights issue (retroactive adjustment, theoretical ex-rights price); bonus shares (retroactive adjustment); diluted EPS — convertibles, options, warrants; anti-dilutive instruments excluded</td></tr>
+        <tr><td class="td-day">D44</td><td class="td-date">2 Sep</td><td class="td-dow">Wed</td><td class="td-seq">Seq 20</td><td class="td-chapter">AS 20 — EPS</td><td class="td-topics">Adjustments to numerator for diluted EPS; disclosures; Illustrations (complex weighted avg, rights, diluted); Layer 3</td></tr>
+        <tr><td class="td-day">D45</td><td class="td-date">3 Sep</td><td class="td-dow">Thu</td><td class="td-seq">Seq 21</td><td class="td-chapter">AS 1 — Accounting Policies</td><td class="td-topics">Which policies must be disclosed; 3 fundamental assumptions (if not followed → disclose); selection criteria (Prudence, Substance over Form, Materiality); conditions for change in policy; quantify effect; Illustrations + Layer 3</td></tr>
+        <tr class="row-test"><td class="td-day">D46</td><td class="td-date">4 Sep</td><td class="td-dow">Fri</td><td class="td-seq">TEST 3</td><td class="td-chapter">Seq 11–21</td><td class="td-topics">Chapter Test + Review</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase-header">
+    <span class="phase-pill">Phase 4</span>
+    <div>
+      <div class="phase-title">Financial Statements &amp; Disclosures</div>
+      <div class="phase-sub">Seq 22–26 &middot; Days 47–62</div>
+    </div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="planner-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Day</th><th>Date</th><th>Day</th><th>Seq</th><th>Chapter</th><th>Topics Covered</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-day">D47</td><td class="td-date">5 Sep</td><td class="td-dow">Sat</td><td class="td-seq">Seq 22</td><td class="td-chapter">Preparation of FS</td><td class="td-topics">Schedule III — Part I (Balance Sheet); equity and liabilities side structure; non-current vs current classification</td></tr>
+        <tr><td class="td-day">D48</td><td class="td-date">7 Sep</td><td class="td-dow">Mon</td><td class="td-seq">Seq 22</td><td class="td-chapter">Preparation of FS</td><td class="td-topics">Assets side structure; notes to accounts; mandatory disclosures (share capital note, reserves, borrowings, fixed assets schedule); statutory books</td></tr>
+        <tr><td class="td-day">D49</td><td class="td-date">8 Sep</td><td class="td-dow">Tue</td><td class="td-seq">Seq 22</td><td class="td-chapter">Preparation of FS</td><td class="td-topics">Schedule III Part II (P&amp;L) — revenue, other income, expenses by nature, tax line; distributable profits calculation; first illustration</td></tr>
+        <tr><td class="td-day">D50</td><td class="td-date">9 Sep</td><td class="td-dow">Wed</td><td class="td-seq">Seq 22</td><td class="td-chapter">Preparation of FS</td><td class="td-topics">Full Schedule III conversion problem — trial balance to complete financial statements; Layer 3</td></tr>
+        <tr><td class="td-day">D51</td><td class="td-date">10 Sep</td><td class="td-dow">Thu</td><td class="td-seq">Seq 23A</td><td class="td-chapter">Cash Flow — Concept</td><td class="td-topics">Why profit ≠ cash; 3 activities (Operating, Investing, Financing); direct vs indirect method; non-cash transactions (excluded)</td></tr>
+        <tr><td class="td-day">D52</td><td class="td-date">11 Sep</td><td class="td-dow">Fri</td><td class="td-seq">Seq 23B</td><td class="td-chapter">AS 3 — Cash Flow</td><td class="td-topics">Interest paid; interest received; dividends paid; dividends received; taxes treatment; foreign currency CFS</td></tr>
+        <tr><td class="td-day">D53</td><td class="td-date">12 Sep</td><td class="td-dow">Sat</td><td class="td-seq">Seq 23</td><td class="td-chapter">Cash Flow — Practice</td><td class="td-topics">CFS preparation — Direct Method</td></tr>
+        <tr><td class="td-day">D54</td><td class="td-date">14 Sep</td><td class="td-dow">Mon</td><td class="td-seq">Seq 23</td><td class="td-chapter">Cash Flow — Practice</td><td class="td-topics">Indirect Method (most common exam format); Investing + Financing sections</td></tr>
+        <tr><td class="td-day">D55</td><td class="td-date">15 Sep</td><td class="td-dow">Tue</td><td class="td-seq">Seq 23</td><td class="td-chapter">Cash Flow — Practice</td><td class="td-topics">Complex CFS — acquisition/disposal adjustments, working capital changes, proposed dividend; Layer 3</td></tr>
+        <tr><td class="td-day">D56</td><td class="td-date">16 Sep</td><td class="td-dow">Wed</td><td class="td-seq">Seq 24</td><td class="td-chapter">AS 17 — Segment Reporting</td><td class="td-topics">Primary vs secondary segment; business vs geographical; 10% threshold (revenue / assets / result); 75% test</td></tr>
+        <tr><td class="td-day">D57</td><td class="td-date">17 Sep</td><td class="td-dow">Thu</td><td class="td-seq">Seq 24</td><td class="td-chapter">AS 17 — Segment Reporting</td><td class="td-topics">Segment information required (revenue, result, assets, liabilities, capex, depreciation); allocation of common costs; Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D58</td><td class="td-date">18 Sep</td><td class="td-dow">Fri</td><td class="td-seq">Seq 25</td><td class="td-chapter">AS 18 — Related Party</td><td class="td-topics">10 related party relationships; KMP definition; control vs significant influence; what qualifies as a related party transaction</td></tr>
+        <tr><td class="td-day">D59</td><td class="td-date">19 Sep</td><td class="td-dow">Sat</td><td class="td-seq">Seq 25</td><td class="td-chapter">AS 18 — Related Party</td><td class="td-topics">Disclosure requirements (name, nature, amount, outstanding balance); exemptions; government-related entity exemption; Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D60</td><td class="td-date">21 Sep</td><td class="td-dow">Mon</td><td class="td-seq">Seq 26</td><td class="td-chapter">AS 24 — Discontinuing Ops</td><td class="td-topics">Definition; initial disclosure event (binding sale agreement or Board approval); measurement; presentation in FS; comparative information; Illustrations + Layer 3</td></tr>
+        <tr class="row-test"><td class="td-day">D61</td><td class="td-date">22 Sep</td><td class="td-dow">Tue</td><td class="td-seq">TEST 4</td><td class="td-chapter">Seq 22–26</td><td class="td-topics">Chapter Test + Review</td></tr>
+        <tr class="row-itd"><td class="td-day">D62</td><td class="td-date">23 Sep</td><td class="td-dow">Wed</td><td class="td-seq">ITD 1</td><td class="td-chapter">Mid-Batch Comprehensive Test — Seq 1–26</td><td class="td-topics">Exam Conditions</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase-header">
+    <span class="phase-pill">Phase 5</span>
+    <div>
+      <div class="phase-title">Consolidation Group</div>
+      <div class="phase-sub">Seq 27–31 &middot; Days 63–78</div>
+    </div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="planner-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Day</th><th>Date</th><th>Day</th><th>Seq</th><th>Chapter</th><th>Topics Covered</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-day">D63</td><td class="td-date">24 Sep</td><td class="td-dow">Thu</td><td class="td-seq">Seq 27</td><td class="td-chapter">AS 21 — Consolidation</td><td class="td-topics">Why consolidation; control definition (majority voting power); parent-subsidiary definition; consolidation procedure overview</td></tr>
+        <tr><td class="td-day">D64</td><td class="td-date">25 Sep</td><td class="td-dow">Fri</td><td class="td-seq">Seq 27</td><td class="td-chapter">AS 21 — Consolidation</td><td class="td-topics">Cost of investment vs share in net assets → Goodwill or Capital Reserve; Minority Interest calculation; line-by-line addition</td></tr>
+        <tr><td class="td-day">D65</td><td class="td-date">26 Sep</td><td class="td-dow">Sat</td><td class="td-seq">Seq 27</td><td class="td-chapter">AS 21 — Consolidation</td><td class="td-topics">Intra-group eliminations (intercompany sales, loans, interest); unrealised profit in closing stock; uniform accounting policies</td></tr>
+        <tr class="row-zoom"><td class="td-day">—</td><td class="td-date">27 Sep</td><td class="td-dow">Sun</td><td class="td-seq">—</td><td class="td-chapter">ZOOM 2 — Monthly Zoom Session 2</td><td class="td-topics">—</td></tr>
+        <tr><td class="td-day">D66</td><td class="td-date">28 Sep</td><td class="td-dow">Mon</td><td class="td-seq">Seq 27</td><td class="td-chapter">AS 21 — Consolidation</td><td class="td-topics">Preference shares in subsidiary; dividends from subsidiary; different year-ends; step acquisitions</td></tr>
+        <tr><td class="td-day">D67</td><td class="td-date">29 Sep</td><td class="td-dow">Tue</td><td class="td-seq">Seq 27</td><td class="td-chapter">AS 21 — Consolidation</td><td class="td-topics">Practice: Full consolidation worksheet — goodwill, MI, intra-group eliminations, P&amp;L consolidation</td></tr>
+        <tr><td class="td-day">D68</td><td class="td-date">30 Sep</td><td class="td-dow">Wed</td><td class="td-seq">Seq 27</td><td class="td-chapter">AS 21 — Consolidation</td><td class="td-topics">Practice: Complex consolidation — unrealised profit in stock, different acquisition dates; Layer 3</td></tr>
+        <tr><td class="td-day">D69</td><td class="td-date">1 Oct</td><td class="td-dow">Thu</td><td class="td-seq">Seq 28</td><td class="td-chapter">AS 23 — Associates</td><td class="td-topics">Associate definition (significant influence, 20–49%); equity method (one-line consolidation); share of post-acquisition P&amp;L; goodwill on equity method; Illustrations + Layer 3</td></tr>
+        <tr class="row-holiday"><td class="td-day">—</td><td class="td-date">2 Oct</td><td class="td-dow">Fri</td><td class="td-seq">—</td><td class="td-chapter">HOLIDAY — Gandhi Jayanti</td><td class="td-topics">—</td></tr>
+        <tr><td class="td-day">D70</td><td class="td-date">3 Oct</td><td class="td-dow">Sat</td><td class="td-seq">Seq 29</td><td class="td-chapter">AS 27 — Joint Ventures</td><td class="td-topics">Types (jointly controlled operations, assets, entities); proportionate consolidation for JCE; JV vs partnership; Illustrations + Layer 3</td></tr>
+        <tr><td class="td-day">D71</td><td class="td-date">5 Oct</td><td class="td-dow">Mon</td><td class="td-seq">Seq 30A</td><td class="td-chapter">Amalgamation — Concept</td><td class="td-topics">Merger vs amalgamation (legal distinction); purpose; pooling of interests vs purchase method — when each applies</td></tr>
+        <tr><td class="td-day">D72</td><td class="td-date">6 Oct</td><td class="td-dow">Tue</td><td class="td-seq">Seq 30B</td><td class="td-chapter">AS 14 — Amalgamation</td><td class="td-topics">Pooling of Interests method — 5 conditions; accounting treatment (book values, reserves maintained, no goodwill); purchase consideration types</td></tr>
+        <tr><td class="td-day">D73</td><td class="td-date">7 Oct</td><td class="td-dow">Wed</td><td class="td-seq">Seq 30B</td><td class="td-chapter">AS 14 — Amalgamation</td><td class="td-topics">Purchase method treatment (agreed/FV values, goodwill or capital reserve); statutory reserves — amalgamation adjustment account; P&amp;L balance treatment</td></tr>
+        <tr><td class="td-day">D74</td><td class="td-date">8 Oct</td><td class="td-dow">Thu</td><td class="td-seq">Seq 30B</td><td class="td-chapter">AS 14 — Amalgamation</td><td class="td-topics">Practice: Pooling of Interests — journal entries in transferee's books, closing transferor's books</td></tr>
+        <tr><td class="td-day">D75</td><td class="td-date">9 Oct</td><td class="td-dow">Fri</td><td class="td-seq">Seq 30B</td><td class="td-chapter">AS 14 — Amalgamation</td><td class="td-topics">Practice: Purchase Method — goodwill, capital reserve, statutory reserves</td></tr>
+        <tr><td class="td-day">D76</td><td class="td-date">10 Oct</td><td class="td-dow">Sat</td><td class="td-seq">Seq 30B</td><td class="td-chapter">AS 14 — Amalgamation</td><td class="td-topics">Practice: Complex problem — mixed consideration, statutory reserves, intercompany balances; Layer 3</td></tr>
+        <tr><td class="td-day">D77</td><td class="td-date">12 Oct</td><td class="td-dow">Mon</td><td class="td-seq">Seq 31</td><td class="td-chapter">AS 25 — Interim Reporting</td><td class="td-topics">Discrete vs integral view; condensed FS content; seasonal revenue treatment; uneven costs; material events; disclosures; Illustrations + Layer 3</td></tr>
+        <tr class="row-test"><td class="td-day">D78</td><td class="td-date">13 Oct</td><td class="td-dow">Tue</td><td class="td-seq">TEST 5</td><td class="td-chapter">Seq 27–31</td><td class="td-topics">Chapter Test + Review</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PHASE 6 -->
+  <div class="phase-header">
+    <span class="phase-pill">Phase 6</span>
+    <div>
+      <div class="phase-title">Capital Restructuring &amp; Branches</div>
+      <div class="phase-sub">Seq 32–34 &middot; Days 79–97</div>
+    </div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="planner-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Day</th><th>Date</th><th>Day</th><th>Seq</th><th>Chapter</th><th>Topics Covered</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-day">D79</td><td class="td-date">14 Oct</td><td class="td-dow">Wed</td><td class="td-seq">Seq 32</td><td class="td-chapter">Buyback</td><td class="td-topics">Section 70 conditions (7 conditions); permissible sources (free reserves, securities premium, fresh issue — not loans); 25% limit</td></tr>
+        <tr><td class="td-day">D80</td><td class="td-date">15 Oct</td><td class="td-dow">Thu</td><td class="td-seq">Seq 32</td><td class="td-chapter">Buyback</td><td class="td-topics">Open market vs tender offer; Capital Redemption Reserve (CRR) creation; journal entry sequence; no treasury shares in India</td></tr>
+        <tr><td class="td-day">D81</td><td class="td-date">16 Oct</td><td class="td-dow">Fri</td><td class="td-seq">Seq 32</td><td class="td-chapter">Buyback</td><td class="td-topics">Practice: Sources check + CRR + post-buyback Balance Sheet; Layer 3</td></tr>
+        <tr><td class="td-day">D82</td><td class="td-date">17 Oct</td><td class="td-dow">Sat</td><td class="td-seq">BUFFER</td><td class="td-chapter">Revision</td><td class="td-topics">Error-register-driven revision — weakest chapter from Phases 1–5; MCQ drill</td></tr>
+        <tr><td class="td-day">D83</td><td class="td-date">19 Oct</td><td class="td-dow">Mon</td><td class="td-seq">Seq 33</td><td class="td-chapter">Internal Reconstruction</td><td class="td-topics">Sick company concept; capital reduction; share surrender; legal process (NCLT); Internal Reconstruction Account</td></tr>
+        <tr class="row-holiday"><td class="td-day">—</td><td class="td-date">20 Oct</td><td class="td-dow">Tue</td><td class="td-seq">—</td><td class="td-chapter">HOLIDAY — Dussehra</td><td class="td-topics">—</td></tr>
+        <tr><td class="td-day">D84</td><td class="td-date">21 Oct</td><td class="td-dow">Wed</td><td class="td-seq">Seq 33</td><td class="td-chapter">Internal Reconstruction</td><td class="td-topics">Creditor compromise (partial settlement); priority order; journal entries (capital reduction, creditor haircut, asset write-down, fresh issue)</td></tr>
+        <tr><td class="td-day">D85</td><td class="td-date">22 Oct</td><td class="td-dow">Thu</td><td class="td-seq">Seq 33</td><td class="td-chapter">Internal Reconstruction</td><td class="td-topics">Practice: Full reconstruction problem — capital reduction + creditor compromise + Balance Sheet before and after; Layer 3</td></tr>
+        <tr><td class="td-day">D86</td><td class="td-date">23 Oct</td><td class="td-dow">Fri</td><td class="td-seq">Seq 34</td><td class="td-chapter">Branches — Dependent</td><td class="td-topics">Dependent branch characteristics; goods sent at cost vs invoice price; branch debtors; branch expenses; methods overview</td></tr>
+        <tr><td class="td-day">D87</td><td class="td-date">24 Oct</td><td class="td-dow">Sat</td><td class="td-seq">Seq 34</td><td class="td-chapter">Branches — Stock &amp; Debtors</td><td class="td-topics">Stock and Debtors Method — branch stock account, branch debtors account, branch P&amp;L; loading; goods in transit; short/surplus stock</td></tr>
+        <tr class="row-zoom"><td class="td-day">—</td><td class="td-date">25 Oct</td><td class="td-dow">Sun</td><td class="td-seq">—</td><td class="td-chapter">ZOOM 3 — Monthly Zoom Session 3</td><td class="td-topics">—</td></tr>
+        <tr><td class="td-day">D88</td><td class="td-date">26 Oct</td><td class="td-dow">Mon</td><td class="td-seq">Seq 34</td><td class="td-chapter">Branches — Independent</td><td class="td-topics">Independent branch — own complete books; HO-Branch account (reciprocal accounts); reconciliation; incorporation entries at HO</td></tr>
+        <tr><td class="td-day">D89</td><td class="td-date">27 Oct</td><td class="td-dow">Tue</td><td class="td-seq">Seq 34</td><td class="td-chapter">Branches — Foreign</td><td class="td-topics">Integral vs non-integral classification; translation method; exchange differences on non-integral branch → reserve</td></tr>
+        <tr><td class="td-day">D90</td><td class="td-date">28 Oct</td><td class="td-dow">Wed</td><td class="td-seq">Seq 34</td><td class="td-chapter">Branches — Practice</td><td class="td-topics">Dependent branch full problem — Stock and Debtors Method (invoice price, loading, goods in transit)</td></tr>
+        <tr><td class="td-day">D91</td><td class="td-date">29 Oct</td><td class="td-dow">Thu</td><td class="td-seq">Seq 34</td><td class="td-chapter">Branches — Practice</td><td class="td-topics">Foreign branch translation problem (P&amp;L + BS); Layer 3</td></tr>
+        <tr class="row-test"><td class="td-day">D92</td><td class="td-date">30 Oct</td><td class="td-dow">Fri</td><td class="td-seq">TEST 6</td><td class="td-chapter">Seq 32–34</td><td class="td-topics">Chapter Test + Review</td></tr>
+        <tr class="row-itd"><td class="td-day">D93</td><td class="td-date">31 Oct</td><td class="td-dow">Sat</td><td class="td-seq">ITD 2</td><td class="td-chapter">Final Comprehensive Test — Full Syllabus</td><td class="td-topics">Exam Simulation (all 34 sequences)</td></tr>
+        <tr><td class="td-day">D94</td><td class="td-date">2 Nov</td><td class="td-dow">Mon</td><td class="td-seq">Rev 1</td><td class="td-chapter">Revision — Seq 1–10</td><td class="td-topics">Layer 3 rapid revision + high-frequency MCQ drill</td></tr>
+        <tr><td class="td-day">D95</td><td class="td-date">3 Nov</td><td class="td-dow">Tue</td><td class="td-seq">Rev 2</td><td class="td-chapter">Revision — Seq 11–21</td><td class="td-topics">Layer 3 rapid revision + MCQ (AS 3, AS 13, AS 20 focus)</td></tr>
+        <tr><td class="td-day">D96</td><td class="td-date">4 Nov</td><td class="td-dow">Wed</td><td class="td-seq">Rev 3</td><td class="td-chapter">Revision — Seq 22–34</td><td class="td-topics">Layer 3 rapid revision + Karma (AS 21, AS 14, Branches focus)</td></tr>
+        <tr><td class="td-day">D97</td><td class="td-date">5 Nov</td><td class="td-dow">Thu</td><td class="td-seq">—</td><td class="td-chapter">Batch Close</td><td class="td-topics">Doubt clearing + exam-day strategy briefing + closing session</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- KEY DATES -->
+  <div class="key-dates">
+    <div class="key-dates-title">Key Dates</div>
+    <div class="key-dates-grid">
+      <div class="key-date-card">
+        <div class="key-date-event">Batch Start</div>
+        <div class="key-date-date">13 July 2026</div>
+      </div>
+      <div class="key-date-card">
+        <div class="key-date-event">Zoom Session 1</div>
+        <div class="key-date-date">30 August 2026 (Sun)</div>
+      </div>
+      <div class="key-date-card">
+        <div class="key-date-event">ITD Test 1 — Seq 1–26</div>
+        <div class="key-date-date">23 September 2026</div>
+      </div>
+      <div class="key-date-card">
+        <div class="key-date-event">Zoom Session 2</div>
+        <div class="key-date-date">27 September 2026 (Sun)</div>
+      </div>
+      <div class="key-date-card">
+        <div class="key-date-event">Zoom Session 3</div>
+        <div class="key-date-date">25 October 2026 (Sun)</div>
+      </div>
+      <div class="key-date-card">
+        <div class="key-date-event">ITD Test 2 — Full Syllabus</div>
+        <div class="key-date-date">31 October 2026</div>
+      </div>
+      <div class="key-date-card">
+        <div class="key-date-event">Batch Close</div>
+        <div class="key-date-date">5 November 2026</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div><strong>Batch Planner — Light Version</strong></div>
+  <div>CA Inter Advanced Accounting &nbsp;&middot;&nbsp; VC Gurukul, Noida &nbsp;&middot;&nbsp; CA Pranav Pratik Tulshyan</div>
+  <div style="margin-top:6px"><a class="footer-link" href="index.html">&#8592; Back to Concept Book</a></div>
+</footer>
+
+</body>
+</html>

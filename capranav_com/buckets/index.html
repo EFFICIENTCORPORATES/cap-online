@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundation — CA Inter Strategy Book</title>
+  <style>
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Kalam:wght@300;400;700&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:       #1F2933;
+  --gold:      #C9A227;
+  --grey:      #EEF1F4;
+  --body-f:    'Source Sans 3', sans-serif;
+  --head-f:    'Archivo', sans-serif;
+  --hand-f:    'Kalam', cursive;
+  --pg-w:      177.8mm;
+  --pg-h:      254mm;
+  --m-inner:   22mm;
+  --m-outer:   25mm;
+  --m-top:     20mm;
+  --m-bottom:  24mm;
+}
+
+/* ── Screen shell ── */
+body {
+  font-family: var(--body-f);
+  font-size: 10.5pt;
+  line-height: 1.6;
+  color: var(--ink);
+  background: #e8ecf0;
+}
+
+.page-shell {
+  position: relative;
+  width: var(--pg-w);
+  min-height: var(--pg-h);
+  margin: 12mm auto;
+  background: white;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.18);
+  padding: var(--m-top) var(--m-outer) var(--m-bottom) var(--m-inner);
+  overflow: hidden;
+}
+
+/* ── Running header ── */
+.r-header {
+  position: absolute;
+  top: 10mm;
+  left: var(--m-inner);
+  right: calc(var(--m-outer) + 10mm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--head-f);
+  font-size: 7pt;
+  letter-spacing: 0.04em;
+}
+.r-book-title {
+  font-variant: small-caps;
+  color: #8a9bac;
+  text-transform: lowercase;
+  font-variant: small-caps;
+}
+.r-section {
+  font-weight: 700;
+}
+.r-rule {
+  position: absolute;
+  bottom: -2mm;
+  left: 0; right: 0;
+  height: 0.5pt;
+  border: none;
+  border-top: 0.5pt solid currentColor;
+  opacity: 0.35;
+}
+
+/* ── Edge tab ── */
+.edge-tab {
+  position: absolute;
+  right: 0;
+  width: 12mm;
+  height: 22mm;
+  border-radius: 4px 0 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tab-label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: var(--head-f);
+  font-size: 6pt;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ── Journey strip footer ── */
+.j-strip {
+  position: absolute;
+  bottom: 10mm;
+  left: var(--m-inner);
+  right: calc(var(--m-outer) + 12mm);
+  display: flex;
+  align-items: center;
+  gap: 2.5pt;
+}
+.j-seg {
+  width: 14pt;
+  height: 8pt;
+  border-radius: 2pt;
+  background: #dde3e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--head-f);
+  font-size: 5pt;
+  font-weight: 800;
+  color: #8a9bac;
+  flex-shrink: 0;
+}
+.j-seg.active { color: white; }
+.j-seg.past   { opacity: 0.6; }
+.pg-num {
+  margin-left: auto;
+  font-family: var(--head-f);
+  font-size: 8pt;
+  font-weight: 700;
+}
+
+/* ── Section banner (bucket opener) ── */
+.bucket-banner {
+  margin: calc(-1 * var(--m-top)) calc(-1 * var(--m-outer)) 7mm calc(-1 * var(--m-inner));
+  padding: 9mm var(--m-outer) 7mm var(--m-inner);
+  display: flex;
+  align-items: center;
+  gap: 7mm;
+  color: white;
+}
+.bucket-num {
+  font-family: var(--head-f);
+  font-size: 80pt;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.22;
+  letter-spacing: -3pt;
+  flex-shrink: 0;
+}
+.bucket-nameblock {
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+}
+.bucket-label {
+  font-family: var(--head-f);
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  opacity: 0.7;
+}
+.bucket-name {
+  font-family: var(--head-f);
+  font-size: 22pt;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.3pt;
+}
+
+/* ── Generic H1 (non-bucket) ── */
+.section-h1 {
+  font-family: var(--head-f);
+  font-size: 18pt;
+  font-weight: 800;
+  margin-bottom: 5mm;
+}
+
+/* ── H2 subtitle ── */
+.section-subtitle {
+  font-family: var(--head-f);
+  font-size: 11pt;
+  font-weight: 400;
+  color: #607080;
+  margin-top: -3mm;
+  margin-bottom: 6mm;
+}
+
+/* ── H3 non-strategy ── */
+.subsection-heading {
+  font-family: var(--head-f);
+  font-size: 7.5pt;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a9bac;
+  margin: 6mm 0 3mm;
+  padding-bottom: 1.5mm;
+  border-bottom: 1px solid #dde3e8;
+}
+
+/* ── Strategy heading ── */
+.strat-head {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  margin: 5mm 0 3.5mm;
+  flex-wrap: nowrap;
+}
+.strat-circle {
+  flex-shrink: 0;
+  width: 8mm;
+  height: 8mm;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--head-f);
+  font-size: 9pt;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+}
+.strat-title {
+  flex: 1;
+  font-family: var(--head-f);
+  font-size: 11.5pt;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.badge {
+  flex-shrink: 0;
+  font-family: var(--head-f);
+  font-size: 7pt;
+  font-weight: 700;
+  padding: 1pt 5pt;
+  border-radius: 10pt;
+  letter-spacing: 0.04em;
+}
+.badge-all  { border: 1.5pt solid var(--ink); color: var(--ink); }
+.badge-rank { background: var(--gold); color: white; }
+
+/* ── Strategy rule ── */
+.strat-rule {
+  border: none;
+  border-top: 1px solid #e0e5ea;
+  margin: 5mm 0;
+}
+
+/* ── Body text ── */
+p { margin-bottom: 3mm; }
+p:last-child { margin-bottom: 0; }
+strong { font-weight: 600; }
+em     { font-style: italic; }
+code {
+  font-family: 'Courier New', monospace;
+  font-size: 8.5pt;
+  background: #f0f2f4;
+  padding: 1pt 3pt;
+  border-radius: 2pt;
+}
+
+/* ── Lists ── */
+ul.body-list, ol.body-list {
+  margin: 2mm 0 3mm 5mm;
+  padding-left: 4mm;
+}
+ul.body-list li, ol.body-list li {
+  margin-bottom: 1.5mm;
+}
+
+/* ── Checklist ── */
+ul.checklist {
+  list-style: none;
+  margin: 3mm 0;
+  padding: 0;
+}
+.cl-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 3mm;
+  margin-bottom: 2.5mm;
+  line-height: 1.45;
+}
+.cl-box {
+  flex-shrink: 0;
+  font-size: 12pt;
+  line-height: 1.1;
+  color: #8a9bac;
+}
+.cl-rank .star {
+  flex-shrink: 0;
+  color: var(--gold);
+  font-size: 11pt;
+  line-height: 1.3;
+}
+.cl-text { flex: 1; }
+
+/* ── Code / template block ── */
+.tmpl-block {
+  background: #f7f8fa;
+  border: 1px solid #dde3e8;
+  border-left: 3px solid #b0bcc8;
+  border-radius: 3pt;
+  padding: 3mm 4mm;
+  font-family: 'Courier New', monospace;
+  font-size: 8.5pt;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 3mm 0;
+  color: #2d3a45;
+}
+
+/* ── Anonymous blockquote ── */
+blockquote.anon-bq {
+  border-left: 3px solid #c5cdd5;
+  padding: 2mm 4mm;
+  margin: 3mm 0;
+  color: #4a5568;
+  font-style: italic;
+}
+blockquote.anon-bq p { margin-bottom: 1.5mm; }
+
+/* ── Components: shared ── */
+.comp {
+  margin: 5mm 0;
+  border-radius: 5pt;
+  overflow: hidden;
+}
+.comp-head {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  padding: 2.5mm 4mm;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.end-goal-head { border-bottom: none; }
+.comp-label {
+  font-family: var(--head-f);
+  font-size: 7.5pt;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.comp-icon { font-size: 11pt; line-height: 1; }
+.avatar {
+  width: 7mm; height: 7mm;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--head-f);
+  font-size: 8pt;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+}
+.comp-body {
+  padding: 3mm 4mm;
+}
+.comp-body p { margin-bottom: 2mm; }
+.comp-body p:last-child { margin-bottom: 0; }
+ul.comp-list, ol.comp-list {
+  margin: 1.5mm 0 2mm 4mm;
+  padding-left: 3mm;
+}
+.comp-list li { margin-bottom: 1.5mm; }
+
+/* ── Pranav's Tip (handwritten style, formerly Author Says) ── */
+.author-says { border-radius: 6pt; }
+.handwritten, .handwritten p {
+  font-family: var(--hand-f) !important;
+  font-size: 11pt;
+  line-height: 1.65;
+  color: #2a3a47;
+}
+
+/* ── HOW TO DO THIS ── */
+.how-to { background: #fbfcfd; }
+
+/* ── RANK ONLY ── */
+.rank-only { background: #fffbee; }
+
+/* ── Rank inline ── */
+.rank-line {
+  padding-left: 3mm;
+  border-left: 2.5pt solid var(--gold);
+  margin: 2mm 0;
+}
+.star { color: var(--gold); font-weight: 700; }
+
+/* ── END GOAL ── */
+.end-goal { }
+.end-goal .comp-body { padding-top: 4mm; }
+
+/* ── DIAGRAM placeholder ── */
+.diagram-ph {
+  background: #f7f8fa;
+  border: 2px dashed #b5c0ca;
+  border-radius: 5pt;
+  padding: 7mm;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2mm;
+  min-height: 32mm;
+  justify-content: center;
+}
+.diag-icon { font-size: 24pt; opacity: 0.35; }
+.diag-label {
+  font-family: var(--head-f);
+  font-size: 7.5pt;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8a9bac;
+}
+.diag-desc { font-size: 8.5pt; color: #8a9bac; max-width: 80%; }
+.diag-desc p { margin: 0; }
+
+/* ── FILL-IN ── */
+.fill-in { overflow: visible; }
+.fill-head {
+  display: flex; align-items: center; gap: 2.5mm;
+  padding: 2.5mm 4mm;
+  border-radius: 5pt 5pt 0 0;
+}
+
+/* ── PRANAV'S TIP ── */
+.pran-tip { border-radius: 4pt; }
+
+/* ── Generic callout ── */
+.generic-callout {
+  background: #f9fafb;
+  padding: 3mm 4mm 3mm 5mm;
+  border-radius: 0 4pt 4pt 0;
+}
+
+/* ── Inline tags ── */
+.ref-tag      { font-size: 8.5pt; color: #8a9bac; font-style: italic; }
+.placeholder  { font-size: 8.5pt; font-style: italic; padding: 1pt 4pt; border-radius: 2pt; }
+.structure-only { background: #fff8e1; color: #a0522d; border: 1px dashed #f5c518; }
+.author-confirm { background: #ffe0e0; color: #c0392b; border: 1px dashed #e74c3c; }
+
+/* ── Print / paged.js ── */
+@media print {
+  body { background: white; }
+  .page-shell { box-shadow: none; margin: 0; width: 100%; }
+  .placeholder { display: none; }
+}
+@page {
+  size: 177.8mm 254mm;
+  margin: 20mm 25mm 24mm 22mm;
+}
+</style>
+</head>
+<body>
+<div class="page-shell">
+
+  <!-- Running header -->
+  <div class="r-header">
+    <span class="r-book-title">CA Inter Strategy Guide</span>
+    <span class="r-section" style="color:#5C6B7A">Foundation</span>
+    <hr class="r-rule" style="color:#5C6B7A">
+  </div>
+
+  <!-- Edge tab -->
+  <div class="edge-tab" style="background:#5C6B7A;top:40mm">
+    <span class="tab-label">Foundati</span>
+  </div>
+
+  <!-- Section content -->
+  <div class="section-body">
+<div class="bucket-banner" style="background:#5C6B7A"><span class="bucket-num">0</span><div class="bucket-nameblock"><span class="bucket-label">BUCKET 0</span><span class="bucket-name">THE FOUNDATION</span></div></div>
+<h2 class="section-subtitle">For Every Day of the Journey</h2>
+<p>This bucket has no start date and no end date. It runs from the day you begin until the day your result comes. Read it once. Then live it.</p>
+<p>No "Starting Late" box here. If you haven't been doing these — start today. Better late than never: the day you realise this, put it into practice that same day — and then every single day after.</p>
+<blockquote class="anon-bq"><p><strong>One line before we begin.</strong> There are two kinds of pain: 1. The pain of discipline NOW OR 2. The Pain of Regret at time of result.</p></blockquote>
+<blockquote class="anon-bq"><p>You must choose 1 out of the above 2 today. CHOOSE WISELY.</p></blockquote>
+<p>(That's the only philosophy line in this whole book. We're done. Now the system.)</p>
+<hr class="strat-rule">
+<h3 class="subsection-heading">PRIORITIES FROM TODAY ONWARDS TILL THE LAST DAY OF INTERMEDIATE EXAM</h3>
+<p>Set these three. Everything else comes after.</p>
+<pre class="tmpl-block"><code>Priority 1 — Health
+Priority 2 — Study &amp; Goal
+Priority 3 — Family (3 to 5 people you choose — usually parents
+            plus one sibling, peer, or mentor)</code></pre>
+<p>Friends, relatives, teachers, faculty — all of them come after these three. If your health is suffering, you stop studying and see a doctor or listen to your parents. That is not weakness. That is Priority 1 doing its job. Lock this order until your last paper is done.</p>
+<hr class="strat-rule">
+<div class="strat-head" id="s1"><span class="strat-circle" style="background:#5C6B7A">1</span><span class="strat-title">The Second Space in your Phone</span><span class="badge badge-all">ALL</span></div>
+<p>Your phone is your study tool now — your classes, notes, PDFs, and AI all live on it. "Keep your phone away" is useless advice in 2026. So you literally can't put it away. So, Split it.</p>
+<p>Create a <strong>Second Space / New User</strong> on your phone. A second profile. A clean phone inside your phone, for the next 9 months.</p>
+<p>In this space, install only what serves the exam:</p>
+<ul class="body-list"><li>Your faculty's app</li><li>Companies Act / GST / Income Tax apps</li><li>AI tools</li><li>A water reminder, a posture reminder</li><li>A news app</li><li>One app for your hobby</li></ul>
+<p>Instagram, WhatsApp chats, everything else — they stay in your main space. This space is study only. You'll start living here more and more.</p>
+<div class="comp how-to" style="border-left:4px solid #5C6B7A"><div class="comp-head"><span class="comp-icon">⚙</span><span class="comp-label" style="color:#5C6B7A">HOW TO DO THIS</span></div><div class="comp-body"><p>Android: Settings → Users / Second Space → create new user → install only the apps above → use a different or the same Gmail, your choice.</p>
+<p>Note: on 8GB RAM, switching is smooth. On lower RAM, expect a 5–10 second delay when you switch spaces. Annoying, not a dealbreaker. A slow switch still beats no separation. Don't use a slow phone as your excuse.</p>
+<p>iPhone / iOS: iOS doesn't support a second user. Do the next best thing — hide the distracting apps, lock and restrict them, turn off their notifications, mute the groups, and filter contacts so nothing pulls you mid-study.</p></div></div>
+<hr class="strat-rule">
+<div class="strat-head" id="s2"><span class="strat-circle" style="background:#5C6B7A">2</span><span class="strat-title">AI Tools, Installed and Ready</span><span class="badge badge-all">ALL</span></div>
+<p>Install these in your Second Space and ensure that you actually use them as well (for the Right things): Mobile apps available for ChatGPT, Claude, Gemini, Perplexity, KIMI, and an India-native option like Indus / Sarvam AI (good for Hindi). Any conversational AI that lets you ask and argue works. The full playbook on how and for what purpose to use AI is in the "AI Section" near the end of this book. <span class="ref-tag">→ AI Section</span></p>
+<hr class="strat-rule">
+<div class="strat-head" id="s3"><span class="strat-circle" style="background:#5C6B7A">3</span><span class="strat-title">Sleep</span><span class="badge badge-all">ALL</span></div>
+<p>7–8 hours. Every night. This isn't a reward for a good day — it's what makes the next day work. Your brain reinforces everything you studied while you sleep. Cut sleep and you cut the reinforcement.</p>
+<blockquote class="anon-bq"><p><strong>PRANAV'S TIP:</strong> I have personally tried the "Polyphasic Sleep", a famous sleep strategy by "Leonardo da Vinci". I tried multiple other sleep strategy like  Dymaxion Schedule , The Everyman Schedule, Triphasic Schedule, but trust me , NOTHING WORKS, and NEITHER is required. The only strategy worked for me is : A Fixed Sleep timing , without fail, and 6 hours fixed sleep at night (10:00 pm to 4:00 am) and a 20-30 mins nap during the day.</p><p>While I agree, timings may differ for everyone, but ensure minimum 6 hours and maximum 8 hours of sleep is NON NEGOTIABLE.</p></blockquote>
+<blockquote class="anon-bq"><p><strong>PRANAV'S TIP:</strong> There is one more thing I noticed — and I think almost everyone experiences this. When you wake up after a good night of sleep, there is a first natural wakeup that happens. In that moment, your mind is genuinely fresh. Sharp. You feel ready. Now here is what almost every student does: they look at the time, decide it is "too early," and go back to sleep for one more hour. When they wake up that second time — even though they technically slept more — they feel more tired, more sluggish, harder to get going.</p><p>The sleep was extra. The freshness is gone. That first wakeup — that is your real window. The moment you notice it, get up. Don't negotiate.</p></blockquote>
+<blockquote class="anon-bq"><p><strong>IMPLEMENTATION FRAMEWORK:</strong> <strong>The Wake Anchor Rule:</strong> Fix one non-negotiable wake-up time. That time does not move, regardless of when you slept. <code>`</code> Fixed wake time     → non-negotiable. Same every day. Slept 30 min late?  → Still wake at the same time. Don't shift. Missed sleep?       → Take a 20–30 min nap in the afternoon.                       Do NOT sleep extra the next morning.</p><p>When the first natural wakeup happens → GET UP. Going back to sleep from that point gives you more hours, less freshness. The first wakeup window is real. Use it. <code>`</code></p></blockquote>
+<hr class="strat-rule">
+<div class="strat-head" id="s4"><span class="strat-circle" style="background:#5C6B7A">4</span><span class="strat-title">Move Your Body</span><span class="badge badge-all">ALL</span></div>
+<p>15–20 minutes of movement daily — walk, stretch, yoga, badminton, anything. Every 30 minutes of sitting: roll your neck, stretch your back. When you feel "mentally tired" after a long stretch, you're often just physically locked. Two minutes of movement resets it.</p>
+<p><strong>Eyes — the 20-20-20 rule:</strong> every 20 minutes, look at something 20 feet away for 20 seconds. Your screen time is brutal on your eyes. This one habit protects them.</p>
+<div class="comp diagram-ph"><div class="diag-icon">📐</div><div class="diag-label">Mention your Neck Shoulder and Eyes Exercise</div><div class="diag-desc"><p>Write down your execrcises like neck rolls, shoulder shrugs, back stretch, wrist rotations, palming, eye rolling.</p></div></div>
+<hr class="strat-rule">
+<div class="strat-head" id="s5"><span class="strat-circle" style="background:#5C6B7A">5</span><span class="strat-title">Hydration &amp; Light Meals</span><span class="badge badge-all">ALL</span></div>
+<p>Water through the day. Dehydration kills focus before you even notice it.</p>
+<p>And watch the plate before you sit to study. A heavy meal — a big rice-dal-roti lunch — pulls blood to your stomach and your eyes start closing inside twenty minutes. Eat lighter before study blocks; save the heavy meal for after the day's targets are done. This isn't a diet plan. It's just not sabotaging your next two hours with your last twenty minutes.</p>
+<p>Food that keeps you sharp instead of sleepy: a bowl of sprouts (moong or chana), roasted chana, curd or chhaas, a banana or any seasonal fruit, a handful of peanuts or 4–5 soaked almonds, paneer, makhana, or a light veg poha or idli. , all easy on a student's budget, all kinder to your brain than a plate of oily or Junk foods. Keep the heavy, oily stuff for after the day's targets — or for an off day.</p>
+<blockquote class="anon-bq"><p><strong>PRANAV'S TIP:</strong> "I never drank coffee or tea until my first year of articleship. My drinks during preparation were water, lemon-salt water, jeera-lemon-salt water, and coconut water. Simple. Cheap. Worked."</p></blockquote>
+<hr class="strat-rule">
+<div class="strat-head" id="s6"><span class="strat-circle" style="background:#5C6B7A">6</span><span class="strat-title">Wear Your Blinders</span><span class="badge badge-all">ALL</span></div>
+<p>There is exactly one thing in front of you: your Dream Marksheet, with your attempt written on top. That's it. No topper celebrations, no comparing whose syllabus is further along, no doing the maths on someone else's progress.</p>
+<div class="comp how-to" style="border-left:4px solid #5C6B7A"><div class="comp-head"><span class="comp-icon">⚙</span><span class="comp-label" style="color:#5C6B7A">HOW TO DO THIS</span></div><div class="comp-body"><ul class="comp-list"><li>Mute every WhatsApp group where batchmates compare progress. Mute, don't leave.</li><li>When family asks how prep is going, one answer: "On track." Don't elaborate.</li><li>When someone posts a celebration, reply "Congratulations, happy for you." Then</li></ul>
+<p>  move on, no matter what you feel inside.</p></div></div>
+<blockquote class="anon-bq"><p><strong>PRANAV'S TIP:</strong> "In my Foundation (Formerly CPT) internal exams, there was a girl who beat me about three times. I was the first to congratulate her every single time she came first and I came fifth in Law. Only I know how that felt. But I never let it turn into anything ugly inside me. She became one of my best friends. Your real competition is you."</p></blockquote>
+<hr class="strat-rule">
+<div class="strat-head" id="s7"><span class="strat-circle" style="background:#5C6B7A">7</span><span class="strat-title">Park Your Emotions Before You Study</span><span class="badge badge-all">ALL</span></div>
+<p>Whatever is going on outside — family, a fight, a hard day , personal issues — it stays outside the study room. Not because it doesn't matter. Because you can't fix it in the next two hours, and you can definitely lose those two hours to it.</p>
+<p>This is not just a mindset trick. It is proven to work. When something is bothering you and you write it down completely — every detail, everything on your mind — your brain registers it as "noted and stored." The mental loop that keeps pulling your attention back to the problem quiets down. You're not suppressing the problem. You're parking it, on paper, so your mind can let go of it for now.</p>
+<div class="comp how-to" style="border-left:4px solid #5C6B7A"><div class="comp-head"><span class="comp-icon">⚙</span><span class="comp-label" style="color:#5C6B7A">HOW TO DO THIS</span></div><div class="comp-body"><p>Before you sit, take 2 minutes. Write down what's bothering you on a scrap of paper (Just a paper, not a notebook). Write in complete detail whatever comes to your mind. Fold it. It's parked and noted. Store it on paper and not in your mind. Open your notebook. Come back to the paper later — that evening, or the next day. You must return to it. If you never return, the brain figures out that "parking" means abandoning, and the technique stops working.</p></div></div>
+<blockquote class="anon-bq"><p><strong>IMPLEMENTATION FRAMEWORK:</strong> <strong>The 2-Minute Park Protocol:</strong> <code>`</code> Step 1  →  Sit down. Take one blank scrap of paper. Step 2  →  Write everything. Speed matters more than structure. 2–5 minutes max.            If you're still writing at 5 minutes → you're processing, not parking.            Stop. Fold it. Step 3  →  The fold is the physical signal: "parked."            Do not skip the fold. It is part of the technique. Step 4  →  Open your notebook. Begin studying. Step 5  →  Return to the paper that evening or the next morning.            Decide then: is action needed? If yes, schedule it.            If no → tear up the paper. Done. <code>`</code></p></blockquote>
+<hr class="strat-rule">
+<div class="strat-head" id="s8"><span class="strat-circle" style="background:#5C6B7A">8</span><span class="strat-title">The 10-Minute Flashback (Before Sleep)</span><span class="badge badge-all">ALL</span></div>
+<p>Don't end the night doom-scrolling. Don't end it cramming either. Instead: lie down, eyes closed, and replay your whole day. What happened, what you studied, what you understood. Not judging it good or bad. Just recalling, in detail. You're training your brain's recall muscle — the exact muscle the exam tests.</p>
+<blockquote class="anon-bq"><p><strong>PRANAV'S TIP:</strong> "If you overthink like I do, here's my hack. Pick the one concept or problem you didn't understand that day and just turn it over in your head — no Google, no notes, only your brain — until you fall asleep. Believe me, I solved a lot of maths problems this way during Foundation."</p></blockquote>
+<hr class="strat-rule">
+<div class="strat-head" id="s9"><span class="strat-circle" style="background:#5C6B7A">9</span><span class="strat-title">Talk to Yourself (Daily Journal, GenZ Version)</span><span class="badge badge-all">ALL</span></div>
+<p>Forget writing a diary. Make a WhatsApp group with only yourself. At the end of the day, send a voice note — say whatever you're feeling, what went well, what didn't. Just talk. Or use voice-to-text if you'd rather have it written.</p>
+<hr class="strat-rule">
+<div class="strat-head" id="s10"><span class="strat-circle" style="background:#5C6B7A">10</span><span class="strat-title">Daily Targets, Not a Daily Lecture</span><span class="badge badge-all">ALL</span></div>
+<p>Morning: write today's actual targets. Not "study accounts." Specific: "finish Consolidation illustrations 4–9, note errors, mark important questions."</p>
+<p>Night: in your self-WhatsApp note, check what got done, what didn't, why. Carry the misses forward honestly. Don't quietly delete them.</p>
+<p><strong>The point is the target, not the hours.</strong> Never measure your day by "I sat for 12 hours." Measure it by "did today's targets get done." Eight focused hours that finish the list beat twelve foggy hours that don't. Hours are the cost; finished targets are the result. Track the result.</p>
+<blockquote class="anon-bq"><p><strong>IMPLEMENTATION FRAMEWORK:</strong> <strong>The 4-Part Target Rule:</strong> A target is only valid if it passes all four parts. If any one is missing, it is not a target — it is a wish. <code>`</code> [Chapter / Topic]  +  [Activity Type]  +  [Quantity]  +  [Completeness Signal]</p><p>INVALID:  "Study Accounts" INVALID:  "Finish Consolidation" VALID:    "Consolidation — solve illustrations 5–9, write working notes,            log errors. Done when all 5 are attempted and checked." VALID:    "GST Ch 3 — read Layer 2 notes + attempt 10 MCQs from ICAI bank.            Done when MCQs are checked and gaps are marked." <code>`</code> The Completeness Signal is the most important part. It is the one sentence that tells you when today's target is actually done. No signal = no target.</p></blockquote>
+<div class="comp rank-only" style="border-left:4px solid #C9A227"><div class="comp-head"><span class="star">★</span><span class="comp-label" style="color:#C9A227">RANK ONLY</span></div><div class="comp-body"><p>Keep a weekly tally — hours, chapters, questions. Review every Sunday. Adjust next week on data, not mood.</p></div></div>
+<hr class="strat-rule">
+<div class="strat-head" id="s11"><span class="strat-circle" style="background:#5C6B7A">11</span><span class="strat-title">Earn Your Breaks</span><span class="badge badge-all">ALL</span></div>
+<p>Parties, functions, outings — yes, but when your week's targets are on track. This isn't punishment. It's just deciding in advance that the fun follows the work. You stay the one who controls your schedule.</p>
+<hr class="strat-rule">
+<div class="strat-head" id="s12"><span class="strat-circle" style="background:#5C6B7A">12</span><span class="strat-title">Keep a Hobby</span><span class="badge badge-all">ALL</span></div>
+<p>Continue on to at least one hobby through these preparation months — guitar, singing, sketching, whatever it is.</p>
+<blockquote class="anon-bq"><p><strong>PRANAV'S TIP:</strong> "Keep a hobby. Otherwise the articleship interview gets very boring — mine was quite boring. Lolzz" (Said with a smile. But he's not fully joking.)</p></blockquote>
+<hr class="strat-rule">
+<div class="strat-head" id="s13"><span class="strat-circle" style="background:#5C6B7A">13</span><span class="strat-title">Make It a Game</span><span class="badge badge-all">ALL</span></div>
+<p>Learning without a target is just punishment. Learning without fun is incomplete.</p>
+<p>Think of your preparation as a game with levels: each bucket you complete is a level cleared. Bucket 0 runs on every level. The exam is the Final Boss. Every chapter you nail, every error register entry you write, every Sanjeevani Booti you complete — that's XP earned.</p>
+<p>The goal isn't to <em>survive</em> the preparation. It's to <em>play</em> it well.</p>
+<blockquote class="anon-bq"><p><strong>PRANAV'S TIP:</strong> "I always kept a mental scoreboard. Not comparing with anyone else — just against my own yesterday. Did I do more today? Did I understand something I didn't understand last week? That small internal game kept the energy alive across months. 'Princess ko bachana hai' — you just have to find your own princess."</p></blockquote>
+<hr class="strat-rule">
+<h3 class="subsection-heading">YOUR BUCKET 0 DAILY TICK</h3>
+<p>Bucket 0 isn't a phase you finish — it's a list you run <em>every single day</em>. Copy this onto a sheet, stick it on your wall, and tick it each night:</p>
+<ul class="checklist"><li class="cl-item"><span class="cl-box">☐</span><span class="cl-text">Slept 7–8 hours</span></li><li class="cl-item"><span class="cl-box">☐</span><span class="cl-text">Studied inside the Second Space (study profile only)</span></li><li class="cl-item"><span class="cl-box">☐</span><span class="cl-text">Moved 15–20 min + eye breaks (20-20-20)</span></li><li class="cl-item"><span class="cl-box">☐</span><span class="cl-text">Ate light before study blocks, stayed hydrated</span></li><li class="cl-item"><span class="cl-box">☐</span><span class="cl-text">Wrote the day's targets in the morning</span></li><li class="cl-item"><span class="cl-box">☐</span><span class="cl-text">Wore my blinders — didn't compare with anyone today</span></li><li class="cl-item"><span class="cl-box">☐</span><span class="cl-text">Parked my emotions before sitting to study</span></li><li class="cl-item"><span class="cl-box">☐</span><span class="cl-text">10-minute flashback before sleep</span></li><li class="cl-item"><span class="cl-box">☐</span><span class="cl-text">Night voice-note to my self-WhatsApp — what got done, what didn't</span></li><li class="cl-item cl-rank"><span class="star">★</span><span class="cl-text">Weekly tally reviewed on Sunday (hours, chapters, questions)</span></li></ul>
+<p>Missed a box? No drama — tick it tomorrow. The streak is the point, not perfection.</p>
+  </div>
+
+  <!-- Journey strip footer -->
+  <div class="j-strip"><span class="j-seg active" style="background:#5C6B7A">0</span><span class="j-seg">1</span><span class="j-seg">2</span><span class="j-seg">3</span><span class="j-seg">4</span><span class="j-seg">5</span><span class="j-seg">6</span><span class="j-seg">AI</span><span class="j-seg">EMG</span><span class="pg-num" style="color:#5C6B7A">—</span></div>
+
+</div>
+</body>
+</html>
