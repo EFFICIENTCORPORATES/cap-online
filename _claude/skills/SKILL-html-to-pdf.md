@@ -160,61 +160,110 @@ all supported correctly.
 
 - **Images** must be local files or data URIs. Remote URLs (http/https) will not load in
   headless mode unless the machine has internet access at generation time.
-- **Web fonts** (Google Fonts etc.) similarly require internet. Use system fonts for
-  offline-safe output: `'Segoe UI', system-ui, -apple-system, sans-serif`.
+- **Web fonts (Google Fonts etc.)** require internet. They also add load time — Chrome headless
+  may silently fail (produce no PDF) if it times out waiting for fonts. Two options:
+  - Use system fonts for offline-safe output: `'Segoe UI', system-ui, -apple-system, sans-serif`
+  - OR add `--virtual-time-budget=15000` to the Chrome/Edge command (see section 3.2) to allow
+    15 seconds for remote resources to load. If Chrome still fails with Google Fonts, use
+    **Edge** instead — Edge handles remote font loading in headless mode more reliably.
 - **SVGs** inline in HTML render correctly.
+
+### 2.8 When the source HTML already has print CSS
+
+If the source HTML already contains `@media print`, `@page`, and `page-break` rules,
+you do **not** need to create a separate `*-print.html` file. Run Chrome/Edge headless
+directly on the source file.
+
+The only thing to verify before running:
+1. `print-color-adjust: exact` is present in the CSS (add it to the `*` rule if missing)
+2. All content is visible in the static DOM (not hidden by JavaScript)
+3. The `@page { size: ...; margin: ...; }` rule is correct
+
+To add `print-color-adjust` to an existing file without a separate print copy:
+
+```css
+/* Add this to the existing * { } rule, or in @media print { * { } } */
+* {
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+  /* keep existing rules: margin, padding, box-sizing */
+}
+```
 
 ---
 
 ## 3. Stage B — Generating the PDF with Chrome Headless
 
-### 3.1 Chrome paths on this machine (Windows 11)
+### 3.1 Chrome and Edge paths on this machine (Windows 11)
 
-Both have been confirmed present:
+Both confirmed present:
 ```
-C:\Program Files (x86)\Google\Chrome\Application\chrome.exe   ← PRIMARY (use this first)
-C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe  ← FALLBACK
+C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
 ```
 
-If neither exists at those paths, search:
+**Which browser to use:**
+
+| HTML type | Use |
+|-----------|-----|
+| Pure local HTML (no remote fonts/images) | Either — Chrome or Edge |
+| HTML with Google Fonts or any remote `<link>`/`<img>` | **Edge** — more reliable in headless mode for remote resources |
+| Dark backgrounds, gradients, CSS variables | Either — both handle these correctly once `print-color-adjust: exact` is set |
+
+**Rule of thumb:** Start with Edge. If Edge fails, try Chrome. Not the other way around.
+Edge was observed to succeed where Chrome silently failed on a page using Google Fonts
+(June 2026 test on this machine).
+
+If neither path exists, search:
 ```powershell
+Get-ChildItem "C:\Program Files*" -Recurse -Filter "msedge.exe" -ErrorAction SilentlyContinue |
+  Select-Object -First 3 -ExpandProperty FullName
 Get-ChildItem "C:\Program Files*" -Recurse -Filter "chrome.exe" -ErrorAction SilentlyContinue |
   Select-Object -First 3 -ExpandProperty FullName
 ```
 
 ### 3.2 The exact PowerShell command
 
-```powershell
-$chrome  = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-$htmlIn  = "file:///D:/path/to/your-file-print.html"   # must be file:/// URL, not a path
-$pdfOut  = "D:\path\to\your-file.pdf"                  # absolute Windows path is fine
+Use **Edge** as the default browser (more reliable with remote fonts):
 
-& $chrome `
+```powershell
+$browser = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+$htmlIn  = "file:///D:/path/to/your-file-print.html"   # must be file:/// URL, not a Windows path
+$pdfOut  = "D:\path\to\your-file.pdf"                  # absolute Windows path is fine here
+
+& $browser `
   --headless=new `
   --disable-gpu `
   --no-sandbox `
   --no-first-run `
   --disable-extensions `
   --print-to-pdf="$pdfOut" `
-  --no-margins `
   --print-to-pdf-no-header `
+  --virtual-time-budget=15000 `
   $htmlIn
 
-Start-Sleep -Seconds 4   # wait for Chrome to finish writing the file
+Start-Sleep -Seconds 10   # Edge + Google Fonts can take 8–10 sec; never use less than 6
+```
+
+**Chrome fallback** (use if Edge fails or is not installed):
+```powershell
+$browser = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+# same flags — identical syntax
 ```
 
 **Flag reference:**
 
 | Flag | Why |
 |------|-----|
-| `--headless=new` | Modern headless renderer (Chrome 112+). More accurate CSS rendering than old headless. |
-| `--disable-gpu` | Prevents GPU-related crashes in headless mode. |
-| `--no-sandbox` | Required in some Windows environments to prevent sandbox init errors. |
-| `--no-first-run` | Skips the "welcome to Chrome" setup that can block headless execution. |
-| `--disable-extensions` | Prevents any installed extensions from interfering. |
-| `--print-to-pdf="path"` | The absolute path to write the PDF. Use double quotes around path. |
-| `--no-margins` | Overrides any OS-level print margin defaults. The `@page { margin: 0; }` CSS handles margins. |
-| `--print-to-pdf-no-header` | Removes Chrome's default "filename + URL + date + page number" header/footer. |
+| `--headless=new` | Modern headless renderer (Chrome/Edge 112+). More accurate CSS rendering than old headless. |
+| `--disable-gpu` | Prevents GPU-related crashes in headless mode on Windows. |
+| `--no-sandbox` | Required in some Windows environments to avoid sandbox init failures. |
+| `--no-first-run` | Skips the browser's first-run setup wizard, which can block headless execution. |
+| `--disable-extensions` | Prevents installed extensions from interfering with rendering. |
+| `--print-to-pdf="path"` | Absolute path for the output PDF. Always wrap in double quotes. |
+| `--print-to-pdf-no-header` | Removes the default browser header/footer (URL, date, page number). |
+| `--virtual-time-budget=15000` | Gives the page 15 seconds of simulated time to load remote resources (fonts, CSS). **Required for any HTML that loads Google Fonts or other remote assets.** Omit only for fully local HTML. |
+| `--no-margins` | Use this **only** when the HTML has `@page { margin: 0; }` and you want zero OS-level margins too. If the HTML has its own `@page` margins, omit this flag — the CSS controls margins. |
 
 ### 3.3 Converting the HTML path to a `file:///` URL
 
@@ -360,10 +409,12 @@ Emoji in decorative contexts (slide titles, etc.) usually render fine on Windows
 
 ---
 
-## 6. Full Worked Example
+## 6. Full Worked Examples
 
-Below is the complete PowerShell block used successfully in this project
-(June 2026, Windows 11, Chrome 126):
+### Example 1 — Presentation slides (local HTML, no remote fonts)
+
+Source: `exam-strategyFoundation-print.html` — dark-background slide deck, 7 slides,
+A4 landscape, pure local CSS (no Google Fonts). Separate print file created from interactive source.
 
 ```powershell
 $chrome = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
@@ -384,13 +435,46 @@ $pdfOut = "D:\EffCorp_Projects\cap-online\books\strategy-book\working\exam-strat
 Start-Sleep -Seconds 4
 
 if (Test-Path $pdfOut) {
-  $bytes = (Get-Item $pdfOut).Length
-  Write-Host "PDF created: $bytes bytes"
-} else {
-  Write-Host "PDF generation failed"
-}
+  Write-Host "PDF created: $([math]::Round((Get-Item $pdfOut).Length/1KB,1)) KB"
+} else { Write-Host "Failed" }
+```
 
-# Verify page count
+**Result:** 7 pages · 150 KB · A4 landscape · dark background preserved.
+Chrome worked here because no remote fonts were involved.
+
+---
+
+### Example 2 — Book chapter (source HTML with built-in print CSS + Google Fonts)
+
+Source: `seq04-as02-valuation-of-inventories.html` — concept book chapter, A4 portrait,
+already has `@media print` + `@page` rules. Uses Google Fonts (Poppins, Merriweather, Lato).
+No separate print file created — ran directly on the source.
+
+**Pre-run edit:** Added `print-color-adjust: exact; -webkit-print-color-adjust: exact;`
+to the existing `* { }` rule in the source file (one-line edit, does not affect screen view).
+
+```powershell
+$edge   = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+$htmlIn = "file:///D:/EffCorp_Projects/cap-online/books/concept-book/chapters/seq04-as02-valuation-of-inventories.html"
+$pdfOut = "D:\EffCorp_Projects\cap-online\books\concept-book\chapters\seq04-as02-valuation-of-inventories.pdf"
+
+& $edge `
+  --headless=new `
+  --disable-gpu `
+  --no-sandbox `
+  --no-first-run `
+  --disable-extensions `
+  --print-to-pdf="$pdfOut" `
+  --print-to-pdf-no-header `
+  --virtual-time-budget=15000 `
+  $htmlIn
+
+Start-Sleep -Seconds 10
+
+if (Test-Path $pdfOut) {
+  Write-Host "PDF created: $([math]::Round((Get-Item $pdfOut).Length/1KB,1)) KB"
+} else { Write-Host "Failed" }
+
 python -c "
 import re
 with open(r'$pdfOut', 'rb') as f:
@@ -400,8 +484,8 @@ print(f'Pages: {pages}')
 "
 ```
 
-**Result:** `exam-strategyFoundation.pdf` — 7 pages, 150 KB, A4 landscape,
-dark background fully preserved, all slide content visible.
+**Result:** 16 pages · 595 KB · A4 portrait · all backgrounds and fonts preserved.
+Chrome failed silently on this file; Edge + `--virtual-time-budget=15000` succeeded.
 
 ---
 

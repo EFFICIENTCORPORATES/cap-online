@@ -4,6 +4,34 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-06-22 — CA Foundation strategy slides + HTML-to-PDF skill
+
+Created `books/strategy-book/working/exam-strategyFoundation.html` (7-slide interactive dark-background presentation with beat-wise JS animation engine for CA Foundation Sep 2026 batch). Generated `exam-strategyFoundation-print.html` (static print copy, mm/pt sizing, all content visible) and `exam-strategyFoundation.pdf` (7 pages, 150 KB, A4 landscape) via Chrome headless.
+
+Converted `books/concept-book/chapters/seq04-as02-valuation-of-inventories.html` to PDF (16 pages, 595 KB, A4 portrait). Added `print-color-adjust: exact` to source `*` rule; used Edge + `--virtual-time-budget=15000` because Chrome headless failed silently on Google Fonts.
+
+Created `_claude/skills/SKILL-html-to-pdf.md` — full 8-section skill with two worked examples (slides vs. chapter), documenting the Chrome-vs-Edge decision, `--virtual-time-budget` flag, `--no-margins` usage, and the "no separate print file needed when source already has @media print" pattern.
+
+---
+
+## 2026-06-22 - Parsed question-bank pilot created
+
+Created ooks/question-bank/Parsed_PDF_Question_Bank_CA_Inter_Accounts/ with one parsed MTP, one parsed RTP, one parsed PYQ, and a README. Outputs remain .md files with HTML table blocks for ruled accounting layouts. Ran python tools/health_check.py (17 pre-existing failures remain) and python tools/file_index.py (417 files indexed).
+
+---
+
+## 2026-06-22 - Question-bank markdown parseability sampling
+
+Inspected ooks/question-bank/README.md, question_bank_index.csv, and sampled MTP/RTP/PYQ markdown files under ooks/question-bank/Raw_PDF_Question_Bank_CA_Inter_Accounts/. Confirmed raw OCR markdown is parseable with a custom rule-based parser, but needs cleanup rules for page numbers, table fragments, front-matter announcements, and embedded suggested answers in RTP files.
+
+---
+
+## 2026-06-22 - Orientation read: CLAUDE.md + project context reviewed
+
+Read AGENTS.md, README.md, CLAUDE.md, and the _claude/memory/ context to understand the cap-online ecosystem. Ran python tools/health_check.py; it reported existing missing expected folders, NUL-byte text files in bridge-course/question-bank sources, and undocumented top-level capranav_com/. No content files changed beyond this log note.
+
+---
+
 ## 2026-06-19 — AS02.dc.html animation: 4 fixes applied + local React bundled
 
 Applied all 4 agreed fixes to `books/concept-book/characters/animations/AS02.dc.html`:
