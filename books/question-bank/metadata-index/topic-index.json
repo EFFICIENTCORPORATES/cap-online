@@ -1,0 +1,435 @@
+{
+  "_readme": "Reusable reference index of ICAI CA-Inter Advanced Accounting study material (Modules 1-3, May 2026 edition, from books/concept-book/raw_icai_study_materials/). Built by reading each unit's actual PDF/MD (no invented section numbers). Used to tag question-bank questions to the exact chapter/unit/numbered sub-topic they test. This index currently covers only the 22 units touched by the first pilot MTP attempt (Jan 2025, Set 1 + Set 2) - it will grow incrementally as more attempts are processed, since the same ~25-27 units recur throughout the whole question bank. NOTE: some chapters have multiple units (e.g. Chapter 4 has 7 units, only U5/AS20 indexed so far) - a chapter appearing here does not mean all its units are covered, only the ones actually tested by processed questions so far.",
+  "generated": "2026-07-17",
+  "units": [
+    {
+      "unitCode": "M1-C1-U1",
+      "module": 1, "chapter": 1, "unit": 1,
+      "standard": null,
+      "title": "Introduction to Accounting Standards",
+      "sourceFile": "M1_C1_U1_ Introduction to Accounting Standards.pdf",
+      "pageRange": "1.1-1.32 (content 1.2-1.29; Test Your Knowledge 1.29-1.32)",
+      "sections": [
+        {"ref": "1", "heading": "INTRODUCTION / GAAP", "page": "1.2-1.6", "description": "Defines GAAP, benefits of AS (standardisation, additional disclosure, comparability), creative accounting risk, AS vs Statute."},
+        {"ref": "2", "heading": "STANDARDS SETTING PROCESS", "page": "1.6-1.9", "description": "ASB (est. 1977) composition and the 8-step standard-setting procedure; ASIs merged as Explanations; Companies Act s.133 role."},
+        {"ref": "3", "heading": "HOW MANY ACCOUNTING STANDARDS?", "page": "1.9-1.12", "description": "29 ASs issued, AS 6 & AS 8 withdrawn (27 effective); table of AS 1-29 with applicability dates; chapter-wise grouping of ASs."},
+        {"ref": "4", "heading": "STATUS OF ACCOUNTING STANDARDS", "page": "1.13", "description": "ASs mandatory from notified dates; cannot override law."},
+        {"ref": "5", "heading": "NEED FOR CONVERGENCE TOWARDS GLOBAL STANDARDS", "page": "1.13-1.15", "description": "Four drivers: international fund-raising, comparability, uniformity/transparency, global investment."},
+        {"ref": "6", "heading": "INTERNATIONAL ACCOUNTING STANDARD BOARD (IASB)", "page": "1.15", "description": "IASC (1973) to IASB (2001); IAS vs IFRS distinction."},
+        {"ref": "7", "heading": "IFRS AS GLOBAL STANDARDS", "page": "1.16-1.17", "description": "Defines IFRS as comprising IFRS, IAS, SIC and IFRIC interpretations."},
+        {"ref": "8", "heading": "BECOMING IFRS COMPLIANT", "page": "1.17-1.18", "description": "Two techniques: Adoption (full IASB timetable) vs Convergence (partial/full alignment); Ind AS = IFRS with carve-outs; benefits of convergence."},
+        {"ref": "9", "heading": "WHAT ARE CARVE OUTS/INS IN IND AS?", "page": "1.18-1.19", "description": "TESTED TOPIC. Convergence not adoption chosen; 3 reasons for Ind AS/IFRS departures: terminology, removal of options (NOT a carve-out), and difference in economic environment (= Carve-out); Carve-in = additional guidance beyond IFRS."},
+        {"ref": "10", "heading": "CONVERGENCE TO IFRS IN INDIA", "page": "1.20", "description": "ICAI/NFRA/SEBI/RBI alignment effort; decision to maintain Ind AS and existing AS as two parallel sets."},
+        {"ref": "11", "heading": "WHAT ARE INDIAN ACCOUNTING STANDARDS (IND AS)?", "page": "1.21", "description": "Defines Ind AS; numbering convention (IFRS number + 100)."},
+        {"ref": "12", "heading": "HISTORY OF IFRS-CONVERGED IND AS", "page": "1.22-1.23", "description": "2006 initiation, 2011 target postponement, 2014 Budget Speech, MCA 2015 Rules roadmap."},
+        {"ref": "13", "heading": "LIST OF IND AS", "page": "1.23-1.26", "description": "Table of all Ind AS 101-116 cross-referenced to IFRS/IAS/old AS/GN equivalents."},
+        {"ref": "14", "heading": "ROADMAP FOR IMPLEMENTATION OF IND AS", "page": "1.26-1.29", "description": "Phase I/II net-worth thresholds for companies, NBFCs, banks (RBI deferred), insurers (IRDAI deferred)."}
+      ]
+    },
+    {
+      "unitCode": "M1-C2-U1",
+      "module": 1, "chapter": 2, "unit": 1,
+      "standard": null,
+      "title": "Framework for Preparation and Presentation of Financial Statements",
+      "sourceFile": "M1_C2_U1_ Framework for Preparation and Presentation of Financial Statements.pdf",
+      "pageRange": "2.1-2.38 (content 2.2-2.32; Test Your Knowledge 2.32-2.38)",
+      "sections": [
+        {"ref": "1", "heading": "INTRODUCTION", "page": "2.2", "description": "Framework issued July 2000; 8 principal areas covered."},
+        {"ref": "2", "heading": "PURPOSE OF THE FRAMEWORK", "page": "2.3", "description": "Six purposes: assisting enterprises, ASB development/review/harmonisation, auditors, users."},
+        {"ref": "3", "heading": "STATUS AND SCOPE OF THE FRAMEWORK", "page": "2.3-2.4", "description": "Applies to general-purpose FS; AS prevails over Framework in conflict."},
+        {"ref": "4", "heading": "COMPONENTS OF FINANCIAL STATEMENTS", "page": "2.4", "description": "Balance Sheet, P&L, Cash Flow Statement, Notes and what each portrays."},
+        {"ref": "5", "heading": "OBJECTIVES AND USERS OF FINANCIAL STATEMENTS", "page": "2.5-2.6", "description": "Decision-useful info objective; 7 user groups (investors, employees, lenders, suppliers/creditors, customers, government, public) and their specific information needs."},
+        {"ref": "6", "heading": "FUNDAMENTAL ACCOUNTING ASSUMPTIONS", "page": "2.6-2.11", "description": "Going Concern, Accrual, Consistency - no disclosure needed if followed, must disclose if not."},
+        {"ref": "7", "heading": "QUALITATIVE CHARACTERISTICS OF FINANCIAL STATEMENTS", "page": "2.11-2.13", "description": "TESTED TOPIC. Four characteristics: (1) Understandability, (2) Relevance (incl. materiality, timeliness, cost-benefit constraint), (3) Reliability (faithful representation, substance over form, NEUTRALITY, prudence, completeness), (4) Comparability."},
+        {"ref": "8", "heading": "TRUE AND FAIR VIEW", "page": "2.13", "description": "Framework doesn't define TFV directly; achieved via qualitative characteristics + AS application."},
+        {"ref": "9", "heading": "ELEMENTS OF FINANCIAL STATEMENTS", "page": "2.13-2.21", "description": "TESTED TOPIC. Five elements with formal ICAI definitions: (1) Asset - resource controlled from past events, expected future economic benefit; (2) Liability - present obligation from past events, expected outflow; (3) Equity - residual interest (assets minus liabilities); (4) Income - increase in economic benefits excluding equity contributions (revenue vs gains); (5) Expense - decrease in economic benefits excluding distributions (expenses vs losses)."},
+        {"ref": "10", "heading": "MEASUREMENT OF ELEMENTS OF FINANCIAL STATEMENTS", "page": "2.21-2.25", "description": "Four measurement bases: Historical Cost, Current Cost, Realisable (Settlement) Value, Present Value."},
+        {"ref": "11", "heading": "CAPITAL MAINTENANCE", "page": "2.25-2.29", "description": "TESTED TOPIC. Capital = net assets; Financial capital maintenance (historical cost / current purchasing power) vs Physical capital maintenance (current costs); retained profit formula."}
+      ]
+    },
+    {
+      "unitCode": "M1-C3-U1",
+      "module": 1, "chapter": 3, "unit": 1,
+      "standard": null,
+      "title": "Applicability of Accounting Standards",
+      "sourceFile": "M1_C3_U1_ Applicability of Accounting Standards.pdf",
+      "pageRange": "3.1-3.23",
+      "sections": [
+        {"ref": "1", "heading": "STATUS OF ACCOUNTING STANDARDS", "page": "3.2-3.6", "description": "Three-question applicability test (enterprise/statement/item); ICDS I-X list; materiality of financial items."},
+        {"ref": "2", "heading": "APPLICABILITY OF ACCOUNTING STANDARDS", "page": "3.6", "description": "Introduces classification of entities for AS applicability."},
+        {"ref": "2.1", "heading": "Revised Criteria for classification of Non-company entities", "page": "3.6-3.13", "description": "MSME vs Large entity classification (turnover ≤250cr, borrowings ≤50cr etc., effective 1 Apr 2024); Annexure 1 - AS exemptions/relaxations for MSMEs (AS3/17/20/24 fully exempt; partial relaxations for AS10/11/15/19/22/26/28/29)."},
+        {"ref": "2.3", "heading": "Applicability of AS to Companies (non-Ind AS)", "page": "3.13-3.17", "description": "AS applicable in entirety to companies; SMC vs Non-SMC exemptions/relaxations (AS17 fully exempt for SMCs; partial relaxations AS15/19/20/28/29)."}
+      ]
+    },
+    {
+      "unitCode": "M1-C4-U5",
+      "module": 1, "chapter": 4, "unit": 5,
+      "standard": "AS 20",
+      "title": "Earnings Per Share",
+      "sourceFile": "M1_C4_U5_ Accounting Standard 20 Earnings Per Share.pdf",
+      "pageRange": "4.95-4.124 (content 4.95-4.113; Test Your Knowledge 4.114-4.124)",
+      "_scopeNote": "Chapter 4 'Presentation & Disclosures Based Accounting Standards' has 7 units total (U1 AS1, U2 AS3, U3 AS17, U4 AS18, U5 AS20, U6 AS24, U7 AS25). Only U5 (AS 20) has been indexed so far, because it is the only Chapter 4 unit tested by the Jan 2025 MTP pilot questions. U1/U2/U3/U4/U6/U7 will be added once a question that tests them is encountered, per the incremental-index strategy.",
+      "sections": [
+        {"ref": "5.1", "heading": "Introduction", "page": "4.95-4.96", "description": "AS 20 objective - computation/presentation of EPS for inter-firm and intra-firm comparison; mandatory for all companies, diluted EPS disclosure optional for SMCs; consolidated FS use consolidated figures for EPS."},
+        {"ref": "5.2", "heading": "Definition of the Terms Used in AS 20", "page": "4.96-4.98", "description": "Equity share, preference share, financial instrument/asset/liability, potential equity share (with examples), partly paid share, share warrants/options, fair value."},
+        {"ref": "5.3", "heading": "Earnings - Basic", "page": "4.98-4.99", "description": "TESTED TOPIC. Numerator = net profit attributable to equity shareholders; all income/expense including tax and extraordinary items included; preference dividends (non-cumulative if declared, cumulative in full) deducted."},
+        {"ref": "5.4", "heading": "Per Share - Basic", "page": "4.99-4.101", "description": "Denominator = weighted average number of equity shares using a time-weighting factor; inclusion-date rules for shares issued under various circumstances (cash, conversion, settlement, services rendered)."},
+        {"ref": "5.5", "heading": "Shares Issued in a Scheme of Amalgamation / Contingently Issuable Shares / Bonus Issue, Share Split and Rights Issue", "page": "4.101-4.104", "description": "TESTED TOPIC. Shares issued in a purchase amalgamation included from acquisition date; merger amalgamation included from start of period. Contingently issuable shares included once conditions satisfied. Bonus issues/splits require retrospective adjustment of prior-period share counts. Rights issues contain a bonus element requiring an adjustment factor = fair value per share prior to exercise / theoretical ex-rights fair value per share, where theoretical ex-rights value = (fair value of shares prior to rights x shares outstanding + proceeds from rights exercise) / shares outstanding after exercise."},
+        {"ref": "5.6-5.8", "heading": "Diluted Earnings Per Share / Earnings-Diluted / Per Share-Diluted", "page": "4.105-4.109", "description": "Diluted EPS adjusts numerator (add back dividends/interest on dilutive potential equity shares, net of tax) and denominator (weighted average equity shares plus shares issuable on conversion, using most advantageous terms for holders); share application money pending allotment treated as dilutive; options/share purchase arrangements split into fairly-priced portion (ignored) and no-consideration portion (added to denominator)."},
+        {"ref": "5.9", "heading": "Dilutive Potential Equity Shares", "page": "4.110-4.112", "description": "Anti-dilutive potential equity shares (would increase EPS or decrease loss per share from continuing ordinary activities) are excluded from diluted EPS; multiple issues of potential equity shares tested separately, ranked from most to least dilutive using earnings per incremental share."},
+        {"ref": "5.10", "heading": "Restatement", "page": "4.112", "description": "Basic and diluted EPS for all periods presented must be adjusted for bonus issues/splits/reverse splits, including those occurring after the balance sheet date but before FS approval, with disclosure of the fact."},
+        {"ref": "5.11", "heading": "Presentation", "page": "4.112", "description": "Basic and diluted EPS presented on the face of the P&L for each class of equity share with equal prominence for all periods, even if negative (loss per share)."},
+        {"ref": "5.12", "heading": "Disclosure", "page": "4.113", "description": "TESTED TOPIC. Required disclosures: EPS excluding extraordinary items; numerator amounts and reconciliation to net profit/loss; denominator (weighted average shares) and reconciliation; nominal value of shares; equal prominence for alternative net profit components."}
+      ]
+    },
+    {
+      "unitCode": "M2-C5-U1",
+      "module": 2, "chapter": 5, "unit": 1,
+      "standard": "AS 2",
+      "title": "Valuation of Inventories",
+      "sourceFile": "M2_C5_U1_ Accounting Standard 2 Valuation of Inventory.pdf",
+      "pageRange": "5.1-5.20",
+      "sections": [
+        {"ref": "1.1", "heading": "Introduction", "page": "5.2", "description": "AS 2 (Revised) scope - valuation guidance and cost formulas."},
+        {"ref": "1.2", "heading": "Inventories", "page": "5.2-5.3", "description": "Definition of inventories (held for sale/production/consumption); scope exclusions (construction WIP, service WIP, stock-in-trade securities, producer inventories at NRV)."},
+        {"ref": "1.3", "heading": "Measurement of Inventories", "page": "5.3-5.5", "description": "Lower of cost and net realisable value rule; worked NRV example (partly finished unit)."},
+        {"ref": "1.4-1.8", "heading": "Costs of Inventory / Purchase / Conversion / Joint-By-products / Other Costs", "page": "5.6-5.8", "description": "Cost components; fixed overhead absorption at normal capacity; joint/by-product allocation at NRV."},
+        {"ref": "1.9", "heading": "Exclusions from the Cost of Inventories", "page": "5.9", "description": "Abnormal waste, storage costs (unless necessary), admin overheads not contributing to location/condition, selling/distribution costs - all expensed, not inventoried."},
+        {"ref": "1.10", "heading": "Cost Formula", "page": "5.9", "description": "Specific identification where possible; otherwise FIFO or Weighted Average."},
+        {"ref": "1.11", "heading": "Other Techniques of Cost Measurement", "page": "5.9-5.10", "description": "Standard cost method; retail method (gross margin)."},
+        {"ref": "1.12", "heading": "Estimates of Net Realisable Value", "page": "5.10-5.11", "description": "NRV based on most reliable evidence at estimate date, considering post-balance-sheet price/cost fluctuations."},
+        {"ref": "1.13", "heading": "Comparison of Cost and NRV", "page": "5.11", "description": "Item-by-item comparison (not global)."},
+        {"ref": "1.14", "heading": "NRV of Materials Held for Use or Disposal", "page": "5.11-5.12", "description": "Materials not written down below cost if finished product sells at/above cost."},
+        {"ref": "1.15", "heading": "Disclosures", "page": "5.12", "description": "Accounting policy/cost formula used; total carrying amount by classification."}
+      ]
+    },
+    {
+      "unitCode": "M2-C5-U2",
+      "module": 2, "chapter": 5, "unit": 2,
+      "standard": "AS 10",
+      "title": "Property, Plant and Equipment",
+      "sourceFile": "M2_C5_U2_ Accounting Standard 10 Property, Plant and Equipment.pdf",
+      "pageRange": "5.21-5.77 (content 5.21-5.60; Test Your Knowledge 5.61-5.77)",
+      "sections": [
+        {"ref": "2.1", "heading": "Introduction", "page": "5.22", "description": "AS 10 objective: recognition, carrying amounts, depreciation, impairment of PPE."},
+        {"ref": "2.2", "heading": "Scope of the Standard", "page": "5.22-5.23", "description": "Applies to PPE except where another standard requires different treatment (e.g. AS 19 leases); covers bearer plants, cost model for investment property."},
+        {"ref": "2.3", "heading": "Definition of PPE", "page": "5.23-5.24", "description": "Two conditions (tangible, held for use >12 months); excludes biological assets and wasting assets/mineral rights; intangibles under AS 26."},
+        {"ref": "2.4", "heading": "Other Definitions (Biological Asset / Bearer Plant / Agricultural Activity)", "page": "5.24-5.26", "description": "Defines biological asset, bearer plant (3 conditions), agricultural activity."},
+        {"ref": "2.5", "heading": "Recognition Criteria for PPE", "page": "5.26-5.27", "description": "Probable future benefits + reliable cost measurement; spare parts/standby equipment as PPE vs AS 2 inventory."},
+        {"ref": "2.6-2.7", "heading": "Measurement of PPE / Initial Recognition", "page": "5.27-5.30", "description": "Cost = purchase price + directly attributable costs + decommissioning/restoration cost estimate; excluded costs (idle capacity, initial operating losses, relocation)."},
+        {"ref": "2.8", "heading": "Cost of a Self-Constructed Asset", "page": "5.33", "description": "Same principles as acquired assets, excludes abnormal waste; AS 16 borrowing costs cross-reference."},
+        {"ref": "2.9", "heading": "PPE Acquired in Exchange for Non-Monetary Asset", "page": "5.34-5.37", "description": "Measured at fair value unless exchange lacks commercial substance or fair value not reliably measurable (then WDV of asset given up)."},
+        {"ref": "2.10", "heading": "Treatment of Subsequent Costs", "page": "5.38-5.40", "description": "Day-to-day servicing expensed; replacement of parts and major inspections capitalised with derecognition of replaced part's WDV."},
+        {"ref": "(unnumbered)", "heading": "Measurement After Recognition - Cost Model / Revaluation Model", "page": "5.40-5.47", "description": "Class of PPE; revaluation must cover entire class; two techniques for restating gross carrying amount/accumulated depreciation on revaluation; treatment of revaluation surplus/deficit."},
+        {"ref": "(unnumbered)", "heading": "Depreciation - Component Method, Useful Life, Residual Value", "page": "5.47-5.53", "description": "Componentisation of significant parts; depreciable amount = cost less residual value; annual review of useful life/residual value as change in estimate (AS 5); commencement/cessation of depreciation rules; depreciation method must reflect benefit-consumption pattern (revenue-based method inappropriate)."},
+        {"ref": "(unnumbered)", "heading": "Changes in Decommissioning/Restoration Liabilities; Compensation for Impairment", "page": "5.54-5.56", "description": "Treatment under cost model vs revaluation model; insurance compensation for destroyed asset recognised separately, not netted against loss on derecognition."},
+        {"ref": "(unnumbered)", "heading": "Retirements and De-recognition", "page": "5.57-5.58", "description": "Retired PPE at lower of carrying amount and NRV; derecognition gain/loss = disposal proceeds less carrying amount, not classified as revenue (except routinely-sold rental assets)."},
+        {"ref": "(unnumbered)", "heading": "Disclosure (General, Additional, Revalued Assets)", "page": "5.58-5.60", "description": "Per-class disclosures: measurement basis, depreciation method/rates, gross carrying amount, reconciliation of carrying amount, title restrictions, revaluation details."}
+      ]
+    },
+    {
+      "unitCode": "M2-C5-U3",
+      "module": 2, "chapter": 5, "unit": 3,
+      "standard": "AS 13",
+      "title": "Accounting for Investments",
+      "sourceFile": "M2_C5_U3_ Accounting Standard 13 Accounting for Investments.pdf",
+      "pageRange": "5.78-5.112 (content 5.78-5.97; Test Your Knowledge 5.98-5.112)",
+      "sections": [
+        {"ref": "3.1", "heading": "Introduction", "page": "5.78-5.79", "description": "Scope: covers investments and disclosures; excludes AS 9 interest/dividend recognition, leases, retirement/insurance-plan investments, mutual/venture-capital funds."},
+        {"ref": "3.2", "heading": "Definition of the Terms Used", "page": "5.79", "description": "Investments, Fair value, Market value."},
+        {"ref": "3.3", "heading": "Forms of Investments", "page": "5.79-5.80", "description": "Documentary vs physical investments; active-market vs no-active-market."},
+        {"ref": "3.4", "heading": "Classification of Investments", "page": "5.80", "description": "Current investment (readily realisable, held ≤1 year, judged at purchase) vs Long-term investment; statutory sub-classification categories."},
+        {"ref": "3.5", "heading": "Cost of Investments", "page": "5.80-5.82", "description": "Cost includes acquisition charges (brokerage/fees/duties); valuation on issue of securities or exchange for another asset; pre-acquisition interest/dividends as recovery of cost; rights shares treatment (subscribed shares added to cost; sold rights entitlement to P&L or cost reduction if cum-right value falls below cost). NOTE: bonus shares are not separately addressed in this unit's text - by analogy to the rights-share principle, cost of original holding is spread over original+bonus shares with no separate cost recorded for the bonus shares themselves; this analogy is NOT verbatim AS 13 text and should be flagged when tagging bonus-share questions."},
+        {"ref": "3.6", "heading": "Carrying Amount of Investments", "page": "5.82-5.86", "description": "Current investments at lower of cost and fair value (individually assessed); long-term investments at cost, with 'other than temporary' decline charged to P&L and reversible."},
+        {"ref": "3.7", "heading": "Investment Properties", "page": "5.86", "description": "Land/buildings not for own operational use; accounted under AS 10 cost model."},
+        {"ref": "3.8", "heading": "Disposal of Investments", "page": "5.86", "description": "Gain/loss = disposal proceeds less carrying amount; partial disposal uses average-cost allocation."},
+        {"ref": "3.9", "heading": "Reclassification of Investments", "page": "5.86-5.88", "description": "Long-term to current: lower of cost and carrying amount. Current to long-term: lower of cost and fair value."},
+        {"ref": "3.10", "heading": "Disclosure", "page": "5.88", "description": "Accounting policies for carrying amount; P&L income/gains/losses split current vs long-term; restrictions on ownership/realisability; quoted vs unquoted aggregate amounts."}
+      ]
+    },
+    {
+      "unitCode": "M2-C5-U5",
+      "module": 2, "chapter": 5, "unit": 5,
+      "standard": "AS 19",
+      "title": "Leases",
+      "sourceFile": "M2_C5_U5_ Accounting Standard 19 Leases.pdf",
+      "pageRange": "5.137-5.182 (content 5.137-5.171; Test Your Knowledge 5.172-5.182)",
+      "sections": [
+        {"ref": "5.1", "heading": "Introduction", "page": "5.138", "description": "AS 19 objective and definition of a lease."},
+        {"ref": "5.2", "heading": "Applicability of AS 19 [Scope]", "page": "5.138", "description": "Excludes: natural-resource exploration/use agreements, licensing agreements (films, patents, copyrights), land lease agreements."},
+        {"ref": "5.3", "heading": "Definitions", "page": "5.139-5.144", "description": "Non-cancellable lease, lease term, inception, minimum lease payments, fair value, economic/useful life, residual value (guaranteed/unguaranteed), gross/net investment, unearned finance income, implicit/incremental borrowing rate, contingent rent, hire-purchase."},
+        {"ref": "5.4", "heading": "Types of Leases", "page": "5.144", "description": "Finance lease (substantially transfers risks/rewards) vs Operating lease; substance over form."},
+        {"ref": "5.5-5.7", "heading": "Indicators of Finance Lease - Deterministic & Suggestive Conditions", "page": "5.145-5.147", "description": "5 deterministic conditions (ownership transfer, bargain purchase option, lease term = major part of economic life, PV of MLP ≈ fair value, specialised asset) + 3 suggestive conditions; classification fixed at inception."},
+        {"ref": "5.8", "heading": "Accounting for Finance Leases", "page": "5.147-5.162", "description": "Lessee: recognise at lower of fair value and PV of MLP, split payments between finance charge and liability reduction (5.8.1 implicit rate computation), depreciate per AS 10, disclosures (5.8.2). Lessor: recognise as receivable at net investment (5.8.3), finance income recognition (5.8.4), initial direct costs (5.8.5), review of unguaranteed residual value (5.8.6), manufacturer/dealer lessor selling profit."},
+        {"ref": "5.9", "heading": "Accounting for Operating Leases", "page": "5.163-5.167", "description": "Lessee: expense straight-line over lease term (5.9.1) with disclosures (5.9.2). Lessor: keep as PPE, recognise income straight-line, depreciate per AS 10 (5.9.3) with disclosures (5.9.4)."},
+        {"ref": "5.10", "heading": "Sale and Leaseback", "page": "5.168-5.171", "description": "TESTED TOPIC. Situation I (leaseback = finance lease): profit/loss on sale deferred and amortised over lease term. Situation II (leaseback = operating lease): three cases by sale price vs fair value - (a) sale price = fair value: recognise immediately; (b) fair value < carrying amount, sale price < fair value: loss to extent of (carrying amount - fair value) recognised immediately, remainder deferred; (c) sale price > fair value: excess over fair value deferred/amortised, profit up to fair value recognised immediately."}
+      ]
+    },
+    {
+      "unitCode": "M2-C5-U6",
+      "module": 2, "chapter": 5, "unit": 6,
+      "standard": "AS 26",
+      "title": "Intangible Assets",
+      "sourceFile": "M2_C5_U6_ Accounting Standard 26 Intangible Assets.pdf",
+      "pageRange": "5.183-5.215 (content 5.183-5.207; Test Your Knowledge 5.208-5.215)",
+      "sections": [
+        {"ref": "6.1-6.2", "heading": "Introduction / Scope", "page": "5.183-5.184", "description": "Prescribes treatment for intangibles not covered elsewhere; excludes inventories, deferred tax, leases, goodwill on amalgamation/consolidation, financial assets, mineral rights."},
+        {"ref": "6.3", "heading": "Definitions", "page": "5.185-5.186", "description": "Asset, amortisation, depreciable amount, useful life, fair value, active market, impairment loss, carrying amount, intangible asset (identifiable, non-monetary, no physical substance)."},
+        {"ref": "6.4-6.6", "heading": "Identifiability / Control / Future Economic Benefits", "page": "5.187-5.189", "description": "Must be distinguishable from goodwill (usually via separability); control = power to restrict others' access (staff skill/customer loyalty usually not controllable)."},
+        {"ref": "6.7-6.11", "heading": "Recognition and Initial Measurement - Separate Acquisition / Amalgamation / Government Grant / Exchange", "page": "5.189-5.192", "description": "Two recognition criteria (probable benefits + reliable cost); initial measurement at cost; acquisition-specific rules (AS 14 amalgamation, AS 12 government grant, AS 10-style exchange of assets)."},
+        {"ref": "6.12-6.13", "heading": "Internally Generated Goodwill / Internally Generated Intangible Assets", "page": "5.192-5.193", "description": "Internally generated goodwill never recognised; internally generated intangibles split into Research Phase and Development Phase."},
+        {"ref": "6.14", "heading": "Research Phase", "page": "5.193", "description": "No intangible asset ever recognised from research; always expensed."},
+        {"ref": "6.15", "heading": "Development Phase", "page": "5.194", "description": "Six cumulative criteria for recognising a development-phase intangible (technical feasibility, intention, ability to use/sell, probable benefits, resource availability, reliable cost measurement); internally generated brands/mastheads/customer lists never recognised."},
+        {"ref": "6.16", "heading": "Cost of an Internally Generated Intangible Asset", "page": "5.195-5.198", "description": "Cost = expenditure from the point recognition criteria first met, no reinstatement of past-expensed costs; includes worked Example on production-process cost/impairment (20X1-20X2 pattern)."},
+        {"ref": "6.17", "heading": "Recognition of an Expense", "page": "5.198-5.199", "description": "TESTED TOPIC. Expensed unless meets asset criteria; lists always-expensed items (start-up, training, advertising, reorganisation costs); 'Past Expenses not to be recognised as an Asset' - expenditure once expensed in a prior period CANNOT later be capitalised even after approval/criteria are met."},
+        {"ref": "6.18", "heading": "Subsequent Expenditure", "page": "5.199", "description": "Expensed unless it generates benefits beyond original performance and is reliably measurable/attributable; brand/masthead-type subsequent spend always expensed."},
+        {"ref": "6.19-6.23", "heading": "Measurement Subsequent to Initial Recognition / Amortisation Period, Method, Residual Value, Review", "page": "5.199-5.202", "description": "Cost less accumulated amortisation/impairment; rebuttable 10-year useful-life presumption; straight-line default method; residual value assumed zero unless active market/third-party commitment exists; annual review of period/method."},
+        {"ref": "6.24-6.25", "heading": "Recoverability of Carrying Amount - Impairment Losses / Retirements and Disposals", "page": "5.203-5.204", "description": "Impairment per AS 28, mandatory annual testing for not-yet-in-use assets or >10-year amortisation; derecognised on disposal or when no future benefit expected, gain/loss to P&L."},
+        {"ref": "6.26-6.27", "heading": "Disclosure / Other Disclosures", "page": "5.204-5.208", "description": "Per-class: useful lives/rates, methods, gross carrying amount, reconciliation; reasons for exceeding 10-year presumption, R&D expense disclosure."}
+      ]
+    },
+    {
+      "unitCode": "M2-C6-U2",
+      "module": 2, "chapter": 6, "unit": 2,
+      "standard": "AS 29",
+      "title": "Provisions, Contingent Liabilities and Contingent Assets",
+      "sourceFile": "M2_C6_U2_ AS 29 (Revised) Provisions, Contingent Liabilities and Contingent Assets.pdf",
+      "pageRange": "6.28-6.50",
+      "sections": [
+        {"ref": "2.1", "heading": "Introduction", "page": "6.28", "description": "Applies from 1-4-2004; ensures appropriate recognition/measurement and curbs 'profit smoothing' via arbitrary provisioning."},
+        {"ref": "2.2", "heading": "Scope", "page": "6.30", "description": "Excludes fair-valued financial instruments, executory contracts (unless onerous), insurance-policyholder contracts, items covered by another AS (AS 7, 9, 15, 19, 22)."},
+        {"ref": "2.3", "heading": "Definitions", "page": "6.31-6.32", "description": "Executory contracts, provision, liability, obligating event, contingent liability, contingent asset, present/possible obligation, restructuring."},
+        {"ref": "2.4", "heading": "Recognition of Provision", "page": "6.32", "description": "TESTED TOPIC. Three conditions: present obligation from past event + probable outflow + reliable estimate."},
+        {"ref": "2.5-2.8", "heading": "Present Obligation / Past Event / Probable Outflow / Reliable Estimate", "page": "6.32-6.35", "description": "Assessment of present obligation from available evidence; obligating event = no realistic alternative to settling; 'probable' = more likely than not, judged for a class of similar obligations (e.g. warranties); reliable estimate almost always possible."},
+        {"ref": "2.9-2.10", "heading": "Contingent Liabilities / Contingent Assets", "page": "6.35-6.38", "description": "Disclosed not recognised (unless outflow remote); contingent assets recognised only if realisation virtually certain, otherwise disclosed in approving authority's report only."},
+        {"ref": "2.11-2.14", "heading": "Measurement - Best Estimate / Risks and Uncertainties / Future Events / Expected Disposal of Assets", "page": "6.38-6.39", "description": "Best estimate per management judgment/expert reports; generally not discounted; gains on expected disposals never netted against a provision."},
+        {"ref": "2.15", "heading": "Reimbursements", "page": "6.40", "description": "TESTED TOPIC. Reimbursement (insurance, indemnity, supplier warranty) recognised as a SEPARATE ASSET only when virtually certain - not simply omitted or netted against the provision."},
+        {"ref": "2.16-2.18", "heading": "Table - Reimbursements / Changes in Provisions / Use of Provisions", "page": "6.40-6.41", "description": "Provisions reviewed and adjusted/reversed at each balance sheet date; used only for the expenditure originally recognised."},
+        {"ref": "2.19", "heading": "Application to Future Operating Losses and Restructuring", "page": "6.42-6.43", "description": "2.19.1 no provision for future operating losses; 2.19.2 restructuring provision requires binding commitment, restricted to direct costs only (excludes retraining, marketing, new systems, future losses)."},
+        {"ref": "2.20", "heading": "Disclosure", "page": "6.43-6.47", "description": "Per class of provision: opening/closing amount, additions, amounts used/reversed (SMC exemption noted); contingent liability nature/uncertainty disclosure with 'seriously prejudicial' exemption."}
+      ]
+    },
+    {
+      "unitCode": "M2-C7-U1",
+      "module": 2, "chapter": 7, "unit": 1,
+      "standard": "AS 4",
+      "title": "Contingencies and Events Occurring After the Balance Sheet Date",
+      "sourceFile": "M2_C7_U1_ Accounting Standard 4 Contingencies and Events occurring after the Balance Sheet Date.pdf",
+      "pageRange": "7.1-7.13",
+      "sections": [
+        {"ref": "1.1", "heading": "Introduction", "page": "7.1", "description": "AS 4 (Revised)'s contingency provisions apply only to the extent not covered by other AS (e.g. provision for bad debts still under AS 4)."},
+        {"ref": "1.2", "heading": "Contingencies", "page": "7.2-7.3", "description": "Contingency = condition with outcome dependent on future uncertain events; contingent losses provided for if likely; contingent gains never recognised unless realisation virtually certain."},
+        {"ref": "1.3", "heading": "Events Occurring After the Balance Sheet Date", "page": "7.3", "description": "Events between balance sheet date and approval date; introduces adjusting/non-adjusting classification."},
+        {"ref": "1.4", "heading": "Adjusting Events", "page": "7.4", "description": "Provide additional evidence of conditions existing at balance sheet date; require adjustment (e.g. trade receivable insolvency confirmed after year-end)."},
+        {"ref": "1.5", "heading": "Non-Adjusting Events", "page": "7.4-7.5", "description": "Relate to conditions arising after balance sheet date; no adjustment (e.g. investment value decline); dividends declared post-BS-date not recognised as liability (disclosed only); going-concern-inappropriate events (e.g. plant destruction) may require liquidation-basis statements."},
+        {"ref": "1.6", "heading": "Disclosure", "page": "7.6-7.10", "description": "TESTED TOPIC. Two elements: nature of the event + estimate of financial effect (or statement that none can be made); 'cheques in hand' example shows why post-year-end-realised cheques are NOT an adjusting event/asset at year-end."}
+      ]
+    },
+    {
+      "unitCode": "M2-C7-U3",
+      "module": 2, "chapter": 7, "unit": 3,
+      "standard": "AS 11",
+      "title": "The Effects of Changes in Foreign Exchange Rates",
+      "sourceFile": "M2_C7_U3_ Accounting Standard 11 The Effects of Changes in Foreign Exchange Rates.pdf",
+      "pageRange": "7.28-7.53",
+      "sections": [
+        {"ref": "3.1", "heading": "Introduction / Scope", "page": "7.28-7.29", "description": "Applies to foreign currency transactions, translating foreign operations' statements, forward exchange contracts; excludes AS 3 cash flow presentation, borrowing-cost exchange differences."},
+        {"ref": "3.2", "heading": "Definitions", "page": "7.30", "description": "Foreign currency transaction, monetary/non-monetary items, integral/non-integral foreign operation, net investment, forward exchange contract/rate."},
+        {"ref": "3.3", "heading": "Initial Recognition", "page": "7.31", "description": "Recorded at exchange rate on transaction date (average rate allowed if stable)."},
+        {"ref": "3.4", "heading": "Reporting at Each Balance Sheet Date", "page": "7.32", "description": "TESTED TOPIC. Monetary items at closing rate (with unrealistic-rate exception); non-monetary items at historical cost use transaction-date rate; non-monetary at fair value use valuation-date rate; contingent liabilities at closing rate."},
+        {"ref": "3.5", "heading": "Recognition of Exchange Differences", "page": "7.32-7.34", "description": "TESTED TOPIC. Exchange differences on settlement/restatement of monetary items go to P&L in the period arising (2009/2011 amendments allow long-term monetary item differences to be capitalised into depreciable asset cost or accumulated in FCMITD account)."},
+        {"ref": "3.6-3.9", "heading": "Classification & Translation of Integral/Non-Integral Foreign Operations", "page": "7.34-7.40", "description": "Integral = extension of reporting enterprise (translated as if enterprise itself transacted); Non-integral = independent operation (assets/liabilities at closing rate, income/expense at transaction/average rate, differences to foreign currency translation reserve); 8 indicators of non-integral status."},
+        {"ref": "3.10", "heading": "Tax Effects of Exchange Differences", "page": "7.41", "description": "Accounted for under AS 22."},
+        {"ref": "3.11", "heading": "Forward Exchange Contract", "page": "7.41-7.45", "description": "Hedging contracts: premium/discount amortised over contract life, differences to P&L each period; speculative contracts marked to market each balance sheet date, premium ignored."},
+        {"ref": "3.12", "heading": "Disclosure", "page": "7.45", "description": "Exchange differences in net profit/loss; translation reserve reconciliation; reporting-currency rationale."},
+        {"ref": "3.13", "heading": "Presentation of FCMITDA", "page": "7.46", "description": "Shown as separate line item under 'Reserves and Surplus' (translation loss, not an asset), since Schedule III has no dedicated line item."}
+      ]
+    },
+    {
+      "unitCode": "M2-C8-U2",
+      "module": 2, "chapter": 8, "unit": 2,
+      "standard": "AS 9",
+      "title": "Revenue Recognition",
+      "sourceFile": "M2_C8_U2_ Accounting Standard 9 Revenue Recognition.pdf",
+      "pageRange": "8.34-8.55",
+      "sections": [
+        {"ref": "2.1-2.2", "heading": "Introduction / Definition of Revenue", "page": "8.34-8.36", "description": "AS 9 covers sale of goods, rendering of services, use of resources yielding interest/royalty/dividend; excludes construction contracts, hire-purchase/lease, government grants, insurance contracts."},
+        {"ref": "2.3", "heading": "Agency Relationship", "page": "8.37", "description": "Only commission (not gross proceeds) is revenue for an agent, determined by who bears risks/rewards."},
+        {"ref": "2.4-2.5", "heading": "Sale of Goods / Timing of Recognition", "page": "8.39", "description": "Two conditions for 'performance': transfer of property/significant risks & rewards, and no significant uncertainty over consideration collectability."},
+        {"ref": "2.6", "heading": "Rendering of Services", "page": "8.41-8.42", "description": "Proportionate completion method vs completed service contract method."},
+        {"ref": "2.7", "heading": "Income from Other Sources - Interest, Royalties and Dividends", "page": "8.42", "description": "TESTED TOPIC. Interest on time-proportion basis; royalties on accrual basis per agreement terms; dividends when right to receive is established - all subject to no significant uncertainty on measurability/collectability."},
+        {"ref": "2.8", "heading": "Conditions for Sale of Goods (7 specific scenarios)", "page": "8.44-8.47", "description": "TESTED TOPIC. (1) Delivery delayed at buyer's request + buyer accepts billing = revenue recognised; (2) Sale on approval basis = revenue only on formal acceptance/act adopting transaction/expiry of rejection period; (3) Goods subject to installation = deferred until complete if significant; (4) Sale and repurchase = treated as financing, no revenue; (5) Trade discounts/volume rebates = excluded from revenue; (6) Cash discounts = not deducted from revenue; (7) Consignment sale = revenue only when sold by consignee to third party."},
+        {"ref": "2.9", "heading": "Effect of Uncertainties on Revenue Recognition", "page": "8.47-8.48", "description": "Recognition postponed to extent of collection uncertainty at time of claim; post-sale uncertainty handled via separate provision, not revenue adjustment."},
+        {"ref": "2.10", "heading": "Disclosure", "page": "8.48-8.50", "description": "Must disclose circumstances where revenue recognition was postponed due to significant uncertainties."}
+      ]
+    },
+    {
+      "unitCode": "M2-C9-U1",
+      "module": 2, "chapter": 9, "unit": 1,
+      "standard": "AS 12",
+      "title": "Accounting for Government Grants",
+      "sourceFile": "M2_C9_U1_ Accounting Standard 12 Accounting for Government Grants.pdf",
+      "pageRange": "9.1-9.22",
+      "sections": [
+        {"ref": "1.1", "heading": "Introduction", "page": "9.2", "description": "Scope (grants, subsidies, cash incentives, duty drawbacks); non-recognition until conditions/receipt assured."},
+        {"ref": "1.2", "heading": "Government Grants", "page": "9.2", "description": "Defines grants as cash/kind assistance for past or future compliance with conditions."},
+        {"ref": "1.3", "heading": "Accounting Treatment of Government Grants", "page": "9.3", "description": "Capital approach (part of shareholders' funds) vs Income approach (taken to income over periods)."},
+        {"ref": "1.4", "heading": "Recognition of Government Grants", "page": "9.3", "description": "Two-part test: reasonable assurance of compliance AND of receipt."},
+        {"ref": "1.5", "heading": "Non-Monetary Government Grants", "page": "9.4", "description": "Recorded at acquisition cost, or nominal value if given free."},
+        {"ref": "1.6", "heading": "Presentation of Grants Related to Specific Fixed Assets", "page": "9.4-9.8", "description": "TESTED TOPIC. Method I: grant deducted from asset's gross value (reduces depreciation), nominal value if grant covers full cost. Method II: treated as deferred income recognised over useful life (depreciable assets) or credited to capital reserve (non-depreciable, unless obligations attach)."},
+        {"ref": "1.7", "heading": "Presentation of Grants Related to Revenue", "page": "9.8-9.9", "description": "Shown as P&L credit ('Other Income') or deducted from related expense."},
+        {"ref": "1.8", "heading": "Presentation of Grants of the Nature of Promoters' Contribution", "page": "9.9-9.11", "description": "Credited to capital reserve, not treated as deferred income or distributable as dividend."},
+        {"ref": "1.9", "heading": "Refund of Government Grants", "page": "9.11-9.12", "description": "Treated as extraordinary item (AS 5); refund treatment differs by grant type (revenue/fixed-asset/promoters' contribution)."},
+        {"ref": "1.10", "heading": "Disclosure", "page": "9.12", "description": "Accounting policy/presentation method adopted; nature and extent of grants recognised."}
+      ]
+    },
+    {
+      "unitCode": "M2-C10-U1",
+      "module": 2, "chapter": 10, "unit": 1,
+      "standard": "AS 21",
+      "title": "Consolidated Financial Statements",
+      "sourceFile": "M2_C10_U1_ Accounting Standard 21 Consolidated Financial Statements.pdf",
+      "pageRange": "10.1-10.109",
+      "sections": [
+        {"ref": "1.1", "heading": "Concept of Group, Holding Company and Subsidiary Company", "page": "10.2-10.4", "description": "Group of Companies; Companies Act s.2(46)/s.2(87) definitions of holding/subsidiary."},
+        {"ref": "1.2", "heading": "Objectives of AS 21", "page": "10.5-10.6", "description": "CFS purpose; definitions - parent, subsidiary, control, group, minority interest, equity, CFS."},
+        {"ref": "1.3", "heading": "Wholly Owned and Partly Owned Subsidiaries", "page": "10.7", "description": "Distinction and minority interest implications."},
+        {"ref": "1.4", "heading": "Purpose of Preparing Consolidated Financial Statements", "page": "10.7-10.9", "description": "CFS shows group as single economic entity; Companies Act 2013 CFS filing requirements; exemptions from CFS preparation."},
+        {"ref": "1.5", "heading": "Scope of AS 21", "page": "10.10-10.11", "description": "Excludes amalgamation accounting (AS 14), investments in associates (AS 13/23), joint ventures (AS 13/27)."},
+        {"ref": "1.6", "heading": "Control", "page": "10.11-10.12", "description": "Ownership of >50% voting power OR control of board composition."},
+        {"ref": "1.7", "heading": "Exclusion from Preparation of CFS", "page": "10.12-10.14", "description": "Temporary control (near-future disposal) or severe long-term restrictions impairing fund transfer."},
+        {"ref": "1.8", "heading": "Advantages of Consolidated Financial Statements", "page": "10.15", "description": "Single source document, intrinsic share value, acquisition bargaining, market evaluation."},
+        {"ref": "1.9", "heading": "Components of Consolidated Financial Statements", "page": "10.16-10.17", "description": "Consolidated Balance Sheet, P&L, Cash Flow Statement, Notes."},
+        {"ref": "1.10", "heading": "Consolidation Procedures", "page": "10.18-10.19", "description": "Steps: eliminate cost of investment vs parent's share of equity (goodwill/capital reserve); eliminate intra-group transactions in full; adjust unrealised profits/losses; identify minority interest in income and net assets."},
+        {"ref": "1.11", "heading": "Calculation of Goodwill/Capital Reserve (Cost of Control)", "page": "10.19-10.24", "description": "TESTED TOPIC. Goodwill = Cost of Investment - Parent's share in equity of subsidiary on acquisition date; Capital Reserve = reverse. Extensive worked Examples 1-3 building the concept."},
+        {"ref": "1.12", "heading": "Minority Interests", "page": "10.24-10.26", "description": "TESTED TOPIC. Minority Interest = Share Capital of subsidiary belonging to outsiders + Minority's share of reserves/profits; losses reducing minority interest below nil adjusted against majority interest."},
+        {"ref": "1.13", "heading": "Profit or Loss of Subsidiary Company", "page": "10.26-10.27", "description": "Classification into pre- and post-acquisition reserves/profits; pre-acquisition = capital profit (adjusted against cost of control); post-acquisition = revenue profit (added to consolidated reserves)."},
+        {"ref": "1.14", "heading": "Consolidation Adjustments (A. Revaluation of Assets, B. Dividend Received from Subsidiary, C. Elimination of Intra-Group Transactions)", "page": "10.27-10.72", "description": "TESTED TOPIC. (A) Revaluation profit/loss of subsidiary's assets treated as capital profit (if before acquisition) or revenue (if after); additional depreciation on revalued assets. (B) Pre-acquisition dividend reduces cost of investment; post-acquisition dividend credited to P&L. (C) Upstream vs downstream intra-group transactions - unrealised profit elimination shared with minority (upstream) or borne wholly by holding company (downstream)."},
+        {"ref": "1.15-1.16", "heading": "Preparation of Consolidated Statement of Profit and Loss / Consolidated Cash Flow Statement", "page": "10.73-10.78", "description": "Line-by-line addition with elimination of inter-company transactions and unrealised profit in inventory."},
+        {"ref": "1.17", "heading": "Uniform Accounting Policies", "page": "10.78-10.83", "description": "TESTED TOPIC. Consolidated FS must use uniform accounting policies; subsidiary's figures restated (e.g. inventory valuation method, provision for doubtful debts %, deferred expenditure write-off period) to match parent's policies before consolidation."},
+        {"ref": "1.18", "heading": "Treatment of Subsidiary Company Having Preference Share Capital", "page": "10.83", "description": "Cumulative preference dividends adjusted for (as external liability) even if undeclared; non-cumulative only if actually declared."}
+      ]
+    },
+    {
+      "unitCode": "M2-C10-U2",
+      "module": 2, "chapter": 10, "unit": 2,
+      "standard": "AS 23",
+      "title": "Accounting for Investments in Associates in Consolidated Financial Statements",
+      "sourceFile": "M2_C10_U2_ Accounting Standard 23 Accounting for Investments in Associates in Consolidated Financial Statements.pdf",
+      "pageRange": "10.110-10.133",
+      "sections": [
+        {"ref": "2.1-2.2", "heading": "Introduction / Objective", "page": "10.110-10.111", "description": "Governs recognition of investments in associates in CFS via equity method; compulsory wherever AS 21 consolidation is followed."},
+        {"ref": "2.3", "heading": "Definitions", "page": "10.111-10.114", "description": "TESTED TOPIC. Associate, significant influence (20% voting-power rebuttable presumption; evidenced by board representation, policy participation, material inter-company transactions, personnel interchange, technical info sharing); includes worked Example 2 on effective direct+indirect holding through an intermediate company (matches 'A holds stake in B, B holds stake in C' pattern)."},
+        {"ref": "2.4", "heading": "Associates Accounted for Using the Equity Method", "page": "10.114-10.115", "description": "Initial recognition at cost; goodwill/capital reserve on acquisition; subsequent adjustment for investor's share of investee's net asset changes."},
+        {"ref": "2.5", "heading": "Circumstances Under Which Equity Method is Followed", "page": "10.115-10.116", "description": "Exceptions: temporary control pending near-future disposal, or severe long-term restrictions - AS 13 applies instead."},
+        {"ref": "2.6", "heading": "Application of the Equity Method", "page": "10.116-10.124", "description": "Parallels AS 21 subsidiary rules; step acquisitions computed separately per tranche; unrealised profit/loss elimination; losses capping investment at nil; uniform accounting policies and reporting-date alignment (max 6-month gap)."},
+        {"ref": "2.7", "heading": "Contingencies", "page": "10.124", "description": "Investor discloses share of associate's contingencies/capital commitments per AS 4."},
+        {"ref": "2.8", "heading": "Why is Equity Method Adopted for Associates?", "page": "10.124-10.125", "description": "20-50% stake reflects participation in decision-making, not just dividend receipt."},
+        {"ref": "2.9", "heading": "Disclosure", "page": "10.125", "description": "List/description of associates with ownership %; classified as long-term investments with separate P&L disclosure."},
+        {"ref": "2.10", "heading": "Relevant Explanations to AS 23", "page": "10.126", "description": "2.10.1 Proposed dividend of associate excluded when computing investor's share of results; 2.10.2 Potential equity shares excluded when determining associate's voting power for classification."}
+      ]
+    },
+    {
+      "unitCode": "M3-C11-U1",
+      "module": 3, "chapter": 11, "unit": 1,
+      "standard": null,
+      "title": "Preparation of Financial Statements (of Companies)",
+      "sourceFile": "M3_C11_U1_ Preparation of Financial Statements.pdf",
+      "pageRange": "11.1-11.72",
+      "sections": [
+        {"ref": "1.1", "heading": "Meaning of Company", "page": "11.2-11.6", "description": "Section 2(20) definition and company types (guarantee, limited, foreign, government, OPC, private, public, small, unlimited, holding, subsidiary, SMC)."},
+        {"ref": "1.2", "heading": "Maintenance of Books of Account", "page": "11.6-11.9", "description": "Section 128 - accrual/double-entry basis at registered office; branch office and electronic-mode rules (audit trail, Indian server backups)."},
+        {"ref": "1.3", "heading": "Statutory Books", "page": "11.9", "description": "Registers of investments, charges, members, debenture-holders, minutes, contracts, KMP shareholding, loans."},
+        {"ref": "1.4", "heading": "Annual Return", "page": "11.10", "description": "Section 92 - filed within 60 days of AGM."},
+        {"ref": "1.5", "heading": "Final Accounts", "page": "11.10-11.17", "description": "Section 129 - Board must lay financial statements at AGM; Schedule III Parts I/II and Divisions I/II/III; compliance with AS (Section 133); Examples 1-6 (bonus share source disclosure, WIP disclosure, negative Reserves and Surplus presentation, current-vs-long-term loan classification, reserves-vs-provisions, trade receivables ageing schedule)."},
+        {"ref": "1.6", "heading": "Distributable Profit", "page": "11.18-11.23", "description": "TESTED TOPIC. Meaning of dividend (Section 2(35)); Section 123(1) dividend sources; Companies (Declaration and Payment of Dividend) Rules 2014 - conditions for drawing dividend from accumulated reserves (rate capped at 3-year average, amount capped at 1/10th of paid-up capital+free reserves, post-withdrawal reserves must stay ≥15% of paid-up capital); transfer to reserves; dividend on preference/partly-paid shares; Section 124 unpaid dividend account and Investor Education & Protection Fund."}
+      ]
+    },
+    {
+      "unitCode": "M3-C11-U2",
+      "module": 3, "chapter": 11, "unit": 2,
+      "standard": "AS 3",
+      "title": "Cash Flow Statement",
+      "sourceFile": "M3_C11_U2_ Cash Flow Statement.pdf",
+      "pageRange": "11.73-11.140",
+      "sections": [
+        {"ref": "2.1", "heading": "Introduction", "page": "11.73-11.75", "description": "Cash flow information helps assess ability to generate/use cash; benefits, purpose, sources and applications of cash."},
+        {"ref": "2.2", "heading": "Elements of Cash", "page": "11.75-11.76", "description": "Cash (cash in hand, demand deposits) and cash equivalents; CFS ignores movements among cash/bank/cash-equivalent investments."},
+        {"ref": "2.3", "heading": "Classification of Cash Flow Activities", "page": "11.76-11.79", "description": "2.3.1 Operating activities (principal revenue-generating); 2.3.2 Investing activities (long-term asset/investment acquisition-disposal); 2.3.3 Financing activities (changes in owners' capital and borrowings)."},
+        {"ref": "2.4", "heading": "Calculation of Cash Flows from Operating Activities", "page": "11.80-11.82", "description": "2.4.1 Direct method (gross receipts/payments); 2.4.2 Indirect method (net profit adjusted for working-capital changes and non-cash items)."},
+        {"ref": "2.5", "heading": "Calculation of Cash Flows from Investing Activities", "page": "11.82", "description": "Acquisition/disposal of long-term/non-operating assets and investments."},
+        {"ref": "2.6", "heading": "Calculation of Cash Flows from Financing Activities", "page": "11.82-11.83", "description": "TESTED TOPIC. Changes in capital and borrowings; dividend paid is classified here (financing activity)."},
+        {"ref": "2.7", "heading": "Illustrations", "page": "11.83-11.112", "description": "Twelve worked illustrations applying classification and direct/indirect method CFS preparation."}
+      ]
+    },
+    {
+      "unitCode": "M3-C12-U1",
+      "module": 3, "chapter": 12, "unit": 1,
+      "standard": null,
+      "title": "Buy-back of Securities",
+      "sourceFile": "M3_C12_U1_ Buyback of Securities.pdf",
+      "pageRange": "12.1-12.52",
+      "sections": [
+        {"ref": "1", "heading": "Introduction", "page": "12.2-12.6", "description": "TESTED TOPIC. Section 68(1) buy-back funding sources (free reserves, securities premium, proceeds of a fresh issue - not the same kind of security). Section 68(2) conditions (a)-(h): authorisation, special/board resolution, (c) buy-back ≤25% of paid-up capital + free reserves = RESOURCES TEST, (d) annual equity buy-back ≤25% of paid-up equity capital = SHARES OUTSTANDING TEST, (e) post-buyback debt ≤2x paid-up capital+free reserves = DEBT-EQUITY RATIO TEST, fully-paid securities only, SEBI compliance; explanatory statement requirements; 12-month completion deadline; 3 permitted routes (proportionate, open market, ESOP/sweat equity); declaration of solvency; extinguishment within 7 days; 6-month restriction on fresh issue; buy-back register; 30-day return filing; Section 69 transfer to Capital Redemption Reserve."},
+        {"ref": "(Some Important Terms)", "heading": "Definitions - Specified Securities / Free Reserves", "page": "12.6", "description": "Free reserves = reserves distributable as dividend, excluding unrealised/notional/revaluation gains."},
+        {"ref": "2", "heading": "Provisions of Section 70 of the Companies Act 2013", "page": "12.6-12.7", "description": "Cannot buy back indirectly through a subsidiary/investment company, or while in default on deposits/debenture/preference-share redemption/loan repayment (unless 3 years cured), or non-compliant with Sections 92, 123, 127, 129; 2013 SEBI Buy-back Regulations (15% open-market cap, 1-year gap, 50% utilisation)."}
+      ]
+    },
+    {
+      "unitCode": "M3-C13-U1",
+      "module": 3, "chapter": 13, "unit": 1,
+      "standard": null,
+      "title": "Amalgamation of Companies",
+      "sourceFile": "M3_C13_U1_ Amalgamation of Companies.pdf",
+      "pageRange": "13.1-13.97",
+      "sections": [
+        {"ref": "1", "heading": "Introduction", "page": "13.2", "description": "Business-saving/growth strategies context."},
+        {"ref": "2", "heading": "Meaning of Amalgamation", "page": "13.3-13.4", "description": "Amalgamation vs Absorption vs External Reconstruction - definitions and distinguishing table."},
+        {"ref": "3", "heading": "Types of Amalgamation", "page": "13.5-13.7", "description": "TESTED TOPIC. Amalgamation in the Nature of Merger (5 conditions per AS 14 para 3(e): all assets/liabilities transferred, ≥90% equity shareholders become transferee's shareholders, consideration wholly by equity shares except fractional cash, business continued, no adjustment to book values except for uniform accounting policies) vs Amalgamation in the Nature of Purchase (any condition unmet)."},
+        {"ref": "4", "heading": "Purchase Consideration", "page": "13.7-13.17", "description": "TESTED TOPIC. Definition (aggregate of shares/securities/cash paid to shareholders, EXCLUDES amounts paid to debenture-holders/creditors); four computation methods: Lumpsum, Net Payment, Net Assets, Intrinsic Value/Share Exchange."},
+        {"ref": "5", "heading": "Methods of Accounting for Amalgamations", "page": "13.18-13.21", "description": "Pooling of Interests Method (merger) - assets/liabilities/reserves at existing carrying amounts, difference between share capital issued and transferor's share capital adjusted against reserves. Purchase Method - assets/liabilities at carrying amount or fair value; excess of purchase consideration over net assets = Goodwill (amortised over ≤5 years), shortfall = Capital Reserve; statutory reserves preserved via 'Amalgamation Adjustment Reserve' entry."},
+        {"ref": "6", "heading": "Journal Entries to Close the Books of Vendor Company", "page": "13.21-13.29", "description": "TESTED TOPIC. Realisation Account (transfer assets/liabilities); Purchase consideration receivable; Preference/Equity Shareholders' Accounts; liquidation expenses treatment; profit/loss on realisation."},
+        {"ref": "7", "heading": "Entries in the Books of Purchasing Company", "page": "13.29-13.68", "description": "TESTED TOPIC. Business Purchase A/c; recording assets/liabilities at agreed values with Goodwill/Capital Reserve as balancing figure; discharge of purchase consideration; inter-company owing elimination; unrealised profit in stock adjustment; extensive worked illustrations (6-14) covering absorption, merger, and complex multi-adjustment scenarios."}
+      ]
+    },
+    {
+      "unitCode": "M3-C14-U1",
+      "module": 3, "chapter": 14, "unit": 1,
+      "standard": null,
+      "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)",
+      "sourceFile": "M3_C14_U1_ Internal Reconstruction.pdf",
+      "pageRange": "14.1-14.68",
+      "sections": [
+        {"ref": "1", "heading": "Meaning of Reconstruction", "page": "14.2-14.3", "description": "Internal reconstruction (reorganising capital/writing off losses without winding up) vs External reconstruction (amalgamation in the nature of merger under AS 14)."},
+        {"ref": "2.1", "heading": "Alteration of Share Capital", "page": "14.4-14.9", "description": "Section 61 - increase of authorised capital, sub-division/consolidation of shares, conversion to stock."},
+        {"ref": "2.2", "heading": "Variation of Shareholders Rights", "page": "14.9", "description": "Section 48 - rights attached to a share class can be varied via simple transfer entries."},
+        {"ref": "2.3", "heading": "Reduction of Share Capital", "page": "14.9-14.11", "description": "TESTED TOPIC. Section 66 (Tribunal-confirmed) - extinguishing unpaid liability, paying off excess paid-up capital, or cancelling lost/unrepresented capital; introduces Capital Reduction Account."},
+        {"ref": "2.4", "heading": "Compromise/Arrangements", "page": "14.11", "description": "Shareholders/creditors accept reduced settlement, credited to Reconstruction Account."},
+        {"ref": "2.5", "heading": "Surrender of Shares", "page": "14.12", "description": "Shares surrendered by holders, reallotted to creditors/debenture-holders to reduce claims."},
+        {"ref": "3", "heading": "Entries in Case of Internal Reconstruction", "page": "14.12-14.45", "description": "TESTED TOPIC. General rules: when Capital Reduction/Reconstruction A/c is opened; asset appreciation/liability reduction and P&L debit balance write-off; residual balance to Capital Reserve; balance-sheet presentation ('and Reduced', 5-year disclosure); extensive worked Illustrations 3-8 combining capital/preference reduction, asset revaluation, creditor/debenture settlement, redrafted balance sheet."}
+      ]
+    },
+    {
+      "unitCode": "M3-C15-U1",
+      "module": 3, "chapter": 15, "unit": 1,
+      "standard": null,
+      "title": "Accounting for Branches including Foreign Branches",
+      "sourceFile": "M3_C15_U1_ Accounting for Branches including Foreign Branches.pdf",
+      "pageRange": "15.1-15.106 (plus an unrelated CS.1-CS.15 Case Scenarios appendix on other AS topics, bundled in the same PDF but not part of this unit's content)",
+      "sections": [
+        {"ref": "1", "heading": "Introduction", "page": "15.2-15.3", "description": "Branch definition; branch vs department distinction."},
+        {"ref": "2", "heading": "Distinction Between Branch Accounts and Departmental Accounts", "page": "15.3", "description": "Where accounts maintained, apportionment of common expenses, reconciliation need, foreign-currency conversion."},
+        {"ref": "3", "heading": "Dependent Branches", "page": "15.4", "description": "HO controls policy/administration; 3 types (order-booking, HO-collection sales, retail selling HO-supplied goods)."},
+        {"ref": "4", "heading": "Methods of Charging Goods to Branches", "page": "15.5", "description": "TESTED TOPIC. Goods invoiced at cost, at selling price, or (retail branches) at wholesale price; selling-price method used for fixed-price dealers and tighter HO stock control - this is the rationale tested for 'why goods are marked at invoice price.'"},
+        {"ref": "5", "heading": "Accounting for Dependent Branches", "page": "15.6-15.40", "description": "5.1 Goods invoiced at cost (Debtors method; Stock & Debtors method; Trading & P&L/Final Accounts method). 5.2 Goods invoiced at selling price (Branch Adjustment Account for loading; Stock Reserve for unrealised profit in closing stock). 5.3 Goods invoiced at wholesale price to retail branches."},
+        {"ref": "6", "heading": "Accounting for Independent Branches", "page": "15.41-15.43", "description": "Full double-entry books; mutual HO Account/Branch Account; branch sends trial balance to HO; transaction-to-journal-entry mapping table."},
+        {"ref": "7", "heading": "Adjustment and Reconciliation of Branch & Head Office Accounts", "page": "15.44-15.52", "description": "TESTED TOPIC. 7.1 Reasons for disagreement (goods/cash in transit, direct collections/payments, unrecorded expense allocations). 7.2 Other points: (1) Inter-branch transactions routed through HO; (2) Fixed assets kept at HO - depreciation entries; (3) HO expenses charged to branch - matches Illustration 9's five independent-branch rectification entries (HO staff salary, retained asset, remittance in transit, HO direct collection from customer, no-entry cases)."},
+        {"ref": "8", "heading": "Incorporation of Branch Balance in Head Office Books", "page": "15.53-15.63", "description": "Method I: separate P&L/Balance Sheet per branch. Method II: consolidated P&L and Balance Sheet."},
+        {"ref": "9", "heading": "Incomplete Information in Branch Books", "page": "15.64-15.66", "description": "HO withholds opening stock/cost data from branch to keep profitability confidential; branch doesn't prepare its own P&L."},
+        {"ref": "10-11", "heading": "Foreign Branches / Accounting for Foreign Branches", "page": "15.67-15.68", "description": "Per AS 11 (revised 2003) - Integral Foreign Operation (IFO) vs Non-Integral Foreign Operation (NFO) classification."},
+        {"ref": "12", "heading": "Techniques for Foreign Currency Translation", "page": "15.69-15.71", "description": "12.1 IFO - transaction-date/closing-rate mix, exchange differences to P&L. 12.2 NFO - all items at closing/average rate, differences to foreign currency translation reserve."},
+        {"ref": "13", "heading": "Change in Classification", "page": "15.71-15.72", "description": "13.1 Integral to Non-Integral; 13.2 Non-Integral to Integral - translation reserve and historical-cost treatment on reclassification."}
+      ]
+    }
+  ]
+}
