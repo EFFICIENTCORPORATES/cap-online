@@ -1,0 +1,257 @@
+Now, Lets do one thing.. For now , I just wanted to analyse AS 2 only..
+
+
+Please go through properly.. and ensure that all the question which tests the concepts of Inventories are well listed. and No Question is missed because it is very critical for holistics deveopment of studets. So, Please be extra cautious and prioritize accuracy over speed.
+
+
+Also, I need a bifurcation of MCQ Question and Descrition Question Separately...
+
+
+Also, I see that you are referring the question even from the Ans "i.e Answers" pdf.. So , Please dont do that, Instead I want you to give me a give reference of both the tings,. In which pdf and which page is the question and In which page or pdf is the answers situated.
+
+
+Are you clear or you have any doubts...?? Along with Concepts tested..ALso, make a New COlumn Name, Common Student Mistakes in Exams.. which will be like, Main additional note or some aspect which you think is tricky and can lead to errors. or Irrelevant information given just to trick students.
+
+
+Please consider all these what I have said you and give me this revised manner.. If you have any questions , make sure to ask me
+
+
+So, I have done this exercise t my end and I see that below are the MCQ & Descritive questions re as below:
+
+I. Multiple Choice Questions (MCQs)
+These questions typically test definitions, cost inclusions/exclusions, and basic cost formulas.
+PDF Name (Question)
+Q. No.
+Page (Q)
+PDF Name (Answer)
+Page (Ans)
+Marks
+Concepts Tested
+Common Student Mistakes in Exams
+MTP-ICAI-Practice-Q
+MTP 1, Q4
+86
+MTP-ICAI-Practice-Ans
+290
+2
+Exclusions from cost: Identifying costs not included (Selling, abnormal wastage)
+.
+Including Selling and Distribution costs in inventory value instead of expensing them
+.
+MTP-ICAI-Practice-Q
+MTP 3, Q5
+129
+MTP-ICAI-Practice-Ans
+315
+2
+Cost Formulas: Selecting formula for non-interchangeable items (Specific Identification)
+.
+Applying FIFO/Weighted Average for custom-made or project-specific items
+.
+MTP-ICAI-Practice-Q
+MTP 4, Q6
+149
+MTP-ICAI-Practice-Ans
+327
+2
+Cost Inclusions: Identifying what is not excluded (Raw material cost)
+.
+Misclassifying Raw Material cost as an exclusion like abnormal waste
+.
+MTP-ICAI-Practice-Q
+MTP 7, Q6
+213
+MTP-ICAI-Practice-Ans
+370
+2
+Measurement: Valuation of partly finished units using NRV and brokerage
+.
+Forgetting to deduct further processing costs and selling brokerage from the estimated selling price to reach NRV
+.
+MTP-Jan2026-Set2-Q
+Q5-8
+364
+MTP-Jan2026-Set2-Ans
+348
+8
+Cost Measurement: Direct transit costs, normal vs. abnormal loss, and GST credit impacts
+.
+Including GST in the cost even when full Input Tax Credit (ITC) is available
+.
+PYQ-Sep2024-Ans
+Q1 (i)
+950
+PYQ-Sep2024-Ans
+951
+2
+Replacement Cost: Valuing raw material when finished goods NRV is below cost
+.
+Valuing raw material at replacement cost even when the finished product can be sold at or above cost
+.
+PYQ-Jan2026-Ans
+Q4
+756
+PYQ-Jan2026-Ans
+758
+2
+Fixed Overheads: Allocation based on normal capacity vs. actual production
+.
+Allocating fixed overheads based on actual production when it is lower than normal capacity, leading to overvaluation
+.
+II. Descriptive & Scenario-Based Questions (Just AS 2)
+These questions require detailed calculations and explanations of the standard's principles.
+PDF Name (Question)
+Q. No.
+Page (Q)
+PDF Name (Answer)
+Page (Ans)
+Marks
+Concepts Tested
+Common Student Mistakes in Exams
+MTP-ICAI-Practice-Q
+MTP 5, Q1(b)
+172
+MTP-ICAI-Practice-Ans
+340
+7
+Joint/By-Products: Allocation of joint costs and valuation of by-products (Fiber) at NRV
+.
+Valuing By-products at cost; they should be valued at NRV, which is then deducted from the main product cost
+.
+PYQ-May2024-Q
+Q1(b)
+847
+PYQ-May2024-Ans
+815
+7
+Joint/By-Products: Identical scenario to "Well Wear Limited" above
+.
+Double counting scrap value or ignoring it in the joint cost allocation
+.
+MTP-May2024-Set2-Q
+Q1(b)
+431
+MTP-May2024-Set2-Ans
+412
+5
+Wastage: Calculation of abnormal loss and its accounting treatment
+.
+Including Abnormal Loss in the cost per unit calculation instead of charging it directly to P&L
+.
+RTP-May2025-Q
+Q5
+1187
+RTP-May2025-Q
+1209
+-
+Measurement: Comprehensive valuation of Raw Material A and Finished Goods B
+.
+Failing to use Normal Capacity for calculating fixed overheads per unit
+.
+MTP-ICAI-Practice-Q
+MTP 8, Q6 (Or) (a)
+245
+MTP-ICAI-Practice-Ans
+398
+4
+Standard Theory: Listing examples of costs excluded from inventory (AS 2 Para 13)
+.
+Listing Storage costs as a generic exclusion without noting the exception for costs necessary for production
+.
+RTP-Jan2026-Q
+Q3
+1094
+RTP-Jan2026-Q
+1112
+-
+Valuation Logic: Incorrectly valuing towels at NRV inclusive of profit
+.
+Applying the "homogenous market/assured sale" exception (AS 9) to generic manufactured goods like towels
+.
+III. Integrated Questions (AS 2 with Other Concepts)
+These involve consolidation, accounting policies, or other standards (AS 1, AS 10, AS 16, AS 21).
+PDF Name (Question)
+Q. No.
+Page (Q)
+PDF Name (Answer)
+Page (Ans)
+Marks
+Concepts Tested
+Common Student Mistakes in Exams
+RTP-Jan2025-Q
+Q3
+1048
+RTP-Jan2025-Q
+1060
+-
+AS 1 & AS 2: Whether changing non-moving inventory provision method is a change in policy
+.
+Treating a change in estimation method as a change in accounting policy
+.
+MTP-Jan2026-Set1-Ans
+Q5
+327
+MTP-Jan2026-Set1-Ans
+255
+14
+AS 21 & AS 2: Uniformity of policies—restating LIFO to FIFO for a subsidiary (MNT Ltd)
+.
+Forgetting to adjust opening Revenue Reserves when correcting the prior year's inventory valuation
+.
+PYQ-Jan2025-Ans
+Q5
+723
+PYQ-Jan2025-Ans
+727
+14
+AS 21 & AS 2: Elimination of unrealised profit in inter-company stock transfers
+.
+Eliminating the entire sale value instead of only the unrealised profit portion remaining in stock
+.
+RTP-Jan2026-Q
+Q12
+1107
+RTP-Jan2026-Q
+1122
+-
+AS 16 & AS 2: Including interest in inventory cost for assets like wine/liquor
+.
+Including interest for routinely manufactured items that do not take a substantial period to mature
+.
+PYQ-May2026-Q
+Case II, Q6
+924
+PYQ-May2026-Q
+926
+2
+AS 10 & AS 2: Raw material used for self-constructed assets (PPE) vs. finished goods
+.
+Charging raw materials used for PPE to Cost of Goods Sold instead of capitalising them
+.
+MTP-May2025-Set2-Q
+Q6(c)
+504
+MTP-May2025-Set2-Ans
+484
+5
+AS 17 & AS 2: Treatment of interest included in inventory as a segment expense
+.
+Excluding inventory-related interest from segment results when it should be included per AS 16/AS 2
+.
+Summary of "Common Student Mistakes" identified in the Sources:
+NRV Miscalculation: Forgetting that NRV is Estimated Selling Price minus Estimated Costs of Completion minus Estimated Costs to make the sale
+.
+Raw Materials: Writing down raw materials to replacement cost automatically. Rule: Only write them down if the finished product is expected to be sold below cost
+.
+Abnormal Waste: Including abnormal wastage in inventory value to "save" the P&L; this is explicitly forbidden by AS 2
+.
+GST/Taxes: Including recoverable taxes in the cost. Only non-refundable duties and taxes should be included
+.
+Standard Costs: Using standard costs that are outdated and do not approximate actual costs
+.
+
+
+Please see, whether I have missed any question of As 2 ffom tehse files..
+
+
+And , give me a final HTML file with all of these Questtion Reference ..In a single table
