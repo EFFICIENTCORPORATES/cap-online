@@ -1,0 +1,259 @@
+{
+  "meta": {
+    "source": "Built from 0-ca-inter-adv-accounts-subtopics-marks-weightage.json + direct reading of each unit's source material. Tier 2 first drafts produced via GitHub Copilot/Gemini/Blackbox in VS Code (see books/question-bank/metadata-index/phase0-batch1-prompts.md for the prompts used), reviewed and corrected by Claude (Tier 3) against the actual source .md before merging.",
+    "generated_on": "2026-07-20",
+    "coverage_units": "3/36",
+    "coverage_list": ["M1-C1-U0", "M1-C2-U0", "M1-C3-U0"],
+    "unnumbered_topic_convention": "Sections with no ICAI-assigned number get sequential IDs continuing from the last real number, suffixed with an asterisk, e.g. M1-C1-U0-T15* — flagged as author-assigned, not ICAI-numbered."
+  },
+  "topics": {
+    "M1-C1-U0-T1": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "Introduction",
+      "keywords": ["Generally Accepted Accounting Principles", "GAAP", "Accounting Standards (ASs)", "International Financial Reporting Standards", "Indian Accounting Standards", "financial statements", "recognition", "measurement", "presentation", "disclosure"],
+      "typical_question_signals": ["What are Accounting Standards?", "Explain the objectives and benefits of Accounting Standards.", "State the meaning of GAAP and its relation to IFRS and Ind AS.", "What is the difference between Accounting Standards and Ind AS?"],
+      "notes": "Broad introductory/definition topic; mostly theory and definitions rather than computation. Verified against source (2026-07-20)."
+    },
+    "M1-C1-U0-T2": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "Standards Setting Process",
+      "keywords": ["Accounting Standards Board (ASB)", "ICAI", "1977", "Ministry of Corporate Affairs (MCA)", "National Financial Reporting Authority (NFRA)", "study groups", "preliminary draft", "exposure draft", "public comments", "Accounting Standard Interpretations (ASIs)", "consultative and transparent"],
+      "typical_question_signals": ["Describe the process of standard setting in India.", "What are the steps involved in issuing an Accounting Standard?", "Explain the role of ASB in formulating Accounting Standards.", "How are public comments considered in the standards-setting process?"],
+      "notes": "Theory/process (8-step ASB procedure) topic; no realistic computational angle. Verified against source (2026-07-20)."
+    },
+    "M1-C1-U0-T3": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "How Many Accounting Standards?",
+      "keywords": ["29 Accounting Standards", "AS 6", "Depreciation Accounting", "AS 8", "Accounting for Research and Development", "27 Accounting Standards", "Companies (Accounting Standards) Rules, 2021", "revised ASs", "AS 2, AS 4, AS 10, AS 13, AS 14, AS 21, AS 29 revised"],
+      "typical_question_signals": ["How many Accounting Standards are presently effective in India?", "Which Accounting Standards were withdrawn?", "Explain the current number of notified Accounting Standards.", "What is the effect of the 2021 Companies (Accounting Standards) Rules?"],
+      "notes": "Mostly factual/number-based recall; no realistic computational angle. Verified against source (2026-07-20) - all figures (29 issued, AS6/AS8 withdrawn, 27 effective, 2021 Rules notified 23 June 2021) confirmed accurate."
+    },
+    "M1-C1-U0-T4": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "Status of Accounting Standards",
+      "keywords": ["mandatory status", "Companies Act, 2013", "Section 133", "Central Government", "statute", "laws and local regulations", "notified ASs", "27 notified ASs", "MCA", "28 ASs earlier notified"],
+      "typical_question_signals": ["What is the status of Accounting Standards in India?", "Are Accounting Standards mandatory for all enterprises?", "How does the Companies Act affect the applicability of ASs?", "State the role of the Central Government in relation to Accounting Standards."],
+      "notes": "Regulatory/status topic; mostly theory and applicability rather than computation. Verified against source (2026-07-20)."
+    },
+    "M1-C1-U0-T5": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "Need for Convergence towards Global Standards",
+      "keywords": ["trans-national corporations", "raising funds from international markets", "comparability of financial statements", "uniformity", "rationalisation", "transparency", "global investment", "cross-border flow of money", "global listing"],
+      "typical_question_signals": ["Why is convergence towards global standards necessary?", "Explain the need for uniformity and comparability in financial reporting.", "How does convergence help global investment?", "What is the significance of cross-border flow of money in convergence?"],
+      "notes": "Conceptual/benefit-based topic (4 numbered reasons in source: raising funds, comparability, uniformity, global investment); no realistic computational angle. Verified against source (2026-07-20)."
+    },
+    "M1-C1-U0-T6": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "International Accounting Standard Board",
+      "keywords": ["International Accounting Standards Committee (IASC)", "London based", "June 1973", "IASB", "International Accounting Standards (IAS)", "professional accountancy bodies", "over 75 countries", "1 April 2001", "restructured"],
+      "typical_question_signals": ["Who is responsible for issuing IAS and IFRS?", "Explain the role of the IASB and the IASC.", "When was the IASB established and how did it replace the IASC?", "What is the significance of the IASC in the history of IFRS?"],
+      "notes": "History/institutional topic; no realistic computational angle. Verified against source (2026-07-20) - corrected during Tier 3 review: 'Standard Interpretations Committee' was misattributed here in the Tier 2 draft, moved to T7 where it actually belongs in the source text."
+    },
+    "M1-C1-U0-T7": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "International Financial Reporting Standards as Global Standards",
+      "keywords": ["International Financial Reporting Standards", "IFRS issued by IASB", "IAS issued by IASC", "Standard Interpretations Committee (SIC)", "IFRS Interpretations Committee (IFRIC)", "principles-based", "broad rules", "stock-exchange listing", "public companies"],
+      "typical_question_signals": ["What is meant by IFRS as global standards?", "Explain the composition of IFRS.", "Why are IFRS considered principles-based standards?", "How do IFRS affect public companies and stock exchanges?"],
+      "notes": "Definition/framework topic; no realistic computational angle. Verified against source (2026-07-20)."
+    },
+    "M1-C1-U0-T8": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "Becoming IFRS Compliant",
+      "keywords": ["adoption process", "convergence process", "IFRS compliant", "high quality compatible accounting standards", "alignment of standards", "Ind AS", "carve-outs", "Indian environment"],
+      "typical_question_signals": ["Differentiate between adoption and convergence.", "What is meant by becoming IFRS compliant?", "How do Ind AS relate to IFRS in India?", "Explain the difference between adoption and convergence in accounting standards."],
+      "notes": "Theory/comparison topic (Technique I Adoption vs Technique II Convergence); no realistic computational angle. Verified against source (2026-07-20)."
+    },
+    "M1-C1-U0-T9": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "What are Carve Outs/Ins in Ind AS?",
+      "keywords": ["carve-outs", "carve-ins", "terminology differences", "statement of profit and loss", "statement of comprehensive income", "statement of financial position", "removal of options", "difference in economic environment"],
+      "typical_question_signals": ["What are carve-outs and carve-ins in Ind AS?", "Explain the concept of carve-outs in relation to IFRS.", "Why are terminology differences treated differently in Ind AS?", "How do carve-outs arise from differences in economic environment?"],
+      "notes": "Definition/interpretation topic; no realistic computational angle. Verified against source (2026-07-20)."
+    },
+    "M1-C1-U0-T10": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "Convergence to IFRS in India",
+      "keywords": ["globalisation", "ICAI", "NFRA", "SEBI", "Reserve Bank of India (RBI)", "full convergence", "Task Force", "Ind AS", "Existing notified AS"],
+      "typical_question_signals": ["Explain the convergence to IFRS in India.", "What is the role of ICAI, NFRA, SEBI and RBI in convergence?", "Why is full convergence of Ind AS with IFRS significant?", "State the objectives behind convergence of Indian accounting standards."],
+      "notes": "Implementation/regulatory topic; mostly theory and policy rather than computation. Verified against source (2026-07-20)."
+    },
+    "M1-C1-U0-T11": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "What are Indian Accounting Standards (Ind AS)?",
+      "keywords": ["Ind AS", "IFRS converged standards", "Central Government of India", "ASB of ICAI", "NFRA", "MCA", "corresponding IAS", "IFRS number + 100 (e.g. IFRS 1 = Ind AS 101)"],
+      "typical_question_signals": ["What are Indian Accounting Standards (Ind AS)?", "How are Ind AS named and numbered?", "Explain the relationship between Ind AS and IFRS.", "What role does the Central Government play in issuing Ind AS?"],
+      "notes": "Definition/structure topic; no realistic computational angle. Verified against source (2026-07-20)."
+    },
+    "M1-C1-U0-T12": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "History of IFRS Converged Indian Accounting Standards (Ind AS)",
+      "keywords": ["2006", "IFRS", "Government of India", "2011", "postpone", "Budget Speech", "Arun Jaitley", "July 2014", "Companies (Indian Accounting Standards) Rules, 2015", "16 February 2015", "voluntary basis 1 April 2015", "mandatory basis 1 April 2016"],
+      "typical_question_signals": ["Trace the history of IFRS-converged Ind AS in India.", "When did India begin moving towards IFRS?", "How did the 2015 roadmap affect implementation of Ind AS?", "Explain the importance of the 2014 Budget Speech in the history of Ind AS."],
+      "notes": "History/timeline topic; no realistic computational angle. Verified against source (2026-07-20) - all dates/names (2006 start, 2011 original target, Arun Jaitley's July 2014 Budget Speech, 16 Feb 2015 Notification, voluntary/mandatory dates) confirmed exactly accurate, including the specific minister name."
+    },
+    "M1-C1-U0-T13": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "List of Ind AS",
+      "keywords": ["Ind AS 101", "IFRS 1", "First Time Adoption of Indian Accounting Standards", "Ind AS 102", "IFRS 2", "Share Based Payment", "Ind AS 115", "IFRS 15", "Revenue from contracts with customers", "Ind AS 110", "IFRS 10", "Consolidated Financial Statements", "Ind AS vis-a-vis AS mapping table"],
+      "typical_question_signals": ["List the notified Ind AS vis-à-vis IFRS.", "State the title or number of Ind AS 101 or IFRS 1.", "Which Ind AS correspond to IFRS 10 or IFRS 15?", "Identify the Ind AS related to share-based payment or revenue recognition."],
+      "notes": "List/numbering topic; no realistic computational angle. Verified against source (2026-07-20) - table entries confirmed exact matches."
+    },
+    "M1-C1-U0-T14": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "Roadmap for Implementation of Indian Accounting Standards (Ind AS): A Snapshot",
+      "keywords": ["Phase I", "Phase II", "mandatory basis", "voluntary basis", "net worth of INR 500 crore", "net worth of INR 250 crore", "listed companies", "unlisted companies", "SME exchange", "NBFCs", "Scheduled Commercial Banks", "Insurance companies", "RBI deferral", "IRDAI deferral"],
+      "typical_question_signals": ["Explain the roadmap for implementation of Ind AS.", "What are the Phase I and Phase II criteria for companies?", "How does the roadmap differ for NBFCs, banks and insurers?", "Which entities are exempt from applying Ind AS through the SME exchange route?"],
+      "notes": "Roadmap/criteria topic; mostly classification and timeline rather than computation. Verified against source (2026-07-20) - all net-worth thresholds and phase dates confirmed exactly accurate."
+    },
+    "M1-C1-U0-T15*": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "Summary",
+      "keywords": ["comparability", "consistency", "transparency", "globalisation", "IFRS convergence", "Ind AS"],
+      "typical_question_signals": ["Summarise the chapter in one paragraph.", "What are the key takeaways from the chapter?"],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20) - genuine standalone SUMMARY section exists after the roadmap content."
+    },
+    "M1-C1-U0-T16*": {
+      "chapter_id": "M1-C1-U0",
+      "chapter_name": "Introduction to Accounting Standards",
+      "topic_name": "Test Your Knowledge",
+      "keywords": ["Multiple Choice Questions", "non-corporate entities", "Institute of Chartered Accountants of India", "NFRA", "MCA", "transparency", "consistency", "comparability"],
+      "typical_question_signals": ["Which authority issues Accounting Standards for non-corporate entities?", "Which statement best describes the objective of Accounting Standards?", "What is the role of NFRA and MCA in the standards framework?"],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20) - genuine TEST YOUR KNOWLEDGE section with 5 MCQs + 4 theoretical questions + answers/hints exists at the end of the unit."
+    },
+    "M1-C2-U0-T1": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Introduction",
+      "keywords": ["framework", "preparation and presentation", "general purpose financial statements", "Accounting Standards Board", "ICAI", "July 2000", "development of new standards", "review of existing standards", "components of financial statements"],
+      "typical_question_signals": ["What is the framework for preparation and presentation of financial statements?", "Explain the significance of the framework.", "State the purpose of the framework issued by ICAI.", "How does the framework help in development of accounting standards?"],
+      "notes": "Purely theoretical/conceptual topic. Verified against source (2026-07-20)."
+    },
+    "M1-C2-U0-T2": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Purpose of the Framework",
+      "keywords": ["external users", "general-purpose financial statements", "preparation of financial statements", "Accounting Standards", "harmonisation", "alternative accounting treatments", "auditors", "interpretation of financial statements"],
+      "typical_question_signals": ["What is the purpose of the framework?", "How does the framework assist enterprises in preparing financial statements?", "Explain the role of the framework in harmonisation of accounting standards.", "Why is the framework useful to auditors and users?"],
+      "notes": "Purely theoretical/conceptual topic (6 stated purposes in source). Verified against source (2026-07-20)."
+    },
+    "M1-C2-U0-T3": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Status and Scope of the Framework",
+      "keywords": ["general-purpose financial statements", "external users", "special purpose financial reports", "tax purposes", "scope of framework", "Accounting Standard", "conflict", "prevail over"],
+      "typical_question_signals": ["What is the scope of the framework?", "How does the framework apply to general-purpose financial statements?", "Which reports fall outside the scope of the framework?", "What happens if an Accounting Standard conflicts with the framework?"],
+      "notes": "Mostly theoretical; focuses on applicability and hierarchy (AS prevails over framework in conflict). Verified against source (2026-07-20)."
+    },
+    "M1-C2-U0-T4": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Components of Financial Statements",
+      "keywords": ["Balance Sheet", "Statement of Profit and Loss", "Cash Flow Statement", "notes", "explanatory materials", "liquidity", "solvency", "profitability", "supplementary information"],
+      "typical_question_signals": ["What are the components of financial statements?", "Explain the role of the balance sheet, statement of profit and loss and cash flow statement.", "What information is provided by the cash flow statement?", "Why are notes and other statements included in financial statements?"],
+      "notes": "Purely theoretical/conceptual topic. Verified against source (2026-07-20)."
+    },
+    "M1-C2-U0-T5": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Objectives and Users of Financial Statements",
+      "keywords": ["financial position", "performance", "cash flows", "economic decisions", "investors", "employees", "lenders", "suppliers and creditors", "customers", "governments", "public"],
+      "typical_question_signals": ["What are the objectives of financial statements?", "Who are the users of financial statements?", "Why are investors and lenders interested in financial statements?", "How do governments and the public use financial statements?"],
+      "notes": "Purely theoretical/conceptual topic (7 user groups in source). Verified against source (2026-07-20)."
+    },
+    "M1-C2-U0-T6": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Fundamental Accounting Assumptions",
+      "keywords": ["going concern", "accrual basis", "consistency", "fundamental accounting assumptions", "disclosure", "net realisable values", "accounting policies", "foreseeable future"],
+      "typical_question_signals": ["What are the fundamental accounting assumptions?", "Explain the going concern concept.", "What is meant by accrual basis of accounting?", "When should a departure from consistency be disclosed?"],
+      "notes": "Mostly theoretical; some scenario-based exam questions test disclosures and application (source Illustration 1: going-concern vs non-going-concern P&L/BS). Verified against source (2026-07-20)."
+    },
+    "M1-C2-U0-T7": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Qualitative Characteristics of Financial Statements",
+      "keywords": ["understandability", "relevance", "materiality", "reliability", "comparability", "timeliness", "benefit and cost", "substance over form", "prudence", "neutrality"],
+      "typical_question_signals": ["Explain the qualitative characteristics of financial statements.", "What is meant by relevance and materiality?", "How do understandability and comparability improve financial statements?", "State the differences between relevance and reliability."],
+      "notes": "Purely theoretical/conceptual topic. Verified against source (2026-07-20) - correctly captures all reliability sub-elements (faithful representation, substance over form, neutrality, prudence, completeness)."
+    },
+    "M1-C2-U0-T8": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "True and Fair View",
+      "keywords": ["true and fair view", "performance", "financial position", "cash flows", "qualitative characteristics", "appropriate accounting standards", "financial statements"],
+      "typical_question_signals": ["What is meant by a true and fair view?", "How are financial statements judged to show a true and fair view?", "Explain the relationship between true and fair view and qualitative characteristics.", "What does a true and fair view imply for the financial statements?"],
+      "notes": "Purely theoretical/conceptual topic. Verified against source (2026-07-20)."
+    },
+    "M1-C2-U0-T9": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Elements of Financial Statements",
+      "keywords": ["asset", "liability", "equity", "income", "expense", "gains", "losses", "future economic benefits", "present obligation", "residual interest"],
+      "typical_question_signals": ["Define asset, liability, equity, income and expense.", "What is the difference between income and gains?", "Explain the recognition criteria for an asset and a liability.", "How is equity defined in the framework?"],
+      "notes": "Mostly theoretical; scenario-based questions test recognition criteria (source Example 2: custom-made machine liability recognition). Verified against source (2026-07-20)."
+    },
+    "M1-C2-U0-T10": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Measurement of Elements of Financial Statements",
+      "keywords": ["measurement", "historical cost", "current cost", "realisable value", "present value", "discounting", "discounting rate", "value in use", "recoverable value", "net cash inflows"],
+      "typical_question_signals": ["What are the different measurement bases used in financial statements?", "Distinguish between historical cost and current cost.", "How is present value used to measure an asset or liability?", "Explain realisable value and value in use."],
+      "notes": "One of the two sub-topics with a realistic computational/scenario angle (4 measurement bases, discounting formula, value-in-use vs recoverable value worked examples in source). Verified against source (2026-07-20)."
+    },
+    "M1-C2-U0-T11": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Capital Maintenance",
+      "keywords": ["capital maintenance", "financial capital maintenance", "current purchasing power", "physical capital maintenance", "retained profit", "historical cost", "closing price", "specific price indices", "capital to be maintained"],
+      "typical_question_signals": ["Explain the concept of capital maintenance.", "Differentiate between financial capital maintenance and physical capital maintenance.", "How is capital maintenance measured at current purchasing power?", "What is the effect of drawings and price changes on capital maintenance?"],
+      "notes": "Second sub-topic with a realistic computational/scenario angle (3 bases: historical cost, current purchasing power, physical capital maintenance, with worked numerical examples in source). Verified against source (2026-07-20)."
+    },
+    "M1-C2-U0-T12*": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Summary",
+      "keywords": ["summary", "components of financial statements", "users of financial statements", "fundamental accounting assumptions", "qualitative characteristics", "elements of financial statements", "measurement of elements", "capital maintenance"],
+      "typical_question_signals": ["Summarise the chapter on framework for financial statements.", "What are the key takeaways from the framework chapter?"],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20)."
+    },
+    "M1-C2-U0-T13*": {
+      "chapter_id": "M1-C2-U0",
+      "chapter_name": "Framework for Preparation and Presentation of Financial Statements",
+      "topic_name": "Test Your Knowledge",
+      "keywords": ["multiple choice questions", "going concern", "accrual basis", "consistency", "qualitative characteristics", "financial statements", "capital maintenance"],
+      "typical_question_signals": ["Which concept assumes the business will continue in operation?", "What is the meaning of accrual basis of accounting?", "Which qualitative characteristic relates to comparability?", "What is the correct description of going concern?"],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20) - genuine TEST YOUR KNOWLEDGE section with 5 MCQs + 2 theoretical + 3 scenario-based questions + answers/hints exists at the end of the unit."
+    },
+    "M1-C3-U0-T1": {
+      "chapter_id": "M1-C3-U0",
+      "chapter_name": "Applicability of Accounting Standards",
+      "topic_name": "Status of Accounting Standards",
+      "keywords": ["Accounting Standards Board (ASB)", "ICAI Council approval", "MCA notification dates (mandatory status)", "approved by MCA for Corporate entities", "cannot override laws and local regulations", "generally applicable to all enterprises (subject to exceptions)", "mandatory status implication", "preface to Accounting Standards (answers applicability questions)", "three applicability questions: enterprise / financial statement / financial item", "Companies Act, 2013 Section 129(1) compliance requirement", "Companies Act, 2013 Section 143(3)(e) auditor reporting compliance", "Section 129(5) disclosure when financial statements do not comply"],
+      "typical_question_signals": ["Explain the status of Accounting Standards - what makes them mandatory and from when?", "Accounting Standard cannot override laws/local regulations - why?", "List the three questions to assess whether an Accounting Standard is applicable.", "What must a company disclose if its financial statements do not comply with AS as required under the Companies Act?"],
+      "notes": "Mostly theoretical (status/mandatory-status/applicability-test theory); the Section 129/143(3)(e)/129(5) statutory references are recall-type, not computational. Verified against source (2026-07-20) - all three Companies Act section numbers confirmed exact."
+    },
+    "M1-C3-U0-T2": {
+      "chapter_id": "M1-C3-U0",
+      "chapter_name": "Applicability of Accounting Standards",
+      "topic_name": "Applicability of Accounting Standards",
+      "keywords": ["enterprise engaged in commercial, industrial or business activities", "exclusion when activities are not commercial/industrial/business (e.g., collecting donations)", "if any small proportion is commercial/industrial/business then AS applies to all activities", "materiality of items (omission/misstatement affects economic decisions)", "AS intended to apply only to material items", "Income-tax vs accounting standards (expense in P&L not always tax deductible)", "mandatory status implication for partnership firm (attest functions; adequate disclosures in reports)", "ICDSs under Income Tax Act, 1961 (Section 145(2))", "Income Computation and Disclosure Standards: ICDS I-X (Accounting Policies to Provisions/Contingent items)", "Companies classification into SMC and Non-SMC (Companies (Accounting Standards) Rules, 2021)", "Non-SMC comply with all Accounting Standards in entirety", "SMC relaxation/exemptions: AS 17 not applicable in entirety; partial relaxations for AS 15/AS 19/AS 20/AS 28/AS 29", "Non-company revised criteria effective for periods commencing on/after April 1, 2024", "Non-company entities: MSME vs Large (two levels)", "MSME conditions: unlisted equity/debt; not bank/FI/insurance; turnover not exceeding Rs250 crore; borrowings not exceeding Rs50 crore; not holding/subsidiary of non-MSME", "Large non-company entities comply in full with all AS", "MSME: AS 3/AS 17/AS 20/AS 24 not applicable in their entirety", "MSME partial non-application: AS 18 and AS 28 when turnover does not exceed Rs50 crore and borrowings do not exceed Rs10 crore and not holding/subsidiary of non-covered MSME", "MSME disclosure on exemptions/relaxations (disclose MSME status + compliance; disclose standards where exemption availed)"],
+      "typical_question_signals": ["Is Accounting Standard X applicable to this enterprise? (corporate vs non-company; charitable vs business activity)", "Assess applicability based on materiality: whether an item should be shown separately rather than clubbed.", "Classify the non-company entity as MSME or Large as per ICAI August 2024 criteria (turnover/borrowings/listing/bank-FI/insurance/holding-subsidiary).", "Which AS are not applicable in their entirety / where exemptions apply for MSMEs or SMCs?"],
+      "notes": "Largely classification/theory: (i) whether AS applies to the enterprise/financial statements/material item, and (ii) classification-based exemptions/relaxations using explicit thresholds (SMC vs Non-SMC; MSME vs Large; MSME turnover Rs250cr/borrowings Rs50cr; AS18/AS28 partial-exemption thresholds turnover Rs50cr/borrowings Rs10cr - note these are DIFFERENT threshold pairs, easy to conflate, must be tested separately). Verified against source (2026-07-20) - every section number, AS list, and threshold pair confirmed exact, including the easily-confused 250cr/50cr vs 50cr/10cr distinction."
+    }
+  }
+}
