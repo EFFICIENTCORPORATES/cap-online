@@ -1,7 +1,22 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "Bash(python -c \"import fitz; print\\('pymupdf ok', fitz.__doc__\\)\")",
+      "Bash(pdftotext -layout CAInter-AdvAcc-RTP-Jan2025-Q.pdf -)",
+      "Bash(awk 'BEGIN{p=1} /\\\\f/{p++} {print p\": \"$0}')",
+      "Bash(awk -F: '$1==1' \"C:/Users/Dell/AppData/Local/Temp/claude/g--EffCorp-Products-cap-online-cap-online/b879984c-509f-40c8-a21c-f2cb3e2b95a1/scratchpad/rtp_pages.txt\")",
+      "Bash(awk -F: '$1==23' \"C:/Users/Dell/AppData/Local/Temp/claude/g--EffCorp-Products-cap-online-cap-online/b879984c-509f-40c8-a21c-f2cb3e2b95a1/scratchpad/rtp_pages.txt\")",
+      "Bash(pdfinfo \"g:\\\\EffCorp_Products\\\\cap-online\\\\cap-online\\\\books\\\\question-bank\\\\Raw_PDF_Question_Bank_CA_Inter_Accounts\\\\CAInter-AdvAcc-RTP-Jan2025-Q.pdf\")",
+      "Bash(awk -F: '$1==12' \"C:/Users/Dell/AppData/Local/Temp/claude/g--EffCorp-Products-cap-online-cap-online/b879984c-509f-40c8-a21c-f2cb3e2b95a1/scratchpad/rtp_pages.txt\")",
+      "Bash(awk -F: '$1==4' \"C:/Users/Dell/AppData/Local/Temp/claude/g--EffCorp-Products-cap-online-cap-online/b879984c-509f-40c8-a21c-f2cb3e2b95a1/scratchpad/rtp_pages.txt\")",
+      "Bash(python -c \"import pypdf\")",
+      "Bash(awk -F: '$1>=3 && $1<=5' \"C:/Users/Dell/AppData/Local/Temp/claude/g--EffCorp-Products-cap-online-cap-online/b879984c-509f-40c8-a21c-f2cb3e2b95a1/scratchpad/rtp_pages.txt\")",
+      "Bash(pdfinfo \"CAInter-AdvAcc-RTP-May2025-Q.pdf\")",
+      "Bash(pdftotext -layout \"CAInter-AdvAcc-RTP-May2025-Q.pdf\" -)",
+      "Bash(awk 'BEGIN{p=1} {print} /\\\\f/{p++}')",
+      "Bash(pdftotext -layout \"CAInter-AdvAcc-RTP-May2025-Q.pdf\" \"pages_out.txt\")",
+      "Bash(python3 -c ' *)"
     ]
   }
 }

@@ -7,7 +7,12 @@
 > or to extend/refresh the reusable `books/question-bank/metadata-index/topic-index.json`.
 > Built from the AS 2 (Valuation of Inventories) audit — see
 > `books/question-bank/metadata-index/AS2_Question_Reference.html` as the worked example
-> of the expected final deliverable shape.
+> of the expected final deliverable shape. AS 10 (Property, Plant and Equipment) is a second
+> worked example — `books/question-bank/metadata-index/AS10_Question_Reference.html` — and is
+> the one to check for how partial/gap-flagged coverage should look when a source wasn't
+> fully auditable in one pass. **This skill is now one input into a larger pipeline** — see
+> §11 below and `books/question-bank/metadata-index/question-book-implementation-plan.md`
+> before starting new chapter work.
 
 ---
 
@@ -233,3 +238,48 @@ one-off question-bank summary be the only place the correct numbering lives. Fut
 (for other chapters/standards) should be able to skip re-reading a unit already indexed
 correctly here. Bump `topic-index.json`'s `_readme`/`generated` fields when you touch it, and
 validate the file is still well-formed JSON with the expected unit count before moving on.
+
+**Note (2026-07-20):** `topic-index.json` predates the canonical `M{module}-C{chapter}-U{unit}-T{topic}`
+ID scheme now in use (see §11) — its AS 2/AS 10 entries are accurate but its ad-hoc `ref`
+numbering doesn't match the canonical IDs used everywhere else going forward. Treat it as
+historical/superseded rather than extending it further; new work should write directly into
+`topic-keyword-index.json` (§11) instead.
+
+## 11. This skill inside the larger Question Bank Book pipeline
+
+This skill covers the *audit* — finding and verifying every question on a topic. It now feeds
+a bigger effort: a full per-chapter **Question Bank Book** (question → answer → rubric →
+common mistakes, topic-ordered, cost-optimized across a 3-tier AI/Python pipeline). Before
+starting any new chapter's work, read
+`books/question-bank/metadata-index/question-book-implementation-plan.md` in full — it has the
+phase breakdown, tier assignments, ready-to-paste prompts, and the current batch/sequencing
+state. Conventions this skill's output must now stay compatible with:
+
+- **Topic IDs**: use the canonical `M{module}-C{chapter}-U{unit}-T{topic}` form from
+  `books/concept-book/syllabus-engine/data/0-ca-inter-adv-accounts-subtopics-marks-weightage.json`
+  (e.g. `M2-C5-U1-T1.7`), not an ad-hoc `ref` string. Where a unit has real content beyond its
+  last ICAI-numbered topic (AS 10 is the known example — everything after §2.10 is unnumbered
+  in the source itself), assign sequential IDs continuing from the last real number, suffixed
+  with an asterisk (`M2-C5-U2-T2.11*`) and labeled "unnumbered in ICAI source, sequence
+  assigned for indexing purposes only" — never silently invent a number that looks official.
+- **Missing marks**: apply an ICAI-typical default (2 marks for MCQs is near-universal) but
+  always label it `"Author Guessed"` — never present an inferred figure as if ICAI printed it.
+- **Duplicate/near-identical questions across attempts**: tag the earliest attempt as **OP**
+  (original) and every later ≥95%-text-similar match (compared with digits/currency stripped
+  out) as **PP** ("Practice Perfect"), with a pointer back to the OP. This detection is pure
+  Python (Tier 1, §"Cost-control architecture" below) — no AI needed for the matching itself.
+- **Rubrics ("Important Computational Steps")**: author-inferred step-wise mark allocations,
+  since ICAI's MTP/RTP suggested-answers essentially never publish an official marking scheme.
+  These will later drive AI-based grading of student answers, so they are Tier-3-only — never
+  delegate rubric generation to a cheap model, and label them `"rubricSource": "author-inferred,
+  not ICAI-published"` unless the source answer genuinely shows its own breakdown.
+- **Cost-control architecture**: classify every task as Tier 1 (fully deterministic → spec by
+  Claude, Python written by GitHub Copilot/Gemini, not Claude), Tier 2 (40–90% deterministic →
+  prompt written by Claude, run by the user via Blackbox/Copilot/Gemini in VS Code, output
+  brought back for review), or Tier 3 (creative/high-stakes/review → Claude directly). When you
+  write a Tier 2 prompt, always point it at the exact relative file path(s) it needs to read
+  for grounding (source unit `.md`, the relevant slice of the taxonomy JSON, etc.) rather than
+  describing content abstractly — the external tool has no memory of this conversation's
+  context. OCR for scanned/image-only PDFs uses Tesseract directly (via PyMuPDF for page
+  rendering, no Poppler needed — see the implementation plan for the verified snippet), not an
+  LLM at all.

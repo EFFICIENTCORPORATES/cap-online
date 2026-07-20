@@ -4,6 +4,32 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-07-20 — AS2/AS10 question-bank audits + Question Bank Book project kicked off
+
+**Read this entry first if you're picking up the "Question Bank Book" work on a fresh clone/session — it explains exactly where things stand and what to do next.**
+
+**What exists now:**
+- `books/question-bank/metadata-index/AS2_Question_Reference.html` and `AS10_Question_Reference.html` — accuracy-audited, topic-tagged references of every genuine question found in the MTP/RTP/PYQ/ICAI-Practice question bank for AS 2 (Valuation of Inventories) and AS 10 (Property, Plant & Equipment) respectively. Each has a topic-wise marks-weightage summary plus MCQ/Descriptive/Integrated detail tables with page refs (Q and Ans located independently, never inferred from each other), marks, concepts tested, and "Common Student Mistakes." **AS10's audit has two known gaps, clearly flagged inside the file itself: PYQ May 2026 (scanned PDF, no Ans doc exists) and ICAI-Practice Model Test Papers 6–8 were never audited.**
+- `books/question-bank/metadata-index/topic-index.json` — a reusable index of ICAI base-material unit structure (currently has full/accurate numbered sub-topic breakdowns only for AS 2 and AS 10, built by directly reading each unit's source `.md`/`.pdf` — not guessed). Superseded in spirit by the newer `topic-keyword-index.json` planned in Phase 0 below, but still useful as-is.
+- `_claude/skills/SKILL-question-bank-summary-making.md` — the accuracy-first methodology for auditing a chapter's questions across the question bank (source-of-truth locations, false-positive traps like FIFO-for-investments-vs-inventory, independent Q/Ans page verification rule, speed-vs-accuracy tradeoff handling, marks-aggregation rules). Load this before doing any further chapter audits.
+- `books/question-bank/metadata-index/question-book-implementation-plan.md` — the actual build plan for turning these audits into a full **"Question Bank Book"**: one flowing per-chapter document (Q.N → metadata → question → answer → rubric → common mistakes), topic-ordered, with OP/PP duplicate-question linking and per-question time estimates. Read this file in full before doing any Question Bank Book work — it has the phase breakdown, tier assignments (Python / cheap model / Claude), ready-to-paste prompts for Phase 0 and Phase 1, and the Tesseract OCR install steps.
+- `books/concept-book/syllabus-engine/data/0-ca-inter-adv-accounts-subtopics-marks-weightage.json` — pre-existing, NOT built this session, but central to the plan: canonical `M{module}-C{chapter}-U{unit}-T{topic}` IDs for all 36 units across the syllabus's 15 ICAI chapters. Confirmed by cross-checking against a direct read of the AS2/AS10 source units that its numbering is accurate.
+
+**Key decisions made with Pranav this session (don't re-litigate these):**
+- The "Question Bank Book" per chapter will have: Q.N sequence → metadata (MCQ-Direct/MCQ-Scenario/Descriptive, attempt, Q.No in that attempt, marks, estimated time = marks×1.8 min, topic tags in the `M-C-U-T` format, comprehensive-question flag for ≥3 distinct topic tags) → question → official answer → "Important Computational Steps" (rubric, author-inferred since ICAI doesn't publish official step-marks — will later drive AI-based grading of student answers, so this stays Claude-only, never delegated to a cheap model) → "Common Student Mistakes."
+- Missing marks: apply an ICAI-typical default (2 marks is near-universal for MCQs) but always label it `"Author Guessed"`, never silently presented as ICAI's own figure.
+- Duplicate/near-identical questions across attempts get an **OP** (original, earliest attempt) / **PP** ("Practice Perfect", later near-duplicates ≥95% text-similar after stripping numbers) tagging system — PP entries carry a pointer back to their OP.
+- Ordering within a chapter's book follows the ICAI syllabus's own topic sequence, not the order questions happened to appear across exam attempts.
+- Cost-control architecture (Pranav's framing, agreed): **Tier 1 fully deterministic → Python** (written by GitHub Copilot/Gemini in VS Code, not Claude); **Tier 2, 40–90% deterministic → cheap/free model** (Blackbox/Copilot/Gemini in VS Code, but the *prompt* is always authored by Claude); **Tier 3, creative/high-stakes/review → Claude directly**. OCR for scanned PDFs uses Tesseract (a dedicated tool), not an LLM at all.
+- Phase 0 (building one single master `topic-keyword-index.json` covering all 36 units, so cross-chapter tagging for integrated questions works cleanly) runs **before** any further chapter's question extraction, in 3 batches by ICAI chapter number: **Batch 1 = Chapters 1–5 (17 units)**, **Batch 2 = Chapters 6–10 (13 units)**, **Batch 3 = Chapters 11–15 (6 units)** — note this split is workload-uneven (Batch 1 is ~3x Batch 3), which was flagged to Pranav and accepted as-is.
+
+**Immediate next steps (in order):**
+1. Build `books/question-bank/metadata-index/topic-keyword-index.json` for Batch 1 (Chapters 1–5) — the Phase 0 prompt is in `question-book-implementation-plan.md`, run once per unit via Gemini/Copilot, Claude reviews the drafts before merging (AS2/AS10 already have deep source familiarity from the audits, so those two units should be fast).
+2. Once Phase 0 Batch 1 is done, Phase 1 (question+answer extraction) can start for the Batch 1 chapters — or, per Pranav's earlier framing, interleave so the AS2/AS10 book doesn't wait on all 17 Batch-1 units' keyword indexes to finish first (this specific interleaving question was raised but not yet finally answered — ask Pranav to confirm before assuming).
+3. Separately, and lower priority: finish the two flagged AS10 audit gaps (PYQ May 2026, ICAI-Practice MTP 6–8) if a complete AS10 reference is needed before the Question Bank Book work reaches AS10.
+
+---
+
 ## 2026-06-22 — CA Foundation strategy slides + HTML-to-PDF skill
 
 Created `books/strategy-book/working/exam-strategyFoundation.html` (7-slide interactive dark-background presentation with beat-wise JS animation engine for CA Foundation Sep 2026 batch). Generated `exam-strategyFoundation-print.html` (static print copy, mm/pt sizing, all content visible) and `exam-strategyFoundation.pdf` (7 pages, 150 KB, A4 landscape) via Chrome headless.
