@@ -1,0 +1,202 @@
+{
+  "sourceFile_Q": "CAInter-AdvAcc-MTP-ICAI-Practice-Q.pdf",
+  "modelTestPaper": 3,
+  "physicalPageRange": "31-39",
+  "questions": [
+    {
+      "qNoInPaper": "1(i)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 31,
+      "caseScenario": "MBB Ltd - 10% Pref Share Capital ₹2,500 lacs; Equity Share Capital ₹8,000 lacs; CRR ₹1,000 lacs; Securities Premium ₹800 lacs; General Reserve ₹6,000 lacs; P&L A/c ₹300 lacs; Cash ₹1,650 lacs; Investments (MV ₹1,500 lacs) ₹3,000 lacs. Redeems all preference shares @10% premium, buys back 25% equity shares @₹15/share. Investments MV ₹1,000 lakhs sold for ₹3,000 lakhs, raises bank loan ₹2,000 lakhs.",
+      "questionTextHtml": "<p>The amount of Profit/Loss on Sale of Investment is:</p><p>(a) ₹1,500 lakhs Profit<br>(b) ₹1,000 lakhs Profit<br>(c) ₹2,000 lakhs Loss<br>(d) ₹1,000 lakhs Loss</p>"
+    },
+    {
+      "qNoInPaper": "1(ii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 31,
+      "caseScenario": "MBB Ltd - same as 1(i)",
+      "questionTextHtml": "<p>Securities Premium available for Buyback after redemption of Preference Shares:</p><p>(a) ₹550 lakhs<br>(b) ₹800 lakhs<br>(c) Can't utilize securities premium for buyback<br>(d) ₹350 lakhs</p>"
+    },
+    {
+      "qNoInPaper": "1(iii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 32,
+      "caseScenario": "MBB Ltd - same as 1(i)",
+      "questionTextHtml": "<p>Total amount to be transferred to Capital Redemption Reserve:</p><p>(a) ₹2,000 lakhs<br>(b) ₹4,500 lakhs<br>(c) ₹2,500 lakhs<br>(d) ₹1,750 lakhs</p>"
+    },
+    {
+      "qNoInPaper": "1(iv)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 32,
+      "caseScenario": "MBB Ltd - same as 1(i)",
+      "questionTextHtml": "<p>Cash balance after buyback:</p><p>(a) ₹1,150 lakhs<br>(b) ₹2,200 lakhs<br>(c) ₹3,250 lakhs<br>(d) ₹900 lakhs</p>"
+    },
+    {
+      "qNoInPaper": "2(i)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 32,
+      "caseScenario": "Suman Ltd - manufactures/sells electronics, installation services + 1-year free warranty. Beach Resorts bought 5 ACs @₹45,000 each (incl. ₹1,000 installation fee each), ₹500/AC trade discount. Order placed 15.3.2024, paid 20.3.2024, delivered 27.3.2024, installation completed 5.4.2024.",
+      "questionTextHtml": "<p>How much revenue should be recognised by the Company as on March 31, 2024:</p><p>(a) ₹2,25,000<br>(b) ₹2,17,500<br>(c) ₹2,00,000<br>(d) ₹2,30,000</p>",
+      "notes": "AS9 revenue recognition."
+    },
+    {
+      "qNoInPaper": "2(ii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 32,
+      "caseScenario": "Suman Ltd - same as 2(i)",
+      "questionTextHtml": "<p>How much revenue should be recognised by the Company in the financial year 2024-25:</p><p>(a) ₹5,000<br>(b) ₹2,20,000<br>(c) ₹10,000<br>(d) ₹2,40,000</p>"
+    },
+    {
+      "qNoInPaper": "2(iii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 32,
+      "caseScenario": "Suman Ltd - same as 2(i)",
+      "questionTextHtml": "<p>What will be the accounting for trade discount:</p><p>(a) The same will be recognised separately in the profit and loss.<br>(b) The trade discounts are deducted in determining the revenue.<br>(c) Trade discount will be recognised after one year, when the warranty will be over.<br>(d) Trade discount will be recognised after installation is complete.</p>"
+    },
+    {
+      "qNoInPaper": "2(iv)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 33,
+      "caseScenario": "Suman Ltd - same as 2(i)",
+      "questionTextHtml": "<p>Is the Company required to do any accounting for 1 year warranty provided by it:</p><p>(a) No accounting treatment is required till some warranty claim is actually received by the Company.<br>(b) As there exists a present obligation to provide warranty to customers for 1 year, the Company should estimate the amount that it may have to incur considering various factors including past trends and create a provision as per AS 29.<br>(c) Accounting for claims will be done on cash basis i.e. expense will be recognised when expense is made.<br>(d) As the Company is not charging separately for the warranty provided, there is no need to create any provision.</p>",
+      "notes": "AS29 provisions."
+    },
+    {
+      "qNoInPaper": "3(i)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 33,
+      "caseScenario": "X Limited - SAP ERP implementation, cost ₹25,00,000, 15 months required. Implementation started June 2022, not finished in 15 months, actually implemented May 2024. ₹1,00,000/year maintenance post-implementation. Vendor refunded ₹2,00,000 due to delay. Company recognised intangible asset Sept 2023 (15 months from June 2022). After 2 years, upgraded to latest version for ₹7,00,000.",
+      "questionTextHtml": "<p>On which date the Intangible asset should be recognised:</p><p>(a) April 2022 (When it was decided that SAP ERP is to be implemented)<br>(b) June 2022 (When the implementation work started)<br>(c) September 2023 (When the implementation work should have completed as per agreed terms)<br>(d) May 2024 (When the SAP actually got implemented)</p>",
+      "notes": "AS26 intangible assets."
+    },
+    {
+      "qNoInPaper": "3(ii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 33,
+      "caseScenario": "X Limited - same as 3(i)",
+      "questionTextHtml": "<p>At what amount the SAP ERP should be initially recognised as 'intangible asset':</p><p>(a) ₹25,00,000<br>(b) ₹26,00,000<br>(c) ₹23,00,000<br>(d) ₹32,00,000</p>"
+    },
+    {
+      "qNoInPaper": "3(iii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 34,
+      "caseScenario": "X Limited - same as 3(i)",
+      "questionTextHtml": "<p>How should the annual maintenance and updation expenses be accounted for:</p><p>(a) Should be capitalised with 'Intangible Asset'<br>(b) Should be recognised as a separate 'Intangible Asset'<br>(c) Should be recognised as expense in Profit and Loss annually.<br>(d) No accounting is required</p>"
+    },
+    {
+      "qNoInPaper": "3(iv)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 34,
+      "caseScenario": "X Limited - same as 3(i)",
+      "questionTextHtml": "<p>During the implementation period, how the expenditure incurred will be accounted for:</p><p>(a) It will be expensed in profit and loss as and when incurred<br>(b) It will be recognised as an asset 'Intangible asset under development'<br>(c) It will only be disclosed in notes to accounts and will be recognised when complete<br>(d) It will be recognised as an item of Property, Plant and Equipment</p>"
+    },
+    {
+      "qNoInPaper": "4",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 34,
+      "questionTextHtml": "<p>Vijay Ltd. borrowed ₹30 lakh at interest rate of 5% per annum and purchased plant and machinery for ₹60 lakh (using borrowed funds) and started production. It took 1 year time for Vijay Ltd. to create optimum market for the goods manufactured and generate revenue. How much borrowing cost can be capitalised with cost of plant and machinery:</p><p>(a) ₹1.5 lakh<br>(b) ₹3 Lakh<br>(c) Nil<br>(d) ₹5 Lakh</p>",
+      "notes": "AS16 borrowing costs. Part of a '4 MCQs of 2 Marks each: Total 8 Marks' standalone block (Q4-Q7, only 3 shown here per OCR; possible 4th question missing/merged - flagged)."
+    },
+    {
+      "qNoInPaper": "5",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 34,
+      "questionTextHtml": "<p>The cost of inventories of items that are not ordinarily interchangeable and goods or services produced and segregated for specific projects should be assigned using following cost formula:</p><p>(a) By specific identification of their individual costs<br>(b) First-in, First-out (FIFO) Method<br>(c) Weighted average cost formula<br>(d) The formula used should reflect the fairest possible approximation to the cost incurred in bringing the items of inventory to their present location and condition.</p>",
+      "notes": "AS2 inventories."
+    },
+    {
+      "qNoInPaper": "6",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 34,
+      "questionTextHtml": "<p>Securities held as stock-in-trade held by an entity are:</p><p>(a) Investments<br>(b) Not Investments<br>(c) May or may not be Investments<br>(d) Not an asset for entity</p>",
+      "notes": "AS13 investments."
+    },
+    {
+      "qNoInPaper": "1(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 10,
+      "pageQ": 35,
+      "questionTextHtml": "<p>A Ltd. purchased on 1st April, 2023 8% convertible debenture in C Ltd. of face value of ₹2,00,000 @₹108. On 1st July, 2023 A Ltd. purchased another ₹1,00,000 debentures @₹112 cum interest. On 1st October, 2023 ₹80,000 debentures were sold @₹105. On 1st December, 2023, C Ltd. give option for conversion of 8% convertible debentures into equity share of ₹10 each. A Ltd. received 5,000 equity shares in C Ltd. in conversion of 25% debentures held on that date. The market price of debenture and equity share in C Ltd. on 31st December, 2023 is ₹110 and ₹15 respectively. Interest on debenture is payable each year on 31st March, and 30th September. Prepare investment account in the books of A Ltd. on average cost basis for the accounting year ended 31st December, 2023.</p>"
+    },
+    {
+      "qNoInPaper": "1(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 35,
+      "questionTextHtml": "<p>A company incorporated in June 2023, has setup a factory within a period of 8 months with borrowed funds. The construction period of the assets had reduced drastically due to usage of technical innovations by the company and the company is able to justify the reasons for the same. Whether interest on borrowings for the period prior to the date of setting up the factory should be capitalized although it has taken less than 12 months for the assets to get ready for use. You are required to comment on the necessary treatment with reference to AS 16.</p>"
+    },
+    {
+      "qNoInPaper": "2 [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 14,
+      "pageQ": 35,
+      "questionTextHtml": "<p>You are required to prepare a Balance Sheet as at 31st March 2024, as per Schedule III of the Companies Act, 2013, from the following information of Mehar Ltd.: Term Loans (Secured) ₹40,00,000; Trade payables ₹45,80,000; Cash and Bank Balances ₹38,40,000; Staff Advances ₹2,20,000; Other advances (given by Loan from other co.) ₹14,88,000; Provision for Taxation ₹10,20,000; Securities Premium ₹19,00,000; Loose Tools ₹2,00,000; General Reserve ₹62,00,000; Plant and Machinery (WDV) ₹2,14,00,000 / Investments (Non-current) ₹9,00,000; Profit for the year ₹32,00,000; Trade receivables ₹49,00,000; Miscellaneous Expenses ₹2,32,000; Loan from other parties ₹8,00,000; Provision for Doubtful Debts ₹80,000; Stores ₹16,00,000; Finished Goods ₹30,00,000. Additional info: 1. Share Capital consists of (a) 1,20,000 Equity Shares of ₹100 each fully paid up, (b) 40,000 10% Redeemable Preference Shares of ₹100 each fully paid up. 2. Write off the amount of Miscellaneous Expenses in full, amounting ₹2,32,000.</p>",
+      "notes": "OCR-garbled tabular data; row pairing reconstructed, needs verification against actual PDF."
+    },
+    {
+      "qNoInPaper": "3(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 7,
+      "pageQ": 35,
+      "questionTextHtml": "<p>You are required to give the necessary journal entry at the inception of lease to record the asset taken on finance lease in books of lessee from the following information: Lease period = 5 years; Annual lease rents = ₹50,000 at the end of each year. Guaranteed residual value = ₹25,000; Fair Value at the inception (beginning) of lease = ₹2,00,000; Interest rate implicit on lease is 12.6% (Discounted rates for year 1 to 5 are .890, .790, .700, .622 and .552 respectively).</p>"
+    },
+    {
+      "qNoInPaper": "3(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 7,
+      "pageQ": 36,
+      "questionTextHtml": "<p>Ram Ltd. purchased machinery for ₹80 lakhs (useful life 4 years and residual value ₹8 lakhs). Government grant received was ₹32 lakhs. The grant had to be refunded at the beginning of third year. Show the Journal Entry to be passed at the time of refund of grant and the value of the fixed assets in the third year and the amount of depreciation for remaining two years, if the grant had been credited to Deferred Grant A/c.</p>"
+    },
+    {
+      "qNoInPaper": "4 [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 14,
+      "pageQ": 36,
+      "questionTextHtml": "<p>Robert Ltd. and Diamond Ltd. give the following information as at 31.03.2024 (₹ in lakhs, Robert Ltd / Diamond Ltd): Equity Share Capital (fully paid shares of ₹10 each) 22,500 / 9,000; Securities Premium 4,500 / -; Foreign Project Reserve - / 465; General Reserve 14,250 / 4,800; Profit and Loss Account 4,305 / 1,162.5; 12% Debentures - / 1,500; Trade payables 1,800 / 694.5; Provisions 2,745 / 1,053; Land and Buildings 9,000 / -; Plant and Machinery 21,000 / 7,500; Furniture, Fixtures and Fittings 3,456 / 2,550; Inventory 11,793 / 6,061.5; Trade receivables 3,180 / 1,650; Cash at Bank 1,671 / 913.5. All bills receivable held by Diamond Ltd. were Robert Ltd.'s acceptances. On 15 April 2024, Robert Ltd. took over Diamond Ltd. in an amalgamation in the nature of merger. Consideration: Robert Ltd. would allot 3 fully paid equity shares of ₹10 each at par for every 2 shares held in Diamond Ltd. 12% debentures in Diamond Ltd. converted into 13% debentures in Robert Ltd. of the same amount and denomination. Trade receivables/payables detail given (Creditors 1,620/694.5, Bills Payable 180/- = 1,800/694.5; Debtors 3,180/1,530, Bills Receivable -/120 = 3,180/1,650). Amalgamation expenses ₹1.5 lakhs borne by Robert Ltd. Required: Prepare Robert Ltd.'s Balance Sheet immediately after the merger.</p>"
+    },
+    {
+      "qNoInPaper": "5 [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 14,
+      "pageQ": 37,
+      "questionTextHtml": "<p>H Ltd. and its subsidiary S Ltd. give the following information as on 31st March, 2024 (H Ltd / S Ltd): Equity Share Capital (fully paid shares of ₹10 each) 12,00,000 / 2,00,000; General Reserve 4,35,000 / 1,55,000; Cr. Balance in Profit and Loss Account 2,80,000 / 65,000; Trade Payables 3,22,000 / 1,23,000; Machinery 6,40,000 / 1,80,000; Furniture 3,75,000 / 34,000; Shares in S Ltd. - 16,000 shares @₹20 each 3,20,000 / -; Inventories 2,68,000 / 62,000; Trade Receivables 4,70,000 / 2,35,000; Cash and Bank 1,64,000 / 32,000. H Ltd. acquired 80% shares of S Ltd. on 1st April, 2023. On acquisition date, General Reserve and P&L A/c of S Ltd. stood at ₹50,000 and ₹30,000 respectively. Machinery (book value ₹2,00,000) and Furniture (book value ₹40,000) of S Ltd. revalued at ₹3,00,000 and ₹30,000 respectively on 1st April 2023 for purpose of fixing share price (WDV depreciation rates: Machinery 10%, Furniture 15%). Trade Payables of H Ltd. include ₹35,000 due to S Ltd. for goods supplied since acquisition, charged at 10% above cost. Inventories of H Ltd. include goods costing ₹55,000 (cost to H Ltd.) purchased from S Ltd. Required: prepare Consolidated Balance Sheet of H Ltd. with its subsidiary as at 31st March, 2024.</p>"
+    },
+    {
+      "qNoInPaper": "6(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 38,
+      "questionTextHtml": "<p>'Accounting Standards standardize diverse accounting policies with a view to eliminate the non-comparability of financial statements and improve the reliability of financial statements.' Discuss and explain the benefits of Accounting Standards.</p><p>OR</p><p>XYZ Ltd. proposes to declare 10% dividend out of General Reserves due to inadequacy of profits in the year ending 31-03-2024. From the following particulars ascertain the amount that can be utilized from general reserves, according to the Companies Rules, 2014: 8,00,000 Equity Shares of ₹10 each fully paid up ₹80,00,000; General Reserves ₹25,00,000; Revaluation Reserves ₹6,50,000; Net profit for the year ₹1,42,500. Average rate of dividend during the last five years has been 12%.</p>"
+    },
+    {
+      "qNoInPaper": "6(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 5,
+      "pageQ": 39,
+      "questionTextHtml": "<p>Following is the cash flow abstract of Alpha Ltd. for the year ended 31st March, 2024: Inflows - Opening cash and bank balance ₹80,000; Share capital shares issued ₹5,00,000; Collection from Trade Receivables ₹3,50,000; Sale of Machinery ₹70,000 / Outflows - Payment for Account Payables ₹90,000; Salaries and wages ₹25,000; Payment of overheads ₹15,000; Machinery acquired ₹4,00,000; Debentures redeemed ₹50,000; Bank loan repaid ₹2,50,000; Tax paid ₹1,55,000; Closing cash and bank balance ₹15,000; Total ₹10,00,000 both sides. Prepare Cash Flow Statement for the year ended 31st March, 2024 in accordance with AS 3.</p>"
+    },
+    {
+      "qNoInPaper": "6(c) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 5,
+      "pageQ": 39,
+      "questionTextHtml": "<p>M/s Shrikant operates a number of retail outlets to which goods are invoiced at wholesale price which is cost plus 25%. These outlets sell the goods at the retail price which is wholesale price plus 20%. Following is the information regarding one of the outlets for the year ended 31.3.2024: Stock at the outlet 1.4.2023 ₹45,000; Goods invoiced to the outlet during the year ₹4,86,000; Gross profit made by the outlet ₹90,000; Goods lost by fire ?; Expenses of the outlet for the year ₹30,000; Stock at the outlet 31.3.2024 ₹54,000. Required: prepare [a] Outlet Stock Account [b] Outlet Profit & Loss Account [c] Stock Reserve Account for the year ended 31.3.2024.</p>"
+    }
+  ],
+  "extractionNotes": "Extracted via direct OCR (Tesseract) + manual structuring. Q4-Q6 standalone MCQ block header count vs. sub-questions shown has a possible 1-question discrepancy (see notes on Q4) - flagged not silently reconciled."
+}

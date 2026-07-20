@@ -4,6 +4,48 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-07-20 (latest) — Phase 1 extraction fully delegated (MTP/RTP/PYQ/ICAI-Practice); Batch 1 book pivot
+
+**Continuation of the same session — read the two entries below first if picking this up cold.**
+
+**Pivot:** Pranav asked to finish the Batch 1 (10-unit) Question Bank Book first, before starting Batch 2/3 Phase 0. Since Phase 1 (question extraction) is naturally per-source-paper not per-chapter, decided (Pranav's call) to **extract every question from every source paper once now**, then tag against Batch 1's keyword index only — non-Batch-1 matches wait for Batch 2/3's indexes later. This avoids re-scanning the same source papers three times.
+
+**Delegation across tools, per Pranav's request:**
+
+- Wrote `phase1-mtp-prompts.md` (5 prompts, 18 MTP attempts/36 files), `phase1-rtp-prompts.md` (3 prompts, 7 RTP files), `phase1-pyq-prompts.md` (3 prompts, 7 PYQ attempts incl. the null-Q/null-Ans edge cases) — for Pranav to run through Gemini/Copilot/Blackbox. **Not yet run as of this entry.**
+- ICAI-Practice compilation (scanned, 101+111 pages) was assigned to me directly since it needed OCR. Built and verified an OCR pipeline (PyMuPDF + pytesseract, see the entry below for the snippet) and OCR'd both PDFs successfully.
+- **I hand-extracted Model Test Papers 1–4's questions myself** (reading the OCR text directly) — written to `books/question-bank/metadata-index/icai-practice-extraction/icai_practice_MTP{1,2,3,4}_Q_extracted.json`. Partway through MTP5, Pranav pointed out that once OCR is done, structuring plain OCR text into JSON is mechanically identical to what the other three tools are doing for MTP/RTP/PYQ — no longer needs a premium model. **Correct call — I agreed and stopped doing it by hand.**
+- Copied `icai_practice_Q_ocr.txt` / `icai_practice_Ans_ocr.txt` (the full OCR dumps) into the repo at `books/question-bank/metadata-index/icai-practice-extraction/` so Tier 2 tools can actually read them (they'd been sitting in Claude's own scratchpad temp dir, inaccessible to VS Code extensions). Wrote `phase1-icai-practice-prompts.md` (2 prompts: extract MTP5-8, then match answers for all 8 papers against the Ans OCR text, using my MTP1-4 files as the format reference). **Not yet run.**
+
+**Lesson for future sessions:** OCR (image→text) is genuinely Tier 1/mechanical and fine to do myself via Tesseract. But *structuring* OCR'd text into schema'd JSON is Tier 2 work like any other source file — don't keep doing that by hand past the first paper or two once the OCR output is confirmed clean; write the prompt and hand it off. Recognize this pivot point earlier next time instead of grinding through several papers first.
+
+**Current state:** all four Phase 1 prompt sets (MTP, RTP, PYQ, ICAI-Practice) are written and ready. Nothing to do until Pranav runs them and brings back outputs. Next real work is reviewing/merging those 8 batches of JSON, then Phase 2 (tagging against Batch 1's `topic-keyword-index.json`), then Phases 3–8 to produce the finished Batch 1 book.
+
+---
+
+## 2026-07-20 (later) — Phase 0 Batch 1 complete: topic-keyword-index.json (10/36 units)
+
+**Continuation of the AS2/AS10 audit session (see the entry below this one for full background — read that first if this is your first time picking up the Question Bank Book work).**
+
+**What happened this session:**
+- Rebatched Phase 0 to Chapters 1–4 / 5–9 / 10–15 (10/17/9 units, replacing the earlier 17/13/6 split) — AS 2 and AS 10 now sit in Batch 2, not Batch 1.
+- Verified Tesseract 5.5.0 install and built a working OCR pipeline: **PyMuPDF (`fitz`) + `pytesseract`**, no Poppler needed — simpler than the originally-planned `pdf2image` route. Confirmed end-to-end against the ICAI-Practice compilation.
+- Wrote `books/question-bank/metadata-index/phase0-batch1-prompts.md` — 10 fully-instantiated Phase 0 prompts (real file paths, real topic scaffolds pulled from the taxonomy JSON), one per Batch 1 unit, ready to paste into Gemini/Copilot/Blackbox.
+- **Ran all 10 prompts and completed the full Tier 3 review + merge cycle.** `books/question-bank/metadata-index/topic-keyword-index.json` now has **10/36 units, 114 topics**: M1-C1-U0 (Intro to AS), M1-C2-U0 (Framework), M1-C3-U0 (Applicability), M1-C4-U1 (AS1), M1-C4-U2 (AS3 Cash Flow), M1-C4-U3 (AS17 Segment Reporting), M1-C4-U4 (AS18 Related Party), M1-C4-U5 (AS20 EPS), M1-C4-U6 (AS24 Discontinuing Ops), M1-C4-U7 (AS25 Interim Reporting).
+
+**Batch 1 is fully done.** Every Tier 2 draft was checked line-by-line against its actual source `.md`, not rubber-stamped. Patterns worth knowing before doing Batch 2/3:
+- **Almost every unit's Tier 2 draft omitted the unit's own "Illustrations + Test Your Knowledge" section** as a topic bucket — even though this is usually the single richest source of realistic exam-style numerical/scenario questions. Added as a `*`-suffixed unnumbered bucket (e.g. `M1-C4-U5-T5.13*`) in every case. **Expect this same gap in Batch 2/3 outputs — check for it every time, don't assume a Tier 2 tool will remember to include it.**
+- Some tools explicitly stated they only read part of a long source file (AS 17's tool said "read lines 1 to 500" of a 1010-line file) — when that happens, the *numbered* topics it did cover are usually still accurate, but the unread tail (illustrations/TYK) needs a separate read-and-add pass.
+- Dense definitional/threshold sections (AS 18's `T4.6`, the MSME/SMC thresholds in `M1-C3-U0-T2`) came back essentially error-free even under heavy scrutiny — the Tier 2 tools are reliable on this kind of content when given the exact file path + topic scaffold, per the prompt design in `phase0-batch1-prompts.md`. The failure mode is *omission* (missing sub-rules, missing whole sections), not *fabrication* — no hallucinated facts were found across all 10 units.
+- One prompt output arrived as an exact duplicate of an earlier prompt's output (Prompt 9 first came back identical to Prompt 7) — flagged to Pranav, he re-ran it and got a valid distinct result. If this happens again, don't merge the duplicate; ask for a re-run.
+
+**Immediate next steps:**
+1. Batch 2 (Chapters 5–9, 17 units — includes AS 2 and AS 10, which already have deep familiarity from the original audits) is next. Per Pranav's decision, wait for **all 17** Batch 2 units' Phase 0 keyword drafts before starting Phase 1 (question extraction) on any of them, including AS 2/AS 10 — don't fast-track those two ahead of their batch-mates.
+2. Need a new `phase0-batch2-prompts.md` analogous to the Batch 1 one, with real file paths + topic scaffolds for all 17 Batch 2 units.
+3. The two flagged AS 10 audit gaps (PYQ May 2026, ICAI-Practice MTP 6–8) from the earlier session are still open and lower priority than the Question Bank Book pipeline work.
+
+---
+
 ## 2026-07-20 — AS2/AS10 question-bank audits + Question Bank Book project kicked off
 
 **Read this entry first if you're picking up the "Question Bank Book" work on a fresh clone/session — it explains exactly where things stand and what to do next.**

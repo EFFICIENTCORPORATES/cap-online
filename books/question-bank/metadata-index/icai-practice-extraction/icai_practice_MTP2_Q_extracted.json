@@ -1,0 +1,219 @@
+{
+  "sourceFile_Q": "CAInter-AdvAcc-MTP-ICAI-Practice-Q.pdf",
+  "modelTestPaper": 2,
+  "physicalPageRange": "19-30",
+  "questions": [
+    {
+      "qNoInPaper": "1(i)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 19,
+      "caseScenario": "Mars Ltd - new manufacturing plant construction (land 50L, material/labour 35L, HO expenses 10L, borrowed 25L @12% p.a. from 1.4.2023, director travel/meeting expenses for arranging loan 5L, 3-month construction stoppage Nov 2023-Feb 2024 due to environmental agitation, 6L environmental device cost March 2024, depreciation 10%)",
+      "questionTextHtml": "<p>Which of the following expenses cannot be included in the cost of plant:</p><p>(a) Cost of Land<br>(b) Construction material and labour cost<br>(c) Head office expenses<br>(d) Borrowing cost</p>",
+      "notes": "Part I Q1 sub-parts (i)-(iv) marks not explicitly shown per sub-part in OCR; likely 2 marks each per the paper's recurring pattern - flagged as inferred not printed."
+    },
+    {
+      "qNoInPaper": "1(ii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 19,
+      "caseScenario": "Mars Ltd - same as 1(i)",
+      "questionTextHtml": "<p>How much amount of borrowing cost can be capitalised with the plant:</p><p>(a) ₹3,00,000<br>(b) ₹2,00,000<br>(c) ₹7,00,000<br>(d) ₹6,00,000</p>"
+    },
+    {
+      "qNoInPaper": "1(iii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 20,
+      "caseScenario": "Mars Ltd - same as 1(i)",
+      "questionTextHtml": "<p>The total cost of plant as on March 31, 2024 will be:</p><p>(a) ₹85,00,000<br>(b) ₹98,00,000<br>(c) ₹93,00,000<br>(d) ₹95,00,000</p>"
+    },
+    {
+      "qNoInPaper": "1(iv)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 20,
+      "caseScenario": "Mars Ltd - same as 1(i)",
+      "questionTextHtml": "<p>The amount of depreciation to be charged for the year end March 31, 2024:</p><p>(a) ₹4,30,000<br>(b) ₹9,30,000<br>(c) ₹9,80,000<br>(d) Nil</p>"
+    },
+    {
+      "qNoInPaper": "2(i)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 20,
+      "caseScenario": "Beloved Finance Ltd - financial enterprise lending to small businesses. Lent ₹50 crore, earned ₹1.5 crore interest on loans; surplus funds in FDs earned ₹20 lakh interest; acquired gold loan unit for ₹10 crore; interest-free loan of ₹15 crore to wholly-owned subsidiary; paid ₹75 lakh income tax.",
+      "questionTextHtml": "<p>In the Cash Flow Statement as per AS 3, the interest income of ₹1.5 crore earned on loans given by the Company will be disclosed as:</p><p>(a) Cash Flow from Operating Activities<br>(b) Cash Flow from Investing Activities<br>(c) Cash Flow from Financing Activities<br>(d) Non-cash Items</p>",
+      "notes": "This block is AS3-relevant. Header says '4 MCQs of 2 Marks each: Total 8 Marks' but 5 sub-questions (i)-(v) are printed - likely (v) is a bonus/non-MCQ theory sub-part not counted in the 4, or an OCR/paper numbering quirk. Flagged for verification against actual PDF."
+    },
+    {
+      "qNoInPaper": "2(ii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 20,
+      "caseScenario": "Beloved Finance Ltd - same as 2(i)",
+      "questionTextHtml": "<p>In the Cash Flow Statement as per AS 3, the interest income of ₹20 Lacs earned on fixed deposits with bank will be disclosed as:</p><p>(a) Cash Flow from Operating Activities<br>(b) Cash Flow from Investing Activities<br>(c) Cash Flow from Financing Activities<br>(d) Non-cash Items</p>"
+    },
+    {
+      "qNoInPaper": "2(iii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 21,
+      "caseScenario": "Beloved Finance Ltd - same as 2(i)",
+      "questionTextHtml": "<p>In the Cash Flow Statement as per AS 3, amount paid for acquiring gold loan unit will be disclosed as:</p><p>(a) Cash Flow from Operating Activities<br>(b) Cash Flow from Investing Activities<br>(c) Cash Flow from Financing Activities<br>(d) Non-cash Items</p>"
+    },
+    {
+      "qNoInPaper": "2(iv)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 21,
+      "caseScenario": "Beloved Finance Ltd - same as 2(i)",
+      "questionTextHtml": "<p>In the Cash Flow Statement as per AS 3, total income tax of ₹75 lacs paid for the year will be disclosed as:</p><p>(a) Cash Flow from Operating Activities<br>(b) Cash Flow from Investing Activities<br>(c) Cash Flow from Financing Activities<br>(d) Non-cash Items</p>"
+    },
+    {
+      "qNoInPaper": "2(v)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 21,
+      "caseScenario": "Beloved Finance Ltd - same as 2(i)",
+      "questionTextHtml": "<p>Is any specific disclosure required to be made in relation to the interest free loan of ₹15 crore provided by the Company to its wholly-owned subsidiary, if yes, as per which Accounting Standard:</p><p>(a) Yes, disclosure is required to be made as per AS 3, Cash Flow Statements.<br>(b) Yes, disclosure is required to be made as per AS 18, Related Party Disclosures<br>(c) Yes, disclosure is required to be made as per AS 13, Accounting for Investments<br>(d) No specific disclosures are required.</p>",
+      "notes": "AS18-relevant sub-question, marks not clearly attributable given the header/count discrepancy noted in 2(i)."
+    },
+    {
+      "qNoInPaper": "3(i)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 21,
+      "caseScenario": "Kumar Ltd - privately-held manufacturing company, founded 2008. Equity share capital ₹30,00,000; Reserves & Surplus ₹49,00,000 (General Reserve ₹32,50,000, Securities Premium ₹6,00,000, P&L A/c ₹4,30,000, Revaluation Reserve ₹6,20,000); Loan Funds ₹42,00,000. Buy-back at ₹30/share using Debt Equity Ratio Test.",
+      "questionTextHtml": "<p>What is the minimum equity Kumar Ltd. needs to maintain after buy-back, according to the Debt Equity Ratio Test?</p><p>(a) ₹12,95,000<br>(b) ₹21,00,000<br>(c) ₹32,50,000<br>(d) ₹6,00,000</p>",
+      "notes": "Header says '5 MCQs of 2 Marks each: Total 10 Marks' but only 3 sub-questions (i)-(iii) are printed for the Kumar Ltd scenario - discrepancy flagged, verify against PDF (possibly 2 more MCQs exist that were missed in OCR, or the header marks a combined bucket spanning into Q4)."
+    },
+    {
+      "qNoInPaper": "3(ii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 22,
+      "caseScenario": "Kumar Ltd - same as 3(i)",
+      "questionTextHtml": "<p>What is the maximum permitted buy-back of equity for Kumar Ltd.?</p><p>(a) ₹38,85,000<br>(b) ₹42,00,000<br>(c) ₹12,95,000<br>(d) ₹59,85,000</p>"
+    },
+    {
+      "qNoInPaper": "3(iii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 22,
+      "caseScenario": "Kumar Ltd - same as 3(i)",
+      "questionTextHtml": "<p>How many shares of Kumar Ltd. can be bought back at ₹30 per share according to the Debt Equity Ratio Test?</p><p>(a) 43,000<br>(b) 1,29,500<br>(c) 2,00,000<br>(d) 78,000</p>"
+    },
+    {
+      "qNoInPaper": "4",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 22,
+      "questionTextHtml": "<p>Sahil Ltd agreed to sell its factory located in Assam to Kali Ltd on 4.12.2023. It entered into a sale deed (transferring all significant risks and rewards of ownership) on 1.2.2024. But the transaction was registered with the registrar on 30.5.2024. When should the sale and gain be recognized?</p><p>(a) Both sale and gain should be recognized as on the balance sheet date i.e. 31.3.2024.<br>(b) Both sale and gain should be recognized on 30.5.2024.<br>(c) The sale should be recognized as on balance sheet date but gain should be recognized on 30.5.2024.<br>(d) Both sale and gain should be recognized on 4.12.2023.</p>",
+      "notes": "Part of a '3 MCQs of 2 Marks each: Total 6 Marks' standalone-MCQ block (Q4-Q6). AS9 revenue recognition."
+    },
+    {
+      "qNoInPaper": "5",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 22,
+      "questionTextHtml": "<p>Pratham and Associates is a manufacturer of steel rods. It invests its profits by purchasing shares of listed companies in order to earn dividend income. It had purchased shares of Bharti Airtel Limited in FY 2018-19. However, it sold all the shares of Bharti Airtel Limited during the current year i.e. FY 2023-24. What amount would be disclosed in the profit and loss account for FY 2023-24?</p><p>(a) This transaction would not affect the profit and loss account since the primary business of the company is manufacturing, and not investment.<br>(b) The carrying amount net of expenses would be disclosed in the profit and loss account.<br>(c) The disposal proceeds net of expenses would be disclosed in the profit and loss account.<br>(d) The difference between the carrying amount and the disposal proceeds, net of expenses, would be disclosed in the profit and loss account.</p>",
+      "notes": "AS13 investments disposal question."
+    },
+    {
+      "qNoInPaper": "6",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 22,
+      "questionTextHtml": "<p>As per Accounting Standards, difference between the Gross Investment and the present value of Minimum Lease Payments under finance lease (from the standpoint of the lessor) and Unguaranteed Residual Value accruing to the lessor is recorded as:</p><p>(a) Unearned finance income<br>(b) Guaranteed Residual Value<br>(c) Profit on lease<br>(d) Loss on lease</p>",
+      "notes": "AS19 lease question."
+    },
+    {
+      "qNoInPaper": "1(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 5,
+      "pageQ": 23,
+      "questionTextHtml": "<p>K Ltd. launched a project for producing product X in October, 2023. The Company incurred ₹40 lakhs towards Research and Development expenses upto 31st March, 2024. Due to prevailing market conditions, the Management came to conclusion that the product cannot be manufactured and sold in the market for the next 10 years. The Management hence wants to defer the expenditure write off to future years. Advise the Company as per the applicable Accounting Standard.</p>"
+    },
+    {
+      "qNoInPaper": "1(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 5,
+      "pageQ": 24,
+      "questionTextHtml": "<p>Wooden Plywood Limited has a normal wastage of 5% in the production process. During the year 2023-24, the Company used 16,000 MT of Raw material costing ₹190 per MT. At the end of the year, 950 MT of wastage was in stock. The accountant wants to know how this wastage is to be treated in the books. You are required to: (1) Calculate the amount of abnormal loss. (2) Explain the treatment of normal loss and abnormal loss in the context of AS-2.</p>"
+    },
+    {
+      "qNoInPaper": "1(c) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 24,
+      "questionTextHtml": "<p>On 15th June, 2024, Y limited wants to re-classify its investments in accordance with AS 13 (revised). Decide and state the amount of transfer, based on the following information: (1) A portion of long term investments purchased on 1st March, 2023 are to be re-classified as current investments. The original cost of these investments was ₹14 lakhs but had been written down by ₹2 lakhs (to recognise 'other than temporary' decline in value). The market value of these investments on 15th June, 2024 was ₹11 lakhs. (2) A portion of current investments purchased on 15th March, 2024 for ₹7 lakhs are to be re-classified as long term investments, as the company has decided to retain them. The market value of these investments on 31st March, 2024 was ₹6 lakhs and fair value on 15th June 2024 was ₹8.5 lakhs.</p>",
+      "notes": "OCR shows '15th June 2018' in the fair-value line, almost certainly an OCR error for '2024' (consistent with the rest of the question's dates) - corrected in this extraction, flagged for verification against actual PDF."
+    },
+    {
+      "qNoInPaper": "2 [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 14,
+      "pageQ": 24,
+      "questionTextHtml": "<p>The following balance appeared in the books of Oliva Company Ltd. as on 31-03-2024: [Trial balance table - Inventory 01-04-2023 (Raw Material ₹30,000, Finished goods ₹46,500 = ₹76,500), Purchases ₹12,15,000, Manufacturing Expenses ₹2,70,000, Salaries and wages ₹40,200, General Charges ₹16,500, Interim Dividend paid ₹27,000, Building ₹1,01,000, Plant and Machinery ₹70,400, Furniture ₹10,200, Motor Vehicles ₹40,800, Stores and Spare Parts Consumed ₹45,000, Investments (Current ₹4,500, Non-Current ₹7,500 = ₹12,000), Trade receivables ₹2,38,500, Cash in Bank ₹2,71,100 / Sales ₹17,10,000, Interest ₹3,900, Profit and Loss A/c ₹48,000, Share Capital ₹3,15,000, Secured Loans (Short-term ₹4,500, Long-term ₹21,000 = ₹25,500), Deposits unsecured (Short-Term ₹1,500, Long-term ₹3,300 = ₹4,800), Trade payables ₹3,27,000; Total ₹24,34,200 both sides]. Additional info: (a) Inventory on 31st March 2024: Raw material ₹25,800 & finished goods ₹60,000. (b) Outstanding Expenses: Manufacturing Expenses ₹67,500 & Salaries & Wages ₹4,500. Interest accrued on Securities ₹300. General Charges prepaid ₹2,490. Provide depreciation: Building @2% p.a., Machinery @10% p.a., Furniture @10% p.a. & Motor Vehicles @20% p.a. Taxation provision of 40% on net profit is considered. Prepare the company's Profit and Loss Account for the year ended 31 March, 2024 and Company's Balance Sheet as on that date.</p>",
+      "notes": "OCR-garbled tabular trial balance; reconstructed as faithfully as possible, needs verification against actual PDF for exact row alignment."
+    },
+    {
+      "qNoInPaper": "3(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 25,
+      "questionTextHtml": "<p>XYZ Ltd. has not made provision for warrantee in respect of certain goods due to the fact that the company can claim the warranty cost from the original supplier. Hence the accountant of the company says that the company is not having any liability for warrantees on a particular date as the amount gets reimbursed. You are required to comment on the accounting treatment done by the XYZ Ltd. in line with the provisions of AS 29.</p>"
+    },
+    {
+      "qNoInPaper": "3(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 10,
+      "pageQ": 25,
+      "questionTextHtml": "<p>The Balance Sheet of Radhika Ltd. as at 31-3-2024 is given [Share capital ₹13,80,000 (9,000 Equity Shares of ₹100 each = ₹9,00,000; 4,800 6% Cumulative Preference Shares of ₹100 each = ₹4,80,000); Reserves and Surplus (Debit balance of P&L A/c) (₹6,42,000); Long-term borrowings 6% Debentures ₹4,50,000; Trade Payables ₹3,60,000; Bank Overdraft ₹2,34,000; Other current liabilities (Loan from directors ₹1,20,000, Interest payable on 6% debentures ₹27,000) ₹1,47,000; Total ₹19,29,000 / PPE (Freehold property ₹5,10,000, Plant ₹60,000) ₹5,70,000; Intangible assets (Goodwill ₹1,56,000, Patents ₹45,000) ₹2,01,000; Non-current investments at cost ₹66,000; Inventories ₹5,10,000; Trade receivables ₹5,00,000; Cash and Cash Equivalents ₹82,000; Total ₹19,29,000]. Court approved Scheme of re-organization effective 1-4-2024: (1) Equity Shares reduced to ₹20 each. (2) Preference shareholders give up 30% of capital for 11% Debentures. (3) Of Preference dividends in arrears for 4 years, 3/4 waived and Equity Shares of ₹20 each allotted for remaining 1/4. (4) Interest payable on debentures paid in cash. (5) Goodwill written off. (6) Inventory written off by ₹65,000. (7) ₹68,500 provided for bad debts. (8) Freehold property revalued at ₹6,49,000. (9) Investments sold for ₹1,40,000. (10) Directors accept settlement of loans as to 90% by allotment of equity shares of ₹20 each and 5% in cash, balance 5% waived. (11) Capital commitments totaling ₹2,50,000 cancelled on payment of 5% of contract price as penalty. (12) Ignore taxation and cost of scheme. (13) Eliminate debit balance of P&L A/c. Prepare the Balance Sheet of the company after completion of the Scheme.</p>"
+    },
+    {
+      "qNoInPaper": "4 [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 14,
+      "pageQ": 27,
+      "questionTextHtml": "<p>Information of Anu Ltd. and Banu Ltd. as on 31.03.2023: [Anu Ltd / Banu Ltd - Share Capital: 50,000 Equity Shares of ₹10 each fully paid ₹5,00,000 / 37,500 Equity Shares of ₹10 each fully paid ₹3,75,000; General Reserve ₹3,00,000 / -; Profit and Loss Account ₹62,500 / ₹62,500; Trade Payables ₹2,62,500 / ₹1,62,500; 5% Debentures - / ₹1,50,000; Freehold Property ₹3,75,000 / ₹3,00,000; Plant and Machinery ₹75,000 / ₹50,000; Motor Vehicle ₹37,500 / ₹25,000; Trade Receivables ₹2,50,000 / ₹1,00,000; Inventory ₹2,87,500 / ₹2,25,000; Cash at Bank ₹1,00,000 / ₹50,000]. Anu Ltd. and Banu Ltd. carry on business of similar nature and agreed to amalgamate. A new Company, Anban Ltd. is formed to take over the Assets and Liabilities on the following basis: Assets and Liabilities at Book Value except: (a) Goodwill of Anu Ltd. and Banu Ltd. valued at ₹1,75,000 and ₹50,000 respectively. (b) Plant and Machinery of Anu Ltd. valued at ₹1,25,000. (c) Debentures of Banu Ltd. discharged by issue of 6% Debentures of Anban Ltd. at a premium of 5%. Required: 1. Compute the basis on which shares in Anban Ltd. will be issued to Shareholders of the existing Companies assuming nominal value of each share of Anban Ltd. is ₹10. 2. Draw up a Balance Sheet of Anban Ltd. as on 1st April, 2023, when Amalgamation is completed.</p>"
+    },
+    {
+      "qNoInPaper": "5(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 7,
+      "pageQ": 28,
+      "questionTextHtml": "<p>Star Ltd. acquires 70% of equity shares of Moon Ltd. as on 31st March, 2024 at a cost of ₹140 lakhs. From the balance sheet of Moon Ltd. as on 31st March, 2024 (₹ in lakhs): Property, plant and equipment 240; Investments 110; Current Assets 140; Loans & Advances 30; 15% Debentures 180; Current Liabilities 100. Revaluations agreed upon (not included above): Property, plant and equipment Up by 20%; Investments Down by 10%. Moon Ltd. declared and paid dividend @20% on its equity shares as on 31st March, 2024 (Face value ₹10 per share). Star Ltd. purchased the shares of Moon Ltd. @₹20 per share. Calculate the amount of goodwill/capital reserve on acquisition of shares of Moon Ltd. as on 31st March, 2024.</p>",
+      "notes": "Combined 5(a)/5(b) marks printed as '7+7 = 14 Marks' after 5(b)'s text; split 7/7 here as best estimate."
+    },
+    {
+      "qNoInPaper": "5(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 7,
+      "pageQ": 28,
+      "questionTextHtml": "<p>Gamma Ltd. acquired 24,000 equity shares of ₹10 each, in Beta Ltd. on October 1, 2023 for ₹4,60,200. The profit and loss account of Beta Ltd. showed a balance of ₹15,000 on April 1, 2023. The plant and machinery of Beta Ltd. which stood in the books at ₹2,25,000 on April 1, 2023 was considered worth ₹2,70,000 on the date of acquisition. Information of the two companies as at 31-3-2024 (Gamma Ltd / Beta Ltd): Share capital (fully paid equity shares of ₹10 each) ₹7,50,000 / ₹3,00,000; General reserve ₹3,60,000 / ₹1,50,000; Profit and loss account ₹85,800 / ₹1,23,000; Current Liabilities ₹2,54,700 / ₹49,500; Land and building ₹2,70,000 / ₹2,85,000; Plant and machinery ₹3,60,000 / ₹2,02,500; Investments ₹4,60,200 / -; Current assets ₹3,60,300 / ₹1,35,000. Required: compute impact of revaluation of Plant and Machinery.</p>"
+    },
+    {
+      "qNoInPaper": "6(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 28,
+      "questionTextHtml": "<p>'One of the characteristics of financial statements is neutrality' - Do you agree with this statement?</p><p>OR</p><p>Opening Balance Sheet of Mr. Amit is showing the aggregate value of assets, liabilities and equity ₹16 lakh, ₹6 lakh and ₹10 lakh respectively. During accounting period, Mr. Amit has the following transactions: (1) Earned 10% dividend on 4,000 equity shares held of ₹100 each (2) Paid ₹1,00,000 to creditors for settlement of ₹1,40,000 (3) Rent of the premises is outstanding ₹20,000 (4) Mr. A withdrew ₹18,000 for his personal use. You are required to show the effect of above transactions on Balance Sheet in the form of Assets - Liabilities = Equity after each transaction.</p>"
+    },
+    {
+      "qNoInPaper": "6(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 30,
+      "questionTextHtml": "<p>C Ltd. had ₹5,00,000 authorized capital on 31-12-2021 divided into shares of ₹100 each out of which 4,000 shares were issued and fully paid up. In June 2022 the Company decided to convert the issued shares into stock. But in June, 2023 the Company re-converted the stock into shares of ₹10 each, fully paid up. Pass entries and show how Share Capital will appear in Notes to Balance Sheet as on 31-12-2022 and 31-12-2023.</p>"
+    },
+    {
+      "qNoInPaper": "6(c) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 6,
+      "pageQ": 30,
+      "questionTextHtml": "<p>Alfa of Chennai has a branch at Mumbai to which goods are sent @20% above cost. The branch makes both cash and credit sales. Branch expenses are met partly from H.O. and partly by the branch. The statement of expenses incurred by the branch every month is sent to head office for recording. Following further details are given for the year ended 31st December, 2023: Cost of goods sent to Branch at cost ₹2,00,000; Goods received by Branch till 31-12-2023 at invoice price ₹2,20,000; Credit Sales for the year @invoice price ₹1,65,000; Cash Sales for the year @invoice price ₹59,000; Cash Remitted to head office ₹2,22,500; Expenses paid by H.O. ₹12,000; Bad Debts written off ₹750. Balances: Stock 1-1-2023 ₹25,000 (Cost), 31-12-2023 ₹28,000 (invoice price); Debtors 1-1-2023 ₹32,750, 31-12-2023 ₹26,000; Cash in Hand 1-1-2023 ₹5,000, 31-12-2023 ₹2,500. Prepare Branch stock account and branch debtor account in the books of the head office for the year ended 31st December, 2023.</p>"
+    }
+  ],
+  "extractionNotes": "Extracted via direct OCR (Tesseract) + manual structuring. Part I MCQ counts/mark-totals printed in the source headers don't always cleanly match the number of sub-questions actually printed (see notes on Q2 and Q3 blocks) - flagged rather than silently reconciled. Spot-check against actual PDF recommended before treating as final."
+}

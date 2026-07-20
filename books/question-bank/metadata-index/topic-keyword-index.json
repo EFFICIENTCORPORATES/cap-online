@@ -2,8 +2,8 @@
   "meta": {
     "source": "Built from 0-ca-inter-adv-accounts-subtopics-marks-weightage.json + direct reading of each unit's source material. Tier 2 first drafts produced via GitHub Copilot/Gemini/Blackbox in VS Code (see books/question-bank/metadata-index/phase0-batch1-prompts.md for the prompts used), reviewed and corrected by Claude (Tier 3) against the actual source .md before merging.",
     "generated_on": "2026-07-20",
-    "coverage_units": "3/36",
-    "coverage_list": ["M1-C1-U0", "M1-C2-U0", "M1-C3-U0"],
+    "coverage_units": "10/36",
+    "coverage_list": ["M1-C1-U0", "M1-C2-U0", "M1-C3-U0", "M1-C4-U1", "M1-C4-U2", "M1-C4-U3", "M1-C4-U4", "M1-C4-U5", "M1-C4-U6", "M1-C4-U7"],
     "unnumbered_topic_convention": "Sections with no ICAI-assigned number get sequential IDs continuing from the last real number, suffixed with an asterisk, e.g. M1-C1-U0-T15* — flagged as author-assigned, not ICAI-numbered."
   },
   "topics": {
@@ -254,6 +254,670 @@
       "keywords": ["enterprise engaged in commercial, industrial or business activities", "exclusion when activities are not commercial/industrial/business (e.g., collecting donations)", "if any small proportion is commercial/industrial/business then AS applies to all activities", "materiality of items (omission/misstatement affects economic decisions)", "AS intended to apply only to material items", "Income-tax vs accounting standards (expense in P&L not always tax deductible)", "mandatory status implication for partnership firm (attest functions; adequate disclosures in reports)", "ICDSs under Income Tax Act, 1961 (Section 145(2))", "Income Computation and Disclosure Standards: ICDS I-X (Accounting Policies to Provisions/Contingent items)", "Companies classification into SMC and Non-SMC (Companies (Accounting Standards) Rules, 2021)", "Non-SMC comply with all Accounting Standards in entirety", "SMC relaxation/exemptions: AS 17 not applicable in entirety; partial relaxations for AS 15/AS 19/AS 20/AS 28/AS 29", "Non-company revised criteria effective for periods commencing on/after April 1, 2024", "Non-company entities: MSME vs Large (two levels)", "MSME conditions: unlisted equity/debt; not bank/FI/insurance; turnover not exceeding Rs250 crore; borrowings not exceeding Rs50 crore; not holding/subsidiary of non-MSME", "Large non-company entities comply in full with all AS", "MSME: AS 3/AS 17/AS 20/AS 24 not applicable in their entirety", "MSME partial non-application: AS 18 and AS 28 when turnover does not exceed Rs50 crore and borrowings do not exceed Rs10 crore and not holding/subsidiary of non-covered MSME", "MSME disclosure on exemptions/relaxations (disclose MSME status + compliance; disclose standards where exemption availed)"],
       "typical_question_signals": ["Is Accounting Standard X applicable to this enterprise? (corporate vs non-company; charitable vs business activity)", "Assess applicability based on materiality: whether an item should be shown separately rather than clubbed.", "Classify the non-company entity as MSME or Large as per ICAI August 2024 criteria (turnover/borrowings/listing/bank-FI/insurance/holding-subsidiary).", "Which AS are not applicable in their entirety / where exemptions apply for MSMEs or SMCs?"],
       "notes": "Largely classification/theory: (i) whether AS applies to the enterprise/financial statements/material item, and (ii) classification-based exemptions/relaxations using explicit thresholds (SMC vs Non-SMC; MSME vs Large; MSME turnover Rs250cr/borrowings Rs50cr; AS18/AS28 partial-exemption thresholds turnover Rs50cr/borrowings Rs10cr - note these are DIFFERENT threshold pairs, easy to conflate, must be tested separately). Verified against source (2026-07-20) - every section number, AS list, and threshold pair confirmed exact, including the easily-confused 250cr/50cr vs 50cr/10cr distinction."
+    },
+    "M1-C4-U1-T1.1": {
+      "chapter_id": "M1-C4-U1",
+      "chapter_name": "Accounting Standard 1 Disclosure of Accounting Policies",
+      "topic_name": "Introduction",
+      "keywords": ["Accounting Standard 1", "Disclosure of Accounting Policies", "significant accounting policies", "comparability", "financial statements", "different enterprises", "same accounting period", "changes in accounting policies", "meaningful comparison", "applies to all enterprises"],
+      "typical_question_signals": ["What is the purpose of AS 1?", "Why is disclosure of significant accounting policies required?", "How does AS 1 improve comparability of financial statements?", "Explain the need for disclosure of changes in accounting policies."],
+      "notes": "Mostly theory-based; the chapter is about disclosure and comparability rather than computation. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U1-T1.2": {
+      "chapter_id": "M1-C4-U1",
+      "chapter_name": "Accounting Standard 1 Disclosure of Accounting Policies",
+      "topic_name": "Fundamental Accounting Assumptions",
+      "keywords": ["fundamental accounting assumptions", "going concern", "consistency", "accrual basis", "foreseeable future", "same accounting policies", "disclosure required", "not required to be disclosed", "Section 128(1) Companies Act 2013 mandatory accrual basis"],
+      "typical_question_signals": ["What are the fundamental accounting assumptions under AS 1?", "Explain the going concern concept.", "What is meant by accrual basis of accounting?", "When should a deviation from fundamental accounting assumptions be disclosed?"],
+      "notes": "Theory-based topic with some scenario questions on whether disclosure is required. Verified against source (2026-07-20) - added Section 128(1) Companies Act reference during Tier 3 review (present in source, omitted from Tier 2 draft)."
+    },
+    "M1-C4-U1-T1.3": {
+      "chapter_id": "M1-C4-U1",
+      "chapter_name": "Accounting Standard 1 Disclosure of Accounting Policies",
+      "topic_name": "Accounting Policies",
+      "keywords": ["accounting policies", "specific accounting principles", "methods of applying principles", "valuation", "recognition of revenue", "expected losses", "inventories", "cash flow statement", "FIFO", "weighted average", "Direct Method", "Indirect Method"],
+      "typical_question_signals": ["What are accounting policies?", "How do accounting policies differ from accounting standards?", "Give examples of areas where accounting policies are applied.", "Explain the role of accounting policies in preparing financial statements."],
+      "notes": "Conceptual topic; relevant for later questions on inventory valuation methods and policy selection. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U1-T1.4": {
+      "chapter_id": "M1-C4-U1",
+      "chapter_name": "Accounting Standard 1 Disclosure of Accounting Policies",
+      "topic_name": "Selection of Accounting Policy",
+      "keywords": ["selection of accounting policy", "prudence", "substance over form", "materiality", "conservatism", "profits not overstated", "losses not understated", "assets not overstated", "liabilities not understated", "1% of revenue from operations or Rs1,00,000 disclosure threshold", "5% shareholding disclosure threshold", "change in accounting policy", "change in accounting estimate", "retrospective application", "prospective application", "materiality of change"],
+      "typical_question_signals": ["What factors govern the selection of accounting policy?", "How does prudence influence the choice of accounting policy?", "Explain substance over form and materiality in AS 1.", "Differentiate between a change in accounting policy and a change in accounting estimate."],
+      "notes": "This is one of the most cross-chapter-relevant topics because it is often embedded inside questions on inventory valuation, depreciation, or other standards. Verified against source (2026-07-20) - Prudence/substance-over-form/materiality (incl. the two specific quantitative thresholds) are directly in this unit's text; 'change in accounting estimate'/'retrospective'/'prospective application' keywords were deliberately added per the cross-referencing instruction in the Phase 0 prompt (these terms do not literally appear in this unit's own text but are the correct AS 1/AS 5 boundary concept needed to catch embedded cross-chapter questions - not a hallucination, an intentional extension)."
+    },
+    "M1-C4-U1-T1.5": {
+      "chapter_id": "M1-C4-U1",
+      "chapter_name": "Accounting Standard 1 Disclosure of Accounting Policies",
+      "topic_name": "Disclosure of Changes in Accounting Policies",
+      "keywords": ["change in accounting policy", "material effect", "current period", "later periods", "amount affected", "ascertainable", "not ascertainable", "disclosure requirement", "weighted average method", "FIFO method"],
+      "typical_question_signals": ["When should a change in accounting policy be disclosed?", "How should the effect of a change in accounting policy be disclosed?", "Explain the disclosure requirement where the amount affected is not ascertainable.", "A company changed from FIFO to weighted average - how should it disclose the change?"],
+      "notes": "Highly relevant for scenario-based questions because it often appears in cross-chapter questions about changing methods under other standards. Verified against source (2026-07-20) - matches Example 3/Illustration 1 (FIFO to weighted average switch)."
+    },
+    "M1-C4-U1-T1.6": {
+      "chapter_id": "M1-C4-U1",
+      "chapter_name": "Accounting Standard 1 Disclosure of Accounting Policies",
+      "topic_name": "Disclosure of Deviations From Fundamental Accounting Assumptions",
+      "keywords": ["deviation from fundamental accounting assumptions", "going concern not followed", "consistency not followed", "accrual basis not followed", "specific disclosure", "financial statements", "not followed", "disclosure requirement"],
+      "typical_question_signals": ["When should deviations from fundamental accounting assumptions be disclosed?", "If consistency is not followed, what must be disclosed?", "Explain the disclosure requirement when accrual basis is not followed.", "State the effect of non-compliance with fundamental assumptions on financial statements."],
+      "notes": "Theory and disclosure topic; scenario-based questions may test whether the company must disclose a deviation. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U1-T1.7*": {
+      "chapter_id": "M1-C4-U1",
+      "chapter_name": "Accounting Standard 1 Disclosure of Accounting Policies",
+      "topic_name": "Illustrations and Worked Examples",
+      "keywords": ["inventory valuation", "lower of cost and net realisable value", "works cost", "prime cost", "permanent diminution in value of investments", "overdue interest", "claims against the company not acknowledged as debt", "technical evaluation", "prudent estimate", "non-moving inventory provision"],
+      "typical_question_signals": ["How should a change in inventory valuation method be disclosed?", "What note is required for permanent diminution in value of investments?", "How should overdue interest be treated under AS 1?", "Discuss the disclosure requirement in the given illustration."],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20) - correctly aggregates Illustrations 1-3 (FIFO/WA inventory switch, works-cost/prime-cost change + investment diminution, overdue interest/claims-not-acknowledged-as-debt) plus the Q8 non-moving-inventory technical-evaluation scenario as a distinct unnumbered grouping."
+    },
+    "M1-C4-U1-T1.8*": {
+      "chapter_id": "M1-C4-U1",
+      "chapter_name": "Accounting Standard 1 Disclosure of Accounting Policies",
+      "topic_name": "Test Your Knowledge",
+      "keywords": ["multiple choice questions", "comparability", "material effect", "future periods", "significant accounting policies", "fundamental accounting assumptions", "prudence", "accrual basis"],
+      "typical_question_signals": ["Which of the following is not a major consideration in selection of accounting policy?", "Which qualitative characteristic is most affected by differing accounting policies?", "State whether the disclosure statement about change in accounting policy is true or false.", "What are the three fundamental accounting assumptions recognised by AS 1?"],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U2-T2.1": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Introduction",
+      "keywords": ["mandatory for Non-SMCs", "mandatory for Level I non-corporate entities", "Companies Act 2013 mandates CFS (exceptions: OPC, small company, dormant company, startup private company)", "Section 129 Companies Act 2013 exemption from CFS", "Notification dated June 13, 2017 (startup private company exemption)", "Section 462 Companies Act 2013", "previous year comparative figures - newly qualifying entity not required to disclose prior year", "disqualified entity continues preparing CFS for two consecutive years", "encouraged (not compulsory) for all other enterprises"],
+      "typical_question_signals": ["Is AS 3 mandatory for a Level I non-corporate entity / SMC?", "Which companies are exempt from preparing a Cash Flow Statement under the Companies Act, 2013?", "An enterprise qualified to prepare CFS last year but no longer qualifies - how many more years must it continue?", "Is the Cash Flow Statement mandatory for a One Person Company / small company / dormant company / startup private company?"],
+      "notes": "Mostly theoretical/regulatory-applicability topic. Verified against source (2026-07-20) - all specific facts (Section 129 exemption, Section 462 startup exemption, 13 June 2017 notification date, two-consecutive-year continuation rule) confirmed exact."
+    },
+    "M1-C4-U2-T2.2": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Objective",
+      "keywords": ["historical changes in cash and cash equivalents", "identify sources of cash inflows and outflows", "future cash requirement determination", "ability to generate cash and cash equivalents", "compare operational efficiency of different enterprises", "insolvency and liquidity position assessment", "amount, timing and certainty of future cash flows", "check accuracy of past assessments of future cash flows", "relationship between profitability and net cash flow", "impact of changing prices on cash flows"],
+      "typical_question_signals": ["State the objectives of preparing a Cash Flow Statement as per AS 3.", "How does a Cash Flow Statement help users of accounts in assessing liquidity?", "List the purposes served by a Cash Flow Statement."],
+      "notes": "Purely theoretical/definitional topic - testing memory of CFS objectives as listed in AS 3 (9 bullet points in source). Verified against source (2026-07-20)."
+    },
+    "M1-C4-U2-T2.3": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Meaning of the Term Cash and Cash Equivalents for Cash Flow Statements",
+      "keywords": ["cash in hand", "demand deposits repayable on demand", "cash equivalents definition (short-term, highly liquid, readily convertible, insignificant risk of value change)", "three months maturity from date of acquisition (qualifying criterion)", "investments in shares NOT normally cash equivalents", "at least three balance sheet items in cash and cash equivalents (cash in hand + demand deposits + cash equivalent investments)", "break-up of opening and closing cash required as note to CFS", "AS 3 note disclosure requirement for cash components"],
+      "typical_question_signals": ["Define cash and cash equivalents as per AS 3.", "Which of the following would qualify as a cash equivalent under AS 3?", "Would an investment in shares / a 3-month Treasury bill / a 6-month fixed deposit be considered a cash equivalent?", "What is the maturity period criterion for an investment to qualify as a cash equivalent under AS 3?"],
+      "notes": "Classic MCQ topic - test items against the three-month maturity and insignificant-risk-of-value-change criteria. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U2-T2.4": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Meaning of The Term Cash Flow",
+      "keywords": ["inflows (receipts) of cash and cash equivalents", "outflows (payments) of cash and cash equivalents", "movements within cash or cash equivalents NOT cash flows", "cash deposited into bank is not a cash flow", "acquisition of cash equivalent investments not a cash flow", "exchange rate restatement (no cash flow - example: USD bank balance restated at closing rate)"],
+      "typical_question_signals": ["Define cash flow as per AS 3.", "Which of the following is NOT a cash flow?", "Explain with example why a change in cash does not necessarily imply a cash flow."],
+      "notes": "Traps in MCQs: movements within cash/cash equivalents categories are NOT cash flows; foreign exchange restatement is NOT a cash flow. Verified against source (2026-07-20) - matches source's USD 10,000 @ Rs49 to Rs50/USD illustrative example."
+    },
+    "M1-C4-U2-T2.5": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Types of Cash Flow",
+      "keywords": ["three types: operating, investing, financing cash flows", "operating activities - principal revenue-producing activities", "investing activities - acquisition and disposal of long-term assets and other investments (not cash equivalents)", "financing activities - changes in size and composition of owners' capital and borrowings", "examples of operating cash flows (cash sales, collections from customers, payments to suppliers, salaries, wages)", "examples of investing cash flows (disposal of fixed assets, loans given to others, payments to acquire fixed assets, interest/dividends earned for non-financial)", "examples of financing cash flows (issue of shares/debentures, redemption, dividends paid, interest paid for non-financial)", "separate presentation improves usefulness"],
+      "typical_question_signals": ["Name the three types of cash flows as per AS 3 and give examples of each.", "Classify the following into operating / investing / financing activities.", "Payment of salaries is which type of cash flow?", "Issue of debentures would be classified under which cash flow activity?"],
+      "notes": "Highly testable classification topic - usually appears in MCQs or short-answer classification questions (list of items to categorise, e.g. source Illustration 1). Verified against source (2026-07-20)."
+    },
+    "M1-C4-U2-T2.6": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Identifying Type of Cash Flows",
+      "keywords": ["classification depends on business of enterprise (financial vs non-financial)", "loans/advances given and interest earned - operating for financial, investing for non-financial", "loans to subsidiaries and interest - investing for ALL enterprises", "loans to employees and interest - operating for ALL enterprises", "advance payments to suppliers and interest earned - operating for ALL enterprises", "interest from customers for late payments - operating for non-financial", "loans/advances taken and interest paid - operating for financial, financing for non-financial", "loans/advances taken from subsidiaries and interest paid - financing for ALL enterprises", "advances taken from customers and interest paid - operating for non-financial enterprises", "interest paid to suppliers for late payments - operating for ALL enterprises", "interest capitalised as part of inventory cost per AS 16 - operating cash flow (AS16/AS2/AS3 cross-reference)", "investments and dividends earned - operating for financial, investing for non-financial", "investments in subsidiaries and dividends - investing for ALL", "dividends paid - financing for ALL", "income tax - operating on operating income; TDS on investment income to investing; TDS on expenses to respective category", "insurance claims - loss of stock/profits = extraordinary operating; loss of fixed assets = extraordinary investing", "extraordinary items disclosed separately but classified as operating/investing/financing as appropriate"],
+      "typical_question_signals": ["Classify: loans given to employees / interest paid by a financial enterprise / TDS on interest received from subsidiary", "How would a financial enterprise classify interest paid in its Cash Flow Statement?", "Is dividend received from a subsidiary an operating or investing cash flow for a non-financial company?", "Insurance claim received for loss of machinery by fire - how is this classified under AS 3?"],
+      "notes": "CRITICAL FALSE-POSITIVE WARNING: This topic tests classification rules, NOT the substantive accounting standard governing the item itself. A later automated tagger must NOT cross-tag every CFS question with AS10/AS16/AS29 etc. just because depreciation/PPE-disposal/provision/interest appears as a line item - those are mechanical add-backs in the indirect method, not substantive tests of those standards - EXCEPT the specific 'interest capitalised into inventory per AS16 is operating cash flow' rule, which IS a genuine AS3/AS16/AS2 cross-reference and should be tagged accordingly. Verified against source (2026-07-20) - added sub-rules 2.6.2(c)(d)(e)(f) during Tier 3 review (present in source, omitted from Tier 2 draft), including the AS16-interest-in-inventory cross-reference."
+    },
+    "M1-C4-U2-T2.7": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Reporting Cash Flows from Operating Activities",
+      "keywords": ["direct method (gross receipts minus gross payments, ignoring non-cash items)", "indirect method (start from net profit/loss, eliminate non-cash/investing/financing items)", "add back non-cash expenses (depreciation, provisions, loss on sale of assets)", "deduct non-cash income (interest received, gain on sale of assets)", "adjustment for changes in working capital (excl. cash and cash equivalents)", "direct method preferred - gives clearer picture of sources of inflows/outflows", "format of CFS - direct method (illustrative)", "format of CFS - indirect method (illustrative)", "profit or loss on disposal of fixed assets - NOT operating (entire proceeds = investing inflow)", "fundamental techniques - compile from opening and closing balance sheets (not cash books)"],
+      "typical_question_signals": ["Distinguish between direct method and indirect method of reporting cash flows from operating activities.", "Which method is preferred under AS 3 and why?", "Calculate net cash flow from operating activities using the indirect method.", "How is profit/loss on sale of fixed asset treated in the cash flow from operating activities under indirect method?"],
+      "notes": "FALSE-POSITIVE WARNING FOR INDIRECT METHOD: Depreciation, provisions, and PPE disposal gains/losses appear as mechanical add-back/deduction line items in the indirect-method reconciliation. Their presence in a CFS question tests AS 3's operating-activities mechanics, NOT AS 10/AS 29 etc. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U2-T2.8": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Reporting Cash Flows on Net Basis",
+      "keywords": ["AS 3 forbids netting of receipts and payments (investing and financing) - gross basis required", "exceptions: cash receipts/payments on behalf of customers", "exceptions: items with quick turnover, large amounts, short maturities", "financial enterprises - net basis allowed for fixed deposits, deposits from other financial enterprises, advances/loans to customers", "interest and dividends - separate disclosure required", "financial enterprise: interest paid and dividends received to operating cash flows", "non-financial enterprise: interest paid to financing; interest and dividends received to investing", "dividends paid to financing for ALL enterprises", "non-cash transactions excluded from CFS (e.g., bonus shares) - disclosed elsewhere in financial statements"],
+      "typical_question_signals": ["Can an enterprise show net cash outflow (purchase minus sale) in the CFS? Why or why not?", "In which cases does AS 3 permit reporting cash flows on a net basis?", "A financial enterprise - how is interest paid classified in CFS?", "How are non-cash transactions (like issue of bonus shares) treated in the Cash Flow Statement?"],
+      "notes": "Gross vs net reporting is a common theory question. General rule is gross; two exceptions for all enterprises (on behalf of customers; quick-turnover items) plus three exceptions specific to financial enterprises (fixed deposits, inter-financial-enterprise deposits, customer advances/loans). Verified against source (2026-07-20)."
+    },
+    "M1-C4-U2-T2.9": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Business Purchase",
+      "keywords": ["acquisition and disposal of subsidiaries - investing activities", "acquisition and disposal of other business units - investing activities", "presented separately and classified as investing", "cash flows from disposal and acquisition NOT netted off", "disclose total purchase/disposal consideration", "disclose portion discharged by cash and cash equivalents", "current assets and liabilities taken over - reduce from closing balances for operating cash flow computation", "business purchase is NOT operating activity"],
+      "typical_question_signals": ["How are cash flows arising from acquisition of a subsidiary presented in the CFS as per AS 3?", "What disclosures are required under AS 3 for business purchases?", "How should current assets and liabilities taken over on business purchase be treated when computing operating cash flows?"],
+      "notes": "Relatively niche topic - the key exam point is the treatment of current assets/liabilities taken over (reduce from closing balances so the difference reflects only operating changes). Verified against source (2026-07-20)."
+    },
+    "M1-C4-U2-T2.10": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Exchange Gains and Losses",
+      "keywords": ["foreign currency monetary assets and liabilities", "initial recognition at transaction date exchange rate", "balance sheet date restatement at closing rate", "exchange gain/loss recognised in statement of profit and loss", "exchange gains/losses on cash and cash equivalents NOT cash flows", "net increase/decrease in cash stated EXCLUSIVE of exchange gains/losses", "reconciliation note between CFS cash and balance sheet cash (explaining exchange rate difference)"],
+      "typical_question_signals": ["How are exchange gains/losses on foreign currency cash and cash equivalents treated in the Cash Flow Statement?", "How would an exchange difference on a foreign bank deposit be presented in the CFS?", "An enterprise's foreign currency bank balance increased due to exchange rate fluctuation - is this a cash flow? Why or why not?"],
+      "notes": "Key conceptual point: exchange gains/losses on cash/cash equivalents are NOT cash flows. The CFS net change is stated exclusive of exchange effects; the difference is reconciled in a note. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U2-T2.11": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Disclosures",
+      "keywords": ["significant cash and cash equivalent balances not available for use (e.g., exchange-controlled foreign balances)", "commentary by management on restricted cash", "encouraged disclosure: undrawn borrowing facilities available for future operating activities and capital commitments", "encouraged disclosure: restrictions on use of undrawn facilities", "encouraged disclosure: aggregate cash flows for maintaining operating capacity vs increasing operating capacity"],
+      "typical_question_signals": ["What disclosures are required by AS 3 in relation to cash and cash equivalents?", "What additional information is encouraged to be disclosed by AS 3?", "An enterprise holds bank balances in a country with exchange controls - what must it disclose under AS 3?"],
+      "notes": "Purely theoretical - distinguish between required disclosures (restricted cash) and encouraged disclosures (undrawn facilities, maintenance vs expansion capex). Verified against source (2026-07-20)."
+    },
+    "M1-C4-U2-T2.12*": {
+      "chapter_id": "M1-C4-U2",
+      "chapter_name": "Accounting Standard 3 - Cash Flow Statement",
+      "topic_name": "Illustrations, Test Your Knowledge and Full CFS Preparation",
+      "keywords": ["classify items as operating/investing/financing/cash equivalent", "cash equivalent vs long-term investment classification (debentures redeemable in 3 months)", "full Cash Flow Statement preparation from balance sheet (indirect method)", "cash flow from investing activities preparation", "foreign currency deposit exchange difference in CFS (interest income vs exchange gain split)", "TDS on interest received from subsidiary", "bad debts written off (non-cash adjustment under indirect method)"],
+      "typical_question_signals": ["Classify the following activities as Operating/Investing/Financing/Cash Equivalent.", "Prepare Cash Flow Statement for the year in accordance with AS 3.", "Prepare Cash Flow from Investing Activities.", "How would exchange differences on a foreign bank deposit be presented in the Cash Flow Statement?"],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20) - added during Tier 3 review (present in source as Illustrations 1-5 and a full TEST YOUR KNOWLEDGE section with 5 MCQs, 2 theoretical, 5 scenario-based questions incl. full CFS-preparation problems; omitted from Tier 2 draft, unlike the equivalent bucket correctly captured in prior units)."
+    },
+    "M1-C4-U3-T3.1": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Introduction",
+      "keywords": ["AS 17", "non-SMCs", "level I entities", "non-corporates", "different products and services", "different geographical areas", "risk and returns", "multi-locational enterprise"],
+      "typical_question_signals": ["What is AS 17 and why is it relevant?", "Explain the purpose of segment reporting in a diversified enterprise.", "When is AS 17 mandatory?", "What information does AS 17 require to be reported?"],
+      "notes": "Conceptual introduction; mostly theory rather than computation. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U3-T3.2": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Objective",
+      "keywords": ["objective of AS 17", "risks and returns", "profitability", "growth opportunities", "future prospects", "performance of the enterprise", "informed judgments"],
+      "typical_question_signals": ["What is the objective of AS 17?", "How does segment reporting help users assess risks and returns?", "Why is segment information useful to users of financial statements?", "How does AS 17 improve understanding of enterprise performance?"],
+      "notes": "Theory-based topic. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U3-T3.3": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Scope",
+      "keywords": ["general purpose financial statements", "consolidated financial statements", "separate financial statements", "parent company", "segment information", "selectively", "full compliance"],
+      "typical_question_signals": ["What is the scope of AS 17?", "When should segment information be presented on the basis of consolidated financial statements?", "Does an enterprise have discretion to comply selectively with AS 17?", "How does AS 17 apply to consolidated and separate financial statements?"],
+      "notes": "Applicability and reporting-scope topic. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U3-T3.4": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Definition of the terms used in the Accounting Standard",
+      "keywords": ["business segment", "geographical segment", "related products or services", "production processes", "customers", "distribution methods", "regulatory environment", "economic environment", "risks and returns", "reportable segment definition", "segment revenue = directly attributable + reasonably allocable + inter-segment revenue", "segment revenue EXCLUDES extraordinary items (AS5), interest/dividend income (unless financial nature), gains on investment sales/debt extinguishment (unless financial nature)", "segment expense = directly attributable + reasonably allocable + inter-segment expense", "segment expense EXCLUDES extraordinary items, interest expense (unless financial nature), losses on investments/debt extinguishment (unless financial nature), income tax expense, general/HO admin expenses", "segment result = segment revenue less segment expense", "segment assets EXCLUDE income tax assets and general/HO assets", "segment liabilities EXCLUDE income tax liabilities and financing borrowings", "joint assets/liabilities allocated only if related revenue/expense also allocated"],
+      "typical_question_signals": ["Define a business segment and a geographical segment.", "What factors are considered in identifying business segments?", "What factors determine whether operations form a geographical segment?", "Which of the following is NOT included in segment revenue/expense/assets/liabilities?"],
+      "notes": "Definition-heavy topic; often tested in theory definitions. Verified against source (2026-07-20) - added the specific inclusion/exclusion rules for segment revenue, expense, assets and liabilities during Tier 3 review (present in source, significantly under-captured in Tier 2 draft - these exclusion rules are classic MCQ trap material)."
+    },
+    "M1-C4-U3-T3.5": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Treatment of Interest for determining Segment Expense",
+      "keywords": ["interest expense", "overdrafts", "operating liabilities", "segment expense", "interest as segment expense", "borrowing cost embedded in inventory", "AS 16", "AS 2", "inventory cost"],
+      "typical_question_signals": ["How should interest be treated in determining segment expense?", "Is interest capitalised into inventory cost also a segment expense?", "How does AS 16 read with AS 2 affect segment expense treatment?", "When should interest relating to operating liabilities be included in segment expense?"],
+      "notes": "Cross-chapter-relevant topic; questions may test the interaction between segment reporting and inventory/borrowing-cost rules. Verified against source (2026-07-20) - this exact AS16/AS2/AS17 cross-reference was independently confirmed as a genuine finding during the earlier AS2 question-bank audit this session (MTP-May2025-Set2 Q6(b))."
+    },
+    "M1-C4-U3-T3.6": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Allocation",
+      "keywords": ["allocation", "directly attributable", "reasonably allocable", "internal financial reporting system", "segment revenue", "segment expense", "segment assets", "segment liabilities", "inter-segment transfers", "intra-enterprise balances determined before elimination"],
+      "typical_question_signals": ["What is the basis for allocating revenues and expenses to segments?", "How are items allocated to segments under AS 17?", "What role does the internal reporting system play in allocation?", "How should inter-segment transfers be treated for segment reporting?"],
+      "notes": "Conceptual allocation topic. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U3-T3.7": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Primary and Secondary Segment Reporting Formats",
+      "keywords": ["primary segment reporting format", "secondary segment reporting", "business segments", "geographical segments", "dominant source of risks and returns", "primary format", "secondary information"],
+      "typical_question_signals": ["What is the primary reporting format under AS 17?", "When should business segments be the primary format?", "When should geographical segments be the primary format?", "What secondary information should be reported?"],
+      "notes": "Classification and format topic. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U3-T3.8": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Business and Geographical Segments",
+      "keywords": ["board of directors", "Chief Executive Officer", "internal financial reporting", "business segment", "geographical segment", "product and service lines", "geographical lines", "lower-level segmentation"],
+      "typical_question_signals": ["How are business and geographical segments identified?", "What role does internal financial reporting play in identifying segments?", "When should management look to a lower level of internal segmentation?", "How are internal segments tested against AS 17 definitions?"],
+      "notes": "Identification and organisational-structure topic. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U3-T3.9": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Identifying Reportable Segments (Quantitative Thresholds)",
+      "keywords": ["reportable segment", "10% revenue test", "10% result test", "10% assets test", "75% test", "external revenue", "internal revenue", "segment result", "segment assets", "unallocated reconciling item", "management discretion to include below-threshold segment", "prior-period reportable segment continues even if thresholds no longer met", "newly reportable segment - restate comparative prior-period data"],
+      "typical_question_signals": ["Which segments are reportable under AS 17?", "Apply the 10% revenue, result and assets tests.", "How is the 75% test applied to reportable segments?", "When should additional segments be included even if they do not meet the 10% thresholds?"],
+      "notes": "This is the most computation-heavy topic in the unit; exam questions often require applying the 10% revenue/result/assets thresholds and the 75% overall test (extensive worked examples in source Illustrations 1, 3 and Test Your Knowledge Q6, 9-13). Verified against source (2026-07-20)."
+    },
+    "M1-C4-U3-T3.10": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Segment Accounting Policies",
+      "keywords": ["segment accounting policies", "accounting policies adopted for enterprise", "internal reporting to board", "chief executive officer", "resource allocation", "performance assessment", "basis of measurement", "additional segment information"],
+      "typical_question_signals": ["What are segment accounting policies?", "Can additional segment information be prepared on a basis different from enterprise accounting policies?", "When is additional segment information acceptable under AS 17?", "How should the basis of measurement be disclosed?"],
+      "notes": "Policy and disclosure topic. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U3-T3.11": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Primary Reporting Format",
+      "keywords": ["segment revenue", "segment result", "segment assets", "segment liabilities", "fixed assets", "depreciation", "amortisation", "non-cash expenses", "reconciliation", "exemption if enterprise reports segment cash flows"],
+      "typical_question_signals": ["What information should be disclosed for each reportable segment?", "How should segment revenue and segment result be disclosed?", "What reconciliation is required between segment information and enterprise financial statements?", "Which non-cash expenses should be included in segment result?"],
+      "notes": "Disclosure-format topic (7-item disclosure list plus 4-item reconciliation: revenue, result, assets, liabilities). Verified against source (2026-07-20)."
+    },
+    "M1-C4-U3-T3.12": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Secondary Segment Information",
+      "keywords": ["secondary segment information", "geographical location of customers", "geographical location of assets", "external customers", "segment assets", "10% threshold", "business segment", "geographical segment"],
+      "typical_question_signals": ["What secondary information should be disclosed when the primary format is business segments?", "How should geographical segment information be reported?", "When should secondary information be disclosed for a geographical segment?", "What information is required when the primary format is geographical segments?"],
+      "notes": "Secondary disclosure topic. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U3-T3.13": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Other Disclosures",
+      "keywords": ["inter-segment transfers", "pricing of inter-segment transfers", "change in accounting policies", "material effect", "identification of segments", "allocation of revenues and expenses", "types of products and services", "composition of geographical segment"],
+      "typical_question_signals": ["How should inter-segment transfers be measured and disclosed?", "What disclosures are required for a change in segment accounting policies?", "How should changes in segment identification or allocation basis be disclosed?", "What information about products and services should be disclosed?"],
+      "notes": "Disclosure and change-in-policy topic. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U3-T3.14*": {
+      "chapter_id": "M1-C4-U3",
+      "chapter_name": "Accounting Standard 17 Segment Reporting",
+      "topic_name": "Illustrations and Test Your Knowledge",
+      "keywords": ["reportable segment determination given segment assets/results/revenue table", "deferred tax assets excluded from segment assets before 10% test", "inter-segment transfer pricing policy (cost less discount vs market price)", "geographical segments within same country (rural vs urban)", "secondary segment disclosure threshold for insignificant export sales", "segment result computation with inter-segment transactions and allocated enterprise revenue/expense (5:4:2 basis)", "profitability test using greater of total profit-segments or total loss-segments"],
+      "typical_question_signals": ["The Chief Accountant/Senior Accountant is of the opinion that only segment X should be reported - is he justified?", "Calculate the segment results from the following information (directly attributed + allocated + inter-segment revenue/expense).", "A company has an inter-segment transfer pricing policy of charging at cost less X% - is this correct?", "Identify the reportable segments given segment assets/profit/revenue data."],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20) - added during Tier 3 review; the Tier 2 draft explicitly stopped reading at line 500 of a 1010-line source file and so never reached Illustrations 1-5 or the full TEST YOUR KNOWLEDGE section (5 MCQs + 8 scenario-based numerical questions, mostly reportable-segment threshold computations - the single most exam-relevant content in this unit given how heavily the 10%/75% tests are tested numerically)."
+    },
+    "M1-C4-U4-T4.1": {
+      "chapter_id": "M1-C4-U4",
+      "chapter_name": "Accounting Standard 18 Related Party Disclosures",
+      "topic_name": "Introduction",
+      "keywords": ["AS 18 prescribes requirements for disclosure of related party relationships and transactions", "applicable to financial statements of each reporting enterprise", "applicable to consolidated financial statements presented by a holding company"],
+      "typical_question_signals": ["To which financial statements does AS 18 apply?", "What is the scope and applicability of AS 18 - Related Party Disclosures?"],
+      "notes": "Brief scope/applicability statement. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U4-T4.2": {
+      "chapter_id": "M1-C4-U4",
+      "chapter_name": "Accounting Standard 18 Related Party Disclosures",
+      "topic_name": "Related Party Issue - Why disclosure is needed?",
+      "keywords": ["arm's-length basis presumption between independent parties", "related parties may enter into transactions unrelated parties would not", "transactions may not be at same terms and conditions", "no price charged in some related party transactions (e.g., free management services, free credit)", "mere existence of relationship may affect transactions even if no transactions occur", "one party may refrain from acting due to control/significant influence (e.g., subsidiary instructed not to do R&D)", "transactions may not have taken place without the related party relationship"],
+      "typical_question_signals": ["Why is disclosure of related party relationships necessary as per AS 18?", "How can the mere existence of a related party relationship affect the financial statements even without any transactions?", "Explain the presumption about arm's-length transactions and when it may not be valid under AS 18."],
+      "notes": "Purely theoretical - tests understanding of the rationale behind related party disclosure. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U4-T4.3": {
+      "chapter_id": "M1-C4-U4",
+      "chapter_name": "Accounting Standard 18 Related Party Disclosures",
+      "topic_name": "Related Party Relationships, as contemplated under AS 18",
+      "keywords": ["ability to control or exercise significant influence over the other party", "parties considered related if at ANY TIME during the reporting period one has control/significant influence", "five specific types of related party relationships (a) to (e)", "type (a): enterprises that control, are controlled by, or under common control with reporting enterprise (holding company, subsidiaries, fellow subsidiaries)", "type (b): associates and joint ventures of the reporting enterprise; investing party/venturer when reporting is associate/joint venture", "type (c): individuals owning interest in voting power giving control or significant influence, and relatives of such individuals", "type (d): key management personnel and relatives of such personnel", "type (e): enterprises over which persons in (c) or (d) can exercise significant influence (enterprises owned by directors/major shareholders, common KMP)", "associate of an associate is NOT a related party", "sub-subsidiaries under common control are related"],
+      "typical_question_signals": ["Identify the related parties as per AS 18 given the following organisational structure.", "Which of the following is a related party of the reporting enterprise under AS 18?", "Are two companies related if they have a common director? When would they be considered related under AS 18?", "Is an associate of an associate a related party under AS 18?"],
+      "notes": "Distinguish from T4.4 - T4.3 tests who IS a related party (the five categories a-e). Classic exam pattern: given a corporate structure diagram, identify all related parties for each reporting entity. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U4-T4.4": {
+      "chapter_id": "M1-C4-U4",
+      "chapter_name": "Accounting Standard 18 Related Party Disclosures",
+      "topic_name": "Who are NOT deemed to be Related Parties under AS 18?",
+      "keywords": ["two companies NOT related simply because they have a director in common", "exception: if common director can affect policies of both companies in mutual dealings THEN they ARE related", "single customer, supplier, franchiser, distributor, or general agent - NOT related merely by economic dependence", "providers of finance in normal dealings - NOT related merely by virtue of those dealings", "trade unions in normal dealings - NOT related", "public utilities in normal dealings - NOT related", "government departments and government agencies (including government sponsored bodies) - NOT related", "BUT: any of the above becomes related if it otherwise meets the control/significant influence criteria (e.g. a bank holding 23% voting rights loses the provider-of-finance exemption)"],
+      "typical_question_signals": ["Which of the following is NOT a related party under AS 18?", "Are two companies considered related parties under AS 18 simply because they share a common director?", "State whether a provider of finance is a related party under AS 18."],
+      "notes": "CRITICAL MCQ TRAP TOPIC. Verified against source (2026-07-20) - the UK Bank illustration (bank holds 23% voting rights + provides a loan + nominates a board member) is the key worked example showing how the provider-of-finance exemption is lost once independent significant-influence criteria are met."
+    },
+    "M1-C4-U4-T4.5": {
+      "chapter_id": "M1-C4-U4",
+      "chapter_name": "Accounting Standard 18 Related Party Disclosures",
+      "topic_name": "Exemption from Related Party Disclosure in certain situations",
+      "keywords": ["conflict with duties of confidentiality - required by statute or regulator or similar competent authority", "example: banks obliged by law to maintain customer confidentiality - AS 18 does not override", "commercial contract confidentiality clauses do NOT qualify for this exemption", "consolidated financial statements - no disclosure required for intra-group transactions", "state-controlled enterprises - no disclosure required for relationships/transactions with other state-controlled enterprises"],
+      "typical_question_signals": ["In which situations is an enterprise exempt from related party disclosure under AS 18?", "ABC Ltd. has commercial contracts requiring confidentiality - can it avoid related party disclosure?", "Are intra-group transactions required to be disclosed in consolidated financial statements under AS 18?"],
+      "notes": "Three exemptions verified exactly against source: (1) statutory/regulatory confidentiality, NOT commercial contracts (per Test Your Knowledge Answer 7); (2) consolidated FS intra-group transactions; (3) state-controlled enterprises."
+    },
+    "M1-C4-U4-T4.6": {
+      "chapter_id": "M1-C4-U4",
+      "chapter_name": "Accounting Standard 18 Related Party Disclosures",
+      "topic_name": "Definitions of other Terms used in AS 18",
+      "keywords": ["related party transaction - transfer of resources or obligations between related parties, regardless of whether a price is charged", "control - (a) ownership of >50% voting power; (b) control of composition of board of directors; (c) substantial interest in voting power with power to direct financial/operating policies", "control under AS 18 is wider than under AS 21 (clause (c) is additional)", "power to appoint director - without consent, follows from position held, or nominated by enterprise", "substantial interest - 20% or more interest in voting power (enterprise or individual)", "associate - enterprise in which investing party has significant influence, neither subsidiary nor joint venture", "significant influence - participation in financial/operating policy decisions but not control; presumed at 20%+ voting power", "significant influence may be exercised by: board representation, policy-making, material inter-company transactions, interchange of managerial personnel, dependence on technical information", "significant influence NOT presumed if <20% voting power (unless demonstrated otherwise)", "key management personnel (KMP) - MD, whole-time director, manager, persons whose directions board is accustomed to act", "non-executive director NOT KMP merely by being a director", "relative - spouse, son, daughter, brother, sister, father, mother", "joint venture - contractual arrangement with joint control", "joint control - contractually agreed sharing of power to govern financial/operating policies", "subsidiary - >50% equity share capital OR control of composition of board of directors", "fellow subsidiary - companies that are subsidiaries of the same holding company"],
+      "typical_question_signals": ["Define 'control' as per AS 18 and explain how it differs from AS 21.", "What is the meaning of 'significant influence' under AS 18? At what threshold is it presumed?", "Who is considered a key management personnel under AS 18?", "Define 'relative' as per AS 18."],
+      "notes": "Definition-heavy topic - all 16 distinct facts independently verified exact against source (2026-07-20), including the AS18-vs-AS21 control-definition width distinction and both 20% thresholds (substantial interest, significant influence presumption)."
+    },
+    "M1-C4-U4-T4.7": {
+      "chapter_id": "M1-C4-U4",
+      "chapter_name": "Accounting Standard 18 Related Party Disclosures",
+      "topic_name": "Disclosure requirements under AS 18",
+      "keywords": ["name and nature of related party relationship where control exists - disclose even if NO transactions", "transactions exist - disclose: (i) name, (ii) description of relationship, (iii) nature of transactions, (iv) volume (amount or proportion), (v) other elements for understanding, (vi) outstanding items amounts/proportions + provisions for doubtful debts, (vii) amounts written off/written back", "items of similar nature may be disclosed in aggregate by type of related party", "separate disclosure if necessary for understanding effects", "remuneration paid to KMP - treated as related party transaction requiring disclosure", "remuneration to non-executive directors - NOT a related party transaction if they are not related parties"],
+      "typical_question_signals": ["What are the disclosure requirements under AS 18 when control exists but no transactions have occurred?", "Should remuneration paid to key management personnel be disclosed as a related party transaction under AS 18?"],
+      "notes": "Verified against source (2026-07-20) - all seven disclosure items (i)-(vii) exact matches."
+    },
+    "M1-C4-U4-T4.8": {
+      "chapter_id": "M1-C4-U4",
+      "chapter_name": "Accounting Standard 18 Related Party Disclosures",
+      "topic_name": "List of Related Party Transactions, to be Disclosed",
+      "keywords": ["purchases or sales of goods (finished or unfinished)", "purchases or sales of fixed assets", "rendering or receiving of services", "agency arrangements", "leasing or hire purchase arrangements", "transfer of research and development", "licence agreements", "finance (including loans and equity contributions in cash or in kind)", "guarantees and collaterals", "management controls including for deputation of employees"],
+      "typical_question_signals": ["List the examples of related party transactions that need to be disclosed as per AS 18.", "Which of the following is an example of a related party transaction under AS 18?"],
+      "notes": "Memory-based - all 10 illustrative examples verified exact against source. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U4-T4.9*": {
+      "chapter_id": "M1-C4-U4",
+      "chapter_name": "Accounting Standard 18 Related Party Disclosures",
+      "topic_name": "Illustrations and Test Your Knowledge",
+      "keywords": ["identify related parties given a corporate structure/shareholding chain diagram (holding, subsidiary, fellow subsidiary, associate, joint control)", "indirect control via combined holding+subsidiary voting rights", "associate of an associate is NOT related (worked example)", "sub-subsidiary under common control IS related (worked example)", "relative of an individual with control/significant influence is a related party (spouse example)", "relative of KMP who left service mid-year still identified as related party for that reporting period since relationship existed at some point during the period", "related party relationship ceasing mid-year - only transactions during the period the relationship existed are disclosed, not the entire year", "provider of finance losing its exemption once it independently meets significant-influence criteria (bank holding voting rights + board nominee)", "sale at normal/arm's-length price does NOT exempt a related party transaction from disclosure"],
+      "typical_question_signals": ["Identify the related parties in the following case as per AS 18 (given a shareholding chain).", "Determine whether Company X is to be treated as a party related to Company A.", "A related party relationship existed only for part of the year - are transactions for the entire year required to be disclosed?", "The Chief Accountant contends that sales made at normal selling price need not be disclosed as related party transactions - is this correct?"],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20) - added during Tier 3 review; the Tier 2 draft omitted this bucket even though the source is unusually illustration-heavy (10 worked illustrations covering shareholding-chain related-party identification, timing/cessation of related party status, and a full TEST YOUR KNOWLEDGE section with 5 MCQs, 3 theoretical, 3 scenario-based questions) - this is a classic, heavily-tested exam pattern (given a corporate structure, identify all related parties per reporting entity)."
+    },
+    "M1-C4-U5-T5.1": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Introduction",
+      "keywords": ["earnings per share", "EPS", "basic earnings per share", "diluted earnings per share", "computation", "presentation", "Statement of Profit and Loss", "performance comparison", "mandatory for all companies", "disclosure of diluted EPS not mandatory for SMCs (encouraged)", "consolidated financial statements use consolidated information"],
+      "typical_question_signals": ["What is the objective of AS 20?", "How is earnings per share computed and presented?", "Is diluted EPS disclosure mandatory for an SMC?", "Explain the purpose of basic and diluted EPS."],
+      "notes": "Conceptual introduction; mostly theory rather than computation. Verified against source (2026-07-20) - added the SMC diluted-EPS exemption during Tier 3 review (present in source, omitted from Tier 2 draft)."
+    },
+    "M1-C4-U5-T5.2": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Definition of the terms used in AS 20",
+      "keywords": ["equity share", "preference share", "financial instrument", "financial asset", "financial liability", "potential equity share", "share warrant", "option", "employee stock option plan", "contingently issuable shares", "fair value", "partly-paid share not entitled to dividends treated as potential equity share for Diluted EPS"],
+      "typical_question_signals": ["Define an equity share and a preference share.", "What is a potential equity share?", "Give examples of potential equity shares.", "What is meant by fair value in AS 20?"],
+      "notes": "Definition-heavy topic; important for later diluted-EPS questions. Verified against source (2026-07-20) - added contingently issuable shares and the partly-paid-share note during Tier 3 review."
+    },
+    "M1-C4-U5-T5.3": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Earnings - Basic",
+      "keywords": ["net profit attributable to equity shareholders", "preference dividends", "cumulative preference shares (full amount deducted regardless of whether provided)", "non-cumulative preference shares (deducted only if provided)", "tax expense", "exceptional items", "extraordinary items", "changes in accounting estimates", "changes in accounting policy", "more than one class of equity shares - apportion net profit by dividend rights - multiple Basic EPS figures"],
+      "typical_question_signals": ["How is the numerator adjusted for basic EPS?", "How are preference dividends treated in basic EPS?", "Which items are excluded from or adjusted in the EPS numerator?", "How is EPS computed when there is more than one class of equity shares?"],
+      "notes": "Numerator-adjustment topic; often tested in theory and simple adjustment questions. Verified against source (2026-07-20) - added the multiple-equity-share-class apportionment note during Tier 3 review."
+    },
+    "M1-C4-U5-T5.4": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Per share - Basic",
+      "keywords": ["weighted average number of equity shares", "weighted average number of shares outstanding", "time-weighting factor = days outstanding / days in period", "shares issued for cash - included when cash receivable", "shares from debt conversion - included at date of conversion", "shares issued for settlement of liability - included when settlement effective", "shares issued for asset acquisition - included when acquisition recognised", "shares issued for services rendered - included as services rendered", "shares bought back", "bonus issue", "rights issue", "share split", "reverse share split", "partly paid equity shares", "contingently issuable shares included from date conditions satisfied"],
+      "typical_question_signals": ["How is the weighted-average share count computed for basic EPS?", "How are bonus issue and rights issue adjusted in the denominator?", "From which date should equity shares issued in exchange for X be included in the weighted average?", "How are partly paid shares treated in the basic EPS denominator?"],
+      "notes": "This is the core numerical topic of the unit; questions often involve bonus issue, rights issue, buy-back, or partly paid shares. Verified against source (2026-07-20) - added the six specific share-inclusion-date sub-rules during Tier 3 review (directly tested in Test Your Knowledge Q6)."
+    },
+    "M1-C4-U5-T5.5": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Shares issued in a scheme of Amalgamation",
+      "keywords": ["amalgamation in the nature of purchase", "amalgamation in the nature of merger", "date of acquisition", "beginning of reporting period", "transferee", "transferor", "combined enterprise", "equity shares issued as consideration", "weighted average number of shares"],
+      "typical_question_signals": ["How are shares issued in an amalgamation treated in basic EPS?", "When are shares issued in a merger included in weighted-average share count?", "How does purchase vs merger treatment differ in EPS?"],
+      "notes": "Scenario-based topic involving timing of inclusion in the denominator. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U5-T5.6": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Diluted Earnings Per Share",
+      "keywords": ["diluted earnings per share", "dilutive potential equity shares", "convertible debentures", "convertible preference shares", "share warrants", "options", "employee stock option plans", "share application money pending allotment treated as dilutive potential equity share", "tax effect"],
+      "typical_question_signals": ["How is diluted EPS computed?", "Which potential equity shares are included in diluted EPS?", "How are convertible debentures treated in diluted EPS?", "How is share application money treated for diluted EPS?"],
+      "notes": "This is a high-complexity computational topic; it combines numerator adjustment with extra shares from potential equity instruments. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U5-T5.7": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Earnings - Diluted",
+      "keywords": ["adjusted net profit", "dividends on dilutive potential equity shares", "interest recognised", "after-tax savings", "expenses saved", "income that will cease to accrue", "conversion of potential equity shares", "tax adjustment"],
+      "typical_question_signals": ["How is the numerator adjusted for diluted EPS?", "What tax effect is considered when potential shares convert?", "How are interest and dividends added back for diluted EPS?"],
+      "notes": "Numerator-side diluted-EPS topic with tax and savings adjustments. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U5-T5.8": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Per share - Diluted",
+      "keywords": ["weighted average number of equity shares", "diluted share denominator", "potential equity shares outstanding", "beginning of the period", "date of issue", "date of conversion", "cancelled or lapsed shares - weighted only for outstanding portion", "contingently issuable shares", "fair value", "exercise price", "options split into fairly-priced shares (ignored) and no-consideration shares (dilutive, added to denominator)"],
+      "typical_question_signals": ["How is the diluted share denominator computed?", "When are potential equity shares included in diluted EPS?", "How are contingently issuable shares treated?", "How are share options treated in diluted EPS?"],
+      "notes": "Denominator-side diluted-EPS topic; questions often involve timing, conversion, and options. Verified against source (2026-07-20) - added the options fair-value-vs-no-consideration split mechanism during Tier 3 review."
+    },
+    "M1-C4-U5-T5.9": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Dilutive Potential Equity Shares",
+      "keywords": ["dilutive potential equity shares", "anti-dilutive", "continuing ordinary activities is the control factor (not overall net profit/loss)", "net profit per share", "loss per share", "incremental EPS", "most dilutive", "least dilutive", "each issue considered separately in sequence, not in aggregate"],
+      "typical_question_signals": ["Which potential equity shares are dilutive?", "How is anti-dilution determined under AS 20?", "How do you rank potential equity shares from most dilutive to least dilutive?", "A company has a net loss overall but income from continuing operations - which figure determines dilutive status?"],
+      "notes": "This is the decision-rule topic for whether instruments are included in diluted EPS. Verified against source (2026-07-20) - the 'continuing ordinary activities is the control factor, not overall net profit/loss' point is the key lesson of source Illustration 7 (discontinued-operations loss case)."
+    },
+    "M1-C4-U5-T5.10": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Restatement",
+      "keywords": ["restatement", "bonus issue", "share split", "reverse share split", "prior period EPS", "comparative figure", "board of directors", "approved financial statements", "restatement required even if change occurs after balance sheet date but before board approval"],
+      "typical_question_signals": ["How is EPS restated after a bonus issue?", "What adjustment is required for a share split or reverse share split?", "When should restatement be applied if the change occurs after the balance sheet date?"],
+      "notes": "Comparative-figure topic; the restatement rule is important in exam scenarios. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U5-T5.11": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Presentation",
+      "keywords": ["presentation", "Statement of Profit and Loss", "face of the statement", "basic EPS", "diluted EPS", "equal prominence", "each class of equity shares", "must be presented even if negative (loss per share)"],
+      "typical_question_signals": ["How should basic and diluted EPS be presented?", "Where should EPS be shown in the financial statements?", "Must EPS be disclosed even if it is a loss per share?"],
+      "notes": "Presentation-format topic; mostly disclosure and reporting structure. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U5-T5.12": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Disclosure",
+      "keywords": ["disclosure", "EPS excluding extraordinary items (net of tax) where statement includes extraordinary items", "numerators in EPS calculation", "reconciliation of numerators to net profit/loss", "denominators in EPS calculation", "reconciliation of denominators to each other", "nominal value of shares", "component of net profit other than net profit/loss attributable to equity shareholders - must use AS20-consistent denominator + reconciliation"],
+      "typical_question_signals": ["What disclosures are required for EPS under AS 20?", "How is reconciliation of numerator and denominator disclosed?", "What information about nominal value should be disclosed?"],
+      "notes": "Disclosure topic; often tested in theory rather than numeric work. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U5-T5.13*": {
+      "chapter_id": "M1-C4-U5",
+      "chapter_name": "Accounting Standard 20 Earnings Per Share",
+      "topic_name": "Illustrations and Test Your Knowledge",
+      "keywords": ["compute weighted average shares from issue/buyback dates using time-weighting factor", "bonus issue treated retrospectively - restate ALL prior periods as if bonus occurred at earliest period reported", "rights issue theoretical ex-rights fair value per share and adjustment factor computation", "rights issue price below fair value creates a bonus element (unlike a rights issue at full fair value)", "partly paid shares weighted by proportion of amount paid relative to full value", "diluted EPS with convertible debentures - add back after-tax interest to numerator, add converted shares to denominator", "diluted EPS with share options - fair value vs exercise price split", "combined bonus issue + fresh issue at market price in same year (different treatment: bonus is retrospective, market-price issue is time-weighted from issue date)", "preference dividend deducted from net profit before computing EPS"],
+      "typical_question_signals": ["Calculate the weighted average number of shares given issue and buyback dates.", "Compute basic EPS given a bonus issue during the year, including the restated comparative figure.", "Compute basic EPS given a rights issue, including the theoretical ex-rights fair value adjustment.", "Compute diluted EPS given convertible debentures / share options outstanding."],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20) - added during Tier 3 review; the Tier 2 draft omitted this bucket even though the source is the most numerically intensive unit reviewed so far (13 worked illustrations plus a TEST YOUR KNOWLEDGE section with 5 MCQs, 3 theoretical, 5 scenario-based numerical problems including a combined bonus-issue-plus-fresh-issue scenario) - these illustration patterns are the primary source of realistic exam numerical questions for this unit."
+    },
+    "M1-C4-U6-T6.1": {
+      "chapter_id": "M1-C4-U6",
+      "chapter_name": "Accounting Standard 24 Discontinuing Operations",
+      "topic_name": "Introduction",
+      "keywords": ["discontinuing operations", "financial statements", "primary stakeholders", "cash flows", "earnings-generating capacity", "financial position", "continuing operations", "AS 24 applicable to all discontinuing operations", "segregating discontinuing from continuing operations information"],
+      "typical_question_signals": ["What is the objective of AS 24?", "Why is information about discontinuing operations disclosed separately?", "How does AS 24 help users assess cash flows and earnings capacity?"],
+      "notes": "Conceptual introduction; mostly theory-based. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U6-T6.2": {
+      "chapter_id": "M1-C4-U6",
+      "chapter_name": "Accounting Standard 24 Discontinuing Operations",
+      "topic_name": "Discontinuing Operation",
+      "keywords": ["component of an enterprise", "single plan", "disposing substantially in its entirety (single transaction, demerger, spin-off)", "disposing piecemeal (selling assets/settling liabilities individually)", "terminating through abandonment", "separate major line of business", "geographical area of operations", "operationally and for financial reporting purposes distinguishable - 3 conditions: (a) assets/liabilities directly attributable, (b) revenue directly attributable, (c) majority of operating expenses directly attributable", "reportable segment", "major product or service line (single-segment enterprise)", "activities that do NOT necessarily satisfy criterion (a) alone: gradual/evolutionary phasing out of a product line, abruptly discontinuing several products within an ongoing line, shifting production/marketing to another location, closing a facility for productivity/cost savings", "discontinuing operations are infrequent events but not all infrequent events are discontinuing operations", "classification as discontinuing operation does NOT itself bring into question going concern ability"],
+      "typical_question_signals": ["When does a component qualify as a discontinuing operation?", "How is a discontinuing operation distinguished from a mere restructuring or gradual phase-out?", "What conditions make a component operationally and financially distinguishable?", "Does classifying an operation as discontinuing raise doubts about going concern?"],
+      "notes": "Classic scenario-MCQ trap; the key distinction is between a genuine discontinuing operation and a restructuring, gradual phase-out, or a small part of the business. Verified against source (2026-07-20) - added the 3-condition operational/financial distinguishability checklist, the 4 non-qualifying-activity examples, and the infrequent-events/going-concern points during Tier 3 review (all directly tested in Test Your Knowledge MCQs 3-4)."
+    },
+    "M1-C4-U6-T6.3": {
+      "chapter_id": "M1-C4-U6",
+      "chapter_name": "Accounting Standard 24 Discontinuing Operations",
+      "topic_name": "Initial Disclosure Event",
+      "keywords": ["initial disclosure event = earlier of: binding sale agreement OR board approval + announcement of formal plan", "board of directors or similar governing body", "detailed formal plan features: major assets to be disposed, expected method of disposal, period expected for completion, principal locations affected, employee compensation/termination details, estimated proceeds or salvage", "announcement = informing affected parties (lenders, stock exchanges, trade payables, trade unions) sufficiently specifically to be demonstrably committed"],
+      "typical_question_signals": ["What is the initial disclosure event under AS 24?", "Given a board-approval date, announcement date, and binding-sale-agreement date, which is the initial disclosure event date?", "What features normally form part of a detailed formal plan?"],
+      "notes": "Timing concept; the trigger date for initial disclosure is central (whichever of the two triggering events occurs earlier). Verified against source (2026-07-20) - added the remaining formal-plan features and the affected-parties definition during Tier 3 review; this exact multi-date scenario (board approval / announcement / binding sale agreement / reporting date) is directly tested in Test Your Knowledge MCQ1."
+    },
+    "M1-C4-U6-T6.4": {
+      "chapter_id": "M1-C4-U6",
+      "chapter_name": "Accounting Standard 24 Discontinuing Operations",
+      "topic_name": "Recognition and Measurement",
+      "keywords": ["recognition and measurement", "relevant Accounting Standards", "discontinuing operations", "measurement principles", "AS 24 does not provide specific guidelines"],
+      "typical_question_signals": ["How are the effects of discontinuing operations recognised and measured?", "Does AS 24 itself prescribe measurement rules for discontinuing operations?"],
+      "notes": "This topic is procedural rather than standalone; it points to other standards for measurement. Verified against source (2026-07-20) - this exact point (AS 24 provides no recognition/measurement guidance) is tested as a TRUE statement in Test Your Knowledge MCQ4."
+    },
+    "M1-C4-U6-T6.5": {
+      "chapter_id": "M1-C4-U6",
+      "chapter_name": "Accounting Standard 24 Discontinuing Operations",
+      "topic_name": "Presentation and Disclosure",
+      "keywords": ["initial disclosure", "description of discontinuing operation", "business or geographical segment (per AS 17)", "date and nature of initial disclosure event", "date/period discontinuance expected to be completed", "carrying amount of assets and liabilities", "revenue and expenses attributable", "pre-tax profit or loss", "income tax expense", "net cash flows (operating, investing, financing)", "notes to financial statements", "other disclosures on actual disposal/settlement or binding agreements: pre-tax gain/loss + tax expense on the gain/loss, net selling price or range (after disposal costs), expected timing of cash receipt, carrying amount of net assets"],
+      "typical_question_signals": ["What information must be disclosed at initial disclosure?", "Which amounts are shown on the face of the statement of profit and loss?", "What must be disclosed when an enterprise actually disposes of assets or enters a binding sale agreement?"],
+      "notes": "Disclosure-heavy topic; some information is shown in the notes while pre-tax profit or loss and related tax are shown on the face of the statement of profit and loss. Verified against source (2026-07-20) - added the 'other disclosures on actual disposal' sub-section (source section 6.5.3) during Tier 3 review, which was entirely missing from the Tier 2 draft."
+    },
+    "M1-C4-U6-T6.6": {
+      "chapter_id": "M1-C4-U6",
+      "chapter_name": "Accounting Standard 24 Discontinuing Operations",
+      "topic_name": "Updating the Disclosures",
+      "keywords": ["updating the disclosures", "significant changes", "cash flows", "assets to be disposed", "liabilities to be settled", "discontinuance completed (substantially completed or abandoned, even if full payment not yet received)", "abandoned plan", "effect of withdrawal"],
+      "typical_question_signals": ["How should disclosures be updated after the initial disclosure event?", "What happens if the amount or timing of cash flows changes?", "What must be disclosed if a previously reported plan is abandoned?"],
+      "notes": "This is about ongoing updates to the disclosures after the first reporting period. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U6-T6.7": {
+      "chapter_id": "M1-C4-U6",
+      "chapter_name": "Accounting Standard 24 Discontinuing Operations",
+      "topic_name": "Separate Disclosure for Each Discontinuing Operation",
+      "keywords": ["separate disclosure", "each discontinuing operation", "multiple discontinuing operations", "separate reporting"],
+      "typical_question_signals": ["How should disclosures be presented when there is more than one discontinuing operation?", "Must each discontinuing operation be disclosed separately?"],
+      "notes": "Simple presentation rule for scenarios with more than one discontinuing operation (single sentence in source). Verified against source (2026-07-20)."
+    },
+    "M1-C4-U6-T6.8": {
+      "chapter_id": "M1-C4-U6",
+      "chapter_name": "Accounting Standard 24 Discontinuing Operations",
+      "topic_name": "Presentation of The Required Disclosures",
+      "keywords": ["presentation of required disclosures", "notes to financial statements", "pre-tax profit or loss shown on face of P&L", "income tax expense shown on face of P&L", "pre-tax gain or loss on disposal shown on face of P&L", "net selling price", "binding sale agreements", "expected timing of cash flows"],
+      "typical_question_signals": ["Where should the required disclosures be shown?", "Which items must appear on the face of the statement of profit and loss?"],
+      "notes": "Presentation-rule topic; emphasis is on the distinction between face-of-statement presentation (2 items) and note disclosure (everything else). Verified against source (2026-07-20)."
+    },
+    "M1-C4-U6-T6.9": {
+      "chapter_id": "M1-C4-U6",
+      "chapter_name": "Accounting Standard 24 Discontinuing Operations",
+      "topic_name": "Restatement of Prior Periods",
+      "keywords": ["restatement of prior periods", "comparative information", "continuing operations", "discontinuing operations", "segregate assets", "segregate liabilities", "segregate revenue", "segregate expenses", "segregate cash flows"],
+      "typical_question_signals": ["How are prior period figures restated after an initial disclosure event?", "What must be segregated in comparative information?"],
+      "notes": "Comparative-period adjustment topic (single sentence in source, all 5 segregated items captured). Verified against source (2026-07-20)."
+    },
+    "M1-C4-U6-T6.10": {
+      "chapter_id": "M1-C4-U6",
+      "chapter_name": "Accounting Standard 24 Discontinuing Operations",
+      "topic_name": "Disclosure in Interim Financial Reports",
+      "keywords": ["disclosure in interim financial reports", "interim financial report", "AS 25", "Interim Financial Reporting", "significant activities or events since the most recent annual reporting period", "significant changes in amount or timing of cash flows"],
+      "typical_question_signals": ["How are discontinuing-operation disclosures handled in interim financial reports?", "What interim-reporting disclosures are required under AS 24 read with AS 25?"],
+      "notes": "Cross-chapter overlap with AS 25; a question may test both standards together. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U6-T6.11*": {
+      "chapter_id": "M1-C4-U6",
+      "chapter_name": "Accounting Standard 24 Discontinuing Operations",
+      "topic_name": "Illustrations and Test Your Knowledge",
+      "keywords": ["single restaurant sale out of a chain, small % of revenue, no wider plan - NOT a discontinuing operation", "airline business sold via piecemeal aircraft disposal, large % of group revenue, distinguishable - IS a discontinuing operation", "single-segment enterprise selling a major product line - can qualify as discontinuing operation", "consolidated FS example: selling a subsidiary with activities similar to the parent/other subsidiaries", "board resolution silent on definite timeframe for closure - NOT a discontinuing operation (no clear roadmap)", "phased but time-bound board resolution to sell a division's assets - IS a discontinuing operation", "gradual enforcement of a product-line change over several months without a resolution specifying closure - NOT a discontinuing operation", "identify the initial disclosure event date given board-approval date, announcement date, and binding-sale-agreement date (earliest of the applicable triggers)"],
+      "typical_question_signals": ["Comment on whether the following qualifies as a discontinuing operation under AS 24, given the facts.", "Given the following dates (board approval, announcement, binding sale agreement), identify the initial disclosure event date.", "Advise whether the company's gradual product-line change should be treated as a discontinuing operation."],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20) - added during Tier 3 review; the Tier 2 draft omitted this bucket. Source contains 4 worked Examples embedded within section 6.2 plus a TEST YOUR KNOWLEDGE section (4 MCQs, 2 theoretical, 2 scenario-based questions incl. the Rohini Ltd. passenger-car-division case and the dish-washing/clothes-washing product-line case) - these are the primary source of realistic exam scenario questions distinguishing genuine discontinuing operations from mere restructuring."
+    },
+    "M1-C4-U7-T7.1": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Introduction",
+      "keywords": ["interim financial report", "interim period", "complete set of financial statements", "condensed financial statements", "timely and reliable reporting", "investors", "creditors", "lenders", "cash flows", "financial condition", "AS 25 does NOT mandate WHICH entities should publish interim reports, HOW FREQUENTLY, or HOW SOON after period end", "statute/regulator may require different form/content but AS25 recognition/measurement principles still apply unless otherwise specified"],
+      "typical_question_signals": ["What is the objective of AS 25?", "Does AS 25 specify which entities must publish interim reports, how often, or how soon?", "What is the purpose of interim financial reporting?"],
+      "notes": "Conceptual introduction; mainly theory-based. Verified against source (2026-07-20) - added the 'AS 25 does not mandate which/how often/how soon' point during Tier 3 review; this is the exact correct answer (option d, 'none of the above') to Test Your Knowledge MCQ 1 and was missing from the Tier 2 draft."
+    },
+    "M1-C4-U7-T7.2": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Definitions of the terms used under the Accounting Standard",
+      "keywords": ["interim period = financial reporting period shorter than a full financial year", "interim financial report = complete OR condensed set of financial statements for an interim period", "first year of operations - if annual reporting period is shorter than a financial year, that shorter period is NOT considered an interim period"],
+      "typical_question_signals": ["Define interim period under AS 25.", "What is meant by interim financial report?", "Is the first year of operations treated as an interim period?"],
+      "notes": "Definition-based topic; usually tested in theory rather than computation. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U7-T7.3": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Content of an Interim Financial Report",
+      "keywords": ["minimum contents = condensed financial statements", "complete set normally includes Balance Sheet, Statement of Profit and Loss, Cash Flow Statement, Notes", "focuses on new activities, events and circumstances - does not duplicate previously reported information", "AS 25 does not prohibit presenting a complete set of financial statements instead of condensed", "recognition and measurement principles apply to complete interim statements too, including all AS25 + other AS disclosures"],
+      "typical_question_signals": ["What is the minimum content of an interim financial report?", "Can an interim report contain a complete set of financial statements instead of condensed?", "Why does AS 25 focus on new events and circumstances rather than duplication?"],
+      "notes": "This topic is about the required minimum content and the choice between complete and condensed statements. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U7-T7.4": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Form and Content of Interim Financial Statements",
+      "keywords": ["complete statements conform to annual complete-set requirements", "condensed statements include at minimum the headings/sub-headings from most recent annual financial statements plus selected explanatory notes", "additional line items or notes included if omission would be misleading", "if basic and diluted EPS presented in annual FS per AS 20, must also present on face of interim P&L (complete or condensed)"],
+      "typical_question_signals": ["How should interim financial statements be formatted?", "What minimum headings and sub-headings must condensed statements include?", "How should EPS be presented in interim statements?"],
+      "notes": "This is about presentation structure and the requirement to include relevant notes if omission would be misleading. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U7-T7.5": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Selected Explanatory Notes",
+      "keywords": ["same accounting policies statement (or description of change)", "seasonality of interim operations", "unusual items per AS 5 (nature, size, incidence)", "changes in estimates of prior interim/financial year amounts with material current-period effect", "issuances, buy-backs, repayments and restructuring of debt/equity/potential equity shares", "dividends (aggregate or per share)", "segment revenue/capital employed/result (only if required annually per AS 17)", "effect of changes in composition of the enterprise (amalgamations, acquisition/disposal of subsidiaries and long-term investments, restructurings, discontinuing operations)", "material changes in contingent liabilities since last annual balance sheet date", "reported on financial year-to-date basis, plus any material current-interim-period events"],
+      "typical_question_signals": ["What explanatory notes are required in interim financial statements?", "How should seasonality be disclosed?", "What disclosure is required if the composition of the enterprise changed during the interim period (e.g. an amalgamation or a discontinuing operation)?"],
+      "notes": "Disclosure-oriented topic with a strong theory component (9-item list a-i in source). Verified against source (2026-07-20) - added item (h), the composition-change disclosure (amalgamations/subsidiary disposal/discontinuing operations), during Tier 3 review; this is itself a cross-reference to AS 14/AS 21/AS 24."
+    },
+    "M1-C4-U7-T7.6": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Periods for which Interim Financial Statements are required to be presented",
+      "keywords": ["balance sheet: current interim period end vs comparative = immediately preceding financial year end", "statement of profit and loss: current interim period + cumulative year-to-date vs comparative = comparable interim period + year-to-date of immediately preceding financial year", "cash flow statement: cumulative year-to-date vs comparative = comparable year-to-date of immediately preceding financial year", "current interim period", "comparative period"],
+      "typical_question_signals": ["What periods must be presented in interim financial statements for a given reporting date?", "How are comparative periods defined under AS 25 for the balance sheet vs the P&L vs the cash flow statement?"],
+      "notes": "This topic is about timing and the required comparative periods (a table with 3 distinct rules, one per statement - directly tested in Test Your Knowledge Q5 with a concrete date example). Verified against source (2026-07-20)."
+    },
+    "M1-C4-U7-T7.7": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Materiality",
+      "keywords": ["materiality assessed in relation to the INTERIM period financial data (not annual)", "interim measurements rely on estimates to a greater extent than annual data", "unusual/extraordinary items, changes in accounting policies/estimates, prior period items recognised/disclosed based on interim-period materiality"],
+      "typical_question_signals": ["How is materiality assessed for interim financial reporting?", "Why might interim materiality thresholds differ from annual thresholds?"],
+      "notes": "Materiality is judged in relation to the interim period and may be more judgment-based because interim data relies more on estimates. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U7-T7.8": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Disclosure in Annual Financial Statements",
+      "keywords": ["AS 5 requires disclosure of nature/amount of a material accounting-estimate change", "if an interim-period estimate changes significantly in the FINAL interim period and no separate report is prepared for that period, disclose the nature and amount of the change in a note to the ANNUAL financial statements"],
+      "typical_question_signals": ["How should a change in estimate in the final interim period be disclosed if no separate report is prepared for it?"],
+      "notes": "Disclosure topic for annual reporting when estimate changes occur near the year-end. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U7-T7.9": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Accounting Policies",
+      "keywords": ["same accounting policies as annual FS except pending changes to be reflected in next annual FS", "measurement made on year-to-date basis so reporting frequency doesn't affect annual results", "inventory write-downs/restructurings/impairments - same principles as annual; estimate changed in a later interim period via accrual of additional loss or reversal", "cost not meeting asset definition at interim-period end is NOT deferred to await future info or to smooth earnings", "income tax expense recognised each interim period based on best estimate of weighted average annual effective income tax rate; adjusted in later interim periods if the rate estimate changes", "more-than-half-yearly reporters measure on year-to-date basis; amounts reported in prior interim periods are NOT retrospectively adjusted, but nature/amount of significant changes must be disclosed", "change in accounting policy since most recent annual FS - interim report includes nature and effect description", "change in depreciation method mid-year", "change in accounting estimate mid-year"],
+      "typical_question_signals": ["Should interim statements use the same accounting policies as annual statements?", "How should income tax expense be measured in each interim period (weighted average annual effective rate)?", "Are prior interim periods retrospectively adjusted when an estimate changes in a later interim period of the same year?", "How should a change in depreciation method or accounting estimate mid-year be treated in interim reporting?"],
+      "notes": "Cross-chapter link with AS 10/AS 5: a mid-year change in depreciation method or accounting estimate can appear inside an AS 25 question, and the issue is whether the change is applied retrospectively or prospectively within the interim context. Verified against source (2026-07-20) - added the 'no retrospective adjustment of prior interim periods, disclose the change instead' point during Tier 3 review; this is the exact rule applied in the source's bad-debts-deferral Illustration."
+    },
+    "M1-C4-U7-T7.10": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Revenue Received Seasonally or Occasionally",
+      "keywords": ["seasonal revenue", "occasional revenue", "dividend revenue", "royalties", "government grants", "retailers", "recognised when they occur", "not anticipated or deferred (unless also appropriate to do so at financial year-end)"],
+      "typical_question_signals": ["How should seasonal or occasional revenue be treated in interim reporting?", "Should seasonal revenue be anticipated or deferred at an interim date?"],
+      "notes": "Classic numerical trap: seasonal revenue should be recognised when it occurs, not spread or deferred simply because the business is seasonal. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U7-T7.11": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Cost Incurred Unevenly During the Financial Year",
+      "keywords": ["costs incurred unevenly", "anticipate or defer cost ONLY if also appropriate to do so at year-end", "cost not meeting asset definition NOT deferred to await future info or to smooth earnings", "only costs incurred after the recognition criteria for that asset class are met can be capitalised", "deferral in the hope that criteria will be met before year-end is PROHIBITED"],
+      "typical_question_signals": ["Should a cost incurred once a year be spread across interim periods?", "When can an unevenly incurred cost be anticipated or deferred for interim reporting?", "Can a cost be deferred simply to smooth earnings over interim periods?"],
+      "notes": "Classic numerical trap: costs incurred unevenly should be anticipated or deferred only if that would also be appropriate at year-end; they cannot be deferred merely to smooth earnings. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U7-T7.12": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Use of Estimates",
+      "keywords": ["measurement procedures designed to ensure reliable information", "all material financial information relevant to understanding financial position/performance appropriately disclosed", "change in depreciation method mid-year", "change in accounting estimate mid-year", "interim period restatement"],
+      "typical_question_signals": ["How should estimates be handled in interim financial reporting?", "What is the standard for reliability of interim measurements?"],
+      "notes": "This is the topic most likely to catch embedded cross-reference questions involving a change in depreciation method, a change in accounting estimate mid-year, or interim-period restatement. Verified against source (2026-07-20) - the core source text is a single sentence about reliable measurement procedures; the cross-reference keywords were deliberately added per this project's established convention of catching embedded cross-chapter references."
+    },
+    "M1-C4-U7-T7.13": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Restatement of Previously Reported Interim Periods",
+      "keywords": ["objective: single accounting policy applied to a particular class of transactions throughout the entire financial year", "within the current financial year, any change in accounting policy is applied RETROSPECTIVELY to the beginning of the financial year"],
+      "typical_question_signals": ["Should a change in accounting policy be applied retrospectively to the beginning of the year, within the current financial year?", "What is the effect of a mid-year policy change on earlier interim periods of the same year?"],
+      "notes": "This topic is about applying a policy change consistently across the full financial year - note this intra-year retrospective rule is distinct from AS 5's general annual-level policy-change treatment. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U7-T7.14": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Transitional Provision",
+      "keywords": ["first occasion an interim financial report is presented under AS 25", "need not present: (a) comparative P&L for comparable interim periods (current and year-to-date) of immediately preceding financial year, (b) comparative cash flow statement for comparable year-to-date period of immediately preceding financial year"],
+      "typical_question_signals": ["What transitional relief is available on the first interim report presented under AS 25?", "Which comparative statements may be omitted on the first occasion?"],
+      "notes": "Procedural topic dealing with the first-time presentation of interim reports. Verified against source (2026-07-20)."
+    },
+    "M1-C4-U7-T7.15": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Applicability of AS 25 to Interim Financial Results",
+      "keywords": ["presentation/disclosure requirements apply ONLY to a genuine 'interim financial report' as defined in AS 25", "NOT required for 'interim financial results' that don't meet that definition", "example: quarterly results under Clause 41 of the Listing Agreement do NOT meet the 'interim financial report' definition", "BUT recognition and measurement principles of AS 25 still apply to such interim financial results"],
+      "typical_question_signals": ["Does AS 25 apply to quarterly financial results presented under listing requirements?", "Which principles of AS 25 still apply to interim financial results that don't meet the 'interim financial report' definition?"],
+      "notes": "This topic distinguishes an interim financial report from simpler interim financial results. Verified against source (2026-07-20) - the Clause 41 Listing Agreement example is an exact match to the source."
+    },
+    "M1-C4-U7-T7.16*": {
+      "chapter_id": "M1-C4-U7",
+      "chapter_name": "Accounting Standard 25 Interim Financial Reporting",
+      "topic_name": "Illustrations and Test Your Knowledge",
+      "keywords": ["compute quarterly result for a seasonal business, rejecting management's attempt to defer expenditure to a high-sales quarter", "compute tax expense per quarter using the applicable actual/average tax rate for each period", "adjust a reported quarterly profit for bad-debts deferral (add back), extraordinary loss (correctly recognised same quarter), and additional depreciation from a mid-year method change (correctly recognised same quarter, no adjustment needed)", "weighted average annual effective income tax rate applied uniformly to each quarter's estimated income", "warranty provision revised mid-year due to a newly discovered fault - only the INCREMENTAL rate applies to the current quarter's sales, not retrospectively to prior quarters", "multi-item adjusted PBT computation: dividend income deferral reversed, no adjustment for correctly-recognised depreciation change, extraordinary gain not deferred across quarters, cumulative inventory-valuation-method change loss reallocated retrospectively, sales promotion expense deferral reversed, occasional investment-sale gain not spread across quarters"],
+      "typical_question_signals": ["Calculate the result of the first quarter as per AS 25 and comment on the company's view on deferring expenditure.", "Calculate the tax expense to be recognised in each quarter given a changing tax rate or a changing estimated annual income.", "Ascertain the correct quarterly income given bad debts deferral, an extraordinary loss, and additional depreciation from a method change.", "Prepare the adjusted profit before tax for the quarter given several items requiring AS 25 correction."],
+      "notes": "Unnumbered in ICAI source. Verified against source (2026-07-20) - added during Tier 3 review; the Tier 2 draft omitted this bucket. Source contains 4 worked Illustrations plus a TEST YOUR KNOWLEDGE section (4 MCQs incl. a weighted-average-tax-rate computation and a warranty-provision-revision problem, 3 theoretical, 4 scenario-based questions incl. a dense 6-item PBT adjustment problem for Antarbarti Ltd.) - this is the primary source of realistic exam numerical questions for this unit, and the single richest illustration set of any unit reviewed in this batch."
     }
   }
 }
