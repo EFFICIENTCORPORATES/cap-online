@@ -1,0 +1,233 @@
+{
+  "_readme": "Tagged from Parsed_PDF_Question_Bank_CA_Inter_Accounts/parsed-PYQ-Jan2026.md using the lean-index schema (see TAGGING-SCHEMA.md). Source note: the raw PYQ question paper MD was blank (OCR failure), so this parsed file - and this tagging - is built from the Suggested Answers document only, which contains the question prompts and worked answers together. 6 chapters not previously in topic-index.json (AS16, AS28, AS18, AS5, AS24, AS7, AS22, AS25) were added as stubs while tagging this and the MTP May2024 Set1 sitting.",
+  "examSession": "January 2026",
+  "paperType": "Past Year Question (PYQ)",
+  "course": "CA Intermediate - Group I - Paper 1",
+  "subject": "Advanced Accounting",
+  "sourceParsedFile": "../Parsed_PDF_Question_Bank_CA_Inter_Accounts/parsed-PYQ-Jan2026.md",
+  "totalMarks": 100,
+  "questions": [
+    {
+      "id": "PYQ-Jan2026-PartI-Q1",
+      "mdAnchor": "### Answer 1 (Case Scenario I, MCQ 1)",
+      "part": "Part I - MCQs, Case Scenario I (P Limited)",
+      "questionNumber": "1",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M2-C5-U4", "standard": "AS 16", "title": "Borrowing Costs", "subtopicRef": "4.3", "subtopicTitle": "Exchange Differences on Foreign Currency Borrowings treated as a borrowing-cost adjustment (interest-rate differential test vs local-currency borrowing)"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q2",
+      "mdAnchor": "### Answer 2 (Case Scenario I, MCQ 2)",
+      "part": "Part I - MCQs, Case Scenario I (P Limited)",
+      "questionNumber": "2",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M2-C7-U3", "standard": "AS 11", "title": "The Effects of Changes in Foreign Exchange Rates", "subtopicRef": "3.5", "subtopicTitle": "Recognition of Exchange Differences on the same foreign-currency loan, net of the AS 16 portion recognised in Q1"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q3",
+      "mdAnchor": "### Answer 3 (Case Scenario I, MCQ 3)",
+      "part": "Part I - MCQs, Case Scenario I (P Limited)",
+      "questionNumber": "3",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M2-C10-U2", "standard": "AS 23", "title": "Accounting for Investments in Associates in Consolidated Financial Statements", "subtopicRef": "2.3", "subtopicTitle": "Determining significant influence (12% voting shares + board representation) to classify G Limited as an associate"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q4",
+      "mdAnchor": "### Answer 4 (Case Scenario I, MCQ 4)",
+      "part": "Part I - MCQs, Case Scenario I (P Limited)",
+      "questionNumber": "4",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M2-C5-U1", "standard": "AS 2", "title": "Valuation of Inventories", "subtopicRef": "1.4-1.8", "subtopicTitle": "Cost of inventory - fixed production overhead absorption at normal capacity vs actual production, applied to unsold finished-goods valuation"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q5",
+      "mdAnchor": "### Answer 5 (Case Scenario I, MCQ 5)",
+      "part": "Part I - MCQs, Case Scenario I (P Limited)",
+      "questionNumber": "5",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M2-C6-U2", "standard": "AS 29", "title": "Provisions, Contingent Liabilities and Contingent Assets", "subtopicRef": "2.4 / 2.15", "subtopicTitle": "Recognition of Provision for the legal-cost portion (probable outflow) + disclosure-only contingent liability for the disputed settlement claim"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q6",
+      "mdAnchor": "### Answer 6 (Case Scenario II, MCQ 6)",
+      "part": "Part I - MCQs, Case Scenario II (V Limited)",
+      "questionNumber": "6",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M2-C8-U1", "standard": "AS 7", "title": "Construction Contracts", "subtopicRef": "1.6", "subtopicTitle": "Percentage of Completion Method - revenue and total expense recognised for the hostel-building contract"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q7",
+      "mdAnchor": "### Answer 7 (Case Scenario II, MCQ 7)",
+      "part": "Part I - MCQs, Case Scenario II (V Limited)",
+      "questionNumber": "7",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M2-C10-U2", "standard": "AS 23", "title": "Accounting for Investments in Associates in Consolidated Financial Statements", "subtopicRef": "2.6 / 2.10.1", "subtopicTitle": "Equity method carrying amount - share of post-acquisition profit added, pre-acquisition dividend excluded per Relevant Explanations to AS 23"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q8",
+      "mdAnchor": "### Answer 8 (Case Scenario II, MCQ 8)",
+      "part": "Part I - MCQs, Case Scenario II (V Limited)",
+      "questionNumber": "8",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M1-C4-U7", "standard": "AS 25", "title": "Interim Financial Reporting", "subtopicRef": "7.9", "subtopicTitle": "Accounting Policies - weighted-average annual effective tax rate applied to Q2 pre-tax profit"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q9",
+      "mdAnchor": "### Answer 9 (Case Scenario II, MCQ 9)",
+      "part": "Part I - MCQs, Case Scenario II (V Limited)",
+      "questionNumber": "9",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M2-C7-U4", "standard": "AS 22", "title": "Accounting for Taxes on Income", "subtopicRef": "4.4 / 4.5", "subtopicTitle": "Recognition and Measurement of deferred tax on depreciation timing difference + a permanent-difference GST penalty item"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q10",
+      "mdAnchor": "### Answer 10 (standalone MCQ)",
+      "part": "Part I - MCQs (standalone)",
+      "questionNumber": "10",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M1-C4-U4", "standard": "AS 18", "title": "Related Party Disclosures", "subtopicRef": "4.7 / 4.8", "subtopicTitle": "Disclosure requirements - sale to subsidiary, managerial remuneration, and loan from holding company all count as related-party transactions"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q11",
+      "mdAnchor": "### Answer 11 (Case Scenario III, MCQ 11)",
+      "part": "Part I - MCQs, Case Scenario III (XYZ Ltd.)",
+      "questionNumber": "11",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M3-C11-U2", "standard": "AS 3", "title": "Cash Flow Statement", "subtopicRef": "2.4.2", "subtopicTitle": "Indirect method - non-cash expense add-backs (depreciation + amortisation) to net profit"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q12",
+      "mdAnchor": "### Answer 12 (Case Scenario III, MCQ 12)",
+      "part": "Part I - MCQs, Case Scenario III (XYZ Ltd.)",
+      "questionNumber": "12",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M3-C11-U2", "standard": "AS 3", "title": "Cash Flow Statement", "subtopicRef": "2.4.2", "subtopicTitle": "Cash flow from operating activities, indirect method, incl. working-capital adjustments"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q13",
+      "mdAnchor": "### Answer 13 (Case Scenario III, MCQ 13)",
+      "part": "Part I - MCQs, Case Scenario III (XYZ Ltd.)",
+      "questionNumber": "13",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M3-C11-U2", "standard": "AS 3", "title": "Cash Flow Statement", "subtopicRef": "2.3.3 / 2.6", "subtopicTitle": "Cash flow from financing activities - share issue, new borrowing, debt repayment, dividend paid"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q14",
+      "mdAnchor": "### Answer 14 (Case Scenario III, MCQ 14)",
+      "part": "Part I - MCQs, Case Scenario III (XYZ Ltd.)",
+      "questionNumber": "14",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M3-C11-U2", "standard": "AS 3", "title": "Cash Flow Statement", "subtopicRef": "2.4-2.6", "subtopicTitle": "Closing cash and cash equivalents = opening balance + net operating + investing + financing cash flows"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartI-Q15",
+      "mdAnchor": "### Answer 15 (standalone MCQ)",
+      "part": "Part I - MCQs (standalone)",
+      "questionNumber": "15",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M3-C14-U1", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "1", "subtopicTitle": "Meaning of Reconstruction - distinguishing External Reconstruction (new company formed, old company dissolved) from Internal Reconstruction, Merger and Absorption"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartII-Q1",
+      "mdAnchor": "### Question 1 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive - Compulsory",
+      "questionNumber": "1",
+      "subParts": ["a", "b", "c"],
+      "marks": 14,
+      "marksNote": "(a) 5 + (b) 4 + (c) 5",
+      "topics": [
+        {"unitCode": "M2-C5-U4", "standard": "AS 16", "title": "Borrowing Costs", "subtopicRef": "4.6 / 4.7", "subtopicTitle": "Specific vs general (non-specific) borrowings - capitalisation rate applied to multiple qualifying assets, part (a)"},
+        {"unitCode": "M2-C6-U1", "standard": "AS 15", "title": "Employee Benefits", "subtopicRef": "1.10", "subtopicTitle": "Actuarial Gains and Losses - expected vs actual return on defined-benefit plan assets, part (b)"},
+        {"unitCode": "M1-C4-U5", "standard": "AS 20", "title": "Earnings Per Share", "subtopicRef": "5.5", "subtopicTitle": "Rights issue - theoretical ex-rights fair value, adjustment factor, restated comparative EPS, part (c)"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartII-Q2",
+      "mdAnchor": "### Question 2 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive",
+      "questionNumber": "2",
+      "marks": 14,
+      "topics": [
+        {"unitCode": "M3-C14-U1", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "2.1 / 2.3 / 3", "subtopicTitle": "Sub-division of shares, share surrender, capital reduction, Reconstruction A/c and post-reconstruction share capital notes - MA Limited scheme"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartII-Q3",
+      "mdAnchor": "### Question 3 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive",
+      "questionNumber": "3",
+      "subParts": ["a", "b"],
+      "marks": 14,
+      "marksNote": "(a) 7 + (b) 7",
+      "topics": [
+        {"unitCode": "M3-C12-U1", "standard": null, "title": "Buy-back of Securities", "subtopicRef": "1", "subtopicTitle": "All three buy-back tests + journal entries incl. transfer to Capital Redemption Reserve, part (a)"},
+        {"unitCode": "M2-C5-U3", "standard": "AS 13", "title": "Accounting for Investments", "subtopicRef": "3.5 / 3.6", "subtopicTitle": "Investment Account with bonus shares, partial rights subscription + sale of rights entitlement, and part-disposal at average cost, part (b)"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartII-Q4",
+      "mdAnchor": "### Question 4 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive",
+      "questionNumber": "4",
+      "marks": 14,
+      "topics": [
+        {"unitCode": "M3-C13-U1", "standard": null, "title": "Amalgamation of Companies", "subtopicRef": "4 / 7", "subtopicTitle": "Purchase Consideration (cash + shares to equity/preference/debenture holders) + acquirer's journal entries and post-absorption Balance Sheet - B Ltd. absorbs G Ltd."}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartII-Q5",
+      "mdAnchor": "### Question 5 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive",
+      "questionNumber": "5",
+      "marks": 14,
+      "topics": [
+        {"unitCode": "M2-C10-U1", "standard": "AS 21", "title": "Consolidated Financial Statements", "subtopicRef": "1.11 / 1.12 / 1.14", "subtopicTitle": "Cost of control/Goodwill-Capital Reserve, minority interest, pre/post-acquisition profit split, intercompany debenture holding elimination, unrealised profit in stock - MN Ltd./RP Ltd. (75% subsidiary)"}
+      ]
+    },
+    {
+      "id": "PYQ-Jan2026-PartII-Q6",
+      "mdAnchor": "### Question 6 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive",
+      "questionNumber": "6",
+      "subParts": ["a", "b", "c"],
+      "marks": 14,
+      "marksNote": "(a) 4 [EITHER/OR] + (b) 4 + (c) 6",
+      "topics": [
+        {"unitCode": "M1-C4-U6", "standard": "AS 24", "title": "Discontinuing Operations", "subtopicRef": "6.3 / 6.5", "subtopicTitle": "Initial disclosure event - required disclosure items, part (a) first alternative"},
+        {"unitCode": "M2-C5-U5", "standard": "AS 19", "title": "Leases", "subtopicRef": "5.8", "subtopicTitle": "Finance lease - lessee's initial recognition and finance-charge schedule, part (a) second alternative"},
+        {"unitCode": "M3-C11-U1", "standard": null, "title": "Preparation of Financial Statements (of Companies)", "subtopicRef": "1.6", "subtopicTitle": "Distributable Profit - Companies (Declaration and Payment of Dividend) Rules 2014, three-condition test for dividend out of reserves, part (b)"},
+        {"unitCode": "M3-C15-U1", "standard": null, "title": "Accounting for Branches including Foreign Branches", "subtopicRef": "5.2", "subtopicTitle": "Stock and Debtors System (goods invoiced at selling price) - Branch Stock, Branch Debtors, Branch Adjustment and Branch P&L accounts, part (c)"}
+      ]
+    }
+  ]
+}

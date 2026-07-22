@@ -1,0 +1,39 @@
+Category,Attempt Name,Set,Question PDF Available?,Answer PDF Available?,Question and Answer Both Available?,Question PDF to MD Conversion,Answer PDF to MD Conversion,Parsed (clean HTML-table) MD Available?,HTML Format Available?,JSON (topic-tagged) Format Available?,Notes
+MTP,Nov 2023,Set 1,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,Nov 2023,Set 2,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,May 2023,Set 1,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,May 2023,Set 2,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,May 2024,Set 1,Yes,Yes,Yes,Converted OK,Converted OK,Yes,No,Yes,Only fully-parsed-and-tagged MTP sitting so far
+MTP,May 2024,Set 2,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,Sep 2024,Set 1,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,Sep 2024,Set 2,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,Jan 2025,Set 1,Yes,Yes,Yes,Converted OK,Converted OK,No,No,Yes,Tagged directly in MTP_Jan2025.json before Parsed_PDF existed; full question/answer text is duplicated inside that JSON instead of pointing at a parsed MD
+MTP,Jan 2025,Set 2,Yes,Yes,Yes,Converted OK,Converted OK,No,No,Yes,Same MTP_Jan2025.json file covers both Set 1 and Set 2
+MTP,May 2025,Set 1,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,May 2025,Set 2,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,Sep 2025,Set 1,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,Sep 2025,Set 2,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,Jan 2026,Set 1,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,Jan 2026,Set 2,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,May 2026,Set 1,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP,May 2026,Set 2,Yes,Yes,Yes,Converted OK,Converted OK,No,No,No,
+MTP-ICAI-Practice,NA,NA,Yes,Yes,Yes (PDFs only - no usable text),"Converted but BLANK - 0 words extracted; source PDF is image/scanned, MarkItDown found no text layer",Converted but BLANK - same issue,No,No,No,Needs OCR (e.g. Tesseract) instead of plain text extraction to recover any content
+PYQ,Dec 2021,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,No,No,No,Newly sourced this session - extends PYQ coverage back before May 2023 for the first time. Paper still named plain "Accounting" (pre-dates the "Advanced Accounting" renaming) but same subject scope.
+PYQ,May 2022,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,No,No,No,Newly sourced this session
+PYQ,Nov 2022,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,No,No,No,Newly sourced this session
+PYQ,May 2023,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,No,No,No,"Newly sourced this session; source PDF was AES-encrypted, decrypted with empty password"
+PYQ,Nov 2023,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,No,No,No,"Newly sourced this session; source PDF was AES-encrypted, decrypted with empty password"
+PYQ,Sep 2024,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,No,No,No,
+PYQ,Jan 2025,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,No,No,No,A separate Question-only PDF/MD pair used to exist for this sitting but was deprecated this session (moved to deprecated-pyq-question-files/) - its MD always converted BLANK (scanned image) and the Answers doc already has the question text
+PYQ,May 2024,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,No,No,No,A separate Question-only PDF/MD pair used to exist for this sitting but was deprecated this session (moved to deprecated-pyq-question-files/) - its MD always converted BLANK (scanned image) and the Answers doc already has the question text
+PYQ,May 2025,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,No,No,No,No separate Question PDF was ever sourced for this sitting - not an issue anymore now that Answers-only is the intended design
+PYQ,Sep 2025,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,No,No,No,No separate Question PDF was ever sourced for this sitting - not an issue anymore now that Answers-only is the intended design
+PYQ,Jan 2026,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,Yes,No,Yes,"Parsed + tagged sitting was originally built from the Answers doc when the Question doc still converted blank; a separate Question-only PDF/MD pair was deprecated this session (moved to deprecated-pyq-question-files/)"
+PYQ,May 2026,NA,N/A - superseded design (see note),Yes (single Suggested-Answers doc contains both question and answer),Yes (single combined document),N/A - superseded design,Converted OK,No,No,No,Answers PDF was newly sourced this session (previously missing entirely) and converted OK; a separate Question-only PDF/MD pair was deprecated this session (moved to deprecated-pyq-question-files/) - its MD always converted BLANK (scanned image)
+RTP,Sep 2024,NA,Yes (single file - RTP has no separate Answer PDF; answers are embedded within the Question document itself),N/A - RTP format,Yes (single combined document),Converted OK,N/A - RTP format,No,No,No,
+RTP,Jan 2025,NA,Yes (single file - RTP has no separate Answer PDF; answers are embedded within the Question document itself),N/A - RTP format,Yes (single combined document),Converted OK,N/A - RTP format,No,No,No,
+RTP,May 2024,NA,Yes (single file - RTP has no separate Answer PDF; answers are embedded within the Question document itself),N/A - RTP format,Yes (single combined document),Converted OK,N/A - RTP format,No,No,No,
+RTP,May 2025,NA,Yes (single file - RTP has no separate Answer PDF; answers are embedded within the Question document itself),N/A - RTP format,Yes (single combined document),Converted OK,N/A - RTP format,No,No,No,
+RTP,Sep 2025,NA,Yes (single file - RTP has no separate Answer PDF; answers are embedded within the Question document itself),N/A - RTP format,Yes (single combined document),Converted OK,N/A - RTP format,No,No,No,
+RTP,Jan 2026,NA,Yes (single file - RTP has no separate Answer PDF; answers are embedded within the Question document itself),N/A - RTP format,Yes (single combined document),Converted OK,N/A - RTP format,No,No,No,
+RTP,May 2026,NA,Yes (single file - RTP has no separate Answer PDF; answers are embedded within the Question document itself),N/A - RTP format,Yes (single combined document),Converted OK,N/A - RTP format,Yes,No,Yes,Only fully-parsed-and-tagged RTP sitting so far

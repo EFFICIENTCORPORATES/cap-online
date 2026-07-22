@@ -1,0 +1,197 @@
+{
+  "_readme": "Tagged from Parsed_PDF_Question_Bank_CA_Inter_Accounts/parsed-RTP-May2026.md using the lean-index schema (see TAGGING-SCHEMA.md). This RTP is unusually broad - it deliberately touches nearly every chapter once, one question each - so it added the most new topic-index.json stubs of the three sittings tagged so far (AS17 Segment Reporting, plus reuse of AS16/AS28/AS18/AS5/AS24/AS7/AS22/AS25/AS15 stubs added while tagging the other two sittings). The RTP's own chapter-heading labels in the source (e.g. 'AS 7 Construction Contracts' above Question 10) occasionally mislabel the actual content being tested - flagged per-question below where that happens.",
+  "examSession": "May 2026",
+  "paperType": "Revision Test Paper (RTP)",
+  "course": "CA Intermediate - Group I - Paper 1",
+  "subject": "Advanced Accounting",
+  "sourceParsedFile": "../Parsed_PDF_Question_Bank_CA_Inter_Accounts/parsed-RTP-May2026.md",
+  "totalMarks": null,
+  "questions": [
+    {
+      "id": "RTP-May2026-PartI-Q1",
+      "mdAnchor": "Part I, Question 1 (Year 1/Year 3 borrowing-cost MCQ set)",
+      "part": "Part I - MCQs based on Case Scenario",
+      "questionNumber": "1",
+      "subParts": ["i", "ii", "iii", "iv"],
+      "topics": [
+        {"unitCode": "M2-C5-U4", "standard": "AS 16", "title": "Borrowing Costs", "subtopicRef": "4.5 / 4.9", "subtopicTitle": "Recognition Criteria and Commencement of Capitalisation - two parallel qualifying-asset construction projects, one completed (capitalisation ceases) and one still in progress"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartI-Q2",
+      "mdAnchor": "Part I, Question 2 (General MCQ - Suraj Ltd. lease)",
+      "part": "Part I - General MCQs",
+      "questionNumber": "2",
+      "topics": [
+        {"unitCode": "M2-C5-U5", "standard": "AS 19", "title": "Leases", "subtopicRef": "5.8", "subtopicTitle": "Finance lease recognition value at lower of fair value and PV of minimum lease payments"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartI-Q3",
+      "mdAnchor": "Part I, Question 3 (General MCQ - cash equivalents not available for use)",
+      "part": "Part I - General MCQs",
+      "questionNumber": "3",
+      "topics": [
+        {"unitCode": "M3-C11-U2", "standard": "AS 3", "title": "Cash Flow Statement", "subtopicRef": "2.2", "subtopicTitle": "Elements of Cash - which restricted/earmarked balances still count as cash and cash equivalents"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartI-Q4",
+      "mdAnchor": "Part I, Question 4 (General MCQ - AS 26 research activities)",
+      "part": "Part I - General MCQs",
+      "questionNumber": "4",
+      "topics": [
+        {"unitCode": "M2-C5-U6", "standard": "AS 26", "title": "Intangible Assets", "subtopicRef": "6.14", "subtopicTitle": "Research Phase - activities always expensed as incurred"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q5",
+      "mdAnchor": "### Question 5",
+      "part": "Part II - Descriptive (Introduction to Accounting Standards)",
+      "questionNumber": "5",
+      "topics": [
+        {"unitCode": "M1-C1-U1", "standard": null, "title": "Introduction to Accounting Standards", "subtopicRef": "6", "subtopicTitle": "International Accounting Standards Board (IASB) - short note"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q6",
+      "mdAnchor": "### Question 6",
+      "part": "Part II - Descriptive (Framework for Preparation & Presentation of FS)",
+      "questionNumber": "6",
+      "topics": [
+        {"unitCode": "M1-C2-U1", "standard": null, "title": "Framework for Preparation and Presentation of Financial Statements", "subtopicRef": "9", "subtopicTitle": "Elements of Financial Statements - liability recognition for a binding purchase commitment with no future economic benefit (onerous/abandoned custom order)"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q7",
+      "mdAnchor": "### Question 7",
+      "part": "Part II - Descriptive (Applicability of Accounting Standards)",
+      "questionNumber": "7",
+      "topics": [
+        {"unitCode": "M1-C3-U1", "standard": null, "title": "Applicability of Accounting Standards", "subtopicRef": "2.1", "subtopicTitle": "Revised MSME classification criteria (turnover/borrowings thresholds, effective 1 Apr 2024) applied to a partnership firm"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q8",
+      "mdAnchor": "### Question 8",
+      "part": "Part II - Descriptive (AS 3 Cash Flow Statements)",
+      "questionNumber": "8",
+      "topics": [
+        {"unitCode": "M3-C11-U2", "standard": "AS 3", "title": "Cash Flow Statement", "subtopicRef": "2.4.2 / 2.7", "subtopicTitle": "Full Cash Flow Statement by indirect method, Dark Limited - two-year balance sheet comparison"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q9",
+      "mdAnchor": "### Question 9",
+      "part": "Part II - Descriptive (AS 4 Contingencies and Events after Balance Sheet Date)",
+      "questionNumber": "9",
+      "topics": [
+        {"unitCode": "M2-C7-U1", "standard": "AS 4", "title": "Contingencies and Events Occurring After the Balance Sheet Date", "subtopicRef": "1.4 / 1.5", "subtopicTitle": "Adjusting vs Non-Adjusting Events - acquisition negotiation, post-year-end fraud discovery, and warehouse fire, three scenarios"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q10",
+      "mdAnchor": "### Question 10",
+      "part": "Part II - Descriptive (source heading says 'AS 7 Construction Contracts', but content is self-constructed PPE + borrowing cost, not a construction contract)",
+      "questionNumber": "10",
+      "topics": [
+        {"unitCode": "M2-C5-U2", "standard": "AS 10", "title": "Property, Plant and Equipment", "subtopicRef": "2.6-2.7", "subtopicTitle": "Cost of a self-constructed factory - which construction-phase costs capitalise (mirrors MTP May2024 Set1 Part I Q2)"},
+        {"unitCode": "M2-C5-U4", "standard": "AS 16", "title": "Borrowing Costs", "subtopicRef": "4.6 / 4.7", "subtopicTitle": "Net borrowing cost capitalised, offset by temporary-investment income, over an 8-month capitalisation period"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q11",
+      "mdAnchor": "### Question 11",
+      "part": "Part II - Descriptive (AS 12 Accounting for Government Grants)",
+      "questionNumber": "11",
+      "topics": [
+        {"unitCode": "M2-C9-U1", "standard": "AS 12", "title": "Accounting for Government Grants", "subtopicRef": "1.6 / 1.9", "subtopicTitle": "Grant credited to asset account (deduction method) + partial refund of grant in a later year, journal entries for first two years"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q12",
+      "mdAnchor": "### Question 12",
+      "part": "Part II - Descriptive (AS 14 Amalgamation)",
+      "questionNumber": "12",
+      "topics": [
+        {"unitCode": "M3-C13-U1", "standard": null, "title": "Amalgamation of Companies", "subtopicRef": "5 / 7", "subtopicTitle": "Amalgamation in the nature of purchase - two companies merged into a NEW company (AB Limited), post-amalgamation Schedule III Balance Sheet"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q13",
+      "mdAnchor": "### Question 13 (AS 17 Segment Reporting)",
+      "part": "Part II - Descriptive (AS 17 Segment Reporting)",
+      "questionNumber": "13",
+      "topics": [
+        {"unitCode": "M1-C4-U3", "standard": "AS 17", "title": "Segment Reporting", "subtopicRef": "3.5", "subtopicTitle": "Treatment of Interest for Segment Reporting - overdraft/operating-liability interest identified to a segment"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q14",
+      "mdAnchor": "### Question 14 (AS 19 Leases)",
+      "part": "Part II - Descriptive (AS 19 Leases)",
+      "questionNumber": "14",
+      "topics": [
+        {"unitCode": "M2-C5-U5", "standard": "AS 19", "title": "Leases", "subtopicRef": "5.9", "subtopicTitle": "Accounting for Operating Leases - lessor's treatment of an asset given under an operating lease"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q15",
+      "mdAnchor": "### Question 15 (AS 24 Discontinuing Operations)",
+      "part": "Part II - Descriptive (AS 24 Discontinuing Operations)",
+      "questionNumber": "15",
+      "subParts": ["i", "ii", "iii"],
+      "topics": [
+        {"unitCode": "M1-C4-U6", "standard": "AS 24", "title": "Discontinuing Operations", "subtopicRef": "6.2 / 6.3", "subtopicTitle": "What constitutes a 'Discontinuing Operation' - gradual phase-out vs a board resolution with a binding, time-bound plan"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q16",
+      "mdAnchor": "### Question 16 (AS 28 Impairment of Assets)",
+      "part": "Part II - Descriptive (AS 28 Impairment of Assets)",
+      "questionNumber": "16",
+      "topics": [
+        {"unitCode": "M2-C5-U7", "standard": "AS 28", "title": "Impairment of Assets", "subtopicRef": "7.8", "subtopicTitle": "Identification of a Cash-Generating Unit - magazine-title publisher scenario, identifiable cash inflows by customer segment"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q17",
+      "mdAnchor": "### Question 17 (AS 29 Provisions, Contingent Liabilities and Contingent Assets)",
+      "part": "Part II - Descriptive (AS 29 Provisions, Contingent Liabilities and Contingent Assets)",
+      "questionNumber": "17",
+      "subParts": ["i", "ii"],
+      "topics": [
+        {"unitCode": "M2-C6-U2", "standard": "AS 29", "title": "Provisions, Contingent Liabilities and Contingent Assets", "subtopicRef": "2.15 / 2.9", "subtopicTitle": "Reimbursement recognised as a separate asset when virtually certain (part i) + contingent liability disclosure when outflow is not probable (part ii)"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q18",
+      "mdAnchor": "### Question 18 (Financial statements of companies)",
+      "part": "Part II - Descriptive (Financial statements of companies)",
+      "questionNumber": "18",
+      "topics": [
+        {"unitCode": "M3-C11-U1", "standard": null, "title": "Preparation of Financial Statements (of Companies)", "subtopicRef": "1.5 / 1.6", "subtopicTitle": "Trial Balance to Schedule III Balance Sheet + Statement of P&L, incl. dividend declared after year-end note - Anmol Limited"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q19",
+      "mdAnchor": "### Question 1 (under 'Internal reconstruction' heading - Ellora Limited scheme, 14 numbered items)",
+      "part": "Part II - Descriptive (Internal reconstruction)",
+      "questionNumber": "19",
+      "subParts": ["a", "b"],
+      "topics": [
+        {"unitCode": "M3-C14-U1", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "2.3 / 3", "subtopicTitle": "Full 14-item internal reconstruction scheme (share write-down, arrear-dividend settlement, debenture-holder asset takeover + fresh funding, asset write-downs, contingent liability settlement, capital commitment, fresh share issue, tax settlement) - journal entries + Capital Reduction A/c, Ellora Limited"}
+      ]
+    },
+    {
+      "id": "RTP-May2026-PartII-Q20",
+      "mdAnchor": "### Question 20 (Accounting for Branches - Cambridge Branch)",
+      "part": "Part II - Descriptive (Accounting for Branches)",
+      "questionNumber": "20",
+      "subParts": ["i", "ii"],
+      "topics": [
+        {"unitCode": "M3-C15-U1", "standard": null, "title": "Accounting for Branches including Foreign Branches", "subtopicRef": "10-13", "subtopicTitle": "Foreign branch (Cambridge, in Euros) - Branch Trading/P&L in foreign currency + translation of the Trial Balance into Indian Rupees at closing/average rates"}
+      ]
+    }
+  ]
+}

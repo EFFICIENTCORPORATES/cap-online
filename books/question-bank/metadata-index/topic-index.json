@@ -1,6 +1,7 @@
 {
-  "_readme": "Reusable reference index of ICAI CA-Inter Advanced Accounting study material (Modules 1-3, May 2026 edition, from books/concept-book/raw_icai_study_materials/). Built by reading each unit's actual PDF/MD (no invented section numbers). Used to tag question-bank questions to the exact chapter/unit/numbered sub-topic they test. This index currently covers only the 22 units touched by the first pilot MTP attempt (Jan 2025, Set 1 + Set 2) - it will grow incrementally as more attempts are processed, since the same ~25-27 units recur throughout the whole question bank. NOTE: some chapters have multiple units (e.g. Chapter 4 has 7 units, only U5/AS20 indexed so far) - a chapter appearing here does not mean all its units are covered, only the ones actually tested by processed questions so far.",
+  "_readme": "Reusable reference index of ICAI CA-Inter Advanced Accounting study material (Modules 1-3, May 2026 edition, from books/concept-book/raw_icai_study_materials/). Built by reading each unit's actual PDF/MD (no invented section numbers). Used to tag question-bank questions to the exact chapter/unit/numbered sub-topic they test. Started with the 22 units touched by the first pilot MTP attempt (Jan 2025, Set 1 + Set 2); 4 more units (AS16 Borrowing Costs, AS28 Impairment, AS18 Related Party Disclosures, AS5) were added 2026-07-22 while tagging MTP May2024 Set1 - those 4 are stubs (heading list only, no per-section description yet, marked with a _note field). Grows incrementally as more sittings are processed, since the same ~25-27 units recur throughout the whole question bank. NOTE: some chapters have multiple units (e.g. Chapter 4 has 7 units - U4/AS18 and U5/AS20 indexed so far, U1/U2/U3/U6/U7 still missing) - a chapter appearing here does not mean all its units are covered, only the ones actually tested by processed questions so far. unitCode convention: single-unit chapters use U1 (not the U0 used by the separate master syllabus JSON at books/concept-book/syllabus-engine/data/ - see metadata-index/TAGGING-SCHEMA.md for the reconciliation table).",
   "generated": "2026-07-17",
+  "lastUpdated": "2026-07-22 - now 32 of 36 syllabus chapters/units indexed (up from 22), after tagging 3 sittings (MTP May2024 Set1, PYQ Jan2026, RTP May2026). Remaining untouched: AS1 (Disclosure of Accounting Policies, M1-C4-U1) and AS27 (Joint Ventures, M2-C10-U3) - genuinely no tagged question has hit either yet. AS3 (M1-C4-U2) and AS14 (M2-C9-U2) are technically still unindexed as their own AS-numbered chapters, but their content is already covered via sibling Companies-Act chapters M3-C11-U2 (Cash Flow Statement) and M3-C13-U1 (Amalgamation of Companies), which every tagged cash-flow/amalgamation question has been pointed at instead.",
   "units": [
     {
       "unitCode": "M1-C1-U1",
@@ -429,6 +430,215 @@
         {"ref": "10-11", "heading": "Foreign Branches / Accounting for Foreign Branches", "page": "15.67-15.68", "description": "Per AS 11 (revised 2003) - Integral Foreign Operation (IFO) vs Non-Integral Foreign Operation (NFO) classification."},
         {"ref": "12", "heading": "Techniques for Foreign Currency Translation", "page": "15.69-15.71", "description": "12.1 IFO - transaction-date/closing-rate mix, exchange differences to P&L. 12.2 NFO - all items at closing/average rate, differences to foreign currency translation reserve."},
         {"ref": "13", "heading": "Change in Classification", "page": "15.71-15.72", "description": "13.1 Integral to Non-Integral; 13.2 Non-Integral to Integral - translation reserve and historical-cost treatment on reclassification."}
+      ]
+    },
+    {
+      "unitCode": "M2-C5-U4",
+      "module": 2, "chapter": 5, "unit": 4,
+      "standard": "AS 16",
+      "title": "Borrowing Costs",
+      "sourceFile": "M2_C5_U4_ Accounting Standard 16 Borrowing Costs.pdf",
+      "_note": "Added 2026-07-22 while tagging MTP May2024 Set1 - stub, headings only from source MD, not yet individually described.",
+      "sections": [
+        {"ref": "4.1", "heading": "Introduction", "page": "n/a"},
+        {"ref": "4.3", "heading": "Exchange Differences on Foreign Currency Borrowings", "page": "n/a"},
+        {"ref": "4.4", "heading": "Borrowing Costs Eligible for Capitalisation", "page": "n/a"},
+        {"ref": "4.5", "heading": "Recognition Criteria", "page": "n/a"},
+        {"ref": "4.6", "heading": "Specific Borrowings", "page": "n/a"},
+        {"ref": "4.7", "heading": "General Borrowings", "page": "n/a"},
+        {"ref": "4.8", "heading": "Excess of the Carrying Amount of the Qualifying Asset over Recoverable Amount", "page": "n/a"},
+        {"ref": "4.9", "heading": "Commencement of Capitalisation", "page": "n/a"},
+        {"ref": "4.10", "heading": "Suspension of Capitalisation", "page": "n/a"},
+        {"ref": "4.11", "heading": "Cessation of Capitalisation", "page": "n/a"},
+        {"ref": "4.12", "heading": "Disclosure", "page": "n/a"}
+      ]
+    },
+    {
+      "unitCode": "M2-C5-U7",
+      "module": 2, "chapter": 5, "unit": 7,
+      "standard": "AS 28",
+      "title": "Impairment of Assets",
+      "sourceFile": "M2_C5_U7_ Accounting Standard 28 Impairment of Assets.pdf",
+      "_note": "Added 2026-07-22 while tagging MTP May2024 Set1 - stub, headings only from source MD, not yet individually described.",
+      "sections": [
+        {"ref": "7.1", "heading": "Introduction", "page": "n/a"},
+        {"ref": "7.2", "heading": "Scope", "page": "n/a"},
+        {"ref": "7.3", "heading": "Assessment", "page": "n/a"},
+        {"ref": "7.4", "heading": "Measurement of Recoverable Amount", "page": "n/a"},
+        {"ref": "7.5", "heading": "Basis for Estimates of Future Cash Flows", "page": "n/a"},
+        {"ref": "7.6", "heading": "Composition of Estimates of Future Cash Flows", "page": "n/a"},
+        {"ref": "7.7", "heading": "Recognition and Measurement of an Impairment Loss", "page": "n/a"},
+        {"ref": "7.8", "heading": "Identification of the Cash-Generating Unit", "page": "n/a"},
+        {"ref": "7.9", "heading": "Recoverable Amount and Carrying Amount of a Cash-Generating Unit", "page": "n/a"},
+        {"ref": "7.10", "heading": "Goodwill", "page": "n/a"},
+        {"ref": "7.11", "heading": "Corporate Assets", "page": "n/a"},
+        {"ref": "7.12", "heading": "Impairment Loss for a Cash-Generating Unit", "page": "n/a"},
+        {"ref": "7.13", "heading": "Reversal of an Impairment Loss", "page": "n/a"},
+        {"ref": "7.14-7.16", "heading": "Reversal of an Impairment Loss for an Asset / Cash-Generating Unit", "page": "n/a"},
+        {"ref": "7.17", "heading": "Impairment in Case of Discontinuing Operations", "page": "n/a"},
+        {"ref": "7.18", "heading": "Disclosure", "page": "n/a"},
+        {"ref": "7.19", "heading": "Illustrations", "page": "n/a"}
+      ]
+    },
+    {
+      "unitCode": "M1-C4-U4",
+      "module": 1, "chapter": 4, "unit": 4,
+      "standard": "AS 18",
+      "title": "Related Party Disclosures",
+      "sourceFile": "M1_C4_U4_ Accounting Standard 18 Related Party Disclosures.pdf",
+      "_scopeNote": "Chapter 4 'Presentation & Disclosures Based Accounting Standards' has 7 units total; U4 (AS 18) added 2026-07-22 while tagging MTP May2024 Set1 - stub, headings only, not yet individually described.",
+      "sections": [
+        {"ref": "4.1", "heading": "Introduction", "page": "n/a"},
+        {"ref": "4.2", "heading": "Related Party Issue - Why Disclosure", "page": "n/a"},
+        {"ref": "4.3", "heading": "Related Party Relationships as per AS 18", "page": "n/a"},
+        {"ref": "4.4", "heading": "Who are NOT Deemed to be Related Parties", "page": "n/a"},
+        {"ref": "4.5", "heading": "Exemption", "page": "n/a"},
+        {"ref": "4.6", "heading": "Definitions of Other Terms Used in AS 18", "page": "n/a"},
+        {"ref": "4.7", "heading": "Disclosure Requirements under AS 18", "page": "n/a"},
+        {"ref": "4.8", "heading": "List of Related Party Transactions", "page": "n/a"}
+      ]
+    },
+    {
+      "unitCode": "M2-C7-U2",
+      "module": 2, "chapter": 7, "unit": 2,
+      "standard": "AS 5",
+      "title": "Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies",
+      "sourceFile": "M2_C7_U2_ Accounting Standard 5 Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies.pdf",
+      "_note": "Added 2026-07-22 while tagging MTP May2024 Set1 - stub, headings only from source MD, not yet individually described.",
+      "sections": [
+        {"ref": "2.1", "heading": "Introduction", "page": "n/a"},
+        {"ref": "2.2", "heading": "Net Profit or Loss for the Period", "page": "n/a"},
+        {"ref": "2.4", "heading": "Changes in Accounting Estimates", "page": "n/a"},
+        {"ref": "2.5", "heading": "Changes in Accounting Policies", "page": "n/a"}
+      ]
+    },
+    {
+      "unitCode": "M1-C4-U6",
+      "module": 1, "chapter": 4, "unit": 6,
+      "standard": "AS 24",
+      "title": "Discontinuing Operations",
+      "sourceFile": "M1_C4_U6_ Accounting Standard 24 Discontinuing Operations.pdf",
+      "_scopeNote": "Chapter 4 'Presentation & Disclosures Based Accounting Standards' has 7 units total; U6 (AS 24) added 2026-07-22 while tagging PYQ Jan2026 - stub, headings only, not yet individually described.",
+      "sections": [
+        {"ref": "6.1", "heading": "Introduction", "page": "n/a"},
+        {"ref": "6.2", "heading": "Discontinuing Operation", "page": "n/a"},
+        {"ref": "6.3", "heading": "Initial Disclosure Event", "page": "n/a"},
+        {"ref": "6.4", "heading": "Recognition and Measurement", "page": "n/a"},
+        {"ref": "6.5", "heading": "Presentation and Disclosure", "page": "n/a"},
+        {"ref": "6.6", "heading": "Updating the Disclosures", "page": "n/a"},
+        {"ref": "6.7", "heading": "Separate Disclosure for Each Discontinuing Operation", "page": "n/a"},
+        {"ref": "6.8", "heading": "Presentation of the Required Disclosures", "page": "n/a"},
+        {"ref": "6.9", "heading": "Restatement of Prior Periods", "page": "n/a"},
+        {"ref": "6.10", "heading": "Disclosure in Interim Financial Reports", "page": "n/a"}
+      ]
+    },
+    {
+      "unitCode": "M2-C8-U1",
+      "module": 2, "chapter": 8, "unit": 1,
+      "standard": "AS 7",
+      "title": "Construction Contracts",
+      "sourceFile": "M2_C8_U1_ Accounting Standard 7 Construction Contracts.pdf",
+      "_note": "Added 2026-07-22 while tagging PYQ Jan2026 - stub, headings only from source MD, not yet individually described.",
+      "sections": [
+        {"ref": "1.1", "heading": "Significance of the Standard", "page": "n/a"},
+        {"ref": "1.2", "heading": "Introduction", "page": "n/a"},
+        {"ref": "1.3", "heading": "Combining and Segmenting Construction Contracts", "page": "n/a"},
+        {"ref": "1.4", "heading": "Types of Construction Contracts", "page": "n/a"},
+        {"ref": "1.5", "heading": "Contract Revenue and Costs", "page": "n/a"},
+        {"ref": "1.6", "heading": "Percentage of Completion Method", "page": "n/a"},
+        {"ref": "1.7", "heading": "Treatment of Costs Relating to Future Activity", "page": "n/a"},
+        {"ref": "1.8", "heading": "Uncollectable Contract Revenue", "page": "n/a"},
+        {"ref": "1.9", "heading": "Stage of Completion", "page": "n/a"},
+        {"ref": "1.10", "heading": "Changes in Estimates", "page": "n/a"},
+        {"ref": "1.11", "heading": "Disclosure", "page": "n/a"}
+      ]
+    },
+    {
+      "unitCode": "M2-C7-U4",
+      "module": 2, "chapter": 7, "unit": 4,
+      "standard": "AS 22",
+      "title": "Accounting for Taxes on Income",
+      "sourceFile": "M2_C7_U4_ Accounting Standard 22 Accounting for Taxes on Income.pdf",
+      "_note": "Added 2026-07-22 while tagging PYQ Jan2026 - stub, headings only from source MD, not yet individually described.",
+      "sections": [
+        {"ref": "4.1", "heading": "Introduction", "page": "n/a"},
+        {"ref": "4.2", "heading": "Objective", "page": "n/a"},
+        {"ref": "4.3", "heading": "Definitions", "page": "n/a"},
+        {"ref": "4.4", "heading": "Recognition", "page": "n/a"},
+        {"ref": "4.5", "heading": "Measurement", "page": "n/a"},
+        {"ref": "4.6", "heading": "Re-assessment of Unrecognised Deferred Tax Assets", "page": "n/a"},
+        {"ref": "4.7", "heading": "Review of Previously Recognised Deferred Tax Assets", "page": "n/a"},
+        {"ref": "4.8", "heading": "Virtual Certainty Supported by Convincing Evidence", "page": "n/a"},
+        {"ref": "4.9", "heading": "Disclosure", "page": "n/a"},
+        {"ref": "4.10", "heading": "Relevant Explanations to AS 22", "page": "n/a"}
+      ]
+    },
+    {
+      "unitCode": "M1-C4-U7",
+      "module": 1, "chapter": 4, "unit": 7,
+      "standard": "AS 25",
+      "title": "Interim Financial Reporting",
+      "sourceFile": "M1_C4_U7_ Accounting Standard 25 Interim Financial Reporting.pdf",
+      "_scopeNote": "Chapter 4 'Presentation & Disclosures Based Accounting Standards' has 7 units total; U7 (AS 25), the last one, added 2026-07-22 while tagging PYQ Jan2026 - stub, headings only, not yet individually described. All 7 units of Chapter 4 are now indexed (U1 AS1 and U2 AS3 still missing as of this note).",
+      "sections": [
+        {"ref": "7.1", "heading": "Introduction", "page": "n/a"},
+        {"ref": "7.2", "heading": "Definitions of the Terms Used", "page": "n/a"},
+        {"ref": "7.3", "heading": "Content of an Interim Financial Report", "page": "n/a"},
+        {"ref": "7.4", "heading": "Form and Content of Interim Financial Statements", "page": "n/a"},
+        {"ref": "7.5", "heading": "Selected Explanatory Notes", "page": "n/a"},
+        {"ref": "7.7", "heading": "Materiality", "page": "n/a"},
+        {"ref": "7.8", "heading": "Disclosure in Annual Financial Statements", "page": "n/a"},
+        {"ref": "7.9", "heading": "Accounting Policies", "page": "n/a"},
+        {"ref": "7.10", "heading": "Revenue Received Seasonally or Occasionally", "page": "n/a"},
+        {"ref": "7.11", "heading": "Costs Incurred Unevenly During the Year", "page": "n/a"},
+        {"ref": "7.12", "heading": "Use of Estimates", "page": "n/a"},
+        {"ref": "7.13", "heading": "Restatement of Previously Reported Interim Periods", "page": "n/a"},
+        {"ref": "7.14", "heading": "Transitional Provision", "page": "n/a"},
+        {"ref": "7.15", "heading": "Applicability of AS 25 to Interim Financial Results", "page": "n/a"}
+      ]
+    },
+    {
+      "unitCode": "M2-C6-U1",
+      "module": 2, "chapter": 6, "unit": 1,
+      "standard": "AS 15",
+      "title": "Employee Benefits",
+      "sourceFile": "M2_C6_U1_ Accounting Standard 15 Employee Benefits.pdf",
+      "_note": "Added 2026-07-22 while tagging PYQ Jan2026 - stub, headings only from source MD, not yet individually described.",
+      "sections": [
+        {"ref": "1.2", "heading": "Applicability", "page": "n/a"},
+        {"ref": "1.3", "heading": "Meaning of the Term 'Employee Benefits'", "page": "n/a"},
+        {"ref": "1.4", "heading": "Short-Term Employee Benefits", "page": "n/a"},
+        {"ref": "1.5", "heading": "Post-Employment Benefits: Defined Contribution vs Defined Benefit Plans", "page": "n/a"},
+        {"ref": "1.6", "heading": "Is the Gratuity Scheme a Defined Benefit Plan?", "page": "n/a"},
+        {"ref": "1.7", "heading": "Accounting Treatment", "page": "n/a"},
+        {"ref": "1.8", "heading": "Disclosures", "page": "n/a"},
+        {"ref": "1.9", "heading": "Actuarial Assumptions", "page": "n/a"},
+        {"ref": "1.10", "heading": "Actuarial Gains and Losses (incl. Expected vs Actual Return on Plan Assets)", "page": "n/a"},
+        {"ref": "1.11", "heading": "Other Long Term Employee Benefits", "page": "n/a"},
+        {"ref": "1.12", "heading": "Termination Benefits", "page": "n/a"}
+      ]
+    },
+    {
+      "unitCode": "M1-C4-U3",
+      "module": 1, "chapter": 4, "unit": 3,
+      "standard": "AS 17",
+      "title": "Segment Reporting",
+      "sourceFile": "M1_C4_U3_ Accounting Standard 17 Segment Reporting.pdf",
+      "_scopeNote": "Chapter 4 'Presentation & Disclosures Based Accounting Standards' has 7 units total; U3 (AS 17) added 2026-07-22 while tagging RTP May2026 - stub, headings only, not yet individually described. Only U1 (AS1) and U2 (AS3) of Chapter 4 remain unindexed as of this note.",
+      "sections": [
+        {"ref": "3.1", "heading": "Introduction", "page": "n/a"},
+        {"ref": "3.2", "heading": "Objective", "page": "n/a"},
+        {"ref": "3.3", "heading": "Scope", "page": "n/a"},
+        {"ref": "3.4", "heading": "Definition of the Terms Used in the Standard", "page": "n/a"},
+        {"ref": "3.5", "heading": "Treatment of Interest for Segment Reporting (incl. overdraft/operating-liability interest)", "page": "n/a"},
+        {"ref": "3.6", "heading": "Allocation", "page": "n/a"},
+        {"ref": "3.7", "heading": "Primary and Secondary Segment Reporting Formats", "page": "n/a"},
+        {"ref": "3.8", "heading": "Business and Geographical Segments", "page": "n/a"},
+        {"ref": "3.9", "heading": "Identifying Reportable Segments", "page": "n/a"},
+        {"ref": "3.10", "heading": "Segment Accounting Policies", "page": "n/a"},
+        {"ref": "3.11", "heading": "Primary Reporting Format", "page": "n/a"},
+        {"ref": "3.12", "heading": "Secondary Segment Information", "page": "n/a"},
+        {"ref": "3.13", "heading": "Other Disclosures", "page": "n/a"}
       ]
     }
   ]

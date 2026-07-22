@@ -1,0 +1,151 @@
+{
+  "_readme": "Tagged from Parsed_PDF_Question_Bank_CA_Inter_Accounts/parsed-MTP-May2024-Set1.md using the lean-index schema (see TAGGING-SCHEMA.md) - content stays in the parsed .md, this file only maps questions to topic-index.json chapters/topics. 4 chapters not previously in topic-index.json (AS16, AS28, AS18, AS5) were added as stubs while tagging this sitting.",
+  "examSession": "May 2024, Set 1",
+  "paperType": "Mock Test Paper (MTP)",
+  "course": "CA Intermediate - Group I - Paper 1",
+  "subject": "Advanced Accounting",
+  "sourceParsedFile": "../Parsed_PDF_Question_Bank_CA_Inter_Accounts/parsed-MTP-May2024-Set1.md",
+  "totalMarks": 100,
+  "questions": [
+    {
+      "id": "MTP-May2024-S1-PartI-Q1",
+      "mdAnchor": "### Question 1 (Part I - Case Scenario Based MCQs)",
+      "part": "Part I - Case Scenario Based MCQs",
+      "questionNumber": "1",
+      "marks": 8,
+      "marksNote": "4 MCQs of 2 marks each",
+      "topics": [
+        {"unitCode": "M2-C8-U2", "standard": "AS 9", "title": "Revenue Recognition", "subtopicRef": "2.3", "subtopicTitle": "Agency Relationship - sub-part (i): tours/travel company reselling airline seats, gross vs net revenue basis"},
+        {"unitCode": "M2-C7-U3", "standard": "AS 11", "title": "The Effects of Changes in Foreign Exchange Rates", "subtopicRef": "3.11", "subtopicTitle": "Forward Exchange Contract accounting - sub-part (ii): premature-settlement forward contract for a hedge"},
+        {"unitCode": "M2-C7-U2", "standard": "AS 5", "title": "Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies", "subtopicRef": "2.5", "subtopicTitle": "Changes in Accounting Policies - sub-part (iii): distinguishing a new gratuity/pension scheme from a change in existing accounting policy"},
+        {"unitCode": "M2-C10-U1", "standard": "AS 21", "title": "Consolidated Financial Statements", "subtopicRef": "1.5", "subtopicTitle": "Scope of AS 21 (interaction with AS 13/23) - sub-part (iv): subsidiary holding a direct associate stake, parent also holding a direct stake in the same associate"},
+        {"unitCode": "M2-C10-U2", "standard": "AS 23", "title": "Accounting for Investments in Associates in Consolidated Financial Statements", "subtopicRef": "2.6", "subtopicTitle": "Application of the Equity Method - sub-part (iv), same scenario as above"}
+      ]
+    },
+    {
+      "id": "MTP-May2024-S1-PartI-Q2",
+      "mdAnchor": "### Question 2 (Part I - Case Scenario Based MCQs)",
+      "part": "Part I - Case Scenario Based MCQs",
+      "questionNumber": "2",
+      "marks": 8,
+      "marksNote": "4 MCQs of 2 marks each",
+      "topics": [
+        {"unitCode": "M2-C5-U2", "standard": "AS 10", "title": "Property, Plant and Equipment", "subtopicRef": "2.6-2.7", "subtopicTitle": "Measurement of PPE / Initial Recognition - which construction-phase costs are capitalisable (legal cost, relocation, inauguration, overheads)"},
+        {"unitCode": "M2-C5-U4", "standard": "AS 16", "title": "Borrowing Costs", "subtopicRef": "4.6 / 4.7", "subtopicTitle": "Specific vs General Borrowings - net borrowing cost capitalised to cost of factory, net of temporary-investment income"}
+      ]
+    },
+    {
+      "id": "MTP-May2024-S1-PartI-Q3",
+      "mdAnchor": "### Question 3 (Part I - Case Scenario Based MCQs)",
+      "part": "Part I - Case Scenario Based MCQs",
+      "questionNumber": "3",
+      "marks": 8,
+      "marksNote": "4 MCQs of 2 marks each",
+      "topics": [
+        {"unitCode": "M3-C12-U1", "standard": null, "title": "Buy-back of Securities", "subtopicRef": "1", "subtopicTitle": "The three buy-back tests: Shares Outstanding Test, Resources Test, Debt-Equity Ratio Test"}
+      ]
+    },
+    {
+      "id": "MTP-May2024-S1-PartI-Q4",
+      "mdAnchor": "### Question 4 (Part I - Case Scenario Based MCQs)",
+      "part": "Part I - Case Scenario Based MCQs (standalone)",
+      "questionNumber": "4",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M2-C5-U1", "standard": "AS 2", "title": "Valuation of Inventories", "subtopicRef": "1.9", "subtopicTitle": "Exclusions from the Cost of Inventories (selling/distribution costs, abnormal waste, storage, non-necessary overheads)"}
+      ]
+    },
+    {
+      "id": "MTP-May2024-S1-PartI-Q5",
+      "mdAnchor": "### Question 5 (Part I - Case Scenario Based MCQs)",
+      "part": "Part I - Case Scenario Based MCQs (standalone)",
+      "questionNumber": "5",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M1-C4-U4", "standard": "AS 18", "title": "Related Party Disclosures", "subtopicRef": "4.4", "subtopicTitle": "Who is NOT deemed a related party (e.g. a 30% shareholder, a normal-course banker)"}
+      ]
+    },
+    {
+      "id": "MTP-May2024-S1-PartI-Q6",
+      "mdAnchor": "### Question 6 (Part I - Case Scenario Based MCQs)",
+      "part": "Part I - Case Scenario Based MCQs (standalone)",
+      "questionNumber": "6",
+      "marks": 2,
+      "topics": [
+        {"unitCode": "M3-C14-U1", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "1", "subtopicTitle": "Meaning of Reconstruction - definition of internal (vs external) reconstruction"}
+      ]
+    },
+    {
+      "id": "MTP-May2024-S1-PartII-Q1",
+      "mdAnchor": "### Question 1 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive - Compulsory",
+      "questionNumber": "1",
+      "subParts": ["a", "b", "c"],
+      "marks": 14,
+      "marksNote": "(a) 5 + (b) 5 + (c) 4",
+      "topics": [
+        {"unitCode": "M2-C5-U3", "standard": "AS 13", "title": "Accounting for Investments", "subtopicRef": "3.4 / 3.6", "subtopicTitle": "Classification and Carrying Amount of Investments - part (a): shares (current) vs gold/silver (long-term) at lower of cost/fair value or cost"},
+        {"unitCode": "M2-C5-U5", "standard": "AS 19", "title": "Leases", "subtopicRef": "5.8", "subtopicTitle": "Accounting for Finance Leases - part (b): lessee's initial recognition at lower of fair value and PV of MLP, finance-charge schedule"},
+        {"unitCode": "M2-C5-U7", "standard": "AS 28", "title": "Impairment of Assets", "subtopicRef": "7.4 / 7.9", "subtopicTitle": "Measurement of Recoverable Amount - part (c): impairment loss after a downward revaluation already taken to P&L"}
+      ]
+    },
+    {
+      "id": "MTP-May2024-S1-PartII-Q2",
+      "mdAnchor": "### Question 2 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive",
+      "questionNumber": "2",
+      "marks": 14,
+      "topics": [
+        {"unitCode": "M3-C11-U1", "standard": null, "title": "Preparation of Financial Statements (of Companies)", "subtopicRef": "1.5", "subtopicTitle": "Final Accounts - Trial Balance to Schedule III Balance Sheet + Statement of P&L, incl. revaluation reserve and machinery disposal"}
+      ]
+    },
+    {
+      "id": "MTP-May2024-S1-PartII-Q3",
+      "mdAnchor": "### Question 3 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive",
+      "questionNumber": "3",
+      "subParts": ["a", "b"],
+      "marks": 14,
+      "marksNote": "(a) 4 + (b) 10",
+      "topics": [
+        {"unitCode": "M2-C8-U2", "standard": "AS 9", "title": "Revenue Recognition", "subtopicRef": "2.7", "subtopicTitle": "Income from Other Sources - part (a): interest and royalty revenue recognition basis"},
+        {"unitCode": "M3-C14-U1", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "2.3 / 3", "subtopicTitle": "Reduction of Share Capital + Entries in Case of Internal Reconstruction - part (b): Capital Reduction scheme, journal entries, post-reconstruction Balance Sheet"}
+      ]
+    },
+    {
+      "id": "MTP-May2024-S1-PartII-Q4",
+      "mdAnchor": "### Question 4 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive",
+      "questionNumber": "4",
+      "marks": 14,
+      "topics": [
+        {"unitCode": "M3-C13-U1", "standard": null, "title": "Amalgamation of Companies", "subtopicRef": "4 / 6 / 7", "subtopicTitle": "Purchase Consideration, Realisation A/c (vendor), acquisition entries + post-absorption Balance Sheet (purchaser) - Hari Ltd. absorbs Vayu Ltd."}
+      ]
+    },
+    {
+      "id": "MTP-May2024-S1-PartII-Q5",
+      "mdAnchor": "### Question 5 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive",
+      "questionNumber": "5",
+      "marks": 14,
+      "topics": [
+        {"unitCode": "M2-C10-U1", "standard": "AS 21", "title": "Consolidated Financial Statements", "subtopicRef": "1.10 / 1.11 / 1.12", "subtopicTitle": "Consolidation Procedures, Goodwill/Capital Reserve (Cost of Control), Minority Interest - Virat Ltd./Anushka Ltd. (80% subsidiary) consolidated Balance Sheet"}
+      ]
+    },
+    {
+      "id": "MTP-May2024-S1-PartII-Q6",
+      "mdAnchor": "### Question 6 (Part II - Descriptive Questions)",
+      "part": "Part II - Descriptive",
+      "questionNumber": "6",
+      "subParts": ["a", "b", "c"],
+      "marks": 14,
+      "marksNote": "(a) 4 + (b) 4 + (c) 6",
+      "topics": [
+        {"unitCode": "M1-C2-U1", "standard": null, "title": "Framework for Preparation and Presentation of Financial Statements", "subtopicRef": "7", "subtopicTitle": "Qualitative Characteristics of Financial Statements - part (a), first alternative of an either/or question"},
+        {"unitCode": "M1-C1-U1", "standard": null, "title": "Introduction to Accounting Standards", "subtopicRef": "1", "subtopicTitle": "Introduction / GAAP - part (a), second alternative ('issues Accounting Standards deal with')"},
+        {"unitCode": "M3-C11-U2", "standard": "AS 3", "title": "Cash Flow Statement", "subtopicRef": "2.4", "subtopicTitle": "Calculation of Cash Flows from Operating Activities - part (b): deriving operating cash flow from a summarised cash account"},
+        {"unitCode": "M3-C15-U1", "standard": null, "title": "Accounting for Branches including Foreign Branches", "subtopicRef": "4 / 5", "subtopicTitle": "Methods of Charging Goods to Branches / Accounting for Dependent Branches - part (c): goods invoiced at cost-plus, branch profit and stock-reserve computation"}
+      ]
+    }
+  ]
+}
