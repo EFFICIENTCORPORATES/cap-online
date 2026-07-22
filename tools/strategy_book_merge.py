@@ -124,7 +124,10 @@ from pathlib import Path
 # docstring for why). Edit this tuple — never rename files — when the book's
 # structure changes.
 BOOK_ORDER = (
-    "cover",
+    # "cover" deliberately excluded here per Pranav's explicit book order
+    # (2026-07-22) -- cover.html still exists in build/ and is intentionally
+    # left out of the merged book, not forgotten. See validate_order()'s
+    # orphan check, which is why merging this order requires --force.
     "front-matter",
     "routing",
     "bucket-0",

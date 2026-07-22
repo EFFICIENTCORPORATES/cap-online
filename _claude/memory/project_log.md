@@ -4,6 +4,24 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-07-22 — Strategy book: FULL-BOOK.html finalized (87 pages, verified stable) + a major false-alarm debugging lesson
+
+Pranav gave the exact book order to merge (front-matter, routing, bucket-0..6, ai-section, emergency, personal-pages, authors-journey — "cover" deliberately dropped) and asked for a final, properly print-ready `FULL-BOOK.html` with "no margin or page issues."
+
+**Checked front-matter.html was in sync first** (it carries hand-authored content from a concurrent session, per the standing hazard logged this morning) — geometry, footer fix, and structure were all already correct; no changes needed there.
+
+**Updated `BOOK_ORDER` in `tools/strategy_book_merge.py`** to match exactly, regenerated the other 13 sections individually (still deliberately not touching front-matter.html directly via the generator), hand-patched only front-matter.html's font-loading `<link>` tag, and re-merged.
+
+**Then hit a serious-looking problem:** repeated headless-Chrome checks of the identical merged file gave wildly different page counts (4, 7, 10, 22, 262) — looked like real pagination corruption. Spent real effort chasing two plausible causes (an empty `.blank-page` div confusing paged.js's fragmentation; Google Fonts loading over the network racing against paged.js's layout pass) — vendored all fonts locally either way (`design/templates/vendor/fonts/*.woff2` + `gfonts-local.css`, replacing the `@import` from fonts.googleapis.com) since it's a legitimate improvement regardless, but **instability persisted through both fixes**.
+
+**Root cause, confirmed properly rather than guessed:** `--dump-dom`/`--virtual-time-budget` simply capture Chrome's headless state at an arbitrary, non-deterministic point — for a small file this coincides closely enough with paged.js actually finishing, but for this ~200KB/13-section merged book, paged.js needs several real seconds of wall-clock CPU time to converge, and every prior capture in this session was catching it mid-render. Installed `websocket-client` via pip (flagged, same low-risk pattern as the other concurrent session's `pypdf` install today) and drove Chrome directly over the DevTools Protocol, polling `document.querySelectorAll('.pagedjs_page').length` every 3 **real** seconds with no virtual-time involved at all. Result: **87 pages, stable from the very first check through 120 continuous real seconds** — confirmed genuinely complete, not a snapshot. Separately confirmed the actual rendered text ends exactly at the book's true final line ("End of Master Draft...") — nothing silently truncated.
+
+**Documented as Claude_V2.md §15** — a standing rule for future sessions: never trust a single `--dump-dom`/`--screenshot` capture's page count for the *full merged book* (only for small single-section files, where it's fine). Poll for real-time stability instead, or just do what the human workflow already does — open it in a foreground tab and wait until it visibly stops changing before printing.
+
+**Final state delivered:** `books/strategy-book/design/templates/build/FULL-BOOK.html`, 87 pages, verified stable, front-matter in sync, fonts vendored locally, correct book order. Ran `health_check.py`/`file_index.py` — same 16 pre-existing failures, nothing new.
+
+---
+
 ## 2026-07-22 — Question Bank Book: locked in the end-goal + two new content layers
 
 Pranav showed the target deliverable: `books/question-bank/metadata-index/AS10_Question_Book.html`, a hand-built student-facing "go-to book for practice" for AS 10 (~58 questions, official answers, topic tags, Common Student Mistakes, confidence flags). This reframed the whole Question Bank effort — tagging isn't the end product, it's infrastructure for one HTML book per chapter.

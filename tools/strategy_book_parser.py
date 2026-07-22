@@ -627,8 +627,19 @@ class Renderer:
 
 def get_css(geo: dict) -> str:
     css = """
-/* ── Google Fonts ── */
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Kalam:wght@300;400;700&display=swap');
+/* ── Fonts ──
+   NOT loaded via @import from fonts.googleapis.com. Network font loading is
+   asynchronous with no guaranteed completion time, and paged.js lays out and
+   paginates the document as soon as it starts running -- if that happens
+   before the real fonts finish loading, paged.js measures text with fallback
+   font metrics, then a font swap after layout has already committed changes
+   the actual text size/wrapping, corrupting the pagination. Confirmed this
+   was happening 2026-07-22: identical repeated headless-Chrome runs of the
+   same merged book produced wildly different page counts (4, 7, 10, 22, 262
+   across runs) purely from this race. Fonts are vendored locally instead
+   (design/templates/vendor/fonts/ + gfonts-local.css) and loaded via a
+   <link> tag in build_page(), same principle as vendoring paged.js itself:
+   remove the network dependency entirely so layout is deterministic. ── */
 
 /* ── Reset ── */
 *, *::before, *::after {
@@ -1163,6 +1174,7 @@ def build_page(body_html: str, slug: str, color: str, label: str) -> str:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(label)} — CA Inter Strategy Book</title>
+  <link rel="stylesheet" href="../vendor/gfonts-local.css">
   <style>{get_css(geo)}</style>
 </head>
 <body>

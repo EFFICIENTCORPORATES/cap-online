@@ -1,5 +1,5 @@
 {
-  "_purpose": "Machine-readable companion to Claude_V2.md sections 9, 13, 14. This file is git-tracked so cloning this repo onto a new machine does not lose the paged.js/book-assembly architecture context. Claude_V2.md has the prose explanation and reasoning; this file has the exact current values and facts for fast lookup. Update both together when either changes.",
+  "_purpose": "Machine-readable companion to Claude_V2.md sections 9, 13, 14, 15. This file is git-tracked so cloning this repo onto a new machine does not lose the paged.js/book-assembly architecture context. Claude_V2.md has the prose explanation and reasoning; this file has the exact current values and facts for fast lookup. Update both together when either changes.",
   "last_updated": "2026-07-22",
 
   "key_files": {
@@ -8,6 +8,8 @@
     "section_generator": "tools/strategy_book_parser.py",
     "whole_book_merger": "tools/strategy_book_merge.py",
     "vendored_paged_js": "books/strategy-book/design/templates/vendor/paged.polyfill.js",
+    "vendored_fonts": "books/strategy-book/design/templates/vendor/fonts/*.woff2 + books/strategy-book/design/templates/vendor/gfonts-local.css -- NOT git-tracked (binary), regenerate with tools/fetch_local_fonts.py",
+    "font_fetch_script": "tools/fetch_local_fonts.py",
     "build_output_dir": "books/strategy-book/design/templates/build/",
     "merged_output_file": "books/strategy-book/design/templates/build/FULL-BOOK.html",
     "pdf_export_skill": "_claude/skills/SKILL-html-to-pdf.md (section 9 = paged.js-specific)",
@@ -37,10 +39,15 @@
   },
 
   "book_order": [
-    "cover", "front-matter", "routing",
+    "front-matter", "routing",
     "bucket-0", "bucket-1", "bucket-2", "bucket-3", "bucket-4", "bucket-5", "bucket-6",
     "ai-section", "emergency", "personal-pages", "authors-journey"
   ],
+  "book_order_note": "'cover' deliberately excluded per Pranav's explicit instruction 2026-07-22. cover.html still exists in build/ -- merging this order requires --force since the orphan-check correctly flags it as intentionally left out, not forgotten.",
+  "confirmed_final_page_count": {
+    "value": 87,
+    "verified": "2026-07-22 via real-time CDP polling (see verification_techniques.cdp_polling below), stable and unchanged over 120 seconds of continuous real-wall-clock checking. Last rendered text confirmed to be the true end of MASTER.md's content (Author's Journey closing lines) -- nothing truncated."
+  },
 
   "core_css_mechanism": {
     "name": "CSS Paged Media running elements",
@@ -129,8 +136,15 @@
   },
 
   "verification_techniques": [
-    {"tool": "chrome --headless=new --dump-dom", "confirms": "DOM structure and pagination happened (page count, running-element repetition count) -- does NOT confirm visual layout is correct"},
-    {"tool": "chrome --headless=new --screenshot=out.png --window-size=W,H", "confirms": "Actual visual rendering -- required to catch layout bugs like flex rows collapsing into columns; DOM can be perfectly correct while still rendering wrong"},
-    {"tool": "chrome --headless=new --print-to-pdf", "confirms": "DOES NOT WORK for paged.js output -- produces a near-empty PDF due to the print-media/screen-media mismatch (see known_open_risks.one-command-pdf-automation-unavailable)"}
+    {"tool": "chrome --headless=new --dump-dom", "confirms": "DOM structure and pagination happened (page count, running-element repetition count) for SMALL single-section files only -- see cdp_polling entry below for why this is unreliable on the full merged book"},
+    {"tool": "chrome --headless=new --screenshot=out.png --window-size=W,H", "confirms": "Actual visual rendering -- required to catch layout bugs like flex rows collapsing into columns; DOM can be perfectly correct while still rendering wrong. Same big-document caveat as --dump-dom applies."},
+    {"tool": "chrome --headless=new --print-to-pdf", "confirms": "DOES NOT WORK for paged.js output -- produces a near-empty PDF due to the print-media/screen-media mismatch (see known_open_risks.one-command-pdf-automation-unavailable)"},
+    {
+      "tool": "cdp_polling",
+      "confirms": "The ONLY reliable way found to verify true pagination completion on the full ~200KB/13-section merged book. --dump-dom and --virtual-time-budget both capture at an arbitrary, non-deterministic point mid-render for a document this size (confirmed: identical repeated runs gave page counts of 4, 7, 10, 22, 262 -- pure testing-methodology noise, not a real bug).",
+      "how": "pip install websocket-client; launch chrome --headless=new --remote-debugging-port=9222 --remote-allow-origins=* <file>; open a devtools websocket connection via the /json/new HTTP endpoint; repeatedly Runtime.evaluate 'document.querySelectorAll(\".pagedjs_page\").length' every few REAL seconds (genuine time.sleep(), not virtual time) until the count stops changing.",
+      "result_this_session": "87 pages, already stable at the first check, unchanged for 120 continuous real seconds -- high confidence this is the true final count.",
+      "caveat": "This full CDP-polling rigor is only necessary for the WHOLE merged book. Single-section files (bucket-0.html etc.) render in ~2-3 real seconds and a plain --dump-dom with a modest --virtual-time-budget (15000-20000) is fine for those, as done earlier in this same session without issue."
+    }
   ]
 }

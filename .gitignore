@@ -39,6 +39,17 @@
 **/*.webm
 **/*.wmv
 
+# Fonts (binary) -- regenerate locally via tools/fetch_local_fonts.py, never commit the files.
+# gfonts-local.css is generated alongside the font files by that same script (kept in
+# sync with whatever font-file names it downloads), so it's excluded here too rather
+# than committed and risking drifting out of sync with a freshly regenerated fonts/ folder.
+**/*.woff2
+**/*.woff
+**/*.ttf
+**/*.otf
+**/*.eot
+books/strategy-book/design/templates/vendor/gfonts-local.css
+
 # Archives & executables / large binaries
 **/*.zip
 **/*.rar
