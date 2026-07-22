@@ -95,3 +95,18 @@ Run timestamp : 2026-06-18 17:38:08
 Total files   : 1  |  Success: 1  |  Failed: 0  |  Skipped: 0  |  Dry-run: 0
 ========================================================================
   [SUCCESS ]  CAInter-AdvAcc-MTP-ICAI-Practice-Ans.pdf  ->  CAInter-AdvAcc-MTP-ICAI-Practice-Ans.md
+
+========================================================================
+Run timestamp : 2026-07-22 19:58:27
+Tool used     : pypdf (MarkItDown not installed in this session; plain per-page text extraction used instead - same input/output contract, no markitdown-specific processing applied)
+Total files   : 6  |  Success: 6  |  Failed: 0  |  Skipped: 0  |  Dry-run: 0
+Context       : Pranav confirmed PYQ "Suggested Answers" PDFs contain BOTH the question text and the worked answer, and are printed (not scanned) - so they convert cleanly, unlike the PYQ Question-only PDFs (see DEPRECATION note below). CAInter-AdvAcc-PYQ-May2026-Ans.pdf was newly sourced to fill the previously-missing May 2026 answer; the other 5 (Dec2021/May2022/Nov2022/May2023/Nov2023) are newly-sourced older sittings extending PYQ coverage back before May 2023 for the first time.
+========================================================================
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-May2026-Ans.pdf  ->  CAInter-AdvAcc-PYQ-May2026-Ans.md (44 pages, 9406 words)
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-Dec2021-Ans.pdf  ->  CAInter-AdvAcc-PYQ-Dec2021-Ans.md (27 pages, 7745 words) [paper named "PAPER 1: ACCOUNTING" - pre-dates the "Advanced Accounting" paper renaming]
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-May2022-Ans.pdf  ->  CAInter-AdvAcc-PYQ-May2022-Ans.md (33 pages, 8534 words)
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-Nov2022-Ans.pdf  ->  CAInter-AdvAcc-PYQ-Nov2022-Ans.md (29 pages, 7531 words)
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-May2023-Ans.pdf  ->  CAInter-AdvAcc-PYQ-May2023-Ans.md (36 pages, 8740 words) [AES-encrypted PDF, empty-password decrypt succeeded]
+  [SUCCESS ]  CAInter-AdvAcc-PYQ-Nov2023-Ans.pdf  ->  CAInter-AdvAcc-PYQ-Nov2023-Ans.md (31 pages, 7489 words) [AES-encrypted PDF, empty-password decrypt succeeded]
+
+DEPRECATION NOTE (same run): moved 4 existing PYQ Question-only file pairs (PDF+MD) out of this folder into deprecated-pyq-question-files/ - CAInter-AdvAcc-PYQ-{Jan2025,Jan2026,May2024,May2026}-Q.{pdf,md}. Their MD conversions were always BLANK (0 words - scanned/image PDFs, no text layer), and the corresponding Suggested-Answers PDF already contains the full question text anyway, so they add nothing and were cluttering the active pipeline. Going forward, PYQ sourcing should fetch ONLY the Suggested Answers document for each sitting, not the separate Question paper.
