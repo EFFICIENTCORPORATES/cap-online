@@ -4,6 +4,135 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-07-22 — Question Bank Book: locked in the end-goal + two new content layers
+
+Pranav showed the target deliverable: `books/question-bank/metadata-index/AS10_Question_Book.html`, a hand-built student-facing "go-to book for practice" for AS 10 (~58 questions, official answers, topic tags, Common Student Mistakes, confidence flags). This reframed the whole Question Bank effort — tagging isn't the end product, it's infrastructure for one HTML book per chapter.
+
+**Two strategic decisions confirmed by Pranav (see CLAUDE.md §6 for full detail):** (1) tag every sitting comprehensively once for every chapter, never re-scan chapter-by-chapter; (2) render chapter books with a reusable generator script, not hand-assembled HTML.
+
+**New work this session:**
+- Pranav sourced 6 real ICAI "Examiners' Comments on the Performance of the Examinees" PDFs (Jan2025/May2024/Sep2024/May2025/Sep2025/Jan2026) — converted, sliced to Paper 1 section (`Raw_PDF_.../examiner-comments-paper1/`). Analysed all 6 and wrote `metadata-index/examiner-comments-writing-skill.md` — a style guide for writing ICAI-voiced "Common Student Mistakes" for every question outside those 6 sittings, with a strict real-vs-synthesized provenance tag.
+- Added Pranav's OP/PP recurring-question rule (90%-similarity-on-numbers-stripped text; earliest sitting = OP, rest = PP) to `TAGGING-SCHEMA.md`, alongside the `commonMistakes` schema.
+- Deliberately did NOT retrofit the 4 already-tagged sitting JSONs — new shape applies going forward only.
+
+**Blocked on:** Pranav is going to share more `AS10_*` sample files (`AS10_Question_Reference.html`, `question-book-implementation-plan.md`, `AS10_Question_Bank.json`) to reconcile our schema before the generator script gets built and Phase 1 (parse+tag remaining ~34 sittings) resumes at scale.
+
+---
+
+## 2026-07-22 — Strategy book: Author's Journey + front-matter Category B sections complete
+
+**`authors-journey.html`** — fully written (was a CSS-only shell):
+- Added CSS for `.journey-close` (gold left-border close block) and `.photo-ph` (picture gallery placeholders with handwritten-style `.ph-caption` in Kalam font)
+- Full first-person narrative in 5 phases: Foundation 2014–15, Intermediate 2015–16, February 1 2016 result, Why I'm Here, the Socrates close
+- All key facts from the master profile used: PCO booth call (80 seconds, 3rd ranker), earthquake April 25 2015 (11:56 AM, Cost Accounting / Overhead chapter), 25–30 days lost, 85% mental reframe, Nepal Blockade, Auditing Pronouncements 5-mark question, dates (Jan 19 2015 CPT, Feb 1 2016 IPCC)
+- Four key quotes placed as `blockquote.anon-bq`: "I am not guaranteeing the result. I am guaranteeing the work." / the rank feeling quote / "What you do not revise the day before the exam..." / "Be stubborn about your goals. Be flexible about your methods."
+- Socrates loop closes the section in `.journey-close` block
+- Four `.photo-ph` placeholders for picture gallery (real photos needed from Pranav)
+
+**`front-matter.html`** — all Category B sections written:
+- Added CSS for `.story-vignette` (left border, non-italic vignette block) and `.dedication-block` (centered, spacious)
+- **Dedication:** left as `[AUTHOR TO CONFIRM]` — Pranav must write this personally
+- **The Socrates Story:** written as a brief plain-prose vignette (7 short paragraphs), no moral stated, no explanation — sits alone as intended
+- **About This Book:** full prose from the bullet outlines — what it is, what it isn't, the implementation-layer differentiator, the gyaan warning
+- **About the Author:** two-paragraph credential block — AIR 1 CPT+IPCC, EY, IOCL, VC Gurukul; pointer to the journey at the back
+- **How to Read This Book:** prose version — bucket navigation, Bucket 0 is daily, [ALL]/[RANK] markers, Emergency Section independence, groups note
+- Table of Contents remains `[AUTO-GENERATED]`
+
+**What's left in the book:**
+- Cover: Pranav getting it built elsewhere
+- Dedication: Pranav's personal text
+- Picture Gallery photos: real CPT/IPCC notebooks etc.
+- Table of Contents: auto-generated at final assembly
+
+---
+
+## 2026-07-22 — Strategy book front-matter: Blank Page, Title Page, Copyright done
+
+Completed three of the four Category A sections in `books/strategy-book/design/templates/build/front-matter.html`. Emergency section was already fully written (6 steps + 10-day schedule + "what not to do") in a prior context window — confirmed complete, no further work needed.
+
+**What changed in front-matter.html:**
+- Removed the `<h1>FRONT MATTER</h1>` editorial heading and the three `<h3 class="subsection-heading">Page N</h3>` structural markers for pages 1–3.
+- Added CSS for three new layout classes: `.blank-page`, `.title-page` (with sub-elements `.tp-series`, `.tp-title`, `.tp-rule`, `.tp-author`, `.tp-credential`, `.tp-publisher`), and `.copyright-page` (with `.copy-year`).
+- **Page 1 — Blank Page:** genuinely empty `<div class="blank-page"></div>` with `break-after: page`.
+- **Page 2 — Title Page:** flex column layout (top/center/bottom zones); title "The Comprehensive CA Intermediate Exam Preparation Guide"; author "CA Pranav Pratik Tulshyan"; credential "AIR 1 (Foundation) · AIR 1 (Intermediate)"; publisher "VC Gurukul · Noida". Gold rule between title and author block.
+- **Page 3 — Copyright & Disclaimers:** copyright line + no-reproduction notice + ICAI-requirements disclaimer + strategy-results disclaimer + publication year. Padded from top 60mm (verso positioning convention).
+- Pages 4 onwards (Dedication, Socrates Story, About This Book, About the Author, How to Read, ToC) left as `[STRUCTURE ONLY]` — Category B/C, need Pranav's input.
+
+---
+
+## 2026-07-22 — Strategy book: whole-book merge script (`strategy_book_merge.py`)
+
+Continuation of the same-day paged.js work. Pranav wanted independent per-section HTML files (already true — `strategy_book_parser.py` outputs one per bucket) plus one Python script to stitch them into a single whole-book file for continuous pagination/page numbers, with an explicit tuple of paths/slugs controlling merge order rather than relying on filenames.
+
+**Two things checked before building, both verified rather than assumed:**
+- Diffed the embedded `<style>` block across 4 different generated files (`bucket-0`, `ai-section`, `cover`, `authors-journey`) — byte-identical. Confirms consolidating to one shared stylesheet in the merged file is lossless, since per-section color/label are always inline styles, never baked into the CSS.
+- Found a real bug while checking mergeability: every strategy heading gets `id="s{number}"`, and the number restarts at 1 in every bucket (confirmed `bucket-0.html` and `bucket-1.html` both have `id="s1"`, `id="s2"`...) — would collide into duplicate/invalid ids the moment two sections share one document.
+
+**Also fixed in passing:** `"THE AUTHOR'S JOURNEY — CPT & IPCC"` had no `SECTION_META` entry, so it fell through to a generic fallback — output filename `section.html` (meaningless, collision-prone) and a mangled running-header label ("The Author'S Journey — Cpt & Ipcc" from Python's naive `.title()`). Added a proper entry; now generates as `authors-journey.html` with the correct label.
+
+**Built `tools/strategy_book_merge.py`:** takes `BOOK_ORDER` (an explicit tuple of section slugs, editable in one place, not derived from filenames) or a `--order` CLI override; extracts each section's body-only content (drops the per-file paged.js `<script>` tag, kept exactly once in the output); rewrites `id="sN"` → `id="{slug}-sN"`; wraps each section in a `.book-section` div with `break-before: right` (recto-start, added only at merge time — lone section files don't need it); writes into the same `build/` folder as `vendor/paged.polyfill.js` so the existing relative script path keeps working. Validates in both directions before merging: any listed slug with no file = hard error; any file in `build/` not listed = hard error (downgradeable to a warning via `--force`) — protects against a section silently vanishing from the final book. Also checks CSS is still byte-identical across all sections being merged (hard error if not, `--force` to override) and warns if `MASTER.md` is newer than the build files being merged (stale-build hint).
+
+**Verified with headless Chrome, not just read from the code:** ran `--dump-dom` on the merged 14-section `FULL-BOOK.html` (193,698 chars) — confirmed running-header color switches correctly at each section boundary (all 10 distinct bucket/section colors found in the rendered DOM, in the right places), single `<style>`/`<script>` survived the merge, ids properly disambiguated (`bucket-0-s1` and `bucket-1-s1` both present, distinctly). Also tested the validation logic directly: missing-slug hard error, orphaned-file hard error, and `--force` correctly downgrading the orphan case to a warning.
+
+Documented all of this as durable learnings in **Claude_V2.md §13** (paged.js running-element mechanism, why `@page` can't be trusted with `var()`, the print-media export gap, and the full list of merge-script gotchas) so a future session doesn't have to re-derive any of it.
+
+Ran `tools/health_check.py` + `tools/file_index.py` after adding the new script and build artifact — same 16 pre-existing failures as this morning's entry, nothing new introduced.
+
+---
+
+## 2026-07-22 — Question Bank: PYQ pipeline simplified to Answers-only, coverage extended to 2021
+
+Pranav noticed PYQ "Suggested Answers" PDFs already contain both question and answer text, and are printed (not scanned) — unlike the separate PYQ Question-only PDFs, which always convert blank. Decision: PYQ sourcing now targets only the Suggested Answers document per sitting (same single-document shape as RTP); Question-only PDFs are dead weight.
+
+**Work done:**
+- Moved the 4 existing PYQ Question-only PDF/MD pairs (Jan2025, Jan2026, May2024, May2026) to new `Raw_PDF_Question_Bank_CA_Inter_Accounts/deprecated-pyq-question-files/`.
+- Converted 6 newly-sourced PYQ Answer PDFs to `.md`: May 2026 (fills a previously-missing sitting) plus 5 older sittings never in the repo before — Dec 2021, May 2022, Nov 2022, May 2023, Nov 2023 (last two were AES-encrypted, empty-password decrypt worked). Used `pypdf` directly (MarkItDown isn't installed in this sandbox) — same plain-text-extraction contract, logged as such.
+- Updated `conversion_log.txt` and `question_bank_index.csv` to match current folder reality.
+- Built `books/question-bank/question_bank_index_by_attempt.csv` (new) — one row per exam sitting (not per file) with PDF/MD/Parsed/JSON status columns; more useful than the per-file CSV for pipeline-status questions. Updated `CLAUDE.md` section 6 accordingly.
+
+**Result:** PYQ coverage now spans **Dec 2021 – May 2026** (was May 2024 – May 2026) — real progress toward the README's 7–10 yr goal. MTP/RTP still only May 2023 – May 2026.
+
+**Note:** installed `pypdf` + `cryptography` via pip into the sandbox Python (not into the repo/venv) to do the conversions — flagging since it's an environment change, though a low-risk, easily-redone one.
+
+---
+
+## 2026-07-22 — Strategy book: paged.js wired in, page geometry config-driven
+
+Pranav asked how to write the strategy book's HTML so page size/margins can change anytime with no manual re-editing and no overflow risk. Diagnosed a real bug in the existing `tools/strategy_book_parser.py` output: each section was one giant `.page-shell` div with `position:absolute` header/edge-tab/footer — correct-looking for exactly one physical page, but silently broken the moment Chrome sliced a tall bucket into multiple PDF pages (header/footer/edge-tab would only appear once per bucket file, not repeated per page).
+
+**Work done:**
+- `books/strategy-book/design/page-geometry.json` (new) — single source of truth for trim/margins.
+- `tools/strategy_book_parser.py` — `get_css()` now templates both the `:root` CSS vars and the literal `@page` rule from that one JSON (`@page` doesn't reliably resolve `var()`, so both are substituted from the same source at generation time, never hand-duplicated). Removed the `.page-shell` fixed-div-per-file pattern entirely; content is now one continuous flow. Header/edge-tab/journey-strip are defined once per section via `position: running(name)` + `@page { @top-center/@bottom-center/@right-middle { content: element(name); } }` (edge tab only on `@page :right`) — paged.js auto-repeats them on every generated physical page. Added `break-inside: avoid` on every component (was missing) and `print-color-adjust: exact` (was missing entirely — bucket colours would've printed white).
+- Vendored `paged.js` locally at `design/templates/vendor/paged.polyfill.js` (downloaded, MIT license) rather than a CDN, consistent with the offline-safe pattern already used for fonts/images elsewhere in this repo.
+- Regenerated all sections (`python tools/strategy_book_parser.py --section all`) — 14 files now, including `cover.html`, `bucket-1.html`, `bucket-2.html`, `bucket-6.html` which MASTER.md had content for but nothing had generated yet.
+- Verified with headless Chrome `--dump-dom`: pagination and running-element repetition are confirmed genuinely working (running header found on 4+ generated pages, edge tab on 3+, journey strip on 4+ for `bucket-0.html`).
+- **Found and documented a real gap:** the existing `chrome --print-to-pdf` CLI recipe (`_claude/skills/SKILL-html-to-pdf.md`) does NOT work on paged.js output — produces a near-empty ~1KB PDF, because paged.js's paginated view is hidden under print media unless the caller forces screen-media emulation first (which plain Chrome CLI flags cannot do; normally requires Puppeteer). Added a new §9 to that skill file documenting this, with the working manual fallback (open in Chrome → Ctrl+P → Save as PDF) and what a Node+Puppeteer automated path would need. **Node/npm are not installed on this machine** — flagged, not installed without asking first.
+- Ran `tools/health_check.py` + `tools/file_index.py` per repo rule. Health check's 16 failures are all pre-existing, unrelated to this work (missing `syllabus-engine`/`question-bank` subfolders, NUL bytes in unrelated `bridge-course/base-studymaterials/*.md` files, `capranav_com/` undocumented in CLAUDE.md) — not touched this session, flagged for Pranav.
+
+**Known trade-off, not yet solved:** `.bucket-banner` (bucket opener colour banner) no longer bleeds to the full trim edge — the old negative-margin trick escaped `.page-shell`'s padding, which no longer exists. True full-bleed under `@page`-margin pagination needs a dedicated zero-margin named page; open item.
+
+**Next lever:** if Pranav wants one-command PDF regeneration back, that needs Node + Puppeteer installed — ask before adding. Otherwise the manual Ctrl+P → Save as PDF path works today with zero new tooling.
+
+---
+
+## 2026-07-22 — Question Bank Book: full-focus audit + tagging schema + 3 sittings tagged
+
+Pranav asked to shift full focus to the Question Bank Book (`books/question-bank/`). Ran a 3-way audit (question-bank folder, concept-book/syllabus taxonomy, mcq-platform for competing schemes) and wrote it up in **CLAUDE.md section 6** (new) — corrected two stale path entries in section 3 (`syllabus-engine/` and `question-bank/` both actually live nested under `books/concept-book/` and `books/` respectively, not at repo root as previously documented).
+
+**Key findings:** raw PDFs converted (54/55) but only 3 of ~55 files had gone through the clean HTML-table parse; only 1 of ~17 exam sittings (MTP Jan 2025) had questions tagged to syllabus topics; three overlapping chapter/topic ID schemes exist in the repo (concept-book bracket tags, the "locked" master syllabus JSON, and `topic-index.json`) with a `U0`-vs-`U1` mismatch for 7 single-unit chapters between the master JSON and everything else.
+
+**Work done:**
+- `books/question-bank/metadata-index/TAGGING-SCHEMA.md` (new) — locks in `topic-index.json`'s `unitCode`+`subtopicRef` scheme (not the master JSON's IDs) as the tagging target, documents the U0/U1 reconciliation table, and switches to a **lean index** going forward (question/answer content stays in `Parsed_PDF_.../`, tagging files only point at it via `mdAnchor` — no more full-HTML duplication like the `MTP_Jan2025.json` pilot did).
+- Tagged all 3 already-parsed pilot sittings end-to-end: `MTP_May2024_Set1.json`, `PYQ_Jan2026.json`, `RTP_May2026.json` (new files in `metadata-index/`) — 4 of ~17 sittings now tagged, up from 1.
+- Extended `topic-index.json` from 22 to **32 of 36** syllabus units — added stub entries (heading lists only, not full descriptions) for AS16, AS28, AS18, AS5, AS24, AS7, AS22, AS25, AS15, AS17 as they came up in the 3 sittings. Only AS 1 and AS 27 remain untouched by any tagged question.
+- All new/edited JSON validated (`python -c "import json; json.load(...)"`).
+
+**Explicitly NOT done (flagged, Pranav to decide):** `books/question-bank/README.md` still describes the abandoned `pyq/mtp/rtp/solutions/` layout; `tools/health_check.py`'s `EXPECTED_DIRS` still checks for a top-level `question-bank/` that doesn't exist (pre-existing false-flag, not touched this session).
+
+**Next lever:** parsing the remaining ~52 raw conversions into the clean `Parsed_PDF_.../` format is now the bottleneck — tagging itself is fast once a sitting is parsed.
+
+---
+
 ## 2026-06-22 — CA Foundation strategy slides + HTML-to-PDF skill
 
 Created `books/strategy-book/working/exam-strategyFoundation.html` (7-slide interactive dark-background presentation with beat-wise JS animation engine for CA Foundation Sep 2026 batch). Generated `exam-strategyFoundation-print.html` (static print copy, mm/pt sizing, all content visible) and `exam-strategyFoundation.pdf` (7 pages, 150 KB, A4 landscape) via Chrome headless.

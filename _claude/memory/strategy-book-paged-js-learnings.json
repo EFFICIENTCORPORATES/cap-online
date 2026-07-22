@@ -1,0 +1,136 @@
+{
+  "_purpose": "Machine-readable companion to Claude_V2.md sections 9, 13, 14. This file is git-tracked so cloning this repo onto a new machine does not lose the paged.js/book-assembly architecture context. Claude_V2.md has the prose explanation and reasoning; this file has the exact current values and facts for fast lookup. Update both together when either changes.",
+  "last_updated": "2026-07-22",
+
+  "key_files": {
+    "content_source_of_truth": "books/strategy-book/working/CA-Inter-Strategy-Book-MASTER.md",
+    "page_geometry_config": "books/strategy-book/design/page-geometry.json",
+    "section_generator": "tools/strategy_book_parser.py",
+    "whole_book_merger": "tools/strategy_book_merge.py",
+    "vendored_paged_js": "books/strategy-book/design/templates/vendor/paged.polyfill.js",
+    "build_output_dir": "books/strategy-book/design/templates/build/",
+    "merged_output_file": "books/strategy-book/design/templates/build/FULL-BOOK.html",
+    "pdf_export_skill": "_claude/skills/SKILL-html-to-pdf.md (section 9 = paged.js-specific)",
+    "design_spec": "books/strategy-book/design/design-spec.md"
+  },
+
+  "pipeline": [
+    "CA-Inter-Strategy-Book-MASTER.md (hand-edited content, canonical source)",
+    "tools/strategy_book_parser.py --section all -> 14 independent standalone HTML files in build/",
+    "tools/strategy_book_merge.py -> FULL-BOOK.html (one continuous paged.js-paginated document)",
+    "Manual: open FULL-BOOK.html in Chrome, wait for paged.js, Ctrl+P -> Save as PDF"
+  ],
+
+  "current_page_geometry": {
+    "source_file": "books/strategy-book/design/page-geometry.json",
+    "page_width": "177.8mm",
+    "page_height": "254mm",
+    "margin_top": "14mm",
+    "margin_bottom": "16mm",
+    "margin_inner": "16mm",
+    "margin_outer": "16mm",
+    "bleed": "3mm",
+    "history": [
+      {"date": "2026-06-10", "values": {"top": "20mm", "bottom": "24mm", "inner": "22mm", "outer": "25mm"}, "note": "original design-spec.md values; 25mm outer sized to hold the 12mm edge tab plus pencil-note space"},
+      {"date": "2026-07-22", "values": {"top": "14mm", "bottom": "16mm", "inner": "16mm", "outer": "16mm"}, "note": "narrowed at Pranav's request to reduce page count/print cost; pencil-note space thinner but not fully gone"}
+    ]
+  },
+
+  "book_order": [
+    "cover", "front-matter", "routing",
+    "bucket-0", "bucket-1", "bucket-2", "bucket-3", "bucket-4", "bucket-5", "bucket-6",
+    "ai-section", "emergency", "personal-pages", "authors-journey"
+  ],
+
+  "core_css_mechanism": {
+    "name": "CSS Paged Media running elements",
+    "how_it_works": "Header/edge-tab/footer are marked position: running(name) once per section. @page { @top-center { content: element(name); } } (and @bottom-center, @right-middle on @page :right for the edge tab) tells paged.js to clone that element onto every generated physical page automatically. Running elements update their 'current value' at the point in the document flow where they're redefined -- this is what lets a merged whole-book file's header/edge-tab/footer correctly switch color/label as the reader crosses from one section into the next, with zero manual repetition.",
+    "do_not": "Never make the running() names unique per section (e.g. running(bucket1Header)) -- that breaks the whole mechanism. All sections deliberately reuse the same three names: bookHeader, bookEdgeTab, bookFooter."
+  },
+
+  "bugs_found_and_fixed": [
+    {
+      "id": "page-shell-no-repeat",
+      "found": "2026-07-22",
+      "description": "Original generator put header/edge-tab/footer as position:absolute children of one big per-file .page-shell div. Looked correct for exactly one physical page but silently failed to repeat once Chrome sliced a tall section into multiple PDF pages.",
+      "fix": "Removed .page-shell entirely; content is now one continuous flow; header/edge-tab/footer converted to position: running() + @page margin boxes.",
+      "status": "fixed"
+    },
+    {
+      "id": "id-collision-across-sections",
+      "found": "2026-07-22",
+      "description": "Every strategy heading gets id=\"s{number}\", and the number restarts at 1 in every bucket. Confirmed: bucket-0.html and bucket-1.html both contain id=\"s1\", id=\"s2\". Merging sections as-is produces duplicate/invalid ids.",
+      "fix": "tools/strategy_book_merge.py rewrites every id=\"sN\" to id=\"{slug}-sN\" while stitching sections together.",
+      "status": "fixed"
+    },
+    {
+      "id": "print-color-adjust-missing",
+      "found": "2026-07-22",
+      "description": "get_css() never set print-color-adjust: exact. Bucket background colours would have printed white.",
+      "fix": "Added print-color-adjust: exact / -webkit-print-color-adjust: exact to the * reset rule.",
+      "status": "fixed"
+    },
+    {
+      "id": "journey-strip-vertical-stacking",
+      "found": "2026-07-22",
+      "description": "The .journey-strip footer (0 1 2 3 4 5 6 AI EMG segments) rendered as a vertical column instead of a horizontal row once cloned into the @page @bottom-center margin box. Confirmed visually via headless-Chrome --screenshot (not just --dump-dom, which only confirms DOM structure, not visual layout).",
+      "root_cause": "paged.js known quirk: content cloned into a @page margin box via content:element() can pick up an inline style during the clone that forces block layout, silently beating a plain (non-!important) class rule.",
+      "fix": "Set display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important on .journey-strip, and gave @bottom-center an explicit width:55mm so paged.js doesn't auto-narrow it.",
+      "status": "fixed",
+      "unconfirmed_secondary_observation": "On page 1 specifically, the segment strip appeared to render twice (once near top, once at correct bottom position). Not confirmed as a recurring issue on interior pages -- flag for attention if it resurfaces."
+    },
+    {
+      "id": "authors-journey-slug-fallback",
+      "found": "2026-07-22",
+      "description": "\"THE AUTHOR'S JOURNEY -- CPT & IPCC\" had no SECTION_META entry, so it fell through to the generic fallback: filename section.html (meaningless, collision-prone with any future unrecognized heading) and a mangled running-header label from Python's naive .title() (\"The Author'S Journey -- Cpt & Ipcc\").",
+      "fix": "Added a proper SECTION_META entry; now generates as authors-journey.html with correct label \"The Author's Journey\".",
+      "status": "fixed"
+    }
+  ],
+
+  "known_open_risks": [
+    {
+      "id": "front-matter-hand-authored-content-not-in-master-md",
+      "severity": "high",
+      "description": "build/front-matter.html contains hand-authored Title Page + Copyright Page content (real CSS classes .title-page/.tp-title/.copyright-page, real copyright text) added directly to the generated HTML file by a concurrent editor (a parallel AI session, per Pranav), NOT present anywhere in MASTER.md (verified by grep).",
+      "danger": "tools/strategy_book_parser.py --section all (or --section \"FRONT MATTER\") will silently destroy this content on every run, since the generator only ever reads MASTER.md. This already happened once in this session and was only recoverable because the removed text was still visible in an earlier in-conversation diff -- build/ is not git-tracked, so there is no version-control safety net.",
+      "mitigation_until_resolved": "Never run --section all (or --section \"FRONT MATTER\") without first checking whether build/front-matter.html has diverged from a fresh regen (diff against a temp-path regeneration, or compare file mtimes against the other 13 build files). Regenerate the other 13 sections individually by name and hand-patch only safe things (e.g. geometry :root/@page numbers) in front-matter.html without touching its body.",
+      "real_fix_not_yet_done": "Port the hand-authored Title Page/Copyright Page content into MASTER.md's FRONT MATTER section as real markdown -- may need a new component type added to the parser's tokenizer vocabulary (no 'title page' / 'copyright page' component exists today)."
+    },
+    {
+      "id": "bucket-banner-not-full-bleed",
+      "severity": "low",
+      "description": "design-spec.md calls for the bucket-opener colour banner to be full-bleed to the trim edge. Under the current @page-margin-driven architecture, ordinary content-flow elements cannot escape into the page's margin area (unlike the old page-shell's own div padding, which could be cancelled with negative margins). The banner is now contained within the normal content column, not full-bleed.",
+      "real_fix_not_yet_done": "Would need a dedicated zero-margin named @page type for bucket-opener pages specifically (page: bucket-opener; margin: 0;) -- not implemented."
+    },
+    {
+      "id": "one-command-pdf-automation-unavailable",
+      "severity": "medium",
+      "description": "Plain 'chrome --print-to-pdf' CLI does not work on paged.js output -- produces a near-empty ~1KB PDF, because paged.js's paginated view needs screen-media emulation before capture, which plain Chrome CLI flags cannot force.",
+      "current_workaround": "Manual: open in Chrome, wait for paged.js, Ctrl+P -> Save as PDF (see print_export_instructions below). Chosen path -- no new tooling.",
+      "automated_alternative_not_installed": "Node.js + Puppeteer with page.emulateMediaType('screen') + wait for paged.js 'rendered' event + page.pdf({printBackground:true, preferCSSPageSize:true}). Node/npm confirmed NOT installed on the working machine as of 2026-07-22 -- do not install without asking first."
+    }
+  ],
+
+  "print_export_instructions": {
+    "method": "manual_chrome_ctrl_p",
+    "steps": [
+      "Open the merged FULL-BOOK.html (or any single section file) directly in Chrome",
+      "Wait for paged.js to finish repainting into paginated view (a full ~92-page book takes noticeably longer than a single section -- this is expected, not a hang)",
+      "Ctrl+P to open the print dialog"
+    ],
+    "required_settings": {
+      "destination": "Save as PDF -- NOT 'Microsoft Print to PDF'. The latter routes through a Windows print driver limited to fixed standard paper sizes (A4, Letter, ...) and cannot honor this book's custom 177.8x254mm trim, padding the content inside a larger sheet with empty space. 'Save as PDF' is Chrome's own internal PDF export and respects the page's actual CSS @page size.",
+      "margins": "None -- Chrome's own print-margin setting is separate from and additive to the book's @page-declared margin. 'Default' adds Chrome's own inset on top of what's already rendered.",
+      "headers_and_footers": "Unchecked -- checked, it adds Chrome's own native print header/footer (date/time, page title, URL, page number) on every page, layered on top of the book's own paged.js running header/footer.",
+      "background_graphics": "Checked -- required for bucket background colours to print instead of white."
+    },
+    "verified_against": "Real print-dialog screenshot from Pranav, 2026-07-22, which showed 'Microsoft Print to PDF' + 'Headers and footers' checked + 'Margins: Default' -- all three actively fighting the book's own design."
+  },
+
+  "verification_techniques": [
+    {"tool": "chrome --headless=new --dump-dom", "confirms": "DOM structure and pagination happened (page count, running-element repetition count) -- does NOT confirm visual layout is correct"},
+    {"tool": "chrome --headless=new --screenshot=out.png --window-size=W,H", "confirms": "Actual visual rendering -- required to catch layout bugs like flex rows collapsing into columns; DOM can be perfectly correct while still rendering wrong"},
+    {"tool": "chrome --headless=new --print-to-pdf", "confirms": "DOES NOT WORK for paged.js output -- produces a near-empty PDF due to the print-media/screen-media mismatch (see known_open_risks.one-command-pdf-automation-unavailable)"}
+  ]
+}

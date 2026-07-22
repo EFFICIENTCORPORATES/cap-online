@@ -1,0 +1,10 @@
+{
+  "_comment": "Single source of truth for page geometry. strategy_book_parser.py reads this and derives BOTH the :root CSS variables and the @page rule from it — change these six values here only, never in the generated HTML/CSS directly.",
+  "page_width": "177.8mm",
+  "page_height": "254mm",
+  "margin_top": "14mm",
+  "margin_bottom": "16mm",
+  "margin_inner": "16mm",
+  "margin_outer": "16mm",
+  "bleed": "3mm"
+}

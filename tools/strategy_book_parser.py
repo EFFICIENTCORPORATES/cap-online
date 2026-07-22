@@ -16,6 +16,7 @@ Usage:
 
 import argparse
 import html
+import json
 import re
 import sys
 from pathlib import Path
@@ -37,11 +38,24 @@ SECTION_META = {
     "FRONT MATTER":      {"color": "#1F2933", "label": "Front Matter",       "slug": "front-matter",   "index": -2},
     "PERSONAL PAGES":    {"color": "#1F2933", "label": "Personal Pages",     "slug": "personal-pages", "index": 9},
     "THE COMPREHENSIVE": {"color": "#1F2933", "label": "Cover",              "slug": "cover",          "index": -3},
+    "THE AUTHOR'S JOURNEY": {"color": "#1F2933", "label": "The Author's Journey", "slug": "authors-journey", "index": 10},
 }
 
 GOLD   = "#C9A227"
 INK    = "#1F2933"
 GREY   = "#EEF1F4"
+
+# ── Page geometry ──────────────────────────────────────────────────────────────
+# Single source of truth: design/page-geometry.json. get_css() templates BOTH
+# the :root CSS variables and the literal @page rule from this same dict, so
+# there is exactly one place to ever change page size/margins.
+
+def load_geometry() -> dict:
+    here = Path(__file__).resolve().parent
+    geo_path = here.parent / 'books' / 'strategy-book' / 'design' / 'page-geometry.json'
+    with geo_path.open(encoding='utf-8') as f:
+        data = json.load(f)
+    return {k: v for k, v in data.items() if not k.startswith('_')}
 
 # Known component markers (all-caps, may contain space / ? / — / -)
 COMPONENT_MARKERS = {
@@ -611,13 +625,17 @@ class Renderer:
 
 # ── CSS ───────────────────────────────────────────────────────────────────────
 
-def get_css() -> str:
-    return """
+def get_css(geo: dict) -> str:
+    css = """
 /* ── Google Fonts ── */
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Kalam:wght@300;400;700&display=swap');
 
 /* ── Reset ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  box-sizing: border-box; margin: 0; padding: 0;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
 
 :root {
   --ink:       #1F2933;
@@ -626,49 +644,41 @@ def get_css() -> str:
   --body-f:    'Source Sans 3', sans-serif;
   --head-f:    'Archivo', sans-serif;
   --hand-f:    'Kalam', cursive;
-  --pg-w:      177.8mm;
-  --pg-h:      254mm;
-  --m-inner:   22mm;
-  --m-outer:   25mm;
-  --m-top:     20mm;
-  --m-bottom:  24mm;
+  --pg-w:      __PG_W__;
+  --pg-h:      __PG_H__;
+  --m-inner:   __M_INNER__;
+  --m-outer:   __M_OUTER__;
+  --m-top:     __M_TOP__;
+  --m-bottom:  __M_BOTTOM__;
 }
 
-/* ── Screen shell ── */
 body {
   font-family: var(--body-f);
   font-size: 10.5pt;
   line-height: 1.6;
   color: var(--ink);
-  background: #e8ecf0;
 }
 
-.page-shell {
-  position: relative;
-  width: var(--pg-w);
-  min-height: var(--pg-h);
-  margin: 12mm auto;
-  background: white;
-  box-shadow: 0 4px 40px rgba(0,0,0,0.18);
-  padding: var(--m-top) var(--m-outer) var(--m-bottom) var(--m-inner);
-  overflow: hidden;
-}
+/* ── Book content flow ──
+   One continuous flow, no manual page division. paged.js slices this into
+   as many physical pages as the content needs, at whatever size @page below
+   declares. Resize the page by editing design/page-geometry.json only —
+   nothing in this file or in the content HTML ever needs to change. */
+.book-content { }
 
-/* ── Running header ── */
-.r-header {
-  position: absolute;
-  top: 10mm;
-  left: var(--m-inner);
-  right: calc(var(--m-outer) + 10mm);
+/* ── Running header (paged.js repeats this on every page via @page @top-center) ── */
+.running-header {
+  position: running(bookHeader);
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-family: var(--head-f);
   font-size: 7pt;
   letter-spacing: 0.04em;
+  padding-bottom: 1.5mm;
+  border-bottom: 0.5pt solid #d5dae0;
 }
 .r-book-title {
-  font-variant: small-caps;
   color: #8a9bac;
   text-transform: lowercase;
   font-variant: small-caps;
@@ -676,20 +686,10 @@ body {
 .r-section {
   font-weight: 700;
 }
-.r-rule {
-  position: absolute;
-  bottom: -2mm;
-  left: 0; right: 0;
-  height: 0.5pt;
-  border: none;
-  border-top: 0.5pt solid currentColor;
-  opacity: 0.35;
-}
 
-/* ── Edge tab ── */
+/* ── Edge tab (paged.js repeats this on every right-hand page: @page :right / @right-middle) ── */
 .edge-tab {
-  position: absolute;
-  right: 0;
+  position: running(bookEdgeTab);
   width: 12mm;
   height: 22mm;
   border-radius: 4px 0 0 4px;
@@ -710,15 +710,23 @@ body {
   line-height: 1;
 }
 
-/* ── Journey strip footer ── */
-.j-strip {
-  position: absolute;
-  bottom: 10mm;
-  left: var(--m-inner);
-  right: calc(var(--m-outer) + 12mm);
-  display: flex;
+/* ── Journey strip footer (paged.js repeats this on every page via @page @bottom-center) ──
+   display/flex-direction/flex-wrap are !important here because paged.js has a known
+   quirk: content cloned into a @page margin box via content:element() can pick up an
+   inline style during that clone that silently forces block layout, which otherwise
+   beats a plain (non-!important) class rule and stacks the segments into a vertical
+   column instead of a row (confirmed visually via headless-Chrome screenshot,
+   2026-07-22 — see project_log.md). !important on the stylesheet rule is the only
+   thing that reliably wins against an inline style. */
+.journey-strip {
+  position: running(bookFooter);
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
   align-items: center;
   gap: 2.5pt;
+  padding-top: 1.5mm;
+  border-top: 0.5pt solid #d5dae0;
 }
 .j-seg {
   width: 14pt;
@@ -736,17 +744,14 @@ body {
 }
 .j-seg.active { color: white; }
 .j-seg.past   { opacity: 0.6; }
-.pg-num {
-  margin-left: auto;
-  font-family: var(--head-f);
-  font-size: 8pt;
-  font-weight: 700;
-}
 
-/* ── Section banner (bucket opener) ── */
+/* ── Section banner (bucket opener) ──
+   NOTE: contained within the normal content column, not full-bleed to the
+   trim edge — true edge-to-edge colour under @page-margin pagination needs
+   a dedicated zero-margin named page (see project_log for this open item). */
 .bucket-banner {
-  margin: calc(-1 * var(--m-top)) calc(-1 * var(--m-outer)) 7mm calc(-1 * var(--m-inner));
-  padding: 9mm var(--m-outer) 7mm var(--m-inner);
+  margin: 0 0 7mm 0;
+  padding: 9mm 6mm 7mm 6mm;
   display: flex;
   align-items: center;
   gap: 7mm;
@@ -1083,17 +1088,50 @@ ul.comp-list, ol.comp-list {
 .structure-only { background: #fff8e1; color: #a0522d; border: 1px dashed #f5c518; }
 .author-confirm { background: #ffe0e0; color: #c0392b; border: 1px dashed #e74c3c; }
 
-/* ── Print / paged.js ── */
+/* ── Overflow-proofing: never slice these across a page break ── */
+.comp, .strat-head, .bucket-banner, .diagram-ph, .content-table, table,
+blockquote.anon-bq, .tmpl-block {
+  break-inside: avoid;
+}
+h1, h2, h3, .section-h1, .section-subtitle, .subsection-heading, .strat-head {
+  break-after: avoid;
+}
+
 @media print {
-  body { background: white; }
-  .page-shell { box-shadow: none; margin: 0; width: 100%; }
   .placeholder { display: none; }
 }
+
+/* ── Page geometry + running elements (paged.js) ──
+   size/margin are literal values templated from design/page-geometry.json.
+   @page does not reliably resolve var(), so the generator substitutes the
+   same source numbers here AND into the :root block above — edit the JSON,
+   never these lines directly. */
 @page {
-  size: 177.8mm 254mm;
-  margin: 20mm 25mm 24mm 22mm;
+  size: __PG_W__ __PG_H__;
+  margin: __M_TOP__ __M_OUTER__ __M_BOTTOM__ __M_INNER__;
+
+  @top-center    { content: element(bookHeader); }
+  @bottom-center { content: element(bookFooter); width: 55mm; }
+  @bottom-right  {
+    content: counter(page);
+    font-family: var(--head-f);
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--ink);
+  }
+}
+
+@page :right {
+  @right-middle { content: element(bookEdgeTab); }
 }
 """
+    return (css
+            .replace('__PG_W__', geo['page_width'])
+            .replace('__PG_H__', geo['page_height'])
+            .replace('__M_TOP__', geo['margin_top'])
+            .replace('__M_BOTTOM__', geo['margin_bottom'])
+            .replace('__M_INNER__', geo['margin_inner'])
+            .replace('__M_OUTER__', geo['margin_outer']))
 
 
 # ── Page builder ──────────────────────────────────────────────────────────────
@@ -1108,45 +1146,47 @@ def build_journey_strip(slug: str, color: str) -> str:
             segs.append(f'<span class="j-seg past" style="background:{color};opacity:0.35;color:white">{lbl}</span>')
         else:
             segs.append(f'<span class="j-seg">{lbl}</span>')
-    segs.append(f'<span class="pg-num" style="color:{color}">—</span>')
-    return '<div class="j-strip">' + ''.join(segs) + '</div>'
+    return '<div class="journey-strip">' + ''.join(segs) + '</div>'
 
 
 def build_page(body_html: str, slug: str, color: str, label: str) -> str:
+    # Vertical "slot" for this section's edge tab, stepped down the fore-edge
+    # (B0 near the top, EMG near the bottom) — same value as before, just
+    # applied as an offset inside its own running margin box instead of a
+    # position tied to one giant per-file page div.
     tab_top = 40 + max(0, JOURNEY_IDX_MAP.get(slug, 0)) * 22
     journey = build_journey_strip(slug, color)
+    geo = load_geometry()
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(label)} — CA Inter Strategy Book</title>
-  <style>{get_css()}</style>
+  <style>{get_css(geo)}</style>
 </head>
 <body>
-<div class="page-shell">
 
-  <!-- Running header -->
-  <div class="r-header">
+  <!-- Running header: repeated on every physical page by paged.js (@page @top-center) -->
+  <div class="running-header">
     <span class="r-book-title">CA Inter Strategy Guide</span>
     <span class="r-section" style="color:{color}">{html.escape(label)}</span>
-    <hr class="r-rule" style="color:{color}">
   </div>
 
-  <!-- Edge tab -->
-  <div class="edge-tab" style="background:{color};top:{tab_top}mm">
+  <!-- Edge tab: repeated on every right-hand page by paged.js (@page :right / @right-middle) -->
+  <div class="edge-tab" style="background:{color};margin-top:{tab_top}mm">
     <span class="tab-label">{html.escape(label[:8])}</span>
   </div>
 
-  <!-- Section content -->
-  <div class="section-body">
+  <!-- Journey strip footer: repeated on every physical page by paged.js (@page @bottom-center) -->
+  {journey}
+
+  <!-- Section content: one continuous flow, paginated automatically -->
+  <div class="book-content">
 {body_html}
   </div>
 
-  <!-- Journey strip footer -->
-  {journey}
-
-</div>
+<script src="../vendor/paged.polyfill.js"></script>
 </body>
 </html>"""
 
