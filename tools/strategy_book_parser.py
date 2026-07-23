@@ -1225,7 +1225,7 @@ def build_page(body_html: str, slug: str, color: str, label: str) -> str:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{html.escape(label)} — CA Inter Strategy Book</title>
+  <title>{html.escape(label)}: CA Inter Strategy Book</title>
   <link rel="stylesheet" href="../vendor/gfonts-local.css">
   <style>{get_css(geo)}</style>
 </head>

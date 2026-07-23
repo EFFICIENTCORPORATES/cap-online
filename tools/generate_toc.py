@@ -94,7 +94,7 @@ def _display_label(slug: str, meta: dict) -> str:
     title-casing mangled 'CPT' into 'Cpt' and an apostrophe-s into 'S').
     """
     if meta["slug"].startswith("bucket-"):
-        return f'Bucket {meta["index"]} — {meta["label"]}'
+        return f'Bucket {meta["index"]}: {meta["label"]}'
     return meta["label"]
 
 

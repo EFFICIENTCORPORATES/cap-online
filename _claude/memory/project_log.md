@@ -4,6 +4,59 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-07-23 — Strategy book: em-dash pass across all student-visible content
+
+Pranav flagged that heavy em-dash use across the book reads as an AI-writing tell, and asked for a pass to humanize it. Scoped to actual book content only (Bucket 0–6, AI Section, Emergency, Personal Pages, front matter's real prose, Author's Journey) — explicitly not MASTER.md's internal working-draft/status notes, which aren't student-visible.
+
+**Real scope, checked before starting:** 529 em-dashes in MASTER.md, but only 417 were prose (the other 112 are `Strategy N — Title` / `BUCKET N — Name` structural heading separators the parser's regex depends on to detect section boundaries — confirmed via the renderer that these never even survive into the rendered HTML as literal dash characters, since the tokenizer splits them into separate number/title fields). Plus 25 in front-matter.html and 41 in authors-journey.html (both hand-authored, edited directly, never regenerated).
+
+**Went through every instance by hand, not a blind find-replace** — a mechanical substitution would break grammar constantly (some dashes need a comma, some a period splitting into two sentences, some a colon, some parentheses, depending on what the sentence is actually doing). Worked bucket by bucket: Routing → Bucket 0 → ... → Personal Pages, then both hand-authored files. A few of the period-splits (e.g. "Don't overthink the sequence. This default beats a blank page every time.") land closer to the book's intended "older brother, blunt" voice than the original single long sentence did anyway.
+
+Also fixed the `<title>` tag em-dash (shared across all generator output, one-line fix in `build_page()`) and the Table of Contents' own `Bucket N — Label` format in `generate_toc.py` (that one was my own code, no parser dependency, fixed for full consistency).
+
+**Left alone, deliberately:**
+- Heading separators (`Strategy N — Title`, `BUCKET N — Name`, `TRACK A — ...`) — structural convention, not a prose tell, and some are parser-regex-load-bearing.
+- Two table-placeholder dashes in the backward-planning calendars (`Exams start  —  —  01-05-2027`) — these mean "no value," same as a spreadsheet blank cell, not a written dash.
+- One literal quoted exam-answer example (`"Computation of Total Income — Mr. X"`) — showing exact text a student would write on their answer sheet; a real accounting convention, not prose style.
+
+**Verified, not assumed:** re-ran the full merge + ToC-resolve pipeline afterward — stable at 92 pages, same page numbers as before the edit (confirms the punctuation changes didn't meaningfully shift line-wrapping), and grepped the final merged book's body content for `—` to confirm only the three intentional exemption categories above remain.
+
+Also caught and fixed a newly-stale `component-index` health-check failure (MASTER.md's content changed enough to trip the checksum) by re-running `tools/generate_component_index.py`.
+
+---
+
+## 2026-07-23 — first_run/ pilot workspace built: schema, style JSON, 3 external-AI prompts
+
+Pranav reviewed `Claude_V2.md`'s paged.js/single-source-of-truth learnings (from the concurrent Strategy Book session) and asked for the same discipline in the Question Bank pipeline: font-size/spacing/margins controlled from exactly one JSON, never hardcoded per file. Distilled those learnings into new **CLAUDE.md section 7** (7 numbered lessons: JSON-driven geometry, `@page` not resolving `var()`, `break-inside:avoid` for page-break safety, local font vendoring, `position:running()` for repeating headers, merge-script gotchas, screenshot-based verification).
+
+Also reconsidered and simplified the pipeline: **Parsed MD is not a required gate** (tagging works fine from Raw MD directly; cleanup can happen once, per-question, at first-read time instead of upfront for whole sittings that might not even get used) and **sitting-level records should embed full question+answer content directly** rather than staying a lean pointer-only index (this reverses part of yesterday's `TAGGING-SCHEMA.md` decision — for good reason: the one careful AI read of messy OCR content should never be thrown away and redone later). Also: MTP_Jan2025.json bundling both Sets into one file is inconsistent with the one-Set-per-100-mark-file convention used everywhere since — needs splitting (not done this session, flagged).
+
+Further refined (after Pranav pushed back and asked for independent evaluation rather than agreement): moved from "embed HTML directly as JSON string values" to **"AI writes a standalone HTML file per sitting; a script extracts JSON from it mechanically."** Concrete reason this is better, not just different: embedding dense HTML (nested tables, quoted attributes, rupee signs) as JSON string values asks a model to get two escaping disciplines right at once, and smaller models are exactly the kind of thing that gets this wrong — a single bad escape corrupts the *entire* file. Plain HTML has no such compounding failure mode.
+
+**Built `first_run/` (new temporary top-level folder, documented in CLAUDE.md §3 and README.md, zero new health_check failures introduced):**
+- `source/` — copies of the 5-sitting pilot's 7 raw MD files + `Paper1-ExaminerComments-Jan2026.md`.
+- `schema/book-style.json` + `generate_style_css.py` + generated `book-style.css` — the single source of truth for every font-size/spacing/colour/margin value; every sitting HTML links to the one generated stylesheet rather than hardcoding anything.
+- `schema/HTML-SCHEMA.md` — the exact per-question HTML structure (`.qblock`, `.qmeta`, `.question`, `.answer-block`, `.topics`/`.topic-tag`, `.examiner-comment` with a mandatory `data-source` provenance attribute, `.author-comment` — always present, always empty, always hidden, a placeholder for Pranav's own future notes — and `.extraction-note`).
+- `prompts/GENERATE-SITTING-HTML-PROMPTS.md` — 3 full, self-contained prompts (MTP/RTP/PYQ) for an external AI to read the raw sources directly and write real HTML files into `first_run/output/` (never just display content) — PYQ's prompt explicitly handles the split (Jan 2026 has a real ICAI Examiner's Comments doc to match against; May 2026 doesn't and gets synthesized notes per `examiner-comments-writing-skill.md`, embedded in the prompt).
+
+**Pilot scope confirmed by Pranav:** MTP May 2026 Set 1 + Set 2, RTP May 2026, PYQ May 2026, and PYQ Jan 2026 (deliberately included out-of-batch specifically to test the real-comment-matching path) — 5 sittings, run through to a full chapter-book proof before scaling to the remaining ~30+.
+
+**Waiting on:** Pranav running the 3 prompts (5 times total) via his other AI model(s). Next session resumes with reviewing the 5 HTML outputs, then building the HTML→JSON extraction script against real data.
+
+---
+
+## 2026-07-23 — Question Bank: U0 migration completed (topic-index.json + 4 tagged sittings)
+
+Follow-up to the canonical topic/page-index JSON built earlier today (see entry below). Pranav confirmed: migrate everything to `U0` for the 7 single-unit chapters (Intro to AS, Framework, Applicability, Buyback, Amalgamation, Internal Reconstruction, Branch Accounting), reversing yesterday's `U1` choice.
+
+Migrated in one pass: `topic-index.json` (7 `unitCode` fields + their `"unit": 1`→`0` companions) and all 4 already-tagged sitting JSONs (`MTP_Jan2025.json`, `MTP_May2024_Set1.json`, `PYQ_Jan2026.json`, `RTP_May2026.json` — 28 `unitCode` occurrences total). Re-validated every file as parseable JSON afterward; grepped for stray `U1` references and confirmed zero remain for these 7 chapters anywhere in tagging data. Deliberately left `topic-index.json`'s `sourceFile` fields alone (e.g. `"M1_C1_U1_ Introduction....pdf"`) — those are real filenames on disk under `raw_icai_study_materials/`, not our tagging convention.
+
+Updated `TAGGING-SCHEMA.md` and `CLAUDE.md` §6 to mark the migration done (was previously flagged "not yet done, waiting on Pranav").
+
+**Everything is now consistent**: `U0` + hyphens, matching the master syllabus JSON, the new canonical topic/page index, `topic-index.json`, and all 4 tagged sittings. Clear to proceed with Phase 1 (parsing + tagging the remaining ~34 sittings) without a looming ID-scheme cleanup hanging over it.
+
+---
+
 ## 2026-07-23 — Strategy book: Table of Contents built, real page numbers verified working
 
 Pranav wanted a Python script to generate the Table of Contents as its own file, added to the merge order like any other section — good instinct, and exactly how it's built. The hard part was always going to be page numbers: nobody can know what page Bucket 3 starts on until paged.js has actually laid out the whole merged book.

@@ -1,9 +1,9 @@
 # MASTER Component Index
 ## CA-Inter-Strategy-Book-MASTER.md
 
-Generated: 2026-06-17  ·  `tools/generate_component_index.py`
+Generated: 2026-07-23  ·  `tools/generate_component_index.py`
 Source: `books/strategy-book/working/CA-Inter-Strategy-Book-MASTER.md`
-Lines: 2815  ·  MD5: `5805c527`
+Lines: 2814  ·  MD5: `7a18a213`
 
 ---
 
@@ -90,7 +90,7 @@ Lines: 2815  ·  MD5: `5805c527`
 | Ref | Title | IF | PT | HTD | RO |
 |-----|-------|-----|-----|-----|-----|
 | `ASG.3.1` | Build Layer 2 [ALL] | ✓ | — | — | — |
-| `ASG.3.2` | Revise, Then Test — That's How You Cover RTP/MTP/PYQ [ALL] | ✓ | — | ✓ | — |
+| `ASG.3.2` | Revise, Then Test: That's How You Cover RTP/MTP/PYQ [ALL] | ✓ | — | ✓ | — |
 | `ASG.3.3` | Practise Like the Exam, Not Like a Stopwatch [ALL] | — | ✓ | — | ✓ |
 | `ASG.3.4` | The Error Register Becomes Your Edge [ALL] | — | — | — | — |
 | `ASG.3.5` | MCQs, Properly [ALL] | — | — | — | — |
