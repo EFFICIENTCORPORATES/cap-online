@@ -4,6 +4,36 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-07-23 — Strategy book: Table of Contents built, real page numbers verified working
+
+Pranav wanted a Python script to generate the Table of Contents as its own file, added to the merge order like any other section — good instinct, and exactly how it's built. The hard part was always going to be page numbers: nobody can know what page Bucket 3 starts on until paged.js has actually laid out the whole merged book.
+
+**First approach (didn't work, confirmed properly rather than given up on early):** CSS `target-counter()` — the standards-based way to ask "what page did this element land on." Looked promising (paged.js's CSS parser accepted the syntax, `getComputedStyle` showed it rewritten into an internal counter reference) but never actually resolved to a rendered number, across several syntax variants tried. Confirmed via paged.js's own GitHub issues this is a known, still-open bug (#145, "TOC page number always zero") — not a mistake in usage. One variant (`url(#fragment)` as a literal target) crashed pagination entirely and is now flagged in the code to never retry.
+
+**What actually works:** paged.js stamps a real `data-page-number` attribute on every physical page container it creates. Built `tools/resolve_toc_pages.py` — drives its own headless Chrome instance over the DevTools Protocol (`websocket-client`, pip-installed), polls for genuine real-time pagination stability (reusing the section-15 lesson from yesterday — a fixed timer is not a reliable completion signal for a document this size), looks up which page each section's anchor lands on, and bakes the real number into `toc.html` as plain static text. Two-pass build: merge once (blank numbers) → resolve → merge again (correct numbers). `--remerge` flag chains the last two steps automatically.
+
+**Verified, not assumed:** ran the full 3-command pipeline, then independently re-checked all 12 baked-in numbers against a fresh real-time pagination pass of the final book — every one matched exactly (routing→11 ... authors-journey→89, out of 92 total pages).
+
+**Supporting changes:** `strategy_book_parser.py`'s `_h1()` now writes `id="{slug}"` on every section heading (bucket banners and generic H1s) — these are what the ToC and resolver both anchor to; `tools/generate_toc.py` imports `BOOK_ORDER` directly from the merge script rather than keeping a second list (order changes propagate automatically) and reuses `SECTION_META`'s already-correct labels rather than re-deriving display names. Front-matter.html and authors-journey.html both needed small hand-patches (anchor id, and — for front-matter specifically, since it supplies the merge's shared stylesheet — the new `.toc-entry`/`.toc-page` CSS) added surgically, never through the generator, per the standing hazard logged yesterday.
+
+Full investigation and the working pipeline documented in Claude_V2.md section 16. Ran `health_check.py`/`file_index.py` — same 16 pre-existing failures, nothing new.
+
+---
+
+## 2026-07-23 — Canonical topic/page-number JSON built, U0/U1 decision reversed
+
+Pranav shared `books/concept-book/syllabus-engine/data/CA INTER ADV ACCOUNTS - For Adarsh.csv` (400 topics, all 36 chapters incl. AS 1 and AS 27, real ICAI page numbers) and asked whether to convert it to JSON. Validated first: 0 duplicate topic IDs, 0 blank fields, spot-checked AS 10 against existing hand-built data — matched exactly. Test-converted before committing to anything.
+
+Built `books/concept-book/syllabus-engine/data/1-ca-inter-adv-accounts-topic-page-index.json` — the new canonical topic-number + page-number source. Cross-joined 1:1 against the locked master syllabus JSON (file 0) by `unique_chapter_id` (zero unmatched either direction), pulling in `teaching_sequence`/`chapter_name_short`/`marks_distinct_attempt_count`; added `standard`/`standard_title` (parsed from unit name) and `is_single_unit_chapter`.
+
+**Decision reversed:** the CSV (and file 0) both use `U0` for the 7 single-unit chapters; Pranav confirmed switching from the `U1` convention chosen in yesterday's `TAGGING-SCHEMA.md` to `U0` ("no further units" reads more sensibly), and to keep hyphens (not the CSV's underscores) for IDs. `topic-index.json` and the 4 already-tagged sitting JSONs still use `U1` — **not yet migrated**, flagged as pending.
+
+Also reviewed 3 more AS10 sample files Pranav added (`AS10_Question_Bank.json`, `AS10_Question_Reference.html`, `MTP_Jan2026.json`) — confirmed the two-layer book architecture (lean per-sitting tagging vs. derived per-chapter book JSON with embedded content), and that `MTP_Jan2026.json` is new untagged content needing to be folded into Layer 1.
+
+Updated `TAGGING-SCHEMA.md` and `CLAUDE.md` §6 with all of this.
+
+---
+
 ## 2026-07-23 — authors-journey.html: caught a second content-loss mistake, rewrote in third person
 
 Pranav asked to check whether `authors-journey.html` was complete. Reading it showed the plain `[STRUCTURE ONLY]` placeholder — but per `project_log.md`'s own entry from 2026-07-22 ("Author's Journey + front-matter Category B sections complete"), the parallel session had already fully written this section (5-phase first-person narrative, real facts from the author profile, 4 quotes, photo placeholders). **My own blanket regeneration loop the previous session (run twice, for the book-order change and the font fix) silently overwrote it back to placeholder** — I'd protected `front-matter.html` specifically because I already knew it carried hand-authored content, but didn't realize this file did too, and didn't check before regenerating.

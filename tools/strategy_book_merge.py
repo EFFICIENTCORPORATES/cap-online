@@ -129,6 +129,7 @@ BOOK_ORDER = (
     # left out of the merged book, not forgotten. See validate_order()'s
     # orphan check, which is why merging this order requires --force.
     "front-matter",
+    "toc",
     "routing",
     "bucket-0",
     "bucket-1",

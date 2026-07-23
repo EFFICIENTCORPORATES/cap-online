@@ -653,4 +653,38 @@ This cost a lot of debugging time and is worth getting right in any future sessi
 
 ---
 
+## 16. Table of Contents — target-counter() is broken in this paged.js version; a verified two-pass rebuild is the real fix (2026-07-23)
+
+### 16.1 The right instinct, the wrong CSS feature
+
+Pranav asked for a Python-generated ToC file, added to `BOOK_ORDER` like any other section. That instinct was correct and is exactly how it's built — but the actual hard problem is page numbers, and they can NEVER be computed in Python: nobody knows what page Bucket 3 starts on until paged.js has laid out the entire merged book (font metrics, line-wrapping, everything before it all matter).
+
+The standards-based answer looked like CSS `target-counter()` — a real CSS Paged Media feature specifically for this ("what page did element X land on"). It was implemented first (`content: target-counter(attr(href url), page)`), and it looked like it worked: paged.js's CSS parser accepted the syntax without error, and `getComputedStyle` showed it had been rewritten into an internal `counter(target-counter-<uuid>)` reference. But the actual rendered value was always empty — never resolved to a number. Tried multiple syntax variants (`attr(href)` without the `url` type, `url(#fragment)` literal form — this one crashed paged.js's pagination entirely and should never be used again in this codebase — single-colon `:after` vs `::after`) — none produced a real number. Confirmed via the paged.js GitHub issue tracker that this is a known, still-open bug (issue #145, "TOC page number always zero"; related: #91, #135, #256) — not a mistake in how it was used here.
+
+**Do not re-attempt `target-counter()` in this codebase without first checking whether that upstream issue has been closed in a newer paged.js version than the one vendored here.**
+
+### 16.2 What actually works: `data-page-number`, read via a two-pass build
+
+Verified directly: every `.pagedjs_page` container paged.js creates carries a real, reliable `data-page-number` attribute. So instead of asking CSS to resolve a cross-reference, a script asks the browser directly, after the fact: "which `.pagedjs_page` contains the element with id `bucket-3`, and what's its `data-page-number`?" This is the same two-pass principle LaTeX/InDesign use for any cross-reference (build once, learn positions, bake them in, build again) — just implemented against a live headless browser instead of a typesetting log file.
+
+**Pipeline, in order:**
+```
+python tools/generate_toc.py               # ToC with blank page-number spans
+python tools/strategy_book_merge.py --force # first merge (numbers not yet correct)
+python tools/resolve_toc_pages.py --remerge # resolves real numbers + re-merges automatically
+```
+
+`tools/resolve_toc_pages.py` manages its own headless Chrome (launches it with `--remote-debugging-port` + `--remote-allow-origins=*`, drives it over the DevTools Protocol using the `websocket-client` package — installed via pip this session, same as the earlier CDP verification work in section 15), polls `.pagedjs_page` count for **real wall-clock stability** (not a fixed `--virtual-time-budget` guess — section 15's lesson applies here too and was reused directly), reads the real page number for every ToC anchor, and patches `toc.html`'s empty `<span class="toc-page" data-target-id="...">` spans with the actual number as plain static text.
+
+**Verified end-to-end, not assumed:** ran the full pipeline, cross-checked all 12 baked-in numbers against a fresh, independent real-time pagination pass of the final re-merged book afterward — every single one matched exactly (routing→11, bucket-0→13, ... authors-journey→89, out of 92 total pages). Re-merging after the numbers are baked in does very slightly change `toc.html`'s own content (digit width), which could in principle shift subsequent page numbers by a tiny amount — this cross-check is what confirms it didn't, for this book, as-is. If the book grows enough that this ever becomes a real drift, the fix is running `resolve_toc_pages.py` once more (page numbers stabilize after at most one extra pass, same as any fixed-point cross-reference system).
+
+### 16.3 Supporting pieces this required
+
+- `strategy_book_parser.py`'s `_h1()` now writes `id="{slug}"` on every section's opening heading (the `.bucket-banner` div for buckets, `.section-h1` otherwise) — the anchors both the ToC and `resolve_toc_pages.py` depend on. These never need merge-time id-rewriting (unlike the strategy-heading `id="sN"` ids) since slugs are already globally unique.
+- `tools/generate_toc.py` imports `BOOK_ORDER` directly from `strategy_book_merge.py` rather than maintaining a second ordered list — if the book's order changes, the ToC updates automatically next time it's regenerated. Display labels come from `SECTION_META`'s existing human-written `label` field (bucket entries get `"Bucket {index} — {label}"`), not a naive `.title()` of raw MASTER.md heading text — that exact bug already mangled authors-journey.html's label once this session (section 14.5's fix); reusing the already-correct field sidesteps it entirely rather than re-deriving it.
+- "front-matter" and "cover" are deliberately excluded from the ToC's own listed rows — real books don't list their own title/copyright pages in their contents list, and front-matter.html currently has no single top-level heading to anchor to anyway (its hand-authored Title/Copyright pages replaced the generic `<h1>FRONT MATTER</h1>` during the section-14.2 restoration).
+- Both `front-matter.html` and `authors-journey.html` needed the same anchor-id/CSS additions hand-patched in separately (never regenerated via the parser, per the standing section-14.2 hazard) — `front-matter.html` got the `.toc-entry`/`.toc-page` CSS added by hand since it's first in `BOOK_ORDER` and supplies the shared stylesheet the merge actually uses; `authors-journey.html` got `id="authors-journey"` added to its hand-written `<h1>`.
+
+---
+
 *This file synthesizes the full strategy-book context from: books/strategy-book/README.md, MASTER.md (2816 lines), MASTER-component-index.md, design-spec.md, summary-strategy-book-memory.md, CA-Inter-Book-Full-Structure.md, and the HTML build templates. Use this as the starting context for any strategy-book work session.*

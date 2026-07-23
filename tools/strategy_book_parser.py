@@ -385,18 +385,24 @@ class Renderer:
     # ── H1 banner ──
 
     def _h1(self, text: str) -> str:
+        # id={self.slug} anchors this section for the Table of Contents:
+        # tools/resolve_toc_pages.py looks up which physical page the
+        # element with this id lands inside (after paged.js has paginated
+        # the whole merged book) and bakes that real page number into
+        # toc.html -- never hardcode a page number here, it can't be known
+        # until the whole book has actually been laid out.
         m = re.match(r'^BUCKET\s+(\d+)\s+[—\-]\s+(.+)', text)
         if m:
             num, name = m.group(1), m.group(2)
             return (
-                f'<div class="bucket-banner" style="background:{self.color}">'
+                f'<div class="bucket-banner" id="{self.slug}" style="background:{self.color}">'
                 f'<span class="bucket-num">{num}</span>'
                 f'<div class="bucket-nameblock">'
                 f'<span class="bucket-label">BUCKET {num}</span>'
                 f'<span class="bucket-name">{html.escape(name)}</span>'
                 f'</div></div>'
             )
-        return f'<h1 class="section-h1">{inline_md(text)}</h1>'
+        return f'<h1 class="section-h1" id="{self.slug}">{inline_md(text)}</h1>'
 
     # ── Strategy heading ──
 
@@ -1098,6 +1104,52 @@ ul.comp-list, ol.comp-list {
 .placeholder  { font-size: 8.5pt; font-style: italic; padding: 1pt 4pt; border-radius: 2pt; }
 .structure-only { background: #fff8e1; color: #a0522d; border: 1px dashed #f5c518; }
 .author-confirm { background: #ffe0e0; color: #c0392b; border: 1px dashed #e74c3c; }
+
+/* ── Table of Contents (tools/generate_toc.py + tools/resolve_toc_pages.py) ──
+   Page numbers are NEVER computed in Python at generation time -- they
+   can't be known until paged.js has actually laid out the whole merged
+   book (font metrics, line wrapping, how much content precedes a section
+   all affect what page it lands on).
+   CSS target-counter() looked like the standards-based answer here, but
+   is confirmed broken in this vendored paged.js version -- it parses
+   without error and allocates an internal counter, but never actually
+   resolves to a rendered value (matches long-standing open upstream
+   issues, e.g. pagedjs/pagedjs#145 "TOC page number always zero"; see
+   Claude_V2.md for the full investigation). The reliable mechanism used
+   instead: paged.js DOES correctly stamp a real `data-page-number`
+   attribute on every `.pagedjs_page` container it creates. A separate
+   script drives headless Chrome after the first merge, looks up which
+   `.pagedjs_page` each section's anchor id landed inside, reads that
+   attribute, and bakes the real number back into toc.html as plain text
+   before the final merge -- a two-pass build, same principle LaTeX/InDesign
+   use for cross-references, just implemented with a live browser instead
+   of a fixed-point iteration over a typesetting log. */
+.toc-list { margin-top: 4mm; }
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 2mm;
+  margin: 0 0 4mm;
+  break-inside: avoid;
+}
+.toc-entry a {
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--head-f);
+  font-weight: 700;
+  font-size: 10.5pt;
+}
+.toc-leader {
+  flex: 1;
+  border-bottom: 1px dotted #b5c0ca;
+  margin-bottom: 1.5pt;
+}
+.toc-page {
+  font-family: var(--head-f);
+  font-weight: 700;
+  font-size: 10.5pt;
+  color: var(--ink);
+}
 
 /* ── Overflow-proofing: never slice these across a page break ── */
 .comp, .strat-head, .bucket-banner, .diagram-ph, .content-table, table,
