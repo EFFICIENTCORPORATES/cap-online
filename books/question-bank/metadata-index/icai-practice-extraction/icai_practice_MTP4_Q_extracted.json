@@ -1,0 +1,211 @@
+{
+  "sourceFile_Q": "CAInter-AdvAcc-MTP-ICAI-Practice-Q.pdf",
+  "modelTestPaper": 4,
+  "physicalPageRange": "40-51",
+  "questions": [
+    {
+      "qNoInPaper": "1(a)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 40,
+      "caseScenario": "Super Ltd - manufacturing co. Equity Shares ₹17,00,000; Revenue Reserve ₹23,50,000; Securities Premium ₹2,50,000; P&L A/c ₹2,00,000; Infrastructure Development Reserve ₹1,50,000; 9% Debentures ₹38,00,000; Unsecured Loan ₹8,50,000; PPE ₹58,50,000; Current Assets ₹34,50,000. Plans to buy back 35,000 equity shares @₹30/share on 1.4.2024.",
+      "questionTextHtml": "<p>As per The Companies Act, 2013 under Section 68(2) the buy-back of shares in any financial year must not exceed:</p><p>(i) 20% of its total paid-up capital and free reserves<br>(ii) 25% of its total paid-up capital and free reserves<br>(iii) 25% of its total paid-up capital<br>(iv) 20% of its total paid-up capital</p>"
+    },
+    {
+      "qNoInPaper": "1(b)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 41,
+      "caseScenario": "Super Ltd - same as 1(a)",
+      "questionTextHtml": "<p>How many shares can Super Ltd. buy back according to the Shares Outstanding Test?</p><p>(i) 35,000 shares<br>(ii) 42,500 shares<br>(iii) 37,500 shares<br>(iv) 54,375 shares</p>"
+    },
+    {
+      "qNoInPaper": "1(c)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 41,
+      "caseScenario": "Super Ltd - same as 1(a)",
+      "questionTextHtml": "<p>What is the maximum number of shares that can be bought back according to the Resources Test?</p><p>(i) 35,000 shares<br>(ii) 42,500 shares<br>(iii) 37,500 shares<br>(iv) 54,375 shares</p>"
+    },
+    {
+      "qNoInPaper": "1(d)",
+      "type": "MCQ-Scenario",
+      "printedMarks": null,
+      "pageQ": 41,
+      "caseScenario": "Super Ltd - same as 1(a)",
+      "questionTextHtml": "<p>According to the Debt Equity Ratio Test, what is the maximum number of shares that can be bought back?</p><p>(i) 35,000 shares<br>(ii) 42,500 shares<br>(iii) 37,500 shares<br>(iv) 54,375 shares</p>"
+    },
+    {
+      "qNoInPaper": "2(a)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 41,
+      "caseScenario": "Venus Limited - received land free from govt for factory dev, valued ₹75 lakhs, nominal value ₹10 lakhs. Received govt grant ₹30 lakhs (25% of total investment needed). Received ₹15 lakhs conditional on purchasing machinery. No repayment expectation.",
+      "questionTextHtml": "<p>The land received from Government, free of cost should be presented at:</p><p>(i) ₹75 Lakhs<br>(ii) ₹30 Lakhs<br>(iii) ₹10 Lakhs<br>(iv) ₹45 Lakhs</p>",
+      "notes": "AS12 government grants."
+    },
+    {
+      "qNoInPaper": "2(b)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 41,
+      "caseScenario": "Venus Limited - same as 2(a)",
+      "questionTextHtml": "<p>As per AS 12, how the Government Grant of ₹30 Lakhs should be presented:</p><p>(i) It should be recognised in the profit and loss statement as per the related cost.<br>(ii) It will be treated as capital reserve.<br>(iii) It will be treated as deferred income.<br>(iv) It will not be recognised in the financial statements.</p>"
+    },
+    {
+      "qNoInPaper": "2(c)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 42,
+      "caseScenario": "Venus Limited - same as 2(a)",
+      "questionTextHtml": "<p>As per AS 12, how the Government Grant of ₹15 Lakhs with a condition to purchase machinery may be presented as:</p><p>(i) Capital Reserve<br>(ii) Shareholders Fund<br>(iii) Deferred Income<br>(iv) Income in statement of profit and loss as received.</p>"
+    },
+    {
+      "qNoInPaper": "2(d)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 42,
+      "caseScenario": "Venus Limited - same as 2(a)",
+      "questionTextHtml": "<p>Which of the above grants are required to be recognised in the statement of profit and loss on a systematic and rational basis over the useful life of the asset:</p><p>(i) Land received as Grant<br>(ii) Government Grant of ₹30 Lakhs<br>(iii) Government Grant of ₹15 Lakhs with a condition to purchase machinery<br>(iv) None of the above</p>"
+    },
+    {
+      "qNoInPaper": "3(a)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 42,
+      "caseScenario": "Axis Limited - manufacturing co. Purchased machinery costing ₹10 Lakhs April 2023, paid ₹4 lakhs upfront + ₹6,00,000 deferred (6 monthly instalments of ₹1,05,000). Sold land (PPE) for ₹25,00,000, paid ₹1,00,000 income tax as LTCG. Received income tax refund with interest.",
+      "questionTextHtml": "<p>As per the requirements of AS 3, 'Cash Flow Statements', how the amount for purchase of machinery should be presented:</p><p>(i) ₹10 lakhs as 'Cash flows from Investing Activities' and ₹30,000 will simply be booked in profit and loss with no presentation in Cash Flow Statement.<br>(ii) ₹10.30 lakhs as 'Cash flows from Investing Activities' as entire amount is spent on purchase of machinery.<br>(iii) ₹10 lakhs as 'Cash flows from Investing Activities' and ₹30,000 as 'Cash flows from Financing Activities'.<br>(iv) ₹10.30 lakhs as 'Cash flows from Financing Activities' as the machinery has been purchased on finance.</p>",
+      "notes": "AS3 cash flow statements."
+    },
+    {
+      "qNoInPaper": "3(b)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 42,
+      "caseScenario": "Axis Limited - same as 3(a)",
+      "questionTextHtml": "<p>At what amount, the machinery should be recognised in the financial statements:</p><p>(i) ₹4,00,000<br>(ii) ₹10,30,000<br>(iii) ₹6,00,000<br>(iv) ₹10,00,000</p>"
+    },
+    {
+      "qNoInPaper": "3(c)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 43,
+      "caseScenario": "Axis Limited - same as 3(a)",
+      "questionTextHtml": "<p>How should the income tax paid on sale of land should be disclosed in the Cash Flows Statement:</p><p>(i) Cash flows from Operating Activities<br>(ii) Cash flows from Investing Activities<br>(iii) Cash flows from Financing Activities<br>(iv) No disclosure in Cash Flow Statement</p>"
+    },
+    {
+      "qNoInPaper": "3(d)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 43,
+      "caseScenario": "Axis Limited - same as 3(a)",
+      "questionTextHtml": "<p>How should the interest on income tax refunds should be disclosed in the Cash Flows Statement:</p><p>(i) Cash flows from Operating Activities<br>(ii) Cash flows from Investing Activities<br>(iii) Cash flows from Financing Activities<br>(iv) No disclosure in Cash Flow Statement</p>"
+    },
+    {
+      "qNoInPaper": "4",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 43,
+      "questionTextHtml": "<p>Gyan Ltd. borrowed ₹10 crore for construction of a plant at the rate of 10% per annum (interest paid annually ₹1 crore). The construction was being carried on and out of the borrowings, ₹4 crore was temporarily placed in a fixed deposit at the rate of 6% per annum (interest earned ₹24 lakh). At the year end, how much cost of borrowing Gyan Limited will capitalise?</p><p>(a) Interest paid on ₹10 crore i.e. ₹1 crore<br>(b) Interest paid on ₹6 crore as only this amount was utilized i.e. ₹60 Lakh.<br>(c) Interest paid less income on temporary investment i.e. ₹76 lakh<br>(d) Nothing will be capitalised.</p>",
+      "notes": "AS16 borrowing costs. Part of a standalone-MCQ block (Q4-Q6)."
+    },
+    {
+      "qNoInPaper": "5",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 43,
+      "questionTextHtml": "<p>Cost of current investment acquired was ₹1,00,000 but the fair value was ₹80,000. The Investment was recorded at ₹80,000. Now the fair value of Investment is ₹1,20,000. At what value should it be recorded and how much gain will be credited to profit and loss account.</p><p>(a) No change is required and it will continue at ₹80,000<br>(b) Current investment will be recorded at ₹1,00,000 and gain of ₹20,000 will be credited to profit and loss account.<br>(c) Current investment will be recorded at ₹1,20,000 and gain of ₹40,000 will be credited to profit and loss account.<br>(d) Current investment will be recorded at ₹1,20,000 but no gain will be credited to profit and loss account.</p>",
+      "notes": "AS13 investments - cost floor rule (current investments never carried above cost)."
+    },
+    {
+      "qNoInPaper": "6",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 44,
+      "questionTextHtml": "<p>In determining the cost of inventories, it is appropriate to exclude certain costs and recognise them as expenses in the period in which they are incurred. Which of the following is not an example of such costs:</p><p>(a) Abnormal amounts of wasted materials, labour, or other production costs<br>(b) Storage costs, unless the production process requires such storage<br>(c) Raw Material cost<br>(d) Selling and distribution costs</p>",
+      "notes": "AS2 inventories."
+    },
+    {
+      "qNoInPaper": "1(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 7,
+      "pageQ": 44,
+      "questionTextHtml": "<p>On 15th June, 2024, Y limited wants to re-classify its investments in accordance with AS 13 (revised). Decide and state the amount of transfer, based on the following information: (i) A portion of long term investments purchased on 1st March, 2023 are to be re-classified as current investments. Original cost ₹14 lakhs, written down by ₹2 lakhs ('other than temporary' decline). Market value on 15th June, 2024 was ₹11 lakhs. (ii) Another portion of long term investments purchased on 15th January, 2023 to be re-classified as current investments. Original cost ₹7 lakhs, written down to ₹5 lakhs. Fair value on 15th June, 2024 was ₹4.5 lakhs. (iii) A portion of current investments purchased on 15th March, 2024 for ₹7 lakhs to be re-classified as long term investments. Market value on 31st March, 2024 was ₹6 lakhs and fair value on 15th June 2024 was ₹8.5 lakhs. (iv) Another portion of current investments purchased on 7th December, 2023 for ₹4 lakhs to be re-classified as long term investments. Market value on 31st March, 2024 = ₹3.5 lakhs; on 15th June, 2024 = ₹3.8 lakhs.</p>",
+      "notes": "This is a 4-part expanded version of the same AS13 reclassification question seen in MTP2 Q1(c) (which only had parts (1)-(2)); this MTP4 version has all 4 parts. Flag for OP/PP duplicate-detection in Phase 4 - likely OP given fuller content, or verify which appeared first chronologically."
+    },
+    {
+      "qNoInPaper": "1(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 7,
+      "pageQ": 44,
+      "questionTextHtml": "<p>The financial statements of PQ Ltd. for the year 2023-24 approved by the Board of Directors on 15th July, 2024. The following information was provided: (i) A suit against the company's advertisement was filed by a party on 20th April, 2024, claiming damages of ₹25 lakhs. (ii) The terms and conditions for acquisition of business of another company have been decided by March, 2024. But the financial resources were arranged in April, 2024 and amount invested was ₹50 lakhs. (iii) Theft of cash of ₹5 lakhs by the cashier on 31st March, 2024 but was detected on 16th July, 2024. (iv) Company sent a proposal to sell an immovable property for ₹40 lakhs in March, 2024. The book value of the property was ₹30 lakhs on 31 March, 2024. However, the deed was registered on 15th April, 2024. (v) A major fire has damaged the assets in a factory on 5th April, 2024. However, the assets are fully insured. With reference to AS-4 'Contingencies and events occurring after the balance sheet date', state whether the above mentioned events will be treated as contingencies, adjusting events or non-adjusting events occurring after the balance sheet date.</p>"
+    },
+    {
+      "qNoInPaper": "2 [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 14,
+      "pageQ": 45,
+      "questionTextHtml": "<p>From the following particulars furnished by Prashant Ltd., prepare the Balance Sheet as at 31st March, 2024 as required by Schedule III of the Companies Act, 2013: Debit - Calls-in-arrears ₹5,000; Land ₹5,50,000; Building ₹4,85,000; Plant & machinery ₹5,60,000; Inventories ₹3,15,000; Trade receivables ₹2,95,000; Short-term loans & advances ₹58,500; Cash in hand ₹37,300; Cash at bank ₹2,85,000 / Credit - Equity share capital (face value ₹10 each) ₹15,00,000; General reserve ₹2,70,000; Loan from State Financial Corporation ₹2,10,000; Provision for taxation ₹72,000; Profit & loss account ₹1,06,800; Unsecured loans ₹1,65,000; Trade payables ₹2,67,000; Total ₹25,90,800 both sides. Additional info: (1) 10,000 equity shares issued for consideration other than cash. (2) Trade receivables of ₹55,000 due for more than 6 months. (3) Cost of building and plant & machinery is ₹5,50,000 and ₹6,25,000 respectively. Loan from State Financial Corporation secured by hypothecation of plant & machinery; balance ₹2,10,000 includes ₹10,000 interest accrued but not due. Balance at Bank includes ₹15,000 with Aakash Bank Ltd., a non-scheduled bank.</p>"
+    },
+    {
+      "qNoInPaper": "3(a)(i) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 10,
+      "pageQ": 46,
+      "questionTextHtml": "<p>Information for PQR Ltd. for the year ended 31st March, 2024: (1) Gross Profit Ratio 25%, amounting to ₹3,75,000. (2) Company sold goods for cash only. (3) Opening inventory lesser than closing inventory by ₹25,000. (4) Wages paid ₹5,55,000. (5) Office expenses paid ₹35,000. (6) Selling expenses paid ₹15,000. (7) Dividend paid ₹40,000. (8) Bank Loan repaid ₹2,05,000 (incl. interest ₹5,000). (9) Trade Payables 31.3.2023 ₹50,000, 31.3.2024 ₹35,000. (10) Amount paid to Trade payables ₹6,10,000. (11) Income Tax paid ₹55,000; Provision for taxation as on 31.3.2024 ₹30,000. (12) Investments of ₹8,20,000 sold at profit of ₹20,000. (13) Depreciation on furniture ₹40,000. (14) Depreciation on other PPE ₹20,000. (15) Plant and Machinery purchased 15th November, 2023 for ₹3,50,000. (16) On 31st March, 2024, ₹2,00,000 7% Debentures issued at face value in exchange for a plant. (17) Cash and Cash equivalents on 31st March, 2023 ₹2,25,000. Prepare cash flow statement for the year ended 31st March, 2024, using direct method.</p>",
+      "notes": "Combined (i)+(ii) marks printed as '(10 Marks)' after part (ii) - split as best estimate; verify against PDF."
+    },
+    {
+      "qNoInPaper": "3(a)(ii) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": null,
+      "pageQ": 46,
+      "questionTextHtml": "<p>Calculate cash flow from operating activities, using indirect method (same PQR Ltd. data as 3(a)(i)).</p>"
+    },
+    {
+      "qNoInPaper": "3(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 47,
+      "questionTextHtml": "<p>Wow Ltd. agreed to takeover Wonder Ltd. on 1st April, 2024. Terms: (i) Wow Ltd. issued 56,000 equity shares of ₹100 each at a premium of ₹15 per share to equity shareholders of Wonder Ltd. (ii) Cash payment of ₹39,000 made to equity shareholders of Wonder Ltd. (iii) 24,000 fully paid preference shares of ₹50 each issued at par to discharge preference shareholders of Wonder Ltd. (iv) 8% Debentures of Wonder Ltd. (₹78,000) converted into equivalent value of 9% debentures in Wow Ltd. (v) Actual cost of liquidation of Wonder Ltd. was ₹23,000, reimbursed by Wow Ltd. to the extent of ₹15,000. Required: (1) Calculate the amount of purchase consideration as per AS 14. (2) Pass Journal Entry relating to discharge of purchase consideration in books of Wow Ltd.</p>"
+    },
+    {
+      "qNoInPaper": "4 [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 14,
+      "pageQ": 47,
+      "questionTextHtml": "<p>Summarized Balance Sheets of VT Ltd. and MG Ltd. as on 31st March, 2024 (VT Ltd / MG Ltd): Equity Shares of ₹10 each ₹12,00,000 / ₹6,00,000; 10% Preference Shares of ₹100 each ₹4,00,000 / ₹2,00,000; Reserve and Surplus ₹6,00,000 / ₹4,00,000; 12% Debentures ₹4,00,000 / ₹3,00,000; Trade Payables ₹5,00,000 / ₹3,00,000; Total ₹31,00,000 / ₹18,00,000 / PPE ₹14,00,000 / ₹5,00,000; Investment ₹1,60,000 / ₹1,60,000; Inventory ₹4,80,000 / ₹6,40,000; Trade Receivables ₹8,40,000 / ₹4,20,000; Cash at Bank ₹2,20,000 / ₹80,000. Trade receivables/payables detail (VT/MG): Debtors ₹7,20,000/₹3,80,000, Bills Receivable ₹1,20,000/₹40,000; Sundry Creditors ₹4,40,000/₹2,50,000, Bills Payable ₹60,000/₹50,000. PPE of both revalued at 15% above book value. Inventory and Debtors taken over at 5% lesser than book value. Both companies to pay 10% equity dividend, preference dividend already paid. VT Ltd. absorbs MG Ltd.: (i) VT Ltd. issues 16 Equity Shares of ₹10 each at par against 12 Shares of MG Ltd. (ii) 10% Preference Shareholders of MG Ltd. paid at 10% discount by issue of 10% Preference Shares of ₹100 each at par in VT Ltd. (iii) 12% Debenture holders of MG Ltd. paid at 8% premium by 12% Debentures in VT Ltd. issued at a discount of 10%. (iv) ₹60,000 paid by VT Ltd. to MG Ltd. for Liquidation expenses. (v) Sundry Debtors of MG Ltd. includes ₹20,000 due from VT Ltd. Required: (1) Journal entries in the books of VT Ltd. (2) Statement of consideration payable by VT Ltd.</p>"
+    },
+    {
+      "qNoInPaper": "5(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 14,
+      "pageQ": 48,
+      "questionTextHtml": "<p>Kedar Ltd. and its subsidiary Vijay Ltd. at 31st March, 2024: Reserves and P&L A/c of Vijay Ltd. stood at ₹62,500 and ₹37,500 respectively on date of acquisition of 80% shares by Kedar Ltd. on 1st April, 2023. Machinery (Book value ₹2,50,000) and Furniture (Book value ₹50,000) of Vijay Ltd. revalued at ₹3,75,000 and ₹37,500 respectively on 1st April, 2023 for purpose of fixing share price (depreciation rates: Machinery 10%, Furniture 15%). Kedar Ltd / Vijay Ltd figures as on 31st March, 2024: Share Capital (₹100 each) ₹15,00,000 / ₹2,50,000; Reserves ₹5,00,000 / ₹1,87,500; Profit and Loss Account ₹2,50,000 / ₹62,500; Trade Payables ₹3,75,000 / ₹1,42,500; Machinery ₹7,50,000 / ₹2,25,000; Furniture ₹3,75,000 / ₹42,500; Other non-current assets ₹11,00,000 / ₹3,75,000; Non-current Investments - 2,000 shares in Vijay Ltd. at ₹4,00,000 / -. Prepare consolidated balance sheet as at 31st March, 2024.</p>",
+      "notes": "OCR shows '500 oot in Vijay Ltd.: 2,000 shares' - garbled, likely 'Non-current Investments: 2,000 shares in Vijay Ltd. at ₹4,00,000' - reconstructed, verify against PDF."
+    },
+    {
+      "qNoInPaper": "5(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 48,
+      "questionTextHtml": "<p>Distinguish between Amalgamation, Absorption and External Reconstruction of Company.</p><p>OR</p><p>Summarised Balance Sheet of Cloth Trader as on 31.03.2023: Proprietor's Capital ₹3,00,000; Profit & Loss Account ₹1,25,000; 10% Loan Account ₹2,10,000; Sundry Creditors ₹50,000 / Fixed Assets ₹3,60,000; Closing Stock ₹1,50,000; Sundry Debtors ₹1,00,000; Deferred Expenses ₹50,000; Cash & Bank ₹25,000; Total ₹6,85,000 both sides. Additional info: (1) Remaining life of fixed assets 8 years, even use pattern; NRV of fixed assets on 31.03.2024 was ₹3,25,000. (2) Purchases ₹22,50,000, Sales ₹27,50,000 in 2023-24. (3) Cost and NRV of stock on 31.03.2024 were ₹2,00,000 and ₹2,50,000 respectively. (4) Expenses for the year ₹78,000. (5) Deferred Expenses amortized equally over 5 years. (6) Sundry Debtors on 31.03.2024 ₹1,50,000, of which ₹5,000 doubtful; collection of another ₹25,000 depends on successful re-installation of a product. (7) Closing Sundry Creditors ₹75,000, likely settled at 10% discount. (8) Cash balance on 31.03.2024 ₹4,22,000. (9) Early repayment penalty for loan ₹25,000. Required: prepare Profit & Loss Account for 2023-24 (Not assuming going concern).</p>"
+    },
+    {
+      "qNoInPaper": "6(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 49,
+      "questionTextHtml": "<p>Synergy Ltd. is in engineering industry. The company received an actuarial valuation for the first time for its pension scheme which revealed a surplus of ₹6 lakhs. It wants to spread the same over the next 2 years by reducing the annual contribution to ₹2 lakhs instead of ₹5 lakhs. The average remaining life of the employee is estimated to be 6 years. You are required to advise the company.</p>",
+      "notes": "AS15 employee benefits."
+    },
+    {
+      "qNoInPaper": "6(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 6,
+      "pageQ": 49,
+      "questionTextHtml": "<p>Karan Enterprises having its Head Office in Mangalore, Karnataka has a branch in Greenville, USA. Trial balance of Branch as at 31-3-2024 ($): Dr - Fixed assets 8,000; Opening inventory 800; Cash 700; Goods received from Head Office 2,800; Purchases 11,800; Expenses 1,800; Remittance to head office 2,450 / Cr - Sales 24,050; Head office account 4,300; Total 28,350 both sides. (i) Fixed assets purchased 1st April, 2020. (ii) Depreciation at 10% p.a. SLM on fixed assets. (iii) Closing inventory at branch $700 as on 31-3-2024. (iv) Goods received from HO recorded at ₹1,85,500 in HO books. (v) Remittances to HO recorded at ₹1,62,000 in HO books. (vi) HO account recorded in HO books at ₹2,84,500. (vii) Exchange rates of US Dollar: 1-4-2020 ₹63; 1-4-2023 ₹65; 31-3-2024 ₹67. Prepare the trial balance after being converted into Indian rupees in accordance with AS-11.</p>"
+    }
+  ],
+  "extractionNotes": "Extracted via direct OCR (Tesseract) + manual structuring. MTP4 Q1(a) is a near-duplicate/superset of MTP2 Q1(c) - flagged for OP/PP handling in Phase 4."
+}

@@ -1,0 +1,6237 @@
+
+
+===== PHYSICAL PAGE 1 =====
+
+ANSWERS
+
+
+===== PHYSICAL PAGE 2 =====
+
+(i)
+
+(ii)
+(iii)
+(iv)
+
+(ii)
+(iii)
+(iv)
+(i)
+
+(ii)
+(iii)
+(iv)
+(b)
+(b)
+(a)
+
+(a)
+
+(b)
+
+ANSWERS OF MODEL TEST PAPER 1
+INTERMEDIATE COURSE: GROUP - |
+PAPER - 1 : ADVANCED ACCOUNTING
+ANSWER
+Division A (30 Marks)
+(a)
+(d)
+(c)
+(c)
+(a)
+(c)
+(d)
+(b)
+(b)
+(d)
+(c)
+
+Division B
+As per AS 13 (Revised) ‘Accounting for Investments’, for investment in
+shares if the investment is purchased with an intention to hold for short-
+term period (less than one year), then it will be classified as current
+investment and to be carried at lower of cost and fair value, i.e., in case
+of shares, at lower of cost (= 2,50,000) and market value (% 2,25,000) as
+on 31 March 2023, i.e., = 2,25,000.
+
+If equity shares are acquired with an intention to hold for long term period
+(more than one year), then should be considered as long-term
+investment to be shown at cost in the Balance Sheet of the company.
+However, provision for diminution should be made to recognise a
+decline, if other than temporary, in the value of the investments.
+
+Gold and silver are generally purchased with an intention to hold it for
+long term period (more than one year) until and unless given otherwise.
+Hence, the investment in Gold and Silver (purchased on 1%t March, 2020)
+should continue to be shown at cost (since there is no ‘other than
+temporary’ diminution) as on 31%t March, 2023, i.e., = 4,00,000 and &
+2,00,000 respectively, though their market values have been increased.
+
+As per AS 19 "Leases", the lessee should recognize the lease as an
+asset and a liability at the inception of a finance lease. Such recognition
+should be at an amount equal to the fair value of the leased asset at the
+
+291
+
+
+===== PHYSICAL PAGE 3 =====
+
+(c)
+
+inception of lease. However, if the fair value of the leased asset exceeds
+the present value of minimum lease payment from the standpoint of the
+lessee, the amount recorded as an asset and liability should be the
+present value of minimum lease payments from the standpoint of the
+lessee.
+
+Computation of Value of machinery:
+
+Present value of minimum lease payment =% 6,99,054
+
+(See working note below)
+
+Fair value of leased asset = % 7,00,000
+
+Therefore, the recognition will be at the lower of the two i.e. 6,99,054
+Working Note - Present value of minimum lease payments:
+
+Annual lease rental x PVIF+ Present value of guaranteed residual value
+= 3,00,000 x (0.869 + 0.756 + 0.657) + = 22,000 x 0.657
+
+=% 6,84,600+% 14,454 = 6,99,054
+
+Computation of finance charges:
+
+Year Finance|Payment| Reduction in | Outstandin
+charge outstanding g liability
+liability
+
+1st Year - - - 6,99,054
+beginning
+End of 1%t year |1,04,858] 3,00,000 1,95,142 5,03,912
+End of 2 year | 75,587 | 3,00,000 2,24,413 2,79,499
+End of 3 year | 41,925 | 3,00,000 2,58,075 21,424
+
+Treatment of Impairment Loss
+
+As per AS 28 “Impairment of assets”, if the recoverable amount (higher
+of net selling price and its value in use) of an asset is less than its
+carrying amount, the carrying amount of the asset should be reduced to
+its recoverable amount. In the given case, net selling price is = 64.50
+lakhs (% 67.50 lakhs — % 3 lakhs) and value in use is % 60 lakhs.
+Therefore, recoverable amount will be ¥ 64.50 lakhs. Impairment loss
+will be calculated as = 10.50 lakhs [% 75 lakhs (Carrying Amount after
+revaluation - Refer Working Note) less ~ 64.50 lakhs (Recoverable
+Amount)].
+
+Thus impairment loss of = 10.50 lakhs should be recognised as an
+expense in the Statement of Profit and Loss immediately since there was
+downward revaluation of asset which was already charged to Statement
+of Profit and Loss.
+
+292
+
+
+===== PHYSICAL PAGE 4 =====
+
+Working Note:
+
+Calculation of carrying amount of the Property, Plant and
+Equipment at the end of the fourth year on revaluation
+
+(@ in lakhs)
+Purchase price of a Property, Plant and Equipment 150.00
+Less: Depreciation for four years [(150 lakhs / 10 (60.00)
+years) x 4 years]
+Carrying value at the end of fourth year 90.00
+Less: Downward revaluation charged to profit and (15.00)
+loss account
+Revalued carrying amount 75.00
+Delta Limited
+Balance Sheet as at 31° March 2023
+Particulars Note No. (& in 000)
+A. Equity and Liabilities
+1. Shareholders’ funds
+(a) | Share Capital 495.00
+(b) Reserves and Surplus 807.20
+2. Non-Current Liabilities
+(a) | Long Term Borrowings 300.00
+3. Current Liabilities
+(a) | Trade Payables 30.00
+(b) — Short- term provision 163.80
+Total 1,796.00
+B. Assets
+1. Non-Current Assets
+Equionent Property, Plant and 1,550.00
+2. Current Assets
+(a) Inventories 96.00
+(b) Trade Receivables 120.00
+(c) Cash and Cash equivalents 30.00
+Total 1,796.00
+Statement of Profit and Loss for the year ended 31% March 2023
+Particulars Note No. (® in ‘000)
+I. Revenue from Operations 1200.00
+Il. Other Income 6.00
+
+293
+
+
+
+===== PHYSICAL PAGE 5 =====
+
+Il. Total Income (I +Il) 1,206.00
+IV. Expenses:
+Purchases (adjusted) 400.00
+Finance Costs 9 30.00
+Depreciation (10% of 800) 80.00
+Other expenses 10 150.00
+Total Expenses 660.00
+ve (ul oy) / (Loss) for the period before 546.00
+Vil. Tax expenses @30% 163.80
+Vil Profit for the period 382.20
+Notes to Accounts
+Particulars (% in ‘000)
+1 | Share Capital
+Equity Share Capital
+Authorised
+80,000 Shares of = 10/- each 800
+Issued, Subscribed and Called-up
+50,000 Shares of % 10/- each 500
+(Out of the above 5,000 shares have been
+issued for consideration other than cash)
+Less: Calls in arrears (5) 495
+2 | Reserves and Surplus
+Securities Premium 40.00
+Revaluation Reserve = (960 — 800) 160.00
+General Reserve 150.00
+Surplus i.e. Profit & Loss Account Balance
+Opening Balance 75.00
+Add: Profit for the period 382.20 457.20
+807.20
+3 | Long-Term Borrowings
+10% Debentures 300
+4. | Short — term provision
+Provision for tax 163.80
+5 | Property, plant & equipment
+Land
+Opening Balance 800
+Add: Revaluation adjustment 160
+Closing Balance 960
+
+294
+
+
+
+===== PHYSICAL PAGE 6 =====
+
+Plant and Machinery
+
+Opening Balance 824
+Less: Disposed off (24)
+800
+nara = (150 — 20 + (240)
+Closing Balance 590
+Total 1,550
+6 | Trade receivables
+Debits outstanding for a period exceeding 50
+six months
+Other debts 70 120
+7 | Cash and Cash Equivalents
+Cash at Bank With scheduled 23
+banks
+With others (ABC Bank Limited) 5
+Cash in hand 2 30
+8 | Other Income
+Profit on sale of machinery
+Sale value of machinery 10
+Less: Book value of machiner
+(24 — 20) ” (4) 6
+9 | Finance Costs
+Debenture Interest 30
+10 | Other Expenses:
+Factory expenses 80
+Selling expenses 25
+Administrative expenses 45 150
+(a) As per AS 9 on Revenue Recognition, revenue arising from the use by
+
+others of enterprise resources yielding interest and royalties should only
+be recognized when no significant uncertainty as to measurability or
+collectability exists. These revenues are recognized on the following
+
+bases:
+
+(i) Interest: on a time proportion basis taking into account the amount
+outstanding and the rate applicable. Therefore X Ltd. should
+recognize interest revenue of = 10 Lakhs.
+
+(ii) Royalties: on an accrual basis in accordance with the terms of the
+relevant agreement. X Ltd. therefore should recognize royalty
+
+revenue of = 15 Lakhs.
+
+295
+
+
+
+===== PHYSICAL PAGE 7 =====
+
+(b)
+
+In the Books of ABC Ltd.
+Journal Entries
+Particulars z z
+8% Preference share capital A/c Dr.| 6,00,000
+To 11% Debentures A/c 4,20,000
+To Capital reduction A/c 1,80,000
+[Being 30% reduction in liability of
+preference share capital and issue of 11%
+debentures]
+9% Debentures A/c Dr. | 12,00,000
+To Plant & machinery A/c 9,00,000
+To Capital reduction A/c 3,00,000
+[Settlement of debenture holders by
+allotment of plant & machinery]
+Trade payables A/c Dr.) 5,92,000
+To Inventory A/c 5,00,000
+To Capital reduction A/c 92,000
+[Being settlement of creditors by giving
+Inventories]
+Bank A/c Dr.| 3,00,000
+To 11% Debentures A/c 3,00,000
+[Being fresh issue of debentures]
+Bank overdraft A/c Dr.| 1,50,000
+To Bank A/c 1,50,000
+[Being settlement of bank overdraft]
+Capital reduction A/c Dr.| 5,72,000
+To Investment A/c 13,000
+To Profit and loss A/c 4,05,000
+To Capital reserve A/c 1,54,000
+[Being decrease in investment and profit
+and loss account (Dr. bal.); and balance of
+capital reduction account transferred to
+capital reserve]
+Capital Reduction Account
+z z
+To Investments A/c 13,000 By Preference share | 1,80,000
+capital A/c
+To Profit and loss A/c |4,05,000|By 9% Debenture | 3,00,000
+holders A/c
+
+296
+
+
+
+===== PHYSICAL PAGE 8 =====
+
+To Capital reserve |1,54,000 By Trade payables A/c
+
+Alc 92,000
+5,72,000 5,72,000
+Balance Sheet Extract of ABC Ltd. (And Reduced)
+As at 318 March 2023
+Particulars Note No z
+|. Equity and Liabilities
+(1) Shareholder's Funds
+(a) Share Capital 1 20,00,000
+(b) Reserves and Surplus 2 1,54,000
+(2) Non-Current Liabilities
+(a) Long-term borrowings 3 7,20,000
+Total 28,74,000
+Notes to Accounts
+z
+1. Share Capital
+20,00,00
+2,00,000 Equity shares of = 10 each fully paid-up 0
+2. Reserve and Surplus
+Capital Reserve 1,54,000
+3. Long Term Borrowings
+11% Debentures (% 4,20,000 + % 3,00,000) 7,20,000
+In the Books of Hari Ltd.
+Journal Entries
+z z
+Business Purchase A/c Dr. 5,30,000
+To Liquidators of Vayu Ltd. Account 5,30,000
+(Being business of Vayu Ltd. taken over)
+Goodwill Account Dr. 50,000
+Building Account Dr. 1,50,000
+Machinery Account Dr. 1,60,000
+Inventory Account Dr. 1,57,500
+Trade receivables Account Dr. 1,00,000
+Bank Account Dr. 20,000
+To Retirement Gratuity Fund Account 20,000
+
+297
+
+
+
+===== PHYSICAL PAGE 9 =====
+
+To Trade payables Account
+
+80,000
+
+To Provision for Doubtful Debts 7,500
+Account
+To Business Purchase A/c 5,30,000
+(Being Assets and Liabilities taken over as
+per agreed valuation).
+Liquidators of Vayu Ltd. A/c Dr. 5,30,000
+To 9% Preference Share Capital A/c 1,10,000
+To Equity Share Capital A/c 4,00,000
+To Securities Premium A/c 20,000
+(Being Purchase Consideration satisfied as
+above).
+Balance Sheet of Hari Ltd. (after absorption)
+as at 31°t March, 2023
+Particulars Notes z
+Equity and Liabilities
+1 Shareholders’ funds
+A Share capital 1 16,10,000
+B Reserves and Surplus 2 90,000
+2 Non-current liabilities
+A Long-term provisions 3 70,000
+3 Current liabilities
+A Trade Payables 2,10,000
+Total 19,80,000
+Assets
+1 Non-current assets
+A Property, Plant and Equipment 4 11,10,000
+B Intangible assets 5 1,00,000
+2 Current assets
+A Inventories 4,07,500
+B_ Trade receivables 6 2,92,500
+C Cash and cash equivalents 70.000
+Total 19,80,000
+Notes to accounts
+z
+
+1 Share Capital
+Equity share capital
+
+298
+
+
+
+===== PHYSICAL PAGE 10 =====
+
+1,40,000 Equity Shares of = 10 each fully paid
+(Out of above 40,000 Equity Shares were
+issued in consideration other than for cash)
+
+14,00,000
+
+Preference share capital
+
+2,100 9% Preference Shares of = 100 each 2,10,000
+(Out of above 1,100 Preference Shares were
+issued in consideration other than for cash)
+Total 16,10,000
+2 Reserves and Surplus
+Securities Premium 20,000
+General Reserve 70,000
+Total 90,000
+3 Long-term provisions
+Retirement Gratuity fund 70,000
+Total 70,000
+4 Property, Plant and Equipment
+Buildings 4,50,000
+Machinery 6,60,000
+Total 11,10,000
+5 Intangible assets
+Goodwill 1,00,000
+6 Trade receivables 3,00,000
+Less: Provision for Doubtful Debts 7,500
+2,92,500
+Working Notes:
+Purchase Consideration: z
+Goodwill 50,000
+Building 1,50,000
+Machinery 1,60,000
+Inventory 1,57,500
+Trade receivables 92,500
+Cash at Bank 20,000
+6,30,000
+Less: Liabilities:
+Retirement Gratuity Fund (20,000)
+Trade payables (80,000)
+Net Assets/ Purchase Consideration 5,30,000
+To be satisfied as under:
+10% Preference Shareholders of Vayu Ltd. 1,00,000
+Add: 10% Premium 10,000
+
+299
+
+
+
+===== PHYSICAL PAGE 11 =====
+
+1,100 9% Preference Shares of Hari Ltd. 1,10,000
+Equity Shareholders of Vayu Ltd. to be satisfied by
+
+issue of 40,000 Equity Shares of Hari Ltd. at 5% 4,20,000
+Premium
+Total 5,30,000
+
+Consolidated balance Sheet of Virat Ltd. and its Subsidiary Anushka Ltd.
+as at 31St March, 2023
+Particulars Note | Amount (%)
+
+i] EQUITY AND LIABILITIES:
+Shareholders’ Funds:
+
+(1) | (a) Share Capital 1 6,00,000
+(b) Reserve and Surplus 2 1,80,000
+Minority Interest 3 1,00,000
+Non-Current Liabilities:
+
+(2) Long Term Borrowings 4 3,00,000
+
+(3)
+
+(4) | Current Liabilities:
+Trade Payables 5 2,00,000
+Total 13,80,000
+Il ASSETS:
+(1) | Non-Current Assets
+Property, Plant & Equipment 6 7,00,000
+(2) | Current Assets:
+(a) Inventories 7 3,60,000
+(b) Trade receivables 8 2,20,000
+(c) Cash and Cash Equivalents 9 1,00,000
+Total 13,80,000
+Notes to Accounts
+Particulars z z
+1. | Share capital
+60,000 equity shares of % 10 each fully paid 6,00,000
+up
+
+2. | Reserves and Surplus
+
+General Reserve 1,00,000
+
+Add: General reserve of Anushka Ltd (80%) 80,000
+
+Total 1,80,000
+3. | Minority interest
+
+20% share in Anushka Ltd (WN 3) 1,00,000
+
+300
+
+
+
+===== PHYSICAL PAGE 12 =====
+
+4 | Long term borrowings
+
+Long term borrowings of Virat 2,00,000
+
+Add: Long term borrowings of Anushka 1,00,000
+
+Total 3,00,000
+5. | Trade payables
+
+Trade payables of Virat 1,00,000
+
+Add: Trade payables of Anushka 1,00,000
+
+Total 2,00,000
+6. | Property, Plant and Equipment (PPE)
+
+PPE of Virat Ltd 4,00,000
+
+Add: PPE of Anushka Ltd 3,00,000
+
+Total 7,00,000
+7. | Inventories
+
+Inventories of Virat Ltd 1,60,000
+
+Add: Inventories of Anushka Ltd 2,00,000
+
+Total 3,60,000
+8. | Trade receivables
+
+Trade receivables of Virat Ltd 80,000
+
+Add: Trade receivables of Anushka Ltd 1,40,000
+
+Total 2,20,000
+9 | Cash and cash equivalents
+
+Cash and cash equivalents of Virat Ltd 40,000
+
+Add: Cash and cash equivalents of 60,000
+
+Anushka Ltd
+
+Total 1,00,000
+
+Working Notes:
+
+1. Basic Information
+
+Company Status Dates Holding Status
+
+Holding Co. = Virat | Acquisition: Anushka’s | Holding
+
+Ltd. Incorporation Company
+
+Subsidiary =| Consolidation: 318 March, | = 80%
+
+Anushka Ltd. 2023 Minority Interest
+= 20%
+
+2. Analysis of General Reserves of Anushka Ltd
+
+Since Virat holds shares in Anushka since its incorporation, the entire
+Reserve balance of ~1,00,000 will be Revenue.
+
+301
+
+
+===== PHYSICAL PAGE 13 =====
+
+(a)
+
+(a)
+
+Consolidation of Balances
+
+Holding- 80%, Total | Minority Holding Company
+Minority - 20% Interest
+Equity Capital 4,00,000 80,000 3,20,000 -
+General Reserves
+
+1,00,000 20,000 Nil 80,000
+
+(pre-acq) | (post-acq)
+
+Total 1,00,000 3,20,000 80,000
+Cost of Investment (3,20,000) -
+Goodwill/ capital NIL
+reserve
+Parent’s Balance 1,00,000
+Amount for 1,80,000
+Consolidated
+Balance Sheet
+
+The qualitative characteristics are attributes that improve the usefulness
+of information provided in financial statements. Understandability;
+Relevance; Reliability; Comparability are the qualitative characteristics
+of financial statements.
+
+Qualitative Characteristics of Financial Statements
+
+e Understandability
+
+Information presented in __ financial
+statements should be readily
+understandable by the users’ with
+reasonable knowledge of business and
+economic activities.
+
+e Relevance e Financial statements should contain
+relevant information only. Information,
+which is likely to influence the economic
+decisions of the users is called relevant.
+
+e Reliability e Information must be reliable; that is to
+say, they must be free from material error
+and bias.
+
+e Comparability
+
+Financial statements should provide both
+inter-firm and intra-firm comparison.
+
+Or
+
+Accounting Standards deal with the issues of (i) Recognition of events
+and transactions in the financial statements, (ii) Measurement of these
+transactions and events, (iii) Presentation of these transactions and
+events in the financial statements in a manner that is meaningful and
+understandable to the reader, and (iv) Disclosure requirements.
+
+302
+
+
+===== PHYSICAL PAGE 14 =====
+
+(b)
+
+(c)
+
+Cash Flow Statement of ......
+for the year ended March 31, 2023(Direct Method)
+
+Particulars z z
+Operating Activities:
+Cash received from sale of goods 1,40,000
+Cash received from Trade receivables 1,75,000
+Trade Commission received 50,000 3,65,000
+Less: Payment for Cash Purchases 1,20,000
+Payment to Trade payables 1,57,000
+Office and Selling Expenses 75,000
+Payment for Income Tax 30,000 | (3,82,000)
+Net Cash Flow used in Operating Activities (17,000)
+(i) Calculation of profit earned by the branch
+In the books of Jammu Branch
+Trading Account and Profit and Loss Account
+Particulars Amount | Particulars Amount
+z z
+To Opening stock 2,20,000 | By Sales 12,00,000
+To Goods received | 11,00,000 | By Closing stock] 3,60,000
+by Head office (Refer W.N.)
+To Expenses 45,000
+To Net profit (Bal fig) | 1,95,000
+15,60,000 15,60,000
+
+(ii) Stock reserve in respect of unrealised profit
+
+= % 3,60,000 x (20/120) = = 60,000
+
+Working Note:
+
+zg
+
+Cost Price 100
+Invoice Price 120
+Sale Price 150
+Calculation of closing stock at z
+invoice price
+Opening stock at invoice price 2,20,000
+Goods received during the year at | 11,00,000
+invoice price
+
+13,20,000
+Less: Cost of goods sold at invoice | (9,60,000) | [12,00,000 x
+price (120/150)]
+Closing stock 3,60,000
+
+303
+
+
+
+===== PHYSICAL PAGE 15 =====
+
+(i)
+(ii)
+(iii)
+(iv)
+(i)
+(ii)
+(iii)
+(iv)
+(v)
+(i)
+(ii)
+(iii)
+
+(d)
+(a)
+
+(a)
+
+(b)
+
+ANSWER OF MODEL TEST PAPER 2
+INTERMEDIATE COURSE: GROUP - |
+
+PAPER - 1: ADVANCED ACCOUNTING
+
+(c)
+
+(b)
+
+(c)
+
+(d)
+
+(a)
+
+(a)
+
+(b)
+
+(a)
+
+(b)
+
+(b)
+
+(a)
+
+(b)
+
+PART Il — Descriptive Questions (70 Marks)
+
+As per AS 26 “Intangible Assets”, expenditure on research should be
+recognized as an expense when it is incurred. An intangible asset
+arising from development (or from the development phase of an internal
+project) should be recognized if, and only if, an enterprise can
+demonstrate all of the conditions specified in para 44 of the standard.
+An intangible asset (arising from development) should be derecognised
+when no future economic benefits are expected from its use according
+to para 87 of the standard. Thus, the manager cannot defer the
+expenditure write off to future years in the given case.
+
+Hence, the expenses amounting % 40 lakhs incurred on the research and
+development project has to be written off in the current year ending
+318t March, 2024.
+
+(i) As per AS 2 ‘Valuation of Inventories’, abnormal amounts of wasted
+materials, labour and other production costs are excluded from cost
+of inventories and such costs are recognised as expenses in the
+period in which they are incurred. The normal loss will be included
+in determining the cost of inventories (finished goods) at the year
+end.
+
+(ii) Material used 16,000 MT @ & 190 = % 30,40,000
+
+304
+
+
+===== PHYSICAL PAGE 16 =====
+
+(c)
+
+Normal Loss (5% of 16,000 MT) 800 MT (included
+in calculation of cost of inventories)
+
+Net quantity of material 15,200 MT
+(iii) Abnormal Loss in quantity (950 - 800) 150 MT
+Abnormal Loss = 30,000
+
+[150 units @ % 200 (% 30,40,000/15,200)]
+
+Amount of = 30,000 (Abnormal loss) will be charged to the Profit
+and Loss statement.
+
+As per AS 13 (Revised) ‘Accounting for Investments’, where long-term
+investments are reclassified as current investments, transfers are made
+at the lower of cost and carrying amount at the date of transfer; and
+where investments are reclassified from current to long term, transfers
+are made at lower of cost and fair value on the date of transfer.
+
+Accordingly, the re-classification will be done on the following basis:
+
+(i) In this case, carrying amount of investment on the date of transfer
+is less than the cost; hence this re-classified current investment
+should be carried at ¥ 12 lakhs in the books.
+
+(ii) In this case, reclassification of current investment into long-term
+investments will be made at % 7 lakhs as cost is less than its fair
+value of ~ 8.5 lakhs on the date of transfer.
+
+Oliva Company Ltd.
+Statement of Profit and loss for the year ended 31.03.2024
+
+Particulars Note | Amount (%)
+| Revenue from operations 17,10,000
+Il Other income (3,900 +300) 4,200
+Ill | Total Revenue (I +l) 17,14,200
+IV__| Expenses:
+Cost of materials consumed 10 12,64,200
+Purchases of inventory-in-trade --
+Changes in inventories of finished goods, | 11 (13,500)
+work-in-progress and inventory-in-Trade
+Employee benefit expenses 12 44,700
+Finance costs --
+Depreciation and amortization expenses 18,240
+Other expenses 13 3,51,510
+Total Expenses 16,65,150
+Vv Profit before exceptional and extraordinary 49,050
+
+items and tax
+
+305
+
+
+===== PHYSICAL PAGE 17 =====
+
+Vi
+
+Exceptional items
+
+VII | Profit before extraordinary items and tax 49,050
+VIII | Extraordinary items --
+IX | Profit before tax 49,050
+X | Tax expense (40% of 49,050) 19,620
+XI | Profit/Loss for the period from continuing 29,430
+operations
+Oliva Company Ltd.
+Balance Sheet for the year ended 31.03.2024
+Particulars Note Amount
+1 | Equity and Liabilities
+(i) Shareholders’ funds
+(a) Share Capital 3,15,000
+(b) Reserves and surplus 1 50,430
+2) | Non-current liabilities
+(a) Long-term borrowings 2 24,300
+(3) | Current Liabilities
+(a) Short -term borrowings 3 6,000
+(b) Trade payables 3,27,000
+(c) Other current liability 4 72,000
+(d) Short term provision 5 19,620
+8,14,350
+Il | ASSETS
+(1) |) Non current assets
+(a) Property, Plant & equipment 6 2,04,160
+b) Non-current investments 7,500
+(2) | Current assets
+(a) Current investments 4,500
+b) Inventories 7 85,800
+c) Trade receivables 2,38,500
+(d) Cash and cash equivalents 2,71,100
+e) Short-term loans and advances 8 2,490
+f) | Other current assets 9 300
+814,350
+
+306
+
+
+
+===== PHYSICAL PAGE 18 =====
+
+Notes to accounts
+
+No. Particulars Amount Amount
+1. | Reserve & Surplus
+
+Profit & Loss Account: 48,000
+
+Balance b/f
+
+Net Profit for the year 29,430
+
+Less: Interim Dividend (27,000) 50,430
+2. Long term borrowings
+
+Secured loans 21,000
+
+Fixed Deposits: Unsecured 3,300 24,300
+3. | Short term borrowings
+
+Secured loans 4,500
+
+Fixed Deposits -Unsecured 1,500 6,000
+4. Other current liabilities
+
+Expenses Payable 72,000
+
+(67,500 + 4,500)
+5. Short term provisions
+
+Provision for Income tax 19,620
+6. | PPE
+
+Building 1,01,000
+
+Less: Depreciation @ 2% (2,020) 98,980
+
+Plant & Machinery 70,400
+
+Less: Depreciation @ 10% (7,040) 63,360
+
+Furniture 10,200
+
+Less: Depreciation @ 10% (1,020) 9,180
+
+Motor vehicles 40,800
+
+Less: Depreciation @ 20% (8,160) 32,640 2,04,160
+7 Inventory
+
+Raw Material 25,800
+
+Finished goods 60,000 85,800
+8. Short term Loans &
+
+Advances
+
+General Charges prepaid 2,490
+9. | Other Current Assets
+
+Interest accrued 300
+10. | Cost of material consumed
+
+Opening inventory of raw 30,000
+
+material
+
+Add: Purchases 12,15,000
+
+307
+
+
+
+===== PHYSICAL PAGE 19 =====
+
+3.
+
+Stores & spare _ parts 45,000 | 12,90,000
+consumed
+Less: Closing inventory (25,800) | 12,64,200
+11. | Changes in inventory of
+Finished Goods & WIP
+Closing Inventory of Finished 60,000
+Goods
+Less: Opening Inventory of 46,500 13,500
+Finished Goods
+12. | Employee Benefit
+expenses
+Salary & Wages 44,700
+(40,200 + 4,500)
+13. | Other Expenses
+Manufacturing Expenses 3,37,500
+(2,70,000 + 67,500)
+General Charges 14.010 3,51,510
+(16,500 — 2,490)
+(a) As per AS 29 "Provisions, Contingent Liabilities and Contingent Assets",
+
+(b)
+
+where some or all of the expenditure required to settle a provision is
+expected to be reimbursed by another party, the reimbursement should
+be recognised when, and only when, it is virtually certain that
+reimbursement will be received if the enterprise settles the obligation.
+The reimbursement should be treated as a separate asset. The amount
+recognised for the reimbursement should not exceed the amount of the
+provision.
+
+It is apparent from the question that the company had not made provision
+for warranty in respect of certain goods considering that the company
+can claim the warranty cost from the original supplier. However, the
+provision for warranty should have been made as per AS 29 and the
+amount claimable as reimbursement should be treated as a separate
+asset in the financial statements of the company rather than omitting the
+disclosure of such liability. Accordingly, it is viewed that the accounting
+treatment adopted by the company with respect to warranty is not
+correct.
+
+Balance Sheet of Radhika Ltd. (and Reduced) as on 1.4.2024
+
+Particulars Notes z
+I. Equity & Liabilities
+
+A Shareholders' Fund
+
+a Share Capital 1 3,16,800
+
+b Reserves & Surplus 2 1,10,200
+
+B Non-Current Liabilities
+308
+
+
+
+===== PHYSICAL PAGE 20 =====
+
+a Long Term Borrowings 3 7,86,000
+Cc Current Liabilities
+a Trade Payables 3,60,000
+b Short Term borrowings: Bank OD 2,34,000
+Total 18,07,000
+Il. Assets
+A Non-Current Assets
+a Property, Plant & Equipment 4 7,09,000
+b | Intangible assets: Patents 45,000
+B Current Assets
+a Inventory (5,10,000-65,000) 4,45,000
+b Trade Receivable 5 4,31,500
+c Cash & Cash Equivalent 1,76,500
+Total 18,07,000
+Notes to Accounts
+Particulars z
+1 | Share Capital -
+Authorised, Issued, Subscribed & Paid Up Capital
+Equity share Capital
+15,840 Shares of ¥20 Paid up 3,16,800
+(Out of above 6,840 shares are issued for
+consideration other cash) (W.N 1)
+2 | Reserves & Surplus
+Capital Reserve (W.N 2) 1,10,200
+3 | Long Term Borrowings Secured
+6% Debentures 4,50,000
+41411% Debentures (70% of 4,80,000 preference | 3,36,000
+b | shares)
+7,86,000
+4 | PPE
+Freehold property 6,49,000
+Plant 60,000
+7,09,000
+5 | Trade receivable 5,00,000
+Less: Provision for Doubtful Debts (68,500)
+4,31,500
+
+309
+
+
+
+===== PHYSICAL PAGE 21 =====
+
+Working notes:
+
+1.
+
+Computation of equity shares:
+
+Equity No. of
+share shares at
+capital 20 each
+4 After the reduction to | 90,000 x 20 | 1,80,000 9,000
+% 20 each
+2. | Equity shares allotted 6% of 28,800 1,440
+to preference 4,80,000
+shareholders for their
+% arrears.
+3. | Equity shares allotted 90% of | 1,08,000 5,400
+to Directors in 1,20,000
+settlement of their loan
+Total equity shares 3,16,800 15,840
+
+2. Calculation of capital reserve: Equity Share 7,20,000 + Preference
+share 1,44,000 + Freehold property 1,39,000 +Investment 74,000
+
++ Director Loan 6,000 — Preference share dividend 28,800 -
+
+Goodwill 1,56,000 — Inventory 65,000 — Bad debts 68,500 — Profit
+& Loss A/c 6,42,000 = Capital Reserve 1,22,700
+
+3. Cash balance:
+
+z
+Cash & cash equivalent 82,000
+Add: Investment sold 1,40,000
+Less: Directors Loan (1,20,000 x 5%) 6,000
+Penalty (2,50,000x 5%) 12,500
+Interest on debentures (6% on 27,000 45,500
+4,50,000)
+1,76,500
+Calculation of Net Assets
+Particulars Anu Ltd. (%) Banu Ltd. (%)
+Goodwill 1,75,000 50,000
+Freehold property 3,75,000 3,00,000
+Plant & Machinery 1,25,000 50,000
+Motor vehicle 37,500 25,000
+Trade receivable 2,50,000 1,00,000
+Inventory 2,87,500 2,25,000
+Cash at Bank 1,00,000 50,000
+Total 13,50,000 8,00,000
+
+310
+
+
+
+===== PHYSICAL PAGE 22 =====
+
+Less : Trade payable (2,62,500) (1,62,500)
+6% debentures - (1,57,500)
+Net Assets 10,87,500 4,80,000
+Calculation of Purchase Consideration
+Sr. | Particulars Computation Anu Ltd | Banu Ltd
+No.
+1 |Amount payable to
+Equity Share Holder in
+the form of
+1,08,750 Equity shares | (1,08,750 x 10) 10,87,500
+of §10 each
+48,000 Equity shares of | (48,000 x 10) 4,80,000
+=10 each
+Purchase Consideration 10,87,500 | 4,80,000
+Balance Sheet of Anban Ltd.
+as on 1st April, 2023
+Particulars Note z
+No.
+Equity and Liabilities
+(1) | Shareholders’ Funds
+(a) Share Capital 1 15,67,500
+(2) | Non-current Liabilities
+(a) | Long term borrowings 2 1,57,500
+(3) | Current Liabilities
+(a) | Trade Payables (2,62,500 + 1,62,500) 4,25,000
+Total 21,50,000
+Assets
+(1) | Non-current Assets
+(a) | Property Plant and Equipment 3 9,12,500
+(b) | Intangible assets 4 2,25,000
+(2) | Current Assets
+(a) | Inventories (2,87,500 + 2,25,000) 5,12,500
+(b) | Trade Receivables (2,50,000 + 1,00,000) 3,50,000
+(c) | Cash and cash equivalents (1,00,000 + 1,50,000
+50,000)
+Total 21,50,000
+
+311
+
+
+
+===== PHYSICAL PAGE 23 =====
+
+Notes to Accounts:
+
+Note | Particulars z
+No.
+1 Share Capital
+Equity share capital
+1,56,750 equity shares of 10 each 15,67,500
+(out of above shares are issued for consideration other
+than cash)
+2 | Long term borrowings
+6% Debentures 1,57,500
+3 Property, Plant & Equipment’s
+Freehold property (3,75,000 + 3,00,000) 6,75,000
+Plant & Machinery (1,25,000 + 50,000) 1,75,000
+Motor Vehicle (37,500+25,000) 62,500
+9,12,500
+4 Intangible assets
+Goodwill (1,75,000 + 50,000) 2,25,000
+
+(a) Revalued net assets of Moon Ltd.as on 31 March, 2024
+
+% in lakhs | 7 in lakhs
+Property, plant and equipment [240 x 120%] 288.0
+Investments [110 X 90%] 99
+Current Assets 140.0
+Loans and Advances _ 30.0
+Total Assets after revaluation 557
+Less: 15% Debentures .
+
+Current Liabilities 100.0 (280.0)
+Equity / Net Worth 277
+Star Ltd.’s share of net assets (70% of 277) 193.9
+Star Ltd.’s cost of acquisition of shares of
+Moon Ltd.
+
+(= 140 lakhs — = 14 lakhs*) 126.00
+Capital reserve 67.9
+* Total Cost of 70 % Equity of Moon Ltd. = 140 lakhs
+Purchase Price of each share = 20
+Number of shares purchased [140 lakhs /% 20] 7 lakhs
+Dividend @ 20 % i.e. ¥ 2 per share = 14 lakhs
+
+Since dividend received is for pre-acquisition period, it has been reduced
+from the cost of investment in the subsidiary company.
+
+312
+
+
+===== PHYSICAL PAGE 24 =====
+
+(b)
+
+(a)
+
+Impact of Revaluation of Plant and Machinery will be as -
+
+z
+Book value of Plant and Machinery as on 01-04-2023 2,25,000
+Depreciation Rate 2:28:0002.02.500) _ 55 500/2,25000 x100 10%
+
+2,25,000
+
+Book value of Plant and Machinery as on 01-10-2023 after
+six months depreciation @10% (2,25,000-11,250) 2,13,750
+Revalued at 2,70,000
+Revaluation profit (2,70,000-2,13,750) 56,250
+Share of Gamma Limited in Revaluation Profit (80%) 45,000
+Share of Minority in Revaluation profit (20%) 11,250
+Additional Depreciation on appreciated value to be
+charged from post-acquisition profits
+(10% of % 22,5,000 for 6 months) + (10% of = 2,70,000 for
+6 months) less = 22500 (as already charged) 2,250
+Share of Gamma Limited in additional depreciation that will
+reduce its share (80%) in post-acquisition profit by 1,800
+Share of Minority Interest in additional depreciation 450
+
+Working note:
+
+Percentage of holding:
+
+No. of Shares Percentage
+Holding Co. : 24,000 (80%)
+Minority shareholders : _6,000 (20%)
+TOTAL SHARES : 30,000
+
+Yes, one of the characteristics of financial statements is neutrality. To
+be reliable, the information contained in financial statement must be
+neutral, that is free from bias. Financial Statements are not neutral if by
+the selection or presentation of information, the focus of analysis could
+shift from one area of business to another thereby arriving at a totally
+
+different conclusion on the business results.
+
+313
+
+
+
+===== PHYSICAL PAGE 25 =====
+
+Or
+Effects of each transaction on Balance sheet of the trader is shown
+
+below:
+
+. Assets Liabilities _ Equity
+Transactions Z lakh | — Zlakh| ~ | Zlakh
+Opening 16.00 | - 6.00 = 10.00
+(1) Dividend earned 16.40} - 6.00 = 10.40
+(2) Settlement of 15.40] - 4.60 = 10.80
+
+Creditors
+(3) Rent Outstanding 15.40} - 4.80 = 10.60
+(4) Drawings 15.22 | - 4.80 = 10.42
+(b) Journal Entries
+z z
+2022 | Equity Share Capital A/c Dr. | 4,00,000
+June To Equity Stock A/c 4,00,000
+(Being conversion of 4,000 fully
+paid Equity Shares of 100 into
+= 4,00,000 Equity Stock as per
+resolution in general meeting
+dated...)
+2023
+June | Equity Stock A/c Dr. | 4,00,000
+To Equity Share Capital A/c 4,00,000
+(Being re-conversion of
+= 4,00,000 Equity Stock into
+40,000 shares of & 10 fully paid
+Equity Shares as per resolution
+in General Meeting dated...)
+(c) Books of Head Office
+Branch Stock Account
+z z
+To Balance b/d — Op 30,000 | By Branch Debtors | 1,65,000
+Stock (Sales)
+To Goods Sent to} 2,40,000 | By Branch Cash 59,000
+Branch A/c
+To Branch 2,000 | By Balance c/d
+Adjustment A/c
+
+314
+
+
+===== PHYSICAL PAGE 26 =====
+
+(Balancing Figure
+
+Goods in Transit
+
+— Excess of Sale (% 2,40,000 - 20,000
+over Invoice Price) = 2,20,000)
+Closing Stock at 28,000
+Branch
+2,72,000 2,72,000
+Branch Debtors Account
+z z
+To Balance b/d 32,750 | By Bad debts written off 750
+To Branch Stock | 1,65,000 | By Branch Cash (bal. fig.) | 1,71,000
+Alc (Sales)
+By Balance c/d 26,000
+1,97,750 1,97,750
+
+315
+
+
+
+===== PHYSICAL PAGE 27 =====
+
+(i) (b)
+(ii) (b)
+(iii) (b)
+(iv) (d)
+(i) (b)
+(ii) (a)
+(iii) (b)
+(iv) (b)
+(i) (a)
+(ii) (c)
+(iii) (c)
+(iv) (b)
+(c)
+
+(a)
+
+(b)
+
+ANSWER OF MODEL TEST PAPER 3
+INTERMEDIATE COURSE: GROUP - |
+PAPER - 1 : ADVANCED ACCOUNTING
+
+PART Il — Descriptive Questions (70 Marks)
+
+(a) Investment Account for the year ending on 315 December, 2023
+Scrip : 8% Convertible Debentures in C Ltd.
+
+[Interest Payable on 315t March and 30" September]
+
+Date Particulars} Nominal Interest Cost %|Date Particulars|NominaliInterest Cost
+value 2 zi Value ®) (®)
+@)
+1.4.23 |To — Bank! 2,00,000 2,16,000/30.09.23/By Bank -| 12,000)
+A/c A/c
+4.7.23 |To Bank} 1,00,000} 2,000} 1,10,000) [%3,00,000
+A/c (W.N.1) Kk 8% x
+\(6/12]
+31.12.23|To P & L -| 14,033 -/1.10.23 |By Bank} 80,000 84,000)
+A/c A/c
+Interest] 1.10.23 |By P & L 2,933)
+[A/c (loss);
+(W.N.3)
+1.12.23 |By Bank 733)
+A/c
+(Accrued
+interest)
+(= 55,000 x}
+.08 x 2/12)
+
+316
+
+
+
+===== PHYSICAL PAGE 28 =====
+
+1.12.23 |By Equity} 55,000 59,767
+shares in
+Ltd. (W.N.
+3 and 4)
+
+31.12.23 |By Balance
+Ic/d (W.N.5)|1,65,000] _3,300|1,79,300}
+
+3,00,000} 16,033] 3,26,000 3,00,000} 16,033/3,26,000
+
+SCRIP: Equity Shares in C LTD.
+
+Date Particulars Cost | Date Particulars Cost
+
+(8) (®)
+
+1.12.23 | To 8 % | 59,767 | 31.12.23 | By balance c/d 59,767
+
+debentures
+
+(b)
+
+Working Notes:
+
+(i) Cost of Debenture purchased on 1° July = % 1,12,000 — = 2,000
+(Interest) = %1,10,000
+
+(ii) Cost of Debentures sold on 1% Oct.
+= (% 2,16,000 + % 1,10,000) x 80,000/3,00,000 = % 86,933
+(iii) Loss on sale of Debentures = % 86,933— %84,000 = % 2,933
+Nominal value of debentures converted into equity shares
+=% 55,000
+[(® 3,00,000 — 80,000) x.25]
+Interest received before the conversion of debentures
+Interest on 25% of total debentures = 55,000 x 8% x 2/12 = 733
+
+(iv) Cost of Debentures converted = (% 2,16,000 + %1,10,000) x
+55,000/3,00,000 = = 59,767
+
+(v)
+Cost of closing balance = (% 2,16,000 + %1,10,000) x
+of Debentures 1,65,000 / 3,00,000
+= 7 1,79,300
+
+(vii) Closing balance of Debentures has been valued at cost.
+
+(viii) 5,000 equity Shares in C Ltd. will be valued at cost of = 59,767
+being lower than the market value = 75,000 (% 15 x5,000)
+
+Note: It is assumed that interest on debentures, which are converted into
+cash, has been received at the time of conversion.
+
+As per AS 16 ‘Borrowing Costs’, a qualifying asset is an asset that
+necessarily takes a substantial period of time to get ready for its intended
+use or sale. Further, the standard states that what constitutes a
+substantial period of time primarily depends on the facts and
+circumstances of each case. However, ordinarily, a period of twelve
+months is considered as substantial period of time unless a shorter or
+longer period can be justified on the basis of facts and circumstances of
+
+317
+
+
+===== PHYSICAL PAGE 29 =====
+
+the case. In estimating the period, time which an asset takes,
+technologically and commercially, to get it ready for its intended use or
+sale is considered.
+
+It may be implied that there is a rebuttable presumption that a 12 months
+period constitutes substantial period of time.
+
+Under present circumstances where construction period has reduced
+drastically due to technical innovation, the 12 months period should at
+best be looked at as a benchmark and not as a conclusive yardstick. It
+may so happen that an asset under normal circumstances may take
+more than 12 months to complete. However, an enterprise that
+completes the asset in 8 months should not be penalized for its efficiency
+by denying it interest capitalization and vice versa.
+
+The substantial period criteria ensures that enterprises do not spend a
+lot of time and effort capturing immaterial interest cost for purposes of
+capitalization.
+
+Therefore, if the factory is constructed in 8 months then it shall be
+considered as a qualifying asset. The interest on borrowings for the
+same shall be capitalised although it has taken less than 12 months for
+the asset to get ready to use.
+
+Balance Sheet of Mehar Ltd. as at 31S March, 2024
+
+Note z
+l EQUITY AND LIABILITIES:
+(1) | (a) Share Capital 1 1,60,00,000
+(b) Reserves and Surplus 2 110,68,000
+(2) | Non-current Liabilities
+Long term Borrowings- 40,00,000
+Terms Loans (Secured)
+(3) | Current Liabilities
+(a) Trade Payables 45,80,000
+(b) Other current liabilities 3 8,00,000
+(c) Short-term Provisions (Provision for
+taxation) 10,20,000
+Total 3,74,68,000
+Il | ASSETS
+(1) | Non-current Assets
+(a) Property, Plant and Equipment 4 214,00,000
+(b) Non- current Investments 9,00,000
+(2) | Current Assets:
+(a) Inventories 5 48,00,000
+(b) Trade Receivables 6 48,20,000
+(c) Cash and Cash Equivalents 38,40,000
+
+318
+
+
+===== PHYSICAL PAGE 30 =====
+
+(d) Short-term Loans and Advances 7 17,08,000
+Total 3,74,68,000
+Notes to accounts
+(2
+1. | Share Capital
+Authorized, issued, subscribed & called
+up
+1,20,000, Equity Shares of = 100 each 1,20,00,000
+40,000 10% Redeemable Preference 40,00,000 | 1,60,00,000
+Shares of 100 each
+2. | Reserves and Surplus
+Securities Premium Account 19,00,000
+General reserve 62,00,000
+Profit & Loss Balance
+Opening balance -
+Profit for the period 32,00,000
+Less: Miscellaneous Expenditure
+written off (2,32,000) 29,68,000 | 110,68,000
+3. | Other current liabilities
+Loan from other parties 8,00,000
+4. | Property, plant and equipment
+Plant and Machinery (WDV) 214,00,000
+5. | Inventories
+Finished Goods 30,00,000
+Stores 16,00,000
+Loose Tools 2,00,000 48,00,000
+6. | Trade Receivables
+Trade receivables 49,00,000
+Less: Provision for Doubtful Debts (80,000) | 48,20,000
+7. | Short term loans & Advances
+Staff Advances* 2,20,000
+Other Advances* 14,88,000 17,08,000
+*Considered to be short term.
+(a) Present value of minimum lease payment is computed below:
+
+319
+
+Year MLP PV
+DF (12.6%)
+z z
+1 50,000 0.890 44,500
+2 50,000 0.790 39,500
+
+
+
+===== PHYSICAL PAGE 31 =====
+
+(b)
+
+3 50,000 0.700 35,000
+4 50,000 0.622 31,100
+5 50,000 0.552 27,600
+5 25,000 0.552 13,800
+1,91,500
+
+Present value of minimum lease payment = = 1,91,500
+Fair value of leased asset = & 2,00,000
+
+As per AS 19, on the date of inception of Lease, Lessee should show it
+as an asset and corresponding liability at lower of Fair value of leased
+asset at the inception of the lease and present value of minimum lease
+payments from the standpoint of the lessee. The accounting entry at the
+inception of lease to record the asset taken on finance lease in books of
+lessee is suggested below:
+
+z z
+Asset A/c Dr. 1,91,500
+To Lessor (Lease Liability) A/c 1,91,500
+(Being recognition of finance lease as asset
+and liability)
+
+As per AS 12 ‘Accounting for Government Grants,’ income from Deferred
+Grant Account is allocated to Profit and Loss account usually over the
+periods and in the proportions in which depreciation on related assets is
+charged. Accordingly, in the first two years (= 32 lakhs /4 years) = = 8
+lakhs x 2 years= = 16 lakhs will be credited to Profit and Loss Account
+and = 16 lakhs will be the balance of Deferred Grant Account after two
+years. Therefore, on refund of grant, following entry will be passed:
+
+z id
+Deferred Grant A/c Dr. 16 lakhs
+Profit & Loss A/c Dr. 16 lakhs
+To Bank A/c 32 lakhs
+(Being Government grant refunded)
+
+1. Value of Fixed Assets after two years but before refund of
+grant
+
+Fixed assets initially recorded in the books = & 80 lakhs
+Depreciation for each year
+
+= (% 80 lakhs — %8 lakhs)/4 years = 18 lakhs per year
+Book value of fixed assets after two years
+
+= 80 lakhs — (% 18 lakhs x 2 years) = = 44 lakhs
+
+320
+
+
+===== PHYSICAL PAGE 32 =====
+
+2. Value of Fixed Assets after refund of grant
+
+On refund of grant the balance of deferred grant account will
+become nil. The fixed assets will continue to be shown in the books
+
+at = 44 lakhs.
+3. Amount of depreciation for remaining two years
+
+Depreciation will continue to be charged at = 18 lakhs per annum
+
+for the remaining two years.
+Books of Robert Ltd.
+
+Balance Sheet of Robert Ltd. as at 1st April, 2024 (after merger)
+
+321
+
+Particulars Notes | % (in lakhs)
+Equity and Liabilities
+1 Shareholders’ funds
+A_ Share capital 1 36,000
+B_ Reserves and Surplus 2 24,981
+2 Non-current liabilities
+A_ Long-term borrowings 3 1,500
+3 Current liabilities
+A_ Trade Payables (1,800+694.5-120) 2,374.5
+B_ Short-term provisions (2,745+1,053) 3,798
+Total 68,653.5
+Assets
+1 Non-current assets
+A Property, Plant & Equipment 4 43,506
+2 Current assets
+Inventories (11,793+6,061.5) 17,854.5
+B_ Trade receivables (3,180+1,650-120) 4,710
+Cash and cash equivalents (1,671+913.5-
+C 1.5) 2,583
+Total 68,653.5
+Notes to Accounts
+id
+1. Share Capital
+Equity share capital
+Authorized, issued, subscribed and paid-up: 36 crores
+equity shares of ~ 10 each (out of these shares, 13.5 36,000
+crores shares have been issued for consideration other
+than cash)
+
+
+
+===== PHYSICAL PAGE 33 =====
+
+2. Reserves and Surplus
+General Reserve
+Securities Premium
+Foreign Project Reserve
+
+Total
+3. Long-term borrowings
+Secured
+13% Debentures
+4. PPE
+
+Land & Buildings
+
+Plant & Machinery
+
+Furniture & Fittings
+Total
+
+Profit and Loss Account % (4,305 +1,162.5-1.5)
+
+14,550
+4,500
+465
+5,466
+24,981
+
+9,000
+28,500
+6,006
+43,506
+
+Working Note:
+
+Computation of purchase consideration
+
+Purchase consideration was discharged in the form of three equity shares of
+Robert Ltd. for every two equity shares held in Diamond Ltd.
+
+Purchase consideration = ¥ 9,000 lacs x 5
+
+3
+
+=% 13,500 lacs
+
+Consolidated Balance Sheet of H Ltd. and its Subsidiary S Ltd.
+as at 31st March, 2024
+
+Particulars Note No. (2
+|. Equity and Liabilities
+(1) Shareholder's Funds
+(a) Share Capital 12,00,000
+(1,20,000 equity shares of = 10 each)
+(b) Reserves and Surplus 1 8,16,200
+(2) Minority Interest (W.N.4) 99,300
+(3) Current Liabilities
+(a) Trade Payables 2 4,10,000
+Total 25,25,500
+ll. Assets
+(1) Non-current assets
+(i) Property, plant and equipment 3 13,10,500
+(ii) Intangible assets 4 24,000
+(2) Current assets
+(i) Inventories 5 3,25,000
+
+322
+
+
+
+===== PHYSICAL PAGE 34 =====
+
+(ii) Trade Receivables 6 6,70,000
+
+(iii) Cash at Bank 7 1,96,000
+Total 25,25,500
+Notes to Accounts
+z
+1. | Reserves and Surplus
+General Reserves 4,35,000
+Add: 80% share of S Ltd.’s post-
+acquisition reserves (W.N.3) 84,000 5,19,000
+Profit and Loss Account 2,80,000
+Add: 80% share of S Ltd.’s post- 21,200
+acquisition profits (W.N.3)
+Less: Unrealised gain (4,000) 17,200 2,97,200
+8,16,200
+2. | Trade Payables
+H Ltd. 3,22,000
+S Ltd. 1,23,000
+Less: Mutual transaction (35,000) 4,10,000
+3. | Property, plant and equipment
+Machinery
+H Ltd. 6,40,000
+S Ltd. 2,00,000
+Add: Appreciation 1,00,000
+3,00,000
+Less: Depreciation (30,000) | 2,70,000 9,10,000
+Furniture
+H. Ltd. 3,75,000
+S Ltd. 40,000
+Less: Decrease in value (10,000)
+30,000
+Less: Depreciation (4,500) 25,500 4,00,500
+13,10,500
+4. | Intangible assets
+Goodwill [WN 5] 24,000
+5. | Inventories
+H Ltd. 2,68,000
+S Ltd. 62,000 | 3,30,000
+Less: Inventory reserve (5,000)
+3,25,000
+
+323
+
+
+===== PHYSICAL PAGE 35 =====
+
+6. | Trade Receivables
+H Ltd. 4,70,000
+S Ltd. 2,35,000
+7,05,000
+Less: Mutual transaction (35,000)
+6,70,000
+7. | Cash and Bank
+H Ltd. 1,64,000
+S Ltd. 32,000 1,96,000
+
+Working Notes:
+
+1. Profit or loss on revaluation of assets in the books of S Ltd. and
+their book values as on 1.4.2023
+
+id
+Machinery
+Revaluation as on 1.4.2023 3,00,000
+Less: Book value as on 1.4.2023 (2,00,000)
+Profit on revaluation 1,00,000
+Furniture
+Revaluation as on 1.4.2023 30,000
+Less: Book value as on 1.4.2023 (40,000)
+Loss on revaluation (10,000)
+
+2. Calculation of short/excess depreciation
+
+Machinery | Furniture
+Upward/ (Downward) Revaluation 1,00,000| (10,000)
+Rate of depreciation 10% p.a.| 15% p.a.
+Difference [(short)/excess] (10,000) 1,500
+
+3. Analysis of reserves and profits of S Ltd. as on 31.03.2024
+Pre- Post-acquisition
+acquisition profits
+profit upto) (1.4.2023-31.3.2024)
+
+1.4.2023
+
+(Capital| General | Profit and
+profits)| Reserve loss
+
+account
+General reserve as on 50,000) 1,05,000
+31.3.2024
+Profit and loss account as on 30,000 35,000
+31.3.2024
+
+Upward Revaluation of machinery 1,00,000
+324
+
+
+===== PHYSICAL PAGE 36 =====
+
+(a)
+
+as on 1.4.2023
+
+Furniture as on 1.4.2023
+
+Downward Revaluation of (10,000)
+
+Short depreciation on machinery (10,000)
+Excess depreciation on furniture 1,500
+Total 1,70,000| 1,05,000 26,500
+Minority Interest
+id
+Paid-up value of (2,00,000 x 20%) 40,000
+Add: 20% share of pre-acquisition profits and reserves
+[(20% of (50,000 + 30,000)] 16,000
+20% share of profit on revaluation 18,000
+20% share of post-acquisition reserves 21,000
+20% share of post-acquisition profit 5,300
+1,00,300
+Less: Unrealised Profit on Inventory
+(55,000 x 10/110) x 20% (1,000)
+99,300
+Cost of Control or Goodwill
+Cost of Investment 3,20,000
+Less: Paid-up value of 80% shares 1,60,000
+80% share of pre-acquisition profits and
+reserves (% 64,000 + 72,000) 1,36,000 | (2,96,000)
+Cost of control or Goodwill __ 24,000
+
+Accounting Standards standardize diverse accounting policies with a
+view to eliminate the non-comparability of financial statements and
+improve the reliability of financial statements. Accounting Standards
+provide a set of standard accounting policies, valuation norms and
+disclosure requirements. Accounting standards aim at improving the
+quality of financial reporting by promoting comparability, consistency and
+transparency, in the interests of users of financial statements.
+
+The following are the benefits of Accounting Standards:
+
+(i) Standardization of alternative accounting
+
+treatments:
+
+Accounting Standards reduce to a reasonable extent confusing
+variations in the accounting treatment followed for the purpose of
+
+preparation of financial statements.
+
+(ii) Requirements for additional disclosures: There are certain
+areas where important is not statutorily required to be disclosed.
+Standards may call for disclosure beyond that required by law.
+
+325
+
+
+===== PHYSICAL PAGE 37 =====
+
+(b)
+
+(iii)
+
+Comparability of financial statements: The application of
+accounting standards would facilitate comparison of financial
+statements of different companies situated in India and facilitate
+comparison, to a limited extent, of financial statements of
+companies situated in different parts of the world. However, it
+should be noted in this respect that differences in the institutions,
+traditions and legal systems from one country to another give rise
+to differences in Accounting Standards adopted in different
+countries.
+
+Or
+
+Amount that can be drawn from reserves for (10% dividend on
+= 80,00,000 i.e. = 8,00,000)
+
+Profits available
+
+Current year profit = 1,42,500
+Amount which can be utilized from
+reserves (= 8,00,000 — 1,42,500) = 6,57,500
+
+Conditions as per Companies (Declaration of dividend out of
+Reserves) Rules, 2014:
+
+Condition |
+
+Since 10% is lower than the average rate of dividend (12%), 10%
+dividend can be declared.
+
+Condition Il
+
+Maximum amount that can be drawn from the accumulated profits
+and reserves should not exceed 10% of paid up capital plus free
+reserves ie. % 10,50,000 [10% of (80,00,000 + 25,00,000)]
+
+Condition Ill
+
+The balance of reserves after drawl ¥ 18,42,500 (% 25,00,000 -
+= 6,57,500) should not fall below 15% of its paid up capital ie.
+= 12,00,000 (15% of = 80,00,000]
+
+Since all the three conditions are satisfied, the company can
+withdraw % 6,57,500 from accumulated reserve (as per Declaration
+and Payment of Dividend Rules, 2014).
+
+Cash Flow Statement for the year ended 31.3.2024
+
+id id
+
+Cash flow from operating activities
+Cash received on account of trade| 3,50,000
+
+receivables
+
+Cash paid on account of trade payables (90,000)
+Cash paid to employees (salaries and wages) | (25,000)
+Other cash payments (overheads) (15,000)
+Cash generated from operations 2,20,000
+
+326
+
+
+===== PHYSICAL PAGE 38 =====
+
+(c)
+
+Income tax paid (1,55,000)
+Net cash generated from operating activities 65,000
+Cash flow from investing activities
+Payment for purchase of machinery (4,00,000)
+Proceeds from sale of machinery 70,000
+Net cash used in investment activities (3,30,000)
+Cash flow from financing activities
+Proceeds from issue of share capital 5,00,000
+Bank loan repaid (2,50,000)
+Debentures redeemed (50,000)
+Net cash used in financing activities 2,00,000
+Net decrease in cash and cash equivalents (65,000)
+Cash and cash equivalents at the beginning 80,000
+of the year
+Cash and cash equivalents at the end of the 15,000
+year
+
+Outlet Stock A/c
+Particulars | Particulars z
+To bal b/d 45,000 | By Sales (90,000/20 x | 5,40,000
+
+120)
+
+To Goods sent at outlet | 4,86,000 | By goods lost by fire} 27,000
+
+(balancing figure)
+
+To Gross Profit 90,000 | By bal c/d 54,000
+6,21,000 6,21,000
+Outlet Profit and Loss A/c
+
+Particulars % | Particulars z
+To Expenses 30,000 | By Gross Profit 90,000
+
+To Goods lost by fire 27,000
+
+To Net Profit 33,000
+
+(balancing figure)
+90,000 90,000
+Stock Reserve A/c
+
+Particulars | Particulars z
+To HO P&L A/c 9,000 | By bal c/d 9,000
+To Bal c/d 10,800 | By HO P&L A/c 10,800
+19,800 19,800
+
+327
+
+
+
+===== PHYSICAL PAGE 39 =====
+
+ANSWER OF MODEL TEST PAPER 4
+INTERMEDIATE COURSE: GROUP - I
+PAPER - 1 : ADVANCED ACCOUNTING
+
+Case Scenario
+
+1.
+
+(a)
+(b)
+(c)
+d)
+
+(a)
+(b)
+(c)
+(d)
+(a)
+(b)
+(c)
+(d)
+(c)
+(b)
+(c)
+
+(a)
+
+(ii)
+(ii)
+(iii)
+(iv)
+(iii)
+(ii)
+(iii)
+(iii)
+(iii)
+(iv)
+(ii)
+(ii)
+
+PART Il —- Descriptive Questions (70 Marks)
+
+As per AS 13 ‘Accounting for Investments’, where long-term investments
+are reclassified as current investments, transfers are made at the lower
+of cost and carrying amount at the date of transfer; and where
+investments are reclassified from current to long term, transfers are
+made at lower of cost and fair value on the date of transfer.
+
+Accordingly, the re-classification will be done on the following basis:
+(i) In this case, carrying amount of investment on the date of transfer
+
+is less than the cost; hence this re-classified current investment
+should be carried at ¥ 12 lakhs in the books.
+
+(ii) In this case also, carrying amount of investment on the date of
+transfer is less than the cost; hence this re-classified current
+investment should be carried at = 5 lakhs in the books.
+
+(iii) In this case, reclassification of current investment into long-term
+investments will be made at % 7 lakhs as cost is less than its fair
+value of ~ 8.5 lakhs on the date of transfer.
+
+(iv) In this case, market value (considered as fair vale) is ¥ 3.8 lakhs on
+the date of transfer which is lower than the cost of = 4 lakhs. The
+
+328
+
+
+===== PHYSICAL PAGE 40 =====
+
+(b) (i)
+
+(ii)
+
+(iii)
+
+(iv)
+
+(v)
+
+reclassification of current investment into long-term investments
+will be made at & 3.8 lakhs.
+
+Suit filed against the company is a contingent liability but it was not
+existing as on balance sheet date as the suit was filed on 20" April
+after the balance Sheet date. As per AS 4, 'Contingencies' used in
+the Standard is restricted to conditions or situations at the balance
+sheet date, the financial effect of which is to be determined by
+future events which may or may not occur. Hence, it will have no
+effect on financial statements and will be a non-adjusting event.
+
+In the given case, terms and conditions for acquisition of business
+were finalised and carried out before the closure of the books of
+accounts but transaction for payment of financial resources was
+effected in April, 2024. This is clearly an event occuring after the
+balance sheet date. Hence, necessary adjustment to assets and
+liabilities for acquisition of business is necessary in the financial
+statements for the year ended 31%t March 2024.
+
+Only those significant events which occur between the balance
+sheet date and the date on which the financial statements are
+approved, may indicate the need for adjustment to assets and
+liabilities existing on the balance sheet date or may require
+disclosure. In the given case, theft of cash was detected on 16"
+July, 2024 after approval of financial statements by the Board of
+Directors, hence no treatment is required.
+
+Adjustments to assets and liabilities are not appropriate for events
+occurring after the balance sheet date, if such events do not relate
+to conditions existing at the balance sheet date. In the given case,
+sale of immovable property was under proposal stage (negotiations
+also not started) on the balance sheet date. Therefore, no
+adjustment to assets for sale of immovable property is required in
+the financial statements for the year ended 31%t March, 2024.
+
+The condition of fire occurrence was not existing on the balance
+sheet date. Only the disclosure regarding event of fire and loss
+being completely insured may be given in the report of approving
+authority.
+
+Prashant Ltd.
+Balance Sheet as on 31S* March, 2024
+
+Particulars Notes z
+
+Equity and Liabilities
+
+1 Shareholders’ funds
+a_ Share capital 1 14,95,000
+b Reserves and Surplus 2 3,76,800
+Non-current liabilities
+Long-term borrowings 3 3,65,000
+
+329
+
+
+===== PHYSICAL PAGE 41 =====
+
+3 Current liabilities
+a Trade Payables 2,67,000
+Other current liabilities 4 10,000
+c Short-term provisions 5 72,000
+Total 25,85,800
+Assets
+1 Non-current assets
+Property, Plant and Equipment 6 15,95,000
+2 Current assets
+a_ Inventories 3,15,000
+b Trade receivables 7 2,95,000
+c Cash and bank balances 8 3,22,300
+d Short-term loans and advances 58,500
+Total 25,85,800
+Notes to accounts
+id
+1 Share Capital
+Equity share capital
+Issued & subscribed & fully paid up
+1,50,000 Equity Shares of ~ 10 each
+(of the above 10,000 shares have been
+issued for consideration other than cash) 15,00,000
+Less: Calls in arrears (5,000) | 14,95,000
+2 Reserves and Surplus
+General Reserve 2,70,000
+Profit & Loss balance 1,06,800
+Total | 3,76,800
+3 Long-term borrowings
+Secured
+Loan from State Financial Corporation 2,00,000
+(2,10,000-10,000)
+(Secured by hypothecation of Plant and
+Machinery)
+Unsecured Loan 1,65,000
+Total 3,65,000
+4 Other current liabilities
+Interest accrued but not due on loans (SFC) 10,000
+5 Short-term provisions
+Provision for taxation 72,000
+
+330
+
+
+
+===== PHYSICAL PAGE 42 =====
+
+6 Property, Plant & Equipment
+
+Land
+
+Building
+
+Less: Depreciation(b.f.)
+
+Plant & Machinery
+
+Less: Depreciation (b.f.)
+
+Total
+
+7 Trade receivables
+
+Outstanding for a period exceeding six
+months
+
+Other Amounts
+
+Total
+8 Cash and bank balances
+Cash and cash equivalents
+Cash at bank
+Cash in hand
+Other bank balances
+Total
+
+5,50,000
+(65,000)
+6,25,000
+(65,000)
+
+5,50,000
+
+4,85,000
+
+5,60,000
+
+15,95,000
+
+55,000
+
+2,40,000
+
+2,95,000
+
+2,85,000
+37,300
+Nil
+
+3,22,300
+
+(a) (i) PQR Ltd.
+
+Cash Flow Statement for the year ended 31% March, 2024
+
+(Using direct method)
+
+331
+
+Particulars id id
+
+Cash flows from Operating Activities
+Cash sales (% 3,75,000/25%) 15,00,000
+Less: Cash payments for trade payables (6,10,000)
+
+Wages Paid (5,55,000)
+
+Office and selling expenses
+
+= (35,000 + 15,000) (50,000) | (12,15,000)
+Cash generated from operations before
+taxes 2,85,000
+Income tax paid (55,000)
+Net cash generated from operating activities
+(A) 2,30,000
+Cash flows from Investing activities
+Sale of investments = (8,20,000 + 20,000) 8,40,000
+Payments for purchase of Plant &
+machinery (3,50,000)
+Net cash used in investing activities (B) 4,90,000
+
+
+
+===== PHYSICAL PAGE 43 =====
+
+Cash flows from financing activities
+Bank loan repayment (including interest) (2,05,000)
+Dividend paid (40,000)
+Net cash used in financing activities (C) (2,45,000)
+Net increase in cash (A+B+C) 4,75,000
+Cash and cash equivalents at beginning of
+the period 2,25,000
+Cash and cash equivalents at end of the
+period 7,00,000
+(ii) ‘Cash Flow from Operating Activities’ by indirect method
+zg
+Net Profit for the year before tax and 2,80,000
+extraordinary items
+Add: Non-Cash and Non-Operating Expenses:
+Depreciation 60,000
+Interest Paid 5,000
+Less: Non-Cash and Non-Operating Incomes:
+Profit on Sale of Investments (20,000)
+Net Profit after Adjustment for Non-Cash Items 3,25,000
+Less: Decrease in trade payables 15,000
+Increase in inventory 25,000 | (40,000)
+Cash generated from operations before taxes 2,85,000
+Working Note:
+Calculation of net profit earned during the year
+z zg
+Gross profit 3,75,000
+Less: Office expenses, selling expenses 50,000
+Depreciation 60,000
+Interest paid 5,000 | (1,15,000)
+2,60,000
+Add: Profit on sale of investments 20,000
+Net profit before tax 2,80,000
+
+(b) As per AS 14, ‘Accounting for Amalgamations’ consideration for the
+amalgamation means the aggregate of shares and other securities
+issued and payment made in form of cash or other assets by the
+transferee company to the shareholders of the transferor company.
+
+(i) Computation of Purchase Consideration
+
+(a) Preference Shares: = 50 per share
+24,000 Preference shares 12,00,000
+332
+
+
+===== PHYSICAL PAGE 44 =====
+
+(b) Cash
+(c) Equity shares: 56,000 equity shares in
+
+39,000
+
+Wow Ltd. @ = 115 64,40,000
+76,79,000
+(ii) Journal entry
+z id
+Liquidator of Wonder Ltd. Dr. 76,79,000
+To Cash 39,000
+To Preference Share Capital A/c 12,00,000
+To Equity Share Capital A/c 56,00,000
+To Securities Premium A/c 8,40,000
+[56,000 x = 15 (115-100)]
+(i) Journal Entries in the Books of VT Ltd.
+Dr. Cr.
+id id
+PPE Dr. | 2,10,000
+To Revaluation Reserve 2,10,000
+(Revaluation of PPE at 15% above book
+value)
+Reserve and Surplus Dr. | 1,20,000
+To Equity Dividend 1,20,000
+(Equity dividend @ 10%)
+Equity Dividend Dr. | 1,20,000
+To Bank Account 1,20,000
+(Payment of equity dividend)
+Business Purchase Account Dr. | 9,80,000
+To Liquidator of MG Ltd. 9,80,000
+(Consideration payable for the business
+taken over from MG Ltd.)
+PPE (115% of = 5,00,000) Dr. | 5,75,000
+Inventory (95% of = 6,40,000) Dr. | 6,08,000
+Debtors Dr. | 3,80,000
+Bills Receivable Dr. 40,000
+Investment Dr. | 1,60,000
+Cash at Bank Dr. 20,000
+(= 80,000 —% 60,000 dividend paid)
+e 5
+2360000) for Bad Debts (5% of 18,000
+
+333
+
+
+
+===== PHYSICAL PAGE 45 =====
+
+(Being goodwill set off)
+
+To Sundry Creditors 2,50,000
+To 12% Debentures in MG Ltd. 3,24,000
+To Bills Payable 50,000
+To Business Purchase Account 9,80,000
+To Capital Reserve (Balancing 1,61,000
+figure)
+(Incorporation of various assets and
+liabilities taken over from MG Ltd. at agreed
+values and difference of net assets and
+purchase consideration being credited to
+capital reserve)
+Liquidator of MG Ltd. Dr. | 9,80,000
+To Equity Share Capital 8,00,000
+To 10% Preference Share Capital 1,80,000
+(Discharge of consideration for MG Ltd.'s
+business)
+12% Debentures in MG Ltd. (% 3,00,000 x
+108%) Dr. | 3,24,000
+Discount on Issue of Debentures
+(& 3,60,000 x 10%) Dr. | 38,000
+0,
+To 12% Debentures (% 3,24,000/90 x 3,60,000
+100)
+Allotment of 12% Debentures to debenture
+holders of MG Ltd. at a discount of 10%)
+Sundry Creditors Dr. 20,000
+To Sundry Debtors 20,000
+Cancellation of mutual owing)
+Goodwill Dr. 60,000
+To Bank 60,000
+Being liquidation expenses reimbursed to
+MG Ltd.)
+Capital Reserve/P&L A/c Dr. 60,000
+To Goodwill 60,000
+
+(ii) Statement of Consideration payable by VT Ltd. for 60,000 shares
+
+(payment method)
+
+Shares to be allotted 60,000/12 x 16 = 80,000 shares of VT Ltd.
+
+Issued 80,000 shares of 10 each i.e.
+
+= 8,00,000
+
+For 10% preference shares, to be paid at 10% discount
+
+= 2,00,000x 90/100
+
+334
+
+= 1,80,000
+
+(i)
+
+(ii)
+
+
+
+===== PHYSICAL PAGE 46 =====
+
+Consideration amount [(i) + (ii)] = 9,80,000
+5. Consolidated Balance Sheet of Kedar Ltd. and its Subsidiary Vijay Ltd.
+as at 31°t March, 2024
+
+Particulars Note (®)
+No.
+
+I. Equity and Liabilities
+(1) | Shareholder's Funds
+
+(a) | Share Capital 15,00,000
+(b) Reserves and Surplus 1 8,61,500
+(2) Minority Interest (W.N.5) 1,20,375
+(3) | Current Liabilities
+(a) | Trade Payables 2 5,17,500
+Total 29,99,375
+Il. Assets
+
+(1) Non-current assets
+
+(i) Property, plant & Equipment 3 14,94,375
+(ii) Intangible assets 4 30,000
+
+(b) | Other non- current assets 5 14,75,000
+Total 29,99,375
+
+Notes to Accounts
+
+z
+1. | Reserves and Surplus
+Reserves 5,00,000
+Add: 4/5th share of Vijay Ltd.’s 1,00,000 6,00,000
+post-acquisition reserves
+(W.N.3)
+Profit and Loss Account 2,50,000
+Add: 4/5th share of Vijay Ltd.’s 11,500 2,61,500
+post-acquisition profits (W.N.4)
+8,61,500
+2. | Trade Payables
+Kedar Ltd. 3,75,000
+Vijay Ltd. 1,42,500 5,17,500
+3. | Property, plant & Equipment
+Machinery
+Kedar Ltd. 7,50,000
+
+335
+
+
+===== PHYSICAL PAGE 47 =====
+
+336
+
+Vijay Ltd. 2,50,000
+Add: Appreciation 1,25,000
+3,75,000
+Less: Depreciation (37,500) | 3,37,500
+Furniture -
+Kedar Ltd. -| 3,75,000
+Vijay Ltd. 50,000
+Less: Decrease in value (12,500)
+37,500
+Less: Depreciation (5,625) 31,875 14,94,375
+Intangible assets
+Goodwill [WN 6] 30,000
+5. | Other non-current assets
+Kedar Ltd. 11,00,000
+Vijay Ltd. 3,75,000 14,75,000
+Working Notes:
+
+1. Pre-acquisition profits and reserves of Vijay Ltd. e
+Reserves 62,500
+Profit and Loss Account 37,500
+
+1,00,000
+Kedar Ltd.’s = 4/5 x 1,00,000 80,000
+Minority Interest = 1/5 x 1,00,000 20,000
+
+2. Profit on revaluation of assets of Vijay Ltd. -
+Profit on Machinery % (3,75,000 — 2,50,000) 1,25,000
+Less: Loss on Furniture %(50,000 — 37,500) 12,500
+Net Profit on revaluation 1,12,500
+Kedar Ltd.’s share 4/5 x 1,12,500 90,000
+Minority Interest 1/5 x 1,12,500 22,500
+
+3. Post-acquisition reserves of Vijay Ltd. -
+Post-acquisition reserves (Total reserves less pre- 1,25,000
+acquisition reserves = = 1,87,500 — 62,500)
+
+Kedar Ltd.’s share 4/5 x 1,25,000 1,00,000
+Minority interest 1/5 x 25,000 25,000
+
+4. Post -acquisition profits of Vijay Ltd. -
+Post-acquisition profits (Profit & loss account balance 25,000
+less pre-acquisition profits = ¥ 62,500 — 37,500)
+
+Add: Excess depreciation charged on furniture @ 15% -
+on % 12,500 i.e. (50,000 — 37,500) 1,875
+26,875
+
+
+
+===== PHYSICAL PAGE 48 =====
+
+Less: Under depreciation on machinery @ 10% -
+on % 1,25,000 i.e. (3,75,000 — 2,50,000) (12,500)
+Adjusted post-acquisition profits 14,375
+Kedar Ltd.’s share 4/5 x 14,375 11,500
+Minority Interest 1/5 x 14,375 2,875
+Minority Interest -
+Paid-up value of (2,500 — 2,000) = 500 shares -
+held by outsiders i.e. 500 x = 100 50,000
+Add: 1/5th share of pre-acquisition profits and reserves 20,000
+1/5th share of profit on revaluation 22,500
+1/5th share of post-acquisition reserves 25,000
+1/5th share of post-acquisition profit 2,875
+1,20,375
+Cost of Control or Goodwill -
+Paid-up value of 2,000 shares held by Kedar Ltd. i.e. 2,00,000
+2,000 x = 100
+Add: 4/5th share of pre-acquisition profits and reserves 80,000
+4/5th share of profit on the revaluation 90,000
+Intrinsic value of shares on the date of} 3,70,000
+acquisition
+Price paid by Kedar Ltd. for 2,000 shares 4,00,000
+Less: Intrinsic value of the shares (3,70,000)
+Cost of control or Goodwill 30,000
+
+(a)
+
+Difference between Amalgamation, Absorption and External
+Reconstruction
+Basis Amalgamation Absorption External
+Reconstruction
+
+Meaning Two or more|In this case, an|In this case, a
+companies are|existing newly formed
+wound up and a|jcompany takes/company _ takes
+new company is|over the | over the business
+formed to  take|business of onejof an_ existing
+over their}or more existing |company.
+business. companies.
+
+Minimum At least three/At least two/Only two
+
+number of | companies are|companies are|companies are
+
+Companies _ |involved. involved. involved.
+
+involved
+
+337
+
+
+
+===== PHYSICAL PAGE 49 =====
+
+Number — of|Only one resultant] No new resultant) Only one
+new resultant | company is |Company is}resultant
+companies _ | formed. Two| formed. company is
+companies are formed. Under
+wound up to form a this case a newly
+single resultant formed company
+company. takes over the
+business of an
+existing company.
+Objective Amalgamation —is|Absorption is | External
+done to cut}done to  cut/reconstruction is
+competition | and|competition and|done to
+reap the|reap the | reorganise the
+economies in large |economies in| financial structure
+scale. large scale. of the company.
+Example A Ltd. and B Ltd.|/A Ltd. takes over|B Ltd. is formed to
+amalgamate to|the business of|take over the
+form C Ltd. another existing|business of an
+company B Ltd. |existing company
+A Ltd.
+Or
+
+(a) Profit and Loss Account for the year ended 2023-24 (not assuming
+going concern)
+Particulars Amount Particulars Amount
+z z
+
+To Opening Stock 1,50,000 | By Sales 27,50,000
+
+To Purchases 22,50,000 | By Closing Stock 2,50,000
+
+To Expenses* 78,000 | By Trade payables 7,500
+To Depreciation 35,000
+To Provision for 30,000
+
+doubtful debts
+
+To Deferred cost 50,000
+To Loan penalty 25,000
+To Net Profit (b.f.) 3,89,500
+
+30,07,500 30,07,500
+
+(b) According to AS 15 (Revised) “Employee Benefits”, actuarial gains and
+losses should be recognized immediately in the statement of profit and
+
+loss as income or expense.
+
+Therefore, surplus of = 6 lakhs in the
+
+pension scheme on its actuarial valuation is required to be credited to
+the profit and loss statement of the current year. Hence, Synergy Ltd.
+cannot spread the actuarial gain of = 6 lakhs over the next 2 years by
+reducing the annual contributions to = 2 lakhs instead of = 5 lakhs. It has
+to contribute = 5 lakhs annually for its pension schemes.
+
+338
+
+
+===== PHYSICAL PAGE 50 =====
+
+(c) Trial Balance of Foreign Branch (converted into Indian Rupees) as on
+March 31, 2024
+
+Particulars | $(Dr.)| $ (Cr.)/Conversion Rate % (Dr.) & (Cr.)
+Basis
+Fixed Assets | 8,000 Transaction 63 5,04,000
+Date Rate
+Opening 800 Opening Rate 65 52,000
+Inventory
+Goods 2,800 Actuals 1,85,500
+Received
+from HO
+Sales 24,050/Average Rate 66 15,87,300
+Purchases 11,800 Average Rate 66 7,78,800
+Expenses 1,800 Average Rate 66 1,18,800
+Cash 700 Closing Rate 67 46,900
+Remittance 2,450 Actuals 1,62,000
+to HO
+HO Account 4,300/Actuals 2,84,500
+Exchange Balancing 23,800
+Rate Figure
+Difference
+28,350| 28,350 18,71,800] 18,71,800
+Closing Stock 700 Closing Rate 67 46,900
+Depreciation 800 Fixed Asset| 63 50,400
+Rate
+
+339
+
+
+===== PHYSICAL PAGE 51 =====
+
+ANSWERS OF MODEL TEST PAPER 5
+INTERMEDIATE COURSE; GROUP |
+PAAPER 1 ADVANCED ACCOUNTING
+
+(i) (d)
+
+(ii) (c)
+
+(iii) | (b)
+
+(iv) (a)
+
+(i) (b)
+
+(ii) (d)
+
+(iii) (c)
+
+(iv) (c)
+
+(i) (b)
+
+(ii) (a)
+
+(iii) (d)
+
+(iv) (a)
+. (a)
+5. | (b)
+(c)
+
+Part Il- Descriptive questions (70 marks)
+
+(a) (i) Computation of borrowing cost to be capitalized for specific
+borrowings and general borrowings based on weighted average
+accumulated expenses
+
+Date of | Amount | Financed | Calculation z
+incurrence of spent | through
+
+expenditure
+
+18' April 2023 4,00,000} Specific 4,00,000 x 12% x 40,000
+
+borrowing | 10/12
+1st August 2023 10,00,000} Specific 10,00,000 x 12% x | 1,00,000
+borrowing | 10/12
+
+4st December | 25,00,000) General 25,00,000 x 10.8%
+
+2023 borrowing | x 2/12 45,000
+
+31%! January 2024 | 5,00,000/ General 5,00,000 x 10.8% x Nil
+borrowing | 0/12
+
+1,85,000
+
+Less: interest income on borrowing (15,000)
+
+Total amount borrowing cost to be capitalized 1,70,000
+
+340
+
+
+===== PHYSICAL PAGE 52 =====
+
+(ii)
+
+Journal Entry
+
+(borrowing cost)
+(Being expenditure incurred
+on construction of building
+and borrowing cost thereon
+
+capitalized)
+
+Date Particulars z z
+31.1.2024 | Building account Dr. | 45,70,000
+To Bank account 44,00,000
+To Interest payable 1,70,000
+
+Note: In the above journal entry, it is assumed that interest amount will
+be paid at the year end. Hence, entry for interest payable has been
+passed on 31.1.2024.
+
+(b) As per AS 2 ‘Valuation of Inventories’, most by-products as well as scrap
+or waste materials by their nature, are immaterial. They are often
+measured at net realizable value and this value is deducted from the cost
+of the main product.
+
+Determination of value of closing inventory of Polyester and Nylon
+
+Polyester Nylon
+Closing inventory in units 1,600 units 400 units
+Cost per unit % 31.14 = 18.68
+Value of closing inventory = 49,824 = 7,472
+
+Working Notes
+
+1. Calculation of net realizable value of by-product, Fiber
+
+zg
+
+Selling price of by-product Fiber
+
+(3,200 units x % 40) 1,28,000
+
+per unit)
+Less: Separate processing
+charges of by-product
+Fiber
+
+Packing charges
+
+Net realizable value of by-
+product Fiber
+
+(10,000)
+
+(9,000)
+1,09,000
+
+2. Calculation of cost of conversion for allocation between joint
+
+pi
+
+roducts Polyester and Nylon
+
+z
+Raw material 3,50,000
+Wages 1,60,000
+Fixed overhead 1,20,000
+
+341
+
+
+
+===== PHYSICAL PAGE 53 =====
+
+Variable overhead 60,000
+
+6,90,000
+
+Less: NRV of by-product Fiber (W.N. 1) | (1,09,000)
+Sale value of scrap (5,000) | (1,14,000)
+Joint cost to be allocated between 5,76,000
+
+Polyester and Nylon
+
+Determination of “basis for allocation” and allocation of joint
+cost to Polyester and Nylon
+
+Polyester Nylon
+Output in units (a) 12,500 units | 10,000 units
+Sales price per unit (b) = 100 = 60
+Sales value (a x b) = 12,50,000|} %6,00,000
+Total value (12,50,000 + 6,00,000)
+= 18,50,000
+
+Joint cost of = 5,76,000 allocated in| %3,89,189| %1,86,811
+the ratio of 12,50,000 : 6,00,000
+Cost per unit [c/a] = 31.14 = 18.68
+
+Journal Entries
+In the Books of Z Ltd. as on 1% April 2024
+
+Particulars Dr. Cr.
+
+.04.2024 Amount| Amount
+
+®) )
+
+Equity share capital A/c (= 100) Dr. | 60,00,000
+To Equity share capital A/c (= 10) 60,00,000
+(Being sub-division of one share of
+= 100 each into 10 shares of ¥ 10 each)
+
+s
+
+a
+
+Equity share capital A/c (= 10) Dr. | 24,00,000
+To Capital reduction A/c 24,00,000
+(Being reduction of Equity capital by
+40%)
+
+Capital reduction A/c Dr.| 1,68,000
+To Bank A/c 1,68,000
+(Being payment in cash of 25% of
+arrear of preference dividend)
+[21,00,000x8%] x 4 years
+
++
+
+Bank A/c D 2,35,200
+
+To Own debentures A/c 2,30,400
+
+(5,76,000/6,00,000) x 2,40,000
+
+To Capital reduction A/c 4,800
+
+(Being profit on sale of own debentures
+
+of ~ 2,40,000 transferred to capital
+reduction A/c)
+
+Pal
+
+342
+
+
+===== PHYSICAL PAGE 54 =====
+
+10% Debentures A/c
+(6,00,000 -2,40,000)
+
+To Own debentures A/c
+
+To Capital reduction A/c
+(Being profit on cancellation of own
+debentures transferred to capital
+reduction A/c)
+
+10% Debentures A/c
+Capital reduction A/c
+To Machinery or PPE A/c
+(Being machinery taken up by
+debenture holders for = 6,00,000)
+
+Capital reduction A/c (balancing figure)
+To PPE A/c
+(72,00,000 - 9,00,000 - 60,00,000)
+(Being PPE revalued)
+
+Trade payables A/c
+(16,80,000 -15,00,000)
+To Trade receivables A/c
+(13,75,000-13,00,000)
+To Inventory A/c
+(9,80,000-9,44,000)
+To Capital Reduction A/c
+(Being assets and liabilities revalued)
+
+Capital reduction A/c
+To Goodwill A/c
+To Profit and Loss A/c
+(Being the above assets written off)
+
+Capital reduction A/c
+
+To Bank A/c
+(Being penalty paid for avoidance of
+capital commitments)
+
+Capital reduction A/c
+
+To Capital reserve A/c
+(Being the credit balance in Capital
+Reduction A/c transferred to Capital
+Reserve)
+
+Dr.
+Dr.
+
+Dr.
+
+Dr.
+
+=
+
+Dr.
+
+3,60,000
+
+6,00,000
+3,00,000
+
+3,00,000
+
+1,80,000
+
+13,16,000
+
+60,000
+
+3,44,200
+
+3,45,600
+14,400
+
+9,00,000
+
+3,00,000
+
+75,000
+36,000
+
+69,000
+
+81,000
+12,35,000
+
+60,000
+
+3,44,200
+
+343
+
+
+
+===== PHYSICAL PAGE 55 =====
+
+(a)
+
+Capital Reduction Account
+
+®) ®)
+To Bank 1,68,000) By Equity Share Capital 24,00,000
+To Property, Plant & 3,00,000} By Trade Payable 1,80,000
+Equipment
+To Property, Plant &) 3,00,000} By Bank A/c (Profit on 4,800
+Equipment Sale)
+To Trade Receivables 75,000| By 10% debentures A/c 14,400
+(Profit on cancellation)
+To Inventory 36,000
+To Goodwill 81,000
+To Profit and Loss A/c 12,35,000
+To Cash/Bank A/c 60,000
+To Capital Reserve 3,44,200
+25,99,200 25,99,200
+Bank Account
+7 id
+To To balance b/d 1,33,000| By Capital Reduction 1,68,000
+To Own Debenture 2,35,200| By Capital Reduction A/c 60,000
+(2,30,400 +4,800) By balance c/d 1,40,200
+3,68,200 3,68,200
+(i) Stage of completion = Costs incurred to date / Total estimated
+costs
+Year 1: 98.8 crore / 375 crore = 26.35%
+Year 2: 202.4 crore / 375 crore = 53.97%
+Year 3: (310 crore — 3 crore) / (375+7) crore = 80.37%
+Year 4: 382 crore / 382 crore = 100%
+(ii) Profit to be recognized each year has been calculated as
+follows:
+Year 1 Year 2 Year 3 Year 4
+Contract 105.40 | 110.48 crore 113.64 crore 80.48 crore
+Revenue crore
+(1)
+(400 crore x (400 crore x (410 crore x (410 crore x
+26.35%) 53.97% - 80.37% | 100% - 105.40
+105.40 crore) | - 105.40 crore - | crore - 110.48
+110.48 crore) | crore - 113.64
+crore)
+Contract 98.8 crore | 103.60 crore 104.60 crore 75 crore
+Cost (2)
+
+344
+
+
+===== PHYSICAL PAGE 56 =====
+
+4.
+
+(b)
+
+202.40 - (307 crore -
+98.80 crore) 98.8 crore-
+
+(382 crore -
+
+98.8 crore-
+
+103.60 crore) | 103.6 crore —
+104.6 crore)
+
+Contract 6.60 crore 6.88 crore 9.04 crore 5.48 crore
+Profit
+(1) = (2)
+Cash Flow from Operating Activities
+z
+Difference between Profit and Loss Account = (37,800 + 43,200
+5,400)
+Add: Transfer to General Reserve (81,000-54,000) 27,000
+Add: Adjustment for Provision for taxation 1,62,000
+Profit Before tax 2,32,200
+Add: Adjustment for Depreciation (= 1,62,000 — % 1,29,600) 32,400
+Add: Adjustment for provision for doubtful debt (¥ 54,000 — 27,000
+= 27,000)
+Add: Debenture Interest Paid = (1,18,800 x 12%) 14,256
+Less: Income from Investments (54,000 x 8%) (4,320)
+Operating Profit before Working Capital changes 3,01,536
+Decrease in Inventories = (1,35,000-81,000) 54,000
+Increase in Trade receivables = (2,61,360-81,000) (1,80,360)
+Decrease in Trade payables = (1,29,600-1,18,800) (10,800)
+Cash generated from operations 1,64,376
+Income tax paid (2,48,400)
+Net Cash generated from Operating Activities (84,024)
+Working Note:
+Provision for taxation account
+z z
+To Cash (Paid) 2,48,400| By Balance b/d 2,21,400
+(Balancing figure)
+To Balance c/d 1,35,000} By Profit and Loss A/c | 1,62,000
+3,83,400 3,83,400
+
+Computation of shares and debentures to be issued
+
+Intelligent Ltd.| Diligent Ltd.
+
+(i) Equity shares |22,000 x 7/11 = 14,000 14,00,000
+
+(W.N.1)
+
+345
+
+
+
+===== PHYSICAL PAGE 57 =====
+
+22,000 x 4/11 =8,000
+
+8,00,000
+
+(W.N.1)
+(ii) Preference (200000 x 125) 3,75,000
+shares zon x 125) 2,50,000
+100
+(iii) Debentures Refer (W.N.3) 17,50,000 11,25,000
+Total Purchase Consideration (i + ii + iii) 35,25,000 21,75,000
+Balance Sheet of Genius Limited
+as at 1%t April, 2024 (after amalgamation)
+Notes no. g
+I. Equity and Liabilities
+(1) | Shareholder’s fund
+(a) Share Capital 1 27,00,000
+(b) Reserves & Surplus 2 1,25,000
+(2) | Non-current Liabilities
+(a) Long term borrowings 3 28,75,000
+(b) Other non-current liabilities 4 5,00,000
+(3) | Current Liabilities
+(a) Trade Payables 15,00,000
+(12,00,000 + 4,00,000 — 1,00,000)
+Total 77,00,000
+Il. Assets
+(1) | Non-current Assets
+(a) Property, Plant & Equipment 5 32,50,000
+(b) Intangible Assets 6 22,50,000
+(2) | Current Assets
+(a) Inventories (6,00,000 + 3,00,000) 9,00,000
+(b) Trade Receivables 8,00,000
+(6,00,000 + 3,00,000 - 1,00,000)
+(c) Cash & Cash Equivalents 5,00,000
+Total 77,00,000
+Notes to Accounts:
+Sr. | Particular z
+No.
+1. | Share Capital
+Authorized Share Capital
+a) Equity Share Capital
+30,000 Equity Shares of = 100 each 30,00,000
+b) Preference Share Capital
+
+346
+
+
+
+===== PHYSICAL PAGE 58 =====
+
+10% 10,000 Preference Shares % 100 each 10,00,000
+40,00,000
+Issued, Subscribed & Paid-up Capital
+a) Equity Share Capital
+22,000 Equity Shares of 100 each 22,00,000
+(out of the above all shares are issued for
+consideration other than cash)
+b) Preference Share Capital
+10% 5,000 Preference Shares of = 100 each 5,00,000
+(out of the above all shares are issued for
+consideration other than cash)
+27,00,000
+Reserves & Surplus
+Securities Premium 1,25,000
+Long term borrowings
+12% Debentures of ~ 100 each 28,75,000
+Other Non-current Liabilities
+Gratuity Fund 5,00,000
+Property, Plant & Equipment
+Land & Building (11,00,000 + 8,50,000) 19,50,000
+Plant & Machinery (9, 00,000 + 4,00,000) 13,00,000
+32,50,000
+Intangible Assets
+Goodwill 22,50,000
+Working Notes:
+1. Calculation of Ratio of Equity Shares
+Intelligent Ltd. | Diligent Ltd
+“Opening balance P&L 4,50,000 2,50,000
+Profit for the current year 2,50,000 1,50,000
+Total 7,00,000 4,00,000
+
+The total profits- ¥ 7,00,000+ = 4,00,000 = = 11,00,000.
+
+No. of shares to be issued = 22,000 equity shares in the proportion of
+
+the preceding 2 years’ profits. i.e. in 7:4.
+
+*As the company has been in existence for two years, the opening balance of profit and loss account
+has been assumed to be the profit of the previous year.
+
+347
+
+
+
+===== PHYSICAL PAGE 59 =====
+
+Calculation of Net assets as on 31.3.2024
+
+Particulars Intelligent Ltd. | Diligent Ltd
+Assets (after revaluation)
+Land and Buildings 11,00,000 8,50,000
+Plant & Machinery 9,00,000 4,00,000
+Inventories 6,00,000 3,00,000
+Trade Receivables 6,00,000 3,00,000
+Cash & Cash Equivalents 4,00,000 1,00,000
+Total (a) 36,00,000 19,50,000
+Liabilities
+Trade Payables 12,00,000 4,00,000
+Gratuity Fund 3,00,000 2,00,000
+Total (b) 15,00,000 6,00,000
+Net Assets (a — b) 21,00,000 13,50,000
+
+Calculation of 12% Debentures to be issued to Intelligent Ltd. and
+Diligent Ltd.
+
+Intelligent} Diligent
+Ltd. Ltd
+z z
+Net assets (Refer working note) 21,00,000} 13,50,000
+10% return on Net assets 2,10,000} 1,35,000
+12% Debentures to be issued 17,500
+100
+[2,10,000x—] = 17,50,0000f % 100 each
+100
+[1 35,000 — > = 11,25,000 of = 100 each 11,250
+Calculation of Goodwill / Capital Reserve
+s. Particulars Intelligent Diligent
+No. Ltd. Ltd.
+(i) Purchase 35,25,000 | 21,75,000
+Consideration Paid
+(ii) _| Less: Net Assets 21,00,000 | 13,50,000
+(iii) | Goodwill 14,25,000 | 8,25,000| 22,50,000
+
+Consolidated Balance Sheet of Art and Craft Ltd
+As on 31%t March, 2024
+
+Particulars Note z
+no.
+
+. Equity & Liabilities
+(1) Shareholders’ fund
+
+348
+
+
+===== PHYSICAL PAGE 60 =====
+
+(a) Share Capital 1 6,50,000
+(b) Reserves & Surplus 2 3,73,460
+(2) Minority Interest 3 1,26,740
+(3) Current Liabilities
+(a) Short term borrowings 4 70,000
+(b) Trade Payables (1,45,000 + 92,000) 2,37,000
+Total 14,57,200
+I. Assets
+(1) Non-current Assets
+(a) Property, Plant & Equipment 5 7,65,000
+(2) Current Assets
+(a) Inventories 6 3,57,500
+(b) Trade Receivables 7 3,03,500
+(c) Cash & Cash Equivalents 8 31,200
+Total 14,57,200
+Notes to Accounts
+Sr. | Particulars z
+No.
+1. | Share Capital
+Issued, Subscribed & Paid-up Capital
+a) Equity Share Capital
+6,500 Equity Shares of = 100 each 6,50,000
+2. | Reserves & Surplus
+Profit & Loss A/c (WN 5) 2,40,100
+General Reserve (WN 5) 1,20,000
+Capital Reserve (W.N. 3) 13,360
+3,73,460
+3. | Minority interest in Craft Ltd. (W.N.4) 1,26,740
+4. | Short-term borrowings
+Bank Overdraft 70,000
+5. | Property, Plant & Equipment
+Land & Building
+Art Ltd. 1,90,000
+Craft Ltd. 1,35,000 3,25,000
+Plant & Machinery
+Art Ltd. 2,31,000
+Craft Ltd. (2,25,000-17,500+1,500) _2,09,000 4,40,000
+7,65,000
+
+349
+
+
+
+===== PHYSICAL PAGE 61 =====
+
+Inventories
+Art Ltd.
+Craft Ltd.
+
+Less: unrealized profit
+
+Trade Receivables
+Art Ltd.
+Craft Ltd.
+
+Cash & Cash Equivalents
+Art Ltd.
+Craft Ltd.
+
+1,66,000
+2,05,000
+(13,500)
+
+1,33,500
+1,70,000
+
+24,500
+6,700
+
+3,57,500
+
+3,03,500
+
+Working Notes:
+
+1.
+
+2.
+
+Shareholding Pattern
+
+Total 4,000 shares
+
+3,200 shares
+
+800 shares
+
+Art Ltd (80%)
+
+20% Minority Interest
+
+Analysis of Profit
+
+General reserve
+
+Profit and loss
+
+account
+Opening balance 40,000 58,700
+Closing balance 40,000 2,08,000
+Changes during the year 1,49,300
+
+Analysis of Profit
+
+Particulars Pre acquisition | Post acquisition
+
+profit (6 months) | profit (6 months)
+®) @®)
+
+Opening Balances 98,700
+
+(40,000 + 58,700)
+
+Profit for 6 months 74,650 74,650
+
+(1,49,300 x 6/12)
+
+Provision reversed 850 850
+
+(1,700) (W.N. 8)
+
+Revaluation Loss (W.N. 6) (17,500) -
+
+Savings in depreciation - 1,500
+
+(W.N. 6)
+
+Total 1,56,700 77,000
+
+Holding (80%) 1,25,360 61,600
+
+Minority Interest (20%) 31,340 15,400
+
+350
+
+
+
+===== PHYSICAL PAGE 62 =====
+
+3. Cost of Control
+Particulars z z
+Cost of Investment (Given) 4,32,000
+Less: Share in Net Assets:
+
+a) Share Capital (3,200 shares x 7100) | 3,20,000
+
+b) Capital Profit (W.N. 2) 1,25,360 | (4,45,360)
+Capital Reserve 13,360
+4. Minority Interest
+Particulars z
+Share Capital (800 shares x 100) 80,000
+Capital Profit (W.N. 2) 31,340
+Revenue Profit (W.N. 2) 15,400
+Total 1,26,740
+5. Consolidated Profit and General Reserve of Art Ltd
+Particulars Profit and loss General
+account = reserve <=
+Balance as per Balance Sheet 1,92,000 1,20,000
+Revenue Profit 61,600 -
+Unrealized Profit (Downstream) (13,500)
+Total 2,40,100 1,20,000
+6. Calculation of Revaluation Profit /Loss
+Particulars z
+Balance as on 01.04.2023 (given) 2,50,000
+Depreciation for 6 months (2,50,000 x 10% x 6/12) (12,500)
+WDV as on date of acquisition 2,37,500
+Revalued amount 2,20,000
+Revaluation Loss 17,500
+
+7. Savings in Depreciation
+= Depreciation Provided for 6 months — Depreciation Should be
+= 12,500 — (2,20,000 x 10% x 6/12)
+= 1,500
+
+8. Calculation of provision reversed
+Trade Receivable (Given) =1,68,300 it is after provision i.e 99%
+So, 100% will be 1,70,000 therefor provision will be 1,700
+
+As per para 20 and 21 of AS 21, Consolidated financial statements:
+Consolidated financial statements should be prepared using uniform
+351
+
+
+===== PHYSICAL PAGE 63 =====
+
+(a)
+
+(a)
+
+accounting policies for like transactions and other events in similar
+circumstances. If it is not practicable to use uniform accounting policies
+in preparing the consolidated financial statements, that fact should be
+disclosed together with the proportions of the items in the consolidated
+financial statements to which the different accounting policies have been
+applied.
+
+Colour Limited leased a Machine to Red Limited on 1 April, 2021 on
+the Computation of Annual Lease Payment
+
+Particulars Amount
+Cost of Equipment 18,00,000
+Unguaranteed Residual Value 2,00,000
+Present Value of unguaranteed residual value 1,42,360
+(= 200,000 x 0.7118)
+
+Present Value of Lease Payments
+
+(= 18,00,000 — % 1,42,360) 16,57,640
+Present Value of Annuity for three years is 2.4018
+
+Annual Lease Payment (16,57,640 / 2.4018) 6,90,165.71
+
+Classification of Lease:
+Parameter 1:
+
+The present value of lease payment i.e. = 16,57,649 which equals
+92.09% of the fair market value i.e.,  18,00,000.
+
+The present value of minimum lease payments is substantially covers
+the fair value of the leased asset
+
+Parameter 2:
+
+The lease term (i.e. 3 years) covers the major part of the life of the asset
+(i.e. 5 years).
+
+Therefore, it constitutes a finance lease.
+Computation of unearned Finance Income:
+
+Particulars Amount
+Total Lease Payments (% 6,90,165 x 3) = 20,70,495
+Add: Unguaranteed residual value = 2,00,000
+& 22,70,495
+
+Less: Present value of lease payments and residual value
+i.e. Net investment (1,42,360+16,57,640) % 18,00,000
+Unearned Finance Income  4,70,495
+
+OR
+
+Basic Earnings per share (EPS) =
+
+Net profit attributable to equity shareholders
+Weighted average number of equity shares outstanding during the year
+
+352
+
+
+===== PHYSICAL PAGE 64 =====
+
+~ 46,000 Shares (as per working note)
+
+1,84,000
+
+= % 4 per share
+
+Diluted earnings per share
+
+Net profit for the current year = 3,44,000
+No. of equity shares outstanding 50,000
+Basic earnings per share 4
+No. of 12% convertible debentures of ¥ 100 each 10,000
+Each debenture is convertible into 3 equity
+shares
+Interest expense for the current year = 1,20,000
+Tax relating to interest expense (30%) = 36,000
+Adjusted net profit for the current year = (1,84,000 +
+1,20,000 - 36,000)
+= & 2,68,000
+No. of equity shares resulting from conversion of 30,000
+debentures
+No. of equity shares used to compute diluted | 46,000 + 30,000 =
+earnings per share 76,000
+Diluted earnings per share 2,68,000 / 76,000 =
+% 3.53
+
+Working Note:
+
+1.
+
+Net profit attributable to equity share holders = Net profit less
+preference dividends
+
+Total earnings — preference shares dividend
+
+= 3,44,000 — = (8% x 20,00,000)
+
+= 3,44,000 - = 1,60,000
+
+= % 1,84,000
+
+Calculation of weighted average number of equity shares
+
+As per AS 20 ‘Earnings Per Share’, partly paid equity shares are
+treated as a fraction of equity share to the extent that they were
+entitled to participate in dividend relative to a fully paid equity share
+during the reporting period. Assuming that the partly paid shares
+are entitled to participate in the dividend to the extent of amount
+paid, weighted average number of shares will be calculated as
+follows:
+
+Date No. of Amount | Weighted average no.
+equity paid per of equity shares
+shares share
+
+z z z
+01.04.2023 50,000 80 50,000x 80/100x 3/12
+= 10,000
+
+353
+
+
+===== PHYSICAL PAGE 65 =====
+
+(b)
+
+01.07.2023 40,000 100 40,000 x 9/12
+
+= 30,000
+
+01.07.2023 10,000 80 10,000x 80/100x 9/12
+
+= 6,000
+
+Total weighted average equity 46,000
+shares
+
+In case of declaration of dividend out of free reserves, there are 3
+conditions:
+
+(1)
+
+(2)
+
+(3)
+
+(4)
+
+Dividend Rate < Average Rate of last 3 years
+
+10% < 12% [(12+14+10)/3]
+
+Condition is Satisfied
+
+Dividend Distributed < 10% of PUSC + Reserve and Surplus
+
+50,00,000 < 59,50,000 [(5,00,00,000 + 1,00,00,000 — 5,00,000) x
+10%]
+
+Condition is Satisfied
+
+Reserves after dividend > 15% of PUSC 45,00,000 not > 75,00,000
+(5,00,00,000 x 15%)
+
+Condition is Not Satisfied
+
+The closing balance of reserves after payment of dividend and set
+off of loss = % 75,00,000
+
+Therefore, can be utilized = 20,00,000 (1,00,00,000 — 5,00,000 —
+75,00,000)
+
+Thus, rate of dividend = (20,00,000/5,00,00,000) = 4%
+
+Alternatively
+
+To judge the recommendation of management, the satisfaction of all
+three conditions is to be checked:
+
+(1)
+
+(2)
+
+Condition |
+
+The proposed dividend of 10% is less than the average rate of
+dividend being 12%
+
+(i.e.) (12+14+10) /5 =12 %.
+Hence, this condition is satisfied.
+
+Condition II
+
+Amount to be withdrawn.
+10% dividend on Equity share capital 50,00,000
++ Loss of Current year 5,00,000
+Amount to be drawn from General Reserve 55,00,000
+
+Maximum amount that can be withdrawn should not exceed 10% of
+paid-up share capital + free reserves.
+354
+
+
+===== PHYSICAL PAGE 66 =====
+
+(3)
+
+= 10% of [% 500 lakhs + % 100 lakhs] = = 60,00,000
+
+As the amount to be withdrawn is within the maximum limit, hence,
+this condition is also satisfied.
+
+Condition III
+Balance of reserves after withdrawal (100-55) = 45,00,000
+15% of paid-up capital = 75,00,000
+
+As the balance of reserves should not be less than 15% of its paid-
+up share capital, but here the balance of reserves after withdrawal
+is less than 15% of paid-up share capital, hence this condition is
+not satisfied, hence, 10% dividend cannot be declared.
+
+Maximum withdrawal of Reserve if condition II is satisfied.
+
+Opening balance of Reserves in the beginning = % 1,00,00,000
+of the year
+
+- Closing balance of reserves being 15% of =%  75,00,000
+paid-up capital
+
+Reserves available = =  25,00,000
+Maximum permissible Divisible Profits
+
+Permissible withdrawal as above = 25,00,000
+Less: Current Year's Loss = 5,00,000
+Maximum permissible Divisible profit = _ 20,00,000
+
+Actual permissible rate of Dividend =
+(% 20,00,000 / = 5,00,00,000) x 100 = 4%
+
+Therefore, the recommendation of management is not justified and
+a dividend only up to a rate of 4% can be declared.
+
+(c) Converted branch trail balance (in the books of head office)
+
+Particular Dr. $ Cr. $| Rate ae Dr. Cr.
+
+Expenditure 1,03,095 56| 57,73,320
+
+Cash & bank balance 2,175 58 1,26,150
+
+Debtors 7,365 58} 4,27,170
+
+Fixed assets 27,360 55} 15,04,800
+
+Depreciation 20% 6,840 55 3,76,200
+
+Inventory P 5,520 Direct 2,85,000
+
+Inventory Q 1,065 53 56,445
+
+Income 1,32,000 56 73,92,000
+
+Creditors 15,570 58 9,03,060
+
+HO control A/c 5,820 2,66,265
+
+Exchange difference 12,240 _
+85,61,325 | 85,61,325
+
+355
+
+
+===== PHYSICAL PAGE 67 =====
+
+Working Note:
+
+Inventory P $ 5,520 | Inventory Q $ 1,065
+Purchased Cost 56.50 | NRV $ 1,035
+rate
+NRV = | Closing rate 58
+2,85,000
+Cost = | Purchased Cost | 53
+3,11,880 | rate
+Value at cost or = | Value at cost or | $ 1,035 @ % 58 or
+NRV whichever | 2,85,000 | NRV whichever | $1,065 @ = 53
+is less is less = 56,445 or 60,030
+
+356
+
+
+
+===== PHYSICAL PAGE 68 =====
+
+(b)
+(c)
+(d)
+(a)
+(b)
+(c)
+(d)
+(a)
+(b)
+(c)
+(d)
+(ii)
+(i)
+(iv)
+
+ANSWER OF MODEL TEST PAPER 6
+
+INTERMEDIATE COURSE: GROUP - |
+PAPER - 1 : ADVANCED ACCOUNTING
+ANSWERS
+
+(iii)
+(i)
+(ii)
+(iii)
+(ii)
+(iii)
+(iii)
+(i)
+(iii)
+(iii)
+(ii)
+(iv)
+
+PART Il — Descriptive Questions (70 Marks)
+
+Provision to be made for warranty under AS 29 ‘Provisions, Contingent
+Liabilities and Contingent Assets’
+
+As at 318t March, 2023 = % 60,000 x .02 + % 40,000 x .03
+= % 1,200 + % 1,200 = % 2,400
+As at 318t March, 2024 = % 40,000 x .02 + & 1,35,000 x .03
+
+= % 800 + % 4,050 = % 4,850
+
+Amount debited to Profit and Loss Account for year ended
+315t March, 2024
+
+id
+Balance of provision required as on 31.03.2024 4,850
+Less: Opening Balance as on 1.4.2023 (2,400)
+Amount debited to profit and loss account 2,450
+
+357
+
+
+===== PHYSICAL PAGE 69 =====
+
+(b)
+
+(c)
+
+Note: No provision will be made on 31% March, 2024 in respect of sales
+amounting % 60,000 made on 11" February, 2022 as the warranty period
+of 2 years has already expired.
+
+As per AS 26 “Intangible Assets”, subsequent expenditure on an
+intangible asset after its purchase or its completion should be recognized
+as an expense when it is incurred unless (a) it is probable that the
+expenditure will enable the asset to generate future economic benefits
+in excess of its originally assessed standard of performance; and (b)
+expenditure can be measured and attributed to the asset reliably. If these
+conditions are met, the subsequent expenditure should be added to the
+cost of the intangible asset.
+
+(i) In the given case, the legal expenses to defend the patent of a
+product amounting ~ 23,00,000 should not be capitalized and be
+charged to Profit and Loss Statement.
+
+(ii) The company is required to expense the entire amount of
+% 7,00,000 in the Profit and Loss account for the year ended
+315 March, 2024 because no benefit will arise in the future.
+
+(iii) As per AS 26, expenditure on an intangible item that was initially
+recognized as an expense by a reporting enterprise in previous
+annual financial statements should not be recognized as part of the
+cost of an intangible asset at a later date. Thus, the company
+cannot capitalize the amount of % 25,00,000 and it should be
+recognized as expense
+
+(iv) Expenditure of % 50,00,000 on advertising and promotional
+activities should always be charged to Profit and Loss Statement.
+Hence, the company has done the correct treatment by debiting the
+sum of 50 lakhs to Profit and Loss Account.
+
+(1) Trade discounts and volume rebates received are not
+encompassed within the definition of revenue, since they represent
+a reduction of cost. Trade discounts and volume rebates given
+should be deducted in determining revenue.
+
+(2) When goods are sold to distributor or others, revenue from such
+sales can generally be recognized if significant risks of ownership
+have passed; however, in some situations the buyer may in
+substance be an agent and in such cases the sale should be treated
+as a consignment sale.
+
+(3) For transactions, where seller concurrently agrees to repurchase
+the same goods at a later date that are in substance a financing
+agreement, the resulting cash inflow is not revenue as defined and
+should not be recognized as revenue.
+
+(4) Insurance agency commissions should be recognized on the
+effective commencement or renewal dates of the related policies.
+
+358
+
+
+===== PHYSICAL PAGE 70 =====
+
+(5) On 11.03.2024, if X mart takes title and accepts billing for the goods
+then it is implied that the sale is complete and all risk and reward
+on ownership has been transferred to the buyers.
+
+Revenue should be recognized for year ended 31%t March, 2024
+notwithstanding that physical delivery has not been completed so long
+as there is every expectation that delivery will be made and items were
+ready for delivery to the buyer at the time.
+
+MN Limited
+Balance Sheet as at 315t March, 2024
+Particulars Note No. | (% in 000)
+Equity and Liabilities
+1. | Shareholders’ funds
+A | Share capital 1 300
+B_ | Reserves and Surplus 2 530
+2. | Non-Current liabilities
+A_ | Long term borrowings 3 200
+3. | Current liabilities
+A_ | Trade Payables __ 52
+Total 1082
+Assets
+1. | Non-current assets
+A_ | PPE (Property, Plant & Equipment) 4 880
+4 Current assets
+A_ | Inventories 86
+B_ | Trade receivables 96
+C_ | Cash and bank balances _ 20
+Total 1082
+MN Limited
+Statement of Profit and Loss for the year ended 31st March, 2024
+Particulars Notes | (% in 000)
+I. | Revenue from operations 700
+Il. | Other Income 5 _2
+Ill_ | Total Income 702
+IV_| Expenses:
+Purchases 320
+Finance costs 6 20
+
+359
+
+
+===== PHYSICAL PAGE 71 =====
+
+Depreciation (10% of 760*) 76
+Other expenses 7 120
+Total Expenses 536
+V. | Profit (Loss) for the period (Ill — IV) 166
+Notes to accounts
+(= in 000)
+1. | Share Capital
+Equity share capital
+Authorised
+40,000 shares of % 10 each 400
+Issued & subscribed & called up
+30,000 shares of = 10 each 300
+2. | Reserves and Surplus
+Securities Premium Account 40
+Revaluation reserve (360 — 220) 140
+General reserve 130
+Profit & loss Balance
+Opening balance 72
+Profit for the period 166 238
+Less: Appropriations
+Interim Dividend (18) 220
+530
+3. | Long term borrowing
+10% Debentures 200
+4. PPE
+Land
+Opening balance 220
+Add: Revaluation adjustment 140
+Closing balance 360
+Plant and Machinery
+Opening balance 770
+Less: Disposed off (10)
+760
+Less: Depreciation (172-8+76) 240
+Closing balance 520
+
+* 770 (Plant and machinery at cost) — 10 (Cost of plant and machinery sold)
+
+360
+
+
+===== PHYSICAL PAGE 72 =====
+
+Total 880
+
+5. Other Income
+
+Profit on sale of machinery:
+
+Sale value of machinery 4
+
+Less: Book value of machinery (10-8) (2) 2
+6. Finance costs
+
+Debenture interest 20
+7. Other expenses:
+
+Factory expenses 60
+
+Selling expenses 30
+
+Administrative expenses 30 120
+
+Note: The final dividend will not be recognized as a liability at the balance
+sheet date (even if it is declared after reporting date but before approval of
+the financial statements) as per Accounting Standards. Hence, it has not been
+recognized in the financial statements for the year ended 31 March, 2024.
+Such dividends will be disclosed in notes only.
+
+(a)
+
+Fair value of shares immediately prior to exercise of rights + Total amount received from exercise
+
+Number of shares outstanding prior to exercise + Number of shares issued in the exercise
+
+102 x 2,50,000 Shares+% 98 x 1,00,000 shares
+3,50,000 shares
+
+Theoretical ex-rights fair value per share = = 100.86
+
+Computation of adjustment factor:
+
+Fair value per share prior to exercise of rights
+Theoretical ex - rights value per share
+
+= 102/100.86 = 1.01
+
+Computation of earnings per share:
+
+EPS for the year 2022-23 as originally reported: ¥ 50,00,000/2,50,000
+shares = % 20
+
+EPS for the year 2022-23 restated for rights issue: = ~ 50,00,000/
+(2,50,000 shares x 1.01)
+
+= % 19.80
+EPS for the year 2023-24 including effects of rights issue:
+EPS = 75,00,000/3,25,625* = = 23.03
+
+* [(2,50,000 x 1.01 x 3/12) + (3,50,000 x 9/12)] =63,125 + 2,62,500
+= 3,25,625 shares
+
+Note: Financial year (ended 31st March) is considered as accounting
+year while giving the above answer.
+
+361
+
+
+
+===== PHYSICAL PAGE 73 =====
+
+(b)
+
+In the books of Fortunate Ltd.
+
+Journal Entries
+
+Particulars Debit Credit
+(8) (8)
+Equity share capital A/c (= 50) Dr. | 9,37,500
+To Equity share capital A/c (= 5) 93,750
+To Capital reduction A/c* 8,43,750
+(Being equity capital reduced to
+nominal value of = 5 each)
+Bank A/c Dr. | 2,81,250
+To Equity share capital 2,81,250
+(Being 3 right shares against each
+share was issued and subscribed)
+8% Preference share capital A/c Dr. | 7,50,000
+(= 50)
+Capital reduction A/c Dr. 75,000
+To 6% Preference share capital 6,00,000
+(= 10)
+To equity share capital 2,25,000
+(Being 8% preference shares of % 50
+each converted to 6% preference
+shares of = 10 each and also given
+to them 3 equity shares for every
+share held)
+Loan A/c Dr. | 1,87,500
+To 6% Preference share capital 1,50,000
+Alc
+(15,000 x = 10)
+To Equity share capital A/c 37,500
+(7,500 x % 5)
+(Being loan to the extent of
+= 1,50,000 converted into share
+capital)
+Bank A/c (25,000 x = 5) Dr.) 1,25,000
+To Equity share application A/c 1,25,000
+(Being shares subscribed by the
+directors)
+Equity share application A/c Dr. | 1,25,000
+To Equity share capital A/c 1,25,000
+
+(Being application money
+transferred to capital A/c)
+
+362
+
+
+
+===== PHYSICAL PAGE 74 =====
+
+7. | Loan A/c Dr. | 2,50,000
+To Bank A/c 2,50,000
+(Being loan repaid)
+8. | Capital reduction A/c Dr. | 7,68,750
+To Profit and loss A/c 5,63,750
+To Plant A/c 43,750
+To Trademarks and Goodwill A/c 1,61,250
+(Bal. fig.)
+(Being losses and assets written off
+to the extent required)
+Balance sheet of Fortunate Ltd. (and reduced)
+as on 31.3.2024
+Particulars Notes z
+Equity and Liabilities
+1 Shareholders’ funds
+a Share capital 1 15,12,500
+2 Non-current liabilities
+a Long-term borrowings 2,78,750
+(7,16,250 — 1,87,500 — 2,50,000)
+3 Current liabilities
+a Trade Payables 2,58,750
+b Other current liabilities 43,750
+Total 20,93,750
+Assets
+1 Non-current assets
+a Property, Plant and Equipment 2 7,91,250
+b Intangible assets 3 2,36,250
+2 Current assets
+a Inventories 5,00,000
+b Trade receivables 4,10,000
+c Cash and cash equivalents 4 1,56,250
+Total 20,93,750
+Notes to accounts:
+id
+1) Share Capital
+Authorized capital:
+81,250 Preference shares of 10 each} 8,12,500
+
+363
+
+
+
+===== PHYSICAL PAGE 75 =====
+
+1,87,500 Equity shares of % 5 each 937,500} 17,50,000
+Issued, subscribed and paid up:
+1,52,500 equity shares of 5 each 7,62,500
+(out of the above 52,500 shares
+issued for consideration other than
+cash)
+75,000, 6% Preference shares of 10) 7,50,000|] 15,12,500
+each
+2 | Property, Plant and Equipment
+Building at cost less depreciation 5,00,000
+Plant at cost less depreciation 2,91,250 7,91,250
+3. | Intangible assets
+Trademarks and goodwill 2,36,250
+4 | Cash and cash equivalents
+Bank (2,81,250+1,25,000-2,50,000) 1,56,250
+In the Books of Y Ltd. Realisation Account
+id id
+To Sundry Assets: By Retirement Gratuity 60,000
+Fund
+Goodwill 75,000 By Trade payables 2,40,000
+Land & Building 3,00,000 By X Ltd. (Purchase 15,90,000
+Plant & Machinery | 4,50,000 Consideration)
+Inventory 5,25,000
+Trade receivables 3,00,000
+Bank 60,000} 17,10,000
+To Preference 30,000
+Shareholders
+(Premium on
+Redemption)
+To Equity Shareholders
+(Profit on
+Realisation) 1,50,000
+18,90,000 18,90,000
+Balance Sheet of X Ltd. (after absorption)
+as at 31st March, 2024
+Particulars Notes z
+Equity and Liabilities
+1 Shareholders’ funds
+A Share capital 1 48,30,000
+B Reserves and Surplus 2 2,70,000
+
+364
+
+
+
+===== PHYSICAL PAGE 76 =====
+
+* Mutual Owings eliminated.
+
+365
+
+2 Non-current liabilities
+A Long-term provisions 3 2,10,000
+3 Current liabilities
+A Trade Payables 4 6,10,000
+B Short term provision 5 7,500
+Total 59,27,500
+Assets
+1 Non-current assets
+A Fixed assets
+Tangible assets 6| 33,00,000
+Intangible assets 7 3,00,000
+2 Current assets
+A_ Inventories 8 12,22,500
+B_ Trade receivables 9 8,80,000
+C Other current Assets 10 15,000
+D Cash and cash equivalents 11 2,10,000
+Total 59,27,500
+Notes to accounts
+z
+1 Share Capital
+Equity share capital
+4,20,000 Equity Shares of = 10 each fully paid (Out of | 42,00,000
+above 1,20,000 Equity Shares were issued in
+consideration other than for cash)
+Preference share capital
+6,300 9% Preference Shares of % 100 each (Out of 6,30,000
+above 3,300 Preference Shares were issued in
+consideration other than for cash)
+Total 48,30,000
+2 Reserves and Surplus
+Securities Premium 60,000
+General Reserve 2,10,000
+Total 2,70,000
+3 Long-term provisions
+Retirement Gratuity fund 2,10,000
+4 Trade payables
+(3,90,000 + 2,40,000 - 20,000*)
+6,10,000
+
+
+
+===== PHYSICAL PAGE 77 =====
+
+5 Short term Provisions
+
+Provision for Doubtful Debts 7,500
+6 Tangible assets
+Land & Buildings 14,00,000
+Plant & Machinery 19,00,000
+Total 33,00,000
+7 Intangible assets
+Goodwill (1,50,000 +1,50,000) 3,00,000
+8 Inventories (7,50,000 + 4,72,500) 12,22,500
+9 Trade receivables (6,00,000 + 3,00,000 - 20,000) 8,80,000
+10 Other current Assets 15,000
+11 Cash and cash equivalents (1,50,000 +60,000) 2,10,000
+Working Notes:
+1. Computation of goodwill z
+Profit of 2022-23 90,000
+Profit of 2021-22 adjusted = 78,000 + 10,000) 88,000
+Profit of 2020-21 adjusted (= 72,000 — 25,000) 47,000
+2,25,000
+Average profit 75,000
+Goodwill to be valued at 2 times of average profits = = 75,000 x
+= 7 1,50,000
+2.
+Purchase Consideration: z
+Goodwill 1,50,000
+Land & Building 5,00,000
+Plant & Machinery 4,00,000
+Inventory 4,72,500
+Trade receivables 3,00,000
+Unrecorded assets 15,000
+Cash at Bank 60,000
+18,97,500
+Less: Liabilities:
+Retirement Gratuity 60,000
+Trade payables 2,40,000
+Provision for doubtful debts 7,500 (3,07,500)
+Net Assets/ Purchase Consideration 15,90,000
+
+To be satisfied as under:
+
+366
+
+
+
+===== PHYSICAL PAGE 78 =====
+
+10% Preference Shareholders of Y Ltd. 3,00,000
+Add: 10% Premium 30,000
+9% Preference Shares of X Ltd. 3,30,000
+Equity Shareholders of Y Ltd. to be satisfied by issue of
+1,20,000
+equity Shares of X Ltd. at 5% Premium 12,60,000
+Total 15,90,000
+Restated Balance Sheet of MNT Ltd.
+as at 315t December, 2024
+Particulars Note (®)
+No.
+|. Equity and Liabilities
+(1) Shareholder's Funds
+(a) Share Capital 7,50,000
+(b) Reserves and Surplus 1 7,18,500
+(2) Current Liabilities
+(a) Short term borrowings 2 1,70,000
+(b) Trade Payables 2,46,000
+(c) Short-term provision 3 4,30,000
+Total 23,14,500
+ll. Assets
+(1) Non-current assets
+(a) Property, Plant & Equipment 4 6,37,500
+(b) Non-current Investment 5,30,000
+(2) Current assets
+(a) Inventories (6,90,000 +12,000) 5 7,02,000
+(b) Trade Receivables [7302x100] 3,50,000
+(c) Cash & Cash Equivalents 42,500
+(d) Other current assets 6 52,500
+Total 23,14,500
+Notes to Accounts
+id
+1. | Reserves and Surplus
+Revenue Reserve (refer W.N.) 5,11,500
+Securities Premium 2,07,000 |} 7,18,500
+
+2. | Short term borrowings
+
+367
+
+
+
+===== PHYSICAL PAGE 79 =====
+
+Bank overdraft
+
+3. | Short-term provision
+Provision for taxation 4,30,000
+4. | Property, Plant and Equipment
+
+promotion expenses to be written off each
+year) (65,000 -12,500)
+
+1,70,000
+
+Cost 9,20,000
+
+Less: Depreciation to date (2,82,500) | 6,37,500
+5. | Inventories 6,90,000
+
+Increase in value as per FIFO 12,000 | 7,02,000
+6. | Other current assets
+
+Prepaid expenses (After adjusting sales 52,500
+
+Working Note:
+
+Adjusted revenue reserves of MNT Ltd.:
+
+id id
+
+Revenue reserves as given 5,05,000
+Add: Provision for doubtful debts [3,43,000 X 2/98) | 7,000
+
+Add: Increase in value of inventory 12,000 19,000
+
+5,24,000
+
+Less: Sales Promotion expenditure to be written off (12,500)
+
+Adjusted revenue reserve 5,11,500
+
+(a) Elements of Financial Statements
+
+Asset
+
+Liability
+
+Equity
+
+Income/gain
+
+Expense/loss
+
+Resource controlled by the enterprise as a result of
+past events from which future economic benefits are
+expected to flow to the enterprise
+
+Present obligation of the enterprise arising from past
+events, the settlement of which is expected to result
+in an outflow of a resource embodying economic
+benefits.
+
+Residual interest in the assets of an enterprise after
+deducting all its liabilities
+
+Increase in economic benefits during the accounting
+period in the form of inflows or enhancement of assets
+or decreases in liabilities that result in increase in
+equity other than those relating to contributions from
+equity participants
+
+Decrease in economic benefits during the accounting
+period in the form of outflows or depletions of assets
+or incurrence of liabilities that result in decrease in
+
+368
+
+
+
+===== PHYSICAL PAGE 80 =====
+
+equity other than those relating to distributions to
+equity participants
+
+Or
+
+Schedule Ill has come into force for the Balance Sheet and Profit and
+Loss Account prepared for the financial year commencing on or after 1%
+April, 2023. As per Part | of the Schedule Ill, a company should, inter
+alia, disclose in notes to accounts for the period of 5 years immediately
+preceding the balance sheet date (31% March, 2024 in the instant case)
+the aggregate number and class of shares allotted as fully paid-up bonus
+shares. Schedule III does not require a company to disclose the source
+from which bonus shares have been issued. Therefore, non-disclosure
+of source from which bonus shares have been issued does not violate
+the Schedule III to the Companies Act.
+
+(b) Following will be the treatment in the given cases:
+
+(i)
+
+(ii)
+(iii)
+
+(iv)
+
+(v)
+
+(c)
+
+When sale price of = 24 lakhs is equal to fair value, A Ltd. should
+immediately recognise the profit of = 4 lakhs (i.e. 24 — 20) in its
+books.
+
+When fair value is = 20 lakhs & sale price is = 24 lakhs then profit
+of = 4 lakhs is to be deferred and amortised over the lease period.
+
+When fair value is = 22 lakhs & sale price is = 25 lakhs, profit of = 2
+lakhs (22 - 20) to be immediately recognised in its books and
+balance profit of = 3 lakhs (25-22) is to be amortised/deferred over
+lease period.
+When fair value of leased machinery is = 25 lakhs & sale price is
+= 18 lakhs, then loss of % 2 lakhs (20 — 18) to be immediately
+recognised by A Ltd. in its books provided loss is not compensated
+by future lease payment.
+When fair value is = 18 lakhs & sale price is = 19 lakhs, then the
+loss of % 2 lakhs (20-18) to be immediately recognised by A Ltd. in
+its books and profit of ~ 1 lakhs (19-18) should be
+amortised/deferred over lease period.
+
+Books of Branch A
+
+Journal Entries
+
+Particulars Dr. Cr.
+Amount?| Amount?
+
+(i)
+
+(ii)
+
+Expenses account Dr. 3,500
+To Head office account 3,500
+
+(Being the allocated expenditure
+by the head office recorded in
+branch books)
+
+Depreciation account Dr. 1,500
+To Head office account 1,500
+
+369
+
+
+===== PHYSICAL PAGE 81 =====
+
+(Being the depreciation provided)
+(iii) | Head office account Dr. 2,000
+To Salaries account 2,000
+
+(Being the rectification of salary
+paid on behalf of H.O.)
+
+(iv) | Head office account D 10,000
+To Debtors account 10,000
+
+(Being the adjustment of
+collection from branch debtors)
+
+(v) | No entry in branch books
+(vi) | Head Office account Dr. 3,000
+To Cash account 3,000
+
+(Being the expenditure on account
+of Branch B, recorded in books)
+
+=
+
+Note: Entry (vi) Inter branch transactions are routed through Head
+Office.
+
+370
+
+
+===== PHYSICAL PAGE 82 =====
+
+(ii)
+(iii)
+(iv)
+(i)
+
+(ii)
+(iii)
+(iv)
+(a)
+(b)
+(c)
+(d)
+(ii)
+(iii)
+(b)
+
+(a)
+(b)
+(c)
+(b)
+(c)
+
+(c)
+(c)
+(ii)
+(ii)
+(iii)
+(iv)
+
+(ii)
+
+ANSWERS OF MODEL TEST PAPER 7
+
+INTERMEDIATE COURSE: GROUP - |
+PAPER - 1 : ADVANCED ACCOUNTING
+
+PART Il — Descriptive Questions (70 Marks)
+
+As per AS 4‘Contingencies and Events Occurring After the Balance
+Sheet Date’, disclosure should be made in the report of the
+approving authority of those events occurring after the balance
+sheet date that represent material changes and commitments
+affecting the financial position of the enterprise, the investment of
+= 40 lakhs in April, 2024 in the acquisition of another company
+should be disclosed in the report of the Board of Directors to enable
+users of financial statements to make proper evaluations and
+decisions.
+
+As per AS 4, adjustment to assets and liabilities are required for
+events occurring after the balance sheet date that provide
+additional information materially affecting the determination of the
+amounts relating to conditions existing at the Balance Sheet date.
+A debtor for ¥ 2,50,000 suffered heavy loss due to earthquake in
+
+371
+
+
+===== PHYSICAL PAGE 83 =====
+
+(iii)
+
+(iv)
+
+(v)
+
+the second week of March, 2024 which was not covered by
+insurance. This information with its implications was already known
+to the company. The fact that he became bankrupt in May, 2024
+(after the balance sheet date) is only an additional information
+related to the existing condition on the balance sheet date.
+Accordingly, full provision for bad debts amounting ~ 2,50,000
+should be made, to cover the loss arising due to the insolvency of
+a debtor, in the final accounts for the year ended 31% March 2024.
+
+As per AS 4, adjustments to assets and liabilities are required for
+events occurring after the balance sheet date that provide
+additional information materially affecting the determination of the
+amounts relating to conditions existing at the balance sheet date.
+In the given case, since Hari Ltd. was sued by a competitor for
+infringement of a trademark during the year 2023-24 for which the
+provision was also made by it, the decision of the Court on 26"
+May, 2024, for payment of the penalty will constitute as an adjusting
+event because it is an event occurred before approval of the
+financial statements. Therefore, Hari Ltd. should adjust the
+provision upward by % 4 lakhs to reflect the award decreed by the
+Court to be paid by them to its competitor.
+
+As the embezzlement of cash comes to the notice of company
+management only after approval of financial statements by board
+of directors of the company, then the treatment will be done as per
+the provisions of AS 5 “Net Profit or Loss for the Period, Prior Period
+Items and Changes in Accounting Policies” and the same will not
+be adjusted in the financial statements for the year ended 31°
+March, 2024. This being an extra-ordinary item should be disclosed
+in the statement of profit and loss as a part of loss for the year
+ending March, 2025, in a manner, that its impact on current profit
+or loss can be perceived.
+
+Collection of cheques after balance sheet date is not an adjusting
+event even if the cheques bear the date of 31st March. Recognition
+of cheques in hand is therefore not consistent with requirements of
+AS 4. Moreover, the collection of cheques after balance sheet date
+does not represent any material change or commitments affecting
+financial position of the enterprise and no disclosure of such
+collections in the Directors’ Report is necessary.
+
+(b) As per AS 26 ‘Intangible Assets’
+
+(i)
+
+Carrying value of intangible asset as on 31.03.2023
+
+At the end of financial year, on 31 March 2023, the production
+process will be recognized (i.e. carrying amount) as an intangible
+asset at a cost of 30 (98-68) lacs (expenditure incurred since the
+date the recognition criteria were met, i.e., from 1% January, 2023).
+
+372
+
+
+===== PHYSICAL PAGE 84 =====
+
+(a)
+
+(ii)
+
+Expenditure to be charged to Profit and Loss account for the
+
+year ended 31.03.2024
+
+(# in lacs)
+Carrying Amount as on 31.03.2023 30
+Expenditure during 2023-2024 72
+Book Value 102
+Recoverable Amount (52)
+Impairment loss 50
+
+= 50 lakhs to be charged to Profit and loss account for the year
+
+ending 31.03.2024.
+
+(iii) Carrying value of intangible asset as on 31.03.2024
+(7 in lacs)
+Book Value 102
+Less: Impairment loss (50)
+Carrying amount as on 31.03.2024 _52
+Cost of Control
+Sr. | Particulars Computation z
+No.
+A] | Cost of Investments Given 70,00,000
+Less: Dividend out of | (3.5 Lacs x 10 (FV) x (7,00,000)
+Pre Acquisition 20%)
+Dividend (No of Shares = 70
+Lacs/20= 3.5 Lacs)
+Subtotal A | 63,00,000
+B] | Share in Net Assets (1,38,50,000 x 70%) 96,95,000
+of Zed Ltd.
+C] | Goodwill / (Capital (A-B) 33,95,000
+Reserve)
+W.N. 1: Calculation of Net Assets
+Sr. | Particulars z
+No.
+A] | Assets
+- | Property, Plant & Equipment (120+20%) 1,44,00,000
+“| Investment (55 — 10%) 49,50,000
+“) Current Assets 70,00,000
+. Loans & Advances 15,00,000
+Subtotal A | 2,78,50,000
+B] | Liabilities
+- | 15% Debentures 90,00,000
+
+373
+
+
+===== PHYSICAL PAGE 85 =====
+
+(b)
+
+- | Current Liabilities
+
+50,00,000
+
+Subtotal B
+
+1,40,00,000
+
+C] | Net Assets (A - B)
+
+1,38,50,000
+
+W.N. 2 : No of shares acquired
+_ Cost of investment
+~ Purchase price share
+
+70,00,000
+= 20 shares. = %3,50,000 shares
+Revalued net assets of Zed Ltd. as on 31.03.2024
+
+Particulars in lakhs | 7 in lakhs
+Property Plant & Equipment [120 x 120%] 144.0
+Investments [55 x 90%] 49.5
+Current Assets 70.0
+Loans & Advances 15.0
+Total Assets after revaluation 278.5
+Less: 15% Debentures 90.0
+
+Current Liabilities 50.0 (140.0)
+Equity / Net Worth 138.50
+Exe Ltd.’s share of net assets (70% of 96.95
+138.50)
+Exe Ltd.’s cost of acquisition of shares of 63.00
+Zed Ltd.
+(%70 lakhs — 7 lakhs*)
+Capital Reserve 33.95
+*Total Cost of 70% Equity of Zed Ltd. %70 lakhs
+Purchase Price of each share %20
+Number of shares purchases(70 lakhs/20) 3.50 lakhs
+Dividend @ 20% i.e. ¥2/share %7 lakhs
+
+Since, dividend received is for pre-acquisition period, it has been
+reduced from the cost of investment in the subsidiary company.
+
+Minority Interest = Equity attributable to minorities
+
+Equity is the residual interest in the assets of an enterprise after
+deducting all its liabilities i.e. in this case, it should be equal to Share
+
+Capital + Profit & Loss A/c
+A = Share capital on 1.1.2024
+
+B = Profit & loss account balance on 1.1.2024
+
+C = Share capital on 31.12.2024
+
+374
+
+
+===== PHYSICAL PAGE 86 =====
+
+(b)
+
+D = Profit & loss account balance on 31.12.2024
+
+Minority % Minority Minority
+Shares interest as at | interest as at
+Owned the date of the date of
+acquisition consolidation
+[E]| [E] x [A+B] @| [E]X [C+D] 7
+Case i [100-85] 15% 29,250 30,750
+Case ii [100-70] 30% 51,000 39,000
+Case iii [100-65] 35% 10,500 10,500
+Case iv [100-90] 10% 6,500 8,500
+Case v [100-100] NIL NIL NIL
+
+(i)
+
+(ii)
+
+(iii)
+
+(iv)
+
+(v)
+
+As per AS 9 “Revenue Recognition’, in case of goods sold on
+approval basis, revenue should not be recognized until the goods
+have been formally accepted by the buyer or the buyer has done
+an act adopting the transaction or the time period for rejection has
+elapsed or where no time has been fixed, a reasonable time has
+elapsed. Therefore, revenue should be recognized for the total
+sales amounting ~ 5,00,000 as the time period for rejecting the
+goods had expired.
+
+The sale is complete but delivery has been postponed at buyer’s
+request. The entity should recognize the entire sale of ¥ 2,40,000
+for the year ended 31% March.
+
+Sale/repurchase agreements i.e. where seller concurrently agrees
+to repurchase the same goods at a later date, such transactions
+that are in substance a financing agreement, the resulting cash
+inflow is not revenue as defined and should not be recognized as
+revenue. Hence no revenue to be recognized in the given case.
+
+Revenue arising from the use by others of enterprise resources
+yielding interest and royalty should be recognized when no
+significant uncertainty as to measurability or collectability exists.
+The interest should be recognized on time proportion basis taking
+into account the amount outstanding and rate applicable. The
+royalty should be recognized on accrual basis in accordance with
+the terms of relevant agreement.
+
+40% goods lying unsold with consignee should be treated as
+closing inventory and sales should be recognized for % 2,40,000
+(60% of € 4,00,000). In case of consignment sale revenue should
+not be recognized until the goods are sold to a third party.
+
+Journal Entries
+
+Zin
+lacs
+
+375
+
+
+===== PHYSICAL PAGE 87 =====
+
+Equity Share Capital (= 10 each) A/c
+To Equity Share Capital (% 2.50 each) A/c
+To Reconstruction A/c
+
+(Conversion of all the equity shares into the
+same number of fully paid equity shares of
+% 2.50 each as per scheme of reconstruction)
+
+Director's Remuneration Outstanding A/c
+To Reconstruction A/c
+
+(Outstanding remuneration foregone by the
+directors as per scheme of reconstruction)
+
+12% Debentures A/c
+
+Debenture Interest Outstanding A/c
+To 13% Debentures A/c
+To Reconstruction A/c
+
+(Conversion of 12% debentures into 13%
+debentures, Debenture holders forgoing
+outstanding debenture interest)
+
+Bank A/c
+To Equity Share Application A/c
+
+(Application money received for fully paid
+equity shares of ~ 2.5 each from existing
+shareholders)
+
+Equity Share Application A/c
+To Equity Share Capital (= 2.50 each) A/c
+
+(Application money transferred to share
+capital)
+
+Trade payables A/c
+To Equity Share Capital (% 2.50 each) A/c
+To Bank A/c
+To Reconstruction A/c
+
+(Trade payables for ~ 65 lakhs accepting
+shares for full amount and those for = 100
+lakhs accepting cash equal to 80% of claim in
+full settlement)
+
+Capital Reserve A/c
+To Reconstruction A/c
+
+(Being the loss on reconstruction (balance in
+the Reconstruction A/c) transferred to Capital
+Reserve)
+
+Land and Building A/c
+To Reconstruction A/c
+
+376
+
+Dr.
+
+Dr.
+
+Dr.
+
+500
+
+10
+
+400
+48
+
+125
+
+125
+
+165
+
+46
+
+125
+375
+
+400
+48
+
+125
+
+125
+
+65
+80
+20
+
+46
+
+
+
+===== PHYSICAL PAGE 88 =====
+
+(Appreciation made in the value of land and
+building as per scheme of reconstruction)
+
+Reconstruction A/c Dr. | 505
+To Goodwill A/c 15
+To Plant and Machinery A/c 66
+To Inventory A/c 22
+To Trade receivables A/c 4
+To Discount on issue of Debentures A/c 8
+To Profit and Loss A/c 390
+
+(Writing off losses and reduction in the values
+of assets as per scheme of reconstruction—
+W.N. 1)
+
+Note: In a scheme of Reconstruction, Goodwill, Losses etc should be
+written off against the Reconstruction Account whether or not it is
+mentioned in the question.
+
+4. (a) Hello Ltd.
+Balance Sheet as at 31st March, 2024
+
+Particulars Notes id
+Equity and Liabilities
+1 Shareholders' funds
+a_ Share capital 1 50,00,000
+b Reserves and Surplus 2 14,83,500
+2 Non-current liabilities
+Long-term borrowings 3 13,55,000
+3 Current liabilities
+a Trade Payables 10,00,000
+b Short-term provisions 4 6,40,000
+Total 94,78,500
+Assets
+1 Non-current assets
+Property, Plant & equipment 5 56,25,000
+2 Current assets
+a_ Inventories 6 12,55,000
+b Trade receivables 7 10,00,000
+c Cash and Cash Equivalents 8 13,85,000
+d Short-term loans and advances 2,13,500
+Total 94,78,500
+
+377
+
+
+===== PHYSICAL PAGE 89 =====
+
+Notes to accounts
+
+id
+Share Capital
+Equity share capital
+Issued & subscribed & called up
+50,000 Equity Shares of = 100 each 50,00,000
+(of the above 10,000 shares have been
+issued for consideration other than
+cash)
+Reserves and Surplus
+General Reserve 10,50,000
+Add: current year transfer 20,000 | 10,70,000
+Profit & Loss balance
+Profit for the year 4,33,500
+Less: Appropriations:
+Transfer to General reserve (20,000)
+4,13,500
+14,83,500
+Long-term borrowings
+Secured Term Loan
+State Financial Corporation Loan
+(Secured by hypothecation of Plant 7,50,000
+and Machinery)
+Unsecured Loan 6,05,000
+Total 13,55,000
+Short-term provisions
+Provision for taxation 6,40,000
+Property, plant and Equipment
+Building 30,00,000
+Less: Depreciation (2,50,000) | 27,50,000
+(b.f.)
+Plant & Machinery 35,00,000
+Less: Depreciation (8,75,000) | 26,25,000
+(b.f.)
+Furniture & Fittings 3,12,500
+Less: Depreciation (62,500) (b.f.) | _2,50,000
+Total 56,25,000
+
+378
+
+
+
+===== PHYSICAL PAGE 90 =====
+
+6 Inventories
+
+Raw Materials 2,55,000
+Finished goods 10,00,000
+Total 12,55,000
+7 Trade receivables
+Outstanding for a period exceeding six 2,60,000
+months
+Other Amounts 7,40,000
+Total 10,00,000
+8 Cash and Cash Equivalents
+Cash at bank
+with Scheduled Banks 12,25,000
+with others (Omega Bank Ltd.) 10,000 | 12,35,000
+Cash in hand 1,50,000
+Other bank balances Nil
+Total 13,85,000
+Journal Entries in the books of A Ltd.
+Particulars Debit Credit
+z z
+Business purchase A/c (W.N.1) Dr. | 13,75,000
+To Liquidator of B Ltd. 13,75,000
+(Being business of B Ltd. taken over)
+Land & Building A/c Dr. 8,40,000
+Plant and machinery A/c Dr. 5,60,000
+Office equipment A/c Dr. 2,10,000
+Investments A/c Dr. 3,00,000
+Inventory A/c Dr. 4,20,000
+Debtors A/c Dr. 3,20,000
+Bills receivables A/c Dr. 70,000
+Bank A/c Dr. 61,000
+To General reserve A/c (W.N.2) 95,000
+(2,50,000-1,55,000)
+To Export profit reserve A/c 1,20,000
+To Investment allowance reserve 60,000
+Alc
+To Profit and loss A/c 1,20,000
+To Liability for 9% Debentures A/c 2,00,000
+
+(€ 100 each)
+
+379
+
+
+
+===== PHYSICAL PAGE 91 =====
+
+To Secured Loan 3,60,000
+To Trade creditors A/c 2,76,000
+To Bills payables A/c 1,00,000
+To Other current liabilities A/c 75,000
+To Business purchase A/c 13,75,000
+(Being assets and liabilities taken over)
+Liquidator of B Ltd. Dr. | 13,75,000
+To Equity share capital A/c 8,00,000
+To 10% Preference share capital 4,00,000
+Alc
+To Securities premium A/c 1,75,000
+(Being purchase consideration
+discharged)
+General Reserve* A/c Dr. 12,000
+To Cash at bank 12,000
+(Being expenses of amalgamation
+paid)
+Liability for 9% Debentures in B Ltd. A/c Dr. 2,00,000
+To 9% Debentures A/c 2,00,000
+(Being debentures in B Itd. discharged
+by issuing own 9% debentures)
+Bills payables A/c Dr. 60,000
+To Bill receivables A/c 60,000
+(Cancellation of mutual owing on
+account of bills of exchange)
+
+*Alternatively, profit & loss A/c may be debited in place of general reserve A/c.
+
+Opening Balance Sheet of A Ltd. (after absorption)
+as at 1*t April, 2024
+
+Particulars Notes zg
+Equity and Liabilities
+1 Shareholders’ funds
+a Share capital 1 30,00,000
+b Reserves and Surplus 2 14,94,000
+2 Non-current liabilities
+a Long-term borrowings 3 8,60,000
+3 Current liabilities
+a Trade Payables 4 7,03,000
+
+380
+
+
+===== PHYSICAL PAGE 92 =====
+
+b Other current liabilities 5 1,25,000
+Total 61,82,000
+Assets
+Non-current assets
+
+a PPE 6 36,35,000
+
+b Investments 7 3,96,000
+Current assets
+
+a Inventories 8 10,50,000
+
+b Trade receivables 9 8,80,000
+
+c Cash and cash equivalents 10 2,21,000
+Total 61,82,000
+
+Notes to accounts
+z
+
+Share Capital
+
+Equity share capital
+2,00,000 Equity shares of ¥ 10 each
+(Out of above, 80,000 shares were 20,00,000
+issued for consideration other than _
+cash)
+
+Preference share capital
+10,000 10% Preference shares of = 100
+each 10,00,000
+(Out of above, 4,000 shares were issued _
+for consideration other than cash)
+
+Total 30,00,000
+
+Reserves and Surplus
+
+General Reserve
+
+Opening balance 3,00,000
+Me insigamation under scheme of 95,000
+Less: Amalgamation expense paid (12,000)| 3,83,000
+Securities premium
+(2,40,000 ?1,75,000) 4,15,000
+Export profit reserve
+Opening balance 1,80,000
+so emelyemation under scheme of 4,20,000 3,00,000
+Investment allowance reserve 60,000
+
+381
+
+
+
+===== PHYSICAL PAGE 93 =====
+
+Profit and loss account
+Opening balance
+
+Add: Adjustment under
+amalgamation
+
+Total
+3 Long-term borrowings
+Secured
+9% Debentures
+
+Add: Adjustment under
+amalgamation
+
+Secured loan
+4 Trade payables
+Creditors: Opening balance
+
+Add: Adjustment under
+amalgamation
+
+scheme
+
+scheme
+
+scheme
+
+Bills Payables: Opening balance
+
+Add: Adjustment under
+amalgamation
+
+scheme
+
+of
+
+of
+
+of
+
+of
+
+Less: Cancellation of mutual owning
+upon amalgamation
+
+5 Other current liabilities
+Opening balance
+
+Add: Adjustment under
+amalgamation
+
+6 PPE
+
+scheme
+
+Land & Building- Opening balance
+
+Add: Adjustment under
+amalgamation
+
+scheme
+
+of
+
+of
+
+Plant and machinery- Opening balance
+
+Add: Adjustment under
+amalgamation
+
+scheme
+
+Office equipment-Opening balance
+
+Add: Adjustment under
+amalgamation
+
+Total
+7 Investments
+Opening balance
+
+Add: Adjustment under
+amalgamation
+
+scheme
+
+scheme
+
+of
+
+of
+
+of
+
+2,16,000
+1,20,000| 3,36,000
+14,94,000
+
+3,00,000
+
+2,00,000
+3,60,000] 8,60,000
+
+3,12,000
+2,76,000] 5,88,000
+
+75,000
+
+1,00,000
+(60,000)| 1,15,000
+7,03,000
+
+50,000
+75,000} 1,25,000
+
+10,80,000
+8,40,000] 19,20,000
+
+6,00,000
+5,60,000] 11,60,000
+
+3,45,000
+2,10,000] 5,55,000
+36,35,000
+
+96,000
+3,00,000] 3,96,000
+
+382
+
+
+
+===== PHYSICAL PAGE 94 =====
+
+8 Inventories
+Opening balance 6,30,000
+Ada: Adjustment under scheme of 4,20,000| 10,50,000
+amalgamation
+9 Trade receivables
+Debtors: Opening balance 4,90,000
+Ada: Adjustment under scheme of 3,20,000| 8,10,000
+amalgamation
+Bills Payables: Opening balance 60,000
+Ada: Adjustment under scheme of 70,000
+amalgamation
+Less: Cancellation of mutual owning (60,000) 70,000
+upon amalgamation
+Total 8,80,000
+10 Cash and cash equivalents
+Opening balance 1,72,000
+Ada: Adjustment under scheme of 61,000
+amalgamation
+Less: Amalgamation expense paid (12,000)| 2,21,000
+Working Notes:
+1. Calculation of purchase consideration
+z
+Equity shareholders of B Ltd. (80,000 xz 8,00,000
+10)
+Preference shareholders of B Ltd. (5,00,000 5,75,000
+x 115%)
+Purchase consideration would be 13,75,000
+
+Amount to be adjusted from general reserve
+
+The difference between the amount recorded as share capital
+issued and the amount of share capital of transferor company
+
+should be adjusted in General Reserve.
+Thus, General reserve will be adjusted as follows:
+
+zg
+Purchase consideration 13,75,000
+Less: Share capital issued (% 7,20,000 + | (12,20,000)
+= 5,00,000)
+Amount to be adjusted from general reserve 1,55,000
+
+383
+
+
+===== PHYSICAL PAGE 95 =====
+
+6.
+
+(a)
+
+(b)
+
+3. Calculation of balances of Profit & Loss and Sundry Creditors
+of B Limited to be taken over by A Limited
+
+P&L | Creditors
+
+@) (%)
+Balance as per Balance Sheet of B|1,92,000| 2,04,000
+Limited
+Less / Add: Contingent Trade Payable | (72,000) 72,000
+treated as Actual Liability
+Taken by A Limited 1,20,000| 2,76,000
+
+Yes, one of the characteristics of financial statements is neutrality. To
+be reliable, the information contained in financial statement must be
+neutral, that is free from bias. Financial Statements are not neutral if by
+the selection or presentation of information, the focus of analysis could
+shift from one area of business to another thereby arriving at a totally
+different conclusion on the business results.
+
+Or
+
+Certain changes have been made in Ind AS considering the economic
+environment of the country, which is different as compared to the
+economic environment presumed to be in existence by IFRS. These
+differences are due to differences in economic conditions prevailing in
+India. These differences which are in deviation to the accounting
+principles and practices stated in IFRS, are commonly known as ‘Carve-
+outs’. Additional guidance given in Ind AS over and above what is given
+in IFRS, is termed as ‘Carve in’.
+
+As per provisions of AS 29 “Provisions, Contingent Liabilities and
+Contingent Assets”, where some or all of the expenditure required to
+settle a provision is expected to be reimbursed by another party, the
+reimbursement should be recognized when, and only when, it is virtually
+certain that reimbursement will be received if the enterprise settles the
+obligation. The reimbursement should be treated as a separate asset.
+The amount recognized for the reimbursement should not exceed the
+amount of the provision.
+
+It is apparent from the question that the company had not made provision
+for warranty in respect of certain goods considering that the company
+can claim the warranty cost from the original supplier. However, the
+provision for warranty should have been made as per AS 29 and the
+amount claimable as reimbursement should be treated as a separate
+asset in the financial statements of the company rather than omitting the
+disclosure of such liability. Accordingly, it can be said that the
+accounting treatment adopted by the company with respect to warranty
+is not correct.
+
+384
+
+
+===== PHYSICAL PAGE 96 =====
+
+(c)
+
+Goods are marked on invoice price to achieve the following objectives:
+
+(i)
+
+(ii)
+
+(iii)
+
+To keep secret from the branch manager, the cost price of the
+goods and profit made, so that the branch manager may not start a
+rival and competitive business with the concern; and
+
+To have effective control on stock i.e. stock at any time must be
+equal to opening stock plus goods received from head office minus
+sales made at branch.
+
+To dictate pricing policy to its branches, as well as save work at
+branch because prices have already been decided.
+
+385
+
+
+===== PHYSICAL PAGE 97 =====
+
+ANSWERS OF MODEL TEST PAPER 8
+INTERMEDIATE COURSE; GROUP |
+PAAPER 1 ADVANCED ACCOUNTING
+
+MCQ Answers
+No.
+1. (i) (b)
+(ii) | (c)
+(iii) | (a)
+(iv) | (d)
+2 (i) | (a)
+(ii) | (c)
+(iii) | (a)
+3. (c)
+4. (b)
+5. (b)
+6. (i) (b)
+(ii) | (d)
+(iii) | (a)
+(iv) | (c)
+7 (b)
+(a) (i) Inthe following cases, record Journal Entries for amortization in the
+books of
+Journal Entry for the year ended on 31% March 2024
+z z
+in lakhs|_ in lakhs
+31.3.24 | Amortization A/c (340 x 350/ 1,190) Dr. 100
+To Patent Rights A/c 100
+P&L A/c Dr. 100
+To Amortization A/c 100
+
+Working note
+
+Huge Limited amortised ~ 340 lakhs during next 4 years on the
+basis of net cash flows arising of the product. The amortisation for
+second year will be worked out as under:
+
+= 340 x 350 /1,190 (140+350+280+420) = % 100 lakhs
+
+386
+
+
+===== PHYSICAL PAGE 98 =====
+
+(ii)
+
+Particulars Zin lakhs
+
+Zin
+lakhs
+
+Prior period item Dr. 50
+Amortization A/c Dr. 10
+To Know-how A/c
+
+[Being amortization of 6 years (out of
+which amortization of 5 years charged as
+prior period item i.e. 80 x 6 /8 = 60 lakhs)]
+
+Profit and Loss A/c Dr. 60
+To Amortization A/c
+
+To Prior Period Item
+
+(Being amount transferred to Profit and
+Loss account)
+
+60
+
+10
+50
+
+(b) Computation of Expected and Actual Returns on Plan Assets
+
+z
+Return on = 5,00,000 held for 12 months at 10.50% 52,500
+Return on = 1,42,000 for 6 months at 10.50% 7,455
+Loss of interest on benefits paid for 4 months on = 63,000 for (2,205)
+4 months @ 10.50%
+Expected return on plan assets for 2023-2024 57,750
+Fair value of plan assets as on 31%t March 2024 7,50,000
+Less: Fair value of plan assets as on 1 April,2023 5,00,000
+Contributions received on 30.9.2023 1,42,000 | (6,42,000)
+1,08,000
+Add: Benefits paid on 30" Nov 2023 63,000
+Actual return on plan assets 1,71,000
+(c) Calculation of Deferred Tax Asset/Liability in Delta Limited
+Year |Accounting| Taxable Timing Timing | Deferred | Deferred
+Income Income | Difference | Difference Tax Tax
+(balance) Liability
+(balance)
+2021 | 34,00,000 | 30,00,000 | 4,00,000 4,00,000 | 1,20,000 | 1,20,000
+2022 | 50,00,000 | 52,00,000 | (2,00,000) | 2,00,000 | (60,000) | 60,000
+2023 | 65,00,000 | 67,00,000 | (2,00,000) NIL (60,000) NIL
+1,49,00,000 | 1,49,00,000
+Calculation of total tax
+Year Deferred Tax Current tax expense Total tax
+2021 1,20,000 9,00,000 | 10,20,000
+(30,00,000 x 30%)
+
+387
+
+
+
+===== PHYSICAL PAGE 99 =====
+
+2
+
+2
+
+022
+
+023
+
+(60,000) 15,60,000
+(52,00,000 x 30%)
+(60,000) 20,10,000
+
+(67,00,000 x 30%)
+
+15,00,000
+
+19,50,000
+
+Note: It is assumed that the revenue and the taxable profit is the same.
+
+Shivam Limited
+
+Balance Sheet as at 31S* March 2024
+
+Particulars Note = (in 000)
+No.
+|. Equity and Liabilities
+1. | Shareholders’ funds
+(a) | Share capital 1 300.00
+(b) | Reserves and Surplus 2 232.70
+2. | Non-Current liabilities
+(a) | Long term borrowings 3 135.00
+3. | Current liabilities
+(a) | Trade Payables 35.00
+(b) | Short-Term Provisions 30.30
+Total 733.00
+Il. Assets
+1. | Non-current assets
+(a) | Property, Plant and Equipment and
+Intangible assets
+(i) Property, Plant and Equipment 4 596.00
+2. | Current assets
+(a) | Inventories 58.00
+(b) | Trade receivables 65.00
+(c) | Cash and cash equivalents 14.00
+Total 733.00
+Shivam Limited
+Statement of Profit and Loss for the year ended 31%t March 2024
+Particulars Notes | Z (in ‘000)
+I. | Revenue from operations 473.00
+Il. | Other Income 5 1.00
+Ill. | Total Income 474.00
+IV. | Expenses:
+Purchases 226.00
+Finance costs 14.00
+
+388
+
+
+
+===== PHYSICAL PAGE 100 =====
+
+Depreciation and Amortisation expenses (10% 51.00
+of 510*)
+Other expenses 6 82.00
+Total Expenses 373.00
+V. | Profit before Tax (III-IV) 101.00
+Tax Expense:
+Current tax (30.30)
+Profit for the period (after tax) 70.70
+Notes to accounts
+= (in 000)
+1. | Share Capital
+Equity share capital
+Authorised
+35,000 shares of = 10 each 350.00
+Issued, subscribed & paid-up
+20,000 shares of ¥ 10 each fully paid up 200.00
+Add: 10,000 Bonus Shares issued during 100.00
+the year 300.00
+2. | Reserves and Surplus
+Securities Premium Account
+Opening Balance 27.00
+Less: Utilised for bonus issue 27.00 0.00
+Revaluation reserve 97.00
+(2,45,000 — 1,48,000)
+General Reserve 90
+Less: Utilized for bonus issue (73) 17.00
+Add: Transfer from Profit & loss @ 10% 7.07 24.07
+Profit & loss Balance
+Opening balance 48.00
+Profit for the period 70.70
+Appropriations
+Transfer to General Reserve @ 10% 7.07 111.63
+232.70
+3. | Long term borrowing
+10% Debentures 135.00
+4 | Property, Plant and Equipment
+Land
+
+* 520 (Plant and machinery at cost) — 10 (Cost of plant and machinery sold)
+
+
+===== PHYSICAL PAGE 101 =====
+
+Opening balance 148.00
+
+Add: Revaluation adjustment 97.00
+
+Closing balance 245.00
+Plant and Machinery
+
+Opening balance 520.00
+
+Less: Disposed off (10.00)
+
+510.00
+
+Less: Depreciation (1,16,000-8,000+51,000) | (159.00)
+Closing balance 351.00
+Total 596.00
+
+5 | Other Income
+Profit on sale of machinery:
+
+Sale value of machinery 3.00
+Less: Book value of machinery (10,000- (2.00) 1.00
+8,000)
+
+6 | Other expenses:
+Factory expenses 40.00
+Selling expenses 20.00
+Administrative expenses 22.00 82.00
+
+The final dividend will not be recognized as a liability at the balance sheet
+date (even if it is declared after reporting date but before approval of the
+financial statements) as per Accounting Standards. Hence, it has not been
+recognized in the financial statements for the year ended 31 March 2024.
+Such dividends will be disclosed in notes only.
+
+Working note:
+Bonus Shares Issue:
+
+. Bonus shares are issued in a 1:2 ratio, so for every 2 equity shares, 1
+bonus share is issued.
+
+. Equity Share Capital = ¥ 2,00,000 / = 10 = 20,000 shares.
+° Bonus Shares = 20,000 / 2 = 10,000 shares x = 10 = = 1,00,000.
+
+Alternatively, since, the amount of interest on 10% 1,35,000 Debentures
+comes to Rs 13,500 while the Debenture Interest in the trial balance is listed
+as = 14,000, the difference of = 500 (%13,500 - 14,000) may be treated as an
+advance payment.
+
+(a) Cash flow statement
+for the year ended 31%t March 2024
+
+(® in lakhs) (in
+lakhs)
+
+Cash flow from operating activities
+
+390
+
+
+
+===== PHYSICAL PAGE 102 =====
+
+Cash sales 262.00
+
+Cash collected from credit customers 134.00
+
+Interest received on advance payment to 0.50
+
+suppliers
+
+Less: Cash purchases (44.00)
+
+Less: Payment to Creditors (84 + 176 — 92) (168.00)
+
+Less: Cash paid to suppliers for consumables & (19.00)
+
+services
+
+Less: Cash paid to employee (20.00)
+
+Cash from operations 145.50
+
+Less: Income tax paid (26.00)
+
+Net cash generated from _ operating 119.50
+
+activities
+
+Cash flow from investing activities
+
+Payment for purchase of Machine (20-15) (5.00)
+
+Proceeds from rent received 8.00
+
+Net cash used in investing activities 3.00
+
+Cash flow from financing activities
+
+Redemption of Preference shares (32.00)
+
+Proceeds from issue of Equity shares 24.00
+
+Debenture interest paid (3.00)
+
+Dividend Paid (15.00)
+
+Net cash used in financing activities (26.00)
+
+Net increase in cash and cash equivalent 96.50
+
+Add: Cash and cash equivalents as on 2.00
+
+1.04.2023
+
+Cash and cash equivalents as on 31.3.2024 98.50
+
+(b) Statement determining the maximum number of shares to be bought
+back
+(in thousands)
+Particulars Number of
+shares
+
+Shares Outstanding Test (W.N.1) 15
+Resources Test (W.N.2) 12
+Debt Equity Ratio Test (W.N.3) 11
+Maximum number of shares that can be bought back 11
+[least of the above]
+
+Thus, the lowest being 11,000 shares, the company cannot buy back
+14,000 shares.
+
+391
+
+
+===== PHYSICAL PAGE 103 =====
+
+Working Notes:
+
+1. Shares Outstanding Test
+
+Particulars
+
+(Shares in thousands)
+
+Number of shares outstanding
+25% of the shares outstanding
+
+60
+15
+
+2. Resources Test
+
+Particulars
+
+% (in thousands)
+
+Paid up capital
+
+Free reserves (540 + 200 +100)
+Shareholders’ funds
+
+25% of Shareholders fund
+Buy-back price per share
+
+Number of shares that can be bought
+back
+
+12,000 shares
+
+= 30
+
+3. Debt Equity Ratio Test: Loans cannot be in excess of twice the
+Equity Funds post Buy-Back
+
+bought back @ Z 30 per share
+
+Particulars = in thousands
+
+(a) Loan funds 2,000
+
+(b) Minimum equity to be maintained after 1,000
+buy-back in the ratio of 2:1 (%) (a/2)
+
+(c) Present equity shareholders fund (2) 1,440
+
+(d) Future equity shareholders fund (%) (see 1,330
+W.N.4) (1,440-110)
+
+(e) Maximum permitted buy-back of Equity 330
+(%) [(d) — (b)]
+
+(f) | Maximum number of shares that can be | 11,000 shares
+
+4. Amount transferred to CRR and maximum equity to be bought
+back will be calculated by simultaneous equation method.
+
+Suppose amount transferred to CRR account is ‘x’ and maximum
+permitted buy-back of equity is ‘y’ Then
+
+Equation 1: (Present Equity- Transfer to CRR)- Minimum Equity to
+be maintained = Maximum Permitted Buy-Back
+
+= (1,440 — x) — 1,000 = y
+=440-x=y
+
+(1)
+
+Equation 2: Maximum Permitted Buy-Back X Nominal Value Per
+Share/Offer Price Per Share
+
+y/30 x 10 =x
+
+392
+
+
+
+===== PHYSICAL PAGE 104 =====
+
+or
+3x =y
+by solving the above two equations we get
+
+(2)
+
+x = % 110 thousands
+y = = 330 thousands
+Alternatively, Maximum number of shares from debt equity ratio test
+
+may be worked out as follows:
+
+Buy-back price + Face value of equity shares
+
+40
+
+%30+% 10 =%
+
+Excess of equity fund over the minimum equity to be maintained
+
+1440-1000 = 440 thousands
+
+Number of Shares that can be bought back = 440/40 thousands
+
+= 11 thousands.
+
+Journal Entries in the Books of Nice Ltd.
+
+Dr. Cr.
+= in ‘000| % in ‘000
+Business Purchase Account Dr. 10,620
+To Liquidator of Well Ltd. 10,620
+(Consideration payable for the business taken over
+from Well Ltd.)
+Property, Plant and Equipment (120% of = 16,380) Dr. 19,656
+Inventory (110% of = 870) Dr. 957
+Trade receivables Dr. 1,950
+Goodwill A/c (Balancing figure) Dr. 137
+To Trade payables 4,850
+To Debenture Holders Account 1,000
+To Loan from bank (4,525-270) 4,255
+To Short term borrowings 1,975
+To Business Purchase Account 10,620
+(Incorporation of various assets and liabilities taken
+over from Well Ltd. at agreed values and difference
+of net assets and purchase consideration debited to
+Goodwill A/c))
+Liquidator of Well Ltd. Dr. 10,620
+To Equity Share Capital (75,000x 100) 7,500
+To 9% Preference Share Capital 1,620
+To Securities premium (7,5000x 20) 1,500
+
+(Discharge of consideration for Well Ltd.’s
+business)
+
+393
+
+
+
+===== PHYSICAL PAGE 105 =====
+
+Debenture holders A/c Dr. 1,000
+To 9% Debentures A/c 1,000
+(Being 9% debentures issued to 10% debenture
+holders)
+Sundry Creditors of Well Ltd. Dr. 215
+To Sundry Debtors of Nice Ltd. 215
+(Cancellation of mutual owing)
+Goodwill Dr. 55
+To Bank 55
+(Being liquidation expenses reimbursed to Well
+Ltd.)
+Working Note:
+The purchase consideration will be:
+z Form
+Preference shareholders: 16,200 x 100 16,20,000 9% Pref. shares
+Equity shareholders: 1,25,000 x 3/5x120 _90,00,000 Equity shares
+1,06,20,000
+10 % Preference shares 18,00,000
+Less: 10% discount 1,80,000
+16,20,000
+Debenture calculation
+Interest
+10% Debenture 9,00,000 90,000
+
+Therefore 9% debentures 90,000/9% = 10,00,000
+
+Balance Sheet of Nice Ltd. (After absorption) as at 315t March 2024
+
+Particulars Notes | Zin ‘000
+| Equity and Liabilities
+1 Shareholders' funds
+(a) Share capital 1 50,120
+(b) Reserves and Surplus 2 21,000
+2 Non-current liabilities
+(a) Long-term borrowings 3 25,755
+3 Current liabilities
+(a) | Trade payables 4 20,375
+(b) | Short term borrowing 1,975
+Total 1,19,225
+
+394
+
+
+
+===== PHYSICAL PAGE 106 =====
+
+ll Assets
+Non-current assets
+(a) | Property, Plant and Equipment and Intangibles 5
+(i) Property, plant and equipment 82,206
+(ii) Intangible assets 192
+(b) | Non-current investments 22,500
+Current assets
+(a) | Inventories 6 1,257
+(b) | Trade receivables 7 8,325
+(c) | Cash and Cash equivalents 8 4,745
+Total 1,19,225
+Notes to accounts
+= in ‘000
+Share Capital
+Equity share capital
+Issued, subscribed and paid up
+3,90,000 Equity shares of = 100 each
+(out of above 75,000 shares are issued for 39,000
+consideration other than cash)
+Preference Shares
+Issued, subscribed and paid up
+1,11,200 9% Preference Shares of = 100 each (9,500 +
+1,620) . 11,120
+(out of above 16,200 shares are issued for
+consideration other than cash)
+50,120
+Reserves and Surplus
+Securities premium 1,500
+Reserves and surplus 19,500 21,000
+Long-term borrowings
+9 % Debentures (11,200+1,000) 12,200
+Loan from bank (9,300+4255) 13,555 25,755
+Trade Payable
+Nice Limited 15,740
+Well Limited 4,850
+20,590
+Less: Inter Company holdings (215) 20,375
+
+395
+
+
+
+===== PHYSICAL PAGE 107 =====
+
+5 | Property, Plant and Equipment and Intangibles
+Property, Plant and Equipment
+Acquired during the year
+Intangibles
+Goodwill (137+55)
+
+Inventories
+
+Acquired during the year
+
+Trade receivables
+
+Acquired during the year (1,585+150)
+8 | Cash and Cash Equivalents
+
+62,550
+19,656 | 82,206
+
+192
+300
+957| 1,257
+6,590
+
+1,735 8,325
+
+Nice Limited 4,800
+Less: Expenses on liquidation (55) 4,745
+
+1. Trade payable (Consolidated)
+Best limited 3,80,000
+Add: Cool Ltd 4,10,000
+Less: Elimination (3,00,000)
+Total 4,90,000
+
+2. Current assets (Consolidated)
+Best limited 9,65,000
+Add: Cool Ltd 5,60,000
+Less: Elimination of inter company owing | (3,00,000)
+Less: Unrealized stock profit (1,50,000) | (4,50,000)
+Total 10,75,000
+
+3. Minority interest Cool Ltd
+Share Capital (20,00,000 x 20%) 4,00,000
+Add: Securities premium (2,20,000 x 20%) 44,000
+Add: General Reserve (84,000 x 20%) 16,800
+Add: Profit and loss balance 2,70,000
+
+Less: Adjustment of unrealised profit | (1,50,000)
+stock
+
+Balance 1,20,000
+20% of above balance 24,000
+Total 4,84,800
+
+396
+
+
+
+===== PHYSICAL PAGE 108 =====
+
+4.
+
+Goodwill/Capital Reserve on Acquisition of Cool Ltd.:
+
+Purchase Consideration 14,80,000
+
+Less: Share Capital (20,00,000 x 80%) 16,00,000
+
+Less: Securities premium (2,20,000 x 80%) 1,76,000
+
+Less: General Reserve (84,000 x 80%) 67,200
+
+Less: Profit and loss balance opening (30,000 x 80%) 24,000
+
+Less: Pre acquisition profits
+
+(2,70,000-30,000) x 10/12 x 80% 1,60,000
+
+Less: Unrealised profit stock (1,50,000 x 80%) 1,20,000 40,000
+
+Capital Reserves 4,27,200
+Goodwill/Capital Reserve on Acquisition of Good Ltd.
+
+Purchase Consideration 3,80,000
+
+Less: Share Capital (10,00,000 x 25%) 2,50,000
+
+Less: General Reserve (1,20,000 x 25%) 30,000
+
+Less: Profit and loss balance (50,000 x 25%) 12,500
+
+Goodwill 87,500
+Profit and Loss Account (Consolidated)
+
+Best limited 3,26,000
+
+Add: Post acquisition profit of Cool Ltd
+
+{(2,70,000-30,000) x 2/12}80% 32,000
+
+Total 3,58000
+General Reserve (Consolidated)
+
+Best limited 2,69,000
+
+With reference to para no 15 of AS 21
+
+If an enterprise makes two or more investments in another enterprise at
+different dates and eventually obtains control of the other enterprise, the
+consolidated financial statements are presented only from the date on
+which holding-subsidiary relationship comes in existence. If two or more
+investments are made over a period of time, the equity of the subsidiary
+at the date of investment, for the purposes of paragraph 13 above, is
+generally determined on a step-by-step basis; however, if small
+investments are made over a period of time and then an investment is
+made that results in control, the date of the latest investment, as a
+practicable measure, may be considered as the date of investment.
+
+And para no 22 of AS 21 The results of operations of a subsidiary are
+included in the consolidated financial statements as from the date on
+which parent-subsidiary relationship came in existence. The results of
+operations of a subsidiary with which parent- subsidiary relationship
+ceases to exist are included in the consolidated statement of profit and
+loss until the date of cessation of the relationship. The difference
+
+397
+
+
+===== PHYSICAL PAGE 109 =====
+
+between the proceeds from the disposal of investment in a subsidiary
+and the carrying amount of its assets less liabilities as of the date of
+disposal is recognised in the consolidated statement of profit and loss as
+the profit or loss on the disposal of the investment in the subsidiary. In
+order to ensure the comparability of the financial statements from one
+accounting period to the next, supplementary information is often
+provided about the effect of the acquisition and disposal of subsidiaries
+on the financial position at the reporting date and the results for the
+reporting period and on the corresponding amounts for the preceding
+period.
+
+8. Revenue (Consolidated) as per para no 15 and 22 of AS 21
+Revenue of Best Ltd 56,00,000
+Add: Revenue of Cool Ltd. (38,00,000 x 2/ 12) 633,333
+62,33,333
+9. Cost of materials purchased/consumed (Consolidated) as per para
+no 15 and 22 of AS 21
+Raw material of Best Ltd 36,50,000
+Add: Raw material of Cool Ltd (31,20,000x 2/12) 5,20,000
+41,70,000
+(a) In the books of Mr. Day
+Investment Account
+(Equity shares in Square Ltd.)
+Date |Particulars No. of| Amount)Date Particulars No. of} Amount
+shares (8) shares (®)
+1.4.23 |To Balance 25,000} 6,25,000/31.3.24 |By Balance] 63,750] 13,00,000
+b/d c/d (Bal. fig.)
+31.7.23|To Bonus issue} 5,000
+(W.N.1) -
+5.10.23/To Bank A/c} 33,750} 6,75,000
+(right shares)
+(W.N.4)
+63,750/13,00,000 63,750} 13,00,000
+
+Working Notes:
+
+ao = 5,000 shares
+
+25,000 + 5,000 . 3 _
+2
+
+(1) Bonus shares
+
+(2) Right shares = 45,000 shares
+
+(3) Sale ofrights = 45,000 shares x : x%5
+
+= 11,250 x 5 = 56,250
+
+= 56,250 to be credited to statement of
+profit and loss
+
+(4) Rights subscribed = 45,000 shares xox = 20 = = 6,75,000
+398
+
+
+===== PHYSICAL PAGE 110 =====
+
+Or
+
+In determining the cost of inventories, it is appropriate to exclude certain
+costs and recognise them as expenses in the period in which they are
+incurred. Examples of such costs are:
+
+(a) Abnormal amounts of wasted materials, labour, or other
+production costs;
+
+(b) Storage costs, unless the production process requires such
+storage.
+
+(c) Administrative overheads that do not contribute to bringing the
+inventories to their present location and condition.
+
+(d) Selling and distribution costs.
+
+(b) Journal Entries
+z z
+Equity Share Capital (old) A/c Dr. | 15,00,000
+To Equity Share Capital (= 10) A/c 5,00,000
+To Cash A/c 50,000
+To 10% Debentures A/c 7,50,000
+To Securities premium 1,50,000
+To Capital Reduction/ Reconstruction A/c 50,000
+(Being new equity shares, 8% Debentures
+issued, cash of ~ 50,000 and the balance
+transferred to Reconstruction account as per
+the Scheme)
+8% Debentures A/c Dr. | 5,00,000
+To Freehold Property A/c 4,45,000
+To Capital Reduction/ Reconstruction A/c 55,000
+(Being the debenture holders claim settled
+partly and foregone partly as_ per
+reconstruction scheme)
+Capital Reduction/Reconstruction A/c Dr. 1,05,000
+To Capital Reserves A/c 1,05,000
+(Being balance in capital reduction account
+transferred to Capital Reserves A/c)
+(c) (i) In the books of Kullu Branch
+Trading and Profit and Loss Account
+Particulars Amount | Particulars Amount
+z
+To Opening stock 2,70,000 | By Sales 19,50,000
+To Goods received by | 17,82,000 | By Goods returned by 75,000
+Head office Branch
+To Expenses 56,000 | By Closing stock (Refer 4,17,000
+W.N.)
+
+399
+
+
+===== PHYSICAL PAGE 111 =====
+
+To Net profit (Bal fig) 3,34,000
+24,42,000 24,42,000
+(ii) Calculation of Closing Stock
+Cost price 100
+Invoice price 120 (100+20)
+Sales price 150 (120+25% of 120)
+Opening Stock 2,70,000
+Goods received 17,82,000
+Less: Goods Returned 75,000
+19,77,000
+Less: Cost of Goods Sold (Invoice price) 15,60,000
+Closing Stock 4,17,000
+
+Stock reserve in respect of unrealised profit
+= 4,17,000 x (20/120) = = 69,500
+
+400

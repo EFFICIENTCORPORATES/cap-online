@@ -1,0 +1,207 @@
+{
+  "sourceFile_Q": "CAInter-AdvAcc-MTP-ICAI-Practice-Q.pdf",
+  "modelTestPaper": 1,
+  "printedPageRange": "1-13",
+  "physicalPageRange": "6-18",
+  "questions": [
+    {
+      "qNoInPaper": "1(i)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 6,
+      "caseScenario": "SEAS Ltd (tours/travels, airline ticket purchase model), forward contract, employee pension scheme, subsidiary ADI Ltd with associate ASOC Ltd",
+      "questionTextHtml": "<p>What would be the basis of revenue recognition for SEAS Ltd. as per the requirements of Accounting Standards?</p><p>(a) Gross basis.<br>(b) Net basis.<br>(c) Depends on the accounting policy of the Company.<br>(d) Indian GAAP allows a choice to the Company to recognize revenue on gross basis or net basis.</p>"
+    },
+    {
+      "qNoInPaper": "1(ii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 7,
+      "caseScenario": "SEAS Ltd - same as 1(i)",
+      "questionTextHtml": "<p>Please suggest accounting treatment of forward contract for the year ended 31 March 2024 as per Accounting Standard 11.</p><p>(a) MTM (marked to market value) of contract will be recorded on 31 March 2024.<br>(b) MTM of contract will be computed as at 31 March 2024 and only if there is loss, it will be recorded during the year ended 31 March 2024.<br>(c) No accounting will be done during the year ended 31 March 2024. Premium on contract will be amortized over the life of the contract.<br>(d) [option d text unclear in OCR, verify against PDF]</p>"
+    },
+    {
+      "qNoInPaper": "1(iii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 7,
+      "caseScenario": "SEAS Ltd - same as 1(i); two employee benefit scheme changes (formal gratuity scheme replacing ad-hoc ex-gratia; new pension scheme)",
+      "questionTextHtml": "<p>You are requested to advise the Company in respect of the accounting requirements of above schemes related to employee benefits as to which one of those schemes should be considered as a change in accounting policy during the year.</p><p>(a) 1 - Change in accounting policy. 2 - Change in accounting policy.<br>(b) 1 - Not a change in accounting policy. 2 - Change in accounting policy.<br>(c) 1 - Not a change in accounting policy. 2 - Not a change in accounting policy.<br>(d) 1 - Change in accounting policy. 2 - Not a change in accounting policy.</p>"
+    },
+    {
+      "qNoInPaper": "1(iv)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 7,
+      "caseScenario": "SEAS Ltd - subsidiary ADI Ltd (23% in associate ASOC Ltd), SEAS itself holds 9% in ASOC Ltd directly",
+      "questionTextHtml": "<p>Please comment regarding consolidation requirements for SEAS Ltd. and ADI Ltd. using the below mentioned options as to which one should be correct.</p><p>(a) ADI Ltd. would use equity method of accounting for 23% in ASOC Ltd. SEAS Ltd. would consolidate ADI Ltd. and consequently automatically equity account 23% and separately account for the balance 9% as per AS 13.<br>(b) ADI Ltd. would account for 23% in ASOC Ltd. as per AS 13. SEAS Ltd. would consolidate ADI Ltd. and consequently automatically account 23% and separately account for the balance 9%.<br>(c) ADI Ltd. would account for 23% share in ASOC Ltd using equity method of accounting. SEAS Ltd. would consolidate ADI Ltd. and consequently, automatically account for ASOC Ltd 23% share and separately account for 9% share in ASOC Ltd. using equity method of accounting in consolidated financial statements.<br>(d) ADI Ltd. would account for 23% in ASOC Ltd. as per AS 13. SEAS Ltd. would consolidate ADI Ltd. and using equity method of accounting 23% in ASOC Ltd. and separately account for the balance 9% as per AS 13.</p>",
+      "notes": "Marks for Q1(i)-(iv) not explicitly labeled per sub-part in source; inferred as 2 marks each (8 marks total) by elimination against Part I's stated 30-mark total (Q1 8 + Q2 8 + Q3 8 + remaining 6 = 30) - flagged as inferred, not printed."
+    },
+    {
+      "qNoInPaper": "2(i)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 8,
+      "caseScenario": "Shubham Ltd - land purchase + factory construction cost breakdown (legal cost, site prep, employment costs, materials, relocation cost, inauguration cost, overheads, borrowing cost)",
+      "questionTextHtml": "<p>Which of the following cost (incurred directly on construction) will be capitalized to the cost of factory building?</p><p>(a) Rs2,00,000 incurred as legal cost<br>(b) Rs60,000 - costs of relocating employees<br>(c) Rs80,000 costs of inauguration ceremony<br>(d) Rs24,000 - allocated general overhead cost</p>"
+    },
+    {
+      "qNoInPaper": "2(ii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 8,
+      "caseScenario": "Shubham Ltd - same as 2(i)",
+      "questionTextHtml": "<p>What amount of employment cost of construction workers will be capitalized to the cost of factory building?</p><p>(a) Rs2,90,000<br>(b) Rs3,48,000<br>(c) Rs2,32,000<br>(d) Rs29,000</p>"
+    },
+    {
+      "qNoInPaper": "2(iii)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 8,
+      "caseScenario": "Shubham Ltd - same as 2(i)",
+      "questionTextHtml": "<p>What is the amount of net borrowing cost capitalized to the cost of the factory?</p><p>(a) Rs1,89,000<br>(b) Rs1,68,000<br>(c) Rs1,44,000<br>(d) Rs1,64,000</p>"
+    },
+    {
+      "qNoInPaper": "2(iv)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 8,
+      "caseScenario": "Shubham Ltd - same as 2(i)",
+      "questionTextHtml": "<p>What will be the carrying amount (i.e. value after charging depreciation) of the factory in the Balance Sheet of Shubham Limited as at 31st March, 2023?</p><p>(a) Rs30,00,000<br>(b) Rs57,78,125<br>(c) Rs27,78,125<br>(d) Rs58,00,000</p>",
+      "notes": "This Shubham Ltd factory-construction case scenario (2(i)-(iv)) is AS10-relevant (PPE cost elements: legal cost to land not building, relocation/inauguration excluded, borrowing cost capitalisation, component depreciation of roof) - was independently identified in the earlier AS10 audit of this same file (Model Test Paper 1)."
+    },
+    {
+      "qNoInPaper": "3(a)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 9,
+      "caseScenario": "Kesar Ltd - share buyback of 25,000 equity shares @Rs20, balance sheet given (share capital, reserves, borrowings, assets)",
+      "questionTextHtml": "<p>By using the Shares Outstanding Test the number of shares that can be bought back</p><p>(a) 1,25,000<br>(b) 31,250<br>(c) 25,000<br>(d) 30,000</p>"
+    },
+    {
+      "qNoInPaper": "3(b)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 9,
+      "caseScenario": "Kesar Ltd - same as 3(a)",
+      "questionTextHtml": "<p>By using the Resources Test determine the number of shares that can be bought back:</p><p>(a) 25,000<br>(b) 31,250<br>(c) 28,750<br>(d) 39,062</p>"
+    },
+    {
+      "qNoInPaper": "3(c)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 9,
+      "caseScenario": "Kesar Ltd - same as 3(a)",
+      "questionTextHtml": "<p>By using the Debt Equity Ratio Test determine the number of shares that can be bought back:</p><p>(a) 25,000<br>(b) 34,250<br>(c) 28,750<br>(d) 39,062</p>"
+    },
+    {
+      "qNoInPaper": "3(d)",
+      "type": "MCQ-Scenario",
+      "printedMarks": 2,
+      "pageQ": 9,
+      "caseScenario": "Kesar Ltd - same as 3(a)",
+      "questionTextHtml": "<p>On the basis of all three tests determine Maximum number of shares that can be bought back:</p><p>(a) 25,000<br>(b) 31,250<br>(c) 28,750<br>(d) 39,062</p>"
+    },
+    {
+      "qNoInPaper": "4",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 10,
+      "questionTextHtml": "<p>All of the following costs are excluded while computing value of inventories except?</p><p>(a) Selling and Distribution costs<br>(b) Allocated fixed production overheads based on normal capacity.<br>(c) Abnormal wastage<br>(d) Storage costs (which is necessary part of the production process)</p>",
+      "notes": "This is the AS2 question independently identified and verified in the earlier AS2 question-bank audit (page 5/291 per that audit's precise verification)."
+    },
+    {
+      "qNoInPaper": "5",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 11,
+      "questionTextHtml": "<p>According to AS-18 Related Party Disclosures, which ONE of the following is a related party of Skyline Limited?</p><p>(a) A shareholder of Skyline Limited owning 30% of the ordinary share capital<br>(b) An entity providing banking facilities to Skyline Limited in the normal course of business<br>(c) An associate of Skyline Limited<br>(d) Key management personnel of Skyline Limited</p>",
+      "notes": "OCR question stem says 'which ONE of the following IS a related party' but options + correct-answer pattern from the equivalent question seen in M1-C4-U4 source unit's Test Your Knowledge (same question, option (b) is the 'not related' answer there) suggests the actual printed stem is 'which ONE of the following is NOT a related party' - flagged for verification against the actual PDF, not assumed."
+    },
+    {
+      "qNoInPaper": "6",
+      "type": "MCQ-Direct",
+      "printedMarks": 2,
+      "pageQ": 11,
+      "questionTextHtml": "<p>The process of reconstruction, which is carried out without liquidating the company and forming a new one is called</p><p>(a) Internal reconstruction.<br>(b) External reconstruction.<br>(c) Amalgamation in the nature of merger.<br>(d) Amalgamation in the nature of purchase.</p>"
+    },
+    {
+      "qNoInPaper": "1(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 5,
+      "pageQ": 11,
+      "questionTextHtml": "<p>Innovative Garments Manufacturing Company Limited invested in the shares of another company on 1 October, 2022 at a cost of Rs2,50,000. It also earlier purchased Gold of Rs4,00,000 and Silver of Rs2,00,000 on 1st March, 2020. Market value as on 31st March, 2023 of above investments: Shares Rs2,25,000; Gold Rs6,00,000; Silver Rs3,50,000. How will above investments be shown in the books of accounts for the year ending 31st March, 2023 as per AS 13 'Accounting for Investments'?</p>"
+    },
+    {
+      "qNoInPaper": "1(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 5,
+      "pageQ": 11,
+      "questionTextHtml": "<p>Lessee Ltd. took a machine on lease from Lessor Ltd., fair value Rs7,00,000. Economic life and lease term both 3 years. Lessee pays Rs3,00,000 at end of each year. Lessee has guaranteed residual value of Rs22,000; Lessor estimates actual residual value at only Rs15,000. Implicit rate of return 15% p.a.; PV factors at 15%: 0.869, 0.756, 0.657 for years 1-3. Calculate the value of machinery to be considered by Lessee Ltd. and the finance charges in each year.</p>"
+    },
+    {
+      "qNoInPaper": "1(c) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 12,
+      "questionTextHtml": "<p>X Ltd. purchased a PPE four years ago for Rs150 lakhs, depreciates at 10% p.a. SLM. At end of 4th year, revalued asset at Rs75 lakhs, wrote off loss on revaluation to P&L. On the date of revaluation, market price is Rs67.50 lakhs, expected disposal costs Rs3 lakhs. What is the treatment for impairment loss, given fair value for revaluation = market value, and value in use estimated at Rs60 lakhs?</p>"
+    },
+    {
+      "qNoInPaper": "2 [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 14,
+      "pageQ": 12,
+      "questionTextHtml": "<p>Trial balance of Delta Limited as on 31.3.2023 given (Land, Calls in arrears, Cash, Plant & Machinery, Trade receivables, Inventories, Cash at Bank, Adjusted Purchases, Factory expenses, Admin expenses, Selling expenses, Debenture Interest / Equity share capital, 10% Debentures, General reserve, P&amp;L balance, Securities premium, Sales, Trade payables, Provision for depreciation, Suspense Account). Additional info: authorized capital 80,000 shares of Rs10; land revalued to Rs9,60,000; equity capital includes Rs50,000 issued for non-cash consideration; suspense account represents sale proceeds of machinery (cost Rs24,000, acc. dep Rs20,000); depreciation on P&amp;M at 10% on cost; Rs5,000 bank balance is with a non-scheduled bank; provide income tax @30%; trade receivables of Rs50,000 due &gt;6 months. Prepare Delta Limited's Balance Sheet and Statement of P&amp;L with notes to accounts as at/for year ended 31.3.2023 per Schedule III. Ignore previous year figures and taxation [as stated].</p>"
+    },
+    {
+      "qNoInPaper": "3(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 13,
+      "questionTextHtml": "<p>Y Ltd. used certain resources of X Ltd. In return X Ltd. received Rs10 lakhs and Rs15 lakhs as interest and royalties respectively from Y Ltd. during 2022-23. State whether and on what basis these revenues can be recognized by X Ltd.</p>"
+    },
+    {
+      "qNoInPaper": "3(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 10,
+      "pageQ": 13,
+      "questionTextHtml": "<p>Balance Sheet of ABC Ltd. as at 31st March 2023 given (Share capital incl. equity + 8% preference shares; Reserves and Surplus deficit; 9% debentures; Trade payables; Bank overdraft; PPE; Intangible assets; Non-current investments market value Rs55,000; Inventory; Trade receivables; Cash). Scheme of reconstruction: (i) Preference shareholders give up 30% of capital for 11% Debentures (ii) Debenture holders (charge on P&amp;M) accept P&amp;M in full settlement (iii) Inventory Rs5,00,000 book value taken over by trade payables in full settlement (iv) Investment value reduced to market price (v) Company issues 11% Debentures Rs3,00,000 and augments working capital after settling bank overdraft. Pass Journal Entries, prepare Capital Reduction Account, and Balance Sheet extract for Equity &amp; Liabilities after internal reconstruction.</p>"
+    },
+    {
+      "qNoInPaper": "4 [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 14,
+      "pageQ": 15,
+      "questionTextHtml": "<p>Financial position of Hari Ltd. and Vayu Ltd. as at 31 March 2023 given (Share capital incl. equity + 9%/10% preference shares, Reserves and Surplus, Long term provisions/retirement gratuity fund, Trade Payables, PPE incl. Land &amp; Building / Plant &amp; Machinery, Intangible assets/Goodwill, Inventories, Trade receivables, Cash). Hari Ltd. absorbs Vayu Ltd.: (a) 10% Preference Shareholders paid at 10% premium via 9% Preference Shares of Hari Ltd. (b) Vayu Ltd. Goodwill valued at Rs50,000, Buildings at Rs1,50,000, Machinery at Rs1,60,000 (c) Inventory taken over at 10% less value, Provision for Doubtful Debts @7.5% (d) Equity Shareholders of Vayu Ltd. issued Hari Ltd. equity shares @5% premium. Prepare acquisition entries in Hari Ltd.'s books and draft Balance Sheet after absorption as at 31 March 2023.</p>"
+    },
+    {
+      "qNoInPaper": "5 [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 14,
+      "pageQ": 16,
+      "questionTextHtml": "<p>Balance Sheets of Virat Ltd. and Anushka Ltd. as at 31 March given (Share Capital, Reserves and Surplus, Long Term Borrowings, Trade Payables / PPE, Non-current investments, Inventories, Trade Receivables, Cash). Virat Ltd. holds 80% of Equity Shares in Anushka Ltd. since incorporation. Prepare Consolidated Balance Sheet of Virat Ltd. and Anushka Ltd. as at 31 March.</p>"
+    },
+    {
+      "qNoInPaper": "6(a) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 17,
+      "questionTextHtml": "<p>What are the qualitative characteristics of the financial statements which improve the usefulness of the information furnished therein?</p><p>OR</p><p>What are the issues, with which Accounting Standards deal?</p>"
+    },
+    {
+      "qNoInPaper": "6(b) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 4,
+      "pageQ": 17,
+      "questionTextHtml": "<p>From the following Summary of Cash Account for year ended March 31, 2023 (Balance b/d, Cash sales, Trade receivables collections, Trade commission received, Sale of Investment, Loan from Bank, Interest &amp; Dividend received / Cash purchases, Trade payables paid, Office &amp; Selling Expenses, Income Tax, Investment made, Repayment of Loan, Interest on loan, Balance c/d), calculate cash flow from operating activities.</p>"
+    },
+    {
+      "qNoInPaper": "6(c) [Part II]",
+      "type": "Descriptive",
+      "printedMarks": 6,
+      "pageQ": 18,
+      "questionTextHtml": "<p>Jammu branch of Best New Delhi, year ending 31 March 2023: goods invoiced to branch at cost plus 20%; sale price = cost plus 50%. Data: Stock as on 01.04.2022 (invoice price) Rs2,20,000; Goods sent during year (invoice price) Rs11,00,000; Sales during the year Rs12,00,000; Expenses incurred at branch Rs45,000. Ascertain (i) profit earned by branch during the year (ii) branch stock reserve for unrealized profit.</p>"
+    }
+  ],
+  "extractionNotes": "Extracted via direct OCR (Tesseract, PyMuPDF page rendering) + manual structuring, not delegated to Tier 2 tools. Some question text has OCR artifacts (garbled table layouts especially in the Delta Ltd trial balance and ABC Ltd balance sheet) - numbers/labels reconstructed as faithfully as possible from the OCR output, but should be spot-checked against the actual PDF before being treated as final/publishable. Marks for Part I Q1(SEAS case) inferred by arithmetic elimination, not directly OCR'd as explicit per-sub-question labels - flagged."
+}

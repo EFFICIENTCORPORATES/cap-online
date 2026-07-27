@@ -4,6 +4,26 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-07-27 — Book stats script built; discovered the 34 chapter files were substantially redesigned outside this session
+
+Two things this session, in order:
+
+**1. Discovered `generate_chapter_book.py` and all 34 chapter files were regenerated/redesigned outside this conversation** (files dated 2026-07-26 ~20:2x-20:3x, after this session's earlier merge work that day). Real, confirmed changes: MCQs are now deliberately excluded from the printed chapter books (they're described as living on "the dedicated MCQ platform" instead -- only Descriptive + Integrated sections remain); the old `id="AS02-NNN"` bug is fixed at the source now (ids are correctly per-chapter, e.g. `M2C5U2-001`); a richer built-in self-notes/notebook-ref/tag-placeholder/revision-phase block was added per question (overlapping with, and now superseding, the simpler one-line strip this session had injected at merge time); a per-chapter brand-header/footer and a back-of-chapter "Sanjeevani Booti 2: Error Register" section were added. **Not yet reconciled with the merge pipeline** (`qb_merge.py`/`qb_common.py` still assume the old shape in places -- e.g. the now-redundant `inject_student_notes()` merge-time overlay, and the chapter_print_* font overrides don't yet cover the new `.self-notes`/`.brand-header`/`.error-register` classes) -- flagged to Pranav directly rather than guessed at; the previously-delivered `QUESTION-BANK-BOOK.html` is stale against this and needs a full re-merge once the reconciliation approach is agreed.
+
+**2. Built `first_run/scripts/generate_book_stats.py`** (Pranav's request: a script-driven book-coverage summary — attempts covered, question counts including parts/sub-parts, total marks). Reads `questions_index.json` (Layer 2) directly rather than the 34 chapter files, deliberately: chapter-book rendering policy (MCQs in/out) can keep changing, but the underlying question corpus is stable, so the stats describe the corpus with the current rendering policy called out as a separate, explicit fact rather than baked into the numbers.
+
+Ran it and checked every surprising number against the raw data before trusting it, rather than reporting them as-is:
+- **275 total question records** (already parts/sub-parts-inclusive, since independent splitting happens at extraction) across the 10 known sittings; **165 distinct question numbers as originally printed** (collapsing split sub-parts and OR-alternative pairs back to their real printed number).
+- **"Easy" for all 275 rows on the difficulty field** — checked topic_count distribution directly (272 rows touch exactly 1 topic, 3 touch 2), confirmed this is a real consequence of the splitting design, not a computation bug; the difficulty label currently carries near-zero signal.
+- **RTP sittings show 0 marks** — confirmed by grepping the raw sitting HTML: RTP files genuinely have zero `data-marks` attributes anywhere (ICAI's RTP documents don't publish a marks-weighted answer key), matching an already-documented, expected behavior from 2026-07-26's log, not new data loss.
+- **Each MTP/PYQ sitting sums to 114 marks, not the nominal 100** — traced to Part II's "answer any N of the remaining M" choice structure: the book deliberately includes every optional question shown (Q1-Q6, 84 marks) rather than only the subset (Q1-Q5, 70 marks) one specific sitting required, so a student can practice all of them. Verified consistent (30 + 84 = 114) across all 7 MTP/PYQ sittings, confirming it's structural, not a one-off tagging error.
+
+Every one of those four "this looks wrong" moments turned out to be either already-documented expected behavior or a real, traceable structural fact -- none were left unexplained in the script's own output (each has an inline NOTE in both the console summary and the written `book_stats.json`).
+
+**Not yet done**: wiring these stats into an actual front-matter page (Pranav asked to confirm the script works first, before deciding where in the book's flow to place it) -- `book_stats.json` is written to `first_run/output/generated-from-script/` for now, nothing reads it yet.
+
+---
+
 ## 2026-07-26 (cont'd, 8) — Question Bank Book: chapter-book reader-experience overhaul (MCQs removed, Integrated-topic bug fixed, several new student-facing fields)
 
 Pranav sent a 16-point review of the rendered chapter books; asked for feedback/plan first (delivered), then to implement all "straightforward" items and report what's left.
@@ -573,6 +593,74 @@ Pranav asked to shift full focus to the Question Bank Book (`books/question-bank
 **Explicitly NOT done (flagged, Pranav to decide):** `books/question-bank/README.md` still describes the abandoned `pyq/mtp/rtp/solutions/` layout; `tools/health_check.py`'s `EXPECTED_DIRS` still checks for a top-level `question-bank/` that doesn't exist (pre-existing false-flag, not touched this session).
 
 **Next lever:** parsing the remaining ~52 raw conversions into the clean `Parsed_PDF_.../` format is now the bottleneck — tagging itself is fast once a sitting is parsed.
+
+---
+
+## 2026-07-20 (latest) — Phase 1 extraction fully delegated (MTP/RTP/PYQ/ICAI-Practice); Batch 1 book pivot
+
+**Continuation of the same session — read the two entries below first if picking this up cold.**
+
+**Pivot:** Pranav asked to finish the Batch 1 (10-unit) Question Bank Book first, before starting Batch 2/3 Phase 0. Since Phase 1 (question extraction) is naturally per-source-paper not per-chapter, decided (Pranav's call) to **extract every question from every source paper once now**, then tag against Batch 1's keyword index only — non-Batch-1 matches wait for Batch 2/3's indexes later. This avoids re-scanning the same source papers three times.
+
+**Delegation across tools, per Pranav's request:**
+
+- Wrote `phase1-mtp-prompts.md` (5 prompts, 18 MTP attempts/36 files), `phase1-rtp-prompts.md` (3 prompts, 7 RTP files), `phase1-pyq-prompts.md` (3 prompts, 7 PYQ attempts incl. the null-Q/null-Ans edge cases) — for Pranav to run through Gemini/Copilot/Blackbox. **Not yet run as of this entry.**
+- ICAI-Practice compilation (scanned, 101+111 pages) was assigned to me directly since it needed OCR. Built and verified an OCR pipeline (PyMuPDF + pytesseract, see the entry below for the snippet) and OCR'd both PDFs successfully.
+- **I hand-extracted Model Test Papers 1–4's questions myself** (reading the OCR text directly) — written to `books/question-bank/metadata-index/icai-practice-extraction/icai_practice_MTP{1,2,3,4}_Q_extracted.json`. Partway through MTP5, Pranav pointed out that once OCR is done, structuring plain OCR text into JSON is mechanically identical to what the other three tools are doing for MTP/RTP/PYQ — no longer needs a premium model. **Correct call — I agreed and stopped doing it by hand.**
+- Copied `icai_practice_Q_ocr.txt` / `icai_practice_Ans_ocr.txt` (the full OCR dumps) into the repo at `books/question-bank/metadata-index/icai-practice-extraction/` so Tier 2 tools can actually read them (they'd been sitting in Claude's own scratchpad temp dir, inaccessible to VS Code extensions). Wrote `phase1-icai-practice-prompts.md` (2 prompts: extract MTP5-8, then match answers for all 8 papers against the Ans OCR text, using my MTP1-4 files as the format reference). **Not yet run.**
+
+**Lesson for future sessions:** OCR (image→text) is genuinely Tier 1/mechanical and fine to do myself via Tesseract. But *structuring* OCR'd text into schema'd JSON is Tier 2 work like any other source file — don't keep doing that by hand past the first paper or two once the OCR output is confirmed clean; write the prompt and hand it off. Recognize this pivot point earlier next time instead of grinding through several papers first.
+
+**Current state:** all four Phase 1 prompt sets (MTP, RTP, PYQ, ICAI-Practice) are written and ready. Nothing to do until Pranav runs them and brings back outputs. Next real work is reviewing/merging those 8 batches of JSON, then Phase 2 (tagging against Batch 1's `topic-keyword-index.json`), then Phases 3–8 to produce the finished Batch 1 book.
+
+---
+
+## 2026-07-20 (later) — Phase 0 Batch 1 complete: topic-keyword-index.json (10/36 units)
+
+**Continuation of the AS2/AS10 audit session (see the entry below this one for full background — read that first if this is your first time picking up the Question Bank Book work).**
+
+**What happened this session:**
+- Rebatched Phase 0 to Chapters 1–4 / 5–9 / 10–15 (10/17/9 units, replacing the earlier 17/13/6 split) — AS 2 and AS 10 now sit in Batch 2, not Batch 1.
+- Verified Tesseract 5.5.0 install and built a working OCR pipeline: **PyMuPDF (`fitz`) + `pytesseract`**, no Poppler needed — simpler than the originally-planned `pdf2image` route. Confirmed end-to-end against the ICAI-Practice compilation.
+- Wrote `books/question-bank/metadata-index/phase0-batch1-prompts.md` — 10 fully-instantiated Phase 0 prompts (real file paths, real topic scaffolds pulled from the taxonomy JSON), one per Batch 1 unit, ready to paste into Gemini/Copilot/Blackbox.
+- **Ran all 10 prompts and completed the full Tier 3 review + merge cycle.** `books/question-bank/metadata-index/topic-keyword-index.json` now has **10/36 units, 114 topics**: M1-C1-U0 (Intro to AS), M1-C2-U0 (Framework), M1-C3-U0 (Applicability), M1-C4-U1 (AS1), M1-C4-U2 (AS3 Cash Flow), M1-C4-U3 (AS17 Segment Reporting), M1-C4-U4 (AS18 Related Party), M1-C4-U5 (AS20 EPS), M1-C4-U6 (AS24 Discontinuing Ops), M1-C4-U7 (AS25 Interim Reporting).
+
+**Batch 1 is fully done.** Every Tier 2 draft was checked line-by-line against its actual source `.md`, not rubber-stamped. Patterns worth knowing before doing Batch 2/3:
+- **Almost every unit's Tier 2 draft omitted the unit's own "Illustrations + Test Your Knowledge" section** as a topic bucket — even though this is usually the single richest source of realistic exam-style numerical/scenario questions. Added as a `*`-suffixed unnumbered bucket (e.g. `M1-C4-U5-T5.13*`) in every case. **Expect this same gap in Batch 2/3 outputs — check for it every time, don't assume a Tier 2 tool will remember to include it.**
+- Some tools explicitly stated they only read part of a long source file (AS 17's tool said "read lines 1 to 500" of a 1010-line file) — when that happens, the *numbered* topics it did cover are usually still accurate, but the unread tail (illustrations/TYK) needs a separate read-and-add pass.
+- Dense definitional/threshold sections (AS 18's `T4.6`, the MSME/SMC thresholds in `M1-C3-U0-T2`) came back essentially error-free even under heavy scrutiny — the Tier 2 tools are reliable on this kind of content when given the exact file path + topic scaffold, per the prompt design in `phase0-batch1-prompts.md`. The failure mode is *omission* (missing sub-rules, missing whole sections), not *fabrication* — no hallucinated facts were found across all 10 units.
+- One prompt output arrived as an exact duplicate of an earlier prompt's output (Prompt 9 first came back identical to Prompt 7) — flagged to Pranav, he re-ran it and got a valid distinct result. If this happens again, don't merge the duplicate; ask for a re-run.
+
+**Immediate next steps:**
+1. Batch 2 (Chapters 5–9, 17 units — includes AS 2 and AS 10, which already have deep familiarity from the original audits) is next. Per Pranav's decision, wait for **all 17** Batch 2 units' Phase 0 keyword drafts before starting Phase 1 (question extraction) on any of them, including AS 2/AS 10 — don't fast-track those two ahead of their batch-mates.
+2. Need a new `phase0-batch2-prompts.md` analogous to the Batch 1 one, with real file paths + topic scaffolds for all 17 Batch 2 units.
+3. The two flagged AS 10 audit gaps (PYQ May 2026, ICAI-Practice MTP 6–8) from the earlier session are still open and lower priority than the Question Bank Book pipeline work.
+
+---
+
+## 2026-07-20 — AS2/AS10 question-bank audits + Question Bank Book project kicked off
+
+**Read this entry first if you're picking up the "Question Bank Book" work on a fresh clone/session — it explains exactly where things stand and what to do next.**
+
+**What exists now:**
+- `books/question-bank/metadata-index/AS2_Question_Reference.html` and `AS10_Question_Reference.html` — accuracy-audited, topic-tagged references of every genuine question found in the MTP/RTP/PYQ/ICAI-Practice question bank for AS 2 (Valuation of Inventories) and AS 10 (Property, Plant & Equipment) respectively. Each has a topic-wise marks-weightage summary plus MCQ/Descriptive/Integrated detail tables with page refs (Q and Ans located independently, never inferred from each other), marks, concepts tested, and "Common Student Mistakes." **AS10's audit has two known gaps, clearly flagged inside the file itself: PYQ May 2026 (scanned PDF, no Ans doc exists) and ICAI-Practice Model Test Papers 6–8 were never audited.**
+- `books/question-bank/metadata-index/topic-index.json` — a reusable index of ICAI base-material unit structure (currently has full/accurate numbered sub-topic breakdowns only for AS 2 and AS 10, built by directly reading each unit's source `.md`/`.pdf` — not guessed). Superseded in spirit by the newer `topic-keyword-index.json` planned in Phase 0 below, but still useful as-is.
+- `_claude/skills/SKILL-question-bank-summary-making.md` — the accuracy-first methodology for auditing a chapter's questions across the question bank (source-of-truth locations, false-positive traps like FIFO-for-investments-vs-inventory, independent Q/Ans page verification rule, speed-vs-accuracy tradeoff handling, marks-aggregation rules). Load this before doing any further chapter audits.
+- `books/question-bank/metadata-index/question-book-implementation-plan.md` — the actual build plan for turning these audits into a full **"Question Bank Book"**: one flowing per-chapter document (Q.N → metadata → question → answer → rubric → common mistakes), topic-ordered, with OP/PP duplicate-question linking and per-question time estimates. Read this file in full before doing any Question Bank Book work — it has the phase breakdown, tier assignments (Python / cheap model / Claude), ready-to-paste prompts for Phase 0 and Phase 1, and the Tesseract OCR install steps.
+- `books/concept-book/syllabus-engine/data/0-ca-inter-adv-accounts-subtopics-marks-weightage.json` — pre-existing, NOT built this session, but central to the plan: canonical `M{module}-C{chapter}-U{unit}-T{topic}` IDs for all 36 units across the syllabus's 15 ICAI chapters. Confirmed by cross-checking against a direct read of the AS2/AS10 source units that its numbering is accurate.
+
+**Key decisions made with Pranav this session (don't re-litigate these):**
+- The "Question Bank Book" per chapter will have: Q.N sequence → metadata (MCQ-Direct/MCQ-Scenario/Descriptive, attempt, Q.No in that attempt, marks, estimated time = marks×1.8 min, topic tags in the `M-C-U-T` format, comprehensive-question flag for ≥3 distinct topic tags) → question → official answer → "Important Computational Steps" (rubric, author-inferred since ICAI doesn't publish official step-marks — will later drive AI-based grading of student answers, so this stays Claude-only, never delegated to a cheap model) → "Common Student Mistakes."
+- Missing marks: apply an ICAI-typical default (2 marks is near-universal for MCQs) but always label it `"Author Guessed"`, never silently presented as ICAI's own figure.
+- Duplicate/near-identical questions across attempts get an **OP** (original, earliest attempt) / **PP** ("Practice Perfect", later near-duplicates ≥95% text-similar after stripping numbers) tagging system — PP entries carry a pointer back to their OP.
+- Ordering within a chapter's book follows the ICAI syllabus's own topic sequence, not the order questions happened to appear across exam attempts.
+- Cost-control architecture (Pranav's framing, agreed): **Tier 1 fully deterministic → Python** (written by GitHub Copilot/Gemini in VS Code, not Claude); **Tier 2, 40–90% deterministic → cheap/free model** (Blackbox/Copilot/Gemini in VS Code, but the *prompt* is always authored by Claude); **Tier 3, creative/high-stakes/review → Claude directly**. OCR for scanned PDFs uses Tesseract (a dedicated tool), not an LLM at all.
+- Phase 0 (building one single master `topic-keyword-index.json` covering all 36 units, so cross-chapter tagging for integrated questions works cleanly) runs **before** any further chapter's question extraction, in 3 batches by ICAI chapter number: **Batch 1 = Chapters 1–5 (17 units)**, **Batch 2 = Chapters 6–10 (13 units)**, **Batch 3 = Chapters 11–15 (6 units)** — note this split is workload-uneven (Batch 1 is ~3x Batch 3), which was flagged to Pranav and accepted as-is.
+
+**Immediate next steps (in order):**
+1. Build `books/question-bank/metadata-index/topic-keyword-index.json` for Batch 1 (Chapters 1–5) — the Phase 0 prompt is in `question-book-implementation-plan.md`, run once per unit via Gemini/Copilot, Claude reviews the drafts before merging (AS2/AS10 already have deep source familiarity from the audits, so those two units should be fast).
+2. Once Phase 0 Batch 1 is done, Phase 1 (question+answer extraction) can start for the Batch 1 chapters — or, per Pranav's earlier framing, interleave so the AS2/AS10 book doesn't wait on all 17 Batch-1 units' keyword indexes to finish first (this specific interleaving question was raised but not yet finally answered — ask Pranav to confirm before assuming).
+3. Separately, and lower priority: finish the two flagged AS10 audit gaps (PYQ May 2026, ICAI-Practice MTP 6–8) if a complete AS10 reference is needed before the Question Bank Book work reaches AS10.
 
 ---
 
