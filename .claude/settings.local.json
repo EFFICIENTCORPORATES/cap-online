@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(npm -v)",
+      "Bash(curl -sI https://unpkg.com/pagedjs/dist/paged.polyfill.js --max-time 10)",
+      "Bash(curl -sL \"https://unpkg.com/pagedjs@0.4.3/dist/paged.polyfill.js\" -o \"/d/EffCorp_Projects/cap-online/books/strategy-book/design/templates/vendor/paged.polyfill.js\" --max-time 30)",
+      "Bash(python tools/strategy_book_parser.py --section all)"
+    ]
+  }
+}
