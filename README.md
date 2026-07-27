@@ -92,6 +92,7 @@ cap-online/
 │       └── famous-cas/  myth-vs-reality/  accounting-in-news/
 ├── student-toolkit/            ← standalone student tools (e.g. exam date calculator)
 ├── final-deliverables/         ← print-ready teaching docs: teaching method, batch planner, bridge course skeleton
+├── first_run/                  ← TEMPORARY pilot workspace for the Question Bank Book pipeline (source/ schema/ prompts/ output/) — see CLAUDE.md §6
 │
 └── tools/                     ← admin scripts + processing utilities
     ├── health_check.py · file_index.py · gitignore_audit.py

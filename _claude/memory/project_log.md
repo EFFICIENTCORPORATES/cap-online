@@ -4,6 +4,336 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-07-26 (cont'd, 8) — Question Bank Book: chapter-book reader-experience overhaul (MCQs removed, Integrated-topic bug fixed, several new student-facing fields)
+
+Pranav sent a 16-point review of the rendered chapter books; asked for feedback/plan first (delivered), then to implement all "straightforward" items and report what's left.
+
+**Implemented in `generate_chapter_book.py`, all 34 books regenerated and re-validated clean (0 unclosed tags/NUL/backticks/placeholders/duplicate IDs):**
+- MCQs removed from the book entirely (still in sitting HTML + `questions_index.json`, just not rendered) — sections renumbered to I. Descriptive, II. Integrated.
+- Fixed a real bug: `topic_label()` used to show only the current chapter's tag on an Integrated-section row, hiding the question's other tested standard (found via `AS16_Question_Book.html`'s MTP_May2026_Set2 Q8 — showed "AS 16" only despite also testing AS 10). Now shows every tagged topic.
+- Topic tags now render in full (`M1_C2_U0 : Framework for Preparation and Presentation of Financial Statements / ICAI Study Mat Topic No : 7/9/11`) instead of the old compressed `Framework (7/9/11)`.
+- Examiner's Comment (tan/orange) vs Author's Note (pale pink) now actually colour-differ, matching `book-style.json` — previously both rendered in one flat colour despite the front-matter legend promising a distinction.
+- New "Approx Time" field (`ceil(marks × 1.8)` minutes, computed at generation time; RTP with no stated marks shows a "10–20 minutes" range).
+- Removed from rendered output (data still in JSON): per-question Extraction Note, file-level Build Info footer.
+- New per-question fields: blank Student Self Notes box, My Notebook Ref No, freeform My Tag, Revision Phase 1/2/3 tick-boxes.
+- New chapter-end blank page: "Sanjeevani Booti 2: Error Register" (dotted lines, 40% opacity, two sections).
+- New static header/footer branding (Pranav Bhaiya / Newton of Accounts / AIR 1-1-5 / Kahaan-Koncept-Karma) on each standalone chapter file — **not** the same as a print running-header-on-every-physical-page, which belongs to the other agent's merge/pagination scripts (`qb_merge.py`/`qb_common.py`) and isn't wired up there yet.
+- Title simplified to `{Standard} — {Chapter}`, no "Question Book" suffix.
+- New `first_run/output/How-to-Read-this-Book.md` — student-facing guide to every colour/field and why it exists; each chapter book's "how this is organised" note now points here.
+
+**Explicitly parked (need more design or Pranav's input, not built this pass):** OP/PP recurring-question tags (duplicate-detection design exists, never built) and a short-chapter-name field for the topic-index taxonomy (needs Pranav to help draft ~36 short names). Both named honestly as "coming in a future edition" in the new guide.
+
+**Flag for the parallel agent running the whole-book merge**: this pass changed the DOM/CSS inside each chapter book — removed `.extraction-note` and `.build-info` divs, added `.self-notes`/`.notebook-ref`/`.tag-placeholder`/`.revision-phase`/`.error-register` (the last has `page-break-before:always`), changed `.mistakes` to need an `.icai`/`.synth` subclass for colour. If `qb_merge.py`/`qb_common.py` has any CSS or structural assumptions keyed to the old markup (e.g. selectors targeting `.extraction-note`/`.build-info`, or page-count math from the earlier print-cost pass), it should be re-checked against the regenerated files before the next merged-book build.
+
+---
+
+## 2026-07-26 (cont'd, 7) — Question Bank Book: ToC-duplication bug fixed, study-material cross-reference added, page-break waste cut, student-notes strip added
+
+Pranav's review of the merged book (388 pages, from the print-cost pass) surfaced four things in one message. All four addressed:
+
+1. **Real bug: Table of Contents was duplicating on re-runs.** Root cause: `generate_qb_toc.py`'s patch regex used a non-greedy `(.*?)(</div>)` to find the ToC list div's closing tag -- correct only while that div was still empty. Once it held 34 nested `<div class="qb-toc-entry">` rows, the lazy match stopped at row 1's own `</div>` instead of the list's real closing tag, so every re-run replaced only row 1 and left the old rows sitting there, growing by ~33 stale rows each time (confirmed: 67 entries in the file Pranav flagged, exactly 34 fresh + 33 leftover). Fixed with balanced-`<div>`-tag counting instead of regex (`_find_matching_close()`), verified idempotent by running it 3 times in a row and confirming the count stays at 34.
+
+2. **Chapter <-> study-material cross-reference, added.** Each of the 34 `CHAPTERS` entries in `qb_merge.py` now carries a 4th field, `study_material_ref` (e.g. `"M2-C5-U1"`), sourced from `1-ca-inter-adv-accounts-topic-page-index.json`'s `unique_chapter_id` -- deliberately NOT `metadata-index/topic-index.json` (which already correctly drives each *question's* own subtopic tag like "AS 2 (1.4)", untouched) since that file only covers 32/36 chapters and documents itself as secondary to file 1 for chapter-level IDs. Shows as a small chip next to every ToC entry and as a one-line "Study Material Reference: M2-C5-U1" banner at the top of each chapter.
+
+3. **Page-break waste, measured and fixed.** Pranav's instinct that "each question starting from a new page" was wasteful was checked against real data, not assumed: 312 of 334 content pages (93%) held exactly 1 qblock, averaging 282px of ~960px (29%) unused per page. Cause: `break-inside: avoid` was set on the whole `.qblock` container, so any question too tall for the remaining space on a page jumped ENTIRELY to the next page rather than just the part that didn't fit. Fixed by moving `break-inside: avoid` down to the smaller indivisible pieces inside a qblock (`.question`, `.answer-block`, `.mistakes`, `.extraction-note`, `table`, `.note`, `.case-facts`, `.empty-section` -- confirmed these are real sibling `<div>`s, not guessed) and removing it from `.qblock` itself, so a page break can now fall between a question's own Question/Answer/Notes sections instead of only between different questions. Cut 388 -> 361 pages on its own.
+
+4. **Student self-notes + notebook-page-reference strip, added to every question.** A compact one-line strip ("Your Notes: ______ Practiced in Notebook — Page No.: ____") injected after each qblock's content via `qb_common.inject_student_notes()`, using the same balanced-div-counting technique as the ToC fix (a qblock's real closing tag is not the first `</div>` inside it either). Applied only at merge time -- the 34 source chapter files (screen-review copies) are untouched, this only exists in the print-ready merged book, which is the only place a student would actually write in it. Kept deliberately compact (single line, not a ruled box) given the same-day cost-cutting effort: added only ~7 pages across all 278 questions.
+
+**Net page count after all four fixes: 368** (was 388 before this round; 707 before the whole print-cost pass started). Re-verified structurally clean each time (0 duplicate ids, 0 NUL, 0 backticks, single `<style>`/script) and visually via headless-Chrome screenshots of the ToC and an AS 2 chapter page.
+
+**Not yet done, flagged for a decision, not executed:** nothing outstanding from this round -- all four of Pranav's points were addressed. Still open from earlier: whether to extend the em-dash humanization pass to the 34 chapter files' own content (their own `<h1>`s still have em-dashes), and OP/PP duplicate detection.
+
+---
+
+## 2026-07-26 (cont'd, 6) — Question Bank Book: print-cost reduction (margins + font size), 707 → 388 pages
+
+Pranav asked to shrink margins to "nearly zero" and reduce font size, explicitly for printing cost (page count is the direct cost driver). Both changes went into `first_run/schema/book-style.json` (the single source of truth) and are consumed additively by `qb_common.py`'s `print_layer_css()` — the 34 chapter files' own embedded style is still never touched, this is a merge-time-only override layered on top, same discipline as everything else in this pipeline.
+
+- **Margins**: `page_geometry_for_future_print_stage` cut from 20mm to 6mm on every side — near the practical floor for a home/office printer (many can't guarantee edge printing below ~4-5mm without clipping; true 0mm was avoided for that reason, flagged in a code comment so it's an easy one-line change if Pranav confirms his actual print method can go tighter).
+- **Font size**: new `chapter_print_*` fields added to `book-style.json` (body 9pt, h1 15pt, h2 12pt, table 7.5pt, small text 7pt) plus tightened `.qblock` margin/padding — applied only inside `.qb-book-content` (higher specificity than the chapter files' own bare-tag rules, no `!important` needed).
+- **Result**: 707 → **388 pages** (~45% cut). Re-verified structurally clean (0 duplicate ids — a first check falsely flagged 34 "duplicates" that turned out to be a regex matching `data-target-id="..."` as if it were `id="..."`, not real; a boundary-safe regex confirmed the true count is 0) and visually via headless-Chrome screenshots (title page and an AS 2 chapter page both still legible at the smaller size).
+
+**Also discovered and adapted to, mid-task, not caused by this session's own work**: sometime between this morning's working merge and this afternoon, the 34 chapter files were moved from `first_run/output/` directly into a new `first_run/output/generated-from-script/` subfolder and regenerated fresh (confirmed by mtimes — content shape/style unchanged, same known `id="AS02-NNN"` bug still present), and the 10 sitting-level files similarly moved into `first_run/output/parsed-from-pdf/`. `qb_merge.py`'s file-existence check caught this immediately (all 34 chapters suddenly "missing") rather than silently merging stale content. Fixed `qb_common.load_chapter_html()` and `qb_merge.py`'s validation to check both the old flat location and the new subfolder, so the pipeline keeps working regardless of which layout is current — worth telling Pranav this reorganization happened, since it wasn't this session's doing and it's unclear if it was intentional or another concurrent process.
+
+**Output** (unchanged path): `first_run/output/QUESTION-BANK-BOOK.html` — 388 pages, same Chrome → Save as PDF workflow.
+
+---
+
+## 2026-07-26 (cont'd, 5) — Question Bank Book: front/back matter, whole-book merge, ToC with real page numbers — full pipeline working end-to-end
+
+Pranav assigned a new deliverable on top of the 34 already-generated chapter files ("the main content is done"): front/back matter, a chapter merge order, and one final single HTML mergeable into a print-ready PDF via Chrome — same "Save as PDF" workflow already proven on the Strategy Book.
+
+**Built, all in `first_run/scripts/`:**
+- `qb_common.py` — shared helpers: fixes the real `id="AS02-NNN"` bug (every chapter file hardcodes this id prefix regardless of its actual chapter — confirmed directly, fixed at merge time via slug-prefix rewriting, chapter source files never touched); the print/pagination CSS layer (page geometry literally templated from `book-style.json`, since `@page` doesn't resolve `var()`); front/back-matter-only CSS (title page, copyright page, ToC, author bio).
+- `generate_qb_front_back_matter.py` — writes `front-matter.html` (title page, copyright & disclaimers, How to Use This Book, ToC placeholder) and `back-matter.html` (About the Author, closing note) as standalone reviewable files.
+- `qb_merge.py` — the whole-book assembler. `CHAPTERS` tuple = 34 chapters in teaching sequence (cross-referenced against `1-ca-inter-adv-accounts-topic-page-index.json`'s `teaching_sequence`; confirmed the 34-vs-36 gap is two deliberate syllabus-pair collapses, not missing content — Financial Statements' two units share one file, and pre-Ind-AS "AS 14" **is** "Amalgamation of Companies" so that pairing shares one file too, confirmed straight from that file's own `<title>`).
+- `generate_qb_toc.py` + `resolve_qb_toc_pages.py` — same two-pass pattern as the Strategy Book's ToC (`target-counter()` is confirmed broken in this vendored paged.js; real page numbers come from polling `data-page-number` via a headless-Chrome CDP pass after a first blank-ToC merge, then re-merging).
+
+**Two real bugs found and fixed, both invisible without headless-Chrome verification (reading the code/output alone would have missed both):**
+1. Pagination silently never started (0 `.pagedjs_page` elements, no console dialog, no crash) — root cause was `<link rel="stylesheet" href="vendor/gfonts-local.css">` in the merged file's `<head>`: paged.js internally re-fetches every linked stylesheet via XHR to analyze it, and Chrome blocks that XHR under `file://` origin (CORS: "Access to XMLHttpRequest ... blocked by CORS policy"), throwing an uncaught promise rejection that halted initialization before any page ever rendered. Fixed by inlining the font CSS text directly into the merged `<style>` block instead of linking it (with its `url(fonts/...)` paths rewritten to `url(vendor/fonts/...)`, since inlined relative URLs resolve against the *document's* location, not the original CSS file's).
+2. The title page's author-name/credential line was rendering on a *different, much later physical page* than the rest of the title page — traced via `getBoundingClientRect()` (not visible from a DOM-only check) to `.qb-title-page`'s `min-height: 220mm` exceeding the actual per-page content-box height (`254mm - 20mm - 20mm = 214mm`, from `book-style.json`): a `display:flex; justify-content:space-between` container that overflows a page boundary doesn't fragment predictably, so its children scattered across pages instead of visibly overflowing where the bug would have been obvious. Fixed: `min-height: 190mm` (safely under the 214mm ceiling) plus `break-inside: avoid` as a second line of defence.
+
+**Verified clean after both fixes** (headless Chrome, real-time `.pagedjs_page`-count polling until stable — no `--dump-dom`/timed-capture shortcuts, per the Strategy Book's established discipline): **707 pages**, 0 duplicate `id` attributes (319 total, verified with a boundary-safe regex after an initial loose regex falsely flagged 34 — those were `data-target-id="..."` substring matches, not real duplicates), exactly one `<style>` block and one `paged.polyfill.js` reference, 0 NUL bytes, 0 backticks, 0 leftover placeholder markers, all 34 ToC entries resolved to real ascending page numbers (7 through 674). Screenshotted the title page, ToC, and an AS 2 chapter-opening page directly (not just DOM-checked) to confirm the visual fix.
+
+**Flagged, not changed:** the 34 chapter files' own content (headings, question text) still contains em-dashes in places — e.g. `AS02_Question_Book.html`'s own `<h1>` reads "AS 2 — Valuation of Inventories: Question Book." Left untouched deliberately, since Pranav said this content is done and out of scope for this task; new content this session (book title, chapter labels in the running header/ToC, all front/back-matter prose) was written without em-dashes from the start, matching the Strategy Book's cleanup discipline. Worth a decision from Pranav on whether the same humanization pass should eventually extend to the 34 chapter files.
+
+**Output:** `first_run/output/QUESTION-BANK-BOOK.html` — open in Chrome, wait for pagination to finish (a 707-page document takes noticeably longer to settle than any single chapter), then Ctrl+P → Save as PDF with Background graphics enabled.
+
+---
+
+## 2026-07-26 (cont'd, 4) — Phase 2 complete: 5 more sittings built, full 34-chapter Question Bank Book generated
+
+Built the 5 sittings Pranav named (completing the Jan 2026 exam cycle + starting Sep 2025): `MTP_Jan2026_Set1.html`, `MTP_Jan2026_Set2.html`, `RTP_Jan2026.html`, `PYQ_Sep2025.html`, `RTP_Sep2025.html` — all read from raw source PDFs, tagged, split, and validated against the same schema as the original 5, at the Phase 2 relaxed accuracy bar (§0 of the Phase 1 skill: correct transcription and topic tagging, MCQ letters verified against source, but not the exhaustive re-derivation depth Phase 1's audit applied). PYQ_Sep2025 has a real ICAI Examiner's Comments document — folded in 13 verbatim real comments (labelled "Examiner's Comment") alongside synthesized ones (labelled "Author's Note"), the first sitting since PYQ_Jan2026 to exercise that distinction.
+
+**Two accuracy-relevant things surfaced and fixed along the way:**
+- Resolved a genuinely unresolved flag from Phase 1: `MTP_Jan2026_Set1.html` Q15's lease-rent MCQ (dealer/operating lease, 20% margin on cost) had been left flagged `unverified-arithmetic` because the simple pro-rata computation didn't reproduce the answer key. Building `RTP_Jan2026.html` turned up the *identical* question with one extra detail in its narrative ("3-year **operating** lease") that the MTP version's shorter restatement omitted — this revealed the actual mechanism (recover cost+margin in proportion to output consumed during the lease, out of the machine's full economic-life output, not a flat 3-year spread). Went back and fixed the MTP file's explanation with the same resolved logic.
+- Found and fixed a real `unitCode` inconsistency: Branch Accounting was tagged `M3-C15-U0` in some files and `M3-C15-U1` in others; Framework similarly `M1-C2-U0` vs `M1-C2-U1`. Per CLAUDE.md's locked U0/U1 migration, both are single-unit chapters that must always use U0 — left un-caught, this would have silently split each into two separate "chapters" at book-generation time. Fixed across all affected files before generating books.
+
+**Also caught mid-build:** `extract_questions.py`'s file-discovery briefly re-ingested a previously generated chapter book as if it were an 11th sitting (same bug pattern as before, from a stray filename not matching the `_Question_Book.html` exclusion at the time it was written) — already covered by the existing exclusion filter from the last fix, no recurrence.
+
+**Built `first_run/scripts/generate_all_chapter_books.py`** — a batch driver that reads every unique `final_chapter` out of `questions_index.json` and calls the existing `generate_chapter_book.build_book()` for each, with a naming scheme matching the AS10 reference sample's style (`AS02_Question_Book.html`, `AS16_Question_Book.html`, ... `CashFlowStatement_Question_Book.html`, `Buyback_Question_Book.html`, etc. for the non-AS-numbered chapters).
+
+**Result:** 275 rows extracted across all 10 sittings (30 Part I marks + 88 raw/84 deduped Part II marks per marked paper, consistently — RTPs correctly show 0/0/0 since they print no marks). **34 chapters touched — essentially the entire 36-chapter syllabus** (only 2 chapters, AS 1 and AS 27, remain thin at 2 questions each; genuinely zero-coverage chapters from the original per-question audit are now gone). All 34 generated chapter books validated structurally clean (0 unclosed tags, 0 NUL, 0 backticks, 0 duplicate IDs). Two chapters (AS 10, AS 16) now have real, non-empty Section III "Integrated" content for the first time in this pilot, from genuinely connected multi-topic questions found across the 10 sittings.
+
+**Not done in this phase** (per Pranav's explicit "keep parked" instruction from earlier): the whole-book merge/"sewing" script, OP/PP duplicate-detection implementation, and any of the parked UX items (answer-hide toggle, mobile/print CSS, filter bar, etc.). Several likely-recurring (OP/PP) questions were spotted and noted in extraction-notes during this build (the P/Q/R Ltd. AS 18 scenario across 3 sittings; the Anshul manufacturers AS 2 scenario across 2; the Alfa/Jay Ltd. reconstruction scenario within the same MTP series; the Mansi Ltd./Akash Ltd. AS 19 sale-leaseback across 2 RTPs) but not formally merged, since duplicate detection remains a separate, not-yet-built workstream.
+
+---
+
+## 2026-07-26 (cont'd, 3) — Phase 1 closed out; accuracy bar relaxed for descriptives; moving to Phase 2 (scale to more sittings)
+
+After the MCQ audit found 6 real errors, Pranav deliberately relaxed the remaining bar rather than asking for the same depth on all 69 descriptive rows: "we need not be 100% accurate... first edition... just skim through and let's close this." Ran a fast automated red-flag skim (hedge phrases, placeholder text, suspiciously short answers) across all 69 descriptive rows — zero automated flags, one manual catch during spot-reading: `MTP_May2026_Set1.html`'s Q6(a) alt-2 (amalgamation purchase consideration) had literal leftover placeholder text ("see working note...", a stray "...") sitting inside a real answer table, previously flagged `needs-visual-check`/`ocr-garbled`. Recomputed the missing share-count derivation from the given exchange ratios, confirmed it reconciles exactly to the already-stated rupee totals, and marked the row `verified`.
+
+**Also implemented, per Pranav's instructions**: renamed the rendered Mistakes box from generic wording to **"Examiner's Comment"** (real ICAI sittings) vs. **"Author's Note"** (synthesized, with an explicit "may not apply in every case" caveat) — a display-layer change in `generate_chapter_book.py`, not a change to the underlying `data-comment-source` enum. Added a reader-facing disclaimer (top and bottom of every chapter book) acknowledging first-edition status and inviting error reports by email — **placeholder email address in the script (`ERROR_REPORT_EMAIL`), needs Pranav's real address before any real distribution**. Rewrote the book's front-matter to be student-facing (moved script/JSON/folder-path references into a small "Build info" footer, per the already-accepted Phase 1 §4 item). Documented the bar relaxation in `SKILL-question-bank-phase1-definition-of-done.md` §0 (new) so it isn't lost/re-litigated on the next sitting.
+
+`AS02_Question_Book.html` regenerated against the new template and re-validated clean.
+
+**Next**: Pranav asked to move to "Phase 2" — build 5 more sitting HTML files through the full pipeline (source PDF → tagged sitting HTML → extraction → chapter books) and produce the complete chapter-wise Question Bank across all resulting chapters, not just AS 2. This is a substantially larger undertaking than anything done so far (roughly re-doing the full sitting-authoring effort 5 more times, then generating N chapter books instead of 1) — scope/sitting-selection to be confirmed before starting.
+
+---
+
+## 2026-07-26 (cont'd, 2) — Full MCQ accuracy audit (Phase 1 §1) completed for all 5 pilot sittings
+
+Executed the accuracy-audit gate from `SKILL-question-bank-phase1-definition-of-done.md` §1 against all 67 MCQ rows across the 5 sitting files (the other 69 descriptive rows are not yet done — see below). Independently re-derived the arithmetic for every MCQ carrying a Claude-authored explanation (50 of 67; the other 17 are genuinely bare-letter with no explanation, matching source, no risk). Consulted `books/concept-book/raw_icai_study_materials/` (Pranav's explicit authorization) to resolve conceptual doubts against three different standards' actual rule text (AS 18 related-party aggregation through a controlled subsidiary; AS 23 equity-method dividend treatment; AS 25 interim-period cost/gain/estimate-change treatment, cross-checked against a near-identical worked illustration in the AS 25 study material itself).
+
+**Found and fixed, beyond the original 2 (AS02-005/006):**
+- `MTP_May2026_Set2.html` Q7 (AS 16 borrowing-cost suspension): the case narrative's stated "3 months" standstill doesn't reconcile to the official answer letter — only a 4-month reading does. Flagged as a source-wording ambiguity (`data-issue="source-inconsistency"`) rather than silently picking one reading, per the verbatim-extraction skill's "flag, don't fix" doctrine.
+- `MTP_May2026_Set2.html` Q15 (AS 18 related party): final letter was already right, but the stated method (diluting an indirect holding through a subsidiary as 60%×20%=12%) is not how AS 18 aggregates control-based holdings — verified against the AS 18 study material and corrected to the proper full (non-diluted) aggregation.
+- `PYQ_Jan2026.html` Q7 (AS 23 equity method): explanation was self-contradictory (called the same dividend "pre-acquisition" then "post-acquisition" in one sentence) and never showed real numbers; the attached Mistakes note claimed the dividend "should be added, not deducted" — backward. Rewrote with the full verified calculation (₹26,00,000).
+- `PYQ_Jan2026.html` Q12 (cash flow): the written formula literally computed to ₹20,30,000 while claiming to justify ₹23,00,000, hedged with "= per source figure" — a real tell that the reconciliation was never actually completed. Re-derived properly (interest reclassified to financing, added back before removing) and cross-checked against Q13/Q14's dependent figures.
+- `PYQ_May2026.html` Q10 (AS 25 interim reporting): previously bare answer-letter only, no explanation at all, on a question where three plausible sign conventions are easy to get wrong (confirmed by getting it wrong myself twice before checking source) — added a fully verified explanation after cross-referencing the AS 25 study material's own near-identical worked illustration.
+- `RTP_May2026.html` Q2 (AS 19 lease PV computation): could **not** be independently re-derived — the discount/implicit rate needed for the calculation is not present anywhere in the extracted source text. Flagged honestly (`data-issue="unverified-arithmetic"`) rather than assumed correct just because the letter matches the source answer key.
+
+**Confirmed correct (no change needed) after independent re-derivation:** the remaining ~44 authored MCQ explanations, including several cross-checked against the AS 18/AS 23/Amalgamation study materials for genuinely tricky theory points (G Limited associate-via-board-representation despite only 12% holding; External Reconstruction vs. Absorption vs. Amalgamation terminology; Amalgamation Adjustment Reserve = statutory reserves only).
+
+Also caught and fixed 2 stray literal backticks introduced by this session's own edits (violates the repo's no-backtick/UTF-8 discipline) — from markdown-style code spans in extraction-note prose, switched to `<code>` tags.
+
+**Not yet done, and substantially larger in scope per row:** the 69 descriptive-answer rows (full worked solutions — journals, balance sheets, ledger accounts) have not been arithmetic-audited yet. Flagged to Pranav as the next chunk of Phase 1 §1; pacing/priority to be confirmed before continuing.
+
+---
+
+## 2026-07-26 (cont'd) — Phase 1 scope finalized and locked
+
+After the accuracy incident below, Pranav cut off further open-ended review discussion and finalized scope: "whatever is parked for later, keep it parked... I just want that this book HTML should have accuracy at all cost... genuinely high value [improvements] are only to be considered." Wrote the locked checklist to `_claude/skills/SKILL-question-bank-phase1-definition-of-done.md` — the reusable Definition of Done for scaling past the AS 2 pilot to the remaining ~35 chapters and ~12+ sittings. Locked scope:
+
+1. **Accuracy audit (top priority, gate before anything else)** — re-derive every AI-authored explanation's arithmetic across all 5 sittings against source figures; consult `books/concept-book/raw_icai_study_materials/` (per-unit ICAI study material MD, Pranav explicitly authorized this as the reference to resolve conceptual doubt) whenever the correct rule itself, not just the arithmetic, is uncertain.
+2. **Cross-chapter cluster classification, finalized design** — one home chapter per case-scenario cluster/connected question (latest-taught touched standard), shown there under a new "(b) Integrated with Other Standards" sub-heading; every other touched chapter gets a cross-reference pointer only, never duplicated full content. This one rule resolves the earlier-logged case-scenario-duplication issue, the cross-chapter-cluster-homing issue, and the Single-AS/Integrated sub-bucket issue together. Design locked; `extract_questions.py`/`generate_chapter_book.py` implementation not yet built.
+3. **Theory/practical** — folded into the accuracy-audit pass (already tagged at Layer 1, just needs a sanity check + surfacing), not a separate workstream.
+4. **Two external-review suggestions accepted as genuinely high value**: strip build/engineering plumbing from student-facing text; fix the Mistakes-box voice so MTP/RTP synthesized comments don't falsely claim "many examinees" behavior on papers that never had real candidates (reframed as a correctness fix, not a tone preference). Bonus near-free item: render the topic tag's existing `data-subtopictitle`.
+5. **Everything else explicitly parked**: answer-hide toggle, concept recap, revision scaffolding, mobile/print CSS, filter bar, OP/PP badge, Q11/Q12 cross-pointer.
+
+Execution order locked: full accuracy audit first, then the combined cluster/sub-bucket/theory-practical/voice-fix regeneration, then re-validate AS 2 as the Phase 1 proof before scaling.
+
+---
+
+## 2026-07-26 — Real accuracy incident: two backward AS 2 explanations found via external AI review of AS02_Question_Book.html
+
+Pranav ran the AS02 book past another AI for review and relayed its findings rather than accepting them at face value: "Dont accept everyting blindly... evaluate all against our Main goal... main is to make life of student easier and to ensure 100% accuracy at all cost." Independently re-verified every claim from source before acting.
+
+**Confirmed, fixed:** `PYQ_Jan2026.html` Q4 and `PYQ_May2026.html` Q6 (both AS 2 MCQs) had explanations where the arithmetic actually computed to the *distractor* option, not the letter the qblock claimed — and the attached synthesized "Common Student Mistakes" note branded the *correct* method as the student error, exactly backward. Traced root cause by reading the actual source PDFs: both ICAI "Suggested Answers" documents give only a bare letter (`4. (B)`, `6. (B)`) with zero working — meaning the explanations were never transcribed, they were authored by Claude while building these files directly (2026-07-24 session), and the `extraction-note` on both falsely claimed "Verbatim... Confidence: high" for reasoning that was never in the source. Fixed both explanations with correct AS 2 reasoning (fixed-overhead absorption at the *actual* production rate when actual exceeds normal capacity; raw-material write-down to replacement cost when the finished goods it feeds are expected to sell below cost), corrected the mistakes-notes, and rewrote the extraction-notes to honestly distinguish source-verbatim (letter/options) from Claude-authored (explanation).
+
+**Also fixed for consistency, not correctness:** the 4 sibling AS 2 MCQs in `MTP_May2026_Set2.html` (Q10–13) had the same "verbatim... high confidence" mislabeling on Claude-authored explanations, even though re-deriving their arithmetic independently confirmed all 4 were already correct. Relabeled honestly rather than left as-is, since the metadata claim was still false regardless of whether the content happened to be right.
+
+**Bug also caught mid-fix:** `extract_questions.py`'s file-discovery (`os.listdir(OUTPUT_DIR) if f.endswith(".html")`) was sweeping up generated chapter-book outputs (`AS02_Question_Book.html`) as if they were a 6th sitting, double-counting those 7 rows (136 → 143). Fixed by excluding `*_Question_Book.html` from the glob — will matter more once more chapter books accumulate in the same folder.
+
+**Flagged as a systemic risk, not fully resolved:** found on 2 of ~13 AS 2 MCQs checked so far — since ICAI MCQ answer keys are routinely bare-letter-only, most authored explanations across all 5 sittings carry the same unverified-arithmetic risk. Recommended a full audit pass (re-derive every MCQ explanation's arithmetic against its own source figures) before scaling past the pilot; not yet scheduled. New skill section added: `SKILL-question-bank-verbatim-extraction.md` §6, plus a new `data-issue="answer-key-letter-only"` vocabulary value in the html-schema skill.
+
+**Evaluated, not blindly accepted, the same reviewer's 12 UX/structure suggestions** (case-scenario dedup — already tracked as our own issue 1; subtopic-title surfacing — cheap, data already exists via `data-subtopictitle`; engineering-plumbing-in-student-view removal; mobile CSS; print CSS tied to CLAUDE.md §7's existing page-break architecture; MTP/RTP "examinees" voice being factually wrong since those papers never had real candidates; etc.) — see chat for the full per-item verdict, not duplicated here since most are pending design decisions, not facts to persist.
+
+---
+
+## 2026-07-25 — Pipeline proven end-to-end: extraction script + first real chapter book (AS 2)
+
+Pranav asked to prove the whole pipeline actually works: "For all the extracted HTML File, I want you to complete the entire pending actions... I want to see from you being able to give me a 'Proper well formatted HTML file for the AS02 Chapter'." Built and ran both remaining scripts against the 5 real pilot sitting files (no synthetic test data).
+
+**`first_run/scripts/extract_questions.py`** (Layer 1 → Layer 2, BeautifulSoup, mechanical only — no AI re-judgment): walks every sitting HTML in `first_run/output/`, emits one row per qblock into `first_run/output/questions_index.json`. Ran clean: **136 rows from 5 files** (MTP Set1: 28, MTP Set2: 27, PYQ Jan2026: 27, PYQ May2026: 28, RTP: 26). Built-in marks sanity check (Part I total 30, Part II raw vs alt-group-deduped total 84, across the 4 files that carry marks; RTP correctly shows 0/0/0 since it prints none).
+
+**Caught before extraction, via a pre-flight `grep -o 'data-part="[^"]*"' | sort -u` across all 5 files**: `MTP_May2026_Set1.html` (the oldest file, built before the `"I"`/`"II"` data-part convention was settled) still had free-text values (`"Part I - Case Scenario I"`, `"Part I - MCQs"`, `"Part II"`). Fixed with a targeted regex pass (18 lines), re-validated 0 errors. This is exactly the cross-session schema drift the extraction script's Part-I/Part-II bucketing logic depends on being clean — worth re-running that same grep sanity check before extracting after any future file is added or edited.
+
+**`first_run/scripts/generate_chapter_book.py`** (Layer 2 → Layer 3, plain Python/f-strings, no AI): takes a unitcode + labels, queries `questions_index.json`, partitions into Section I (MCQ/case-mcq), II (descriptive, single-topic = the norm post-splitting), III (integrated — `topic_count > 1` and the target unit is a secondary tag), renders inline-CSS HTML matching the `AS10_Question_Book.html` quality bar (qmeta line, case-facts embedded inline, answer block, Common-Student-Mistakes box **with an explicit real-ICAI-vs-synthesized provenance line per entry** — a discipline the AS10 hand-built sample predates and doesn't have, added here since our schema already tracks it losslessly in `examiner_comment.comment_source`).
+
+Ran it for AS 2 (Valuation of Inventories, `M2-C5-U1`) → `first_run/output/AS02_Question_Book.html`: **6 MCQs + 1 descriptive + 0 integrated = 7 questions**, matching the record set already hand-confirmed by ad-hoc query. Validated: 0 unclosed tags (the 2 "errors" HTMLParser reported were a validator artifact from self-closing `<br/>` synthetic end-tag events, not real defects — confirmed by grep, no `</br>` exists anywhere), 0 NUL bytes, 0 backticks, correct `&#8377;` rupee entities, 0 placeholder phrases, 0 duplicate IDs. Read the full rendered output — case scenarios correctly embedded per-MCQ (the exact bug Pranav flagged earlier in this project as the "major issue" with the original external-AI output), verbatim accounting tables intact, synthesized-mistakes provenance correctly labelled throughout (no real ICAI comment exists for any of these 7 — all synthesized per `examiner-comments-writing-skill.md`).
+
+**Honest finding surfaced by the run itself, documented in the book's own scope note**: Section III (Integrated) is genuinely empty for AS 2 across this 5-file pilot — 0 records exist where AS2 is a secondary tag on a connected multi-topic question. This is the expected shape of the independent-vs-connected splitting design (most multi-topic-looking questions get split into single-topic records at extraction time), not a pipeline gap — but it means the AS10 hand-built sample's 3-section structure won't always have content in all 3 sections for every chapter, which future chapter-book runs should expect and state plainly rather than treat as a bug to chase.
+
+Also deleted `first_run/output/TODO.md` — confirmed stale (pre-build planning notes for RTP referencing an abandoned `M1-C4-U2`/`M3-C11-U2` unit-code confusion that was resolved differently in the final schema).
+
+**Next**: this is the first chapter book against real data — scale the same `generate_chapter_book.py` call to the remaining 35 chapters once enough sittings are tagged (still only 5 of ~17+ sittings exist at all); OP/PP duplicate detection and a whole-book merge script are still designed-not-built.
+
+---
+
+## 2026-07-24 (cont'd, 3) — Remaining 3 pilot sittings built directly (MTP Set 2, PYQ May2026, PYQ Jan2026)
+
+Pranav decided not to hand the revised prompts to the external AI for the remaining 3 sittings ("I dont know they will again create a mess") and asked Claude to build them directly instead, against the schema/skills already established from the MTP Set 1 and RTP rebuilds — "minimum token possible... best possible output." All 3 built end-to-end: source PDFs extracted via pypdf, read in full, classified question-by-question (independent-split vs connected vs OR-alternative), tagged against `topic-index.json` with `data-final-chapter`, and validated with the same Python script used for the first two files.
+
+**MTP May 2026 Set 2** (13+14-page Q/Ans PDFs) — 27 qblocks + 3 case scenarios. One judgment call worth recording: Q6(a) bundles two Framework sub-questions ((i) qualitative characteristics, (ii) capital maintenance calc) under one 4-mark heading with no individual mark split shown in the source — kept as one record rather than inventing a split, since both map to the same syllabus unit anyway.
+
+**PYQ May 2026** (44-page Ans PDF, both Q&A embedded per the PYQ sourcing decision) — 28 qblocks + 3 case scenarios. One genuine ambiguity flagged rather than guessed: Q5(a)'s mark value is not printed in the extracted source text (only Q5(b)'s "10 Marks" is) — inferred as 4 (14 total pattern minus 10) and marked `data-issue="marks-mismatch"` rather than stated as confirmed fact.
+
+**PYQ Jan 2026** (45-page Ans PDF) — the pilot's one sitting with a real ICAI Examiner's Comments document (`Paper1-ExaminerComments-Jan2026.md`). Matched all 6 real comments to their corresponding Part II sub-questions (Q1a/b/c, Q2, Q3a/b, Q4, Q5, Q6a-alt1, Q6b, Q6c — 11 of 12 Part II records), leaving only Q6(a)'s AS 19 lease alternative synthesized since the real comment for Q6(a) discusses only the AS 24 disclosure alternative content, not the lease computation — confirmed by actually reading what the comment describes rather than assuming one comment covers both OR-branches.
+
+**Caught and fixed a self-introduced schema bug during this build**: all 11 real-comment blocks in the Jan 2026 file were first written with the citation string stuffed into `data-comment-source` (e.g. `data-comment-source="ICAI Examiner's Comment — Jan 2026, paraphrased"`) and the `synthesized` CSS class left on by copy-paste, instead of the clean enum `data-comment-source="icai"` plus the citation in `data-source`, per the schema. Caught by grepping the output for the enum values immediately after the validation pass reported "0 errors" (structural validation doesn't check semantic correctness of attribute values) — a reminder that automated validation catches malformed HTML, not wrong values in well-formed attributes. Fixed with a targeted regex pass; re-validated: 11 `icai` + 16 `synthesized` = 27, matching the 27 qblocks exactly.
+
+All three files validated identically to the first two: 0 unclosed tags, 0 backticks, 0 placeholder phrases, all IDs unique, all case-scenario references resolve, marks arithmetic consistent (Part I 30, Part II 84 after alt-group dedup across all three files).
+
+**All 5 pilot sittings are now built and validated against the current schema**: MTP Set 1, MTP Set 2, RTP May2026, PYQ May2026, PYQ Jan2026. Next: the HTML→JSON extraction script, duplicate-detection (OP/PP) implementation, and difficulty-computation step, per the six `SKILL-question-bank-*.md` skills — none of these are built yet, only designed.
+
+---
+
+## 2026-07-24 (cont'd, 2) — RTP May 2026 rebuilt against the revised schema
+
+Extended the same-day schema revision (previous entry below) to the second pilot file.
+`first_run/output/RTP_May2026.html` had been generated under the *old* schema and, on
+inspection, was far worse than the MTP file had been: nearly every Part II answer (16 of
+20 questions) was placeholder/meta-descriptive text ("see source", "as printed in source",
+"full data in source") with **zero real content**, zero topic tagging throughout, and the
+document metadata claimed `"Total Marks: NA"` while individual questions carried invented
+marks values (4, 6, 8, 14, etc.) that do not exist anywhere in the source PDF — the RTP
+genuinely prints no marks per question at all, so those numbers were fabricated by the
+earlier AI, not merely omitted.
+
+Extracted the full 48-page source PDF and rebuilt the file end-to-end: real Case Scenario
+node (the AS 16 borrowing-cost scenario behind Q1's four MCQ sub-parts), verbatim content
+for every one of the 20 original questions, correct MCQ answers cross-checked against the
+source answer key (**and one genuine error caught and fixed**: Q4's answer was recorded as
+"(a)" in the old file; the source's own suggested-answer section plainly states "4. (b)"),
+topic tags against `topic-index.json` for all 26 resulting records, and `data-marks`
+omitted throughout rather than invented (documented in the Part II section header so this
+isn't mistaken for an oversight). Applied the independent/connected sub-part rule from the
+new question-splitting skill: Q9 (three unrelated post-balance-sheet events bundled under
+one number) and Q17 (two unrelated AS 29 fact patterns) split into independent records;
+Q15 (three progressively-building sub-parts, the third explicitly referencing "the above")
+and Q20 (Euro-denominated branch accounts feeding a converted trial balance) correctly kept
+as single connected records — a real worked example of both branches of the rule.
+
+Also caught, independently of the splitting/tagging work: Q10 is printed in the source
+under the heading "AS 7 Construction Contracts" but its actual content (Y Limited
+constructing its own factory) is a self-constructed-PPE-plus-borrowing-cost problem, AS 10
++ AS 16, not AS 7 at all — exactly the header-mismatch failure mode already anticipated and
+warned against in the RTP prompt's specific notes, now confirmed as a real, not just
+theoretical, risk. Tagged from actual content, flagged the header mismatch in the
+extraction-note rather than tagging blindly from the printed heading. One further source
+typo was caught and corrected with a flagged note (an evident stray-zero OCR/typo artifact
+in one journal-entry credit figure in Q19, internally inconsistent with the same entry's
+debit side and with the same figure used correctly elsewhere in the same scheme).
+
+Validated identically to the MTP file: 0 unclosed HTML tags, 0 backticks, 0 leftover
+placeholder phrases, all 27 IDs (26 qblocks + 1 case scenario) unique, case-scenario
+reference resolves.
+
+**Both pilot sittings reviewed under the revised schema are now MTP May 2026 Set 1 and
+RTP May 2026.** Remaining: MTP Set 2, PYQ May 2026, PYQ Jan 2026 still need first-time
+generation via the revised prompts.
+
+---
+
+## 2026-07-24 (cont'd) — Question Bank schema revision: case scenarios, marks tagging, question splitting, Final Chapter, six new skill files
+
+Continuing the same-day MTP Set 1 review (previous entry below), Pranav flagged two more
+structural gaps by inspecting the rectified file directly: (1) Case Scenario MCQs'
+shared narratives were captured nowhere at all — the questions referenced facts
+("the Company", specific rupee figures, dates) that appeared in no visible node, an
+extraction blunder neither the original AI nor Claude's first-pass fix had caught; (2)
+marks, paper facets (MTP/RTP/PYQ, month, year, set), and difficulty needed to be
+independently machine-queryable, not embedded in display strings like `"MTP May 2026 Set 1"`
+or `"14 (7+7)"`.
+
+Fixed the case-scenario gap immediately (added `.case-scenario` nodes + `data-case-ref`
+for all three scenarios in the pilot file). For the rest, Pranav also forwarded an
+external AI's independent schema-review document and asked for honest evaluation, not
+blanket acceptance — most of it was sound (paper-level facets, structured MCQ options,
+deterministic composite IDs, structured review-flag attributes) and was adopted; two
+specific recommendations were rejected with reasoning (a parallel topic-ID namespace that
+would recreate the U0/U1 ID-scheme fight already fixed once; diluting the synthesized
+examiner-comment voice, which reverses `examiner-comments-writing-skill.md`'s explicit
+design choice — voice fidelity + provenance metadata was always the intended
+misattribution safeguard, not a diluted voice).
+
+**New locked decision (Pranav):** multi-part descriptive questions get classified
+independent (unrelated sub-parts, just bundled under one question number — the common
+case, confirmed by checking every multi-part question in the pilot file) vs. connected
+(one continuous fact pattern). Independent sub-parts split into separate Question Bank
+records, each single-topic; connected questions stay one record. Paired with a new
+`data-final-chapter` concept — every question/fragment's designated home chapter in the
+assembled book, computed from `teaching_sequence` (pulled fresh from
+`books/concept-book/syllabus-engine/data/1-ca-inter-adv-accounts-topic-page-index.json`).
+Also confirmed: Easy/Medium/Hard difficulty (by count of distinct topics tagged: ≤2/3–5/
+>5) will be computed in the Python `questions.json` step, never hand-authored in HTML —
+Pranav's own call, for the same one-place-to-change-the-logic reason already governing
+the rest of the pipeline's two-layer (HTML source / JSON computed) architecture.
+
+Rebuilt `MTP_May2026_Set1.html` end-to-end against the new schema: split the four
+multi-part Part II questions into 13 independent records (one, Q6's part (a), also needed
+`data-alt-group` handling for its OR-alternative), added paper-level facets on `<body>`,
+converted all 15 MCQs' options to structured `<ol><li data-opt>` lists, fixed 54 leftover
+stray-backtick rupee signs the earlier review had missed, fixed an arrow-in-cell
+(`1,50,000 → 8,50,000`) table anti-pattern into separate before/after columns, and added
+`data-final-chapter`/`data-confidence`/`data-review-status`/`data-comment-source` across
+all 28 resulting qblocks. Validated with a Python script: 0 unclosed HTML tags, 0
+backticks, 0 leftover placeholder phrases, all 31 IDs (28 qblocks + 3 case scenarios)
+unique, all case-scenario references resolve, marks arithmetic correct (Part I = 30, Part
+II = 84 across 6 distinct questions after alt-group deduplication, i.e. 6×14 — matching
+the paper's "compulsory Q1 + best 4 of remaining 5" structure).
+
+Wrote six new skill files at `_claude/skills/SKILL-question-bank-*.md`
+(`pipeline-overview`, `html-schema`, `topic-tagging`, `question-splitting`,
+`examiner-comments`, `duplicate-detection`) plus `verbatim-extraction` (seven total),
+per Pranav's explicit request that all of today's Question Bank learnings be captured as
+durable, self-contained documentation usable "by anyone using a clone of git... with
+whatever AI they want" — `pipeline-overview` is the front-matter index pointing to the
+rest. Updated `first_run/schema/HTML-SCHEMA.md` (the operative generation spec) and
+`first_run/prompts/GENERATE-SITTING-HTML-PROMPTS.md` (all 3 prompts) to match, including
+switching the prompts' source-of-truth instruction from the `.md` conversions to the
+original PDFs directly (per the new `verbatim-extraction` skill's #1 rule) and adding an
+explicit "count questions against the paper's own stated structure" instruction, aimed
+directly at the missing-Q6 failure mode from earlier today.
+
+**Not yet done:** `RTP_May2026.html` (generated under the old schema) needs re-review/
+rebuild against the new one. `MTP_May2026_Set2.html`, `PYQ_May2026.html`,
+`PYQ_Jan2026.html` still need first-time generation with the revised prompts. The
+HTML→JSON extraction script, the duplicate-detection (OP/PP) implementation, and the
+difficulty-computation step are all still unbuilt — designed in the new skills, not yet
+coded.
+
+---
+
+## 2026-07-24 — MTP May 2026 Set 1: reviewed and rectified the first pilot AI output against the source PDF
+
+Pranav ran Prompt 1 through his external AI and got `first_run/output/MTP_May2026_Set1.html`. He asked for a review against the **PDF** (not the MD conversion), and rectification of anything wrong.
+
+**Found it badly non-compliant with `HTML-SCHEMA.md` and the prompt's own rules**, extracted both source PDFs (`CAInter-AdvAcc-MTP-May2026-Set1-Q.pdf`, `-Ans.pdf`) via `pypdf` to verify line by line:
+- **Zero chapter/topic tagging** on all 20 questions (`<span class="na">Not tagged yet</span>` everywhere) despite the prompt requiring it.
+- **Part II (descriptive, 70 of 100 marks) was not verbatim** — placeholder/meta-descriptive text like "(full text as in source)" and "as in source answers (verbatim, OCR-normalized)" stood in for actual content.
+- **Question 6 of the source paper (14 marks — AS 24/Amalgamation alternative + AS 1 + AS 17) was missing entirely** — the AI only produced Q1–Q5 of Part II's 6 printed questions, silently dropping one full question worth 14 marks.
+- **Two mark totals were wrong**: Q2 shown as 12 (source: 7+7=14), Q5 shown as 16 (source: 10+4=14) — the overall 30+70=100 happened to still check out only by coincidental cancellation.
+- Examiner comments were thin one-liners, not following `examiner-comments-writing-skill.md`'s required quantifier/failure-mode/citation/consequence structure.
+- Positives that did hold up: all 15 Part I MCQ answers verified correct against the PDF; `.author-comment` placeholders correctly present/empty throughout.
+
+**Rectified directly** rather than re-prompting the external AI: rebuilt all 21 question blocks (added the missing Q6 as `id="Q21"`) with genuine verbatim question/answer text transcribed from the PDF extraction, tagged every question against `topic-index.json`'s taxonomy (flagging the one AS 1 tag as pointing to a chapter/unit not yet individually indexed, rather than fabricating detail), fixed the two mark totals, rewrote every examiner comment in the skill's actual voice, and fixed the "Printed paper instructions" placeholder with the real verbatim instructions. Also flagged (not silently corrected) one internal inconsistency found in the source answer PDF itself — Falgun Ltd.'s Note 1 Share Capital block prints figures for a different company size than the trial balance — left in as printed with an extraction-note pointing it out for Pranav's judgment call. Verified the final file has zero unclosed HTML tags and correct marks arithmetic (Part I 30 + Part II compulsory Q1 14 + best 4-of-5 optional = 70 = 100 total; file now shows all 6 printed Part II questions summing to 84, matching how MTP answer keys conventionally print solutions for every optional question).
+
+**Not yet done:** `RTP_May2026.html` (already generated, not yet reviewed) still pending; the stray empty `first_run/output/TODO.md` is still unexplained/uninvestigated.
+
+---
+
 ## 2026-07-23 — Strategy book: em-dash pass across all student-visible content
 
 Pranav flagged that heavy em-dash use across the book reads as an AI-writing tell, and asked for a pass to humanize it. Scoped to actual book content only (Bucket 0–6, AI Section, Emergency, Personal Pages, front matter's real prose, Author's Journey) — explicitly not MASTER.md's internal working-draft/status notes, which aren't student-visible.
