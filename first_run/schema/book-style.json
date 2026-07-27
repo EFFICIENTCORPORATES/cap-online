@@ -1,0 +1,69 @@
+{
+  "_comment": "Single source of truth for ALL visual styling in the Question Bank Book pipeline - sitting-level HTML, chapter-wise HTML, and the final merged whole-book HTML all read from this ONE file. Change a value here, re-run generate_style_css.py, and every already-generated HTML file picks up the change automatically via its shared <link> to book-style.css - no HTML file ever needs hand-editing or regenerating for a pure style change. Page-geometry fields are included now for forward compatibility with the final print/paginated book stage (see CLAUDE.md section 7) even though the sitting-level HTML in first_run/output/ does not yet use paged.js pagination - it's a browser-reviewed content record at this stage, not a print artifact yet.",
+
+  "typography": {
+    "body_font": "'Source Sans 3', Arial, sans-serif",
+    "heading_font": "'Archivo', Arial, sans-serif",
+    "mono_font": "'Source Code Pro', 'Courier New', monospace",
+    "body_font_size": "11pt",
+    "body_line_height": "1.6",
+    "paragraph_spacing": "0.6em",
+    "h1_font_size": "20pt",
+    "h2_font_size": "15pt",
+    "h3_font_size": "12.5pt",
+    "small_font_size": "9pt",
+    "table_font_size": "10pt",
+
+    "_chapter_print_comment": "Applied only in the merged QUESTION-BANK-BOOK.html, as an additive override on top of the 34 chapter files' own embedded style (never edits those files -- see qb_common.py's print_layer_css()). Added 2026-07-26 on Pranav's explicit instruction to shrink the printed book to cut printing cost; the chapter files' own style has no explicit body font-size at all (defaults to the browser's 16px), so this is the main lever alongside the page-margin cut above.",
+    "chapter_print_body_size": "9pt",
+    "chapter_print_line_height": "1.3",
+    "chapter_print_h1_size": "15pt",
+    "chapter_print_h2_size": "12pt",
+    "chapter_print_table_size": "7.5pt",
+    "chapter_print_small_size": "7pt"
+  },
+
+  "colors": {
+    "ink": "#1F2933",
+    "muted_ink": "#5b6b7a",
+    "page_bg": "#ffffff",
+    "accent": "#2c3e50",
+    "table_border": "#999999",
+    "table_header_bg": "#2c3e50",
+    "table_header_ink": "#ffffff",
+    "table_zebra_bg": "#f5f5f5",
+    "question_block_border": "#cccccc",
+    "question_block_bg": "#fdfdfd",
+    "answer_block_bg": "#eafbea",
+    "examiner_comment_bg": "#fff3e0",
+    "examiner_comment_border": "#e0b46c",
+    "synthesized_comment_bg": "#fdf1f1",
+    "synthesized_comment_border": "#d98a8a",
+    "author_comment_border": "#8a6fd8",
+    "flagged_border": "#d98a8a",
+    "flagged_bg": "#fffaf7"
+  },
+
+  "spacing": {
+    "page_margin": "24px",
+    "qblock_margin": "18px 0",
+    "qblock_padding": "16px 20px",
+    "qblock_border_radius": "8px",
+    "section_gap": "44px",
+
+    "_chapter_print_comment": "Same additive-override mechanism as typography's chapter_print_* fields above -- tightens the 34 chapter files' own .qblock spacing only inside the merged print output, print cost reduction, 2026-07-26.",
+    "chapter_print_qblock_margin": "8px 0",
+    "chapter_print_qblock_padding": "8px 12px"
+  },
+
+  "page_geometry_for_future_print_stage": {
+    "_comment": "Now used by first_run/scripts/qb_common.py's print_layer_css() for the merged QUESTION-BANK-BOOK.html (2026-07-26). Margins cut from 20mm to 6mm on Pranav's explicit instruction to reduce printing cost (page count is the main cost driver) -- 6mm is near the physical floor most consumer laser/inkjet printers can actually print to without clipping (many can't guarantee below ~4-5mm on all edges); true 0mm risks losing content off the edge on real hardware even though it would render fine in a PDF viewer. Go lower only after confirming the actual print method (a print shop / commercial printer with true edge-to-edge or bleed printing can safely go tighter than a home/office printer can).",
+    "page_width": "177.8mm",
+    "page_height": "254mm",
+    "margin_top": "6mm",
+    "margin_bottom": "6mm",
+    "margin_inner": "6mm",
+    "margin_outer": "6mm",
+    "bleed": "3mm"
+  }
+}
