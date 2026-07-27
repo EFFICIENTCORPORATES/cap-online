@@ -154,7 +154,7 @@
       "questionNumber": "15",
       "marks": 2,
       "topics": [
-        {"unitCode": "M3-C14-U1", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "1", "subtopicTitle": "Meaning of Reconstruction - distinguishing External Reconstruction (new company formed, old company dissolved) from Internal Reconstruction, Merger and Absorption"}
+        {"unitCode": "M3-C14-U0", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "1", "subtopicTitle": "Meaning of Reconstruction - distinguishing External Reconstruction (new company formed, old company dissolved) from Internal Reconstruction, Merger and Absorption"}
       ]
     },
     {
@@ -178,7 +178,7 @@
       "questionNumber": "2",
       "marks": 14,
       "topics": [
-        {"unitCode": "M3-C14-U1", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "2.1 / 2.3 / 3", "subtopicTitle": "Sub-division of shares, share surrender, capital reduction, Reconstruction A/c and post-reconstruction share capital notes - MA Limited scheme"}
+        {"unitCode": "M3-C14-U0", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "2.1 / 2.3 / 3", "subtopicTitle": "Sub-division of shares, share surrender, capital reduction, Reconstruction A/c and post-reconstruction share capital notes - MA Limited scheme"}
       ]
     },
     {
@@ -190,7 +190,7 @@
       "marks": 14,
       "marksNote": "(a) 7 + (b) 7",
       "topics": [
-        {"unitCode": "M3-C12-U1", "standard": null, "title": "Buy-back of Securities", "subtopicRef": "1", "subtopicTitle": "All three buy-back tests + journal entries incl. transfer to Capital Redemption Reserve, part (a)"},
+        {"unitCode": "M3-C12-U0", "standard": null, "title": "Buy-back of Securities", "subtopicRef": "1", "subtopicTitle": "All three buy-back tests + journal entries incl. transfer to Capital Redemption Reserve, part (a)"},
         {"unitCode": "M2-C5-U3", "standard": "AS 13", "title": "Accounting for Investments", "subtopicRef": "3.5 / 3.6", "subtopicTitle": "Investment Account with bonus shares, partial rights subscription + sale of rights entitlement, and part-disposal at average cost, part (b)"}
       ]
     },
@@ -201,7 +201,7 @@
       "questionNumber": "4",
       "marks": 14,
       "topics": [
-        {"unitCode": "M3-C13-U1", "standard": null, "title": "Amalgamation of Companies", "subtopicRef": "4 / 7", "subtopicTitle": "Purchase Consideration (cash + shares to equity/preference/debenture holders) + acquirer's journal entries and post-absorption Balance Sheet - B Ltd. absorbs G Ltd."}
+        {"unitCode": "M3-C13-U0", "standard": null, "title": "Amalgamation of Companies", "subtopicRef": "4 / 7", "subtopicTitle": "Purchase Consideration (cash + shares to equity/preference/debenture holders) + acquirer's journal entries and post-absorption Balance Sheet - B Ltd. absorbs G Ltd."}
       ]
     },
     {
@@ -226,7 +226,7 @@
         {"unitCode": "M1-C4-U6", "standard": "AS 24", "title": "Discontinuing Operations", "subtopicRef": "6.3 / 6.5", "subtopicTitle": "Initial disclosure event - required disclosure items, part (a) first alternative"},
         {"unitCode": "M2-C5-U5", "standard": "AS 19", "title": "Leases", "subtopicRef": "5.8", "subtopicTitle": "Finance lease - lessee's initial recognition and finance-charge schedule, part (a) second alternative"},
         {"unitCode": "M3-C11-U1", "standard": null, "title": "Preparation of Financial Statements (of Companies)", "subtopicRef": "1.6", "subtopicTitle": "Distributable Profit - Companies (Declaration and Payment of Dividend) Rules 2014, three-condition test for dividend out of reserves, part (b)"},
-        {"unitCode": "M3-C15-U1", "standard": null, "title": "Accounting for Branches including Foreign Branches", "subtopicRef": "5.2", "subtopicTitle": "Stock and Debtors System (goods invoiced at selling price) - Branch Stock, Branch Debtors, Branch Adjustment and Branch P&L accounts, part (c)"}
+        {"unitCode": "M3-C15-U0", "standard": null, "title": "Accounting for Branches including Foreign Branches", "subtopicRef": "5.2", "subtopicTitle": "Stock and Debtors System (goods invoiced at selling price) - Branch Stock, Branch Debtors, Branch Adjustment and Branch P&L accounts, part (c)"}
       ]
     }
   ]

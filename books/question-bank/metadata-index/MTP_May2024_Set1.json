@@ -42,7 +42,7 @@
       "marks": 8,
       "marksNote": "4 MCQs of 2 marks each",
       "topics": [
-        {"unitCode": "M3-C12-U1", "standard": null, "title": "Buy-back of Securities", "subtopicRef": "1", "subtopicTitle": "The three buy-back tests: Shares Outstanding Test, Resources Test, Debt-Equity Ratio Test"}
+        {"unitCode": "M3-C12-U0", "standard": null, "title": "Buy-back of Securities", "subtopicRef": "1", "subtopicTitle": "The three buy-back tests: Shares Outstanding Test, Resources Test, Debt-Equity Ratio Test"}
       ]
     },
     {
@@ -72,7 +72,7 @@
       "questionNumber": "6",
       "marks": 2,
       "topics": [
-        {"unitCode": "M3-C14-U1", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "1", "subtopicTitle": "Meaning of Reconstruction - definition of internal (vs external) reconstruction"}
+        {"unitCode": "M3-C14-U0", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "1", "subtopicTitle": "Meaning of Reconstruction - definition of internal (vs external) reconstruction"}
       ]
     },
     {
@@ -109,7 +109,7 @@
       "marksNote": "(a) 4 + (b) 10",
       "topics": [
         {"unitCode": "M2-C8-U2", "standard": "AS 9", "title": "Revenue Recognition", "subtopicRef": "2.7", "subtopicTitle": "Income from Other Sources - part (a): interest and royalty revenue recognition basis"},
-        {"unitCode": "M3-C14-U1", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "2.3 / 3", "subtopicTitle": "Reduction of Share Capital + Entries in Case of Internal Reconstruction - part (b): Capital Reduction scheme, journal entries, post-reconstruction Balance Sheet"}
+        {"unitCode": "M3-C14-U0", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "2.3 / 3", "subtopicTitle": "Reduction of Share Capital + Entries in Case of Internal Reconstruction - part (b): Capital Reduction scheme, journal entries, post-reconstruction Balance Sheet"}
       ]
     },
     {
@@ -119,7 +119,7 @@
       "questionNumber": "4",
       "marks": 14,
       "topics": [
-        {"unitCode": "M3-C13-U1", "standard": null, "title": "Amalgamation of Companies", "subtopicRef": "4 / 6 / 7", "subtopicTitle": "Purchase Consideration, Realisation A/c (vendor), acquisition entries + post-absorption Balance Sheet (purchaser) - Hari Ltd. absorbs Vayu Ltd."}
+        {"unitCode": "M3-C13-U0", "standard": null, "title": "Amalgamation of Companies", "subtopicRef": "4 / 6 / 7", "subtopicTitle": "Purchase Consideration, Realisation A/c (vendor), acquisition entries + post-absorption Balance Sheet (purchaser) - Hari Ltd. absorbs Vayu Ltd."}
       ]
     },
     {
@@ -141,10 +141,10 @@
       "marks": 14,
       "marksNote": "(a) 4 + (b) 4 + (c) 6",
       "topics": [
-        {"unitCode": "M1-C2-U1", "standard": null, "title": "Framework for Preparation and Presentation of Financial Statements", "subtopicRef": "7", "subtopicTitle": "Qualitative Characteristics of Financial Statements - part (a), first alternative of an either/or question"},
-        {"unitCode": "M1-C1-U1", "standard": null, "title": "Introduction to Accounting Standards", "subtopicRef": "1", "subtopicTitle": "Introduction / GAAP - part (a), second alternative ('issues Accounting Standards deal with')"},
+        {"unitCode": "M1-C2-U0", "standard": null, "title": "Framework for Preparation and Presentation of Financial Statements", "subtopicRef": "7", "subtopicTitle": "Qualitative Characteristics of Financial Statements - part (a), first alternative of an either/or question"},
+        {"unitCode": "M1-C1-U0", "standard": null, "title": "Introduction to Accounting Standards", "subtopicRef": "1", "subtopicTitle": "Introduction / GAAP - part (a), second alternative ('issues Accounting Standards deal with')"},
         {"unitCode": "M3-C11-U2", "standard": "AS 3", "title": "Cash Flow Statement", "subtopicRef": "2.4", "subtopicTitle": "Calculation of Cash Flows from Operating Activities - part (b): deriving operating cash flow from a summarised cash account"},
-        {"unitCode": "M3-C15-U1", "standard": null, "title": "Accounting for Branches including Foreign Branches", "subtopicRef": "4 / 5", "subtopicTitle": "Methods of Charging Goods to Branches / Accounting for Dependent Branches - part (c): goods invoiced at cost-plus, branch profit and stock-reserve computation"}
+        {"unitCode": "M3-C15-U0", "standard": null, "title": "Accounting for Branches including Foreign Branches", "subtopicRef": "4 / 5", "subtopicTitle": "Methods of Charging Goods to Branches / Accounting for Dependent Branches - part (c): goods invoiced at cost-plus, branch profit and stock-reserve computation"}
       ]
     }
   ]

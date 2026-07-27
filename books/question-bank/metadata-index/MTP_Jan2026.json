@@ -1,0 +1,235 @@
+{
+  "examSession": "January 2026",
+  "paperType": "Mock Test Paper (MTP)",
+  "course": "CA Intermediate - Group I - Paper 1",
+  "subject": "Advanced Accounting",
+  "papers": [
+    {
+      "series": "Series I (Set 1)",
+      "dateOfPaper": "18th November 2025",
+      "sourceFiles": {
+        "question": "CAInter-AdvAcc-MTP-Jan2026-Set1-Q.md",
+        "answer": "CAInter-AdvAcc-MTP-Jan2026-Set1-Ans.md"
+      },
+      "totalMarks": 100,
+      "questions": [
+        {
+          "id": "MTP-Jan2026-S1-Q1",
+          "part": "Part I (Case Scenario MCQs)",
+          "questionNumber": "1-4",
+          "subParts": ["a", "b", "c", "d"],
+          "marks": 8,
+          "marksNote": "4 MCQs of 2 marks each",
+          "questionHtml": "<div class='case-scenario'><p>Alfa Ltd. submits the following data extracted from the Final Accounts as on 31 March 2025:</p><p>Equity Share Capital ₹50,000; Profit &amp; Loss (Dr. balance) ₹50,000; 9% Debentures ₹2,00,000; Loan from Bank ₹3,00,000; Advance to suppliers ₹45,000; Provision for tax ₹14,000; Plant &amp; Machinery ₹4,50,000; Furniture &amp; Fixtures ₹85,000; Investment in Beta Ltd. ₹1,25,000; Sundry Debtors ₹70,000; Cash &amp; Bank Balance ₹65,500.</p><p>On 31 March 2025, Alfa Ltd. decided to reconstruct the company. It was decided that (a) 9% Debentures to be settled by issuing 15,000 equity shares of ₹10 each; (b) equity shareholders give up 40% of their capital in exchange for new 11% Debentures of ₹1,00,000; (c) the balance of Profit &amp; Loss to be written off; and (d) equity shares issued for ₹1,00,000.</p><p>Additional information on 1 April 2025: interest on advances ₹3,000; tax liability settled at ₹14,000; debtor of ₹40,000 insolvent with 40% recovery; dividend on investment ₹1 per share; part of Plant &amp; Machinery sold at loss of ₹3,000 (book value ₹15,000).</p><ol type='a'><li>What is the amount of Cash Flow from operating activity?</li><li>What is the amount of Cash Flow from investing activity?</li><li>What is the amount of closing Cash and Cash equivalents as on 1 April 2025?</li><li>What is the balance of Equity Share Capital after internal reconstruction?</li></ol></div>",
+          "answerHtml": "<div class='answer'><table><tr><th>Sub-part</th><th>Correct option</th></tr><tr><td>(a)</td><td>B</td></tr><tr><td>(b)</td><td>D</td></tr><tr><td>(c)</td><td>A</td></tr><tr><td>(d)</td><td>C</td></tr></table></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S1-Q5",
+          "part": "Part I (Standalone MCQ)",
+          "questionNumber": "5",
+          "marks": 2,
+          "questionHtml": "<div><p>Fixed Asset held for sale will be classified in the Balance Sheet as per Schedule III of the Companies Act as:</p><ol type='A'><li>Deferred Tax Assets</li><li>Current Asset</li><li>Non-Current Asset</li><li>Long term Investments</li></ol></div>",
+          "answerHtml": "<div class='answer'><p>Correct option: <strong>B</strong></p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S1-Q6",
+          "part": "Part I (Case Scenario MCQs)",
+          "questionNumber": "6-9",
+          "subParts": ["a", "b", "c", "d"],
+          "marks": 8,
+          "marksNote": "4 MCQs of 2 marks each",
+          "questionHtml": "<div class='case-scenario'><p>Hari Ltd. manufactures electronic equipment and provides installation services and a one-year warranty on all products. Beach Resorts purchased 5 air conditioners from Hari Ltd. for ₹45,000 each (including installation fees of ₹1,000 each). Hari Ltd. also offered a trade discount of ₹500 per AC. The order was placed on 15 March 2025 and payment was made on 20 March 2025. The ACs were delivered on 27 March 2025 and installation was completed on 5 April 2025.</p><ol type='a'><li>How much revenue should be recognised by the Company as on 31 March 2025?</li><li>How much revenue should be recognised by the Company in FY 2025-26?</li><li>What will be the accounting for trade discount?</li><li>Is the Company required to do any accounting for the 1-year warranty?</li></ol></div>",
+          "answerHtml": "<div class='answer'><table><tr><th>Sub-part</th><th>Correct option</th></tr><tr><td>(a)</td><td>B</td></tr><tr><td>(b)</td><td>A</td></tr><tr><td>(c)</td><td>B</td></tr><tr><td>(d)</td><td>B</td></tr></table></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S1-Q10",
+          "part": "Part I (Case Scenario MCQs)",
+          "questionNumber": "10-14",
+          "subParts": ["a", "b", "c", "d"],
+          "marks": 8,
+          "marksNote": "4 MCQs of 2 marks each",
+          "questionHtml": "<div class='case-scenario'><p>A company acquired a controlling interest in a public sector undertaking from the Government of India at ₹1,551 per share. The book value and market value of the shares on 18 February 2025 were ₹192.58 and ₹876 per share respectively. The company paid a strategic premium of ₹675 per share. The shares were classified as long-term strategic investments and accounted for at cost. No provision for diminution was made. On 28 March 2025, the market price dropped to ₹880 per share and by 18 July 2025 to ₹300. Management considered the decline not permanent.</p><ol type='a'><li>Is the accounting treatment of recording the investment at cost without providing for diminution correct as per AS 13?</li><li>How should the company assess whether the decline in market value is other than temporary?</li><li>If a provision for diminution is required, how should it be treated?</li><li>Can the premium paid for strategic benefits be accounted for separately from the cost of investment?</li></ol></div>",
+          "answerHtml": "<div class='answer'><table><tr><th>Sub-part</th><th>Correct option</th></tr><tr><td>(a)</td><td>B</td></tr><tr><td>(b)</td><td>C</td></tr><tr><td>(c)</td><td>A</td></tr><tr><td>(d)</td><td>C</td></tr></table></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S1-Q15",
+          "part": "Part I (Standalone MCQ)",
+          "questionNumber": "15",
+          "marks": 2,
+          "questionHtml": "<div><p>A machinery was given on 3 years lease by a dealer of the machinery for equal annual lease rentals to yield 20% profit margin on cost of the machinery, which is ₹3,00,000. Economic life is 5 years and output in 5 years is 50,000, 60,000, 40,000, 65,000 and 85,000 units respectively. Compute annual lease rent.</p></div>",
+          "answerHtml": "<div class='answer'><p>Correct option: <strong>B</strong></p><p>Annual lease rent is ₹60,000.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S1-PartII-Q1",
+          "part": "Part II (Descriptive) - Compulsory",
+          "questionNumber": "1",
+          "subParts": ["a", "b"],
+          "marks": 14,
+          "marksNote": "(a) 7 marks + (b) 7 marks",
+          "questionHtml": "<div><p><strong>(a)</strong> The following information is provided for More Limited for 31 March 2024 and 31 March 2025. You are required to calculate net Cash Flow from Operating Activities.</p><p><strong>(b)</strong> A Ltd. started construction of an office building on 1 April 2024, raised a specific loan of ₹14 lakhs at 12% and also had other outstanding loans. You are required to calculate borrowing cost to be capitalized, pass the initial journal entry, compute depreciation for the year, and determine the carrying value of the building as on 31 March 2025.</p></div>",
+          "answerHtml": "<div><p><strong>(a)</strong> The solution requires adjusting profit before tax for depreciation, provision for doubtful debts, debenture interest, and working capital movements, then accounting for income tax paid to arrive at net cash flow from operating activities.</p><p><strong>(b)</strong> The borrowing cost to be capitalized comprises specific-borrowing interest plus eligible general-borrowing interest, less interest income on the temporary borrowing. The initial entry debits the Building Account and credits Bank/Interest Payable accordingly.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S1-PartII-Q2",
+          "part": "Part II (Descriptive)",
+          "questionNumber": "2",
+          "subParts": ["a", "b"],
+          "marks": 14,
+          "questionHtml": "<div><p><strong>(a)</strong> Happy Limited is a textile manufacturing company producing polyester, nylon and a by-product Fibre. You are required to determine the value of closing inventory of the main products using the by-product NRV approach.</p><p><strong>(b)</strong> A statement determining the maximum number of shares that can be bought back under the shares outstanding test, resources test and debt-equity ratio test is required.</p></div>",
+          "answerHtml": "<div><p><strong>(a)</strong> The closing inventory values are derived by deducting the NRV of the by-product from total joint cost and then allocating the remaining joint cost between polyester and nylon on a suitable basis.</p><p><strong>(b)</strong> The maximum buy-back is the least of the three statutory tests, and the answer in the source solution shows that only 11,000 shares can be bought back.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S1-PartII-Q3",
+          "part": "Part II (Descriptive)",
+          "questionNumber": "3",
+          "marks": 14,
+          "questionHtml": "<div><p>Give the accounting treatment for the issue of bonus shares, internal reconstruction, and related journal entries in the books of the company as required in the source question.</p></div>",
+          "answerHtml": "<div><p>The answer presents the journal entries for capital reduction, conversion of preference shares, allotment of equity shares and the related reserve adjustments.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S1-PartII-Q4",
+          "part": "Part II (Descriptive)",
+          "questionNumber": "4",
+          "marks": 14,
+          "questionHtml": "<div><p>Prepare the Realisation Account and the balance sheet of the purchasing company after absorption of another company, taking into account purchase consideration, revaluation, provisions and inter-company balances.</p></div>",
+          "answerHtml": "<div><p>The answer shows the Realisation Account, purchase consideration, the purchase of assets and liabilities at agreed values, and the resulting post-absorption balance sheet.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S1-PartII-Q5",
+          "part": "Part II (Descriptive)",
+          "questionNumber": "5",
+          "marks": 14,
+          "questionHtml": "<div><p>Consider the summarized balance sheets of a subsidiary, restate the figures to align with the parent’s accounting policies, and prepare the adjusted balance sheet and the relevant working notes.</p></div>",
+          "answerHtml": "<div><p>The solution includes restatement of inventory, receivables, prepaid expenses and reserves, together with the adjusted balance sheet and working notes.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S1-PartII-Q6",
+          "part": "Part II (Descriptive)",
+          "questionNumber": "6",
+          "subParts": ["a", "b", "c"],
+          "marks": 14,
+          "marksNote": "(a) 4 marks + (b) 4 marks + (c) 6 marks",
+          "questionHtml": "<div><p><strong>(a)</strong> Briefly explain the elements of financial statements or comment on the disclosure of bonus share source under Schedule III.</p><p><strong>(b)</strong> Explain the accounting treatment of profit or loss on sale and leaseback under AS 19 in different fair value scenarios.</p><p><strong>(c)</strong> Give journal entries to rectify or adjust branch accounts for various transactions with the head office.</p></div>",
+          "answerHtml": "<div><p><strong>(a)</strong> The answer defines asset, liability, equity, income and expense, and also notes that Schedule III does not require disclosure of the source of bonus shares.</p><p><strong>(b)</strong> The answer explains the immediate recognition of profit or loss in the books of the seller-lessee depending on whether the sale price equals, exceeds or falls below fair value.</p><p><strong>(c)</strong> The answer provides the branch-side journal entries for head office expenses, depreciation, salary, collections, remittances and inter-branch transactions.</p></div>"
+        }
+      ]
+    },
+    {
+      "series": "Series II (Set 2)",
+      "dateOfPaper": "6th December 2025",
+      "sourceFiles": {
+        "question": "CAInter-AdvAcc-MTP-Jan2026-Set2-Q.md",
+        "answer": "CAInter-AdvAcc-MTP-Jan2026-Set2-Ans.md"
+      },
+      "totalMarks": 100,
+      "questions": [
+        {
+          "id": "MTP-Jan2026-S2-Q1",
+          "part": "Part I (Case Scenario MCQs)",
+          "questionNumber": "1-4",
+          "subParts": ["a", "b", "c", "d"],
+          "marks": 8,
+          "marksNote": "4 MCQs of 2 marks each",
+          "questionHtml": "<div class='case-scenario'><p>Sun Ltd. acquired 40% share in Moon Ltd. for ₹5,00,000 on 1 July 2024. Moon Ltd. held 40% stake in Star Ltd. Moon Ltd. declared dividend of ₹80,000 for FY 2023-24 and earned profit of ₹4,00,000 in FY 2024-25, declaring dividend of ₹90,000 on 15 September 2025.</p><ol type='a'><li>With respect to the relationship between the companies, which of the following is correct?</li><li>What will be the carrying amount of investment in separate financial statements of Sun Ltd. as on 31 March 2025?</li><li>What will be the carrying amount of investment in consolidated financial statements of Sun Ltd. as on 31 March 2025?</li><li>Which statements correctly evidence significant influence as per AS 23?</li></ol></div>",
+          "answerHtml": "<div class='answer'><table><tr><th>Sub-part</th><th>Correct option</th></tr><tr><td>(a)</td><td>C</td></tr><tr><td>(b)</td><td>A</td></tr><tr><td>(c)</td><td>B</td></tr><tr><td>(d)</td><td>D</td></tr></table></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S2-Q5",
+          "part": "Part I (Case Scenario MCQs)",
+          "questionNumber": "5-8",
+          "subParts": ["a", "b", "c", "d"],
+          "marks": 8,
+          "marksNote": "4 MCQs of 2 marks each",
+          "questionHtml": "<div class='case-scenario'><p>Anshul Manufacturers purchased 20,000 kg of raw material at ₹170 per kg. Direct transit cost was ₹5,00,000 and normal transit loss is 3%. Only 19,000 kg were actually received. The purchase price includes ₹15 per kg of GST eligible for credit. There is no opening stock and 17,600 kg were consumed during the year.</p><ol type='a'><li>What will be the cost of material?</li><li>What will be the value of closing stock?</li><li>What will be the cost per kg of raw material?</li><li>How much abnormal loss will be debited to Profit &amp; Loss?</li></ol></div>",
+          "answerHtml": "<div class='answer'><table><tr><th>Sub-part</th><th>Correct option</th></tr><tr><td>(a)</td><td>C</td></tr><tr><td>(b)</td><td>A</td></tr><tr><td>(c)</td><td>D</td></tr><tr><td>(d)</td><td>B</td></tr></table></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S2-Q9",
+          "part": "Part I (Case Scenario MCQs)",
+          "questionNumber": "9-12",
+          "subParts": ["a", "b", "c", "d"],
+          "marks": 8,
+          "marksNote": "4 MCQs of 2 marks each",
+          "questionHtml": "<div class='case-scenario'><p>Jay Ltd. submits final account data as on 31 March 2024. It decides to reconstruct the company and to issue new shares and debentures, write off the loss balance, and settle tax and debtor balances. Additional information includes interest on advances, tax settlement, bad debt recovery and sale of plant.</p><ol type='a'><li>What is the amount of Cash Flow from operating activity?</li><li>What is the amount of Cash Flow from investing activity?</li><li>What is the amount of closing Cash and Cash equivalents as on 1 April 2024?</li><li>What is the balance of Equity Share Capital after reconstruction?</li></ol></div>",
+          "answerHtml": "<div class='answer'><table><tr><th>Sub-part</th><th>Correct option</th></tr><tr><td>(a)</td><td>B</td></tr><tr><td>(b)</td><td>C</td></tr><tr><td>(c)</td><td>A</td></tr><tr><td>(d)</td><td>B</td></tr></table></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S2-Q13",
+          "part": "Part I (Standalone MCQ)",
+          "questionNumber": "13",
+          "marks": 2,
+          "questionHtml": "<div><p>Vijay Ltd. borrowed ₹30 lakh at 5% p.a. and purchased plant and machinery for ₹60 lakh using borrowed funds. It took one year to develop a market. How much borrowing cost can be capitalised with the cost of plant and machinery?</p></div>",
+          "answerHtml": "<div class='answer'><p>Correct option: <strong>C</strong></p><p>Nil borrowing cost can be capitalised because the asset was not ready for intended use within the period of acquisition and the qualifying asset criteria were not met.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S2-Q14",
+          "part": "Part I (Standalone MCQ)",
+          "questionNumber": "14",
+          "marks": 2,
+          "questionHtml": "<div><p>The cost of inventories of items that are not ordinarily interchangeable and goods or services produced and segregated for specific projects should be assigned using which formula?</p></div>",
+          "answerHtml": "<div class='answer'><p>Correct option: <strong>A</strong></p><p>Specific identification of their individual costs.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S2-Q15",
+          "part": "Part I (Standalone MCQ)",
+          "questionNumber": "15",
+          "marks": 2,
+          "questionHtml": "<div><p>A Ltd. had 1,50,000 shares outstanding on 1 April 2024. Additional 50,000 shares were issued on 1 November 2024 and 32,000 shares were bought back on 1 February 2025. Calculate the weighted average number of shares outstanding for the year ended 31 March 2025.</p></div>",
+          "answerHtml": "<div class='answer'><p>Correct option: <strong>C</strong></p><p>The weighted average amount is 1,76,167 shares approximately.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S2-PartII-Q1",
+          "part": "Part II (Descriptive) - Compulsory",
+          "questionNumber": "1",
+          "subParts": ["a", "b", "c"],
+          "marks": 14,
+          "marksNote": "(a) 5 marks + (b) 5 marks + (c) 4 marks",
+          "questionHtml": "<div><p><strong>(a)</strong> Jared Limited purchased a machine for US$ 20,000 on 31 December 2024 and entered into a forward contract. You are required to explain the accounting treatment and where the profit or loss should be recognised.</p><p><strong>(b)</strong> Jared Limited also had trade payables denominated in US$ and you are required to calculate the exchange difference at 31 March 2025 and on settlement on 1 May 2025.</p><p><strong>(c)</strong> Comment on the treatment of the forward contract and the foreign currency payable under AS 11.</p></div>",
+          "answerHtml": "<div><p><strong>(a)</strong> The forward contract is recognised at fair value and the gain or loss on the contract is accounted for through the profit and loss account as the contract is marked to market.</p><p><strong>(b)</strong> The exchange difference at the balance sheet date is recognised in the profit and loss account, and the difference on settlement is also recognised on settlement.</p><p><strong>(c)</strong> The accounting treatment follows AS 11, with translation differences recognised in the statement of profit and loss unless they qualify for capitalisation.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S2-PartII-Q2",
+          "part": "Part II (Descriptive)",
+          "questionNumber": "2",
+          "subParts": ["a", "b"],
+          "marks": 14,
+          "questionHtml": "<div><p><strong>(a)</strong> Prem Ltd. holds 15% debentures in Mehar Ltd. and you are required to prepare the investment account using FIFO, showing the value of holdings on 31 March 2025 at cost.</p><p><strong>(b)</strong> Care carried on a retail business and opened a branch. You are required to prepare the branch account and compute the profit earned by the branch.</p></div>",
+          "answerHtml": "<div><p><strong>(a)</strong> The investment account is prepared using FIFO, with interest accrued and sale/purchase transactions properly adjusted to the cost basis.</p><p><strong>(b)</strong> The branch account shows the invoice price, credit sales, expenses and closing stock reserve, which together determine the branch profit.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S2-PartII-Q3",
+          "part": "Part II (Descriptive)",
+          "questionNumber": "3",
+          "marks": 14,
+          "questionHtml": "<div><p>As per AS 26, deal with the situations relating to legal costs of defending a patent, advertising and research expenditure, past expenditure, and initial advertisement campaign costs.</p></div>",
+          "answerHtml": "<div><p>The answer states that legal defence costs are generally charged to profit and loss; publicity and research expenses are expensed unless future economic benefits are established; past expenses cannot be capitalised later; and initial advertising expenditure is treated as an expense.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S2-PartII-Q4",
+          "part": "Part II (Descriptive)",
+          "questionNumber": "4",
+          "marks": 14,
+          "questionHtml": "<div><p>Comment on whether the gradual scaling down of activities of a company without a formal approved plan for disposal can be regarded as a discontinuing operation within the meaning of AS 24.</p></div>",
+          "answerHtml": "<div><p>The answer explains that a discontinuing operation requires a formal and approved plan for disposal or closure; mere strategic intentions or gradual scaling down are not sufficient.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S2-PartII-Q5",
+          "part": "Part II (Descriptive)",
+          "questionNumber": "5",
+          "marks": 14,
+          "questionHtml": "<div><p>Prepare the cash flow statement or related working notes from the information supplied in the source paper.</p></div>",
+          "answerHtml": "<div><p>The solution shows the derivation of cash from operating, investing and financing activities and the reconciliation to the closing cash balance.</p></div>"
+        },
+        {
+          "id": "MTP-Jan2026-S2-PartII-Q6",
+          "part": "Part II (Descriptive)",
+          "questionNumber": "6",
+          "subParts": ["a", "b"],
+          "marks": 14,
+          "questionHtml": "<div><p><strong>(a)</strong> Explain the treatment of revenue recognition for sale and installation services and warranty obligations under the relevant accounting standards.</p><p><strong>(b)</strong> Address the related-party disclosure issue as per AS 18 and comment on the group relationships.</p></div>",
+          "answerHtml": "<div><p><strong>(a)</strong> The answer sets out the timing of revenue recognition for goods sold, installation services and provision for warranty obligations.</p><p><strong>(b)</strong> The answer identifies the related parties based on significant influence and voting rights and explains the disclosure requirements.</p></div>"
+        }
+      ]
+    }
+  ]
+}

@@ -4,44 +4,68 @@ Written 2026-07-22. Answers one question: when a new PYQ/MTP/RTP sitting gets ta
 (as `metadata-index/{PaperType}_{Session}[_SetN].json`), which taxonomy and field
 names should it use?
 
-## Two taxonomies in this repo — which one wins
+## Three taxonomy sources in this repo — which one wins (revised 2026-07-23)
 
 1. **`books/concept-book/syllabus-engine/data/0-ca-inter-adv-accounts-subtopics-marks-weightage.json`**
    — the master syllabus index. All 36 chapters, 436 topics, marked "locked, never
    edit." Uses `unique_chapter_id` = `M{module}-C{chapter}-U{unit}` and
-   `unique_topic_id` = `{unique_chapter_id}-T{topic_no}`.
-2. **`topic-index.json`** (this folder) — the index actually being used to tag
+   `unique_topic_id` = `{unique_chapter_id}-T{topic_no}`. Also carries
+   `teaching_sequence` and `marks_by_attempt` (back to May-2018) per chapter — not
+   duplicated elsewhere.
+2. **`books/concept-book/syllabus-engine/data/1-ca-inter-adv-accounts-topic-page-index.json`**
+   (new, 2026-07-23) — **the canonical topic-number + page-number authority**,
+   converted from Pranav's `CA INTER ADV ACCOUNTS - For Adarsh.csv` (400 topics, all
+   36 chapters — including AS 1 and AS 27, which nothing else in this repo had).
+   Cross-joined against file 0 by `unique_chapter_id` (100% match, zero unmatched
+   either direction) to also carry `teaching_sequence`, `chapter_name_short`, and
+   `marks_distinct_attempt_count`; adds `standard`/`standard_title` (parsed from the
+   unit name) and `is_single_unit_chapter`. **This is the file to read for exact
+   topic numbering/naming and real page numbers** — more complete and better
+   validated than `topic-index.json`'s hand-built entries (which still only cover
+   32/36 chapters and mark 10 of those as page-number stubs).
+3. **`topic-index.json`** (this folder) — the index actually being used to tag
    questions today (see `MTP_Jan2025.json`). Uses `unitCode` = same
    `M{module}-C{chapter}-U{unit}` shape, plus `sections[].ref` = raw ICAI paragraph
-   numbers (e.g. `"5.6-5.8"`, no `T` prefix).
+   numbers (e.g. `"5.6-5.8"`, no `T` prefix) and prose `description`s for the
+   chapters it's gotten to.
 
-**Decision: keep tagging questions against `topic-index.json`'s scheme** (`unitCode`
-+ `subtopicRef`), because it's already operative (one full sitting tagged this way)
-and its `sections[].ref` values map directly onto the actual ICAI paragraph numbers
-students see in the study material — more legible than `unique_topic_id` for a
-question bank meant to point students back at "go read para 5.6–5.8." The master
-JSON stays the reference for the full 36-chapter/436-topic list and marks-weightage
-data, not for the per-question tag itself.
+**Decision: keep tagging questions with `unitCode` + `subtopicRef` (`topic-index.json`'s
+shape)** — its `sections[].ref` values map directly onto the actual ICAI paragraph
+numbers students see in the study material, more legible for a question bank than
+`unique_topic_id`. But **pull the `unitCode` itself, the topic numbering, and page
+numbers from file 1 (canonical) going forward** — `topic-index.json`'s own
+per-chapter entries should be treated as supplementary prose description, not the
+numbering authority anymore.
 
-## The U0/U1 mismatch — resolved
+## The U0/U1 decision — reversed 2026-07-23
 
-For 7 single-unit chapters, the master JSON uses `U0`; `topic-index.json`, the raw
-ICAI source filenames (`books/concept-book/raw_icai_study_materials/M{n}_C{n}_U1_*.md`),
-and the one sitting already tagged (`MTP_Jan2025.json`) all use `U1` for the same
-chapter. **Use `U1` going forward** (matches the majority + the raw source of
-truth). Translation table, if you ever need to join against the master JSON:
+Originally this doc said use `U1` for the 7 single-unit chapters, to match
+`topic-index.json` + the raw ICAI filenames. **Reversed: use `U0`** — Pranav's
+reasoning: `U0` correctly signals "this chapter has no further units," and it's now
+backed by *two* independent sources (file 0 and file 1) against one.
 
-| Chapter | Master JSON (`unique_chapter_id`) | Use this in tagging (`unitCode`) |
-|---|---|---|
-| Introduction to Accounting Standards | `M1-C1-U0` | `M1-C1-U1` |
-| Framework for Preparation & Presentation of FS | `M1-C2-U0` | `M1-C2-U1` |
-| Applicability of Accounting Standards | `M1-C3-U0` | `M1-C3-U1` |
-| Buyback of Securities | `M3-C12-U0` | `M3-C12-U1` |
-| Amalgamation of Companies | `M3-C13-U0` | `M3-C13-U1` |
-| Internal Reconstruction | `M3-C14-U0` | `M3-C14-U1` |
-| Accounting for Branches incl. Foreign Branches | `M3-C15-U0` | `M3-C15-U1` |
+**Migrated 2026-07-23 — `U0` is now used everywhere, no stale `U1` references remain.**
+`topic-index.json` (7 `unitCode` fields + their `"unit": 1`→`0` companions) and all 4
+already-tagged sitting JSONs (`MTP_Jan2025.json`, `MTP_May2024_Set1.json`,
+`PYQ_Jan2026.json`, `RTP_May2026.json` — 10+7+5+6 = 28 `unitCode` occurrences) were
+migrated in one pass and re-validated as parseable JSON afterward. The `sourceFile`
+fields in `topic-index.json` (e.g. `"M1_C1_U1_ Introduction....pdf"`) were deliberately
+**left untouched** — those are real filenames on disk under
+`books/concept-book/raw_icai_study_materials/`, which genuinely use `U1` in their
+names; that's a filename fact, not our tagging convention, and isn't part of this
+migration.
 
-All other chapters already agree between the two files (e.g. `M2-C5-U1` = AS 2
+| Chapter | `unique_chapter_id` (canonical, everywhere now) |
+|---|---|
+| Introduction to Accounting Standards | `M1-C1-U0` |
+| Framework for Preparation & Presentation of FS | `M1-C2-U0` |
+| Applicability of Accounting Standards | `M1-C3-U0` |
+| Buyback of Securities | `M3-C12-U0` |
+| Amalgamation of Companies | `M3-C13-U0` |
+| Internal Reconstruction | `M3-C14-U0` |
+| Accounting for Branches incl. Foreign Branches | `M3-C15-U0` |
+
+All other chapters already agree across all three files (e.g. `M2-C5-U1` = AS 2
 everywhere) — no translation needed there.
 
 ## Per-question tagging JSON schema — LEAN INDEX (revised 2026-07-22)

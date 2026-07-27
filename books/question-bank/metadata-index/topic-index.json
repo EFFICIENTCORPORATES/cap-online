@@ -1,11 +1,11 @@
 {
-  "_readme": "Reusable reference index of ICAI CA-Inter Advanced Accounting study material (Modules 1-3, May 2026 edition, from books/concept-book/raw_icai_study_materials/). Built by reading each unit's actual PDF/MD (no invented section numbers). Used to tag question-bank questions to the exact chapter/unit/numbered sub-topic they test. Started with the 22 units touched by the first pilot MTP attempt (Jan 2025, Set 1 + Set 2); 4 more units (AS16 Borrowing Costs, AS28 Impairment, AS18 Related Party Disclosures, AS5) were added 2026-07-22 while tagging MTP May2024 Set1 - those 4 are stubs (heading list only, no per-section description yet, marked with a _note field). Grows incrementally as more sittings are processed, since the same ~25-27 units recur throughout the whole question bank. NOTE: some chapters have multiple units (e.g. Chapter 4 has 7 units - U4/AS18 and U5/AS20 indexed so far, U1/U2/U3/U6/U7 still missing) - a chapter appearing here does not mean all its units are covered, only the ones actually tested by processed questions so far. unitCode convention: single-unit chapters use U1 (not the U0 used by the separate master syllabus JSON at books/concept-book/syllabus-engine/data/ - see metadata-index/TAGGING-SCHEMA.md for the reconciliation table).",
+  "_readme": "Reusable reference index of ICAI CA-Inter Advanced Accounting study material (Modules 1-3, May 2026 edition, from books/concept-book/raw_icai_study_materials/). Built by reading each unit's actual PDF/MD (no invented section numbers). Used to tag question-bank questions to the exact chapter/unit/numbered sub-topic they test. Started with the 22 units touched by the first pilot MTP attempt (Jan 2025, Set 1 + Set 2); 4 more units (AS16 Borrowing Costs, AS28 Impairment, AS18 Related Party Disclosures, AS5) were added 2026-07-22 while tagging MTP May2024 Set1 - those 4 are stubs (heading list only, no per-section description yet, marked with a _note field). Grows incrementally as more sittings are processed, since the same ~25-27 units recur throughout the whole question bank. NOTE: some chapters have multiple units (e.g. Chapter 4 has 7 units - U4/AS18 and U5/AS20 indexed so far, U1/U2/U3/U6/U7 still missing) - a chapter appearing here does not mean all its units are covered, only the ones actually tested by processed questions so far. unitCode convention: single-unit chapters use U0 (migrated 2026-07-23 from an earlier U1 convention, to match both the master syllabus JSON at books/concept-book/syllabus-engine/data/0-*.json and the canonical topic/page index at .../1-ca-inter-adv-accounts-topic-page-index.json - see metadata-index/TAGGING-SCHEMA.md).",
   "generated": "2026-07-17",
-  "lastUpdated": "2026-07-22 - now 32 of 36 syllabus chapters/units indexed (up from 22), after tagging 3 sittings (MTP May2024 Set1, PYQ Jan2026, RTP May2026). Remaining untouched: AS1 (Disclosure of Accounting Policies, M1-C4-U1) and AS27 (Joint Ventures, M2-C10-U3) - genuinely no tagged question has hit either yet. AS3 (M1-C4-U2) and AS14 (M2-C9-U2) are technically still unindexed as their own AS-numbered chapters, but their content is already covered via sibling Companies-Act chapters M3-C11-U2 (Cash Flow Statement) and M3-C13-U1 (Amalgamation of Companies), which every tagged cash-flow/amalgamation question has been pointed at instead.",
+  "lastUpdated": "2026-07-23 - migrated the 7 single-unit chapters (Intro to AS, Framework, Applicability, Buyback, Amalgamation, Internal Reconstruction, Branch Accounting) from U1 to U0, and re-migrated the same 7 chapters in the 4 already-tagged sitting JSONs (MTP_Jan2025.json, MTP_May2024_Set1.json, PYQ_Jan2026.json, RTP_May2026.json), for consistency with the canonical topic/page index. Previously (2026-07-22): 32 of 36 syllabus chapters/units indexed (up from 22), after tagging 3 sittings (MTP May2024 Set1, PYQ Jan2026, RTP May2026). Remaining untouched: AS1 (Disclosure of Accounting Policies, M1-C4-U1) and AS27 (Joint Ventures, M2-C10-U3) - genuinely no tagged question has hit either yet. AS3 (M1-C4-U2) and AS14 (M2-C9-U2) are technically still unindexed as their own AS-numbered chapters, but their content is already covered via sibling Companies-Act chapters M3-C11-U2 (Cash Flow Statement) and M3-C13-U0 (Amalgamation of Companies), which every tagged cash-flow/amalgamation question has been pointed at instead.",
   "units": [
     {
-      "unitCode": "M1-C1-U1",
-      "module": 1, "chapter": 1, "unit": 1,
+      "unitCode": "M1-C1-U0",
+      "module": 1, "chapter": 1, "unit": 0,
       "standard": null,
       "title": "Introduction to Accounting Standards",
       "sourceFile": "M1_C1_U1_ Introduction to Accounting Standards.pdf",
@@ -28,8 +28,8 @@
       ]
     },
     {
-      "unitCode": "M1-C2-U1",
-      "module": 1, "chapter": 2, "unit": 1,
+      "unitCode": "M1-C2-U0",
+      "module": 1, "chapter": 2, "unit": 0,
       "standard": null,
       "title": "Framework for Preparation and Presentation of Financial Statements",
       "sourceFile": "M1_C2_U1_ Framework for Preparation and Presentation of Financial Statements.pdf",
@@ -49,8 +49,8 @@
       ]
     },
     {
-      "unitCode": "M1-C3-U1",
-      "module": 1, "chapter": 3, "unit": 1,
+      "unitCode": "M1-C3-U0",
+      "module": 1, "chapter": 3, "unit": 0,
       "standard": null,
       "title": "Applicability of Accounting Standards",
       "sourceFile": "M1_C3_U1_ Applicability of Accounting Standards.pdf",
@@ -364,8 +364,8 @@
       ]
     },
     {
-      "unitCode": "M3-C12-U1",
-      "module": 3, "chapter": 12, "unit": 1,
+      "unitCode": "M3-C12-U0",
+      "module": 3, "chapter": 12, "unit": 0,
       "standard": null,
       "title": "Buy-back of Securities",
       "sourceFile": "M3_C12_U1_ Buyback of Securities.pdf",
@@ -377,8 +377,8 @@
       ]
     },
     {
-      "unitCode": "M3-C13-U1",
-      "module": 3, "chapter": 13, "unit": 1,
+      "unitCode": "M3-C13-U0",
+      "module": 3, "chapter": 13, "unit": 0,
       "standard": null,
       "title": "Amalgamation of Companies",
       "sourceFile": "M3_C13_U1_ Amalgamation of Companies.pdf",
@@ -394,8 +394,8 @@
       ]
     },
     {
-      "unitCode": "M3-C14-U1",
-      "module": 3, "chapter": 14, "unit": 1,
+      "unitCode": "M3-C14-U0",
+      "module": 3, "chapter": 14, "unit": 0,
       "standard": null,
       "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)",
       "sourceFile": "M3_C14_U1_ Internal Reconstruction.pdf",
@@ -411,8 +411,8 @@
       ]
     },
     {
-      "unitCode": "M3-C15-U1",
-      "module": 3, "chapter": 15, "unit": 1,
+      "unitCode": "M3-C15-U0",
+      "module": 3, "chapter": 15, "unit": 0,
       "standard": null,
       "title": "Accounting for Branches including Foreign Branches",
       "sourceFile": "M3_C15_U1_ Accounting for Branches including Foreign Branches.pdf",

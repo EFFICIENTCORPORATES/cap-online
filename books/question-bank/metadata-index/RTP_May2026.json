@@ -50,7 +50,7 @@
       "part": "Part II - Descriptive (Introduction to Accounting Standards)",
       "questionNumber": "5",
       "topics": [
-        {"unitCode": "M1-C1-U1", "standard": null, "title": "Introduction to Accounting Standards", "subtopicRef": "6", "subtopicTitle": "International Accounting Standards Board (IASB) - short note"}
+        {"unitCode": "M1-C1-U0", "standard": null, "title": "Introduction to Accounting Standards", "subtopicRef": "6", "subtopicTitle": "International Accounting Standards Board (IASB) - short note"}
       ]
     },
     {
@@ -59,7 +59,7 @@
       "part": "Part II - Descriptive (Framework for Preparation & Presentation of FS)",
       "questionNumber": "6",
       "topics": [
-        {"unitCode": "M1-C2-U1", "standard": null, "title": "Framework for Preparation and Presentation of Financial Statements", "subtopicRef": "9", "subtopicTitle": "Elements of Financial Statements - liability recognition for a binding purchase commitment with no future economic benefit (onerous/abandoned custom order)"}
+        {"unitCode": "M1-C2-U0", "standard": null, "title": "Framework for Preparation and Presentation of Financial Statements", "subtopicRef": "9", "subtopicTitle": "Elements of Financial Statements - liability recognition for a binding purchase commitment with no future economic benefit (onerous/abandoned custom order)"}
       ]
     },
     {
@@ -68,7 +68,7 @@
       "part": "Part II - Descriptive (Applicability of Accounting Standards)",
       "questionNumber": "7",
       "topics": [
-        {"unitCode": "M1-C3-U1", "standard": null, "title": "Applicability of Accounting Standards", "subtopicRef": "2.1", "subtopicTitle": "Revised MSME classification criteria (turnover/borrowings thresholds, effective 1 Apr 2024) applied to a partnership firm"}
+        {"unitCode": "M1-C3-U0", "standard": null, "title": "Applicability of Accounting Standards", "subtopicRef": "2.1", "subtopicTitle": "Revised MSME classification criteria (turnover/borrowings thresholds, effective 1 Apr 2024) applied to a partnership firm"}
       ]
     },
     {
@@ -114,7 +114,7 @@
       "part": "Part II - Descriptive (AS 14 Amalgamation)",
       "questionNumber": "12",
       "topics": [
-        {"unitCode": "M3-C13-U1", "standard": null, "title": "Amalgamation of Companies", "subtopicRef": "5 / 7", "subtopicTitle": "Amalgamation in the nature of purchase - two companies merged into a NEW company (AB Limited), post-amalgamation Schedule III Balance Sheet"}
+        {"unitCode": "M3-C13-U0", "standard": null, "title": "Amalgamation of Companies", "subtopicRef": "5 / 7", "subtopicTitle": "Amalgamation in the nature of purchase - two companies merged into a NEW company (AB Limited), post-amalgamation Schedule III Balance Sheet"}
       ]
     },
     {
@@ -180,7 +180,7 @@
       "questionNumber": "19",
       "subParts": ["a", "b"],
       "topics": [
-        {"unitCode": "M3-C14-U1", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "2.3 / 3", "subtopicTitle": "Full 14-item internal reconstruction scheme (share write-down, arrear-dividend settlement, debenture-holder asset takeover + fresh funding, asset write-downs, contingent liability settlement, capital commitment, fresh share issue, tax settlement) - journal entries + Capital Reduction A/c, Ellora Limited"}
+        {"unitCode": "M3-C14-U0", "standard": null, "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)", "subtopicRef": "2.3 / 3", "subtopicTitle": "Full 14-item internal reconstruction scheme (share write-down, arrear-dividend settlement, debenture-holder asset takeover + fresh funding, asset write-downs, contingent liability settlement, capital commitment, fresh share issue, tax settlement) - journal entries + Capital Reduction A/c, Ellora Limited"}
       ]
     },
     {
@@ -190,7 +190,7 @@
       "questionNumber": "20",
       "subParts": ["i", "ii"],
       "topics": [
-        {"unitCode": "M3-C15-U1", "standard": null, "title": "Accounting for Branches including Foreign Branches", "subtopicRef": "10-13", "subtopicTitle": "Foreign branch (Cambridge, in Euros) - Branch Trading/P&L in foreign currency + translation of the Trial Balance into Indian Rupees at closing/average rates"}
+        {"unitCode": "M3-C15-U0", "standard": null, "title": "Accounting for Branches including Foreign Branches", "subtopicRef": "10-13", "subtopicTitle": "Foreign branch (Cambridge, in Euros) - Branch Trading/P&L in foreign currency + translation of the Trial Balance into Indian Rupees at closing/average rates"}
       ]
     }
   ]

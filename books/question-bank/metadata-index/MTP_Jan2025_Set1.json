@@ -1,0 +1,244 @@
+{
+  "_readme": "Tagged from raw source files CAInter-AdvAcc-MTP-Jan2025-Set1-Q.md and CAInter-AdvAcc-MTP-Jan2025-Set1-Ans.md; no parsed MD exists for this sitting yet.",
+  "examSession": "January 2025, Set 1",
+  "paperType": "Mock Test Paper (MTP)",
+  "course": "CA Intermediate - Group I - Paper 1",
+  "subject": "Advanced Accounting",
+  "sourceParsedFile": "../Raw_PDF_Question_Bank_CA_Inter_Accounts/CAInter-AdvAcc-MTP-Jan2025-Set1-Q.md, ../Raw_PDF_Question_Bank_CA_Inter_Accounts/CAInter-AdvAcc-MTP-Jan2025-Set1-Ans.md",
+  "totalMarks": 100,
+  "questions": [
+    {
+      "id": "MTP-Jan2025-S1-PartI-Q1",
+      "mdAnchor": "1.  Fly Ltd. made a sale of ` 7,00,000 to Wings International in May 2023 and recognised Trade Receivables which was initially recorded at the prevailing exchange rate on the date of sales, transaction recorded at US$ 1= ` 79.4.",
+      "part": "Part I - Case Scenario based MCQs",
+      "questionNumber": "1",
+      "marks": 8,
+      "marksNote": "4 MCQs of 2 marks each",
+      "topics": [
+        {
+          "unitCode": "M2-C7-U3",
+          "standard": "AS 11",
+          "title": "The Effects of Changes in Foreign Exchange Rates",
+          "subtopicRef": "3.4 / 3.5",
+          "subtopicTitle": "Monetary item restatement at closing rate and recognition of exchange differences for receivables and loans"
+        }
+      ]
+    },
+    {
+      "id": "MTP-Jan2025-S1-PartI-Q2",
+      "mdAnchor": "2.   X Ltd. purchased 3,000 shares of Amazing Ltd. in December 2023 @ ` 100 each and paid brokerage @ 1%.",
+      "part": "Part I - Case Scenario based MCQs",
+      "questionNumber": "2",
+      "marks": 8,
+      "marksNote": "4 MCQs of 2 marks each",
+      "topics": [
+        {
+          "unitCode": "M2-C5-U3",
+          "standard": "AS 13",
+          "title": "Accounting for Investments",
+          "subtopicRef": "3.5 / 3.6",
+          "subtopicTitle": "Cost and carrying amount of investments for current/long-term holdings, including bonus-share cost allocation derived by analogy from AS 13 rights-issue guidance"
+        }
+      ]
+    },
+    {
+      "id": "MTP-Jan2025-S1-PartI-Q3",
+      "mdAnchor": "3. Sun Limited has acquired 40% share in Moon Ltd. for ` 500,000 on 01.07.2023.",
+      "part": "Part I - Case Scenario based MCQs",
+      "questionNumber": "3",
+      "marks": 8,
+      "marksNote": "4 MCQs of 2 marks each",
+      "topics": [
+        {
+          "unitCode": "M2-C10-U2",
+          "standard": "AS 23",
+          "title": "Accounting for Investments in Associates in Consolidated Financial Statements",
+          "subtopicRef": "2.3 / 2.6",
+          "subtopicTitle": "Significant influence/associate definition and equity-method carrying amount for associate investments"
+        }
+      ]
+    },
+    {
+      "id": "MTP-Jan2025-S1-PartI-Q4",
+      "mdAnchor": "4. Cost of current investment acquired was ` 1000 but the fair value was ` 800.",
+      "part": "Part I - Standalone MCQs",
+      "questionNumber": "4",
+      "marks": 2,
+      "topics": [
+        {
+          "unitCode": "M2-C5-U3",
+          "standard": "AS 13",
+          "title": "Accounting for Investments",
+          "subtopicRef": "3.6",
+          "subtopicTitle": "Carrying amount of current investments at lower of cost and fair value"
+        }
+      ]
+    },
+    {
+      "id": "MTP-Jan2025-S1-PartI-Q5",
+      "mdAnchor": "5. As per AS 20 an enterprise should present/disclose the following:",
+      "part": "Part I - Standalone MCQs",
+      "questionNumber": "5",
+      "marks": 2,
+      "topics": [
+        {
+          "unitCode": "M1-C4-U5",
+          "standard": "AS 20",
+          "title": "Earnings Per Share",
+          "subtopicRef": "5.12",
+          "subtopicTitle": "Disclosure requirements for EPS including numerator/denominator reconciliation and equal prominence for negative EPS"
+        }
+      ]
+    },
+    {
+      "id": "MTP-Jan2025-S1-PartI-Q6",
+      "mdAnchor": "6. Accounting Standard 10, Property, Plant and Equipment is applicable to:",
+      "part": "Part I - Standalone MCQs",
+      "questionNumber": "6",
+      "marks": 2,
+      "topics": [
+        {
+          "unitCode": "M2-C5-U2",
+          "standard": "AS 10",
+          "title": "Property, Plant and Equipment",
+          "subtopicRef": "2.2 / 2.3",
+          "subtopicTitle": "Scope and definition of PPE, including the treatment of bearer plants vs biological assets, wasting assets and inventories"
+        }
+      ]
+    },
+    {
+      "id": "MTP-Jan2025-S1-PartII-Q1",
+      "mdAnchor": "1. (a) A Ltd. provides after sales warranty for two years to its customers.",
+      "part": "Part II - Descriptive - Compulsory",
+      "questionNumber": "1",
+      "marks": 14,
+      "marksNote": "(a) 4 + (b) 5 + (c) 5 = 14 Marks",
+      "topics": [
+        {
+          "unitCode": "M2-C6-U2",
+          "standard": "AS 29",
+          "title": "Provisions, Contingent Liabilities and Contingent Assets",
+          "subtopicRef": "2.4 / 2.11",
+          "subtopicTitle": "Recognition and measurement of warranty provisions using the AS 29 provision criteria"
+        },
+        {
+          "unitCode": "M2-C5-U6",
+          "standard": "AS 26",
+          "title": "Intangible Assets",
+          "subtopicRef": "6.17 / 6.18",
+          "subtopicTitle": "Subsequent expenditure and expense recognition for an intangible asset, including past expensed costs and advertising/research spend"
+        },
+        {
+          "unitCode": "M2-C8-U2",
+          "standard": "AS 9",
+          "title": "Revenue Recognition",
+          "subtopicRef": "2.1-2.2 / 2.3 / 2.4-2.5 / 2.6",
+          "subtopicTitle": "Revenue recognition conditions for trade discounts, agency/resale arrangements, sale-repurchase financing, commission income and delayed delivery"
+        }
+      ]
+    },
+    {
+      "id": "MTP-Jan2025-S1-PartII-Q2",
+      "mdAnchor": "2.  The following is the Trial Balance of MN Limited as on 31.3.2024:",
+      "part": "Part II - Descriptive",
+      "questionNumber": "2",
+      "marks": 14,
+      "topics": [
+        {
+          "unitCode": "M3-C11-U1",
+          "standard": null,
+          "title": "Preparation of Financial Statements (of Companies)",
+          "subtopicRef": "1.5",
+          "subtopicTitle": "Preparation of final accounts and Schedule III financial statements for a company"
+        }
+      ]
+    },
+    {
+      "id": "MTP-Jan2025-S1-PartII-Q3",
+      "mdAnchor": "3. (a) Following information is supplied by K Ltd.:",
+      "part": "Part II - Descriptive",
+      "questionNumber": "3",
+      "marks": 14,
+      "marksNote": "(a) 4 Marks + (b) 10 Marks",
+      "topics": [
+        {
+          "unitCode": "M1-C4-U5",
+          "standard": "AS 20",
+          "title": "Earnings Per Share",
+          "subtopicRef": "5.5",
+          "subtopicTitle": "Rights issue and bonus-share EPS adjustment including theoretical ex-rights value"
+        },
+        {
+          "unitCode": "M3-C14-U0",
+          "standard": null,
+          "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)",
+          "subtopicRef": "2.3 / 3",
+          "subtopicTitle": "Reduction of share capital and journal entries for internal reconstruction"
+        }
+      ]
+    },
+    {
+      "id": "MTP-Jan2025-S1-PartII-Q4",
+      "mdAnchor": "4. The financial details of X Ltd. and Y Ltd. as on 31st March, 2024 was as under:",
+      "part": "Part II - Descriptive",
+      "questionNumber": "4",
+      "marks": 14,
+      "topics": [
+        {
+          "unitCode": "M3-C13-U0",
+          "standard": null,
+          "title": "Amalgamation of Companies",
+          "subtopicRef": "4 / 6 / 7",
+          "subtopicTitle": "Purchase consideration, realisation account and absorption accounting entries for amalgamation"
+        }
+      ]
+    },
+    {
+      "id": "MTP-Jan2025-S1-PartII-Q5",
+      "mdAnchor": "5.   Consider the following summarized Balance Sheets of subsidiary MNT Ltd.",
+      "part": "Part II - Descriptive",
+      "questionNumber": "5",
+      "marks": 14,
+      "topics": [
+        {
+          "unitCode": "M2-C10-U1",
+          "standard": "AS 21",
+          "title": "Consolidated Financial Statements",
+          "subtopicRef": "1.17",
+          "subtopicTitle": "Uniform accounting policies for consolidation and restatement of subsidiary financial statements"
+        }
+      ]
+    },
+    {
+      "id": "MTP-Jan2025-S1-PartII-Q6",
+      "mdAnchor": "6.  (a)   Briefly explain the elements of financial statements.",
+      "part": "Part II - Descriptive",
+      "questionNumber": "6",
+      "marks": 14,
+      "marksNote": "(a) 4 Marks + (b) 4 Marks + (c) 6 Marks",
+      "topics": [
+        {
+          "unitCode": "M1-C2-U0",
+          "standard": null,
+          "title": "Framework for Preparation and Presentation of Financial Statements",
+          "subtopicRef": "9",
+          "subtopicTitle": "Elements of financial statements and their definitions"
+        },
+        {
+          "unitCode": "M3-C11-U1",
+          "standard": null,
+          "title": "Preparation of Financial Statements (of Companies)",
+          "subtopicRef": "1.5",
+          "subtopicTitle": "Schedule III disclosure requirements for bonus shares and notes to accounts"
+        },
+        {
+          "unitCode": "M3-C15-U0",
+          "standard": null,
+          "title": "Accounting for Branches including Foreign Branches",
+          "subtopicRef": "7 / 7.2",
+          "subtopicTitle": "Rectification journal entries for branch expenses, depreciation, direct HO collections and remittance differences"
+        }
+      ]
+    }
+  ]
+}
