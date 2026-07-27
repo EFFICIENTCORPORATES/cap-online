@@ -1,0 +1,59 @@
+=== Final CSV written: 477 rows ===
+
+=== AS-mention cross-check: 0 rows where assigned standard(s) do not appear among regex-detected AS-numbers in text ===
+
+=== Case-study clusters spanning multiple chapters: 14 of 26 clusters ===
+  case c2aa648f: 4 rows, chapters=['M2-C10-U1', 'M2-C10-U2', 'M2-C7-U2', 'M2-C7-U3', 'M2-C8-U2']
+  case 5c708acd: 4 rows, chapters=['M1-C4-U3', 'M2-C5-U6', 'M2-C7-U4', 'M2-C9-U1']
+  case 3b2dee7b: 4 rows, chapters=['M2-C5-U2', 'M2-C5-U3', 'M2-C5-U7', 'M2-C7-U3']
+  case d27f9a5b: 4 rows, chapters=['M2-C5-U1', 'M2-C5-U2', 'M2-C5-U3', 'M2-C5-U4']
+  case dd4cd032: 3 rows, chapters=['M2-C6-U2', 'M2-C7-U1', 'M2-C8-U2']
+  case 6fce0c47: 4 rows, chapters=['M2-C5-U2', 'M2-C5-U4']
+  case 4778790b: 4 rows, chapters=['M2-C5-U1', 'M2-C5-U2']
+  case dff21db8: 4 rows, chapters=['M2-C6-U2', 'M2-C8-U2']
+  case 15ccb29c: 4 rows, chapters=['M2-C5-U2', 'M2-C5-U4']
+  case 080adcad: 4 rows, chapters=['M2-C5-U2', 'M2-C9-U1']
+  case bc3fd25b: 4 rows, chapters=['M2-C5-U2', 'M3-C11-U2']
+  case 7c0cf99a: 4 rows, chapters=['M3-C11-U2', 'M3-C14-U0']
+  case f5e7dfbc: 5 rows, chapters=['M1-C4-U4', 'M3-C11-U2']
+  case fe39296d: 4 rows, chapters=['M2-C10-U2', 'M2-C5-U3']
+
+=== Coverage by unitCode (question count) ===
+  M1-C1-U0: 38
+  M1-C2-U0: 39
+  M1-C3-U0: 32
+  M1-C4-U1: 9
+  M1-C4-U3: 12
+  M1-C4-U4: 3
+  M1-C4-U5: 2
+  M2-C10-U1: 20
+  M2-C10-U2: 4
+  M2-C5-U1: 7
+  M2-C5-U2: 33
+  M2-C5-U3: 20
+  M2-C5-U4: 7
+  M2-C5-U5: 3
+  M2-C5-U6: 5
+  M2-C5-U7: 2
+  M2-C6-U1: 9
+  M2-C6-U2: 16
+  M2-C7-U1: 7
+  M2-C7-U2: 6
+  M2-C7-U3: 12
+  M2-C7-U4: 8
+  M2-C8-U1: 12
+  M2-C8-U2: 14
+  M2-C9-U1: 15
+  M2-C9-U2: 27
+  M3-C11-U1: 20
+  M3-C11-U2: 22
+  M3-C12-U0: 40
+  M3-C13-U0: 4
+  M3-C14-U0: 19
+  M3-C15-U0: 17
+
+=== Confidence distribution ===
+{'inferred': 96, 'confident': 374, 'flagged': 7}
+
+=== Scope distribution ===
+{'single': 470, 'multiple': 7}
