@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Back Matter: Question Bank Book</title>
+<link rel="stylesheet" href="vendor/gfonts-local.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Source Sans 3', Arial, sans-serif; color: #1F2933; margin: 0; padding: 24px; max-width: 980px; margin-left: auto; margin-right: auto; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   PRINT / PAGINATION LAYER (added by qb_common.py -- not part of the
+   34 chapter files' own embedded style, which is left untouched above).
+   Page geometry is templated from book-style.json's
+   page_geometry_for_future_print_stage block -- literal values here AND
+   in the :root block below, both from the same source, since @page does
+   not reliably resolve var(). Edit book-style.json, never these numbers
+   directly. ══════════════════════════════════════════════════════════ */
+
+:root {
+  --qb-heading-font: 'Archivo', Arial, sans-serif;
+  --qb-body-font: 'Source Sans 3', Arial, sans-serif;
+  --qb-ink: #1F2933;
+  --qb-muted-ink: #5b6b7a;
+  --qb-accent: #2c3e50;
+  --qb-gold: #C9A227;
+}
+
+.qb-book-content { max-width: none; }  /* the 980px on-screen review cap doesn't apply once @page controls width */
+
+/* Running header: book title + current chapter, repeats on every physical page */
+.qb-running-header {
+  position: running(qbHeader);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--qb-heading-font);
+  font-size: 8pt;
+  letter-spacing: 0.03em;
+  color: var(--qb-muted-ink);
+  padding-bottom: 1.5mm;
+  border-bottom: 0.5pt solid #d5dae0;
+}
+.qb-running-header .qb-chapter { font-weight: 700; color: var(--qb-accent); }
+
+/* Running footer: repeats on every physical page; the page number itself
+   comes from a separate @bottom-right box using counter(page), not this
+   running element -- same split used on the strategy book and for the
+   same reason (a running element's content is fixed at the point it's
+   redefined in the flow; the page number must be evaluated per-page). */
+.qb-running-footer {
+  position: running(qbFooter);
+  font-family: var(--qb-heading-font);
+  font-size: 7.5pt;
+  color: var(--qb-muted-ink);
+  padding-top: 1.5mm;
+  border-top: 0.5pt solid #d5dae0;
+}
+
+/* Overflow-proofing: never slice a table, options list, answer paragraph,
+   or callout mid-way across a page break. The 34 chapter files' own
+   embedded style has no break-inside rules at all (confirmed) -- added
+   here rather than in the 34 files.
+
+   NOTE (2026-07-26, revised from the original version of this rule):
+   .qblock itself is deliberately NOT in this list anymore. It was
+   originally included ("never slice a QUESTION across a page break"), but
+   measured directly against the real output: with .qblock included, 312 of
+   334 content pages (93%) held exactly ONE qblock, each with ~282px of the
+   ~960px page left blank (~29% wasted) -- because break-inside:avoid on a
+   large container means the WHOLE thing jumps to the next page the moment
+   it doesn't fit the remaining space, not just the part that doesn't fit.
+   Pranav caught this directly ("each question starting from a new page...
+   space getting wasted"). The fix keeps the same guarantee at a smaller
+   grain: a single question's stem/options, a single answer paragraph, a
+   single table, and a single mistake/note box each still can never be cut
+   mid-way -- but the page break IS now allowed to fall at the natural
+   boundary BETWEEN a question's own Question / Answer / Mistakes /
+   Extraction-note blocks (they're already separate sibling <div>s inside
+   .qblock -- confirmed by reading a real qblock's markup, not guessed).
+   That's a normal, readable place for a real book to break a page; an
+   unbroken 282px gap in the middle of a chapter is not. */
+.question, .answer-block, .mistakes, .extraction-note,
+table, .note, .empty-section, .case-facts {
+  break-inside: avoid;
+}
+h1, h2 { break-after: avoid; }
+
+/* Forces each front-matter page, chapter, and back-matter page onto a
+   fresh physical page. Only meaningful once sections are concatenated --
+   a lone chapter file has nothing to break away from, so this lives here,
+   not in the 34 source files. */
+.qb-section { break-before: page; }
+
+/* ── PRINT-COST REDUCTION (added 2026-07-26, Pranav's explicit request:
+   printing cost tracks page count, so shrink both margins -- see @page
+   below -- and the chapter content's own text size). This is an ADDITIVE
+   OVERRIDE only, scoped under .qb-book-content for higher specificity than
+   the 34 files' own bare-tag rules (e.g. their plain "table{...}" rule is
+   (0,0,1) specificity; ".qb-book-content table" here is (0,1,1) and wins
+   without needing !important) -- the 34 source files themselves are never
+   edited.
+   Values come from book-style.json's typography.chapter_print_* /
+   spacing.chapter_print_* fields -- change the size there, not here. */
+.qb-book-content {
+  font-size: 9pt;
+  line-height: 1.3;
+}
+.qb-book-content h1 { font-size: 15pt; }
+.qb-book-content h2 { font-size: 12pt; }
+.qb-book-content table { font-size: 7.5pt; }
+.qb-book-content .qmeta,
+.qb-book-content .badge,
+.qb-book-content .note,
+.qb-book-content .empty-section,
+.qb-book-content .section-intro,
+.qb-book-content .extraction-note { font-size: 7pt; }
+.qb-book-content .qblock {
+  margin: 8px 0;
+  padding: 8px 12px;
+}
+
+/* Student self-notes + notebook-page-reference strip (added 2026-07-26,
+   Pranav's request) -- injected once per question by
+   qb_common.inject_student_notes(), never in the 34 source chapter files.
+   Deliberately compact: two label+blank-line rows, not a ruled box -- see
+   inject_student_notes()'s docstring for the print-cost reasoning. */
+.qb-student-notes {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2mm;
+  margin-top: 2mm;
+  padding-top: 1.5mm;
+  border-top: 0.5pt dashed #c7cdd3;
+  font-family: var(--qb-heading-font);
+  font-size: 7pt;
+  color: var(--qb-muted-ink);
+  break-inside: avoid;
+}
+.qb-sn-label, .qb-sn-notebook { flex-shrink: 0; white-space: nowrap; }
+.qb-sn-line { flex: 1 1 40mm; min-width: 20mm; border-bottom: 0.5pt dotted #b5c0ca; }
+.qb-sn-notebook-line { flex: 0 0 18mm; border-bottom: 0.5pt dotted #b5c0ca; }
+
+/* Study-material cross-reference banner (added 2026-07-26, Pranav's
+   request) -- one line at the top of each chapter, pointing to the
+   matching study-material chapter code (e.g. "M2-C5-U1"), so a student can
+   go straight from a Question Bank chapter to the right study-material
+   chapter. Shown once per chapter here, not in the running header -- see
+   page_shell()'s docstring in this file for why. */
+.qb-study-ref {
+  font-family: var(--qb-heading-font);
+  font-size: 8.5pt;
+  color: var(--qb-muted-ink);
+  letter-spacing: 0.02em;
+  margin-bottom: 3mm;
+}
+.qb-study-ref strong { color: var(--qb-accent); }
+
+@page {
+  size: 177.8mm 254mm;
+  margin: 6mm 6mm 6mm 6mm;
+
+  @top-center    { content: element(qbHeader); }
+  @bottom-center { content: element(qbFooter); }
+  @bottom-right  {
+    content: counter(page);
+    font-family: var(--qb-heading-font);
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--qb-ink);
+  }
+}
+
+
+.qb-title-page {
+  /* Content-box height available on one physical page is page_height minus
+     top+bottom margins (254mm - 20mm - 20mm = 214mm, from book-style.json).
+     min-height was originally 220mm -- 6mm TALLER than that, which is
+     exactly what caused a confirmed bug (2026-07-26): flex containers do
+     not fragment predictably across a CSS page break, so the overflow
+     silently scattered this page's own children (author name, credential
+     line) onto a LATER physical page instead of visibly overflowing on
+     page 1 where it would have been obvious. Kept safely under 214mm, plus
+     break-inside: avoid as a second line of defence -- if it ever slightly
+     overflows again (e.g. a future font-metric change), the whole block
+     moves to the next page intact rather than fragmenting across two. */
+  min-height: 190mm;
+  break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20mm 0 12mm;
+  text-align: center;
+}
+.qb-tp-series {
+  font-family: var(--qb-heading-font);
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--qb-muted-ink);
+}
+.qb-tp-title {
+  font-family: var(--qb-heading-font);
+  font-size: 26pt;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--qb-ink);
+  margin: 10mm 0 4mm;
+}
+.qb-tp-subtitle {
+  font-family: var(--qb-body-font);
+  font-size: 12pt;
+  color: var(--qb-muted-ink);
+  margin-bottom: 8mm;
+}
+.qb-tp-rule { height: 1.5pt; background: var(--qb-gold); width: 18mm; margin: 0 auto 6mm; }
+.qb-tp-author { font-family: var(--qb-heading-font); font-size: 13pt; font-weight: 700; color: var(--qb-ink); }
+.qb-tp-credential { font-family: var(--qb-body-font); font-size: 9.5pt; color: var(--qb-muted-ink); margin-top: 1.5mm; }
+.qb-tp-publisher { font-family: var(--qb-heading-font); font-size: 8.5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--qb-muted-ink); }
+
+.qb-copyright-page { padding-top: 55mm; font-size: 9pt; color: var(--qb-muted-ink); line-height: 1.75; }
+.qb-copyright-page p { margin-bottom: 4mm; }
+.qb-copyright-page strong { color: var(--qb-ink); }
+
+.qb-page-title {
+  font-family: var(--qb-heading-font);
+  font-size: 17pt;
+  font-weight: 800;
+  color: var(--qb-ink);
+  margin-bottom: 6mm;
+}
+
+.qb-howto p, .qb-howto li { font-family: var(--qb-body-font); font-size: 10pt; line-height: 1.65; color: var(--qb-ink); }
+.qb-howto h3 {
+  font-family: var(--qb-heading-font);
+  font-size: 10.5pt;
+  font-weight: 700;
+  margin: 6mm 0 2mm;
+  color: var(--qb-accent);
+}
+.qb-howto ul { margin: 2mm 0 4mm 5mm; padding-left: 4mm; }
+.qb-howto li { margin-bottom: 1.5mm; }
+.qb-legend-swatch {
+  display: inline-block;
+  padding: 1pt 6pt;
+  border-radius: 4pt;
+  font-size: 8.5pt;
+  font-weight: 700;
+  margin-right: 4mm;
+}
+.qb-legend-examiner { background: #fff3e0; border: 1px solid #e0b46c; }
+.qb-legend-author { background: #fdf1f1; border: 1px solid #d98a8a; }
+
+.qb-toc-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 2mm;
+  margin: 0 0 3mm;
+  font-family: var(--qb-heading-font);
+  font-size: 9.5pt;
+  break-inside: avoid;
+}
+.qb-toc-entry .qb-toc-num { color: var(--qb-muted-ink); width: 8mm; flex-shrink: 0; }
+.qb-toc-entry a { color: var(--qb-ink); text-decoration: none; font-weight: 600; }
+.qb-toc-ref {
+  font-family: var(--qb-body-font);
+  font-size: 8pt;
+  color: var(--qb-muted-ink);
+  background: #eef1f4;
+  border-radius: 3pt;
+  padding: 0.5pt 4pt;
+  flex-shrink: 0;
+}
+.qb-toc-leader { flex: 1; border-bottom: 1px dotted #b5c0ca; margin-bottom: 1.2pt; }
+.qb-toc-page { font-family: var(--qb-heading-font); font-weight: 700; font-size: 9.5pt; color: var(--qb-ink); }
+
+.qb-bio p { font-family: var(--qb-body-font); font-size: 10pt; line-height: 1.7; color: var(--qb-ink); margin-bottom: 3mm; }
+
+</style>
+</head>
+<body>
+<div class="qb-section" id="qb-author">
+
+<h2 class="qb-page-title">About the Author</h2>
+<div class="qb-bio">
+<p>CA Pranav Pratik Tulshyan holds All India Rank 1 in both Foundation (188/200, January 2015) and Intermediate (544/700, February 2016): the only student in the 70-year history of ICAI to achieve this from outside India, across both examinations. He holds AIR 5 in CA Finals. He completed his articleship at Ernst &amp; Young, Gurgaon, and has worked across IOCL and the Ministry of Petroleum and Natural Gas, Government of India. He now teaches CA Inter Accounts at VC Gurukul, Noida.</p>
+<p>This Question Bank was built the same way his Advanced Accounts classes are taught: every question placed exactly where it belongs, nothing left to guesswork about what's actually been examined.</p>
+</div>
+
+</div>
+<div class="qb-section" id="qb-closing">
+
+<h2 class="qb-page-title">A Closing Note</h2>
+<div class="qb-bio">
+<p>This is the first edition of this book. It exists because ten sittings' worth of questions, scattered across separate PDFs, is a genuinely painful way to revise a chapter, and there was no reason that pain needed to stay.</p>
+<p>It will get better with every edition; more sittings, more chapters fully cross-checked, corrections from students who actually use it in their revision. If you found an error, or a question that's misfiled, or a topic tag that looks wrong, the single most useful thing you can do is email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference. It gets fixed, and the next student after you never hits it.</p>
+<p>Good luck with your attempt.</p>
+</div>
+
+</div>
+</body>
+</html>

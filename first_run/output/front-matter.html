@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Front Matter: Question Bank Book</title>
+<link rel="stylesheet" href="vendor/gfonts-local.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Source Sans 3', Arial, sans-serif; color: #1F2933; margin: 0; padding: 24px; max-width: 980px; margin-left: auto; margin-right: auto; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   PRINT / PAGINATION LAYER (added by qb_common.py -- not part of the
+   34 chapter files' own embedded style, which is left untouched above).
+   Page geometry is templated from book-style.json's
+   page_geometry_for_future_print_stage block -- literal values here AND
+   in the :root block below, both from the same source, since @page does
+   not reliably resolve var(). Edit book-style.json, never these numbers
+   directly. ══════════════════════════════════════════════════════════ */
+
+:root {
+  --qb-heading-font: 'Archivo', Arial, sans-serif;
+  --qb-body-font: 'Source Sans 3', Arial, sans-serif;
+  --qb-ink: #1F2933;
+  --qb-muted-ink: #5b6b7a;
+  --qb-accent: #2c3e50;
+  --qb-gold: #C9A227;
+}
+
+.qb-book-content { max-width: none; }  /* the 980px on-screen review cap doesn't apply once @page controls width */
+
+/* Running header: book title + current chapter, repeats on every physical page */
+.qb-running-header {
+  position: running(qbHeader);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--qb-heading-font);
+  font-size: 8pt;
+  letter-spacing: 0.03em;
+  color: var(--qb-muted-ink);
+  padding-bottom: 1.5mm;
+  border-bottom: 0.5pt solid #d5dae0;
+}
+.qb-running-header .qb-chapter { font-weight: 700; color: var(--qb-accent); }
+
+/* Running footer: repeats on every physical page; the page number itself
+   comes from a separate @bottom-right box using counter(page), not this
+   running element -- same split used on the strategy book and for the
+   same reason (a running element's content is fixed at the point it's
+   redefined in the flow; the page number must be evaluated per-page). */
+.qb-running-footer {
+  position: running(qbFooter);
+  font-family: var(--qb-heading-font);
+  font-size: 7.5pt;
+  color: var(--qb-muted-ink);
+  padding-top: 1.5mm;
+  border-top: 0.5pt solid #d5dae0;
+}
+
+/* Overflow-proofing: never slice a table, options list, answer paragraph,
+   or callout mid-way across a page break. The 34 chapter files' own
+   embedded style has no break-inside rules at all (confirmed) -- added
+   here rather than in the 34 files.
+
+   NOTE (2026-07-26, revised from the original version of this rule):
+   .qblock itself is deliberately NOT in this list anymore. It was
+   originally included ("never slice a QUESTION across a page break"), but
+   measured directly against the real output: with .qblock included, 312 of
+   334 content pages (93%) held exactly ONE qblock, each with ~282px of the
+   ~960px page left blank (~29% wasted) -- because break-inside:avoid on a
+   large container means the WHOLE thing jumps to the next page the moment
+   it doesn't fit the remaining space, not just the part that doesn't fit.
+   Pranav caught this directly ("each question starting from a new page...
+   space getting wasted"). The fix keeps the same guarantee at a smaller
+   grain: a single question's stem/options, a single answer paragraph, a
+   single table, and a single mistake/note box each still can never be cut
+   mid-way -- but the page break IS now allowed to fall at the natural
+   boundary BETWEEN a question's own Question / Answer / Mistakes /
+   Extraction-note blocks (they're already separate sibling <div>s inside
+   .qblock -- confirmed by reading a real qblock's markup, not guessed).
+   That's a normal, readable place for a real book to break a page; an
+   unbroken 282px gap in the middle of a chapter is not. */
+.question, .answer-block, .mistakes, .extraction-note,
+table, .note, .empty-section, .case-facts {
+  break-inside: avoid;
+}
+h1, h2 { break-after: avoid; }
+
+/* Forces each front-matter page, chapter, and back-matter page onto a
+   fresh physical page. Only meaningful once sections are concatenated --
+   a lone chapter file has nothing to break away from, so this lives here,
+   not in the 34 source files. */
+.qb-section { break-before: page; }
+
+/* ── PRINT-COST REDUCTION (added 2026-07-26, Pranav's explicit request:
+   printing cost tracks page count, so shrink both margins -- see @page
+   below -- and the chapter content's own text size). This is an ADDITIVE
+   OVERRIDE only, scoped under .qb-book-content for higher specificity than
+   the 34 files' own bare-tag rules (e.g. their plain "table{...}" rule is
+   (0,0,1) specificity; ".qb-book-content table" here is (0,1,1) and wins
+   without needing !important) -- the 34 source files themselves are never
+   edited.
+   Values come from book-style.json's typography.chapter_print_* /
+   spacing.chapter_print_* fields -- change the size there, not here. */
+.qb-book-content {
+  font-size: 9pt;
+  line-height: 1.3;
+}
+.qb-book-content h1 { font-size: 15pt; }
+.qb-book-content h2 { font-size: 12pt; }
+.qb-book-content table { font-size: 7.5pt; }
+.qb-book-content .qmeta,
+.qb-book-content .badge,
+.qb-book-content .note,
+.qb-book-content .empty-section,
+.qb-book-content .section-intro,
+.qb-book-content .extraction-note { font-size: 7pt; }
+.qb-book-content .qblock {
+  margin: 8px 0;
+  padding: 8px 12px;
+}
+
+/* Student self-notes + notebook-page-reference strip (added 2026-07-26,
+   Pranav's request) -- injected once per question by
+   qb_common.inject_student_notes(), never in the 34 source chapter files.
+   Deliberately compact: two label+blank-line rows, not a ruled box -- see
+   inject_student_notes()'s docstring for the print-cost reasoning. */
+.qb-student-notes {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2mm;
+  margin-top: 2mm;
+  padding-top: 1.5mm;
+  border-top: 0.5pt dashed #c7cdd3;
+  font-family: var(--qb-heading-font);
+  font-size: 7pt;
+  color: var(--qb-muted-ink);
+  break-inside: avoid;
+}
+.qb-sn-label, .qb-sn-notebook { flex-shrink: 0; white-space: nowrap; }
+.qb-sn-line { flex: 1 1 40mm; min-width: 20mm; border-bottom: 0.5pt dotted #b5c0ca; }
+.qb-sn-notebook-line { flex: 0 0 18mm; border-bottom: 0.5pt dotted #b5c0ca; }
+
+/* Study-material cross-reference banner (added 2026-07-26, Pranav's
+   request) -- one line at the top of each chapter, pointing to the
+   matching study-material chapter code (e.g. "M2-C5-U1"), so a student can
+   go straight from a Question Bank chapter to the right study-material
+   chapter. Shown once per chapter here, not in the running header -- see
+   page_shell()'s docstring in this file for why. */
+.qb-study-ref {
+  font-family: var(--qb-heading-font);
+  font-size: 8.5pt;
+  color: var(--qb-muted-ink);
+  letter-spacing: 0.02em;
+  margin-bottom: 3mm;
+}
+.qb-study-ref strong { color: var(--qb-accent); }
+
+@page {
+  size: 177.8mm 254mm;
+  margin: 6mm 6mm 6mm 6mm;
+
+  @top-center    { content: element(qbHeader); }
+  @bottom-center { content: element(qbFooter); }
+  @bottom-right  {
+    content: counter(page);
+    font-family: var(--qb-heading-font);
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--qb-ink);
+  }
+}
+
+
+.qb-title-page {
+  /* Content-box height available on one physical page is page_height minus
+     top+bottom margins (254mm - 20mm - 20mm = 214mm, from book-style.json).
+     min-height was originally 220mm -- 6mm TALLER than that, which is
+     exactly what caused a confirmed bug (2026-07-26): flex containers do
+     not fragment predictably across a CSS page break, so the overflow
+     silently scattered this page's own children (author name, credential
+     line) onto a LATER physical page instead of visibly overflowing on
+     page 1 where it would have been obvious. Kept safely under 214mm, plus
+     break-inside: avoid as a second line of defence -- if it ever slightly
+     overflows again (e.g. a future font-metric change), the whole block
+     moves to the next page intact rather than fragmenting across two. */
+  min-height: 190mm;
+  break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20mm 0 12mm;
+  text-align: center;
+}
+.qb-tp-series {
+  font-family: var(--qb-heading-font);
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--qb-muted-ink);
+}
+.qb-tp-title {
+  font-family: var(--qb-heading-font);
+  font-size: 26pt;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--qb-ink);
+  margin: 10mm 0 4mm;
+}
+.qb-tp-subtitle {
+  font-family: var(--qb-body-font);
+  font-size: 12pt;
+  color: var(--qb-muted-ink);
+  margin-bottom: 8mm;
+}
+.qb-tp-rule { height: 1.5pt; background: var(--qb-gold); width: 18mm; margin: 0 auto 6mm; }
+.qb-tp-author { font-family: var(--qb-heading-font); font-size: 13pt; font-weight: 700; color: var(--qb-ink); }
+.qb-tp-credential { font-family: var(--qb-body-font); font-size: 9.5pt; color: var(--qb-muted-ink); margin-top: 1.5mm; }
+.qb-tp-publisher { font-family: var(--qb-heading-font); font-size: 8.5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--qb-muted-ink); }
+
+.qb-copyright-page { padding-top: 55mm; font-size: 9pt; color: var(--qb-muted-ink); line-height: 1.75; }
+.qb-copyright-page p { margin-bottom: 4mm; }
+.qb-copyright-page strong { color: var(--qb-ink); }
+
+.qb-page-title {
+  font-family: var(--qb-heading-font);
+  font-size: 17pt;
+  font-weight: 800;
+  color: var(--qb-ink);
+  margin-bottom: 6mm;
+}
+
+.qb-howto p, .qb-howto li { font-family: var(--qb-body-font); font-size: 10pt; line-height: 1.65; color: var(--qb-ink); }
+.qb-howto h3 {
+  font-family: var(--qb-heading-font);
+  font-size: 10.5pt;
+  font-weight: 700;
+  margin: 6mm 0 2mm;
+  color: var(--qb-accent);
+}
+.qb-howto ul { margin: 2mm 0 4mm 5mm; padding-left: 4mm; }
+.qb-howto li { margin-bottom: 1.5mm; }
+.qb-legend-swatch {
+  display: inline-block;
+  padding: 1pt 6pt;
+  border-radius: 4pt;
+  font-size: 8.5pt;
+  font-weight: 700;
+  margin-right: 4mm;
+}
+.qb-legend-examiner { background: #fff3e0; border: 1px solid #e0b46c; }
+.qb-legend-author { background: #fdf1f1; border: 1px solid #d98a8a; }
+
+.qb-toc-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 2mm;
+  margin: 0 0 3mm;
+  font-family: var(--qb-heading-font);
+  font-size: 9.5pt;
+  break-inside: avoid;
+}
+.qb-toc-entry .qb-toc-num { color: var(--qb-muted-ink); width: 8mm; flex-shrink: 0; }
+.qb-toc-entry a { color: var(--qb-ink); text-decoration: none; font-weight: 600; }
+.qb-toc-ref {
+  font-family: var(--qb-body-font);
+  font-size: 8pt;
+  color: var(--qb-muted-ink);
+  background: #eef1f4;
+  border-radius: 3pt;
+  padding: 0.5pt 4pt;
+  flex-shrink: 0;
+}
+.qb-toc-leader { flex: 1; border-bottom: 1px dotted #b5c0ca; margin-bottom: 1.2pt; }
+.qb-toc-page { font-family: var(--qb-heading-font); font-weight: 700; font-size: 9.5pt; color: var(--qb-ink); }
+
+.qb-bio p { font-family: var(--qb-body-font); font-size: 10pt; line-height: 1.7; color: var(--qb-ink); margin-bottom: 3mm; }
+
+</style>
+</head>
+<body>
+<div class="qb-section" id="qb-title">
+
+<div class="qb-title-page">
+  <div><p class="qb-tp-series">CA Intermediate &middot; Advanced Accounts</p></div>
+  <div>
+    <h1 class="qb-tp-title">The Complete<br>Question Bank</h1>
+    <p class="qb-tp-subtitle">Every MTP, RTP, and PYQ question, mapped to its exact chapter and topic</p>
+    <div class="qb-tp-rule"></div>
+    <p class="qb-tp-author">CA Pranav Pratik Tulshyan</p>
+    <p class="qb-tp-credential">AIR 1 (Foundation) &middot; AIR 1 (Intermediate)</p>
+  </div>
+  <div><p class="qb-tp-publisher">VC Gurukul &middot; Noida</p></div>
+</div>
+
+</div>
+<div class="qb-section" id="qb-copyright">
+
+<div class="qb-copyright-page">
+  <p>&copy; 2026 CA Pranav Pratik Tulshyan. All rights reserved.</p>
+  <p>Published by VC Gurukul, Noida.</p>
+  <p>No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without the prior written permission of the author.</p>
+  <p><strong>Disclaimer: Source Material.</strong> Questions are drawn from ICAI's own published MTP, RTP, and PYQ papers and their official Suggested Answers / Answer Keys. Examiner's Comments, where quoted, are taken from ICAI's published "Examiners' Comments on the Performance of the Examinees" documents where one exists for that sitting.</p>
+  <p><strong>Disclaimer: Accuracy.</strong> This is the first edition of this book, assembled with AI assistance and reviewed as carefully as we could manage, but it has not been independently audited question-by-question. If you spot an error, please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference so it can be corrected in the next edition.</p>
+  <p><strong>Disclaimer: Author's Notes.</strong> Any note labelled "Author's Note" is the author's own identification of a likely student pitfall, not an official ICAI finding, and may not apply in every case. The label on every note in this book tells you which kind it is.</p>
+  <p style="margin-top:8mm; padding-top:3mm; border-top:0.5pt solid #dde3e8; font-size:8pt;">First published 2026 &middot; VC Gurukul, Noida.</p>
+</div>
+
+</div>
+<div class="qb-section" id="qb-howto-page">
+
+<h2 class="qb-page-title">How to Use This Book</h2>
+<div class="qb-howto">
+<p>This book collects every Advanced Accounts question from 10 recent ICAI sittings (MTP Jan 2026 Set 1 &amp; 2, MTP May 2026 Set 1 &amp; 2, PYQ Jan 2026, PYQ May 2026, PYQ Sep 2025, RTP Jan 2026, RTP May 2026, RTP Sep 2025), 275 questions in total, and organises them by chapter, in the same teaching sequence your classes follow, not by exam sitting. Instead of hunting through ten separate papers to find every question on AS 2, or Amalgamation, or Branch Accounting, you go to that one chapter here and every question that has ever tested it, across all ten sittings, is already in one place.</p>
+
+<h3>Chapter order</h3>
+<p>Chapters run in teaching sequence, the same order your classes cover them in, starting with the Framework and foundational standards and ending with Branch Accounting. Use the Table of Contents to jump straight to the chapter you're revising.</p>
+
+<h3>Inside every chapter</h3>
+<p>Each chapter is split into three sections:</p>
+<ul>
+  <li><strong>I. MCQs</strong>: standalone and case-scenario multiple choice questions.</li>
+  <li><strong>II. Descriptive</strong>: full descriptive or scenario questions where this chapter is the only topic being tested.</li>
+  <li><strong>III. Integrated</strong>: questions where this chapter's judgment is one part of a larger question that also tests another standard. An empty Section III is normal for many chapters, not a mistake; most multi-topic-looking questions are deliberately split so each topic gets its own clean entry in its own chapter, so genuinely combined questions are the rarer case.</li>
+</ul>
+
+<h3>What's attached to every question</h3>
+<ul>
+  <li><strong>Source and marks</strong>: exactly which sitting, question number, and mark weight it carried.</li>
+  <li><strong>Topic tag</strong>: the specific syllabus sub-topic it maps to (e.g. "AS 2 (1.4)"), so you can cross-reference against your own notes or concept book.</li>
+  <li><strong>Official answer</strong>: the ICAI Suggested Answer / Answer Key, verbatim.</li>
+  <li><strong>A mistake note</strong>, labelled as one of two kinds:</li>
+</ul>
+<p>
+  <span class="qb-legend-swatch qb-legend-examiner">Examiner's Comment</span> a real quote from ICAI's own published feedback on that sitting, where one exists.
+</p>
+<p>
+  <span class="qb-legend-swatch qb-legend-author">Author's Note</span> the author's own identification of a likely pitfall, not an official ICAI finding, and may not apply in every case.
+</p>
+<p>The label on every note tells you which one you're reading. Never blurred.</p>
+
+<h3>A first edition, said plainly</h3>
+<p>This book was assembled with AI assistance from the source PDFs and reviewed carefully, but not independently audited question by question. If something looks wrong, a figure, an answer, a topic tag, please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference. It will be fixed in the next edition, and you'll have helped every student who uses this book after you.</p>
+</div>
+
+</div>
+<div class="qb-section" id="qb-toc">
+
+<h2 class="qb-page-title">Table of Contents</h2>
+<div class="qb-toc-list" id="qb-toc-list">
+<div class="qb-toc-entry"><span class="qb-toc-num">1.</span><a href="#intro-to-as">Intro to AS</a><span class="qb-toc-ref">M1-C1-U0</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="intro-to-as">7</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">2.</span><a href="#applicability-of-as">Applicability of AS</a><span class="qb-toc-ref">M1-C3-U0</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="applicability-of-as">10</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">3.</span><a href="#framework">Framework for Preparation and Presentation of Financial Statements</a><span class="qb-toc-ref">M1-C2-U0</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="framework">13</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">4.</span><a href="#as02">AS 2: Valuation of Inventories</a><span class="qb-toc-ref">M2-C5-U1</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as02">17</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">5.</span><a href="#as10">AS 10: Property, Plant and Equipment</a><span class="qb-toc-ref">M2-C5-U2</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as10">35</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">6.</span><a href="#as26">AS 26: Intangible Assets</a><span class="qb-toc-ref">M2-C5-U6</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as26">50</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">7.</span><a href="#as16">AS 16: Borrowing Costs</a><span class="qb-toc-ref">M2-C5-U4</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as16">55</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">8.</span><a href="#as19">AS 19: Leases</a><span class="qb-toc-ref">M2-C5-U5</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as19">82</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">9.</span><a href="#as28">AS 28: Impairment of Assets</a><span class="qb-toc-ref">M2-C5-U7</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as28">91</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">10.</span><a href="#as13">AS 13: Accounting for Investments</a><span class="qb-toc-ref">M2-C5-U3</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as13">97</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">11.</span><a href="#as29">AS 29: Provisions, Contingent Liabilities and Contingent Assets</a><span class="qb-toc-ref">M2-C6-U2</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as29">113</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">12.</span><a href="#as15">AS 15: Employee Benefits</a><span class="qb-toc-ref">M2-C6-U1</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as15">120</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">13.</span><a href="#as04">AS 4: Contingencies and Events Occurring After the Balance Sheet Date</a><span class="qb-toc-ref">M2-C7-U1</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as04">126</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">14.</span><a href="#as05">AS 5: Net Profit or Loss, Prior Period Items and Changes in Accounting Policies</a><span class="qb-toc-ref">M2-C7-U2</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as05">131</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">15.</span><a href="#as11">AS 11: The Effects of Changes in Foreign Exchange Rates</a><span class="qb-toc-ref">M2-C7-U3</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as11">137</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">16.</span><a href="#as09">AS 9: Revenue Recognition</a><span class="qb-toc-ref">M2-C8-U2</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as09">144</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">17.</span><a href="#as07">AS 7: Construction Contracts</a><span class="qb-toc-ref">M2-C8-U1</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as07">157</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">18.</span><a href="#as12">AS 12: Accounting for Government Grants</a><span class="qb-toc-ref">M2-C9-U1</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as12">162</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">19.</span><a href="#as22">AS 22: Accounting for Taxes on Income</a><span class="qb-toc-ref">M2-C7-U4</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as22">173</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">20.</span><a href="#as20">AS 20: Earnings Per Share</a><span class="qb-toc-ref">M1-C4-U5</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as20">177</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">21.</span><a href="#as01">AS 1: Disclosure of Accounting Policies</a><span class="qb-toc-ref">M1-C4-U1</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as01">182</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">22.</span><a href="#financial-statements">Financial Statements of Companies (Schedule III)</a><span class="qb-toc-ref">M3-C11-U1</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="financial-statements">186</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">23.</span><a href="#cash-flow-statement">Cash Flow Statement (AS 3)</a><span class="qb-toc-ref">M1-C4-U2</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="cash-flow-statement">214</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">24.</span><a href="#as17">AS 17: Segment Reporting</a><span class="qb-toc-ref">M1-C4-U3</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as17">238</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">25.</span><a href="#as18">AS 18: Related Party Disclosures</a><span class="qb-toc-ref">M1-C4-U4</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as18">245</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">26.</span><a href="#as24">AS 24: Discontinuing Operations</a><span class="qb-toc-ref">M1-C4-U6</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as24">250</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">27.</span><a href="#as21">AS 21: Consolidated Financial Statements</a><span class="qb-toc-ref">M2-C10-U1</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as21">257</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">28.</span><a href="#as23">AS 23: Accounting for Investments in Associates in CFS</a><span class="qb-toc-ref">M2-C10-U2</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as23">271</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">29.</span><a href="#as27">AS 27: Financial Reporting of Interests in Joint Ventures</a><span class="qb-toc-ref">M2-C10-U3</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as27">278</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">30.</span><a href="#as14">AS 14: Amalgamation of Companies</a><span class="qb-toc-ref">M3-C13-U0</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as14">281</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">31.</span><a href="#as25">AS 25: Interim Financial Reporting</a><span class="qb-toc-ref">M1-C4-U7</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="as25">300</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">32.</span><a href="#buyback">Buy-back of Securities</a><span class="qb-toc-ref">M3-C12-U0</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="buyback">305</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">33.</span><a href="#internal-reconstruction">Internal Reconstruction</a><span class="qb-toc-ref">M3-C14-U0</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="internal-reconstruction">325</span></div>
+<div class="qb-toc-entry"><span class="qb-toc-num">34.</span><a href="#branch-accounting">Accounting for Branches Including Foreign Branches</a><span class="qb-toc-ref">M3-C15-U0</span><span class="qb-toc-leader"></span><span class="qb-toc-page" data-target-id="branch-accounting">351</span></div>
+</div>
+
+</div>
+</body>
+</html>
