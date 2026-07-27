@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AS 16 — Borrowing Costs</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;margin:24px;max-width:980px;margin-left:auto;margin-right:auto;color:#222;background:#fff;line-height:1.5;}
+h1{font-size:24px;margin-bottom:4px;}
+h2{font-size:19px;margin-top:44px;border-bottom:2px solid #333;padding-bottom:6px;}
+.note{background:#fff8e1;border:1px solid #e0c46c;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;}
+.empty-section{background:#f0f0f0;border:1px dashed #999;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;color:#555;font-style:italic;}
+.section-intro{font-size:13.5px;color:#444;margin-top:-6px;}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:12.5px;}
+th,td{border:1px solid #999;padding:5px 7px;text-align:left;vertical-align:top;}
+th{background:#2c3e50;color:#fff;}
+.qblock{border:1px solid #ccc;border-radius:8px;padding:14px 18px;margin:18px 0;background:#fdfdfd;}
+.qblock.flagged{border-color:#d98a8a;background:#fffaf7;}
+.qmeta{font-size:12px;color:#555;margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed #ccc;}
+.qmeta .src{font-weight:bold;color:#2c3e50;}
+.qmeta .marks{font-weight:bold;}
+.badge{display:inline-block;background:#fff3e0;border:1px solid #e0b46c;border-radius:10px;padding:1px 8px;font-size:11px;margin-left:6px;}
+.badge.icai{background:#e0f0ff;border-color:#6ca8e0;}
+.question{margin:10px 0;}
+.answer-block{margin:10px 0;background:#eafbea;padding:8px 12px;border-radius:6px;}
+.case-facts{background:#f5f5fb;border-left:3px solid #8888c0;padding:6px 12px;margin-bottom:8px;font-size:13px;}
+.mistakes{margin:10px 0;padding:8px 12px;border-radius:6px;font-size:13.5px;border-left:3px solid #999;}
+.mistakes.icai{background:#fff3e0;border-left-color:#e0b46c;color:#5a3d0a;}
+.mistakes.synth{background:#fdf1f1;border-left-color:#d98a8a;color:#7a2f2f;}
+.mistakes .prov{font-style:italic;color:#666;font-size:11.5px;display:block;margin-top:4px;}
+.na{color:#999;font-style:italic;}
+.notebook-ref{margin-top:10px;font-size:12.5px;color:#444;border-top:1px dashed #ccc;padding-top:6px;}
+.notebook-ref .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:160px;}
+.self-notes{margin-top:8px;border:1px solid #ccc;background:#fff;border-radius:6px;padding:8px 12px;}
+.self-notes .notes-lines{margin-top:4px;}
+.self-notes .dotted-line{height:22px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+.tag-placeholder{margin-top:8px;font-size:12.5px;color:#444;}
+.tag-placeholder .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:220px;}
+.revision-phase{margin-top:8px;font-size:12.5px;color:#444;}
+.revision-phase .box{display:inline-block;border:1px solid #888;width:12px;height:12px;margin:0 3px 0 10px;vertical-align:middle;}
+.brand-header{text-align:center;font-size:11px;color:#777;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:18px;letter-spacing:.3px;}
+.brand-header strong{color:#2c3e50;}
+.brand-footer{text-align:center;font-size:11px;color:#777;border-top:1px solid #eee;padding-top:10px;margin-top:36px;line-height:1.8;}
+.brand-footer strong{color:#2c3e50;}
+.error-register{page-break-before:always;break-before:page;margin-top:40px;}
+.error-register h2{margin-top:8px;}
+.error-register h3{font-size:15px;color:#444;margin-top:28px;}
+.error-register .dotted-line{height:34px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+</style>
+</head>
+<body>
+
+<div class="brand-header">
+<strong>Pranav Bhaiya</strong> &middot; The Newton of Accounts &middot; AIR 1-1-5<br>
+Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma, Not Results
+</div>
+
+<h1>AS 16 — Borrowing Costs</h1>
+<p>Every MTP/RTP/PYQ question that tests this chapter, collected in one place, with official answers and topic tags — so you can practise every question this topic has been examined with, without hunting through separate papers.</p>
+
+<div class="note">
+<strong>A note on accuracy (please read):</strong> This is the first edition of this book, assembled with AI assistance and reviewed as carefully as we could manage, but it has not been independently audited question-by-question. If you spot an error &mdash; a wrong figure, a wrong answer, anything that looks off &mdash; please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference so it can be corrected in the next edition.
+</div>
+
+<div class="note">
+<strong>Scope of this book (8 questions):</strong> Covers 10 sittings: MTP Jan2026 Set1, MTP Jan2026 Set2, MTP May2026 Set1, MTP May2026 Set2, PYQ Jan2026, PYQ May2026, PYQ Sep2025, RTP Jan2026, RTP May2026, RTP Sep2025. MCQs on this chapter are deliberately not included here — practise those on the dedicated MCQ platform; this book is for descriptive/scenario practice with full worked answers.
+</div>
+
+<div class="note">
+<strong>How this book is organised:</strong> Two sections — <strong>I. Descriptive (pure AS 16)</strong> and <strong>II. Integrated</strong> (questions where AS 16 is one part of a larger question that also tests another standard). An empty Section II for a chapter is normal and expected, not a mistake — most multi-topic-looking questions are split so each topic gets its own clean entry, so genuinely combined questions are the rarer case. Each answer includes either a real <strong>Examiner's Comment</strong> (tan/orange box, quoted from ICAI's own published feedback, where one exists for that sitting) or an <strong>Author's Note</strong> (pale pink box, a likely pitfall identified by the author, not an official ICAI finding, and may not apply in every case) &mdash; see <strong>How to Read this Book.md</strong> for the full key to every colour and symbol used.
+</div>
+
+<h2>I. Descriptive &amp; Scenario-Based Questions (pure AS 16)</h2>
+<p class='section-intro'>Full descriptive/scenario questions where this chapter is the sole topic tested (after independent-question splitting).</p>
+
+<div class="qblock" id="M2C5U4-001">
+  <div class="qmeta">
+    <span class="src">MTP January 2026 Set 1</span> &middot;
+    <span class="qno">Q1(b)</span> &middot;
+    <span class="marks">Marks: 7</span> &middot;
+    <span class="marks">Approx Time: 13 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U4 : AS 16 &mdash; Borrowing Costs / ICAI Study Mat Topic No : 4.5</span>
+    <span class="badge">Compulsory</span>
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>On 1st April, 2024, A Limited started the construction of an Office Building (qualifying asset; land is a separate asset, not part of the qualifying asset). For construction, the company raised a specific loan of ₹14 lakhs from a Bank at 12% p.a. Interest income of ₹15,000 was earned on this loan while held in anticipation of payments. The company's other outstanding loans on 1st April, 2024: ₹20,00,000 at 15%; ₹30,00,000 at 8%. Construction started 1st April, 2024, completed 31st January, 2025 (ready for intended use). Payments to the contractor: 1st April 2024 ₹4,00,000; 1st August 2024 ₹10,00,000; 1st December 2024 ₹25,00,000; 31st January 2025 ₹5,00,000. Life of building 20 years, straight line depreciation. Required: (i) borrowing cost to be capitalized; (ii) initial journal entry (interest paid at year end); (iii) depreciation for the year ending 31st March, 2025; (iv) carrying value of building as on 31st March, 2025.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p><strong>(i) Weighted average accumulated expenses and borrowing cost capitalized:</strong></p>
+<table><thead><tr><th>Date</th><th>Amount</th><th>Source</th><th>Calculation</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>1 Apr 2024</td><td>4,00,000</td><td>Specific</td><td>4,00,000 × 12% × 10/12</td><td>40,000</td></tr>
+<tr><td>1 Aug 2024</td><td>10,00,000</td><td>Specific</td><td>10,00,000 × 12% × 10/12</td><td>1,00,000</td></tr>
+<tr><td>1 Dec 2024</td><td>25,00,000</td><td>General (10.8% w. avg.)</td><td>25,00,000 × 10.8% × 2/12</td><td>45,000</td></tr>
+<tr><td>31 Jan 2025</td><td>5,00,000</td><td>General</td><td>0 months remaining</td><td>Nil</td></tr>
+<tr><td colspan="4"><strong>Subtotal</strong></td><td><strong>1,85,000</strong></td></tr>
+<tr><td colspan="4">Less: interest income on specific borrowing</td><td>(15,000)</td></tr>
+<tr><td colspan="4"><strong>Total borrowing cost to be capitalized</strong></td><td><strong>1,70,000</strong></td></tr>
+</tbody></table>
+<p><em>Working note — weighted average rate on general borrowings: (20,00,000×15%=3,00,000) + (30,00,000×8%=2,40,000) = 5,40,000 on 50,00,000 = 10.8%.</em></p>
+<p><strong>(ii) Journal entry (31.1.2025):</strong> Building A/c Dr. 45,70,000; To Bank A/c 44,00,000; To Interest Payable A/c (borrowing cost) 1,70,000. (Cost of building = 44,00,000 payments + 1,70,000 capitalised interest.)</p>
+<p><strong>(iii) Depreciation for year ended 31.3.2025</strong> = 45,70,000 / 20 years × 2/12 (Feb–Mar, post-completion) = ₹38,083.33.</p>
+<p><strong>(iv) Carrying value as on 31.3.2025</strong> = 45,70,000 − 38,083.33 = ₹45,31,917 (approx).</p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Common errors: forgetting to net off the ₹15,000 temporary-investment interest income against capitalised borrowing cost, misclassifying the 1st December payment as specific-loan funded once the specific loan is fully drawn, or depreciating from the payment date rather than the date the asset was ready for use (31st January).<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C5U4-002">
+  <div class="qmeta">
+    <span class="src">MTP May 2026 Set 1</span> &middot;
+    <span class="qno">Q1(a)</span> &middot;
+    <span class="marks">Marks: 5</span> &middot;
+    <span class="marks">Approx Time: 9 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U4 : AS 16 &mdash; Borrowing Costs / ICAI Study Mat Topic No : 4.4/4.6/4.7</span>
+    <span class="badge">Compulsory</span>
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Glen Ltd. began construction of a new building on 1st January, 2025. On 1st April, 2025, following two loans were obtained to fund the construction cost:
+    <br/>(i) Loan of ₹60,00,000 from Data Bank Ltd. was taken at interest rate of 8% per annum. This loan was fully utilized for construction of the new building.
+    <br/>(ii) Loan of ₹20,00,000 from Satya Bank Ltd. Out of this, loan amount of ₹6,00,000 was utilized for working capital purpose. Total interest of ₹1,92,000 were paid to Satya Bank Ltd. for the financial year 2025-26.
+    <br/>Construction of the new building was completed on 31st January, 2026 and was ready for its intended use on the same date.
+    <br/>None of the loan was repaid during the year. The building is a qualifying asset for the purpose of AS-16.
+    <br/>Out of loan from Data Bank Ltd., surplus funds were temporarily invested for the short period of time. This temporary investment earned interest of ₹30,000.
+    <br/>You are required to calculate the amount of interest (a) to be capitalized, (b) to be charged to profit and loss account from the total interest incurred as borrowing cost during the year 2025-26 (as per AS-16). (5 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>According to AS 16 “Borrowing Costs”, borrowing costs that are directly attributable to the acquisition, construction or production of a qualifying asset should be capitalized as part of the cost of that asset. The amount of borrowing costs eligible for capitalization should be determined in accordance with this Standard. Other borrowing costs should be recognised as an expense in the period in which they are incurred.</p>
+<p>The standard also states that to the extent that funds are borrowed specifically for the purpose of obtaining a qualifying asset, the amount of borrowing costs eligible for capitalization on that asset should be determined as the actual borrowing costs incurred on that borrowing during the period less any income on the temporary investment of those borrowings.</p>
+<p>Thus, eligible borrowing cost on Loan of data bank to be capitalized:
+    <br/>= ₹(60,00,000 x 8%) x 10/12 − ₹30,000
+    <br/>= ₹(4,80,000 x 10/12) = ₹4,00,000
+    <br/>= ₹4,00,000 − ₹30,000
+    <br/>= ₹3,70,000</p>
+<table>
+<thead><tr><th>Loan</th><th>Particulars</th><th>Nature of assets</th><th>Interest to be Capitalized (₹)</th><th>Interest to be charged to Profit &amp; Loss Account (₹)</th></tr></thead>
+<tbody>
+<tr><td>Data bank</td><td>Construction of factory building</td><td>Qualifying Asset</td><td>3,70,000</td><td>(4,80,000 − 4,00,000) = 80,000</td></tr>
+<tr><td>Satya Bank</td><td>Construction of factory building</td><td>Qualifying Asset</td><td>(1,92,000 x 14/20) x 10/12 = 1,12,000</td><td>(1,92,000 x 14/20) x 2/12 = 22,400</td></tr>
+<tr><td>Satya Bank</td><td>Working Capital</td><td>Not a Qualifying Asset</td><td>NIL</td><td>(1,92,000 x 6/20) = ₹57,600</td></tr>
+<tr><td colspan="3"><strong>Total</strong></td><td><strong>₹4,82,000</strong></td><td><strong>₹1,60,000</strong></td></tr>
+</tbody>
+</table>
+<p><em>Note:</em> Loan from Satya bank is considered to be specific borrowings.</p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Many examinees capitalised the full interest on the Data Bank loan without deducting the ₹30,000 temporary-investment income as required under AS 16, and several also failed to apportion the Satya Bank interest between the qualifying-asset and working-capital portions, treating the entire ₹1,92,000 as eligible for capitalisation.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C5U4-003">
+  <div class="qmeta">
+    <span class="src">MTP May 2026 Set 2</span> &middot;
+    <span class="qno">Q6(a) [OR-alt 2]</span> &middot;
+    <span class="marks">Marks: 4</span> &middot;
+    <span class="marks">Approx Time: 8 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U4 : AS 16 &mdash; Borrowing Costs / ICAI Study Mat Topic No : 4.11</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>When capitalisation of borrowing cost should cease as per Accounting Standard 16? Explain in brief. (4 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Capitalization of borrowing costs should cease when substantially all the activities necessary to prepare the qualifying asset for its intended use or sale are complete. An asset is normally ready for its intended use or sale when its physical construction or production is complete even though routine administrative work might still continue. If minor modifications such as the decoration of a property to the user's specification, are all that are outstanding, this indicates that substantially all the activities are complete. When the construction of a qualifying asset is completed in parts and a completed part is capable of being used while construction continues for the other parts, capitalization of borrowing costs in relation to a part should cease when substantially all the activities necessary to prepare that part for its intended use or sale are complete.</p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Several examinees described only the overall-completion cessation rule and omitted the part-completion exception, despite this being the same principle tested numerically elsewhere in this paper&#x27;s Case Scenario I.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C5U4-004">
+  <div class="qmeta">
+    <span class="src">PYQ January 2026</span> &middot;
+    <span class="qno">Q1(a)</span> &middot;
+    <span class="marks">Marks: 5</span> &middot;
+    <span class="marks">Approx Time: 9 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U4 : AS 16 &mdash; Borrowing Costs / ICAI Study Mat Topic No : 4.7</span>
+    <span class="badge">Compulsory</span>
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>On 1st April, 2024, RM Limited obtained a term loan of ₹50,00,000 at 12% p.a. from bank for the construction of a building. It also raised multiple non-specific borrowings: 8% Debentures ₹30,00,000; 15% Term Loan ₹60,00,000; 10% Inter Corporate Loan ₹36,00,000. Funds utilized for: Building ₹1,40,00,000; Furniture ₹44,00,000; Plant and Machinery ₹1,80,00,000; Factory Shed ₹86,00,000. Construction of Building, Plant and Machinery, and Factory Shed took a substantial period and was completed 31st March, 2025. Furniture was purchased directly from a local manufacturer. The factory was ready to commence production 1st April, 2025.</p>
+<p>You are required to show the treatment of interest as per AS-16 in respect of borrowing cost for the year ended 31st March, 2025 in the books of RM Limited. (5 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Interest to be capitalized (on qualifying assets):</p>
+<table>
+<tbody>
+<tr><td>On Specific Borrowings (50,00,000 × 12%)</td><td>6,00,000</td></tr>
+<tr><td>On Non-Specific borrowings (W.N.1)</td><td>13,35,000</td></tr>
+<tr><td><strong>Amount of interest to be Capitalized</strong></td><td><strong>19,35,000</strong></td></tr>
+</tbody>
+</table>
+<p>Interest transferred to Statement of Profit and Loss (on non-qualifying assets): On Non-Specific Borrowings (W.N.1) = ₹1,65,000.</p>
+<p><strong>Working Note 1 – Treatment of Interest under AS 16 on Non-Specific Borrowings:</strong></p>
+<table>
+<thead><tr><th>Asset</th><th>Qualifying asset</th><th>Computation</th><th>Interest Capitalized (₹)</th><th>Interest Charged to P&amp;L (₹)</th></tr></thead>
+<tbody>
+<tr><td>Building</td><td>Yes</td><td>(90,00,000/4,00,00,000) × 15,00,000</td><td>3,37,500</td><td>—</td></tr>
+<tr><td>Furniture</td><td>No</td><td>(44,00,000/4,00,00,000) × 15,00,000</td><td>—</td><td>1,65,000</td></tr>
+<tr><td>Plant &amp; Machinery</td><td>Yes</td><td>(1,80,00,000/4,00,00,000) × 15,00,000</td><td>6,75,000</td><td>—</td></tr>
+<tr><td>Factory shed</td><td>Yes</td><td>(86,00,000/4,00,00,000) × 15,00,000</td><td>3,22,500</td><td>—</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td></td><td><strong>13,35,000</strong></td><td><strong>1,65,000</strong></td></tr>
+</tbody>
+</table>
+<p><em>Note: the weighted average capitalisation rate is applied via each asset's proportion of total funds employed (₹4,00,00,000 = Building+Furniture+P&amp;M+Factory Shed) against the ₹15,00,000 total non-specific interest (Debentures ₹2,40,000 + Term Loan ₹9,00,000 + Inter Corporate Loan ₹3,60,000).</em></p>
+<p><strong>Working Note 2 – Total Amount of Interest on Non-Specific Borrowings:</strong></p>
+<table>
+<thead><tr><th>Particulars</th><th>Amount of loan</th><th>Rate</th><th>Interest</th></tr></thead>
+<tbody>
+<tr><td>Debentures</td><td>30,00,000</td><td>8%</td><td>2,40,000</td></tr>
+<tr><td>Term Loan</td><td>60,00,000</td><td>15%</td><td>9,00,000</td></tr>
+<tr><td>Other Corporate Loan</td><td>36,00,000</td><td>10%</td><td>3,60,000</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>1,26,00,000</strong></td><td></td><td><strong>15,00,000</strong></td></tr>
+</tbody>
+</table></div></div>
+  <div class="mistakes icai"><strong>Examiner&rsquo;s Comment:</strong> The majority of examinees were unable to correctly account for the treatment of interest, particularly in computing and allocating borrowing costs between qualifying and non-qualifying assets. Errors were frequently observed in determining the portion of borrowing costs eligible for capitalisation. Many examinees also demonstrated a lack of understanding in identifying whether interest should be capitalised or charged to the Profit and Loss Account. Additionally, several examinees failed to compute the correct weighted average rate of interest.<span class="prov">Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C5U4-005">
+  <div class="qmeta">
+    <span class="src">RTP January 2026</span> &middot;
+    <span class="qno">Q12</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U4 : AS 16 &mdash; Borrowing Costs / ICAI Study Mat Topic No : 4.2</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Can interest be included in the cost of inventories?</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div><p>As a general rule, AS 2 (para 12) provides that interest and other borrowing costs are usually not related to bringing inventories to their present location and condition, and are therefore usually excluded from inventory cost.</p>
+<p>However, AS 16 (para 6) requires borrowing costs directly attributable to acquisition/construction/production of a <strong>qualifying asset</strong> to be capitalised, and para 5 specifically includes "inventories that require a substantial period of time to bring them to a saleable condition" as an example of a qualifying asset (e.g. liquor requiring 12+ months of maturation, per ASI 1). It is only in such exceptional cases — where time is a major factor in changing the condition of the inventory — that borrowing costs are included in inventory valuation. Routinely/repetitively manufactured inventory over a short period is never a qualifying asset, so its borrowing costs are never capitalised.</p></div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees answered with a flat &quot;no&quot;, missing the exceptional qualifying-asset case (e.g. maturing liquor) where AS 16 does require capitalisation into inventory cost.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock flagged" id="M2C5U4-006">
+  <div class="qmeta">
+    <span class="src">RTP May 2026</span> &middot;
+    <span class="qno">Q10</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U2 : AS 10 &mdash; Property, Plant and Equipment / ICAI Study Mat Topic No : 2.8  &nbsp;+&nbsp;  M2_C5_U4 : AS 16 &mdash; Borrowing Costs / ICAI Study Mat Topic No : 4.4/4.9</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>On 1st April, 2024, Y Limited purchased an industrial plot of land for ₹50,00,000 for the purpose of constructing a new factory. This cost of ₹50,00,000 included legal cost of ₹2,50,000 incurred for the purpose of acquisition of this plot. The construction of the factory commenced on 1st May, 2024. Y Limited provides you with the following details of the costs incurred in relation to the above construction:</p>
+<table>
+<thead><tr><th>Particulars</th><th>Amount (₹)</th></tr></thead>
+<tbody>
+<tr><td>Preparation and levelling of the land</td><td>1,60,000</td></tr>
+<tr><td>Employment costs of construction workers (per month)</td><td>58,000</td></tr>
+<tr><td>Purchase of Raw materials for the construction</td><td>42,48,000</td></tr>
+<tr><td>Cost of relocating the workers to new factory for work</td><td>75,000</td></tr>
+<tr><td>Costs of inaugural function of the new factory on 1st January, 2025</td><td>95,000</td></tr>
+<tr><td>Overhead costs incurred directly on the construction of the factory (per month)</td><td>50,000</td></tr>
+</tbody>
+</table>
+<p>The construction of the factory was completed on 31st December, 2024 and production could commence on 1st February, 2025. The overall useful life of the factory building was estimated at 40 years from the date of completion. However, it was estimated that the roof would need to be replaced 20 years after the date of completion. The cost of replacing the roof at current prices would be 25% of the total cost of the building. The construction of the factory was partly financed by a loan of ₹56,00,000 raised from State Bank of India on 1st April, 2024 at an interest rate of 9% per annum. During the period when the loan proceeds had been fully utilized to finance the construction, Y Limited earned an income of ₹50,000 from the temporary investment of the proceeds. Assume that all of the net finance cost needs to be allocated to the cost of factory (excluding land) and interest cost to be capitalized based on eight months' period.</p>
+<p>You are required to compute the carrying amount (i.e. value after charging depreciation) of the Factory in the books of Y Limited as at 31 March, 2025 as per the provisions of the relevant Accounting Standard.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Cost of construction of the factory</p>
+<table>
+<tbody>
+<tr><td>Cost of Industrial Plot</td><td>50,00,000</td></tr>
+<tr><td>Preparation and levelling of the land</td><td>1,60,000</td></tr>
+<tr><td>Employment costs of construction workers (₹58,000 per month) for 8 months</td><td>4,64,000</td></tr>
+<tr><td>Purchase of Raw materials for the construction</td><td>42,48,000</td></tr>
+<tr><td>Overhead costs incurred directly on the construction of the factory (₹50,000 per month) for 8 months</td><td>4,00,000</td></tr>
+<tr><td>Interest on ₹56,00,000 for 9 months @ 9% = ₹3,78,000 less ₹50,000</td><td>3,28,000</td></tr>
+<tr><td><strong>Total Cost (A)</strong></td><td><strong>1,06,00,000</strong></td></tr>
+<tr><td>Depreciation (B) (W.N.)</td><td>43,750</td></tr>
+<tr><td><strong>Carrying amount of the factory (A−B)</strong></td><td><strong>1,05,56,250</strong></td></tr>
+</tbody>
+</table>
+<p><strong>Working Note: Calculation of Depreciation</strong></p>
+<p>On land of ₹50,00,000: Nil. On remaining cost of Building i.e. ₹1,06,00,000 − ₹50,00,000 = ₹56,00,000:</p>
+<ul>
+<li>On Building: ₹56,00,000 × 75% / 40 yrs × 3/12 = ₹26,250</li>
+<li>On roof: ₹56,00,000 × 25% / 20 yrs × 3/12 = ₹17,500</li>
+<li><strong>Total Depreciation charged = ₹43,750</strong></li>
+</ul>
+<p>Cost of relocating the workers to new factory for work and cost of inaugural function of the new factory is not directly attributable to construction cost, hence not considered.</p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Many examinees included the relocation cost and the inauguration-function cost in the capitalised cost of the factory, failing to apply AS 10&#x27;s distinction between costs necessary to bring an asset to its working condition and costs merely associated with commissioning it. Several also capitalised the gross interest of ₹3,78,000 without netting the ₹50,000 temporary-investment income against it, as AS 16 requires.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C5U4-007">
+  <div class="qmeta">
+    <span class="src">RTP September 2025</span> &middot;
+    <span class="qno">Q16</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U4 : AS 16 &mdash; Borrowing Costs / ICAI Study Mat Topic No : 4.3</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Is it permissible to capitalise borrowing costs incurred on assets necessary for the construction of qualifying assets? A company constructing a large manufacturing plant in a backward area also purchased a residential building (funded by a long-term loan) to house workers engaged in the plant's construction, intending to dispose of the building once construction completes. If the manufacturing plant is a qualifying asset, are the borrowing costs on the residential-building loan eligible for capitalisation?</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div><p>Per AS 16 para 3, a qualifying asset "necessarily takes a substantial period of time to get ready for its intended use or sale"; para 5 clarifies that assets ready for use when acquired are <strong>not</strong> qualifying assets. Prima facie, the residential building appears ready for use on acquisition, suggesting no capitalisation.</p>
+<p>However, since providing housing is <strong>necessary</strong> for the construction of the plant, the borrowing costs on the building loan are, in substance, directly attributable to the construction of the manufacturing plant. The company should therefore <strong>capitalise</strong> these borrowing costs as part of the cost of the manufacturing plant, up to the period the plant is ready for its intended use.</p></div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees stopped at the observation that the residential building is itself &quot;ready for use&quot; and concluded no capitalisation applies, missing the substance-over-form link to the main construction project&#x27;s necessity.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<h2>II. Integrated Questions (AS 16 with Other Standards)</h2>
+<p class='section-intro'>Questions where AS 16 judgment is one part of a larger, genuinely connected question also testing another standard.</p>
+
+<div class="qblock" id="M2C5U4-008">
+  <div class="qmeta">
+    <span class="src">MTP May 2026 Set 2</span> &middot;
+    <span class="qno">Q8</span> &middot;
+    <span class="marks">Marks: 2</span> &middot;
+    <span class="marks">Approx Time: 4 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U2 : AS 10 &mdash; Property, Plant and Equipment / ICAI Study Mat Topic No : 2.7  &nbsp;+&nbsp;  M2_C5_U4 : AS 16 &mdash; Borrowing Costs / ICAI Study Mat Topic No : 4.10</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><div class="case-facts"><strong>Case Scenario:</strong> <p>Mars Ltd. is a manufacturing enterprise which is starting a new manufacturing plant at X Village. It has commenced construction of the plant on April 1, 2023 and has incurred following expenses: acquired land for installing Plant for ₹50,00,000; incurred ₹35,00,000 for material and direct labour cost for developing the Plant; incurred ₹10,00,000 for head office expenses at New Delhi which included rent, employee cost and maintenance expenditure; borrowed ₹25,00,000 for construction work of Plant @12% per annum on April 1, 2023 (Director finance incurred travel and meeting expenses of ₹5,00,000 during the year for arranging this loan).</p>
+<p>On November 1, 2023, the construction activities of the plant were interrupted as the local people alongwith activists raised issues relating to environmental impact of the plant being constructed; construction came to a standstill for 3 months. With the help of Government and NGOs, the agitation was over by February 28, 2024 and the work resumed. However, to balance the impact on environment, government ordered the company to install certain devices for which the Company had to incur ₹6,00,000 in March 2024. The rate of depreciation on Plant is 10%.</p>
+<p>Based on the above information, answer Question Nos. 6–9.</p></div><p class="stem">The total cost of plant as on March 31, 2024 will be:</p>
+<ol class="options" type="A"><li data-opt="A">₹85,00,000</li><li data-opt="B">₹98,00,000</li><li data-opt="C">₹93,00,000</li><li data-opt="D">₹95,00,000</li></ol></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <p><em>Correct option: <strong>C</strong></em></p><div><p><strong>Answer:</strong> (c) ₹93,00,000 = Land ₹50,00,000 + material/labour ₹35,00,000 + capitalised borrowing cost ₹2,00,000 + government-mandated environmental devices ₹6,00,000 (head office expenses and loan-arrangement travel costs excluded).</p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees excluded the government-mandated environmental device cost, not recognising it as a cost necessary to bring the plant to a condition of operating in compliance with regulatory requirements, and so directly attributable under AS 10.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="note" style="margin-top:48px;">
+Found an error? Please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference (shown at the top of each card) so it can be fixed in the next edition. Thank you for helping make this book better.
+</div>
+
+<div class="error-register">
+<h2>Sanjeevani Booti 2: Error Register for Borrowing Costs</h2>
+<h3>Section 1: Concepts I Forgot</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<h3>Section 2: Mistakes I Repeated More Than Twice</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+</div>
+
+<div class="brand-footer">
+#KeepLearning #DreamBig &nbsp;&middot;&nbsp; #LoveWhatYouDo<br>
+<strong>AS 16 — Borrowing Costs</strong>
+</div>
+
+</body>
+</html>

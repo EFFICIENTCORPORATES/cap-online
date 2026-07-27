@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AS 21 — Consolidated Financial Statements</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;margin:24px;max-width:980px;margin-left:auto;margin-right:auto;color:#222;background:#fff;line-height:1.5;}
+h1{font-size:24px;margin-bottom:4px;}
+h2{font-size:19px;margin-top:44px;border-bottom:2px solid #333;padding-bottom:6px;}
+.note{background:#fff8e1;border:1px solid #e0c46c;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;}
+.empty-section{background:#f0f0f0;border:1px dashed #999;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;color:#555;font-style:italic;}
+.section-intro{font-size:13.5px;color:#444;margin-top:-6px;}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:12.5px;}
+th,td{border:1px solid #999;padding:5px 7px;text-align:left;vertical-align:top;}
+th{background:#2c3e50;color:#fff;}
+.qblock{border:1px solid #ccc;border-radius:8px;padding:14px 18px;margin:18px 0;background:#fdfdfd;}
+.qblock.flagged{border-color:#d98a8a;background:#fffaf7;}
+.qmeta{font-size:12px;color:#555;margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed #ccc;}
+.qmeta .src{font-weight:bold;color:#2c3e50;}
+.qmeta .marks{font-weight:bold;}
+.badge{display:inline-block;background:#fff3e0;border:1px solid #e0b46c;border-radius:10px;padding:1px 8px;font-size:11px;margin-left:6px;}
+.badge.icai{background:#e0f0ff;border-color:#6ca8e0;}
+.question{margin:10px 0;}
+.answer-block{margin:10px 0;background:#eafbea;padding:8px 12px;border-radius:6px;}
+.case-facts{background:#f5f5fb;border-left:3px solid #8888c0;padding:6px 12px;margin-bottom:8px;font-size:13px;}
+.mistakes{margin:10px 0;padding:8px 12px;border-radius:6px;font-size:13.5px;border-left:3px solid #999;}
+.mistakes.icai{background:#fff3e0;border-left-color:#e0b46c;color:#5a3d0a;}
+.mistakes.synth{background:#fdf1f1;border-left-color:#d98a8a;color:#7a2f2f;}
+.mistakes .prov{font-style:italic;color:#666;font-size:11.5px;display:block;margin-top:4px;}
+.na{color:#999;font-style:italic;}
+.notebook-ref{margin-top:10px;font-size:12.5px;color:#444;border-top:1px dashed #ccc;padding-top:6px;}
+.notebook-ref .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:160px;}
+.self-notes{margin-top:8px;border:1px solid #ccc;background:#fff;border-radius:6px;padding:8px 12px;}
+.self-notes .notes-lines{margin-top:4px;}
+.self-notes .dotted-line{height:22px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+.tag-placeholder{margin-top:8px;font-size:12.5px;color:#444;}
+.tag-placeholder .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:220px;}
+.revision-phase{margin-top:8px;font-size:12.5px;color:#444;}
+.revision-phase .box{display:inline-block;border:1px solid #888;width:12px;height:12px;margin:0 3px 0 10px;vertical-align:middle;}
+.brand-header{text-align:center;font-size:11px;color:#777;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:18px;letter-spacing:.3px;}
+.brand-header strong{color:#2c3e50;}
+.brand-footer{text-align:center;font-size:11px;color:#777;border-top:1px solid #eee;padding-top:10px;margin-top:36px;line-height:1.8;}
+.brand-footer strong{color:#2c3e50;}
+.error-register{page-break-before:always;break-before:page;margin-top:40px;}
+.error-register h2{margin-top:8px;}
+.error-register h3{font-size:15px;color:#444;margin-top:28px;}
+.error-register .dotted-line{height:34px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+</style>
+</head>
+<body>
+
+<div class="brand-header">
+<strong>Pranav Bhaiya</strong> &middot; The Newton of Accounts &middot; AIR 1-1-5<br>
+Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma, Not Results
+</div>
+
+<h1>AS 21 — Consolidated Financial Statements</h1>
+<p>Every MTP/RTP/PYQ question that tests this chapter, collected in one place, with official answers and topic tags — so you can practise every question this topic has been examined with, without hunting through separate papers.</p>
+
+<div class="note">
+<strong>A note on accuracy (please read):</strong> This is the first edition of this book, assembled with AI assistance and reviewed as carefully as we could manage, but it has not been independently audited question-by-question. If you spot an error &mdash; a wrong figure, a wrong answer, anything that looks off &mdash; please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference so it can be corrected in the next edition.
+</div>
+
+<div class="note">
+<strong>Scope of this book (7 questions):</strong> Covers 10 sittings: MTP Jan2026 Set1, MTP Jan2026 Set2, MTP May2026 Set1, MTP May2026 Set2, PYQ Jan2026, PYQ May2026, PYQ Sep2025, RTP Jan2026, RTP May2026, RTP Sep2025. MCQs on this chapter are deliberately not included here — practise those on the dedicated MCQ platform; this book is for descriptive/scenario practice with full worked answers.
+</div>
+
+<div class="note">
+<strong>How this book is organised:</strong> Two sections — <strong>I. Descriptive (pure AS 21)</strong> and <strong>II. Integrated</strong> (questions where AS 21 is one part of a larger question that also tests another standard). An empty Section II for a chapter is normal and expected, not a mistake — most multi-topic-looking questions are split so each topic gets its own clean entry, so genuinely combined questions are the rarer case. Each answer includes either a real <strong>Examiner's Comment</strong> (tan/orange box, quoted from ICAI's own published feedback, where one exists for that sitting) or an <strong>Author's Note</strong> (pale pink box, a likely pitfall identified by the author, not an official ICAI finding, and may not apply in every case) &mdash; see <strong>How to Read this Book.md</strong> for the full key to every colour and symbol used.
+</div>
+
+<h2>I. Descriptive &amp; Scenario-Based Questions (pure AS 21)</h2>
+<p class='section-intro'>Full descriptive/scenario questions where this chapter is the sole topic tested (after independent-question splitting).</p>
+
+<div class="qblock" id="M2C10U1-001">
+  <div class="qmeta">
+    <span class="src">MTP January 2026 Set 1</span> &middot;
+    <span class="qno">Q3</span> &middot;
+    <span class="marks">Marks: 14</span> &middot;
+    <span class="marks">Approx Time: 26 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C10_U1 : AS 21 &mdash; Consolidated Financial Statements / ICAI Study Mat Topic No : 1.9</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>GB Limited acquired 80% of equity shares of TB Limited on 1st April, 2018 at a cost of ₹58,00,000, when TB Limited had Equity Share Capital of ₹50,00,000 and Reserves and Surplus of ₹4,64,000. Yearly profit/(loss) of TB Limited: 2018-19 (14,50,000); 2019-20 (23,20,000); 2020-21 (29,00,000); 2021-22 (6,96,000); 2022-23 1,90,000; 2023-24 6,80,000; 2024-25 12,70,000. You are required to calculate the minority interest and cost of control at the end of each year for the purpose of consolidation.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p><strong>W.N. — Minority Interest and Goodwill on 1.4.2018:</strong> Share Capital 50,00,000 (80%: 40,00,000; 20%: 10,00,000) + Reserves 4,64,000 (80%: 3,71,200; 20%: 92,800) = Holding's share 43,71,200, Minority 10,92,800. Cost of investment 58,00,000 − 43,71,200 = <strong>Goodwill 14,28,800</strong>.</p>
+<p>Since minority interest (20%) turns negative during the loss-making years 2018-19 through 2020-21, AS 21 requires losses beyond the minority's own interest to be absorbed by the holding company (Cost of Control account), then recouped from future minority profits before minority interest is credited again:</p>
+<table><thead><tr><th>Year</th><th>Profit/(Loss)</th><th>Minority share (20%)</th><th>Minority interest balance</th><th>Cost of Control (holding co. absorption)</th></tr></thead>
+<tbody>
+<tr><td>2018-19</td><td>(14,50,000)</td><td>(2,90,000)</td><td>8,02,800</td><td>—</td></tr>
+<tr><td>2019-20</td><td>(23,20,000)</td><td>(4,64,000)</td><td>3,38,800</td><td>—</td></tr>
+<tr><td>2020-21</td><td>(29,00,000)</td><td>(5,80,000)</td><td>Nil (excess 2,41,200 absorbed by holding co.)</td><td>2,41,200</td></tr>
+<tr><td>2021-22</td><td>(6,96,000)</td><td>(1,39,200)</td><td>Nil (absorbed by holding co.)</td><td>3,80,400 (cumulative)</td></tr>
+<tr><td>2022-23</td><td>1,90,000</td><td>38,000</td><td>Nil (profit share adjusted against losses absorbed by holding co.)</td><td>3,42,400 (cumulative)</td></tr>
+<tr><td>2023-24</td><td>6,80,000</td><td>1,36,000</td><td>Nil (profit share adjusted against holding co.'s absorbed balance)</td><td>2,06,400 (cumulative)</td></tr>
+<tr><td>2024-25</td><td>12,70,000</td><td>2,54,000</td><td>47,600 (2,54,000 − 2,06,400 remaining absorbed balance recouped)</td><td>Nil</td></tr>
+</tbody></table>
+<p>Cumulative Minority Interest at 31.3.2025 (Balance Sheet figure, excluding the P&amp;L movement column): ₹12,22,400 (i.e. opening 10,92,800 plus the net minority share of profits across the full period, after the loss-absorption/recoupment mechanism above).</p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A very common error across multiple sittings on this exact pattern: continuing to show a negative (debit) minority interest balance in the consolidated balance sheet, instead of transferring the excess loss to the holding company (Cost of Control) and recouping it against the minority&#x27;s later profit shares before crediting minority interest again.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C10U1-002">
+  <div class="qmeta">
+    <span class="src">MTP May 2026 Set 1</span> &middot;
+    <span class="qno">Q5(a)</span> &middot;
+    <span class="marks">Marks: 10</span> &middot;
+    <span class="marks">Approx Time: 18 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C10_U1 : AS 21 &mdash; Consolidated Financial Statements / ICAI Study Mat Topic No : 1.15</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Birds Ltd. and its subsidiary Rooster Ltd provided the following information for the year ended 31/03/2025.</p>
+<table>
+<thead><tr><th>Particulars</th><th>Birds Ltd. (₹)</th><th>Rooster Ltd. (₹)</th></tr></thead>
+<tbody>
+<tr><td>Equity Share Capital</td><td>10,00,000</td><td>3,00,000</td></tr>
+<tr><td>Sales</td><td>28,40,000</td><td>10,40,000</td></tr>
+<tr><td>Purchases (Finished Goods)</td><td>9,15,000</td><td>1,75,000</td></tr>
+<tr><td>Salaries</td><td>7,75,000</td><td>3,78,000</td></tr>
+<tr><td>Rent received</td><td>5,40,000</td><td></td></tr>
+<tr><td>General and Administration expenses</td><td>2,81,500</td><td>1,98,000</td></tr>
+<tr><td>Selling and Distribution Expenses</td><td>2,21,000</td><td>90,000</td></tr>
+<tr><td>Dividend Income</td><td>1,35,000</td><td>28,000</td></tr>
+<tr><td>Finished Goods Inventory on 01/04/2024</td><td>3,35,000</td><td>1,20,000</td></tr>
+<tr><td>Finished Goods Inventory on 31/03/2025</td><td>7,85,000</td><td>2,90,000</td></tr>
+<tr><td>Other Non-operating Income</td><td>2,38,000</td><td>57,000</td></tr>
+</tbody>
+</table>
+<p>Other Information:</p>
+<ul>
+<li>On 1st April 2022 Birds Ltd. acquired 2,500 shares of ₹100 each fully paid up in Rooster Ltd.</li>
+<li>Rooster Ltd. paid a dividend of 12% for the year ended 31/03/2024. The dividend was correctly accounted for by Birds Ltd.</li>
+<li>Rooster Ltd. pays ₹11,250 per month to Birds Ltd. towards rent for the portion of premises occupied.</li>
+<li>Selling and Distribution Expenses of Rooster Ltd. include ₹15,000 received from Birds Ltd.</li>
+</ul>
+<p>Prepare Consolidated Profit and Loss Account of Birds Ltd. and its subsidiary Rooster Ltd. for the year ended 31/03/2025. (10 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Consolidated statement of profit and loss of Birds Ltd. and its subsidiary Rooster Ltd. for the year ended on 31st March, 2025</p>
+<table>
+<thead><tr><th>Particulars</th><th>Note No.</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>Revenue from operations</td><td>1</td><td>38,80,000</td></tr>
+<tr><td>Other Income</td><td>2</td><td>8,33,000</td></tr>
+<tr><td><strong>Total revenue (I)</strong></td><td></td><td><strong>47,13,000</strong></td></tr>
+<tr><td>Expenses:</td><td></td><td></td></tr>
+<tr><td>  Cost of material purchased/consumed</td><td>3</td><td>10,90,000</td></tr>
+<tr><td>  Changes (Increase) in inventories of finished goods</td><td>4</td><td>(6,20,000)</td></tr>
+<tr><td>  Employee benefit expense</td><td>5</td><td>11,53,000</td></tr>
+<tr><td>  Other expenses</td><td>6</td><td>6,55,500</td></tr>
+<tr><td><strong>Total expenses (II)</strong></td><td></td><td><strong>22,78,500</strong></td></tr>
+<tr><td><strong>Profit before tax (I−II)</strong></td><td></td><td><strong>24,34,500</strong></td></tr>
+</tbody>
+</table>
+<p><strong>Notes to Accounts</strong></p>
+<table>
+<tbody>
+<tr><th colspan="2">1. Revenue from operations</th><th>₹</th></tr>
+<tr><td colspan="2">Birds Ltd.</td><td>28,40,000</td></tr>
+<tr><td colspan="2">Rooster Ltd.</td><td>10,40,000</td></tr>
+<tr><td colspan="2"><strong>Total</strong></td><td><strong>38,80,000</strong></td></tr>
+<tr><th colspan="3">2. Other Income</th></tr>
+<tr><td colspan="2">Dividend income: Birds Ltd. 1,35,000; Less: Dividend received from Rooster Ltd. (2,50,000 × 12%) (30,000)</td><td> </td></tr>
+<tr><td colspan="2">Rooster Ltd. 28,000</td><td>1,33,000</td></tr>
+<tr><td colspan="2">Other Non-operating Income: Birds Ltd. 2,38,000; Rooster Ltd. 57,000</td><td>2,95,000</td></tr>
+<tr><td colspan="2">Rent received: Birds Ltd. 5,40,000; Less: Rent received by Birds Ltd. from Rooster Ltd. (11,250 x 12) (1,35,000)</td><td>4,05,000</td></tr>
+<tr><td colspan="2"><strong>Total</strong></td><td><strong>8,33,000</strong></td></tr>
+<tr><th colspan="2">3. Cost of material purchased/consumed</th><th>₹</th></tr>
+<tr><td colspan="2">Birds Ltd. 9,15,000; Rooster Ltd. 1,75,000</td><td>10,90,000</td></tr>
+<tr><th colspan="2">4. Changes (Increase) in inventories of finished goods</th><th>₹</th></tr>
+<tr><td colspan="2">Birds Ltd. (7,85,000 − 3,35,000) 4,50,000; Rooster Ltd. (2,90,000 − 1,20,000) 1,70,000</td><td>6,20,000</td></tr>
+<tr><th colspan="2">5. Employee benefits and expenses</th><th>₹</th></tr>
+<tr><td colspan="2">Salaries: Birds Ltd. 7,75,000; Rooster Ltd. 3,78,000</td><td>11,53,000</td></tr>
+<tr><th colspan="3">6. Other expenses</th></tr>
+<tr><td colspan="2">General &amp; Administrative expenses: Birds Ltd. 2,81,500; Rooster Ltd. 1,98,000 Less: Rent paid to Birds Ltd. (1,35,000) = 3,44,500</td><td> </td></tr>
+<tr><td colspan="2">Selling and distribution Expenses: Birds Ltd. 2,21,000 Less: paid to Rooster Ltd (15,000); Rooster Ltd. 90,000 Add: Received from Birds Ltd. 15,000 = 3,11,000</td><td>6,55,500</td></tr>
+</tbody>
+</table>
+<p><em>Note: An amount of ₹15,000 was added under Selling and Distribution Expenses of Rooster Ltd. due to a rectification entry, while ₹15,000 was deducted from Birds Ltd. under the same head to account for the set-off of inter-company transactions.</em></p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Most examinees correctly eliminated the pre-acquisition dividend received by Birds Ltd. from Rooster Ltd. against dividend income, but some failed to also eliminate the inter-company rent and the inter-company selling and distribution expense recovery when preparing the consolidated statement of profit and loss, resulting in an overstatement of consolidated other income and expenses.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock flagged" id="M2C10U1-003">
+  <div class="qmeta">
+    <span class="src">MTP May 2026 Set 2</span> &middot;
+    <span class="qno">Q3</span> &middot;
+    <span class="marks">Marks: 14</span> &middot;
+    <span class="marks">Approx Time: 26 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C10_U1 : AS 21 &mdash; Consolidated Financial Statements / ICAI Study Mat Topic No : 1.11/1.14</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>The following are the extract of balance sheet of P Ltd., and its subsidiary Q Ltd., as at 31 March 2026:</p>
+<table>
+<thead><tr><th>Particulars</th><th>P Ltd. (₹)</th><th>Q Ltd. (₹)</th></tr></thead>
+<tbody>
+<tr><td>I Equity &amp; Liabilities</td><td></td><td></td></tr>
+<tr><td>(1) Shareholders' Funds: (a) Share capital (Equity shares of ₹100 each fully paid up)</td><td>16,00,000</td><td>4,00,000</td></tr>
+<tr><td>(b) Reserve &amp; Surplus</td><td>2,00,000</td><td>80,000</td></tr>
+<tr><td>(2) Current liability</td><td>30,00,000</td><td>19,20,000</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>48,00,000</strong></td><td><strong>24,00,000</strong></td></tr>
+<tr><td>II Assets</td><td></td><td></td></tr>
+<tr><td>(1) Non-current assets: (a) PPE</td><td>10,00,000</td><td>3,80,000</td></tr>
+<tr><td>(2) Investment: 3,600 equity shares in Q Ltd. on 1 April 2025</td><td>5,60,000</td><td>—</td></tr>
+<tr><td>(3) Current Assets: (a) Other current assets</td><td>32,40,000</td><td>20,20,000</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>48,00,000</strong></td><td><strong>24,00,000</strong></td></tr>
+</tbody>
+</table>
+<p>On 1 April 2025 Profit &amp; Loss A/c of Q Ltd. showed a credit balance of ₹32,000 and equipment of Q Ltd. was revalued by P Ltd. 20% above its book value of ₹4,00,000 (but no such adjustment effected in the books of Q Ltd.).</p>
+<p>Prepare the consolidated balance sheet as at 31st March 2026. (14 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Consolidated Balance Sheet of P Ltd. and its Subsidiary Q Ltd. as on 31.3.2026</p>
+<table>
+<thead><tr><th>Particulars</th><th>Note No.</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>I. Equities &amp; Liabilities</td><td></td><td></td></tr>
+<tr><td>(1) Shareholder's funds: (a) Share Capital</td><td>1</td><td>16,00,000</td></tr>
+<tr><td>(b) Reserve &amp; surplus</td><td>2</td><td>2,39,600</td></tr>
+<tr><td>(c) Minority interest</td><td></td><td>55,600</td></tr>
+<tr><td>(2) Current liability: (a) Other current liabilities (30,00,000+19,20,000)</td><td></td><td>49,20,000</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>68,15,200</strong></td></tr>
+<tr><td>II. Assets: (1)(a) PPE (10,00,000+3,80,000+80,000−4,000)</td><td></td><td>14,56,000</td></tr>
+<tr><td>(b) Goodwill</td><td></td><td>99,200</td></tr>
+<tr><td>(2) Current Assets: (a) Other current assets (32,40,000+20,20,000)</td><td></td><td>52,60,000</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>68,15,200</strong></td></tr>
+</tbody>
+</table>
+<p>Notes to accounts: (1) Share capital – Issued, subscribed &amp; paid-up: 16,000 equity shares of ₹100 each = ₹16,00,000. (2) Reserve &amp; Surplus – Profit &amp; Loss A/c (W.N. 5) = ₹2,39,600.</p>
+<p><strong>Working Notes:</strong></p>
+<p>1. Shareholding: Held by P Ltd. 3,600 shares (90%); Minority interest 400 shares (10%).</p>
+<p>2. Analysis of profit: Q Ltd.'s P&amp;L A/c – opening balance ₹32,000 + profit for the year ₹48,000 = closing balance ₹80,000.</p>
+<table>
+<thead><tr><th>Particulars</th><th>Capital profit</th><th>Revenue profit</th></tr></thead>
+<tbody>
+<tr><td>Opening balance in P&amp;L A/c</td><td>32,000</td><td></td></tr>
+<tr><td>Profit during the year</td><td></td><td>48,000</td></tr>
+<tr><td>Revaluation of equipment (W.N.6)</td><td>80,000</td><td></td></tr>
+<tr><td>Short depreciation on equipment</td><td></td><td>(4,000)</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>1,12,000</strong></td><td><strong>44,000</strong></td></tr>
+<tr><td>Q Ltd. (Minority) (10%)</td><td>11,200</td><td>4,400</td></tr>
+<tr><td>P Ltd. (90%)</td><td>1,00,800</td><td>39,600</td></tr>
+</tbody>
+</table>
+<p>3. Cost of Control: Cost of investment (A) ₹5,60,000. Share in net assets of Q Ltd.: Share capital 4,00,000×90% = 3,60,000; Capital profit (W.N.2) = 1,00,800; (B) = 4,60,800. Goodwill (A−B) = ₹99,200.</p>
+<p>4. Calculation of Minority Interest: Share capital 4,00,000×10% = 40,000; Capital profit (W.N.2) = 11,200; Revenue profit (W.N.2) = 4,400; Total = ₹55,600.</p>
+<p>5. P Ltd.: Balance as per Balance sheet (P&amp;L) 2,00,000 + Share in profit of Q Ltd. 39,600 = Total ₹2,39,600.</p>
+<p>6. Appreciation/Depreciation on revalued asset: Book value as on 31.3.26 (per B/S) 3,80,000; Book value as on 1.4.25 (given) 4,00,000; Depreciation charged (iii) = 20,000; Depreciation rate = 5%; Revaluation of asset (4,00,000+20%) = 4,80,000; Revaluation reserve = 80,000; Depreciation on revalued asset (4,80,000×5%) = 24,000; Short depreciation = ₹4,000.</p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Many examinees treated the ₹80,000 pre-acquisition revaluation gain on Q Ltd.&#x27;s equipment as revenue profit rather than capital profit, and several omitted the consequential ₹4,000 short-depreciation adjustment on the revalued amount, both of which distort the capital/revenue profit split used for cost of control and minority interest.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C10U1-004">
+  <div class="qmeta">
+    <span class="src">MTP May 2026 Set 2</span> &middot;
+    <span class="qno">Q4(a)</span> &middot;
+    <span class="marks">Marks: 7</span> &middot;
+    <span class="marks">Approx Time: 13 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C10_U1 : AS 21 &mdash; Consolidated Financial Statements / ICAI Study Mat Topic No : 1.11/1.12</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>A Ltd. acquired 70% equity shares of B Ltd. @ ₹20 per share (Face value – ₹10) on 31st March, 2026 at a cost of ₹140 lakhs. Calculate the amount of share of A Ltd. and minority interest in the net assets of B Ltd. on this date. Also compute goodwill/capital reserve for A Ltd. on acquisition of shares of B Ltd. from the following information available from the balance sheet of B Ltd. as on 31st March, 2026:</p>
+<table>
+<tbody>
+<tr><td>Property, plant and equipment</td><td>₹360 lakhs</td></tr>
+<tr><td>Investments</td><td>₹90 lakhs</td></tr>
+<tr><td>Current Assets</td><td>₹140 lakhs</td></tr>
+<tr><td>Loans &amp; Advances</td><td>₹30 lakhs</td></tr>
+<tr><td>15% Debentures</td><td>₹180 lakhs</td></tr>
+<tr><td>Current Liabilities</td><td>₹100 lakhs</td></tr>
+</tbody>
+</table>
+<p>(7 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Net assets of B Ltd. as on 31st March, 2026:</p>
+<table>
+<tbody>
+<tr><td>Property, plant and equipment</td><td>360</td></tr>
+<tr><td>Investments</td><td>90</td></tr>
+<tr><td>Current Assets</td><td>140</td></tr>
+<tr><td>Loans and Advances</td><td>30</td></tr>
+<tr><td><strong>Total Assets</strong></td><td><strong>620</strong></td></tr>
+<tr><td>Less: 15% Debentures</td><td>180.0</td></tr>
+<tr><td>Current Liabilities</td><td>100.0</td></tr>
+<tr><td><strong>Equity / Net Worth</strong></td><td><strong>340</strong></td></tr>
+<tr><td>Share of Minority Interest in net assets (30% of 340)</td><td>102</td></tr>
+<tr><td>A Ltd.'s share in net assets (70% of 340)</td><td>238</td></tr>
+<tr><td>A Ltd.'s cost of acquisition of shares of B Ltd. (₹140 lakhs)</td><td>(140)</td></tr>
+<tr><td><strong>Capital reserve</strong></td><td><strong>98</strong></td></tr>
+</tbody>
+</table></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees netted debentures and current liabilities against only part of the asset base, or computed A Ltd.&#x27;s share of net assets before deducting external liabilities, producing an incorrect capital reserve figure.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock flagged" id="M2C10U1-005">
+  <div class="qmeta">
+    <span class="src">PYQ January 2026</span> &middot;
+    <span class="qno">Q5</span> &middot;
+    <span class="marks">Marks: 14</span> &middot;
+    <span class="marks">Approx Time: 26 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C10_U1 : AS 21 &mdash; Consolidated Financial Statements / ICAI Study Mat Topic No : 1.11/1.14</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Prepare a consolidated balance sheet of MN Ltd. and its subsidiary RP Ltd. as on 31st March, 2025. Balance Sheets: Share Capital – MN Ltd. ₹7,000 lakh, RP Ltd. ₹4,000 lakh. Reserve and Surplus – MN Ltd. ₹4,000 lakh (General Reserve 2,600 + P&amp;L 1,400), RP Ltd. ₹3,500 lakh (General Reserve 2,000 + P&amp;L 1,500). Long Term Borrowings – MN Ltd. ₹1,800 lakh, RP Ltd. ₹1,400 lakh. Trade Payable – MN Ltd. ₹2,280 lakh, RP Ltd. ₹1,600 lakh. PPE – MN Ltd. ₹6,800 lakh (Land &amp; Building 4,000 + P&amp;M 2,800), RP Ltd. ₹5,500 lakh (Land &amp; Building 3,500 + P&amp;M 2,000). Non-current Investments – MN Ltd. ₹3,280 lakh (Shares in RP Ltd. 3,000 + Debentures in RP Ltd. 280). Inventory – MN Ltd. ₹2,200 lakh, RP Ltd. ₹1,500 lakh. Trade Receivables – MN Ltd. ₹1,800 lakh (Debtors 1,200 + Bills Receivable 600), RP Ltd. ₹1,200 lakh (Debtors 900 + Bills Receivable 300). Cash and Bank – MN Ltd. ₹1,000 lakh, RP Ltd. ₹2,300 lakh.</p>
+<p>Additional Information: (1) MN Ltd. acquired 75% shares in RP Ltd. on 1st April, 2024. On acquisition date: General Reserve of RP Ltd. ₹1,600 lakh; P&amp;L Account of RP Ltd. ₹1,200 lakh. (2) On 1st April, 2024, RP Ltd. declared dividend @12% for the year ended 31st March, 2024. MN Ltd. credited the dividend received to its P&amp;L Account. (3) RP Ltd. sold goods worth ₹160 lakh to MN Ltd. during the year, profit ₹40 lakh. MN Ltd.'s inventory includes ₹80 lakh of these goods still unsold as on 31st March, 2025. (4) MN Ltd. holds ₹280 lakh of RP Ltd.'s debentures, included in RP Ltd.'s long-term borrowings. (14 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Consolidated Balance Sheet of MN Ltd. and its subsidiary RP Ltd. as at 31st March, 2025:</p>
+<table>
+<thead><tr><th>Particulars</th><th>Note No.</th><th>₹ in Lakhs</th></tr></thead>
+<tbody>
+<tr><td>I. Equity and Liabilities: (1)(a) Share Capital</td><td>1</td><td>7,000</td></tr>
+<tr><td>(b) Reserves and Surplus</td><td>2</td><td>6,610</td></tr>
+<tr><td>(2) Minority Interest (W.N.4)</td><td></td><td>1,870</td></tr>
+<tr><td>(3) Long term borrowings (1,800+1,400−280)</td><td></td><td>2,920</td></tr>
+<tr><td>(4) Trade payables (2,280+1,600)</td><td></td><td>3,880</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>22,280</strong></td></tr>
+<tr><td>II. Assets: (1) PPE</td><td>3</td><td>12,300</td></tr>
+<tr><td>(2)(a) Inventories</td><td></td><td>3,680</td></tr>
+<tr><td>(b) Trade receivables</td><td>4</td><td>3,000</td></tr>
+<tr><td>(c) Cash and cash equivalents</td><td></td><td>3,300</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>22,280</strong></td></tr>
+</tbody>
+</table>
+<p>Notes: 1. Share Capital – 700 Lakh Equity shares of ₹10 each = ₹7,000. 2. Reserves and Surplus – Capital Reserve 2,100 + General Reserve 2,900 + P&amp;L 1,610 = ₹6,610. 3. PPE – Land and Buildings (4,000+3,500) 7,500 + Plant and Machinery (2,800+2,000) 4,800 = ₹12,300. 4. Trade receivables – Debtors (1,200+900) 2,100 + Bills Receivable (600+300) 900 = ₹3,000.</p>
+<p><strong>Working Notes:</strong></p>
+<p>1. RP Ltd.'s General Reserve: Balance b/d 1,600 + transfer from P&amp;L (balancing) 400 = Balance c/d 2,000.</p>
+<p>2. RP Ltd.'s Profit and Loss Account: Balance b/d 1,200 + Net Profit for year (balancing) 1,180 − Transfer to General Reserve 400 − Dividend paid (12% on 4,000) 480 = Balance c/d 1,500.</p>
+<p>3. Calculation of Minority Interest: Equity share capital (4,000×25%) 1,000 + Pre-acquisition Profit 580 + Share in Revenue Profit (100+190) 290 = ₹1,870.</p>
+<p>4. Analysis of Profit:</p>
+<table>
+<thead><tr><th>Particulars</th><th>Capital Profit – Pre-Acq. General Reserve</th><th>Capital Profit – P&amp;L</th><th>Revenue Profit</th></tr></thead>
+<tbody>
+<tr><td>Opening Balance in General Reserve</td><td>1,600</td><td></td><td></td></tr>
+<tr><td>Add: Transfer from Profit &amp; Loss</td><td>400</td><td></td><td></td></tr>
+<tr><td>Opening Bal in Profit &amp; Loss</td><td></td><td>1,200</td><td></td></tr>
+<tr><td>Add: Profit earned in C.Y.</td><td></td><td></td><td>1,180</td></tr>
+<tr><td>Less: Dividend paid</td><td></td><td>(480)</td><td></td></tr>
+<tr><td>Less: Transfer to General Reserve</td><td></td><td></td><td>(400)</td></tr>
+<tr><td>Less: Unrealised profit (80×40/160)</td><td></td><td></td><td>(20)</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>2,000</strong></td><td><strong>720</strong></td><td><strong>760</strong></td></tr>
+</tbody>
+</table>
+<p><em>(Total capital profit combining the two capital columns = 2,320; MN Ltd. 75% = 1,740 + 300 = capital, 570 = revenue; Minority 25% = 580 capital + 190 revenue + 100 general-reserve-share, consistent with the Minority Interest working above.)</em></p>
+<p>5. Calculation of Cost of Control: Cost of Investment 3,000; Less: Dividend received out of Pre-acquisition Profit (4,000×12%×75%) (360); Subtotal (A) 2,640. Share in Net Assets of RP Ltd.: Share Capital (4,000×75%) 3,000 + Pre-Acq. Profit (W.N.2) 1,740; Subtotal (B) 4,740. Goodwill/(Capital Reserve) (A−B) = (2,100), i.e. Capital Reserve ₹2,100.</p>
+<p>6. Profit &amp; Loss and General Reserve of MN Ltd.: General Reserve – Balance per Balance Sheet 2,600 + Share in Post-Acq. Profit of RP Ltd. 300 = 2,900. Profit &amp; Loss – Balance per Balance Sheet 1,400 + Share in Post-Acq. Profit 570 − Dividend (4,000×12%×75%) (360) = 1,610.</p></div></div>
+  <div class="mistakes icai"><strong>Examiner&rsquo;s Comment:</strong> Several examinees were unable to correctly determine the amounts of capital profits and revenue profits. Errors were also noted in the treatment of unrealised profit in inventory and in the preparation of the consolidated Balance Sheet. Although some examinees attempted the adjustment for dividend paid out of pre-acquisition profits, incorrect treatment of such dividends adversely affected subsequent calculations.<span class="prov">Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock flagged" id="M2C10U1-006">
+  <div class="qmeta">
+    <span class="src">PYQ May 2026</span> &middot;
+    <span class="qno">Q5(a)</span> &middot;
+    <span class="marks">Marks: 4</span> &middot;
+    <span class="marks">Approx Time: 8 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C10_U1 : AS 21 &mdash; Consolidated Financial Statements / ICAI Study Mat Topic No : 1.15</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Glamour Ltd. and its subsidiary Fashion Ltd. has provided you the following information for the year ended 31st March, 2026:</p>
+<table>
+<thead><tr><th>Particulars</th><th>Glamour Ltd. ('000)</th><th>Fashion Ltd. ('000)</th></tr></thead>
+<tbody>
+<tr><td>Equity share capital</td><td>1,000</td><td>750</td></tr>
+<tr><td>Sales and other operating revenue</td><td>4,500</td><td>2,800</td></tr>
+<tr><td>Inventory as on 1.04.2025</td><td>545</td><td>390</td></tr>
+<tr><td>Inventory as on 31.03.2026</td><td>750</td><td>615</td></tr>
+<tr><td>Dividend income</td><td>125</td><td>80</td></tr>
+<tr><td>Raw materials consumed</td><td>1,550</td><td>940</td></tr>
+<tr><td>Production expenses</td><td>710</td><td>680</td></tr>
+<tr><td>Administrative expenses</td><td>314</td><td>129</td></tr>
+<tr><td>Selling &amp; Distribution expenses</td><td>285</td><td>230</td></tr>
+<tr><td>Interest expenses</td><td>150</td><td>95</td></tr>
+<tr><td>Depreciation</td><td>70</td><td>45</td></tr>
+<tr><td>Wages &amp; salaries</td><td>880</td><td>740</td></tr>
+<tr><td>Loss on sale of investment</td><td>—</td><td>35</td></tr>
+<tr><td>Other non-operating income</td><td>74</td><td>22</td></tr>
+</tbody>
+</table>
+<p>Other information: (i) On 1st April, 2024 Glamour Ltd. acquired 6,000 equity shares of ₹100 each fully paid up in Fashion Ltd. (ii) Fashion Ltd. paid a dividend of 12% for the year ended 31st March, 2025, correctly accounted for by Glamour Ltd. (iii) Glamour Ltd. purchased goods worth ₹5,00,000 (Invoice Price) from Fashion Ltd. at a profit of 25% on cost; 50% still in stock of Glamour Ltd. (iv) Selling &amp; Distribution expenses of Fashion Ltd. includes ₹45,000 paid to Glamour Ltd. as brokerage fees. (v) Administrative expenses of Glamour Ltd. include ₹65,000 paid to Fashion Ltd. as consultancy fees. (vi) Consultancy fees and brokerage fee are to be considered as operating revenues.</p>
+<p>You are required to prepare consolidated Profit and Loss Account of Glamour Ltd. and its subsidiary Fashion Ltd. for the year ended 31st March, 2026 as per Schedule III of the Companies Act, 2013.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Consolidated statement of profit and loss of Glamour Ltd. and its subsidiary Fashion Ltd for the year ended on 31st March, 2026 ('000)</p>
+<table>
+<thead><tr><th>Particulars</th><th>Note No.</th><th>'000</th></tr></thead>
+<tbody>
+<tr><td>Revenue from operations</td><td>1</td><td>6,690</td></tr>
+<tr><td>Other Income</td><td>2</td><td>194</td></tr>
+<tr><td><strong>Total revenue (I)</strong></td><td></td><td><strong>6,884</strong></td></tr>
+<tr><td>Cost of material purchased/consumed</td><td>3</td><td>3,380</td></tr>
+<tr><td>Changes (Increase) in inventories of finished goods</td><td>4</td><td>(380)</td></tr>
+<tr><td>Employee benefit expense</td><td>5</td><td>1,620</td></tr>
+<tr><td>Finance cost</td><td>6</td><td>245</td></tr>
+<tr><td>Depreciation and amortization expense</td><td>7</td><td>115</td></tr>
+<tr><td>Other expenses</td><td>8</td><td>848</td></tr>
+<tr><td><strong>Total expenses (II)</strong></td><td></td><td><strong>5,828</strong></td></tr>
+<tr><td><strong>Profit before tax (I−II)</strong></td><td></td><td><strong>1,056</strong></td></tr>
+</tbody>
+</table>
+<p>Notes to Accounts (figures '000):</p>
+<p>1. Revenue from operations: Glamour 4,500 + Fashion 2,800 = 7,300; Less: Inter-company sales (500); Consultancy fees received by Fashion from Glamour (65); Brokerage received by Glamour from Fashion (45) = <strong>6,690</strong>.</p>
+<p>2. Other Income: Dividend income Glamour 125 + Fashion 80 = 205; Less: Dividend realized from Fashion Ltd. (6,00,000×12% = 72) = 133. Other Non-operating Income: Glamour 74 + Fashion 22 = 96; Less: Loss on sale of investments Fashion (35) = 61. Total = 133+61 = <strong>194</strong>.</p>
+<p>3. Cost of material purchased/consumed: Glamour 1,550 + Fashion 940 = 2,490; Less: Inter-company purchase (500) = 1,990; Direct expenses (Production): Glamour 710 + Fashion 680 = 1,390. Total = <strong>3,380</strong>.</p>
+<p>4. Changes (Increase) in inventories: Glamour (750−545) 205 + Fashion (615−390) 225 = 430; Less: Unrealized profits (₹2,00,000×25%) 50 = <strong>(380)</strong>.</p>
+<p>5. Employee benefits: Wages and salaries Glamour 880 + Fashion 740 = <strong>1,620</strong>.</p>
+<p>6. Finance cost: Interest Glamour 150 + Fashion 95 = <strong>245</strong>. 7. Depreciation: Glamour 70 + Fashion 45 = <strong>115</strong>.</p>
+<p>8. Other expenses: Administrative expenses Glamour 314 + Fashion 129 = 443; Less: Consultancy fees received by Fashion from Glamour (65) = 378. Selling and distribution: Glamour 285 + Fashion 230 = 515; Less: Brokerage received by Glamour from Fashion (45) = 470. Total = 378+470 = <strong>848</strong>.</p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Many examinees eliminated the full ₹5,00,000 inter-company sale from revenue but forgot to also eliminate the unrealised profit on the 50% of that stock still held by Glamour Ltd. at year end, overstating consolidated changes-in-inventory.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C10U1-007">
+  <div class="qmeta">
+    <span class="src">PYQ September 2025</span> &middot;
+    <span class="qno">Q5</span> &middot;
+    <span class="marks">Marks: 14</span> &middot;
+    <span class="marks">Approx Time: 26 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C10_U1 : AS 21 &mdash; Consolidated Financial Statements / ICAI Study Mat Topic No : 1.6</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Seva Limited and subsidiary Meva Limited, Balance Sheets as at 31st March 2025 (₹ Lakh): Seva — Equity Shares of ₹10 6,000, General Reserve 1,500, P&amp;L 2,000, 10% Debentures 1,180, Trade Payable 1,500; Land and Building 4,000, Plant &amp; Machinery 1,460, Investments (Meva shares) 3,000, Inventories 1,400, Trade Receivable 1,420, Cash at Bank 550, Cash in Hand 350. Meva — Equity Shares of ₹10 4,000, General Reserve 1,200, P&amp;L 1,500, 10% Debentures 820, Trade Payable 1,080; Land and Building 4,150, Plant &amp; Machinery 1,650, Inventories 1,100, Trade Receivable 1,000, Cash at Bank 600, Cash in Hand 100. Seva acquired 80% of Meva on 1st April 2024 (Meva's General Reserve ₹2,000 lakh, P&amp;L ₹800 lakh on that date). On 1st November 2024, Meva issued a 1:3 bonus share out of General Reserve (as at 31 March 2024 balance). On 31st March 2025, Seva's inventory includes goods purchased from Meva for ₹125 lakh, on which Meva made a profit of ₹25 lakh. Prepare the Consolidated Balance Sheet as per Schedule III.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p><strong>W.N.9 Bonus shares:</strong> Meva's shares post-bonus 4,000 lakh (at ₹10 face value, i.e. 400 lakh shares) represent 4/3 of pre-bonus holding; pre-bonus = 4,000×3/4=3,000; bonus issued = 4,000−3,000=1,000 (lakh, i.e. ₹1,000 lakh face value), funded from General Reserve.</p>
+<p><strong>W.N.1 Meva's General Reserve movement:</strong> Opening 2,000 − Bonus 1,000 + transfer from P&amp;L 200 = Closing 1,200.</p>
+<p><strong>W.N.2 Meva's P&amp;L movement:</strong> Opening 800 − transfer to General Reserve 200 + Net profit for the year (balancing) 900 = Closing 1,500.</p>
+<p><strong>W.N.4 Capital profits (pre-acquisition):</strong> General Reserve at acquisition, net of the bonus issue (2,000−1,000=1,000) + P&amp;L at acquisition (800) = 1,800. Seva's 80% share = 1,440; Minority's 20% = 360.</p>
+<p><strong>W.N.3 Revenue profits (post-acquisition):</strong> 900 (from W.N.2); Seva's 80% share: General Reserve 160 (80% of 200) + P&amp;L 560 (80% of 700, i.e. profit after removing the amount already transferred to reserve) = 720; Minority's 20% = 180.</p>
+<p><strong>W.N.5 Capital Reserve:</strong> Paid-up value of shares held (80% of 4,000) 3,200 + share in capital profits 1,440 = 4,640; less cost of shares 3,000 = <strong>Capital Reserve ₹1,640 lakh.</strong></p>
+<p><strong>W.N.6 Minority Interest:</strong> 20% of share capital (800) + share in revenue profits (180) + share in capital profits (360) = 1,340; less unrealised profit (20% of 25 = 5, Meva's share of the inter-company profit since Meva is the seller) = <strong>Minority Interest ₹1,335 lakh.</strong></p>
+<p><strong>Consolidated Balance Sheet as at 31st March, 2025 (₹ Lakh):</strong> Share Capital 6,000 (Seva's own, unchanged); Reserves and Surplus 5,840 (Capital Reserve 1,640 + General Reserve 1,660 + P&amp;L 2,540); Minority Interest 1,335; Long-term borrowings 2,000 (1,180+820); Trade payables 2,580 (1,500+1,080). <strong>Total 17,755.</strong> Assets: PPE 11,260 (Land&amp;Building 8,150 [4,000+4,150] + Plant&amp;Machinery 3,110 [1,460+1,650]); Inventories 2,475 (1,400+1,100−25 unrealised profit); Trade receivables 2,420 (1,420+1,000); Cash and cash equivalents 1,600 (Bank 1,150 + Cash in hand 450). <strong>Total 17,755.</strong></p>
+</div></div></div>
+  <div class="mistakes icai"><strong>Examiner&rsquo;s Comment:</strong> Many examinees were unable to prepare the Balance Sheet and Notes to Accounts as per Schedule III. Several examinees failed to give the correct treatment to the issue of bonus shares and the unrealised profit included in closing inventory arising from an upstream transaction. Due to these errors, the computation of capital profits (pre-acquisition) and revenue profits (post-acquisition) was incorrect, which further affected the final answers.<span class="prov">Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<h2>II. Integrated Questions (AS 21 with Other Standards)</h2>
+<p class='section-intro'>Questions where AS 21 judgment is one part of a larger, genuinely connected question also testing another standard.</p>
+<div class="empty-section">No questions in this batch are placed in Consolidated Financial Statements for this section. This is an honest finding, not an extraction gap — see the scope note above.</div>
+
+<div class="note" style="margin-top:48px;">
+Found an error? Please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference (shown at the top of each card) so it can be fixed in the next edition. Thank you for helping make this book better.
+</div>
+
+<div class="error-register">
+<h2>Sanjeevani Booti 2: Error Register for Consolidated Financial Statements</h2>
+<h3>Section 1: Concepts I Forgot</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<h3>Section 2: Mistakes I Repeated More Than Twice</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+</div>
+
+<div class="brand-footer">
+#KeepLearning #DreamBig &nbsp;&middot;&nbsp; #LoveWhatYouDo<br>
+<strong>AS 21 — Consolidated Financial Statements</strong>
+</div>
+
+</body>
+</html>

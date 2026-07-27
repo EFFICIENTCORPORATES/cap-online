@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Internal Reconstruction — Internal Reconstruction</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;margin:24px;max-width:980px;margin-left:auto;margin-right:auto;color:#222;background:#fff;line-height:1.5;}
+h1{font-size:24px;margin-bottom:4px;}
+h2{font-size:19px;margin-top:44px;border-bottom:2px solid #333;padding-bottom:6px;}
+.note{background:#fff8e1;border:1px solid #e0c46c;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;}
+.empty-section{background:#f0f0f0;border:1px dashed #999;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;color:#555;font-style:italic;}
+.section-intro{font-size:13.5px;color:#444;margin-top:-6px;}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:12.5px;}
+th,td{border:1px solid #999;padding:5px 7px;text-align:left;vertical-align:top;}
+th{background:#2c3e50;color:#fff;}
+.qblock{border:1px solid #ccc;border-radius:8px;padding:14px 18px;margin:18px 0;background:#fdfdfd;}
+.qblock.flagged{border-color:#d98a8a;background:#fffaf7;}
+.qmeta{font-size:12px;color:#555;margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed #ccc;}
+.qmeta .src{font-weight:bold;color:#2c3e50;}
+.qmeta .marks{font-weight:bold;}
+.badge{display:inline-block;background:#fff3e0;border:1px solid #e0b46c;border-radius:10px;padding:1px 8px;font-size:11px;margin-left:6px;}
+.badge.icai{background:#e0f0ff;border-color:#6ca8e0;}
+.question{margin:10px 0;}
+.answer-block{margin:10px 0;background:#eafbea;padding:8px 12px;border-radius:6px;}
+.case-facts{background:#f5f5fb;border-left:3px solid #8888c0;padding:6px 12px;margin-bottom:8px;font-size:13px;}
+.mistakes{margin:10px 0;padding:8px 12px;border-radius:6px;font-size:13.5px;border-left:3px solid #999;}
+.mistakes.icai{background:#fff3e0;border-left-color:#e0b46c;color:#5a3d0a;}
+.mistakes.synth{background:#fdf1f1;border-left-color:#d98a8a;color:#7a2f2f;}
+.mistakes .prov{font-style:italic;color:#666;font-size:11.5px;display:block;margin-top:4px;}
+.na{color:#999;font-style:italic;}
+.notebook-ref{margin-top:10px;font-size:12.5px;color:#444;border-top:1px dashed #ccc;padding-top:6px;}
+.notebook-ref .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:160px;}
+.self-notes{margin-top:8px;border:1px solid #ccc;background:#fff;border-radius:6px;padding:8px 12px;}
+.self-notes .notes-lines{margin-top:4px;}
+.self-notes .dotted-line{height:22px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+.tag-placeholder{margin-top:8px;font-size:12.5px;color:#444;}
+.tag-placeholder .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:220px;}
+.revision-phase{margin-top:8px;font-size:12.5px;color:#444;}
+.revision-phase .box{display:inline-block;border:1px solid #888;width:12px;height:12px;margin:0 3px 0 10px;vertical-align:middle;}
+.brand-header{text-align:center;font-size:11px;color:#777;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:18px;letter-spacing:.3px;}
+.brand-header strong{color:#2c3e50;}
+.brand-footer{text-align:center;font-size:11px;color:#777;border-top:1px solid #eee;padding-top:10px;margin-top:36px;line-height:1.8;}
+.brand-footer strong{color:#2c3e50;}
+.error-register{page-break-before:always;break-before:page;margin-top:40px;}
+.error-register h2{margin-top:8px;}
+.error-register h3{font-size:15px;color:#444;margin-top:28px;}
+.error-register .dotted-line{height:34px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+</style>
+</head>
+<body>
+
+<div class="brand-header">
+<strong>Pranav Bhaiya</strong> &middot; The Newton of Accounts &middot; AIR 1-1-5<br>
+Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma, Not Results
+</div>
+
+<h1>Internal Reconstruction — Internal Reconstruction</h1>
+<p>Every MTP/RTP/PYQ question that tests this chapter, collected in one place, with official answers and topic tags — so you can practise every question this topic has been examined with, without hunting through separate papers.</p>
+
+<div class="note">
+<strong>A note on accuracy (please read):</strong> This is the first edition of this book, assembled with AI assistance and reviewed as carefully as we could manage, but it has not been independently audited question-by-question. If you spot an error &mdash; a wrong figure, a wrong answer, anything that looks off &mdash; please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference so it can be corrected in the next edition.
+</div>
+
+<div class="note">
+<strong>Scope of this book (7 questions):</strong> Covers 10 sittings: MTP Jan2026 Set1, MTP Jan2026 Set2, MTP May2026 Set1, MTP May2026 Set2, PYQ Jan2026, PYQ May2026, PYQ Sep2025, RTP Jan2026, RTP May2026, RTP Sep2025. MCQs on this chapter are deliberately not included here — practise those on the dedicated MCQ platform; this book is for descriptive/scenario practice with full worked answers.
+</div>
+
+<div class="note">
+<strong>How this book is organised:</strong> Two sections — <strong>I. Descriptive (pure Internal Reconstruction)</strong> and <strong>II. Integrated</strong> (questions where Internal Reconstruction is one part of a larger question that also tests another standard). An empty Section II for a chapter is normal and expected, not a mistake — most multi-topic-looking questions are split so each topic gets its own clean entry, so genuinely combined questions are the rarer case. Each answer includes either a real <strong>Examiner's Comment</strong> (tan/orange box, quoted from ICAI's own published feedback, where one exists for that sitting) or an <strong>Author's Note</strong> (pale pink box, a likely pitfall identified by the author, not an official ICAI finding, and may not apply in every case) &mdash; see <strong>How to Read this Book.md</strong> for the full key to every colour and symbol used.
+</div>
+
+<h2>I. Descriptive &amp; Scenario-Based Questions (pure Internal Reconstruction)</h2>
+<p class='section-intro'>Full descriptive/scenario questions where this chapter is the sole topic tested (after independent-question splitting).</p>
+
+<div class="qblock" id="M3C14U0-001">
+  <div class="qmeta">
+    <span class="src">MTP January 2026 Set 1</span> &middot;
+    <span class="qno">Q4(b)</span> &middot;
+    <span class="marks">Marks: 8</span> &middot;
+    <span class="marks">Approx Time: 15 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C14_U0 : Internal Reconstruction / ICAI Study Mat Topic No : 2</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Summarized Balance Sheet of Vijay Ltd. as on 31st March, 2025: Equity Shares of ₹10 each 3,50,000; 8% Cumulative Preference Shares of ₹100 each 1,75,000; 6% Debentures of ₹100 each 1,40,000; Sundry Creditors 1,75,000; Provision for taxation 3,500; Total 8,43,500. Assets: PPE 4,37,500; Investments (Market value ₹33,250) 35,000; Current Assets 3,50,000; P&amp;L A/c (Dr.) 21,000; Total 8,43,500. Scheme of Internal Reconstruction approved and effective 31st March, 2025: (1) Investments brought to market value; (2) Taxation liability settled at ₹5,250 out of Current Assets; (3) balance of P&amp;L written off; (4) equity shares reduced to ₹4 each; (5) preference shares reduced to ₹60 each; (6) debenture rate increased to 9%, debenture holders surrender ₹100 debentures and exchange 1-for-1 for fresh ₹80 debentures; (7) balance Current Assets revalued at ₹1,57,500; (8) PPE written down to 80%; (9) one creditor of ₹70,000 gives up 50% of claim, allotted 8,750 equity shares of ₹4 each in settlement. Pass Journal entries.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p><strong>Journal entries (books of Vijay Ltd.):</strong></p>
+<ol>
+<li>Capital Reduction A/c Dr. 1,750; To Investments A/c 1,750 (investments revalued to market value).</li>
+<li>(a) Provision for taxation A/c Dr. 3,500; Capital Reduction A/c Dr. 1,750; To Liability for taxation 5,250 (tax liability ascertained). (b) Liability for Taxation Dr. 5,250; To Current Assets (Bank) 5,250 (tax paid).</li>
+<li>Capital Reduction A/c Dr. 21,000; To Profit &amp; Loss A/c 21,000 (P&amp;L debit balance written off).</li>
+<li>Equity Share Capital (₹10) A/c Dr. 3,50,000; To Equity Share Capital (₹4) A/c 1,40,000; To Capital Reduction A/c 2,10,000 (conversion of equity capital).</li>
+<li>8% Cumulative Preference Share Capital A/c Dr. 1,75,000; To 8% Cumulative Preference Share Capital A/c 1,05,000; To Capital Reduction A/c 70,000 (conversion of preference capital to ₹60 each).</li>
+<li>6% Debentures A/c Dr. 1,40,000; To 9% Debentures A/c 1,12,000; To Capital Reduction A/c 28,000 (fresh ₹80 debentures issued to existing holders).</li>
+<li>Capital Reduction A/c Dr. 1,87,250; To Current Assets A/c 1,87,250 (current assets revalued).</li>
+<li>Capital Reduction A/c Dr. 87,500; To Property, Plant &amp; Equipment A/c 87,500 (PPE written down to 80%).</li>
+<li>Sundry Creditors A/c Dr. 70,000; To Equity Share Capital (₹4) A/c 35,000; To Capital Reduction A/c 35,000 (creditor's claim settled 50% cash-equivalent-in-shares, 50% given up).</li>
+<li>Capital Reduction A/c Dr. 43,750; To Capital Reserve A/c (balancing figure) 43,750 (balance of Capital Reduction transferred to Capital Reserve).</li>
+</ol>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees missed crediting Capital Reduction for the &quot;gain&quot; side of each conversion entry (e.g. the difference between old and new share/debenture face values), recording only the reduction without recognising the corresponding Capital Reduction credit.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M3C14U0-002">
+  <div class="qmeta">
+    <span class="src">MTP January 2026 Set 2</span> &middot;
+    <span class="qno">Q4</span> &middot;
+    <span class="marks">Marks: 14</span> &middot;
+    <span class="marks">Approx Time: 26 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C14_U0 : Internal Reconstruction / ICAI Study Mat Topic No : 3</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Summarized Balance Sheet of Star Ltd. as on 31st March, 2025: 15,000 8% Preference shares of ₹50 each 7,50,000; 18,750 Equity shares of ₹50 each 9,37,500; Profit and Loss A/c (Dr.) (5,63,750); Loan 7,16,250; Trade Payables 2,58,750; Other Liabilities 43,750; Total 21,42,500. Assets: Building at cost less depreciation 5,00,000; Plant at cost less depreciation 3,35,000; Trademarks and goodwill at cost 3,97,500; Inventory 5,00,000; Trade Receivables 4,10,000; Total 21,42,500. (Preference dividend in arrears 5 years.) Scheme of reconstruction: (i) equity shares reduced ₹50→₹5, shareholders subscribe 3 new equity shares of ₹5 for each held; (ii) preference shareholders forego dividend arrears, accept 4 new 6% preference shares of ₹10 plus 3 new equity shares of ₹5 for each ₹50 preference share; (iii) lenders convert ₹1,87,500 of loan into 15,000 new preference shares of ₹10 plus 7,500 new equity shares of ₹5; (iv) directors subscribe cash for 25,000 new equity shares of ₹5 (in addition to (i)); (v) ₹2,50,000 of cash received used to reduce the loan; (vi) equity capital cancelled applied to write off the P&amp;L debit balance and ₹43,750 from plant, balance to write down trademarks/goodwill; nominal capital increased to ₹8,12,500 (preference) and ₹9,37,500 (equity). Pass journal entries and prepare the post-reconstruction Balance Sheet.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p><strong>Journal entries (books of Star Ltd.):</strong></p>
+<ol>
+<li>Equity Share Capital A/c (₹50) Dr. 9,37,500; To Equity Share Capital A/c (₹5) 93,750; To Capital Reduction A/c 8,43,750 (equity capital reduced to ₹5 nominal).</li>
+<li>Bank A/c Dr. 2,81,250; To Equity Share Capital A/c 2,81,250 (3 rights shares per share held, subscribed).</li>
+<li>8% Preference Share Capital A/c (₹50) Dr. 7,50,000; Capital Reduction A/c Dr. 75,000; To 6% Preference Share Capital A/c (₹10) 6,00,000; To Equity Share Capital A/c (₹50) 2,25,000 (conversion, plus 3 equity shares per preference share held).</li>
+<li>Loan A/c Dr. 1,87,500; To 6% Preference Share Capital A/c 1,50,000 (15,000 × ₹10); To Equity Share Capital A/c 37,500 (7,500 × ₹5) (loan converted to shares).</li>
+<li>Bank A/c Dr. 1,25,000 (25,000 × ₹5); To Equity Share Application A/c 1,25,000 (directors' subscription).</li>
+<li>Equity Share Application A/c Dr. 1,25,000; To Equity Share Capital A/c 1,25,000 (application money transferred).</li>
+<li>Loan A/c Dr. 2,50,000; To Bank A/c 2,50,000 (loan repaid from cash proceeds).</li>
+<li>Capital Reduction A/c Dr. 7,68,750; To Profit and Loss A/c 5,63,750; To Plant A/c 43,750; To Trademarks and Goodwill A/c (balancing figure) 1,61,250 (losses/assets written off).</li>
+</ol>
+<p><strong>Balance Sheet of Star Ltd. (and reduced) as on 31.3.2025:</strong> Share Capital 15,12,500 (75,000 6% Pref. shares of ₹10 = 7,50,000 + 1,52,500 Equity shares of ₹5 = 7,62,500); Long-term borrowings 2,78,750 (7,16,250−1,87,500−2,50,000); Trade Payables 2,58,750; Other Liabilities 43,750; <strong>Total 20,93,750.</strong> Assets: PPE 7,91,250 (Building 5,00,000 + Plant 2,91,250 after the 43,750 write-off); Intangible assets (Trademarks/goodwill) 2,36,250; Inventories 5,00,000; Trade Receivables 4,10,000; Cash 1,56,250 (2,81,250+1,25,000−2,50,000); <strong>Total 20,93,750.</strong></p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees missed one of the several simultaneous share issues (rights issue, preference-conversion bonus shares, lender-conversion shares, director subscription), producing an incomplete post-reconstruction share capital figure.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M3C14U0-003">
+  <div class="qmeta">
+    <span class="src">MTP May 2026 Set 1</span> &middot;
+    <span class="qno">Q4</span> &middot;
+    <span class="marks">Marks: 14</span> &middot;
+    <span class="marks">Approx Time: 26 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C14_U0 : Companies Act 2013, s.66 &mdash; Accounting for Reconstruction of Companies (Internal Reconstruction) / ICAI Study Mat Topic No : 3</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>4. Following is the Balance Sheet of Tourna Limited as at 31st March, 2025:</p>
+<table>
+<tr><th>Particulars</th><th>Note</th><th>₹</th></tr>
+<tr><td>Equity and Liabilities</td><td></td><td></td></tr>
+<tr><td>1. Shareholders' funds</td><td></td><td></td></tr>
+<tr><td>  A. Share Capital</td><td>1</td><td>24,00,000</td></tr>
+<tr><td>  B. Reserves and Surplus</td><td>2</td><td>(9,10,000)</td></tr>
+<tr><td>2. Non-current liabilities</td><td></td><td></td></tr>
+<tr><td>  A. Long-term borrowings</td><td>3</td><td>3,20,000</td></tr>
+<tr><td>3. Current liabilities</td><td></td><td></td></tr>
+<tr><td>  A. Trade Payables</td><td></td><td>1,15,000</td></tr>
+<tr><td>  B. Short Term Borrowings – Bank Overdraft</td><td></td><td>1,40,000</td></tr>
+<tr><td>  C. Other current liabilities</td><td>4</td><td>32,000</td></tr>
+<tr><td>  D. Short term provisions</td><td>5</td><td>42,000</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>21,39,000</strong></td></tr>
+<tr><td>Assets</td><td></td><td></td></tr>
+<tr><td>1. Non-current assets</td><td></td><td></td></tr>
+<tr><td>  A. Property, Plant and Equipment</td><td>6</td><td>7,80,000</td></tr>
+<tr><td>  B. Intangible Assets</td><td>7</td><td>1,70,000</td></tr>
+<tr><td>  C. Non-Current Investments</td><td>8</td><td>1,80,000</td></tr>
+<tr><td>2. Current Assets</td><td></td><td></td></tr>
+<tr><td>  A. Inventory</td><td></td><td>5,12,000</td></tr>
+<tr><td>  B. Trade receivables</td><td></td><td>4,32,000</td></tr>
+<tr><td>  C. Cash and cash equivalents</td><td></td><td>65,000</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>21,39,000</strong></td></tr>
+</table>
+<p><strong>Notes to Accounts:</strong></p>
+<table>
+<tr><th colspan="2">1. Share Capital</th><th>₹</th></tr>
+<tr><td colspan="2">Equity share capital – 16,000 Equity Shares of ₹100 each</td><td>16,00,000</td></tr>
+<tr><td colspan="2">8,000 6% Preference Shares of ₹100 each</td><td>8,00,000</td></tr>
+<tr><td colspan="2"><strong>Total</strong></td><td><strong>24,00,000</strong></td></tr>
+<tr><th colspan="2">2. Reserves and Surplus</th><th>₹</th></tr>
+<tr><td colspan="2">Debit balance of Profit and loss Account</td><td>(9,10,000)</td></tr>
+<tr><th colspan="2">3. Long-term borrowings</th><th>₹</th></tr>
+<tr><td colspan="2">3,200 10% Debentures</td><td>3,20,000</td></tr>
+<tr><th colspan="2">4. Other current liabilities</th><th>₹</th></tr>
+<tr><td colspan="2">Interest payable on debentures</td><td>32,000</td></tr>
+<tr><th colspan="2">5. Short term provisions</th><th>₹</th></tr>
+<tr><td colspan="2">Provision for taxation</td><td>42,000</td></tr>
+<tr><th colspan="2">6. Property, Plant and Equipment</th><th>₹</th></tr>
+<tr><td colspan="2">Plant &amp; Machinery</td><td>5,00,000</td></tr>
+<tr><td colspan="2">Furniture &amp; Fixture</td><td>2,80,000</td></tr>
+<tr><td colspan="2"><strong>Total</strong></td><td><strong>7,80,000</strong></td></tr>
+<tr><th colspan="2">7. Intangible Assets</th><th>₹</th></tr>
+<tr><td colspan="2">Patents &amp; Copyrights</td><td>1,70,000</td></tr>
+<tr><th colspan="2">8. Non-current Investments</th><th>₹</th></tr>
+<tr><td colspan="2">Investments (Market Value ₹1,10,000)</td><td>1,80,000</td></tr>
+</table>
+<p>As on 1st April, 2025, the following scheme of Tourna Limited was finalized for which necessary resolution was passed and approvals were obtained from appropriate authorities. Accordingly, it was decided that:</p>
+<ol>
+<li>Each equity share is to be sub-divided into ten fully paid-up equity shares of ₹10 each. After sub-division, each shareholder shall surrender to the company 40% of his holding, for the purpose of reissue to trade payables as necessary.</li>
+<li>Preference shareholders would give up 30% of their capital and 12% Debentures (face value ₹100 each) shall be issued to them for balance holdings.</li>
+<li>The company would issue additional 12% Debentures (face value ₹100 each) for ₹4,00,000 for meeting its working capital requirement and final settlement of Bank Overdraft at 90% of the amount.</li>
+<li>Existing debenture holders would accept Furniture &amp; Fixture in full settlement of their dues.</li>
+<li>Trade payables claim shall be reduced to 70%, it is to be settled by the issue of equity shares of ₹10 each out of shares surrendered.</li>
+<li>The shares surrendered and not re-issued shall be cancelled.</li>
+<li>The taxation liability is to be settled at 50,000.</li>
+<li>Investment value to be reduced to market price.</li>
+<li>Balance of profit and loss account is to be written off.</li>
+<li>The value of inventories is to be increased by ₹32,000 and provision for Doubtful Debts is to be created at 5% of Trade Receivables.</li>
+</ol>
+<p>You are required to: (i) Pass necessary journal entries in the books of account of Tourna Limited. (ii) Prepare Reconstruction Account, and (iii) Prepare Balance Sheet of the company after internal reconstruction. (14 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p><strong>Journal Entries in the books of Tourna Ltd.</strong></p>
+<table>
+<tr><th>Particulars</th><th>Dr. (₹)</th><th>Cr. (₹)</th></tr>
+<tr><td>Equity Share Capital (₹100) A/c Dr.</td><td>16,00,000</td><td></td></tr>
+<tr><td>  To Share Surrender A/c</td><td></td><td>6,40,000</td></tr>
+<tr><td>  To Equity Share Capital (₹10) A/c</td><td></td><td>9,60,000</td></tr>
+<tr><td colspan="3"><em>(Subdivision of 16,000 equity shares of ₹100 each into 1,60,000 equity shares of ₹10 each and surrender of 64,000 of such subdivided shares as per capital reduction scheme)</em></td></tr>
+<tr><td>6% Preference Share Capital (₹100) A/c Dr.</td><td>8,00,000</td><td></td></tr>
+<tr><td>  To 12% Debentures A/c</td><td></td><td>5,60,000</td></tr>
+<tr><td>  To Reconstruction A/c</td><td></td><td>2,40,000</td></tr>
+<tr><td colspan="3"><em>(12% Debenture issued to Preference Shareholders and 30% of the capital foregone by them)</em></td></tr>
+<tr><td>Bank A/c Dr.</td><td>4,00,000</td><td></td></tr>
+<tr><td>  To 12% Debenture (₹100) A/c</td><td></td><td>4,00,000</td></tr>
+<tr><td colspan="3"><em>(Being 12% debentures issued)</em></td></tr>
+<tr><td>Bank Overdraft A/c Dr.</td><td>1,40,000</td><td></td></tr>
+<tr><td>  To Bank A/c</td><td></td><td>1,26,000</td></tr>
+<tr><td>  To Reconstruction A/c</td><td></td><td>14,000</td></tr>
+<tr><td colspan="3"><em>(Being bank overdraft amount paid)</em></td></tr>
+<tr><td>10% Debentures A/c Dr.</td><td>3,20,000</td><td></td></tr>
+<tr><td>Interest payable A/c Dr.</td><td>32,000</td><td></td></tr>
+<tr><td>  To Debenture holders A/c</td><td></td><td>3,52,000</td></tr>
+<tr><td colspan="3"><em>(Being Interest payable on the 10% debentures credited to debenture holders A/c)</em></td></tr>
+<tr><td>Debentureholder A/c Dr.</td><td>3,52,000</td><td></td></tr>
+<tr><td>  To Furniture &amp; Fixtures A/c</td><td></td><td>2,80,000</td></tr>
+<tr><td>  To Reconstruction A/c</td><td></td><td>72,000</td></tr>
+<tr><td colspan="3"><em>Alternative combined entry: 10% Debentures A/c Dr. 3,20,000; Interest payable A/c Dr. 32,000; To Furniture &amp; fixtures A/c 2,80,000; To Reconstruction A/c 72,000 (Settlement of debenture holders by allotment of Furniture &amp; Fixtures)</em></td></tr>
+<tr><td>Trade payables A/c Dr.</td><td>1,15,000</td><td></td></tr>
+<tr><td>  To Reconstruction A/c</td><td></td><td>1,15,000</td></tr>
+<tr><td colspan="3"><em>(Transferred claims of the trade payables to reconstruction account, 30% of which is being clear reduction and equity shares are being issued in consideration of the balance)</em></td></tr>
+<tr><td>Share Surrender A/c Dr.</td><td>6,40,000</td><td></td></tr>
+<tr><td>  To Equity Share Capital (₹10) A/c</td><td></td><td>80,500</td></tr>
+<tr><td>  To Reconstruction A/c</td><td></td><td>5,59,500</td></tr>
+<tr><td colspan="3"><em>(Issued equity shares to discharge the claims of the trade payables respectively as per scheme and the balance in share surrender account is being transferred to reconstruction account)</em></td></tr>
+<tr><td>Provision for Taxation A/c Dr.</td><td>42,000</td><td></td></tr>
+<tr><td>Reconstruction A/c Dr.</td><td>8,000</td><td></td></tr>
+<tr><td>  To Bank A/c</td><td></td><td>50,000</td></tr>
+<tr><td colspan="3"><em>(Being taxation liability settled) — Alternative separate entry: Provision for Taxation A/c Dr. 42,000; Reconstruction A/c Dr. 8,000; To Liability for taxation A/c 50,000; then Liability for taxation A/c Dr. 50,000; To Cash/Bank A/c 50,000</em></td></tr>
+<tr><td>Reconstruction A/c Dr.</td><td>70,000</td><td></td></tr>
+<tr><td>  To Investment A/c</td><td></td><td>70,000</td></tr>
+<tr><td colspan="3"><em>(Being investments' value reduced to market price)</em></td></tr>
+<tr><td>Inventory A/c Dr.</td><td>32,000</td><td></td></tr>
+<tr><td>  To Reconstruction A/c</td><td></td><td>10,400</td></tr>
+<tr><td>  To Provision for doubtful debts (4,32,000 x 5%)</td><td></td><td>21,600</td></tr>
+<tr><td colspan="3"><em>(Being inventory revalued and provision for doubtful debts created)</em></td></tr>
+<tr><td>Reconstruction A/c Dr.</td><td>9,32,900</td><td></td></tr>
+<tr><td>  To Profit and Loss A/c</td><td></td><td>9,10,000</td></tr>
+<tr><td>  To Capital Reserve A/c</td><td></td><td>22,900</td></tr>
+<tr><td colspan="3"><em>(Adjusted debit balance of profit and loss account against the reconstruction account and the balance in the latter is being transferred to capital reserve)</em></td></tr>
+</table>
+<p><strong>Reconstruction Account</strong></p>
+<table>
+<tr><th>Particulars</th><th>₹</th><th>Particulars</th><th>₹</th></tr>
+<tr><td>To Provision for taxation</td><td>8,000</td><td>By Preference share capital A/c</td><td>2,40,000</td></tr>
+<tr><td>To Investments A/c</td><td>70,000</td><td>By Bank Overdraft A/c</td><td>14,000</td></tr>
+<tr><td>To Provision for doubtful debt</td><td>21,600</td><td>By 10% Debenture holders A/c</td><td>72,000</td></tr>
+<tr><td>To Profit and loss A/c</td><td>9,10,000</td><td>By Trade payables A/c</td><td>1,15,000</td></tr>
+<tr><td>To Capital reserve A/c</td><td>22,900</td><td>By Share Surrender A/c</td><td>5,59,500</td></tr>
+<tr><td></td><td></td><td>By Inventory</td><td>32,000</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>10,32,500</strong></td><td><strong>Total</strong></td><td><strong>10,32,500</strong></td></tr>
+</table>
+<p><strong>Balance Sheet of Tourna Limited (and reduced) as at 1st April, 2025</strong></p>
+<table>
+<tr><th>Particulars</th><th>Note No.</th><th>₹</th></tr>
+<tr><td>I. Equity and Liabilities</td><td></td><td></td></tr>
+<tr><td>(1) Shareholder's Funds</td><td></td><td></td></tr>
+<tr><td>  (a) Share Capital</td><td>1</td><td>10,40,500</td></tr>
+<tr><td>  (b) Reserves and Surplus</td><td>2</td><td>22,900</td></tr>
+<tr><td>(2) Non-Current Liabilities</td><td></td><td></td></tr>
+<tr><td>  (a) Long-term borrowings</td><td>3</td><td>9,60,000</td></tr>
+<tr><td>(3) Current Liabilities</td><td></td><td>—</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>20,23,400</strong></td></tr>
+<tr><td>II. Assets</td><td></td><td></td></tr>
+<tr><td>(1) Non-current assets</td><td></td><td></td></tr>
+<tr><td>  (a) Property, plant and equipment</td><td>4</td><td>5,00,000</td></tr>
+<tr><td>  (b) Intangible assets</td><td>5</td><td>1,70,000</td></tr>
+<tr><td>  (c) Non-current investments</td><td>6</td><td>1,10,000</td></tr>
+<tr><td>(2) Current assets</td><td></td><td></td></tr>
+<tr><td>  (a) Inventories</td><td>7</td><td>5,44,000</td></tr>
+<tr><td>  (b) Trade receivables</td><td>8</td><td>4,10,400</td></tr>
+<tr><td>  (c) Cash and cash equivalents (W.N.)</td><td></td><td>2,89,000</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>20,23,400</strong></td></tr>
+</table>
+<p><strong>Notes to Accounts</strong></p>
+<table>
+<tr><th colspan="2">1. Share Capital</th><th>₹</th></tr>
+<tr><td colspan="2">Equity Share Capital – Issued Capital: 1,04,500 Equity Shares of ₹10 each (9,60,000+80,500)</td><td>10,40,500</td></tr>
+<tr><td colspan="3"><em>(Of the above shares all are allotted as fully paid up pursuant to capital reduction scheme by conversion of equity shares without payment being received in cash)</em></td></tr>
+<tr><th colspan="2">2. Reserve and Surplus</th><th>₹</th></tr>
+<tr><td colspan="2">Capital Reserve</td><td>22,900</td></tr>
+<tr><th colspan="2">3. Long-term borrowings</th><th>₹</th></tr>
+<tr><td colspan="2">Unsecured Loans – 12% Debentures (5,60,000 + 4,00,000)</td><td>9,60,000</td></tr>
+<tr><th colspan="2">4. Property, plant and Equipment</th><th>₹</th></tr>
+<tr><td colspan="2">Plant &amp; Machinery</td><td>5,00,000</td></tr>
+<tr><th colspan="2">5. Intangible assets</th><th>₹</th></tr>
+<tr><td colspan="2">Patents &amp; copyrights</td><td>1,70,000</td></tr>
+<tr><th colspan="2">6. Non-Current Investments</th><th>₹</th></tr>
+<tr><td colspan="2">Investments (1,80,000 − 80,000)</td><td>1,10,000</td></tr>
+<tr><th colspan="2">7. Inventory</th><th>₹</th></tr>
+<tr><td colspan="2">5,12,000; Add: Appreciation under scheme of Reconstruction 32,000</td><td>5,44,000</td></tr>
+<tr><th colspan="2">8. Trade Receivables</th><th>₹</th></tr>
+<tr><td colspan="2">4,32,000; Less: Provision for doubtful debts 21,600</td><td>4,10,400</td></tr>
+</table>
+<p><em>Cash &amp; Bank A/c (Working Note)</em></p>
+<table>
+<tr><th>Particulars</th><th>₹</th><th>Particulars</th><th>₹</th></tr>
+<tr><td>To Opening balance</td><td>65,000</td><td>By Bank Overdraft A/c</td><td>1,26,000</td></tr>
+<tr><td>To 12% Debenture A/c</td><td>4,00,000</td><td>By Liability for taxation</td><td>50,000</td></tr>
+<tr><td></td><td></td><td>By Closing balance</td><td>2,89,000</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>4,65,000</strong></td><td><strong>Total</strong></td><td><strong>4,65,000</strong></td></tr>
+</table></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A significant number of examinees failed to correctly compute the surrendered shares available for re-issue to trade payables after equity sub-division, and several also omitted to route the settlement of debenture holders through the Reconstruction Account when furniture and fixtures were given in full settlement of their dues, instead treating it as a direct asset disposal without recognising the resulting gain.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock flagged" id="M3C14U0-004">
+  <div class="qmeta">
+    <span class="src">PYQ January 2026</span> &middot;
+    <span class="qno">Q2</span> &middot;
+    <span class="marks">Marks: 14</span> &middot;
+    <span class="marks">Approx Time: 26 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C14_U0 : Companies Act 2013, s.66 &mdash; Accounting for Reconstruction of Companies (Internal Reconstruction) / ICAI Study Mat Topic No : 3</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>The business of MA Limited was being carried on continuously at losses. Extracts from its Balance Sheet as at 31st March, 2025: PPE ₹6,50,000; Investments ₹2,55,000; Stock ₹5,10,000; Trade Receivables ₹3,40,000; Cash &amp; Cash Equivalents ₹70,000; P&amp;L A/c debit balance ₹3,25,000; Total ₹21,50,000. Equity and Liabilities: 10,000 Equity Shares @ ₹100 ₹10,00,000; 40,000, 8% Cumulative Preference Shares @ ₹10 ₹4,00,000 (dividends in arrears 3 years); 10% Debentures ₹2,00,000; Unsecured Loans (from directors) ₹80,000; Trade Payables ₹4,10,000; Outstanding interest on debentures ₹60,000; Total ₹21,50,000.</p>
+<p>Scheme of reconstruction (court-approved): (1) Equity shares converted into 20,000 shares of ₹50 each fully paid. (2) After sub-division, each shareholder surrenders 60% of holdings. (3) Preference shareholders forego arrears of dividends in consideration of 8% preference shares converted into 9% preference shares. (4) Trade Payables reduce claim by 60% in consideration of shares of ₹1,50,000 out of surrendered equity shares. (5) Debenture holders' claims reduced to 40%, receiving preference shares of ₹1,00,000 converted from surrendered shares. (6) Assets valued at: Fixed assets ₹4,40,000; Investments ₹2,00,000; Trade Receivables ₹2,50,000; Stock ₹4,50,000. (7) Expenses of reconstruction ₹10,000. (8) Directors forego unsecured loan. (9) P&amp;L balance written off. (10) Further 8,000 equity shares issued to existing members for working capital, fully subscribed and paid up. (11) Shares surrendered and not re-issued shall be cancelled.</p>
+<p>You are required to: (a) Show the journal entries to record the above transaction in the company's books and prepare Reconstruction A/c. (b) Show revised share capital structure of the Company in Notes to Accounts. (14 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Journal Entries in the books of MA Limited:</p>
+<table>
+<thead><tr><th>#</th><th>Particulars</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Equity Share Capital (₹100) A/c Dr. <br/>  To Equity Share Capital (₹50) A/c <br/><em>(Subdivision of 10,000 shares of ₹100 into 20,000 shares of ₹50 each)</em></td><td>10,00,000</td><td>10,00,000</td></tr>
+<tr><td>2</td><td>Equity Share Capital (₹50) A/c Dr. <br/>  To Surrendered Shares A/c <br/><em>(60% of shares surrendered by shareholders)</em></td><td>6,00,000</td><td>6,00,000</td></tr>
+<tr><td>3</td><td>8% Cumulative Preference Share Capital A/c Dr. <br/>  To 9% Preference Share Capital A/c <br/><em>(Conversion of 8% preference shares to 9% for waiving dividend arrears)</em></td><td>4,00,000</td><td>4,00,000</td></tr>
+<tr><td>4</td><td>Trade Payables A/c Dr. <br/>  To Reconstruction A/c <br/><em>(60% claim waived by trade payables)</em></td><td>2,46,000</td><td>2,46,000</td></tr>
+<tr><td>5</td><td>Surrendered Shares A/c Dr. <br/>  To Equity Share Capital (₹50) A/c <br/><em>(Issue of equity shares from pool to trade payables)</em></td><td>1,50,000</td><td>1,50,000</td></tr>
+<tr><td>6</td><td>10% Debenture A/c Dr. <br/>Interest on Debenture A/c Dr. <br/>  To Reconstruction A/c <br/><em>(60% of total debenture liability transferred to Reconstruction account for reduction)</em></td><td>1,20,000 / 36,000</td><td>1,56,000</td></tr>
+<tr><td>7</td><td>Surrendered Shares A/c Dr. <br/>  To 9% Preference share capital A/c <br/><em>(Preference shares issued to debenture holders from surrendered equity shares)</em></td><td>1,00,000</td><td>1,00,000</td></tr>
+<tr><td>8</td><td>Unsecured Loans (Directors) A/c Dr. <br/>  To Reconstruction A/c <br/><em>(Amount waived by directors)</em></td><td>80,000</td><td>80,000</td></tr>
+<tr><td>9</td><td>Surrendered Shares A/c Dr. <br/>  To Reconstruction A/c <br/><em>(Unutilized surrendered shares cancelled and transferred)</em></td><td>3,50,000</td><td>3,50,000</td></tr>
+<tr><td>10</td><td>Bank A/c Dr. <br/>  To Equity Share Capital A/c <br/><em>(Issue of 8,000 fresh equity shares of ₹50 each)</em></td><td>4,00,000</td><td>4,00,000</td></tr>
+<tr><td>11</td><td>Reconstruction A/c Dr. <br/>  To Bank A/c <br/><em>(Payment of reconstruction expenses)</em></td><td>10,000</td><td>10,000</td></tr>
+<tr><td>12</td><td>Reconstruction A/c Dr. <br/>  To Profit and Loss A/c <br/>  To Property, Plant &amp; Equipment A/c <br/>  To Investments A/c <br/>  To Stock A/c <br/>  To Trade Receivables A/c <br/><em>(Accumulated losses and overvalued assets written off)</em></td><td>7,40,000</td><td>3,25,000 / 2,10,000 / 55,000 / 60,000 / 90,000</td></tr>
+<tr><td>13</td><td>Reconstruction A/c Dr. <br/>  To Capital Reserve A/c (Balancing figure) <br/><em>(Transfer of surplus in Reconstruction A/c to Capital Reserve)</em></td><td>82,000</td><td>82,000</td></tr>
+</tbody>
+</table>
+<p>Reconstruction Account:</p>
+<table>
+<thead><tr><th>Particulars</th><th>₹</th><th>Particulars</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To PPE A/c</td><td>2,10,000</td><td>By Trade payables A/c</td><td>2,46,000</td></tr>
+<tr><td>To Investment</td><td>55,000</td><td>By 10% Debenture A/c</td><td>1,20,000</td></tr>
+<tr><td>To Trade receivable</td><td>90,000</td><td>By Interest on Debenture</td><td>36,000</td></tr>
+<tr><td>To Stock A/c</td><td>60,000</td><td>By Unsecured loan</td><td>80,000</td></tr>
+<tr><td>To Bank A/c</td><td>10,000</td><td>By Share surrender</td><td>3,50,000</td></tr>
+<tr><td>To Profit &amp; Loss A/c</td><td>3,25,000</td><td></td><td></td></tr>
+<tr><td>To Capital reserves A/c</td><td>82,000</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>8,32,000</strong></td><td><strong>Total</strong></td><td><strong>8,32,000</strong></td></tr>
+</tbody>
+</table>
+<p>Share Capital Notes to Accounts:</p>
+<table>
+<tbody>
+<tr><td>Equity share capital: 10,000 shares @₹100</td><td>10,00,000</td></tr>
+<tr><td>Sub-divided: 20,000 shares @₹50</td><td>10,00,000</td></tr>
+<tr><td>(less) 60% share surrender, 12,000 shares</td><td>(6,00,000)</td></tr>
+<tr><td>8,000 shares @₹50 remaining after surrender</td><td>4,00,000</td></tr>
+<tr><td>3,000 shares @₹50 issued from surrendered pool (1,50,000 to trade payables) – issued other than for cash</td><td>1,50,000</td></tr>
+<tr><td>8,000 shares @₹50 – fresh issue for working capital</td><td>4,00,000</td></tr>
+<tr><td><strong>Issued &amp; fully paid &amp; subscribed: 19,000 shares @₹50</strong></td><td><strong>9,50,000</strong></td></tr>
+<tr><td>Preference share capital: 40,000, 9% Preference shares @₹10</td><td>4,00,000</td></tr>
+<tr><td>10,000, 9% Preference shares @₹10 (issued other than for cash, to debenture holders)</td><td>1,00,000</td></tr>
+<tr><td><strong>Total Preference Share Capital</strong></td><td><strong>5,00,000</strong></td></tr>
+</tbody>
+</table></div></div>
+  <div class="mistakes icai"><strong>Examiner&rsquo;s Comment:</strong> Most examinees were able to pass the required journal entries and prepare the reconstructed Balance Sheet in accordance with Schedule III. However, some examinees committed errors in the utilisation of the Capital Reduction Account and in the treatment of certain capital adjustments. A few also failed to present the revised capital structure appropriately.<span class="prov">Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock flagged" id="M3C14U0-005">
+  <div class="qmeta">
+    <span class="src">PYQ May 2026</span> &middot;
+    <span class="qno">Q3(b)</span> &middot;
+    <span class="marks">Marks: 8</span> &middot;
+    <span class="marks">Approx Time: 15 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C14_U0 : Companies Act 2013, s.66 &mdash; Accounting for Reconstruction of Companies (Internal Reconstruction) / ICAI Study Mat Topic No : 3</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Given below is the Balance Sheet of ABC Ltd. as at March 31, 2026: Share Capital ₹18,50,000; Reserve and Surplus (₹6,53,000); Long-term borrowings ₹6,78,000; Trade Payables ₹3,57,000; Other Current Liabilities ₹85,000; Total ₹23,17,000. Assets: PPE ₹9,78,000; Intangible assets ₹4,50,000; Inventories ₹5,39,000; Trade Receivables ₹3,50,000; Total ₹23,17,000.</p>
+<p>Notes to Accounts: Share Capital – 21,000 Equity Shares of ₹50 each ₹10,50,000; 16,000, 8% Cumulative Preference Shares of ₹50 each ₹8,00,000 (preference dividend in arrears for 3 years); Total ₹18,50,000. Reserve and Surplus – Debit balance of P&amp;L Account (₹6,53,000). Long-term borrowings – 6% Debentures ₹6,78,000. Other current liabilities – Interest payable on debentures ₹40,680; Outstanding wages &amp; salaries ₹44,320; Total ₹85,000. PPE – Building at cost less depreciation ₹5,00,000; Plant and machinery at cost less depreciation ₹4,78,000; Total ₹9,78,000. Intangible Assets – Goodwill ₹1,25,000; Trademarks ₹3,25,000; Total ₹4,50,000.</p>
+<p>Since the company was not earning profits, it was decided to reconstruct the company. A summary of the reconstruction scheme: (i) The equity shareholders agreed their ₹50 shares should be reduced to ₹10 by cancellation of ₹40 per share, and to subscribe for three new equity shares of ₹10 each for each equity share held. (ii) The preference shareholders agreed to waive off the arrear of dividends, and to accept for each ₹50 share, 4 new 5% preference shares of ₹10 each fully paid up, plus one new equity share of ₹10 each fully paid up. (iii) The debenture holders accepted the inventories at an agreed figure of ₹5,20,000 and ₹1,48,680 in cash and forego the remaining amount due to them. (iv) Building is to be revalued at ₹6,50,000. (v) A contingent liability for which no provision had been made was settled at ₹10,800, of which ₹4,800 was recovered from insurance. (vi) The debit balance of Profit and Loss account is to be written off. (vii) Any balance remaining is first used to write down the value of goodwill and then applied to trademarks.</p>
+<p>You are required to pass necessary journal entries to record the above reconstruction in the books of ABC Limited. (8 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Journal entries in the books of ABC Ltd:</p>
+<table>
+<thead><tr><th>#</th><th>Particulars</th><th>Dr. (₹)</th><th>Cr. (₹)</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Equity share capital A/c (₹50) Dr. <br/>  To Equity share capital A/c (₹10) <br/>  To Reconstruction A/c <br/><em>(Being equity capital reduced to nominal value of ₹10 each)</em></td><td>10,50,000</td><td>2,10,000 / 8,40,000</td></tr>
+<tr><td>2</td><td>Bank A/c Dr. <br/>  To Equity share capital (₹10) <br/><em>(Being 3 right shares against each share was issued and subscribed)</em></td><td>6,30,000</td><td>6,30,000</td></tr>
+<tr><td>3</td><td>8% Preference share capital A/c (₹50) Dr. <br/>  To 5% Preference share capital (₹10) <br/>  To Equity share capital (₹10) <br/><em>(Being 8% preference shares of ₹50 each converted to 5% preference shares of ₹10 each and also given 1 equity share for every share held)</em></td><td>8,00,000</td><td>6,40,000 / 1,60,000</td></tr>
+<tr><td>4</td><td>6% Debentures A/c Dr. <br/>Interest Payable on Debentures A/c Dr. <br/>  To Inventories A/c <br/>  To Cash A/c <br/>  To Reconstruction A/c <br/><em>(Being Debenture Holders settled by Inventory and cash)</em></td><td>6,78,000 / 40,680</td><td>5,20,000 / 1,48,680 / 50,000</td></tr>
+<tr><td>5</td><td>Reconstruction A/c Dr. <br/>  To Inventories A/c <br/><em>(Being reduction in inventory value accounted for)</em></td><td>19,000</td><td>19,000</td></tr>
+<tr><td>6</td><td>Building A/c Dr. <br/>  To Reconstruction A/c <br/><em>(Being building revalued)</em></td><td>1,50,000</td><td>1,50,000</td></tr>
+<tr><td>7</td><td>Contingent Liability A/c Dr. <br/>  To Bank A/c <br/><em>(Contingent liability paid as part of the internal reconstruction scheme)</em></td><td>10,800</td><td>10,800</td></tr>
+<tr><td>8</td><td>Bank A/c Dr. <br/>Reconstruction A/c Dr. <br/>  To Contingent Liability A/c <br/><em>(Insurance company remitting part of the contingency payment amount)</em></td><td>4,800 / 6,000</td><td>10,800</td></tr>
+<tr><td>9</td><td>Reconstruction A/c Dr. <br/>  To Profit and loss A/c <br/><em>(Accumulated losses written off as part of the internal reconstruction scheme)</em></td><td>6,53,000</td><td>6,53,000</td></tr>
+<tr><td>10</td><td>Reconstruction A/c Dr. <br/>  To Goodwill A/c <br/>  To Trade Mark A/c <br/><em>(Assets written off as part of the internal reconstruction scheme)</em></td><td>3,62,000</td><td>1,25,000 / 2,37,000</td></tr>
+</tbody>
+</table></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Many examinees netted the insurance recovery directly against the contingent liability payment instead of routing both the ₹10,800 payment and the ₹4,800 recovery through separate entries, and several applied the final Reconstruction Account balance to trademarks before fully exhausting it against goodwill, reversing the scheme&#x27;s stated write-off order.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M3C14U0-006">
+  <div class="qmeta">
+    <span class="src">PYQ September 2025</span> &middot;
+    <span class="qno">Q6(b)</span> &middot;
+    <span class="marks">Marks: 4</span> &middot;
+    <span class="marks">Approx Time: 8 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C14_U0 : Internal Reconstruction / ICAI Study Mat Topic No : 4</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Megha Limited scheme of reconstruction, effective 1st April 2025: (i) 9% Debenture holders (₹5,00,000) accept 25% in cash and take over Plant &amp; Machinery of ₹2,85,000 in full settlement. (ii) Furniture &amp; Fixtures (book ₹5,50,000) written down to ₹4,45,000. (iii) Freehold Premises (book ₹9,25,000) appreciated by ₹75,000. (iv) Capital commitments ₹4,50,000, to be cancelled on payment of 5% penalty. (v) Write off P&amp;L debit balance ₹1,15,000. (vi) Shortfall, if any, can use General Reserve balance ₹90,000. Pass journal entries.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<ol>
+<li>9% Debentures A/c Dr. 5,00,000; To Bank A/c 1,25,000 (25% cash); To Plant &amp; Machinery A/c 2,85,000; To Reconstruction A/c 90,000 (balancing gain, debenture claim settled partly in cash/kind, partly foregone).</li>
+<li>Reconstruction A/c Dr. 1,05,000; To Furniture and Fixtures A/c 1,05,000 (writing off overvalued assets: 5,50,000−4,45,000).</li>
+<li>Freehold Premises A/c Dr. 75,000; To Reconstruction A/c 75,000 (appreciation credited to reconstruction).</li>
+<li>Reconstruction A/c Dr. 22,500; To Bank A/c 22,500 (5% penalty on ₹4,50,000 capital commitment cancellation).</li>
+<li>Reconstruction A/c Dr. 1,15,000; To Profit and Loss A/c 1,15,000 (P&amp;L debit balance written off).</li>
+<li>General Reserve A/c Dr. 77,500; To Reconstruction A/c 77,500 (balance of General Reserve utilised to make good the shortfall in the Reconstruction A/c — not the full ₹90,000 available, only the ₹77,500 actually needed to balance the account).</li>
+</ol>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees transferred the full ₹90,000 available in General Reserve to Reconstruction A/c instead of only the ₹77,500 actually required to balance the account, leaving an unexplained residual.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock flagged" id="M3C14U0-007">
+  <div class="qmeta">
+    <span class="src">RTP May 2026</span> &middot;
+    <span class="qno">Q19</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C14_U0 : Companies Act 2013, s.66 &mdash; Accounting for Reconstruction of Companies (Internal Reconstruction) / ICAI Study Mat Topic No : 3</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Following is the Balance Sheet of Ellora Limited as at 31st March, 2025:</p>
+<table>
+<thead><tr><th>Particulars</th><th>Note</th><th>Amount (₹)</th></tr></thead>
+<tbody>
+<tr><td>Equity and Liabilities</td><td></td><td></td></tr>
+<tr><td>Shareholders' Funds: Share Capital</td><td>1</td><td>46,00,000</td></tr>
+<tr><td>Reserves and Surplus</td><td>2</td><td>(21,40,000)</td></tr>
+<tr><td>Non-current Liabilities: Long Term borrowings</td><td>3</td><td>15,00,000</td></tr>
+<tr><td>Current Liabilities: Trade Payables</td><td></td><td>12,00,000</td></tr>
+<tr><td>Short Term Borrowings – Bank Overdraft</td><td></td><td>7,80,000</td></tr>
+<tr><td>Other Current Liabilities</td><td>4</td><td>4,90,000</td></tr>
+<tr><td>Short Term Provisions – Provision for Taxation</td><td></td><td>4,00,000</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>68,30,000</strong></td></tr>
+<tr><td>Assets: Property, Plant and Equipment</td><td>5</td><td>23,00,000</td></tr>
+<tr><td>Intangible Assets</td><td>6</td><td>6,70,000</td></tr>
+<tr><td>Non-current Investments</td><td>7</td><td>2,20,000</td></tr>
+<tr><td>Inventories</td><td></td><td>17,00,000</td></tr>
+<tr><td>Trade Receivables</td><td></td><td>19,40,000</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>68,30,000</strong></td></tr>
+</tbody>
+</table>
+<p>Notes to Accounts:</p>
+<table>
+<tbody>
+<tr><th colspan="2">1 Share Capital</th><th>₹</th></tr>
+<tr><td colspan="2">3,00,000 Equity Shares of ₹10 each, fully paid up</td><td>30,00,000</td></tr>
+<tr><td colspan="2">16,000 6% Cumulative Preference Shares of ₹100 each, fully paid up</td><td>16,00,000</td></tr>
+<tr><td colspan="2"><strong>Total</strong></td><td><strong>46,00,000</strong></td></tr>
+<tr><td colspan="2">2 Reserves and Surplus – Debit balance of Profit and Loss Account</td><td>(21,40,000)</td></tr>
+<tr><th colspan="2">3 Long Term Borrowings</th><th>₹</th></tr>
+<tr><td colspan="2">6% Debentures (secured on the freehold property)</td><td>15,00,000</td></tr>
+<tr><th colspan="2">4 Other Current Liabilities</th><th>₹</th></tr>
+<tr><td colspan="2">Loan from Directors 4,00,000; Interest Payable on Debentures 90,000</td><td>4,90,000</td></tr>
+<tr><th colspan="2">5 Property, Plant and Equipment</th><th>₹</th></tr>
+<tr><td colspan="2">Freehold Property 17,00,000; Plant and Machinery 6,00,000</td><td>23,00,000</td></tr>
+<tr><th colspan="2">6 Intangible Assets</th><th>₹</th></tr>
+<tr><td colspan="2">Goodwill 5,20,000; Patents and Trademarks 1,50,000</td><td>6,70,000</td></tr>
+<tr><td colspan="2">7 Non-current Investments – Investments in Marketable Securities, valued at Cost (Market Value ₹5,40,000)</td><td>2,20,000</td></tr>
+</tbody>
+</table>
+<p>Due to continued losses and liquidity constraints, it was decided to reconstruct the company. The following scheme of internal reconstruction was approved by the shareholders and sanctioned by the Tribunal:</p>
+<ol>
+<li>The Equity Shares shall be written down to ₹2 each and the Preference Shares shall be written down to ₹75 each.</li>
+<li>Of the Preference Shares' Dividends which are in arrears for four years, the Preference Shareholders have agreed to forego their claim for arrears of dividends for three years and accept allotment of Equity Shares of ₹2 each towards dividend for the fourth year.</li>
+<li>Interest payable on Debentures is paid in cash.</li>
+<li>The Debenture holders have agreed to take over freehold property, book value ₹4,00,000 at a valuation of ₹4,80,000 in part repayment of their holdings. Besides they have agreed to provide additional funds of ₹5,20,000 secured by a floating charge on the company's assets at an interest rate of 9%.</li>
+<li>Inventory is to be written down by ₹2,60,000.</li>
+<li>Provision for bad and doubtful debts is to be created for ₹2,74,000.</li>
+<li>Intangible Assets and Debit balance of Profit and Loss Account are to be written off.</li>
+<li>The remaining freehold property after giving to Debenture holders is to be revalued at ₹15,50,000.</li>
+<li>The Non-current Investments are sold off for ₹5,60,000.</li>
+<li>A contingent liability of ₹1,00,000 is payable, which has arisen due to the wrong action of one of the Directors. He has agreed to compensate this loss out of the loan given by him to the company. For the remaining loan of ₹3,00,000, the Directors have agreed to accept a cash payment of ₹20,000 and allotment of ₹1,30,000 Equity Shares of ₹2 each in full settlement.</li>
+<li>There is a capital commitment of ₹10,00,000. The contract is cancelled on payment of 5% of the contract price as a penalty.</li>
+<li>The company issued 2,00,000 new Equity shares of ₹2 each at par, payable in full on allotment. The issue was underwritten for a commission of 5%. Shares were fully taken up.</li>
+<li>The taxation liability of the company is settled at ₹3,00,000 and the same is paid immediately.</li>
+<li>The expenses of reconstruction amounted to ₹15,000.</li>
+</ol>
+<p>You are required to: (a) Pass the Journal Entries to record the above transactions (including cash transactions) in the books of the company. (b) Prepare Capital Reduction Account.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Journal Entries in the Books of Ellora Limited</p>
+<table>
+<thead><tr><th>#</th><th>Particulars</th><th>Amount (Dr) (₹)</th><th>Amount (Cr) (₹)</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Equity Share Capital A/c (₹10) Dr. <br/>  To Equity Share Capital A/c (₹2) <br/>  To Capital Reduction A/c <br/><em>(Reduction of Share Capital of ₹10 each to Shares of ₹2 each as per the Scheme of Reconstruction)</em></td><td>30,00,000</td><td>6,00,000 / 24,00,000</td></tr>
+<tr><td>2</td><td>6% Cumulative Preference Share Capital A/c (₹100) Dr. <br/>  To 6% Cumulative Preference Share Capital A/c (₹75) <br/>  To Capital Reduction A/c <br/><em>(Reduction of Preference Shares of ₹100 each to shares of ₹75 each as per the Scheme of Reconstruction)</em></td><td>16,00,000</td><td>12,00,000 / 4,00,000</td></tr>
+<tr><td>3</td><td>Capital Reduction A/c Dr. <br/>  To Equity Share Capital A/c (₹2) <br/><em>(Arrears of Preference Dividend satisfied by the issue of equity shares, 25% of the amount due ₹3,84,000)</em></td><td>96,000</td><td>96,000</td></tr>
+<tr><td>4</td><td>Freehold Property A/c Dr. <br/>  To Capital Reduction A/c <br/><em>(Appreciation in the value of Property: book value ₹4,00,000, revalued figure ₹4,80,000; book value ₹13,00,000, revalued figure ₹15,50,000; total book value ₹17,00,000, revalued figure ₹20,30,000)</em></td><td>3,30,000</td><td>3,30,000</td></tr>
+<tr><td>5</td><td>6% Debentures A/c Dr. <br/>  To Freehold Property A/c <br/><em>(Claims of Debenture holders, in part, in respect of principal, discharged by transfer of freehold property vide Scheme of Reconstruction)</em></td><td>4,80,000</td><td>4,80,000</td></tr>
+<tr><td>6</td><td>Interest Payable A/c Dr. <br/>  To Bank A/c <br/><em>(Debenture Interest paid)</em></td><td>90,000</td><td>90,000</td></tr>
+<tr><td>7</td><td>Bank A/c Dr. <br/>  To 9% Debentures A/c <br/><em>(9% Debentures issued for cash)</em></td><td>5,20,000</td><td>5,20,000</td></tr>
+<tr><td>8</td><td>Bank A/c Dr. <br/>  To Investment A/c <br/>  To Capital Reduction A/c <br/><em>(Sale of Investment for ₹5,60,000, cost being ₹2,20,000, Profit ₹3,40,000 credited to Capital Reduction A/c)</em></td><td>5,60,000</td><td>2,20,000 / 3,40,000</td></tr>
+<tr><td>9</td><td>Loan from Directors A/c Dr. <br/>  To Provision for Contingent Liability A/c <br/><em>(Being provision for contingent liability as it is payable, and the same is adjusted against loan from Directors)</em></td><td>1,00,000</td><td>1,00,000</td></tr>
+<tr><td>10</td><td>Loan from Directors A/c Dr. <br/>  To Equity Share Capital A/c (₹2) <br/>  To Bank A/c <br/>  To Capital Reduction A/c <br/><em>(Remaining loan from Directors discharged by issue of Equity Shares of ₹2,60,000, and cash of ₹20,000 in full settlement)</em></td><td>3,00,000</td><td>2,60,000 / 20,000 / 20,000</td></tr>
+<tr><td>11</td><td>Capital Reduction A/c Dr. <br/>  To Bank A/c <br/><em>(Penalty charges for cancellation of contract (5% of ₹10,00,000) paid in cash)</em></td><td>50,000</td><td>50,000</td></tr>
+<tr><td>12</td><td>Bank A/c Dr. <br/>  To Equity Share Application A/c <br/><em>(Issue of 2,00,000 equity Shares of ₹2 each fully paid up)</em></td><td>4,00,000</td><td>4,00,000</td></tr>
+<tr><td>13</td><td>Equity Share Application A/c Dr. <br/>  To Equity Share Capital A/c (₹2) <br/><em>(Share Application Money transferred to Share Capital A/c)</em></td><td>4,00,000</td><td>4,00,000</td></tr>
+<tr><td>14</td><td>Capital Reduction A/c Dr. <br/>  To Bank A/c <br/><em>(Underwriting commission on fresh issue of equity share capital paid)</em></td><td>20,000</td><td>20,000</td></tr>
+<tr><td>15</td><td>Provision for Taxation A/c Dr. <br/>  To Bank A/c <br/>  To Capital Reduction A/c <br/><em>(Tax liability settled at ₹3,00,000 and the balance credited to Capital reduction A/c)</em></td><td>4,00,000</td><td>3,00,000 / 1,00,000</td></tr>
+<tr><td>16</td><td>Capital Reduction A/c Dr. <br/>  To Bank A/c <br/><em>(Expenses on Scheme of reconstruction paid)</em></td><td>15,000</td><td>15,000</td></tr>
+<tr><td>17</td><td>Capital Reduction A/c Dr. <br/>  To Inventory A/c <br/>  To Provision for Bad and Doubtful Debts A/c <br/>  To Goodwill A/c <br/>  To Patents and Trademarks A/c <br/>  To Profit and Loss A/c <br/>  To Capital reserve A/c (balancing figure) <br/><em>(Writing off Inventory, Goodwill, Patents and Trademarks, Debit balance of Profit and Loss Account, making provision for Bad and doubtful debts and transferring the balance to Capital reserve A/c)</em></td><td>34,09,000</td><td>2,60,000 / 2,74,000 / 5,20,000 / 1,50,000 / 21,40,000 / 65,000</td></tr>
+</tbody>
+</table>
+<p>Capital Reduction Account</p>
+<table>
+<thead><tr><th>Particulars</th><th>Amount (₹)</th><th>Particulars</th><th>Amount (₹)</th></tr></thead>
+<tbody>
+<tr><td>To Equity Share Capital</td><td>96,000</td><td>By Equity Share Capital A/c (₹10)</td><td>24,00,000</td></tr>
+<tr><td>To Bank A/c (penalty)</td><td>50,000</td><td>By 6% Cumulative Preference Share Capital A/c (₹100)</td><td>4,00,000</td></tr>
+<tr><td>To Bank A/c (underwriting commission)</td><td>20,000</td><td>By Freehold Property A/c</td><td>3,30,000</td></tr>
+<tr><td>To Bank A/c (reconstruction expenses)</td><td>15,000</td><td>By Investments or Bank A/c (profit on sale)</td><td>3,40,000</td></tr>
+<tr><td>To Inventory A/c</td><td>2,60,000</td><td>By Loan from Directors A/c</td><td>20,000</td></tr>
+<tr><td>To Provision for Bad and Doubtful Debts A/c</td><td>2,74,000</td><td>By Provision for Taxation A/c</td><td>1,00,000</td></tr>
+<tr><td>To Goodwill A/c</td><td>5,20,000</td><td></td><td></td></tr>
+<tr><td>To Patents and Trademarks A/c</td><td>1,50,000</td><td></td><td></td></tr>
+<tr><td>To Profit and Loss A/c</td><td>21,40,000</td><td></td><td></td></tr>
+<tr><td>To Capital Reserve A/c (balancing figure)</td><td>65,000</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>35,90,000</strong></td><td><strong>Total</strong></td><td><strong>35,90,000</strong></td></tr>
+</tbody>
+</table></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Many examinees omitted the entry recognising and setting off the ₹1,00,000 contingent liability against the director&#x27;s loan before settling the remaining ₹3,00,000 balance in shares and cash, and several also revalued the entire freehold property before, rather than after, transferring the portion given to debenture holders, producing an incorrect revaluation gain.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<h2>II. Integrated Questions (Internal Reconstruction with Other Standards)</h2>
+<p class='section-intro'>Questions where Internal Reconstruction judgment is one part of a larger, genuinely connected question also testing another standard.</p>
+<div class="empty-section">No questions in this batch are placed in Internal Reconstruction for this section. This is an honest finding, not an extraction gap — see the scope note above.</div>
+
+<div class="note" style="margin-top:48px;">
+Found an error? Please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference (shown at the top of each card) so it can be fixed in the next edition. Thank you for helping make this book better.
+</div>
+
+<div class="error-register">
+<h2>Sanjeevani Booti 2: Error Register for Internal Reconstruction</h2>
+<h3>Section 1: Concepts I Forgot</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<h3>Section 2: Mistakes I Repeated More Than Twice</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+</div>
+
+<div class="brand-footer">
+#KeepLearning #DreamBig &nbsp;&middot;&nbsp; #LoveWhatYouDo<br>
+<strong>Internal Reconstruction — Internal Reconstruction</strong>
+</div>
+
+</body>
+</html>

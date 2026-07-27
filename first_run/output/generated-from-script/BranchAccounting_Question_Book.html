@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Branch Accounting — Accounting for Branches including Foreign Branches</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;margin:24px;max-width:980px;margin-left:auto;margin-right:auto;color:#222;background:#fff;line-height:1.5;}
+h1{font-size:24px;margin-bottom:4px;}
+h2{font-size:19px;margin-top:44px;border-bottom:2px solid #333;padding-bottom:6px;}
+.note{background:#fff8e1;border:1px solid #e0c46c;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;}
+.empty-section{background:#f0f0f0;border:1px dashed #999;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;color:#555;font-style:italic;}
+.section-intro{font-size:13.5px;color:#444;margin-top:-6px;}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:12.5px;}
+th,td{border:1px solid #999;padding:5px 7px;text-align:left;vertical-align:top;}
+th{background:#2c3e50;color:#fff;}
+.qblock{border:1px solid #ccc;border-radius:8px;padding:14px 18px;margin:18px 0;background:#fdfdfd;}
+.qblock.flagged{border-color:#d98a8a;background:#fffaf7;}
+.qmeta{font-size:12px;color:#555;margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed #ccc;}
+.qmeta .src{font-weight:bold;color:#2c3e50;}
+.qmeta .marks{font-weight:bold;}
+.badge{display:inline-block;background:#fff3e0;border:1px solid #e0b46c;border-radius:10px;padding:1px 8px;font-size:11px;margin-left:6px;}
+.badge.icai{background:#e0f0ff;border-color:#6ca8e0;}
+.question{margin:10px 0;}
+.answer-block{margin:10px 0;background:#eafbea;padding:8px 12px;border-radius:6px;}
+.case-facts{background:#f5f5fb;border-left:3px solid #8888c0;padding:6px 12px;margin-bottom:8px;font-size:13px;}
+.mistakes{margin:10px 0;padding:8px 12px;border-radius:6px;font-size:13.5px;border-left:3px solid #999;}
+.mistakes.icai{background:#fff3e0;border-left-color:#e0b46c;color:#5a3d0a;}
+.mistakes.synth{background:#fdf1f1;border-left-color:#d98a8a;color:#7a2f2f;}
+.mistakes .prov{font-style:italic;color:#666;font-size:11.5px;display:block;margin-top:4px;}
+.na{color:#999;font-style:italic;}
+.notebook-ref{margin-top:10px;font-size:12.5px;color:#444;border-top:1px dashed #ccc;padding-top:6px;}
+.notebook-ref .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:160px;}
+.self-notes{margin-top:8px;border:1px solid #ccc;background:#fff;border-radius:6px;padding:8px 12px;}
+.self-notes .notes-lines{margin-top:4px;}
+.self-notes .dotted-line{height:22px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+.tag-placeholder{margin-top:8px;font-size:12.5px;color:#444;}
+.tag-placeholder .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:220px;}
+.revision-phase{margin-top:8px;font-size:12.5px;color:#444;}
+.revision-phase .box{display:inline-block;border:1px solid #888;width:12px;height:12px;margin:0 3px 0 10px;vertical-align:middle;}
+.brand-header{text-align:center;font-size:11px;color:#777;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:18px;letter-spacing:.3px;}
+.brand-header strong{color:#2c3e50;}
+.brand-footer{text-align:center;font-size:11px;color:#777;border-top:1px solid #eee;padding-top:10px;margin-top:36px;line-height:1.8;}
+.brand-footer strong{color:#2c3e50;}
+.error-register{page-break-before:always;break-before:page;margin-top:40px;}
+.error-register h2{margin-top:8px;}
+.error-register h3{font-size:15px;color:#444;margin-top:28px;}
+.error-register .dotted-line{height:34px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+</style>
+</head>
+<body>
+
+<div class="brand-header">
+<strong>Pranav Bhaiya</strong> &middot; The Newton of Accounts &middot; AIR 1-1-5<br>
+Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma, Not Results
+</div>
+
+<h1>Branch Accounting — Accounting for Branches including Foreign Branches</h1>
+<p>Every MTP/RTP/PYQ question that tests this chapter, collected in one place, with official answers and topic tags — so you can practise every question this topic has been examined with, without hunting through separate papers.</p>
+
+<div class="note">
+<strong>A note on accuracy (please read):</strong> This is the first edition of this book, assembled with AI assistance and reviewed as carefully as we could manage, but it has not been independently audited question-by-question. If you spot an error &mdash; a wrong figure, a wrong answer, anything that looks off &mdash; please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference so it can be corrected in the next edition.
+</div>
+
+<div class="note">
+<strong>Scope of this book (8 questions):</strong> Covers 10 sittings: MTP Jan2026 Set1, MTP Jan2026 Set2, MTP May2026 Set1, MTP May2026 Set2, PYQ Jan2026, PYQ May2026, PYQ Sep2025, RTP Jan2026, RTP May2026, RTP Sep2025. MCQs on this chapter are deliberately not included here — practise those on the dedicated MCQ platform; this book is for descriptive/scenario practice with full worked answers.
+</div>
+
+<div class="note">
+<strong>How this book is organised:</strong> Two sections — <strong>I. Descriptive (pure Branch Accounting)</strong> and <strong>II. Integrated</strong> (questions where Branch Accounting is one part of a larger question that also tests another standard). An empty Section II for a chapter is normal and expected, not a mistake — most multi-topic-looking questions are split so each topic gets its own clean entry, so genuinely combined questions are the rarer case. Each answer includes either a real <strong>Examiner's Comment</strong> (tan/orange box, quoted from ICAI's own published feedback, where one exists for that sitting) or an <strong>Author's Note</strong> (pale pink box, a likely pitfall identified by the author, not an official ICAI finding, and may not apply in every case) &mdash; see <strong>How to Read this Book.md</strong> for the full key to every colour and symbol used.
+</div>
+
+<h2>I. Descriptive &amp; Scenario-Based Questions (pure Branch Accounting)</h2>
+<p class='section-intro'>Full descriptive/scenario questions where this chapter is the sole topic tested (after independent-question splitting).</p>
+
+<div class="qblock" id="M3C15U0-001">
+  <div class="qmeta">
+    <span class="src">MTP January 2026 Set 1</span> &middot;
+    <span class="qno">Q6(c)</span> &middot;
+    <span class="marks">Marks: 6</span> &middot;
+    <span class="marks">Approx Time: 11 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C15_U0 : AS 11 &mdash; Accounting for Branches including Foreign Branches / ICAI Study Mat Topic No : 1.5</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Smart Limited (Indian Company) has a Branch at New York. Balances (USD): Debit — Expenditure (excl. depreciation) 1,03,095; Cash &amp; bank 2,175; Debtors 7,365; Fixed Assets (Gross) 34,200 (depreciation rate 20%); Inventory 'P' 5,520; Inventory 'Q' 1,035. Credit — Incomes 1,32,000; Creditors 15,570; HO Control A/c 5,820. Average exchange rate during the year: 1 USD = ₹56. Fixed assets purchased at 1 USD = ₹55. Closing rate: 1 USD = ₹58. Stock 'P': cost USD 5,520 (purchase rate ₹56.50), NRV ₹2,85,000. Stock 'Q': carried at NRV USD 1,035 (cost USD 1,065, purchase rate ₹53). Branch Control A/c per HO books ₹2,66,265. Show how this is reflected in the books of Head Office as a Trial Balance, if the USA Branch is classified as an Integral Foreign Operation.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p><strong>Converted branch trial balance (books of Head Office, Integral Foreign Operation — monetary items at closing rate, non-monetary at historical/transaction rate, income/expense at average rate):</strong></p>
+<table><thead><tr><th>Particular</th><th>USD</th><th>Rate</th><th>₹ Dr.</th><th>₹ Cr.</th></tr></thead>
+<tbody>
+<tr><td>Expenditure</td><td>1,03,095</td><td>56 (average)</td><td>57,73,320</td><td></td></tr>
+<tr><td>Cash &amp; bank balance</td><td>2,175</td><td>58 (closing)</td><td>1,26,150</td><td></td></tr>
+<tr><td>Debtors</td><td>7,365</td><td>58 (closing)</td><td>4,27,170</td><td></td></tr>
+<tr><td>Fixed assets (net of depreciation)</td><td>27,360</td><td>55 (historical)</td><td>15,04,800</td><td></td></tr>
+<tr><td>Inventory P (lower of cost and NRV, in ₹)</td><td>—</td><td>Direct NRV</td><td>2,85,000</td><td></td></tr>
+<tr><td>Inventory Q (lower of cost and NRV)</td><td>1,065</td><td>53 (historical, cost basis governs here)</td><td></td><td>56,445</td></tr>
+<tr><td>Income</td><td>1,32,000</td><td>56 (average)</td><td></td><td>73,92,000</td></tr>
+<tr><td>Creditors</td><td>15,570</td><td>58 (closing)</td><td></td><td>9,03,060</td></tr>
+<tr><td>HO Control A/c</td><td>5,820</td><td>—</td><td></td><td>2,66,265</td></tr>
+<tr><td>Exchange difference (balancing figure)</td><td></td><td></td><td>12,240</td><td></td></tr>
+<tr><td><strong>Total</strong></td><td></td><td></td><td><strong>85,61,325</strong></td><td><strong>85,61,325</strong></td></tr>
+</tbody></table>
+<p><em>Working — Inventory Q: cost USD 1,065 × ₹53 = ₹56,445 (lower of cost ₹56,445 and NRV: USD 1,035 × ₹58 = ₹60,030 — cost is lower, so carried at ₹56,445).</em></p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees applied the closing rate uniformly to all items (as would be done for a non-integral foreign operation), instead of the mixed-rate treatment (closing rate for monetary items, historical rate for non-monetary items like fixed assets and inventory) required for an integral foreign operation under AS 11.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M3C15U0-002">
+  <div class="qmeta">
+    <span class="src">MTP January 2026 Set 2</span> &middot;
+    <span class="qno">Q2(b)</span> &middot;
+    <span class="marks">Marks: 7</span> &middot;
+    <span class="marks">Approx Time: 13 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C15_U0 : Accounting for Branches including Foreign Branches / ICAI Study Mat Topic No : 1.2</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Care, a retail business, opened a branch Omega on 1st January, 2025; all branch sales on credit. Goods supplied from Head Office, invoiced at 10% above cost. Transactions (Jan/Feb/March 2025): Goods sent to Branch (purchase price) 60,000 / 75,000 / 90,000; Sales as per branch monthly report 57,000 / 63,000 / 82,500; Cash received from debtors and remitted to HO 30,000 / 76,500 / 52,500; Returns to HO (invoice price) 1,800 / 900 / 3,600. Branch closing stock at 31st March, 2025: ₹80,100 at invoice-to-branch price. Record in HO books, showing balances as on 31st March, 2025 and the branch gross profit for the three months.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p><strong>Branch Account (books of Care, Head Office):</strong> To Goods sent to Branch A/c (2,25,000 total invoice value: 60,000+75,000+90,000, at 10% above cost) 2,47,500; To Goods sent to Branch A/c — returns loading (6,300 × 10/110) 573; To Stock Reserve (80,100 × 10/110) 7,283; <strong>To Net Profit (balancing figure, transferred to General P&amp;L) 56,045</strong>. By Goods sent to Branch — Loading 22,500; By Goods sent to Branch — Returns 6,300; By Bank (cash remitted, 30,000+76,500+52,500) 1,59,000; By Balance c/d — Closing Branch Assets: Stock 80,100, Debtors (Sales 2,02,500 − Collections 1,59,000 = 43,500) 1,23,600. Total both sides ₹3,11,400.</p>
+<p><em>Memorandum Branch Debtors Account confirms Debtors closing balance ₹43,500 (Sales 2,02,500 − Cash received 1,59,000).</em></p>
+<p><strong>Branch gross profit for the three months: ₹56,045</strong> (the loading on goods sent, net of returns and closing stock reserve, represents the branch's realised gross margin for the period).</p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees forgot to create a stock reserve for the unrealised loading in the closing stock (still at invoice price, not yet sold), overstating the branch&#x27;s reported profit.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M3C15U0-003">
+  <div class="qmeta">
+    <span class="src">MTP May 2026 Set 1</span> &middot;
+    <span class="qno">Q2(b)</span> &middot;
+    <span class="marks">Marks: 7</span> &middot;
+    <span class="marks">Approx Time: 13 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C15_U0 : Accounting for Branches including Foreign Branches / ICAI Study Mat Topic No : 5</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Jolly Industries of Delhi is a trader in spices. It has a branch at Jalandhar to which Head office invoice goods at 20% on sales. The Jalandhar branch sells spices both on cash and credit. Branch remit all the cash received to Head Office Bank account, thus all expenses of branch are also directly paid from head office.
+    <br/>From the following information given, Prepare Branch Accounts in the Head office ledger using Stock and Debtors Method.
+    <br/>Branch does not maintain any books of account, but send fortnightly returns to Head office.</p>
+<table>
+<tbody>
+<tr><td>Stock at Jalandhar as on 1st April, 2025 (Cost Price)</td><td>1,00,000</td></tr>
+<tr><td>Sundry Debtors at Jalandhar as on 1st April, 2025</td><td>1,10,000</td></tr>
+<tr><td>Cash received from Debtors</td><td>3,45,000</td></tr>
+<tr><td>Bad debts during the year</td><td>9,500</td></tr>
+<tr><td>Discount allowed to Debtors</td><td>5,500</td></tr>
+<tr><td>Goods received from Head Office at Invoice Price</td><td>6,00,000</td></tr>
+<tr><td>Returns to Head office at Invoice Price</td><td>60,000</td></tr>
+<tr><td>Normal loss of goods during transport (Out of Goods sent by H.O. to Branch)</td><td>12,000</td></tr>
+<tr><td>Sales returns at Jalandhar Branch</td><td>11,000</td></tr>
+<tr><td>Salaries and staff welfare expenses at Branch</td><td>54,000</td></tr>
+<tr><td>Rent and taxes at Branch</td><td>9,000</td></tr>
+<tr><td>Other Office Expenses</td><td>2,500</td></tr>
+<tr><td>Sundry Debtors at Branch as at 31st March 2026</td><td>1,55,000</td></tr>
+<tr><td>Stock at Jalandhar as on 31st March, 2026 (Cost Price)</td><td>1,20,000</td></tr>
+</tbody>
+</table>
+<p>Credit sales at Branch are four times of the cash Sales at Branch. (7 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Books of Jolly Industries, Delhi</p>
+<p><em>Jalandhar Branch Stock Account</em></p>
+<table>
+<thead><tr><th>Dr. Particulars</th><th>₹</th><th>Cr. Particulars</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To Balance b/d – Op Stock</td><td>1,25,000</td><td>By Bank A/c – Cash Sales</td><td>1,04,000</td></tr>
+<tr><td>To Branch Debtors A/c – Sales Return</td><td>11,000</td><td>By Branch Debtors A/c – Credit Sales</td><td>4,16,000</td></tr>
+<tr><td>To Goods sent to Branch A/c (6,00,000+12,000)</td><td>6,12,000</td><td>By Goods sent to Branch (Returns to H.O.)</td><td>60,000</td></tr>
+<tr><td></td><td></td><td>By Branch Stock Adjustment A/c (Normal Loss)</td><td>12,000</td></tr>
+<tr><td></td><td></td><td>By Branch Stock Adjustment A/c (Abnormal Loss) (bal. fig.)</td><td>6,000</td></tr>
+<tr><td></td><td></td><td>By Balance c/d – Closing stock</td><td>1,50,000</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>7,48,000</strong></td><td><strong>Total</strong></td><td><strong>7,48,000</strong></td></tr>
+</tbody>
+</table>
+<p><em>Note: Opening Stock at invoice price (1,00,000 ÷ 0.8) = 1,25,000; Closing Stock at invoice price (1,20,000 ÷ 0.8) = 1,50,000.</em></p>
+<p><em>Jalandhar Branch Stock Adjustment Account</em></p>
+<table>
+<thead><tr><th>Dr. Particulars</th><th>₹</th><th>Cr. Particulars</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To Goods sent to Branch A/c (1/5 of ₹60,000) (on returns)</td><td>12,000</td><td>By Balance b/d (20% of 1,25,000)</td><td>25,000</td></tr>
+<tr><td>To Branch Stock A/c (Abnormal Loss) (6,000 x 1/5)</td><td>1,200</td><td>By Goods sent to Branch A/c (1/5 of ₹6,12,000)</td><td>1,22,400</td></tr>
+<tr><td>To Branch Stock A/c (Normal Loss)</td><td>12,000</td><td></td><td></td></tr>
+<tr><td>To Balance c/d (1/5 of ₹1,50,000)</td><td>30,000</td><td></td><td></td></tr>
+<tr><td>To Branch P&amp;L A/c (Profit on sale) – Bal fig</td><td>92,200</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>1,47,400</strong></td><td><strong>Total</strong></td><td><strong>1,47,400</strong></td></tr>
+</tbody>
+</table>
+<p><em>Goods Sent to Branch Account</em></p>
+<table>
+<thead><tr><th>Dr. Particulars</th><th>₹</th><th>Cr. Particulars</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To Jalandhar Branch Stock Adjustment A/c</td><td>1,22,400</td><td>By Jalandhar Branch Stock A/c</td><td>6,12,000</td></tr>
+<tr><td>To Jalandhar Branch Stock A/c (Returns)</td><td>60,000</td><td>By Jalandhar Branch Stock Adj. A/c</td><td>12,000</td></tr>
+<tr><td>To Purchases A/c</td><td>4,41,600</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>6,24,000</strong></td><td><strong>Total</strong></td><td><strong>6,24,000</strong></td></tr>
+</tbody>
+</table>
+<p><em>Branch Debtors Account</em></p>
+<table>
+<thead><tr><th>Dr. Particulars</th><th>₹</th><th>Cr. Particulars</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To Balance b/d</td><td>1,10,000</td><td>By Bank</td><td>3,45,000</td></tr>
+<tr><td>To Branch Stock A/c</td><td>4,16,000</td><td>By Branch P&amp;L A/c – Discount</td><td>5,500</td></tr>
+<tr><td></td><td></td><td>By Branch P&amp;L A/c – Bad Debts</td><td>9,500</td></tr>
+<tr><td></td><td></td><td>By Branch Stock – Sales Returns</td><td>11,000</td></tr>
+<tr><td></td><td></td><td>By Balance c/d</td><td>1,55,000</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>5,26,000</strong></td><td><strong>Total</strong></td><td><strong>5,26,000</strong></td></tr>
+</tbody>
+</table>
+<p><em>Branch Expenses Account</em></p>
+<table>
+<thead><tr><th>Dr. Particulars</th><th>₹</th><th>Cr. Particulars</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To Bank A/c (Rent &amp; Taxes)</td><td>9,000</td><td>By Branch Profit &amp; Loss A/c (Transfer)</td><td>65,500</td></tr>
+<tr><td>To Bank A/c (Salaries &amp; Staff Welfare expenses)</td><td>54,000</td><td></td><td></td></tr>
+<tr><td>To Bank A/c (Office exp.)</td><td>2,500</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>65,500</strong></td><td><strong>Total</strong></td><td><strong>65,500</strong></td></tr>
+</tbody>
+</table>
+<p><em>Branch Profit &amp; Loss Account for the year ending 31st March 2026</em></p>
+<table>
+<thead><tr><th>Dr. Particulars</th><th>₹</th><th>Cr. Particulars</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To Branch Expenses A/c</td><td>65,500</td><td>By Branch Stock Adj. A/c</td><td>92,200</td></tr>
+<tr><td>To Branch Debtors A/c (Discount)</td><td>5,500</td><td></td><td></td></tr>
+<tr><td>To Branch Debtors A/c (Bad Debts)</td><td>9,500</td><td></td><td></td></tr>
+<tr><td>To Abnormal Loss (cost)</td><td>4,800</td><td></td><td></td></tr>
+<tr><td>To Net Profit transferred to Profit &amp; Loss A/c</td><td>6,900</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>92,200</strong></td><td><strong>Total</strong></td><td><strong>92,200</strong></td></tr>
+</tbody>
+</table></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees credited the normal loss in transit directly to the Branch Stock Account at invoice price rather than routing it through the Branch Stock Adjustment Account, resulting in an incorrect branch gross profit under the Stock and Debtors Method.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M3C15U0-004">
+  <div class="qmeta">
+    <span class="src">MTP May 2026 Set 2</span> &middot;
+    <span class="qno">Q2(b)</span> &middot;
+    <span class="marks">Marks: 7</span> &middot;
+    <span class="marks">Approx Time: 13 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C15_U0 : Accounting for Branches including Foreign Branches / ICAI Study Mat Topic No : 5.1</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>On 31st March, 2026 Delhi Branch submits the following Trial Balance to its Head Office at Mumbai:</p>
+<table>
+<thead><tr><th>Debit Balances</th><th>₹ in lacs</th></tr></thead>
+<tbody>
+<tr><td>Furniture and Equipment</td><td>36</td></tr>
+<tr><td>Depreciation on furniture</td><td>4</td></tr>
+<tr><td>Salaries</td><td>50</td></tr>
+<tr><td>Rent</td><td>20</td></tr>
+<tr><td>Advertising</td><td>12</td></tr>
+<tr><td>Telephone, Postage and Stationery</td><td>6</td></tr>
+<tr><td>Sundry Office Expenses</td><td>2</td></tr>
+<tr><td>Stock on 1st April, 2025</td><td>120</td></tr>
+<tr><td>Goods Received from Head Office</td><td>576</td></tr>
+<tr><td>Debtors</td><td>40</td></tr>
+<tr><td>Cash at bank and in hand</td><td>16</td></tr>
+<tr><td>Carriage Inwards</td><td>14</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>896</strong></td></tr>
+<tr><th colspan="2">Credit Balances</th></tr>
+<tr><td>Outstanding Expenses</td><td>6</td></tr>
+<tr><td>Goods Returned to Head Office</td><td>10</td></tr>
+<tr><td>Sales</td><td>720</td></tr>
+<tr><td>Head Office</td><td>160</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>896</strong></td></tr>
+</tbody>
+</table>
+<p>Additional Information: Stock on 31st March, 2026 was valued at ₹124 lacs. On 29th March, 2026 the Head Office dispatched goods costing ₹20 lacs to its branch. Branch did not receive these goods before 1st April, 2026. Hence, the figure of goods received from Head Office does not include these goods. Also the head office has charged the branch ₹2 lac for centralized services for which the branch has not passed the entry.</p>
+<p>You are required to prepare Final Accounts of the Branch including Balance Sheet. (7 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Trading and Profit &amp; Loss Account of the Branch for the year ended 31st March, 2026</p>
+<table>
+<thead><tr><th>Particulars</th><th>₹ in lacs</th><th>Particulars</th><th>₹ in lacs</th></tr></thead>
+<tbody>
+<tr><td>To Opening Stock</td><td>120</td><td>By Sales</td><td>720</td></tr>
+<tr><td>To Goods received from Head Office 576, Less: Returns (10)</td><td>566</td><td>By Closing Stock</td><td>124</td></tr>
+<tr><td>To Carriage Inwards</td><td>14</td><td></td><td></td></tr>
+<tr><td>To Gross Profit c/d</td><td>144</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>844</strong></td><td><strong>Total</strong></td><td><strong>844</strong></td></tr>
+<tr><td>To Salaries</td><td>50</td><td>By Gross Profit b/d</td><td>144</td></tr>
+<tr><td>To Depreciation on Furniture</td><td>4</td><td></td><td></td></tr>
+<tr><td>To Rent</td><td>20</td><td></td><td></td></tr>
+<tr><td>To Advertising</td><td>12</td><td></td><td></td></tr>
+<tr><td>To Telephone, Postage &amp; Stationery</td><td>6</td><td></td><td></td></tr>
+<tr><td>To Sundry Office Expenses</td><td>2</td><td></td><td></td></tr>
+<tr><td>To Head Office Expenses</td><td>2</td><td></td><td></td></tr>
+<tr><td>To Net Profit Transferred to Head Office A/c</td><td>48</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>144</strong></td><td><strong>Total</strong></td><td><strong>144</strong></td></tr>
+</tbody>
+</table>
+<p>Balance Sheet as on 31st March, 2026</p>
+<table>
+<thead><tr><th>Liabilities</th><th>₹ in lacs</th><th>Assets</th><th>₹ in lacs</th></tr></thead>
+<tbody>
+<tr><td>Head Office 160, Add: Goods in transit 20, Head Office Expenses 2, Net Profit 48</td><td>230</td><td>Furniture &amp; Equipment 40, Less: Depreciation (4)</td><td>36</td></tr>
+<tr><td>Outstanding Expenses</td><td>6</td><td>Stock in hand</td><td>124</td></tr>
+<tr><td></td><td></td><td>Goods in Transit</td><td>20</td></tr>
+<tr><td></td><td></td><td>Debtors</td><td>40</td></tr>
+<tr><td></td><td></td><td>Cash at bank and in hand</td><td>16</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>236</strong></td><td><strong>Total</strong></td><td><strong>236</strong></td></tr>
+</tbody>
+</table></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Many examinees omitted to add the ₹20 lac goods-in-transit and ₹2 lac unrecorded head office charge to both the Trading/P&amp;L account and the Head Office balance in the branch&#x27;s balance sheet, leaving the two sides of the reconciliation incomplete.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock flagged" id="M3C15U0-005">
+  <div class="qmeta">
+    <span class="src">PYQ January 2026</span> &middot;
+    <span class="qno">Q6(c)</span> &middot;
+    <span class="marks">Marks: 6</span> &middot;
+    <span class="marks">Approx Time: 11 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C15_U0 : Accounting for Branches including Foreign Branches / ICAI Study Mat Topic No : 5.2</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Mr. GOKU, head office at Ahmedabad, has a branch at Nagpur. Goods invoiced to branch at cost plus 25%. Branch sells for cash and credit; branch expenses paid direct from head office; branch remits all cash received to head office's Ahmedabad bank account. For the year ended 31st March, 2025: Goods sent to branch (Invoice Price) ₹67,50,000; Goods returned by branch (Invoice Price) ₹2,40,000; Cash sales ₹18,50,000; Discount allowed to customers ₹25,000; Amount received from branch debtors ₹32,50,000; Cheques returned unpaid ₹80,000; Branch expenses met in cash ₹7,25,000; Sales return at Nagpur branch ₹1,00,000; Bad debts ₹55,000. Branch debtors: 31.3.2025 ₹10,50,000, 31.3.2024 ₹5,00,000. Stock at branch (Invoice Price): 31.3.2025 ₹23,60,000, 31.3.2024 ₹15,00,000.</p>
+<p>Applying the Stock and Debtors System, you are required to prepare the following Ledger Accounts in the books of Head Office for the year ended 31st March, 2025: (i) Nagpur Branch Stock A/c; (ii) Nagpur Branch Debtors A/c; (iii) Nagpur Branch Adjustment A/c; and (iv) Nagpur Branch Profit and Loss A/c. (6 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Nagpur Branch Stock Account:</p>
+<table>
+<thead><tr><th>Particulars</th><th>₹</th><th>Particulars</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To Balance b/d</td><td>15,00,000</td><td>By Goods sent to branch A/c (Returns)</td><td>2,40,000</td></tr>
+<tr><td>To Goods sent to branch A/c</td><td>67,50,000</td><td>By Bank A/c (Cash sales)</td><td>18,50,000</td></tr>
+<tr><td>To Branch debtors A/c (Returns)</td><td>1,00,000</td><td>By Branch debtors A/c (credit sales, W.N.)</td><td>39,00,000</td></tr>
+<tr><td></td><td></td><td>By Balance c/d</td><td>23,60,000</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>83,50,000</strong></td><td><strong>Total</strong></td><td><strong>83,50,000</strong></td></tr>
+</tbody>
+</table>
+<p>Nagpur Branch Adjustment Account:</p>
+<table>
+<thead><tr><th>Particulars</th><th>₹</th><th>Particulars</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To Goods Sent to Branch A/c (goods returned to HO, 20% of 2,40,000)</td><td>48,000</td><td>By Stock reserve – 20% of 15,00,000 (Opening stock)</td><td>3,00,000</td></tr>
+<tr><td>To Branch profit &amp; loss A/c (Gross profit)</td><td>11,30,000</td><td>By Goods sent to branch A/c – 20% of 67,50,000</td><td>13,50,000</td></tr>
+<tr><td>To Stock reserve – 20% of 23,60,000 (Closing stock)</td><td>4,72,000</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>16,50,000</strong></td><td><strong>Total</strong></td><td><strong>16,50,000</strong></td></tr>
+</tbody>
+</table>
+<p>Branch Profit &amp; Loss Account:</p>
+<table>
+<thead><tr><th>Particulars</th><th>₹</th><th>Particulars</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To Branch expenses A/c</td><td>7,25,000</td><td>By Branch adjustment A/c (Gross Profit)</td><td>11,30,000</td></tr>
+<tr><td>To Branch debtors A/c (Discount)</td><td>25,000</td><td></td><td></td></tr>
+<tr><td>To Branch Debtors A/c (Bad debts)</td><td>55,000</td><td></td><td></td></tr>
+<tr><td>To Net profit (transferred to Profit &amp; Loss A/c)</td><td>3,25,000</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>11,30,000</strong></td><td><strong>Total</strong></td><td><strong>11,30,000</strong></td></tr>
+</tbody>
+</table>
+<p>Branch Debtors Account:</p>
+<table>
+<thead><tr><th>Particulars</th><th>₹</th><th>Particulars</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To Balance b/d</td><td>5,00,000</td><td>By Bank A/c</td><td>32,50,000</td></tr>
+<tr><td>To Branch stock A/c (credit sales, W.N.)</td><td>39,00,000</td><td>By Branch profit and loss A/c (Bad debts and discount)</td><td>80,000</td></tr>
+<tr><td>To Bank A/c (Cheques dishonoured)</td><td>80,000</td><td>By Branch stock A/c (Sales returns)</td><td>1,00,000</td></tr>
+<tr><td></td><td></td><td>By Balance c/d</td><td>10,50,000</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>44,80,000</strong></td><td><strong>Total</strong></td><td><strong>44,80,000</strong></td></tr>
+</tbody>
+</table>
+<p><strong>Working Note – Calculation of Credit sales:</strong> = Closing Balance + Collections + Discount + Bad Debts + Sales Return − Opening Balance − Cheque Return (reinstatement) = ₹10,50,000+₹32,50,000+₹25,000+₹55,000+₹1,00,000−₹5,00,000−₹80,000 = ₹39,00,000.</p></div></div>
+  <div class="mistakes icai"><strong>Examiner&rsquo;s Comment:</strong> Many examinees faced difficulty in applying the concept of loading in goods sent to branches. Errors were observed in the preparation of branch accounts and computation of branch profit. They also failed to distinguish between returns by customers and returns by the branch, leading to incorrect treatment and affecting the accuracy of related accounts.<span class="prov">Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M3C15U0-006">
+  <div class="qmeta">
+    <span class="src">PYQ May 2026</span> &middot;
+    <span class="qno">Q6(c)</span> &middot;
+    <span class="marks">Marks: 6</span> &middot;
+    <span class="marks">Approx Time: 11 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C15_U0 : Accounting for Branches including Foreign Branches / ICAI Study Mat Topic No : 7</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>(i) Why goods are marked on invoice price by the head office while sending goods to the branch?</p>
+<p>(ii) Rama Ltd. has a branch at Delhi, that closes its books of accounts every year on 31st March. This is an independent branch, which maintains comprehensive books of accounts for recording their transactions. You are required to show Journal Entries in the books of branch on 31st March, 2026 to rectify or adjust the following: (A) Head Office allocates ₹2,70,000 to the Branch as Head Office Expenses, not yet recorded by Branch. (B) Depreciation of Branch Fixed Assets, accounts kept by Head Office, not yet recorded in Branch Books ₹2,30,000. (C) Branch paid ₹2,80,000 as salary to a Head Office manager, debited by the branch to its Salaries A/c. (D) Head Office collected ₹2,60,000 directly from a Branch Customer on behalf of the Branch; intimation received by the branch only now, not recorded till now. (E) A remittance of ₹3,00,000 sent by the Branch has not yet been received by Head Office. (F) The Branch incurred Advertisement Expenses of ₹60,000 on behalf of another Branch. (G) Goods worth ₹1,50,000 dispatched by the head office, but the branch has received goods worth ₹1,10,000 till date of reconciliation; rest received subsequently. (H) Goods worth ₹25,000 returned by the branch to head office yet not received by the head office. (6 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>(i) Goods are marked on invoice price to achieve the following objectives: (a) to keep secret from the branch manager the cost price of the goods and profit made, so that the branch manager may not start a rival and competitive business with the concern; (b) to have effective control on stock, i.e. stock at any time must equal opening stock plus goods received from head office minus sales made at branch; (c) to dictate pricing policy to its branches; (d) to save work at branch because prices have already been decided.</p>
+<p>(ii) Books of Branch – Journal Entries:</p>
+<table>
+<thead><tr><th>#</th><th>Particulars</th><th>Dr. (₹)</th><th>Cr. (₹)</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Expenses Account Dr. <br/>  To Head Office Account <br/><em>(Being allocated expenses of Head Office recorded)</em></td><td>2,70,000</td><td>2,70,000</td></tr>
+<tr><td>B</td><td>Depreciation A/c Dr. <br/>  To Head Office Account <br/><em>(Being depreciation on assets recorded, accounts maintained by HO)</em></td><td>2,30,000</td><td>2,30,000</td></tr>
+<tr><td>C</td><td>Head Office Account Dr. <br/>  To Salaries Account <br/><em>(Being rectification of salary paid on behalf of Head Office)</em></td><td>2,80,000</td><td>2,80,000</td></tr>
+<tr><td>D</td><td>Head Office Account Dr. <br/>  To Debtors Account <br/><em>(Being adjustment for collection from Branch Debtors directly by Head Office)</em></td><td>2,60,000</td><td>2,60,000</td></tr>
+<tr><td>E</td><td colspan="3">No entry in Branch Books is required (this affects only Head Office's own reconciliation, as cash-in-transit from the branch's remittance).</td></tr>
+<tr><td>F</td><td>Head Office Account Dr. <br/>  To Cash Account <br/><em>(Being expenditure incurred on account of another branch, now recorded)</em></td><td>60,000</td><td>60,000</td></tr>
+<tr><td>G</td><td>Goods-in-transit Account Dr. <br/>  To Head Office Account <br/><em>(Being goods sent by Head Office still in-transit, ₹1,50,000−₹1,10,000)</em></td><td>40,000</td><td>40,000</td></tr>
+<tr><td>H</td><td colspan="3">No entry in Branch Books is required. Head office should make the Goods-in-Transit entry; Branch would have already made the entry while returning the goods to HO.</td></tr>
+</tbody>
+</table></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Many examinees passed entries in the branch books for items (E) and (H), not recognising that these two items affect only the Head Office&#x27;s side of the reconciliation (cash-in-transit and goods-in-transit already recorded by the sending party), requiring no corresponding branch-book entry.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M3C15U0-007">
+  <div class="qmeta">
+    <span class="src">PYQ September 2025</span> &middot;
+    <span class="qno">Q6(c)</span> &middot;
+    <span class="marks">Marks: 6</span> &middot;
+    <span class="marks">Approx Time: 11 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C15_U0 : Accounting for Branches including Foreign Branches / ICAI Study Mat Topic No : 1.3</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Shanti Limited (Chennai), incorporated 1st April 2024, opened branches at Madurai and Tiruchi. Goods invoiced to branches at Cost + 25%. All branch expenses paid by HO; each branch has its own Sales Ledger, sends weekly statements, remits cash collections daily. Year ended 31st March 2025 (₹ lakhs): Madurai/Tiruchi — Credit Sales 1,25,200/1,10,000; Cash Sales 78,600/85,200; Sales Returns 2,300/1,200; Trade Receivable (closing) 34,500/23,600; Rent and Taxes 3,200/4,500; Bad Debts 6,000/—; Salaries 16,000/18,000; General Expenses 2,600/1,500; Goods Received from HO (at invoice price) 1,50,000/1,25,000; Advertisement 7,500/5,200; Closing Stock (at invoice price) 45,000/35,000. Prepare Branch Accounts as they would appear in HO's books, using the Debtors Method, for the year ended 31st March 2025.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p>Loading = 25% on cost = 1/5th on invoice price.</p>
+<p><strong>Memorandum Branch Debtors Account (both branches):</strong> To Sales (credit) 1,25,200/1,10,000; less Sales Returns 2,300/1,200, Bad Debts 6,000/—, Cash collected from debtors (balancing figure) 82,400/85,200 = Closing balance 34,500/23,600 (matches given closing Trade Receivable, confirming the collection figures).</p>
+<p><strong>Branch Account, Madurai / Tiruchi (₹ in lakhs, goods at invoice price):</strong></p>
+<table><thead><tr><th>Dr.</th><th>Madurai</th><th>Tiruchi</th><th>Cr.</th><th>Madurai</th><th>Tiruchi</th></tr></thead>
+<tbody>
+<tr><td>To Goods sent to Branch (invoice price)</td><td>1,50,000</td><td>1,25,000</td><td>By Cash (Cash Sales)</td><td>78,600</td><td>85,200</td></tr>
+<tr><td>To Rent &amp; Taxes</td><td>3,200</td><td>4,500</td><td>By Cash (Collection from Debtors)</td><td>82,400</td><td>85,200</td></tr>
+<tr><td>To Salaries</td><td>16,000</td><td>18,000</td><td>By Debtors (closing)</td><td>34,500</td><td>23,600</td></tr>
+<tr><td>To General Expenses</td><td>2,600</td><td>1,500</td><td>By Closing Stock (invoice price)</td><td>45,000</td><td>35,000</td></tr>
+<tr><td>To Advertisement</td><td>7,500</td><td>5,200</td><td>By Goods sent to Branch (Stock Reserve, on returns loading)</td><td>30,000</td><td>25,000</td></tr>
+<tr><td>To Stock Reserve (on closing stock loading)</td><td>9,000</td><td>7,000</td><td></td><td></td><td></td></tr>
+<tr><td><strong>To Net Profit transferred to General P&amp;L</strong></td><td><strong>82,200</strong></td><td><strong>92,800</strong></td><td></td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>2,70,500</strong></td><td><strong>2,54,000</strong></td><td><strong>Total</strong></td><td><strong>2,70,500</strong></td><td><strong>2,54,000</strong></td></tr>
+</tbody></table>
+<p><em>Note: since goods were sent and recorded at invoice price, the closing-stock stock-reserve (unrealised loading) must be created (9,000/7,000, i.e. 1/5th of 45,000/35,000), and the Goods-sent-to-Branch account is also credited for the loading portion of goods returned (30,000/25,000). An alternative full solution exists recording goods at cost price instead, giving the same net profit figures (82,200/92,800) through a differently structured account.</em></p>
+</div></div></div>
+  <div class="mistakes icai"><strong>Examiner&rsquo;s Comment:</strong> In the part relating to branch accounting, several examinees failed to apply the concept of loading (profit element in goods sent to the branch) correctly. This resulted in an incorrect computation of net profit. Many examinees also arrived at an incorrect amount of cash collected from branch debtors.<span class="prov">Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock flagged" id="M3C15U0-008">
+  <div class="qmeta">
+    <span class="src">RTP May 2026</span> &middot;
+    <span class="qno">Q20</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">M3_C15_U0 : Accounting for Branches including Foreign Branches / ICAI Study Mat Topic No : 10-11/12</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Following is the Trial Balance as on 31st December, 2025 of the Cambridge Branch of Harry Limited whose Head Office is situated at Pune, India.</p>
+<table>
+<thead><tr><th>Particulars</th><th>Dr €</th><th>Cr €</th></tr></thead>
+<tbody>
+<tr><td>Furniture</td><td>80,000</td><td></td></tr>
+<tr><td>Stock as on 1st January, 2024</td><td>36,000</td><td></td></tr>
+<tr><td>Debtors</td><td>16,000</td><td></td></tr>
+<tr><td>Cash at Bank</td><td>3,000</td><td></td></tr>
+<tr><td>Head Office A/c</td><td></td><td>80,000</td></tr>
+<tr><td>Creditors</td><td></td><td>12,000</td></tr>
+<tr><td>Sales</td><td></td><td>2,80,000</td></tr>
+<tr><td>Expenses</td><td></td><td></td></tr>
+<tr><td>Goods sent from Head Office</td><td>12,000</td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>3,72,000</strong></td><td><strong>3,72,000</strong></td></tr>
+</tbody>
+</table>
+<p>In the books of Head Office, the Branch Account stood as under:</p>
+<table>
+<thead><tr><th colspan="2">Cambridge Branch Account</th></tr></thead>
+<tbody>
+<tr><td>To Balance b/d</td><td>₹ in Lakhs 27.00</td></tr>
+<tr><td>To Goods sent to Branch</td><td>180.00</td></tr>
+<tr><td>By Bank</td><td>146.00</td></tr>
+<tr><td>By Balance c/d</td><td>61.00</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>207.00 / 207.00</strong></td></tr>
+</tbody>
+</table>
+<p>Additional Information: (1) Goods are sent to the branch at cost plus 10% and the branch sells goods at invoice price plus 25%. (2) Furniture was acquired on 1st April, 2023 when €1.00 = ₹84. Furniture is depreciated at 10%. (3) The Branch Manager is entitled to a commission of 10% on the profits of the branch before charging such commission. (4) Rates of Exchange were on 1st January, 2025 €1.00 = ₹91, on 31st December, 2025 €1.00 = ₹89 and Average €1.00 = ₹86.</p>
+<p>You are required to: (i) Prepare the Branch Trading and Profit &amp; Loss Account in Euros. (ii) Convert the Trial Balance of the Branch in Indian Currency.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>In the books of Head Office Harry Limited — Cambridge Branch Trading and Profit &amp; Loss Account for the year ended 31st December, 2025</p>
+<table>
+<thead><tr><th>Particulars</th><th>€</th><th>Particulars</th><th>€</th></tr></thead>
+<tbody>
+<tr><td>To Opening Stock</td><td>36,000</td><td>By Sales</td><td>2,80,000</td></tr>
+<tr><td>To Goods sent from H.O.</td><td>2,25,000</td><td>By Closing Stock</td><td>37,000</td></tr>
+<tr><td>To Gross Profit c/d</td><td>56,000</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>3,17,000</strong></td><td><strong>Total</strong></td><td><strong>3,17,000</strong></td></tr>
+<tr><td>To Expenses</td><td>12,000</td><td>By Gross Profit b/d</td><td>56,000</td></tr>
+<tr><td>To Depreciation</td><td>8,000</td><td></td><td></td></tr>
+<tr><td>To Manager's Commission</td><td>3,600</td><td></td><td></td></tr>
+<tr><td>To Net Profit c/d</td><td>32,400</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>56,000</strong></td><td><strong>Total</strong></td><td><strong>56,000</strong></td></tr>
+</tbody>
+</table>
+<p>Converted Trial Balance (into Indian Currency) of Cambridge Branch</p>
+<table>
+<thead><tr><th>Particulars</th><th>Rate per €</th><th>Dr. (₹ in Lakhs)</th><th>Cr. (₹ in Lakhs)</th></tr></thead>
+<tbody>
+<tr><td>Furniture</td><td>84</td><td>67.20</td><td></td></tr>
+<tr><td>Stock as on 1st January, 2024</td><td>91</td><td>32.76</td><td></td></tr>
+<tr><td>Debtors</td><td>89</td><td>14.24</td><td></td></tr>
+<tr><td>Cash at Bank</td><td>89</td><td>2.67</td><td></td></tr>
+<tr><td>Head Office A/c</td><td>Actual</td><td></td><td>61.00</td></tr>
+<tr><td>Creditors</td><td>89</td><td></td><td>10.68</td></tr>
+<tr><td>Sales</td><td>86</td><td></td><td>240.80</td></tr>
+<tr><td>Expenses</td><td>86</td><td>10.32</td><td></td></tr>
+<tr><td>Goods from Head Office</td><td>Actual</td><td>180.00</td><td></td></tr>
+<tr><td>Exchange Difference in rate</td><td></td><td>5.29</td><td></td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>312.48</strong></td><td><strong>312.48</strong></td></tr>
+</tbody>
+</table>
+<p><strong>Working Notes:</strong></p>
+<p>1. Calculation of Closing Stock and COGS: Opening Stock €36,000; Add: Goods from Head Office €2,25,000; = €2,61,000; Less: Cost of Goods sold (at invoice price) €2,80,000 × 100/125 = €2,24,000; Closing Stock = €37,000.</p>
+<p>2. Calculation of Manager's Commission @ 10% of Profit: 10% of (€56,000 − €12,000 − €8,000) = 10% of €36,000 = €3,600. Closing Stock €37,000 @ 89 = ₹32.93 lakhs (used in the converted trial balance's Head Office/reconciling figures).</p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees translated furniture (a non-monetary asset carried at historical cost) at the closing rate instead of the historical rate ruling on its date of acquisition, and several used the closing rate rather than the average rate for sales and expenses, producing an incorrect exchange difference in the converted trial balance.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<h2>II. Integrated Questions (Branch Accounting with Other Standards)</h2>
+<p class='section-intro'>Questions where Branch Accounting judgment is one part of a larger, genuinely connected question also testing another standard.</p>
+<div class="empty-section">No questions in this batch are placed in Accounting for Branches including Foreign Branches for this section. This is an honest finding, not an extraction gap — see the scope note above.</div>
+
+<div class="note" style="margin-top:48px;">
+Found an error? Please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference (shown at the top of each card) so it can be fixed in the next edition. Thank you for helping make this book better.
+</div>
+
+<div class="error-register">
+<h2>Sanjeevani Booti 2: Error Register for Accounting for Branches including Foreign Branches</h2>
+<h3>Section 1: Concepts I Forgot</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<h3>Section 2: Mistakes I Repeated More Than Twice</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+</div>
+
+<div class="brand-footer">
+#KeepLearning #DreamBig &nbsp;&middot;&nbsp; #LoveWhatYouDo<br>
+<strong>Branch Accounting — Accounting for Branches including Foreign Branches</strong>
+</div>
+
+</body>
+</html>

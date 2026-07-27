@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AS 9 — Revenue Recognition</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;margin:24px;max-width:980px;margin-left:auto;margin-right:auto;color:#222;background:#fff;line-height:1.5;}
+h1{font-size:24px;margin-bottom:4px;}
+h2{font-size:19px;margin-top:44px;border-bottom:2px solid #333;padding-bottom:6px;}
+.note{background:#fff8e1;border:1px solid #e0c46c;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;}
+.empty-section{background:#f0f0f0;border:1px dashed #999;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;color:#555;font-style:italic;}
+.section-intro{font-size:13.5px;color:#444;margin-top:-6px;}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:12.5px;}
+th,td{border:1px solid #999;padding:5px 7px;text-align:left;vertical-align:top;}
+th{background:#2c3e50;color:#fff;}
+.qblock{border:1px solid #ccc;border-radius:8px;padding:14px 18px;margin:18px 0;background:#fdfdfd;}
+.qblock.flagged{border-color:#d98a8a;background:#fffaf7;}
+.qmeta{font-size:12px;color:#555;margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed #ccc;}
+.qmeta .src{font-weight:bold;color:#2c3e50;}
+.qmeta .marks{font-weight:bold;}
+.badge{display:inline-block;background:#fff3e0;border:1px solid #e0b46c;border-radius:10px;padding:1px 8px;font-size:11px;margin-left:6px;}
+.badge.icai{background:#e0f0ff;border-color:#6ca8e0;}
+.question{margin:10px 0;}
+.answer-block{margin:10px 0;background:#eafbea;padding:8px 12px;border-radius:6px;}
+.case-facts{background:#f5f5fb;border-left:3px solid #8888c0;padding:6px 12px;margin-bottom:8px;font-size:13px;}
+.mistakes{margin:10px 0;padding:8px 12px;border-radius:6px;font-size:13.5px;border-left:3px solid #999;}
+.mistakes.icai{background:#fff3e0;border-left-color:#e0b46c;color:#5a3d0a;}
+.mistakes.synth{background:#fdf1f1;border-left-color:#d98a8a;color:#7a2f2f;}
+.mistakes .prov{font-style:italic;color:#666;font-size:11.5px;display:block;margin-top:4px;}
+.na{color:#999;font-style:italic;}
+.notebook-ref{margin-top:10px;font-size:12.5px;color:#444;border-top:1px dashed #ccc;padding-top:6px;}
+.notebook-ref .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:160px;}
+.self-notes{margin-top:8px;border:1px solid #ccc;background:#fff;border-radius:6px;padding:8px 12px;}
+.self-notes .notes-lines{margin-top:4px;}
+.self-notes .dotted-line{height:22px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+.tag-placeholder{margin-top:8px;font-size:12.5px;color:#444;}
+.tag-placeholder .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:220px;}
+.revision-phase{margin-top:8px;font-size:12.5px;color:#444;}
+.revision-phase .box{display:inline-block;border:1px solid #888;width:12px;height:12px;margin:0 3px 0 10px;vertical-align:middle;}
+.brand-header{text-align:center;font-size:11px;color:#777;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:18px;letter-spacing:.3px;}
+.brand-header strong{color:#2c3e50;}
+.brand-footer{text-align:center;font-size:11px;color:#777;border-top:1px solid #eee;padding-top:10px;margin-top:36px;line-height:1.8;}
+.brand-footer strong{color:#2c3e50;}
+.error-register{page-break-before:always;break-before:page;margin-top:40px;}
+.error-register h2{margin-top:8px;}
+.error-register h3{font-size:15px;color:#444;margin-top:28px;}
+.error-register .dotted-line{height:34px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+</style>
+</head>
+<body>
+
+<div class="brand-header">
+<strong>Pranav Bhaiya</strong> &middot; The Newton of Accounts &middot; AIR 1-1-5<br>
+Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma, Not Results
+</div>
+
+<h1>AS 9 — Revenue Recognition</h1>
+<p>Every MTP/RTP/PYQ question that tests this chapter, collected in one place, with official answers and topic tags — so you can practise every question this topic has been examined with, without hunting through separate papers.</p>
+
+<div class="note">
+<strong>A note on accuracy (please read):</strong> This is the first edition of this book, assembled with AI assistance and reviewed as carefully as we could manage, but it has not been independently audited question-by-question. If you spot an error &mdash; a wrong figure, a wrong answer, anything that looks off &mdash; please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference so it can be corrected in the next edition.
+</div>
+
+<div class="note">
+<strong>Scope of this book (9 questions):</strong> Covers 10 sittings: MTP Jan2026 Set1, MTP Jan2026 Set2, MTP May2026 Set1, MTP May2026 Set2, PYQ Jan2026, PYQ May2026, PYQ Sep2025, RTP Jan2026, RTP May2026, RTP Sep2025. MCQs on this chapter are deliberately not included here — practise those on the dedicated MCQ platform; this book is for descriptive/scenario practice with full worked answers.
+</div>
+
+<div class="note">
+<strong>How this book is organised:</strong> Two sections — <strong>I. Descriptive (pure AS 9)</strong> and <strong>II. Integrated</strong> (questions where AS 9 is one part of a larger question that also tests another standard). An empty Section II for a chapter is normal and expected, not a mistake — most multi-topic-looking questions are split so each topic gets its own clean entry, so genuinely combined questions are the rarer case. Each answer includes either a real <strong>Examiner's Comment</strong> (tan/orange box, quoted from ICAI's own published feedback, where one exists for that sitting) or an <strong>Author's Note</strong> (pale pink box, a likely pitfall identified by the author, not an official ICAI finding, and may not apply in every case) &mdash; see <strong>How to Read this Book.md</strong> for the full key to every colour and symbol used.
+</div>
+
+<h2>I. Descriptive &amp; Scenario-Based Questions (pure AS 9)</h2>
+<p class='section-intro'>Full descriptive/scenario questions where this chapter is the sole topic tested (after independent-question splitting).</p>
+
+<div class="qblock" id="M2C8U2-001">
+  <div class="qmeta">
+    <span class="src">MTP January 2026 Set 2</span> &middot;
+    <span class="qno">Q6(a) [OR-alt 1]</span> &middot;
+    <span class="marks">Marks: 4</span> &middot;
+    <span class="marks">Approx Time: 8 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C8_U2 : AS 9 &mdash; Revenue Recognition / ICAI Study Mat Topic No : 1.6</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Indicate in each case whether revenue can be recognized and when, as per AS-9: (i) Delivery is delayed at buyer's request but buyer takes title and accepts billing. (ii) Instalment Sales. (iii) Trade discounts and volume rebates. (iv) Insurance agency commission for rendering services. (v) Advertising commission.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p>(i) Revenue is recognised notwithstanding the delayed physical delivery, so long as delivery is expected and the goods are on hand, identified, and ready for delivery at the time of sale recognition (not merely an intention to acquire/manufacture in time).</p>
+<p>(ii) When consideration is receivable in instalments, revenue attributable to the sale price (excluding interest) is recognised at the date of sale; the interest element is recognised as revenue proportionately to the unpaid balance.</p>
+<p>(iii) Trade discounts and volume rebates received are not revenue (they reduce cost); those given are deducted in determining revenue.</p>
+<p>(iv) Insurance agency commissions are recognised on the effective commencement or renewal dates of the related policies.</p>
+<p>(v) Advertising commission is recognised when the service is completed — media commission when the advertisement appears before the public (with the agency's intimation received); production commission when the project is completed.</p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees deferred revenue on the delayed-delivery sale entirely, missing that the goods being on-hand and ready is what matters, not the physical transfer date itself.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C8U2-002">
+  <div class="qmeta">
+    <span class="src">PYQ September 2025</span> &middot;
+    <span class="qno">Q1(c-i)</span> &middot;
+    <span class="marks">Marks: 1</span> &middot;
+    <span class="marks">Approx Time: 2 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C8_U2 : AS 9 &mdash; Revenue Recognition / ICAI Study Mat Topic No : 1.4</span>
+    <span class="badge">Compulsory</span>
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>AB Limited purchased goods on credit from XY Limited for ₹150 lakhs for export. The export order was cancelled; AB Limited decided to sell the same goods locally with a price discount. XY Limited agreed to a 12% price discount requested by AB Limited. XY's chief accountant wants to adjust the sales figure to the extent of the discount. Discuss whether this treatment is as per the relevant Accounting Standard.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div><p>Correct. Per AS 9, trade discounts given should be deducted in determining revenue. The 12% discount should be deducted from the turnover figure for revenue recognition purposes — XY Limited's adjustment of the sales figure to the extent of the discount is correct as per AS 9.</p></div></div></div>
+  <div class="mistakes icai"><strong>Examiner&rsquo;s Comment:</strong> The responses of examinees to the requirements of AS 9 &quot;Revenue Recognition&quot; were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.<span class="prov">Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C8U2-003">
+  <div class="qmeta">
+    <span class="src">PYQ September 2025</span> &middot;
+    <span class="qno">Q1(c-ii)</span> &middot;
+    <span class="marks">Marks: 1</span> &middot;
+    <span class="marks">Approx Time: 2 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C8_U2 : AS 9 &mdash; Revenue Recognition / ICAI Study Mat Topic No : 1.5</span>
+    <span class="badge">Compulsory</span>
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>XY Limited recognized dividend income of ₹10 lakhs on accrual basis on securities of face value ₹100 lakhs held at 31st March 2025. The dividend (10%) was declared on 30th April 2025, having been proposed on 30th March 2025. Comment.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div><p>Incorrect. Dividends from investments in securities are not recognised in the Statement of Profit and Loss until the right to receive payment is established. Here, the dividend is proposed 30th March 2025 but declared only 30th April 2025 — the right to receive payment is established only on 30th April 2025. Recognising ₹10 lakhs on accrual basis at 31st March 2025 is <strong>not correct</strong> as per AS 9.</p></div></div></div>
+  <div class="mistakes icai"><strong>Examiner&rsquo;s Comment:</strong> The responses of examinees to the requirements of AS 9 &quot;Revenue Recognition&quot; were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.<span class="prov">Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C8U2-004">
+  <div class="qmeta">
+    <span class="src">PYQ September 2025</span> &middot;
+    <span class="qno">Q1(c-iii)</span> &middot;
+    <span class="marks">Marks: 1</span> &middot;
+    <span class="marks">Approx Time: 2 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C8_U2 : AS 9 &mdash; Revenue Recognition / ICAI Study Mat Topic No : 1.6</span>
+    <span class="badge">Compulsory</span>
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>XY Limited sold goods of ₹1,50,000 on approval basis on 15th December 2024; approval period 3 months, after which goods are considered sold. Buyer approved 60% of goods by 31st January 2025; no approval/disapproval received for the remainder by 31st March 2025. The accountant recognised ₹1,50,000 as revenue on 15th December, 2024. Comment.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div><p>Incorrect as recognised. For goods sold on approval, revenue should not be recognised until formal acceptance, an act adopting the transaction, or expiry of the rejection period. Revenue for ₹90,000 (60%) should be recognised on 31st January, 2025 (date of approval); the remaining ₹60,000 should be recognised on 15th March, 2025, when the 3-month approval period lapsed without response (deemed acceptance) — not the full ₹1,50,000 on 15th December, 2024 as the accountant did.</p></div></div></div>
+  <div class="mistakes icai"><strong>Examiner&rsquo;s Comment:</strong> The responses of examinees to the requirements of AS 9 &quot;Revenue Recognition&quot; were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.<span class="prov">Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C8U2-005">
+  <div class="qmeta">
+    <span class="src">PYQ September 2025</span> &middot;
+    <span class="qno">Q1(c-iv)</span> &middot;
+    <span class="marks">Marks: 1</span> &middot;
+    <span class="marks">Approx Time: 2 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C8_U2 : AS 9 &mdash; Revenue Recognition / ICAI Study Mat Topic No : 1.7</span>
+    <span class="badge">Compulsory</span>
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div></div></div>
+  <div class="mistakes icai"><strong>Examiner&rsquo;s Comment:</strong> The responses of examinees to the requirements of AS 9 &quot;Revenue Recognition&quot; were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.<span class="prov">Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C8U2-006">
+  <div class="qmeta">
+    <span class="src">RTP January 2026</span> &middot;
+    <span class="qno">Q8</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C8_U2 : AS 9 &mdash; Revenue Recognition / ICAI Study Mat Topic No : 1.2</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Class Ltd., a real-estate developer, purchased land for ₹225 crore in FY2025 intending a residential complex, then sold it a few months later for ₹360 crore due to a strategic reallocation and favourable market conditions. All legal formalities completed. Advise on revenue recognition for the year ended 31st March, 2025.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div><p>AS 9 recognises revenue when earned with reasonable certainty of collection, arising from the enterprise's ordinary activities. Class Ltd. is in the business of buying and selling properties; the land forms part of its inventory. The ₹360 crore sale is therefore a transaction arising from ordinary activities, and revenue is recognised when the sale is completed and collection is reasonably certain.</p>
+<p>Per AS 5, this is <strong>not</strong> an extraordinary item, since it arises in the ordinary course of business — though given its size, its nature and amount should be separately disclosed if relevant to explaining the enterprise's performance. The ₹360 crore is recognised as revenue in the year the sale is completed.</p></div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees treated the large, unusual sale as an extraordinary item given its size and the company&#x27;s stated change in strategy, missing that dealing in land is Class Ltd.&#x27;s core ordinary business, so scale alone does not make a transaction extraordinary.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C8U2-007">
+  <div class="qmeta">
+    <span class="src">RTP September 2025</span> &middot;
+    <span class="qno">Q11(i)</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C8_U2 : AS 9 &mdash; Revenue Recognition / ICAI Study Mat Topic No : 1.7</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Tonk Tanners (leather shoes): On 31st December, 2024, shoes worth ₹3,20,000 were sent to Mohan Shoes for sale on consignment; 25% remained unsold with Mohan Shoes as on 31st March, 2025. Advise when revenue is recognised in 2024-25 per AS 9.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div><p>Mohan Shoes is a consignee (agent), not a buyer — risk and reward remain with Tonk Tanners until Mohan Shoes sells to a third party. Revenue is recognised only for the goods actually sold by the consignee: ₹3,20,000 × 75% = <strong>₹2,40,000</strong> recognised as revenue in 2024-25; the remaining 25% (unsold) stays as Tonk Tanners' closing inventory.</p></div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees recognised the full ₹3,20,000 upon dispatch to the consignee, treating the consignment shipment itself as a completed sale.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C8U2-008">
+  <div class="qmeta">
+    <span class="src">RTP September 2025</span> &middot;
+    <span class="qno">Q11(ii)</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C8_U2 : AS 9 &mdash; Revenue Recognition / ICAI Study Mat Topic No : 1.8</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>On 10th January, 2025, Tonk Tanners supplied shoes worth ₹4,50,000 to Shani Shoes and concurrently agreed to repurchase the same goods on 11th April, 2025. Advise on revenue recognition.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div><p>A sale with a concurrent agreement to repurchase the same goods is, in substance, a financing arrangement, not a genuine sale. The resulting cash inflow is <strong>not revenue</strong> and should <strong>not</strong> be recognised as revenue in 2024-25.</p></div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees recognised the ₹4,50,000 as ordinary sales revenue, not recognising the repurchase commitment as converting the transaction into a financing arrangement in substance.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C8U2-009">
+  <div class="qmeta">
+    <span class="src">RTP September 2025</span> &middot;
+    <span class="qno">Q11(iii)</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C8_U2 : AS 9 &mdash; Revenue Recognition / ICAI Study Mat Topic No : 1.4</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>On 21st March, 2025, shoes worth ₹1,60,000 were sold to Shoe Shine, but due to their showroom refurbishment, delivery was made on 12th April, 2025 at their request. Advise on revenue recognition.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div><p>If, on 21st March 2025, Shoe Shine took title and accepted billing for the goods, the sale is complete and all risks/rewards of ownership have transferred, even though physical delivery was delayed at the buyer's own request. Provided no significant uncertainty exists over the consideration, revenue is recognised in <strong>2024-25</strong>, regardless of the delayed physical delivery.</p></div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees deferred revenue recognition to the actual delivery date (April 2025), not recognising that title transfer and billing acceptance, not physical delivery, is what matters here.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<h2>II. Integrated Questions (AS 9 with Other Standards)</h2>
+<p class='section-intro'>Questions where AS 9 judgment is one part of a larger, genuinely connected question also testing another standard.</p>
+<div class="empty-section">No questions in this batch are placed in Revenue Recognition for this section. This is an honest finding, not an extraction gap — see the scope note above.</div>
+
+<div class="note" style="margin-top:48px;">
+Found an error? Please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference (shown at the top of each card) so it can be fixed in the next edition. Thank you for helping make this book better.
+</div>
+
+<div class="error-register">
+<h2>Sanjeevani Booti 2: Error Register for Revenue Recognition</h2>
+<h3>Section 1: Concepts I Forgot</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<h3>Section 2: Mistakes I Repeated More Than Twice</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+</div>
+
+<div class="brand-footer">
+#KeepLearning #DreamBig &nbsp;&middot;&nbsp; #LoveWhatYouDo<br>
+<strong>AS 9 — Revenue Recognition</strong>
+</div>
+
+</body>
+</html>

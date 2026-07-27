@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AS 2 — Valuation of Inventories</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;margin:24px;max-width:980px;margin-left:auto;margin-right:auto;color:#222;background:#fff;line-height:1.5;}
+h1{font-size:24px;margin-bottom:4px;}
+h2{font-size:19px;margin-top:44px;border-bottom:2px solid #333;padding-bottom:6px;}
+.note{background:#fff8e1;border:1px solid #e0c46c;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;}
+.empty-section{background:#f0f0f0;border:1px dashed #999;padding:12px 16px;border-radius:6px;font-size:13px;margin:16px 0;color:#555;font-style:italic;}
+.section-intro{font-size:13.5px;color:#444;margin-top:-6px;}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:12.5px;}
+th,td{border:1px solid #999;padding:5px 7px;text-align:left;vertical-align:top;}
+th{background:#2c3e50;color:#fff;}
+.qblock{border:1px solid #ccc;border-radius:8px;padding:14px 18px;margin:18px 0;background:#fdfdfd;}
+.qblock.flagged{border-color:#d98a8a;background:#fffaf7;}
+.qmeta{font-size:12px;color:#555;margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed #ccc;}
+.qmeta .src{font-weight:bold;color:#2c3e50;}
+.qmeta .marks{font-weight:bold;}
+.badge{display:inline-block;background:#fff3e0;border:1px solid #e0b46c;border-radius:10px;padding:1px 8px;font-size:11px;margin-left:6px;}
+.badge.icai{background:#e0f0ff;border-color:#6ca8e0;}
+.question{margin:10px 0;}
+.answer-block{margin:10px 0;background:#eafbea;padding:8px 12px;border-radius:6px;}
+.case-facts{background:#f5f5fb;border-left:3px solid #8888c0;padding:6px 12px;margin-bottom:8px;font-size:13px;}
+.mistakes{margin:10px 0;padding:8px 12px;border-radius:6px;font-size:13.5px;border-left:3px solid #999;}
+.mistakes.icai{background:#fff3e0;border-left-color:#e0b46c;color:#5a3d0a;}
+.mistakes.synth{background:#fdf1f1;border-left-color:#d98a8a;color:#7a2f2f;}
+.mistakes .prov{font-style:italic;color:#666;font-size:11.5px;display:block;margin-top:4px;}
+.na{color:#999;font-style:italic;}
+.notebook-ref{margin-top:10px;font-size:12.5px;color:#444;border-top:1px dashed #ccc;padding-top:6px;}
+.notebook-ref .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:160px;}
+.self-notes{margin-top:8px;border:1px solid #ccc;background:#fff;border-radius:6px;padding:8px 12px;}
+.self-notes .notes-lines{margin-top:4px;}
+.self-notes .dotted-line{height:22px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+.tag-placeholder{margin-top:8px;font-size:12.5px;color:#444;}
+.tag-placeholder .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:220px;}
+.revision-phase{margin-top:8px;font-size:12.5px;color:#444;}
+.revision-phase .box{display:inline-block;border:1px solid #888;width:12px;height:12px;margin:0 3px 0 10px;vertical-align:middle;}
+.brand-header{text-align:center;font-size:11px;color:#777;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:18px;letter-spacing:.3px;}
+.brand-header strong{color:#2c3e50;}
+.brand-footer{text-align:center;font-size:11px;color:#777;border-top:1px solid #eee;padding-top:10px;margin-top:36px;line-height:1.8;}
+.brand-footer strong{color:#2c3e50;}
+.error-register{page-break-before:always;break-before:page;margin-top:40px;}
+.error-register h2{margin-top:8px;}
+.error-register h3{font-size:15px;color:#444;margin-top:28px;}
+.error-register .dotted-line{height:34px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+</style>
+</head>
+<body>
+
+<div class="brand-header">
+<strong>Pranav Bhaiya</strong> &middot; The Newton of Accounts &middot; AIR 1-1-5<br>
+Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma, Not Results
+</div>
+
+<h1>AS 2 — Valuation of Inventories</h1>
+<p>Every MTP/RTP/PYQ question that tests this chapter, collected in one place, with official answers and topic tags — so you can practise every question this topic has been examined with, without hunting through separate papers.</p>
+
+<div class="note">
+<strong>A note on accuracy (please read):</strong> This is the first edition of this book, assembled with AI assistance and reviewed as carefully as we could manage, but it has not been independently audited question-by-question. If you spot an error &mdash; a wrong figure, a wrong answer, anything that looks off &mdash; please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference so it can be corrected in the next edition.
+</div>
+
+<div class="note">
+<strong>Scope of this book (6 questions):</strong> Covers 10 sittings: MTP Jan2026 Set1, MTP Jan2026 Set2, MTP May2026 Set1, MTP May2026 Set2, PYQ Jan2026, PYQ May2026, PYQ Sep2025, RTP Jan2026, RTP May2026, RTP Sep2025. MCQs on this chapter are deliberately not included here — practise those on the dedicated MCQ platform; this book is for descriptive/scenario practice with full worked answers.
+</div>
+
+<div class="note">
+<strong>How this book is organised:</strong> Two sections — <strong>I. Descriptive (pure AS 2)</strong> and <strong>II. Integrated</strong> (questions where AS 2 is one part of a larger question that also tests another standard). An empty Section II for a chapter is normal and expected, not a mistake — most multi-topic-looking questions are split so each topic gets its own clean entry, so genuinely combined questions are the rarer case. Each answer includes either a real <strong>Examiner's Comment</strong> (tan/orange box, quoted from ICAI's own published feedback, where one exists for that sitting) or an <strong>Author's Note</strong> (pale pink box, a likely pitfall identified by the author, not an official ICAI finding, and may not apply in every case) &mdash; see <strong>How to Read this Book.md</strong> for the full key to every colour and symbol used.
+</div>
+
+<h2>I. Descriptive &amp; Scenario-Based Questions (pure AS 2)</h2>
+<p class='section-intro'>Full descriptive/scenario questions where this chapter is the sole topic tested (after independent-question splitting).</p>
+
+<div class="qblock" id="M2C5U1-001">
+  <div class="qmeta">
+    <span class="src">MTP January 2026 Set 1</span> &middot;
+    <span class="qno">Q2(a)</span> &middot;
+    <span class="marks">Marks: 7</span> &middot;
+    <span class="marks">Approx Time: 13 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U1 : AS 2 &mdash; Valuation of Inventories / ICAI Study Mat Topic No : 1.10</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Happy Limited is a Textile Manufacturing Company producing Polyester (P) and Nylon (N); a by-product Fiber (F) is also produced. Cost of production: Raw material for 30,000 units ₹3,50,000; Wages ₹1,60,000; Fixed overheads ₹1,20,000; Variable overheads ₹60,000. Output: Polyester 12,500 units, Nylon 10,000 units, Fiber 3,200 units. Closing inventory: Polyester 1,600 units, Nylon 400 units. Average market price: Polyester ₹100/unit, Nylon ₹60/unit; by-product Fiber sold @₹40/unit, profit of ₹8,000 on sale of by-product after separate processing expenses ₹10,000 and packing charges ₹9,000. ₹5,000 realized from sale of scrap. Compute the value of closing inventory of Polyester and Nylon.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p>As per AS 2 'Valuation of Inventories', most by-products, being immaterial, are measured at net realizable value, deducted from the cost of the main product.</p>
+<p><strong>W.N.1 — NRV of by-product Fiber:</strong> Selling price (3,200 × ₹40) 1,28,000 − separate processing charges 10,000 − packing charges 9,000 = ₹1,09,000.</p>
+<p><strong>W.N.2 — Joint cost allocation:</strong> Raw material 3,50,000 + Wages 1,60,000 + Fixed OH 1,20,000 + Variable OH 60,000 = 6,90,000; less NRV of Fiber (1,09,000) and scrap sale value (5,000) = <strong>Joint cost to allocate: 5,76,000</strong>.</p>
+<table><thead><tr><th>Particulars</th><th>Polyester</th><th>Nylon</th></tr></thead>
+<tbody>
+<tr><td>Output (units)</td><td>12,500</td><td>10,000</td></tr>
+<tr><td>Sales price/unit</td><td>₹100</td><td>₹60</td></tr>
+<tr><td>Sales value</td><td>12,50,000</td><td>6,00,000</td></tr>
+<tr><td>Joint cost 5,76,000 allocated in ratio 12,50,000:6,00,000</td><td>3,89,189</td><td>1,86,811</td></tr>
+<tr><td>Cost per unit</td><td>₹31.14</td><td>₹18.68</td></tr>
+<tr><td>Closing inventory (units)</td><td>1,600</td><td>400</td></tr>
+<tr><td><strong>Value of closing inventory</strong></td><td><strong>₹49,824</strong></td><td><strong>₹7,472</strong></td></tr>
+</tbody></table>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees allocated the full 6,90,000 cost between Polyester and Nylon without first deducting the by-product&#x27;s net realizable value and the scrap sale proceeds, overstating the joint cost base for allocation.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C5U1-002">
+  <div class="qmeta">
+    <span class="src">MTP January 2026 Set 2</span> &middot;
+    <span class="qno">Q6(a) [OR-alt 2]</span> &middot;
+    <span class="marks">Marks: 4</span> &middot;
+    <span class="marks">Approx Time: 8 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U1 : AS 2 &mdash; Valuation of Inventories / ICAI Study Mat Topic No : 1.9</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>"In determining the cost of inventories, it is appropriate to exclude certain costs and recognise them as expenses in the period in which they are incurred." Provide examples of such costs as per AS 2 (Revised) 'Valuation of Inventories'.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p>Examples of costs excluded from inventory cost and expensed as incurred: (a) abnormal amounts of wasted materials, labour, or other production costs; (b) storage costs, unless required by the production process itself; (c) administrative overheads that do not contribute to bringing the inventories to their present location and condition; (d) selling and distribution costs.</p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees included all administrative overheads as excluded costs, without distinguishing those that do (production-related) vs. do not (general admin) contribute to bringing inventory to its present location and condition.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C5U1-003">
+  <div class="qmeta">
+    <span class="src">MTP May 2026 Set 1</span> &middot;
+    <span class="qno">Q1(c)</span> &middot;
+    <span class="marks">Marks: 4</span> &middot;
+    <span class="marks">Approx Time: 8 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U1 : AS 2 &mdash; Valuation of Inventories / ICAI Study Mat Topic No : 1.11/1.12</span>
+    <span class="badge">Compulsory</span>
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>In the following cases, find the value of closing stock as per AS 2:
+    <br/>(i) Sonu is a retailer dealing in toys. During the year, he purchased items worth for ₹1,47,000 and made a total sale ₹1,54,000. The average percentage of gross margin is 10% on cost. Opening stock of toys at cost was ₹20,000.
+    <br/>(ii) On 21st March, 2026, Mohan purchased 250 chairs at ₹300 each. The selling price of the chair is ₹400 each. Owing to a manufacturing defect, net realisable value of the whole lot of chair was determined at 70% of their normal selling price. No chairs were sold during the year. (4 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>(i) Cost of closing inventory is shown below:</p>
+<table>
+<tbody>
+<tr><td>Sale value of opening stock and purchases (₹20,000 + ₹1,47,000) x 1.10</td><td>1,83,700</td></tr>
+<tr><td>Sales</td><td>(1,54,000)</td></tr>
+<tr><td>Sale value of unsold stock</td><td>29,700</td></tr>
+<tr><td>Less: Gross Margin (₹29,700/1.10) x 0.10</td><td>(2,700)</td></tr>
+<tr><td><strong>Cost of closing inventory</strong></td><td><strong>27,000</strong></td></tr>
+</tbody>
+</table>
+<p><em>Alternative presentation</em></p>
+<table>
+<tbody>
+<tr><td>Opening stock and purchases (₹20,000 + ₹1,47,000)</td><td>1,67,000</td></tr>
+<tr><td>Less: cost of goods sold</td><td>(1,40,000)</td></tr>
+<tr><td><strong>Cost of closing inventory</strong></td><td><strong>27,000</strong></td></tr>
+</tbody>
+</table>
+<p>Calculation of cost of goods sold:</p>
+<table>
+<tbody>
+<tr><td>Goods sold</td><td>1,54,000</td></tr>
+<tr><td>Less: gross margin (1,54,000 x 10/110)</td><td>(14,000)</td></tr>
+<tr><td><strong>Cost of goods sold</strong></td><td><strong>1,40,000</strong></td></tr>
+</tbody>
+</table>
+<p>(ii)</p>
+<table>
+<tbody>
+<tr><td>Closing stock at cost (250 x ₹300) (i)</td><td>75,000</td></tr>
+<tr><td>Net Realizable value of closing stock (₹280* x 250) (ii)</td><td>70,000</td></tr>
+<tr><td><strong>Value of closing stock [lower of (i) and (ii)]</strong></td><td><strong>70,000</strong></td></tr>
+</tbody>
+</table>
+<p><em>*₹280 = 70% of ₹400 selling price.</em></p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Several examinees applied the gross margin percentage directly to sales value instead of grossing up cost through the margin percentage, producing an incorrect closing stock figure in part (i) under AS 2; in part (ii), some compared cost against the normal selling price instead of the defect-adjusted net realisable value.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C5U1-004">
+  <div class="qmeta">
+    <span class="src">PYQ September 2025</span> &middot;
+    <span class="qno">Q1(b)</span> &middot;
+    <span class="marks">Marks: 5</span> &middot;
+    <span class="marks">Approx Time: 9 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U1 : AS 2 &mdash; Valuation of Inventories / ICAI Study Mat Topic No : 1.14</span>
+    <span class="badge">Compulsory</span>
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>SR Limited manufactures finished goods 'MP' from raw material 'RP'. Year ended 31st March 2025: Opening Inventory MP 4,000 units ₹1,20,000; RP 4,400 units ₹52,800. Purchase of RP 40,000 units ₹4,80,000. Labour ₹3,23,200. Fixed Overheads ₹3,15,000. Sales 40,200 units ₹11,20,000. Closing Inventory: MP 4,200 units; RP 4,000 units. Expected production 45,000 units of MP. Due to fall in market demand, sales price of MP fell to ₹22/unit; replacement cost of RP ₹11.50/unit on closing day. Calculate the value of Closing Stock of 'MP' and 'RP' as on 31st March 2025.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p><strong>W.N.1 Actual production:</strong> Sales 40,200 + Closing FG 4,200 − Opening FG 4,000 = 40,400 units.</p>
+<p><strong>W.N.2 RP consumed:</strong> Opening RP 4,400 + Purchases 40,000 = 44,400 available; less Closing RP 4,000 = 40,400 units consumed (1 unit RP per unit MP produced).</p>
+<p><strong>W.N.3 Cost per unit RP (weighted average):</strong> (Opening value 52,800 + Purchases 4,80,000) / 44,400 units = 5,32,800/44,400 = ₹12.00/unit.</p>
+<table><tbody>
+<tr><td>Cost of Material Consumed (40,400 × ₹12)</td><td>4,84,800</td></tr>
+<tr><td>Direct Labour</td><td>3,23,200</td></tr>
+<tr><td>Fixed Overhead (3,15,000 × 40,400/45,000 — based on <em>normal/expected</em> production, not actual)</td><td>2,82,800</td></tr>
+<tr><td><strong>Cost of Production</strong></td><td><strong>10,90,800</strong></td></tr>
+<tr><td>Cost per unit (10,90,800/40,400)</td><td>₹27</td></tr>
+<tr><td>Net Realisable Value per unit (selling price)</td><td>₹22</td></tr>
+</tbody></table>
+<p>Since NRV (₹22) is less than cost (₹27), the closing MP inventory is valued at NRV. Since finished goods NRV is below cost, the raw material RP feeding it is valued at replacement cost (₹11.50), per AS 2's write-down rule.</p>
+<p><strong>Value of closing inventory: MP (4,200 × ₹22) = ₹92,400. RP (4,000 × ₹11.50) = ₹46,000.</strong></p>
+</div></div></div>
+  <div class="mistakes icai"><strong>Examiner&rsquo;s Comment:</strong> The performance of examinees in this part was not satisfactory. A majority of them were unable to determine the value of closing inventory of finished goods (MP) and raw materials (RP) in accordance with AS 2 &quot;Valuation of Inventories&quot;. Several examinees failed to compute the cost of production correctly, particularly where certain items required proportionate allocation. Many could ascertain only the labour cost of ₹3,23,200, while the remaining elements of cost were incorrectly computed. Further, a large number of examinees valued the closing stock of finished goods (on NRV basis) and raw materials (on replacement cost basis) incorrectly.<span class="prov">Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C5U1-005">
+  <div class="qmeta">
+    <span class="src">RTP January 2026</span> &middot;
+    <span class="qno">Q3</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U1 : AS 2 &mdash; Valuation of Inventories / ICAI Study Mat Topic No : 1.3</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>A private limited company manufacturing fancy terry towels had valued its closing inventory of finished goods at realisable value, inclusive of profit and export cash incentives. Firm contracts had been received and goods were packed for export, but ownership had not been transferred to the foreign buyers. Comment on the valuation of the inventories by the company.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div><p>AS 2 requires inventories to be valued at the lower of historical cost and net realisable value. AS 9 permits valuing goods at net realisable value only in specific industries where performance is substantially complete prior to the transaction generating revenue — e.g. harvested agricultural crops or extracted mineral ores, where a sale is assured under forward contract/government guarantee or a ready market exists with negligible risk of failure to sell.</p>
+<p>Fancy terry towels do not fall into the agricultural-crop or mineral-ore category. Since ownership had not transferred to the foreign buyers, the sale was not yet complete. The closing inventory should therefore have been valued at the lower of cost and net realisable value, <strong>not</strong> at net realisable value. Further, export cash incentives are recognised only in the year the export sale actually takes place, not accrued into inventory valuation ahead of the sale. The company's valuation policy is therefore <strong>not correct</strong>.</p></div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees accepted the NRV-inclusive-of-profit valuation on the basis of firm export contracts alone, not recognising that the AS 9 exception is limited to specific industries (agricultural/mineral) and does not extend to manufactured goods merely because a sale contract exists.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C5U1-006">
+  <div class="qmeta">
+    <span class="src">RTP September 2025</span> &middot;
+    <span class="qno">Q6</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">M2_C5_U1 : AS 2 &mdash; Valuation of Inventories / ICAI Study Mat Topic No : 1.10</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Zing Ltd., 2024-25: Raw Material closing stock 700 units, cost ₹35/unit, replacement cost ₹20/unit. Finished products FP1/FP2: Production 3,000/1,600 units; Closing stock 500/300 units. Material consumed ₹3,20,000; Direct labour ₹1,60,000; Direct expenses ₹78,000 (these three cost figures pertain to combined joint production). Fixed overhead ₹95,000, including ₹15,000 godown rent (for storing finished products, not a production cost). 1,000 units of by-product BY also emerged, sold @₹12/unit after ₹2,500 expense; ₹4,800 realized from scrap sale. Average market price: FP1 ₹160/unit, FP2 ₹100/unit. Calculate the value of closing stock per AS 2.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p>Per AS 2, most by-products/scrap are measured at NRV, deducted from the cost of the main product.</p>
+<p><strong>NRV of by-product BY:</strong> Selling price (1,000×₹12) 12,000, less separate processing charges 2,500 = <strong>₹9,500.</strong></p>
+<p><strong>Joint cost to allocate:</strong> Raw material 3,20,000 + Labour 1,60,000 + Direct expenses 78,000 + Fixed overhead (95,000−15,000 godown rent, excluded as unrelated to production) 80,000 = 6,38,000; less NRV of BY (9,500) and scrap sale value (4,800) = <strong>₹6,23,700 to allocate between FP1 and FP2.</strong></p>
+<table><thead><tr><th></th><th>FP1</th><th>FP2</th></tr></thead>
+<tbody>
+<tr><td>Output (units)</td><td>3,000</td><td>1,600</td></tr>
+<tr><td>Sales price/unit</td><td>₹160</td><td>₹100</td></tr>
+<tr><td>Sales value</td><td>4,80,000</td><td>1,60,000</td></tr>
+<tr><td>Allocation ratio</td><td>3</td><td>1</td></tr>
+<tr><td>Joint cost allocated (3:1)</td><td>4,67,775</td><td>1,55,925</td></tr>
+<tr><td>Cost per unit</td><td>₹155.93</td><td>₹97.45</td></tr>
+</tbody></table>
+<p>Since both FP1 (₹155.93 cost vs ₹160 selling price) and FP2 (₹97.45 vs ₹100) sell above cost, both finished goods are valued at cost, and the raw material feeding them is valued at its own cost (₹35/unit, not written down to the ₹20 replacement cost).</p>
+<p><strong>Closing inventory:</strong> FP1 (500×₹155.93) = ₹77,965. FP2 (300×₹97.45) = ₹29,235. Raw material (700×₹35) = ₹24,500. <strong>Total closing inventory = ₹77,965 + ₹29,235 + ₹24,500 = ₹1,31,700.</strong></p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees included the godown rent (storage cost unrelated to production, per AS 2&#x27;s general exclusion of storage costs) in the joint cost pool, or wrote raw material down to replacement cost despite both finished goods selling above their allocated cost.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
+  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
+  <div class="revision-phase">Revision Phase completed:
+    <span class="box"></span>1 &nbsp;
+    <span class="box"></span>2 &nbsp;
+    <span class="box"></span>3
+  </div>
+</div>
+
+
+<h2>II. Integrated Questions (AS 2 with Other Standards)</h2>
+<p class='section-intro'>Questions where AS 2 judgment is one part of a larger, genuinely connected question also testing another standard.</p>
+<div class="empty-section">No questions in this batch are placed in Valuation of Inventories for this section. This is an honest finding, not an extraction gap — see the scope note above.</div>
+
+<div class="note" style="margin-top:48px;">
+Found an error? Please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference (shown at the top of each card) so it can be fixed in the next edition. Thank you for helping make this book better.
+</div>
+
+<div class="error-register">
+<h2>Sanjeevani Booti 2: Error Register for Valuation of Inventories</h2>
+<h3>Section 1: Concepts I Forgot</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<h3>Section 2: Mistakes I Repeated More Than Twice</h3>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+<div class="dotted-line"></div>
+</div>
+
+<div class="brand-footer">
+#KeepLearning #DreamBig &nbsp;&middot;&nbsp; #LoveWhatYouDo<br>
+<strong>AS 2 — Valuation of Inventories</strong>
+</div>
+
+</body>
+</html>
