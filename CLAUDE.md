@@ -8,10 +8,11 @@ Git root `D:\EffCorp_Projects\cap-online` · remote `EFFICIENTCORPORATES/cap-onl
 
 ## 1. Read order (do this first, every session)
 
-1. **CLAUDE.md** (this file).
+1. **CLAUDE.md** (this file) — repo-wide rules and context for every pillar.
 2. **README.md** — full repo map, the 6 pillars, and rules.
-3. **content/README.md** — creative-studio rules (only if the task touches `content/`).
-4. **_claude/memory/** — `project_log.md` (newest entry first) and the memory files there.
+3. **Claude_V2.md** — deep context for the Strategy Book (Pillar 1) only; read it if the task touches `books/strategy-book/`. It does not cover any other pillar and is never a substitute for this file.
+4. **content/README.md** — creative-studio rules (only if the task touches `content/`).
+5. **_claude/memory/** — `project_log.md` (newest entry first) and the memory files there.
 
 Then briefly confirm you understand the structure and rules, and wait for the task. Do not start work before this.
 
@@ -26,6 +27,7 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 - **End every session** by appending a short dated note to `_claude/memory/project_log.md` (newest on top).
 - **Ask first when stuck.** At the first genuine doubt or blocker, ASK Pranav — do not guess or spin on workarounds.
 - **Pushing needs Pranav's credentials.** The sandbox cannot push to GitHub. Commit locally; Pranav runs `git push origin main` from his own machine.
+- **This repo is worked on by more than one AI session concurrently** (at minimum: Claude Code sessions like this one, and a separate "Codex"-based session — both have directly authored files under `first_run/`, both have committed to `main`, sometimes without the other's clone knowing). **Never assume you're the only author of recent changes.** Before assuming a file is stale, unfinished, or "of unconfirmed origin," check its mtime and actually read it — it may have been built or fixed by the other session since you last looked. A real git-history divergence (the other session pushed straight to `origin/main` while this clone worked from an older commit) already happened once and needed a manual merge — see `_claude/memory/project_log.md`'s 2026-07-27 entries for exactly how it was reconciled if it recurs.
 
 ---
 
@@ -51,7 +53,7 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 | `final-deliverables/` | Print-ready teaching documents: teaching method (01), batch planner (02/02A), bridge course skeleton (03/03A), and future student-facing exports. MD only. |
 | `tools/` | Admin/processing scripts (see section 5) |
 | `_claude/` | Claude's context: `memory/` (incl. `project_log.md`), `artifacts/`, `skills/` |
-| `first_run/` | **Workspace proving the Question Bank Book pipeline end-to-end** (added 2026-07-23) before scaling to the full syllabus — `source/` (PDFs only, never MD, for every in-scope sitting — see section 6 for why this is enforced structurally now), `schema/` (single-source-of-truth `book-style.json` + generated `book-style.css` + `HTML-SCHEMA.md`), `prompts/` (the 3 external-AI prompts), `scripts/` (`extract_questions.py`, `generate_chapter_book.py`, `generate_all_chapter_books.py`), `output/parsed-from-pdf/` (sitting HTML, Layer 1), `output/generated-from-script/` (`questions_index.json` + every chapter book, Layers 2–3 — reorganized 2026-07-26, see section 6). See section 6 for full status. Not a permanent pillar — once validated, its lessons fold back into `books/question-bank/`. |
+| `first_run/` | **Workspace proving the Question Bank Book pipeline end-to-end** (added 2026-07-23) before scaling to the full syllabus. **`HOW-TO-BUILD-THE-BOOK.md`** (new 2026-07-27) is the master runbook — read it before running any script below; it has the exact command order, prerequisites, and every fixed-incident gotcha. `source/` (PDFs only, never MD, for every in-scope sitting — see section 6 for why this is enforced structurally now). `schema/` (single-source-of-truth `book-style.json` + generated `book-style.css` + `HTML-SCHEMA.md`). `prompts/` (the 3 external-AI prompts for generating sitting HTML). `scripts/` — Layer 1→2→3 (`extract_questions.py`, `generate_chapter_book.py`, `generate_all_chapter_books.py`), coverage stats (`generate_book_stats.py`), and whole-book assembly (`generate_qb_front_back_matter.py`, `generate_qb_toc.py`, `qb_merge.py`, `resolve_qb_toc_pages.py`, `qb_common.py` for shared print/pagination CSS — all built by a concurrent session, see section 2's multi-agent note). `output/parsed-from-pdf/` (sitting HTML, Layer 1). `output/generated-from-script/` (`questions_index.json`, `book_stats.json`, every chapter book — Layers 2–3). `output/` root also holds `front-matter.html`, `table-of-contents.html`, `back-matter.html`, the final merged `QUESTION-BANK-BOOK.html`, `vendor/` (fonts + paged.js), and the student-facing `How-to-Read-this-Book.md`. See section 6 for full status. Not a permanent pillar — once validated, its lessons fold back into `books/question-bank/`. |
 
 **Only TWO self-drafted books:** the strategy book and the concept book (Advanced Accounts). Everything else is engine/platform/content/ops.
 
@@ -75,7 +77,7 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 
 ---
 
-## 6. Question Bank Book — current focus (as of 2026-07-22)
+## 6. Question Bank Book — current focus (chronological log, 2026-07-22 through 2026-07-27 — read to the end for current state)
 
 Pranav has shifted full focus onto **Pillar 4, `books/question-bank/`**. The core task: converge past-exam questions (PYQ/MTP/RTP) with the syllabus chapter/topic taxonomy so every question is tagged to a chapter/topic — this is the main gap, not raw content collection. This session built the tagging schema and machine-tagged 4 sittings end-to-end (see below) — read `books/question-bank/metadata-index/TAGGING-SCHEMA.md` before adding more.
 
@@ -175,7 +177,7 @@ Pranav asked to see the whole pipeline actually work, not just be designed: "I w
 
 Deleted the confirmed-stale `first_run/output/TODO.md` (leftover pre-build RTP planning notes referencing an abandoned unit-code decision).
 
-**Still not built**: OP/PP duplicate detection (`SKILL-question-bank-duplicate-detection.md` — designed, not implemented) and the whole-book merge/"sewing" script (reuse `tools/strategy_book_merge.py` lessons, section 7 below). Scaling `generate_chapter_book.py` to the other 35 chapters is blocked on more sittings existing — still only 5 of ~17+ sittings are built/tagged.
+**Still not built at this point in the timeline**: OP/PP duplicate detection (`SKILL-question-bank-duplicate-detection.md` — designed, not implemented, still true today) and the whole-book merge/"sewing" script (reuse `tools/strategy_book_merge.py` lessons, section 7 below — **the merge script was built and proven end-to-end by 2026-07-27, see that entry below; this note is historical**). Scaling `generate_chapter_book.py` to the other 35 chapters is blocked on more sittings existing — still only 5 of ~17+ sittings are built/tagged.
 
 ### Accuracy audit and Phase 2 scaling (2026-07-26): 10 sittings, all 34 touched chapters generated
 
@@ -185,7 +187,7 @@ Two locked decisions from 2026-07-26, both still in force — read `_claude/skil
 
 Pranav then asked to scale past the single AS 2 proof-of-concept: 5 more sittings built (`MTP_Jan2026_Set1/Set2.html`, `RTP_Jan2026.html`, `PYQ_Sep2025.html`, `RTP_Sep2025.html`), bringing the pilot to **10 sittings, 275 tagged question rows**. A new batch driver, **`first_run/scripts/generate_all_chapter_books.py`**, queries every unique `final_chapter` in `questions_index.json` and generates a book for each — **34 of the syllabus's 36 chapters are now touched** (only AS 1 and AS 27 remain thin, 2 questions each). All 34 books validated structurally clean. Two real cross-tagging bugs were caught and fixed during this build: a `data-part` free-text drift (same class of bug as the 2026-07-25 fix) and a `unitCode` inconsistency where Branch Accounting and Framework were tagged with both `U0` and `U1` variants across different files — both of which are locked-canonical `U0` single-unit chapters per the earlier migration; left uncaught, either would have silently split one chapter's book into two.
 
-**Still not built**: OP/PP duplicate detection and the whole-book merge script, as above — several likely-recurring questions were spotted and flagged in extraction-notes during this build (noted for whenever duplicate detection is implemented) but not acted on.
+**Still not built at this point in the timeline**: OP/PP duplicate detection and the whole-book merge script, as above (**the merge script is done — see the 2026-07-27 entry below; OP/PP is still genuinely not built**) — several likely-recurring questions were spotted and flagged in extraction-notes during this build (noted for whenever duplicate detection is implemented) but not acted on.
 
 ### Scope expanded to 2023+, folder layout reorganized, MD-not-PDF slip fixed structurally (2026-07-26)
 
@@ -197,7 +199,7 @@ Prompted by discovering that the 5 Phase 2 sittings above were built from `.md` 
 
 Also deleted two stray files flagged back in the 2026-07-22 session and never cleaned up: `MERGE_PDF.py` (a generic PDF-merge utility, unreferenced by any pipeline script) and `MTP_May-24_Set-1 CA-INTER-ACCOUNTS.md` (confirmed pre-rename duplicate of the already-present `CAInter-AdvAcc-MTP-May2024-Set1-*` files).
 
-**Left deliberately untouched**: `first_run/output/QUESTION-BANK-BOOK.html`, `front-matter.html`, `back-matter.html`, and a `vendor/` folder (paged.js + fonts) of unconfirmed origin — likely a separate, earlier whole-book "sewing" attempt matching the §7 print architecture below, but not something built in any session covered by this log. Don't assume these are stale or fold them into either new subfolder without asking Pranav what they are first.
+**At the time, left deliberately untouched** (origin unconfirmed): `first_run/output/QUESTION-BANK-BOOK.html`, `front-matter.html`, `back-matter.html`, and a `vendor/` folder (paged.js + fonts). **Origin since confirmed**: these are a concurrent "Codex" session's whole-book "sewing" pipeline — see the 2026-07-27 entry below for the full, now-complete picture. No longer mystery files.
 
 ### Chapter-book reader-experience overhaul (2026-07-26) — MCQs removed, several new student-facing fields added
 
@@ -222,11 +224,155 @@ Following Pranav's review of the rendered book, a 16-point feature/fix list was 
 
 Full implementation detail lives in `_claude/skills/SKILL-question-bank-chapter-book-rendering.md` §1 (rewritten this date).
 
+### Whole-book assembly built and proven end-to-end (2026-07-27)
+
+A concurrent "Codex" session (see section 2's multi-agent note) built the entire remaining
+half of the pipeline — the pieces the 2026-07-26 entries above still called "not built" —
+while this Claude session was focused on the chapter-book UX overhaul: `qb_common.py`
+(shared print/pagination CSS, single source of truth per section 7 below),
+`generate_qb_front_back_matter.py` (title/copyright/dedication/How-to-Read pages),
+`generate_qb_toc.py` (a fully script-owned, always-fresh-rewrite Table of Contents —
+fixing a real duplication bug an earlier version had), `qb_merge.py` (the whole-book
+"sewing" script, stitching front matter + ToC + all 34 chapters + back matter into one
+document), and `resolve_qb_toc_pages.py` (drives headless Chrome over the DevTools
+Protocol to read real page numbers post-pagination, since `target-counter()` is a
+confirmed-broken CSS feature in the vendored paged.js version — same finding
+`Claude_V2.md` §16 already made for the Strategy Book, independently rediscovered here).
+
+This Claude session then took full ownership of that pipeline on Pranav's instruction
+("take full control of the entire book and entire flow... go through every file of
+another AI"), audited every one of those files, and ran the complete pipeline
+end-to-end in one pass. Findings:
+- **No major issues.** The one duplication risk flagged in the prior session (this
+  script's own richer per-question Student Self Notes/Notebook Ref/Tag/Revision Phase
+  block vs. `qb_common.py`'s older, merge-time-injected "Your Notes" strip) had **already
+  been found and fixed by the Codex session** before this audit even started —
+  `page_shell()` no longer calls `inject_student_notes()`; confirmed by grepping the
+  merged output (zero occurrences of the old strip, all new fields present correctly).
+- **Two small, real bugs found and fixed directly** (per Pranav's "resolve small bugs
+  yourself" instruction): (1) `.qb-howto`/`.qb-legend-*` CSS existed in `qb_common.py`
+  but no page anywhere actually used it — a "How to Read This Book" legend page was
+  designed but never written; added it to `generate_qb_front_back_matter.py`, condensed
+  from `first_run/output/How-to-Read-this-Book.md`, plus 3 more legend swatches so all
+  five colour-coded box types (not just two) are explained. (2) `resolve_qb_toc_pages.py`
+  passed an unencoded `file://` URL into an HTTP request to Chrome's DevTools endpoint —
+  crashed on any repo path containing a space (this clone's does: `.../Other
+  computers/...`). Fixed with `urllib.parse.quote()`.
+- **Full pipeline run, validated**: `generate_all_chapter_books.py` →
+  `generate_book_stats.py` → `generate_qb_front_back_matter.py` → `generate_qb_toc.py` →
+  `qb_merge.py` → `resolve_qb_toc_pages.py --remerge`. Final `QUESTION-BANK-BOOK.html`:
+  **307 pages**, all 34 chapters' ToC page numbers correctly resolved and baked in,
+  validated clean (0 unclosed tags, 0 duplicate ids, 0 NUL bytes, 0 leftover
+  build-info/extraction-note text, 0 duplicate notes strips).
+
+**New file**: `first_run/HOW-TO-BUILD-THE-BOOK.md` — the master end-to-end build
+runbook (architecture, folder map, prerequisites, exact command sequence, a
+what-needs-re-running-after-X-changes table, and every fixed-incident gotcha above in
+full detail). Read it before running any script in `first_run/scripts/`.
+
+**Still genuinely not built** (confirmed current as of this date): OP/PP duplicate
+detection and short chapter/unit names — both as described earlier in this section,
+both still named honestly as "coming in a future edition" in the book's own front matter.
+
+### Scaling to all 34 sittings + two new locked decisions (2026-07-28)
+
+Pranav asked to scale the pipeline past the 10-sitting pilot to all 24 remaining
+in-scope sittings, using the `first_run/pending/` PDFs + `first_run/output/
+pending-pdf-parsed-clean/` cleaned-MD aids (see that folder's own docstring in
+`clean_pending_md.py`) as the batch's source material — **PDF is still the accuracy
+source of truth per sitting; the cleaned MD is a typing aid only**, same rule as
+before. Built via parallel background agents, one per sitting, each independently
+self-validating (structural HTML checks + independent MCQ arithmetic re-derivation
+per `SKILL-question-bank-phase1-definition-of-done.md` §1) and then spot-verified a
+second time by the orchestrating session before being trusted — batched ~3-5 at a time
+with a checkpoint after each, per the pacing this section already recommended. **Done
+as of 2026-07-28**: all 24 remaining sittings built, all 34 in-scope sittings now
+exist, full pipeline (extraction → 34 chapter books → stats → front/back matter → ToC
+→ merge → page-number resolution) rebuilt end-to-end: **796-page `QUESTION-BANK-
+BOOK.html`**, 437 distinct questions, 3,096 total marks, 68 real ICAI Examiner's
+Comments matched. Full detail in `_claude/memory/project_log.md`'s 2026-07-28 entries.
+Two mid-build account spend-limit hits were absorbed without data loss because every
+sitting-build agent is instructed to write to disk as early as it has a solid draft
+and refine in place — worth keeping that instruction in any future batch of this kind.
+
+**New finding during this batch, now a locked handling rule**: several of the older
+(2023) MTP/PYQ sittings test topics from **before a syllabus change** that don't exist
+anywhere in the current 36-chapter taxonomy at all (Hire Purchase, Departmental
+Accounts, Incomplete Records, Insurance Claims for Loss of Stock, Redemption of
+Debentures/Preference Shares, Profit Prior to Incorporation, Bonus Shares, Managerial
+Remuneration — found across `PYQ_May2023.html`, `MTP_May2023_Set1.html`,
+`MTP_May2023_Set2.html`). **Pranav's decision**: tag these `data-unitcode`/
+`data-final-chapter="LEGACY-{TOPIC-SLUG}"` + `data-issue="topic-legacy-not-in-current-
+syllabus"` — the sitting HTML stays a complete, accurate record, but these records are
+**excluded from the generated chapter books** (no chapter exists for a LEGACY code) as
+the book is scoped to the current syllabus. No appendix for them in this edition. This
+is distinct from `topic-unindexed` (AS 1/AS 27 — genuinely *in* the current syllabus,
+just not yet in `topic-index.json`).
+
+**OP/PP explicitly out of scope for this (first) edition** — not just "still not
+built" as stated above, but a deliberate scope decision: Pranav's call, 2026-07-28,
+is to publish the first edition without it and revisit OP/PP as a dedicated
+post-launch effort once the full 34-sitting corpus exists (the ≥90%-similarity
+comparison is O(n²) over the whole corpus — running it against a partial corpus now
+would mean redoing it later for no benefit anyway). Don't build this for edition 1
+even if it looks like a quick win partway through.
+
+**Two new features locked in for this edition, not yet built** (Pranav, 2026-07-28) —
+both are pure derivations from `questions_index.json`, no new tagging work needed:
+
+1. **Chapter-wise Sitting Summary** — a marks-coverage matrix (rows = 36 chapters,
+   columns = sittings, cell = marks tested), placed near the front matter/ToC. Full
+   34-column width doesn't fit A4 print, so: **one column per exam session, not per
+   individual paper/set** (an MTP session's Set 1 + Set 2 collapse into one column —
+   brings MTP to ~7 columns, matching RTP's 7 and PYQ's 9), split into **three
+   separate tables, one page each: MTP, RTP, PYQ** (Pranav's proposed fix for the
+   width problem), each with a row-summed **Total** column at the end — that total,
+   sorted descending, doubles as a "which chapters actually matter most" ranking.
+2. **Topic-wise Summary at the start of each chapter book** — same idea one level
+   deeper: rows = that chapter's subtopics, columns = sittings, cell = marks. This
+   formalizes and automates what Pranav already built by hand for the AS10 pilot
+   sample (`books/question-bank/metadata-index/AS10_Question_Reference.html`'s
+   "topic-wise weightage summary" — this is that same table, generated, for every
+   chapter). Usually narrow enough (a chapter typically has a handful of subtopics)
+   to need only one table, not the three-way MTP/RTP/PYQ split — fall back to that
+   split only for the busiest chapters (AS 2, AS 10, Framework) if row width becomes
+   a real problem in practice, don't split by default.
+
+**Both built 2026-07-28**, same session the 34-sitting corpus was completed. Chapter-
+wise Sitting Summary: `first_run/scripts/generate_qb_coverage_matrix.py` →
+`chapter-coverage-matrix.html`, merged into the book right after the ToC. Per-chapter
+Topic-wise Summary: built into `generate_chapter_book.py`, one per chapter, right
+after each chapter's intro notes. **Real mid-build finding**: a single busy chapter's
+combined MTP+PYQ+RTP session table hit 22 columns (AS 2, tested in nearly every
+sitting) — the identical print-width problem the whole-book matrix was designed to
+avoid, rediscovered one level deeper. Fixed by applying the same MTP/PYQ/RTP split at
+chapter granularity too. Full detail: `first_run/HOW-TO-BUILD-THE-BOOK.md` §5/§6.
+
+### Print-cost reduction pass (2026-07-28) — 819 → 688 pages
+
+Pranav reviewed the merged book for print cost and sent a punch list, all implemented:
+empty Descriptive/Integrated sections now omitted entirely (not printed with a "no
+questions" placeholder); the repeated per-box Author's Note/Examiner's Comment
+provenance sentence removed (stated once in front matter instead); the 3-line student
+fields (Notebook Ref/My Tag/Revision Phase) collapsed into 1 line, renamed "My NB Page
+No"; the Error Register changed from 34 per-chapter full pages to ONE shared 6-page
+appendix at the back; the per-question topic line no longer repeats the chapter name
+(shows only the specific topic, via a new `qb_common.abbreviated_topic_label()`); the
+coverage matrix's chapter column uses file 1's `chapter_name_short` plus CSS wrapping.
+**Real bug found and fixed in the same pass**: the Topic-wise Marks Mapping table was
+showing the same chapter-level title on every row instead of each row's actual topic
+name — `extract_questions.py` never captured `data-subtopictitle` (present on the
+source tags all along); Pranav also added a new `topic_name_abbvtd` field to file 1
+specifically for this. Margins checked but left unchanged (already at a documented
+6mm print-safety floor). **Result: 688 pages**, all from removing genuine repetition,
+no content cut. Full detail: `first_run/HOW-TO-BUILD-THE-BOOK.md`'s "Print-cost
+reduction pass" entry and its two new gotchas.
+
 ---
 
 ## 7. HTML/print architecture — single-source-of-truth styling, page-break safety (added 2026-07-23)
 
-Learned from `Claude_V2.md` §8, §13–16 (the Strategy Book's paged.js work, a separate concurrent effort in this same repo) — read that file's sections 13–16 in full before building any HTML generator/merge script; this is only the distilled, actionable summary. Applies to **all** HTML this repo generates going forward, including the Question Bank Book pipeline above.
+Learned from `Claude_V2.md` §8, §13–16 (the Strategy Book's paged.js work, a separate concurrent effort in this same repo) — read that file's sections 13–16 in full before building any HTML generator/merge script; this is only the distilled, actionable summary. Applies to **all** HTML this repo generates going forward, including the Question Bank Book pipeline above. For the Question Bank Book's own concrete instances of every principle below (which files, which bug, which fix) see `first_run/HOW-TO-BUILD-THE-BOOK.md` §5 rather than re-deriving them — several of the same root causes (CORS-blocked font `<link>`s, flex-fragmentation across page breaks, `target-counter()` being broken) were independently rediscovered there and are already written up in full.
 
 **1. One JSON file is the only place geometry/typography numbers live.** A generator script reads it and writes the values into every place they're needed at generation time (CSS custom properties, literal `@page` rules, etc.) — never hand-duplicated, never edited in the generated output directly. Question Bank's version of this: `first_run/schema/book-style.json` (or successor) driving a single generated stylesheet every HTML file links to — so a font-size/margin change is one JSON edit + one script re-run, and *already-generated* HTML files pick it up automatically via the shared `<link>`, no regeneration needed.
 

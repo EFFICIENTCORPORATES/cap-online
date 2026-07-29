@@ -4,6 +4,407 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-07-28 (cont'd, 4) — Question Bank Book: full print-cost reduction pass implemented, 819 → 688 pages
+
+Pranav gave the go-ahead to implement the punch list from the previous entry, plus new
+points: a new `topic_name_abbvtd` field he added to
+`books/concept-book/syllabus-engine/data/1-ca-inter-adv-accounts-topic-page-index.json`,
+a redesigned Error Register (one shared 6-page/3-double-sided-sheet appendix instead of
+34 per-chapter pages), and dropping the redundant chapter-name repeat on every
+question's topic line. Explicitly asked to skip visual (screenshot) verification for
+now and just document + hand over the final path.
+
+**All implemented, pipeline rebuilt and re-validated after every change:**
+
+1. **Topic-wise Marks Mapping bug, root cause confirmed and fixed.**
+   `extract_questions.py`'s `extract_topics()` now also captures `data-subtopictitle`
+   (was already present on the source tags, just never read). New
+   `qb_common.abbreviated_topic_label()` prefers file 1's `topic_name_abbvtd` (matched
+   via `topic_no` for the plain-integer tagging convention, e.g. Framework's "7",
+   "7/9/11") and falls back to `subtopictitle` otherwise. Spot-checked on the Framework
+   chapter: rows now read "6 — Fundamental Accounting Assumptions",
+   "7/9/11 — Qual. Char. Fin Stmts / Elements of Financial Statements / Capital
+   Maintenance", etc. — no longer the same chapter title repeated on every row.
+2. **Per-question topic line no longer repeats the chapter name** — same
+   `abbreviated_topic_label()`, used in `topic_full_label()` too. Shows just
+   `Topic {ref}: {name}`.
+3. **Empty Descriptive/Integrated sections omitted entirely** — no heading, no "no
+   questions" placeholder, when a section has zero rows (`render_section()`).
+4. **Repeated per-box provenance sentence removed** (~500+ Author's
+   Note/Examiner's Comment boxes) — the explanation now lives once in front matter's
+   How to Read This Book colour key.
+5. **3-line student-fields block collapsed to 1 line**, renamed "My Notebook Ref No" →
+   "My NB Page No"; the My Tag suggestion examples moved into front matter (stated
+   once, not per question). "Student Self Notes" (the 2-line writing box) was
+   correctly kept — a first draft of this edit accidentally deleted it entirely,
+   caught and fixed in the same pass before it reached the pipeline.
+6. **Error Register redesigned**: `generate_chapter_book.py` no longer emits any
+   `.error-register` content per chapter (was 34 full pages). New
+   `generate_qb_front_back_matter.build_error_register_pages()` builds ONE shared
+   6-page appendix (3 double-sided sheets, alternating "Concepts I Forgot"/"Mistakes I
+   Repeated More Than Twice") with a "Chapter/Topic" column so one register serves the
+   whole book, appended at the very end of back matter.
+7. **Coverage-matrix chapter column** now uses file 1's existing `chapter_name_short`
+   field (via a new `qb_common.chapter_name_short_lookup()`) instead of an ad hoc
+   string-split, plus CSS wrapping (`max-width`/`overflow-wrap`, `white-space: nowrap`
+   removed) as a fallback for names still long after abbreviation (Framework's short
+   name barely shortens the full one) — both fixes applied together as Pranav asked.
+8. **Page-break blank-space bug fixed**: `table` and `.answer-block` removed from
+   `qb_common.print_layer_css()`'s `break-inside: avoid` list — the exact same
+   "large container jumps whole, leaves the rest of the page blank" failure the
+   `.qblock` fix (2026-07-26) already solved once, rediscovered one container level
+   deeper after Pranav sent real screenshots. A table with proper thead/tbody already
+   only splits between whole rows, so this is safe, not a new risk.
+9. **Margins checked, left unchanged** — already at a documented 6mm floor (cut from
+   20mm previously), flagged as near the physical print-safety limit; explained to
+   Pranav rather than reduced further.
+
+**Two real mistakes caught and fixed within this same pass, before they reached the
+pipeline**: (a) the student-fields collapse first draft deleted the separate "Student
+Self Notes" writing box entirely, not just the 3 metadata lines — restored; (b) the
+new CSS comment explaining fix #8 used markdown-style backtick-quoting
+(`` `table` ``/`` `.answer-block` ``), which tripped this pipeline's own hard
+"0 backticks anywhere" validation rule — reworded without backticks.
+
+**Result**: full pipeline re-run (extract → chapter books → coverage matrix → stats →
+front/back matter → ToC → merge → resolve) end-to-end. **688 pages**, down from 819
+(131 pages / ~16%, all from removing genuine repetition and fixing real bugs, no
+content cut). Validated: 0 unclosed tags (full `html.parser` pass), 0 duplicate ids,
+0 NUL bytes, 0 backticks, 0 blank ToC pages.
+
+**Not done this pass, by Pranav's explicit request**: visual/screenshot verification of
+the page-break fix and the coverage-matrix wrapping. A PDF was generated via headless
+Chrome (proving pagination completes and is stable at 688 pages) but not visually
+reviewed page-by-page. If blank-space complaints continue after this fix, that
+verification is the first real next step, not re-guessing the CSS further.
+
+Final book: `first_run/output/QUESTION-BANK-BOOK.html`. Full detail in
+`first_run/HOW-TO-BUILD-THE-BOOK.md`'s "Print-cost reduction pass" section and its two
+new gotchas, and `CLAUDE.md` §6.
+
+---
+
+## 2026-07-28 (cont'd, 3) — Question Bank Book: Pranav's print-review punch list (recorded, NOT yet actioned — he's still reviewing)
+
+Pranav is reviewing the 819-page merged book and sent a first batch of review points,
+explicitly asking to record them and hold off implementing until he says go (he's
+still reviewing, more points likely to follow). Recorded here verbatim/summarized so
+nothing is lost; **none of these are implemented yet**.
+
+1. **Empty sections should be omitted entirely, not printed as "No questions..."** —
+   e.g. an empty "II. Integrated Questions" section currently still prints its heading
+   + intro sentence + the honest-finding note. Only render a section when it has rows.
+2. **Remove the per-box "Written by the author, not ICAI..." provenance line** — stated
+   once already in front matter (How to Read This Book / Book Coverage), repeating it
+   under every single Author's Note box is redundant. Drop the repeated line, keep the
+   once-stated explanation in front matter.
+3. **Collapse the 3-line student-fields block into 1 line**, and rename "My Notebook
+   Ref No" → "My NB Page No": `My NB Page No ______  My Tag ______  Revision Phase 1 2 3`
+   — currently 3 separate `<div>` lines per question. Also move the "e.g. Last-day
+   Revision, Not Important..." explainer for My Tag into front matter (state once, not
+   per question).
+4. **Chapter-Wise Sitting Summary table: chapter-name column too wide** — long names
+   like "Framework for Preparation and Presentation of Financial Statements" push the
+   table past the page margin. Needs a smaller font and/or wrapping for the chapter
+   column.
+5. **Real print flow problem: wasted blank space after each question, answer restarts
+   on a fresh page** — needs investigation into why content isn't flowing continuously
+   (likely `break-inside: avoid` on `.answer-block`/`table` forcing a jump to the next
+   page when the remaining space on the current page is too short, rather than letting
+   a long table split across the break). Needs actual visual verification (screenshot),
+   not just CSS reasoning — same lesson CLAUDE.md §7 already states.
+6. **Real bug, root cause confirmed this session (see above)**: the new Topic-wise
+   Marks Mapping table shows the same chapter-level title repeated on every row
+   instead of each row's actual topic name. Cause: `extract_questions.py`'s
+   `extract_topics()` (line 53) only captures `data-title` (chapter-level, same for
+   every question in that chapter) from each sitting HTML's `topic-tag` span — it never
+   captures `data-subtopictitle`, which already exists on the source tags with correct,
+   specific per-topic text (confirmed present and accurate via direct grep against
+   `MTP_May2023_Set1.html`). Fix: capture `data-subtopictitle` in `extract_topics()`,
+   re-run `extract_questions.py`, and use it (not `title`) for the table's row label in
+   `generate_chapter_book.py`'s `subtopic_key()`. Not a data-quality problem — the
+   sitting HTML tagging itself is fine; only the extraction script drops a field that
+   was always there.
+
+**Also asked for**: genuine page-count-reduction ideas (separate from the fixes above,
+which are also page-saving as a side effect). Ideas given in-conversation, not yet
+written up as a durable doc — revisit and formalize once Pranav finishes this review
+pass and gives the go-ahead to implement.
+
+---
+
+## 2026-07-28 (cont'd, 2) — Question Bank Book: Chapter-wise Sitting Summary + per-chapter Topic-wise Summary built (819 pages)
+
+Pranav's request, once the 34-sitting corpus was complete: a whole-book "which chapter
+matters most" marks-coverage table near the front, and a per-chapter "which topic
+within this chapter matters most" table at the start of each chapter. OP/PP explicitly
+confirmed out of scope for this edition (not deferred-but-maybe — a firm decision, see
+the previous entry).
+
+**Built:**
+- Three new shared helpers in `qb_common.py` (`session_label()`, `dedup_marks_sum()`,
+  `dedup_count()`, `sessions_for()`) so both new features and any future one share
+  identical marks-aggregation logic — no risk of two tables disagreeing on a number.
+- `generate_qb_coverage_matrix.py` (new script) → `output/chapter-coverage-matrix.html`:
+  3 pages (MTP/RTP/PYQ), each a chapter × exam-session marks matrix, one column per
+  session (an MTP session's Set 1 + Set 2 combine into one column), Total column at the
+  end. RTP pages show question **count**, not marks — ICAI's RTP documents carry no
+  per-question marks key, confirmed already known from `book_stats.json`. Wired into
+  `qb_merge.py`'s `BOOK_ORDER`, right after the ToC.
+- `generate_chapter_book.py`: a Topic-wise Marks Mapping table added to every chapter,
+  right after the intro notes. **Real finding, fixed same session**: the first combined
+  draft (one table, all paper types together) produced 22 columns for AS 2 — the exact
+  print-width problem the whole-book matrix exists to avoid, rediscovered one level
+  deeper than expected (a "single chapter" isn't automatically narrow if it's tested in
+  nearly every sitting). Fixed by splitting into up to 3 mini-tables per chapter
+  (MTP/PYQ marks, RTP count), same pattern as the whole-book version.
+
+**Validated**: all 34 regenerated chapter books + the new coverage-matrix page pass a
+full `html.parser` structural pass (0 errors) and a duplicate-id check (corrected to
+properly anchor the regex after an earlier false-positive from `data-target-id=`
+matching a naive `id="..."` pattern). Full pipeline re-run end-to-end (stats → coverage
+matrix → front/back matter → ToC → merge → resolve): **819 pages** (up from 796),
+38 merged sections (was 37).
+
+Both features and the OP/PP-out-of-scope decision are documented in
+`first_run/HOW-TO-BUILD-THE-BOOK.md` §5/§6 and `CLAUDE.md` §6.
+
+---
+
+## 2026-07-28 (cont'd) — Question Bank Book: all 34 sittings built, full pipeline rebuilt (796 pages)
+
+Completed the scaling work the previous entry left in progress: all 24 remaining
+sittings are now built and independently validated (structural checks re-run by the
+orchestrating session on every file, not just trusted from each agent's self-report —
+two real defects were caught this way: a stray backtick in `PYQ_Nov2023.html`'s
+extraction-note, fixed directly; and my own validation script's false-positive
+duplicate-id count, caused by an unanchored regex matching `data-target-id="..."`
+as if it were `id="..."` — the actual merged book has 0 real duplicate ids, confirmed
+with a corrected regex plus a full `html.parser` structural pass, 0 errors).
+
+**Blocker resolved mid-session**: the account's monthly Claude spend limit that paused
+the previous entry's batch reset partway through — confirmed by a live retry, not
+assumed. Two further spend-limit hits occurred later in the same session; in every
+case, the agent's `Write` call had already completed before the process was killed,
+so the file survived regardless — this pattern (write to disk as early as possible,
+refine in place) is now baked into every sitting-build agent's instructions going
+forward, per Pranav's explicit request.
+
+**Real finding, confirmed at scale**: 47 question records across 13 distinct
+pre-syllabus-change topics (Hire Purchase, Departmental Accounts, Incomplete Records,
+Insurance Claims for Loss of Stock, Redemption of Debentures/Preference Shares, Profit
+Prior to Incorporation, Bonus Shares, Managerial Remuneration, Issue of Debentures,
+Rights Issue) were tagged `LEGACY-*` across the older 2023 sittings. Fixed
+`generate_all_chapter_books.py` and `generate_book_stats.py` to explicitly skip/report
+these rather than silently including them or crashing — confirmed working: pipeline
+run shows "Skipped 47 LEGACY records across 13 topics" and generates exactly 34
+legitimate chapter books, no stray `LEGACY_Question_Book.html` file.
+
+**Full pipeline rebuilt end-to-end** with all 34 sittings:
+`extract_questions.py` (831 total question records, 897 counting case-scenario nodes)
+→ `generate_all_chapter_books.py` (34 chapter books, incl. AS 1 and AS 27 now finally
+covered — both previously the only two genuinely untouched chapters) →
+`generate_book_stats.py` → `generate_qb_front_back_matter.py` → `generate_qb_toc.py`
+→ `qb_merge.py` → `resolve_qb_toc_pages.py --remerge`. Final `QUESTION-BANK-BOOK.html`:
+**796 pages** (up from 308 with the 10-sitting pilot), all 34 chapters' ToC page
+numbers correctly resolved. Corpus totals: 437 distinct question numbers as originally
+printed, 3,096 total marks covered, 68 real ICAI Examiner's Comments matched (up from
+24) + 763 synthesized Author's Notes.
+
+**Next**: build the two summary-table features locked in earlier this session
+(Chapter-wise Sitting Summary, per-chapter Topic-wise Summary — see the previous
+entry and `CLAUDE.md` §6) now that the full 34-sitting corpus finally exists, which
+was the explicit precondition for starting that work.
+
+---
+
+## 2026-07-28 — Question Bank Book: scaling to all 34 sittings (in progress, paused on account spend limit); OP/PP scoped out of edition 1; two new summary-table features locked in
+
+Pranav asked to build all 24 remaining in-scope sittings (from `first_run/pending/`
+PDFs + `first_run/output/pending-pdf-parsed-clean/` MD aids), using the same
+parallel-background-agent-per-sitting pattern this session established, batched ~5 at
+a time with independent re-validation after each batch (both the agent's own
+self-check and a second structural check run by the orchestrating session before
+trusting the result).
+
+**Progress at pause: 14 of 24 built and independently validated** — MTP Jan2025
+Set1/Set2, PYQ Jan2025, RTP Jan2025, PYQ May2023, MTP May2023 Set1/Set2, MTP May2024
+Set1/Set2, PYQ May2024, RTP May2024, MTP May2025 Set2, PYQ May2025, RTP May2025. **1
+never written** (MTP May2025 Set1 — its agent died before the Write call ran). **9 not
+yet started**: MTP Nov2023 Set1/Set2, PYQ Nov2023, MTP Sep2024 Set1/Set2, PYQ Sep2024,
+RTP Sep2024, MTP Sep2025 Set1/Set2.
+
+**Real finding, now a locked rule**: several 2023-vintage sittings test topics from
+before a syllabus change, absent from the current 36-chapter taxonomy entirely (Hire
+Purchase, Departmental Accounts, Incomplete Records, Insurance Claims for Loss of
+Stock, Redemption of Debentures/Preference Shares, Profit Prior to Incorporation,
+Bonus Shares, Managerial Remuneration). Tagged `LEGACY-{SLUG}` + `data-issue="topic-
+legacy-not-in-current-syllabus"`; Pranav's call: keep them in the sitting record for
+completeness, exclude from generated chapter books entirely (no appendix this
+edition). Full detail: `CLAUDE.md` §6.
+
+**Blocker (paused here, not a pipeline bug)**: batch 3's remaining agents all failed
+mid-work on the account's **monthly Claude spend limit**. 4 of those 5 agents'
+`Write` calls had already completed before the API error killed them, so their files
+survived and were independently validated anyway — confirms the per-sitting
+save-as-you-go approach is robust to a mid-batch failure. Resume once the daily/
+monthly usage allowance is confirmed available again.
+
+**Two scope decisions, both Pranav's call, both documented in full in `CLAUDE.md` §6**:
+1. **OP/PP recurring-question detection is explicitly OUT of this edition's scope**
+   (not just "still not built") — deferred to a dedicated post-launch effort once the
+   full 34-sitting corpus exists, since the ≥90%-similarity comparison is O(n²) over
+   the whole corpus and running it against a partial corpus now would mean redoing it
+   later for nothing.
+2. **Two new locked-in features, not yet built**: a whole-book **Chapter-wise Sitting
+   Summary** (marks-coverage matrix, one column per exam session not per individual
+   paper/set, split into 3 pages — MTP/RTP/PYQ — for print width, each with a
+   row-summed Total column) near the front matter, and a narrower **per-chapter
+   Topic-wise Summary** at the start of each chapter book (formalizing the exact
+   pattern Pranav already hand-built for the AS10 pilot in
+   `AS10_Question_Reference.html`). Both are pure `questions_index.json` derivations,
+   no new tagging needed — build both only after all 34 sittings are in, for the same
+   reason as the OP/PP deferral.
+
+---
+
+## 2026-07-27 (cont'd, 4) — Question Bank Book: wired book_stats.json into the actual front matter as a "Book Coverage at a Glance" page
+
+Pranav's ask, after reviewing what `generate_book_stats.py` computes: don't leave it
+sitting unused in `book_stats.json` — bake it into the book itself. Also asked to
+confirm (not just recall) that color-coding, headers/footers, and student-notes boxes
+are genuinely script-generated, not manually patched — verified directly by grepping
+`generate_chapter_book.py`/`qb_common.py` before answering (they are: `.mistakes
+icai`/`.mistakes synth` per-question, static `.brand-header`/`.brand-footer` plus a
+separate print running-header/footer via `position: running()`, and
+`.self-notes`/`.notebook-ref`/`.revision-phase` all rendered inline in
+`render_qblock()`).
+
+**Implemented:**
+- `generate_qb_front_back_matter.py` now reads `output/generated-from-script/
+  book_stats.json` (hard error if missing/stale — never silently builds a front matter
+  without it) and renders a new "Book Coverage at a Glance" front-matter page: 6 stat
+  tiles (sittings covered, distinct questions, question records incl. split parts,
+  chapters touched of 36, total marks, real ICAI examiner's comments), the full sittings
+  list, and 3 honest caveat notes (why MTP/PYQ sittings sum to 114 not 100, why RTP
+  shows 0 marks, how many mistake notes are synthesized vs real). Every number is read
+  live at generation time, never hand-typed.
+- New CSS (`.qb-stats-grid`/`.qb-stat-tile`/`.qb-stats-sittings`) added to
+  `qb_common.front_back_css()` so `qb_merge.py` picks it up automatically for the merged
+  book too — one shared definition, not duplicated.
+- `generate_book_stats.py` is now a **required** upstream step (Step 3), not an
+  optional/informational one — `HOW-TO-BUILD-THE-BOOK.md` updated throughout (step
+  descriptions, the "what needs re-running" table, the architecture note, the
+  copy-paste command block) to reflect the new Step 3 → Step 4 dependency.
+
+**Ran the full pipeline end-to-end to confirm it actually works**: `generate_book_stats.py`
+→ `generate_qb_front_back_matter.py` → `generate_qb_toc.py` → `qb_merge.py` →
+`resolve_qb_toc_pages.py --remerge`. Book grew from 307 to **308 pages** (exactly the one
+new front-matter page, as expected). Validated: all prior checks still pass (0 blank ToC
+pages, 0 build-info/extraction-note leftovers, 0 duplicate student-notes strips), plus new
+checks confirming the stats page and its 6 tiles are present in the final merged
+`QUESTION-BANK-BOOK.html`.
+
+---
+
+## 2026-07-27 (cont'd, 3) — CLAUDE.md reconciled: fixed stale/contradictory statements, documented the multi-agent reality, added Claude_V2.md to the read order
+
+Pranav's ask: "document all of your skills, understanding into the claude.md file... make
+sure even a fresh git repo pull will give all the context to that new AI after reading
+claude.md and claude_v2.md... don't repeat things and ensure things are not contradictory."
+
+Read `Claude_V2.md` in full (690 lines) first — confirmed it's entirely Strategy-Book
+(Pillar 1) specific, zero overlap with Question Bank content, so nothing there needed
+touching. All the actual staleness was in `CLAUDE.md` §6, left behind by today's rapid
+pace of work:
+- Two "still not built" statements about the whole-book merge script were now flatly
+  false (it's built and proven — see the previous entry). Annotated both in place as
+  historical rather than deleting them, and added the real current-state entry at the
+  end of §6.
+- The "unconfirmed origin" note about `QUESTION-BANK-BOOK.html`/`front-matter.html`/
+  `back-matter.html`/`vendor/` was stale — their origin (the Codex session) is now
+  confirmed and documented.
+- §3's `first_run/` folder-table row hadn't been updated since the merge/ToC/stats
+  scripts were added — now lists all of them and points to the new
+  `HOW-TO-BUILD-THE-BOOK.md`.
+- Added an explicit "this repo has multiple concurrent AI sessions" callout to §2
+  (working rules) — this has caused real confusion and even a git-history divergence
+  requiring a manual merge (see the 2026-07-27 entry further down) — worth stating
+  plainly rather than leaving future sessions to piece it together from scattered
+  mentions.
+- Added `Claude_V2.md` to §1's mandatory read order (conditional on the task touching
+  the Strategy Book, same pattern as the existing `content/README.md` conditional entry)
+  — it was previously only cited deep in §7, easy to miss on a fresh clone.
+
+Ran `tools/health_check.py` and `tools/file_index.py` afterward — same 16 pre-existing,
+unrelated failures as before this session started (stale `EXPECTED_DIRS`, bridge-course
+NUL bytes, undocumented `capranav_com/`), nothing new introduced.
+
+---
+
+## 2026-07-27 (cont'd, 2) — Question Bank Book: took full ownership of the whole-book pipeline, audited every file, ran it end-to-end, wrote the master runbook
+
+Pranav's ask: "take full control of the entire book and entire flow," go through every
+file the parallel agent had built, fix small bugs directly, only pause on major issues,
+and produce one final MD file documenting the whole build end-to-end.
+
+**Audit findings:**
+- The student-notes duplication risk flagged in the previous session (my per-question
+  fields in `generate_chapter_book.py` vs. `qb_common.py`'s `inject_student_notes()`)
+  had **already been found and fixed** by the parallel agent — `page_shell()` no longer
+  calls that function, confirmed by grepping the merged book (0 occurrences of the old
+  strip's text, all of my new fields present and correct, `build-info`/`Extraction note`
+  both at 0). No action needed there, just verified.
+- **Real gap found and fixed**: `qb_common.front_back_css()` already defined `.qb-howto`
+  and `.qb-legend-*` CSS classes, but no page anywhere in the actual HTML used them — a
+  "How to Read This Book" legend page was designed (CSS existed) but never actually
+  written into `front-matter.html`. Added the page (condensed from the existing
+  `first_run/output/How-to-Read-this-Book.md`), plus 3 more legend swatches
+  (`qb-legend-answer`/`qb-legend-case`/`qb-legend-flagged`) alongside the 2 that already
+  existed (`qb-legend-examiner`/`qb-legend-author`) so all five colour-coded box types
+  get a swatch, not just two.
+- **Real bug found and fixed**: `resolve_qb_toc_pages.py` builds a `file://` URL and
+  passes it unencoded into an HTTP request to Chrome's DevTools endpoint — a raw space
+  in the repo's path (this clone sits under `.../Other computers/...`) makes
+  `http.client` reject the request outright. Fixed with `urllib.parse.quote(file_url,
+  safe=":/")` before use; safe regardless of whether a given path has a space in it.
+
+**Ran the full pipeline end-to-end** for the first time in one continuous pass:
+`generate_all_chapter_books.py` → `generate_book_stats.py` →
+`generate_qb_front_back_matter.py` → `generate_qb_toc.py` → `qb_merge.py` →
+`resolve_qb_toc_pages.py --remerge` (had to `pip install websocket-client` first, not
+previously installed in this environment). Final `QUESTION-BANK-BOOK.html`: **307 pages**,
+all 34 ToC page numbers correctly resolved and baked in, validated clean (0 unclosed
+tags, 0 duplicate ids, 0 NUL bytes, 0 backticks, 0 placeholders, 0 leftover build-info/
+extraction-note text, 0 duplicate student-notes strips).
+
+**New file**: `first_run/HOW-TO-BUILD-THE-BOOK.md` — the master end-to-end runbook
+Pranav asked for: architecture diagram, folder map, prerequisites, the exact 7-step
+command sequence (extract → chapter books → stats → front/back matter → ToC → merge →
+resolve-and-remerge → manual PDF export), a "what needs re-running after X changes"
+table, every fixed-incident gotcha in one place, and the still-open items (OP/PP tags,
+short chapter names). `SKILL-question-bank-pipeline-overview.md` updated to point to it
+and to describe the now-complete merge/ToC/front-back-matter stages instead of
+describing them as future work.
+
+---
+
+## 2026-07-27 (cont'd) — Question Bank Book: Dedication added, How-to-Use removed (superseded by How-to-Read-this-Book.md), ToC split into its own file
+
+Pranav's follow-up after reviewing the front matter and the stats script:
+
+1. **Dedication page added.** Reused the Strategy Book's exact dedication (same real people: parents, sister, CA Deepak Pandey, CA Mukul Bhatt, CA Praveen Sharma, CA Gurpreet Singh & Rahul Bhutani) rather than inventing a different one, since Pranav didn't ask for a different dedication when given the choice. New `.qb-dedication-block`/`.qb-ded-*` CSS in `qb_common.front_back_css()`, ported from the Strategy Book's own rules onto this book's CSS variable names.
+2. **"How to Use This Book" removed from front matter.** The other session's `How-to-Read-this-Book.md` is more comprehensive and already describes the current (post-redesign) book shape accurately — mine was still describing the old 3-section MCQ/Descriptive/Integrated structure, now stale anyway. Removed rather than kept as a second, competing copy.
+3. **Table of Contents split into its own file**, `first_run/output/table-of-contents.html`, generated by a rewritten `generate_qb_toc.py` -- confirmed directly for Pranav: **the ToC is 100% script-derived, not hand-typed.** Every row's chapter order, label, and study-material code comes straight from `qb_merge.py`'s `CHAPTERS` tuple; the only thing not computed at generation time is the page number, which can't be known until the book is actually paginated -- `resolve_qb_toc_pages.py` fills that in afterward from a real headless-Chrome pass. Rewriting this as a fully-owned, always-regenerated-from-scratch file also permanently closes the class of bug from the previous "patch an existing div" approach (the ToC-duplication bug fixed earlier this week) -- there's no longer any existing content for a bad patch to leave behind.
+4. Moved `wrap_page()` (the shared standalone-HTML-file shell) into `qb_common.py` so all three front-matter-shaped files (front-matter.html, back-matter.html, table-of-contents.html) share one copy instead of two independently hand-kept ones.
+5. **Disabled the merge-time `inject_student_notes()` overlay** in `qb_common.page_shell()` -- the 34 chapter files (redesigned outside this session, see the 2026-07-27 entry above) now have their own richer, built-in self-notes/notebook-ref/tag/revision-phase block per question. Calling both would have printed the exact kind of duplication Pranav asked to avoid elsewhere this same conversation. Function left defined, not deleted, in case a future chapter-book redesign drops its own version again.
+
+Re-merged and verified clean: 305 pages (down from 368, mostly because the redesigned chapter files no longer include MCQs), 0 duplicate ids, dedication renders correctly on its own page, ToC starts immediately after with all 34 real page numbers resolved.
+
+**Still not reconciled (flagged, not fixed this pass)**: the chapter-print CSS overrides (`print_layer_css()`'s `chapter_print_*` font-size rules) don't yet cover the new chapter classes (`.self-notes`, `.brand-header`, `.brand-footer`, `.error-register`), so those render at their original (larger) size; and the redesigned per-question content is tall enough with its own new fields that some pages show the same kind of trailing whitespace the earlier page-break fix addressed for the old shape -- would need the same break-inside review applied to the new elements.
+
+---
+
 ## 2026-07-27 — Book stats script built; discovered the 34 chapter files were substantially redesigned outside this session
 
 Two things this session, in order:
