@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter-wise Sitting Summary</title>
+<link rel="stylesheet" href="vendor/gfonts-local.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Source Sans 3', Arial, sans-serif; color: #1F2933; margin: 0; padding: 24px; max-width: 980px; margin-left: auto; margin-right: auto; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   PRINT / PAGINATION LAYER (added by qb_common.py -- not part of the
+   34 chapter files' own embedded style, which is left untouched above).
+   Page geometry is templated from book-style.json's
+   page_geometry_for_future_print_stage block -- literal values here AND
+   in the :root block below, both from the same source, since @page does
+   not reliably resolve var(). Edit book-style.json, never these numbers
+   directly. ══════════════════════════════════════════════════════════ */
+
+:root {
+  --qb-heading-font: 'Archivo', Arial, sans-serif;
+  --qb-body-font: 'Source Sans 3', Arial, sans-serif;
+  --qb-ink: #1F2933;
+  --qb-muted-ink: #5b6b7a;
+  --qb-accent: #2c3e50;
+  --qb-gold: #C9A227;
+}
+
+.qb-book-content { max-width: none; }  /* the 980px on-screen review cap doesn't apply once @page controls width */
+
+/* Running header: book title + current chapter, repeats on every physical page */
+.qb-running-header {
+  position: running(qbHeader);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--qb-heading-font);
+  font-size: 8pt;
+  letter-spacing: 0.03em;
+  color: var(--qb-muted-ink);
+  padding-bottom: 1.5mm;
+  border-bottom: 0.5pt solid #d5dae0;
+}
+.qb-running-header .qb-chapter { font-weight: 700; color: var(--qb-accent); }
+
+/* Running footer: repeats on every physical page; the page number itself
+   comes from a separate @bottom-right box using counter(page), not this
+   running element -- same split used on the strategy book and for the
+   same reason (a running element's content is fixed at the point it's
+   redefined in the flow; the page number must be evaluated per-page). */
+.qb-running-footer {
+  position: running(qbFooter);
+  font-family: var(--qb-heading-font);
+  font-size: 7.5pt;
+  color: var(--qb-muted-ink);
+  padding-top: 1.5mm;
+  border-top: 0.5pt solid #d5dae0;
+}
+
+/* Overflow-proofing: never slice a short callout mid-way across a page
+   break. The 34 chapter files' own embedded style has no break-inside
+   rules at all (confirmed) -- added here rather than in the 34 files.
+
+   NOTE (2026-07-26, revised from the original version of this rule):
+   .qblock itself is deliberately NOT in this list anymore. It was
+   originally included ("never slice a QUESTION across a page break"), but
+   measured directly against the real output: with .qblock included, 312 of
+   334 content pages (93%) held exactly ONE qblock, each with ~282px of the
+   ~960px page left blank (~29% wasted) -- because break-inside:avoid on a
+   large container means the WHOLE thing jumps to the next page the moment
+   it doesn't fit the remaining space, not just the part that doesn't fit.
+   Pranav caught this directly ("each question starting from a new page...
+   space getting wasted"). The fix keeps the same guarantee at a smaller
+   grain -- but the page break IS now allowed to fall at the natural
+   boundary BETWEEN a question's own Question / Answer / Mistakes blocks
+   (they're already separate sibling <div>s inside .qblock -- confirmed by
+   reading a real qblock's markup, not guessed). That's a normal, readable
+   place for a real book to break a page; an unbroken 282px gap in the
+   middle of a chapter is not.
+
+   NOTE 2 (2026-07-28, the exact same bug rediscovered one level deeper):
+   `table` and `.answer-block` used to ALSO be in this list. Pranav flagged
+   real screenshots showing large blank gaps followed by a long accounting
+   table (or a whole answer) starting fresh on the next page -- the
+   identical "large container can't fit remaining space, jumps whole"
+   failure as the .qblock case above, just one container smaller. A big
+   worked-answer table is very often the single tallest element in a
+   qblock, so protecting it as a monolith reintroduced exactly the bug the
+   .qblock fix was meant to solve. Removed both from this list: a `<table>`
+   with proper <thead>/<tbody> (required by the schema, HTML-SCHEMA.md
+   rule 9) already only ever splits BETWEEN complete <tr> rows, never
+   mid-row, and paged.js repeats the <thead> on the continuation page --
+   this is normal, safe print-table behaviour, not a new risk. .question
+   and .mistakes remain protected since they're normally short enough that
+   splitting them would look wrong, not save space. */
+.question, .mistakes,
+.note, .empty-section, .case-facts {
+  break-inside: avoid;
+}
+h1, h2 { break-after: avoid; }
+
+/* Forces each front-matter page, chapter, and back-matter page onto a
+   fresh physical page. Only meaningful once sections are concatenated --
+   a lone chapter file has nothing to break away from, so this lives here,
+   not in the 34 source files. */
+.qb-section { break-before: page; }
+
+/* ── PRINT-COST REDUCTION (added 2026-07-26, Pranav's explicit request:
+   printing cost tracks page count, so shrink both margins -- see @page
+   below -- and the chapter content's own text size). This is an ADDITIVE
+   OVERRIDE only, scoped under .qb-book-content for higher specificity than
+   the 34 files' own bare-tag rules (e.g. their plain "table{...}" rule is
+   (0,0,1) specificity; ".qb-book-content table" here is (0,1,1) and wins
+   without needing !important) -- the 34 source files themselves are never
+   edited.
+   Values come from book-style.json's typography.chapter_print_* /
+   spacing.chapter_print_* fields -- change the size there, not here. */
+.qb-book-content {
+  font-size: 9pt;
+  line-height: 1.3;
+}
+.qb-book-content h1 { font-size: 15pt; }
+.qb-book-content h2 { font-size: 12pt; }
+.qb-book-content table { font-size: 7.5pt; }
+.qb-book-content .qmeta,
+.qb-book-content .badge,
+.qb-book-content .note,
+.qb-book-content .empty-section,
+.qb-book-content .section-intro,
+.qb-book-content .extraction-note { font-size: 7pt; }
+.qb-book-content .qblock {
+  margin: 8px 0;
+  padding: 8px 12px;
+}
+
+/* Student self-notes + notebook-page-reference strip (added 2026-07-26,
+   Pranav's request) -- injected once per question by
+   qb_common.inject_student_notes(), never in the 34 source chapter files.
+   Deliberately compact: two label+blank-line rows, not a ruled box -- see
+   inject_student_notes()'s docstring for the print-cost reasoning. */
+.qb-student-notes {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2mm;
+  margin-top: 2mm;
+  padding-top: 1.5mm;
+  border-top: 0.5pt dashed #c7cdd3;
+  font-family: var(--qb-heading-font);
+  font-size: 7pt;
+  color: var(--qb-muted-ink);
+  break-inside: avoid;
+}
+.qb-sn-label, .qb-sn-notebook { flex-shrink: 0; white-space: nowrap; }
+.qb-sn-line { flex: 1 1 40mm; min-width: 20mm; border-bottom: 0.5pt dotted #b5c0ca; }
+.qb-sn-notebook-line { flex: 0 0 18mm; border-bottom: 0.5pt dotted #b5c0ca; }
+
+/* Study-material cross-reference banner (added 2026-07-26, Pranav's
+   request) -- one line at the top of each chapter, pointing to the
+   matching study-material chapter code (e.g. "M2-C5-U1"), so a student can
+   go straight from a Question Bank chapter to the right study-material
+   chapter. Shown once per chapter here, not in the running header -- see
+   page_shell()'s docstring in this file for why. */
+.qb-study-ref {
+  font-family: var(--qb-heading-font);
+  font-size: 8.5pt;
+  color: var(--qb-muted-ink);
+  letter-spacing: 0.02em;
+  margin-bottom: 3mm;
+}
+.qb-study-ref strong { color: var(--qb-accent); }
+
+@page {
+  size: 177.8mm 254mm;
+  margin: 6mm 6mm 6mm 6mm;
+
+  @top-center    { content: element(qbHeader); }
+  @bottom-center { content: element(qbFooter); }
+  @bottom-right  {
+    content: counter(page);
+    font-family: var(--qb-heading-font);
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--qb-ink);
+  }
+}
+
+
+.qb-title-page {
+  /* Content-box height available on one physical page is page_height minus
+     top+bottom margins (254mm - 20mm - 20mm = 214mm, from book-style.json).
+     min-height was originally 220mm -- 6mm TALLER than that, which is
+     exactly what caused a confirmed bug (2026-07-26): flex containers do
+     not fragment predictably across a CSS page break, so the overflow
+     silently scattered this page's own children (author name, credential
+     line) onto a LATER physical page instead of visibly overflowing on
+     page 1 where it would have been obvious. Kept safely under 214mm, plus
+     break-inside: avoid as a second line of defence -- if it ever slightly
+     overflows again (e.g. a future font-metric change), the whole block
+     moves to the next page intact rather than fragmenting across two. */
+  min-height: 190mm;
+  break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20mm 0 12mm;
+  text-align: center;
+}
+.qb-tp-series {
+  font-family: var(--qb-heading-font);
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--qb-muted-ink);
+}
+.qb-tp-title {
+  font-family: var(--qb-heading-font);
+  font-size: 26pt;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--qb-ink);
+  margin: 10mm 0 4mm;
+}
+.qb-tp-subtitle {
+  font-family: var(--qb-body-font);
+  font-size: 12pt;
+  color: var(--qb-muted-ink);
+  margin-bottom: 8mm;
+}
+.qb-tp-rule { height: 1.5pt; background: var(--qb-gold); width: 18mm; margin: 0 auto 6mm; }
+.qb-tp-author { font-family: var(--qb-heading-font); font-size: 13pt; font-weight: 700; color: var(--qb-ink); }
+.qb-tp-credential { font-family: var(--qb-body-font); font-size: 9.5pt; color: var(--qb-muted-ink); margin-top: 1.5mm; }
+.qb-tp-publisher { font-family: var(--qb-heading-font); font-size: 8.5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--qb-muted-ink); }
+
+.qb-copyright-page { padding-top: 55mm; font-size: 9pt; color: var(--qb-muted-ink); line-height: 1.75; }
+.qb-copyright-page p { margin-bottom: 4mm; }
+.qb-copyright-page strong { color: var(--qb-ink); }
+
+.qb-page-title {
+  font-family: var(--qb-heading-font);
+  font-size: 17pt;
+  font-weight: 800;
+  color: var(--qb-ink);
+  margin-bottom: 6mm;
+}
+
+.qb-howto p, .qb-howto li { font-family: var(--qb-body-font); font-size: 10pt; line-height: 1.65; color: var(--qb-ink); }
+.qb-howto h3 {
+  font-family: var(--qb-heading-font);
+  font-size: 10.5pt;
+  font-weight: 700;
+  margin: 6mm 0 2mm;
+  color: var(--qb-accent);
+}
+.qb-howto ul { margin: 2mm 0 4mm 5mm; padding-left: 4mm; }
+.qb-howto li { margin-bottom: 1.5mm; }
+.qb-legend-swatch {
+  display: inline-block;
+  padding: 1pt 6pt;
+  border-radius: 4pt;
+  font-size: 8.5pt;
+  font-weight: 700;
+  margin-right: 4mm;
+}
+.qb-legend-examiner { background: #fff3e0; border: 1px solid #e0b46c; }
+.qb-legend-author { background: #fdf1f1; border: 1px solid #d98a8a; }
+.qb-legend-answer { background: #eafbea; border: 1px solid #8fcf9a; }
+.qb-legend-case { background: #f5f5fb; border: 1px solid #8888c0; }
+.qb-legend-flagged { background: #fffaf7; border: 1px solid #d98a8a; }
+
+.qb-stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4mm;
+  margin: 5mm 0 6mm;
+}
+.qb-stat-tile {
+  flex: 1 1 42mm;
+  min-width: 38mm;
+  border: 1px solid #dde3e8;
+  border-left: 2.5pt solid var(--qb-accent);
+  border-radius: 3pt;
+  padding: 3mm 4mm;
+  break-inside: avoid;
+}
+.qb-stat-num {
+  display: block;
+  font-family: var(--qb-heading-font);
+  font-size: 17pt;
+  font-weight: 800;
+  color: var(--qb-ink);
+  line-height: 1.1;
+}
+.qb-stat-label {
+  display: block;
+  font-family: var(--qb-body-font);
+  font-size: 7.5pt;
+  color: var(--qb-muted-ink);
+  margin-top: 1mm;
+  line-height: 1.3;
+}
+.qb-stats-sittings {
+  columns: 2;
+  margin: 2mm 0 4mm 5mm;
+  padding-left: 4mm;
+  font-family: var(--qb-body-font);
+  font-size: 9pt;
+  color: var(--qb-ink);
+}
+.qb-stats-sittings li { margin-bottom: 1mm; break-inside: avoid; }
+
+.qb-matrix-page { break-inside: avoid; }
+.qb-matrix-note {
+  font-family: var(--qb-body-font);
+  font-size: 8pt;
+  color: var(--qb-muted-ink);
+  line-height: 1.5;
+  margin-bottom: 4mm;
+}
+.qb-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--qb-heading-font);
+  font-size: 7pt;
+  break-inside: avoid;
+}
+.qb-matrix-table th, .qb-matrix-table td {
+  border: 0.5pt solid #c7cdd3;
+  padding: 1.3mm 1.6mm;
+  text-align: center;
+}
+.qb-matrix-table th {
+  background: #eef1f4;
+  color: var(--qb-ink);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.qb-matrix-table td.qb-matrix-chapter {
+  text-align: left;
+  font-weight: 600;
+  max-width: 34mm;
+  overflow-wrap: break-word;
+}
+.qb-matrix-table td.qb-matrix-total {
+  font-weight: 800;
+  background: #f5f0dd;
+}
+.qb-matrix-table td.qb-matrix-zero { color: #c5cdd5; }
+
+.qb-er-page { padding-top: 4mm; }
+.qb-er-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--qb-body-font);
+  font-size: 9pt;
+}
+.qb-er-table th {
+  background: #eef1f4;
+  color: var(--qb-ink);
+  font-weight: 700;
+  text-align: left;
+  padding: 2mm 3mm;
+  border-bottom: 1pt solid #c7cdd3;
+}
+.qb-er-table td {
+  padding: 3mm 3mm;
+  border-bottom: 0.5pt dotted #c7cdd3;
+  vertical-align: bottom;
+}
+.qb-er-chapter { width: 28%; }
+.qb-er-check { width: 12%; text-align: center; }
+.qb-er-blank { display: block; border-bottom: 0.5pt dotted #999; height: 4mm; }
+.qb-er-blank-wide { width: 100%; }
+.qb-er-box { display: inline-block; border: 1px solid #888; width: 4mm; height: 4mm; }
+
+.qb-toc-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 2mm;
+  margin: 0 0 3mm;
+  font-family: var(--qb-heading-font);
+  font-size: 9.5pt;
+  break-inside: avoid;
+}
+.qb-toc-entry .qb-toc-num { color: var(--qb-muted-ink); width: 8mm; flex-shrink: 0; }
+.qb-toc-entry a { color: var(--qb-ink); text-decoration: none; font-weight: 600; }
+.qb-toc-ref {
+  font-family: var(--qb-body-font);
+  font-size: 8pt;
+  color: var(--qb-muted-ink);
+  background: #eef1f4;
+  border-radius: 3pt;
+  padding: 0.5pt 4pt;
+  flex-shrink: 0;
+}
+.qb-toc-leader { flex: 1; border-bottom: 1px dotted #b5c0ca; margin-bottom: 1.2pt; }
+.qb-toc-page { font-family: var(--qb-heading-font); font-weight: 700; font-size: 9.5pt; color: var(--qb-ink); }
+
+.qb-bio p { font-family: var(--qb-body-font); font-size: 10pt; line-height: 1.7; color: var(--qb-ink); margin-bottom: 3mm; }
+
+/* Dedication page (added 2026-07-27, Pranav's request) -- ported from the
+   Strategy Book's own dedication-block CSS (books/strategy-book/design/
+   templates/build/front-matter.html), same real names/content, just
+   renamed onto this book's --qb-* CSS variables instead of that book's
+   --head-f/--body-f/--ink ones. Reused deliberately, not rewritten --
+   Pranav didn't ask for a different dedication for this book. */
+.qb-dedication-block {
+  text-align: center;
+  padding: 10mm 0 8mm;
+  break-inside: avoid;
+}
+.qb-ded-to {
+  font-family: var(--qb-heading-font);
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--qb-muted-ink);
+  margin-bottom: 7mm;
+  display: block;
+}
+.qb-ded-name {
+  font-family: var(--qb-heading-font);
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--qb-ink);
+  margin-bottom: 1mm;
+  display: block;
+}
+.qb-ded-role {
+  font-family: var(--qb-body-font);
+  font-size: 7.5pt;
+  font-weight: 400;
+  color: var(--qb-muted-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5mm;
+  display: block;
+}
+.qb-ded-note {
+  font-family: var(--qb-body-font);
+  font-size: 9pt;
+  font-style: italic;
+  color: #4a5568;
+  line-height: 1.6;
+  display: block;
+}
+.qb-ded-sep {
+  color: #c5cdd5;
+  font-family: var(--qb-heading-font);
+  font-size: 10pt;
+  margin: 4.5mm 0;
+  display: block;
+}
+.qb-ded-close {
+  font-family: var(--qb-body-font);
+  font-size: 8.5pt;
+  font-style: italic;
+  color: #607080;
+  margin-top: 7mm;
+  padding-top: 4mm;
+  border-top: 0.5pt solid #dde3e8;
+  display: block;
+}
+
+</style>
+</head>
+<body>
+
+<div class="qb-matrix-page qb-section">
+<h2 class="qb-page-title">MTP Coverage by Chapter and Session</h2>
+<p class="qb-matrix-note">Marks tested per chapter, per session &mdash; Set 1 and Set 2 of the same session are combined into one column. Total sums across every MTP session in this edition; a higher total means this chapter has been examined more heavily in Mock Test Papers.</p>
+<table class="qb-matrix-table"><thead><tr><th>Chapter</th><th>May '23</th><th>Nov '23</th><th>May '24</th><th>Sep '24</th><th>Jan '25</th><th>May '25</th><th>Sep '25</th><th>Jan '26</th><th>May '26</th><th>Total</th></tr></thead><tbody><tr><td class="qb-matrix-chapter">Basics</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="">4</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">17</td></tr><tr><td class="qb-matrix-chapter">Applicability of Accounting Standards</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">0</td></tr><tr><td class="qb-matrix-chapter">Framework for Preparation & Presentation of Financial Statements</td><td class="">5</td><td class="">9</td><td class="">8</td><td class="">4</td><td class="">8</td><td class="">4</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-total">46</td></tr><tr><td class="qb-matrix-chapter">AS-2</td><td class="">10</td><td class="">10</td><td class="">7</td><td class="">12</td><td class="">6</td><td class="">7</td><td class="">2</td><td class="">21</td><td class="">12</td><td class="qb-matrix-total">87</td></tr><tr><td class="qb-matrix-chapter">AS-10</td><td class="">5</td><td class="">10</td><td class="">14</td><td class="">2</td><td class="">12</td><td class="">6</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="">6</td><td class="qb-matrix-total">59</td></tr><tr><td class="qb-matrix-chapter">AS-26</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">5</td><td class="">8</td><td class="">12</td><td class="">8</td><td class="qb-matrix-zero">&ndash;</td><td class="">10</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">43</td></tr><tr><td class="qb-matrix-chapter">AS-16</td><td class="">10</td><td class="">5</td><td class="">4</td><td class="">8</td><td class="qb-matrix-zero">&ndash;</td><td class="">6</td><td class="">24</td><td class="">9</td><td class="">21</td><td class="qb-matrix-total">87</td></tr><tr><td class="qb-matrix-chapter">AS-19</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">7</td><td class="">7</td><td class="">6</td><td class="">4</td><td class="">2</td><td class="">6</td><td class="">9</td><td class="qb-matrix-total">41</td></tr><tr><td class="qb-matrix-chapter">AS-28</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">12</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">18</td></tr><tr><td class="qb-matrix-chapter">AS 13: Accounting for Investments</td><td class="">18</td><td class="">28</td><td class="">11</td><td class="">21</td><td class="">12</td><td class="">9</td><td class="">32</td><td class="">17</td><td class="">18</td><td class="qb-matrix-total">166</td></tr><tr><td class="qb-matrix-chapter">AS-29</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="">10</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">2</td><td class="qb-matrix-total">18</td></tr><tr><td class="qb-matrix-chapter">AS-15</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">11</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">15</td></tr><tr><td class="qb-matrix-chapter">AS-4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">7</td><td class="">7</td><td class="">9</td><td class="">7</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">30</td></tr><tr><td class="qb-matrix-chapter">AS-5</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">7</td></tr><tr><td class="qb-matrix-chapter">AS-11</td><td class="">10</td><td class="">12</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="">8</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="">5</td><td class="">7</td><td class="qb-matrix-total">49</td></tr><tr><td class="qb-matrix-chapter">AS-9</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">6</td><td class="qb-matrix-zero">&ndash;</td><td class="">9</td><td class="">4</td><td class="">7</td><td class="">10</td><td class="">8</td><td class="qb-matrix-total">44</td></tr><tr><td class="qb-matrix-chapter">AS-7</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">7</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">7</td></tr><tr><td class="qb-matrix-chapter">AS-12</td><td class="">10</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="">15</td><td class="">2</td><td class="">2</td><td class="">9</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">43</td></tr><tr><td class="qb-matrix-chapter">AS-22</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">10</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">10</td></tr><tr><td class="qb-matrix-chapter">AS-20</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">6</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="">6</td><td class="">5</td><td class="qb-matrix-total">22</td></tr><tr><td class="qb-matrix-chapter">AS-1</td><td class="">5</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="">5</td><td class="qb-matrix-total">19</td></tr><tr><td class="qb-matrix-chapter">Financial Statement of Companies</td><td class="">5</td><td class="">14</td><td class="">28</td><td class="">32</td><td class="">32</td><td class="">14</td><td class="">6</td><td class="">34</td><td class="">30</td><td class="qb-matrix-total">195</td></tr><tr><td class="qb-matrix-chapter">Cash Flow Statement (incl. AS 3)</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">0</td></tr><tr><td class="qb-matrix-chapter">AS-17</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-total">9</td></tr><tr><td class="qb-matrix-chapter">AS-18</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">7</td><td class="">2</td><td class="">4</td><td class="qb-matrix-total">19</td></tr><tr><td class="qb-matrix-chapter">AS-24</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">7</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="">7</td><td class="qb-matrix-total">18</td></tr><tr><td class="qb-matrix-chapter">AS 21: Consolidation</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">28</td><td class="">28</td><td class="">28</td><td class="">35</td><td class="">28</td><td class="">14</td><td class="">31</td><td class="qb-matrix-total">192</td></tr><tr><td class="qb-matrix-chapter">AS-23</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="">6</td><td class="">7</td><td class="">2</td><td class="">6</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">23</td></tr><tr><td class="qb-matrix-chapter">AS-27</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">14</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">16</td></tr><tr><td class="qb-matrix-chapter">Amalgamation of Companies</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">28</td><td class="">36</td><td class="">28</td><td class="">32</td><td class="">21</td><td class="qb-matrix-zero">&ndash;</td><td class="">12</td><td class="qb-matrix-total">157</td></tr><tr><td class="qb-matrix-chapter">AS-25</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">2</td></tr><tr><td class="qb-matrix-chapter">Buy Back of Securities</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">14</td><td class="">16</td><td class="">8</td><td class="">16</td><td class="">12</td><td class="">7</td><td class="">17</td><td class="qb-matrix-total">90</td></tr><tr><td class="qb-matrix-chapter">Internal Reconstruction</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">26</td><td class="qb-matrix-zero">&ndash;</td><td class="">20</td><td class="">2</td><td class="">19</td><td class="">26</td><td class="">14</td><td class="qb-matrix-total">107</td></tr><tr><td class="qb-matrix-chapter">Branch Accounting</td><td class="">16</td><td class="">10</td><td class="">12</td><td class="">11</td><td class="">10</td><td class="">14</td><td class="">5</td><td class="">13</td><td class="">14</td><td class="qb-matrix-total">105</td></tr></tbody></table>
+</div>
+
+
+<div class="qb-matrix-page qb-section">
+<h2 class="qb-page-title">PYQ Coverage by Chapter and Session</h2>
+<p class="qb-matrix-note">Marks tested per chapter, per session, drawn from ICAI's own published Suggested Answers &mdash; this is the closest signal to real exam importance in this table.</p>
+<table class="qb-matrix-table"><thead><tr><th>Chapter</th><th>May '23</th><th>Nov '23</th><th>May '24</th><th>Sep '24</th><th>Jan '25</th><th>May '25</th><th>Sep '25</th><th>Jan '26</th><th>May '26</th><th>Total</th></tr></thead><tbody><tr><td class="qb-matrix-chapter">Basics</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-total">8</td></tr><tr><td class="qb-matrix-chapter">Applicability of Accounting Standards</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">0</td></tr><tr><td class="qb-matrix-chapter">Framework for Preparation & Presentation of Financial Statements</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">9</td></tr><tr><td class="qb-matrix-chapter">AS-2</td><td class="qb-matrix-zero">&ndash;</td><td class="">5</td><td class="">7</td><td class="">6</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">5</td><td class="">2</td><td class="">2</td><td class="qb-matrix-total">27</td></tr><tr><td class="qb-matrix-chapter">AS-10</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">2</td><td class="">9</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-total">24</td></tr><tr><td class="qb-matrix-chapter">AS-26</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">8</td></tr><tr><td class="qb-matrix-chapter">AS-16</td><td class="">5</td><td class="">5</td><td class="">7</td><td class="">2</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">7</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">30</td></tr><tr><td class="qb-matrix-chapter">AS-19</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="">2</td><td class="">5</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">17</td></tr><tr><td class="qb-matrix-chapter">AS-28</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">4</td><td class="">7</td><td class="qb-matrix-zero">&ndash;</td><td class="">5</td><td class="qb-matrix-total">18</td></tr><tr><td class="qb-matrix-chapter">AS 13: Accounting for Investments</td><td class="">10</td><td class="">10</td><td class="qb-matrix-zero">&ndash;</td><td class="">6</td><td class="qb-matrix-zero">&ndash;</td><td class="">9</td><td class="qb-matrix-zero">&ndash;</td><td class="">7</td><td class="">2</td><td class="qb-matrix-total">44</td></tr><tr><td class="qb-matrix-chapter">AS-29</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">7</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">11</td></tr><tr><td class="qb-matrix-chapter">AS-15</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">5</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">4</td><td class="">5</td><td class="qb-matrix-total">20</td></tr><tr><td class="qb-matrix-chapter">AS-4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="qb-matrix-total">4</td></tr><tr><td class="qb-matrix-chapter">AS-5</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-total">8</td></tr><tr><td class="qb-matrix-chapter">AS-11</td><td class="">5</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">4</td><td class="qb-matrix-total">18</td></tr><tr><td class="qb-matrix-chapter">AS-9</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">8</td></tr><tr><td class="qb-matrix-chapter">AS-7</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">7</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">6</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">2</td><td class="qb-matrix-total">19</td></tr><tr><td class="qb-matrix-chapter">AS-12</td><td class="">5</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="qb-matrix-total">20</td></tr><tr><td class="qb-matrix-chapter">AS-22</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">5</td><td class="">8</td><td class="qb-matrix-zero">&ndash;</td><td class="">5</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">20</td></tr><tr><td class="qb-matrix-chapter">AS-20</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="">2</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">5</td><td class="">2</td><td class="qb-matrix-total">18</td></tr><tr><td class="qb-matrix-chapter">AS-1</td><td class="">5</td><td class="">5</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">14</td></tr><tr><td class="qb-matrix-chapter">Financial Statement of Companies</td><td class="">10</td><td class="">25</td><td class="">4</td><td class="">16</td><td class="">2</td><td class="">20</td><td class="">16</td><td class="">4</td><td class="">14</td><td class="qb-matrix-total">111</td></tr><tr><td class="qb-matrix-chapter">Cash Flow Statement (incl. AS 3)</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">0</td></tr><tr><td class="qb-matrix-chapter">AS-17</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">8</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">8</td></tr><tr><td class="qb-matrix-chapter">AS-18</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">8</td></tr><tr><td class="qb-matrix-chapter">AS-24</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="">10</td><td class="qb-matrix-total">16</td></tr><tr><td class="qb-matrix-chapter">AS 21: Consolidation</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">14</td><td class="qb-matrix-zero">&ndash;</td><td class="">14</td><td class="">14</td><td class="">14</td><td class="">14</td><td class="">4</td><td class="qb-matrix-total">74</td></tr><tr><td class="qb-matrix-chapter">AS-23</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">14</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">4</td><td class="">2</td><td class="qb-matrix-total">20</td></tr><tr><td class="qb-matrix-chapter">AS-27</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">0</td></tr><tr><td class="qb-matrix-chapter">Amalgamation of Companies</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">14</td><td class="">14</td><td class="">14</td><td class="">14</td><td class="">14</td><td class="">16</td><td class="">16</td><td class="qb-matrix-total">102</td></tr><tr><td class="qb-matrix-chapter">AS-25</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">7</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">6</td><td class="qb-matrix-total">15</td></tr><tr><td class="qb-matrix-chapter">Buy Back of Securities</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">7</td><td class="">4</td><td class="">6</td><td class="">8</td><td class="">7</td><td class="">4</td><td class="qb-matrix-total">36</td></tr><tr><td class="qb-matrix-chapter">Internal Reconstruction</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">14</td><td class="">8</td><td class="">14</td><td class="">2</td><td class="">4</td><td class="">14</td><td class="">10</td><td class="qb-matrix-total">66</td></tr><tr><td class="qb-matrix-chapter">Branch Accounting</td><td class="">5</td><td class="">10</td><td class="">6</td><td class="">6</td><td class="">6</td><td class="">6</td><td class="">6</td><td class="">6</td><td class="">6</td><td class="qb-matrix-total">57</td></tr></tbody></table>
+</div>
+
+
+<div class="qb-matrix-page qb-section">
+<h2 class="qb-page-title">RTP Coverage by Chapter and Session</h2>
+<p class="qb-matrix-note">Question <strong>COUNT</strong> per chapter, per session, not marks &mdash; ICAI's RTP documents carry no per-question marks-weighted answer key, so count is the best available coverage signal here. Do not compare these numbers directly against the MTP/PYQ marks pages.</p>
+<table class="qb-matrix-table"><thead><tr><th>Chapter</th><th>May '24</th><th>Sep '24</th><th>Jan '25</th><th>May '25</th><th>Sep '25</th><th>Jan '26</th><th>May '26</th><th>Total</th></tr></thead><tbody><tr><td class="qb-matrix-chapter">Basics</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-total">2</td></tr><tr><td class="qb-matrix-chapter">Applicability of Accounting Standards</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-total">3</td></tr><tr><td class="qb-matrix-chapter">Framework for Preparation & Presentation of Financial Statements</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-total">2</td></tr><tr><td class="qb-matrix-chapter">AS-2</td><td class="">1</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="">3</td><td class="">2</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">9</td></tr><tr><td class="qb-matrix-chapter">AS-10</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="">3</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">9</td></tr><tr><td class="qb-matrix-chapter">AS-26</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="qb-matrix-total">4</td></tr><tr><td class="qb-matrix-chapter">AS-16</td><td class="">2</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">5</td><td class="">5</td><td class="qb-matrix-total">16</td></tr><tr><td class="qb-matrix-chapter">AS-19</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">2</td><td class="">2</td><td class="qb-matrix-total">8</td></tr><tr><td class="qb-matrix-chapter">AS-28</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">4</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="qb-matrix-total">7</td></tr><tr><td class="qb-matrix-chapter">AS 13: Accounting for Investments</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">2</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">6</td></tr><tr><td class="qb-matrix-chapter">AS-29</td><td class="qb-matrix-zero">&ndash;</td><td class="">2</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">2</td><td class="qb-matrix-total">7</td></tr><tr><td class="qb-matrix-chapter">AS-15</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">1</td></tr><tr><td class="qb-matrix-chapter">AS-4</td><td class="">2</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">3</td><td class="qb-matrix-total">8</td></tr><tr><td class="qb-matrix-chapter">AS-5</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">2</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">7</td></tr><tr><td class="qb-matrix-chapter">AS-11</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">2</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">4</td></tr><tr><td class="qb-matrix-chapter">AS-9</td><td class="">5</td><td class="">4</td><td class="">1</td><td class="">1</td><td class="">3</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">15</td></tr><tr><td class="qb-matrix-chapter">AS-7</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">2</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">7</td></tr><tr><td class="qb-matrix-chapter">AS-12</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">6</td><td class="">1</td><td class="">1</td><td class="qb-matrix-total">11</td></tr><tr><td class="qb-matrix-chapter">AS-22</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">1</td></tr><tr><td class="qb-matrix-chapter">AS-20</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">4</td></tr><tr><td class="qb-matrix-chapter">AS-1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">3</td></tr><tr><td class="qb-matrix-chapter">Financial Statement of Companies</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-total">4</td></tr><tr><td class="qb-matrix-chapter">Cash Flow Statement (incl. AS 3)</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">0</td></tr><tr><td class="qb-matrix-chapter">AS-17</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="qb-matrix-total">5</td></tr><tr><td class="qb-matrix-chapter">AS-18</td><td class="">2</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">6</td></tr><tr><td class="qb-matrix-chapter">AS-24</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-total">4</td></tr><tr><td class="qb-matrix-chapter">AS 21: Consolidation</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">1</td></tr><tr><td class="qb-matrix-chapter">AS-23</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">2</td></tr><tr><td class="qb-matrix-chapter">AS-27</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">1</td></tr><tr><td class="qb-matrix-chapter">Amalgamation of Companies</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-total">4</td></tr><tr><td class="qb-matrix-chapter">AS-25</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">0</td></tr><tr><td class="qb-matrix-chapter">Buy Back of Securities</td><td class="">1</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-total">2</td></tr><tr><td class="qb-matrix-chapter">Internal Reconstruction</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-total">2</td></tr><tr><td class="qb-matrix-chapter">Branch Accounting</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="qb-matrix-zero">&ndash;</td><td class="">1</td><td class="qb-matrix-total">2</td></tr></tbody></table>
+</div>
+
+</body>
+</html>

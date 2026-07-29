@@ -28,23 +28,24 @@ th{background:#2c3e50;color:#fff;}
 .mistakes.synth{background:#fdf1f1;border-left-color:#d98a8a;color:#7a2f2f;}
 .mistakes .prov{font-style:italic;color:#666;font-size:11.5px;display:block;margin-top:4px;}
 .na{color:#999;font-style:italic;}
-.notebook-ref{margin-top:10px;font-size:12.5px;color:#444;border-top:1px dashed #ccc;padding-top:6px;}
-.notebook-ref .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:160px;}
 .self-notes{margin-top:8px;border:1px solid #ccc;background:#fff;border-radius:6px;padding:8px 12px;}
 .self-notes .notes-lines{margin-top:4px;}
 .self-notes .dotted-line{height:22px;border-bottom:1px dotted rgba(0,0,0,0.4);}
-.tag-placeholder{margin-top:8px;font-size:12.5px;color:#444;}
-.tag-placeholder .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:220px;}
-.revision-phase{margin-top:8px;font-size:12.5px;color:#444;}
-.revision-phase .box{display:inline-block;border:1px solid #888;width:12px;height:12px;margin:0 3px 0 10px;vertical-align:middle;}
+.student-fields{margin-top:8px;font-size:12px;color:#444;border-top:1px dashed #ccc;padding-top:6px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+.student-fields .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:120px;}
+.student-fields .fill-blank-sm{min-width:60px;}
+.student-fields .box{display:inline-block;border:1px solid #888;width:11px;height:11px;margin:0 2px 0 6px;vertical-align:middle;}
 .brand-header{text-align:center;font-size:11px;color:#777;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:18px;letter-spacing:.3px;}
 .brand-header strong{color:#2c3e50;}
 .brand-footer{text-align:center;font-size:11px;color:#777;border-top:1px solid #eee;padding-top:10px;margin-top:36px;line-height:1.8;}
 .brand-footer strong{color:#2c3e50;}
-.error-register{page-break-before:always;break-before:page;margin-top:40px;}
-.error-register h2{margin-top:8px;}
-.error-register h3{font-size:15px;color:#444;margin-top:28px;}
-.error-register .dotted-line{height:34px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+.topic-summary{margin:18px 0 30px;}
+.topic-summary h3{font-size:16px;margin-bottom:2px;color:#2c3e50;}
+.topic-summary-table{font-size:11px;}
+.topic-summary-table th{background:#445566;}
+.topic-summary-table td.tsc{text-align:left;font-weight:600;}
+.topic-summary-table td.tst{font-weight:700;background:#fdf6e3;}
+.topic-summary-table td.tsz{color:#bbb;}
 </style>
 </head>
 <body>
@@ -62,11 +63,36 @@ Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma
 </div>
 
 <div class="note">
-<strong>Scope of this book (3 questions):</strong> Covers 10 sittings: MTP Jan2026 Set1, MTP Jan2026 Set2, MTP May2026 Set1, MTP May2026 Set2, PYQ Jan2026, PYQ May2026, PYQ Sep2025, RTP Jan2026, RTP May2026, RTP Sep2025. MCQs on this chapter are deliberately not included here — practise those on the dedicated MCQ platform; this book is for descriptive/scenario practice with full worked answers.
+<strong>Scope of this book (13 questions):</strong> Covers 34 sittings: MTP Jan2025 Set1, MTP Jan2025 Set2, MTP Jan2026 Set1, MTP Jan2026 Set2, MTP May2023 Set1, MTP May2023 Set2, MTP May2024 Set1, MTP May2024 Set2, MTP May2025 Set1, MTP May2025 Set2, MTP May2026 Set1, MTP May2026 Set2, MTP Nov2023 Set1, MTP Nov2023 Set2, MTP Sep2024 Set1, MTP Sep2024 Set2, MTP Sep2025 Set1, MTP Sep2025 Set2, PYQ Jan2025, PYQ Jan2026, PYQ May2023, PYQ May2024, PYQ May2025, PYQ May2026, PYQ Nov2023, PYQ Sep2024, PYQ Sep2025, RTP Jan2025, RTP Jan2026, RTP May2024, RTP May2025, RTP May2026, RTP Sep2024, RTP Sep2025. MCQs on this chapter are deliberately not included here — practise those on the dedicated MCQ platform; this book is for descriptive/scenario practice with full worked answers.
 </div>
 
 <div class="note">
 <strong>How this book is organised:</strong> Two sections — <strong>I. Descriptive (pure AS 11)</strong> and <strong>II. Integrated</strong> (questions where AS 11 is one part of a larger question that also tests another standard). An empty Section II for a chapter is normal and expected, not a mistake — most multi-topic-looking questions are split so each topic gets its own clean entry, so genuinely combined questions are the rarer case. Each answer includes either a real <strong>Examiner's Comment</strong> (tan/orange box, quoted from ICAI's own published feedback, where one exists for that sitting) or an <strong>Author's Note</strong> (pale pink box, a likely pitfall identified by the author, not an official ICAI finding, and may not apply in every case) &mdash; see <strong>How to Read this Book.md</strong> for the full key to every colour and symbol used.
+</div>
+
+
+<div class="topic-summary">
+<h3>Topic-wise Marks Mapping &mdash; AS 11</h3>
+<p class="section-intro">Which topic of the study material was tested for how many marks, in which sitting &mdash; use this to see which parts of AS 11 matter most.</p>
+
+<p class="section-intro" style="margin-top:10px;"><strong>MTP</strong> (Marks):</p>
+<table class="topic-summary-table">
+<thead><tr><th>Topic</th><th>May '23</th><th>Nov '23</th><th>May '24</th><th>Jan '25</th><th>May '25</th><th>Jan '26</th><th>May '26</th><th>Total</th></tr></thead>
+<tbody><tr><td class="tsc">3.2/3.4 &mdash; Definition of monetary item and reporting of foreign currency monetary/non-monetary items at each balance sheet date</td><td>5</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">5</td></tr><tr><td class="tsc">3.2/3.5 &mdash; Monetary vs non-monetary classification, and exchange difference on restatement of a monetary trade payable recognised in profit and loss</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>5</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">5</td></tr><tr><td class="tsc">3.4 &mdash; Foreign currency monetary item (trade receivable) restated at the closing rate on the balance sheet date</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>2</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">2</td></tr><tr><td class="tsc">3.4 &mdash; Foreign currency monetary item (loan) restated at the closing rate on the balance sheet date</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>2</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">2</td></tr><tr><td class="tsc">3.4/3.5 &mdash; Reporting monetary items at closing rate; recognition of exchange differences</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>2</td><td class="tst">2</td></tr><tr><td class="tsc">3.4/3.5 &mdash; Balance sheet valuation of monetary/non-monetary items and exchange gain/loss on settlement</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>5</td><td class="tst">5</td></tr><tr><td class="tsc">3.5 &mdash; Exchange gain on restatement of a monetary asset (trade receivable) recognised in the period</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>2</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">2</td></tr><tr><td class="tsc">3.5 &mdash; Exchange difference on restatement of a monetary liability (loan) recognised in the period</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>2</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">2</td></tr><tr><td class="tsc">3.5 &mdash; Exchange differences on restatement of a monetary trade receivable at the balance sheet date are recognised in the Statement of Profit and Loss</td><td>5</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">5</td></tr><tr><td class="tsc">3.5 &mdash; Exchange difference on restatement of a foreign-currency monetary borrowing at the closing rate, with the AS 16-eligible portion carved out of the total exchange loss and the remainder recognised under AS 11</td><td class="tsz">&ndash;</td><td>4</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">4</td></tr><tr><td class="tsc">3.6 &mdash; Forward contract premium amortised over the contract period; monetary item restated at each balance sheet date and on settlement</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>5</td><td class="tsz">&ndash;</td><td class="tst">5</td></tr><tr><td class="tsc">3.6-3.9 &mdash; Non-integral foreign operation translation - all assets and liabilities (including fixed assets, regardless of historical acquisition rate) translated at closing rate, opening stock at opening rate, income/expense items at average rate, with the balancing exchange difference recognised as a single figure</td><td class="tsz">&ndash;</td><td>8</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">8</td></tr><tr><td class="tsc">3.11 &mdash; Hedging forward exchange contracts - premium/discount amortised over the contract life</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>2</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">2</td></tr></tbody>
+</table>
+
+<p class="section-intro" style="margin-top:10px;"><strong>PYQ</strong> (Marks):</p>
+<table class="topic-summary-table">
+<thead><tr><th>Topic</th><th>May '23</th><th>Nov '23</th><th>May '25</th><th>Jan '26</th><th>May '26</th><th>Total</th></tr></thead>
+<tbody><tr><td class="tsc">3.3/3.4 &mdash; Measurement of a foreign-currency monetary payable at the transaction/settlement exchange rate, compared under two settlement options</td><td>5</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">5</td></tr><tr><td class="tsc">3.3/3.4/3.5 &mdash; Trade payable/receivable restated at closing rate vs. a non-monetary asset (plant, settled same day) held at transaction-date rate; exchange gain/loss recognised on each outstanding monetary item</td><td class="tsz">&ndash;</td><td>5</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">5</td></tr><tr><td class="tsc">3.5 &mdash; Recognition of exchange differences on a foreign currency loan, net of the AS 16 borrowing-cost-cap portion</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>2</td><td class="tsz">&ndash;</td><td class="tst">2</td></tr><tr><td class="tsc">3.5 &mdash; Monetary items restated at the closing rate on the balance sheet date; the resulting exchange difference goes to profit and loss for that year, independent of a later settlement rate</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>2</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">2</td></tr><tr><td class="tsc">3.13 &mdash; Para 46A option - exchange difference on foreign-currency loan capitalised to a depreciable asset, or accumulated in FCMITD if not asset-linked</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>4</td><td class="tst">4</td></tr></tbody>
+</table>
+
+<p class="section-intro" style="margin-top:10px;"><strong>RTP</strong> (Count; RTP publishes no marks key, so this is question count, not marks):</p>
+<table class="topic-summary-table">
+<thead><tr><th>Topic</th><th>Sep '24</th><th>Jan '25</th><th>May '25</th><th>Total</th></tr></thead>
+<tbody><tr><td class="tsc">3.4 &mdash; Monetary items restated at the closing rate at each balance sheet date; the resulting exchange difference goes to profit and loss, never adjusted against the non-monetary cost already recorded</td><td class="tsz">&ndash;</td><td>1</td><td class="tsz">&ndash;</td><td class="tst">1</td></tr><tr><td class="tsc">3.5 &mdash; Para 46A option to capitalise exchange differences on long-term foreign-currency monetary items into a depreciable asset&#x27;s cost</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td>1</td><td class="tst">1</td></tr><tr><td class="tsc">3.5 &mdash; Exchange differences on restatement/repayment of a long-term foreign-currency loan financing PPE, capitalised into the asset&#x27;s carrying amount</td><td>1</td><td class="tsz">&ndash;</td><td class="tsz">&ndash;</td><td class="tst">1</td></tr><tr><td class="tsc">3.13 &mdash; Presentation of FCMITDA as a separate line item under Reserves and Surplus, in the absence of a dedicated Schedule III line item</td><td class="tsz">&ndash;</td><td>1</td><td class="tsz">&ndash;</td><td class="tst">1</td></tr></tbody>
+</table>
+
 </div>
 
 <h2>I. Descriptive &amp; Scenario-Based Questions (pure AS 11)</h2>
@@ -78,7 +104,7 @@ Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma
     <span class="qno">Q1(a)</span> &middot;
     <span class="marks">Marks: 5</span> &middot;
     <span class="marks">Approx Time: 9 minutes (approx.)</span> &middot;
-    <span class="topic">M2_C7_U3 : AS 11 &mdash; Effects of Changes in Foreign Exchange Rates / ICAI Study Mat Topic No : 3.6</span>
+    <span class="topic">Topic 3.6: Forward contract premium amortised over the contract period; monetary item restated at each balance sheet date and on settlement</span>
     <span class="badge">Compulsory</span>
   </div>
   <div class="question"><strong>Question:</strong> <div><p>Jared Limited purchased a machine for US$20,000 on 31st December 2024, payment due after four months. The company entered a four-month forward contract at ₹78.85 per US$; the spot rate on 31st December 2024 was ₹77.50 per US$. (i) How should Jared recognise the profit or loss on the forward contract for the year ended 31st March, 2025? (ii) Trade payables include an amount due to Sterling Limited of ₹9,75,000, recorded at US$1=₹75.00 on the purchase date. Exchange rate on balance-sheet date (31st March 2025): US$1=₹79.00. Payment made 1st May 2025 at US$1=₹78.30. Calculate the exchange difference as at 31st March 2025 and on settlement (1st May 2025), and explain the accounting treatment per AS 11.</p></div></div>
@@ -86,27 +112,129 @@ Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma
 <p><strong>(i) Forward contract premium/loss:</strong> Forward rate 78.85 − Spot rate 77.50 = premium of ₹1.35/US$. Total loss on contract = 20,000 × 1.35 = ₹27,000. Contract period 4 months, of which 3 months fall in the year ended 31st March, 2025: loss to be recognised = 27,000 × 3/4 = <strong>₹20,250</strong> in the year ended 31st March, 2025 (the balance ₹6,750 recognised in the following year).</p>
 <p><strong>(ii) Exchange difference on trade payable to Sterling Ltd.:</strong> Initial recognition: US$13,000 (9,75,000/75) at ₹75. Balance sheet date rate ₹79 — exchange loss = 13,000 × (79−75) = <strong>₹52,000</strong>, charged to the Statement of Profit &amp; Loss for the year ended 31st March, 2025 (per AS 11, monetary item restatement differences are recognised as they arise). Settlement date rate ₹78.30 — exchange gain on settlement = 13,000 × (79−78.30) = <strong>₹9,100</strong>, credited to the Statement of Profit &amp; Loss for the year ended 31st March, 2026 (the year of settlement).</p>
 </div></div></div>
-  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees recognised the full forward-contract loss in the year of inception rather than time-apportioning it over the contract period falling in each accounting year, or netted the balance-sheet-date exchange loss against the later settlement-date gain instead of recognising each in its own accounting period.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Some examinees recognised the full forward-contract loss in the year of inception rather than time-apportioning it over the contract period falling in each accounting year, or netted the balance-sheet-date exchange loss against the later settlement-date gain instead of recognising each in its own accounting period.</div>
   <div class="self-notes"><strong>Student Self Notes:</strong>
     <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
   </div>
-  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
-  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
-  <div class="revision-phase">Revision Phase completed:
-    <span class="box"></span>1 &nbsp;
-    <span class="box"></span>2 &nbsp;
-    <span class="box"></span>3
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
   </div>
 </div>
 
 
 <div class="qblock" id="M2C7U3-002">
   <div class="qmeta">
+    <span class="src">MTP May 2023 Set 2</span> &middot;
+    <span class="qno">Q6(a) [OR-alt 2]</span> &middot;
+    <span class="marks">Marks: 5</span> &middot;
+    <span class="marks">Approx Time: 9 minutes (approx.)</span> &middot;
+    <span class="topic">Topic 3.2/3.4: Definition of monetary item and reporting of foreign currency monetary/non-monetary items at each balance sheet date</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>"Explain "monetary item" as per Accounting Standard 11. How are foreign currency monetary items to be recognized at each Balance Sheet date? Classify the following as monetary or non-monetary item: (i) Share Capital (ii) Trade Receivables (iii) Investments (iv) Fixed Assets.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p>As per AS 11 'The Effects of Changes in Foreign Exchange Rates', Monetary items are money held and assets and liabilities to be received or paid in fixed or determinable amounts of money.</p>
+<p>Foreign currency monetary items should be reported using the closing rate at each balance sheet date. However, in certain circumstances, the closing rate may not reflect with reasonable accuracy the amount in reporting currency that is likely to be realised from, or required to disburse, a foreign currency monetary item at the balance sheet date. In such circumstances, the relevant monetary item should be reported in the reporting currency at the amount which is likely to be realised from or required to disburse, such item at the balance sheet date.</p>
+<table>
+<thead><tr><th>Item</th><th>Classification</th></tr></thead>
+<tbody>
+<tr><td>Share capital</td><td>Non-monetary</td></tr>
+<tr><td>Trade receivables</td><td>Monetary</td></tr>
+<tr><td>Investments</td><td>Non-monetary</td></tr>
+<tr><td>Fixed assets</td><td>Non-monetary</td></tr>
+</tbody>
+</table>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A common error is classifying Investments as a monetary item because they are eventually realised in cash, missing that AS 11 tests whether the amount to be received is fixed or determinable in monetary terms at the reporting date, not merely whether the asset will ultimately convert to cash.</div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
+  </div>
+</div>
+
+
+<div class="qblock flagged" id="M2C7U3-003">
+  <div class="qmeta">
+    <span class="src">MTP May 2023 Set 2</span> &middot;
+    <span class="qno">Q6(d)</span> &middot;
+    <span class="marks">Marks: 5</span> &middot;
+    <span class="marks">Approx Time: 9 minutes (approx.)</span> &middot;
+    <span class="topic">Topic 3.5: Exchange differences on restatement of a monetary trade receivable at the balance sheet date are recognised in the Statement of Profit and Loss</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Trade receivables of PP Ltd. include amount receivable from Preksha Ltd., ₹20,00,150 recorded at the prevailing exchange rate on the date of sales, transaction recorded at US $1 = ₹73.40. The exchange rate on balance sheet date (31.03.2023) is US $1 = ₹73.60. Exchange rate on 1st April, 2022 is US $1 = ₹74.00. You are required to calculate the amount of exchange difference and also explain the accounting treatment needed in the above two cases as per AS 11 in the books of PP Ltd.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p><strong>Trade Receivables</strong></p>
+<table>
+<thead><tr><th></th><th>Foreign Currency / Rate</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>Initial recognition</td><td>US $27,250 (20,00,150/73.40) at 1 US $ = ₹73.40</td><td>20,00,150</td></tr>
+<tr><td>Rate on Balance sheet date</td><td>1 US $ = ₹73.60</td><td></td></tr>
+<tr><td>Exchange Difference Gain [US $27,250 × (73.60−73.40)]</td><td></td><td>5,450</td></tr>
+</tbody>
+</table>
+<p>As per AS 11 "The Effects of Changes in Foreign Exchange Rates", exchange differences on trade receivables amounting ₹5,450 is required to be transferred to Profit and Loss A/c.</p>
+<p><strong>Treatment needed in this case:</strong> Credit Profit and loss account by ₹5,450.</p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A common error is recognising the exchange gain on the monetary trade receivable directly in a reserve, rather than crediting the full amount to the Statement of Profit and Loss for the period as AS 11 requires for monetary-item restatement differences.</div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C7U3-004">
+  <div class="qmeta">
+    <span class="src">MTP May 2025 Set 1</span> &middot;
+    <span class="qno">Q6(b)</span> &middot;
+    <span class="marks">Marks: 5</span> &middot;
+    <span class="marks">Approx Time: 9 minutes (approx.)</span> &middot;
+    <span class="topic">Topic 3.2/3.5: Monetary vs non-monetary classification, and exchange difference on restatement of a monetary trade payable recognised in profit and loss</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p><strong>(i)</strong> Classify the following items into Monetary and Non-monetary: Share capital; Trade Payables; Cash balance; Property, plant and equipment.</p>
+<p><strong>(ii)</strong> Trade payables of CAT Ltd. include amount payable to JBB Ltd., ₹10,00,000 recorded at the prevailing exchange rate on the date of transaction, transaction recorded at US $1 = ₹80.00. The exchange rate on balance sheet date (31.03.2024) was US $1 = ₹85.00. You are required to calculate the amount of exchange difference and also explain the accounting treatment needed for this as per AS 11 in the books of CAT Ltd.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p><strong>(i)</strong> Share capital – Non-monetary; Trade Payables – Monetary; Cash balance – Monetary; Property, plant and equipment – Non-monetary.</p>
+<p><strong>(ii) Amount of Exchange difference and its Accounting Treatment</strong></p>
+<table><thead><tr><th>Particulars</th><th>Foreign Currency / Rate</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>Trade payables — Initial recognition</td><td>US $12,500 (₹10,00,000/80), 1 US $ = ₹80</td><td>10,00,000</td></tr>
+<tr><td>Rate on Balance sheet date</td><td>1 US $ = ₹85</td><td></td></tr>
+<tr><td>Exchange Difference loss</td><td>US $12,500 × ₹(85−80)</td><td>62,500</td></tr>
+</tbody></table>
+<p><strong>Treatment:</strong> Debit Profit and Loss A/c by ₹62,500 and Credit Trade Payables. Thus, the Exchange Difference on trade payables amounting ₹62,500 is required to be transferred to Profit and Loss.</p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A common error is classifying Property, Plant and Equipment as monetary because it has a determinable rupee value, confusing &quot;monetary&quot; (a fixed or determinable number of currency units) with simply &quot;having a value&quot;; a second common error is deferring or capitalising the exchange loss instead of recognising it in profit and loss for the period.</div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C7U3-005">
+  <div class="qmeta">
     <span class="src">MTP May 2026 Set 1</span> &middot;
     <span class="qno">Q1(b)</span> &middot;
     <span class="marks">Marks: 5</span> &middot;
     <span class="marks">Approx Time: 9 minutes (approx.)</span> &middot;
-    <span class="topic">M2_C7_U3 : AS 11 &mdash; The Effects of Changes in Foreign Exchange Rates / ICAI Study Mat Topic No : 3.4/3.5</span>
+    <span class="topic">Topic 3.4/3.5: Balance sheet valuation of monetary/non-monetary items and exchange gain/loss on settlement</span>
     <span class="badge">Compulsory</span>
   </div>
   <div class="question"><strong>Question:</strong> <div><p>Karna Ltd., an Indian Company, has the following foreign currency transactions during the financial year 2025-26:
@@ -125,27 +253,213 @@ Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma
 <p>(ii) Amount of gain/loss on each transaction on account of exchange difference:
     <br/>Exchange loss on Transaction of import of goods from Try Ltd. = ₹(1,44,000) [36,000 German Currency x ₹4 (i.e. 90−86)]
     <br/>Exchange gain on Transaction of export of goods to Cream Ltd = ₹3,60,000 [60,000 German Currency x ₹6 (i.e. 90−84)]</p></div></div>
-  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A significant number of examinees used the transaction-date rate instead of the closing rate to restate the outstanding trade payable and trade receivable at year end under AS 11, and some failed to translate the plant and machinery paid for on the date of import at the transaction-date rate.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A significant number of examinees used the transaction-date rate instead of the closing rate to restate the outstanding trade payable and trade receivable at year end under AS 11, and some failed to translate the plant and machinery paid for on the date of import at the transaction-date rate.</div>
   <div class="self-notes"><strong>Student Self Notes:</strong>
     <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
   </div>
-  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
-  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
-  <div class="revision-phase">Revision Phase completed:
-    <span class="box"></span>1 &nbsp;
-    <span class="box"></span>2 &nbsp;
-    <span class="box"></span>3
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
   </div>
 </div>
 
 
-<div class="qblock" id="M2C7U3-003">
+<div class="qblock" id="M2C7U3-006">
+  <div class="qmeta">
+    <span class="src">MTP November 2023 Set 2</span> &middot;
+    <span class="qno">Q3(a)</span> &middot;
+    <span class="marks">Marks: 8</span> &middot;
+    <span class="marks">Approx Time: 15 minutes (approx.)</span> &middot;
+    <span class="topic">Topic 3.6-3.9: Non-integral foreign operation translation - all assets and liabilities (including fixed assets, regardless of historical acquisition rate) translated at closing rate, opening stock at opening rate, income/expense items at average rate, with the balancing exchange difference recognised as a single figure</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Moon Star has a branch at Virginia (USA). The Branch is a non-integral foreign operation of the Moon Star. The trial balance of the Branch as at 31st March, 2023 is as follows:</p>
+<table>
+<thead><tr><th>Particulars</th><th>Dr. (US $)</th><th>Cr. (US $)</th></tr></thead>
+<tbody>
+<tr><td>Office equipments</td><td>48,000</td><td></td></tr>
+<tr><td>Furniture and Fixtures</td><td>3,200</td><td></td></tr>
+<tr><td>Stock (April 1, 2022)</td><td>22,400</td><td></td></tr>
+<tr><td>Purchases</td><td>96,000</td><td></td></tr>
+<tr><td>Sales</td><td></td><td>1,66,400</td></tr>
+<tr><td>Goods sent from H.O</td><td>32,000</td><td></td></tr>
+<tr><td>Salaries</td><td>3,200</td><td></td></tr>
+<tr><td>Carriage inward</td><td>400</td><td></td></tr>
+<tr><td>Rent, Rates &amp; Taxes</td><td>800</td><td></td></tr>
+<tr><td>Insurance</td><td>400</td><td></td></tr>
+<tr><td>Trade Expenses</td><td>400</td><td></td></tr>
+<tr><td>Head Office Account</td><td></td><td>45,600</td></tr>
+<tr><td>Sundry Debtors</td><td>9,600</td><td></td></tr>
+<tr><td>Sundry Creditors</td><td></td><td>6,800</td></tr>
+<tr><td>Cash at Bank</td><td>2,000</td><td></td></tr>
+<tr><td>Cash in Hand</td><td>400</td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>2,18,800</strong></td><td><strong>2,18,800</strong></td></tr>
+</tbody>
+</table>
+<p>The following further information is given:</p>
+<ol type="1">
+<li>Salaries outstanding $400.</li>
+<li>Depreciate office equipment and furniture &amp; fixtures @10% p.a. at written down value.</li>
+<li>The Head Office sent goods to Branch for ₹15,80,000.</li>
+<li>The Head Office shows an amount of ₹20,50,000 due from Branch.</li>
+<li>Stock on 31st March, 2023 - $21,500.</li>
+<li>There were no transit items either at the start or at the end of the year.</li>
+<li>On April 1, 2021 when the fixed assets were purchased the rate of exchange was ₹43 to one $. On April 1, 2022, the rate was 47 per $. On March 31, 2023 the rate was ₹50 per $. Average rate during the year was ₹45 to one $.</li>
+</ol>
+<p>Prepare Trial balance incorporating adjustments given converting dollars into rupees and Trading, Profit and Loss Account for the year ended 31st March, 2023 of the Branch as would appear in the books of Moon Star for the purpose of incorporating in the main Balance Sheet.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p><strong>In the books of Moon Star – Trial Balance (in Rupees) of Virginia (USA) Branch as on 31st March, 2023</strong></p>
+<table>
+<thead><tr><th>Particulars</th><th>Dr. (US $)</th><th>Cr. (US $)</th><th>Conversion rate</th><th>Dr. (₹)</th><th>Cr. (₹)</th></tr></thead>
+<tbody>
+<tr><td>Office Equipment</td><td>43,200</td><td></td><td>50</td><td>21,60,000</td><td></td></tr>
+<tr><td>Depreciation on Office Equipment</td><td>4,800</td><td></td><td>50</td><td>2,40,000</td><td></td></tr>
+<tr><td>Furniture and fixtures</td><td>2,880</td><td></td><td>50</td><td>1,44,000</td><td></td></tr>
+<tr><td>Depreciation on furniture and fixtures</td><td>320</td><td></td><td>50</td><td>16,000</td><td></td></tr>
+<tr><td>Stock (1st April, 2022)</td><td>22,400</td><td></td><td>47</td><td>10,52,800</td><td></td></tr>
+<tr><td>Purchases</td><td>96,000</td><td></td><td>45</td><td>43,20,000</td><td></td></tr>
+<tr><td>Sales</td><td></td><td>1,66,400</td><td>45</td><td></td><td>74,88,000</td></tr>
+<tr><td>Goods sent from H.O.</td><td>32,000</td><td></td><td>—</td><td>15,80,000</td><td></td></tr>
+<tr><td>Carriage inward</td><td>400</td><td></td><td>45</td><td>18,000</td><td></td></tr>
+<tr><td>Salaries (3,200+400)</td><td>3,600</td><td></td><td>45</td><td>1,62,000</td><td></td></tr>
+<tr><td>Outstanding salaries</td><td></td><td>400</td><td>50</td><td></td><td>20,000</td></tr>
+<tr><td>Rent, rates and taxes</td><td>800</td><td></td><td>45</td><td>36,000</td><td></td></tr>
+<tr><td>Insurance</td><td>400</td><td></td><td>45</td><td>18,000</td><td></td></tr>
+<tr><td>Trade expenses</td><td>400</td><td></td><td>45</td><td>18,000</td><td></td></tr>
+<tr><td>Head Office A/c</td><td></td><td>45,600</td><td>—</td><td></td><td>20,50,000</td></tr>
+<tr><td>Trade debtors</td><td>9,600</td><td></td><td>50</td><td>4,80,000</td><td></td></tr>
+<tr><td>Trade creditors</td><td></td><td>6,800</td><td>50</td><td></td><td>3,40,000</td></tr>
+<tr><td>Cash at bank</td><td>2,000</td><td></td><td>50</td><td>1,00,000</td><td></td></tr>
+<tr><td>Cash in hand</td><td>400</td><td></td><td>50</td><td>20,000</td><td></td></tr>
+<tr><td>Exchange gain (bal. fig.)</td><td></td><td></td><td></td><td></td><td>4,66,800</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>2,19,200</strong></td><td><strong>2,19,200</strong></td><td></td><td><strong>1,03,64,800</strong></td><td><strong>1,03,64,800</strong></td></tr>
+</tbody>
+</table>
+<p><strong>Trading and Profit and Loss Account of Virginia Branch for the year ended 31st March, 2023</strong></p>
+<table>
+<thead><tr><th>Dr.</th><th>₹</th><th>Cr.</th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>To Opening stock</td><td>10,52,800</td><td>By Sales</td><td>74,88,000</td></tr>
+<tr><td>To Purchases</td><td>43,20,000</td><td>By Closing stock (21,500 US $ × 50)</td><td>10,75,000</td></tr>
+<tr><td>To Goods from Head Office</td><td>15,80,000</td><td></td><td></td></tr>
+<tr><td>To Carriage inward</td><td>18,000</td><td></td><td></td></tr>
+<tr><td>To Gross profit c/d</td><td>15,92,200</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>85,63,000</strong></td><td><strong>Total</strong></td><td><strong>85,63,000</strong></td></tr>
+<tr><td>To Salaries</td><td>1,62,000</td><td>By Gross profit b/d</td><td>15,92,200</td></tr>
+<tr><td>To Rent, rates and taxes</td><td>36,000</td><td></td><td></td></tr>
+<tr><td>To Insurance</td><td>18,000</td><td></td><td></td></tr>
+<tr><td>To Trade expenses</td><td>18,000</td><td></td><td></td></tr>
+<tr><td>To Depreciation on office equipment</td><td>2,40,000</td><td></td><td></td></tr>
+<tr><td>To Depreciation on furniture and fixtures</td><td>16,000</td><td></td><td></td></tr>
+<tr><td>To Net Profit c/d</td><td>11,02,200</td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>15,92,200</strong></td><td><strong>Total</strong></td><td><strong>15,92,200</strong></td></tr>
+</tbody>
+</table></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A common error is translating the branch&#x27;s fixed assets at their historical acquisition-date rates, as would be correct for an integral operation, instead of at the closing rate required for a non-integral foreign operation.</div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C7U3-007">
+  <div class="qmeta">
+    <span class="src">MTP November 2023 Set 2</span> &middot;
+    <span class="qno">Q6(a)</span> &middot;
+    <span class="marks">Marks: 4</span> &middot;
+    <span class="marks">Approx Time: 8 minutes (approx.)</span> &middot;
+    <span class="topic">Topic 4.3: Exchange differences on a foreign-currency borrowing treated as a borrowing cost only to the extent they approximate the interest-rate differential against an equivalent local-currency loan  &nbsp;+&nbsp;  Topic 3.5: Exchange difference on restatement of a foreign-currency monetary borrowing at the closing rate, with the AS 16-eligible portion carved out of the total exchange loss and the remainder recognised under AS 11</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Omega Limited has borrowed a sum of US $10,00,000 at the beginning of Financial Year 2022-23 for its residential project at 4%. The interest is payable at the end of the Financial Year. At the time of availment of loan exchange rate was ₹56 per US $ and the rate as on 31st March, 2023 was ₹62 per US $. If Omega Limited had borrowed the loan in India in Indian Rupee equivalent, the pricing of loan would have been 10.50%.</p>
+<p>You are required to compute Borrowing Cost and exchange difference for the year ending 31st March, 2023 as per applicable Accounting Standards.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><ol type="i">
+<li>Interest for the period 2022-23 = US $10 lakhs × 4% × ₹62 per US$ = ₹24.80 lakhs</li>
+<li>Increase in the liability towards the principal amount = US $10 lakhs × ₹(62 − 56) = ₹60 lakhs</li>
+<li>Interest that would have resulted if the loan was taken in Indian currency = US $10 lakhs × ₹56 × 10.5% = ₹58.80 lakhs</li>
+<li>Difference between interest on local currency borrowing and foreign currency borrowing = ₹58.80 lakhs − ₹24.80 lakhs = ₹34 lakhs.</li>
+</ol>
+<p>Therefore, out of ₹60 lakhs increase in the liability towards principal amount, only ₹34 lakhs will be considered as the borrowing cost. Thus, total borrowing cost would be ₹58.80 lakhs being the aggregate of interest of ₹24.80 lakhs on foreign currency borrowings plus the exchange difference to the extent of difference between interest on local currency borrowing and interest on foreign currency borrowing of ₹34 lakhs.</p>
+<p>Hence, ₹58.80 lakhs would be considered as the borrowing cost to be accounted for as per AS 16 and the remaining ₹26 lakhs (60 − 34) would be considered as the exchange difference to be accounted for as per AS 11.</p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A common error is treating the entire ₹60 lakh increase in the rupee liability as either wholly a borrowing cost under AS 16 or wholly an exchange difference under AS 11, instead of splitting it at the interest-rate-differential figure of ₹34 lakhs.</div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C7U3-008">
+  <div class="qmeta">
+    <span class="src">PYQ May 2023</span> &middot;
+    <span class="qno">Q1(b)</span> &middot;
+    <span class="marks">Marks: 5</span> &middot;
+    <span class="marks">Approx Time: 9 minutes (approx.)</span> &middot;
+    <span class="topic">Topic 3.3/3.4: Measurement of a foreign-currency monetary payable at the transaction/settlement exchange rate, compared under two settlement options</span>
+    <span class="badge">Compulsory</span>
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Trower Limited is an Indian importer. It imports goods from True View Limited situated at London. Trower Limited has a payable of £50,000 to True View Limited as on 31<sup>st</sup> March, 2023. True View Limited has given Trower Limited the following two options:</p>
+<p>(i) Pay immediately with a cash discount of 1% on the payable.<br/>(ii) Pay after 6 months with interest @ 5% p.a. on the payable.</p>
+<p>The borrowing rate for Trower Limited in rupees is 15% p.a.</p>
+<p>The following are the exchange rates:</p>
+<table>
+<thead><tr><th>Date</th><th>₹/£</th></tr></thead>
+<tbody>
+<tr><td>31<sup>st</sup> March, 2023</td><td>97</td></tr>
+<tr><td>30<sup>th</sup> September, 2023</td><td>99</td></tr>
+</tbody>
+</table>
+<p>You are required to give your opinion to Trower Limited on which of the above two options to be chosen. (5 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>Option (i) Pay immediately with Cash discount of 1% on the payable</p>
+<table>
+<thead><tr><th></th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>Total amount payable as on 31.3.2023 (50,000 × ₹97)</td><td>48,50,000</td></tr>
+<tr><td>Less: Cash discount</td><td>(48,500)</td></tr>
+<tr><td><em>(subtotal)</em></td><td>48,01,500</td></tr>
+<tr><td>Add: Borrowing cost @ 15% p.a. for 6 months</td><td>3,60,112.50</td></tr>
+<tr><td><strong>If payment made immediate</strong></td><td><strong>51,61,612.50</strong></td></tr>
+</tbody>
+</table>
+<p>Option (ii) Pay after 6 months with interest @ 5% p.a. on the payable</p>
+<table>
+<thead><tr><th></th><th>₹</th></tr></thead>
+<tbody>
+<tr><td>Total amount payable as on 31.3.2023 (50,000 × ₹99)</td><td>49,50,000</td></tr>
+<tr><td>Interest for 6 months @ 5%</td><td>1,23,750</td></tr>
+<tr><td><strong>If payment made after 6 months</strong></td><td><strong>50,73,750</strong></td></tr>
+</tbody>
+</table>
+<p>Thus, Option (ii) is beneficial to Trower Limited as the Rupee outflow will be lower by ₹(51,61,612 − 50,73,750) = ₹87,862 in option (ii).</p>
+<p><em>Note: the source presents an alternative worked route to the identical figures – Option (i): 50,000 less cash discount (500) = 49,500 units × ₹97 = 48,01,500, plus borrowing cost 3,60,112.50 = ₹51,61,612.50. Option (ii): 50,000 + interest for 6 months @5% (50,000×5/100×6/12=1,250) = 51,250 units × ₹99 = ₹50,73,750. Same conclusion.</em></p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A significant number of examinees omitted the notional borrowing cost of paying immediately (interest on funds foregone at the company&#x27;s own 15% p.a. rate) when comparing the two options, effectively comparing only the cash discount against the deferred interest without placing both options on a common date. This led many to conclude that immediate payment was cheaper, missing that Trower Limited&#x27;s own high borrowing rate outweighs the 1% cash discount once time value is properly reflected.</div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C7U3-009">
   <div class="qmeta">
     <span class="src">PYQ May 2026</span> &middot;
     <span class="qno">Q6(a) [OR-alt 2]</span> &middot;
     <span class="marks">Marks: 4</span> &middot;
     <span class="marks">Approx Time: 8 minutes (approx.)</span> &middot;
-    <span class="topic">M2_C7_U3 : AS 11 &mdash; The Effects of Changes in Foreign Exchange Rates / ICAI Study Mat Topic No : 3.13</span>
+    <span class="topic">Topic 3.13: Para 46A option - exchange difference on foreign-currency loan capitalised to a depreciable asset, or accumulated in FCMITD if not asset-linked</span>
     
   </div>
   <div class="question"><strong>Question:</strong> <div><p>ABC Ltd, borrowed 10,000 US $ in foreign currency on 1st April, 2025 at 6% p.a. annual interest and acquired a depreciable asset. Exchange rates: 01-04-2025 ₹85.00/US$; 31-03-2026 ₹90.00/US$. (Assume interest accrued on 31st March, 2026 is paid on the same date.)</p>
@@ -163,50 +477,164 @@ Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma
 <p>Since the option under Para 46A is availed, the Exchange Loss of ₹50,000 is capitalized in the cost of PPE, indirectly recognized in the P&amp;L by way of increased depreciation over the remaining useful life of the asset.</p>
 <p>(ii) If Para 46A is NOT availed: the Exchange Loss of ₹50,000 is recognised as an expense in the Statement of Profit and Loss for the year ending 31 March 2026 instead.</p>
 <p>(iii) If the loan financed operations (not a depreciable asset) and Para 46A is availed: the Exchange Loss of ₹50,000 is accumulated in the FCMITD A/c, subsequently spread over and debited to P&amp;L over the tenure of the loan (since there is no qualifying asset to capitalise it against).</p></div></div>
-  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Many examinees applied the same asset-capitalisation treatment to part (iii) as part (i), not recognising that Para 46A&#x27;s asset-linked capitalisation route is only available when the borrowing financed a depreciable asset; where it instead financed operations, the FCMITD accumulation-and-amortisation route applies.<span class="prov">Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case.</span></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Many examinees applied the same asset-capitalisation treatment to part (iii) as part (i), not recognising that Para 46A&#x27;s asset-linked capitalisation route is only available when the borrowing financed a depreciable asset; where it instead financed operations, the FCMITD accumulation-and-amortisation route applies.</div>
   <div class="self-notes"><strong>Student Self Notes:</strong>
     <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
   </div>
-  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
-  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
-  <div class="revision-phase">Revision Phase completed:
-    <span class="box"></span>1 &nbsp;
-    <span class="box"></span>2 &nbsp;
-    <span class="box"></span>3
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
   </div>
 </div>
 
 
-<h2>II. Integrated Questions (AS 11 with Other Standards)</h2>
-<p class='section-intro'>Questions where AS 11 judgment is one part of a larger, genuinely connected question also testing another standard.</p>
-<div class="empty-section">No questions in this batch are placed in The Effects of Changes in Foreign Exchange Rates for this section. This is an honest finding, not an extraction gap — see the scope note above.</div>
+<div class="qblock" id="M2C7U3-010">
+  <div class="qmeta">
+    <span class="src">PYQ November 2023</span> &middot;
+    <span class="qno">Q1(b)</span> &middot;
+    <span class="marks">Marks: 5</span> &middot;
+    <span class="marks">Approx Time: 9 minutes (approx.)</span> &middot;
+    <span class="topic">Topic 3.3/3.4/3.5: Trade payable/receivable restated at closing rate vs. a non-monetary asset (plant, settled same day) held at transaction-date rate; exchange gain/loss recognised on each outstanding monetary item</span>
+    <span class="badge">Compulsory</span>
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Karna Ltd., an Indian Company, has the following foreign currency transactions during the financial year 2022-23:</p>
+<p>(i) On 1<sup>st</sup> July, 2022, imported goods from Try Ltd., a German based company, amounting to ₹30,96,000.</p>
+<p>(ii) On 1<sup>st</sup> October, 2022, imported plant and machinery from Lucy Ltd., a German based company, for €18,500. The amount was paid on the date of import itself. (Ignore depreciation).</p>
+<p>(iii) On 1<sup>st</sup> December, 2022, exported goods on credit to Cream Ltd., a German based company, amounting to ₹50,40,000.</p>
+<p>All the above transactions were recorded in the books of account at the prevailing exchange rate on the date of the transactions. Ignore taxes and duty on the above transactions.</p>
+<p>Payment due from Cream Ltd. and payment due to Try Ltd. is outstanding as on 31<sup>st</sup> March, 2023.</p>
+<p>Rate of exchange between reporting currency (₹) and foreign currency (€) on different dates are as under:</p>
+<table>
+<thead><tr><th>Date</th><th>₹/€</th></tr></thead>
+<tbody>
+<tr><td>1<sup>st</sup> July, 2022</td><td>86</td></tr>
+<tr><td>1<sup>st</sup> October, 2022</td><td>88</td></tr>
+<tr><td>1<sup>st</sup> December, 2022</td><td>84</td></tr>
+<tr><td>31<sup>st</sup> March, 2023</td><td>90</td></tr>
+</tbody>
+</table>
+<p>You are required, as per AS-11: (i) To show value at which above items will appear in Balance sheet as on 31<sup>st</sup> March, 2023; (ii) To calculate the amount of gain/loss on each of above transactions on account of exchange differences, if any. (5 Marks)</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><p>As per AS 11 “The Effects of Changes in Foreign Exchange Rates”, Foreign currency monetary items should be reported using the closing rate. Non-monetary items which are carried in terms of historical cost denominated in a foreign currency should be reported using the exchange rate at the date of the transaction. Exchange differences arising on the settlement of monetary items or on reporting an enterprise’s monetary items at rates different from those at which they were initially recorded during the period, or reported in previous financial statements, should be recognised as income or as expenses in the period in which they arise.</p>
+<p>(i) Items given in the question will appear in the Balance Sheet at the following values:</p>
+<p>Trade Payables (30,96,000/86 = 36,000 German Currency) × ₹90 = ₹32,40,000<br/>Plant and Machinery 18,500 German Currency × ₹88 = ₹16,28,000<br/>Trade Receivables (50,40,000/84 = 60,000 German Currency) × ₹90 = ₹54,00,000</p>
+<p>(ii) Amount of gain/loss on each transaction on account of exchange difference:</p>
+<p>Exchange loss on Transaction of import of goods from Try Ltd. = ₹(1,44,000) [36,000 German Currency × ₹4 (i.e. 90−86)]</p>
+<p>Exchange gain on Transaction of export of goods to Cream Ltd = ₹3,60,000 [60,000 German Currency × ₹6 (i.e. 90−84)]</p></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> Many examinees correctly applied the closing rate to the trade receivable and trade payable but incorrectly restated the plant and machinery – a non-monetary item already settled in cash on the date of import – to the 31st March closing rate as well, not recognising that AS 11 requires non-monetary items carried at historical cost to remain at the transaction-date rate. Some examinees also computed the exchange gain/loss by comparing the transaction-date rupee value to the closing-rate rupee value directly rather than isolating the per-unit rate movement on the outstanding foreign-currency amount, occasionally producing the correct final figure by an incorrect method.</div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C7U3-011">
+  <div class="qmeta">
+    <span class="src">RTP January 2025</span> &middot;
+    <span class="qno">Q9</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">Topic 3.4: Monetary items restated at the closing rate at each balance sheet date; the resulting exchange difference goes to profit and loss, never adjusted against the non-monetary cost already recorded</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Bansal Company Ltd. imported raw material worth US Dollars 12,000 on 15th January, 2024 when the exchange rate was ₹68 per US Dollar. The payment for the transaction was made on 5th May, 2024 when exchange rate was ₹64 per US Dollar. At the year end, 31st March, 2024, the rate of exchange was ₹65 per US Dollar. The accountant of the company passed entry on 31st March, 2024 adjusting the cost of raw material consumed for the difference between ₹64 and ₹68 per US Dollar.</p>
+<p>Discuss whether this treatment is justified as per the provisions of AS-11 (Revised).</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p>As per AS 11, "The Effects of Changes in Foreign Exchange Rates", initial recognition of a foreign currency transaction is done in the reporting currency by applying the exchange rate at the date of the transaction. Accordingly, on 15th January, 2024, the raw material purchased and its creditors will be recorded at US dollar 12,000 × ₹68 = ₹8,16,000.</p>
+<p>Also, on balance sheet date such transaction is reported at closing rate of exchange, hence it will be valued at the closing rate i.e. ₹65 per US dollar (USD 12,000 × ₹65 = ₹7,80,000) at 31st March, 2024, irrespective of the payment made for the same subsequently at a lower rate in the next financial year.</p>
+<p>The difference of ₹3 (65 − 68) per US dollar i.e. ₹36,000 (USD 12,000 × ₹3) will be shown as an <strong>exchange gain in the profit and loss account</strong> for the year ended 31st March, 2024 and will not be adjusted against the cost of raw materials.</p>
+<p>In the subsequent year on settlement date, the company would recognize or provide in the Profit and Loss account an exchange gain of ₹1 per US dollar, i.e. the difference from balance sheet date to the date of settlement between ₹65 and ₹64 per US dollar i.e. ₹12,000.</p>
+<p>Hence, the accounting treatment adopted by the Accountant of the company is <strong>incorrect</strong> i.e. it is not in accordance with the provisions of AS 11.</p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A common error is adjusting the cost of raw material consumed for the exchange difference between the transaction-date and settlement-date rates, missing that AS 11 requires monetary items to be restated at the closing rate at each balance sheet date, with the resulting exchange difference recognised in the Statement of Profit and Loss, not adjusted against the non-monetary cost of raw material already recorded.</div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
+  </div>
+</div>
+
+
+<div class="qblock" id="M2C7U3-012">
+  <div class="qmeta">
+    <span class="src">RTP May 2025</span> &middot;
+    <span class="qno">Q12</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">Topic 3.5: Para 46A option to capitalise exchange differences on long-term foreign-currency monetary items into a depreciable asset&#x27;s cost</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Legal Ltd. is engaged in the manufacturing of rubber. For its plant, it required machineries of latest technology. It usually resorts to Long Term Foreign Currency Borrowings for its fund requirements. On 1st April, 2023, it borrowed US $1 million from International Funding Agency, USA when the exchange rate was 1$ = ₹63. The funds were used for acquiring machineries, on the same date, to be used in three different plants. The useful life of the machineries is 10 years and their residual value is ₹30,00,000.</p>
+<p>Earlier also the company used to purchase machineries out of foreign borrowings. The exchange differences arising on such borrowings were charged to profit and loss account and were not capitalized, even though the company had an option to capitalize it as per notified AS 11.</p>
+<p>Now for this new purchase of machinery, Legal Ltd. is interested to avail the option of capitalizing the same to the cost of asset. Exchange rate on 31st March, 2024 is 1 US$ = ₹62. Assume that on 31st March, 2024, Legal Ltd. is not having any old long term foreign currency borrowings except for the amount borrowed for machinery purchased on 1st April, 2023.</p>
+<p>Comment whether Legal Ltd. can capitalize the exchange difference to the cost of asset on 31st March, 2024. If yes, then calculate the depreciation amount on machineries as on 31st March, 2024.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p>As per paragraph 46A of AS 11, in respect of accounting periods commencing on or after 1st April, 2011, an enterprise (whether or not it had earlier exercised the option under paragraph 46, the option being irrevocable and applied to all such foreign currency monetary items) may add to or deduct from the cost of a depreciable capital asset the exchange differences arising on reporting long-term foreign currency monetary items relating to its acquisition, and depreciate this over the balance life of the asset.</p>
+<p>Accordingly, though Legal Ltd. had not earlier exercised the option, it can still avail the option to capitalize the exchange difference to the cost of machinery by virtue of para 46A of AS 11. Further, since Legal Ltd. has no other long term foreign currency borrowings, it is not required to apply the capitalization option to any earlier borrowing.</p>
+<table><thead><tr><th>Exchange difference to be capitalized and depreciation amount</th><th>₹</th></tr></thead><tbody>
+<tr><td>Cost of the asset in $ (1 million); Exchange rate on 1st April, 2023 (₹63 = $1)</td><td>—</td></tr>
+<tr><td>Cost of the asset in ₹ (1 million × ₹63)</td><td>63 million</td></tr>
+<tr><td>Less: Exchange difference as on 31st March, 2024 – (63−62) × $1 million (Gain)</td><td>(1 million)</td></tr>
+<tr><td><strong>Revised cost of asset</strong></td><td><strong>62 million</strong></td></tr>
+<tr><td>Less: Depreciation for 2023-2024 – (62 million − 3 million) / 10 years</td><td>(5.90 million)</td></tr>
+<tr><td><strong>Carrying amount as on 31st March, 2024</strong></td><td><strong>56.10 million</strong></td></tr>
+</tbody></table>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A common error is assuming the para 46A option is unavailable to Legal Ltd. because it never exercised it in earlier years, missing that the option is available for this new borrowing on its own facts, since Legal Ltd. has no other long-term foreign-currency borrowings that would otherwise force the irrevocable-election issue.</div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
+  </div>
+</div>
+
+
+<div class="qblock flagged" id="M2C7U3-013">
+  <div class="qmeta">
+    <span class="src">RTP September 2024</span> &middot;
+    <span class="qno">Q9</span> &middot;
+    <span class="marks">Marks: <span class="na">Not stated in source</span></span> &middot;
+    <span class="marks">Approx Time: 10&ndash;20 minutes (approx.)</span> &middot;
+    <span class="topic">Topic 3.5: Exchange differences on restatement/repayment of a long-term foreign-currency loan financing PPE, capitalised into the asset&#x27;s carrying amount</span>
+    
+  </div>
+  <div class="question"><strong>Question:</strong> <div><p>Alfa Ltd. purchased an item of property, plant and equipment for US $ 50 lakh on 01.04.2023 and the same was fully financed by the foreign currency loan [i.e. US $] repayment in five equal instalments annually. (Exchange rate at the time of purchase was 1 US $ = ₹60]. As on 31.03.2024 the first instalment was paid when 1 US $ fetched ₹62.00. The entire loss on exchange was included in cost of goods sold. Alfa Ltd. normally provides depreciation on an item of property, plant and equipment at 20% on WDV basis and exercised the option to adjust the cost of asset for exchange difference arising out of loan restatement and payment. Calculate the amount of exchange loss and its treatment and depreciation.</p></div></div>
+  <div class="answer-block"><strong>Answer / Solution:</strong> <div><div>
+<p>Exchange differences arising on restatement or repayment of liabilities incurred for the purpose of acquiring an item of property, plant and equipment should be adjusted in the carrying amount of the respective item of property, plant and equipment as Alfa Ltd. has exercised the option and it is long term foreign currency monetary item.</p>
+<p>Thus, the entire exchange loss due to variation of ₹20 lakh on 31.03.2023 on payment of US $ 10 lakh, should be added to the carrying amount of an item of property, plant and equipment and not to the cost of goods sold. Further, depreciation on the unamortized depreciable amount should also be provided.</p>
+<p><strong>Calculation of Exchange loss:</strong></p>
+<p>Foreign currency loan (in ₹) = (50 lakh $ × ₹60) = ₹3,000 lakh</p>
+<p>Exchange loss on outstanding loan on 31.03.2024 = ₹40 lakh US $ × (62.00−60.00) = ₹80 lakh.</p>
+<p>So, ₹80 lakh should also be added to cost of an item of property, plant and equipment with corresponding credit to outstanding loan in addition to ₹20 lakh on account of exchange loss on payment of instalment. The total cost of an item of property, plant and equipment to be increased by ₹100 lakh.</p>
+<p>Total depreciation to be provided for the year 2023-2024 = 20% of (₹3,000 lakh + 100 lakh) = <strong>₹620 lakh</strong>.</p>
+</div></div></div>
+  <div class="mistakes synth"><strong>Author&rsquo;s Note:</strong> A common error is leaving the exchange loss in the cost of goods sold (as the company&#x27;s own initial treatment had done) rather than capitalising it into the carrying amount of the property, plant and equipment once the long-term-monetary-item option has been exercised, and consequently missing the resulting increase in the depreciation charge.</div>
+  <div class="self-notes"><strong>Student Self Notes:</strong>
+    <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
+  </div>
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
+  </div>
+</div>
+
+
+
 
 <div class="note" style="margin-top:48px;">
 Found an error? Please email <strong>capranavpratiktulshyan@gmail.com</strong> with the question reference (shown at the top of each card) so it can be fixed in the next edition. Thank you for helping make this book better.
-</div>
-
-<div class="error-register">
-<h2>Sanjeevani Booti 2: Error Register for The Effects of Changes in Foreign Exchange Rates</h2>
-<h3>Section 1: Concepts I Forgot</h3>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<h3>Section 2: Mistakes I Repeated More Than Twice</h3>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
-<div class="dotted-line"></div>
 </div>
 
 <div class="brand-footer">

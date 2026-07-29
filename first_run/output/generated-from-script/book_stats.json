@@ -1,0 +1,377 @@
+{
+  "generated_from": "output\\generated-from-script\\questions_index.json",
+  "sittings": {
+    "count": 34,
+    "list": [
+      "MTP January 2025 Set 1",
+      "MTP January 2025 Set 2",
+      "MTP January 2026 Set 1",
+      "MTP January 2026 Set 2",
+      "MTP May 2023 Set 1",
+      "MTP May 2023 Set 2",
+      "MTP May 2024 Set 1",
+      "MTP May 2024 Set 2",
+      "MTP May 2025 Set 1",
+      "MTP May 2025 Set 2",
+      "MTP May 2026 Set 1",
+      "MTP May 2026 Set 2",
+      "MTP November 2023 Set 1",
+      "MTP November 2023 Set 2",
+      "MTP September 2024 Set 1",
+      "MTP September 2024 Set 2",
+      "MTP September 2025 Set 1",
+      "MTP September 2025 Set 2",
+      "PYQ January 2025",
+      "PYQ January 2026",
+      "PYQ May 2023",
+      "PYQ May 2024",
+      "PYQ May 2025",
+      "PYQ May 2026",
+      "PYQ November 2023",
+      "PYQ September 2024",
+      "PYQ September 2025",
+      "RTP January 2025",
+      "RTP January 2026",
+      "RTP May 2024",
+      "RTP May 2025",
+      "RTP May 2026",
+      "RTP September 2024",
+      "RTP September 2025"
+    ],
+    "per_sitting": {
+      "MTP_Jan2025_Set1.html": {
+        "label": "MTP January 2025 Set 1",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 27,
+        "distinct_questions": 6,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_Jan2025_Set2.html": {
+        "label": "MTP January 2025 Set 2",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 27,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_Jan2026_Set1.html": {
+        "label": "MTP January 2026 Set 1",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 27,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_Jan2026_Set2.html": {
+        "label": "MTP January 2026 Set 2",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 27,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_May2023_Set1.html": {
+        "label": "MTP May 2023 Set 1",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 17,
+        "distinct_questions": 6,
+        "marks_covered_here": 120,
+        "has_marks_in_source": true
+      },
+      "MTP_May2023_Set2.html": {
+        "label": "MTP May 2023 Set 2",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 18,
+        "distinct_questions": 6,
+        "marks_covered_here": 120,
+        "has_marks_in_source": true
+      },
+      "MTP_May2024_Set1.html": {
+        "label": "MTP May 2024 Set 1",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 27,
+        "distinct_questions": 6,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_May2024_Set2.html": {
+        "label": "MTP May 2024 Set 2",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 28,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_May2025_Set1.html": {
+        "label": "MTP May 2025 Set 1",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 26,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_May2025_Set2.html": {
+        "label": "MTP May 2025 Set 2",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 26,
+        "distinct_questions": 6,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_May2026_Set1.html": {
+        "label": "MTP May 2026 Set 1",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 28,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_May2026_Set2.html": {
+        "label": "MTP May 2026 Set 2",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 27,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_Nov2023_Set1.html": {
+        "label": "MTP November 2023 Set 1",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 17,
+        "distinct_questions": 6,
+        "marks_covered_here": 125,
+        "has_marks_in_source": true
+      },
+      "MTP_Nov2023_Set2.html": {
+        "label": "MTP November 2023 Set 2",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 20,
+        "distinct_questions": 6,
+        "marks_covered_here": 120,
+        "has_marks_in_source": true
+      },
+      "MTP_Sep2024_Set1.html": {
+        "label": "MTP September 2024 Set 1",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 26,
+        "distinct_questions": 6,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_Sep2024_Set2.html": {
+        "label": "MTP September 2024 Set 2",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 26,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_Sep2025_Set1.html": {
+        "label": "MTP September 2025 Set 1",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 28,
+        "distinct_questions": 6,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "MTP_Sep2025_Set2.html": {
+        "label": "MTP September 2025 Set 2",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 24,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "PYQ_Jan2025.html": {
+        "label": "PYQ January 2025",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 27,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "PYQ_Jan2026.html": {
+        "label": "PYQ January 2026",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 27,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "PYQ_May2023.html": {
+        "label": "PYQ May 2023",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 18,
+        "distinct_questions": 6,
+        "marks_covered_here": 125,
+        "has_marks_in_source": true
+      },
+      "PYQ_May2024.html": {
+        "label": "PYQ May 2024",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 11,
+        "distinct_questions": 6,
+        "marks_covered_here": 84,
+        "has_marks_in_source": true
+      },
+      "PYQ_May2025.html": {
+        "label": "PYQ May 2025",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 27,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "PYQ_May2026.html": {
+        "label": "PYQ May 2026",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 28,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "PYQ_Nov2023.html": {
+        "label": "PYQ November 2023",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 15,
+        "distinct_questions": 6,
+        "marks_covered_here": 120,
+        "has_marks_in_source": true
+      },
+      "PYQ_Sep2024.html": {
+        "label": "PYQ September 2024",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 27,
+        "distinct_questions": 15,
+        "marks_covered_here": 116,
+        "has_marks_in_source": true
+      },
+      "PYQ_Sep2025.html": {
+        "label": "PYQ September 2025",
+        "total_marks_of_paper": "100",
+        "records_in_corpus": 30,
+        "distinct_questions": 15,
+        "marks_covered_here": 114,
+        "has_marks_in_source": true
+      },
+      "RTP_Jan2025.html": {
+        "label": "RTP January 2025",
+        "total_marks_of_paper": "",
+        "records_in_corpus": 23,
+        "distinct_questions": 20,
+        "marks_covered_here": 0,
+        "has_marks_in_source": false
+      },
+      "RTP_Jan2026.html": {
+        "label": "RTP January 2026",
+        "total_marks_of_paper": "",
+        "records_in_corpus": 26,
+        "distinct_questions": 20,
+        "marks_covered_here": 0,
+        "has_marks_in_source": false
+      },
+      "RTP_May2024.html": {
+        "label": "RTP May 2024",
+        "total_marks_of_paper": "",
+        "records_in_corpus": 27,
+        "distinct_questions": 20,
+        "marks_covered_here": 0,
+        "has_marks_in_source": false
+      },
+      "RTP_May2025.html": {
+        "label": "RTP May 2025",
+        "total_marks_of_paper": "",
+        "records_in_corpus": 21,
+        "distinct_questions": 20,
+        "marks_covered_here": 0,
+        "has_marks_in_source": false
+      },
+      "RTP_May2026.html": {
+        "label": "RTP May 2026",
+        "total_marks_of_paper": null,
+        "records_in_corpus": 26,
+        "distinct_questions": 20,
+        "marks_covered_here": 0,
+        "has_marks_in_source": false
+      },
+      "RTP_Sep2024.html": {
+        "label": "RTP September 2024",
+        "total_marks_of_paper": "",
+        "records_in_corpus": 23,
+        "distinct_questions": 20,
+        "marks_covered_here": 0,
+        "has_marks_in_source": false
+      },
+      "RTP_Sep2025.html": {
+        "label": "RTP September 2025",
+        "total_marks_of_paper": "",
+        "records_in_corpus": 29,
+        "distinct_questions": 20,
+        "marks_covered_here": 0,
+        "has_marks_in_source": false
+      }
+    }
+  },
+  "questions": {
+    "total_records_including_parts_and_subparts": 831,
+    "distinct_question_numbers_as_printed": 437,
+    "by_qtype": {
+      "case-mcq": 261,
+      "mcq": 74,
+      "practical": 349,
+      "theory": 147
+    },
+    "by_part": {
+      "I": 335,
+      "II": 496
+    },
+    "by_difficulty": {
+      "Easy": 830,
+      "Medium": 1
+    }
+  },
+  "marks": {
+    "total_marks_covered_book_wide": 3096,
+    "note": "OR-alternative rows (data-alt-group) counted once, not twice, since a student only ever answers one. RTP sittings contribute 0 to this total -- ICAI's own RTP documents carry no per-question marks breakdown (no answer key with marks is published for RTPs), not a tagging gap -- see sittings_without_marks_in_source. Each MTP/PYQ sitting sums to 114, not the paper's nominal 100 -- verified (2026-07-27) this is expected, not an error: Part II offers a 'answer any N of the remaining M' choice (Q1-Q5 required marks = 70, but Q1-Q6 are all shown = 84), and this book deliberately includes every optional question so a student can practice all of them, not just the ones one particular sitting required. 30 (Part I) + 84 (Part II, all options shown) = 114 consistently across all 7 MTP/PYQ sittings checked.",
+    "sittings_without_marks_in_source": [
+      "RTP January 2025",
+      "RTP January 2026",
+      "RTP May 2024",
+      "RTP May 2025",
+      "RTP May 2026",
+      "RTP September 2024",
+      "RTP September 2025"
+    ]
+  },
+  "chapters_touched_count": 34,
+  "legacy_pre_syllabus_topics": {
+    "note": "Records tagged LEGACY-* test topics from before a syllabus change (e.g. Hire Purchase, Departmental Accounts) that don't exist in the current 36-chapter taxonomy at all. Kept in the sitting HTML/questions_index.json for a complete record, but excluded from chapter books and from chapters_touched_count above -- Pranav's decision, 2026-07-28.",
+    "distinct_legacy_topics": 13,
+    "legacy_topic_codes": [
+      "LEGACY-BONUS-SHARES",
+      "LEGACY-DEPARTMENTAL-ACCOUNTS",
+      "LEGACY-HIRE-PURCHASE",
+      "LEGACY-INCOMPLETE-RECORDS",
+      "LEGACY-INSURANCE-CLAIM-LOSS-OF-STOCK",
+      "LEGACY-INSURANCE-CLAIMS",
+      "LEGACY-ISSUE-OF-DEBENTURES",
+      "LEGACY-MANAGERIAL-REMUNERATION",
+      "LEGACY-PRE-INCORPORATION-PROFIT",
+      "LEGACY-PROFIT-PRIOR-TO-INCORPORATION",
+      "LEGACY-REDEMPTION-OF-DEBENTURES",
+      "LEGACY-REDEMPTION-OF-PREFERENCE-SHARES",
+      "LEGACY-RIGHTS-ISSUE"
+    ],
+    "records_excluded": 47
+  },
+  "mistake_notes": {
+    "real_icai_examiner_comments": 68,
+    "author_synthesized_notes": 763
+  },
+  "chapter_book_policy": {
+    "note": "generate_chapter_book.py (as of 2026-07-26) deliberately excludes MCQs from the printed chapter books -- they live on the separate MCQ platform instead. Figures below show what that means against the numbers above.",
+    "mcq_records_in_corpus": 335,
+    "non_mcq_records_in_corpus": 496
+  }
+}

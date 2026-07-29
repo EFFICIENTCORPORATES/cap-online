@@ -58,10 +58,9 @@ body { font-family: 'Source Sans 3', Arial, sans-serif; color: #1F2933; margin: 
   border-top: 0.5pt solid #d5dae0;
 }
 
-/* Overflow-proofing: never slice a table, options list, answer paragraph,
-   or callout mid-way across a page break. The 34 chapter files' own
-   embedded style has no break-inside rules at all (confirmed) -- added
-   here rather than in the 34 files.
+/* Overflow-proofing: never slice a short callout mid-way across a page
+   break. The 34 chapter files' own embedded style has no break-inside
+   rules at all (confirmed) -- added here rather than in the 34 files.
 
    NOTE (2026-07-26, revised from the original version of this rule):
    .qblock itself is deliberately NOT in this list anymore. It was
@@ -73,16 +72,30 @@ body { font-family: 'Source Sans 3', Arial, sans-serif; color: #1F2933; margin: 
    it doesn't fit the remaining space, not just the part that doesn't fit.
    Pranav caught this directly ("each question starting from a new page...
    space getting wasted"). The fix keeps the same guarantee at a smaller
-   grain: a single question's stem/options, a single answer paragraph, a
-   single table, and a single mistake/note box each still can never be cut
-   mid-way -- but the page break IS now allowed to fall at the natural
-   boundary BETWEEN a question's own Question / Answer / Mistakes /
-   Extraction-note blocks (they're already separate sibling <div>s inside
-   .qblock -- confirmed by reading a real qblock's markup, not guessed).
-   That's a normal, readable place for a real book to break a page; an
-   unbroken 282px gap in the middle of a chapter is not. */
-.question, .answer-block, .mistakes, .extraction-note,
-table, .note, .empty-section, .case-facts {
+   grain -- but the page break IS now allowed to fall at the natural
+   boundary BETWEEN a question's own Question / Answer / Mistakes blocks
+   (they're already separate sibling <div>s inside .qblock -- confirmed by
+   reading a real qblock's markup, not guessed). That's a normal, readable
+   place for a real book to break a page; an unbroken 282px gap in the
+   middle of a chapter is not.
+
+   NOTE 2 (2026-07-28, the exact same bug rediscovered one level deeper):
+   the bare table selector and .answer-block used to ALSO be in this list.
+   Pranav flagged real screenshots showing large blank gaps followed by a
+   long accounting table (or a whole answer) starting fresh on the next
+   page -- the identical "large container can't fit remaining space, jumps
+   whole" failure as the .qblock case above, just one container smaller. A
+   big worked-answer table is very often the single tallest element in a
+   qblock, so protecting it as a monolith reintroduced exactly the bug the
+   .qblock fix was meant to solve. Removed both from this list: a table
+   with proper thead/tbody (required by the schema, HTML-SCHEMA.md rule 9)
+   already only ever splits BETWEEN complete row elements, never mid-row,
+   and paged.js repeats the header on the continuation page -- this is
+   normal, safe print-table behaviour, not a new risk. .question and
+   .mistakes remain protected since they're normally short enough that
+   splitting them would look wrong, not save space. */
+.question, .mistakes,
+.note, .empty-section, .case-facts {
   break-inside: avoid;
 }
 h1, h2 { break-after: avoid; }
@@ -253,6 +266,114 @@ h1, h2 { break-after: avoid; }
 }
 .qb-legend-examiner { background: #fff3e0; border: 1px solid #e0b46c; }
 .qb-legend-author { background: #fdf1f1; border: 1px solid #d98a8a; }
+.qb-legend-answer { background: #eafbea; border: 1px solid #8fcf9a; }
+.qb-legend-case { background: #f5f5fb; border: 1px solid #8888c0; }
+.qb-legend-flagged { background: #fffaf7; border: 1px solid #d98a8a; }
+
+.qb-stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4mm;
+  margin: 5mm 0 6mm;
+}
+.qb-stat-tile {
+  flex: 1 1 42mm;
+  min-width: 38mm;
+  border: 1px solid #dde3e8;
+  border-left: 2.5pt solid var(--qb-accent);
+  border-radius: 3pt;
+  padding: 3mm 4mm;
+  break-inside: avoid;
+}
+.qb-stat-num {
+  display: block;
+  font-family: var(--qb-heading-font);
+  font-size: 17pt;
+  font-weight: 800;
+  color: var(--qb-ink);
+  line-height: 1.1;
+}
+.qb-stat-label {
+  display: block;
+  font-family: var(--qb-body-font);
+  font-size: 7.5pt;
+  color: var(--qb-muted-ink);
+  margin-top: 1mm;
+  line-height: 1.3;
+}
+.qb-stats-sittings {
+  columns: 2;
+  margin: 2mm 0 4mm 5mm;
+  padding-left: 4mm;
+  font-family: var(--qb-body-font);
+  font-size: 9pt;
+  color: var(--qb-ink);
+}
+.qb-stats-sittings li { margin-bottom: 1mm; break-inside: avoid; }
+
+.qb-matrix-page { break-inside: avoid; }
+.qb-matrix-note {
+  font-family: var(--qb-body-font);
+  font-size: 8pt;
+  color: var(--qb-muted-ink);
+  line-height: 1.5;
+  margin-bottom: 4mm;
+}
+.qb-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--qb-heading-font);
+  font-size: 7pt;
+  break-inside: avoid;
+}
+.qb-matrix-table th, .qb-matrix-table td {
+  border: 0.5pt solid #c7cdd3;
+  padding: 1.3mm 1.6mm;
+  text-align: center;
+}
+.qb-matrix-table th {
+  background: #eef1f4;
+  color: var(--qb-ink);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.qb-matrix-table td.qb-matrix-chapter {
+  text-align: left;
+  font-weight: 600;
+  max-width: 34mm;
+  overflow-wrap: break-word;
+}
+.qb-matrix-table td.qb-matrix-total {
+  font-weight: 800;
+  background: #f5f0dd;
+}
+.qb-matrix-table td.qb-matrix-zero { color: #c5cdd5; }
+
+.qb-er-page { padding-top: 4mm; }
+.qb-er-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--qb-body-font);
+  font-size: 9pt;
+}
+.qb-er-table th {
+  background: #eef1f4;
+  color: var(--qb-ink);
+  font-weight: 700;
+  text-align: left;
+  padding: 2mm 3mm;
+  border-bottom: 1pt solid #c7cdd3;
+}
+.qb-er-table td {
+  padding: 3mm 3mm;
+  border-bottom: 0.5pt dotted #c7cdd3;
+  vertical-align: bottom;
+}
+.qb-er-chapter { width: 28%; }
+.qb-er-check { width: 12%; text-align: center; }
+.qb-er-blank { display: block; border-bottom: 0.5pt dotted #999; height: 4mm; }
+.qb-er-blank-wide { width: 100%; }
+.qb-er-box { display: inline-block; border: 1px solid #888; width: 4mm; height: 4mm; }
 
 .qb-toc-entry {
   display: flex;
@@ -279,6 +400,71 @@ h1, h2 { break-after: avoid; }
 
 .qb-bio p { font-family: var(--qb-body-font); font-size: 10pt; line-height: 1.7; color: var(--qb-ink); margin-bottom: 3mm; }
 
+/* Dedication page (added 2026-07-27, Pranav's request) -- ported from the
+   Strategy Book's own dedication-block CSS (books/strategy-book/design/
+   templates/build/front-matter.html), same real names/content, just
+   renamed onto this book's --qb-* CSS variables instead of that book's
+   --head-f/--body-f/--ink ones. Reused deliberately, not rewritten --
+   Pranav didn't ask for a different dedication for this book. */
+.qb-dedication-block {
+  text-align: center;
+  padding: 10mm 0 8mm;
+  break-inside: avoid;
+}
+.qb-ded-to {
+  font-family: var(--qb-heading-font);
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--qb-muted-ink);
+  margin-bottom: 7mm;
+  display: block;
+}
+.qb-ded-name {
+  font-family: var(--qb-heading-font);
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--qb-ink);
+  margin-bottom: 1mm;
+  display: block;
+}
+.qb-ded-role {
+  font-family: var(--qb-body-font);
+  font-size: 7.5pt;
+  font-weight: 400;
+  color: var(--qb-muted-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5mm;
+  display: block;
+}
+.qb-ded-note {
+  font-family: var(--qb-body-font);
+  font-size: 9pt;
+  font-style: italic;
+  color: #4a5568;
+  line-height: 1.6;
+  display: block;
+}
+.qb-ded-sep {
+  color: #c5cdd5;
+  font-family: var(--qb-heading-font);
+  font-size: 10pt;
+  margin: 4.5mm 0;
+  display: block;
+}
+.qb-ded-close {
+  font-family: var(--qb-body-font);
+  font-size: 8.5pt;
+  font-style: italic;
+  color: #607080;
+  margin-top: 7mm;
+  padding-top: 4mm;
+  border-top: 0.5pt solid #dde3e8;
+  display: block;
+}
+
 </style>
 </head>
 <body>
@@ -301,5 +487,65 @@ h1, h2 { break-after: avoid; }
 </div>
 
 </div>
+
+<div class="qb-section qb-er-page">
+<h2 class="qb-page-title">Sanjeevani Booti 2: Error Register &mdash; Concepts I Forgot</h2>
+<p class="qb-matrix-note">Sheet 1 of 3 &middot; use for any chapter &mdash; write which chapter/topic each entry is about.</p>
+<table class="qb-er-table">
+<thead><tr><th>Chapter / Topic</th><th>Concepts I Forgot</th><th>Revised</th></tr></thead>
+<tbody><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr></tbody>
+</table>
+</div>
+
+
+<div class="qb-section qb-er-page">
+<h2 class="qb-page-title">Sanjeevani Booti 2: Error Register &mdash; Mistakes I Repeated More Than Twice</h2>
+<p class="qb-matrix-note">Sheet 1 of 3 &middot; use for any chapter &mdash; write which chapter/topic each entry is about.</p>
+<table class="qb-er-table">
+<thead><tr><th>Chapter / Topic</th><th>Mistakes I Repeated More Than Twice</th><th>Revised</th></tr></thead>
+<tbody><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr></tbody>
+</table>
+</div>
+
+
+<div class="qb-section qb-er-page">
+<h2 class="qb-page-title">Sanjeevani Booti 2: Error Register &mdash; Concepts I Forgot</h2>
+<p class="qb-matrix-note">Sheet 2 of 3 &middot; use for any chapter &mdash; write which chapter/topic each entry is about.</p>
+<table class="qb-er-table">
+<thead><tr><th>Chapter / Topic</th><th>Concepts I Forgot</th><th>Revised</th></tr></thead>
+<tbody><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr></tbody>
+</table>
+</div>
+
+
+<div class="qb-section qb-er-page">
+<h2 class="qb-page-title">Sanjeevani Booti 2: Error Register &mdash; Mistakes I Repeated More Than Twice</h2>
+<p class="qb-matrix-note">Sheet 2 of 3 &middot; use for any chapter &mdash; write which chapter/topic each entry is about.</p>
+<table class="qb-er-table">
+<thead><tr><th>Chapter / Topic</th><th>Mistakes I Repeated More Than Twice</th><th>Revised</th></tr></thead>
+<tbody><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr></tbody>
+</table>
+</div>
+
+
+<div class="qb-section qb-er-page">
+<h2 class="qb-page-title">Sanjeevani Booti 2: Error Register &mdash; Concepts I Forgot</h2>
+<p class="qb-matrix-note">Sheet 3 of 3 &middot; use for any chapter &mdash; write which chapter/topic each entry is about.</p>
+<table class="qb-er-table">
+<thead><tr><th>Chapter / Topic</th><th>Concepts I Forgot</th><th>Revised</th></tr></thead>
+<tbody><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr></tbody>
+</table>
+</div>
+
+
+<div class="qb-section qb-er-page">
+<h2 class="qb-page-title">Sanjeevani Booti 2: Error Register &mdash; Mistakes I Repeated More Than Twice</h2>
+<p class="qb-matrix-note">Sheet 3 of 3 &middot; use for any chapter &mdash; write which chapter/topic each entry is about.</p>
+<table class="qb-er-table">
+<thead><tr><th>Chapter / Topic</th><th>Mistakes I Repeated More Than Twice</th><th>Revised</th></tr></thead>
+<tbody><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr><tr><td class="qb-er-chapter"><span class="qb-er-blank"></span></td><td class="qb-er-note"><span class="qb-er-blank qb-er-blank-wide"></span></td><td class="qb-er-check"><span class="qb-er-box"></span></td></tr></tbody>
+</table>
+</div>
+
 </body>
 </html>
