@@ -5,8 +5,10 @@ Book's Table of Contents
 ============================================================================
 
 Same job as tools/resolve_toc_pages.py, adapted for this book's shape: the
-ToC lives inside front-matter.html (as `.qb-toc-page` spans, written by
-generate_qb_toc.py), not in a standalone toc.html.
+ToC is its own file, first_run/output/table-of-contents.html (as
+`.qb-toc-page` spans, written by generate_qb_toc.py) -- moved out of
+front-matter.html 2026-07-27 per Pranav's request to stop embedding it
+inside the rest of the front matter.
 
 target-counter() is confirmed broken in this vendored paged.js version
 (matches open upstream bugs, e.g. pagedjs/pagedjs#145) -- the verified
@@ -27,6 +29,7 @@ import re
 import subprocess
 import sys
 import time
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -45,7 +48,7 @@ except ImportError:
 
 OUTPUT_DIR = qc.OUTPUT_DIR
 MERGED_BOOK = OUTPUT_DIR / "QUESTION-BANK-BOOK.html"
-FRONT_MATTER_FILE = OUTPUT_DIR / "front-matter.html"
+TOC_FILE = OUTPUT_DIR / "table-of-contents.html"
 
 DEBUG_PORT = 9223  # different port than the strategy book's resolver, in
                     # case both are ever run in the same session
@@ -102,8 +105,15 @@ class CDP:
     Runtime.evaluate, and read the result."""
 
     def __init__(self, file_url: str):
+        # Percent-encode the file:// URL before it goes into the DevTools
+        # HTTP request -- a raw space (or other reserved character) in the
+        # path makes http.client reject the request outright ("URL can't
+        # contain control characters"). Reproduced on a clone where the repo
+        # sits under a directory with a space in it ("Other computers"),
+        # which the original author's own path apparently never had.
+        safe_url = urllib.parse.quote(file_url, safe=":/")
         req = urllib.request.Request(
-            f"http://localhost:{DEBUG_PORT}/json/new?{file_url}", method="PUT"
+            f"http://localhost:{DEBUG_PORT}/json/new?{safe_url}", method="PUT"
         )
         r = urllib.request.urlopen(req, timeout=10)
         tab = json.loads(r.read())
@@ -170,8 +180,8 @@ def resolve_page_numbers(cdp: CDP, target_ids: list) -> dict:
     return {tid: num for tid, num in pairs}
 
 
-def patch_front_matter(page_numbers: dict) -> None:
-    text = FRONT_MATTER_FILE.read_text(encoding="utf-8")
+def patch_toc_file(page_numbers: dict) -> None:
+    text = TOC_FILE.read_text(encoding="utf-8")
 
     def repl(m):
         slug = m.group("slug")
@@ -188,11 +198,11 @@ def patch_front_matter(page_numbers: dict) -> None:
     if count != len(page_numbers):
         raise SystemExit(
             f"ERROR: expected to patch {len(page_numbers)} .qb-toc-page "
-            f"spans in front-matter.html, only matched {count}. It may be "
+            f"spans in {TOC_FILE.name}, only matched {count}. It may be "
             "stale -- re-run generate_qb_toc.py and merge again before "
             "retrying."
         )
-    FRONT_MATTER_FILE.write_text(new_text, encoding="utf-8")
+    TOC_FILE.write_text(new_text, encoding="utf-8")
 
 
 def main():
@@ -200,8 +210,9 @@ def main():
     ap.add_argument(
         "--remerge", action="store_true",
         help="Automatically re-run qb_merge.py --force after patching "
-             "front-matter.html, so QUESTION-BANK-BOOK.html ends up with "
-             "the correct numbers baked in without a separate manual step."
+             "table-of-contents.html, so QUESTION-BANK-BOOK.html ends up "
+             "with the correct numbers baked in without a separate manual "
+             "step."
     )
     args = ap.parse_args()
 
@@ -210,17 +221,17 @@ def main():
             f"ERROR: {MERGED_BOOK} not found -- run qb_merge.py first (a "
             "first pass with blank ToC page numbers is expected and fine)."
         )
-    if not FRONT_MATTER_FILE.exists():
-        raise SystemExit(f"ERROR: {FRONT_MATTER_FILE} not found -- run "
-                          "generate_qb_front_back_matter.py first.")
+    if not TOC_FILE.exists():
+        raise SystemExit(f"ERROR: {TOC_FILE} not found -- run "
+                          "generate_qb_toc.py first.")
 
     target_ids = sorted(set(
         re.findall(r'data-target-id="([a-z0-9-]+)"',
-                   FRONT_MATTER_FILE.read_text(encoding="utf-8"))
+                   TOC_FILE.read_text(encoding="utf-8"))
     ))
     if not target_ids:
         raise SystemExit(
-            "ERROR: no data-target-id spans found in front-matter.html -- "
+            f"ERROR: no data-target-id spans found in {TOC_FILE.name} -- "
             "run generate_qb_toc.py first."
         )
 
@@ -245,8 +256,8 @@ def main():
         except subprocess.TimeoutExpired:
             proc.kill()
 
-    patch_front_matter(page_numbers)
-    print(f"Patched: {FRONT_MATTER_FILE}")
+    patch_toc_file(page_numbers)
+    print(f"Patched: {TOC_FILE}")
 
     if args.remerge:
         merge_script = Path(__file__).resolve().parent / "qb_merge.py"

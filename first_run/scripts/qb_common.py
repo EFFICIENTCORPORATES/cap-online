@@ -54,6 +54,11 @@ import re
 from pathlib import Path
 
 FIRST_RUN = Path(__file__).resolve().parent.parent
+REPO_ROOT = FIRST_RUN.parent
+TOPIC_PAGE_INDEX_PATH = (
+    REPO_ROOT / "books" / "concept-book" / "syllabus-engine" / "data"
+    / "1-ca-inter-adv-accounts-topic-page-index.json"
+)
 OUTPUT_DIR = FIRST_RUN / "output"
 SCHEMA_DIR = FIRST_RUN / "schema"
 VENDOR_DIR = OUTPUT_DIR / "vendor"
@@ -79,6 +84,152 @@ BOOK_TITLE = "CA Inter Advanced Accounts: The Complete Question Bank"
 # The id="AS02-NNN" bug -- confirmed identical across every chapter file,
 # regardless of that file's real chapter. Rewritten per-chapter at merge time.
 _BUGGY_ID_RE = re.compile(r'id="AS02-(\d+)"')
+
+
+MONTH_ABBR = {
+    "01": "Jan", "02": "Feb", "03": "Mar", "04": "Apr", "05": "May", "06": "Jun",
+    "07": "Jul", "08": "Aug", "09": "Sep", "10": "Oct", "11": "Nov", "12": "Dec",
+}
+
+
+def session_label(year: str, month: str) -> str:
+    """Short 'Mon 'YY' label for a (year, month) exam session, e.g. Jan '25.
+    Used by the coverage-matrix scripts to collapse an MTP session's Set 1 +
+    Set 2 into one column (see generate_qb_coverage_matrix.py's docstring)."""
+    yy = (year or "??")[-2:]
+    return f"{MONTH_ABBR.get(month, month or '?')} '{yy}"
+
+
+def dedup_marks_sum(rows: list) -> int:
+    """Sum data-marks across rows, counting each (source_file, alt_group)
+    OR-alternative pair only once -- a student only ever answers one
+    alternative. Same logic as extract_questions.py's own sanity check and
+    generate_book_stats.py's dedup_marks_total, reused here so the coverage
+    matrices, the stats page, and the extraction script's own check never
+    drift apart."""
+    total = 0
+    seen = set()
+    for r in rows:
+        ag = r.get("alt_group")
+        if ag:
+            key = (r.get("source_file"), ag)
+            if key in seen:
+                continue
+            seen.add(key)
+        total += r.get("marks") or 0
+    return total
+
+
+def dedup_count(rows: list) -> int:
+    """Count rows, deduping an OR-alternative pair down to 1. Used for RTP
+    cells, which carry no marks in ICAI's own source (RTP documents publish
+    no per-question marks-weighted answer key) -- question count is the
+    best available coverage signal there instead of marks."""
+    count = 0
+    seen = set()
+    for r in rows:
+        ag = r.get("alt_group")
+        if ag:
+            key = (r.get("source_file"), ag)
+            if key in seen:
+                continue
+            seen.add(key)
+        count += 1
+    return count
+
+
+def sessions_for(rows: list, paper_type: str) -> list:
+    """Distinct (year, month) exam sessions for one paper type, chronological
+    order. An MTP session's Set 1 + Set 2 share the same (exam_year,
+    exam_month) and so collapse into ONE session automatically -- this is
+    the print-width design from CLAUDE.md section 6 ("one column per exam
+    session, not per individual paper/set"), not a separate dedup step."""
+    keys = set(
+        (r.get("exam_year"), r.get("exam_month"))
+        for r in rows
+        if r.get("paper_type") == paper_type and r.get("exam_year") and r.get("exam_month")
+    )
+    return sorted(keys)
+
+
+_topic_page_index_cache = None
+_chapter_name_short_cache = None
+_topic_abbrev_cache = None
+
+
+def load_topic_page_index() -> dict:
+    """The canonical topic/page-number source (CLAUDE.md section 6, "file 1")
+    -- 36 chapters, each with a topics[] list carrying topic_no/topic_name/
+    topic_name_abbvtd. Cached at module level since several render scripts
+    call the lookups below once per question/row."""
+    global _topic_page_index_cache
+    if _topic_page_index_cache is None:
+        with TOPIC_PAGE_INDEX_PATH.open(encoding="utf-8") as f:
+            _topic_page_index_cache = json.load(f)
+    return _topic_page_index_cache
+
+
+def chapter_name_short_lookup() -> dict:
+    """{unique_chapter_id: chapter_name_short} -- the existing chapter-level
+    abbreviation field in file 1. Used for the Chapter-wise Sitting Summary's
+    chapter column, which is too wide with the full chapter name for
+    chapters like Framework (Pranav, 2026-07-28)."""
+    global _chapter_name_short_cache
+    if _chapter_name_short_cache is None:
+        data = load_topic_page_index()
+        _chapter_name_short_cache = {
+            c["unique_chapter_id"]: (c.get("chapter_name_short") or c.get("chapter_name") or c["unique_chapter_id"])
+            for c in data["chapters"]
+        }
+    return _chapter_name_short_cache
+
+
+def topic_abbrev_lookup() -> dict:
+    """{(unique_chapter_id, topic_no_as_string): topic_name_abbvtd} -- the
+    new per-topic abbreviation field Pranav added to file 1 (2026-07-28),
+    keyed by the same topic_no used in this repo's data-subtopicref
+    convention for "thin taxonomy" chapters (see abbreviated_topic_label())."""
+    global _topic_abbrev_cache
+    if _topic_abbrev_cache is None:
+        data = load_topic_page_index()
+        out = {}
+        for c in data["chapters"]:
+            for t in c.get("topics", []):
+                out[(c["unique_chapter_id"], str(t.get("topic_no")))] = (
+                    t.get("topic_name_abbvtd") or t.get("topic_name")
+                )
+        _topic_abbrev_cache = out
+    return _topic_abbrev_cache
+
+
+def abbreviated_topic_label(unitcode: str, subtopicref: str, subtopictitle: str = None):
+    """Best available compact label for one tagged topic reference.
+
+    Two subtopicref conventions coexist in this corpus (SKILL-question-bank-
+    topic-tagging.md): plain small integers / slash-joined compounds (e.g.
+    "7", "7/9/11") for chapters where topic-index.json is a stub and the
+    file-1 topic_no was used directly as the tagging number; and ICAI
+    paragraph-style refs (e.g. "2.6-2.7", "1.3/1.9") for chapters with a
+    fully fleshed-out topic-index.json entry. Only the first kind can be
+    looked up against file 1's topic_no directly.
+
+    Priority: (1) file 1's topic_name_abbvtd, if subtopicref is a plain
+    topic-number (or compound of them) that resolves; (2) the per-question
+    data-subtopictitle, which is always topic-specific regardless of ref
+    format (added to extraction 2026-07-28, see project_log.md); (3) None
+    (caller decides the fallback -- never fabricate a label)."""
+    if subtopicref:
+        parts = [p.strip() for p in subtopicref.split("/")]
+        if parts and all(re.fullmatch(r"\d+", p) for p in parts):
+            lookup = topic_abbrev_lookup()
+            names = []
+            for p in parts:
+                name = lookup.get((unitcode, p))
+                if name and name not in names:
+                    names.append(name)
+            if names:
+                return " / ".join(names)
+    return subtopictitle
 
 
 def load_book_style() -> dict:
@@ -258,10 +409,9 @@ def print_layer_css(style: dict) -> str:
   border-top: 0.5pt solid #d5dae0;
 }}
 
-/* Overflow-proofing: never slice a table, options list, answer paragraph,
-   or callout mid-way across a page break. The 34 chapter files' own
-   embedded style has no break-inside rules at all (confirmed) -- added
-   here rather than in the 34 files.
+/* Overflow-proofing: never slice a short callout mid-way across a page
+   break. The 34 chapter files' own embedded style has no break-inside
+   rules at all (confirmed) -- added here rather than in the 34 files.
 
    NOTE (2026-07-26, revised from the original version of this rule):
    .qblock itself is deliberately NOT in this list anymore. It was
@@ -273,16 +423,30 @@ def print_layer_css(style: dict) -> str:
    it doesn't fit the remaining space, not just the part that doesn't fit.
    Pranav caught this directly ("each question starting from a new page...
    space getting wasted"). The fix keeps the same guarantee at a smaller
-   grain: a single question's stem/options, a single answer paragraph, a
-   single table, and a single mistake/note box each still can never be cut
-   mid-way -- but the page break IS now allowed to fall at the natural
-   boundary BETWEEN a question's own Question / Answer / Mistakes /
-   Extraction-note blocks (they're already separate sibling <div>s inside
-   .qblock -- confirmed by reading a real qblock's markup, not guessed).
-   That's a normal, readable place for a real book to break a page; an
-   unbroken 282px gap in the middle of a chapter is not. */
-.question, .answer-block, .mistakes, .extraction-note,
-table, .note, .empty-section, .case-facts {{
+   grain -- but the page break IS now allowed to fall at the natural
+   boundary BETWEEN a question's own Question / Answer / Mistakes blocks
+   (they're already separate sibling <div>s inside .qblock -- confirmed by
+   reading a real qblock's markup, not guessed). That's a normal, readable
+   place for a real book to break a page; an unbroken 282px gap in the
+   middle of a chapter is not.
+
+   NOTE 2 (2026-07-28, the exact same bug rediscovered one level deeper):
+   the bare table selector and .answer-block used to ALSO be in this list.
+   Pranav flagged real screenshots showing large blank gaps followed by a
+   long accounting table (or a whole answer) starting fresh on the next
+   page -- the identical "large container can't fit remaining space, jumps
+   whole" failure as the .qblock case above, just one container smaller. A
+   big worked-answer table is very often the single tallest element in a
+   qblock, so protecting it as a monolith reintroduced exactly the bug the
+   .qblock fix was meant to solve. Removed both from this list: a table
+   with proper thead/tbody (required by the schema, HTML-SCHEMA.md rule 9)
+   already only ever splits BETWEEN complete row elements, never mid-row,
+   and paged.js repeats the header on the continuation page -- this is
+   normal, safe print-table behaviour, not a new risk. .question and
+   .mistakes remain protected since they're normally short enough that
+   splitting them would look wrong, not save space. */
+.question, .mistakes,
+.note, .empty-section, .case-facts {{
   break-inside: avoid;
 }}
 h1, h2 {{ break-after: avoid; }}
@@ -462,6 +626,114 @@ def front_back_css(style: dict) -> str:
 }}
 .qb-legend-examiner {{ background: {col['examiner_comment_bg']}; border: 1px solid {col['examiner_comment_border']}; }}
 .qb-legend-author {{ background: {col['synthesized_comment_bg']}; border: 1px solid {col['synthesized_comment_border']}; }}
+.qb-legend-answer {{ background: {col['answer_block_bg']}; border: 1px solid #8fcf9a; }}
+.qb-legend-case {{ background: #f5f5fb; border: 1px solid #8888c0; }}
+.qb-legend-flagged {{ background: {col['flagged_bg']}; border: 1px solid {col['flagged_border']}; }}
+
+.qb-stats-grid {{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4mm;
+  margin: 5mm 0 6mm;
+}}
+.qb-stat-tile {{
+  flex: 1 1 42mm;
+  min-width: 38mm;
+  border: 1px solid #dde3e8;
+  border-left: 2.5pt solid var(--qb-accent);
+  border-radius: 3pt;
+  padding: 3mm 4mm;
+  break-inside: avoid;
+}}
+.qb-stat-num {{
+  display: block;
+  font-family: var(--qb-heading-font);
+  font-size: 17pt;
+  font-weight: 800;
+  color: var(--qb-ink);
+  line-height: 1.1;
+}}
+.qb-stat-label {{
+  display: block;
+  font-family: var(--qb-body-font);
+  font-size: 7.5pt;
+  color: var(--qb-muted-ink);
+  margin-top: 1mm;
+  line-height: 1.3;
+}}
+.qb-stats-sittings {{
+  columns: 2;
+  margin: 2mm 0 4mm 5mm;
+  padding-left: 4mm;
+  font-family: var(--qb-body-font);
+  font-size: 9pt;
+  color: var(--qb-ink);
+}}
+.qb-stats-sittings li {{ margin-bottom: 1mm; break-inside: avoid; }}
+
+.qb-matrix-page {{ break-inside: avoid; }}
+.qb-matrix-note {{
+  font-family: var(--qb-body-font);
+  font-size: 8pt;
+  color: var(--qb-muted-ink);
+  line-height: 1.5;
+  margin-bottom: 4mm;
+}}
+.qb-matrix-table {{
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--qb-heading-font);
+  font-size: 7pt;
+  break-inside: avoid;
+}}
+.qb-matrix-table th, .qb-matrix-table td {{
+  border: 0.5pt solid #c7cdd3;
+  padding: 1.3mm 1.6mm;
+  text-align: center;
+}}
+.qb-matrix-table th {{
+  background: #eef1f4;
+  color: var(--qb-ink);
+  font-weight: 700;
+  white-space: nowrap;
+}}
+.qb-matrix-table td.qb-matrix-chapter {{
+  text-align: left;
+  font-weight: 600;
+  max-width: 34mm;
+  overflow-wrap: break-word;
+}}
+.qb-matrix-table td.qb-matrix-total {{
+  font-weight: 800;
+  background: #f5f0dd;
+}}
+.qb-matrix-table td.qb-matrix-zero {{ color: #c5cdd5; }}
+
+.qb-er-page {{ padding-top: 4mm; }}
+.qb-er-table {{
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--qb-body-font);
+  font-size: 9pt;
+}}
+.qb-er-table th {{
+  background: #eef1f4;
+  color: var(--qb-ink);
+  font-weight: 700;
+  text-align: left;
+  padding: 2mm 3mm;
+  border-bottom: 1pt solid #c7cdd3;
+}}
+.qb-er-table td {{
+  padding: 3mm 3mm;
+  border-bottom: 0.5pt dotted #c7cdd3;
+  vertical-align: bottom;
+}}
+.qb-er-chapter {{ width: 28%; }}
+.qb-er-check {{ width: 12%; text-align: center; }}
+.qb-er-blank {{ display: block; border-bottom: 0.5pt dotted #999; height: 4mm; }}
+.qb-er-blank-wide {{ width: 100%; }}
+.qb-er-box {{ display: inline-block; border: 1px solid #888; width: 4mm; height: 4mm; }}
 
 .qb-toc-entry {{
   display: flex;
@@ -487,7 +759,102 @@ def front_back_css(style: dict) -> str:
 .qb-toc-page {{ font-family: var(--qb-heading-font); font-weight: 700; font-size: 9.5pt; color: var(--qb-ink); }}
 
 .qb-bio p {{ font-family: var(--qb-body-font); font-size: 10pt; line-height: 1.7; color: var(--qb-ink); margin-bottom: 3mm; }}
+
+/* Dedication page (added 2026-07-27, Pranav's request) -- ported from the
+   Strategy Book's own dedication-block CSS (books/strategy-book/design/
+   templates/build/front-matter.html), same real names/content, just
+   renamed onto this book's --qb-* CSS variables instead of that book's
+   --head-f/--body-f/--ink ones. Reused deliberately, not rewritten --
+   Pranav didn't ask for a different dedication for this book. */
+.qb-dedication-block {{
+  text-align: center;
+  padding: 10mm 0 8mm;
+  break-inside: avoid;
+}}
+.qb-ded-to {{
+  font-family: var(--qb-heading-font);
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--qb-muted-ink);
+  margin-bottom: 7mm;
+  display: block;
+}}
+.qb-ded-name {{
+  font-family: var(--qb-heading-font);
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--qb-ink);
+  margin-bottom: 1mm;
+  display: block;
+}}
+.qb-ded-role {{
+  font-family: var(--qb-body-font);
+  font-size: 7.5pt;
+  font-weight: 400;
+  color: var(--qb-muted-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5mm;
+  display: block;
+}}
+.qb-ded-note {{
+  font-family: var(--qb-body-font);
+  font-size: 9pt;
+  font-style: italic;
+  color: #4a5568;
+  line-height: 1.6;
+  display: block;
+}}
+.qb-ded-sep {{
+  color: #c5cdd5;
+  font-family: var(--qb-heading-font);
+  font-size: 10pt;
+  margin: 4.5mm 0;
+  display: block;
+}}
+.qb-ded-close {{
+  font-family: var(--qb-body-font);
+  font-size: 8.5pt;
+  font-style: italic;
+  color: #607080;
+  margin-top: 7mm;
+  padding-top: 4mm;
+  border-top: 0.5pt solid #dde3e8;
+  display: block;
+}}
 """
+
+
+def wrap_page(title: str, body: str, style: dict) -> str:
+    """Shared standalone-HTML-page shell for front-matter.html,
+    back-matter.html, and table-of-contents.html -- own <head>/<style>/
+    <body>, previewable individually, same pattern the 34 chapter files
+    use. Moved here (2026-07-27) from generate_qb_front_back_matter.py once
+    a third file (the ToC, split out into its own file per Pranav's
+    request) needed the exact same shell -- one copy, not two hand-kept
+    duplicates that could drift apart."""
+    typ = style["typography"]
+    col = style["colors"]
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<link rel="stylesheet" href="vendor/gfonts-local.css">
+<style>
+*, *::before, *::after {{ box-sizing: border-box; }}
+body {{ font-family: {typ['body_font']}; color: {col['ink']}; margin: 0; padding: 24px; max-width: 980px; margin-left: auto; margin-right: auto; }}
+{print_layer_css(style)}
+{front_back_css(style)}
+</style>
+</head>
+<body>
+{body}
+</body>
+</html>"""
 
 
 def page_shell(html_text: str, slug: str, chapter_label: str, study_ref: str = None) -> str:
@@ -504,7 +871,15 @@ def page_shell(html_text: str, slug: str, chapter_label: str, study_ref: str = N
     noise 10-30 times per chapter instead of stating it once where a student
     actually reads it, at the point they open the chapter."""
     body_inner = rewrite_qblock_ids(extract_body_inner(html_text), slug)
-    body_inner = inject_student_notes(body_inner)
+    # inject_student_notes() is deliberately NOT called here anymore
+    # (disabled 2026-07-27): the 34 chapter files were regenerated outside
+    # this session with their own, richer, built-in self-notes/notebook-ref/
+    # tag-placeholder/revision-phase block per question (see
+    # generate_chapter_book.py's render_qblock() -- confirmed by reading a
+    # current chapter file directly). Calling this too would print BOTH,
+    # the exact duplication problem Pranav asked to avoid elsewhere this
+    # same session. The function itself is left defined, not deleted, in
+    # case a future chapter-book redesign drops its own version again.
     ref_banner = (
         f'<div class="qb-study-ref">Study Material Reference: '
         f'<strong>{study_ref}</strong></div>\n'

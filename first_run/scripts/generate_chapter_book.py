@@ -16,8 +16,12 @@ Example: python generate_chapter_book.py M2-C5-U1 "AS 2" "Valuation of Inventori
 import json
 import math
 import os
+import re
 import sys
 import html as html_lib
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qb_common as qc  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.normpath(os.path.join(HERE, "..", "output", "generated-from-script"))
@@ -28,8 +32,6 @@ MONTH_NAMES = {"01": "January", "02": "February", "03": "March", "04": "April",
                "09": "September", "10": "October", "11": "November", "12": "December"}
 
 ERROR_REPORT_EMAIL = "capranavpratiktulshyan@gmail.com"
-
-ERROR_REGISTER_LINE_COUNT = 9
 
 STYLE = """
 body{font-family:Arial,Helvetica,sans-serif;margin:24px;max-width:980px;margin-left:auto;margin-right:auto;color:#222;background:#fff;line-height:1.5;}
@@ -56,23 +58,24 @@ th{background:#2c3e50;color:#fff;}
 .mistakes.synth{background:#fdf1f1;border-left-color:#d98a8a;color:#7a2f2f;}
 .mistakes .prov{font-style:italic;color:#666;font-size:11.5px;display:block;margin-top:4px;}
 .na{color:#999;font-style:italic;}
-.notebook-ref{margin-top:10px;font-size:12.5px;color:#444;border-top:1px dashed #ccc;padding-top:6px;}
-.notebook-ref .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:160px;}
 .self-notes{margin-top:8px;border:1px solid #ccc;background:#fff;border-radius:6px;padding:8px 12px;}
 .self-notes .notes-lines{margin-top:4px;}
 .self-notes .dotted-line{height:22px;border-bottom:1px dotted rgba(0,0,0,0.4);}
-.tag-placeholder{margin-top:8px;font-size:12.5px;color:#444;}
-.tag-placeholder .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:220px;}
-.revision-phase{margin-top:8px;font-size:12.5px;color:#444;}
-.revision-phase .box{display:inline-block;border:1px solid #888;width:12px;height:12px;margin:0 3px 0 10px;vertical-align:middle;}
+.student-fields{margin-top:8px;font-size:12px;color:#444;border-top:1px dashed #ccc;padding-top:6px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+.student-fields .fill-blank{border-bottom:1px dotted #999;display:inline-block;min-width:120px;}
+.student-fields .fill-blank-sm{min-width:60px;}
+.student-fields .box{display:inline-block;border:1px solid #888;width:11px;height:11px;margin:0 2px 0 6px;vertical-align:middle;}
 .brand-header{text-align:center;font-size:11px;color:#777;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:18px;letter-spacing:.3px;}
 .brand-header strong{color:#2c3e50;}
 .brand-footer{text-align:center;font-size:11px;color:#777;border-top:1px solid #eee;padding-top:10px;margin-top:36px;line-height:1.8;}
 .brand-footer strong{color:#2c3e50;}
-.error-register{page-break-before:always;break-before:page;margin-top:40px;}
-.error-register h2{margin-top:8px;}
-.error-register h3{font-size:15px;color:#444;margin-top:28px;}
-.error-register .dotted-line{height:34px;border-bottom:1px dotted rgba(0,0,0,0.4);}
+.topic-summary{margin:18px 0 30px;}
+.topic-summary h3{font-size:16px;margin-bottom:2px;color:#2c3e50;}
+.topic-summary-table{font-size:11px;}
+.topic-summary-table th{background:#445566;}
+.topic-summary-table td.tsc{text-align:left;font-weight:600;}
+.topic-summary-table td.tst{font-weight:700;background:#fdf6e3;}
+.topic-summary-table td.tsz{color:#bbb;}
 """
 
 
@@ -118,21 +121,143 @@ def approx_time_label(row):
 
 
 def topic_full_label(t):
-    unitcode_disp = html_lib.escape(t["unitcode"].replace("-", "_"))
-    standard = t.get("standard")
-    title_esc = html_lib.escape(t.get("title") or "")
-    subref_esc = html_lib.escape(str(t.get("subtopicref") or ""))
-    if standard and standard != "n/a":
-        chapter_part = f'{html_lib.escape(standard)} &mdash; {title_esc}'
-    else:
-        chapter_part = title_esc
-    return f'{unitcode_disp} : {chapter_part} / ICAI Study Mat Topic No : {subref_esc}'
+    """Compact per-question topic reference. Used to say just 'AS 2 -- AS 2 --
+    Valuation of Inventories' on every single question -- the chapter is
+    already named in this file's own title and the ToC, so repeating it here
+    was pure redundancy (Pranav, 2026-07-28). Now shows only the topic
+    number + its specific abbreviated/authored name, via
+    qb_common.abbreviated_topic_label() (file 1's topic_name_abbvtd where the
+    ref matches its topic_no scheme, else the per-question data-subtopictitle
+    -- never the chapter-level data-title, which is what caused this to
+    look redundant in the first place)."""
+    subref = str(t.get("subtopicref") or "")
+    label = qc.abbreviated_topic_label(t.get("unitcode"), subref, t.get("subtopictitle"))
+    if label:
+        return f'Topic {html_lib.escape(subref)}: {html_lib.escape(label)}' if subref else html_lib.escape(label)
+    if subref:
+        return f'Topic {html_lib.escape(subref)}'
+    return ""
 
 
 def topic_label(row):
     if not row.get("topics"):
         return ""
     return "  &nbsp;+&nbsp;  ".join(topic_full_label(t) for t in row["topics"])
+
+
+def _ref_sort_key(ref):
+    """Sort subtopic refs numerically ('2.10' after '2.9', not before) by
+    extracting every digit run -- a plain string sort would put '2.10'
+    before '2.9'. Refs with no digits (or missing) sort last."""
+    nums = [int(p) for p in re.findall(r"\d+", ref or "")]
+    return (0, nums) if nums else (1, [])
+
+
+def subtopic_key(row, unitcode):
+    """Which of THIS chapter's subtopics a row belongs to, for the
+    Topic-wise Marks Mapping table -- uses only topic-tag(s) whose own
+    data-unitcode matches this chapter (a connected multi-topic question's
+    OTHER tagged standards are irrelevant here). Falls back to a single
+    'General' bucket if the row has no subtopicref recorded for this
+    chapter (should be rare post-tagging, not an error).
+
+    Label uses qc.abbreviated_topic_label() (topic_name_abbvtd or
+    data-subtopictitle), NEVER the chapter-level data-title -- using
+    data-title here was the exact bug found 2026-07-28 (every row in a
+    chapter's table showed the same chapter name repeated; see
+    project_log.md's "real bug" entry for the full diagnosis)."""
+    matches = [t for t in row.get("topics", []) if t.get("unitcode") == unitcode]
+    if not matches:
+        return ("", "General / not sub-tagged")
+    t = matches[0]
+    ref = t.get("subtopicref") or ""
+    label = qc.abbreviated_topic_label(unitcode, ref, t.get("subtopictitle"))
+    if not label:
+        label = html_lib.escape(t.get("title") or "General")
+    else:
+        label = html_lib.escape(label)
+    display = f"{html_lib.escape(ref)} &mdash; {label}" if ref else label
+    return (ref, display)
+
+
+def _topic_subtable(paper_type, sessions, ordered_buckets, is_marks):
+    """One MTP/PYQ/RTP mini-table (topic rows x that paper type's sessions
+    + Total) for build_topic_summary(). Split out per paper type for the
+    identical reason generate_qb_coverage_matrix.py splits the whole-book
+    matrix into 3 pages: a busy chapter (e.g. AS 2) can appear in nearly
+    every one of the 34 sittings, so even ONE chapter's combined MTP+PYQ+RTP
+    session list can run past 20 columns -- the exact print-width problem
+    this whole design exists to avoid, just rediscovered one level deeper
+    than expected (found 2026-07-28 while reviewing AS02's first combined-
+    table draft: 22 columns). Splitting by paper type keeps each table to
+    at most ~9 session columns, matching the whole-book page split."""
+    if not sessions:
+        return ""
+    header_cells = "".join(f"<th>{qc.session_label(y, m)}</th>" for (y, m) in sessions)
+    rows_html = []
+    for (_ref, label), bucket_rows in ordered_buckets:
+        cells = []
+        total = 0
+        for (y, m) in sessions:
+            cell_rows = [
+                r for r in bucket_rows
+                if r.get("paper_type") == paper_type and r.get("exam_year") == y and r.get("exam_month") == m
+            ]
+            v = qc.dedup_marks_sum(cell_rows) if is_marks else qc.dedup_count(cell_rows)
+            total += v
+            cls = ' class="tsz"' if v == 0 else ""
+            cells.append(f"<td{cls}>{v if v else '&ndash;'}</td>")
+        if total == 0:
+            continue  # this topic has no presence in this paper type -- skip the row, not a blank one
+        rows_html.append(f'<tr><td class="tsc">{label}</td>{"".join(cells)}<td class="tst">{total}</td></tr>')
+    if not rows_html:
+        return ""
+    unit_label = "Marks" if is_marks else "Count"
+    return f"""
+<p class="section-intro" style="margin-top:10px;"><strong>{paper_type}</strong> ({unit_label}{'; RTP publishes no marks key, so this is question count, not marks' if not is_marks else ''}):</p>
+<table class="topic-summary-table">
+<thead><tr><th>Topic</th>{header_cells}<th>Total</th></tr></thead>
+<tbody>{"".join(rows_html)}</tbody>
+</table>
+"""
+
+
+def build_topic_summary(unitcode, home_rows, standard_label):
+    """'Topic-wise Marks Mapping' -- which subtopic of this chapter was
+    tested for how many marks, in which sitting. Pranav's request
+    (2026-07-28): lets a student see which PART of a chapter matters most,
+    the same idea as the whole-book Chapter-wise Sitting Summary
+    (generate_qb_coverage_matrix.py) one level deeper. Uses `home_rows`
+    (every qtype, including MCQs excluded from the printed book below) so
+    the marks signal reflects true exam importance, not just what's
+    rendered on the page.
+
+    Split into up to 3 mini-tables (MTP/PYQ marks, RTP count) -- see
+    _topic_subtable()'s docstring for why a single combined table doesn't
+    work even at chapter scale for a busy chapter."""
+    if not home_rows:
+        return ""
+
+    buckets = {}
+    for r in home_rows:
+        key = subtopic_key(r, unitcode)
+        buckets.setdefault(key, []).append(r)
+    ordered_buckets = sorted(buckets.items(), key=lambda kv: _ref_sort_key(kv[0][0]))
+
+    subtables = "".join(
+        _topic_subtable(pt, qc.sessions_for(home_rows, pt), ordered_buckets, is_marks=(pt != "RTP"))
+        for pt in ("MTP", "PYQ", "RTP")
+    )
+    if not subtables:
+        return ""
+
+    return f"""
+<div class="topic-summary">
+<h3>Topic-wise Marks Mapping &mdash; {standard_label}</h3>
+<p class="section-intro">Which topic of the study material was tested for how many marks, in which sitting &mdash; use this to see which parts of {standard_label} matter most.</p>
+{subtables}
+</div>
+"""
 
 
 def render_qblock(row, idx, chapter_slug):
@@ -151,17 +276,21 @@ def render_qblock(row, idx, chapter_slug):
     mistakes_html = ""
     ec = row.get("examiner_comment")
     if ec and ec.get("text"):
+        # The "Written by the author, not ICAI..." / "Real ICAI Examiner's
+        # Comment..." provenance sentence used to repeat on every single
+        # box -- stated once already in front matter's How to Read This
+        # Book colour key, so printing it again on ~500+ boxes was pure
+        # repetition (Pranav, 2026-07-28). Removed here; the label itself
+        # ("Examiner's Comment:" vs "Author's Note:") plus the colour still
+        # carry the distinction on the page.
         if ec.get("comment_source") == "icai":
             label = "Examiner&rsquo;s Comment"
-            prov = "Real ICAI Examiner&rsquo;s Comment, quoted from the official document for this sitting."
             mistake_cls = "mistakes icai"
         else:
             label = "Author&rsquo;s Note"
-            prov = "Written by the author, not ICAI &mdash; a likely pitfall, not an official finding. May not apply in every case."
             mistake_cls = "mistakes synth"
         mistakes_html = (
-            f'<div class="{mistake_cls}"><strong>{label}:</strong> {html_lib.escape(ec["text"])}'
-            f'<span class="prov">{prov}</span></div>'
+            f'<div class="{mistake_cls}"><strong>{label}:</strong> {html_lib.escape(ec["text"])}</div>'
         )
 
     answer_letter_line = ""
@@ -184,12 +313,10 @@ def render_qblock(row, idx, chapter_slug):
   <div class="self-notes"><strong>Student Self Notes:</strong>
     <div class="notes-lines"><div class="dotted-line"></div><div class="dotted-line"></div></div>
   </div>
-  <div class="notebook-ref">My Notebook Ref No: <span class="fill-blank">&nbsp;</span></div>
-  <div class="tag-placeholder">My Tag <span style="color:#999;">(e.g. Last-day Revision, Not Important, Easy, Must Practice)</span>: <span class="fill-blank">&nbsp;</span></div>
-  <div class="revision-phase">Revision Phase completed:
-    <span class="box"></span>1 &nbsp;
-    <span class="box"></span>2 &nbsp;
-    <span class="box"></span>3
+  <div class="student-fields">
+    <span>My NB Page No <span class="fill-blank fill-blank-sm">&nbsp;</span></span>
+    <span>My Tag <span class="fill-blank">&nbsp;</span></span>
+    <span>Revision Phase <span class="box"></span>1 <span class="box"></span>2 <span class="box"></span>3</span>
   </div>
 </div>
 """
@@ -220,15 +347,30 @@ def build_book(unitcode, standard_label, chapter_title, out_filename):
             out.append(render_qblock(r, idx_counter[0], chapter_slug))
         return "\n".join(out)
 
-    def section_or_empty(rows, label):
+    def render_section(rows, heading, intro):
+        # An empty section is now omitted entirely -- heading, intro, and
+        # placeholder note all skipped (Pranav, 2026-07-28: a chapter with
+        # no Integrated questions used to still print the full "II.
+        # Integrated..." heading + intro sentence + an explanatory
+        # empty-section note, pure wasted space repeated across every thin
+        # chapter). The "empty Integrated is normal, not an extraction gap"
+        # explanation now lives once in front matter / How to Read This
+        # Book instead of being restated per chapter.
         if not rows:
-            return f'<div class="empty-section">No questions in this batch are placed in {chapter_title} for this section. This is an honest finding, not an extraction gap — see the scope note above.</div>'
-        return render_all(rows)
+            return ""
+        return f"<h2>{heading}</h2>\n<p class='section-intro'>{intro}</p>\n{render_all(rows)}\n"
 
-    descriptive_html = section_or_empty(descriptive, "Descriptive")
-    integrated_html = section_or_empty(integrated, "Integrated")
-
-    error_register_lines = "\n".join('<div class="dotted-line"></div>' for _ in range(ERROR_REGISTER_LINE_COUNT))
+    descriptive_html = render_section(
+        descriptive,
+        f"I. Descriptive &amp; Scenario-Based Questions (pure {standard_label})",
+        f"Full descriptive/scenario questions where this chapter is the sole topic tested (after independent-question splitting).",
+    )
+    integrated_html = render_section(
+        integrated,
+        f"II. Integrated Questions ({standard_label} with Other Standards)",
+        f"Questions where {standard_label} judgment is one part of a larger, genuinely connected question also testing another standard.",
+    )
+    topic_summary_html = build_topic_summary(unitcode, home, standard_label)
 
     html_out = f"""<!DOCTYPE html>
 <html lang="en">
@@ -259,24 +401,12 @@ Kahaan &middot; Koncept &middot; Karma &nbsp;&mdash;&nbsp; Always Focus on Karma
 <strong>How this book is organised:</strong> Two sections — <strong>I. Descriptive (pure {standard_label})</strong> and <strong>II. Integrated</strong> (questions where {standard_label} is one part of a larger question that also tests another standard). An empty Section II for a chapter is normal and expected, not a mistake — most multi-topic-looking questions are split so each topic gets its own clean entry, so genuinely combined questions are the rarer case. Each answer includes either a real <strong>Examiner's Comment</strong> (tan/orange box, quoted from ICAI's own published feedback, where one exists for that sitting) or an <strong>Author's Note</strong> (pale pink box, a likely pitfall identified by the author, not an official ICAI finding, and may not apply in every case) &mdash; see <strong>How to Read this Book.md</strong> for the full key to every colour and symbol used.
 </div>
 
-<h2>I. Descriptive &amp; Scenario-Based Questions (pure {standard_label})</h2>
-<p class='section-intro'>Full descriptive/scenario questions where this chapter is the sole topic tested (after independent-question splitting).</p>
+{topic_summary_html}
 {descriptive_html}
-
-<h2>II. Integrated Questions ({standard_label} with Other Standards)</h2>
-<p class='section-intro'>Questions where {standard_label} judgment is one part of a larger, genuinely connected question also testing another standard.</p>
 {integrated_html}
 
 <div class="note" style="margin-top:48px;">
 Found an error? Please email <strong>{ERROR_REPORT_EMAIL}</strong> with the question reference (shown at the top of each card) so it can be fixed in the next edition. Thank you for helping make this book better.
-</div>
-
-<div class="error-register">
-<h2>Sanjeevani Booti 2: Error Register for {chapter_title}</h2>
-<h3>Section 1: Concepts I Forgot</h3>
-{error_register_lines}
-<h3>Section 2: Mistakes I Repeated More Than Twice</h3>
-{error_register_lines}
 </div>
 
 <div class="brand-footer">

@@ -146,12 +146,20 @@ CHAPTERS = (
 )
 
 # Front-to-back order of the finished book, expressed as plain slugs (same
-# pattern as strategy_book_merge.py's BOOK_ORDER) -- "front-matter" and
-# "back-matter" are special-cased in build_merged_html() below, everything
-# else is looked up in CHAPTERS.
-BOOK_ORDER = ("front-matter",) + tuple(c[0] for c in CHAPTERS) + ("back-matter",)
+# pattern as strategy_book_merge.py's BOOK_ORDER) -- "front-matter", "toc",
+# "coverage-matrix", and "back-matter" are special-cased in
+# build_merged_html() below, everything else is looked up in CHAPTERS. "toc"
+# is its own file/slug (moved out of front-matter.html 2026-07-27, Pranav's
+# request) so it can be regenerated/reviewed independently of the rest of
+# the front matter. "coverage-matrix" (added 2026-07-28, Pranav's request)
+# is the "Chapter-wise Sitting Summary" -- a marks-coverage matrix, one page
+# each for MTP/RTP/PYQ -- placed right after the ToC so a reader sees "what's
+# in the book" then "why it matters" before diving into chapter 1.
+BOOK_ORDER = ("front-matter", "toc", "coverage-matrix") + tuple(c[0] for c in CHAPTERS) + ("back-matter",)
 
 FRONT_MATTER_FILE = "front-matter.html"
+TOC_FILE = "table-of-contents.html"
+COVERAGE_MATRIX_FILE = "chapter-coverage-matrix.html"
 BACK_MATTER_FILE = "back-matter.html"
 
 _SLUG_TO_CHAPTER = {
@@ -173,6 +181,10 @@ def validate_order(order: tuple, output_dir: Path, output_name: str, force: bool
     for slug in order:
         if slug == "front-matter":
             candidates = [output_dir / FRONT_MATTER_FILE]
+        elif slug == "toc":
+            candidates = [output_dir / TOC_FILE]
+        elif slug == "coverage-matrix":
+            candidates = [output_dir / COVERAGE_MATRIX_FILE]
         elif slug == "back-matter":
             candidates = [output_dir / BACK_MATTER_FILE]
         else:
@@ -263,6 +275,12 @@ def build_merged_html(output_dir: Path, order: tuple, style: dict) -> str:
     for slug in order:
         if slug == "front-matter":
             html_text = qc.load_chapter_html(FRONT_MATTER_FILE)
+            sections_html.append(qc.extract_body_inner(html_text))
+        elif slug == "toc":
+            html_text = qc.load_chapter_html(TOC_FILE)
+            sections_html.append(qc.extract_body_inner(html_text))
+        elif slug == "coverage-matrix":
+            html_text = qc.load_chapter_html(COVERAGE_MATRIX_FILE)
             sections_html.append(qc.extract_body_inner(html_text))
         elif slug == "back-matter":
             html_text = qc.load_chapter_html(BACK_MATTER_FILE)

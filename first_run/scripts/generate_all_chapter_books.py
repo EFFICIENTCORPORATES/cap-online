@@ -55,12 +55,29 @@ def main():
     data = load_index()
     chapter_info = {}
     counts = Counter()
+    legacy_skipped = Counter()
     for r in data:
         fc = r["final_chapter"]
+        # LEGACY-* codes mark pre-syllabus-change topics (e.g. Hire Purchase,
+        # Departmental Accounts) that don't exist in the current 36-chapter
+        # taxonomy at all -- Pranav's decision (2026-07-28, see CLAUDE.md §6):
+        # keep them in the sitting HTML/questions_index.json for a complete
+        # record, but never generate a chapter book for one. No real chapter
+        # exists for them to belong to.
+        if fc and fc.startswith("LEGACY-"):
+            legacy_skipped[fc] += 1
+            continue
         counts[fc] += 1
         for t in r["topics"]:
             if t["unitcode"] == fc:
                 chapter_info[fc] = (t.get("standard"), t.get("title"))
+
+    if legacy_skipped:
+        print(f"Skipped {sum(legacy_skipped.values())} LEGACY (pre-syllabus-change) "
+              f"records across {len(legacy_skipped)} topics -- excluded from chapter "
+              f"books by design, not an error:")
+        for fc, n in sorted(legacy_skipped.items()):
+            print(f"    {fc}: {n} record(s)")
 
     print(f"Generating {len(counts)} chapter books...")
     results = []

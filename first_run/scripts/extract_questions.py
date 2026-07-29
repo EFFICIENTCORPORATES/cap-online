@@ -51,6 +51,16 @@ def extract_topics(qblock):
             "subtopicref": span.get("data-subtopicref"),
             "standard": span.get("data-standard"),
             "title": span.get("data-title"),
+            # data-subtopictitle (added here 2026-07-28): the per-question-
+            # authored, topic-SPECIFIC description (e.g. "Seven user groups
+            # of financial statements") -- distinct from "title" above,
+            # which is the chapter-level name and identical for every
+            # question in that chapter. Was already present on every
+            # topic-tag span in the source HTML but never captured here,
+            # which is why the Topic-wise Marks Mapping table showed the
+            # same chapter title on every row instead of each row's real
+            # topic name -- see project_log.md's 2026-07-28 "real bug" entry.
+            "subtopictitle": span.get("data-subtopictitle"),
             "rank": span.get("data-topic-rank"),
             "label": span.get_text(strip=True),
             "flag": span.get("data-flag"),
