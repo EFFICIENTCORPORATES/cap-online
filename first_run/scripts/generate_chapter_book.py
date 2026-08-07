@@ -322,8 +322,14 @@ def render_qblock(row, idx, chapter_slug):
 """
 
 
-def build_book(unitcode, standard_label, chapter_title, out_filename):
-    data = load_index()
+def select_chapter_rows(data, unitcode):
+    """Which questions_index.json rows belong to this chapter's book: home
+    (data-final-chapter == unitcode, incl. MCQs -- used for the topic-summary
+    table), descriptive (home, non-MCQ -- Section I), and integrated
+    (unitcode is a secondary tag on a genuinely connected multi-topic
+    question elsewhere -- Section II). Factored out of build_book() so
+    diff_book_vs_index.py can replicate the exact same selection instead of
+    re-deriving it and risking drift from this function."""
     home = [r for r in data if r["final_chapter"] == unitcode]
     integrated = [
         r for r in data
@@ -331,8 +337,13 @@ def build_book(unitcode, standard_label, chapter_title, out_filename):
         and any(t["unitcode"] == unitcode for t in r["topics"])
         and r["topic_count"] > 1
     ]
-
     descriptive = [r for r in home if r["qtype"] not in ("mcq", "case-mcq")]
+    return home, descriptive, integrated
+
+
+def build_book(unitcode, standard_label, chapter_title, out_filename):
+    data = load_index()
+    home, descriptive, integrated = select_chapter_rows(data, unitcode)
 
     source_files = sorted(set(r["source_file"] for r in data))
     total_shown = len(descriptive) + len(integrated)
