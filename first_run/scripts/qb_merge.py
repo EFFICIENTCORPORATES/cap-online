@@ -131,7 +131,21 @@ CHAPTERS = (
     ("as20", "AS20_Question_Book.html", "AS 20: Earnings Per Share", "M1-C4-U5"),
     ("as01", "AS01_Question_Book.html", "AS 1: Disclosure of Accounting Policies", "M1-C4-U1"),
     ("financial-statements", "FinancialStatements_Question_Book.html", "Financial Statements of Companies (Schedule III)", "M3-C11-U1"),
-    ("cash-flow-statement", "CashFlowStatement_Question_Book.html", "Cash Flow Statement (AS 3)", "M1-C4-U2"),
+    # study_ref was "M1-C4-U2" (the standalone AS 3 chapter, Module 1) until
+    # 2026-08-07 -- wrong: every one of this chapter's 27 tagged questions in
+    # questions_index.json (and generate_all_chapter_books.py's own
+    # NON_AS_SLUGS/TITLE_OVERRIDES table, which actually pulls this chapter's
+    # content) uses "M3-C11-U2" (the Cash Flow unit inside Module 3's
+    # Financial Statements of Companies chapter) -- confirmed the established,
+    # documented convention elsewhere too (books/question-bank/mcq_bank's
+    # tag_batch01.py notes and topic-index.json's lastUpdated note both record
+    # this exact M1-C4-U2-vs-M3-C11-U2 duplicate and the decision to tag
+    # against M3-C11-U2). The old value pointed the printed "Study Material
+    # Reference" banner, ToC cross-reference, and coverage-matrix row at a
+    # unit none of the chapter's own questions are actually tagged against --
+    # found via diff_book_vs_index.py (2026-08-07), fixed per Pranav's
+    # instruction the same day.
+    ("cash-flow-statement", "CashFlowStatement_Question_Book.html", "Cash Flow Statement (AS 3)", "M3-C11-U2"),
     ("as17", "AS17_Question_Book.html", "AS 17: Segment Reporting", "M1-C4-U3"),
     ("as18", "AS18_Question_Book.html", "AS 18: Related Party Disclosures", "M1-C4-U4"),
     ("as24", "AS24_Question_Book.html", "AS 24: Discontinuing Operations", "M1-C4-U6"),
