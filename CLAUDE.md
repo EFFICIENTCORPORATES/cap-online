@@ -53,7 +53,7 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 | `final-deliverables/` | Print-ready teaching documents: teaching method (01), batch planner (02/02A), bridge course skeleton (03/03A), and future student-facing exports. MD only. |
 | `tools/` | Admin/processing scripts (see section 5) |
 | `_claude/` | Claude's context: `memory/` (incl. `project_log.md`), `artifacts/`, `skills/` |
-| `first_run/` | **Workspace proving the Question Bank Book pipeline end-to-end** (added 2026-07-23) before scaling to the full syllabus. **`HOW-TO-BUILD-THE-BOOK.md`** (new 2026-07-27) is the master runbook — read it before running any script below; it has the exact command order, prerequisites, and every fixed-incident gotcha. `source/` (PDFs only, never MD, for every in-scope sitting — see section 6 for why this is enforced structurally now). `schema/` (single-source-of-truth `book-style.json` + generated `book-style.css` + `HTML-SCHEMA.md`). `prompts/` (the 3 external-AI prompts for generating sitting HTML). `scripts/` — Layer 1→2→3 (`extract_questions.py`, `generate_chapter_book.py`, `generate_all_chapter_books.py`), coverage stats (`generate_book_stats.py`), and whole-book assembly (`generate_qb_front_back_matter.py`, `generate_qb_toc.py`, `qb_merge.py`, `resolve_qb_toc_pages.py`, `qb_common.py` for shared print/pagination CSS — all built by a concurrent session, see section 2's multi-agent note). `output/parsed-from-pdf/` (sitting HTML, Layer 1). `output/generated-from-script/` (`questions_index.json`, `book_stats.json`, every chapter book — Layers 2–3). `output/` root also holds `front-matter.html`, `table-of-contents.html`, `back-matter.html`, the final merged `QUESTION-BANK-BOOK.html`, `vendor/` (fonts + paged.js), and the student-facing `How-to-Read-this-Book.md`. See section 6 for full status. Not a permanent pillar — once validated, its lessons fold back into `books/question-bank/`. |
+| `first_run/` | **Workspace proving the Question Bank Book pipeline end-to-end** (added 2026-07-23) before scaling to the full syllabus. **`HOW-TO-BUILD-THE-BOOK.md`** (new 2026-07-27) is the master runbook — read it before running any script below; it has the exact command order, prerequisites, and every fixed-incident gotcha. `source/` (PDFs only, never MD, for every in-scope sitting — see section 6 for why this is enforced structurally now). `schema/` (single-source-of-truth `book-style.json` + generated `book-style.css` + `HTML-SCHEMA.md`). `prompts/` (the 3 external-AI prompts for generating sitting HTML). `scripts/` — Layer 1→2→3 (`extract_questions.py`, `generate_chapter_book.py`, `generate_all_chapter_books.py`), coverage stats (`generate_book_stats.py`), whole-book assembly (`generate_qb_front_back_matter.py`, `generate_qb_toc.py`, `qb_merge.py`, `resolve_qb_toc_pages.py`, `qb_common.py` for shared print/pagination CSS — all built by a concurrent session, see section 2's multi-agent note), and QA round-trip tooling added 2026-08-07 (`extract_book_questions.py`, `diff_book_vs_index.py` — parse the *finished merged book* back into JSON and diff it against `questions_index.json`; see section 6's 2026-08-07 entry). `output/parsed-from-pdf/` (sitting HTML, Layer 1). `output/generated-from-script/` (`questions_index.json`, `book_stats.json`, every chapter book — Layers 2–3). `output/qa/` (added 2026-08-07 — `book_questions_extracted.json`, the finished book re-parsed into JSON, plus `book-vs-index-diff.json`/`.md`, the QA comparison report). `output/` root also holds `front-matter.html`, `table-of-contents.html`, `chapter-coverage-matrix.html`, `back-matter.html`, the final merged `QUESTION-BANK-BOOK.html`, `vendor/` (fonts + paged.js), `final_deliverable/` (already-built, named PDF releases — e.g. `..._V1.pdf`, watermarked `..._V1_protect.pdf` — treat as distributed/ready-to-distribute, never regenerate or overwrite without asking), and the student-facing `How-to-Read-this-Book.md`. See section 6 for full status. Not a permanent pillar — once validated, its lessons fold back into `books/question-bank/`. |
 
 **Only TWO self-drafted books:** the strategy book and the concept book (Advanced Accounts). Everything else is engine/platform/content/ops.
 
@@ -77,7 +77,7 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 
 ---
 
-## 6. Question Bank Book — current focus (chronological log, 2026-07-22 through 2026-07-27 — read to the end for current state)
+## 6. Question Bank Book — current focus (chronological log, 2026-07-22 through 2026-08-07 — read to the end for current state)
 
 Pranav has shifted full focus onto **Pillar 4, `books/question-bank/`**. The core task: converge past-exam questions (PYQ/MTP/RTP) with the syllabus chapter/topic taxonomy so every question is tagged to a chapter/topic — this is the main gap, not raw content collection. This session built the tagging schema and machine-tagged 4 sittings end-to-end (see below) — read `books/question-bank/metadata-index/TAGGING-SCHEMA.md` before adding more.
 
@@ -367,6 +367,84 @@ specifically for this. Margins checked but left unchanged (already at a document
 6mm print-safety floor). **Result: 688 pages**, all from removing genuine repetition,
 no content cut. Full detail: `first_run/HOW-TO-BUILD-THE-BOOK.md`'s "Print-cost
 reduction pass" entry and its two new gotchas.
+
+### Current state as of 2026-08-07 (read this if you're new to the session)
+
+`QUESTION-BANK-BOOK.html` is **688 pages, 455 questions, 34 chapters**, built from
+the full 34-sitting corpus (2023–2026, per the 2026-07-26 scope decision above).
+Verified clean — see the QA tooling below. Two things still genuinely open:
+**OP/PP duplicate detection** and **short chapter/unit names** (both explicitly
+deferred to a future edition, see the 2026-07-28 entries above) — don't build either
+without asking, per the locked scope decision. `first_run/output/final_deliverable/`
+holds already-built "V1"/"_protect" (watermarked) PDF releases dated 2026-07-28/30 —
+**these predate the 2026-08-07 fix below and are now stale**; treat that folder as a
+distributed/ready-to-distribute deliverable and never regenerate or overwrite it
+without asking — if a corrected PDF is wanted, that's an explicit separate ask.
+
+### QA round-trip tooling built, and a real cross-taxonomy bug found + fixed (2026-08-07)
+
+Pranav asked for a script converting the finished `QUESTION-BANK-BOOK.html` back into
+JSON. Clarified first: scope = questions only, purpose = QA/round-trip verification
+against `questions_index.json`, not a new data source — this shaped everything below.
+
+**Two new scripts, `first_run/scripts/extract_book_questions.py` and
+`diff_book_vs_index.py`** (companion pair to `extract_questions.py`, but for the
+*output* end of the pipeline instead of the input end):
+- `extract_book_questions.py` parses the real merged book (all 34 `.qb-section`
+  chapters, `.qblock` by `.qblock` — no `data-*` attributes at this stage, everything
+  is baked into rendered display text) into `first_run/output/qa/
+  book_questions_extracted.json`. Exports `parse_qblock()` for reuse.
+- `diff_book_vs_index.py` is the actual QA tool: for every `questions_index.json` row
+  that `generate_chapter_book.select_chapter_rows()` (new — factored out of
+  `build_book()`, behavior-preserving, verified byte-identical output before/after)
+  says belongs in the book, it **regenerates that row's exact qblock HTML via the
+  real `render_qblock()`**, parses it with the same `parse_qblock()`, and diffs
+  field-by-field against what's actually in the book. Both sides call the real
+  pipeline functions — no label/selection logic re-derived — so a diff is real drift,
+  not two parsers disagreeing. Validated with a positive control (real row, byte-
+  identical) and a negative control (corrupted fields, correctly flagged) before
+  trusting a clean run. Output: `first_run/output/qa/book-vs-index-diff.json`/`.md`.
+- Re-run either any time after a full pipeline rebuild — they always parse the book
+  fresh, no stale intermediate state possible.
+
+**First real run found a genuine bug**: 27 of 455 questions came back "orphan" (in
+the book, no matching expected row) — all 27, no exceptions, were the Cash Flow
+Statement chapter. Root cause: `qb_merge.py`'s `CHAPTERS` tuple listed
+`study_ref = "M1-C4-U2"` for that chapter, but every one of its 27 tagged questions in
+`questions_index.json` — and `generate_all_chapter_books.py`'s own
+`NON_AS_SLUGS`/`TITLE_OVERRIDES` table, which is what actually pulls the chapter's
+content — uses `"M3-C11-U2"` instead. **Both codes are real, distinct entries** in
+`1-ca-inter-adv-accounts-topic-page-index.json` (`M1-C4-U2` = the standalone AS 3
+chapter under Module 1, 11 topics; `M3-C11-U2` = the Cash Flow unit inside Module 3's
+"Financial Statements of Companies" chapter, 7 topics) — a real duplicate-chapter
+situation like the U0/U1 one earlier in this section, not a typo, and one **already
+flagged and resolved toward `M3-C11-U2` elsewhere** (`books/question-bank/mcq_bank/
+tag_batch01.py`'s tagging notes, `topic-index.json`'s `lastUpdated` note) — this was
+the one place that decision had never propagated to. Consequence in the *published*
+book before the fix: the chapter's "Study Material Reference" banner, its ToC
+cross-reference, **and** its row in the Chapter-wise Sitting Summary all pointed at
+`M1-C4-U2` — the coverage-matrix row showed **zero marks in every sitting** for Cash
+Flow Statement as a result (real questions existed, just tagged under a different
+code than the matrix was reading numbers from).
+
+Pranav confirmed: point everything at `M3-C11-U2`. Fixed the one `CHAPTERS` tuple
+entry in `qb_merge.py` (comment there explains the history), then re-ran exactly what
+`HOW-TO-BUILD-THE-BOOK.md`'s "what needs re-running" table calls for on a `CHAPTERS`
+change: `generate_qb_coverage_matrix.py` → `generate_qb_toc.py` → `qb_merge.py` →
+`resolve_qb_toc_pages.py --remerge` (real headless-Chrome pagination). Result: still
+688 pages, Cash Flow Statement still lands on page 393 (content length unchanged,
+only the reference code and matrix numbers changed). All of Step 7's validation
+assertions pass. Re-ran the new QA tool: **455/455 matched, 0 missing, 0 drifted, 0
+orphan** — confirmed clean, and this is now the expected steady state after any
+future full pipeline rebuild too.
+
+Grepped the whole repo for every `M1-C4-U2` occurrence to check for other drift
+(Pranav explicitly asked for full consistency, not just the banner): confirmed
+`generate_qb_toc.py` and `generate_qb_coverage_matrix.py` both import `CHAPTERS`
+directly from `qb_merge.py` (single source of truth, nothing else to fix). Every
+other `M1-C4-U2` occurrence in the repo is legitimate — the real Module 1 AS 3
+chapter entry in files 0/1, and the `mcq_bank/` pipeline's own already-correct notes
+about this same duplicate.
 
 ---
 
