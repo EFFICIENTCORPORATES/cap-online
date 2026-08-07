@@ -4,6 +4,81 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-08-07 — Book-vs-data QA tooling built; real Cash Flow Statement taxonomy bug found and fixed
+
+Pranav asked for a script converting the final `QUESTION-BANK-BOOK.html` back into JSON.
+Clarified purpose first (AskUserQuestion): scope = questions only, purpose = QA/
+round-trip verification against `questions_index.json`, not a new data source.
+
+**Built two new scripts in `first_run/scripts/`:**
+- `extract_book_questions.py` — parses the real merged book (all 34 `.qb-section`
+  chapters, `.qblock` by `.qblock`) into JSON. Exports `parse_qblock()` and
+  `extract_book()` for reuse.
+- `diff_book_vs_index.py` — for every `questions_index.json` row that
+  `generate_chapter_book.select_chapter_rows()` (new — factored out of `build_book()`,
+  behavior-preserving, verified byte-identical AS02 output before/after) says belongs in
+  the book, regenerates that row's exact qblock HTML via the real `render_qblock()`,
+  parses it with the same `parse_qblock()`, and diffs field-by-field against what's
+  actually in the book. No label/selection logic re-derived on either side — both paths
+  call the real pipeline functions — so a diff here is real drift, not two independent
+  parsers disagreeing. Validated with a positive control (real row, byte-identical) and
+  a negative control (corrupted fields, correctly flagged) before trusting a clean run.
+  Output: `first_run/output/qa/{book_questions_extracted.json, book-vs-index-diff.json,
+  book-vs-index-diff.md}`.
+
+**First real run found a genuine bug, not noise:** 27 of 455 questions came back
+"orphan" (found in the book, no matching expected row) — all 27, no exceptions, were
+the Cash Flow Statement chapter. Root cause: `qb_merge.py`'s `CHAPTERS` tuple listed
+`study_ref = "M1-C4-U2"` for that chapter, but every one of its 27 tagged questions in
+`questions_index.json` (and `generate_all_chapter_books.py`'s own
+`NON_AS_SLUGS`/`TITLE_OVERRIDES` table, which is what actually pulls the chapter's
+content) uses `"M3-C11-U2"` instead. Both codes are real, distinct entries in
+`1-ca-inter-adv-accounts-topic-page-index.json` (`M1-C4-U2` = the standalone AS 3
+chapter under Module 1, 11 topics; `M3-C11-U2` = the Cash Flow unit inside Module 3's
+"Financial Statements of Companies" chapter, 7 topics) — a genuine duplicate-chapter
+situation, not a typo, and one already flagged and deliberately resolved toward
+`M3-C11-U2` elsewhere in the repo (`books/question-bank/mcq_bank/tag_batch01.py`'s
+tagging notes, `topic-index.json`'s `lastUpdated` note) — this was the one place that
+decision never propagated to.
+
+Consequence in the *published* book, confirmed before the fix: the "Study Material
+Reference" banner atop the chapter, its Table of Contents cross-reference, **and** its
+row in the Chapter-wise Sitting Summary (coverage matrix) all pointed at `M1-C4-U2` —
+the coverage-matrix row showed **zero marks in every single sitting** for Cash Flow
+Statement as a result (real questions existed, just tagged under the code the matrix
+was reading numbers *from*).
+
+Pranav confirmed: point everything at `M3-C11-U2`. Fixed the one `CHAPTERS` tuple entry
+in `qb_merge.py` (comment explains the history), then re-ran exactly what the runbook's
+"what needs re-running" table calls for on a `CHAPTERS`-tuple change: Step 2.5
+(`generate_qb_coverage_matrix.py`) → Step 5 (`generate_qb_toc.py`) → Step 6
+(`qb_merge.py`) → Step 7 (`resolve_qb_toc_pages.py --remerge`, real headless-Chrome
+pagination). Result: still 688 pages, Cash Flow Statement still lands on page 393
+(content length unchanged, only the reference code and matrix numbers changed). All of
+`HOW-TO-BUILD-THE-BOOK.md`'s Step 7 validation assertions pass (0 blank ToC pages, 0
+build-info/extraction-note leftovers, 0 duplicate student-notes strips). Re-ran the new
+QA diff tool: **455/455 matched, 0 missing, 0 drifted, 0 orphan** — confirmed clean.
+
+**Grepped the whole repo for every `M1-C4-U2` occurrence to check for other drift**
+(Pranav explicitly asked for full consistency, not just the banner): confirmed
+`generate_qb_toc.py` and `generate_qb_coverage_matrix.py` both import `CHAPTERS`
+directly from `qb_merge.py` (single source of truth, no separate copy to fix). All
+other `M1-C4-U2` occurrences in the repo are legitimate — the real Module 1 AS 3
+chapter entry in files 0/1, and the `books/question-bank/mcq_bank/` pipeline's own
+(separate, already-correct) tagging notes about the same duplicate.
+
+**Left untouched, flagged instead of silently fixed:** `first_run/output/
+final_deliverable/` holds already-built, named "V1" / "_protect" (watermarked,
+encrypted) PDFs of the Question Bank Book, generated 2026-07-28/30 — before this fix,
+so they still carry the wrong Cash Flow Statement reference. This looks like a
+already-distributed or ready-to-distribute deliverable folder, not pipeline scratch
+output, so it was not regenerated or overwritten without asking. If a corrected PDF
+release is wanted, that's a separate explicit step (open the fixed
+`QUESTION-BANK-BOOK.html` in Chrome, Ctrl+P → Save as PDF, then re-run whatever
+watermark/protect script produced the "_protect" version).
+
+---
+
 ## 2026-07-28 (cont'd, 4) — Question Bank Book: full print-cost reduction pass implemented, 819 → 688 pages
 
 Pranav gave the go-ahead to implement the punch list from the previous entry, plus new
