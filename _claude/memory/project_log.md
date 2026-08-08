@@ -4,6 +4,271 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-08-08 — Question Bank Book marketing one-pager built
+
+Pranav asked Claude to independently review the finished `QUESTION-BANK-BOOK.html`
+and identify genuinely marketable features/problems solved (not generic flattery —
+read `AS10_Question_Book.html`, `book_stats.json`, `front-matter.html`, and
+`How-to-Read-this-Book.md` directly first). Pranav then drafted his own feature pitch
+from the student's actual study journey (Study Material → MTP/RTP/PYQ, topic-wise) and
+asked for a review — gaps flagged: MCQ-exclusion needed explicit framing (real
+expectation-setting risk, not just a nice-to-have), "important chapters" and
+"important topics" are actually two separate real features (coverage matrix +
+topic-wise marks mapping), the Examiner's-Comment-vs-Author's-Note distinction and
+Pranav's own AIR-1 credibility were both missing from the draft, and hard numbers beat
+vague claims.
+
+Pranav then asked for an HTML one-pager, with an exact hero line ("Most Friendly
+Question Bank for Self Study Students"), MCQ mention placed last and low-key (book
+promoted first), and `1Lavya.com` named only as one neutral non-endorsed example
+("or any other MCQ practice platform") per his explicit instruction not to be seen as
+associated with it. Built with real design investment (`artifact-design` skill) —
+fetched and embedded Fraunces + IBM Plex Sans + IBM Plex Mono as base64 @font-face
+data URIs (no external font requests), deliberately reused the book's own established
+CSS colour language (tan/pink/green note coding, the `Marks · Approx Time · Topic`
+meta line, the dotted-line Error Register) so the page reads as a page out of the book
+itself, and used two genuine excerpts from the actual book (the AS 10 Preet Ltd. PPE
+question + its real Author's Note) as facsimile exhibits rather than invented
+examples. Published as a Claude Artifact, then saved into the repo as the persistent
+copy at `content/productions/question-bank-launch/deck/question-bank-onepager.html`
+(new production folder, per `content/productions/`'s existing one-folder-per-video
+convention) with its own `README.md` documenting design intent and origin.
+
+**Not yet done, left as visible placeholders rather than invented**: no purchase
+link, price, or contact address wired into the page yet — needs Pranav's input.
+
+`tools/health_check.py` and `tools/file_index.py` re-run after adding the new
+`content/productions/question-bank-launch/` folder — same 16 pre-existing failures as
+every prior run (`syllabus-engine`/`question-bank` stale `EXPECTED_DIRS`, unrelated
+bridge-course NUL bytes, `capranav_com/` staleness), nothing new introduced.
+
+---
+
+## 2026-08-08 — Exam Hub Bot (Bot 2): added MCQ mode + Course/Level menu + SQLite activity logging
+
+Pranav asked for `telegram/bots/exam_hub_bot.py` (previously descriptive-only,
+reading `book_questions_extracted.json`) to also serve **MCQ practice** —
+Course → Level → Descriptive/MCQ → (MCQ path) Exam Type → Year → Chapter →
+one MCQ at a time with 4 (occasionally 3) option buttons, instant
+correct/incorrect + explanation on tap — and to log every interaction to a
+SQLite DB for analytics ("which student checked which question, what was
+his response, correct or wrong").
+
+**Found the MCQ source data already exists**, just never exposed to this
+bot: `first_run/output/generated-from-script/questions_index.json` (the
+Question Bank Book pipeline's Layer 2, see CLAUDE.md §6's 2026-07-26 entry
+on why MCQs were pulled from the *printed* chapter books but always stayed
+in this JSON) — 335 of its 831 rows are Part I/MCQ, each already carrying
+parsed options, the correct letter, and a Claude-authored explanation.
+
+**New script, `telegram/tools/build_exam_bot_mcq_export.py`**: filters to
+Part I, drops the 1 row with no reliable answer key
+(`CAI-P1-PYQ-2025-01-PI-Q4`), regex-parses `<li data-opt="X">` option markup
+into a plain `{letter: text}` dict (confirmed NOT always 4 options — one
+real MCQ, `CAI-P1-MTP-2026-01-S1-PI-Q11`, is genuinely 3-option — never
+assume A–D), and maps each row's `final_chapter` unitcode to the same
+`chapter_slug`/`chapter_label` the descriptive bank already uses (read
+straight off `book_questions_extracted.json` rather than re-deriving a
+second slugging scheme — confirmed all 28 MCQ unitcodes are a subset of the
+descriptive bank's 34). Output: `telegram/assets/exam_bot/
+mcq_questions_extracted.json`, 334 usable records, self-contained and
+regenerable, same "generated, never hand-edited" pattern as the descriptive
+file.
+
+**Course/Level menu**: Pranav's explicit call — show the full CA / CS / CMA
+× their levels structure up front even though only CA→Inter has any
+question data today, and just tell the student plainly ("no questions for
+this Level yet") for every other combination rather than hiding them. Gated
+by one `AVAILABLE_DATA = {("CA", "Inter")}` set in the script — extend it
+as more course/level question banks get built.
+
+**SQLite activity log** at `telegram/assets/exam_bot/Exam_Bot.db` (new
+`**/*.db` gitignore rule added — binary, stays local, same "no binary files
+in git" principle as everything else). Four tables: `students` (upserted
+per Telegram user), `bot_sessions` (one per `/start`, tracks the
+course/level/mode funnel for drop-off analysis), `descriptive_question_events`
+(one row per question shown, updated in place when the answer is revealed
+/ PDF requested), `mcq_attempts` (one row per MCQ shown, updated in place
+with the selected option + correct/incorrect once answered). Rows are
+inserted at "shown" time and updated as the student acts, so
+shown-but-abandoned questions are visible too (nullable columns stay NULL).
+
+Rewrote `exam_hub_bot.py` end to end on this design — added a parallel
+`McqBank` class (mirrors `QuestionBank`, but `exam_type`/`year` are already
+explicit fields in the MCQ export, no pattern-detection needed like the
+descriptive bank's `src_text` scanning), all the new menu/callback
+branches (`course:`, `level:`, `mode:`, `mcqopt:`, `restart`), and the DB
+helper functions. Smoke-tested directly (bs4/xhtml2pdf/python-telegram-bot
+are all installed in this sandbox) rather than just `py_compile`: loaded
+both banks for real, rendered a real case-mcq's HTML through
+`html_to_telegram_text`, ran the DB init + a full write/read cycle across
+all 4 tables with a fake user, confirmed the 3-option MCQ record parses
+without assuming 4 options, and confirmed `html_to_pdf_bytes` still
+produces real PDF bytes for a descriptive record — all correct on the
+first real run. `tools/health_check.py` still shows only its pre-existing,
+already-documented failures (stale `EXPECTED_DIRS`, `bridge-course` NUL
+bytes, `capranav_com/` staleness — see CLAUDE.md §5) — nothing new from
+this change. `tools/file_index.py` re-run clean.
+
+**Not committed yet** — left for Pranav to review (new bot logic + a new
+gitignore rule + a new generated data file, not pushed per "commit/push
+only when asked"). README (`README_Bot2_ExamHub.md`) fully rewritten to
+document the new flow, the DB schema (with a sample analytics query), and
+the re-run instruction for the export script whenever
+`questions_index.json` changes upstream.
+
+---
+
+## 2026-08-08 — CS/CMA Chapter Catalog (ToC extraction pipeline), Stage 1+2 built
+
+Pranav added CS and CMA study material — 50 consolidated PDFs (one per subject, all
+chapters in one file — no per-chapter split like ICAI's CA material, and no usable
+embedded bookmarks) across `telegram/assets/{CS Exce, CS Prof, CS EET, CMA Final, CMA
+Found Study mat, CMA Inter Study Mat}/`. Asked for a script-generated Excel catalog
+bifurcating each subject into chapter-wise page ranges via each PDF's own printed Table
+of Contents, capturing both the printed page range and the actual PDF page range (since
+downstream Python code needs the latter, not the former), plus full + abbreviated
+chapter names and a planned final split-PDF filename — explicitly staged as "the Excel
+catalog first," before any actual PDF splitting.
+
+**Built `telegram/tools/cs_cma_common.py`**: per-file Course/Level/Subject/PaperNo
+metadata read from each PDF's own cover page (not guessed) — 50 entries. Caught that CMA
+Intermediate's "Paper 7" (Taxation) is one syllabus paper split by ICMAI into two study-
+note volumes (Direct/Indirect) — kept as `7A`/`7B`, mirroring CA Inter's existing
+GST/Income-tax Paper 3A/3B split.
+
+**Built `telegram/tools/scan_cs_cma_toc.py`** (Stage 1): two ToC parsers, auto-selected
+per publisher. ICMAI's "Contents as per Syllabus" page gives explicit printed page
+*ranges* per Module/Section directly (no end-page inference needed); ICSI's "CONTENTS"
+section gives each Lesson's start page only (end = next lesson's start - 1). Found and
+fixed several real parsing bugs along the way: a too-permissive embedded-whitespace
+number regex that once swallowed an adjacent citation year into a page number; ICSI
+sub-heading lines ("SECTION I: ...CODE, 2020") whose trailing citation-year looked like a
+page number; a `Module N **:** Title` colon-separator variant my regex only handled for
+periods; and — the significant one — `^`/`$` regex anchors applied to a whole multi-line
+page string instead of per-line, which silently broke ToC-window-size detection *and*
+let a lesson's own later body-chapter heading (which restates "LESSON N" + title) bleed
+into the parsed ToC as corrupted duplicate entries. Also found 7 of the 23 ICMAI files
+render their ToC table column-by-column (all headings, then all page ranges dumped
+together) rather than row-by-row — built a positional-zip fallback parser for those,
+only invoked when the primary parser finds zero modules.
+
+Every computed PDF page range is verified by fuzzy-content-matching the chapter title
+against its own computed opening page (same discipline as the CA pipeline), not trusted
+from arithmetic alone. Result: 647 chapters across 50 files. Two rows needed an explicit,
+documented correction: two genuine typos in ICMAI's own printed ToC ("Operatinal Audit"
+/ "Diefferent Service Organisations" — confirmed by reading the real chapter page, which
+spells both correctly), and one ICSI lesson (ESG book, Lesson 6) whose own ToC states it
+was merged into an earlier lesson and has no standalone content. Both handled via
+explicit override tables in Stage 2, with a Notes column explaining each — never
+silently applied or silently dropped.
+
+**Built `telegram/tools/build_cs_cma_catalog.py`** (Stage 2): generates
+`telegram/source-docs/CS_CMA_Chapter_Catalog.xlsx` — `PrintedPageStart/End` (as printed
+in the book) alongside `PDFPageStart/End_1indexed` (1-indexed, as any viewer shows it —
+subtract 1 for pypdf), full `ChapterName` + `ShortChapterName` (≤35 char, Telegram-
+button-width, same abbreviation scheme as the CA catalog), `SourceFile` (which
+consolidated PDF these pages still live inside), and `FinalPDFFileName` (the planned name
+once a chapter *is* split out — not yet built).
+
+**Independent verification**: a random 12-row spot-check (re-reading the actual PDF
+pages fresh, not trusting the pipeline's self-reported scores) confirmed every one
+correct, including cross-checking the printed page number visible in each page's own
+running header against the catalog's `PrintedPageStart`.
+
+Full pipeline documented in `_claude/skills/SKILL-cs-cma-toc-pipeline.md`; summarized in
+`CLAUDE.md` §9. `health_check.py` clean (same pre-existing unrelated failures only).
+
+**Explicitly not built yet** (scope locked to "Excel catalog first," don't build without
+asking): actually splitting the 50 consolidated PDFs into per-chapter files using this
+catalog's page ranges, and wiring the result into `study_hub_bot.py` (which currently
+only serves CA content).
+
+---
+
+## 2026-08-07 (cont'd) — Telegram Study Hub Bot: catalog pipeline built, bot wired to real data
+
+Reviewed `telegram/bots/study_hub_bot.py` at Pranav's request and found it couldn't
+actually serve this repo's own content: `EXCEL_PATH`/`FILES_FOLDER` pointed outside the
+repo (`D:\Eklavvia\...`), the mapping Excel was still the blank 3-row template, the real
+380 ICAI PDFs (CA Foundation ×4, CA Inter ×8, CA Final ×5 — Pranav had just added CA
+Final) sat in a *nested* course/Module tree the bot's flat-folder code can't read, and a
+live bot token was hardcoded in the script plus sitting in an ungitignored
+`telegram/creds.txt`. Flagged all of this; Pranav asked for it to be fixed end to end,
+via script (not manual), with the flat filenames self-identifying by Course/Level/
+Subject, kept short, and — critically — verified against real PDF content before trusting
+any filename, "as this will be the last time we will be checking it."
+
+**Built `telegram/tools/scan_study_bot_source.py`** (read-only): extracted real first-page
+text from all 380 PDFs via `pypdf`, fuzzy-scored it against each filename's stated title.
+380/380 had extractable text; every low score was structurally expected (front-matter
+files like "Initial Pages"). Manually followed up on the genuine outliers and found three
+real defects: a corrigendum file with no parseable name at all; two CA Final Advanced
+Auditing chapters literally named "Untitled" (real content, confirmed by reading page 1:
+Chapter 14 Units 1–2, Special Features of Audit of Banks / NBFCs); two CA Foundation
+Quants files filed under chapter 0 that are actually real Chapters 13 and 14 (confirmed
+via the printed chapter number on each page). Also read every subject's own "Initial
+Pages" cover to get exact, ICAI-verified paper names/numbers rather than guess them.
+
+**Built `telegram/tools/build_study_bot_catalog.py`**: copies all 380 PDFs into a new
+flat folder (`telegram/assets/study_bot_flat/`) under a self-identifying name —
+`{Course}{Level}-{SubjectShort}-{Session}_M{n}-C{n}-U{n}_{ShortTitle}.pdf`, e.g.
+`CAInter-AdvAcc-May26_M1-C4-U2_AS3CashFlowStatement.pdf` — and generates
+`telegram/source-docs/1Lavya_Study_Hub_File_Mapping.xlsx` from scratch (was the blank
+template before). Both outputs regenerate wholesale on every run; the three filename
+corrections above live in a documented `TITLE_OVERRIDES` table, not silently applied.
+Result: 380 source PDFs → 380 flat PDFs → 380 Excel rows, zero collisions.
+
+Per Pranav's explicit choice, once the flat copy was verified complete, **deleted the
+nested source tree** (380 original PDFs + their 216 `.md` conversion siblings) — "delete
+the older version to avoid duplication."
+
+**Also fixed**: `study_hub_bot.py` no longer hardcodes a live token (was both in the
+script and in plaintext `telegram/creds.txt`, neither gitignored) — it now parses its
+token from `creds.txt` at runtime or `TELEGRAM_STUDY_BOT_TOKEN`. Added a "Secrets /
+credentials" section to `.gitignore` (`telegram/creds.txt`, `**/creds.txt`, `*.env`) plus
+a blanket `desktop.ini` rule. `EXCEL_PATH`/`FILES_FOLDER` are now resolved repo-relative
+via `Path(__file__)` instead of a hardcoded outside-the-repo path. Smoke-tested the whole
+bot end to end (catalog load, browse flow, free-text search, on-disk file resolution) —
+all working against the real data for the first time.
+
+Wrote up the full pipeline in `_claude/skills/SKILL-study-bot-catalog-pipeline.md` and
+`CLAUDE.md` §8 (new), updated `README_Bot1_StudyHub.md`, deleted the now-superseded blank
+Excel template. `health_check.py` and `file_index.py` both re-run clean — the only
+failures left are pre-existing ones unrelated to this work (stale `EXPECTED_DIRS` list,
+`books/bridge-course` NUL-byte files, undocumented `capranav_com/`), all already flagged
+elsewhere.
+
+One expected (non-bug) finding from testing free-text search: "cash flow statement"
+correctly returns two results, because ICAI's own material repeats the topic under two
+real chapter codes (`M1-C4-U2` and `M3-C11-U2`) — the same duplicate-chapter situation
+already documented for the Question Bank pipeline below, independently hit again here.
+
+**Same-day follow-up**: Pranav actually ran the live bot and searching "Inventories"
+threw `telegram.error.BadRequest: Button_data_invalid`. Root cause: Telegram's inline
+button `callback_data` has its own 64-byte cap, separate from any filesystem limit — the
+bot was putting the raw `FileName` (up to 82 chars) straight into `callback_data`,
+overflowing for 192/380 files, plus the same bug independently existed on the Subject
+picker via long subject names (23/380 rows, e.g. "Advanced Auditing, Assurance &
+Professional Ethics"). Fixed in `study_hub_bot.py` by carrying a small integer
+row-id/list-index in every callback instead of the literal string, resolved back through
+the catalog. Verified by generating and byte-checking every possible callback string
+across the entire browse tree (401) plus several free-text queries — max is now 23 bytes.
+Documented in `SKILL-study-bot-catalog-pipeline.md` §6 and `CLAUDE.md` §8.
+
+**Third bug, same incident**: after that fix, Pranav noticed "Inventories" still didn't
+surface CA Inter Advanced Accounting's "Valuation of Inventory" chapter. Not a
+callback_data issue this time — 21 chapters genuinely score ≥60 against "Inventories"
+(the topic recurs across Foundation/Inter/Final), but `TOP_N_SUGGESTIONS = 3` was
+silently dropping everything past the top 3; two exact-title matches (score 100, one
+each in Foundation and Final) filled 2 slots, and the AdvAcc chapter lost a 5-way tie at
+72.7 for the last one purely by sort-order luck. Fixed by raising `TOP_N_SUGGESTIONS` to
+8 and adding Level to each search-result button's label (previously only Subject was
+shown, so same-titled chapters at different levels were indistinguishable). Documented
+in `SKILL-study-bot-catalog-pipeline.md` §6.
+
+---
+
 ## 2026-08-07 — Book-vs-data QA tooling built; real Cash Flow Statement taxonomy bug found and fixed
 
 Pranav asked for a script converting the final `QUESTION-BANK-BOOK.html` back into JSON.

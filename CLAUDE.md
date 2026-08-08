@@ -41,7 +41,7 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 | `syllabus-engine/` | **Pillar 3** — top-level folder is nearly empty (`data/` = 2 source `.xlsx` only). **The real, working pipeline lives nested at `books/concept-book/syllabus-engine/`** (`scripts/ html-source/ data/` incl. the canonical syllabus JSON) — see section 6. |
 | `books/question-bank/` | **Pillar 4** — non-study-material questions (PYQ/MTP/RTP + solutions), currently ~3 yrs' coverage (goal: 7–10 yrs). **Not a top-level folder** — lives under `books/`. Its own `README.md` describes an abandoned `pyq/mtp/rtp/solutions/` layout (those 4 subfolders are empty `.gitkeep` stubs); real content is in `Raw_PDF_Question_Bank_CA_Inter_Accounts/`, `Parsed_PDF_Question_Bank_CA_Inter_Accounts/`, and `metadata-index/` — see section 6 for full pipeline status. |
 | `mcq-platform/` | **Pillar 5** — AI MCQs in a DBMS, Cloudflare online tests: `question-generation/ database/ cloudflare-app/` |
-| `telegram/` | **Pillar 6** — study bots + their source docs: `bots/ source-docs/` |
+| `telegram/` | **Pillar 6** — study bots + their source docs: `bots/` (the bot scripts + their READMEs + `creds.txt`, gitignored), `source-docs/` (generated Excel catalogs), `assets/` (per-bot content — `study_bot_flat/` is the Study Hub bot's flat, generated CA PDF library; `CS Exce/ CS Prof/ CS EET/ CMA Final/ CMA Found Study mat/ CMA Inter Study Mat/` are CS/CMA source PDFs, one consolidated file per subject, not yet split — see section 9; `exam_bot/`, `myfiles_bot/` are the other two bots' content), `tools/` (the catalog-generation scripts — see sections 8–9) |
 | `student-toolkit/` | Standalone student tools (e.g. exam date calculator). A subset of student-facing utilities; the Telegram bots may also surface these. |
 | `content/` | Creative studio: `assets/` (raw-footage, intros-outros, green-screen, b-roll, music-sfx, brand-kit, thumbnails, flyers), `social/{personal,vc-gurukul}`, `calendar/`, `scripts/`, `motivation/` (daily-quote media library), `competitor-analysis/`, `ai-content-pipeline/`, `productions/` (one folder per video/content piece). See `content/README.md`. |
 | `vc-gurukul/` | Institute side (NOT content brand): `management-discussions/ events/ batch-july-2025/ contracts/` |
@@ -77,7 +77,7 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 
 ---
 
-## 6. Question Bank Book — current focus (chronological log, 2026-07-22 through 2026-08-07 — read to the end for current state)
+## 6. Question Bank Book — current focus (chronological log, 2026-07-22 through 2026-08-08 — read to the end for current state)
 
 Pranav has shifted full focus onto **Pillar 4, `books/question-bank/`**. The core task: converge past-exam questions (PYQ/MTP/RTP) with the syllabus chapter/topic taxonomy so every question is tagged to a chapter/topic — this is the main gap, not raw content collection. This session built the tagging schema and machine-tagged 4 sittings end-to-end (see below) — read `books/question-bank/metadata-index/TAGGING-SCHEMA.md` before adding more.
 
@@ -446,6 +446,30 @@ other `M1-C4-U2` occurrence in the repo is legitimate — the real Module 1 AS 3
 chapter entry in files 0/1, and the `mcq_bank/` pipeline's own already-correct notes
 about this same duplicate.
 
+### Marketing one-pager built for the launch video (2026-08-08)
+
+Pranav asked Claude to independently review the finished book and list what's
+genuinely worth marketing, then drafted his own feature pitch and asked for feedback,
+then asked for it built as an HTML one-pager for a launch video he's making. Built
+`content/productions/question-bank-launch/deck/question-bank-onepager.html` — see
+that folder's own `README.md` for full detail (design intent, hero line, why the MCQ
+mention is placed last and names `1Lavya.com` only as one neutral non-endorsed
+example per Pranav's explicit instruction not to be seen as associated with it).
+
+Deliberately reuses the *book's own* CSS colour language (tan/pink/green
+Examiner's-Comment/Author's-Note/Answer coding, the `Marks · Approx Time · Topic`
+line, the dotted-line Error Register) rather than inventing a separate marketing look
+— so the promo page reads as a page out of the book itself. The two facsimile
+"exhibits" on the page are genuine excerpts (the AS 10 Preet Ltd. PPE question and its
+real Author's Note), not invented examples. Fonts (Fraunces + IBM Plex Sans + IBM Plex
+Mono) are embedded as base64 data URIs so the file is fully self-contained.
+
+**Not yet done — needs Pranav's input before this goes live**: no purchase link, no
+price, and no contact address are wired in yet (left as visible placeholders, not
+invented). Also published as a Claude Artifact (URL in that folder's README) — the
+repo copy in `deck/` is the persistent source of truth; redeploy the Artifact from
+that file if it's edited further.
+
 ---
 
 ## 7. HTML/print architecture — single-source-of-truth styling, page-break safety (added 2026-07-23)
@@ -465,3 +489,132 @@ Learned from `Claude_V2.md` §8, §13–16 (the Strategy Book's paged.js work, a
 **6. When merging multiple independently-generated HTML files into one book:** verify the shared stylesheet is byte-identical across files before assuming it's safe to consolidate (don't assume — diff them). Namespace any per-file element IDs that restart per file (e.g. `id="s1"`) with a file/section prefix before concatenating, or they collide. Include shared `<script>`/font-loading tags exactly once in the merged output, not once per source file. Keep the book's section order as an explicit list in the merge script, cross-validated against what's actually on disk in both directions (missing file for a listed section = hard error; a file that exists but isn't listed = loud warning).
 
 **7. Never trust a layout/page-break fix by reading the code alone — verify with a headless-Chrome screenshot** (`--screenshot`, not just `--dump-dom`, which confirms DOM structure but not visual layout — a real bug here rendered correctly in the DOM but visually wrong).
+
+---
+
+## 8. Telegram Study Hub Bot — catalog pipeline (built 2026-08-07)
+
+Pillar 6's `telegram/bots/study_hub_bot.py` sends CA study-material PDFs to students via a
+Course→Level→Subject→Chapter menu or free-text fuzzy search. It has no database — an
+Excel file (`telegram/source-docs/1Lavya_Study_Hub_File_Mapping.xlsx`) is its whole
+catalog/search index, and it serves PDFs from one flat folder
+(`telegram/assets/study_bot_flat/`). Both are **generated**, not hand-built — full detail,
+including why every design decision was made, is in
+`_claude/skills/SKILL-study-bot-catalog-pipeline.md`; this is the short version.
+
+**What existed before this date**: 380 real ICAI study-material PDFs (CA Foundation ×4
+subjects, CA Inter ×8 paper-sections, CA Final ×5 subjects) sitting in a *nested*
+`telegram/assets/study_bot/<course-slug>/Module N/*.pdf` tree with `.md` siblings from an
+earlier conversion pass, plus a completely blank Excel template (3 example rows). The
+bot's own code assumes one flat folder with globally-unique filenames — but ICAI's own
+naming collides badly (`M1_C0_U1_ Initial Pages.pdf` alone repeats 12× across courses),
+so flattening naively would have silently overwritten files.
+
+**What was built**: two scripts under `telegram/tools/` —
+`scan_study_bot_source.py` (read-only: extracts real page-1 text from every PDF via
+`pypdf` and fuzzy-scores it against the filename's stated title, so nothing is trusted
+without being checked against actual content — Pranav's explicit instruction, "this will
+be the last time we will be checking it... accuracy shall be required") and
+`build_study_bot_catalog.py` (writes: copies every PDF into the flat folder under a new
+name — `{Course}{Level}-{SubjectShort}-{Session}_M{n}-C{n}-U{n}_{ShortTitle}.pdf`, e.g.
+`CAInter-AdvAcc-May26_M1-C4-U2_AS3CashFlowStatement.pdf` — and generates the Excel
+catalog from scratch). Both are idempotent and safe to re-run; **never hand-edit the flat
+folder or the Excel directly**, they will drift out of sync with each other.
+
+The verification pass caught three real filename defects (not hypothetical) by reading
+actual PDF content: a corrigendum file with no parseable naming pattern at all, two CA
+Final Advanced Auditing chapters whose title field was literally the word "Untitled" (real
+content: Chapter 14 Units 1–2, "Special Features of Audit of Banks" / "...of NBFCs"), and
+two CA Foundation Quantitative Aptitude files filed under chapter/module `0` that are
+actually real Chapters 13 and 14 (confirmed via the printed chapter number on each PDF's
+own first page). All three are documented, with reasoning, in the script's
+`TITLE_OVERRIDES` table — never silently corrected with no trace. All 17 subjects'
+official paper names/numbers were likewise read off each subject's own "Initial Pages"
+cover PDF rather than assumed.
+
+Per Pranav's explicit choice: the nested source tree (both the 380 PDFs and their 216
+`.md` siblings) was **deleted** after the flat copy was verified complete (380 source
+PDFs == 380 flat PDFs == 380 Excel rows, zero filename collisions) — "delete the older
+version to avoid duplication." If this pipeline needs to run again from scratch (a new
+session's PDFs, a new subject), re-source a same-shaped nested tree first.
+
+Also fixed in the same pass: `study_hub_bot.py` no longer hardcodes a live bot token as
+its env-var fallback (a real exposure — the token was sitting in plaintext in the script
+*and* in `telegram/creds.txt`, neither gitignored) — it now reads its token from
+`telegram/creds.txt` at runtime (parsed, never hardcoded) or `TELEGRAM_STUDY_BOT_TOKEN`.
+`.gitignore` gained a "Secrets / credentials" section (`telegram/creds.txt`, `**/creds.txt`,
+`*.env`) plus a blanket `desktop.ini` rule (54 stray Windows metadata files were sitting
+untracked in the old nested tree alone). `EXCEL_PATH`/`FILES_FOLDER` in the bot script are
+now resolved repo-relative from `Path(__file__)` instead of hardcoded to a `D:\Eklavvia\...`
+path outside this repo entirely — the bot now actually runs against this repo's own data,
+smoke-tested end to end (catalog loads, browse flow, free-text search, file-on-disk
+resolution all verified working against the real 380-row catalog).
+
+One expected (not a bug) finding surfaced by testing free-text search: some topics
+legitimately return two results because ICAI's own study material repeats them under two
+different chapters (e.g. "cash flow statement" matches both `M1-C4-U2` — the standalone
+AS-3 chapter — and `M3-C11-U2` — Cash Flow Statement inside "Financial Statements of
+Companies") — the exact same duplicate-chapter-code situation already documented in
+section 6's 2026-08-07 QA entry for the Question Bank pipeline, independently
+rediscovered here in a different corpus.
+
+**Not done, deliberately**: CS/CMA content (the bot's README has always described
+CA/CS/CMA; only CA material has ever existed on disk — adding CS/CMA later is just new
+`COURSE_META` entries in `build_study_bot_catalog.py` once those PDFs exist in the same
+nested-tree shape).
+
+**Post-deployment bug found and fixed (same day):** Pranav live-tested the bot and hit
+`telegram.error.BadRequest: Button_data_invalid` searching "Inventories". Cause: Telegram
+inline-button `callback_data` has its own 64-byte limit, unrelated to filesystem/path
+limits — the bot embedded the (sometimes 80+ char) `FileName` directly into
+`callback_data`, which overflows for 192 of the 380 files, plus the Subject-picker step
+had the same bug via long subject names (23 rows). Fixed in `study_hub_bot.py`: every
+callback now carries a small integer catalog-row-id (or a subject-list index) instead of
+the literal string, resolved back via `Catalog.get_row_by_id()`. Verified by generating
+every possible callback string across the full browse tree + several free-text queries —
+max is now 23 bytes. Full writeup: `SKILL-study-bot-catalog-pipeline.md` §6.
+
+**CS/CMA content sourced the next day (2026-08-08)** — the "not done" note above is now
+in progress: see section 9.
+
+---
+
+## 9. CS / CMA Chapter Catalog — ToC extraction pipeline (built 2026-08-08)
+
+Pranav added CS (Company Secretary) and CMA (Cost & Management Accountant) study
+material — 50 PDFs across `telegram/assets/{CS Exce, CS Prof, CS EET, CMA Final, CMA
+Found Study mat, CMA Inter Study Mat}/`. Unlike ICAI's CA material, ICSI/ICMAI ship **one
+consolidated PDF per subject** (every chapter in one file, no per-chapter split, no
+usable embedded bookmarks). Full detail, including every parsing bug found and fixed, is
+in `_claude/skills/SKILL-cs-cma-toc-pipeline.md`; this is the short version.
+
+Pranav's instruction: use each PDF's own printed Table of Contents to work out
+chapter-wise page ranges, capturing **both** the printed page range and the actual PDF
+page range (since "our Python code will only understand the page of the PDF and not the
+printed page"), plus a full and an abbreviated (button-width) chapter name and the
+planned final split-PDF filename — all in one Excel catalog, generated by script, **as a
+first stage before any actual PDF splitting** ("make this complete Excel file first").
+
+**Built**: `telegram/tools/cs_cma_common.py` (per-file Course/Level/Subject metadata,
+read from each PDF's own cover page, not guessed — including catching that CMA
+Intermediate's "Paper 7" is one syllabus paper split across two study-note volumes,
+Direct/Indirect Taxation, kept as `7A`/`7B` the same way CA Inter's GST/Income-tax split
+already is); `telegram/tools/scan_cs_cma_toc.py` (Stage 1 — two ToC parsers, one per
+publisher format, plus a content-matching offset detector and per-chapter verification,
+same discipline as the CA pipeline); `telegram/tools/build_cs_cma_catalog.py` (Stage 2 —
+short titles, final filenames, the Excel itself:
+`telegram/source-docs/CS_CMA_Chapter_Catalog.xlsx`).
+
+**Result**: 647 chapters extracted across all 50 files. A random 12-row independent
+spot-check (re-reading the actual PDF pages fresh, not trusting the pipeline's own
+self-reported scores) confirmed every one correct. Two rows needed an explicit,
+documented correction rather than trusting the source verbatim: two genuine typos in
+ICMAI's own printed ToC ("Operatinal"/"Diefferent", corrected against the real chapter
+page) and one ICSI lesson that its own book states was merged into an earlier lesson
+(listed with a Notes explanation, no fabricated page range). Both are named honestly in
+the catalog's `Notes` column, never silently applied.
+
+**Not built yet, deliberately** (scope locked to "Excel catalog first" — don't build
+without asking): actually splitting the 50 consolidated PDFs into per-chapter files using
+this catalog's page ranges, and wiring the result into `study_hub_bot.py` (which
+currently only serves CA content).
