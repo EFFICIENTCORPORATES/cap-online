@@ -4,6 +4,59 @@ A running status note. Newest entries at the top. One short block per session.
 
 ---
 
+## 2026-08-08/09 — Study Hub Bot unified for CA + CS + CMA across 3 material categories
+
+Continuing from the CS/CMA catalog work: Pranav asked for a PDF-splitting script next
+(explicitly staged as its own step, reviewed before running). Built
+`telegram/tools/split_cs_cma_pdfs.py` — reads `CS_CMA_Chapter_Catalog.xlsx`'s page
+ranges, writes one PDF per chapter. Per his instruction, delivered the code without
+running it myself (only a syntax check); safe-by-default design: dry run unless
+`--execute` is passed, wipes-and-rebuilds its output folder idempotently, every row
+validated independently so one bad row can't crash the batch. Pranav ran it himself —
+confirmed later, output matched exactly (646 files, byte-identical naming to what the
+script predicted).
+
+He then restructured `telegram/assets/` entirely: replaced the separate per-course flat
+folders with `telegram/assets/study_bot/{Study Materials, Exam Materials, Revision
+Material}/`, merged in his split-script output + the existing CA flat folder (1,026
+Study Materials files total: 380 CA + 646 CS/CMA), and added a new **Exam Materials**
+category — 58 CA Inter Advanced Accounting MTP/PYQ/RTP papers with already
+self-describing filenames (`{CourseLevel}-{Subject}-{PaperType}-{Session}[-SetN]-
+{Q|Ans}.pdf`). Asked for `study_hub_bot.py` to be rewritten to match, serving all three
+courses (CA/CS/CMA) instead of just CA.
+
+**Built `telegram/tools/build_master_catalog.py`**: the one catalog the bot now reads
+(`StudyHub_Master_Catalog.xlsx`) — merges the CA and CS/CMA study catalogs into one
+unified schema, plus parses Exam Materials filenames directly (a small 9-entry table
+splits `CAInter`-style prefixes into Course+Level; Subject full names resolve by
+matching filename prefixes against the already-loaded Study Materials rows — no
+separate table to maintain). Self-cross-checks against disk every run, both directions.
+First run: 1,084 rows, zero mismatches (1,026 Study + 58 Exam + 0 Revision, the last
+category being genuinely empty so far and handled as such, not an error).
+
+**Rewrote `study_hub_bot.py`**: new browse tree Category → Course → Level → Subject →
+(Chapter, or Paper Type → file for Exam Materials), every level computed dynamically
+from the catalog — no hardcoded course/level lists, so new content just appears once
+catalogued. An empty category (Revision Material) shows "not available yet" instead of
+a broken empty menu. Extended the 64-byte `callback_data` lesson from the 2026-08-07
+incident one level deeper (Category and Paper-Type both index-based, never literal
+strings). Verified for real: every possible `callback_data` string across the entire
+1,172-node current browse tree — max 25 bytes. Smoke-tested against the real catalog and
+real files: full tree traversal, free-text search across all 3 courses + Exam Materials,
+and a 15-row random sample of file-path resolution — all correct.
+
+Documented in a new `_claude/skills/SKILL-study-hub-bot-architecture.md` (the
+unification layer above the existing CA and CS/CMA pipeline skills), `CLAUDE.md` §10,
+and updated `README_Bot1_StudyHub.md` for the new architecture.
+
+**Still genuinely open**: Exam Materials covers exactly one subject so far; Revision
+Material has no content or agreed naming convention yet (bot/catalog both handle the
+empty state gracefully in the meantime); `telegram/assets/backup pdfs/` (the
+pre-restructuring backup) hasn't been reviewed for whether it's safe to delete — that's
+Pranav's call.
+
+---
+
 ## 2026-08-08 — Question Bank Book marketing one-pager built
 
 Pranav asked Claude to independently review the finished `QUESTION-BANK-BOOK.html`
