@@ -41,7 +41,7 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 | `syllabus-engine/` | **Pillar 3** — top-level folder is nearly empty (`data/` = 2 source `.xlsx` only). **The real, working pipeline lives nested at `books/concept-book/syllabus-engine/`** (`scripts/ html-source/ data/` incl. the canonical syllabus JSON) — see section 6. |
 | `books/question-bank/` | **Pillar 4** — non-study-material questions (PYQ/MTP/RTP + solutions), currently ~3 yrs' coverage (goal: 7–10 yrs). **Not a top-level folder** — lives under `books/`. Its own `README.md` describes an abandoned `pyq/mtp/rtp/solutions/` layout (those 4 subfolders are empty `.gitkeep` stubs); real content is in `Raw_PDF_Question_Bank_CA_Inter_Accounts/`, `Parsed_PDF_Question_Bank_CA_Inter_Accounts/`, and `metadata-index/` — see section 6 for full pipeline status. |
 | `mcq-platform/` | **Pillar 5** — AI MCQs in a DBMS, Cloudflare online tests: `question-generation/ database/ cloudflare-app/` |
-| `telegram/` | **Pillar 6** — study bots + their source docs: `bots/` (the bot scripts + their READMEs + `creds.txt`, gitignored), `source-docs/` (generated Excel catalogs), `assets/` (per-bot content — `study_bot_flat/` is the Study Hub bot's flat, generated CA PDF library; `CS Exce/ CS Prof/ CS EET/ CMA Final/ CMA Found Study mat/ CMA Inter Study Mat/` are CS/CMA source PDFs, one consolidated file per subject, not yet split — see section 9; `exam_bot/`, `myfiles_bot/` are the other two bots' content), `tools/` (the catalog-generation scripts — see sections 8–9) |
+| `telegram/` | **Pillar 6** — study bots + their source docs: `bots/` (the bot scripts + their READMEs + `creds.txt`, gitignored), `source-docs/` (generated Excel catalogs — `StudyHub_Master_Catalog.xlsx` is the one the bot actually reads), `assets/study_bot/{Study Materials, Exam Materials, Revision Material}/` (the Study Hub bot's 3 flat, generated category folders, covering CA+CS+CMA together — see section 10), `assets/backup pdfs/` (pre-restructuring backup, not read by anything), `assets/exam_bot/ myfiles_bot/` (the other two bots' content), `tools/` (all the catalog-generation scripts — see sections 8–10) |
 | `student-toolkit/` | Standalone student tools (e.g. exam date calculator). A subset of student-facing utilities; the Telegram bots may also surface these. |
 | `content/` | Creative studio: `assets/` (raw-footage, intros-outros, green-screen, b-roll, music-sfx, brand-kit, thumbnails, flyers), `social/{personal,vc-gurukul}`, `calendar/`, `scripts/`, `motivation/` (daily-quote media library), `competitor-analysis/`, `ai-content-pipeline/`, `productions/` (one folder per video/content piece). See `content/README.md`. |
 | `vc-gurukul/` | Institute side (NOT content brand): `management-discussions/ events/ batch-july-2025/ contracts/` |
@@ -618,3 +618,47 @@ the catalog's `Notes` column, never silently applied.
 without asking): actually splitting the 50 consolidated PDFs into per-chapter files using
 this catalog's page ranges, and wiring the result into `study_hub_bot.py` (which
 currently only serves CA content).
+
+**Both of those "not built yet" items are done as of the next day — see section 10.**
+
+---
+
+## 10. Study Hub Bot unified for CA + CS + CMA, 3 material categories (built 2026-08-08/09)
+
+Pranav split the PDF-splitting work in §9 into its own step: asked for (and reviewed
+before running) a `telegram/tools/split_cs_cma_pdfs.py` script that reads
+`CS_CMA_Chapter_Catalog.xlsx`'s page ranges and actually writes one PDF per chapter —
+built with a safe dry-run default (prints the plan, writes nothing) and an explicit
+`--execute` flag, wipes-and-rebuilds its output folder idempotently, skips/logs any bad
+row instead of crashing the batch. Pranav ran it himself; output matched the catalog
+exactly (646 files, byte-for-byte the naming this script predicted).
+
+He then **restructured `telegram/assets/` entirely**: replaced the separate per-course
+flat folders with `telegram/assets/study_bot/{Study Materials, Exam Materials, Revision
+Material}/` and populated them — 1,026 Study Materials files (380 CA + 646 CS/CMA, i.e.
+his own split-script output merged with the CA bot's existing flat folder) and 58 Exam
+Materials files (CA Inter Advanced Accounting MTP/PYQ/RTP papers, filenames already
+self-describing: `{CourseLevel}-{Subject}-{PaperType}-{Session}[-SetN]-{Q|Ans}.pdf`).
+Asked for `study_hub_bot.py` to be rewritten to match the new folder layout and serve
+all three courses (CA/CS/CMA), not just CA.
+
+**Built `telegram/tools/build_master_catalog.py`**: the one catalog the bot now actually
+reads (`StudyHub_Master_Catalog.xlsx`), merging the CA catalog + the CS/CMA catalog (both
+remapped into one unified schema) with Exam Materials parsed directly from its
+already-self-describing filenames (a small 9-entry table splits `CAInter`-style prefixes
+back into Course+Level; Subject full names are resolved by matching filename prefixes
+against the already-loaded Study Materials rows, no separate table needed). Self-cross-
+checks against disk every run, both directions (every catalog row ↔ a real file) — clean
+on the first run: 1,084 total rows, zero mismatches.
+
+**Rewrote `study_hub_bot.py`**: new browse tree Category → Course → Level → Subject →
+(Chapter, or Paper Type → file for Exam Materials) — every level computed dynamically
+from the catalog (no hardcoded course/level lists), so new courses/subjects/sessions
+just appear once catalogued, no bot code changes needed. An empty category (Revision
+Material today) shows "not available yet" instead of a broken empty menu. Extended the
+already-learned 64-byte `callback_data` lesson (§8) one level deeper — Category and the
+new Paper-Type step both follow the same index-not-literal-string rule. Verified for
+real: generated every possible `callback_data` string across the entire current browse
+tree (1,172 of them) — max 25 bytes. Smoke-tested against the real catalog + real files
+on disk: full tree traversal, free-text search across all 3 courses and Exam Materials,
+and a 15-row random sample of `send_file()`'s path resolution — all correct.
