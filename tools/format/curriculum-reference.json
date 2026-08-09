@@ -1,0 +1,1639 @@
+[
+  {
+    "subject_id": "8552c004-68ed-4605-9c74-259946ad8d85",
+    "name": "CA Inter Accounts",
+    "chapters": [
+      {
+        "chapter_id": "c385a8a5-0fc7-4006-b9fc-80002d1d10fb",
+        "name": "Accounting Standards based on items impacting Financial Statements",
+        "units": [
+          {
+            "unit_code": "M2-C7-U4",
+            "title": "Accounting for Taxes on Income",
+            "topics": [
+              {
+                "topic_ref": "4.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "4.2",
+                "heading": "Objective"
+              },
+              {
+                "topic_ref": "4.3",
+                "heading": "Definitions"
+              },
+              {
+                "topic_ref": "4.4",
+                "heading": "Recognition"
+              },
+              {
+                "topic_ref": "4.5",
+                "heading": "Measurement"
+              },
+              {
+                "topic_ref": "4.6",
+                "heading": "Re-assessment of Unrecognised Deferred Tax Assets"
+              },
+              {
+                "topic_ref": "4.7",
+                "heading": "Review of Previously Recognised Deferred Tax Assets"
+              },
+              {
+                "topic_ref": "4.8",
+                "heading": "Virtual Certainty Supported by Convincing Evidence"
+              },
+              {
+                "topic_ref": "4.9",
+                "heading": "Disclosure"
+              },
+              {
+                "topic_ref": "4.10",
+                "heading": "Relevant Explanations to AS 22"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C7-U1",
+            "title": "Contingencies and Events Occurring After the Balance Sheet Date",
+            "topics": [
+              {
+                "topic_ref": "1.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "1.2",
+                "heading": "Contingencies"
+              },
+              {
+                "topic_ref": "1.3",
+                "heading": "Events Occurring After the Balance Sheet Date"
+              },
+              {
+                "topic_ref": "1.4",
+                "heading": "Adjusting Events"
+              },
+              {
+                "topic_ref": "1.5",
+                "heading": "Non-Adjusting Events"
+              },
+              {
+                "topic_ref": "1.6",
+                "heading": "Disclosure"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C7-U2",
+            "title": "Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies",
+            "topics": [
+              {
+                "topic_ref": "2.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "2.2",
+                "heading": "Net Profit or Loss for the Period"
+              },
+              {
+                "topic_ref": "2.4",
+                "heading": "Changes in Accounting Estimates"
+              },
+              {
+                "topic_ref": "2.5",
+                "heading": "Changes in Accounting Policies"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C7-U3",
+            "title": "The Effects of Changes in Foreign Exchange Rates",
+            "topics": [
+              {
+                "topic_ref": "3.1",
+                "heading": "Introduction / Scope"
+              },
+              {
+                "topic_ref": "3.2",
+                "heading": "Definitions"
+              },
+              {
+                "topic_ref": "3.3",
+                "heading": "Initial Recognition"
+              },
+              {
+                "topic_ref": "3.4",
+                "heading": "Reporting at Each Balance Sheet Date"
+              },
+              {
+                "topic_ref": "3.5",
+                "heading": "Recognition of Exchange Differences"
+              },
+              {
+                "topic_ref": "3.6-3.9",
+                "heading": "Classification & Translation of Integral/Non-Integral Foreign Operations"
+              },
+              {
+                "topic_ref": "3.10",
+                "heading": "Tax Effects of Exchange Differences"
+              },
+              {
+                "topic_ref": "3.11",
+                "heading": "Forward Exchange Contract"
+              },
+              {
+                "topic_ref": "3.12",
+                "heading": "Disclosure"
+              },
+              {
+                "topic_ref": "3.13",
+                "heading": "Presentation of FCMITDA"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "88126373-043f-40a9-b0ee-b04d9f4aab73",
+        "name": "Accounting Standards for Consolidated Financial Statements",
+        "units": [
+          {
+            "unit_code": "M2-C10-U2",
+            "title": "Accounting for Investments in Associates in Consolidated Financial Statements",
+            "topics": [
+              {
+                "topic_ref": "2.1-2.2",
+                "heading": "Introduction / Objective"
+              },
+              {
+                "topic_ref": "2.3",
+                "heading": "Definitions"
+              },
+              {
+                "topic_ref": "2.4",
+                "heading": "Associates Accounted for Using the Equity Method"
+              },
+              {
+                "topic_ref": "2.5",
+                "heading": "Circumstances Under Which Equity Method is Followed"
+              },
+              {
+                "topic_ref": "2.6",
+                "heading": "Application of the Equity Method"
+              },
+              {
+                "topic_ref": "2.7",
+                "heading": "Contingencies"
+              },
+              {
+                "topic_ref": "2.8",
+                "heading": "Why is Equity Method Adopted for Associates?"
+              },
+              {
+                "topic_ref": "2.9",
+                "heading": "Disclosure"
+              },
+              {
+                "topic_ref": "2.10",
+                "heading": "Relevant Explanations to AS 23"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C10-U1",
+            "title": "Consolidated Financial Statements",
+            "topics": [
+              {
+                "topic_ref": "1.1",
+                "heading": "Concept of Group, Holding Company and Subsidiary Company"
+              },
+              {
+                "topic_ref": "1.2",
+                "heading": "Objectives of AS 21"
+              },
+              {
+                "topic_ref": "1.3",
+                "heading": "Wholly Owned and Partly Owned Subsidiaries"
+              },
+              {
+                "topic_ref": "1.4",
+                "heading": "Purpose of Preparing Consolidated Financial Statements"
+              },
+              {
+                "topic_ref": "1.5",
+                "heading": "Scope of AS 21"
+              },
+              {
+                "topic_ref": "1.6",
+                "heading": "Control"
+              },
+              {
+                "topic_ref": "1.7",
+                "heading": "Exclusion from Preparation of CFS"
+              },
+              {
+                "topic_ref": "1.8",
+                "heading": "Advantages of Consolidated Financial Statements"
+              },
+              {
+                "topic_ref": "1.9",
+                "heading": "Components of Consolidated Financial Statements"
+              },
+              {
+                "topic_ref": "1.10",
+                "heading": "Consolidation Procedures"
+              },
+              {
+                "topic_ref": "1.11",
+                "heading": "Calculation of Goodwill/Capital Reserve (Cost of Control)"
+              },
+              {
+                "topic_ref": "1.12",
+                "heading": "Minority Interests"
+              },
+              {
+                "topic_ref": "1.13",
+                "heading": "Profit or Loss of Subsidiary Company"
+              },
+              {
+                "topic_ref": "1.14",
+                "heading": "Consolidation Adjustments (A. Revaluation of Assets, B. Dividend Received from Subsidiary, C. Elimination of Intra-Group Transactions)"
+              },
+              {
+                "topic_ref": "1.15-1.16",
+                "heading": "Preparation of Consolidated Statement of Profit and Loss / Consolidated Cash Flow Statement"
+              },
+              {
+                "topic_ref": "1.17",
+                "heading": "Uniform Accounting Policies"
+              },
+              {
+                "topic_ref": "1.18",
+                "heading": "Treatment of Subsidiary Company Having Preference Share Capital"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "18029162-1b84-47e2-9c6b-f3b72c832fd8",
+        "name": "Accounting for Branches including foreign branches",
+        "units": [
+          {
+            "unit_code": "M3-C15-U0",
+            "title": "Accounting for Branches including Foreign Branches",
+            "topics": [
+              {
+                "topic_ref": "1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "2",
+                "heading": "Distinction Between Branch Accounts and Departmental Accounts"
+              },
+              {
+                "topic_ref": "3",
+                "heading": "Dependent Branches"
+              },
+              {
+                "topic_ref": "4",
+                "heading": "Methods of Charging Goods to Branches"
+              },
+              {
+                "topic_ref": "5",
+                "heading": "Accounting for Dependent Branches"
+              },
+              {
+                "topic_ref": "6",
+                "heading": "Accounting for Independent Branches"
+              },
+              {
+                "topic_ref": "7",
+                "heading": "Adjustment and Reconciliation of Branch & Head Office Accounts"
+              },
+              {
+                "topic_ref": "8",
+                "heading": "Incorporation of Branch Balance in Head Office Books"
+              },
+              {
+                "topic_ref": "9",
+                "heading": "Incomplete Information in Branch Books"
+              },
+              {
+                "topic_ref": "10-11",
+                "heading": "Foreign Branches / Accounting for Foreign Branches"
+              },
+              {
+                "topic_ref": "12",
+                "heading": "Techniques for Foreign Currency Translation"
+              },
+              {
+                "topic_ref": "13",
+                "heading": "Change in Classification"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "2fb80bb9-1942-4af6-bf71-ff9163b2943c",
+        "name": "Accounting for Reconstruction of companies",
+        "units": [
+          {
+            "unit_code": "M3-C14-U0",
+            "title": "Accounting for Reconstruction of Companies (Internal Reconstruction)",
+            "topics": [
+              {
+                "topic_ref": "1",
+                "heading": "Meaning of Reconstruction"
+              },
+              {
+                "topic_ref": "2.1",
+                "heading": "Alteration of Share Capital"
+              },
+              {
+                "topic_ref": "2.2",
+                "heading": "Variation of Shareholders Rights"
+              },
+              {
+                "topic_ref": "2.3",
+                "heading": "Reduction of Share Capital"
+              },
+              {
+                "topic_ref": "2.4",
+                "heading": "Compromise/Arrangements"
+              },
+              {
+                "topic_ref": "2.5",
+                "heading": "Surrender of Shares"
+              },
+              {
+                "topic_ref": "3",
+                "heading": "Entries in Case of Internal Reconstruction"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "26c99be6-f30c-49d2-a598-e695f0bb2dbf",
+        "name": "Amalgamation of companies",
+        "units": [
+          {
+            "unit_code": "M3-C13-U0",
+            "title": "Amalgamation of Companies",
+            "topics": [
+              {
+                "topic_ref": "1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "2",
+                "heading": "Meaning of Amalgamation"
+              },
+              {
+                "topic_ref": "3",
+                "heading": "Types of Amalgamation"
+              },
+              {
+                "topic_ref": "4",
+                "heading": "Purchase Consideration"
+              },
+              {
+                "topic_ref": "5",
+                "heading": "Methods of Accounting for Amalgamations"
+              },
+              {
+                "topic_ref": "6",
+                "heading": "Journal Entries to Close the Books of Vendor Company"
+              },
+              {
+                "topic_ref": "7",
+                "heading": "Entries in the Books of Purchasing Company"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "76eabeb6-f416-4f32-8763-0242389fbd64",
+        "name": "Applicability of Accounting Standards",
+        "units": [
+          {
+            "unit_code": "M1-C3-U0",
+            "title": "Applicability of Accounting Standards",
+            "topics": [
+              {
+                "topic_ref": "1",
+                "heading": "STATUS OF ACCOUNTING STANDARDS"
+              },
+              {
+                "topic_ref": "2",
+                "heading": "APPLICABILITY OF ACCOUNTING STANDARDS"
+              },
+              {
+                "topic_ref": "2.1",
+                "heading": "Revised Criteria for classification of Non-company entities"
+              },
+              {
+                "topic_ref": "2.3",
+                "heading": "Applicability of AS to Companies (non-Ind AS)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "f131bf7f-bf82-466b-b8ca-ede0e82c556c",
+        "name": "Assets Based Accounting Standards",
+        "units": [
+          {
+            "unit_code": "M2-C5-U3",
+            "title": "Accounting for Investments",
+            "topics": [
+              {
+                "topic_ref": "3.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "3.2",
+                "heading": "Definition of the Terms Used"
+              },
+              {
+                "topic_ref": "3.3",
+                "heading": "Forms of Investments"
+              },
+              {
+                "topic_ref": "3.4",
+                "heading": "Classification of Investments"
+              },
+              {
+                "topic_ref": "3.5",
+                "heading": "Cost of Investments"
+              },
+              {
+                "topic_ref": "3.6",
+                "heading": "Carrying Amount of Investments"
+              },
+              {
+                "topic_ref": "3.7",
+                "heading": "Investment Properties"
+              },
+              {
+                "topic_ref": "3.8",
+                "heading": "Disposal of Investments"
+              },
+              {
+                "topic_ref": "3.9",
+                "heading": "Reclassification of Investments"
+              },
+              {
+                "topic_ref": "3.10",
+                "heading": "Disclosure"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C5-U4",
+            "title": "Borrowing Costs",
+            "topics": [
+              {
+                "topic_ref": "4.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "4.3",
+                "heading": "Exchange Differences on Foreign Currency Borrowings"
+              },
+              {
+                "topic_ref": "4.4",
+                "heading": "Borrowing Costs Eligible for Capitalisation"
+              },
+              {
+                "topic_ref": "4.5",
+                "heading": "Recognition Criteria"
+              },
+              {
+                "topic_ref": "4.6",
+                "heading": "Specific Borrowings"
+              },
+              {
+                "topic_ref": "4.7",
+                "heading": "General Borrowings"
+              },
+              {
+                "topic_ref": "4.8",
+                "heading": "Excess of the Carrying Amount of the Qualifying Asset over Recoverable Amount"
+              },
+              {
+                "topic_ref": "4.9",
+                "heading": "Commencement of Capitalisation"
+              },
+              {
+                "topic_ref": "4.10",
+                "heading": "Suspension of Capitalisation"
+              },
+              {
+                "topic_ref": "4.11",
+                "heading": "Cessation of Capitalisation"
+              },
+              {
+                "topic_ref": "4.12",
+                "heading": "Disclosure"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C5-U6",
+            "title": "Intangible Assets",
+            "topics": [
+              {
+                "topic_ref": "6.1-6.2",
+                "heading": "Introduction / Scope"
+              },
+              {
+                "topic_ref": "6.3",
+                "heading": "Definitions"
+              },
+              {
+                "topic_ref": "6.4-6.6",
+                "heading": "Identifiability / Control / Future Economic Benefits"
+              },
+              {
+                "topic_ref": "6.7-6.11",
+                "heading": "Recognition and Initial Measurement - Separate Acquisition / Amalgamation / Government Grant / Exchange"
+              },
+              {
+                "topic_ref": "6.12-6.13",
+                "heading": "Internally Generated Goodwill / Internally Generated Intangible Assets"
+              },
+              {
+                "topic_ref": "6.14",
+                "heading": "Research Phase"
+              },
+              {
+                "topic_ref": "6.15",
+                "heading": "Development Phase"
+              },
+              {
+                "topic_ref": "6.16",
+                "heading": "Cost of an Internally Generated Intangible Asset"
+              },
+              {
+                "topic_ref": "6.17",
+                "heading": "Recognition of an Expense"
+              },
+              {
+                "topic_ref": "6.18",
+                "heading": "Subsequent Expenditure"
+              },
+              {
+                "topic_ref": "6.19-6.23",
+                "heading": "Measurement Subsequent to Initial Recognition / Amortisation Period, Method, Residual Value, Review"
+              },
+              {
+                "topic_ref": "6.24-6.25",
+                "heading": "Recoverability of Carrying Amount - Impairment Losses / Retirements and Disposals"
+              },
+              {
+                "topic_ref": "6.26-6.27",
+                "heading": "Disclosure / Other Disclosures"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C5-U5",
+            "title": "Leases",
+            "topics": [
+              {
+                "topic_ref": "5.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "5.2",
+                "heading": "Applicability of AS 19 [Scope]"
+              },
+              {
+                "topic_ref": "5.3",
+                "heading": "Definitions"
+              },
+              {
+                "topic_ref": "5.4",
+                "heading": "Types of Leases"
+              },
+              {
+                "topic_ref": "5.5-5.7",
+                "heading": "Indicators of Finance Lease - Deterministic & Suggestive Conditions"
+              },
+              {
+                "topic_ref": "5.8",
+                "heading": "Accounting for Finance Leases"
+              },
+              {
+                "topic_ref": "5.9",
+                "heading": "Accounting for Operating Leases"
+              },
+              {
+                "topic_ref": "5.10",
+                "heading": "Sale and Leaseback"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C5-U2",
+            "title": "Property, Plant and Equipment",
+            "topics": [
+              {
+                "topic_ref": "2.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "2.2",
+                "heading": "Scope of the Standard"
+              },
+              {
+                "topic_ref": "2.3",
+                "heading": "Definition of PPE"
+              },
+              {
+                "topic_ref": "2.4",
+                "heading": "Other Definitions (Biological Asset / Bearer Plant / Agricultural Activity)"
+              },
+              {
+                "topic_ref": "2.5",
+                "heading": "Recognition Criteria for PPE"
+              },
+              {
+                "topic_ref": "2.6-2.7",
+                "heading": "Measurement of PPE / Initial Recognition"
+              },
+              {
+                "topic_ref": "2.8",
+                "heading": "Cost of a Self-Constructed Asset"
+              },
+              {
+                "topic_ref": "2.9",
+                "heading": "PPE Acquired in Exchange for Non-Monetary Asset"
+              },
+              {
+                "topic_ref": "2.10",
+                "heading": "Treatment of Subsequent Costs"
+              },
+              {
+                "topic_ref": "(unnumbered)",
+                "heading": "Measurement After Recognition - Cost Model / Revaluation Model"
+              },
+              {
+                "topic_ref": "(unnumbered)",
+                "heading": "Depreciation - Component Method, Useful Life, Residual Value"
+              },
+              {
+                "topic_ref": "(unnumbered)",
+                "heading": "Changes in Decommissioning/Restoration Liabilities; Compensation for Impairment"
+              },
+              {
+                "topic_ref": "(unnumbered)",
+                "heading": "Retirements and De-recognition"
+              },
+              {
+                "topic_ref": "(unnumbered)",
+                "heading": "Disclosure (General, Additional, Revalued Assets)"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C5-U1",
+            "title": "Valuation of Inventories",
+            "topics": [
+              {
+                "topic_ref": "1.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "1.2",
+                "heading": "Inventories"
+              },
+              {
+                "topic_ref": "1.3",
+                "heading": "Measurement of Inventories"
+              },
+              {
+                "topic_ref": "1.4-1.8",
+                "heading": "Costs of Inventory / Purchase / Conversion / Joint-By-products / Other Costs"
+              },
+              {
+                "topic_ref": "1.9",
+                "heading": "Exclusions from the Cost of Inventories"
+              },
+              {
+                "topic_ref": "1.10",
+                "heading": "Cost Formula"
+              },
+              {
+                "topic_ref": "1.11",
+                "heading": "Other Techniques of Cost Measurement"
+              },
+              {
+                "topic_ref": "1.12",
+                "heading": "Estimates of Net Realisable Value"
+              },
+              {
+                "topic_ref": "1.13",
+                "heading": "Comparison of Cost and NRV"
+              },
+              {
+                "topic_ref": "1.14",
+                "heading": "NRV of Materials Held for Use or Disposal"
+              },
+              {
+                "topic_ref": "1.15",
+                "heading": "Disclosures"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "edfdc9a6-694c-4f0c-9cfc-579ef9e369e0",
+        "name": "Buy back of Securities",
+        "units": [
+          {
+            "unit_code": "M3-C12-U0",
+            "title": "Buy-back of Securities",
+            "topics": [
+              {
+                "topic_ref": "1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "(Some Important Terms)",
+                "heading": "Definitions - Specified Securities / Free Reserves"
+              },
+              {
+                "topic_ref": "2",
+                "heading": "Provisions of Section 70 of the Companies Act 2013"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "57cba0d5-3d74-446b-93cd-0cff7972a0a7",
+        "name": "Financial Statements of Companies",
+        "units": [
+          {
+            "unit_code": "M3-C11-U1",
+            "title": "Preparation of Financial Statements (of Companies)",
+            "topics": [
+              {
+                "topic_ref": "1.1",
+                "heading": "Meaning of Company"
+              },
+              {
+                "topic_ref": "1.2",
+                "heading": "Maintenance of Books of Account"
+              },
+              {
+                "topic_ref": "1.3",
+                "heading": "Statutory Books"
+              },
+              {
+                "topic_ref": "1.4",
+                "heading": "Annual Return"
+              },
+              {
+                "topic_ref": "1.5",
+                "heading": "Final Accounts"
+              },
+              {
+                "topic_ref": "1.6",
+                "heading": "Distributable Profit"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "9fdc6775-7f47-4421-9227-543acf15769c",
+        "name": "Framework for Preparation and Presentation of Financial Statements",
+        "units": [
+          {
+            "unit_code": "M1-C2-U0",
+            "title": "Framework for Preparation and Presentation of Financial Statements",
+            "topics": [
+              {
+                "topic_ref": "1",
+                "heading": "INTRODUCTION"
+              },
+              {
+                "topic_ref": "2",
+                "heading": "PURPOSE OF THE FRAMEWORK"
+              },
+              {
+                "topic_ref": "3",
+                "heading": "STATUS AND SCOPE OF THE FRAMEWORK"
+              },
+              {
+                "topic_ref": "4",
+                "heading": "COMPONENTS OF FINANCIAL STATEMENTS"
+              },
+              {
+                "topic_ref": "5",
+                "heading": "OBJECTIVES AND USERS OF FINANCIAL STATEMENTS"
+              },
+              {
+                "topic_ref": "6",
+                "heading": "FUNDAMENTAL ACCOUNTING ASSUMPTIONS"
+              },
+              {
+                "topic_ref": "7",
+                "heading": "QUALITATIVE CHARACTERISTICS OF FINANCIAL STATEMENTS"
+              },
+              {
+                "topic_ref": "8",
+                "heading": "TRUE AND FAIR VIEW"
+              },
+              {
+                "topic_ref": "9",
+                "heading": "ELEMENTS OF FINANCIAL STATEMENTS"
+              },
+              {
+                "topic_ref": "10",
+                "heading": "MEASUREMENT OF ELEMENTS OF FINANCIAL STATEMENTS"
+              },
+              {
+                "topic_ref": "11",
+                "heading": "CAPITAL MAINTENANCE"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C5-U7",
+            "title": "Impairment of Assets",
+            "topics": [
+              {
+                "topic_ref": "7.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "7.2",
+                "heading": "Scope"
+              },
+              {
+                "topic_ref": "7.3",
+                "heading": "Assessment"
+              },
+              {
+                "topic_ref": "7.4",
+                "heading": "Measurement of Recoverable Amount"
+              },
+              {
+                "topic_ref": "7.5",
+                "heading": "Basis for Estimates of Future Cash Flows"
+              },
+              {
+                "topic_ref": "7.6",
+                "heading": "Composition of Estimates of Future Cash Flows"
+              },
+              {
+                "topic_ref": "7.7",
+                "heading": "Recognition and Measurement of an Impairment Loss"
+              },
+              {
+                "topic_ref": "7.8",
+                "heading": "Identification of the Cash-Generating Unit"
+              },
+              {
+                "topic_ref": "7.9",
+                "heading": "Recoverable Amount and Carrying Amount of a Cash-Generating Unit"
+              },
+              {
+                "topic_ref": "7.10",
+                "heading": "Goodwill"
+              },
+              {
+                "topic_ref": "7.11",
+                "heading": "Corporate Assets"
+              },
+              {
+                "topic_ref": "7.12",
+                "heading": "Impairment Loss for a Cash-Generating Unit"
+              },
+              {
+                "topic_ref": "7.13",
+                "heading": "Reversal of an Impairment Loss"
+              },
+              {
+                "topic_ref": "7.14-7.16",
+                "heading": "Reversal of an Impairment Loss for an Asset / Cash-Generating Unit"
+              },
+              {
+                "topic_ref": "7.17",
+                "heading": "Impairment in Case of Discontinuing Operations"
+              },
+              {
+                "topic_ref": "7.18",
+                "heading": "Disclosure"
+              },
+              {
+                "topic_ref": "7.19",
+                "heading": "Illustrations"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "1f2e3e16-b29c-4da2-b025-a2c136cbd389",
+        "name": "Introduction to Accounting Standards",
+        "units": [
+          {
+            "unit_code": "M1-C1-U0",
+            "title": "Introduction to Accounting Standards",
+            "topics": [
+              {
+                "topic_ref": "1",
+                "heading": "INTRODUCTION / GAAP"
+              },
+              {
+                "topic_ref": "2",
+                "heading": "STANDARDS SETTING PROCESS"
+              },
+              {
+                "topic_ref": "3",
+                "heading": "HOW MANY ACCOUNTING STANDARDS?"
+              },
+              {
+                "topic_ref": "4",
+                "heading": "STATUS OF ACCOUNTING STANDARDS"
+              },
+              {
+                "topic_ref": "5",
+                "heading": "NEED FOR CONVERGENCE TOWARDS GLOBAL STANDARDS"
+              },
+              {
+                "topic_ref": "6",
+                "heading": "INTERNATIONAL ACCOUNTING STANDARD BOARD (IASB)"
+              },
+              {
+                "topic_ref": "7",
+                "heading": "IFRS AS GLOBAL STANDARDS"
+              },
+              {
+                "topic_ref": "8",
+                "heading": "BECOMING IFRS COMPLIANT"
+              },
+              {
+                "topic_ref": "9",
+                "heading": "WHAT ARE CARVE OUTS/INS IN IND AS?"
+              },
+              {
+                "topic_ref": "10",
+                "heading": "CONVERGENCE TO IFRS IN INDIA"
+              },
+              {
+                "topic_ref": "11",
+                "heading": "WHAT ARE INDIAN ACCOUNTING STANDARDS (IND AS)?"
+              },
+              {
+                "topic_ref": "12",
+                "heading": "HISTORY OF IFRS-CONVERGED IND AS"
+              },
+              {
+                "topic_ref": "13",
+                "heading": "LIST OF IND AS"
+              },
+              {
+                "topic_ref": "14",
+                "heading": "ROADMAP FOR IMPLEMENTATION OF IND AS"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "0ac34809-d39d-4b0b-96f4-7f7eecb8e9a3",
+        "name": "Liabilities based Accounting Standards",
+        "units": [
+          {
+            "unit_code": "M2-C6-U1",
+            "title": "Employee Benefits",
+            "topics": [
+              {
+                "topic_ref": "1.2",
+                "heading": "Applicability"
+              },
+              {
+                "topic_ref": "1.3",
+                "heading": "Meaning of the Term 'Employee Benefits'"
+              },
+              {
+                "topic_ref": "1.4",
+                "heading": "Short-Term Employee Benefits"
+              },
+              {
+                "topic_ref": "1.5",
+                "heading": "Post-Employment Benefits: Defined Contribution vs Defined Benefit Plans"
+              },
+              {
+                "topic_ref": "1.6",
+                "heading": "Is the Gratuity Scheme a Defined Benefit Plan?"
+              },
+              {
+                "topic_ref": "1.7",
+                "heading": "Accounting Treatment"
+              },
+              {
+                "topic_ref": "1.8",
+                "heading": "Disclosures"
+              },
+              {
+                "topic_ref": "1.9",
+                "heading": "Actuarial Assumptions"
+              },
+              {
+                "topic_ref": "1.10",
+                "heading": "Actuarial Gains and Losses (incl. Expected vs Actual Return on Plan Assets)"
+              },
+              {
+                "topic_ref": "1.11",
+                "heading": "Other Long Term Employee Benefits"
+              },
+              {
+                "topic_ref": "1.12",
+                "heading": "Termination Benefits"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C6-U2",
+            "title": "Provisions, Contingent Liabilities and Contingent Assets",
+            "topics": [
+              {
+                "topic_ref": "2.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "2.2",
+                "heading": "Scope"
+              },
+              {
+                "topic_ref": "2.3",
+                "heading": "Definitions"
+              },
+              {
+                "topic_ref": "2.4",
+                "heading": "Recognition of Provision"
+              },
+              {
+                "topic_ref": "2.5-2.8",
+                "heading": "Present Obligation / Past Event / Probable Outflow / Reliable Estimate"
+              },
+              {
+                "topic_ref": "2.9-2.10",
+                "heading": "Contingent Liabilities / Contingent Assets"
+              },
+              {
+                "topic_ref": "2.11-2.14",
+                "heading": "Measurement - Best Estimate / Risks and Uncertainties / Future Events / Expected Disposal of Assets"
+              },
+              {
+                "topic_ref": "2.15",
+                "heading": "Reimbursements"
+              },
+              {
+                "topic_ref": "2.16-2.18",
+                "heading": "Table - Reimbursements / Changes in Provisions / Use of Provisions"
+              },
+              {
+                "topic_ref": "2.19",
+                "heading": "Application to Future Operating Losses and Restructuring"
+              },
+              {
+                "topic_ref": "2.20",
+                "heading": "Disclosure"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "0682aec9-72bd-4ae9-b92f-3bf81714dc68",
+        "name": "Other Accounting Standards",
+        "units": [
+          {
+            "unit_code": "M2-C9-U1",
+            "title": "Accounting for Government Grants",
+            "topics": [
+              {
+                "topic_ref": "1.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "1.2",
+                "heading": "Government Grants"
+              },
+              {
+                "topic_ref": "1.3",
+                "heading": "Accounting Treatment of Government Grants"
+              },
+              {
+                "topic_ref": "1.4",
+                "heading": "Recognition of Government Grants"
+              },
+              {
+                "topic_ref": "1.5",
+                "heading": "Non-Monetary Government Grants"
+              },
+              {
+                "topic_ref": "1.6",
+                "heading": "Presentation of Grants Related to Specific Fixed Assets"
+              },
+              {
+                "topic_ref": "1.7",
+                "heading": "Presentation of Grants Related to Revenue"
+              },
+              {
+                "topic_ref": "1.8",
+                "heading": "Presentation of Grants of the Nature of Promoters' Contribution"
+              },
+              {
+                "topic_ref": "1.9",
+                "heading": "Refund of Government Grants"
+              },
+              {
+                "topic_ref": "1.10",
+                "heading": "Disclosure"
+              }
+            ]
+          },
+          {
+            "unit_code": "M1-C4-U5",
+            "title": "Earnings Per Share",
+            "topics": [
+              {
+                "topic_ref": "5.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "5.2",
+                "heading": "Definition of the Terms Used in AS 20"
+              },
+              {
+                "topic_ref": "5.3",
+                "heading": "Earnings - Basic"
+              },
+              {
+                "topic_ref": "5.4",
+                "heading": "Per Share - Basic"
+              },
+              {
+                "topic_ref": "5.5",
+                "heading": "Shares Issued in a Scheme of Amalgamation / Contingently Issuable Shares / Bonus Issue, Share Split and Rights Issue"
+              },
+              {
+                "topic_ref": "5.6-5.8",
+                "heading": "Diluted Earnings Per Share / Earnings-Diluted / Per Share-Diluted"
+              },
+              {
+                "topic_ref": "5.9",
+                "heading": "Dilutive Potential Equity Shares"
+              },
+              {
+                "topic_ref": "5.10",
+                "heading": "Restatement"
+              },
+              {
+                "topic_ref": "5.11",
+                "heading": "Presentation"
+              },
+              {
+                "topic_ref": "5.12",
+                "heading": "Disclosure"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "7b1c5f38-68a1-4960-afea-8dfb76d6aed0",
+        "name": "Presentation & Disclosures Based Accounting Standards",
+        "units": [
+          {
+            "unit_code": "M3-C11-U2",
+            "title": "Cash Flow Statement",
+            "topics": [
+              {
+                "topic_ref": "2.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "2.2",
+                "heading": "Elements of Cash"
+              },
+              {
+                "topic_ref": "2.3",
+                "heading": "Classification of Cash Flow Activities"
+              },
+              {
+                "topic_ref": "2.4",
+                "heading": "Calculation of Cash Flows from Operating Activities"
+              },
+              {
+                "topic_ref": "2.5",
+                "heading": "Calculation of Cash Flows from Investing Activities"
+              },
+              {
+                "topic_ref": "2.6",
+                "heading": "Calculation of Cash Flows from Financing Activities"
+              },
+              {
+                "topic_ref": "2.7",
+                "heading": "Illustrations"
+              }
+            ]
+          },
+          {
+            "unit_code": "M1-C4-U6",
+            "title": "Discontinuing Operations",
+            "topics": [
+              {
+                "topic_ref": "6.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "6.2",
+                "heading": "Discontinuing Operation"
+              },
+              {
+                "topic_ref": "6.3",
+                "heading": "Initial Disclosure Event"
+              },
+              {
+                "topic_ref": "6.4",
+                "heading": "Recognition and Measurement"
+              },
+              {
+                "topic_ref": "6.5",
+                "heading": "Presentation and Disclosure"
+              },
+              {
+                "topic_ref": "6.6",
+                "heading": "Updating the Disclosures"
+              },
+              {
+                "topic_ref": "6.7",
+                "heading": "Separate Disclosure for Each Discontinuing Operation"
+              },
+              {
+                "topic_ref": "6.8",
+                "heading": "Presentation of the Required Disclosures"
+              },
+              {
+                "topic_ref": "6.9",
+                "heading": "Restatement of Prior Periods"
+              },
+              {
+                "topic_ref": "6.10",
+                "heading": "Disclosure in Interim Financial Reports"
+              }
+            ]
+          },
+          {
+            "unit_code": "M1-C4-U7",
+            "title": "Interim Financial Reporting",
+            "topics": [
+              {
+                "topic_ref": "7.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "7.2",
+                "heading": "Definitions of the Terms Used"
+              },
+              {
+                "topic_ref": "7.3",
+                "heading": "Content of an Interim Financial Report"
+              },
+              {
+                "topic_ref": "7.4",
+                "heading": "Form and Content of Interim Financial Statements"
+              },
+              {
+                "topic_ref": "7.5",
+                "heading": "Selected Explanatory Notes"
+              },
+              {
+                "topic_ref": "7.7",
+                "heading": "Materiality"
+              },
+              {
+                "topic_ref": "7.8",
+                "heading": "Disclosure in Annual Financial Statements"
+              },
+              {
+                "topic_ref": "7.9",
+                "heading": "Accounting Policies"
+              },
+              {
+                "topic_ref": "7.10",
+                "heading": "Revenue Received Seasonally or Occasionally"
+              },
+              {
+                "topic_ref": "7.11",
+                "heading": "Costs Incurred Unevenly During the Year"
+              },
+              {
+                "topic_ref": "7.12",
+                "heading": "Use of Estimates"
+              },
+              {
+                "topic_ref": "7.13",
+                "heading": "Restatement of Previously Reported Interim Periods"
+              },
+              {
+                "topic_ref": "7.14",
+                "heading": "Transitional Provision"
+              },
+              {
+                "topic_ref": "7.15",
+                "heading": "Applicability of AS 25 to Interim Financial Results"
+              }
+            ]
+          },
+          {
+            "unit_code": "M1-C4-U4",
+            "title": "Related Party Disclosures",
+            "topics": [
+              {
+                "topic_ref": "4.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "4.2",
+                "heading": "Related Party Issue - Why Disclosure"
+              },
+              {
+                "topic_ref": "4.3",
+                "heading": "Related Party Relationships as per AS 18"
+              },
+              {
+                "topic_ref": "4.4",
+                "heading": "Who are NOT Deemed to be Related Parties"
+              },
+              {
+                "topic_ref": "4.5",
+                "heading": "Exemption"
+              },
+              {
+                "topic_ref": "4.6",
+                "heading": "Definitions of Other Terms Used in AS 18"
+              },
+              {
+                "topic_ref": "4.7",
+                "heading": "Disclosure Requirements under AS 18"
+              },
+              {
+                "topic_ref": "4.8",
+                "heading": "List of Related Party Transactions"
+              }
+            ]
+          },
+          {
+            "unit_code": "M1-C4-U3",
+            "title": "Segment Reporting",
+            "topics": [
+              {
+                "topic_ref": "3.1",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "3.2",
+                "heading": "Objective"
+              },
+              {
+                "topic_ref": "3.3",
+                "heading": "Scope"
+              },
+              {
+                "topic_ref": "3.4",
+                "heading": "Definition of the Terms Used in the Standard"
+              },
+              {
+                "topic_ref": "3.5",
+                "heading": "Treatment of Interest for Segment Reporting (incl. overdraft/operating-liability interest)"
+              },
+              {
+                "topic_ref": "3.6",
+                "heading": "Allocation"
+              },
+              {
+                "topic_ref": "3.7",
+                "heading": "Primary and Secondary Segment Reporting Formats"
+              },
+              {
+                "topic_ref": "3.8",
+                "heading": "Business and Geographical Segments"
+              },
+              {
+                "topic_ref": "3.9",
+                "heading": "Identifying Reportable Segments"
+              },
+              {
+                "topic_ref": "3.10",
+                "heading": "Segment Accounting Policies"
+              },
+              {
+                "topic_ref": "3.11",
+                "heading": "Primary Reporting Format"
+              },
+              {
+                "topic_ref": "3.12",
+                "heading": "Secondary Segment Information"
+              },
+              {
+                "topic_ref": "3.13",
+                "heading": "Other Disclosures"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter_id": "3a15cfe9-7b72-4dbe-9d25-9801ca780193",
+        "name": "Revenue based Accounting Standards",
+        "units": [
+          {
+            "unit_code": "M2-C8-U1",
+            "title": "Construction Contracts",
+            "topics": [
+              {
+                "topic_ref": "1.1",
+                "heading": "Significance of the Standard"
+              },
+              {
+                "topic_ref": "1.2",
+                "heading": "Introduction"
+              },
+              {
+                "topic_ref": "1.3",
+                "heading": "Combining and Segmenting Construction Contracts"
+              },
+              {
+                "topic_ref": "1.4",
+                "heading": "Types of Construction Contracts"
+              },
+              {
+                "topic_ref": "1.5",
+                "heading": "Contract Revenue and Costs"
+              },
+              {
+                "topic_ref": "1.6",
+                "heading": "Percentage of Completion Method"
+              },
+              {
+                "topic_ref": "1.7",
+                "heading": "Treatment of Costs Relating to Future Activity"
+              },
+              {
+                "topic_ref": "1.8",
+                "heading": "Uncollectable Contract Revenue"
+              },
+              {
+                "topic_ref": "1.9",
+                "heading": "Stage of Completion"
+              },
+              {
+                "topic_ref": "1.10",
+                "heading": "Changes in Estimates"
+              },
+              {
+                "topic_ref": "1.11",
+                "heading": "Disclosure"
+              }
+            ]
+          },
+          {
+            "unit_code": "M2-C8-U2",
+            "title": "Revenue Recognition",
+            "topics": [
+              {
+                "topic_ref": "2.1-2.2",
+                "heading": "Introduction / Definition of Revenue"
+              },
+              {
+                "topic_ref": "2.3",
+                "heading": "Agency Relationship"
+              },
+              {
+                "topic_ref": "2.4-2.5",
+                "heading": "Sale of Goods / Timing of Recognition"
+              },
+              {
+                "topic_ref": "2.6",
+                "heading": "Rendering of Services"
+              },
+              {
+                "topic_ref": "2.7",
+                "heading": "Income from Other Sources - Interest, Royalties and Dividends"
+              },
+              {
+                "topic_ref": "2.8",
+                "heading": "Conditions for Sale of Goods (7 specific scenarios)"
+              },
+              {
+                "topic_ref": "2.9",
+                "heading": "Effect of Uncertainties on Revenue Recognition"
+              },
+              {
+                "topic_ref": "2.10",
+                "heading": "Disclosure"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "subject_id": "98b15852-f2e2-4cbd-8b78-4d5069470c4c",
+    "name": "CA Inter Law",
+    "chapters": [
+      {
+        "chapter_id": "97f7215a-6825-41e9-8c09-0a41f8956369",
+        "name": "Acceptance of Deposits by Companies",
+        "units": []
+      },
+      {
+        "chapter_id": "1d59fff5-abe5-486b-8776-ae97bf4d0397",
+        "name": "Accounts of Companies",
+        "units": []
+      },
+      {
+        "chapter_id": "1b65e80b-8fab-431d-87e0-afe1655ed810",
+        "name": "Audit and Auditors",
+        "units": []
+      },
+      {
+        "chapter_id": "e5c446aa-fc57-4d10-80f3-04cd993190a3",
+        "name": "Companies Incorporated Outside India",
+        "units": []
+      },
+      {
+        "chapter_id": "dad4bab2-3640-495c-8bc3-6a1be27b7275",
+        "name": "Declaration and Payment of Dividend",
+        "units": []
+      },
+      {
+        "chapter_id": "0e40e07d-25b4-4fb9-8d30-022f15f31362",
+        "name": "Incorporation of Company",
+        "units": []
+      },
+      {
+        "chapter_id": "ec995765-64b7-41f3-88b4-a6465160e0ba",
+        "name": "Interpretation of Statutes",
+        "units": []
+      },
+      {
+        "chapter_id": "1782809c-cac8-427b-875e-e8caf8a0bc02",
+        "name": "Management and Administration",
+        "units": []
+      },
+      {
+        "chapter_id": "de36d428-7b1c-4655-8206-63e30eb8444f",
+        "name": "Preliminary",
+        "units": []
+      },
+      {
+        "chapter_id": "04e0e53b-acc8-44c3-8351-d1ce22f6dbbe",
+        "name": "Prospectus and Allotment of Securities",
+        "units": []
+      },
+      {
+        "chapter_id": "0ec67019-8e78-41b5-8baa-929f12bb1d09",
+        "name": "Registration of Charges",
+        "units": []
+      },
+      {
+        "chapter_id": "915aebef-cf96-4558-872c-79a5a04e5f6e",
+        "name": "Share Capital and Debentures",
+        "units": []
+      },
+      {
+        "chapter_id": "465adb2f-0117-49d1-8642-c5ef3be0c66f",
+        "name": "The Foreign Exchange Management Act, 1999",
+        "units": []
+      },
+      {
+        "chapter_id": "5354de34-b274-4bfe-832e-c87907c81389",
+        "name": "The General Clauses Act, 1897",
+        "units": []
+      },
+      {
+        "chapter_id": "22b03efa-f9a6-407e-81f5-1bc3f5998b4f",
+        "name": "The Limited Liability Partnership Act, 2008",
+        "units": []
+      }
+    ]
+  }
+]

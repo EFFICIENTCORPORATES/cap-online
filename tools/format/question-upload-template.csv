@@ -1,0 +1,3 @@
+chapter_id,question_html,option_a,option_b,option_c,option_d,correct_option,explanation_html,difficulty,marks,unit_code,topic_refs
+REPLACE_WITH_CHAPTER_UUID,What is the primary objective of accounting?,Recording transactions,Maximizing profit,"Systematic recording, classifying and summarizing financial transactions",Preparing balance sheet only,c,"Accounting aims to systematically record, classify, and summarize financial transactions to provide useful information for decision-making.",easy,1,,
+REPLACE_WITH_CHAPTER_UUID,Which accounting standard deals with revenue recognition?,AS 1,AS 9,AS 5,AS 10,b,AS 9 (Revenue Recognition) prescribes the accounting treatment of revenue arising from certain types of transactions and events.,medium,1,unit-1,"topic-1, topic-2"
