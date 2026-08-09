@@ -71,6 +71,15 @@ photo-gallery/originals/
 obs-setup/recordings/
 obs-setup/tools/
 
+# ICAI downloaded PDFs + their converted MDs (regeneratable on demand)
+tools/downloaded_pdfs/
+
+# Telegram tool generated scan reports (local scratch output)
+telegram/tools/_reports/
+
+# Telegram bot runtime data (logs, user uploads — local only)
+telegram/assets/myfiles_bot/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -104,6 +113,18 @@ dist/
 .spyproject
 .DS_Store
 Thumbs.db
+desktop.ini
 local_settings.py
+
+# Databases (binary; e.g. Telegram bot analytics/logging DBs)
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+
+# Secrets / credentials -- never commit live tokens/keys
+telegram/creds.txt
+**/creds.txt
+*.env
+.env
 books/bridge-course/YogaMembersListNameMumbers.md
 books/concept-book/characters/animations/.thumbnail
