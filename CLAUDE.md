@@ -29,6 +29,23 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 - **Pushing:** previously documented as impossible from this sandbox ("needs Pranav's credentials, commit locally, Pranav pushes from his own machine"). **Correction, 2026-07-29**: `git push origin main` succeeded directly from this sandbox when tried — some credential (cached helper, PAT, or similar) is evidently configured in at least this environment. Don't assume this is permanent or true in every clone/session — verify with a real push attempt (or ask) rather than trusting either this note or the old one blindly. If a push fails, fall back to committing locally and telling Pranav to push from his own machine, per the original rule.
 - **This repo is worked on by more than one AI session concurrently** (at minimum: Claude Code sessions like this one, and a separate "Codex"-based session — both have directly authored files under `first_run/`, both have committed to `main`, sometimes without the other's clone knowing). **Never assume you're the only author of recent changes.** Before assuming a file is stale, unfinished, or "of unconfirmed origin," check its mtime and actually read it — it may have been built or fixed by the other session since you last looked. A real git-history divergence (the other session pushed straight to `origin/main` while this clone worked from an older commit) already happened once and needed a manual merge — see `_claude/memory/project_log.md`'s 2026-07-27 entries for exactly how it was reconciled if it recurs.
 
+### Telegram platform: known scale-readiness gaps (flagged 2026-08-12, not yet resolved)
+
+Pranav's target is **100,000+ students** on the Telegram bot platform (`telegram/`, see §11), currently ~100. An independent PM+CTO-level code review that day found the *feature* layer solid (ledger-based wallet, JSON-source-of-truth configs, audit trails, real smoke tests) but the *infrastructure* layer is still prototype-scale. Anyone picking up `telegram/` work should know these before adding more features on top — fix order matters more than feature count here:
+
+1. **Single point of failure**: every bot process runs hand-managed (`manage_bots.py`, PID files, no auto-restart-on-crash) on one local Windows PC, all writing to one SQLite file, with **no real off-machine backup**. One hardware/power/OS-update failure takes down the entire platform and all student data at once. Highest priority — move to real hosted infra + automated backups before anything else below.
+2. **DB/concurrency model untested under load**: each bot opens one SQLite connection at process start and reuses it for every concurrent update; sqlite3 calls are synchronous and block the bot's single asyncio event loop (same for the synchronous `open(...).read()` PDF sends). WAL+retry is a stopgap, Postgres is the named eventual target (see `database/schema.sql`'s own comments) but the migration trigger is "gated on real load" that has never actually been measured. Load-test this now, while it's cheap to fail.
+3. **No working billing/quota enforcement anywhere in the bot code** — `wallet_ledger`/`payments` tables are schema-only, well-designed, never wired into any bot flow. If monetization is part of what justifies scaling to 100k, this needs to be built and load-tested well before the user base that would make retrofitting it risky.
+4. **Long-polling architecture (`run_polling()`), not webhooks** — no horizontal scaling path for a single popular bot; will need to change before any one bot's DAU is large enough to need it.
+5. **Content requires a full bot restart to reload** (all MCQ/descriptive JSON loads into memory once at startup) — a one-line content fix currently drops every in-flight session on that bot.
+6. **No staging environment** — this session's own routine dev work runs directly against the same `platform.db` file live bots write to.
+7. **Callback-data routing has produced the same bug class 3+ times** (regex pattern collisions swallowing another handler's buttons) and a 4th real instance — Telegram's 64-byte `callback_data` limit silently breaking a menu — was found and fixed 2026-08-12 in `exam_hub_bot.py`'s chapter picker. Worth a structural fix (central route registry + an automated collision/length check) rather than continuing to catch instances one at a time.
+8. **No rate-limiting/abuse protection** anywhere visible (free-text search, OTP/email sends, leaderboard participation) — worth adding before the platform is that publicly exposed.
+9. **Faculty onboarding is fully manual** (new BotFather token + config entries + content pipeline run, no self-serve) — fine for a handful of faculty, a bottleneck if growth depends on onboarding many.
+10. **Admin Portal is single-shared-login, no per-faculty self-service** — every faculty's content/config change still goes through Pranav or an AI session.
+
+Full review detail lives in this conversation's history (2026-08-12); this is the durable, brief pointer so any future session sees it. Ask Pranav for current priority before undertaking any of these — they're listed by what blocks 100k first, not in the order he's necessarily chosen to tackle them.
+
 ---
 
 ## 3. What each folder is for
@@ -1705,3 +1722,401 @@ API, the new Admin Portal's Content Health page, and every bot's own log
 file): 0 errors, 0 warnings everywhere, confirmed right now rather than
 just trusted from the earlier fix. Full detail:
 `telegram/COURSE-CATALOG.md`'s new section.
+
+### 4 document/question catalogues added to the Admin Portal (2026-08-12)
+
+Pranav asked for the existing Course Catalog page to become the live
+**Study Materials** catalogue (reading from `telegram/source-docs/
+knowledge_base_documents.json`), plus 3 more catalogues under the same
+Course/Level/Subject picker: **Exam Materials**, **Revision Material**,
+and a **Question Bank** catalogue (chapter-level MCQ + Descriptive counts
+per subject/level/course). Also asked whether 3 PDFs he'd just added to
+the Study Materials folder (CA Inter Law's "Other Laws" part — General
+Clauses Act, Interpretation of Statutes, FEMA 1999) were showing up.
+
+**They weren't** — `knowledge_base_documents.json` is generated from
+`1Lavya_Study_Hub_File_Mapping.xlsx`, not by scanning the folder directly,
+and the 3 new PDFs had never been added to that source Excel. Fixed at
+the root (verified real chapter titles by reading each PDF's own first
+pages, added 3 rows, re-ran the full downstream chain:
+`build_master_catalog.py` → `populate_course_catalog.py` →
+`build_knowledge_base_catalog.py`). A second real bug surfaced
+immediately via `populate_course_catalog.py`'s own duplicate-key check:
+CA Inter Corporate and Other Laws' printed chapter numbering genuinely
+restarts at Module 4 (Chapter 1/2/3, "Other Laws"), colliding with Module
+1's own Chapter 1/2/3. Verified this is the ONLY CA subject with this
+pattern (checked all 17), then added a small, explicit, documented offset
+(`CHAPTER_NO_MODULE_OFFSET`) so Module 4's chapters continue the
+subject's sequence as 13/14/15 instead of colliding. `course_catalog`
+grew from 957 to 960 rows.
+
+Built `telegram/admin_portal/document_catalog.py` — the query layer for
+Study/Exam/Revision Material (documents from `knowledge_base_documents.json`
+joined to `course_catalog`'s chapter taxonomy at chapter granularity) and
+Question Bank (MCQ/Descriptive counts computed directly from every
+question's own `human_id`, 100% accurate by construction). Wired into the
+Admin Portal as a 5-tab strip on `/content/course-catalog` (the 4 new
+tabs plus the original Chapter Taxonomy view, kept not replaced), sharing
+one Course→Level→Subject picker via a `catalogue` query param, each tab
+with the same pagination/filter/CSV/Excel/HTML/PDF export every other
+Admin Portal table has. Exam Materials only has CA Inter Advanced
+Accounting content (58 files) — sourcing official CS/CMA exam papers from
+ICAI/ICSI/ICMAI's own websites was raised and explicitly deferred to its
+own separate task (asked via AskUserQuestion, Pranav's choice); every
+other course/level/subject shows an honest "not sourced yet" row, not a
+silent gap. Revision Material is honestly empty everywhere too (the
+folder has no files yet).
+
+A third real bug was found testing Pranav's own example URL
+(`?course=CA&level=Inter&subject=Accounting` — the real CA Inter subject
+is "Advanced Accounting"): an invalid subject in the URL silently queried
+zero matching rows and rendered an unexplained empty table. Fixed — an
+unrecognized course/level/subject now falls back to the first real
+option instead.
+
+**Verified**: `smoke_test_course_catalog.py` gained 2 new regression
+checks (all passing, including the original 39). `smoke_test_admin_portal.py`
+grew to 87 checks (from 72) covering the 4 new tabs, the collision fix,
+honest-empty states, and the invalid-subject fallback. Content validator
+still 0 errors/0 warnings. Visually verified via headless-Edge
+screenshots. `1lavya-admin-portal` and `1lavya-studyhub` (the bot that
+actually serves these files to students) both restarted and confirmed
+loading the updated catalog live. `health_check.py`: same 16 pre-existing
+failures, nothing new. Full detail: `telegram/COURSE-CATALOG.md`.
+
+### CA Foundation Accounting: 4 missing chapters found + real ICAI PDFs sourced (2026-08-12, later same day)
+
+While reviewing 2 newly-added MCQ content sets (CA Foundation Accounting
+and Business Economics) for chapter-name accuracy against the master
+syllabus, found a real gap: the new Accounting MCQ set correctly tests
+Chapters 8–11 (Financial Statements of NPO / Accounts from Incomplete
+Records / Partnership and LLP Accounts / Company Accounts) — real ICAI
+syllabus content — but `course_catalog` had no rows for any of them (it
+stopped at Chapter 7), and no Study Material PDFs existed either. Rather
+than guess, asked Pranav for the official syllabus link
+(https://www.icai.org/post/19138), confirmed all 11 chapters (including
+the exact 6-unit split for both Ch.10 and Ch.11) match ICAI's own
+published syllabus exactly — the new content was more complete than our
+data, not deviating from it.
+
+Found and downloaded all 15 real PDFs directly from ICAI's own CDN
+(linked on that same syllabus page), verified each (correct page counts,
+first-page title text matches), added to Study Materials using the
+existing naming convention, added 15 rows to `1Lavya_Study_Hub_File_
+Mapping.xlsx`, re-ran the full downstream chain. No collision this time —
+`course_catalog` grew cleanly 960→975 rows. 3 new permanent regression
+checks added; full suite passing; content validator 0/0; `1lavya-studyhub`
+and `1lavya-admin-portal` restarted, confirmed loading 1102 total catalog
+rows live. `health_check.py`: same 16 pre-existing failures, nothing new.
+Full detail: `telegram/COURSE-CATALOG.md`.
+
+### CA Foundation Accounting + Business Economics MCQs: fixed, normalized, and made live (2026-08-12, later still)
+
+Finished the job on the 2 new MCQ content sets: built `telegram/tools/
+ingest_ca_foundation_accounting_economics_mcqs.py`, which repaired the 3
+invalid-JSON files (including a real `":="` typo found only once repair
+was attempted), merged both subjects' many scattered per-chapter/unit
+files into 2 clean subject-level files (1,595 Accounting + 918 Economics
+MCQs) per the confirmed one-MCQ-plus-one-Descriptive-per-subject
+convention, and resolved every question's real chapter/unit via a single
+regex against the source's own (inconsistently-formatted but always
+present) unit indicators — no fuzzy topic matching needed.
+
+4 more real defects found and fixed via preflight checks failing loudly,
+not inspection: a Python falsy-zero bug that silently dropped a valid
+`correct_answer: 0`; 3 different per-chapter answer formats (option
+text, a letter, a 0-indexed integer) all needing separate handling; a
+`mc_id`/`mcq_id` key typo; and a `Options`/`options` capitalization typo.
+Also corrected the source data's own inaccurate `exam_type: "MTP"` label
+(these are self-authored practice MCQs, not from a real ICAI paper) to
+`"PRACTICE"`, matching the existing CA Foundation Quant Aptitude
+convention.
+
+Extended `generate_mcq_human_ids.py` with a new `_resolve_by_chapter_
+slug()` resolver — all 2,513 records got a real human_id, idempotent on
+a second run. Added both files to `1lavya-examhub`'s `tenants.json`
+scope and restarted it — confirmed loading both cleanly in its own
+startup log. Admin Portal's Question Bank tab now shows real per-chapter
+counts for both subjects (verified summing to 1,595/918 exactly, plus a
+live screenshot). Content validator 0/0, both course-catalog and
+admin-portal smoke suites still fully passing, `health_check.py`: same
+16 pre-existing failures. Still open: faculty attribution (null, needs
+Pranav's input), duplicate-question detection, and "student tags" — all
+named honestly, not silently dropped. Full detail:
+`telegram/COURSE-CATALOG.md`.
+
+### MCQ_PROMPT.md: AI-model prompt for generating MCQ JSON correctly (2026-08-12)
+
+Pranav asked for a "Skill plus prompt" file to hand to AI models
+generating MCQ JSON from PDFs, so future batches don't need the
+repair/normalize pass the CA Foundation Accounting/Economics batches
+just needed. Built `telegram/base_formats/MCQ_PROMPT.md` — a paste-ready
+system prompt directly encoding every real defect found and fixed this
+session (invalid JSON escaping, inconsistent answer-key formats across
+chapters, field-name typos, and a confirmed case of a chapter_slug
+copy-pasted from `base_formats/mcq_input_example.json`'s own AS-1
+example into an unrelated Economics chapter and never updated). Built on
+`generate_base_formats.py`'s already-existing authoritative field
+contract rather than re-deriving field names. Includes a worked example,
+a JSON validity checklist, content-fidelity rules, and a mandatory
+8-point self-check. Documents that any resulting batch still needs the
+same ingestion-script preflight (duplicate IDs, correct_option validity,
+course_catalog cross-check) — the prompt reduces defects, doesn't
+replace verification. `health_check.py`: same 16 pre-existing issues.
+
+### PM+CTO scale review (100k-student target) + real production bug found and fixed in exam_hub_bot.py (2026-08-12)
+
+Pranav asked for an independent PM+CTO-level review of the whole Telegram
+platform against his real target — 100,000+ students, currently ~100 —
+and separately reported a live bug: MCQ practice silently did nothing
+after selecting Year.
+
+**Review findings** (the feature layer is solid — ledger-based wallet,
+JSON-source-of-truth configs, audit trails, real smoke tests; the
+*infrastructure* layer is still prototype-scale): single local-Windows-PC
+deployment with no auto-restart-on-crash and no real off-machine backups
+(highest-priority gap); every bot opens one SQLite connection at startup
+and reuses it for every concurrent update, blocking its single asyncio
+event loop under contention — untested at any real load; no working
+billing/quota enforcement despite a well-designed `wallet_ledger` schema;
+long-polling (`run_polling()`), no horizontal-scaling path for a single
+popular bot; content requires a full bot restart to reload; dev work
+happens directly against the same `platform.db` file live bots write to
+(no staging environment); the same callback_data-collision bug class has
+now recurred 3+ times; no rate-limiting anywhere; faculty onboarding is
+fully manual (new BotFather token + config + content pipeline run, no
+self-serve). Logged as a durable, brief callout right after §2 of this
+file (**"Telegram platform: known scale-readiness gaps"**) so any future
+session sees it before adding more features on top — full narrative
+review lived only in that session's conversation, not reproduced here in
+full; the callout is the lasting artifact.
+
+**The reported bug, root-caused via the real logs** (not guessed):
+`1lavya-examhub.log` showed `telegram.error.BadRequest: Button_data_invalid`
+firing on `edit_message_text` inside the "year" action's chapter-picker
+build — some content sources (the newly-ingested CA Foundation
+Accounting/Business Economics banks) slugify a full chapter/unit name
+into `chapter_slug` (one over 100 bytes on its own), and putting that raw
+string straight into `callback_data=f"chapter:{slug}"` blew past
+Telegram's hard 64-byte `callback_data` limit — **one bad button broke
+the ENTIRE keyboard for that Year**, not just the long one, so a student
+who picked Year saw the loading spinner clear and then nothing. Fixed by
+carrying a small integer INDEX in callback_data instead (same pattern
+already used for Study Hub's own past fix of this exact bug class — see
+§8) and resolving it back via `context.user_data["chapter_slugs"]`, never
+the raw slug. A second, related bug found in the same logs
+(`KeyError: 'exam_type'`, from `capranav-exam.log`/`csarunchouhan.log`) —
+the `year`/`chapter` actions read prior-step state via raw dict indexing;
+a stale keyboard tapped after a bot restart (in-memory `context.user_data`
+doesn't survive one) crashed silently after `query.answer()` already
+fired. Fixed with a new `_require_state()` helper used everywhere a
+handler reads a prior step's value — shows "session expired, start over"
+instead of crashing. Verified against the real offending data (confirmed
+3 of 71 CA Foundation chapters would have broken the old code; all now
+resolve at 10 bytes) before deploying to `1lavya-examhub`, `capranav-exam`,
+`csarunchouhan` — confirmed clean restarts, 0 new tracebacks.
+
+### Exam Hub rebuilt Mode-first; real Subject-picker gap closed (2026-08-12, same day)
+
+While investigating the callback bug above, confirmed a second real gap
+Pranav suspected: Exam Hub had **no Subject-level picker at all**
+(Course→Level→Mode→ExamType→Year→Chapter, nothing narrowed by Subject) —
+at CA Foundation this already merged 3 separate subjects'
+(Accounting/Business Economics/Quantitative Aptitude) chapters into one
+flat, undifferentiated Chapter list. Asked Pranav which flow order he
+wanted — Subject-before-Mode (minimal change) vs. Mode-first with every
+Course/Level/Subject list derived live from real content (bigger rework,
+never shows a dead end) — he chose **Mode-first**.
+
+Rebuilt `exam_hub_bot.py`'s entire flow as **Mode → Course → Level →
+Subject → Exam Type → Year → Chapter → question**, every step
+auto-skipped when exactly one real option exists, every option list
+derived live from actual loaded content intersected with the tenant's
+`content_scope` (never a hand-maintained "show every course even the
+empty ones, gate later" list — the explicit UX choice behind Pranav's
+pick: a student never taps into a dead end). Two structural pieces:
+
+- **`_resolve_course_level_subject()`** (new) — every question record now
+  resolves to a real `(course, level, subject)` triple, derived from
+  `human_id` (`{COURSE}_L{n}_P{paper}_C{c}_U{u}_{seq}`, already present on
+  nearly every record) joined against the platform's own `course_catalog`
+  DB table — the SAME single-source-of-truth mechanism already used for
+  chapter/unit naming (§ COURSE-CATALOG.md), just applied one level up.
+  This fixed a real correctness gap along the way, not just added a new
+  step: 2 of 3 CA Foundation content files had no `subject` field at all;
+  the flagship's descriptive bank (`book_questions_extracted.json`) had
+  no `course`/`level` field on ANY record at all — a "no course/level
+  field always matches" hack that was only ever correct because exactly
+  one course/level/subject existed in scope when it was written, and
+  would have been silently wrong the moment a second one did. Validated
+  against every real record across every tenant before shipping: 0
+  unresolved ("Unknown").
+- **`resolve_entry()`** (replaces `entry_screen_and_updates()`) — one
+  cascade function reused for BOTH the initial `/start` screen and every
+  mid-flow button tap, removing the pre-existing code's duplicated
+  auto-skip logic between the two (a real simplification, not just a
+  rename). The old hand-maintained `AVAILABLE_DATA`/`COURSES` globals are
+  gone entirely.
+
+`faculty_bot.py` updated to match (calls `eh.resolve_entry(context)`,
+callback-pattern registration gained `subject`). New
+`exam_hub_sessions.subject` DB column (via `db.py`'s `_COLUMN_MIGRATIONS`
+list) for the same drop-off analytics `course`/`level`/`mode` already
+had. Verified via 3 full simulated click-journeys driving the real
+`button_router` against real data (multi-subject CA Foundation MCQ with
+an actual queued question, full-auto-skip CA Inter Descriptive matching
+the pre-rewrite zero-extra-taps behavior exactly, csarunchouhan's CMA
+Foundation/Intermediate subject differentiation) before deploying — all
+passed. Deployed to `1lavya-examhub`, `capranav-exam`, `csarunchouhan`;
+confirmed clean restarts. `README_Bot2_ExamHub.md` rewritten to match the
+new flow.
+
+### Chapter-label duplication fixed, CMA Law MCQs merged into the flagship bot, "Report Issue in MCQ" + a real "I'm Done" summary built (2026-08-13)
+
+Pranav flagged 3 more things after using the rebuilt Exam Hub: (1)
+chapter names showing without Unit distinction, so many chapters looked
+repeated in the picker; (2) CMA Foundation/Intermediate Law MCQs
+(csarunchouhan's content) missing from the flagship `1lavya-examhub` bot,
+since — his stated position — 1LAVYA gave Arun ACCESS to this content for
+his own bot, it isn't his exclusively; (3) wanted a "Report Issue in
+MCQ" 4th button (category + free text, stored for later resolution) and
+a real "I'm Done" summary (today's stats, then the existing report
+offer) instead of "I'm Done" silently resetting.
+
+**Chapter duplication, root-caused via a real data audit, not assumed**:
+CA Foundation Accounting/Business Economics were ingested with a bare
+"Chapt N"/"Chapt. N" `chapter_label` carrying no Unit distinction — e.g.
+literally 7 different real units all labeled "Chapt 1", 4 different units
+all labeled "Chapt 7". The underlying grouping (`chapter_slug`) was
+always correct; only the DISPLAYED label collided. Fixed with a new
+`_disambiguate_chapter_labels()` post-load pass in `exam_hub_bot.py`:
+within each (course, level, subject) scope, detects labels shared by more
+than one distinct `chapter_slug` and appends the real unit/chapter name
+(via the SAME `course_catalog` join mechanism, extended to also capture
+chapter_no/unit_no from `human_id`) — falling back to a title-cased slug
+if even that lookup fails, so nothing is ever left silently ambiguous.
+Deliberately surgical: a label that's already unique (the flagship's
+"AS 11: ..." style) is never touched. Verified: 0 duplicate labels
+remaining in both affected subjects; flagship labels confirmed unchanged.
+
+**CMA Foundation + Intermediate Law MCQs (1,025 questions) added as a
+5th `mcq_json` entry** in `tenants.json`'s `1lavya-examhub` tenant —
+csarunchouhan's own bot is unaffected (still scoped to just his
+`content_scope`). MCQ only in this first pass, per Pranav's literal ask
+that day (descriptive followed later the same day — see below).
+
+**"Report Issue in MCQ" built**: new `telegram/bots/mcq_issue_flow.py`
+(same shape as `profile_flow.py`/`report_flow.py` — the host script owns
+callback registration and `text_router` priority-checking; this module
+never imports `exam_hub_bot.py`/`McqBank` at all, every field it needs is
+passed in by the caller at call time, by deliberate design for reuse and
+zero circular-import risk). New `mcq_issue_reports` DB table (bot_id,
+telegram_user_id, mcq_id, course/level/subject/chapter, `category` —
+wrong_question/wrong_answer/typo_error/wrong_mapping/other — description,
+status, created_at). New 4th button on the MCQ answer screen; category →
+free-text → stored → "Thanks for your report... you may also mail us at
+support@1lavya.com" confirmation, restoring the exact Next/Chapter-List/
+I'm-Done keyboard the student was already looking at. Cancel path
+verified too, same restore behavior.
+
+**"I'm Done" — found a real bug while building the requested feature,
+not just a missing feature**: it was wired to the IDENTICAL bare
+`restart` callback_data as "Start Over" — tapping it silently reset
+straight to the Mode picker, zero summary, ever; not a design choice.
+Fixed: new `imdone` action, new `student_analytics.fetch_today_summary()`
+(platform-wide, UTC calendar day — MCQs attempted/answered/correct,
+descriptive questions viewed, a deliberately simpler "time spent today"
+metric than the full report's all-time session-span number, documented
+as such), shown before offering the SAME existing on-demand report flow
+via `report_flow.py`'s already-built `report:ondemand_yes`/`_no` buttons
+directly — zero new report-delivery code, just setting
+`report_flow_bot_id` the same way that flow's other two entry points
+already do.
+
+All 4 pieces verified end-to-end against real data/the real database
+before deploying (full click-journey simulations, including a real
+category-report round trip confirmed stored correctly with every field,
+the cancel path, and "I'm Done" reading real today's-DB-rows) — not just
+structurally. Deployed to `1lavya-examhub`, `capranav-exam`,
+`csarunchouhan`; confirmed clean restarts, 0 new tracebacks.
+`README_Bot2_ExamHub.md` and `telegram/FIRST_PROMPT.md` updated to match.
+
+### Standing "everything joins the flagship" rule locked in; human_id made genuinely live; MCQ Issue Reports added to the Admin Portal (2026-08-13, later same day)
+
+Pranav extended the CMA-merge decision above into a standing platform
+rule: **every question on the platform — MCQ or descriptive, 1LAVYA-
+authored or faculty-sourced — becomes part of the flagship
+`1lavya-examhub` bot's pool, full stop.** Provenance is tracked via
+tagging, never via withholding content from that pool; a faculty's own
+bot stays narrowly scoped to their own `content_scope`, unaffected. He
+also asked for issue reports to get a real place in the Admin Portal, and
+flagged that the human-readable MCQ ID work from 2026-08-11
+(`generate_mcq_human_ids.py`, see COURSE-CATALOG.md) never actually went
+live — computed, but never shown to anyone or used anywhere.
+
+**csarunchouhan's 47-question descriptive Companies Act bank merged into
+the flagship** — `tenants.json`'s `descriptive_json` became a list (same
+pattern `mcq_json` already used since 2026-08-11). Investigating first
+(never assumed) surfaced a real data-sync bug: the bot-facing file had
+been copied from its raw, already-human-id'd source *before* the
+2026-08-11 human_id retrofit ran — a full field-diff confirmed every
+OTHER field was byte-identical between raw and bot-facing, human_id was
+the ONLY gap, 0 of 47 records had it. Patched directly from the
+already-correct raw source; verified 47/47 correct afterward, 0 NUL
+bytes, valid UTF-8/JSON.
+
+**`_content_owner` provenance tagging built** (`exam_hub_bot.py`) —
+inferred purely from each source file's own path convention
+(`.../faculty/<tenant_id>/...` → that tenant_id; everything else →
+`"1lavya"`) — no per-record field or content-file schema change needed
+anywhere. This is exactly the "content-ownership tagging convention"
+`schema.sql` had documented back on 2026-08-09 but left unwired — now
+wired. Persisted into 2 new DB columns, `content_owner` and `human_id`,
+on both `exam_hub_mcq_attempts` and `exam_hub_descriptive_events` (via
+`db.py`'s migration list, since both tables already had live rows),
+enabling future usage/accuracy breakdowns by content source, not just by
+which bot logged the row. Verified: exactly 3,472 "1lavya" + 1,025
+"csarunchouhan" MCQs, 455 + 47 descriptive — matching expected counts
+precisely, 0 missing `human_id` anywhere in the merged pool.
+
+**`human_id` made genuinely live**: already 100%-covered and globally
+unique across the whole merged pool (verified by direct audit before
+touching anything — 0 duplicates, 0 missing), the gap was purely that it
+was never surfaced. Added as the first line (🆔) of every question's meta
+text, both Descriptive and MCQ. Threaded through the issue-report flow
+too — `mcq_issue_reports` gained its own `human_id` column (added via
+`db.py`'s migration list, since that table had been created earlier the
+SAME day by the CREATE TABLE in schema.sql, and `CREATE TABLE IF NOT
+EXISTS` doesn't retroactively ALTER an already-existing table — a real,
+easy-to-miss gotcha worth remembering for any future same-day
+table-then-column addition), shown on the category-picker screen and the
+thank-you confirmation, so a filed report is always traceable to one
+exact, citable question.
+
+**"MCQ Issue Reports" — new Admin Portal Analytics page**
+(`/analytics/issue-reports`), same paginated/filterable/exportable
+(CSV/Excel/HTML/PDF) shape as every other Analytics view, joined to
+`students` for a display name. Read-only for now — no status-editing UI,
+not asked for (the generic "Data Export" page and direct SQL already
+cover marking a report resolved if needed sooner). Verified with a
+synthetic DB row through Flask's real `test_client()` (login, render, all
+4 export formats, cleanup confirmed), then added as a permanent new step
+in `smoke_test_admin_portal.py` (same insert-verify-cleanup discipline
+the rest of that suite already uses) — full suite re-run clean at
+**110 checks, 0 failures**. **Real-world confirmation, found while
+verifying**: Pranav had
+already filed a genuine issue report through the live bot right after
+the feature's first deploy that same day (a Factories Act MCQ,
+`telegram_user_id` = his own real admin chat ID) — left untouched (real
+user data, not test residue), now visible in this new page.
+
+All 3 pieces verified end-to-end against real data/the real database
+before deploying. Restarted `1lavya-examhub`, `capranav-exam`,
+`csarunchouhan`, `1lavya-admin-portal`; confirmed 0 tracebacks since
+restart in every log (checked from each process's actual restart-marker
+log line, not a naive timestamp-string comparison — the first attempt at
+that check gave a false positive from exactly that mistake).
+`README_Bot2_ExamHub.md`, `database/README.md`, and
+`admin_portal/README.md` updated to match. Full session-by-session detail
+for everything in this and the 3 entries above:
+`_claude/memory/project_log.md`'s 2026-08-12/2026-08-13 entries.
