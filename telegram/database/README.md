@@ -13,8 +13,13 @@ registry this joins against.
 `bot_interactions` log, `bot_heartbeats`, Study Hub's `study_hub_events`,
 Exam Hub's `exam_hub_sessions`/`exam_hub_descriptive_events`/
 `exam_hub_mcq_attempts` (migrated 2026-08-10 from Exam Hub's old separate
-per-tenant `Exam_Bot.db`), and `bot_alert_state` (added 2026-08-10,
-`telegram/bots/watcher_bot.py`'s down/up transition tracking — see below).
+per-tenant `Exam_Bot.db`), `bot_alert_state` (added 2026-08-10,
+`telegram/bots/watcher_bot.py`'s down/up transition tracking — see below),
+and `mcq_issue_reports` (added 2026-08-13, `telegram/bots/mcq_issue_flow.py`'s
+"Report Issue in MCQ" flow — has its own Admin Portal page, see that
+folder's README). `exam_hub_mcq_attempts`/`exam_hub_descriptive_events`
+each also gained `content_owner` and `human_id` columns that same day (see
+"content_owner tagging" below).
 **Still schema-only, not wired into any bot**: `wallet_ledger` and
 `payments` — those were designed for the ₹5,000 faculty-fee / MCQ-credit
 billing model, which hasn't been built into any bot's actual flow yet (no
@@ -184,6 +189,23 @@ SELECT COALESCE(SUM(amount), 0) AS balance
 FROM wallet_ledger WHERE telegram_user_id = ?;
 ```
 
-The "1LAVYA-exclusive vs. faculty content" count isn't in this DB — it comes
-from the catalog artifacts once the `content_owner` tagging convention
-(bottom of `schema.sql`) is applied there.
+## content_owner tagging (wired in 2026-08-13)
+
+`schema.sql` documented a "content-ownership tagging convention"
+(`content_owner` = `"1lavya"` for shared content, or a tenant_id for
+faculty-sourced content) back on 2026-08-09 but left it unwired. It's
+live now: `exam_hub_bot.py`'s `_infer_content_owner()` derives it purely
+from each content file's own path (`.../faculty/<tenant_id>/...` → that
+tenant_id; everything else → `"1lavya"`) at load time — no per-record
+field or content-file schema change needed anywhere — and it's persisted
+into every `exam_hub_mcq_attempts`/`exam_hub_descriptive_events` row.
+This is provenance only, never an access filter: **every question on the
+platform joins the flagship `1lavya-examhub` bot's pool regardless of
+`content_owner`** (a standing rule, see `/CLAUDE.md` §11's 2026-08-13
+entries) — a faculty's own bot separately stays scoped via
+`tenants.json`'s `content_scope`.
+
+```sql
+-- MCQs served, broken down by which tenant's content it actually was
+SELECT content_owner, COUNT(*) FROM exam_hub_mcq_attempts GROUP BY content_owner;
+```

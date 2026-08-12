@@ -105,6 +105,53 @@ def main():
     ).fetchone()
     check("CA Final Financial Reporting ch.11: auxiliary files excluded (6 real units, not 8)", row[0] == 6, str(row))
 
+    # Real, found 2026-08-12 -- a 4th edge case, same collision check, this
+    # time triggered by adding 3 new "Other Laws" PDFs: CA Inter Corporate
+    # and Other Laws' printed chapter numbering restarts at Module 4
+    # (Chapter 1/2/3 for General Clauses Act/Interpretation of Statutes/
+    # FEMA 1999) -- same numbers Module 1 already uses. Offset to continue
+    # the subject's existing sequence (13/14/15) instead of colliding.
+    rows = conn.execute(
+        "SELECT chapter_no, chapter_name FROM course_catalog WHERE course='CA' AND level='Inter' "
+        "AND subject='Corporate and Other Laws' AND chapter_no IN (13, 14, 15) ORDER BY chapter_no"
+    ).fetchall()
+    check("CA Inter Corporate and Other Laws: Module 4's 3 chapters offset to 13/14/15, not colliding with Module 1's 1/2/3",
+          [r[1] for r in rows] == ["The General Clauses Act, 1897", "Interpretation of Statutes",
+                                    "The Foreign Exchange Management Act, 1999"], str(rows))
+    row = conn.execute(
+        "SELECT COUNT(*) FROM course_catalog WHERE course='CA' AND level='Inter' AND subject='Corporate and Other Laws'"
+    ).fetchone()
+    check("CA Inter Corporate and Other Laws: 15 real chapters total (12 Company Law + 3 Other Laws)",
+          row[0] == 15, str(row))
+
+    # Real, found 2026-08-12 (later same day): Pranav asked whether the new
+    # CA Foundation Accounting MCQ set's chapters 8-11 (NPO Financial
+    # Statements / Incomplete Records / Partnership & LLP Accounts / Company
+    # Accounts) matched the real ICAI syllabus. They did -- confirmed against
+    # https://www.icai.org/post/19138, ICAI's own real Study Material PDFs
+    # downloaded and added -- but course_catalog itself had never had those
+    # 4 chapters at all (it stopped at chapter 7, Module 1). Not a collision
+    # this time (Module 2 continues 8-11 sequentially, no restart) -- a
+    # genuine coverage gap, same class of bug as the earlier CA-coverage fix.
+    rows = conn.execute(
+        "SELECT DISTINCT chapter_no FROM course_catalog WHERE course='CA' AND level='Foundation' "
+        "AND subject='Accounting' ORDER BY chapter_no"
+    ).fetchall()
+    check("CA Foundation Accounting: all 11 real chapters present (was capped at 7)",
+          [r[0] for r in rows] == list(range(1, 12)), str(rows))
+    rows = conn.execute(
+        "SELECT unit_no FROM course_catalog WHERE course='CA' AND level='Foundation' "
+        "AND subject='Accounting' AND chapter_no=10 ORDER BY unit_no"
+    ).fetchall()
+    check("CA Foundation Accounting ch.10 (Partnership and LLP Accounts): 7 real units (6 + Annexure II)",
+          [r[0] for r in rows] == [1, 2, 3, 4, 5, 6, 7], str(rows))
+    rows = conn.execute(
+        "SELECT unit_no FROM course_catalog WHERE course='CA' AND level='Foundation' "
+        "AND subject='Accounting' AND chapter_no=11 ORDER BY unit_no"
+    ).fetchall()
+    check("CA Foundation Accounting ch.11 (Company Accounts): 6 real units",
+          [r[0] for r in rows] == [1, 2, 3, 4, 5, 6], str(rows))
+
     print("\n--- Step 2: dry-run population never writes ---")
     before = conn.execute("SELECT MAX(updated_at) FROM course_catalog").fetchone()[0]
     import subprocess

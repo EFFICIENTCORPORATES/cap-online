@@ -12,9 +12,11 @@ Flow:
     /start (or "reset" / a standalone "Hi"/"Hey"/...) -> top-level picker:
         "Study Hub" -> study_hub_bot.py's own entry screen (Browse / free-
                         text search), completely unchanged
-        "Exam Practice Hub" -> exam_hub_bot.py's own Course -> Level ->
-                        Mode -> Exam Type -> Year -> Chapter -> question
-                        flow, completely unchanged
+        "Exam Practice Hub" -> exam_hub_bot.py's own Mode -> Course ->
+                        Level -> Subject -> Exam Type -> Year -> Chapter ->
+                        question flow (Mode-first as of the 2026-08-12
+                        rewrite -- see that file's resolve_entry()),
+                        completely unchanged here
     From INSIDE Study Hub, the existing "Main Menu" button (added to
     study_hub_bot.py's post-download prompt) and any reset trigger now land
     back on THIS bot's top-level picker, not Study Hub's own screen -- see
@@ -22,9 +24,10 @@ Flow:
 
 Nothing in study_hub_bot.py or exam_hub_bot.py's own callback_data schemes
 collides (verified: sh uses browse/cat/crs/lvl/subj/pt/file/mainmenu; eh
-uses course/level/mode/type/year/chapter/answer/pdf/next/mcqopt/restart) --
-both modules' existing handlers are registered directly on ONE Application,
-unmodified.
+uses course/level/mode/subject/type/year/chapter/answer/pdf/next/mcqopt/
+restart -- "subj" vs "subject" are different literal tokens, regex-checked,
+not just eyeballed) -- both modules' existing handlers are registered
+directly on ONE Application, unmodified.
 
 SETUP (do this before running):
 1. Both study_hub_bot.py's and exam_hub_bot.py's own dependencies:
@@ -129,10 +132,11 @@ async def hub_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         user = query.from_user
         eh.db_upsert_student(user)
         context.user_data["session_id"] = eh.db_start_session(user.id)
-        # entry_screen_and_updates() auto-skips the Course/Level picker when
-        # this tenant's content_scope leaves only one real option -- see
-        # its own docstring in exam_hub_bot.py.
-        text, markup, updates = eh.entry_screen_and_updates()
+        # resolve_entry() (renamed from entry_screen_and_updates() in the
+        # 2026-08-12 Mode-first rewrite) auto-skips Course/Level/Subject
+        # when this tenant's content leaves only one real option at that
+        # step -- see its own docstring in exam_hub_bot.py.
+        text, markup, updates = eh.resolve_entry(context)
         if updates:
             context.user_data.update(updates)
             eh.db_update_session(context.user_data["session_id"], **updates)
@@ -147,7 +151,13 @@ async def text_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
     swallow "9876543210" as a garbled catalog query instead of the report
     flow ever seeing it. Same "check the more specific state first" rule as
     exam_hub_bot.py's own text_router, just composed with Study Hub's
-    handler here since this bot has one."""
+    handler here since this bot has one. mcq_issue_flow's awaiting-state is
+    checked FIRST of all (2026-08-13), same "most specific active state
+    first" discipline -- a student mid-way through describing a wrong-
+    answer report should never have that message swallowed by search."""
+    if eh.mcq_issue_flow.is_awaiting_text_input(context):
+        if await eh.mcq_issue_flow.handle_issue_text_input(update, context):
+            return
     if eh.profile_flow.is_awaiting_text_input(context):
         if await eh.profile_flow.handle_profile_text_input(update, context):
             return
@@ -194,7 +204,7 @@ def main():
     # acknowledged at all). Standalone exam_hub_bot.py never had this bug --
     # its own CallbackQueryHandler(button_router) has no pattern restriction.
     # Found 2026-08-10 via a live user report on the csarunchouhan bot.
-    app.add_handler(CallbackQueryHandler(eh.button_router, pattern=r"^(course|level|mode|type|year|chapter|answer|pdf|next|mcqopt|restart)(:|$)"))
+    app.add_handler(CallbackQueryHandler(eh.button_router, pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone)(:|$)"))
     # 2026-08-11: report_flow's callbacks, same as exam_hub_bot.py's own
     # standalone registration -- eh.report_flow is exam_hub_bot.py's own
     # already-imported module reference, not a fresh import here.
@@ -202,6 +212,8 @@ def main():
     # eh.profile_flow is exam_hub_bot.py's own already-imported module
     # reference, same reuse pattern as eh.report_flow directly above.
     app.add_handler(CallbackQueryHandler(eh.profile_flow.profile_flow_callback, pattern=r"^(profile|profileconfirm):"))
+    # eh.mcq_issue_flow, same reuse pattern, added 2026-08-13.
+    app.add_handler(CallbackQueryHandler(eh.mcq_issue_flow.mcq_issue_flow_callback, pattern=r"^(issuecat|issuecancel)(:|$)"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_router))
 
     logger.info(f"Faculty Bot starting for bot_id '{BOT_ID}' (tenant '{TENANT_ID}', {TENANT['display_name']})...")

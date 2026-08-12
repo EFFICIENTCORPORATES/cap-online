@@ -60,17 +60,30 @@ the only missing piece is a `bots.json` row and a real BotFather token.
   Course/Level/Subject picker step that collapses to one real option for a
   narrowly-scoped faculty, and resets on `/start`, "reset", or a standalone
   greeting. Logs to the shared platform DB (see `telegram/database/`).
-- **`exam_hub_bot.py`** (2026-08-10): same `BOT_ID` contract, resolving
-  `JSON_PATH`/`MCQ_JSON_PATH`/`BOT_TOKEN` from `tenant_id`/`bots.json`.
-  `COURSES` is scoped from `content_scope`; `AVAILABLE_DATA` is **computed
-  from the loaded question banks**, never hand-maintained. Both
-  `QuestionBank`/`McqBank` gained course+level-aware filtering so a tenant
-  spanning more than one level (e.g. `csarunchouhan`, Foundation +
-  Intermediate) never bleeds one level's questions into the other. Answers
-  now offer Next/Back-to-Chapter-List/I'm-Done instead of just Next. Now
-  migrated onto the shared platform DB (`exam_hub_sessions`/
-  `exam_hub_descriptive_events`/`exam_hub_mcq_attempts`), replacing its old
-  separate per-tenant `Exam_Bot.db` file.
+- **`exam_hub_bot.py`** (2026-08-10, flow rewritten Mode-first 2026-08-12/13
+  — see `bots/README_Bot2_ExamHub.md` and `/CLAUDE.md` §11 for the full
+  detail, this is the short version): same `BOT_ID` contract, resolving
+  `JSON_PATH`/`MCQ_JSON_PATH`/`BOT_TOKEN` from `tenant_id`/`bots.json` —
+  each now a LIST of sources merged at load time (`descriptive_json`
+  joined `mcq_json` in being list-capable on 2026-08-13). Flow is
+  **Mode → Course → Level → Subject → Exam Type → Year → Chapter**, every
+  step auto-skipped when one real option exists, every list derived live
+  from the loaded question banks intersected with `content_scope` — the
+  old hand-maintained `COURSES`/`AVAILABLE_DATA` globals this bullet used
+  to describe are GONE, replaced by `resolve_entry()`'s cascade. Every
+  record resolves a real (course, level, subject) triple and a globally-
+  unique `human_id` via `course_catalog` (shown on-screen to students).
+  **Standing rule, 2026-08-13**: every question on the platform —
+  1LAVYA-authored or faculty-sourced — joins the flagship
+  `1lavya-examhub` tenant's own `exam_content`, tagged with
+  `_content_owner` for provenance only, never as an access filter; a
+  faculty's own bot stays separately scoped via `content_scope`,
+  unaffected. MCQ answers now offer Next/Back-to-Chapter-List/
+  Report-Issue-in-MCQ/I'm-Done (the last shows a real today's-summary +
+  report offer, not just a reset). Runs on the shared platform DB
+  (`exam_hub_sessions`/`exam_hub_descriptive_events`/
+  `exam_hub_mcq_attempts`, each carrying `content_owner`/`human_id` as of
+  2026-08-13) plus `mcq_issue_reports` (new table, own Admin Portal page).
 - **`telegram/bots/faculty_bot.py`** (2026-08-10): composes both under one
   `/start` picker, for any tenant needing BOTH hubs in one Telegram identity
   (see that file's own docstring for the one deliberate monkeypatch this

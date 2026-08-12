@@ -69,6 +69,7 @@ import exporters  # noqa: E402
 import report_delivery  # noqa: E402 -- telegram/database/report_delivery.py
 import student_analytics  # noqa: E402 -- telegram/database/student_analytics.py
 import generate_student_report  # noqa: E402 -- telegram/tools/generate_student_report.py
+import document_catalog  # noqa: E402 -- telegram/admin_portal/document_catalog.py
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("ADMIN_PORTAL_SECRET_KEY") or os.urandom(32)
@@ -99,6 +100,7 @@ NAV_SECTIONS = [
         {"label": "Faculty Report", "endpoint": "analytics_faculty_report", "icon": "\U0001F4CB", "enabled": True},
         {"label": "Content Health", "endpoint": "analytics_content_health", "icon": "\U0001FA7A", "enabled": True},
         {"label": "Email Analytics", "endpoint": "analytics_email", "icon": "\U0001F4E7", "enabled": True},
+        {"label": "MCQ Issue Reports", "endpoint": "analytics_issue_reports", "icon": "\U0001F6A9", "enabled": True},
     ]},
     {"label": "Data Export", "links": [
         {"label": "Export Any Table", "endpoint": "data_export_index", "icon": "\U00002B07\U0000FE0F", "enabled": True},
@@ -707,13 +709,117 @@ def analytics_email_export(fmt):
 
 
 # ---------------------------------------------------------------------------
+# MCQ ISSUE REPORTS -- added 2026-08-13 (Pranav: "make sure that the issues
+# report given by the student gets a place in the admin dashboard"). Reads
+# mcq_issue_reports (telegram/bots/mcq_issue_flow.py, the "Report Issue in
+# MCQ" flow) -- same read-only/paginated/filterable/exportable shape as
+# every other Analytics view here. No status-editing UI yet (marking a
+# report resolved/dismissed) -- not asked for; the generic "Data Export"
+# page and direct SQL already cover that if needed sooner.
+# ---------------------------------------------------------------------------
+ISSUE_REPORTS_FILTER_FIELDS = ["human_id", "mcq_id", "display_name", "course", "level", "subject",
+                                "chapter_label", "category", "description", "status", "bot_id"]
+
+
+def _get_issue_reports_rows(conn) -> list:
+    rows = conn.execute(
+        """
+        SELECT ir.report_id, ir.bot_id, ir.telegram_user_id,
+               COALESCE(s.first_name || ' ' || COALESCE(s.last_name,''), s.username, 'Student ' || ir.telegram_user_id) AS display_name,
+               ir.mcq_id, ir.human_id, ir.course, ir.level, ir.subject, ir.chapter_label,
+               ir.category, ir.description, ir.status, ir.created_at
+        FROM mcq_issue_reports ir LEFT JOIN students s ON s.telegram_user_id = ir.telegram_user_id
+        ORDER BY ir.report_id DESC
+        """
+    ).fetchall()
+    return [
+        {
+            "report_id": r[0], "bot_id": r[1], "telegram_user_id": r[2], "display_name": r[3],
+            "mcq_id": r[4], "human_id": r[5], "course": r[6], "level": r[7], "subject": r[8],
+            "chapter_label": r[9], "category": r[10], "description": r[11], "status": r[12], "created_at": r[13],
+        }
+        for r in rows
+    ]
+
+
+@app.route("/analytics/issue-reports")
+@auth.role_required("admin")
+def analytics_issue_reports():
+    conn = get_conn()
+    all_rows = _get_issue_reports_rows(conn)
+    q = request.args.get("q", "").strip()
+    filtered = exporters.filter_rows(all_rows, q, ISSUE_REPORTS_FILTER_FIELDS)
+    page = request.args.get("page", 1, type=int)
+    pg = exporters.paginate(filtered, page, per_page=25)
+    open_count = sum(1 for r in all_rows if r["status"] == "open")
+    export_urls = {fmt: url_for("analytics_issue_reports_export", fmt=fmt, q=q) for fmt in ("csv", "xlsx", "html", "pdf")}
+    return render_template(
+        "analytics_issue_reports.html", rows=pg["items"], pagination=pg, filter_query=q,
+        total_filtered=len(filtered), open_count=open_count, total_all=len(all_rows),
+        export_urls=export_urls,
+    )
+
+
+@app.route("/analytics/issue-reports.<fmt>")
+@auth.role_required("admin")
+def analytics_issue_reports_export(fmt):
+    if fmt not in ("csv", "xlsx", "html", "pdf"):
+        return "Unsupported format.", 400
+    conn = get_conn()
+    all_rows = _get_issue_reports_rows(conn)
+    q = request.args.get("q", "").strip()
+    filtered = exporters.filter_rows(all_rows, q, ISSUE_REPORTS_FILTER_FIELDS)
+    cols = ["report_id", "bot_id", "telegram_user_id", "display_name", "mcq_id", "human_id", "course",
+            "level", "subject", "chapter_label", "category", "description", "status", "created_at"]
+    out_rows = [[r.get(c) for c in cols] for r in filtered]
+    audit.log_action(conn, auth.current_user(), "analytics_export", "issue_reports", fmt)
+    if fmt == "csv":
+        return exporters.csv_response(cols, out_rows, "mcq_issue_reports")
+    if fmt == "xlsx":
+        return exporters.xlsx_response(cols, out_rows, "mcq_issue_reports")
+    if fmt == "html":
+        return exporters.html_export_response("MCQ Issue Reports", cols, out_rows, brand_kit.colors(), "mcq_issue_reports")
+    return exporters.pdf_export_response("MCQ Issue Reports", cols, out_rows, brand_kit.colors(), "mcq_issue_reports")
+
+
+# ---------------------------------------------------------------------------
 # CONTENT > Course Catalog -- Course/Level/Subject-wise view of
 # course_catalog (Pranav, 2026-08-11: "I also want to see the Course,
 # Level and Subject wise the Course Catalog"). The single source of truth
 # every MCQ/descriptive question's human_id is now derived from -- see
 # telegram/tools/populate_course_catalog.py / generate_mcq_human_ids.py.
+#
+# Extended 2026-08-12 to 5 tabs, all sharing the same Course/Level/Subject
+# picker (Pranav: "make sure all of my 4 catalogues are live and accurate
+# under the url .../content/course-catalog... You may take help of a
+# dropdown if directly writing is a bit difficult"): the original
+# chapter/unit TAXONOMY view (kept, now one tab among several, not
+# replaced -- nothing that worked before stops working) plus 4 new
+# document/question-level views built on top of it -- see
+# telegram/admin_portal/document_catalog.py for what each one actually
+# queries and why. `catalogue` query param selects the tab; defaults to
+# "study" per Pranav's own framing ("this catalog becomes the study
+# materials catalogue").
 # ---------------------------------------------------------------------------
-COURSE_CATALOG_FILTER_FIELDS = ["chapter_no", "chapter_name", "chapter_name_short", "unit_no", "unit_name"]
+COURSE_CATALOG_VIEWS = ("study", "exam", "revision", "questions", "taxonomy")
+COURSE_CATALOG_VIEW_LABELS = {
+    "study": "Study Materials", "exam": "Exam Materials", "revision": "Revision Material",
+    "questions": "Question Bank", "taxonomy": "Chapter Taxonomy",
+}
+COURSE_CATALOG_FILTER_FIELDS = {
+    "taxonomy": ["chapter_no", "chapter_name", "chapter_name_short", "unit_no", "unit_name"],
+    "study": ["chapter_no", "chapter_name", "chapter_name_short", "status"],
+    "revision": ["chapter_no", "chapter_name", "chapter_name_short", "status"],
+    "exam": ["file_name", "native_title", "paper_type", "session", "set_label", "doc_type"],
+    "questions": ["chapter_no", "chapter_name", "chapter_name_short"],
+}
+COURSE_CATALOG_EXPORT_COLS = {
+    "taxonomy": ["paper_no", "chapter_no", "chapter_name", "chapter_name_short", "unit_no", "unit_name", "unit_name_short", "source"],
+    "study": ["chapter_no", "chapter_name", "chapter_name_short", "file_count", "file_names", "total_pages", "status"],
+    "revision": ["chapter_no", "chapter_name", "chapter_name_short", "file_count", "file_names", "total_pages", "status"],
+    "exam": ["file_name", "native_title", "paper_type", "session", "set_label", "doc_type", "page_count"],
+    "questions": ["chapter_no", "chapter_name", "chapter_name_short", "mcq_count", "descriptive_count", "total_count"],
+}
 
 
 def _format_paper_no(paper_no: str) -> str:
@@ -736,15 +842,61 @@ def _course_catalog_course_levels(conn) -> dict:
     return out
 
 
+def _course_catalog_rows(conn, view, course, level, subject) -> list:
+    """Dispatches to the right query for the selected tab. Every row dict
+    also gets 'chapter_no'/'chapter_name' keys where applicable so the
+    template can render a uniform header regardless of view."""
+    if view == "taxonomy":
+        rows = conn.execute(
+            "SELECT paper_no, chapter_no, chapter_name, chapter_name_short, unit_no, unit_name, unit_name_short, source "
+            "FROM course_catalog WHERE course=? AND level=? AND subject=? ORDER BY chapter_no, unit_no",
+            (course, level, subject),
+        ).fetchall()
+        return [
+            {"paper_no": r[0], "paper_display": _format_paper_no(r[0]), "chapter_no": r[1], "chapter_name": r[2],
+             "chapter_name_short": r[3], "unit_no": r[4], "unit_name": r[5], "unit_name_short": r[6], "source": r[7]}
+            for r in rows
+        ]
+    if view == "study":
+        rows = document_catalog.study_materials_rows(conn, course, level, subject)
+    elif view == "revision":
+        rows = document_catalog.revision_material_rows(conn, course, level, subject)
+    elif view == "exam":
+        rows = document_catalog.exam_materials_rows(course, level, subject)
+    elif view == "questions":
+        rows = document_catalog.question_bank_rows(conn, course, level, subject)
+    else:
+        rows = []
+    # file_names/units are lists in document_catalog's output -- flatten to
+    # a display string here so filter_rows() (which does substring matching
+    # on stringified values) and the export writers both work unmodified.
+    for r in rows:
+        if "file_names" in r:
+            r["file_names"] = ", ".join(r["file_names"]) if r["file_names"] else "—"
+        if "units" in r:
+            r["units"] = ", ".join(r["units"]) if r["units"] else None
+    return rows
+
+
 @app.route("/content/course-catalog")
 @auth.role_required("admin")
 def course_catalog():
+    # A URL-supplied course/level/subject that isn't actually a valid
+    # option (a typo, or "Accounting" when the real CA Inter subject is
+    # "Advanced Accounting") falls back to the first real option instead
+    # of silently querying a value with zero matching rows and rendering
+    # an empty "No chapters match" table with no explanation -- found
+    # 2026-08-12 testing Pranav's own example URL, which named a subject
+    # that only exists at a different level.
     conn = get_conn()
     course_levels = _course_catalog_course_levels(conn)
     courses = list(course_levels.keys())
-    selected_course = request.args.get("course") or (courses[0] if courses else None)
+    requested_course = request.args.get("course")
+    selected_course = requested_course if requested_course in courses else (courses[0] if courses else None)
+
     levels = course_levels.get(selected_course, [])
-    selected_level = request.args.get("level") or (levels[0] if levels else None)
+    requested_level = request.args.get("level")
+    selected_level = requested_level if requested_level in levels else (levels[0] if levels else None)
 
     subjects = []
     if selected_course and selected_level:
@@ -754,37 +906,40 @@ def course_catalog():
                 (selected_course, selected_level),
             ).fetchall()
         ]
-    selected_subject = request.args.get("subject") or (subjects[0] if subjects else None)
+    requested_subject = request.args.get("subject")
+    selected_subject = requested_subject if requested_subject in subjects else (subjects[0] if subjects else None)
+
+    view = request.args.get("catalogue", "study")
+    if view not in COURSE_CATALOG_VIEWS:
+        view = "study"
 
     all_rows = []
     if selected_course and selected_level and selected_subject:
-        rows = conn.execute(
-            "SELECT paper_no, chapter_no, chapter_name, chapter_name_short, unit_no, unit_name, unit_name_short, source "
-            "FROM course_catalog WHERE course=? AND level=? AND subject=? ORDER BY chapter_no, unit_no",
-            (selected_course, selected_level, selected_subject),
-        ).fetchall()
-        all_rows = [
-            {"paper_no": r[0], "paper_display": _format_paper_no(r[0]), "chapter_no": r[1], "chapter_name": r[2],
-             "chapter_name_short": r[3], "unit_no": r[4], "unit_name": r[5], "unit_name_short": r[6], "source": r[7]}
-            for r in rows
-        ]
+        all_rows = _course_catalog_rows(conn, view, selected_course, selected_level, selected_subject)
 
     q = request.args.get("q", "").strip()
-    filtered = exporters.filter_rows(all_rows, q, COURSE_CATALOG_FILTER_FIELDS)
+    filtered = exporters.filter_rows(all_rows, q, COURSE_CATALOG_FILTER_FIELDS[view])
     page = request.args.get("page", 1, type=int)
     pg = exporters.paginate(filtered, page, per_page=50)
 
-    filter_extra = [("course", selected_course), ("level", selected_level), ("subject", selected_subject)]
+    filter_extra = [("course", selected_course), ("level", selected_level), ("subject", selected_subject), ("catalogue", view)]
     export_urls = {
-        fmt: url_for("course_catalog_export", fmt=fmt, q=q, course=selected_course, level=selected_level, subject=selected_subject)
+        fmt: url_for("course_catalog_export", fmt=fmt, q=q, course=selected_course, level=selected_level,
+                      subject=selected_subject, catalogue=view)
         for fmt in ("csv", "xlsx", "html", "pdf")
     } if (selected_course and selected_level and selected_subject) else {}
+
+    tab_urls = {
+        v: url_for("course_catalog", course=selected_course, level=selected_level, subject=selected_subject, catalogue=v)
+        for v in COURSE_CATALOG_VIEWS
+    }
 
     return render_template(
         "course_catalog.html", rows=pg["items"], pagination=pg, filter_query=q,
         courses=courses, levels=levels, subjects=subjects,
         selected_course=selected_course, selected_level=selected_level, selected_subject=selected_subject,
         total_filtered=len(filtered), export_urls=export_urls, filter_extra_fields=filter_extra,
+        view=view, views=COURSE_CATALOG_VIEWS, view_labels=COURSE_CATALOG_VIEW_LABELS, tab_urls=tab_urls,
     )
 
 
@@ -796,24 +951,18 @@ def course_catalog_export(fmt):
     course, level, subject = request.args.get("course"), request.args.get("level"), request.args.get("subject")
     if not (course and level and subject):
         return "course, level, and subject query params are all required.", 400
+    view = request.args.get("catalogue", "study")
+    if view not in COURSE_CATALOG_VIEWS:
+        view = "study"
     conn = get_conn()
-    rows = conn.execute(
-        "SELECT paper_no, chapter_no, chapter_name, chapter_name_short, unit_no, unit_name, unit_name_short, source "
-        "FROM course_catalog WHERE course=? AND level=? AND subject=? ORDER BY chapter_no, unit_no",
-        (course, level, subject),
-    ).fetchall()
-    all_rows = [
-        {"paper_no": r[0], "chapter_no": r[1], "chapter_name": r[2], "chapter_name_short": r[3],
-         "unit_no": r[4], "unit_name": r[5], "unit_name_short": r[6], "source": r[7]}
-        for r in rows
-    ]
+    all_rows = _course_catalog_rows(conn, view, course, level, subject)
     q = request.args.get("q", "").strip()
-    filtered = exporters.filter_rows(all_rows, q, COURSE_CATALOG_FILTER_FIELDS)
-    cols = ["paper_no", "chapter_no", "chapter_name", "chapter_name_short", "unit_no", "unit_name", "unit_name_short", "source"]
+    filtered = exporters.filter_rows(all_rows, q, COURSE_CATALOG_FILTER_FIELDS[view])
+    cols = COURSE_CATALOG_EXPORT_COLS[view]
     out_rows = [[r.get(c) for c in cols] for r in filtered]
-    audit.log_action(conn, auth.current_user(), "analytics_export", f"course_catalog:{course}/{level}/{subject}", fmt)
-    filename = f"course_catalog_{course}_{level}_{subject}".replace(" ", "_")
-    title = f"Course Catalog -- {course} {level} {subject}"
+    audit.log_action(conn, auth.current_user(), "analytics_export", f"course_catalog:{view}:{course}/{level}/{subject}", fmt)
+    filename = f"course_catalog_{view}_{course}_{level}_{subject}".replace(" ", "_")
+    title = f"{COURSE_CATALOG_VIEW_LABELS[view]} -- {course} {level} {subject}"
     if fmt == "csv":
         return exporters.csv_response(cols, out_rows, filename)
     if fmt == "xlsx":

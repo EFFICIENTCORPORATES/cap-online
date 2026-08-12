@@ -107,6 +107,26 @@ UNIT_LABEL_RE = re.compile(r"^Unit\s+([IVX]+|\d+)\b", re.IGNORECASE)
 # that were its own unit).
 AUXILIARY_LABELS = {"comprehensive illustrations", "test your knowledge", "appendix", "case studies", "summary"}
 
+# Real, found 2026-08-12 -- a DIFFERENT collision than the two above,
+# caught by the exact same duplicate-key check when the 3 new "Other
+# Laws" PDFs (General Clauses Act / Interpretation of Statutes / FEMA
+# 1999) were added to the source catalog. CA Inter Corporate and Other
+# Laws is the ONLY CA subject (verified by checking all 17 for this
+# pattern before assuming it's isolated) where the PRINTED chapter
+# numbering genuinely restarts mid-subject: Module 4 ("Other Laws") is
+# Chapter 1/2/3 in ICAI's own material, same numbers Module 1 already
+# uses for "Preliminary"/"Incorporation..."/"Prospectus...". Both are
+# real, correctly-printed chapter numbers -- not a data error -- but this
+# catalog needs one collision-free chapter_no per chapter within a
+# subject, matching how this same subject's Module 1->2->3 already number
+# continuously (7 continues after 6, 12 after 11). So Module 4's local
+# 1/2/3 are offset to continue that sequence: 13/14/15. chapter_name still
+# carries the real printed title, so nothing about the source numbering
+# is hidden, just made addressable.
+CHAPTER_NO_MODULE_OFFSET = {
+    ("Inter", "Corporate and Other Laws", 4): 12,
+}
+
 
 def _parse_unit_from_label(label: str):
     m = UNIT_LABEL_RE.match((label or "").strip())
@@ -256,10 +276,22 @@ def rows_from_studyhub_catalog() -> list:
             missing_in_studyhub.append((level, subject))
             continue
         paper_no = _ca_paper_no(level, subject)
+
+        # Apply the Module-4-restart offset (see CHAPTER_NO_MODULE_OFFSET's
+        # own comment) BEFORE grouping, so a colliding local chapter_no
+        # never reaches groupby() as a duplicate key in the first place.
+        subset = subset.copy()
+        def _effective_chapter_no(row):
+            m = CA_FLAT_FNAME_UNIT_RE.search(row["FileName"])
+            module = int(m.group("module")) if m else None
+            offset = CHAPTER_NO_MODULE_OFFSET.get((level, subject, module), 0)
+            return int(row["ChapterNo"]) + offset
+        subset["EffectiveChapterNo"] = subset.apply(_effective_chapter_no, axis=1)
+
         # Group by chapter_no first, so a multi-unit chapter's units are
         # only distinguished by REAL unit numbers, not by row iteration
         # order (which the dataframe doesn't guarantee is unit-ordered).
-        for chapter_no, group in subset.groupby("ChapterNo"):
+        for chapter_no, group in subset.groupby("EffectiveChapterNo"):
             is_multi_unit = len(group) > 1
             for _, r in group.iterrows():
                 if is_multi_unit and _is_auxiliary_label(r["Label"]):

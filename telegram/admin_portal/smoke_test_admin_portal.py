@@ -46,6 +46,7 @@ def check(label: str, condition: bool, detail: str = ""):
 def _cleanup_audit(conn):
     conn.execute("DELETE FROM admin_actions WHERE target=? OR target LIKE ?", (FAKE_BOT_ID, f"%{SYNTHETIC_MARKER}%"))
     conn.execute("DELETE FROM report_deliveries WHERE criteria LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
+    conn.execute("DELETE FROM mcq_issue_reports WHERE mcq_id LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
     conn.commit()
 
 
@@ -250,22 +251,84 @@ def main():
     resp = client.get("/analytics/email.csv")
     check("Email Analytics .csv export returns 200", resp.status_code == 200)
 
+    print("\n--- Step 14a: Analytics > MCQ Issue Reports (2026-08-13) ---")
+    synthetic_mcq_id = f"{SYNTHETIC_MARKER}-mcq-1"
+    platform_db.log_mcq_issue_report(
+        conn, bot_id="1lavya-examhub", telegram_user_id=999999003, mcq_id=synthetic_mcq_id,
+        human_id="CA_L1_P01_C1_U1_00001", course="CA", level="Foundation", subject="Accounting",
+        chapter_slug="test-slug", chapter_label="Test Chapter", category="wrong_answer",
+        description="Smoke-test synthetic issue report",
+    )
+    resp = client.get("/analytics/issue-reports")
+    check("GET /analytics/issue-reports returns 200", resp.status_code == 200)
+    check("shows the synthetic report's human_id", b"CA_L1_P01_C1_U1_00001" in resp.data)
+    check("shows the synthetic report's description", b"Smoke-test synthetic issue report" in resp.data)
+    check("shows the category", b"wrong_answer" in resp.data)
+    resp = client.get("/analytics/issue-reports.csv")
+    check("MCQ Issue Reports .csv export returns 200", resp.status_code == 200)
+    resp = client.get("/analytics/issue-reports.xlsx")
+    check("MCQ Issue Reports .xlsx export returns 200", resp.status_code == 200)
+    _cleanup_audit(conn)
+    row = conn.execute("SELECT 1 FROM mcq_issue_reports WHERE mcq_id=?", (synthetic_mcq_id,)).fetchone()
+    check("synthetic issue report cleaned up", row is None)
+
     print("\n--- Step 14b: Content > Course Catalog ---")
     resp = client.get("/content/course-catalog")
     check("GET /content/course-catalog (default course/level/subject) returns 200", resp.status_code == 200)
+    check("default view is Study Materials", b"Study Materials" in resp.data)
     resp = client.get("/content/course-catalog?course=CMA&level=Intermediate&subject=Business+Laws+and+Ethics")
     check("GET /content/course-catalog with real CMA subject returns 200", resp.status_code == 200)
+    resp = client.get("/content/course-catalog?course=CMA&level=Intermediate&subject=Business+Laws+and+Ethics&catalogue=taxonomy")
+    check("Chapter Taxonomy tab still works (unchanged legacy view)", resp.status_code == 200)
     check("shows the real Companies Act chapter", b"Companies Act" in resp.data)
     resp = client.get("/content/course-catalog.csv?course=CA&level=Inter&subject=Advanced+Accounting")
     check("Course Catalog .csv export returns 200", resp.status_code == 200)
     resp = client.get("/content/course-catalog.csv")   # missing course/level/subject
     check("Course Catalog export without params returns 400, not a crash", resp.status_code == 400)
 
+    print("\n--- Step 14c: the 4 new document/question catalogue tabs (2026-08-12) ---")
+    for view in ("study", "exam", "revision", "questions"):
+        resp = client.get(f"/content/course-catalog?course=CA&level=Inter&subject=Advanced+Accounting&catalogue={view}")
+        check(f"catalogue={view} tab returns 200", resp.status_code == 200)
+        resp = client.get(f"/content/course-catalog.csv?course=CA&level=Inter&subject=Advanced+Accounting&catalogue={view}")
+        check(f"catalogue={view} .csv export returns 200", resp.status_code == 200)
+
+    # Real regression case: the 3 "Other Laws" PDFs added 2026-08-12, and the
+    # Module-4-chapter-number-restart fix that made them addressable at all
+    # (see populate_course_catalog.py's CHAPTER_NO_MODULE_OFFSET).
+    resp = client.get("/content/course-catalog?course=CA&level=Inter&subject=Corporate+and+Other+Laws&catalogue=study")
+    check("Corporate and Other Laws Study Materials tab returns 200", resp.status_code == 200)
+    check("all 15 real chapters present (12 Company Law + 3 Other Laws, no collision)",
+          len(re.findall(rb"<td>C\d+</td>", resp.data)) == 15)
+    check("Module 4's General Clauses Act chapter shows its real file, not 'missing'",
+          b"General Clauses Act" in resp.data and b"Available" in resp.data)
+
+    # Question Bank tab: real, non-zero counts for a subject with tagged content.
+    resp = client.get("/content/course-catalog?course=CA&level=Inter&subject=Advanced+Accounting&catalogue=questions")
+    check("Question Bank tab shows real (non-zero) MCQ/Descriptive counts, not all-zero placeholders",
+          b">0<" in resp.data and any(str(n).encode() in resp.data for n in (146, 111, 257)))
+
+    # Honest-empty states, not a crash or a fabricated row.
+    resp = client.get("/content/course-catalog?course=CMA&level=Intermediate&subject=Business+Laws+and+Ethics&catalogue=exam")
+    check("Exam Materials tab shows the honest 'not sourced yet' message for a course with no exam papers",
+          b"No Exam Material has been sourced" in resp.data)
+    resp = client.get("/content/course-catalog?course=CA&level=Inter&subject=Advanced+Accounting&catalogue=revision")
+    check("Revision Material tab shows the honest 'not sourced yet' message (folder is genuinely empty)",
+          b"No Revision Material has been sourced" in resp.data)
+
+    # A subject name that doesn't exist at the requested level (Pranav's own
+    # example URL: level=Inter&subject=Accounting, when the real CA Inter
+    # subject is "Advanced Accounting") falls back to a real subject instead
+    # of silently rendering an empty "No chapters match" table.
+    resp = client.get("/content/course-catalog?course=CA&level=Inter&subject=Accounting&catalogue=study")
+    check("An invalid subject falls back to a real one instead of an unexplained empty table",
+          b"No chapters match" not in resp.data and b"Advanced Accounting" in resp.data)
+
     print("\n--- Step 15: every new export/analytics route requires auth ---")
     client.get("/logout")
     for path in ("/export", "/export/students.csv", "/analytics/students", "/analytics/students.csv",
                  "/analytics/bots", "/analytics/faculty-report", "/analytics/content-health", "/analytics/email",
-                 "/content/course-catalog"):
+                 "/analytics/issue-reports", "/content/course-catalog"):
         resp = client.get(path, follow_redirects=False)
         check(f"GET {path} unauthenticated redirects (not served directly)", resp.status_code == 302, f"got {resp.status_code}")
     resp = client.post("/analytics/students/send-report", data={"telegram_user_id": ["1"]}, follow_redirects=False)

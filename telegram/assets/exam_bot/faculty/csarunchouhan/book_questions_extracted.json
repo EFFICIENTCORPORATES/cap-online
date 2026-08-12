@@ -30,7 +30,8 @@
     "source_pdf_page_start": 1,
     "source_pdf_page_end": 2,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00001"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-002",
@@ -63,7 +64,8 @@
     "source_pdf_page_start": 2,
     "source_pdf_page_end": 3,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00002"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-003",
@@ -96,7 +98,8 @@
     "source_pdf_page_start": 3,
     "source_pdf_page_end": 4,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00003"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-004",
@@ -129,7 +132,8 @@
     "source_pdf_page_start": 4,
     "source_pdf_page_end": 5,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00004"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-005",
@@ -162,7 +166,8 @@
     "source_pdf_page_start": 5,
     "source_pdf_page_end": 6,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00005"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-006",
@@ -195,7 +200,8 @@
     "source_pdf_page_start": 6,
     "source_pdf_page_end": 7,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00006"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-007",
@@ -228,7 +234,8 @@
     "source_pdf_page_start": 7,
     "source_pdf_page_end": 9,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00007"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-008",
@@ -261,7 +268,8 @@
     "source_pdf_page_start": 9,
     "source_pdf_page_end": 11,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00008"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-009",
@@ -294,7 +302,8 @@
     "source_pdf_page_start": 11,
     "source_pdf_page_end": 12,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00009"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-010",
@@ -327,7 +336,8 @@
     "source_pdf_page_start": 12,
     "source_pdf_page_end": 13,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00010"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-011",
@@ -360,7 +370,8 @@
     "source_pdf_page_start": 13,
     "source_pdf_page_end": 15,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00011"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-012",
@@ -393,7 +404,8 @@
     "source_pdf_page_start": 15,
     "source_pdf_page_end": 16,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00012"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-013",
@@ -426,7 +438,8 @@
     "source_pdf_page_start": 16,
     "source_pdf_page_end": 17,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00013"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-014",
@@ -459,7 +472,8 @@
     "source_pdf_page_start": 17,
     "source_pdf_page_end": 18,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00014"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-015",
@@ -492,7 +506,8 @@
     "source_pdf_page_start": 18,
     "source_pdf_page_end": 19,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00015"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-016",
@@ -525,7 +540,8 @@
     "source_pdf_page_start": 19,
     "source_pdf_page_end": 20,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00016"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-017",
@@ -558,7 +574,8 @@
     "source_pdf_page_start": 20,
     "source_pdf_page_end": 21,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00017"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-018",
@@ -591,7 +608,8 @@
     "source_pdf_page_start": 21,
     "source_pdf_page_end": 21,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00018"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-019",
@@ -624,7 +642,8 @@
     "source_pdf_page_start": 21,
     "source_pdf_page_end": 24,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00019"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-020",
@@ -657,7 +676,8 @@
     "source_pdf_page_start": 24,
     "source_pdf_page_end": 25,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00020"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-021",
@@ -690,7 +710,8 @@
     "source_pdf_page_start": 25,
     "source_pdf_page_end": 27,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00021"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-022",
@@ -723,7 +744,8 @@
     "source_pdf_page_start": 27,
     "source_pdf_page_end": 27,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00022"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-023",
@@ -756,7 +778,8 @@
     "source_pdf_page_start": 27,
     "source_pdf_page_end": 29,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00023"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-024",
@@ -789,7 +812,8 @@
     "source_pdf_page_start": 29,
     "source_pdf_page_end": 30,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00024"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-025",
@@ -822,7 +846,8 @@
     "source_pdf_page_start": 30,
     "source_pdf_page_end": 33,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00025"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-026",
@@ -855,7 +880,8 @@
     "source_pdf_page_start": 33,
     "source_pdf_page_end": 34,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00026"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-027",
@@ -888,7 +914,8 @@
     "source_pdf_page_start": 34,
     "source_pdf_page_end": 35,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00027"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-028",
@@ -921,7 +948,8 @@
     "source_pdf_page_start": 35,
     "source_pdf_page_end": 36,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00028"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-029",
@@ -954,7 +982,8 @@
     "source_pdf_page_start": 36,
     "source_pdf_page_end": 38,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00029"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-030",
@@ -987,7 +1016,8 @@
     "source_pdf_page_start": 38,
     "source_pdf_page_end": 39,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00030"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-031",
@@ -1020,7 +1050,8 @@
     "source_pdf_page_start": 39,
     "source_pdf_page_end": 40,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00031"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-032",
@@ -1053,7 +1084,8 @@
     "source_pdf_page_start": 40,
     "source_pdf_page_end": 41,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00032"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-033",
@@ -1086,7 +1118,8 @@
     "source_pdf_page_start": 41,
     "source_pdf_page_end": 43,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00033"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-034",
@@ -1119,7 +1152,8 @@
     "source_pdf_page_start": 43,
     "source_pdf_page_end": 44,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00034"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-035",
@@ -1152,7 +1186,8 @@
     "source_pdf_page_start": 44,
     "source_pdf_page_end": 46,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00035"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-036",
@@ -1185,7 +1220,8 @@
     "source_pdf_page_start": 46,
     "source_pdf_page_end": 47,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00036"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-037",
@@ -1218,7 +1254,8 @@
     "source_pdf_page_start": 47,
     "source_pdf_page_end": 48,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00037"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-038",
@@ -1251,7 +1288,8 @@
     "source_pdf_page_start": 48,
     "source_pdf_page_end": 49,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00038"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-039",
@@ -1284,7 +1322,8 @@
     "source_pdf_page_start": 49,
     "source_pdf_page_end": 51,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00039"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-040",
@@ -1317,7 +1356,8 @@
     "source_pdf_page_start": 51,
     "source_pdf_page_end": 52,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00040"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-041",
@@ -1350,7 +1390,8 @@
     "source_pdf_page_start": 52,
     "source_pdf_page_end": 54,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00041"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-042",
@@ -1383,7 +1424,8 @@
     "source_pdf_page_start": 54,
     "source_pdf_page_end": 56,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00042"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-043",
@@ -1416,7 +1458,8 @@
     "source_pdf_page_start": 56,
     "source_pdf_page_end": 57,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00043"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-044",
@@ -1449,7 +1492,8 @@
     "source_pdf_page_start": 57,
     "source_pdf_page_end": 60,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00044"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-045",
@@ -1482,7 +1526,8 @@
     "source_pdf_page_start": 60,
     "source_pdf_page_end": 62,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00045"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-046",
@@ -1515,7 +1560,8 @@
     "source_pdf_page_start": 62,
     "source_pdf_page_end": 64,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00046"
   },
   {
     "book_id": "CMAINTLAW-COMPANIESACT-047",
@@ -1548,6 +1594,7 @@
     "source_pdf_page_start": 64,
     "source_pdf_page_end": 65,
     "publication_status": "draft",
-    "validation_status": "extracted_needs_review"
+    "validation_status": "extracted_needs_review",
+    "human_id": "CMA_L2_P05_C12_U0_00047"
   }
 ]

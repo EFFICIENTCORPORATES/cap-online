@@ -534,3 +534,38 @@ CREATE TABLE IF NOT EXISTS course_catalog (
 CREATE UNIQUE INDEX IF NOT EXISTS idx_course_catalog_key
     ON course_catalog(course, level, paper_no, chapter_no, unit_no);
 CREATE INDEX IF NOT EXISTS idx_course_catalog_lookup ON course_catalog(course, level, subject);
+
+-- ===========================================================================
+-- MCQ ISSUE REPORTS -- added 2026-08-13. A student can flag a problem with
+-- an MCQ directly from the "Correct Answer" screen ("Report Issue in MCQ"
+-- button) -- see telegram/bots/mcq_issue_flow.py for the full
+-- category-picker + free-text conversational flow this table supports.
+-- No admin-UI triage is built yet -- rows are visible today via the Admin
+-- Portal's existing generic "Data Export -> any real table" page (already
+-- works for any table with zero new code, per its own design), and via
+-- direct SQL. A dedicated triage view is a natural future Admin Portal
+-- module, not built in this pass.
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS mcq_issue_reports (
+    report_id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    bot_id                TEXT NOT NULL,
+    telegram_user_id      INTEGER NOT NULL,
+    mcq_id                 TEXT NOT NULL,
+    human_id                TEXT,   -- the globally-unique, student-facing question ID (see COURSE-CATALOG.md) -- added 2026-08-13, alongside the internal mcq_id
+    course                  TEXT,
+    level                    TEXT,
+    subject                   TEXT,
+    chapter_slug               TEXT,
+    chapter_label               TEXT,
+    category                     TEXT NOT NULL CHECK (category IN (
+                                      'wrong_question', 'wrong_answer', 'typo_error',
+                                      'wrong_mapping', 'other'
+                                  )),
+    description                   TEXT NOT NULL,
+    status                         TEXT NOT NULL DEFAULT 'open' CHECK (status IN ('open', 'resolved', 'dismissed')),
+    created_at                      TEXT NOT NULL,
+    resolved_at                      TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_mcq_issue_reports_mcq    ON mcq_issue_reports(mcq_id);
+CREATE INDEX IF NOT EXISTS idx_mcq_issue_reports_status ON mcq_issue_reports(status, created_at);

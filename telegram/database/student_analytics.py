@@ -220,6 +220,62 @@ def fetch_student_report_data(conn, telegram_user_id: int, since: str = None, la
     }
 
 
+def fetch_today_summary(conn, telegram_user_id: int) -> dict:
+    """Lightweight "how did today go" snapshot -- added 2026-08-13 for the
+    "I'm Done" button (exam_hub_bot.py), distinct from
+    fetch_student_report_data()'s full report (whose "time on bot" is
+    deliberately ALWAYS all-time, see that function's own docstring).
+    "Today" is a UTC calendar day (matches every timestamp in this schema,
+    which is stored in UTC via db.py's now()) -- platform-wide, same
+    centralized-account reasoning as everything else in this module.
+
+    "Time spent today" here is a deliberately SIMPLER metric than the full
+    report's session-span one: the sum of each individual question's
+    shown->answered (MCQ) / shown->answer_shown (descriptive) gap, for
+    only today's questions, capped at MAX_REASONABLE_SECONDS_PER_QUESTION
+    per question (same cap the full report uses) -- good enough for a
+    quick same-session summary, not a slice of the full report's own
+    number (which counts idle-session gaps differently -- see that
+    function's docstring for why the two are intentionally not the same
+    computation)."""
+    mcq_rows = conn.execute(
+        "SELECT shown_at, answered_at, is_correct FROM exam_hub_mcq_attempts "
+        "WHERE telegram_user_id=? AND date(shown_at)=date('now')",
+        (telegram_user_id,),
+    ).fetchall()
+    desc_rows = conn.execute(
+        "SELECT shown_at, answer_shown_at FROM exam_hub_descriptive_events "
+        "WHERE telegram_user_id=? AND date(shown_at)=date('now')",
+        (telegram_user_id,),
+    ).fetchall()
+
+    mcq_shown = len(mcq_rows)
+    mcq_answered = sum(1 for _, a, _ in mcq_rows if a is not None)
+    mcq_correct = sum(1 for _, _, c in mcq_rows if c == 1)
+    descriptive_shown = len(desc_rows)
+
+    seconds = []
+    for shown_at, answered_at, _ in mcq_rows:
+        if shown_at and answered_at:
+            secs = _seconds_between(shown_at, answered_at)
+            if secs >= 0:
+                seconds.append(min(secs, MAX_REASONABLE_SECONDS_PER_QUESTION))
+    for shown_at, answer_shown_at in desc_rows:
+        if shown_at and answer_shown_at:
+            secs = _seconds_between(shown_at, answer_shown_at)
+            if secs >= 0:
+                seconds.append(min(secs, MAX_REASONABLE_SECONDS_PER_QUESTION))
+
+    return {
+        "mcq_shown": mcq_shown,
+        "mcq_answered": mcq_answered,
+        "mcq_correct": mcq_correct,
+        "descriptive_shown": descriptive_shown,
+        "questions_attempted_today": mcq_shown + descriptive_shown,
+        "time_spent_today_seconds": round(sum(seconds)),
+    }
+
+
 def platform_wide_mcq_answered_count(conn, telegram_user_id: int) -> int:
     """Used by the 20-question milestone trigger -- platform-wide, all
     bots, all time, ANSWERED (not just shown) MCQs. A dedicated small

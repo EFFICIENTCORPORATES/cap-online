@@ -1,23 +1,46 @@
 """
 1Lavya Exam Hub Bot (Bot 2)
 ----------------------------
-Drill-down exam practice bot:
-  Course (CA / CS / CMA)
-    -> Level (per course, e.g. Foundation / Inter / Final)
-      -> [if no question data yet for that Course+Level: say so, offer restart]
-      -> Mode (Descriptive / MCQ)
-        Descriptive:
-          Exam Type (MTP / RTP / PYQ / Mix)
+Drill-down exam practice bot, Mode-first as of the 2026-08-12/13 rewrite
+(see /CLAUDE.md section 11's last several dated entries for the full
+"why" behind every decision below -- this is the short version):
+
+  Mode (Descriptive / MCQ)
+    -> Course (CA / CS / CMA)
+      -> Level (per course, e.g. Foundation / Inter / Final)
+        -> Subject (e.g. CA Foundation: Accounting / Business Economics /
+           Quantitative Aptitude -- added 2026-08-13, previously MISSING
+           entirely, which silently merged every subject's chapters into
+           one undifferentiated list)
+          -> Exam Type (MTP / RTP / PYQ / Mix)
             -> Year (or Mix - all years)
               -> Chapter (or All Chapters)
-                -> Shows a question -> "Show Answer?" -> answer (text) + PDF download
-        MCQ:
-          Exam Type (MTP / RTP / PYQ / Mix)
-            -> Year (or Mix - all years)
-              -> Chapter (or All Chapters)
-                -> Shows a question + up to 4 options as buttons
-                  -> student taps an option -> immediately shown correct/incorrect,
-                     the correct answer, and its explanation -> "Next Question"
+                Descriptive: -> Shows a question -> "Show Answer?" ->
+                  answer (text) + PDF download
+                MCQ: -> Shows a question + up to 4 options as buttons ->
+                  student taps an option -> immediately shown correct/
+                  incorrect, the correct answer, its explanation, and a
+                  "Report Issue in MCQ" button -> Next Question /
+                  Chapter List / I'm Done (a real today's-summary +
+                  report offer, not just a reset)
+
+EVERY step above is auto-skipped when only one real option exists, and
+every option list is derived LIVE from what's actually loaded (never a
+hand-maintained "show everything, gate later" list) -- a student never
+taps into a dead end. See resolve_entry()'s own docstring for the
+cascade mechanics.
+
+CONTENT POOL, standing rule (2026-08-13): every question on the platform
+-- 1LAVYA-authored or faculty-sourced -- is part of THIS bot's pool, no
+exceptions (a faculty's own bot stays separately, narrowly scoped via
+their own tenants.json content_scope). Provenance is tracked via
+_content_owner (inferred from each content file's own path), never via
+withholding content here.
+
+Every question record resolves a real (course, level, subject) triple
+and a globally-unique, student-facing human_id (shown on-screen, first
+line of every question) via course_catalog -- see
+_resolve_course_level_subject()'s own docstring.
 
 Every question shown, answer reveal, PDF request, and MCQ attempt (selected
 option + correct/incorrect) is logged to the shared platform database (see
@@ -33,8 +56,9 @@ SETUP (do this before running):
    original behavior; also accepts the older TENANT_ID name as a fallback
    for single-bot tenants, e.g. "csarunchouhan"). BOT_ID selects a bots.json
    row (which token/script); that row's tenant_id selects a
-   telegram/config/tenants.json row (JSON_PATH/MCQ_JSON_PATH/Course-Level
-   menu all come from there).
+   telegram/config/tenants.json row -- JSON_PATH/MCQ_JSON_PATH (each a LIST
+   of files as of 2026-08-11, merged at load time -- see
+   _load_and_merge_json_sources()) come from that row's exam_content.
 3. Faculty bot tokens resolve via the env var named in their bots.json
    `bot_token_env` field -- put the real value in telegram/.env (gitignored).
    This script loads telegram/.env automatically.
@@ -71,8 +95,10 @@ from telegram.ext import (
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
+import student_analytics  # noqa: E402 -- telegram/database/student_analytics.py, for the "I'm Done" today-summary (2026-08-13)
 import report_flow  # noqa: E402 -- telegram/bots/report_flow.py, the 20-question milestone report pipeline (2026-08-11)
 import profile_flow  # noqa: E402 -- telegram/bots/profile_flow.py, the "profile"/"change profile" identity flow (2026-08-11)
+import mcq_issue_flow  # noqa: E402 -- telegram/bots/mcq_issue_flow.py, the "Report Issue in MCQ" flow (2026-08-13)
 
 # ---------------------------------------------------------------------------
 # CONFIG
@@ -162,33 +188,14 @@ def with_brand_html(text: str) -> str:
 MIX_LABEL = "\U0001F500 Mix (All)"
 ALL_CHAPTERS_LABEL = "\U0001F4DA All Chapters"
 
-# Course -> ordered list of Levels, shown in the menu. "ALL" scope
-# (1LAVYA's flagship) keeps every course/level visible up front even
-# where no question data exists yet (per Pranav's instruction,
-# 2026-08-08) -- AVAILABLE_DATA below still gates entry into a
-# combination with no real content. A scoped (faculty) tenant only ever
-# sees the courses/levels its own content_scope licenses -- showing e.g.
-# "CA Foundation" on a Law-only faculty's bot would be actively wrong,
-# not just incomplete.
-if TENANT["content_scope"] == "ALL":
-    COURSES = {
-        "CA": ["Foundation", "Inter", "Final"],
-        "CS": ["Foundation", "Executive", "Professional"],
-        "CMA": ["Foundation", "Inter", "Final"],
-    }
-else:
-    COURSES = {}
-    for _s in TENANT["content_scope"]:
-        COURSES.setdefault(_s["course"], [])
-        if _s["level"] not in COURSES[_s["course"]]:
-            COURSES[_s["course"]].append(_s["level"])
-
-# (course, level) pairs that actually have question data behind them --
-# computed from whatever's really in the loaded banks (see bank/mcq_bank
-# below) rather than hand-maintained, so this can never drift out of sync
-# with the data itself. A course/level not in here still shows in the
-# menu (for "ALL" scope) but resolves to a "not available yet" message.
-AVAILABLE_DATA = set()
+# 2026-08-12: content_scope is now consumed as a (course, level, subject)
+# allow-list (SCOPE_TRIPLES, defined after the banks load below) rather
+# than the old course->levels dict -- see "COURSE/LEVEL/SUBJECT
+# RESOLUTION" further down for why, and CLAUDE.md/FIRST_PROMPT.md's
+# 2026-08-12 entries for the flow-order decision this replaced (Mode is
+# now asked FIRST, then Course/Level/Subject are derived from real
+# content + this allow-list, never a hand-maintained "show every course
+# even empty ones" list -- Pranav's explicit choice).
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
@@ -246,10 +253,11 @@ def db_log_descriptive_shown(user_id, session_id, q, course, level, exam_type, y
         DB_CONN,
         """INSERT INTO exam_hub_descriptive_events
            (bot_id, telegram_user_id, session_id, book_id, course, level, exam_type, year,
-            chapter_slug, chapter_label, qno_text, marks_text, shown_at)
-           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+            chapter_slug, chapter_label, qno_text, marks_text, shown_at, content_owner, human_id)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
         (BOT_ID, user_id, session_id, q.get("book_id"), course, level, exam_type, year,
-         chapter_slug, chapter_label, q.get("qno_text"), q.get("marks_text"), now),
+         chapter_slug, chapter_label, q.get("qno_text"), q.get("marks_text"), now,
+         q.get("_content_owner"), q.get("human_id")),
     )
     # Capture the new row's id BEFORE log_interaction()'s own INSERT runs --
     # last_insert_rowid() is connection-global, not table-specific, so
@@ -284,11 +292,13 @@ def db_log_mcq_shown(user_id, session_id, q, course, level) -> int:
         DB_CONN,
         """INSERT INTO exam_hub_mcq_attempts
            (bot_id, telegram_user_id, session_id, mcq_id, course, level, exam_type, year,
-            chapter_slug, chapter_label, qno_text, marks, difficulty, correct_option, shown_at)
-           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+            chapter_slug, chapter_label, qno_text, marks, difficulty, correct_option, shown_at,
+            content_owner, human_id)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
         (BOT_ID, user_id, session_id, q.get("mcq_id"), course, level, q.get("exam_type"), q.get("year"),
          q.get("chapter_slug"), q.get("chapter_label"), q.get("qno_text"), q.get("marks"),
-         q.get("difficulty"), q.get("correct_option"), now),
+         q.get("difficulty"), q.get("correct_option"), now,
+         q.get("_content_owner"), q.get("human_id")),
     )
     # Same "capture before log_interaction's own insert" reasoning as
     # db_log_descriptive_shown above.
@@ -309,6 +319,24 @@ def db_log_mcq_answered(attempt_id, selected_option, is_correct):
 # ---------------------------------------------------------------------------
 # DATA LOADING
 # ---------------------------------------------------------------------------
+_FACULTY_PATH_RE = re.compile(r"[/\\]faculty[/\\]([^/\\]+)[/\\]")
+
+
+def _infer_content_owner(path: str) -> str:
+    """Which tenant a content file's questions were sourced/generated by --
+    added 2026-08-13 per Pranav's standing rule ("everything becomes part
+    of the flagship bot, there is just the key tagging that will identify
+    actually sourced by and generated by"). Inferred purely from the
+    file's own path convention -- no per-record field needed, no schema
+    change to any content file: anything under a `.../faculty/<tenant_id>/`
+    folder is that tenant's own sourced content; everything else (the
+    flagship's own auto-generated/ingested batches) is "1lavya". Matches
+    the SAME convention this platform already documented (but never wired
+    up) in schema.sql's own "content-ownership tagging" comment."""
+    m = _FACULTY_PATH_RE.search(str(path))
+    return m.group(1) if m else "1lavya"
+
+
 def _load_and_merge_json_sources(json_paths, id_field, kind_label, logger):
     """Shared by QuestionBank/McqBank below: read every path in json_paths
     (already a list, or None), concatenate their records, and warn (never
@@ -317,7 +345,10 @@ def _load_and_merge_json_sources(json_paths, id_field, kind_label, logger):
     would silently shadow one source's record with another's rather than
     erroring, exactly the bug class validate_content_json.py's own
     duplicate-id check exists to catch on a single file; this is that same
-    check applied across merged files."""
+    check applied across merged files. Also tags every record with
+    `_content_owner` (see _infer_content_owner() above) -- purely
+    informational provenance, never a visibility/access filter (that's
+    still SCOPE_TRIPLES/content_scope's job, unaffected by this)."""
     if not json_paths:
         logger.warning(f"{kind_label}: no content configured for this tenant -- starting empty.")
         return []
@@ -333,9 +364,142 @@ def _load_and_merge_json_sources(json_paths, id_field, kind_label, logger):
             logger.warning(f"{kind_label}: {len(dupes)} {id_field}(s) from {path} collide with an "
                             f"earlier source and will be shadowed: {sorted(dupes)}")
         seen_ids.update(r.get(id_field) for r in data)
+        owner = _infer_content_owner(path)
+        for r in data:
+            r["_content_owner"] = owner
         combined.extend(data)
         logger.info(f"{kind_label}: loaded {len(data)} record(s) from {path}")
     return combined
+
+
+# ---------------------------------------------------------------------------
+# COURSE/LEVEL/SUBJECT RESOLUTION -- added 2026-08-12
+# ---------------------------------------------------------------------------
+# Every question record resolves to a real (course, level, subject) triple,
+# derived from the platform's own course_catalog DB table (see
+# database/schema.sql) via human_id -- never hand-typed per content file.
+# This replaced two real gaps found the same day: (1) 2 of 3 CA Foundation
+# content files (Accounting, Business Economics) never had an explicit
+# "subject" field at all -- only Quantitative Aptitude did; (2) the
+# flagship's descriptive bank (book_questions_extracted.json) has no
+# course/level field on ANY record (its schema predates multi-course
+# support) and used to rely on a "no course/level field always matches"
+# hack -- correct only because this platform had exactly one course/level/
+# subject in scope when that was written, and silently wrong the moment a
+# second one existed. human_id (already on every MCQ record and most
+# descriptive records) encodes course/level_num/paper_no
+# (e.g. "CA_L1_P04_C1_U1_00001") -- joining that back to course_catalog is
+# the SAME mechanism the platform already uses for chapter/unit naming
+# (see COURSE-CATALOG.md), just applied one level up. Validated 2026-08-12
+# against every real record across every tenant's content: 0 unresolved
+# ("Unknown") records.
+_HUMAN_ID_RE = re.compile(r"^([A-Z]+)_L(\d+)_P(\d+[A-Z]?)_C(\d+)_U(\d+)_(\d+)$")
+
+
+def _build_catalog_lookup(conn) -> dict:
+    """(course, level_num, paper_no) -> (level_name, subject), from every
+    distinct row in course_catalog. Built once at bot startup -- the table
+    is small (~1000 rows) and static within a process's lifetime."""
+    rows = conn.execute(
+        "SELECT DISTINCT course, level_num, paper_no, level, subject FROM course_catalog"
+    ).fetchall()
+    return {(course, str(level_num), paper_no): (level, subject) for course, level_num, paper_no, level, subject in rows}
+
+
+def _build_chapter_catalog_lookup(conn) -> dict:
+    """(course, level_num, paper_no, chapter_no, unit_no) -> a real chapter/
+    unit name (short form preferred), for the Chapter-label disambiguation
+    pass below."""
+    rows = conn.execute(
+        "SELECT course, level_num, paper_no, chapter_no, unit_no, chapter_name_short, chapter_name FROM course_catalog"
+    ).fetchall()
+    lookup = {}
+    for course, level_num, paper_no, chapter_no, unit_no, name_short, name in rows:
+        lookup[(course, str(level_num), paper_no, str(chapter_no), str(unit_no))] = name_short or name
+    return lookup
+
+
+_CATALOG_LOOKUP = _build_catalog_lookup(DB_CONN)
+_CHAPTER_CATALOG_LOOKUP = _build_chapter_catalog_lookup(DB_CONN)
+
+
+def _resolve_course_level_subject(q: dict) -> tuple:
+    """Returns (course, level, subject) for a question record -- explicit
+    fields win where present; anything missing/None is derived from
+    human_id via _CATALOG_LOOKUP. Falls back to "Unknown" only if
+    human_id is missing/unparseable or the catalog has no matching row (a
+    real content-authoring gap -- logged loudly, never silently guessed
+    past, same discipline as every other null-handling fix in this file)."""
+    course, level, subject = q.get("course"), q.get("level"), q.get("subject")
+    if course and level and subject:
+        return course, level, subject
+
+    m = _HUMAN_ID_RE.match(q.get("human_id") or "")
+    if not m:
+        return course or "Unknown", level or "Unknown", subject or "Unknown"
+
+    hid_course, level_num, paper_no = m.group(1), m.group(2), m.group(3).lstrip("0") or "0"
+    looked_up = _CATALOG_LOOKUP.get((hid_course, level_num, paper_no))
+    if not looked_up:
+        logger.warning(
+            f"No course_catalog match for human_id {q.get('human_id')!r} "
+            f"(course={hid_course}, level_num={level_num}, paper_no={paper_no}) -- "
+            f"this record's course/level/subject will show as 'Unknown'."
+        )
+        return course or hid_course, level or "Unknown", subject or "Unknown"
+
+    catalog_level, catalog_subject = looked_up
+    return course or hid_course, level or catalog_level, subject or catalog_subject
+
+
+def _disambiguate_chapter_labels(questions: list) -> None:
+    """Second resolution pass, added 2026-08-13 -- runs AFTER course/level/
+    subject are resolved. Within each (course, level, subject) group, if
+    the same `chapter_label` string is shared by more than one distinct
+    `chapter_slug`, the Chapter picker shows identical-looking buttons
+    that actually lead to different question sets (confirmed live: CA
+    Foundation Accounting/Business Economics were ingested with a bare
+    "Chapt N"/"Chapt. N" label carrying no Unit distinction -- e.g.
+    "Chapt 1" shared by 7 genuinely different units, "Chapt 7" by 4 --
+    exactly Pranav's report, "many chapters are simply coming repeated").
+
+    Resolves ONLY the colliding groups -- a label that's already unique
+    (the flagship's "AS 11: ..." style labels, CMA's real per-chapter Act
+    names) is never touched, so already-good labels don't get a
+    redundant/worse suffix. Disambiguates by appending the real chapter/
+    unit name from course_catalog (via human_id ->
+    (course, level_num, paper_no, chapter_no, unit_no), the SAME join
+    mechanism _resolve_course_level_subject uses) -- falling back to a
+    title-cased chapter_slug if even that lookup fails, so a label is
+    NEVER left silently ambiguous either way.
+
+    Sets q["_chapter_label"] on every record -- QuestionBank/McqBank's
+    chapters() methods must read that, never the raw `chapter_label`
+    field, from here on."""
+    groups = {}  # (course, level, subject, raw_label) -> set of chapter_slug
+    for q in questions:
+        raw_label = q.get("chapter_label") or (q.get("chapter_slug") or "unknown")
+        key = (q["_course"], q["_level"], q["_subject"], raw_label)
+        groups.setdefault(key, set()).add(q.get("chapter_slug") or "unknown")
+
+    ambiguous_keys = {k for k, slugs in groups.items() if len(slugs) > 1}
+
+    for q in questions:
+        raw_label = q.get("chapter_label") or (q.get("chapter_slug") or "unknown")
+        key = (q["_course"], q["_level"], q["_subject"], raw_label)
+        if key not in ambiguous_keys:
+            q["_chapter_label"] = raw_label
+            continue
+
+        m = _HUMAN_ID_RE.match(q.get("human_id") or "")
+        catalog_name = None
+        if m:
+            hid_course, level_num, paper_no = m.group(1), m.group(2), m.group(3).lstrip("0") or "0"
+            chapter_no, unit_no = m.group(4), m.group(5)
+            catalog_name = _CHAPTER_CATALOG_LOOKUP.get((hid_course, level_num, paper_no, chapter_no, unit_no))
+        if not catalog_name:
+            catalog_name = (q.get("chapter_slug") or "unknown").replace("-", " ").title()
+        q["_chapter_label"] = f"{raw_label}: {catalog_name}"
 
 
 class QuestionBank:
@@ -355,6 +519,8 @@ class QuestionBank:
             # those fields (the flagship's real MTP/RTP/PYQ data).
             q["_exam_type"] = q.get("exam_type") or self._detect_exam_type(q.get("src_text", ""))
             q["_year"] = q.get("year") or self._detect_year(q.get("src_text", ""))
+            q["_course"], q["_level"], q["_subject"] = _resolve_course_level_subject(q)
+        _disambiguate_chapter_labels(self.questions)
 
     @staticmethod
     def _detect_exam_type(src_text: str) -> str:
@@ -374,16 +540,25 @@ class QuestionBank:
         m = re.search(r"(20\d{2})", src_text or "")
         return m.group(1) if m else "Unknown"
 
-    def exam_types(self, course=None, level=None):
-        return sorted({q["_exam_type"] for q in self._by_course_level(course, level)})
+    def courses(self):
+        return sorted({q["_course"] for q in self.questions})
 
-    def years(self, exam_type, course=None, level=None):
-        pool = self._by_course_level(course, level)
+    def levels(self, course):
+        return sorted({q["_level"] for q in self.questions if q["_course"] == course})
+
+    def subjects(self, course, level):
+        return sorted({q["_subject"] for q in self.questions if q["_course"] == course and q["_level"] == level})
+
+    def exam_types(self, course, level, subject):
+        return sorted({q["_exam_type"] for q in self._by_scope(course, level, subject)})
+
+    def years(self, exam_type, course, level, subject):
+        pool = self._by_scope(course, level, subject)
         subset = pool if exam_type == "MIX" else [q for q in pool if q["_exam_type"] == exam_type]
         return sorted({q["_year"] for q in subset})
 
-    def chapters(self, exam_type, year, course=None, level=None):
-        subset = self._filter(exam_type, year, course, level)
+    def chapters(self, exam_type, year, course, level, subject):
+        subset = self._filter(exam_type, year, course, level, subject)
         seen = {}
         for q in subset:
             # `.get(key, default)` only substitutes when the key is ABSENT --
@@ -391,34 +566,31 @@ class QuestionBank:
             # faculty content) still returns None, not the default. `or` is
             # what's actually needed here (see McqBank's twin methods below
             # for the concrete crash this exact mistake caused 2026-08-10).
+            # `_chapter_label` (not the raw `chapter_label` field) -- see
+            # _disambiguate_chapter_labels()'s own docstring for why.
             slug = q.get("chapter_slug") or "unknown"
-            label = q.get("chapter_label") or slug
+            label = q["_chapter_label"]
             seen[slug] = label
         return sorted(seen.items(), key=lambda kv: kv[1])
 
-    def _by_course_level(self, course, level):
-        """A record with no "course"/"level" field (the flagship's original
-        schema) always matches -- only records that DO carry those fields
-        (faculty practice content spanning more than one course/level) get
-        filtered. Prevents a Foundation student from ever seeing an
-        Intermediate-only question, or vice versa, within the same bank."""
-        subset = self.questions
-        if course:
-            subset = [q for q in subset if q.get("course") in (None, course)]
-        if level:
-            subset = [q for q in subset if q.get("level") in (None, level)]
-        return subset
+    def _by_scope(self, course, level, subject):
+        """course/level/subject are always resolved real values by this
+        point in the flow (Mode -> Course -> Level -> Subject is fully
+        settled, auto-skipped or explicitly chosen, before any exam-type/
+        year/chapter query ever runs) -- strict equality, no None-means-
+        no-filter fallback needed (unlike the pre-2026-08-12 version)."""
+        return [q for q in self.questions if q["_course"] == course and q["_level"] == level and q["_subject"] == subject]
 
-    def _filter(self, exam_type, year, course=None, level=None):
-        subset = self._by_course_level(course, level)
+    def _filter(self, exam_type, year, course, level, subject):
+        subset = self._by_scope(course, level, subject)
         if exam_type != "MIX":
             subset = [q for q in subset if q["_exam_type"] == exam_type]
         if year != "MIX":
             subset = [q for q in subset if q["_year"] == year]
         return subset
 
-    def filter_questions(self, exam_type, year, chapter_slug, course=None, level=None):
-        subset = self._filter(exam_type, year, course, level)
+    def filter_questions(self, exam_type, year, chapter_slug, course, level, subject):
+        subset = self._filter(exam_type, year, course, level, subject)
         if chapter_slug != "ALL":
             # Normalized the same way chapters() above synthesizes "unknown"
             # for a null chapter_slug -- see McqBank's twin fix, same date,
@@ -452,16 +624,23 @@ class McqBank:
 
     def load(self):
         self.questions = _load_and_merge_json_sources(self.json_paths, "mcq_id", "McqBank", logger)
+        for q in self.questions:
+            q["_course"], q["_level"], q["_subject"] = _resolve_course_level_subject(q)
+        _disambiguate_chapter_labels(self.questions)
 
-    def _by_course_level(self, course, level):
-        subset = self.questions
-        if course:
-            subset = [q for q in subset if q.get("course") in (None, course)]
-        if level:
-            subset = [q for q in subset if q.get("level") in (None, level)]
-        return subset
+    def courses(self):
+        return sorted({q["_course"] for q in self.questions})
 
-    def exam_types(self, course=None, level=None):
+    def levels(self, course):
+        return sorted({q["_level"] for q in self.questions if q["_course"] == course})
+
+    def subjects(self, course, level):
+        return sorted({q["_subject"] for q in self.questions if q["_course"] == course and q["_level"] == level})
+
+    def _by_scope(self, course, level, subject):
+        return [q for q in self.questions if q["_course"] == course and q["_level"] == level and q["_subject"] == subject]
+
+    def exam_types(self, course, level, subject):
         # BUG FIXED 2026-08-10: `.get("exam_type", "OTHER")` only substitutes
         # "OTHER" when the key is missing entirely -- a record with an
         # EXPLICIT `"year": null` (real, present in 375 merged CMA Foundation
@@ -475,23 +654,25 @@ class McqBank:
         # explicitly null, not just absent -- applied to every sibling method
         # below too, defensively, since more faculty JSON will have the same
         # heterogeneity going forward.
-        return sorted({q.get("exam_type") or "OTHER" for q in self._by_course_level(course, level)})
+        return sorted({q.get("exam_type") or "OTHER" for q in self._by_scope(course, level, subject)})
 
-    def years(self, exam_type, course=None, level=None):
-        pool = self._by_course_level(course, level)
+    def years(self, exam_type, course, level, subject):
+        pool = self._by_scope(course, level, subject)
         subset = pool if exam_type == "MIX" else [q for q in pool if q.get("exam_type") == exam_type]
         return sorted({q.get("year") or "Unknown" for q in subset})
 
-    def chapters(self, exam_type, year, course=None, level=None):
-        subset = self._filter(exam_type, year, course, level)
+    def chapters(self, exam_type, year, course, level, subject):
+        subset = self._filter(exam_type, year, course, level, subject)
         seen = {}
         for q in subset:
+            # `_chapter_label` (not the raw `chapter_label` field) -- see
+            # _disambiguate_chapter_labels()'s own docstring for why.
             slug = q.get("chapter_slug") or "unknown"
-            label = q.get("chapter_label") or slug
+            label = q["_chapter_label"]
             seen[slug] = label
         return sorted(seen.items(), key=lambda kv: kv[1])
 
-    def _filter(self, exam_type, year, course=None, level=None):
+    def _filter(self, exam_type, year, course, level, subject):
         # Must normalize the SAME way years()/exam_types()/chapters() above
         # do (`or`, not raw `.get()`) -- otherwise a student picking the
         # "Unknown"/"OTHER" bucket those methods synthesized for a
@@ -500,15 +681,15 @@ class McqBank:
         # showing an empty chapter/question list instead of the bug above's
         # loud crash. Same root cause, different failure mode -- fixed
         # together 2026-08-10.
-        subset = self._by_course_level(course, level)
+        subset = self._by_scope(course, level, subject)
         if exam_type != "MIX":
             subset = [q for q in subset if (q.get("exam_type") or "OTHER") == exam_type]
         if year != "MIX":
             subset = [q for q in subset if (q.get("year") or "Unknown") == year]
         return subset
 
-    def filter_questions(self, exam_type, year, chapter_slug, course=None, level=None):
-        subset = self._filter(exam_type, year, course, level)
+    def filter_questions(self, exam_type, year, chapter_slug, course, level, subject):
+        subset = self._filter(exam_type, year, course, level, subject)
         if chapter_slug != "ALL":
             subset = [q for q in subset if (q.get("chapter_slug") or "unknown") == chapter_slug]
         return subset
@@ -523,16 +704,51 @@ class McqBank:
 bank = QuestionBank(JSON_PATH)
 mcq_bank = McqBank(MCQ_JSON_PATH)
 
-# Computed from real loaded data (see COURSES's docstring-comment above for
-# why this replaced a hand-maintained constant).
-AVAILABLE_DATA = set()
-for _q in mcq_bank.questions:
-    if _q.get("course") and _q.get("level"):
-        AVAILABLE_DATA.add((_q["course"], _q["level"]))
-for _q in bank.questions:
-    if _q.get("course") and _q.get("level"):
-        AVAILABLE_DATA.add((_q["course"], _q["level"]))
-logger.info(f"Tenant '{TENANT_ID}': AVAILABLE_DATA = {AVAILABLE_DATA}")
+
+def _mode_bank(mode):
+    return bank if mode == "descriptive" else mcq_bank
+
+
+# tenants.json's content_scope, consumed as a (course, level, subject)
+# allow-list. None = unrestricted (the flagship's "ALL" scope) -- a scoped
+# (faculty) tenant's bot never shows a course/level/subject outside this
+# set, even if the underlying merged JSON technically contains it (e.g. a
+# faculty's exam_content currently pointing at a shared flagship file).
+if TENANT["content_scope"] == "ALL":
+    SCOPE_TRIPLES = None
+else:
+    SCOPE_TRIPLES = {(s["course"], s["level"], s["subject"]) for s in TENANT["content_scope"]}
+
+
+def _scope_allows_course(course):
+    return SCOPE_TRIPLES is None or any(c == course for c, _l, _s in SCOPE_TRIPLES)
+
+
+def _scope_allows_level(course, level):
+    return SCOPE_TRIPLES is None or any(c == course and l == level for c, l, _s in SCOPE_TRIPLES)
+
+
+def _scope_allows_subject(course, level, subject):
+    return SCOPE_TRIPLES is None or (course, level, subject) in SCOPE_TRIPLES
+
+
+def _available_modes():
+    """Which of Descriptive/MCQ have ANY real, in-scope content for this
+    tenant -- computed from real data + SCOPE_TRIPLES, never hand-
+    maintained (see this file's 2026-08-12 flow rewrite)."""
+    modes = []
+    for m in ("descriptive", "mcq"):
+        courses = [c for c in _mode_bank(m).courses() if _scope_allows_course(c)]
+        if courses:
+            modes.append(m)
+    return modes
+
+
+logger.info(
+    f"Tenant '{TENANT_ID}': available modes = {_available_modes()}, "
+    f"descriptive courses = {[c for c in bank.courses() if _scope_allows_course(c)]}, "
+    f"mcq courses = {[c for c in mcq_bank.courses() if _scope_allows_course(c)]}"
+)
 
 # ---------------------------------------------------------------------------
 # HTML HELPERS
@@ -653,62 +869,129 @@ def html_to_pdf_bytes(title: str, meta_lines: list, question_html: str, answer_h
 # 2026-08-10 instruction, "Powered by 1LAVYA" only appears when delivering
 # an answer (send_answer/handle_mcq_answer) or a PDF (send_pdf). Menus,
 # questions being asked, and other plain communication stay unbranded.
-def build_course_menu():
-    keyboard = [[InlineKeyboardButton(c, callback_data=f"course:{c}")] for c in COURSES]
+def build_mode_menu(modes):
+    keyboard = []
+    if "descriptive" in modes:
+        keyboard.append([InlineKeyboardButton("\U0001F4DD Descriptive", callback_data="mode:descriptive")])
+    if "mcq" in modes:
+        keyboard.append([InlineKeyboardButton("✅ MCQ", callback_data="mode:mcq")])
     opening = TENANT.get("welcome_message") or "*Welcome to 1Lavya Exam Hub* \U0001F4DD"
-    text = f"{opening}\n\nSelect your *Course*:"
+    text = f"{opening}\n\nWhat would you like to practice?"
     return text, InlineKeyboardMarkup(keyboard)
 
 
-def build_level_menu(course):
-    levels = COURSES.get(course, [])
+def _label(mode):
+    return "Descriptive" if mode == "descriptive" else "MCQ"
+
+
+def build_course_menu(mode, courses):
+    keyboard = [[InlineKeyboardButton(c, callback_data=f"course:{c}")] for c in courses]
+    return f"Mode: *{_label(mode)}*\nSelect your *Course*:", InlineKeyboardMarkup(keyboard)
+
+
+def build_level_menu(mode, course, levels):
     keyboard = [[InlineKeyboardButton(lvl, callback_data=f"level:{lvl}")] for lvl in levels]
-    return f"Course: *{course}*\nSelect your *Level*:", InlineKeyboardMarkup(keyboard)
+    return f"Mode: *{_label(mode)}* | Course: *{course}*\nSelect your *Level*:", InlineKeyboardMarkup(keyboard)
 
 
-def build_mode_menu_or_gate(course, level):
-    """The screen shown once Course+Level are both settled -- either the
-    Descriptive/MCQ picker, or the "nothing here yet" gate, exactly what
-    the old "level" branch used to render inline. Factored out so it can
-    be reached either from a real Level tap OR from the auto-skip cascade
-    in entry_screen_and_updates()/the "course" branch below."""
-    if (course, level) not in AVAILABLE_DATA:
-        keyboard = [[InlineKeyboardButton("\U0001F519 Start Over", callback_data="restart")]]
-        text = (
-            f"Course: *{course}* | Level: *{level}*\n\n"
-            f"\U0001F6A7 Currently there are no questions for this Level. "
-            f"We will shortly have questions on these as well!"
-        )
-        return text, InlineKeyboardMarkup(keyboard)
-    keyboard = [
-        [InlineKeyboardButton("\U0001F4DD Descriptive", callback_data="mode:descriptive")],
-        [InlineKeyboardButton("✅ MCQ", callback_data="mode:mcq")],
-    ]
-    text = f"Course: *{course}* | Level: *{level}*\nWhat would you like to practice?"
+def build_subject_menu(mode, course, level, subjects):
+    # Index-based callback_data, not the literal subject name -- subject
+    # names (e.g. "Fundamentals of Business Laws and Business
+    # Communication") can exceed Telegram's 64-byte callback_data limit on
+    # their own, the exact bug class fixed for Chapter buttons earlier
+    # today (see the "year" action's own comment). Resolved back via
+    # context.user_data["subject_options"], stashed by resolve_entry().
+    keyboard = [[InlineKeyboardButton(s, callback_data=f"subject:{i}")] for i, s in enumerate(subjects)]
+    text = f"Mode: *{_label(mode)}* | Course: *{course}* | Level: *{level}*\nSelect your *Subject*:"
     return text, InlineKeyboardMarkup(keyboard)
 
 
-def entry_screen_and_updates():
-    """What a student should see immediately after /start or "Start Over" --
-    auto-skipping the Course and/or Level picker when this tenant's
-    content_scope leaves only one real option at that step (persisted in
-    telegram/config/tenants.json, so this is stable across restarts and
-    every session -- nothing here is per-student/session state). Returns
-    (text, markup, user_data_updates) -- callers must merge updates into
-    context.user_data (and mirror into db_update_session) before the
-    course/level get used anywhere else."""
-    courses = list(COURSES.keys())
-    if len(courses) != 1:
-        text, markup = build_course_menu()
-        return text, markup, {}
-    course = courses[0]
-    levels = COURSES[course]
-    if len(levels) != 1:
-        text, markup = build_level_menu(course)
-        return text, markup, {"course": course}
-    level = levels[0]
-    text, markup = build_mode_menu_or_gate(course, level)
-    return text, markup, {"course": course, "level": level}
+def build_type_menu(mode, course, level, subject):
+    exam_types = _mode_bank(mode).exam_types(course, level, subject)
+    keyboard = [[InlineKeyboardButton(et, callback_data=f"type:{et}")] for et in exam_types]
+    keyboard.append([InlineKeyboardButton(MIX_LABEL, callback_data="type:MIX")])
+    text = (
+        f"Mode: *{_label(mode)}* | Course: *{course}* | Level: *{level}* | Subject: *{subject}*\n"
+        f"Select *Exam Type*:"
+    )
+    return text, InlineKeyboardMarkup(keyboard)
+
+
+def build_no_content_gate(mode=None, course=None, level=None):
+    parts = []
+    if mode:
+        parts.append(f"Mode: *{_label(mode)}*")
+    if course:
+        parts.append(f"Course: *{course}*")
+    if level:
+        parts.append(f"Level: *{level}*")
+    header = (" | ".join(parts) + "\n\n") if parts else ""
+    keyboard = [[InlineKeyboardButton("\U0001F519 Start Over", callback_data="restart")]]
+    text = f"{header}\U0001F6A7 No questions available for this selection yet. We will shortly have more!"
+    return text, InlineKeyboardMarkup(keyboard)
+
+
+def resolve_entry(context, mode=None, course=None, level=None, subject=None):
+    """Central cascade for the Exam Hub flow (rewritten 2026-08-12, Mode-
+    first per Pranav's explicit choice): Mode -> Course -> Level ->
+    Subject -> Exam Type. Given however much of the first 4 is already
+    decided, returns (text, markup, updates) for the NEXT screen --
+    auto-skipping any step that has exactly one real, in-scope option, so
+    a narrowly-scoped faculty bot (or any step that only ever has one
+    answer) never shows a picker with nothing to pick. Course/Level/
+    Subject are derived from REAL content (never a hand-maintained "show
+    every course, even empty ones, gate later" list) -- the explicit UX
+    choice behind this rewrite: a student never taps into a dead end.
+
+    `updates` are the additional context.user_data keys this call
+    resolved by auto-skip; callers merge them in (and mirror into
+    db_update_session) themselves. Reused for BOTH the initial /start
+    screen and every mid-flow button tap (mode/course/level/subject
+    actions in button_router) -- one cascade, not the pre-2026-08-12
+    code's two separately-maintained auto-skip implementations (entry
+    screen vs. button_router's "course" branch)."""
+    updates = {}
+
+    if mode is None:
+        modes = _available_modes()
+        if not modes:
+            return (*build_no_content_gate(), updates)
+        if len(modes) > 1:
+            return (*build_mode_menu(modes), updates)
+        mode = modes[0]
+        updates["mode"] = mode
+
+    bank_obj = _mode_bank(mode)
+
+    if course is None:
+        courses = [c for c in bank_obj.courses() if _scope_allows_course(c)]
+        if not courses:
+            return (*build_no_content_gate(mode), updates)
+        if len(courses) > 1:
+            return (*build_course_menu(mode, courses), updates)
+        course = courses[0]
+        updates["course"] = course
+
+    if level is None:
+        levels = [lv for lv in bank_obj.levels(course) if _scope_allows_level(course, lv)]
+        if not levels:
+            return (*build_no_content_gate(mode, course), updates)
+        if len(levels) > 1:
+            return (*build_level_menu(mode, course, levels), updates)
+        level = levels[0]
+        updates["level"] = level
+
+    if subject is None:
+        subjects = [s for s in bank_obj.subjects(course, level) if _scope_allows_subject(course, level, s)]
+        if not subjects:
+            return (*build_no_content_gate(mode, course, level), updates)
+        if len(subjects) > 1:
+            context.user_data["subject_options"] = subjects
+            return (*build_subject_menu(mode, course, level, subjects), updates)
+        subject = subjects[0]
+        updates["subject"] = subject
+
+    return (*build_type_menu(mode, course, level, subject), updates)
 
 
 # ---------------------------------------------------------------------------
@@ -721,11 +1004,40 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     db_upsert_student(user)
     context.user_data["session_id"] = db_start_session(user.id)
 
-    text, markup, updates = entry_screen_and_updates()
+    text, markup, updates = resolve_entry(context)
     if updates:
         context.user_data.update(updates)
         db_update_session(context.user_data["session_id"], **updates)
     await update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
+
+
+def _session_expired_markup():
+    return InlineKeyboardMarkup([[InlineKeyboardButton("\U0001F519 Start Over", callback_data="restart")]])
+
+
+async def _require_state(query, context, *keys):
+    """Read back a set of prior-step selections from context.user_data, or
+    edit the message with a "session expired" prompt and return None if any
+    is missing. context.user_data is in-memory only (no persistence
+    backend configured) -- it doesn't survive a bot restart, but a stale
+    inline keyboard from before the restart can still be tapped afterward.
+    BUG FIXED 2026-08-12: the "year"/"chapter" actions used to read
+    context.user_data["exam_type"] (and ["year"]) directly -- a KeyError on
+    a stale tap raised an unhandled exception AFTER query.answer() already
+    fired, so the student saw the loading spinner clear and then nothing:
+    no error, no menu update, indistinguishable from the bot being broken.
+    Confirmed live in capranav-exam.log/csarunchouhan.log
+    ("KeyError: 'exam_type'"). Every handler that reads a prior step's
+    value back out of user_data should go through this instead of a raw
+    dict index."""
+    missing = [k for k in keys if context.user_data.get(k) is None]
+    if missing:
+        await query.edit_message_text(
+            "⚠️ Your session has expired (the bot may have restarted). Please start over.",
+            reply_markup=_session_expired_markup(),
+        )
+        return None
+    return {k: context.user_data[k] for k in keys}
 
 
 async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -740,78 +1052,72 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         user = query.from_user
         db_upsert_student(user)
         context.user_data["session_id"] = db_start_session(user.id)
-        text, markup, updates = entry_screen_and_updates()
+        text, markup, updates = resolve_entry(context)
         if updates:
             context.user_data.update(updates)
             db_update_session(context.user_data["session_id"], **updates)
         await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
         return
 
-    if action == "course":
+    if action == "mode":
+        mode = data.split(":", 1)[1]  # "descriptive" or "mcq"
+        text, markup, updates = resolve_entry(context, mode=mode)
+        context.user_data["mode"] = mode
+        context.user_data.update(updates)
+        db_update_session(session_id, mode=mode, **updates)
+        await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
+
+    elif action == "course":
         course = data.split(":", 1)[1]
-        context.user_data["course"] = course
-        db_update_session(session_id, course=course)
-        levels = COURSES.get(course, [])
-        if len(levels) == 1:
-            # Only one Level under this course -- skip straight to the
-            # Descriptive/MCQ picker (or the "nothing here yet" gate).
-            level = levels[0]
-            context.user_data["level"] = level
-            db_update_session(session_id, level=level)
-            text, markup = build_mode_menu_or_gate(course, level)
-            await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
+        state = await _require_state(query, context, "mode")
+        if state is None:
             return
-        text, markup = build_level_menu(course)
+        text, markup, updates = resolve_entry(context, mode=state["mode"], course=course)
+        context.user_data["course"] = course
+        context.user_data.update(updates)
+        db_update_session(session_id, course=course, **updates)
         await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
     elif action == "level":
         level = data.split(":", 1)[1]
+        state = await _require_state(query, context, "mode", "course")
+        if state is None:
+            return
+        text, markup, updates = resolve_entry(context, mode=state["mode"], course=state["course"], level=level)
         context.user_data["level"] = level
-        course = context.user_data.get("course")
-        db_update_session(session_id, level=level)
-        text, markup = build_mode_menu_or_gate(course, level)
+        context.user_data.update(updates)
+        db_update_session(session_id, level=level, **updates)
         await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
-    elif action == "mode":
-        mode = data.split(":", 1)[1]  # "descriptive" or "mcq"
-        context.user_data["mode"] = mode
-        db_update_session(session_id, mode=mode)
-        course = context.user_data.get("course")
-        level = context.user_data.get("level")
-        bank_obj = bank if mode == "descriptive" else mcq_bank
-        label = "Descriptive" if mode == "descriptive" else "MCQ"
-        exam_types = bank_obj.exam_types(course, level)
-
-        # (course, level) has SOME content (the AVAILABLE_DATA gate above
-        # already confirmed that), but this specific mode may still have
-        # none -- e.g. a tenant with MCQs for one level and Descriptive for
-        # another. Say so plainly rather than showing an Exam Type picker
-        # that leads nowhere.
-        if not exam_types:
-            keyboard = [[InlineKeyboardButton("\U0001F519 Start Over", callback_data="restart")]]
+    elif action == "subject":
+        raw = data.split(":", 1)[1]
+        state = await _require_state(query, context, "mode", "course", "level")
+        if state is None:
+            return
+        options = context.user_data.get("subject_options") or []
+        try:
+            subject = options[int(raw)]
+        except (ValueError, IndexError):
             await query.edit_message_text(
-                f"Course: *{course}* | Level: *{level}*\n\n"
-                f"\U0001F6A7 No *{label}* questions for this Level yet. Try the other practice mode, "
-                f"or check back soon!",
-                parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
+                "⚠️ Your session has expired (the bot may have restarted). Please start over.",
+                reply_markup=_session_expired_markup(),
             )
             return
-
-        keyboard = [[InlineKeyboardButton(et, callback_data=f"type:{et}")] for et in exam_types]
-        keyboard.append([InlineKeyboardButton(MIX_LABEL, callback_data="type:MIX")])
-        await query.edit_message_text(
-            f"Mode: *{label}*\nSelect *Exam Type*:",
-            parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
+        text, markup, _updates = resolve_entry(
+            context, mode=state["mode"], course=state["course"], level=state["level"], subject=subject
         )
+        context.user_data["subject"] = subject
+        db_update_session(session_id, subject=subject)
+        await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
     elif action == "type":
         exam_type = data.split(":", 1)[1]
         context.user_data["exam_type"] = exam_type
-        mode = context.user_data.get("mode")
-        course = context.user_data.get("course")
-        level = context.user_data.get("level")
-        bank_obj = bank if mode == "descriptive" else mcq_bank
-        years = bank_obj.years(exam_type, course, level)
+        state = await _require_state(query, context, "mode", "course", "level", "subject")
+        if state is None:
+            return
+        mode, course, level, subject = state["mode"], state["course"], state["level"], state["subject"]
+        years = _mode_bank(mode).years(exam_type, course, level, subject)
         keyboard = [[InlineKeyboardButton(y, callback_data=f"year:{y}")] for y in years]
         keyboard.append([InlineKeyboardButton(MIX_LABEL, callback_data="year:MIX")])
         await query.edit_message_text(
@@ -822,15 +1128,30 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == "year":
         year = data.split(":", 1)[1]
         context.user_data["year"] = year
-        exam_type = context.user_data["exam_type"]
-        mode = context.user_data.get("mode")
-        course = context.user_data.get("course")
-        level = context.user_data.get("level")
-        bank_obj = bank if mode == "descriptive" else mcq_bank
-        chapters = bank_obj.chapters(exam_type, year, course, level)
+        state = await _require_state(query, context, "exam_type", "mode", "course", "level", "subject")
+        if state is None:
+            return
+        exam_type = state["exam_type"]
+        mode, course, level, subject = state["mode"], state["course"], state["level"], state["subject"]
+        chapters = _mode_bank(mode).chapters(exam_type, year, course, level, subject)
+        # Telegram's callback_data has a hard 64-BYTE limit. Some content
+        # sources slugify the full chapter/unit name (e.g. "the-process-of-
+        # budget-making-sources-of-revenue-expenditure-management-and-
+        # management-of-public-debt") -- well over 64 bytes on its own.
+        # BUG FIXED 2026-08-12: putting that raw slug straight into
+        # "chapter:{slug}" made Telegram reject the whole edit_message_text
+        # call (BadRequest: Button_data_invalid) for EVERY chapter button
+        # whenever even one slug in the list was too long -- confirmed live
+        # in 1lavya-examhub.log, and it's exactly the step right after
+        # picking Year, matching the "selecting anything gives no response"
+        # report. Fix: carry a small integer index in callback_data instead
+        # (same fix already applied to Study Hub's buttons for this exact
+        # bug class -- see CLAUDE.md section 8) and resolve it back via
+        # context.user_data, never the raw slug string.
+        context.user_data["chapter_slugs"] = [slug for slug, _label in chapters]
         keyboard = [
-            [InlineKeyboardButton(label, callback_data=f"chapter:{slug}")]
-            for slug, label in chapters
+            [InlineKeyboardButton(label, callback_data=f"chapter:{i}")]
+            for i, (slug, label) in enumerate(chapters)
         ]
         keyboard.append([InlineKeyboardButton(ALL_CHAPTERS_LABEL, callback_data="chapter:ALL")])
         await query.edit_message_text(
@@ -839,16 +1160,28 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
     elif action == "chapter":
-        chapter_slug = data.split(":", 1)[1]
+        raw = data.split(":", 1)[1]
+        if raw == "ALL":
+            chapter_slug = "ALL"
+        else:
+            slugs = context.user_data.get("chapter_slugs") or []
+            try:
+                chapter_slug = slugs[int(raw)]
+            except (ValueError, IndexError):
+                await query.edit_message_text(
+                    "⚠️ Your session has expired (the bot may have restarted). Please start over.",
+                    reply_markup=_session_expired_markup(),
+                )
+                return
         context.user_data["chapter_slug"] = chapter_slug
-        exam_type = context.user_data["exam_type"]
-        year = context.user_data["year"]
-        mode = context.user_data.get("mode")
-        course = context.user_data.get("course")
-        level = context.user_data.get("level")
-        bank_obj = bank if mode == "descriptive" else mcq_bank
+        state = await _require_state(query, context, "exam_type", "year", "mode", "course", "level", "subject")
+        if state is None:
+            return
+        exam_type, year = state["exam_type"], state["year"]
+        mode, course, level, subject = state["mode"], state["course"], state["level"], state["subject"]
+        bank_obj = _mode_bank(mode)
 
-        matches = bank_obj.filter_questions(exam_type, year, chapter_slug, course, level)
+        matches = bank_obj.filter_questions(exam_type, year, chapter_slug, course, level, subject)
         if not matches:
             await query.edit_message_text("No questions found for that selection. Use /start to try again.")
             return
@@ -883,6 +1216,30 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         _, mcq_id, letter = data.split(":", 2)
         await handle_mcq_answer(query, context, mcq_id, letter)
 
+    elif action == "reportissue":
+        # Added 2026-08-13. Only button_router has access to the current
+        # question's course/level/subject/chapter (stashed by
+        # handle_mcq_answer) -- mcq_issue_flow.py deliberately never looks
+        # a question up itself, see that module's own docstring.
+        info = context.user_data.get("current_mcq_report_ctx")
+        if not info:
+            await query.edit_message_text(
+                "⚠️ Your session has expired (the bot may have restarted). Please start over.",
+                reply_markup=_session_expired_markup(),
+            )
+            return
+        return_markup = InlineKeyboardMarkup(next_step_rows(context, include_next=True))
+        await mcq_issue_flow.start_issue_report(
+            query, context, BOT_ID,
+            mcq_id=info["mcq_id"], human_id=info.get("human_id"), course=info["course"], level=info["level"],
+            subject=info["subject"],
+            chapter_slug=info["chapter_slug"], chapter_label=info["chapter_label"],
+            return_markup=return_markup,
+        )
+
+    elif action == "imdone":
+        await show_today_summary(query, context)
+
 
 def next_step_rows(context, include_next=True, extra_rows=None):
     """The 3-way choice shown after a question is answered (or after the
@@ -898,7 +1255,13 @@ def next_step_rows(context, include_next=True, extra_rows=None):
     Returns raw button ROWS (a list of one-button lists), not a wrapped
     InlineKeyboardMarkup, so a caller with its own extra button (e.g.
     send_answer's "Get as PDF") can pass it via extra_rows and get one
-    combined keyboard rather than stitching two separately."""
+    combined keyboard rather than stitching two separately.
+
+    BUG FIXED 2026-08-13: "I'm Done" used to carry the SAME bare `restart`
+    callback_data as "Start Over" -- meaning it silently reset straight
+    back to the Mode picker, no summary ever shown. Now carries its own
+    `imdone` action (see button_router's own branch, which shows a quick
+    today's-summary + the on-demand report offer, Pranav's explicit ask)."""
     year = context.user_data.get("year")
     exam_type = context.user_data.get("exam_type")
     back_cb = "restart" if (year is None or exam_type is None) else f"year:{year}"
@@ -906,8 +1269,44 @@ def next_step_rows(context, include_next=True, extra_rows=None):
     if include_next:
         rows.append([InlineKeyboardButton("⏭ Next Question", callback_data="next")])
     rows.append([InlineKeyboardButton("\U0001F519 Back to Chapter List", callback_data=back_cb)])
-    rows.append([InlineKeyboardButton("\U0001F3C1 I'm Done", callback_data="restart")])
+    rows.append([InlineKeyboardButton("\U0001F3C1 I'm Done", callback_data="imdone")])
     return rows
+
+
+async def show_today_summary(query, context):
+    """Shown when the student taps "I'm Done" -- added 2026-08-13, Pranav's
+    ask. A quick "how did today go" snapshot (student_analytics.
+    fetch_today_summary(), platform-wide/UTC-day, distinct from the full
+    report's always-all-time numbers), then offers the SAME on-demand
+    report flow already built in report_flow.py -- reusing its existing
+    "report:ondemand_yes"/"report:ondemand_no" callback branches directly
+    (already registered in main() below), zero new report-delivery code
+    needed here. Setting report_flow_bot_id ourselves (normally done by
+    report_flow.start_report_flow_on_demand()/maybe_trigger_report_milestone(),
+    neither of which runs on this path) is the one thing this function
+    must do for that reuse to work correctly later in the conversation."""
+    conn = platform_db.get_connection()
+    summary = student_analytics.fetch_today_summary(conn, query.from_user.id)
+    mins, secs = divmod(summary["time_spent_today_seconds"], 60)
+    time_str = f"{mins}m {secs}s" if mins else f"{secs}s"
+
+    text = (
+        f"\U0001F4CA *Today's Summary*\n\n"
+        f"MCQs attempted: *{summary['mcq_shown']}*\n"
+        f"MCQs answered: *{summary['mcq_answered']}*\n"
+        f"Correct answers: *{summary['mcq_correct']}*\n"
+        f"Descriptive questions viewed: *{summary['descriptive_shown']}*\n"
+        f"Time spent today: *{time_str}*\n\n"
+        f"Would you like a complete performance report (accuracy, chapter-wise "
+        f"breakdown, time spent) sent to you?"
+    )
+    context.user_data["report_flow_bot_id"] = BOT_ID
+    keyboard = [
+        [InlineKeyboardButton("Yes", callback_data="report:ondemand_yes"),
+         InlineKeyboardButton("No", callback_data="report:ondemand_no")],
+        [InlineKeyboardButton("\U0001F519 Start Over", callback_data="restart")],
+    ]
+    await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard))
 
 
 # ---------------------------------------------------------------------------
@@ -930,7 +1329,13 @@ async def send_question(query, context):
     context.user_data["queue_pos"] = pos + 1
     q = bank.get_by_book_id(book_id)
 
+    # ID line shows human_id -- the platform's globally-unique, human-
+    # readable question identifier (see COURSE-CATALOG.md) -- rather than
+    # the internal book_id, so a student can actually reference "which
+    # question" this is (to a faculty, in a support email, etc.). Falls
+    # back to book_id only for the rare record with no human_id yet.
     meta = (
+        f"\U0001F194 {q.get('human_id') or q.get('book_id','')}\n"
         f"\U0001F4C4 {q.get('src_text','')} | {q.get('qno_text','')}\n"
         f"\U0001F3F7 {q.get('topic_text','')}\n"
         f"{q.get('marks_text','')} | {q.get('approx_time_text','')}"
@@ -991,7 +1396,7 @@ async def send_pdf(query, context, book_id):
 
     db_log_descriptive_pdf(context.user_data.get("current_descriptive_event_id"))
 
-    title = f"{q.get('chapter_label','')} — {q.get('qno_text','')}"
+    title = f"{q.get('_chapter_label') or q.get('chapter_label','')} — {q.get('qno_text','')}"
     meta_lines = [
         f"Source: {q.get('src_text','')}",
         f"Topic: {q.get('topic_text','')}",
@@ -1036,7 +1441,13 @@ async def send_mcq(query, context):
     # would otherwise render as the literal word "None" in the message. Same
     # root cause as the button-crash fix above, different (cosmetic, not
     # crashing) symptom.
+    # ID line shows human_id -- see send_question()'s own comment on why
+    # (globally-unique, human-readable question identifier -- see
+    # COURSE-CATALOG.md -- shown so a student can actually reference
+    # "which question" this is). Falls back to the internal mcq_id only
+    # for the rare record with no human_id yet.
     meta = (
+        f"\U0001F194 {q.get('human_id') or q.get('mcq_id','')}\n"
         f"\U0001F4C4 {q.get('exam_type') or ''} {q.get('year') or ''} | {q.get('qno_text') or ''}\n"
         f"\U0001F3F7 {q.get('topic_text') or ''}\n"
         f"Marks: {q.get('marks') or ''} | Difficulty: {q.get('difficulty') or ''}"
@@ -1102,9 +1513,25 @@ async def handle_mcq_answer(query, context, mcq_id, letter):
 
     result_text = with_brand_html(f"{icon}\nCorrect Answer: <b>({correct})</b>\n\n{explanation}")
 
+    # Stashed so the "reportissue" action (in button_router below) knows
+    # which question is being flagged without needing mcq_id embedded in
+    # its own button's callback_data -- see mcq_issue_flow.py's own
+    # "DELIBERATE NON-DEPENDENCY" note for why that module never looks the
+    # question up itself. `_course`/`_level`/`_subject`/`_chapter_label`
+    # are already resolved on `q` at load time (see McqBank.load()).
+    context.user_data["current_mcq_report_ctx"] = {
+        "mcq_id": mcq_id, "human_id": q.get("human_id"), "course": q.get("_course"), "level": q.get("_level"),
+        "subject": q.get("_subject"),
+        "chapter_slug": q.get("chapter_slug"), "chapter_label": q.get("_chapter_label") or q.get("chapter_label"),
+    }
+
+    rows = next_step_rows(
+        context, include_next=True,
+        extra_rows=[[InlineKeyboardButton("\U0001F6A9 Report Issue in MCQ", callback_data="reportissue")]],
+    )
     await send_long_message(
         context, query.message.chat_id, result_text,
-        reply_markup=InlineKeyboardMarkup(next_step_rows(context, include_next=True)),
+        reply_markup=InlineKeyboardMarkup(rows),
     )
 
     # 2026-08-11: platform-wide 20-question report milestone -- see
@@ -1123,9 +1550,16 @@ async def text_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
     progress is never accidentally swallowed by the trigger-phrase check
     below), (2) the "profile"/"change profile" trigger phrase itself, or
     (3) a reply to the report flow's mobile/email prompt -- the original,
-    only case this router handled before 2026-08-11. Anything else is
-    silently ignored rather than guessed at."""
+    only case this router handled before 2026-08-11, or (4) a reply to
+    the "Report Issue in MCQ" description prompt (2026-08-13) -- checked
+    FIRST of all, same "most specific active state first" discipline, so
+    a student mid-way through describing a wrong-answer report never has
+    their message swallowed by anything else. Anything else is silently
+    ignored rather than guessed at."""
     text = (update.message.text or "").strip()
+    if mcq_issue_flow.is_awaiting_text_input(context):
+        if await mcq_issue_flow.handle_issue_text_input(update, context):
+            return
     if profile_flow.is_awaiting_text_input(context):
         if await profile_flow.handle_profile_text_input(update, context):
             return
@@ -1169,10 +1603,14 @@ def main():
     # collides yet."
     app.add_handler(CallbackQueryHandler(
         button_router,
-        pattern=r"^(course|level|mode|type|year|chapter|answer|pdf|next|mcqopt|restart)(:|$)",
+        pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone)(:|$)",
     ))
     app.add_handler(CallbackQueryHandler(report_flow.report_flow_callback, pattern=r"^(report|reportconfirm):"))
     app.add_handler(CallbackQueryHandler(profile_flow.profile_flow_callback, pattern=r"^(profile|profileconfirm):"))
+    # 2026-08-13: mcq_issue_flow's own callbacks ("issuecat:<i>", bare
+    # "issuecancel") -- registered separately, same "explicit pattern per
+    # module" discipline as report_flow/profile_flow above.
+    app.add_handler(CallbackQueryHandler(mcq_issue_flow.mcq_issue_flow_callback, pattern=r"^(issuecat|issuecancel)(:|$)"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_router))
 
     logger.info(f"Exam Hub Bot starting for bot_id '{BOT_ID}' (tenant '{TENANT_ID}', {TENANT['display_name']})...")

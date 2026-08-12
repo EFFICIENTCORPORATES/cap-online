@@ -124,7 +124,7 @@ generic table-export page both build on:
 Excel, no scoping (Pranav's confirmed choice — single-admin login is the
 only gate today; RBAC later can scope this per-role without a redesign).
 
-**Analytics** (5 views, all paginated/filterable/exportable):
+**Analytics** (6 views, all paginated/filterable/exportable):
 - **Student Master** (`/analytics/students`) — full visibility into every
   known student (contact info, faculty, courses, from real activity).
   Checkbox-select one or many students + **Send Report to Selected** —
@@ -144,6 +144,22 @@ only gate today; RBAC later can scope this per-role without a redesign).
   issue, flattened to one row per issue.
 - **Email Analytics** (`/analytics/email`) — the full `report_deliveries`
   trail, bot-triggered and admin-triggered sends together in one view.
+
+## MCQ Issue Reports — added 2026-08-13
+
+**`/analytics/issue-reports`** — every "Report Issue in MCQ" submission
+(`telegram/bots/mcq_issue_flow.py`) across every bot, joined to `students`
+for a display name: category, the student's own free-text description,
+and the exact question by its `human_id`. Same paginated/filterable/
+exportable shape as every other Analytics view above, built on the same
+`exporters.py` primitives. **Read-only** — no status-editing UI (marking
+a report resolved/dismissed) — not asked for; the generic "Data Export"
+page and direct SQL against `mcq_issue_reports` already cover that if
+needed before a dedicated triage view is built. Verified with a synthetic
+row through Flask's real `test_client()` (login, render, all 4 export
+formats, confirmed cleanup), then added as a permanent step in
+`smoke_test_admin_portal.py` — full suite re-run clean, **110 checks,
+0 failures**.
 
 ## Verified (2026-08-11, Analytics tier)
 
