@@ -20,23 +20,55 @@ Excel or move files around inside telegram/assets/study_bot/ -- fix the
 source and re-run the build scripts, or the catalog and the files on
 disk will drift apart.
 
+This script is BOT-ID-AWARE (tenant-aware since 2026-08-09; refactored onto
+the master bot mapping 2026-08-10) -- the same file serves the flagship
+1LAVYA bot AND every faculty white-label study bot, parameterized purely by
+which BOT_ID it's started with. BOT_ID selects a row in
+telegram/config/bots.json (the master mapping -- which bot, which token,
+which script); that row's tenant_id then selects a row in
+telegram/config/tenants.json (what that tenant teaches -- content_scope).
+See bots.README.md / tenants.README.md for both registries and the "plug
+and play" design -- adding a new faculty's Study bot is a bots.json entry
+(+ a tenants.json entry if they're new), not a code change, as long as
+they're only licensing a slice of the shared catalog.
+
 SETUP (do this before running):
-1. pip install python-telegram-bot rapidfuzz openpyxl pandas
-2. Put the bot's API token (from BotFather) into telegram/creds.txt under
-   "Name: Official1LavyaStudyBot" / "Bot Token: ..." (this file is
-   gitignored, never committed), or set the TELEGRAM_STUDY_BOT_TOKEN
-   environment variable (takes priority over creds.txt if both are set).
-3. Run: python study_hub_bot.py
-   Keep the terminal/laptop running for the bot to stay online.
+1. pip install python-telegram-bot[job-queue] rapidfuzz openpyxl pandas python-dotenv
+2. Bot token resolution, per BOT_ID (see resolve_bot_token()):
+   - The flagship "1lavya-studyhub" bot still resolves via telegram/creds.txt
+     ("Name: Official1LavyaStudyBot" / "Bot Token: ...") as a backward-compat
+     fallback, OR the TELEGRAM_STUDY_BOT_TOKEN env var.
+   - Every other bot resolves via the env var named in its bots.json
+     `bot_token_env` field -- put the real value in telegram/.env
+     (gitignored; copy telegram/.env.example for the template). This script
+     loads telegram/.env automatically at startup.
+3. Choose which bot this process serves by setting the BOT_ID environment
+   variable before launching (defaults to "1lavya-studyhub" if unset, i.e.
+   today's original single-tenant behavior; also accepts the older
+   TENANT_ID name as a fallback, for single-bot tenants where bot_id ==
+   tenant_id -- see bots.json's own note on that). BOT_ID is a per-run
+   selector, not a secret -- set it in your shell, not in .env.
+   PowerShell example:
+       $env:BOT_ID = "capranav-study"; python study_hub_bot.py
+4. Run: python study_hub_bot.py
+   Keep the terminal/laptop running for the bot to stay online. Run a
+   second, independent process (different terminal, different BOT_ID) per
+   additional bot -- Telegram forces one token = one running bot process,
+   this script is just reused, not duplicated. Or use
+   telegram/tools/manage_bots.py to start every `active` bot in bots.json
+   at once instead of doing this by hand.
 """
 
 import os
 import re
+import sys
+import json
 import logging
 from pathlib import Path
 
 import pandas as pd
 from rapidfuzz import fuzz
+from dotenv import load_dotenv
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
@@ -49,6 +81,11 @@ from telegram.ext import (
     filters,
 )
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
+import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
+import profile_flow  # noqa: E402 -- telegram/bots/profile_flow.py, the "profile"/"change profile" identity flow (2026-08-11)
+import report_flow  # noqa: E402 -- telegram/bots/report_flow.py, now also reachable from Study Hub via its on-demand "report"/"analysis"/"email"/"mail" trigger (2026-08-11)
+
 # ---------------------------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------------------------
@@ -56,6 +93,10 @@ REPO_ROOT = Path(__file__).resolve().parents[2]   # telegram/bots/study_hub_bot.
 CREDS_PATH = REPO_ROOT / "telegram" / "creds.txt"
 EXCEL_PATH = REPO_ROOT / "telegram" / "source-docs" / "StudyHub_Master_Catalog.xlsx"
 STUDY_BOT_ROOT = REPO_ROOT / "telegram" / "assets" / "study_bot"
+TENANTS_PATH = REPO_ROOT / "telegram" / "config" / "tenants.json"
+BOTS_PATH = REPO_ROOT / "telegram" / "config" / "bots.json"
+
+load_dotenv(REPO_ROOT / "telegram" / ".env")   # secrets (faculty bot tokens) live here, gitignored
 
 BOT_NAME_IN_CREDS = "Official1LavyaStudyBot"
 
@@ -95,12 +136,95 @@ def load_token_from_creds(bot_name: str, creds_path: Path):
     return None
 
 
-BOT_TOKEN = os.environ.get("TELEGRAM_STUDY_BOT_TOKEN") or load_token_from_creds(BOT_NAME_IN_CREDS, CREDS_PATH)
+def load_bot(bot_id: str, bots_path: Path) -> dict:
+    """Look up one bot's config block from telegram/config/bots.json (the
+    master mapping). Raises SystemExit with the list of known bot_ids on a
+    typo/unknown id -- never silently falls back to a different bot's
+    config (that would mean serving one faculty's content under another's
+    token, a real harm, not just a confusing error)."""
+    data = json.loads(bots_path.read_text(encoding="utf-8"))
+    for b in data["bots"]:
+        if b["bot_id"] == bot_id:
+            return b
+    known = [b["bot_id"] for b in data["bots"]]
+    raise SystemExit(f"Unknown BOT_ID '{bot_id}' -- no matching entry in {bots_path}. Known bot_ids: {known}")
+
+
+def load_tenant(tenant_id: str, tenants_path: Path) -> dict:
+    """Look up one tenant's config block from telegram/config/tenants.json.
+    Raises SystemExit with the list of known tenant_ids on a typo/unknown
+    id -- never silently falls back to a different tenant's config."""
+    data = json.loads(tenants_path.read_text(encoding="utf-8"))
+    for t in data["tenants"]:
+        if t["tenant_id"] == tenant_id:
+            return t
+    known = [t["tenant_id"] for t in data["tenants"]]
+    raise SystemExit(
+        f"Unknown tenant_id '{tenant_id}' (from bots.json's BOT_ID entry) -- no matching entry in {tenants_path}. "
+        f"Known tenant_ids: {known}"
+    )
+
+
+def resolve_bot_token(bot: dict):
+    """Env var named by the bot's bot_token_env, else (for the flagship
+    "1lavya-studyhub" bot only, for backward compatibility) fall back to
+    telegram/creds.txt. Returns None if nothing resolves -- main() turns
+    that into a clear startup error rather than an obscure Telegram one."""
+    env_name = bot.get("bot_token_env")
+    token = os.environ.get(env_name) if env_name else None
+    if token:
+        return token
+    if bot["bot_id"] == "1lavya-studyhub":
+        return load_token_from_creds(BOT_NAME_IN_CREDS, CREDS_PATH)
+    return None
+
+
+# BOT_ID is the master-mapping selector (bots.json); TENANT_ID (older name)
+# still works as a fallback for any bot whose bot_id equals its tenant_id
+# (true for every single-bot tenant, e.g. "csarunchouhan" -- only a
+# multi-bot tenant like Pranav's "capranav-study"/"capranav-exam" actually
+# needs the newer BOT_ID name).
+BOT_ID = os.environ.get("BOT_ID") or os.environ.get("TENANT_ID", "1lavya-studyhub")
+BOT_CONFIG = load_bot(BOT_ID, BOTS_PATH)
+TENANT_ID = BOT_CONFIG["tenant_id"]
+TENANT = load_tenant(TENANT_ID, TENANTS_PATH)
+BOT_TOKEN = resolve_bot_token(BOT_CONFIG)
+
+# 1LAVYA's own flagship bots carry no branding footer (they ARE 1LAVYA);
+# every white-label faculty bot gets a one-line "Powered by 1LAVYA" signature
+# -- but ONLY when actually delivering content (a file/PDF), never on
+# welcome/menu/question screens or other plain communication. Revised
+# 2026-08-10 (Pranav: the original "every response" rule from 2026-08-09
+# was too much) -- use with_brand() only at the specific call sites that
+# deliver a file; everything else (menus, questions, prompts) stays plain.
+BRAND_FOOTER = "\n\n_Powered by 1LAVYA_" if TENANT.get("kind") == "faculty" else ""
+
+
+def with_brand(text: str) -> str:
+    return f"{text}{BRAND_FOOTER}"
+
+
+# Any of these, alone on a line (case-insensitive, optional trailing !/.),
+# resets the conversation back to /start -- same words myfiles_hub_bot.py
+# already treats as a fresh-opener greeting, plus "reset" itself. Anchored
+# (^...$) so it only fires on a *standalone* greeting/reset, never as a
+# false-positive substring inside a real search query.
+RESET_TRIGGER_RE = re.compile(
+    r"^\s*(hi+|hey+|hello+|hiya|yo|namaste|reset)\s*[!.]*\s*$", re.IGNORECASE
+)
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 logger = logging.getLogger(__name__)
+
+# Shared platform DB (telegram/database/platform.db) -- every bot writes
+# here now, not its own separate .db file. See telegram/database/db.py's
+# own module docstring for the multi-process WAL/retry design this relies
+# on. One connection per process, reused for the whole run (never
+# reconnect per query).
+DB_CONN = platform_db.get_connection()
+platform_db.init_schema(DB_CONN)
 
 # ---------------------------------------------------------------------------
 # CATALOG — loaded from Excel once at startup
@@ -216,45 +340,131 @@ class Catalog:
         return [c for c in candidates if c[0] >= FUZZY_MATCH_THRESHOLD][:top_n]
 
 
+def scoped_catalog_df(df, content_scope):
+    """Restrict the loaded catalog to a tenant's licensed slice. "ALL"
+    (the flagship/platform tenants) is a no-op. A faculty's content_scope
+    is a list of {course, level, subject} -- matched exactly against the
+    catalog's own values (see tenants.README.md: get these strings from
+    the real catalog, don't guess/abbreviate them). Re-indexed so row_id
+    (the df index Catalog.get_row_by_id relies on) stays contiguous and
+    stable for THIS tenant's process."""
+    if content_scope == "ALL":
+        return df
+    mask = pd.Series(False, index=df.index)
+    for s in content_scope:
+        mask |= (
+            (df["Course"] == s["course"])
+            & (df["Level"] == s["level"])
+            & (df["Subject"] == s["subject"])
+        )
+    return df[mask].reset_index(drop=True)
+
+
 catalog = Catalog(EXCEL_PATH)
+catalog.df = scoped_catalog_df(catalog.df, TENANT["content_scope"])
+logger.info(
+    f"Tenant '{TENANT_ID}' ({TENANT['kind']}): catalog scoped to {len(catalog.df)} rows "
+    f"(content_scope={TENANT['content_scope']})."
+)
 
 # ---------------------------------------------------------------------------
 # HANDLERS
 # ---------------------------------------------------------------------------
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data.clear()
+def scope_description() -> str:
+    """One-line summary of what this tenant's bot covers, for the welcome
+    message -- computed from the tenant's own content_scope + whatever
+    categories actually survived scoping, never hardcoded per faculty."""
+    if TENANT["content_scope"] == "ALL":
+        return (
+            "Covers *CA*, *CS*, and *CMA* — Study Materials, Exam Materials "
+            "(MTP/PYQ/RTP), and Revision Material."
+        )
+    bits = ", ".join(f"*{s['course']} {s['level']}*" for s in TENANT["content_scope"])
+    cats = [c for c in CATEGORIES if catalog.courses_for_category(c)]
+    cats_text = " / ".join(cats) if cats else "content"
+    return f"Your dedicated hub for {bits} — {cats_text}."
+
+
+def welcome_text_and_keyboard():
+    """Shared by /start (a message reply) and the "mainmenu" callback
+    button (a message edit) so both render identically -- see start() and
+    browse_callback's "mainmenu" branch."""
+    opening = TENANT.get("welcome_message") or "*Welcome to 1Lavya Study Hub* \U0001F4DA"
     text = (
-        "*Welcome to 1Lavya Study Hub* \U0001F4DA\n\n"
-        "Covers *CA*, *CS*, and *CMA* — Study Materials, Exam Materials "
-        "(MTP/PYQ/RTP), and Revision Material.\n\n"
+        f"{opening}\n\n"
+        f"{scope_description()}\n\n"
         "You can either:\n"
-        "1️⃣ Tap *Browse* to pick Category → Course → Level → Subject, or\n"
-        "2️⃣ Just *type* what you need directly "
-        "(e.g. `CA Inter cash flow` or `CS company law`)\n"
+        "1️⃣ Tap *Browse* to pick Course → Level → Subject, or\n"
+        "2️⃣ Just *type* what you need directly\n"
     )
     keyboard = [[InlineKeyboardButton("\U0001F4C2 Browse", callback_data="browse:start")]]
-    await update.message.reply_text(
-        text, parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard)
-    )
+    # No brand footer here -- per Pranav's 2026-08-10 instruction, "Powered by
+    # 1LAVYA" only appears when delivering a PDF or an answer, never on
+    # welcome/menu/question screens. See with_brand()'s own docstring.
+    return text, InlineKeyboardMarkup(keyboard)
+
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    context.user_data.clear()
+    platform_db.upsert_student(DB_CONN, update.effective_user)
+    platform_db.log_interaction(DB_CONN, BOT_ID, update.effective_user.id, "start")
+    text, markup = welcome_text_and_keyboard()
+    await update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
+
+
+def effective_course_back(cat_idx, category):
+    """Where the Back button on whichever screen ends up rendered once
+    Course is settled should point -- the Category picker if Course itself
+    was auto-skipped (only one course in this tenant's content_scope for
+    this category), else the real Course-picker screen. Recomputed fresh
+    from the catalog every call (cheap, always in sync -- no state to
+    thread through callback_data)."""
+    return "browse:start" if len(catalog.courses_for_category(category)) == 1 else f"cat:{cat_idx}"
+
+
+def effective_level_back(cat_idx, category, course):
+    if len(catalog.levels_for(category, course)) == 1:
+        return effective_course_back(cat_idx, category)
+    return f"crs:{cat_idx}:{course}"
+
+
+def effective_subject_back(cat_idx, category, course, level):
+    if len(catalog.subjects_for(category, course, level)) == 1:
+        return effective_level_back(cat_idx, category, course)
+    return f"lvl:{cat_idx}:{course}:{level}"
 
 
 async def browse_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
-    data = query.data
-    # callback_data shapes, all well under Telegram's 64-byte cap because
-    # every variable-length piece (Subject, Session, ...) is passed as an
-    # INDEX into a deterministic sorted list, never as the literal string --
-    # see SKILL-study-bot-catalog-pipeline.md §6 for the incident that
-    # taught us this the hard way:
-    #   browse:start
-    #   cat:{cat_idx}
-    #   crs:{cat_idx}:{course}
-    #   lvl:{cat_idx}:{course}:{level}
-    #   subj:{cat_idx}:{course}:{level}:{subj_idx}
-    #   pt:{cat_idx}:{course}:{level}:{subj_idx}:{paper_type}
-    #   file:{row_id}
+    await route_browse(query, context, query.data)
+
+
+async def route_browse(query, context, data):
+    """The actual dispatcher -- factored out of browse_callback so it can
+    recurse with a SYNTHETIC data string when a tenant's content_scope
+    collapses a picker step to exactly one option (e.g. a faculty scoped
+    to only CMA never needs to be asked "which course?"). Recursing here
+    reuses every downstream branch completely unchanged -- see
+    effective_course_back()/effective_level_back()/effective_subject_back()
+    above for how the resulting screen's Back button still points to the
+    correct PREVIOUS REAL screen, skipping over whatever was auto-skipped.
+
+    callback_data shapes, all well under Telegram's 64-byte cap because
+    every variable-length piece (Subject, Session, ...) is passed as an
+    INDEX into a deterministic sorted list, never as the literal string --
+    see SKILL-study-bot-catalog-pipeline.md §6 for the incident that
+    taught us this the hard way:
+      browse:start
+      cat:{cat_idx}
+      crs:{cat_idx}:{course}
+      lvl:{cat_idx}:{course}:{level}
+      subj:{cat_idx}:{course}:{level}:{subj_idx}
+      pt:{cat_idx}:{course}:{level}:{subj_idx}:{paper_type}
+      file:{row_id}
+      mainmenu:go   (from the post-download "Main Menu" button)
+    """
     parts = data.split(":")
     action = parts[0]
 
@@ -279,6 +489,11 @@ async def browse_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
             )
             return
+        if len(courses) == 1:
+            # Nothing to pick -- this tenant's content_scope only has one
+            # course for this category. Skip straight to Level.
+            await route_browse(query, context, f"crs:{cat_idx}:{courses[0]}")
+            return
         keyboard = [[InlineKeyboardButton(c, callback_data=f"crs:{cat_idx}:{c}")] for c in courses]
         keyboard.append([InlineKeyboardButton("⬅️ Back", callback_data="browse:start")])
         await query.edit_message_text(
@@ -290,10 +505,13 @@ async def browse_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         cat_idx, course = int(parts[1]), parts[2]
         category = CATEGORIES[cat_idx]
         levels = catalog.levels_for(category, course)
+        if len(levels) == 1:
+            await route_browse(query, context, f"lvl:{cat_idx}:{course}:{levels[0]}")
+            return
         keyboard = [
             [InlineKeyboardButton(lv, callback_data=f"lvl:{cat_idx}:{course}:{lv}")] for lv in levels
         ]
-        keyboard.append([InlineKeyboardButton("⬅️ Back", callback_data=f"cat:{cat_idx}")])
+        keyboard.append([InlineKeyboardButton("⬅️ Back", callback_data=effective_course_back(cat_idx, category))])
         await query.edit_message_text(
             f"Category: *{category}* | Course: *{course}*\nSelect your *Level*:",
             parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
@@ -303,6 +521,9 @@ async def browse_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         cat_idx, course, level = int(parts[1]), parts[2], parts[3]
         category = CATEGORIES[cat_idx]
         subjects = catalog.subjects_for(category, course, level)
+        if len(subjects) == 1:
+            await route_browse(query, context, f"subj:{cat_idx}:{course}:{level}:0")
+            return
         # subject INDEX, not name, in callback_data -- some subject names
         # (e.g. "Advanced Auditing, Assurance & Professional Ethics") blow
         # past the 64-byte cap once a prefix is added. subjects_for() is
@@ -312,7 +533,7 @@ async def browse_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton(s, callback_data=f"subj:{cat_idx}:{course}:{level}:{i}")]
             for i, s in enumerate(subjects)
         ]
-        keyboard.append([InlineKeyboardButton("⬅️ Back", callback_data=f"crs:{cat_idx}:{course}")])
+        keyboard.append([InlineKeyboardButton("⬅️ Back", callback_data=effective_level_back(cat_idx, category, course))])
         await query.edit_message_text(
             f"Category: *{category}* | Course: *{course}* | Level: *{level}*\nSelect your *Subject*:",
             parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
@@ -331,13 +552,17 @@ async def browse_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 for pt in paper_types
             ]
             keyboard.append(
-                [InlineKeyboardButton("⬅️ Back", callback_data=f"lvl:{cat_idx}:{course}:{level}")]
+                [InlineKeyboardButton("⬅️ Back", callback_data=effective_subject_back(cat_idx, category, course, level))]
             )
             await query.edit_message_text(
                 f"Subject: *{subject}*\nSelect *Paper Type*:",
                 parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
             )
         else:
+            # Remembered so send_file()'s post-download "Download more" button
+            # can bring the student straight back to this exact chapter list,
+            # not just one level up.
+            context.user_data["return_to"] = f"subj:{cat_idx}:{course}:{level}:{subj_idx}"
             chapters = catalog.chapters_for(category, course, level, subject)
             keyboard = []
             for ch in chapters:
@@ -345,7 +570,7 @@ async def browse_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 label = f"Ch {chno:g} - {ch['Label']}" if pd.notna(chno) else ch["Label"]
                 keyboard.append([InlineKeyboardButton(label[:80], callback_data=f"file:{ch['row_id']}")])
             keyboard.append(
-                [InlineKeyboardButton("⬅️ Back", callback_data=f"lvl:{cat_idx}:{course}:{level}")]
+                [InlineKeyboardButton("⬅️ Back", callback_data=effective_subject_back(cat_idx, category, course, level))]
             )
             await query.edit_message_text(
                 f"Category: *{category}* | Course: *{course}* | Level: *{level}* | Subject: *{subject}*\n"
@@ -358,6 +583,9 @@ async def browse_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         category = CATEGORIES[cat_idx]
         subjects = catalog.subjects_for(category, course, level)
         subject = subjects[subj_idx]
+        # Same reasoning as the chapters branch above -- "Download more"
+        # returns to this exact file list, not one level up.
+        context.user_data["return_to"] = f"pt:{cat_idx}:{course}:{level}:{subj_idx}:{paper_type}"
         files = catalog.exam_files_for(category, course, level, subject, paper_type)
         keyboard = [[InlineKeyboardButton(f["Label"][:80], callback_data=f"file:{f['row_id']}")] for f in files]
         keyboard.append(
@@ -372,11 +600,18 @@ async def browse_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         row_id = parts[1]
         await send_file(query, context, row_id)
 
+    elif action == "mainmenu":
+        context.user_data.clear()
+        text, markup = welcome_text_and_keyboard()
+        await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
+
 
 async def send_file(query_or_update, context, row_id):
     """Send the PDF from local disk to the user, looked up by catalog row_id
     (see Catalog.get_row_by_id -- never by filename, which can exceed
-    Telegram's 64-byte callback_data limit)."""
+    Telegram's 64-byte callback_data limit). Follows up with a "download
+    more / main menu" prompt once the file is sent -- see
+    prompt_download_more()."""
     row = catalog.get_row_by_id(row_id)
 
     chat_id = (
@@ -402,20 +637,86 @@ async def send_file(query_or_update, context, row_id):
         )
         return
 
-    caption = (
+    # This IS a file/PDF delivery -- the one place in this bot that keeps
+    # the brand footer, per Pranav's 2026-08-10 scoping.
+    caption = with_brand(
         f"\U0001F4C4 {row.get('Label', filename)}\n"
         f"{row.get('Category','')} — {row.get('Course','')} {row.get('Level','')} — "
         f"{row.get('Subject','')}"
     )
     with open(filepath, "rb") as f:
-        await context.bot.send_document(chat_id=chat_id, document=f, filename=filename, caption=caption)
+        await context.bot.send_document(
+            chat_id=chat_id, document=f, filename=filename, caption=caption, parse_mode=ParseMode.MARKDOWN
+        )
+
+    platform_db.log_interaction(DB_CONN, BOT_ID, chat_id, "file_sent")
+    platform_db.execute_with_retry(
+        DB_CONN,
+        "INSERT INTO study_hub_events (bot_id, telegram_user_id, event_type, category, course, level, subject, file_label) "
+        "VALUES (?,?,?,?,?,?,?,?)",
+        (BOT_ID, chat_id, "file_download", row.get("Category"), row.get("Course"), row.get("Level"),
+         row.get("Subject"), row.get("Label", filename)),
+    )
+
+    await prompt_download_more(chat_id, context)
+
+
+async def prompt_download_more(chat_id, context: ContextTypes.DEFAULT_TYPE):
+    """Sent right after every file, as its own message (a document message
+    can't be turned into a menu via edit). "Download more" jumps straight
+    back to whichever chapter/paper-type list the file was picked from --
+    see the "return_to" writes in browse_callback's "subj"/"pt" branches --
+    falling back to the Category picker if the file came from free-text
+    search, where there's no narrower list to return to."""
+    return_to = context.user_data.get("return_to", "browse:start")
+    keyboard = [
+        [InlineKeyboardButton("\U0001F4E5 Download More", callback_data=return_to)],
+        [InlineKeyboardButton("\U0001F3E0 Main Menu", callback_data="mainmenu:go")],
+    ]
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="Would you like to download another file, or are you done for now?",
+        reply_markup=InlineKeyboardMarkup(keyboard),
+    )
 
 
 async def free_text_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handles direct text like 'CA Inter cash flow' or 'CS company law',
-    searched across every course and category at once."""
+    searched across every course and category at once -- except a
+    standalone greeting/"reset" (see RESET_TRIGGER_RE), which resets the
+    conversation via start() instead of being treated as a search query."""
     query_text = update.message.text
+
+    # Profile flow takes priority over both search and the reset-greeting
+    # check below -- a display-name/username reply mid-edit must never be
+    # swallowed by either (see profile_flow.py's own docstring for the full
+    # trigger/state design; same "check awaiting-state first" discipline
+    # exam_hub_bot.py's text_router already applies).
+    if profile_flow.is_awaiting_text_input(context):
+        if await profile_flow.handle_profile_text_input(update, context):
+            return
+    if profile_flow.matches_trigger(query_text):
+        await profile_flow.start_profile_flow(update, context)
+        return
+    if report_flow.matches_trigger(query_text) and not report_flow.is_awaiting_text_input(context):
+        await report_flow.start_report_flow_on_demand(update, context, BOT_ID)
+        return
+    if report_flow.is_awaiting_text_input(context):
+        if await report_flow.handle_contact_text_input(update, context):
+            return
+
+    if RESET_TRIGGER_RE.match(query_text):
+        await start(update, context)
+        return
+
     results = catalog.search_text(query_text)
+
+    platform_db.log_interaction(DB_CONN, BOT_ID, update.effective_user.id, "search")
+    platform_db.execute_with_retry(
+        DB_CONN,
+        "INSERT INTO study_hub_events (bot_id, telegram_user_id, event_type, query_text) VALUES (?,?,?,?)",
+        (BOT_ID, update.effective_user.id, "search_query" if results else "search_no_match", query_text),
+    )
 
     if not results:
         await update.message.reply_text(
@@ -423,6 +724,12 @@ async def free_text_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "or rephrase (e.g. include the course, chapter number, or subject name)."
         )
         return
+
+    # No chapter/paper-type list exists to return to for a search-triggered
+    # download -- explicitly reset (not just default-if-absent) so a STALE
+    # return_to left over from earlier Browse navigation this session never
+    # leaks into an unrelated search's "Download more" button.
+    context.user_data["return_to"] = "browse:start"
 
     if len(results) == 1 and results[0][0] >= 90:
         # confident single match -> send directly
@@ -449,20 +756,27 @@ async def free_text_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def main():
     if not BOT_TOKEN:
+        env_name = BOT_CONFIG.get("bot_token_env")
+        hint = f"set the {env_name} variable in telegram/.env" if env_name else "check bots.json"
         raise SystemExit(
-            f"No bot token found. Either add a "
-            f"'Name: {BOT_NAME_IN_CREDS}' / 'Bot Token: ...' block to "
-            f"{CREDS_PATH}, or set the TELEGRAM_STUDY_BOT_TOKEN "
-            f"environment variable."
+            f"No bot token found for bot_id '{BOT_ID}'. {hint} "
+            f"(see telegram/config/bots.README.md)."
+            + (f" '1lavya-studyhub' can also fall back to a "
+               f"'Name: {BOT_NAME_IN_CREDS}' / 'Bot Token: ...' block in {CREDS_PATH}."
+               if BOT_ID == "1lavya-studyhub" else "")
         )
 
     app = Application.builder().token(BOT_TOKEN).build()
+    platform_db.schedule_heartbeat(app, BOT_ID)
 
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(CallbackQueryHandler(browse_callback, pattern=r"^(browse|cat|crs|lvl|subj|pt|file):"))
+    app.add_handler(CommandHandler("reset", start))
+    app.add_handler(CallbackQueryHandler(browse_callback, pattern=r"^(browse|cat|crs|lvl|subj|pt|file|mainmenu):"))
+    app.add_handler(CallbackQueryHandler(profile_flow.profile_flow_callback, pattern=r"^(profile|profileconfirm):"))
+    app.add_handler(CallbackQueryHandler(report_flow.report_flow_callback, pattern=r"^(report|reportconfirm):"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, free_text_search))
 
-    logger.info("1Lavya Study Hub Bot is starting...")
+    logger.info(f"Study Hub Bot starting for bot_id '{BOT_ID}' (tenant '{TENANT_ID}', {TENANT['display_name']})...")
     app.run_polling()
 
 

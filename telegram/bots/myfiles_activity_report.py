@@ -20,8 +20,12 @@ import sqlite3
 import sys
 from pathlib import Path
 
-# Keep in sync with DB_PATH in myfiles_hub_bot.py
-DB_PATH = r"D:\EffCorp_Projects\cap-online\telegram\assets\myfiles_bot\myfiles_hub.db"
+REPO_ROOT = Path(__file__).resolve().parents[2]   # telegram/bots/myfiles_activity_report.py -> repo root
+
+# Derived from REPO_ROOT, same pattern as myfiles_hub_bot.py's own DB_PATH --
+# was hardcoded to a D:\EffCorp_Projects\cap-online\... path until 2026-08-12;
+# fixed as part of the telegram/ portability pass -- see FIRST_PROMPT.md.
+DB_PATH = str(REPO_ROOT / "telegram" / "assets" / "myfiles_bot" / "myfiles_hub.db")
 
 
 def get_conn():

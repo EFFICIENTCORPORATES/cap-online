@@ -64,27 +64,64 @@ Covers three material **categories**, per course:
   PaperType, Session, ChapterNo) — one search covers all three courses
   and all three categories simultaneously.
 
+## This bot is now TENANT-AWARE (2026-08-09) — it serves faculty white-label bots too
+
+The same `study_hub_bot.py` script serves both the flagship 1LAVYA bot AND
+every faculty's white-label bot — which one a given process serves is
+chosen by the `TENANT_ID` environment variable at launch, resolved against
+`telegram/config/tenants.json` (see that file's own `tenants.README.md` for
+the full contract). Each tenant is a **separate running process** (Telegram
+forces one token = one bot identity) — this just means you no longer copy
+the script, you launch it twice with a different `TENANT_ID`.
+
+- `TENANT_ID` unset (or `1lavya-studyhub`) → today's original behavior,
+  unrestricted, all courses/categories.
+- `TENANT_ID=csarunchouhan` → scoped to exactly what that tenant's
+  `content_scope` licenses (CMA Foundation + Intermediate Law, as of
+  2026-08-09) — computed once at startup by filtering the catalog
+  DataFrame, so every existing browse/search method inherits the
+  restriction automatically, no per-method changes needed.
+- Faculty tenants (`kind: "faculty"`) get a `_Powered by 1LAVYA_` line
+  appended to every response; the flagship 1LAVYA tenants don't.
+- A faculty tenant can carry its own `welcome_message` (Markdown) — falls
+  back to the generic 1LAVYA greeting if absent.
+- A standalone greeting ("Hi"/"Hey"/"Hello"/...) or the word "reset",
+  typed as a message, resets the conversation the same way `/start` does.
+
 ## Setup checklist for the developer
 
-1. `pip install python-telegram-bot rapidfuzz openpyxl pandas`
-2. Get the bot's API token from **@BotFather** on Telegram (already
-   registered as `@Official1LavyaStudyBot`)
-3. Put the token in `telegram/creds.txt` under a
-   `Name: Official1LavyaStudyBot` / `Bot Token: ...` block (this file is
-   gitignored — never committed), or set the
-   `TELEGRAM_STUDY_BOT_TOKEN` environment variable (takes priority if
-   both are set).
-4. `EXCEL_PATH` and `STUDY_BOT_ROOT` are resolved automatically,
+1. `pip install python-telegram-bot rapidfuzz openpyxl pandas python-dotenv`
+2. Get each tenant's bot token from **@BotFather**:
+   - `1lavya-studyhub` (already registered as `@Official1LavyaStudyBot`)
+     resolves via `telegram/creds.txt` (`Name: Official1LavyaStudyBot` /
+     `Bot Token: ...`) or the `TELEGRAM_STUDY_BOT_TOKEN` env var.
+   - Every faculty tenant resolves via the env var named in its
+     `tenants.json` entry's `bot_token_env` field — put the real value in
+     `telegram/.env` (gitignored; copy `telegram/.env.example` for the
+     template). The script loads `telegram/.env` automatically.
+3. `EXCEL_PATH` and `STUDY_BOT_ROOT` are resolved automatically,
    repo-relative — no path editing needed as long as you run the script
    from inside a `cap-online` clone.
-5. If the material changes (new subject, new session's exam papers,
+4. If the material changes (new subject, new session's exam papers,
    Revision Material gets populated), re-run
    `python telegram/tools/build_master_catalog.py` (after re-running
    whichever upstream catalog script produced the change), then restart
-   the bot.
-6. Run: `python telegram/bots/study_hub_bot.py`
+   every running tenant process.
+5. Run the flagship bot: `python telegram/bots/study_hub_bot.py`
+   (PowerShell: no `TENANT_ID` needed, it defaults to `1lavya-studyhub`).
+6. Run a faculty bot, in its own terminal, e.g. for CS Arun Chouhan
+   (PowerShell):
+   ```powershell
+   cd <path-to-your-clone-of-this-repo>
+   $env:TENANT_ID = "csarunchouhan"
+   python telegram/bots/study_hub_bot.py
+   ```
+   Leave that terminal running — closing it takes that tenant's bot
+   offline, same as any other instance of this bot.
 7. Test `/start`, the full Browse flow for at least one subject in each
-   of CA/CS/CMA, the Exam Materials path, and free-text search.
+   licensed course/level, free-text search, a standalone "Hi"/"reset" reset,
+   and (for a faculty tenant) that the `_Powered by 1LAVYA_` footer actually
+   appears and the flagship bot's responses don't have it.
 
 ## Things to watch out for
 
@@ -112,3 +149,12 @@ Covers three material **categories**, per course:
 - No payment/premium gating yet — this bot is fully free. If premium
   tiers get added later, they'll need a `user_id → plan` mapping and
   gating logic added to this script.
+- **A tenant's `content_scope` entries must match the catalog's own
+  `Course`/`Level`/`Subject` strings exactly** (e.g. `"Business Laws and
+  Ethics"`, not `"Law"`) — a mismatch silently scopes a faculty bot to
+  zero content rather than erroring, since it's just an empty DataFrame
+  filter. Verify against the real catalog (`pandas.read_excel(...)`) before
+  adding a new tenant, don't guess the subject name.
+- This bot doesn't have the MCQ/Descriptive practice flow — that's
+  `exam_hub_bot.py` (Bot 2), which is **not yet tenant-aware**. A faculty's
+  Study Hub bot can be live while their Exam Hub bot still doesn't exist.

@@ -21,11 +21,16 @@
 - Every login, upload, retrieval, and delete is recorded in activity_log
 
 SETUP (do this before running):
-1. pip install python-telegram-bot --break-system-packages
+1. pip install python-telegram-bot[job-queue] python-dotenv --break-system-packages
    (sqlite3, smtplib, zipfile, secrets are all in the Python standard library)
-2. Fill in the CONFIG block below: BOT_TOKEN, BASE_STORAGE_PATH, DB_PATH,
-   and your SMTP email settings for sending OTPs.
-3. Run: python myfiles_hub_bot.py
+2. Copy telegram/.env.example to telegram/.env (gitignored -- never commit
+   it) and fill in TELEGRAM_MYFILES_BOT_TOKEN, MYFILES_SMTP_EMAIL,
+   MYFILES_SMTP_PASSWORD there. This script loads telegram/.env
+   automatically at startup -- no shell exports needed for local runs.
+3. BASE_STORAGE_PATH/DB_PATH below are auto-derived from this script's own
+   location (REPO_ROOT) -- no manual editing needed even if this repo is
+   cloned/moved elsewhere, as long as telegram/ keeps its folder shape.
+4. Run: python myfiles_hub_bot.py
    Keep the terminal/laptop running for the bot to stay online.
 
 NOTE ON "existing vs new user" / email verification:
@@ -38,15 +43,18 @@ NOTE ON "existing vs new user" / email verification:
 
 import os
 import re
+import sys
 import asyncio
 import sqlite3
 import secrets
 import smtplib
 import zipfile
 import logging
+from pathlib import Path
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 
+from dotenv import load_dotenv
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
 from telegram.ext import (
@@ -62,15 +70,33 @@ from telegram.ext import (
 # ---------------------------------------------------------------------------
 # CONFIG — edit these for your setup
 # ---------------------------------------------------------------------------
-BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8521776019:AAHYJ6P89kl2LhHUpMc7Rkpn05BbG9BTkrc")
-BASE_STORAGE_PATH = r"D:\EffCorp_Projects\cap-online\telegram\assets\myfiles_bot\uploads"  # per-user folders created here
-DB_PATH = r"D:\EffCorp_Projects\cap-online\telegram\assets\myfiles_bot\myfiles_hub.db"     # SQLite database file
+REPO_ROOT = Path(__file__).resolve().parents[2]   # telegram/bots/myfiles_hub_bot.py -> repo root
+load_dotenv(REPO_ROOT / "telegram" / ".env")      # secrets live in telegram/.env (gitignored)
+
+# Heartbeat only (added 2026-08-10) -- this bot is NOT part of the BOT_ID/
+# bots.json/shared-DB migration (its own users/otps/files/tags/activity_log
+# stay exactly where they are, see telegram/database/schema.sql's own note
+# on why). It still writes a heartbeat to the shared platform DB, purely so
+# telegram/tools/manage_bots.py and the analytics dashboard can show it
+# online/offline alongside every other bot -- see main() below.
+sys.path.insert(0, str(REPO_ROOT / "telegram" / "database"))
+import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
+MYFILES_BOT_ID = "1lavya-myfileshub"   # must match telegram/config/bots.json's entry
+
+BOT_TOKEN = os.environ.get("TELEGRAM_MYFILES_BOT_TOKEN", "PASTE_YOUR_BOTFATHER_TOKEN_HERE")
+# Derived from REPO_ROOT (set above from this script's own location) so the
+# bot keeps working unmodified if this repo -- or just telegram/ -- is
+# cloned/moved to a different path or computer. Was hardcoded to this
+# session's own D:\EffCorp_Projects\cap-online\... path until 2026-08-12;
+# fixed as part of the telegram/ portability pass -- see FIRST_PROMPT.md.
+BASE_STORAGE_PATH = str(REPO_ROOT / "telegram" / "assets" / "myfiles_bot" / "uploads")  # per-user folders created here
+DB_PATH = str(REPO_ROOT / "telegram" / "assets" / "myfiles_bot" / "myfiles_hub.db")     # SQLite database file
 
 # SMTP settings for sending OTP emails (e.g. a Gmail account with an "App Password")
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-SMTP_EMAIL = "1lavyamain@gmail.com"       # <-- PLACEHOLDER
-SMTP_PASSWORD = "kgwdmycscoiofxfk"          # <-- PLACEHOLDER
+SMTP_EMAIL = os.environ.get("MYFILES_SMTP_EMAIL", "PASTE_YOUR_SENDING_EMAIL_HERE")
+SMTP_PASSWORD = os.environ.get("MYFILES_SMTP_PASSWORD", "PASTE_YOUR_GMAIL_APP_PASSWORD_HERE")
 
 OTP_VALID_MINUTES = 10
 TELEGRAM_SAFE_LIMIT_MB = 45  # keep under Telegram's 50MB hard cap
@@ -1271,6 +1297,7 @@ def main():
 
     init_db()
     app = Application.builder().token(BOT_TOKEN).build()
+    platform_db.schedule_heartbeat(app, MYFILES_BOT_ID)
 
     conv = ConversationHandler(
         entry_points=[

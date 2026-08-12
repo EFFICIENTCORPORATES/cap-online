@@ -147,21 +147,26 @@ matching.
 
 ## Setup checklist for the developer
 
-1. `pip install python-telegram-bot --break-system-packages`
+1. `pip install python-telegram-bot python-dotenv --break-system-packages`
    (sqlite3, smtplib, zipfile are all standard library — no extra
    install needed for those)
 2. Get the bot's API token from **@BotFather** (registered as
    `@Official1LavyaMyFilesBot`)
-3. In `myfiles_hub_bot.py`, set:
-   - `BOT_TOKEN` (or `TELEGRAM_BOT_TOKEN` environment variable)
+3. Copy `telegram/.env.example` to `telegram/.env` (gitignored — never
+   commit it) and fill in:
+   - `TELEGRAM_MYFILES_BOT_TOKEN` — the BotFather token
+   - `MYFILES_SMTP_EMAIL` / `MYFILES_SMTP_PASSWORD` — for sending OTP
+     emails (Gmail needs an **App Password**, not the real account
+     password)
+   - `myfiles_hub_bot.py` loads `telegram/.env` automatically at startup
+     (via `python-dotenv`) — no shell exports needed for local runs.
+4. In `myfiles_hub_bot.py`, still set directly (not secrets, just local
+   paths — not yet repo-relative, see "Things to flag" below):
    - `BASE_STORAGE_PATH` — where per-student folders get created
      (currently `telegram\assets\myfiles_bot\uploads`)
    - `DB_PATH` — where the SQLite database file lives
      (currently `telegram\assets\myfiles_bot\myfiles_hub.db`)
-   - `SMTP_SERVER` / `SMTP_PORT` / `SMTP_EMAIL` / `SMTP_PASSWORD` — for
-     sending OTP emails (Gmail needs an **App Password**, not the real
-     account password)
-4. Run: `python myfiles_hub_bot.py` — this also auto-creates the SQLite
+5. Run: `python myfiles_hub_bot.py` — this also auto-creates the SQLite
    tables on first run.
 5. Test the full loop with a real email you control: register → receive
    OTP → verify (confirm the starter tags show up in My Tags) → upload a
@@ -175,6 +180,14 @@ matching.
 
 ## Things to flag with the client before launch
 
+- **Secrets fixed 2026-08-09**: the bot token and Gmail App Password used
+  to be hardcoded directly in `myfiles_hub_bot.py` (a live, working token
+  and password, in a file that was about to be committed unencrypted).
+  Both now load from `telegram/.env` (gitignored) via `python-dotenv` —
+  see the setup checklist above. `BASE_STORAGE_PATH`/`DB_PATH` are still
+  hardcoded absolute `D:\...` paths, not secrets but also not
+  repo-relative yet (unlike `study_hub_bot.py`) — worth the same fix if
+  this bot ever needs to run from a different machine/clone.
 - **No student allow-list yet.** Right now *any* email address can
   register — there's no check against a pre-approved list of enrolled
   students. There's a `# TODO: validate against enrolled student list`
