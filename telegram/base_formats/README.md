@@ -6,6 +6,15 @@ Share these files with faculty or content partners when requesting question data
 - `question_input_formats.xlsx` — field-by-field MCQ and descriptive templates.
 - `mcq_input_example.json` — one valid MCQ record in the bot input shape.
 - `descriptive_input_example.json` — one valid descriptive record in the bot input shape.
+- **`MCQ_PROMPT.md`** (added 2026-08-12) — a paste-ready system prompt for an AI model
+  generating MCQ JSON directly from a source PDF. Built from real defects found and fixed
+  in the CA Foundation Accounting/Business Economics batches (invalid JSON escaping,
+  inconsistent answer-key formats, a copy-pasted chapter_slug left over from an unrelated
+  example). Give it to the AI model alongside the source PDF and a real chapter list from
+  `course_catalog` — see the file's own "What you must also give the AI" section. Every
+  batch it produces still needs ingestion-script preflight checks before going live (see
+  `telegram/tools/ingest_ca_foundation_accounting_economics_mcqs.py` for the pattern) —
+  this prompt reduces how many of those checks fire, it doesn't replace them.
 
 The production banks are not duplicated here. The examples are generated from:
 
