@@ -1,0 +1,2003 @@
+[
+  {
+    "question_id": "CA-F-ECO-C5-U1-001",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What do rhythmic fluctuations in aggregate economic activity over a period of time signify?",
+    "options": {
+      "A": "Structural unemployment shifts",
+      "B": "Business cycles or trade cycles",
+      "C": "Secular growth trends only",
+      "D": "Monetary deflation shocks"
+    },
+    "correct_option": "B",
+    "explanation": "Rhythmic fluctuations in aggregate economic activity such as GDP, employment, and income over time are known as business cycles or trade cycles[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-002",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Which of the following best characterizes the recurrence and regularity of business cycles?",
+    "options": {
+      "A": "They occur at fixed intervals of exactly two years and have identical lengths.",
+      "B": "They are recurrent and occur periodically, but not always at regular intervals or of the same length.",
+      "C": "They are completely random events that never repeat.",
+      "D": "They follow a strictly timed 10-year rhythm across all global economies."
+    },
+    "correct_option": "B",
+    "explanation": "Business cycles are recurrent and periodic, but they vary in length, intensity, and duration without a fixed regular interval[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-003",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "The four distinct phases of a typical business cycle in sequential order are:",
+    "options": {
+      "A": "Expansion, Peak, Contraction, Trough",
+      "B": "Trough, Contraction, Peak, Expansion",
+      "C": "Peak, Expansion, Trough, Contraction",
+      "D": "Contraction, Trough, Peak, Expansion"
+    },
+    "correct_option": "A",
+    "explanation": "A typical business cycle moves through expansion, peak, contraction (recession), and trough (depression), followed by recovery[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-004",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "During the expansion phase of a business cycle, which of the following conditions is typically observed?",
+    "options": {
+      "A": "High involuntary unemployment and falling stock prices",
+      "B": "Increase in national output, employment, aggregate demand, and profits",
+      "C": "Shrinking bank credit and severe contraction in capital goods industries",
+      "D": "Widespread business bankruptcies and liquidations"
+    },
+    "correct_option": "B",
+    "explanation": "Expansion is characterized by rising output, employment, aggregate demand, sales, profits, stock prices, and bank credit[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-005",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Hard",
+    "question": "What type of unemployment predominantly exists during the peak of an expansion phase?",
+    "options": {
+      "A": "Cyclical unemployment",
+      "B": "Mass involuntary unemployment",
+      "C": "Frictional or structural unemployment",
+      "D": "Depression-level unemployment"
+    },
+    "correct_option": "C",
+    "explanation": "At peak expansion, involuntary unemployment is almost zero; remaining unemployment is strictly frictional or structural[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-006",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "The top or highest point of a business cycle is called:",
+    "options": {
+      "A": "Trough",
+      "B": "Peak",
+      "C": "Recession",
+      "D": "Recovery"
+    },
+    "correct_option": "B",
+    "explanation": "The top or highest point of the business cycle is referred to as the peak or prosperity[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-007",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Hard",
+    "question": "What triggers the transition from expansion to contraction at the peak?",
+    "options": {
+      "A": "Surplus labor availability driving wages down indefinitely",
+      "B": "Input shortages, rising input and output costs, and stagnating consumer demand",
+      "C": "Sudden elimination of bank credit worldwide",
+      "D": "Permanent government prohibition of capital investments"
+    },
+    "correct_option": "B",
+    "explanation": "In later expansion stages, input shortages increase costs, output prices rise, living costs strain fixed incomes, and consumer demand stagnates, leading to a peak[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-008",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "During the contraction phase, why do producers initially maintain their existing production levels despite slowing demand?",
+    "options": {
+      "A": "Because government mandates minimum production quotas.",
+      "B": "Because producers do not instantaneously recognize the pulse of the economy and anticipate higher demand.",
+      "C": "Because raw materials become free of cost.",
+      "D": "Because consumers prepay for all future goods."
+    },
+    "correct_option": "B",
+    "explanation": "Producers fail to instantaneously recognize the economic pulse and continue anticipating higher demand, creating overproduction[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-009",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "A severe form of recession characterized by negative growth rates and extremely sluggish economic activity is called:",
+    "options": {
+      "A": "Expansion",
+      "B": "Depression",
+      "C": "Equilibrium",
+      "D": "Stagflation"
+    },
+    "correct_option": "B",
+    "explanation": "Depression is the severe form of recession characterized by negative growth rates and rapidly declining income and expenditure[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-010",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Hard",
+    "question": "Which of the following is a typical feature observed during the depth of a depression?",
+    "options": {
+      "A": "Soaring interest rates due to heavy corporate borrowing",
+      "B": "Fall in interest rates coupled with a decline in credit demand due to fallen investor confidence",
+      "C": "Zero unemployment and peak wage rates",
+      "D": "Massive expansion of durable consumer goods manufacturing"
+    },
+    "correct_option": "B",
+    "explanation": "Depression features falling interest rates and increased demand for liquid money, but credit demand declines because investor confidence has collapsed[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-011",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "The lowest turning point of a business cycle where economic activity touches the bottom is known as:",
+    "options": {
+      "A": "Peak",
+      "B": "Trough",
+      "C": "Recession",
+      "D": "Stagnation"
+    },
+    "correct_option": "B",
+    "explanation": "At the depth of depression, all economic activities touch the bottom, marking the trough[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-012",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Hard",
+    "question": "Where is the reversal process from depression to recovery initially felt in the economy?",
+    "options": {
+      "A": "In the foreign exchange reserves market",
+      "B": "In the labor market where pervasive unemployment forces acceptance of lower wages",
+      "C": "In the luxury real estate market",
+      "D": "In government tax revenues"
+    },
+    "correct_option": "B",
+    "explanation": "The reversal process is initially felt in the labor market as pervasive unemployment forces workers to accept lower wages, reducing costs[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-013",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Measurable economic factors that change before the economy starts to follow a particular pattern or trend are called:",
+    "options": {
+      "A": "Lagging indicators",
+      "B": "Coincident indicators",
+      "C": "Leading indicators",
+      "D": "Concurrent indicators"
+    },
+    "correct_option": "C",
+    "explanation": "Leading indicators are variables that change before real output changes, serving as precursors to upturns or downturns[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-014",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Which of the following is considered a leading economic indicator?",
+    "options": {
+      "A": "Unemployment rate",
+      "B": "Corporate profits history",
+      "C": "Changes in stock prices and new orders for plant and equipment",
+      "D": "Labour cost per unit of output"
+    },
+    "correct_option": "C",
+    "explanation": "Stock prices, profit margins, and new orders for plant and equipment are classic leading indicators[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-015",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Variables that change after real output changes and serve to confirm existing economic trends are known as:",
+    "options": {
+      "A": "Leading indicators",
+      "B": "Lagging indicators",
+      "C": "Coincident indicators",
+      "D": "Autonomous indicators"
+    },
+    "correct_option": "B",
+    "explanation": "Lagging indicators reflect historical performance and change after real output changes, confirming trends[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-016",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Which of the following represents a lagging economic indicator?",
+    "options": {
+      "A": "Building permits for private houses",
+      "B": "Index of consumer confidence",
+      "C": "Unemployment and commercial lending activity",
+      "D": "Stock market price trends"
+    },
+    "correct_option": "C",
+    "explanation": "Unemployment, corporate profits, labor cost per unit, and commercial lending are lagging indicators[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-017",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Economic indicators that coincide or occur simultaneously with business-cycle movements are called:",
+    "options": {
+      "A": "Leading indicators",
+      "B": "Lagging indicators",
+      "C": "Coincident or concurrent indicators",
+      "D": "Exogenous indicators"
+    },
+    "correct_option": "C",
+    "explanation": "Coincident or concurrent indicators describe the current state of the business cycle by moving simultaneously with real activity[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-018",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Gross Domestic Product (GDP), inflation, and industrial production are examples of:",
+    "options": {
+      "A": "Leading indicators",
+      "B": "Lagging indicators",
+      "C": "Coincident indicators",
+      "D": "Secular trend indicators"
+    },
+    "correct_option": "C",
+    "explanation": "GDP, inflation, industrial production, personal income, and retail sales are standard coincident indicators[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-019",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "difficulty": "Medium",
+    "question": "The global GDP fell by around 15% between 1929 and 1932 during which major historical event?",
+    "options": {
+      "A": "The Dot-Com Bubble Burst",
+      "B": "The Great Depression",
+      "C": "The Global Financial Crisis of 2008-09",
+      "D": "The Post-War Oil Shock"
+    },
+    "correct_option": "B",
+    "explanation": "The Great Depression of 1930 caused global GDP to fall by around 15% between 1929 and 1932[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-020",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "difficulty": "Hard",
+    "question": "According to John Maynard Keynes, what was the primary cause of the massive decline in income and employment during the Great Depression?",
+    "options": {
+      "A": "Excessive growth in money supply",
+      "B": "Lower aggregate expenditures in the economy",
+      "C": "Rapid technological innovations",
+      "D": "Oversupply of agricultural housing"
+    },
+    "correct_option": "B",
+    "explanation": "Keynes attributed the Great Depression to lower aggregate expenditures in the economy[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-021",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "difficulty": "Medium",
+    "question": "The Information Technology (IT) bubble or Dot-Com bubble roughly covered which period?",
+    "options": {
+      "A": "1929–1933",
+      "B": "1997–2000",
+      "C": "2007–2009",
+      "D": "1980–1983"
+    },
+    "correct_option": "B",
+    "explanation": "The IT or Dot-Com bubble roughly covered the period 1997-2000[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-022",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "difficulty": "Medium",
+    "question": "The Global Economic Crisis of 2008-09 originated primarily from which financial sector?",
+    "options": {
+      "A": "European agricultural commodity markets",
+      "B": "U.S. financial markets and sub-prime mortgage sector",
+      "C": "Asian telecommunications market",
+      "D": "Latin American sovereign debt markets"
+    },
+    "correct_option": "B",
+    "explanation": "The 2008-09 global economic crisis originated in U.S. financial markets following the housing bubble burst[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-023",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Features of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Which of the following sectors is generally DISPROPORTIONATELY affected by business cycles compared to others?",
+    "options": {
+      "A": "Agricultural sector",
+      "B": "Capital goods and durable consumer goods industries",
+      "C": "Essential food retail sector",
+      "D": "Basic public utility services"
+    },
+    "correct_option": "B",
+    "explanation": "Capital goods and durable consumer goods industries are disproportionately affected by trade cycles compared to agriculture[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-024",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Features of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Why are business cycles considered international in character?",
+    "options": {
+      "A": "Because governments sign binding international synchronization treaties.",
+      "B": "Because economies are interconnected through trade, transmitting fluctuations from one country to another.",
+      "C": "Because global weather patterns are uniform.",
+      "D": "Because all central banks share a single currency."
+    },
+    "correct_option": "B",
+    "explanation": "Business cycles are contagious and international because economies are interconnected through trade relations[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-025",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "According to J.M. Keynes, fluctuations in economic activities are primarily caused by fluctuations in:",
+    "options": {
+      "A": "Money supply exclusively",
+      "B": "Aggregate effective demand",
+      "C": "Solar spot cycles",
+      "D": "Population growth rates"
+    },
+    "correct_option": "B",
+    "explanation": "Keynes asserted that fluctuations in economic activities are due to fluctuations in aggregate effective demand[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-026",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Which component of aggregate demand is considered by many economists to be the most volatile?",
+    "options": {
+      "A": "Consumer non-durable spending",
+      "B": "Investment spending",
+      "C": "Government routine administrative expenditure",
+      "D": "Subsistence food consumption"
+    },
+    "correct_option": "B",
+    "explanation": "Investment spending is considered to be the most volatile component of aggregate demand[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-027",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Who propounded the monetary theory of trade cycles, claiming that trade cycles are purely monetary phenomena caused by unplanned changes in money supply?",
+    "options": {
+      "A": "A.C. Pigou",
+      "B": "R.G. Hawtrey",
+      "C": "Joseph Schumpeter",
+      "D": "Nicholas Kaldor"
+    },
+    "correct_option": "B",
+    "explanation": "According to Hawtrey, trade cycle is a purely monetary phenomenon caused by unplanned changes in the supply of money[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-028",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Pigou's psychological theory attributes business fluctuations primarily to:",
+    "options": {
+      "A": "Inventions and innovations",
+      "B": "Waves of optimism and pessimism among the business community",
+      "C": "Monetary credit expansion by central banks",
+      "D": "Agricultural crop failures"
+    },
+    "correct_option": "B",
+    "explanation": "Pigou argued that business activities are based on anticipations and affected by waves of optimism or pessimism[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-029",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Schumpeter’s innovation theory explains trade cycles as a result of:",
+    "options": {
+      "A": "Wars and post-war reconstruction",
+      "B": "Innovations taking place in the system from time to time",
+      "C": "Fluctuations in international gold standards",
+      "D": "Changes in tax brackets"
+    },
+    "correct_option": "B",
+    "explanation": "According to Schumpeter, trade cycles occur as a result of innovations which take place in the system from time to time[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-030",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Hard",
+    "question": "The cobweb theory propounded by Nicholas Kaldor holds that business cycles result from:",
+    "options": {
+      "A": "Present prices substantially influencing production at some future date",
+      "B": "Government budget deficits exceeding GDP limits",
+      "C": "International trade tariffs",
+      "D": "Consumer savings rates dropping to zero"
+    },
+    "correct_option": "A",
+    "explanation": "The cobweb theory states that present prices substantially influence future production, creating subsequent output and employment fluctuations[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-031",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Relevance in Business Decision Making",
+    "difficulty": "Medium",
+    "question": "Businesses whose fortunes are closely linked to the rate of economic growth and suffer sharp drops in demand during slumps are referred to as:",
+    "options": {
+      "A": "Defensive businesses",
+      "B": "Cyclical businesses",
+      "C": "Autonomous monopolies",
+      "D": "Giffen enterprises"
+    },
+    "correct_option": "B",
+    "explanation": "Businesses closely linked to economic growth rates, such as fashion retailers and house-builders, are termed 'cyclical' businesses[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-032",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Relevance in Business Decision Making",
+    "difficulty": "Medium",
+    "question": "Why is knowledge of business cycles important for a profit-maximizing firm?",
+    "options": {
+      "A": "It allows firms to fix statutory tax rates.",
+      "B": "It assists in forward planning, capacity expansion, and adjusting production levels relative to demand.",
+      "C": "It eliminates all forms of competition.",
+      "D": "It guarantees exemption from labor laws."
+    },
+    "correct_option": "B",
+    "explanation": "Understanding business cycles helps managers frame policies, plan forward, and adjust production relative to demand across different phases[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-033",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Which of the following best defines a trade cycle?",
+    "options": {
+      "A": "A seasonal variation in agricultural crop yields",
+      "B": "Periods of good trade with rising prices altering with periods of bad trade with falling prices",
+      "C": "Long-term secular stagnation in population growth",
+      "D": "Government fiscal budget cycles"
+    },
+    "correct_option": "B",
+    "explanation": "A trade cycle comprises periods of good trade with rising prices and low unemployment alternating with periods of bad trade with falling prices[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-034",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "During the contraction phase, what happens to consumer spending as prices and incomes fall?",
+    "options": {
+      "A": "Consumer spending increases rapidly as goods become cheaper immediately.",
+      "B": "Consumers expect further price decreases and postpone their purchases, causing aggregate demand to fall further.",
+      "C": "Consumers shift entirely to luxury imports.",
+      "D": "Consumer spending remains perfectly constant."
+    },
+    "correct_option": "B",
+    "explanation": "Consumers expect further price decreases and postpone purchases, widening the demand-supply discrepancy and deepening recession[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-035",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Net foreign demand is defined as:",
+    "options": {
+      "A": "The sum of total domestic savings and investments",
+      "B": "The difference between exports and imports",
+      "C": "Government tax revenue minus public debt",
+      "D": "Total money supply divided by velocity of circulation"
+    },
+    "correct_option": "B",
+    "explanation": "The difference between exports and imports is net foreign demand, which forms a component of aggregate demand[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-036",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "How do expansionary macroeconomic policies typically boost aggregate demand?",
+    "options": {
+      "A": "Through increased government spending and/or tax cuts",
+      "B": "Through increased taxation and reduced public spending",
+      "C": "Through freezing all bank credit creation",
+      "D": "Through imposing strict import quotas"
+    },
+    "correct_option": "A",
+    "explanation": "Expansionary policies such as increased government spending and/or tax cuts boost aggregate demand and create booms[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-037",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "External causes of business cycles include all of the following EXCEPT:",
+    "options": {
+      "A": "Wars and post-war reconstruction",
+      "B": "Technology shocks",
+      "C": "Fluctuations in effective demand",
+      "D": "Natural factors and population growth"
+    },
+    "correct_option": "C",
+    "explanation": "Fluctuations in effective demand are classified as internal causes, whereas wars, technology shocks, natural factors, and population growth are external causes[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-038",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "If the growth rate of population is higher than the rate of economic growth, what is the expected impact on savings?",
+    "options": {
+      "A": "Savings in the economy will increase significantly.",
+      "B": "There will be lesser savings in the economy.",
+      "C": "Savings will remain unaffected.",
+      "D": "Savings will match total government expenditure."
+    },
+    "correct_option": "B",
+    "explanation": "If population growth exceeds economic growth, there will be lesser savings, reducing investment, income, and effective demand[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-039",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Features of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Which of the following statements regarding business cycles is FALSE?",
+    "options": {
+      "A": "Different business cycles differ in duration and intensity.",
+      "B": "Business cycles follow a uniform, perfectly regular time pattern in all market economies.",
+      "C": "Business cycles are contagious and international in character.",
+      "D": "Repercussions of business cycles are felt simultaneously on output, employment, and income."
+    },
+    "correct_option": "B",
+    "explanation": "Business cycles are anything but regular; they vary in intensity, length, and do not follow a set uniform pattern[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-040",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Relevance in Business Decision Making",
+    "difficulty": "Medium",
+    "question": "Can some businesses actually benefit from an economic downturn?",
+    "options": {
+      "A": "No, all businesses suffer equally without exception.",
+      "B": "Yes, when their products are perceived as offering good value for money or cheaper alternatives.",
+      "C": "Only luxury goods manufacturers benefit from downturns.",
+      "D": "Only firms that shut down completely benefit."
+    },
+    "correct_option": "B",
+    "explanation": "Some businesses benefit during economic downturns if their products offer good value for money or act as cheaper alternatives[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-041",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Which of the following indicators is used to track and forecast changes in business cycles but is not always infallible?",
+    "options": {
+      "A": "Leading indicators",
+      "B": "Lagging indicators",
+      "C": "Coincident indicators",
+      "D": "Static indicators"
+    },
+    "correct_option": "A",
+    "explanation": "Leading indicators are widely used to predict changes in the economy, but they are not always accurate and experts may disagree on timing[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-042",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "During which phase of the business cycle do business firms become pessimistic, bank credit shrinks, and stock prices fall?",
+    "options": {
+      "A": "Expansion",
+      "B": "Peak",
+      "C": "Contraction / Recession",
+      "D": "Recovery"
+    },
+    "correct_option": "C",
+    "explanation": "During contraction/recession, firms become pessimistic, profit expectations fall, bank credit shrinks, stock prices fall, and unemployment rises[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-043",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "How do natural factors such as droughts or excessive floods primarily trigger industrial recessions in agrarian economies?",
+    "options": {
+      "A": "By increasing government tax rates across all sectors",
+      "B": "By reducing agricultural output and farmers' incomes, which lowers demand for industrial goods and pushes up food prices",
+      "C": "By eliminating international trade completely",
+      "D": "By raising interest rates instantly"
+    },
+    "correct_option": "B",
+    "explanation": "Weather cycles reduce agricultural output and farm incomes, lowering demand for industrial goods while higher food prices reduce disposable income for manufactures[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-044",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "The steady growth line representing the growth of an economy when there are no business cycles is called:",
+    "options": {
+      "A": "The Trough Line",
+      "B": "The Trend Line",
+      "C": "The Peak Curve",
+      "D": "The Recession Bound"
+    },
+    "correct_option": "B",
+    "explanation": "The broken line marked 'trend' represents the steady growth line of the economy without business cycles[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-045",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Why are economic indicators essential for economists and policymakers?",
+    "options": {
+      "A": "To measure business cycles and predict where the economy is headed[cite: 21]",
+      "B": "To set fixed prices for all retail commodities",
+      "C": "To eliminate international trade barriers",
+      "D": "To calculate individual corporate income taxes"
+    },
+    "correct_option": "A",
+    "explanation": "Economists use changes in a variety of activities called indicators to measure business cycles and predict economic direction[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-046",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What effect does a decrease in the supply of money typically have on an economy?",
+    "options": {
+      "A": "It initiates expansion and lowers interest rates.",
+      "B": "It reverses the process of prosperity and initiates recession in the economy[cite: 21].",
+      "C": "It eliminates inflation permanently without affecting output.",
+      "D": "It increases employment levels instantaneously."
+    },
+    "correct_option": "B",
+    "explanation": "A decrease in money supply reverses prosperity and initiates recession by constricting credit and aggregate demand[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-047",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Relevance in Business Decision Making",
+    "difficulty": "Medium",
+    "question": "Surviving sluggish business cycles requires businesses to plan and set policies with respect to:",
+    "options": {
+      "A": "Product, prices, and promotion[cite: 21]",
+      "B": "Statutory auditing and tax filing only",
+      "C": "International military defense",
+      "D": "Foreign exchange rate fixing"
+    },
+    "correct_option": "A",
+    "explanation": "Surviving sluggish business cycles requires businesses to plan and set policies with respect to product, prices, and promotion[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-048",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Business cycles generally originate in which type of economic system?",
+    "options": {
+      "A": "Free market economies[cite: 21]",
+      "B": "Strictly centralized command economies",
+      "C": "Traditional subsistence economies",
+      "D": "Manorial feudal economies"
+    },
+    "correct_option": "A",
+    "explanation": "Business cycles generally originate in free market economies and are pervasive across sectors[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-049",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "How do technology shocks impact an economy during expansion?",
+    "options": {
+      "A": "They destroy capital goods and reduce profits.",
+      "B": "They enable production of new and better products, requiring huge investments and boosting employment, income, and profits[cite: 21].",
+      "C": "They cause immediate depressions.",
+      "D": "They have zero impact on macroeconomic variables."
+    },
+    "correct_option": "B",
+    "explanation": "Growing technology enables new products and services, requiring investments that expand employment, income, and profits[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-050",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Relevance in Business Decision Making",
+    "difficulty": "Medium",
+    "question": "What role do economic forecasts play for business firms despite not being perfectly reliable?",
+    "options": {
+      "A": "They help firms prepare for changes in economic direction prior to or soon after they occur[cite: 21].",
+      "B": "They completely eliminate all business risks.",
+      "C": "They dictate government fiscal policy adjustments.",
+      "D": "They replace the need for managerial intuition entirely."
+    },
+    "correct_option": "A",
+    "explanation": "Although not perfectly reliable, economic forecasts help firms anticipate the market and prepare for changes in economic direction[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-051",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Which of the measures of aggregate economic activity are typically used to manifest business cycles?",
+    "options": {
+      "A": "Gross National Product, employment, and income[cite: 21]",
+      "B": "Individual household utility levels only",
+      "C": "Strictly retail store count",
+      "D": "Foreign exchange ticker speeds"
+    },
+    "correct_option": "A",
+    "explanation": "Business cycles are manifested in fluctuations of aggregate economic activity measures like gross national product, employment, and income[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-052",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "What marks the end of pessimism and the beginning of optimism in a business cycle?",
+    "options": {
+      "A": "The peak phase",
+      "B": "The trough phase[cite: 21]",
+      "C": "The expansion peak",
+      "D": "The contraction start"
+    },
+    "correct_option": "B",
+    "explanation": "Trough generally lasts for some time and marks the end of pessimism and the beginning of optimism[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-053",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Changes in housing interest rates and prices are generally viewed as:",
+    "options": {
+      "A": "Precursors of upturns or downturns (leading indicators)[cite: 21]",
+      "B": "Strictly lagging historical records",
+      "C": "Coincident concurrent measures only",
+      "D": "Irrelevant random noise"
+    },
+    "correct_option": "A",
+    "explanation": "Indices such as housing, interest rates, and prices are generally seen as precursors of upturns or downturns (leading indicators)[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-054",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What factor contributed significantly to the Dot-Com bubble in the late 1990s?",
+    "options": {
+      "A": "Low interest rates in 1998-99 encouraging start-up internet borrowing[cite: 21]",
+      "B": "Strict government bans on venture capital",
+      "C": "High mandatory dividend payouts for tech firms",
+      "D": "Absence of any internet infrastructure"
+    },
+    "correct_option": "A",
+    "explanation": "Low interest rates in 1998-99 and venture capital enthusiasm fueled the Dot-Com startup borrowing and bubble[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-055",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "difficulty": "Medium",
+    "question": "In the 2008-09 global crisis, what action by the US Federal Reserve following the 2000 IT bubble burst contributed to housing speculation?",
+    "options": {
+      "A": "It raised interest rates to historic highs.",
+      "B": "It reduced the rate of interest, leading to large liquidity and cheaper credit[cite: 21].",
+      "C": "It nationalized all residential real estate.",
+      "D": "It prohibited mortgage lending entirely."
+    },
+    "correct_option": "B",
+    "explanation": "To combat the 2000 recession, the US Fed reduced interest rates, creating liquidity and cheaper credit that fueled the housing bubble[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-056",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Features of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Which industry type suffers disproportionately during business cycle contractions?",
+    "options": {
+      "A": "Capital goods and consumer durable goods industries[cite: 21]",
+      "B": "Basic staple food providers",
+      "C": "Public healthcare clinics",
+      "D": "Primary educational services"
+    },
+    "correct_option": "A",
+    "explanation": "Capital goods and durable consumer goods industries are disproportionately affected by the adverse effects of trade cycles[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-057",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "According to Hawtrey's monetary theory, an excessive increase in credit and money supply sets off what condition in the economy?",
+    "options": {
+      "A": "Deflation",
+      "B": "Inflation[cite: 21]",
+      "C": "Depression",
+      "D": "Stagnation"
+    },
+    "correct_option": "B",
+    "explanation": "An excessive increase of credit and money supply sets off inflation in the economy as capital is easily borrowed at low rates[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-058",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What is the primary effect of war on a country's economic production structure?",
+    "options": {
+      "A": "Production of war goods increases while resources diverted from capital and consumer goods affect other production[cite: 21].",
+      "B": "Consumer goods production doubles immediately.",
+      "C": "All manufacturing activities cease permanently.",
+      "D": "Agricultural output surges without limitation."
+    },
+    "correct_option": "A",
+    "explanation": "During wartime, resources are diverted to produce war goods, adversely affecting capital and consumer goods production and triggering downturns[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-059",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Post-war reconstruction activities typically push up effective demand because:",
+    "options": {
+      "A": "Houses, roads, bridges, etc., are built, causing output, employment, and income to rise[cite: 21].",
+      "B": "Governments impose heavy consumption taxes.",
+      "C": "International trade is legally prohibited.",
+      "D": "Consumer confidence remains permanently depressed."
+    },
+    "correct_option": "A",
+    "explanation": "Reconstruction of houses, roads, and bridges after a war pushes up effective demand and increases output, employment, and income[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-060",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Relevance in Business Decision Making",
+    "difficulty": "Medium",
+    "question": "Why is the stage of the business cycle crucial when making managerial decisions regarding expansion or down-sizing?",
+    "options": {
+      "A": "Different phases require fluctuating levels of input use, especially labour input[cite: 21].",
+      "B": "It determines corporate income tax brackets directly.",
+      "C": "It controls foreign currency exchange parities.",
+      "D": "It dictates patent registration fees."
+    },
+    "correct_option": "A",
+    "explanation": "Managerial decisions regarding expansion or down-sizing depend on the business cycle stage because different phases require fluctuating input use[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-061",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What type of trade is illustrated by China's recent economic slowdown causing a cycle of decline and panic across much of the world?",
+    "options": {
+      "A": "Isolated domestic autarky",
+      "B": "Contagious, internationally transmitted business cycles[cite: 21]",
+      "C": "Fixed-rate barter exchange",
+      "D": "Non-commercial public administration"
+    },
+    "correct_option": "B",
+    "explanation": "Global economic slowdowns illustrate that business cycles are contagious and international in character[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-062",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "During expansion, good amounts of net investment occur and the demand for what type of goods rises?",
+    "options": {
+      "A": "Demand for all types of goods and services rises[cite: 21].",
+      "B": "Demand only for basic survival rations rises.",
+      "C": "Demand strictly for government bonds rises.",
+      "D": "Demand for capital goods drops to zero."
+    },
+    "correct_option": "A",
+    "explanation": "Good amounts of net investment occur during expansion, and demand for all types of goods and services rises[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-063",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Which of the following describes the function of lagging indicators?",
+    "options": {
+      "A": "They forecast future turning points well in advance.",
+      "B": "They reflect the economy's historical performance and confirm trends after they have occurred[cite: 21].",
+      "C": "They measure current monetary velocity precisely.",
+      "D": "They replace economic output statistics."
+    },
+    "correct_option": "B",
+    "explanation": "Lagging indicators reflect the economy's historical performance, and changes are observable only after a trend has occurred[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-064",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Why are coincident indicators valuable to analysts?",
+    "options": {
+      "A": "They give information about the rate of change of expansion or contraction more or less at the same point in time[cite: 21].",
+      "B": "They predict recessions ten years before they happen.",
+      "C": "They record historical data from past centuries.",
+      "D": "They eliminate the need for GDP data."
+    },
+    "correct_option": "A",
+    "explanation": "Coincident indicators give information about economic expansion or contraction rate at approximately the same time it happens[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-065",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What mentality led dot-com companies to engage in lavish internal spending on elaborate business facilities prior to the 2000 crash?",
+    "options": {
+      "A": "A strict cost-minimization mindset",
+      "B": "A 'growth over profits' mentality[cite: 21]",
+      "C": "A government-mandated budget requirement",
+      "D": "A deflationary savings policy"
+    },
+    "correct_option": "B",
+    "explanation": "The 'growth over profits' mentality led dot-com companies to engage in lavish internal spending before collapsing[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-066",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What happened when the housing bubble burst in the second half of 2007 during the U.S. financial crisis?",
+    "options": {
+      "A": "House prices rose even higher.",
+      "B": "Sub-prime households started defaulting on mortgage installments on a large scale, causing huge bank losses[cite: 21].",
+      "C": "Banks eliminated all mortgage debt.",
+      "D": "Construction of houses doubled."
+    },
+    "correct_option": "B",
+    "explanation": "When house prices declined and the bubble burst in 2007, sub-prime borrowers defaulted on mortgages, inflicting massive losses on banks[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-067",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Features of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Which of the following is a recognized consequence of business cycles on society?",
+    "options": {
+      "A": "They have serious consequences on the well-being of society[cite: 21].",
+      "B": "They ensure perfectly equal income distribution at all times.",
+      "C": "They prevent any form of unemployment.",
+      "D": "They guarantee stable price levels permanently."
+    },
+    "correct_option": "A",
+    "explanation": "Business cycles have serious consequences on the well-being of society due to fluctuations in employment, income, and prices[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-068",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "How do variations in government spending affect business cycles?",
+    "options": {
+      "A": "They have destabilizing effects on the economy, especially during and after wars[cite: 21].",
+      "B": "They completely insulate free markets from depressions.",
+      "C": "They maintain a permanent state of zero inflation.",
+      "D": "They eliminate all private investment volatility."
+    },
+    "correct_option": "A",
+    "explanation": "Fluctuations in government spending, especially during and after wars, have destabilizing effects on economic activity[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-069",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "According to Schumpeter's innovation theory, what is the prime mover of trade cycles?",
+    "options": {
+      "A": "Periodic technological and commercial innovations taking place in the economic system[cite: 21]",
+      "B": "Changes in international gold mining quotas",
+      "C": "Government wage-price controls",
+      "D": "Seasonal agricultural weather shocks"
+    },
+    "correct_option": "A",
+    "explanation": "Schumpeter held that trade cycles occur as a result of innovations taking place in the system from time to time[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-070",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Relevance in Business Decision Making",
+    "difficulty": "Medium",
+    "question": "Why is the stage of the business cycle an important determinant for a new business entering the market?",
+    "options": {
+      "A": "It dictates whether demand will support startup survival and product launch success[cite: 21].",
+      "B": "It determines corporate registration fees with the judiciary.",
+      "C": "It exempts new firms from paying indirect taxes.",
+      "D": "It guarantees immediate monopoly status."
+    },
+    "correct_option": "A",
+    "explanation": "The business cycle stage is critical for a new business to decide market entry and determine the success of a new product launch[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-071",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "During the 1920s in the UK, what fueled the rapid growth in Gross Domestic Product and living standards?",
+    "options": {
+      "A": "New technologies and production processes such as the assembly line[cite: 21]",
+      "B": "Strict post-war rationing policies",
+      "C": "Complete elimination of industrial manufacturing",
+      "D": "Massive government cutbacks in infrastructure"
+    },
+    "correct_option": "A",
+    "explanation": "In the 1920s, UK growth was fuelled by new technologies and production processes like the assembly line[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-072",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "What happens to prices and costs during the late stages of expansion?",
+    "options": {
+      "A": "They tend to rise faster as inputs become scarce[cite: 21].",
+      "B": "They drop to absolute zero.",
+      "C": "They remain strictly frozen by law.",
+      "D": "They decline due to oversupply."
+    },
+    "correct_option": "A",
+    "explanation": "During expansion, prices and costs tend to rise faster as resource utilization nears maximum capacity[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-073",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Which of the following includes examples such as fraction of companies reporting slower deliveries and consumer confidence indices?",
+    "options": {
+      "A": "Leading indicators[cite: 21]",
+      "B": "Lagging indicators",
+      "C": "Coincident indicators",
+      "D": "Static historical indicators"
+    },
+    "correct_option": "A",
+    "explanation": "Index of consumer confidence and fraction of companies reporting slower deliveries are leading indicators[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-074",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Which factors helped world economies recover from the Great Depression starting in 1933?",
+    "options": {
+      "A": "Increased money supply, international inflow of gold, and increased government spending due to World War II[cite: 21]",
+      "B": "A complete ban on international trade",
+      "C": "Massive corporate tax hikes",
+      "D": "Sudden freezing of all bank deposits"
+    },
+    "correct_option": "A",
+    "explanation": "Increased money supply, gold inflows, and government spending due to WWII helped economies recover from the Great Depression[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-075",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Features of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Why are business cycles considered exceedingly complex phenomena?",
+    "options": {
+      "A": "Because they do not have uniform characteristics and causes, making accurate prediction difficult[cite: 21].",
+      "B": "Because they are strictly controlled by single-party decrees.",
+      "C": "Because economic variables never fluctuate.",
+      "D": "Because they only occur once per century."
+    },
+    "correct_option": "A",
+    "explanation": "Business cycles are exceedingly complex with varying causes and characteristics, making accurate prediction difficult[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-076",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "When aggregate demand outstrips aggregate supply in an economy, what condition does it cause?",
+    "options": {
+      "A": "Inflation[cite: 21]",
+      "B": "Depression",
+      "C": "Deflationary stagnation",
+      "D": "Full structural equilibrium"
+    },
+    "correct_option": "A",
+    "explanation": "If aggregate demand outstrips aggregate supply, it causes inflation[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-077",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "How do anti-inflationary policies such as tax hikes and higher interest rates affect aggregate demand?",
+    "options": {
+      "A": "They cause a downward pressure on aggregate demand, slowing down the economy[cite: 21].",
+      "B": "They instantly trigger hyper-expansionary booms.",
+      "C": "They have zero impact on economic activity.",
+      "D": "They eliminate unemployment completely."
+    },
+    "correct_option": "A",
+    "explanation": "Anti-inflationary measures like increased taxes and interest rates exert downward pressure on aggregate demand, slowing down the economy[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-078",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Relevance in Business Decision Making",
+    "difficulty": "Medium",
+    "question": "What is one of the major challenges of sustaining a business in the long-term regarding economic cycles?",
+    "options": {
+      "A": "Overcoming the effects of economic downturns and recessions[cite: 21]",
+      "B": "Preventing the government from collecting corporate taxes",
+      "C": "Eliminating all consumer price variations",
+      "D": "Maintaining absolute monopoly control"
+    },
+    "correct_option": "A",
+    "explanation": "Overcoming the effects of economic downturns and recessions is one of the major challenges of sustaining a business in the long-term[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-079",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What happens to unemployment percentages during periods of 'bad trade' in a trade cycle?",
+    "options": {
+      "A": "Unemployment percentages are high[cite: 21].",
+      "B": "Unemployment drops to absolute zero.",
+      "C": "Unemployment remains unaffected.",
+      "D": "Only voluntary retirement increases."
+    },
+    "correct_option": "A",
+    "explanation": "Periods of bad trade are characterized by falling prices and high unemployment percentages[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-080",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "Why do producers lower their prices during contraction phases?",
+    "options": {
+      "A": "To dispose off inventories and meet financial obligations[cite: 21]",
+      "B": "To comply with strict charitable regulations",
+      "C": "Because input costs rise infinitely",
+      "D": "To encourage consumers to delay purchases further"
+    },
+    "correct_option": "A",
+    "explanation": "Producers lower prices to dispose of excess inventories and meet financial obligations during contraction[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-081",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What initiates the recovery phase through the price mechanism in a free enterprise economy?",
+    "Options": {
+      "A": "Lower wage rates and reduced input costs reviving profit expectations and spurring investment[cite: 21]",
+      "B": "Mandatory government price floors",
+      "C": "Complete cessation of commercial banking",
+      "D": "Permanent abolition of private property"
+    },
+    "correct_option": "A",
+    "explanation": "Pervasive unemployment forces lower wages; producers anticipate lower costs, business confidence revives, and investment spurs recovery[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-082",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Which of the following groups consists entirely of leading indicators?",
+    "options": {
+      "A": "Stock prices, housing permits, and new orders for plant and equipment[cite: 21]",
+      "B": "Unemployment rate, corporate profits, and CPI",
+      "C": "GDP, inflation, and retail sales",
+      "D": "Industrial production and personal income"
+    },
+    "correct_option": "A",
+    "explanation": "Stock prices, housing permits, and new orders for plant and equipment are leading indicators[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-083",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Which of the following groups consists entirely of lagging indicators?",
+    "options": {
+      "A": "Unemployment, corporate profits, and labour cost per unit of output[cite: 21]",
+      "B": "Stock prices and building permits",
+      "C": "Consumer confidence index and new plant orders",
+      "D": "Retail sales and GDP"
+    },
+    "correct_option": "A",
+    "explanation": "Unemployment, corporate profits, and labor cost per unit of output are lagging indicators[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-084",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What happened to nearly half of the dot-com companies during the 1999-2001 collapse?",
+    "options": {
+      "A": "They were shut down or taken over by other companies[cite: 21].",
+      "B": "They became trillion-dollar monopolies.",
+      "C": "They were granted permanent government subsidies.",
+      "D": "They converted entirely into agricultural cooperatives."
+    },
+    "correct_option": "A",
+    "explanation": "During the dot-com crash, nearly half of the dot-com companies ran out of capital and were shut down or taken over[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-085",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Features of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Do business cycles display absolute smoothness and regularity in their phases?",
+    "options": {
+      "A": "Yes, every phase lasts exactly 36 months with mathematical precision.",
+      "B": "No, these phases seldom display smoothness and regularity, and their lengths are not definite[cite: 21].",
+      "C": "Only during depressions do they become smooth.",
+      "D": "Yes, under central planning."
+    },
+    "correct_option": "B",
+    "explanation": "Business cycle phases seldom display smoothness and regularity, and the length of each phase is not definite[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-086",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Effective demand in economic theory refers to:",
+    "options": {
+      "A": "The willingness and ability of consumers to purchase goods at different prices[cite: 21]",
+      "B": "Government mandated production quotas",
+      "C": "Total foreign aid received by a nation",
+      "D": "Physical volume of gold reserves"
+    },
+    "correct_option": "A",
+    "explanation": "Effective demand refers to the willingness and ability of consumers to purchase goods at different prices[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-087",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "During a bust cycle, where do investors typically move their funds when selling stocks?",
+    "options": {
+      "A": "Into safe-haven investments that traditionally do not lose value, such as bonds, gold, and the U.S. dollar[cite: 21]",
+      "B": "Into speculative dot-com startups",
+      "C": "Into high-risk sub-prime mortgages",
+      "D": "Into overseas real estate bubbles"
+    },
+    "correct_option": "A",
+    "explanation": "As stocks drop, investors sell and buy safe-haven investments like bonds, gold, and the U.S. dollar[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-088",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Relevance in Business Decision Making",
+    "difficulty": "Medium",
+    "question": "What is a primary requirement for business managers operating across the whole business cycle?",
+    "options": {
+      "A": "Managing effectively through boom, downturn, recession, and recovery to arrive at sound strategic decisions[cite: 21]",
+      "B": "Maintaining fixed output levels regardless of market demand",
+      "C": "Avoiding all interactions with financial markets",
+      "D": "Setting statutory interest rates"
+    },
+    "correct_option": "A",
+    "explanation": "Managers need to work effectively to arrive at sound strategic decisions in complex times, managing through boom, downturn, recession, and recovery[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-089",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Some business cycles have been observed to last for several years, while others are short, ending in:",
+    "options": {
+      "A": "Two to three years[cite: 21]",
+      "B": "Exactly ten years",
+      "C": "Six months precisely",
+      "D": "Twenty years"
+    },
+    "correct_option": "A",
+    "explanation": "Some business cycles are long, lasting several years, while others are short, ending in two to three years[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-090",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Phases of Business Cycle",
+    "difficulty": "Medium",
+    "question": "During contraction, when producers realize they have indulged in excessive investment and overproduction, how do they respond?",
+    "options": {
+      "A": "By holding back future investment plans and cancelling orders for equipment and inputs[cite: 21]",
+      "B": "By doubling their workforce immediately",
+      "C": "By raising output prices to record highs",
+      "D": "By ignoring market signals completely"
+    },
+    "correct_option": "A",
+    "explanation": "Producers respond to overproduction by holding back future investment and cancelling orders for equipment, inputs, and labor[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-091",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What internal factor causes investment spending to fluctuate quite often?",
+    "options": {
+      "A": "Changes in the profit expectations of entrepreneurs and variations in interest rates[cite: 21]",
+      "B": "Government fixed wage laws",
+      "C": "Permanent climate stabilization",
+      "D": "International border closures"
+    },
+    "correct_option": "A",
+    "explanation": "Investments fluctuate because of changes in entrepreneurs' profit expectations and interest rates[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-092",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Economic Indicators",
+    "difficulty": "Medium",
+    "question": "Coincident indicators are also referred to as:",
+    "options": {
+      "A": "Concurrent indicators[cite: 21]",
+      "B": "Leading predictors",
+      "C": "Lagging confirmation metrics",
+      "D": "Secular trend lines"
+    },
+    "correct_option": "A",
+    "explanation": "Coincident economic indicators are also called concurrent indicators[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-093",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "difficulty": "Medium",
+    "question": "In the 2008-09 crisis, why did banks lend to sub-prime households without checking creditworthiness during the boom?",
+    "options": {
+      "A": "Due to excess liquidity with banks and the availability of new financial instruments[cite: 21]",
+      "B": "Due to strict central bank statutory orders forcing zero-credit checks",
+      "C": "Because housing prices were expected to fall forever",
+      "D": "Because households paid cash upfront"
+    },
+    "correct_option": "A",
+    "explanation": "Excess liquidity and new financial instruments led banks to lend without checking borrower creditworthiness during the boom[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-094",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Features of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Which economic sectors are particularly more prone to the adverse effects of trade cycles compared to agriculture?",
+    "options": {
+      "A": "The industrial sector[cite: 21]",
+      "B": "Subsistence farming",
+      "C": "Handicraft cottage industries",
+      "D": "Local domestic services"
+    },
+    "correct_option": "A",
+    "explanation": "Compared to the agricultural sector, the industrial sector is more prone to the adverse effects of trade cycles[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-095",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "An increase in the supply of money causes an expansion in:",
+    "options": {
+      "A": "Aggregate demand and economic activities[cite: 21]",
+      "B": "Mass unemployment and deflation",
+      "C": "Involuntary inventory accumulation",
+      "D": "Corporate bankruptcies"
+    },
+    "correct_option": "A",
+    "explanation": "An increase in money supply causes expansion in aggregate demand and economic activities[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-096",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What happens to the growth rate during the depression phase of a business cycle?",
+    "options": {
+      "A": "Growth rate becomes negative[cite: 21]",
+      "B": "Growth rate reaches record highs",
+      "C": "Growth rate stays perfectly neutral at zero",
+      "D": "Growth rate matches long-term secular trends instantly"
+    },
+    "correct_option": "A",
+    "explanation": "During depression, growth rate becomes negative and national income and expenditure decline rapidly[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-097",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Relevance in Business Decision Making",
+    "difficulty": "Medium",
+    "question": "Economy-wide trends can have a significant impact on all types of businesses, but do they affect all sectors uniformly?",
+    "options": {
+      "A": "Yes, all sectors experience identical percentage changes in demand.",
+      "B": "No, business cycles do not affect all sectors uniformly; some businesses are more vulnerable than others[cite: 21].",
+      "C": "Only agriculture is affected while industry remains immune.",
+      "D": "Only financial institutions experience cycles."
+    },
+    "correct_option": "B",
+    "explanation": "Business cycles do not affect all sectors uniformly; some businesses are much more vulnerable than others[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-098",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Causes of Business Cycles",
+    "difficulty": "Medium",
+    "question": "Besides monetary and fiscal policies, what other macroeconomic policy intervention can lead to business cycles?",
+    "options": {
+      "A": "Measures influencing money supply, interest rates, government spending, and taxation[cite: 21]",
+      "B": "Mandatory international currency unification",
+      "C": "Abolition of central banking",
+      "D": "Prohibition of private corporate investment"
+    },
+    "correct_option": "A",
+    "explanation": "Macroeconomic policies (monetary and fiscal) like government spending, tax cuts, and interest rate adjustments cause business cycles[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-099",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Historical Examples of Business Cycles",
+    "discipline": "Economics",
+    "difficulty": "Medium",
+    "question": "What caused the collapse of the dot-com bubble during 1999-2001?",
+    "options": {
+      "A": "Many dot-com companies ran out of capital, leading to acquisitions, liquidations, and stock market crashes[cite: 21].",
+      "B": "Government orders banned internet usage globally.",
+      "C": "Venture capitalists refused to invest any capital from the start.",
+      "D": "Traditional manufacturing replaced all software firms."
+    },
+    "correct_option": "A",
+    "explanation": "Dot-com companies ran out of capital as the bubble collapsed, causing liquidations, takeovers, and stock crashes[cite: 21]."
+  },
+  {
+    "question_id": "CA-F-ECO-C5-U1-100",
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 5",
+    "chapter_slug": "business-cycles",
+    "unit_code": "Unit 1",
+    "topic": "Meaning and Phases of Business Cycles",
+    "difficulty": "Medium",
+    "question": "What is the ultimate outcome when a contraction process is complete and severe contraction grips economic activities?",
+    "options": {
+      "A": "The economy enters the phase of depression (trough)[cite: 21]",
+      "B": "The economy achieves permanent hyper-growth",
+      "C": "Inflation reaches its maximum historical peak",
+      "D": "All business firms become monopolies"
+    },
+    "correct_option": "A",
+    "explanation": "The process of recession being complete and severe contraction in economic activities pushes the economy into depression[cite: 21]."
+  }
+]

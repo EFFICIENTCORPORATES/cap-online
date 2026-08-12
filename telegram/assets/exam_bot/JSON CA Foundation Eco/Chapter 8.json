@@ -1,0 +1,1952 @@
+[
+  {
+    "question": "Which of the following is NOT one of the three primary functions of money?",
+    "options": {
+      "A": "Medium of exchange",
+      "B": "Unit of account",
+      "C": "Store of value",
+      "D": "Income redistribution"
+    },
+    "correct_answer": "D",
+    "explanation": "Money serves as a medium of exchange, unit of account, and store of value. Income redistribution is not a primary function.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "What does the store of value function of money allow people to do?",
+    "options": {
+      "A": "Exchange goods simultaneously",
+      "B": "Save purchasing power and smooth purchases over time",
+      "C": "Fix common prices for commodities",
+      "D": "Eliminate all economic uncertainty"
+    },
+    "correct_answer": "B",
+    "explanation": "Store of value means people can save money and use it later, smoothing purchases over time.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "In a barter economy, trading requires:",
+    "options": {
+      "A": "A central bank",
+      "B": "Fiat currency",
+      "C": "Double coincidence of wants",
+      "D": "Electronic fund transfers"
+    },
+    "correct_answer": "C",
+    "explanation": "Barter economies require a double coincidence of wants between trading parties.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Fiat money derives its value primarily from:",
+    "options": {
+      "A": "Its intrinsic gold content",
+      "B": "Collective agreement and belief of the nation",
+      "C": "Commercial bank reserves",
+      "D": "Foreign exchange backing"
+    },
+    "correct_answer": "B",
+    "explanation": "Fiat money is materially worthless but has value because a nation collectively agrees to ascribe value to it.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Which characteristic of money ensures it is not easily reproducible by counterfeiters?",
+    "options": {
+      "A": "Divisibility",
+      "B": "Difficulty to counterfeit",
+      "C": "Uniformity",
+      "D": "Portability"
+    },
+    "correct_answer": "B",
+    "explanation": "Money should be difficult to counterfeit i.e. not easily reproducible by people.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Liquidity of a financial asset refers to:",
+    "options": {
+      "A": "Its interest rate yield",
+      "B": "The ease and speed of converting it into cash at close to full market value",
+      "C": "Its physical weight and size",
+      "D": "Its term to maturity exceeding five years"
+    },
+    "correct_answer": "B",
+    "explanation": "Liquidity refers to the extent to which financial assets can be sold at close to full market value at short notice.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "According to the RBI manual (2007), money for policy purposes can be defined as:",
+    "options": {
+      "A": "The set of liquid financial assets whose stock variation impacts aggregate economic activity",
+      "B": "Only physical currency notes and coins",
+      "C": "All gold and silver reserves held by citizens",
+      "D": "Total corporate equity shares"
+    },
+    "correct_answer": "A",
+    "explanation": "Money is defined as the set of liquid financial assets, the variation in stock of which could impact aggregate economic activity.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Which of the following is considered a requisite characteristic of good money?",
+    "options": {
+      "A": "Perishability",
+      "B": "Uniformity",
+      "C": "High intrinsic value only",
+      "D": "Zero elasticity of supply"
+    },
+    "correct_answer": "B",
+    "explanation": "Money must possess uniformity, divisibility, general acceptability, durability, and portability.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Broad money in official statistics generally encompasses everything that provides:",
+    "options": {
+      "A": "Store of value and liquidity",
+      "B": "High risk and capital loss",
+      "C": "Fixed interest with zero liquidity",
+      "D": "Barter transaction capacity"
+    },
+    "correct_answer": "A",
+    "explanation": "Broad money encompasses everything that provides a store of value and liquidity.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Transferable deposits include:",
+    "options": {
+      "A": "Term deposits for 5 years",
+      "B": "Demand deposits transferable by check or money order",
+      "C": "National savings certificates",
+      "D": "Gold and silver bullion"
+    },
+    "correct_answer": "B",
+    "explanation": "Transferable deposits include demand deposits transferable by check or money order.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The demand for money is in the nature of:",
+    "options": {
+      "A": "Direct demand",
+      "B": "Derived demand",
+      "C": "Autonomous demand",
+      "D": "Inelastic supply"
+    },
+    "correct_answer": "B",
+    "explanation": "Demand for money is in the nature of derived demand; it is demanded for its purchasing power.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The demand for money is essentially a demand for:",
+    "options": {
+      "A": "Real balances / liquidity",
+      "B": "Physical gold bars",
+      "C": "Corporate debt securities",
+      "D": "Foreign exchange reserves"
+    },
+    "correct_answer": "A",
+    "explanation": "Demand for money is actually demand for liquidity, store of value, and real balances.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "What is the opportunity cost of holding money rather than interest-bearing assets?",
+    "options": {
+      "A": "The brokerage fee",
+      "B": "The rate of interest foregone",
+      "C": "The inflation rate",
+      "D": "The required reserve ratio"
+    },
+    "correct_answer": "B",
+    "explanation": "The opportunity cost of holding money is the interest rate a person could earn on other assets.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "How does higher real income affect the quantity of money people desire to hold?",
+    "options": {
+      "A": "It decreases money demand",
+      "B": "It increases money demand due to higher expenditure",
+      "C": "It has no effect",
+      "D": "It makes money demand perfectly elastic"
+    },
+    "correct_answer": "B",
+    "explanation": "Higher income leads to higher expenditure; richer people hold more money to finance expenditure.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "An increase in the general price level leads to:",
+    "options": {
+      "A": "A proportional decrease in money holding",
+      "B": "A direct proportional increase in desired money holding",
+      "C": "No change in nominal money demand",
+      "D": "A drop in transaction velocity"
+    },
+    "correct_answer": "B",
+    "explanation": "The quantity people desire to hold is directly proportional to the prevailing price level.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "How do financial innovations like ATM and internet banking affect the demand for liquid money?",
+    "options": {
+      "A": "Increase the need for cash",
+      "B": "Reduce the need for holding liquid money",
+      "C": "Eliminate the need for transactions",
+      "D": "Double the currency-deposit ratio"
+    },
+    "correct_answer": "B",
+    "explanation": "Innovations such as internet banking and ATMs reduce the need for holding liquid money.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Firms hold money primarily for:",
+    "options": {
+      "A": "Day-to-day transactions and precautionary needs",
+      "B": "Speculative international currency trading",
+      "C": "Purchasing government gold reserves",
+      "D": "Paying personal income taxes"
+    },
+    "correct_answer": "A",
+    "explanation": "Firms hold money essentially for the same basic transaction and precautionary reasons as households.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Real money is defined as:",
+    "options": {
+      "A": "Nominal money adjusted to the price level",
+      "B": "Nominal GDP multiplied by velocity",
+      "C": "Total credit money in circulation",
+      "D": "High-powered money minus currency"
+    },
+    "correct_answer": "A",
+    "explanation": "Real money is nominal money adjusted to the price level.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The demand for money represents a decision about:",
+    "options": {
+      "A": "How much wealth to hold as money versus other assets like bonds",
+      "B": "How many taxes to pay the government",
+      "C": "The exact rate of inflation set by the central bank",
+      "D": "The foreign exchange rate"
+    },
+    "correct_answer": "A",
+    "explanation": "Demand for money is a decision about how much wealth should be held in money rather than bonds.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Why do individuals hold money despite it giving little or no return?",
+    "options": {
+      "A": "Because it is liquid and offers convenience for day-to-day transactions",
+      "B": "Because it guarantees capital gains on stock markets",
+      "C": "Because holding cash is legally mandated by the IMF",
+      "D": "Because banks charge negative interest on deposits"
+    },
+    "correct_answer": "A",
+    "explanation": "Individuals hold money because it is liquid and offers the most convenient way to accomplish day-to-day transactions.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Who propounded the Quantity Theory of Money in 'The Purchasing Power of Money' (1911)?",
+    "options": {
+      "A": "Alfred Marshall",
+      "B": "Irving Fisher",
+      "C": "John Maynard Keynes",
+      "D": "Milton Friedman"
+    },
+    "correct_answer": "B",
+    "explanation": "Irving Fisher propounded QTM in his 1911 book.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Fisher's equation of exchange is formally stated as:",
+    "options": {
+      "A": "Md = kPY",
+      "B": "MV = PT",
+      "C": "C = sqrt(2bY/r)",
+      "D": "M = m * MB"
+    },
+    "correct_answer": "B",
+    "explanation": "Fisher's equation is MV = PT.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "In Fisher's equation MV = PT, what does 'M' represent?",
+    "options": {
+      "A": "Total amount of money in circulation",
+      "B": "Money multiplier",
+      "C": "Marginal propensity to consume",
+      "D": "Minimum reserve ratio"
+    },
+    "correct_answer": "A",
+    "explanation": "M is the total amount of money in circulation.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "In Fisher's equation, 'V' denotes:",
+    "options": {
+      "A": "Volume of trade",
+      "B": "Transactions velocity of circulation",
+      "C": "Value of fiat money",
+      "D": "Variable discount rate"
+    },
+    "correct_answer": "B",
+    "explanation": "V is transactions velocity of circulation.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "In Fisher's expanded equation of exchange, M' represents:",
+    "options": {
+      "A": "Total quantity of credit money",
+      "B": "Maximum high-powered money",
+      "C": "Mandatory reserves",
+      "D": "Monetary base"
+    },
+    "correct_answer": "A",
+    "explanation": "M' represents the total quantity of credit money.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "According to Fisher's QTM, velocity of circulation (V) and volume of transactions (T) in the short run are assumed to be:",
+    "options": {
+      "A": "Highly volatile",
+      "B": "Constant / fixed",
+      "C": "Perfectly elastic",
+      "D": "Zero"
+    },
+    "correct_answer": "B",
+    "explanation": "V is constant and T is fixed in the short run due to full employment.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The classical QTM demonstrates a strong relationship between:",
+    "options": {
+      "A": "Money and price level / value of money",
+      "B": "Interest rate and unemployment",
+      "C": "Brokerage fees and bond prices",
+      "D": "Fiscal deficit and exchange rates"
+    },
+    "correct_answer": "A",
+    "explanation": "QTM demonstrates a strong relationship between money and price level.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "In Fisher's transaction approach, total demand for money is represented by:",
+    "options": {
+      "A": "PT",
+      "B": "MV",
+      "C": "M'V'",
+      "D": "kPY"
+    },
+    "correct_answer": "A",
+    "explanation": "The total volume of transactions multiplied by price level (PT) represents the demand for money.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Later economists replaced 'T' in Fisher's equation with:",
+    "options": {
+      "A": "Real output Y",
+      "B": "Total currency C",
+      "C": "Excess reserves E",
+      "D": "Permanent income Yp"
+    },
+    "correct_answer": "A",
+    "explanation": "Later economists replaced T by the real output Y.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Fisher's equation of exchange asserts that the value of money flow (MV + M'V') is equal to:",
+    "options": {
+      "A": "PT",
+      "B": "kY",
+      "C": "H * m",
+      "D": "C + D"
+    },
+    "correct_answer": "A",
+    "explanation": "Money flow MV + M'V' equals PT.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The Cambridge approach to the quantity theory of money is also known as:",
+    "options": {
+      "A": "Cash balance approach",
+      "B": "Transaction approach",
+      "C": "Liquidity preference model",
+      "D": "Inventory theoretic model"
+    },
+    "correct_answer": "A",
+    "explanation": "Cambridge approach is known as cash balance approach.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Which economists are associated with the Cambridge approach?",
+    "options": {
+      "A": "Marshall, Pigou, Robertson, Keynes",
+      "B": "Fisher, Friedman, Tobin, Baumol",
+      "C": "Wicksell, Smith, Ricardo, Malthus",
+      "D": "Keynes, Hicks, Hansen, Samuelson"
+    },
+    "correct_answer": "A",
+    "explanation": "Marshall, Pigou, Robertson, and Keynes put forward the Cambridge approach.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The Cambridge approach posits that money provides utility by enabling split-up of sale and purchase and by:",
+    "options": {
+      "A": "Acting as a hedge against uncertainty",
+      "B": "Generating fixed stock dividends",
+      "C": "Paying interest on physical currency",
+      "D": "Eliminating transaction costs entirely"
+    },
+    "correct_answer": "A",
+    "explanation": "Money provides utility as a transaction medium and as a hedge against uncertainty (temporary store of wealth).",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The Cambridge money demand function is expressed as:",
+    "options": {
+      "A": "Md = kPY",
+      "B": "MV = PT",
+      "C": "C = sqrt(2bY/r)",
+      "D": "M = m * H"
+    },
+    "correct_answer": "A",
+    "explanation": "Cambridge money demand function is Md = kPY.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "In the Cambridge equation Md = kPY, what does 'PY' represent?",
+    "options": {
+      "A": "Nominal income",
+      "B": "Real national income",
+      "C": "Total volume of transactions",
+      "D": "High-powered money"
+    },
+    "correct_answer": "A",
+    "explanation": "PY is nominal income (price level times real output).",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "What is 'Cambridge k'?",
+    "options": {
+      "A": "The proportion of nominal income that people want to hold as cash balances",
+      "B": "The required reserve ratio set by the central bank",
+      "C": "The currency-deposit ratio",
+      "D": "The broker fee percentage"
+    },
+    "correct_answer": "A",
+    "explanation": "Cambridge k is the proportion of nominal income people want to hold as cash balances.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Both classical and neoclassical QTM versions are chiefly concerned with money as a means of:",
+    "options": {
+      "A": "Transactions or exchange",
+      "B": "Long-term speculative investment",
+      "C": "International trade tariffs",
+      "D": "Government tax collection"
+    },
+    "correct_answer": "A",
+    "explanation": "Neoclassical versions present models of transaction demand for money.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The Cambridge approach shifted the focus of the quantity theory of money to:",
+    "options": {
+      "A": "Money demand",
+      "B": "Money supply exclusively",
+      "C": "Foreign exchange markets",
+      "D": "Government fiscal budgets"
+    },
+    "correct_answer": "A",
+    "explanation": "Neoclassical theory changed focus to money demand as a function of money income.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "In the Cambridge view, holding money for precautionary motives arises because:",
+    "options": {
+      "A": "Sales and purchases do not take place simultaneously",
+      "B": "Interest rates on bonds are negative",
+      "C": "Banks refuse to accept deposits",
+      "D": "Governments outlaw barter"
+    },
+    "correct_answer": "A",
+    "explanation": "Because sale and purchase are not simultaneous, people need a temporary abode of purchasing power as a hedge against uncertainty.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The Cambridge parameter 'k' reflects:",
+    "options": {
+      "A": "Economic structure and monetary habits",
+      "B": "Central bank repo rates",
+      "C": "Total foreign debt",
+      "D": "Physical capital depreciation"
+    },
+    "correct_answer": "A",
+    "explanation": "k is a parameter reflecting economic structure and monetary habits.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Keynes' theory of demand for money is called:",
+    "options": {
+      "A": "Liquidity Preference Theory",
+      "B": "Cash Balance Approach",
+      "C": "Quantity Theory of Money",
+      "D": "Inventory Theoretic Approach"
+    },
+    "correct_answer": "A",
+    "explanation": "Keynes' theory is 'Liquidity Preference Theory'.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "According to Keynes, the three motives for holding money are:",
+    "options": {
+      "A": "Transactions, precautionary, and speculative",
+      "B": "Saving, investment, hoarding",
+      "C": "Primary, secondary, tertiary",
+      "D": "Income, wealth, capital"
+    },
+    "correct_answer": "A",
+    "explanation": "Keynes identified transactions, precautionary, and speculative motives.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The transaction motive for holding cash is directly related to:",
+    "options": {
+      "A": "The level of income",
+      "B": "The market rate of interest",
+      "C": "Brokerage fees",
+      "D": "Stock market volatility"
+    },
+    "correct_answer": "A",
+    "explanation": "Transaction demand is a direct proportional and positive function of the level of income.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Keynes regarded precautionary balances as:",
+    "options": {
+      "A": "Income elastic and not very sensitive to interest rates",
+      "B": "Highly sensitive to interest rates",
+      "C": "Completely dependent on bond prices",
+      "D": "Zero in a developing economy"
+    },
+    "correct_answer": "A",
+    "explanation": "Keynes regarded precautionary balances as income elastic and not very sensitive to interest rate.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The speculative demand for money arises from people's desire to:",
+    "options": {
+      "A": "Exploit future changes in interest rates and bond prices",
+      "B": "Buy daily groceries and gasoline",
+      "C": "Pay government taxes on time",
+      "D": "Store physical gold in central bank vaults"
+    },
+    "correct_answer": "A",
+    "explanation": "Speculative demand reflects desire to hold cash to exploit investment/bond price changes.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "What is the relationship between the speculative demand for money and the rate of interest?",
+    "options": {
+      "A": "Directly related",
+      "B": "Inversely related",
+      "C": "Unrelated",
+      "D": "Proportional"
+    },
+    "correct_answer": "B",
+    "explanation": "Speculative demand for money and interest rate are inversely related.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "In a liquidity trap, the speculative demand curve for money becomes:",
+    "options": {
+      "A": "Vertically parallel to the Y-axis",
+      "B": "Horizontally parallel to the X-axis (perfectly elastic)",
+      "C": "Upward sloping",
+      "D": "Downward sloping at 45 degrees"
+    },
+    "correct_answer": "B",
+    "explanation": "In a liquidity trap, speculative demand becomes perfectly elastic and parallel to the X-axis.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The inventory-theoretic approach to transaction demand was developed by:",
+    "options": {
+      "A": "Baumol and Tobin",
+      "B": "Fisher and Pigou",
+      "C": "Friedman and Schwartz",
+      "D": "Marshall and Keynes"
+    },
+    "correct_answer": "A",
+    "explanation": "Baumol (1952) and Tobin (1956) developed the inventory-theoretic approach.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Milton Friedman's restatement of quantity theory emphasizes which measure of income?",
+    "options": {
+      "A": "Permanent income",
+      "B": "Current disposable income",
+      "C": "Quarterly nominal income",
+      "D": "Net foreign income"
+    },
+    "correct_answer": "A",
+    "explanation": "Friedman maintains permanent income determines money demand.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "James Tobin's portfolio approach to money demand is based on the assumption of:",
+    "options": {
+      "A": "Investor risk aversion and portfolio diversification",
+      "B": "Zero risk in holding equity shares",
+      "C": "Fixed interest rates on all assets",
+      "D": "Complete absence of bonds"
+    },
+    "correct_answer": "A",
+    "explanation": "Tobin analyzed money demand as behavior toward risk aversion and diversification.",
+    "unit": "Unit 1",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Money supply in an economy is defined as the total stock of money held by:",
+    "options": {
+      "A": "The government and central bank",
+      "B": "Commercial banks only",
+      "C": "The public at a particular point of time",
+      "D": "International financial institutions"
+    },
+    "correct_answer": "C",
+    "explanation": "Money supply refers to the total amount of money available to the public as means of payment and store of value at a point in time.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Who is included in the definition of 'public' when measuring money supply?",
+    "options": {
+      "A": "Central government and commercial banks",
+      "B": "All economic units except producers of money (government and banking system)",
+      "C": "Only foreign central banks",
+      "D": "The Reserve Bank of India"
+    },
+    "correct_answer": "B",
+    "explanation": "The public includes all economic units except producers of money (government and banking system).",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Which of the following is excluded from the measure of money supply?",
+    "options": {
+      "A": "Currency held by the public",
+      "B": "Demand deposits with banks",
+      "C": "Inter-bank deposits",
+      "D": "Savings deposits with post offices"
+    },
+    "correct_answer": "C",
+    "explanation": "Inter-bank deposits are excluded from money supply calculations.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Narrow money (M1) in India is composed of:",
+    "options": {
+      "A": "Currency with public + Demand deposits with banking system + Other deposits with RBI",
+      "B": "Currency with public + Time deposits with banks",
+      "C": "M1 + Post office savings bank deposits",
+      "D": "M3 + Total post office deposits"
+    },
+    "correct_answer": "A",
+    "explanation": "M1 = Currency with public + Demand deposits with banking system + Other deposits with RBI.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "M2 money aggregate is defined as:",
+    "options": {
+      "A": "M1 + Savings deposits with post office savings banks",
+      "B": "M1 + Time deposits with banks",
+      "C": "M3 + Post office organization deposits",
+      "D": "Currency with public only"
+    },
+    "correct_answer": "A",
+    "explanation": "M2 = M1 + Savings deposits with post office savings banks.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Broad money (M3) is calculated as:",
+    "options": {
+      "A": "M1 + Time deposits with the banking system",
+      "B": "M2 + Post office deposits",
+      "C": "Currency with public + Other deposits with RBI",
+      "D": "Reserve money minus currency"
+    },
+    "correct_answer": "A",
+    "explanation": "M3 = M1 + Time deposits with the banking system.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "M4 money aggregate includes:",
+    "options": {
+      "A": "M3 + Total deposits with the Post Office Savings Organization (excluding NSC)",
+      "B": "M1 + Post office savings deposits",
+      "C": "Reserve money + Commercial bank reserves",
+      "D": "Demand deposits + Time deposits"
+    },
+    "correct_answer": "A",
+    "explanation": "M4 = M3 + total deposits with Post Office Savings Organization (excluding National Savings Certificates).",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Since July 1935, monetary statistics in India have been compiled and disseminated by:",
+    "options": {
+      "A": "State Bank of India",
+      "B": "Reserve Bank of India",
+      "C": "Ministry of Finance",
+      "D": "SEBI"
+    },
+    "correct_answer": "B",
+    "explanation": "The Reserve Bank of India has been compiling and disseminating monetary statistics since July 1935.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Following the Second Working Group on Money Supply (1977), RBI began publishing data on how many alternative measures of money supply?",
+    "options": {
+      "A": "Two (M1 and M3)",
+      "B": "Four (M1, M2, M3, M4)",
+      "C": "Three (NM1, NM2, NM3)",
+      "D": "Five (L1, L2, M1, M2, M3)"
+    },
+    "correct_answer": "B",
+    "explanation": "RBI publishes four alternative measures: M1, M2, M3, and M4.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "What are 'Other deposits with the RBI' included in M1?",
+    "options": {
+      "A": "Deposits of public financial institutions, foreign central banks, and international bodies like IMF",
+      "B": "Cash reserves of commercial banks",
+      "C": "Government tax revenues",
+      "D": "Personal savings accounts of RBI employees"
+    },
+    "correct_answer": "A",
+    "explanation": "Other deposits include deposits of quasi-government bodies, foreign central banks, IMF, etc., with RBI.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Which monetary aggregate represents broad money in standard Indian reporting?",
+    "options": {
+      "A": "M1",
+      "B": "M2",
+      "C": "M3",
+      "D": "M4"
+    },
+    "correct_answer": "C",
+    "explanation": "M3 is broad money.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Why is empirical analysis of money supply important?",
+    "options": {
+      "A": "To analyze causes of money growth and evaluate price stability",
+      "B": "To determine individual corporate income taxes",
+      "C": "To set commercial bank employee salaries",
+      "D": "To fix international trade tariffs"
+    },
+    "correct_answer": "A",
+    "explanation": "Empirical analysis is essential to understand money growth and evaluate price stability.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Cryptocurrencies in India are currently:",
+    "options": {
+      "A": "Legally recognized as fiat money",
+      "B": "Subject to significant legislative uncertainties and not recognized as currency",
+      "C": "Included in M1 money supply",
+      "D": "Issued exclusively by the RBI"
+    },
+    "correct_answer": "B",
+    "explanation": "Cryptocurrencies face legislative uncertainties and are not categorized as money in India.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Central Bank Digital Currencies (CBDCs) proposed by RBI are:",
+    "options": {
+      "A": "Legal tender issued by a central bank in digital form",
+      "B": "Private cryptocurrencies like Bitcoin",
+      "C": "Commercial bank credit cards",
+      "D": "Post office savings certificates"
+    },
+    "correct_answer": "A",
+    "explanation": "CBDC is legal tender issued by a central bank in a digital form, akin to paper currency.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Current and savings account deposits held by the public with banks are classified as:",
+    "options": {
+      "A": "Time deposits",
+      "B": "Demand deposits",
+      "C": "Inter-bank deposits",
+      "D": "Government currency liabilities"
+    },
+    "correct_answer": "B",
+    "explanation": "Demand deposits include current and savings account deposits.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The primary source of money supply in all countries is:",
+    "options": {
+      "A": "The commercial banking system",
+      "B": "The central bank of the country",
+      "C": "Foreign commercial banks",
+      "D": "Post office savings banks"
+    },
+    "correct_answer": "B",
+    "explanation": "The central bank is the primary source of money supply (high-powered money).",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "High-powered money (Monetary Base) consists of:",
+    "options": {
+      "A": "Currency in circulation plus bank reserves",
+      "B": "Time deposits plus demand deposits",
+      "C": "Total credit money created by banks",
+      "D": "National savings certificates"
+    },
+    "correct_answer": "A",
+    "explanation": "Monetary base / high-powered money is the sum of currency in circulation and bank reserves.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Paper currency issued by the central bank is essentially:",
+    "options": {
+      "A": "A debt instrument / liability of the central bank",
+      "B": "An equity share in the government",
+      "C": "A commodity with high intrinsic value",
+      "D": "A non-interest-bearing corporate bond"
+    },
+    "correct_answer": "A",
+    "explanation": "Paper currency is representative money, essentially a liability of the issuing central bank and sovereign.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Most countries currently adopt which system for issuing currency?",
+    "options": {
+      "A": "100 percent gold reserve system",
+      "B": "Minimum reserve system",
+      "C": "Pure silver standard",
+      "D": "Barter exchange quota"
+    },
+    "correct_answer": "B",
+    "explanation": "Most countries have adopted a 'minimum reserve system'.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The second major source of money supply after the central bank is:",
+    "options": {
+      "A": "The commercial banking system (credit money)",
+      "B": "Post office savings organizations",
+      "C": "Non-banking financial companies (NBFCs)",
+      "D": "International Monetary Fund"
+    },
+    "correct_answer": "A",
+    "explanation": "The second major source is the commercial banking system via credit money creation.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Money created by commercial banks through borrowing and lending transactions is called:",
+    "options": {
+      "A": "High-powered money",
+      "B": "Credit money",
+      "C": "Fiat currency",
+      "D": "Reserve money"
+    },
+    "correct_answer": "B",
+    "explanation": "Money created by commercial banks is called 'credit money'.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Under the minimum reserve system, the central bank can issue currency by keeping:",
+    "options": {
+      "A": "Zero reserves",
+      "B": "Only a certain minimum reserve of gold and foreign securities",
+      "C": "100% gold backing for every note",
+      "D": "Equivalent commercial shares"
+    },
+    "correct_answer": "B",
+    "explanation": "Central bank keeps a minimum reserve of gold and foreign securities.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Government currency liabilities to the public comprise:",
+    "options": {
+      "A": "One rupee notes and coins issued by the government",
+      "B": "All currency notes issued by the RBI",
+      "C": "Commercial bank demand deposits",
+      "D": "Treasury bills held by banks"
+    },
+    "correct_answer": "A",
+    "explanation": "One rupee notes and coins are government currency liabilities to the public.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Net bank credit to government sector is a major component of:",
+    "options": {
+      "A": "Sources of broad money (M3)",
+      "B": "Individual cash holdings",
+      "C": "Post office savings",
+      "D": "Foreign exchange reserves only"
+    },
+    "correct_answer": "A",
+    "explanation": "Net bank credit to government is part of the sources of M3.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Banking sector's net non-monetary liabilities are:",
+    "options": {
+      "A": "Added when calculating M3 sources",
+      "B": "Subtracted when calculating M3 sources",
+      "C": "Equal to currency with public",
+      "D": "Ignored in RBI press releases"
+    },
+    "correct_answer": "B",
+    "explanation": "Non-monetary liabilities are subtracted in the source side of M3 table.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The money multiplier (m) is defined as:",
+    "options": {
+      "A": "Ratio of money supply to monetary base (M / MB)",
+      "B": "Ratio of high-powered money to total deposits",
+      "C": "Ratio of reserves to currency",
+      "D": "Reciprocal of currency-deposit ratio"
+    },
+    "correct_answer": "A",
+    "explanation": "Money multiplier m = Money supply / Monetary base.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "If an injection of 100 Crore in monetary base leads to a 500 Crore increase in money supply, the money multiplier is:",
+    "options": {
+      "A": "1",
+      "B": "5",
+      "C": "10",
+      "D": "0.2"
+    },
+    "correct_answer": "B",
+    "explanation": "Multiplier = 500 / 100 = 5.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "What is the formula for the simple deposit multiplier in terms of required reserve ratio (R)?",
+    "options": {
+      "A": "1 / R",
+      "B": "1 + c / r + c",
+      "C": "R / M",
+      "D": "C / D"
+    },
+    "correct_answer": "A",
+    "explanation": "Simple deposit multiplier is 1 / R.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "If the required reserve ratio (R) is 10%, the simple deposit multiplier is:",
+    "options": {
+      "A": "5",
+      "B": "10",
+      "C": "20",
+      "D": "100"
+    },
+    "correct_answer": "B",
+    "explanation": "1 / 0.10 = 10.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The credit multiplier is:",
+    "options": {
+      "A": "The reciprocal of the required reserve ratio",
+      "B": "Equal to the currency ratio",
+      "C": "The ratio of cash to total assets",
+      "D": "Independent of reserve requirements"
+    },
+    "correct_answer": "A",
+    "explanation": "Credit multiplier = 1 / Required Reserve Ratio.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Why are the money multiplier and deposit multiplier not identical?",
+    "options": {
+      "A": "Because banks hold excess reserves and individuals hold currency",
+      "B": "Because reserve ratios are always zero",
+      "C": "Because central banks issue no currency",
+      "D": "Because time deposits do not exist"
+    },
+    "correct_answer": "A",
+    "explanation": "They differ due to excess reserves and currency holdings by the public.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Creating money through credit expansion by commercial banks implies:",
+    "options": {
+      "A": "Creation of real wealth and natural resources",
+      "B": "Creation of financial claims/liabilities, not net real wealth",
+      "C": "A decrease in total monetary base",
+      "D": "Elimination of all bank liabilities"
+    },
+    "correct_answer": "B",
+    "explanation": "Money creation through credit is not the same as wealth creation.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "What happens to the money multiplier when the required reserve ratio (r) increases?",
+    "options": {
+      "A": "It increases",
+      "B": "It decreases",
+      "C": "It remains unchanged",
+      "D": "It becomes infinite"
+    },
+    "correct_answer": "B",
+    "explanation": "Higher reserve ratio reduces multiple deposit expansion, decreasing the multiplier.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "An increase in the currency-deposit ratio (c) causes the money multiplier to:",
+    "options": {
+      "A": "Increase",
+      "B": "Decrease",
+      "C": "Remain constant",
+      "D": "Equal one"
+    },
+    "correct_answer": "B",
+    "explanation": "Currency does not undergo multiple expansion; higher c reduces the money multiplier.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "What are the three proximate determinants of money supply in the Friedman-Schwartz approach?",
+    "options": {
+      "A": "High-powered money (H), reserve-ratio (r), currency-deposit ratio (c)",
+      "B": "Interest rate, inflation rate, GDP growth rate",
+      "C": "Tax rate, government expenditure, public debt",
+      "D": "Bank rate, repo rate, CRR"
+    },
+    "correct_answer": "A",
+    "explanation": "Proximate determinants are H, r, and c.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Excess reserves (ER) of commercial banks are defined as:",
+    "options": {
+      "A": "Total reserves (TR) minus required reserves (RR)",
+      "B": "Currency with public plus demand deposits",
+      "C": "Total deposits divided by credit multiplier",
+      "D": "Borrowings from the central bank"
+    },
+    "correct_answer": "A",
+    "explanation": "ER = TR - RR.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "How is the excess reserves ratio (e) related to the market interest rate?",
+    "options": {
+      "A": "Positively related",
+      "B": "Negatively related",
+      "C": "Unrelated",
+      "D": "Proportionally fixed at 10%"
+    },
+    "correct_answer": "B",
+    "explanation": "Excess reserves ratio is negatively related to market interest rate (opportunity cost of holding idle reserves).",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "If commercial banks hold excess reserves due to risk aversion during a financial crisis:",
+    "options": {
+      "A": "Money multiplier and money supply increase",
+      "B": "Money multiplier and money supply fall",
+      "C": "Monetary base becomes zero",
+      "D": "Credit creation doubles automatically"
+    },
+    "correct_answer": "B",
+    "explanation": "Holding excess reserves reduces lending and lowers money supply.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "What is the formula for the complete money multiplier including currency ratio (c), reserve ratio (r), and excess reserve ratio (e)?",
+    "options": {
+      "A": "m = (1 + c) / (r + e + c)",
+      "B": "m = 1 / r",
+      "C": "m = c / r",
+      "D": "m = (r + e) / c"
+    },
+    "correct_answer": "A",
+    "explanation": "m = (1 + c) / (r + e + c).",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "If currency = 400, deposits = 1000, required reserve ratio = 10%, and excess reserves = 1, what is the currency ratio (c)?",
+    "options": {
+      "A": "0.10",
+      "B": "0.40",
+      "C": "1.00",
+      "D": "2.50"
+    },
+    "correct_answer": "B",
+    "explanation": "c = C / D = 400 / 1000 = 0.40.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "When the central bank purchases government securities in an open market operation:",
+    "options": {
+      "A": "High-powered money is injected and money supply increases",
+      "B": "Monetary base contracts and money supply falls",
+      "C": "Commercial bank reserves are wiped out",
+      "D": "Currency-deposit ratio becomes zero"
+    },
+    "correct_answer": "A",
+    "explanation": "Purchase of government securities injects high-powered money into the system.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "What facility allows central and state governments to borrow from the RBI when their cash balances fall short?",
+    "options": {
+      "A": "Ways and Means Advances (WMA) / Overdraft facility",
+      "B": "Statutory Liquidity Ratio (SLR) window",
+      "C": "Post office savings accounts",
+      "D": "National savings certificates"
+    },
+    "correct_answer": "A",
+    "explanation": "Governments avail WMA / Overdraft facility from RBI.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Lending to the government under WMA / OD results in:",
+    "options": {
+      "A": "Generation of excess reserves of commercial banks and potential money supply expansion",
+      "B": "Immediate contraction of currency in circulation",
+      "C": "Reduction in commercial bank deposits",
+      "D": "Zero change in high-powered money"
+    },
+    "correct_answer": "A",
+    "explanation": "WMA / government expenditure creates excess reserves and expands money supply.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "If required reserve ratio is 12.5%, what is the credit multiplier?",
+    "options": {
+      "A": "5",
+      "B": "8",
+      "C": "10",
+      "D": "12.5"
+    },
+    "correct_answer": "B",
+    "explanation": "Credit multiplier = 1 / 0.125 = 8.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Calculate Narrow Money (M1) given: Currency with public = 90,000; Demand deposits = 200,000; Time deposits = 220,000; Other deposits with RBI = 280,000 (in crores).",
+    "options": {
+      "A": "570,000 crore",
+      "B": "790,000 crore",
+      "C": "500,000 crore",
+      "D": "370,000 crore"
+    },
+    "correct_answer": "A",
+    "explanation": "M1 = 90,000 + 200,000 + 280,000 = 570,000 crore.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "If currency in circulation = 2,496,611; rupee coin = 25,572; small coins = 743; and cash on hand with banks = 98,305 (in crores), currency with the public is:",
+    "options": {
+      "A": "2,424,621 crore",
+      "B": "2,620,000 crore",
+      "C": "2,398,000 crore",
+      "D": "2,530,000 crore"
+    },
+    "correct_answer": "A",
+    "explanation": "Currency with public = (2,496,611 + 25,572 + 743) - 98,305 = 2,424,621 crore.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Reserve money is also known as:",
+    "options": {
+      "A": "Central bank money",
+      "B": "Base money",
+      "C": "High powered money",
+      "D": "All the above"
+    },
+    "correct_answer": "D",
+    "explanation": "Reserve money is known as central bank money, base money, or high powered money.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Following the 1998 Working Group on Money, the RBI publishes new monetary aggregates including NM1, NM2, and NM3. What does NM1 represent?",
+    "options": {
+      "A": "Currency with public + Demand deposits with banking system + Other deposits with RBI",
+      "B": "NM2 plus long-term time deposits",
+      "C": "Reserve money plus post office deposits",
+      "D": "Total currency in circulation only"
+    },
+    "correct_answer": "A",
+    "explanation": "NM1 = Currency with public + Demand deposits with banking system + Other deposits with RBI.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Liquidity aggregate L1 is defined as:",
+    "options": {
+      "A": "NM3 + All deposits with post office savings banks (excluding NSC)",
+      "B": "NM1 plus term deposits with financial institutions",
+      "C": "M1 plus commercial paper",
+      "D": "High-powered money minus bank reserves"
+    },
+    "correct_answer": "A",
+    "explanation": "L1 = NM3 + All deposits with post office savings banks (excluding NSC).",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "An increase in the time deposit-demand deposit ratio (TD/DD) implies:",
+    "options": {
+      "A": "Greater availability of free reserves and enlargement of multiple deposit expansion",
+      "B": "Immediate contraction of high-powered money",
+      "C": "A rise in the currency-deposit ratio to 100%",
+      "D": "Zero credit creation by commercial banks"
+    },
+    "correct_answer": "A",
+    "explanation": "Higher TD/DD ratio enlarges the volume of multiple deposit expansion.",
+    "unit": "Unit 2",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Monetary policy is used by the Reserve Bank of India primarily to manage economic fluctuations and achieve:",
+    "options": {
+      "A": "Price stability (low and stable inflation)",
+      "B": "Zero government debt",
+      "C": "Unlimited foreign exchange reserves",
+      "D": "Fixed exchange rates against gold"
+    },
+    "correct_answer": "A",
+    "explanation": "RBI uses monetary policy to manage economic fluctuations and achieve price stability.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "When central banks lower interest rates, monetary policy is said to be:",
+    "options": {
+      "A": "Easing",
+      "B": "Tightening",
+      "C": "Neutral",
+      "D": "Contractionary"
+    },
+    "correct_answer": "A",
+    "explanation": "Lowering interest rates is easing monetary policy.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "When central banks raise interest rates, monetary policy is:",
+    "options": {
+      "A": "Easing",
+      "B": "Tightening",
+      "C": "Expansionary",
+      "D": "Accommodative"
+    },
+    "correct_answer": "B",
+    "explanation": "Raising interest rates is tightening monetary policy.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The monetary policy framework has three basic components: objectives, operating procedures, and:",
+    "options": {
+      "A": "The analytics of monetary policy (transmission mechanisms)",
+      "B": "Fiscal tax rates",
+      "C": "Commercial bank profit margins",
+      "D": "International trade tariffs"
+    },
+    "correct_answer": "A",
+    "explanation": "The framework has three components: objectives, analytics (transmission), and operating procedures.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "According to the RBI Act, 1934 preamble, the primary objective is to secure monetary stability and:",
+    "options": {
+      "A": "Operate the currency and credit system of the country to its advantage",
+      "B": "Nationalize all commercial banks",
+      "C": "Fix the exchange rate of the rupee to the US dollar",
+      "D": "Eliminate all taxation"
+    },
+    "correct_answer": "A",
+    "explanation": "The preamble states 'to secure monetary stability... and generally to operate the currency and credit system to its advantage'.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "In developing countries, monetary policy objectives often incorporate:",
+    "options": {
+      "A": "Economic growth, adequate credit flow, and moderate interest rates",
+      "B": "Maximum possible inflation",
+      "C": "Zero lending by commercial banks",
+      "D": "Abolition of central banking"
+    },
+    "correct_answer": "A",
+    "explanation": "Development needs require economic growth, credit flow, and moderate interest rates.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The transmission of monetary policy describes how changes in policy settings flow through to:",
+    "options": {
+      "A": "Economic activity and inflation",
+      "B": "Stock market trading hours",
+      "C": "Government election results",
+      "D": "Corporate employee salaries"
+    },
+    "correct_answer": "A",
+    "explanation": "Transmission describes how policy settings affect economic activity and inflation.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Which of the following is NOT one of the channels of monetary policy transmission?",
+    "options": {
+      "A": "Saving and investment channel",
+      "B": "Cash-flow channel",
+      "C": "Exchange rate channel",
+      "D": "Agricultural subsidy channel"
+    },
+    "correct_answer": "D",
+    "explanation": "Channels include saving/investment, cash-flow, asset prices/wealth, and exchange rate.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "How does the saving and investment channel operate when interest rates are lowered?",
+    "options": {
+      "A": "Reduces savings incentive and encourages spending and business investment",
+      "B": "Increases savings and stops all business borrowing",
+      "C": "Has no impact on consumption",
+      "D": "Increases bank reserve requirements"
+    },
+    "correct_answer": "A",
+    "explanation": "Lower rates reduce savings incentive, encourage borrowing and investment.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The cash-flow channel affects households and businesses by:",
+    "options": {
+      "A": "Altering the amount of disposable cash available after debt repayments",
+      "B": "Changing the physical weight of currency notes",
+      "C": "Determining corporate tax liabilities",
+      "D": "Regulating international shipping rates"
+    },
+    "correct_answer": "A",
+    "explanation": "Cash-flow channel alters available cash via interest repayment changes.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Asset prices and the wealth channel influence consumption and investment because lower interest rates:",
+    "options": {
+      "A": "Support higher asset prices (housing/equities), increasing collateral and wealth",
+      "B": "Drive asset prices down to zero",
+      "C": "Eliminate stock exchanges",
+      "D": "Decrease housing investment"
+    },
+    "correct_answer": "A",
+    "explanation": "Lower interest rates support higher asset prices, boosting wealth and borrowing capacity.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "How does an interest rate reduction affect the exchange rate and net exports?",
+    "options": {
+      "A": "Lowers exchange rate, making exports cheaper and increasing net exports",
+      "B": "Appreciates domestic currency, halting all exports",
+      "C": "Has no effect on foreign exchange",
+      "D": "Fixes the exchange rate permanently"
+    },
+    "correct_answer": "A",
+    "explanation": "Lower interest rates reduce demand for domestic currency, depreciating the exchange rate and boosting exports.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Explicit announcement of an official target range for inflation is known as:",
+    "options": {
+      "A": "Inflation targeting",
+      "B": "Fixed exchange rate pegging",
+      "C": "Monetarist deficit financing",
+      "D": "Credit rationing"
+    },
+    "correct_answer": "A",
+    "explanation": "Announcement of an official inflation target range is inflation targeting.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The Expert Committee under Urjit Patel (2014) recommended that RBI abandon the multiple indicator approach and make what its primary objective?",
+    "options": {
+      "A": "Inflation targeting",
+      "B": "Gold standard backing",
+      "C": "Direct employment guarantees",
+      "D": "Foreign exchange rate fixing"
+    },
+    "correct_answer": "A",
+    "explanation": "Urjit Patel Committee recommended inflation targeting as primary objective.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The inflation target is set by the Government of India in consultation with the RBI once in every:",
+    "options": {
+      "A": "One year",
+      "B": "Three years",
+      "C": "Five years",
+      "D": "Ten years"
+    },
+    "correct_answer": "C",
+    "explanation": "The inflation target is set once in every five years.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Quantitative tools of monetary policy impact:",
+    "options": {
+      "A": "The money supply in the entire economy",
+      "B": "Only a specific sector like agriculture",
+      "C": "Only foreign central banks",
+      "D": "Individual personal income taxes"
+    },
+    "correct_answer": "A",
+    "explanation": "Quantitative tools impact money supply in the entire economy.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Cash Reserve Ratio (CRR) requires banks to hold a set percentage of deposits as cash with:",
+    "options": {
+      "A": "The Reserve Bank of India",
+      "B": "The commercial bank's own vault",
+      "C": "The World Bank",
+      "D": "The Central Government treasury"
+    },
+    "correct_answer": "A",
+    "explanation": "CRR is maintained as cash with the RBI and earns zero interest.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Statutory Liquidity Ratio (SLR) requires banks to maintain a percentage of deposits in:",
+    "options": {
+      "A": "Liquid assets such as gold or approved government securities",
+      "B": "Cash kept exclusively in RBI vaults",
+      "C": "Foreign equity shares",
+      "D": "Real estate properties"
+    },
+    "correct_answer": "A",
+    "explanation": "SLR requires holding liquid assets like gold or approved securities.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Open Market Operations (OMOs) conducted by the RBI involve:",
+    "options": {
+      "A": "Buying and selling government securities in the open market",
+      "B": "Issuing currency notes directly to citizens",
+      "C": "Fixing commercial bank deposit interest rates",
+      "D": "Regulating stock market brokerage fees"
+    },
+    "correct_answer": "A",
+    "explanation": "OMOs involve buying and selling government securities.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "When the RBI sells government securities in an open market operation, it:",
+    "options": {
+      "A": "Sucks liquidity out of the market",
+      "B": "Injects high-powered money into the economy",
+      "C": "Lowers the Cash Reserve Ratio",
+      "D": "Increases commercial bank lending capacity"
+    },
+    "correct_answer": "A",
+    "explanation": "Selling securities sucks liquidity from the market.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Qualitative tools of monetary policy are:",
+    "options": {
+      "A": "Selective tools affecting credit in specific sectors of the economy",
+      "B": "Tools that control the total money supply across all sectors equally",
+      "C": "Mandatory reserve requirements",
+      "D": "Open market purchases of gold"
+    },
+    "correct_answer": "A",
+    "explanation": "Qualitative tools are selective tools affecting specific sectors.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Margin requirements refer to:",
+    "options": {
+      "A": "The difference between the market value of collateral and the loan amount granted",
+      "B": "The profit margin of commercial banks",
+      "C": "The minimum cash reserve ratio",
+      "D": "The tax rate on bank deposits"
+    },
+    "correct_answer": "A",
+    "explanation": "Margin requirement is the prescribed margin against collateral.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Raising margin requirements by the RBI results in:",
+    "options": {
+      "A": "Customers being able to borrow less",
+      "B": "An increase in total money supply",
+      "C": "A drop in repo rates",
+      "D": "Zero collateral loans"
+    },
+    "correct_answer": "A",
+    "explanation": "Higher margin requirements mean customers can borrow less.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Moral suasion involves:",
+    "options": {
+      "A": "Persuading banks through advice and persuasion to follow monetary directives",
+      "B": "Levying heavy penal interest on CRR shortfalls",
+      "C": "Seizing commercial bank assets by force",
+      "D": "Fixing exchange rates by decree"
+    },
+    "correct_answer": "A",
+    "explanation": "Moral suasion is convincing banks via persuasion.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Selective credit controls are used to:",
+    "options": {
+      "A": "Control credit by restricting lending to specific speculative or non-priority sectors",
+      "B": "Expand credit infinitely to all businesses",
+      "C": "Eliminate all bank lending",
+      "D": "Regulate government budget deficits"
+    },
+    "correct_answer": "A",
+    "explanation": "Selective credit controls restrict lending to selective industries or speculative businesses.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The interest rate at which RBI lends long-term funds to banks is called:",
+    "options": {
+      "A": "Bank Rate",
+      "B": "Repo Rate",
+      "C": "Reverse Repo Rate",
+      "D": "Marginal Standing Facility Rate"
+    },
+    "correct_answer": "A",
+    "explanation": "Bank rate is the interest rate at which RBI lends long-term funds.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The Bank Rate is presently used by RBI primarily to:",
+    "options": {
+      "A": "Prescribe penalties if a bank fails to maintain prescribed SLR or CRR",
+      "B": "Determine daily retail grocery prices",
+      "C": "Fix exchange rates with IMF",
+      "D": "Set post office savings interest rates"
+    },
+    "correct_answer": "A",
+    "explanation": "Bank rate is used to prescribe penalties for SLR/CRR defaults.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Liquidity Adjustment Facility (LAF) comprises:",
+    "options": {
+      "A": "Repo rate and reverse repo rate",
+      "B": "CRR and SLR",
+      "C": "Bank rate and MSF rate",
+      "D": "Market Stabilisation Scheme"
+    },
+    "correct_answer": "A",
+    "explanation": "LAF comprises repo rate and reverse repo rate.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Repo rate is the rate at which:",
+    "options": {
+      "A": "Banks borrow short-term funds from RBI against government securities",
+      "B": "RBI borrows funds from commercial banks",
+      "C": "Commercial banks lend to retail customers",
+      "D": "Foreign central banks trade currencies"
+    },
+    "correct_answer": "A",
+    "explanation": "Repo rate is the rate at which banks borrow short-term from RBI against securities.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Reverse repo rate is linked to the repo rate in the following way:",
+    "options": {
+      "A": "Reverse Repo Rate = Repo Rate - 1",
+      "B": "Reverse Repo Rate = Repo Rate + 1",
+      "C": "Reverse Repo Rate = Repo Rate * 2",
+      "D": "Reverse Repo Rate = Repo Rate / 2"
+    },
+    "correct_answer": "A",
+    "explanation": "Reverse Repo Rate = Repo Rate - 1 (basis points or percentage as defined in text framework).",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Marginal Standing Facility (MSF) rate is:",
+    "options": {
+      "A": "A penal rate at which RBI lends additional overnight money over the repo rate",
+      "B": "The interest paid on savings deposits",
+      "C": "The rate on long-term government bonds",
+      "D": "Zero percent during a liquidity trap"
+    },
+    "correct_answer": "A",
+    "explanation": "MSF is the penal rate for additional overnight borrowing over repo.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Banks availing MSF can use a maximum of what percentage of their SLR securities?",
+    "options": {
+      "A": "1%",
+      "B": "5%",
+      "C": "10%",
+      "D": "100%"
+    },
+    "correct_answer": "A",
+    "explanation": "Banks can use a maximum of 1% of SLR securities for MSF.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "What is the relationship between MSF rate and Repo rate?",
+    "options": {
+      "A": "MSF Rate = Repo Rate + 1",
+      "B": "MSF Rate = Repo Rate - 1",
+      "C": "MSF Rate = Repo Rate",
+      "D": "MSF Rate = Bank Rate / 2"
+    },
+    "correct_answer": "A",
+    "explanation": "MSF Rate = Repo Rate + 1.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Market Stabilisation Scheme (MSS) is used to:",
+    "options": {
+      "A": "Absorb surplus structural liquidity of a more enduring nature arising from capital inflows",
+      "B": "Finance government food subsidies",
+      "C": "Increase currency in circulation",
+      "D": "Lower commercial bank reserve requirements"
+    },
+    "correct_answer": "A",
+    "explanation": "MSS absorbs surplus liquidity from capital inflows through special government securities.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "In India, the 'policy rate' refers to:",
+    "options": {
+      "A": "The fixed repo rate quoted for sovereign securities in the overnight LAF segment",
+      "B": "The post office savings rate",
+      "C": "The commercial prime lending rate",
+      "D": "The statutory liquidity ratio"
+    },
+    "correct_answer": "A",
+    "explanation": "The fixed repo rate in overnight LAF is the policy rate.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The Monetary Policy Committee (MPC) was established following the amendment of the RBI Act in:",
+    "options": {
+      "A": "2016",
+      "B": "2010",
+      "C": "1991",
+      "D": "2020"
+    },
+    "correct_answer": "A",
+    "explanation": "RBI Act was amended on June 27, 2016 to set up the MPC.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "How many members are there in the Monetary Policy Committee (MPC)?",
+    "options": {
+      "A": "4",
+      "B": "6",
+      "C": "8",
+      "D": "12"
+    },
+    "correct_answer": "B",
+    "explanation": "The MPC consists of six members.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "How does the MPC determine the policy rate?",
+    "options": {
+      "A": "Through debate and majority vote by a panel of experts",
+      "B": "By executive decree of the Finance Minister alone",
+      "C": "By consensus from commercial bank CEOs",
+      "D": "By random lottery draw"
+    },
+    "correct_answer": "A",
+    "explanation": "MPC determines the policy rate through debate and majority vote.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The central government notified what Consumer Price Index (CPI) inflation target for the period ending March 2021?",
+    "options": {
+      "A": "4 per cent with upper tolerance 6% and lower tolerance 2%",
+      "B": "2 per cent with tolerance 1%",
+      "C": "10 per cent with tolerance 15%",
+      "D": "Zero percent inflation strictly"
+    },
+    "correct_answer": "A",
+    "explanation": "CPI inflation target is 4% with upper tolerance 6% and lower 2%.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Under the flexible inflation targeting framework, what constitutes a failure to achieve the inflation target?",
+    "options": {
+      "A": "Average inflation is more than upper tolerance (6%) or less than lower tolerance (2%) for any three consecutive quarters",
+      "B": "Inflation deviates for a single month",
+      "C": "GDP growth falls by 1%",
+      "D": "Foreign exchange reserves drop by 5%"
+    },
+    "correct_answer": "A",
+    "explanation": "Failure occurs if inflation is outside the 2-6% range for three consecutive quarters.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Why was the Consumer Price Index (CPI) chosen for inflation targeting instead of Wholesale Price Index (WPI)?",
+    "options": {
+      "A": "Because CPI closely reflects cost of living and has a larger influence on inflation expectations",
+      "B": "Because WPI is illegal in India",
+      "C": "Because CPI is calculated only once a decade",
+      "D": "Because CPI excludes food and fuel entirely"
+    },
+    "correct_answer": "A",
+    "explanation": "CPI reflects cost of living and influences inflation expectations.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The RBI is mandated to publish a Monetary Policy Report every:",
+    "options": {
+      "A": "Six months",
+      "B": "Month",
+      "C": "Three years",
+      "D": "Ten years"
+    },
+    "correct_answer": "A",
+    "explanation": "RBI publishes a Monetary Policy Report every six months.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Repo transactions are considered 'collateralised lending' because:",
+    "options": {
+      "A": "Banks sell government securities to RBI with an agreement to repurchase them at a predetermined date",
+      "B": "No security or collateral is required",
+      "C": "Borrowings are backed by corporate equity shares",
+      "D": "Physical gold is deposited with foreign banks"
+    },
+    "correct_answer": "A",
+    "explanation": "Repo is collateralised by government securities sold with an agreement to repurchase.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "During deflation, what monetary policy action is typically undertaken regarding CRR?",
+    "options": {
+      "A": "The RBI reduces CRR to enable banks to expand credit and increase money supply",
+      "B": "The RBI increases CRR to contract credit",
+      "C": "The RBI eliminates all commercial banks",
+      "D": "The RBI doubles bank tax rates"
+    },
+    "correct_answer": "A",
+    "explanation": "During deflation, reducing CRR expands credit and money supply.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Which of the following instruments is a collateralised short-term borrowing and lending instrument in the money market?",
+    "options": {
+      "A": "Repo",
+      "B": "CRR",
+      "C": "SLR",
+      "D": "Bank Rate"
+    },
+    "correct_answer": "A",
+    "explanation": "Repo is a collateralized short-term borrowing/lending instrument.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Reverse repo operation involves:",
+    "options": {
+      "A": "RBI borrowing money from banks by giving them securities / paying interest",
+      "B": "Banks borrowing from RBI at penal rates",
+      "C": "Government issuing treasury bills",
+      "D": "Public purchasing gold bonds"
+    },
+    "correct_answer": "A",
+    "explanation": "Reverse repo is RBI borrowing from banks or absorbing liquidity.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The Monetary Policy Framework Agreement is an agreement between:",
+    "options": {
+      "A": "The Government of India and the Reserve Bank of India",
+      "B": "Commercial banks and retail borrowers",
+      "C": "SEBI and stock exchanges",
+      "D": "IMF and World Bank"
+    },
+    "correct_answer": "A",
+    "explanation": "The agreement is between the Government of India and the RBI.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Which committee recommended abandoning the multiple indicator approach in favor of inflation targeting?",
+    "options": {
+      "A": "Urjit Patel Committee (2014)",
+      "B": "Narsimham Committee",
+      "C": "Second Working Group on Money",
+      "D": "Chelliah Committee"
+    },
+    "correct_answer": "A",
+    "explanation": "Urjit Patel Committee (2014) recommended inflation targeting.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "An open market operation involves buying or selling of:",
+    "options": {
+      "A": "Government securities",
+      "B": "Corporate shares",
+      "C": "Private real estate",
+      "D": "Foreign currency futures only"
+    },
+    "correct_answer": "A",
+    "explanation": "OMOs involve buying/selling government securities.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "The primary rationale for establishing the Monetary Policy Committee was to:",
+    "options": {
+      "A": "Bring transparency, institutionalized decision-making, and accountability to achieving inflation targets",
+      "B": "Allow commercial banks to set their own reserve ratios",
+      "C": "Abolish the RBI governor's office",
+      "D": "Control individual personal bank accounts"
+    },
+    "correct_answer": "A",
+    "explanation": "MPC brings institutionalized decision-making and accountability for inflation targets.",
+    "unit": "Unit 3",
+    "difficulty": "Medium"
+  }
+]

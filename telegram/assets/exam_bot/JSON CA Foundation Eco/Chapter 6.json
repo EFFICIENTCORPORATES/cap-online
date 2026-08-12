@@ -1,0 +1,1902 @@
+[
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "National Income Accounting was pioneered by which Nobel prize-winning economists?",
+    "options": {
+      "A": "Simon Kuznets and Richard Stone",
+      "B": "Adam Smith and David Ricardo",
+      "C": "John Maynard Keynes and Milton Friedman",
+      "D": "Paul Samuelson and Robert Solow"
+    },
+    "correct_answer": "A",
+    "explanation": "National Income Accounting, pioneered by the Nobel prize-winning economists Simon Kuznets and Richard Stone, is the system of macro-economic accounts."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Which organization is responsible for the compilation of National Accounts Statistics in India at the national level?",
+    "options": {
+      "A": "Reserve Bank of India (RBI)",
+      "B": "Central Statistical Organisation (CSO)",
+      "C": "NITI Aayog",
+      "D": "Ministry of Finance"
+    },
+    "correct_answer": "B",
+    "explanation": "The Central Statistical Organisation (CSO) in the Ministry of Statistics and Programme Implementation is responsible for the compilation of National accounts statistics."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "At the State level in India, who has the responsibility of compiling State Domestic Product and other aggregates?",
+    "options": {
+      "A": "State Directorate of Economics and Statistics (DESs)",
+      "B": "State Finance Department",
+      "C": "State Reserve Bank branch",
+      "D": "State Planning Board"
+    },
+    "correct_answer": "A",
+    "explanation": "At the State level, State Directorates of Economics and Statistics (DESs) have the responsibility of compiling their State Domestic Product and other aggregates."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Nominal GDP is defined as the value of all final goods and services produced in a country valued at:",
+    "options": {
+      "A": "Constant prices of base year",
+      "B": "Current market prices",
+      "C": "Factor cost",
+      "D": "Basic prices"
+    },
+    "correct_answer": "B",
+    "explanation": "Nominal GDP is the value of all final goods and services produced in the country valued at its market price (current prices)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Real GDP is calculated as the sum of quantities of final goods times:",
+    "options": {
+      "A": "Current market prices",
+      "B": "Constant prices (base year prices)",
+      "C": "Factor cost",
+      "D": "Wholesale prices"
+    },
+    "correct_answer": "B",
+    "explanation": "Real GDP is constructed as the sum of the quantities of final goods times constant (rather than current) prices."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "The GDP deflator is calculated as:",
+    "options": {
+      "A": "(Real GDP / Nominal GDP) * 100",
+      "B": "(Nominal GDP / Real GDP) * 100",
+      "C": "(Nominal GNP / Real GDP) * 100",
+      "D": "(Real GNP / Nominal GDP) * 100"
+    },
+    "correct_answer": "B",
+    "explanation": "GDP Deflator = (Nominal GDP / Real GDP) * 100."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "If the GDP deflator for a given year is 123.08, what does it indicate compared to the base year?",
+    "options": {
+      "A": "Price levels have fallen by 23.08%",
+      "B": "Price levels are 23.08% higher than the base year",
+      "C": "Real GDP exceeds nominal GDP by 23.08%",
+      "D": "Nominal GDP is equal to real GDP"
+    },
+    "correct_answer": "B",
+    "explanation": "A deflator above 100 is an indication of price levels being higher as compared to the base year."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Net Domestic Product (NDP) is equal to:",
+    "options": {
+      "A": "GDP plus depreciation",
+      "B": "GDP minus depreciation",
+      "C": "GNP minus depreciation",
+      "D": "NNP plus depreciation"
+    },
+    "correct_answer": "B",
+    "explanation": "Net Domestic Product (NDP) is equal to GDP minus depreciation."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Gross National Product at market prices (GNPMP) differs from GDPMP by:",
+    "options": {
+      "A": "Net Indirect Taxes",
+      "B": "Depreciation",
+      "C": "Net Factor Income from Abroad (NFIA)",
+      "D": "Net Exports"
+    },
+    "correct_answer": "C",
+    "explanation": "GNPMP = GDPMP + Net Factor Income from Abroad (NFIA)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "If Net Factor Income from Abroad (NFIA) is positive, then:",
+    "options": {
+      "A": "GNPMP is greater than GDPMP",
+      "B": "GDPMP is greater than GNPMP",
+      "C": "National income is less than domestic income",
+      "D": "Net exports are negative"
+    },
+    "correct_answer": "A",
+    "explanation": "If Net Factor Income from Abroad is positive, then GNPMP would be greater than GDPMP."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Net National Product at Market Prices (NNPMP) is calculated as:",
+    "options": {
+      "A": "GNPMP minus Depreciation",
+      "B": "NDPMP plus NFIA",
+      "C": "GDPMP plus NFIA minus Depreciation",
+      "D": "All of the above"
+    },
+    "correct_answer": "D",
+    "explanation": "NNPMP = GNPMP - Depreciation = NDPMP + NFIA = GDPMP + NFIA - Depreciation."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "The basis of distinction between market price and factor cost is:",
+    "options": {
+      "A": "Net Indirect Taxes (Indirect taxes - Subsidies)",
+      "B": "Depreciation",
+      "C": "Net Factor Income from Abroad",
+      "D": "Operating Surplus"
+    },
+    "correct_answer": "A",
+    "explanation": "The basis of distinction between market price and factor cost is net indirect taxes (i.e., Indirect taxes - Subsidies)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Gross Domestic Product at Factor Cost (GDPFC) is equal to:",
+    "options": {
+      "A": "GDPMP minus Net Indirect Taxes",
+      "B": "Compensation of employees + Operating surplus + Mixed income + Depreciation",
+      "C": "Both (a) and (b)",
+      "D": "GDPMP plus Net Indirect Taxes"
+    },
+    "correct_answer": "C",
+    "explanation": "GDPFC = GDPMP - Indirect Taxes + Subsidies = Compensation of employees + Operating Surplus + Mixed Income + Depreciation."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Basic price is defined as:",
+    "options": {
+      "A": "Factor cost + Production taxes - Production subsidy",
+      "B": "Market price + Product taxes",
+      "C": "Factor cost + Indirect taxes",
+      "D": "Market price - Subsidies"
+    },
+    "correct_answer": "A",
+    "explanation": "Basic price = factor cost + Production taxes - Production subsidy."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Net Domestic Product at Factor Cost (NDPFC) represents:",
+    "options": {
+      "A": "Total factor incomes earned by the factors of production within domestic territory",
+      "B": "National income",
+      "C": "Gross domestic product at market price",
+      "D": "Personal income"
+    },
+    "correct_answer": "A",
+    "explanation": "Net Domestic Product at Factor Cost (NDPFC) is defined as the total factor incomes earned by the factors of production (domestic factor income)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "National Income is formally defined as:",
+    "options": {
+      "A": "NDPFC",
+      "B": "NNPFC",
+      "C": "GNPFC",
+      "D": "GDPFC"
+    },
+    "correct_answer": "B",
+    "explanation": "Net National Product at Factor Cost (NNPFC) is referred to as National Income."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Per capita income is obtained by dividing:",
+    "options": {
+      "A": "Nominal GDP by total population",
+      "B": "Gross domestic product adjusted by inflation (Real GDP) by total population",
+      "C": "National income by total workforce",
+      "D": "Personal income by households"
+    },
+    "correct_answer": "B",
+    "explanation": "The GDP per capita is obtained by dividing the country's gross domestic product, adjusted by inflation, by the total population."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Personal Income differs from National Income because:",
+    "options": {
+      "A": "Personal income includes transfer payments which are excluded from national income",
+      "B": "Personal income excludes undistributed corporate profits and corporate taxes",
+      "C": "Both (a) and (b)",
+      "D": "Personal income equals national income always"
+    },
+    "correct_answer": "C",
+    "explanation": "Personal income includes transfer payments and excludes undistributed profits, corporate taxes, etc., which are part of national income earned."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Disposable Personal Income (DI) is derived from Personal Income by subtracting:",
+    "options": {
+      "A": "Personal income taxes and other compulsory payments",
+      "B": "Undistributed profits",
+      "C": "Corporate taxes",
+      "D": "Net factor income from abroad"
+    },
+    "correct_answer": "A",
+    "explanation": "Disposable personal income is derived from personal income by subtracting the direct taxes paid by individuals and other compulsory payments."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Net National Disposable Income (NNDI) is equal to:",
+    "options": {
+      "A": "Net National Income + Net taxes on income and wealth receivable from abroad + Net social contributions",
+      "B": "Net National Income + Other net current transfers from rest of the world",
+      "C": "Both (a) and (b)",
+      "D": "Gross National Income minus Depreciation"
+    },
+    "correct_answer": "C",
+    "explanation": "Net National Disposable Income (NNDI) = Net National Income + other net current transfers from rest of the world (or net taxes/social contributions from abroad)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Private income includes:",
+    "options": {
+      "A": "Factor income from net domestic product accruing to private sector + NFIA + National debt interest + Current transfers from govt and rest of world",
+      "B": "Only factor incomes of private sector",
+      "C": "Only transfer payments",
+      "D": "GDPFC minus government administrative income"
+    },
+    "correct_answer": "A",
+    "explanation": "Private Income = Factor income from net domestic product accruing to private sector + NFIA + National debt interest + Current transfers from government + Other net transfers from rest of the world."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "The circular flow of income involves three interlinked phases which are:",
+    "options": {
+      "A": "Production, Distribution, and Disposition",
+      "B": "Consumption, Investment, and Savings",
+      "C": "Saving, Investment, and Taxation",
+      "D": "Imports, Exports, and Net Factor Income"
+    },
+    "correct_answer": "A",
+    "explanation": "There are three different interlinked phases in a circular flow of income: production, distribution, and disposition."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "The Value Added Method is also known as:",
+    "options": {
+      "A": "Product Method or Industrial Origin Method or Net Output Method",
+      "B": "Factor Payment Method",
+      "C": "Income Disposal Approach",
+      "D": "Expenditure Method"
+    },
+    "correct_answer": "A",
+    "explanation": "Product Method or Value Added Method is also called Industrial Origin Method or Net Output Method."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Gross value added (GVAMP) is calculated as:",
+    "options": {
+      "A": "Value of output minus Intermediate consumption",
+      "B": "Sales plus change in stock",
+      "C": "Value of output plus Intermediate consumption",
+      "D": "Sales minus Depreciation"
+    },
+    "correct_answer": "A",
+    "explanation": "Gross value added (GVAMP) = Value of output - Intermediate consumption."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Value of output is calculated as:",
+    "options": {
+      "A": "Sales + Change in stock",
+      "B": "Sales - Change in stock",
+      "C": "Intermediate consumption + Sales",
+      "D": "Sales + Imports"
+    },
+    "correct_answer": "A",
+    "explanation": "Value of Output = Sales + change in stock."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Which of the following items is included in Value Added Method?",
+    "options": {
+      "A": "Own account production of fixed assets",
+      "B": "Imputed value of production of goods for self-consumption",
+      "C": "Imputed rent of owner-occupied houses",
+      "D": "All of the above"
+    },
+    "correct_answer": "D",
+    "explanation": "The values of own account production, self-consumption goods, imputed rent of owner-occupied houses, and change in stock are included."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Under the Income Method, national income is calculated by summing up:",
+    "options": {
+      "A": "Wages and salaries, rent, interest, and profit",
+      "B": "Private consumption, government consumption, and investment",
+      "C": "Value added across primary, secondary, and tertiary sectors",
+      "D": "Exports minus imports"
+    },
+    "correct_answer": "A",
+    "explanation": "Under Factor Income Method, national income is calculated by summation of factor incomes paid out as wages and salaries, rent, interest, and profit (along with mixed income)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Mixed income of self-employed refers to:",
+    "options": {
+      "A": "Profits earned by corporate businesses",
+      "B": "Combined factor payments in unincorporated or small enterprises which are difficult to separate",
+      "C": "Wages received from foreign countries",
+      "D": "Transfer earnings"
+    },
+    "correct_answer": "B",
+    "explanation": "Mixed income includes all those incomes in subsistence and small commodity production where labour and capital elements are difficult to separate."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Which of the following is excluded while calculating national income using the Income Method?",
+    "options": {
+      "A": "Imputed rent of owner-occupied houses",
+      "B": "Transfer payments (e.g., pensions of retired workers)",
+      "C": "Commission earned on sale of second-hand goods",
+      "D": "Operating surplus"
+    },
+    "correct_answer": "B",
+    "explanation": "Transfer payments like pensions of retired workers are excluded from national income."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "The Expenditure Method of measuring national income is also called:",
+    "options": {
+      "A": "Income Disposal Approach",
+      "B": "Factor Payment Method",
+      "C": "Industrial Origin Method",
+      "D": "Distributed Share Method"
+    },
+    "correct_answer": "A",
+    "explanation": "In the expenditure approach, also called Income Disposal Approach, national income is aggregate final expenditure."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Private Final Consumption Expenditure (PFCE) includes:",
+    "options": {
+      "A": "Final sales of goods and services to consumer households and NPISH",
+      "B": "Primary products produced for own consumption",
+      "C": "Net expenditure on foreign financial assets (net foreign investment)",
+      "D": "All of the above"
+    },
+    "correct_answer": "D",
+    "explanation": "PFCE includes final sales to households/NPISH, own consumption primary products, and net foreign investment."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Government Final Consumption Expenditure includes:",
+    "options": {
+      "A": "Collective services like defence, education, and healthcare valued at cost",
+      "B": "Transfer payments like scholarships and unemployment allowance",
+      "C": "Pensions paid to retired government employees",
+      "D": "Interest on national debt"
+    },
+    "correct_answer": "A",
+    "explanation": "Government expenditure on collective services valued at cost is treated as consumption expenditure; transfers and pensions are excluded."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Gross domestic fixed capital formation consists of:",
+    "options": {
+      "A": "Acquisition of fixed assets and accumulation of stocks",
+      "B": "Expenditure on machinery, equipment, construction, and valuables",
+      "C": "Both (a) and (b)",
+      "D": "Only intermediate consumption"
+    },
+    "correct_answer": "C",
+    "explanation": "Gross capital formation consists of acquisition of fixed assets and accumulation of stocks, including machinery, construction, and valuables."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Supra-regional sectors in Indian regional accounts refer to activities like:",
+    "options": {
+      "A": "Railways, communications, banking and insurance, and central government administration",
+      "B": "Agriculture and retail trade",
+      "C": "Small scale industries",
+      "D": "Local municipal services"
+    },
+    "correct_answer": "A",
+    "explanation": "Supra-regional sectors are activities that cut across state boundaries such as railways, communications, banking, insurance, and central government administration."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Per Capita State Income is obtained by dividing Net State Domestic Product (NSDP) by:",
+    "options": {
+      "A": "Total geographical area of the state",
+      "B": "Midyear projected population of the state",
+      "C": "Total workforce",
+      "D": "Total tax revenue"
+    },
+    "correct_answer": "B",
+    "explanation": "Per Capita State Income is obtained by dividing the NSDP by the midyear projected population of the state."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Which of the following is a reason why GDP is NOT considered a perfect measure of economic welfare?",
+    "options": {
+      "A": "It excludes non-market production and volunteer work",
+      "B": "It does not account for income distribution and inequality",
+      "C": "It includes economic 'bads' like pollution and crime-prevention expenditures",
+      "D": "All of the above"
+    },
+    "correct_answer": "D",
+    "explanation": "GDP excludes non-market work, ignores income distribution, and includes defensive expenditures ('bads'), making it an imperfect welfare measure."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Which of the following expenditures increases GDP but only prevents us from becoming worse off (defensive expenditure)?",
+    "options": {
+      "A": "Expenditure on police protection and crime control",
+      "B": "Expenditure on luxury cars",
+      "C": "Expenditure on private education",
+      "D": "Investment in machinery"
+    },
+    "correct_answer": "A",
+    "explanation": "Defence and police expenditures increase GDP but only prevent us from becoming worse off rather than adding net welfare."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Conceptual difficulties in computing national income include:",
+    "options": {
+      "A": "Lack of an agreed definition of national income",
+      "B": "Accurate distinction between final and intermediate goods",
+      "C": "Valuation of new goods at constant prices",
+      "D": "All of the above"
+    },
+    "correct_answer": "D",
+    "explanation": "All listed points represent conceptual difficulties in national income computation."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Practical challenges in measuring national income in developing countries include:",
+    "options": {
+      "A": "Presence of a large non-monetized sector",
+      "B": "Production largely for self-consumption",
+      "C": "Illiteracy and lack of proper occupational classification",
+      "D": "All of the above"
+    },
+    "correct_answer": "D",
+    "explanation": "Non-monetized sector, self-consumption, and illiteracy are major practical challenges."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "The concept of 'resident unit' in GDP definition denotes:",
+    "options": {
+      "A": "A citizen household living in India during the accounting year",
+      "B": "The unit having predominant economic interest in the economic territory of the country for one year or more",
+      "C": "A business enterprise belonging solely to Indian citizens",
+      "D": "None of the above"
+    },
+    "correct_answer": "B",
+    "explanation": "Resident unit denotes the unit having predominant economic interest in the economic territory of the country for one year or more irrespective of nationality."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Which of the following transactions is excluded from national income calculation?",
+    "options": {
+      "A": "Brokerage fee on sale of a second-hand car",
+      "B": "Value of services that accompany the sale",
+      "C": "Exchange of stocks, bonds, and previously produced second-hand goods",
+      "D": "Additions to inventory stocks of final goods"
+    },
+    "correct_answer": "C",
+    "explanation": "Exchange of stocks, bonds, and second-hand goods does not represent current production and is excluded."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "If Nominal GDP is 64.95 lakh crore and Real GDP is 36.85 lakh crore, the GDP deflator is approximately:",
+    "options": {
+      "A": "176.25",
+      "B": "100.00",
+      "C": "56.73",
+      "D": "154.87"
+    },
+    "correct_answer": "A",
+    "explanation": "GDP deflator = (64.95 / 36.85) * 100 = 176.25."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Which method of measuring national income is most suitable for developed economies where people properly file tax returns?",
+    "options": {
+      "A": "Income Method",
+      "B": "Value Added Method",
+      "C": "Expenditure Method",
+      "D": "Commodity Flow Method"
+    },
+    "correct_answer": "A",
+    "explanation": "Income method is most suitable for developed economies where people properly file their income tax returns."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "In India, how is national income estimated across different sectors?",
+    "options": {
+      "A": "Wholly by Expenditure method",
+      "B": "Wholly by Income method",
+      "C": "By a combination of methods (e.g., Production method for agriculture, Income for small scale, Expenditure for construction)",
+      "D": "Wholly by Value Added method"
+    },
+    "correct_answer": "C",
+    "explanation": "India uses a mix: production method for agriculture, income method for small scale, and expenditure method for construction."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "If Net Indirect Taxes are 450 and Depreciation is 400, what is the difference between GDPMP and NDPFC?",
+    "options": {
+      "A": "Depreciation plus Net Indirect Taxes",
+      "B": "Only Depreciation",
+      "C": "Only Net Indirect Taxes",
+      "D": "NFIA"
+    },
+    "correct_answer": "A",
+    "explanation": "GDPMP - NDPFC = (Depreciation) + (Net Indirect Taxes)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "Which of the following is considered an injection in the circular flow of income?",
+    "options": {
+      "A": "Savings",
+      "B": "Taxes",
+      "C": "Imports",
+      "D": "Investment and Government Purchases"
+    },
+    "correct_answer": "D",
+    "explanation": "Investment, government purchases, and exports are injections; savings, taxes, and imports are leakages."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "Which sector's income is categorized into income from property/entrepreneurship accruing to government and savings of non-departmental enterprises?",
+    "options": {
+      "A": "Public sector domestic income",
+      "B": "Private sector income",
+      "C": "Foreign sector income",
+      "D": "Personal income"
+    },
+    "correct_answer": "A",
+    "explanation": "Domestic income is categorized into income accruing to the public sector and private sector."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "National debt interest is treated in Personal Income calculations as:",
+    "options": {
+      "A": "A transfer payment added to personal income",
+      "B": "A tax deducted from personal income",
+      "C": "Part of undistributed profits",
+      "D": "Excluded entirely"
+    },
+    "correct_answer": "A",
+    "explanation": "National debt interest is added to personal income as a transfer payment from the government."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Medium",
+    "question_text": "If a country's Net Factor Income from Abroad is negative:",
+    "options": {
+      "A": "Domestic factor income is greater than National Income",
+      "B": "National Income is greater than Domestic Income",
+      "C": "GNP equals GDP",
+      "D": "Net exports must be positive"
+    },
+    "correct_answer": "A",
+    "explanation": "National Income = Domestic Factor Income + NFIA. If NFIA is negative, National Income is less than Domestic Factor Income."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-1-national-income-accounting",
+    "topic": "National Income Accounting and Concepts",
+    "difficulty": "Hard",
+    "question_text": "The difference between Gross National Product and Net National Product is:",
+    "options": {
+      "A": "Net Indirect Taxes",
+      "B": "Depreciation (Consumption of Fixed Capital)",
+      "C": "NFIA",
+      "D": "Subsidies"
+    },
+    "correct_answer": "B",
+    "explanation": "Gross minus Net is always Depreciation."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "The publication that revolutionised modern macroeconomics in 1936 was written by:",
+    "options": {
+      "A": "Adam Smith",
+      "B": "John Maynard Keynes",
+      "C": "Simon Kuznets",
+      "D": "Milton Friedman"
+    },
+    "correct_answer": "B",
+    "explanation": "The history of modern macroeconomics was revolutionised in 1936 with the publication of John Maynard Keynes's General Theory of Employment, Interest, and Money."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "Which of the following is NOT one of the building blocks introduced by Keynes?",
+    "options": {
+      "A": "The consumption function and multiplier",
+      "B": "Liquidity preference (demand for money)",
+      "C": "Perfect competition and wage-price flexibility leading to automatic full employment",
+      "D": "The importance of expectations in consumption and investment"
+    },
+    "correct_answer": "C",
+    "explanation": "Keynes rejected classical wage-price flexibility and automatic full employment, emphasizing demand-driven equilibrium."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "In a simple two-sector economy model, the participants are assumed to be:",
+    "options": {
+      "A": "Households and Business firms",
+      "B": "Households, Firms, and Government",
+      "C": "Households, Firms, Government, and Foreign sector",
+      "D": "Firms and Foreign sector"
+    },
+    "correct_answer": "A",
+    "explanation": "The two-sector model consists of the household and the business sectors."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "In a two-sector economy where households do not save, total output Y equals:",
+    "options": {
+      "A": "Total consumption expenditure (C)",
+      "B": "Total investment (I)",
+      "C": "Savings (S)",
+      "D": "Government purchases (G)"
+    },
+    "correct_answer": "A",
+    "explanation": "In a simple two-sector economy with no savings, total income produced equals household consumption expenditure."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "Aggregate demand (AD) in a simple two-sector economy consists of:",
+    "options": {
+      "A": "Consumer goods (C) plus Investment goods (I)",
+      "B": "Consumption (C) plus Savings (S)",
+      "C": "Consumption (C) plus Government spending (G)",
+      "D": "Consumption plus Exports minus Imports"
+    },
+    "correct_answer": "A",
+    "explanation": "In a simple two-sector economy, ex ante aggregate demand consists of C and I: AD = C + I."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "The Keynesian consumption function is expressed algebraically as:",
+    "options": {
+      "A": "C = a + bY",
+      "B": "C = f(S)",
+      "C": "C = a - bY",
+      "D": "C = Y / b"
+    },
+    "correct_answer": "A",
+    "explanation": "The specific form of consumption function proposed by Keynes is C = a + bY."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "In the consumption function C = a + bY, parameter 'a' represents:",
+    "options": {
+      "A": "Marginal propensity to consume",
+      "B": "Autonomous consumption expenditure at zero level of income",
+      "C": "Average propensity to consume",
+      "D": "Multiplier"
+    },
+    "correct_answer": "B",
+    "explanation": "'a' is a constant term which denotes the positive value of consumption at zero level of disposable income."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "In the consumption function C = a + bY, parameter 'b' represents:",
+    "options": {
+      "A": "Average propensity to consume",
+      "B": "Marginal propensity to consume (MPC)",
+      "C": "Marginal propensity to save",
+      "D": "Investment multiplier"
+    },
+    "correct_answer": "B",
+    "explanation": "The parameter b, the slope of the function (delta C / delta Y), is the marginal propensity to consume (MPC)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "The Keynesian assumption regarding the marginal propensity to consume (MPC or 'b') is that:",
+    "options": {
+      "A": "b is greater than 1",
+      "B": "0 < b < 1",
+      "C": "b is equal to 0",
+      "D": "b is equal to infinity"
+    },
+    "correct_answer": "B",
+    "explanation": "Keynesian assumption is that consumption increases with income, but increase is less than increase in income (0 < b < 1)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "Average Propensity to Consume (APC) is defined as:",
+    "options": {
+      "A": "Total Consumption / Total Income",
+      "B": "Change in Consumption / Change in Income",
+      "C": "Total Savings / Total Income",
+      "D": "Total Consumption / Total Savings"
+    },
+    "correct_answer": "A",
+    "explanation": "APC = Total Consumption / Total Income (C / Y)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "As income increases, the Average Propensity to Consume (APC):",
+    "options": {
+      "A": "Increases",
+      "B": "Decreases",
+      "C": "Remains constant",
+      "D": "Becomes zero"
+    },
+    "correct_answer": "B",
+    "explanation": "The proportion of income spent on consumption decreases as income increases; hence APC decreases."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "Saving function expresses the functional relationship between:",
+    "options": {
+      "A": "Saving and investment",
+      "B": "Saving and total disposable income",
+      "C": "Consumption and saving",
+      "D": "Investment and income"
+    },
+    "correct_answer": "B",
+    "explanation": "Saving function shows the functional relationship between national income and saving (S = f(Y))."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "Marginal Propensity to Save (MPS) is defined as:",
+    "options": {
+      "A": "Delta S / Delta Y",
+      "B": "1 - MPC",
+      "C": "Both (a) and (b)",
+      "D": "Delta Y / Delta S"
+    },
+    "correct_answer": "C",
+    "explanation": "MPS = delta S / delta Y = 1 - MPC."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "If MPC is 0.8, what is the value of MPS?",
+    "options": {
+      "A": "0.2",
+      "B": "0.8",
+      "C": "1.0",
+      "D": "1.25"
+    },
+    "correct_answer": "A",
+    "explanation": "MPS = 1 - MPC = 1 - 0.8 = 0.2."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "Average Propensity to Save (APS) is calculated as:",
+    "options": {
+      "A": "Total Saving / Total Income (S / Y)",
+      "B": "Total Saving / Total Consumption",
+      "C": "Change in Saving / Change in Income",
+      "D": "Total Income / Total Saving"
+    },
+    "correct_answer": "A",
+    "explanation": "APS = Total saving / Total Income = S / Y."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "The sum of APC and APS at any given level of income is always equal to:",
+    "options": {
+      "A": "Zero",
+      "B": "One (1)",
+      "C": "Infinity",
+      "D": "MPC"
+    },
+    "correct_answer": "B",
+    "explanation": "Since Y = C + S, dividing by Y gives C/Y + S/Y = 1, so APC + APS = 1."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "In a two-sector model, the equilibrium condition for national income is:",
+    "options": {
+      "A": "Aggregate Demand = Aggregate Supply (C + I = C + S or I = S)",
+      "B": "Investment = Government Spending",
+      "C": "Savings = Taxes",
+      "D": "Exports = Imports"
+    },
+    "correct_answer": "A",
+    "explanation": "Equilibrium condition is C + I = C + S, which simplifies to I = S."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "In the Keynesian cross diagram, the 45-degree line represents:",
+    "options": {
+      "A": "All points where aggregate expenditure equals aggregate output (Y = C + I)",
+      "B": "Only consumption function",
+      "C": "Only investment function",
+      "D": "Savings function"
+    },
+    "correct_answer": "A",
+    "explanation": "The 45-degree line illustrates every single point where planned aggregate expenditure equals planned aggregate production."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "If planned aggregate expenditure is greater than planned aggregate output (C + I > Y):",
+    "options": {
+      "A": "Firms will experience unintended inventory reduction and will increase production",
+      "B": "Firms will experience inventory pile-up and cut production",
+      "C": "Economy is in equilibrium",
+      "D": "Price level will fall automatically"
+    },
+    "correct_answer": "A",
+    "explanation": "When demand exceeds output, inventories fall, prompting firms to increase output and employment."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "A deflationary gap (recessionary gap) arises when:",
+    "options": {
+      "A": "Equilibrium level of aggregate production falls short of full employment output due to deficient demand",
+      "B": "Aggregate demand exceeds full employment output",
+      "C": "Savings equal investment at full employment",
+      "D": "Taxes equal government spending"
+    },
+    "correct_answer": "A",
+    "explanation": "Deflationary gap arises when equilibrium output falls short of full employment output due to deficient aggregate demand."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "An inflationary gap arises when:",
+    "options": {
+      "A": "Actual aggregate demand exceeds the level of aggregate demand required to establish full employment equilibrium",
+      "B": "Demand falls short of capacity",
+      "C": "Unemployment is very high",
+      "D": "Investment equals savings"
+    },
+    "correct_answer": "A",
+    "explanation": "Inflationary gap is the amount by which actual aggregate demand exceeds full employment aggregate demand."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "The Investment Multiplier (k) is defined as:",
+    "options": {
+      "A": "Ratio of change in national income to change in investment (delta Y / delta I)",
+      "B": "Ratio of change in investment to change in income",
+      "C": "Ratio of consumption to income",
+      "D": "Ratio of savings to investment"
+    },
+    "correct_answer": "A",
+    "explanation": "Multiplier k = delta Y / delta I."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "The formula for investment multiplier in terms of MPC is:",
+    "options": {
+      "A": "k = 1 / (1 - MPC)",
+      "B": "k = 1 / MPC",
+      "C": "k = 1 / MPS",
+      "D": "Both (a) and (c)"
+    },
+    "correct_answer": "D",
+    "explanation": "Multiplier k = 1 / (1 - MPC) = 1 / MPS."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "If MPC is 0.75, what is the value of the investment multiplier?",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5"
+    },
+    "correct_answer": "C",
+    "explanation": "k = 1 / (1 - 0.75) = 1 / 0.25 = 4."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "There is a direct relationship between:",
+    "options": {
+      "A": "MPC and the value of the multiplier",
+      "B": "MPS and the value of the multiplier",
+      "C": "Taxes and multiplier",
+      "D": "Imports and multiplier"
+    },
+    "correct_answer": "A",
+    "explanation": "Higher the MPC, higher the value of the multiplier, and vice-versa."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "Leakages in the multiplier process that reduce the magnitude of the multiplier include:",
+    "options": {
+      "A": "Progressive taxation and high liquidity preference",
+      "B": "Imports and purchase of existing securities/shares",
+      "C": "Undistributed corporate profits and debt repayments",
+      "D": "All of the above"
+    },
+    "correct_answer": "D",
+    "explanation": "All listed factors act as leakages reducing the multiplier effect."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "In a three-sector model, aggregate demand is expressed as:",
+    "options": {
+      "A": "C + I",
+      "B": "C + I + G",
+      "C": "C + I + G + (X - M)",
+      "D": "C + S + T"
+    },
+    "correct_answer": "B",
+    "explanation": "In the three-sector model, AD = C + I + G."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "In a three-sector model, aggregate supply (or injections/leakages condition) at equilibrium is:",
+    "options": {
+      "A": "I = S",
+      "B": "I + G = S + T",
+      "C": "I + G + X = S + T + M",
+      "D": "C + I = Y"
+    },
+    "correct_answer": "B",
+    "explanation": "In equilibrium for a three-sector model, total injections (I + G) equal total leakages (S + T)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "Government purchase multiplier and tax multiplier differ because:",
+    "options": {
+      "A": "Government purchases have a direct dollar-for-dollar impact on AD, whereas taxes impact AD indirectly through MPC",
+      "B": "Taxes have a higher multiplier than government spending",
+      "C": "There is no difference",
+      "D": "Taxes do not affect income"
+    },
+    "correct_answer": "A",
+    "explanation": "Government spending enters directly (multiplier 1/(1-b)), while taxes enter via consumption (-b/(1-b))."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "The tax multiplier (for lump-sum tax) is expressed as:",
+    "options": {
+      "A": "-b / (1 - b)",
+      "B": "1 / (1 - b)",
+      "C": "1 / (1 - b(1-t))",
+      "D": "-1 / (1 - b)"
+    },
+    "correct_answer": "A",
+    "explanation": "Lump-sum tax multiplier is -b / (1 - b)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "The balanced budget multiplier states that an equal increase in government spending and taxes (Delta G = Delta T) results in an increase in national income equal to:",
+    "options": {
+      "A": "Zero",
+      "B": "Delta G",
+      "C": "Delta G times multiplier",
+      "D": "Delta G / 2"
+    },
+    "correct_answer": "B",
+    "explanation": "Balanced budget multiplier is equal to 1, meaning an increase in G matched by equal T increases national income by exactly the amount of Delta G."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "The four-sector model of national income determination includes:",
+    "options": {
+      "A": "Households and Business sectors only",
+      "B": "Households, Business, and Government sectors",
+      "C": "Households, Business, Government, and Foreign sectors",
+      "D": "Financial markets only"
+    },
+    "correct_answer": "C",
+    "explanation": "The four-sector model includes household, business, government, and foreign sectors."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "In the four-sector model, equilibrium national income condition is:",
+    "options": {
+      "A": "Y = C + I + G",
+      "B": "Y = C + I + G + (X - M)",
+      "C": "Y = C + S + T",
+      "D": "I = S"
+    },
+    "correct_answer": "B",
+    "explanation": "In equilibrium for the four-sector model, Y = C + I + G + (X - M)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "Exports represent:",
+    "options": {
+      "A": "Leakages from domestic income stream",
+      "B": "Foreign demand for domestic output (an injection)",
+      "C": "Tax payments",
+      "D": "Savings"
+    },
+    "correct_answer": "B",
+    "explanation": "Exports are injections into the domestic economy."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "Imports act as:",
+    "options": {
+      "A": "Injections into the circular flow",
+      "B": "Leakages or outflows of national income",
+      "C": "Government transfer payments",
+      "D": "Autonomous investment"
+    },
+    "correct_answer": "B",
+    "explanation": "Imports represent expenditure on foreign goods and act as leakages."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "The import function is expressed as:",
+    "options": {
+      "A": "M = M_bar + mY",
+      "B": "M = m - Y",
+      "C": "M = bY",
+      "D": "M = a + tY"
+    },
+    "correct_answer": "A",
+    "explanation": "Import function is M = M_bar + mY, where m is marginal propensity to import."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "Marginal Propensity to Import (m) is defined as:",
+    "options": {
+      "A": "Delta M / Delta Y",
+      "B": "Delta Y / Delta M",
+      "C": "M / Y",
+      "D": "Total imports / Total GDP"
+    },
+    "correct_answer": "A",
+    "explanation": "Marginal propensity to import is the increase in import demand per unit increase in GDP (delta M / delta Y)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "The foreign trade multiplier (or open economy autonomous expenditure multiplier) is expressed as:",
+    "options": {
+      "A": "1 / (1 - b)",
+      "B": "1 / (1 - b + m)",
+      "C": "1 / (m - b)",
+      "D": "1 / (1 - t)"
+    },
+    "correct_answer": "B",
+    "explanation": "Foreign trade multiplier is 1 / (1 - b + m) or 1 / (1 - (b - m))."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "An increase in the marginal propensity to import (m) has what effect on the autonomous expenditure multiplier?",
+    "options": {
+      "A": "Increases the multiplier",
+      "B": "Decreases the multiplier",
+      "C": "Has no effect",
+      "D": "Makes the multiplier infinity"
+    },
+    "correct_answer": "B",
+    "explanation": "The higher 'm' is, the larger the leakage through imports, which reduces the size of the multiplier."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "If a country's exports exceed its imports (X > M):",
+    "options": {
+      "A": "There is a trade deficit",
+      "B": "Net exports are positive, acting as a net injection and increasing national income",
+      "C": "National income falls",
+      "D": "Trade balance is zero"
+    },
+    "correct_answer": "B",
+    "explanation": "If X > M, net exports are positive, creating a net injection that expands national income."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "If an economy is at full employment, any further increase in aggregate demand through monetary or fiscal expansion will result in:",
+    "options": {
+      "A": "Increase in real output",
+      "B": "Inflation (increase in price level) with no change in real output",
+      "C": "Decrease in prices",
+      "D": "Decrease in employment"
+    },
+    "correct_answer": "B",
+    "explanation": "In case of full employment, additional investment or demand will only lead to inflation rather than real output growth."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "In the Keynesian model, how is macroeconomic equilibrium restored when aggregate demand exceeds aggregate supply?",
+    "options": {
+      "A": "Through automatic changes in price levels instantly",
+      "B": "Through adjustments in output, production, and employment levels",
+      "C": "Through automatic wage cuts",
+      "D": "Through interest rate adjustments only"
+    },
+    "correct_answer": "B",
+    "explanation": "Keynesian model relies on changes in total spending and output/employment to restore equilibrium, assuming short-run price rigidity."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "If the consumption function is C = 20 + 0.6Y and investment I = 10 + 0.2Y, the equilibrium level of National Income is:",
+    "options": {
+      "A": "150",
+      "B": "200",
+      "C": "250",
+      "D": "300"
+    },
+    "correct_answer": "A",
+    "explanation": "Y = C + I = 20 + 0.6Y + 10 + 0.2Y = 30 + 0.8Y => 0.2Y = 30 => Y = 150."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "If consumption function is C = 7 + 0.5Y and investment is 100, the equilibrium level of Income is:",
+    "options": {
+      "A": "214",
+      "B": "200",
+      "C": "250",
+      "D": "300"
+    },
+    "correct_answer": "A",
+    "explanation": "Y = 7 + 0.5Y + 100 => 0.5Y = 107 => Y = 214."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "If autonomous consumption is 100, MPS is 0.2, and investment is 200, the equilibrium national income is:",
+    "options": {
+      "A": "1000",
+      "B": "1500",
+      "C": "2000",
+      "D": "2500"
+    },
+    "correct_answer": "B",
+    "explanation": "Y = 100 + 0.8Y + 200 => 0.2Y = 300 => Y = 1500."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "In a closed economy with consumption C = 75 + 0.5(Y - T), investment I = 80, tax T = 25 + 0.1Y, and G = 100, equilibrium income is approximately:",
+    "options": {
+      "A": "350",
+      "B": "440.91",
+      "C": "500",
+      "D": "600"
+    },
+    "correct_answer": "B",
+    "explanation": "Y = 75 + 0.5(Y - 25 - 0.1Y) + 80 + 100 => Y(1 - 0.5 + 0.05) = 242.5 => Y = 242.5 / 0.55 = 440.91."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "If the consumption function is C = 40 + 0.8Yd, T = 0.1Y, I = 60, G = 40, X = 58, and M = 0.05Y, equilibrium income is:",
+    "options": {
+      "A": "500",
+      "B": "600",
+      "C": "700",
+      "D": "800"
+    },
+    "correct_answer": "B",
+    "explanation": "Y = 40 + 0.8(0.9Y) + 60 + 40 + 58 - 0.05Y => Y(1 - 0.72 + 0.05) = 198 => Y = 198 / 0.33 = 600."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "The maximum possible value of the investment multiplier is:",
+    "options": {
+      "A": "1",
+      "B": "10",
+      "C": "Infinity",
+      "D": "Zero"
+    },
+    "correct_answer": "C",
+    "explanation": "The maximum value of the multiplier is infinity when MPC is 1 (i.e. economy consumes 100% of additional income)."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Medium",
+    "question_text": "Which of the following is true regarding short-period equilibrium in Keynesian economics?",
+    "options": {
+      "A": "It contains dynamic growth elements",
+      "B": "It is based on comparative statics with no links across time periods",
+      "C": "Prices are fully flexible upward and downward",
+      "D": "Money supply has no role"
+    },
+    "correct_answer": "B",
+    "explanation": "Keynesian models relate to short-period equilibrium and contain no dynamic elements; one equilibrium is compared with another via comparative statics."
+  },
+  {
+    "course": "CA",
+    "level": "Foundation",
+    "subject": "Economics",
+    "chapter_label": "Chapt 6",
+    "chapter_slug": "determination-of-national-income",
+    "unit_code": "unit-2-keynesian-theory",
+    "topic": "Keynesian Theory of Determination of National Income",
+    "difficulty": "Hard",
+    "question_text": "In the four sector model, if net exports (X - M) are negative:",
+    "options": {
+      "A": "There is a net withdrawal from the domestic circular flow, reducing national income",
+      "B": "National income increases",
+      "C": "Imports equal zero",
+      "D": "Government budget is balanced"
+    },
+    "correct_answer": "A",
+    "explanation": "Negative net exports (X < M) represent a net withdrawal, decreasing national income."
+  }
+]

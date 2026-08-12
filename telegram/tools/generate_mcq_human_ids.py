@@ -120,6 +120,26 @@ def _resolve_by_chapter_name(record, catalog_rows) -> tuple:
     return None
 
 
+def _slugify(text: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", (text or "").lower()).strip("-")
+
+
+def _resolve_by_chapter_slug(record, catalog_rows) -> tuple:
+    """CA Foundation Accounting / Business Economics (added 2026-08-12,
+    see telegram/tools/ingest_ca_foundation_accounting_economics_mcqs.py).
+    That ingestion script already set every record's chapter_slug to the
+    exact slugified real course_catalog unit/chapter name -- match on
+    that directly instead of re-deriving chapter/unit from a source-
+    specific unitcode format (there wasn't one consistent format to
+    trust; 5+ different literal shapes across the 2 source folders,
+    see that script's own docstring)."""
+    slug = record.get("chapter_slug")
+    for row in catalog_rows:
+        if _slugify(row["chapter_name"]) == slug:
+            return row["chapter_no"], row["unit_no"]
+    return None
+
+
 # course, level, paper_no, id_field, resolver
 CONTENT_SOURCES = [
     {
@@ -151,6 +171,17 @@ CONTENT_SOURCES = [
         "path": REPO_ROOT / "telegram" / "assets" / "faculty" / "csarunchouhan-cma-inter-law" / "cma_inter_law_companies_act_descriptive.json",
         "course": "CMA", "level": "Intermediate", "paper_no": "5", "id_field": "book_id",
         "resolve": None,   # uses _resolve_by_chapter_name, needs catalog_rows -- wired below
+    },
+    {
+        # Added 2026-08-12 -- see ingest_ca_foundation_accounting_economics_mcqs.py
+        "path": REPO_ROOT / "telegram" / "assets" / "exam_bot" / "ca-foundation-accounting" / "mcq_questions_extracted.json",
+        "course": "CA", "level": "Foundation", "paper_no": "1", "id_field": "mcq_id",
+        "resolve": "by_chapter_slug",
+    },
+    {
+        "path": REPO_ROOT / "telegram" / "assets" / "exam_bot" / "ca-foundation-business-economics" / "mcq_questions_extracted.json",
+        "course": "CA", "level": "Foundation", "paper_no": "4", "id_field": "mcq_id",
+        "resolve": "by_chapter_slug",
     },
 ]
 
@@ -201,7 +232,9 @@ def process_source(conn, src: dict, dry_run: bool) -> dict:
         if r.get("human_id"):
             continue   # idempotent -- never touch an already-assigned id
 
-        if src["resolve"] is not None:
+        if src["resolve"] == "by_chapter_slug":
+            resolved = _resolve_by_chapter_slug(r, catalog_rows_list)
+        elif src["resolve"] is not None:
             resolved = src["resolve"](r)
         else:
             resolved = _resolve_by_chapter_name(r, catalog_rows_list)
