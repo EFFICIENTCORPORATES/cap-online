@@ -118,8 +118,13 @@ local_settings.py
 
 # Databases (binary; e.g. Telegram bot analytics/logging DBs)
 **/*.db
+**/*.db-wal
+**/*.db-shm
 **/*.sqlite
 **/*.sqlite3
+
+# manage_bots.py runtime state (PID files, per-bot logs) -- local only
+telegram/database/run/
 
 # Secrets / credentials -- never commit live tokens/keys
 telegram/creds.txt

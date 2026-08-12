@@ -93,7 +93,10 @@
       "Bash(pdftotext -layout \"CAInter-AdvAcc-RTP-May2025-Q.pdf\" -)",
       "Bash(awk 'BEGIN{p=1} {print} /\\\\f/{p++}')",
       "Bash(pdftotext -layout \"CAInter-AdvAcc-RTP-May2025-Q.pdf\" \"pages_out.txt\")",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(/d/EffCorp_Projects/cap-online/.venv/Scripts/python.exe -c ' *)",
+      "Bash(\"/d/EffCorp_Projects/cap-online/.venv/Scripts/python.exe\" telegram/tools/populate_course_catalog.py --dry-run)",
+      "Bash(\"/d/EffCorp_Projects/cap-online/.venv/Scripts/python.exe\" telegram/branding/smoke_test_brand_kit.py)"
     ],
     "additionalDirectories": [
       "C:\\Users\\asus\\AppData\\Local\\Temp\\claude"
