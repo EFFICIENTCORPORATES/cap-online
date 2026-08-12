@@ -1,0 +1,126 @@
+{
+  "$comment": "The master bot mapping (added 2026-08-10). This is the ONLY place that says which physical Telegram bots exist, what kind each is, and which token/script runs it. telegram/config/tenants.json answers a DIFFERENT question -- 'what does this faculty teach' (content_scope/exam_content) -- and knows nothing about how many bot processes serve that content. One tenant can map to N bots here (e.g. capranav: one 'study' bot + one 'exam' bot) or just one 'unified' bot (e.g. csarunchouhan). Adding a bot for an already-onboarded faculty is a pure config change here -- no code, no changes to tenants.json. See bots.README.md for the full field contract and telegram/tools/manage_bots.py (the process manager) which reads this file to know what to start/stop.",
+  "schema_version": 1,
+
+  "bots": [
+    {
+      "bot_id": "1lavya-studyhub",
+      "tenant_id": "1lavya-studyhub",
+      "kind": "study",
+      "display_name": "1Lavya Study Hub",
+      "bot_username": "@Official1LavyaStudyBot",
+      "bot_token_env": "TELEGRAM_STUDY_BOT_TOKEN",
+      "script": "study_hub_bot.py",
+      "status": "active",
+      "from_email": "studyhub@1lavya.com"
+    },
+    {
+      "bot_id": "1lavya-examhub",
+      "tenant_id": "1lavya-examhub",
+      "kind": "exam",
+      "display_name": "1Lavya Exam Hub",
+      "bot_username": "@Official1LavyaExamBot",
+      "bot_token_env": "TELEGRAM_EXAM_BOT_TOKEN",
+      "script": "exam_hub_bot.py",
+      "status": "active",
+      "from_email": "examhub@1lavya.com"
+    },
+    {
+      "bot_id": "1lavya-myfileshub",
+      "tenant_id": null,
+      "kind": "myfiles",
+      "display_name": "1Lavya MyFiles Hub",
+      "bot_username": "@Official1LavyaMyFilesBot",
+      "bot_token_env": "TELEGRAM_MYFILES_BOT_TOKEN",
+      "script": "myfiles_hub_bot.py",
+      "status": "active",
+      "notes": "Account-scoped, not content-scoped -- tenant_id is null on purpose, this bot has no relationship to any faculty's content_scope. Not yet refactored onto the BOT_ID/tenants.json pattern (its own token/DB resolution is untouched, still self-contained) -- listed here only so the process manager and heartbeat/dashboard can manage and see it alongside every other bot."
+    },
+
+    {
+      "bot_id": "csarunchouhan",
+      "tenant_id": "csarunchouhan",
+      "kind": "unified",
+      "display_name": "CS Arun Chouhan (Study + Exam Practice, one bot)",
+      "bot_username": null,
+      "bot_token_env": "FACULTY_CSARUNCHOUHAN_BOT_TOKEN",
+      "script": "faculty_bot.py",
+      "status": "active",
+      "from_email": "csarunchouhan@1lavya.com",
+      "notes": "bot_id deliberately equals tenant_id -- he only has ONE bot, so there's no ambiguity (unlike Pranav's two, which need a suffix). Combines both hubs in one process -- see faculty_bot.py's own docstring for why."
+    },
+
+    {
+      "bot_id": "capranav-study",
+      "tenant_id": "capranav",
+      "kind": "study",
+      "display_name": "CA Pranav -- Study Bot",
+      "bot_username": null,
+      "bot_token_env": "FACULTY_CAPRANAVSTUDY_BOT_TOKEN",
+      "script": "study_hub_bot.py",
+      "status": "active",
+      "from_email": "capranav-study@1lavya.com",
+      "notes": "Requested 2026-08-10. Wants TWO separate bots (unlike Arun's one unified bot) -- this is the concrete case that proved the tenant-vs-bot split in this file was needed, not just tenants.json's old bot_token_env-per-tenant shape. Token added to telegram/.env -- ready to launch via BOT_ID=capranav-study."
+    },
+    {
+      "bot_id": "capranav-exam",
+      "tenant_id": "capranav",
+      "kind": "exam",
+      "display_name": "CA Pranav -- Exam Bot",
+      "bot_username": null,
+      "bot_token_env": "FACULTY_CAPRANAVEXAM_BOT_TOKEN",
+      "script": "exam_hub_bot.py",
+      "status": "active",
+      "from_email": "capranav-exam@1lavya.com",
+      "notes": "Same tenant (capranav) as capranav-study above, different bot/token/script -- this pairing is the whole point of this file existing separately from tenants.json. Token added to telegram/.env -- ready to launch via BOT_ID=capranav-exam."
+    },
+
+    {
+      "bot_id": "1lavya-dashboard",
+      "tenant_id": null,
+      "kind": "dashboard",
+      "display_name": "1LAVYA Live Analytics Dashboard",
+      "bot_username": null,
+      "bot_token_env": null,
+      "script": "dashboard_server.py",
+      "script_dir": "tools",
+      "status": "active",
+      "notes": "Added 2026-08-10 (Pranav: 'dashboard should have a refresh button ... get the latest'). Not a Telegram bot -- a local HTTP server (127.0.0.1:8787 by default, see dashboard_server.py) serving the always-live version of the analytics dashboard. bot_token_env is null on purpose, it never talks to Telegram. script_dir is 'tools', not the implicit default 'bots' -- see manage_bots.py's resolve_script_path() (added 2026-08-10 alongside this entry, the only reason this field exists at all)."
+    },
+    {
+      "bot_id": "1lavya-platform-watcher",
+      "tenant_id": null,
+      "kind": "watcher",
+      "display_name": "1LAVYA Platform Watcher (down/up DM alerts)",
+      "bot_username": null,
+      "bot_token_env": null,
+      "script": "watcher_bot.py",
+      "status": "active",
+      "notes": "Added 2026-08-10 (Pranav: 'a fresh DM to be sent to mentioned CHATIDS ... regarding the Bot being down'). Sends alerts via the 1LAVYA MyFiles Hub bot's own token (Pranav's choice) -- see watcher_bot.py, NOT this entry's own bot_token_env (null; it has no token of its own). Flipped to 'active' 2026-08-11 -- telegram/config/alerts.json's admin_chat_ids now has real chat IDs (Pranav's own + Arun's)."
+    },
+    {
+      "bot_id": "1lavya-admin-portal",
+      "tenant_id": null,
+      "kind": "admin-portal",
+      "display_name": "1LAVYA Admin Portal",
+      "bot_username": null,
+      "bot_token_env": null,
+      "script": "app.py",
+      "script_dir": "admin_portal",
+      "status": "active",
+      "from_email": "reports@1lavya.com",
+      "notes": "Added 2026-08-11, Phase 4 foundation tier (Flask migration + sidebar shell + single-admin login + Bot Status/Restart + Bot Logs). Not a Telegram bot -- bot_token_env is null, it never talks to Telegram. Runs on port 8788 (ADMIN_PORTAL_PORT env var to override) ALONGSIDE the existing 1lavya-dashboard (8787), not replacing it yet -- see telegram/admin_portal/README.md for the migration plan. Credentials in telegram/.env's ADMIN_PORTAL_* vars, generated/rotated via telegram/admin_portal/set_password.py. from_email added same day for the Analytics tier's admin-triggered report-sending feature -- reports sent BY the admin (not by a specific student-facing bot) go out as 'reports@1lavya.com', an honest label rather than impersonating whichever bot the student happens to use."
+    },
+    {
+      "bot_id": "1lavya-leaderboard-broadcaster",
+      "tenant_id": null,
+      "kind": "leaderboard-broadcaster",
+      "display_name": "1LAVYA Leaderboard Broadcaster (nightly 11:11pm IST)",
+      "bot_username": null,
+      "bot_token_env": null,
+      "script": "leaderboard_broadcaster.py",
+      "status": "inactive",
+      "notes": "Added 2026-08-11 (Phase 3 of the roadmap). Not a Telegram bot with its own token -- bot_token_env is null on purpose, see leaderboard_broadcaster.py; each individual leaderboard in telegram/config/leaderboards.json specifies its OWN broadcast_bot_token_env (the bot that actually posts to that leaderboard's channels). Deliberately 'inactive' until at least one leaderboard in leaderboards.json is flipped to 'active' with real channel chat_ids -- starting it before then is harmless (it just finds nothing to broadcast every check) but pointless."
+    }
+  ]
+}

@@ -1,0 +1,536 @@
+-- telegram/database/schema.sql
+-- ---------------------------------------------------------------------------
+-- Central 1LAVYA platform schema: shared student identity + wallet ledger +
+-- payments, used by EVERY bot process (platform bots and every faculty bot
+-- alike) -- see telegram/config/tenants.json for the tenant registry this
+-- joins against via tenant_id (a free-text string here, not a DB foreign key,
+-- since tenants.json stays the single source of truth for tenant metadata --
+-- see telegram/config/tenants.README.md).
+--
+-- Design/schema artifact -- this file is not wired into any bot yet. See
+-- telegram/database/README.md for the live-DB + 5-second-delay snapshot-DB
+-- split this is meant to run under, and the analytics queries it supports.
+--
+-- SQLite syntax (per the 2026-08-09 decision to stay on SQLite until real
+-- concurrent load proves it can't keep up -- see memory
+-- 1lavya-bot-infra-plan). Kept close enough to standard SQL to port to
+-- PostgreSQL later without a redesign: swap `INTEGER PRIMARY KEY AUTOINCREMENT`
+-- for `SERIAL PRIMARY KEY` / `GENERATED ALWAYS AS IDENTITY`, and
+-- `strftime(...)` defaults for `now()`.
+-- ---------------------------------------------------------------------------
+
+PRAGMA foreign_keys = ON;
+
+-- One row per real student, shared across every tenant/bot -- this is the
+-- 2026-08-09 "centralized account model" decision (memory:
+-- 1lavya-centralized-account-model). Telegram user ID is the natural,
+-- already-stable key every bot already has.
+CREATE TABLE IF NOT EXISTS students (
+    telegram_user_id   INTEGER PRIMARY KEY,
+    username            TEXT,
+    first_name          TEXT,
+    last_name            TEXT,
+    email                TEXT,                      -- populated once verified via any bot that does email OTP (e.g. MyFiles Hub)
+    first_seen_at        TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+    last_seen_at         TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+
+-- Added 2026-08-11 for the student report pipeline (telegram/tools/
+-- generate_student_report.py + telegram/bots/report_flow.py). These 4
+-- columns are NOT created here -- SQLite has no `ADD COLUMN IF NOT EXISTS`
+-- (confirmed by testing directly: it's a syntax error, unlike
+-- `CREATE TABLE`/`CREATE INDEX IF NOT EXISTS`, which SQLite does support --
+-- an assumption worth testing before relying on next time, not just here).
+-- `db.py`'s `_run_column_migrations()` adds them at startup instead,
+-- checking `PRAGMA table_info` first so it's safely re-runnable -- see that
+-- function's own docstring for the full column list and reasoning
+-- (`mobile_number`, `email_verification_method`, `mobile_verification_method`,
+-- `report_channel_preference`).
+
+-- Every wallet-affecting event, append-only. THE BALANCE IS NEVER STORED --
+-- it is always SUM(amount) over this table for a student. This is the
+-- single most important rule in this schema (see memory
+-- 1lavya-faculty-onboarding-model / the 2026-08-09 feedback round): a mutable
+-- balance column is how real financial data silently corrupts under a crash
+-- or a double-fired payment webhook. A ledger can always be audited and
+-- replayed; a balance column can't.
+CREATE TABLE IF NOT EXISTS wallet_ledger (
+    ledger_id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    telegram_user_id     INTEGER NOT NULL REFERENCES students(telegram_user_id),
+    tenant_id            TEXT NOT NULL,   -- which bot context this happened in, e.g. 'capranav', '1lavya-examhub'; 'platform' for platform-level events not tied to any one bot
+    event_type           TEXT NOT NULL CHECK (event_type IN (
+                              'free_monthly_grant',  -- the 100-free-MCQs/month top-up, granted once per student per calendar month
+                              'mcq_debit',            -- -1 credit, one per MCQ shown (see telegram/database/README.md for why "shown" not "answered")
+                              'recharge_credit',      -- +N credits from a paid top-up (see payments table for the money side)
+                              'manual_adjustment',    -- admin correction; `reference` must explain why
+                              'refund'                -- reversal of a recharge_credit or manual_adjustment
+                          )),
+    amount                INTEGER NOT NULL,   -- signed: positive = credit, negative = debit. Units are MCQ-credits, never rupees directly.
+    reference             TEXT,               -- mcq_id for a debit; payments.payment_id for a recharge; free-text reason for manual_adjustment/refund
+    created_at            TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_wallet_ledger_student ON wallet_ledger(telegram_user_id);
+CREATE INDEX IF NOT EXISTS idx_wallet_ledger_tenant  ON wallet_ledger(tenant_id);
+CREATE INDEX IF NOT EXISTS idx_wallet_ledger_month   ON wallet_ledger(telegram_user_id, event_type, created_at);
+
+-- Real money, both directions: faculty's flat one-time ₹5,000 onboarding fee,
+-- and a student's credit-pack recharge (see tenants.README.md /
+-- 1lavya-faculty-onboarding-model memory for why literal ₹1 charges aren't
+-- practical -- recharges are packs, e.g. ₹50 for 5,000 credits).
+CREATE TABLE IF NOT EXISTS payments (
+    payment_id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    kind                  TEXT NOT NULL CHECK (kind IN ('faculty_onboarding_fee', 'student_credit_recharge')),
+    tenant_id             TEXT,               -- the faculty tenant_id for an onboarding fee; the tenant the student recharged from, for a recharge (informational -- wallet itself is shared, see wallet_ledger)
+    telegram_user_id      INTEGER REFERENCES students(telegram_user_id),  -- NULL for a faculty_onboarding_fee (faculty isn't a student row)
+    amount_inr            NUMERIC NOT NULL,
+    credits_granted       INTEGER,            -- NULL for faculty_onboarding_fee; the pack size for a recharge (mirrored into wallet_ledger.amount on completion)
+    gateway                TEXT,               -- e.g. 'razorpay', 'upi_manual'
+    gateway_txn_id         TEXT UNIQUE,        -- idempotency key: a retried/duplicate webhook for the same txn_id must be a no-op, not a double-credit
+    status                 TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'completed', 'failed', 'refunded')),
+    created_at             TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+    completed_at           TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_payments_student ON payments(telegram_user_id);
+CREATE INDEX IF NOT EXISTS idx_payments_tenant  ON payments(tenant_id);
+
+-- ---------------------------------------------------------------------------
+-- Content-ownership tagging convention (documentation only -- NOT a table
+-- here; applies to the existing catalog artifacts: StudyHub_Master_Catalog
+-- .xlsx, questions_index.json, mcq_questions_extracted.json, etc.):
+--
+--   content_owner = "1lavya"            -- shared pool, matched via a
+--                                           tenant's content_scope filter
+--   content_owner = "<tenant_id>"       -- e.g. "capranav" -- faculty-owned,
+--                                           served only to that tenant's bot,
+--                                           regardless of content_scope
+--
+-- Defaults to "1lavya" where absent, so every row that exists today (all of
+-- it pre-dates faculty content) is backward-compatible with no migration.
+-- Applying this tag is a change to the catalog-building scripts
+-- (build_master_catalog.py, generate_all_chapter_books.py, etc.), not to
+-- this DB -- tracked as a follow-up, not done in this pass.
+-- ---------------------------------------------------------------------------
+
+-- ===========================================================================
+-- WIRED IN 2026-08-10: every bot process below writes to THIS ONE FILE
+-- (telegram/database/platform.db -- see telegram/database/db.py for the
+-- shared connection helper every bot imports) instead of its own separate
+-- .db file. bot_id always refers to telegram/config/bots.json's bot_id
+-- field (free-text here too, same reasoning as tenant_id above -- bots.json
+-- stays the single source of truth for what a bot_id even is).
+--
+-- Design principle locked in 2026-08-10 (Pranav's choice): tables are
+-- shared PER BOT KIND (one events schema for every "study" bot, one for
+-- every "exam" bot, ...), not one physical table per individual bot
+-- instance -- adding capranav-study next to 1lavya-studyhub is a new row
+-- in bots.json, never a new table. Every query that wants "just this bot"
+-- adds `WHERE bot_id = ?`.
+-- ===========================================================================
+
+-- One row per bot process, upserted every heartbeat interval (see
+-- telegram/database/db.py's send_heartbeat(), called from a JobQueue in
+-- every bot). This is how the dashboard (telegram/tools/generate_dashboard.py)
+-- and `manage_bots.py status` know a bot is actually alive right now, not
+-- just that it was configured to exist -- last_heartbeat_at older than a
+-- few missed intervals means the process is down or stuck, whether or not
+-- its OS-level PID is still technically running.
+CREATE TABLE IF NOT EXISTS bot_heartbeats (
+    bot_id               TEXT PRIMARY KEY,
+    pid                  INTEGER,
+    started_at           TEXT NOT NULL,
+    last_heartbeat_at    TEXT NOT NULL
+);
+
+-- The generic, uniform interaction log every bot writes to on every
+-- meaningful student action (a command, a button tap, a free-text
+-- message) -- deliberately lightweight and identically shaped across all
+-- bot kinds, so the dashboard's "messages per day/unique visitors" charts
+-- are one simple query, not three different ones unioned together. The
+-- bot-kind-specific tables below are for RICH per-feature analytics (MCQ
+-- accuracy by chapter, etc.) that this table intentionally doesn't carry.
+CREATE TABLE IF NOT EXISTS bot_interactions (
+    interaction_id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    bot_id               TEXT NOT NULL,
+    telegram_user_id     INTEGER NOT NULL,
+    event_type           TEXT NOT NULL,   -- e.g. 'start', 'callback', 'message', 'file_sent' -- free-text, not enum-constrained (kept intentionally loose across 3+ very different bot kinds)
+    created_at           TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_bot_interactions_bot_time ON bot_interactions(bot_id, created_at);
+CREATE INDEX IF NOT EXISTS idx_bot_interactions_user      ON bot_interactions(telegram_user_id);
+
+-- Study Hub's detailed log (file downloads, free-text searches) --
+-- superset of what bot_interactions captures generically, kept separate so
+-- study_hub_bot.py's own per-feature analytics don't bloat the generic
+-- table's row shape.
+CREATE TABLE IF NOT EXISTS study_hub_events (
+    event_id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    bot_id               TEXT NOT NULL,
+    telegram_user_id     INTEGER NOT NULL,
+    event_type           TEXT NOT NULL CHECK (event_type IN ('file_download', 'search_query', 'search_no_match')),
+    category              TEXT,
+    course                TEXT,
+    level                 TEXT,
+    subject               TEXT,
+    file_label            TEXT,
+    query_text            TEXT,           -- only for search_query/search_no_match
+    created_at            TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_study_hub_events_bot ON study_hub_events(bot_id, created_at);
+
+-- Exam Hub's session/question/MCQ logs -- same shape exam_hub_bot.py
+-- already had in its own per-tenant Exam_Bot.db (students/bot_sessions/
+-- descriptive_question_events/mcq_attempts), migrated here with a bot_id
+-- column added to each, and `students` folded into the one shared
+-- `students` table above instead of a separate per-bot copy (this was
+-- already the 2026-08-09 "centralized account model" decision -- Exam
+-- Hub's own students table was the one piece of this DB that hadn't
+-- caught up to it yet).
+CREATE TABLE IF NOT EXISTS exam_hub_sessions (
+    session_id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    bot_id               TEXT NOT NULL,
+    telegram_user_id     INTEGER NOT NULL,
+    started_at           TEXT NOT NULL,
+    course                TEXT,
+    level                 TEXT,
+    mode                  TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_exam_hub_sessions_bot ON exam_hub_sessions(bot_id, started_at);
+
+-- "Time spent on bot" (2026-08-11, for the student report pipeline) is
+-- deliberately NOT an explicit ended_at column here. First design was
+-- "close any still-open session when the next one starts" -- rejected
+-- before shipping: the gap between two sessions can be days, and treating
+-- "next session started" as "previous session ended" would silently count
+-- that entire idle gap as active time, badly overstating engagement for
+-- exactly the students who take breaks between practice sessions.
+-- generate_student_report.py instead computes each session's real span as
+-- MAX(activity timestamp) - started_at, from the actual mcq_attempts/
+-- descriptive_events rows tied to that session_id -- never wider than
+-- what real recorded activity actually spans.
+
+CREATE TABLE IF NOT EXISTS exam_hub_descriptive_events (
+    event_id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    bot_id               TEXT NOT NULL,
+    telegram_user_id     INTEGER NOT NULL,
+    session_id            INTEGER REFERENCES exam_hub_sessions(session_id),
+    book_id               TEXT NOT NULL,
+    course                TEXT,
+    level                 TEXT,
+    exam_type             TEXT,
+    year                  TEXT,
+    chapter_slug           TEXT,
+    chapter_label           TEXT,
+    qno_text               TEXT,
+    marks_text              TEXT,
+    shown_at                TEXT NOT NULL,
+    answer_shown_at          TEXT,
+    pdf_requested_at          TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_exam_desc_events_bot  ON exam_hub_descriptive_events(bot_id);
+CREATE INDEX IF NOT EXISTS idx_exam_desc_events_book ON exam_hub_descriptive_events(book_id);
+
+CREATE TABLE IF NOT EXISTS exam_hub_mcq_attempts (
+    attempt_id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    bot_id                TEXT NOT NULL,
+    telegram_user_id      INTEGER NOT NULL,
+    session_id             INTEGER REFERENCES exam_hub_sessions(session_id),
+    mcq_id                 TEXT NOT NULL,
+    course                 TEXT,
+    level                  TEXT,
+    exam_type              TEXT,
+    year                   TEXT,
+    chapter_slug            TEXT,
+    chapter_label            TEXT,
+    qno_text                TEXT,
+    marks                   INTEGER,
+    difficulty               TEXT,
+    correct_option            TEXT NOT NULL,
+    selected_option            TEXT,
+    is_correct                 INTEGER,
+    shown_at                    TEXT NOT NULL,
+    answered_at                  TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_exam_mcq_attempts_bot     ON exam_hub_mcq_attempts(bot_id);
+CREATE INDEX IF NOT EXISTS idx_exam_mcq_attempts_mcq     ON exam_hub_mcq_attempts(mcq_id);
+CREATE INDEX IF NOT EXISTS idx_exam_mcq_attempts_chapter ON exam_hub_mcq_attempts(chapter_slug);
+
+-- MyFiles Hub is explicitly OUT of scope for this migration -- its users/
+-- otps/files/tags/file_tags/activity_log tables stay exactly where they
+-- are (myfiles_hub.db, per telegram/bots/myfiles_hub_bot.py), since that's
+-- primary application data (who owns which file), not "logs" in the sense
+-- this section is about. It DOES get a bot_heartbeats row (see db.py),
+-- purely so the dashboard can show it as online/offline alongside every
+-- other bot -- that's the only piece of this file it touches.
+
+-- One row per monitored bot_id, tracking the watcher's last-known up/down
+-- verdict -- added 2026-08-10 for telegram/bots/watcher_bot.py (Pranav:
+-- "a fresh DM ... regarding the Bot being down for any reason"). Exists
+-- purely to make alerts edge-triggered instead of level-triggered: without
+-- remembering "I already told you this bot is down," every single check
+-- tick (default every 60s) would re-send the same DM forever. A transition
+-- FROM 'up' TO 'down' sends exactly one down-alert; a transition back to
+-- 'up' sends exactly one recovery message; staying in the same state sends
+-- nothing. Surviving a watcher restart is the whole point of persisting
+-- this in the DB instead of an in-memory dict.
+CREATE TABLE IF NOT EXISTS bot_alert_state (
+    bot_id               TEXT PRIMARY KEY,
+    last_status          TEXT NOT NULL CHECK (last_status IN ('up', 'down')),
+    since_at             TEXT NOT NULL,   -- when it entered last_status
+    last_alert_sent_at   TEXT             -- NULL if no alert has ever fired for this bot_id
+);
+
+-- ===========================================================================
+-- STUDENT REPORT PIPELINE -- added 2026-08-11 (Phase 2 of the branding-kit
+-- -> report-pipeline -> leaderboard -> admin-portal roadmap). Milestones
+-- are PLATFORM-WIDE (Pranav's explicit choice, matches the centralized-
+-- account model) -- a student's total counts across every bot they've ever
+-- used, not per-bot. See telegram/bots/report_flow.py for the full
+-- conversational flow this table pair drives.
+-- ===========================================================================
+
+-- One row per (student, milestone) -- e.g. ('20_questions_report_prompt').
+-- Exists so the bot asks "want a report?" exactly once per milestone, not
+-- on every single message once the threshold is crossed. 'declined' is a
+-- real, permanent answer for THIS milestone (never re-nagged) -- it does
+-- not block a later, separate milestone (e.g. the Phase 3 leaderboard
+-- prompt) from asking again if contact info is still missing then.
+CREATE TABLE IF NOT EXISTS student_report_milestones (
+    telegram_user_id     INTEGER NOT NULL,
+    milestone_type        TEXT NOT NULL,
+    status                 TEXT NOT NULL CHECK (status IN ('prompted', 'declined', 'fulfilled')),
+    triggered_at            TEXT NOT NULL,
+    resolved_at              TEXT,
+    PRIMARY KEY (telegram_user_id, milestone_type)
+);
+
+-- One row per report actually generated -- an audit trail, and how a
+-- re-run/admin tool can see what was already sent instead of guessing.
+-- Never stores the PDF bytes themselves (that would duplicate real content
+-- data into a logging table) -- `criteria` is enough to regenerate the
+-- exact same report on demand if ever needed again.
+CREATE TABLE IF NOT EXISTS report_deliveries (
+    delivery_id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    telegram_user_id       INTEGER NOT NULL,
+    generated_at             TEXT NOT NULL,
+    criteria                  TEXT,      -- e.g. "all-time", "last_100", "since:2026-01-01" -- human-readable, not a serialized query
+    channels_requested        TEXT,      -- e.g. "email,telegram" -- what the student's report_channel_preference said at generation time
+    email_status               TEXT CHECK (email_status IN ('sent', 'failed') OR email_status IS NULL),
+    telegram_status             TEXT CHECK (telegram_status IN ('sent', 'failed') OR telegram_status IS NULL),
+    error_detail                 TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_report_deliveries_student ON report_deliveries(telegram_user_id, generated_at);
+
+-- Added 2026-08-11, same day, per Pranav's ask after debugging the missed-
+-- milestone bug: "there should be a log maintained of the message sent and
+-- user name collected... all such messages sent. There should be a
+-- complete trail." report_deliveries above only logs the FINAL send
+-- outcome -- this logs every single step of the conversation (prompt
+-- shown, channel chosen, a rejected/invalid attempt, a value collected
+-- pending confirmation, a confirmed value, a retry) so a support
+-- conversation like "the bot never asked me" can be diagnosed from the
+-- data alone, not just re-derived from milestone/students state. `detail`
+-- deliberately CAN hold real contact values (a collected mobile/email) --
+-- this table carries the same PII sensitivity as `students` already does,
+-- same DB file, same access controls, nothing new exposed.
+CREATE TABLE IF NOT EXISTS report_flow_events (
+    event_id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    telegram_user_id      INTEGER NOT NULL,
+    event_type             TEXT NOT NULL,
+    detail                  TEXT,
+    created_at                TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_report_flow_events_student ON report_flow_events(telegram_user_id, created_at);
+
+-- ===========================================================================
+-- STUDENT PROFILE / IDENTITY SYSTEM -- added 2026-08-11 (telegram/bots/
+-- profile_flow.py), built as the identity foundation for the Phase 3
+-- (Leaderboard) roadmap item, per Pranav's explicit confirmation ("build
+-- it now as that foundation, so Phase 3 doesn't need to rebuild it
+-- later"). One `username` (locked forever once claimed, Instagram-handle
+-- style) can be shared across MULTIPLE `students` rows (multiple phones/
+-- chat_ids for the same real person) -- Pranav's original scenario: "a
+-- student might practice using his 3 mobile numbers... these will have 3
+-- unique CHAT IDs... but we will ask him if he already has a username...
+-- so his progress will always be mapped to the 1LAVYA username."
+--
+-- email/mobile_number stay on `students` (per chat_id, NOT here) --
+-- deliberately: Pranav's own example says a student "might give different
+-- email ids as well" across phones, so those are correctly modeled as
+-- per-chat-id already (see the report-pipeline columns added earlier this
+-- session). Only the truly SHARED identity fields live here.
+--
+-- Avatar is NOT a column here -- Pranav's choice: pulled live from the
+-- student's Telegram profile photo (via getUserProfilePhotos) whenever
+-- needed, not stored or editable through this bot at all. Zero new
+-- storage, zero moderation risk, always current.
+-- ===========================================================================
+
+-- `username COLLATE NOCASE` on the PRIMARY KEY makes uniqueness case-
+-- INSENSITIVE ("JohnDoe" and "johndoe" can't both be claimed) while still
+-- storing/displaying exactly what the student typed -- COLLATE only
+-- affects comparison, never storage.
+CREATE TABLE IF NOT EXISTS student_profiles (
+    username             TEXT PRIMARY KEY COLLATE NOCASE,
+    display_name          TEXT,
+    course                  TEXT,
+    level                    TEXT,
+    exam_attempt              TEXT,
+    created_at                  TEXT NOT NULL,
+    updated_at                    TEXT NOT NULL
+);
+
+-- students.lavya_username (added via db.py's _run_column_migrations(), see
+-- that function's own note on why ALTER TABLE ADD COLUMN happens in Python
+-- not here) -- nullable, set at most ONCE per chat_id (profile_flow.py
+-- enforces "locked forever" at the application layer: it will never offer
+-- to change an already-set lavya_username, only to set one that's
+-- currently NULL, either by creating a new student_profiles row or linking
+-- to an existing one).
+
+-- ===========================================================================
+-- LEADERBOARDS -- added 2026-08-11 (Phase 3 of the branding-kit ->
+-- report-pipeline -> leaderboard -> admin-portal roadmap). Pranav's spec:
+-- a student can opt into up to 5 live leaderboards, each scoped to exactly
+-- the course/level (etc.) it's meant for -- a CA Inter student never sees
+-- a CA Final/CMA Inter/CS Inter board. Each leaderboard is broadcast
+-- nightly at 11:11pm IST to one or more Telegram channels.
+--
+-- A LEADERBOARD'S DEFINITION (display name, eligibility rule, which
+-- metrics it ranks by, its target channels, its min-attempts floor) is
+-- NOT a DB table -- it lives in telegram/config/leaderboards.json, same
+-- "JSON is the single source of truth for what an ID even means" pattern
+-- bot_id/tenant_id already follow elsewhere in this file (Pranav's
+-- explicit choice, 2026-08-11: a hand-edited config file now, folding into
+-- the Phase 4 admin portal's data source later rather than being replaced
+-- by it). Only real STUDENT ACTIVITY against a leaderboard_id lives here.
+--
+-- Participation is keyed by `username` (student_profiles), NOT
+-- telegram_user_id -- a student's ranking metrics (accuracy, questions
+-- attempted, time spent) are computed by AGGREGATING ACROSS EVERY chat_id
+-- linked to their username (see telegram/database/leaderboard_metrics.py),
+-- consistent with the profile system's "one identity, several phones"
+-- design directly above. A student with no username yet cannot join any
+-- leaderboard -- profile_flow.py's leaderboard menu only appears once a
+-- username exists.
+-- ===========================================================================
+
+CREATE TABLE IF NOT EXISTS leaderboard_participants (
+    username             TEXT NOT NULL REFERENCES student_profiles(username),
+    leaderboard_id       TEXT NOT NULL,   -- free-text, matches a telegram/config/leaderboards.json entry's leaderboard_id
+    joined_at            TEXT NOT NULL,
+    PRIMARY KEY (username, leaderboard_id)
+);
+
+-- The "max 5 leaderboards per student" cap is enforced at the application
+-- layer (profile_flow.py checks COUNT(*) for this username before allowing
+-- a new join), same as username format validation -- not a SQL CHECK
+-- constraint, since SQLite can't express a per-group row-count limit
+-- declaratively without a trigger, and every other cross-row business rule
+-- in this schema already lives in Python for the same reason.
+CREATE INDEX IF NOT EXISTS idx_leaderboard_participants_lb ON leaderboard_participants(leaderboard_id);
+
+-- One row per nightly broadcast actually sent (or attempted) to one
+-- channel -- the same "complete trail" discipline report_flow_events
+-- established (Pranav, 2026-08-11: "there should be a log maintained...
+-- a complete trail"), applied to leaderboard broadcasts. Never stores the
+-- full rendered message (that's reconstructable from
+-- leaderboard_metrics.py + leaderboards.json at any time) -- just enough
+-- to audit what went out, when, to how many qualifying students.
+CREATE TABLE IF NOT EXISTS leaderboard_broadcast_log (
+    broadcast_id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    leaderboard_id         TEXT NOT NULL,
+    channel_chat_id          TEXT NOT NULL,
+    metrics_included           TEXT,        -- comma-separated metric keys actually rendered this run
+    participant_count             INTEGER,  -- how many opted-in students met the min-attempts floor at send time
+    status                          TEXT NOT NULL CHECK (status IN ('sent', 'failed')),
+    error_detail                     TEXT,
+    sent_at                          TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_leaderboard_broadcast_log_lb ON leaderboard_broadcast_log(leaderboard_id, sent_at);
+
+-- ===========================================================================
+-- ADMIN PORTAL -- added 2026-08-11 (Phase 4 of the roadmap, foundation tier:
+-- Flask app + login + sidebar shell + Bot Status/Restart + Bot Logs). See
+-- telegram/admin_portal/README.md.
+-- ===========================================================================
+
+-- Every real, production-affecting action taken through the portal --
+-- who, what, when. Same "complete trail" discipline already established
+-- for report_flow_events/leaderboard_broadcast_log, applied here because
+-- this portal can restart live bots and (in later phases) edit faculty
+-- tokens/master config -- exactly the kind of action that needs an
+-- honest record of who did it and when, not just whether it succeeded.
+-- `username` is free text (not a foreign key into a users table -- there
+-- is no users table yet, single-admin login only; this column is exactly
+-- what a future multi-user RBAC upgrade will read from, unchanged).
+CREATE TABLE IF NOT EXISTS admin_actions (
+    action_id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    username          TEXT NOT NULL,
+    action_type        TEXT NOT NULL,   -- e.g. 'bot_restart' today; 'master_edit'/'faculty_add'/... in later phases
+    target               TEXT,           -- action-specific, e.g. a bot_id
+    detail                TEXT,
+    created_at              TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_admin_actions_time ON admin_actions(created_at);
+
+-- ===========================================================================
+-- COURSE CATALOG -- added 2026-08-11 (Pranav's ask: "this course catalog
+-- should be part of a table in our db and should be the single source of
+-- truth for all MCQs and descriptive questions... Chapter ID, Unit ID,
+-- Chapter name for each Course, Level, Subject should be derived from
+-- this course content"). One row per (course, level, paper, chapter,
+-- unit) -- the finest grain any current content is tagged at. CS/CMA
+-- chapters have no real sub-unit structure in ICSI/ICMAI's own material
+-- (confirmed against CS_CMA_Chapter_Catalog.xlsx) -- those rows use
+-- unit_no=0, the SAME "no further sub-units" convention CA's own
+-- single-unit chapters already use (see the U0 migration documented
+-- earlier in this file's history for student_profiles/topic-index.json).
+--
+-- Populated by telegram/tools/populate_course_catalog.py from THREE
+-- already-verified real sources (never hand-typed): CA Inter Advanced
+-- Accounting from books/concept-book/syllabus-engine/data/1-ca-inter-adv-
+-- accounts-topic-page-index.json (the canonical, "never edit" topic/page
+-- index); CS/CMA (all subjects) from telegram/source-docs/
+-- CS_CMA_Chapter_Catalog.xlsx's "Chapter Catalog" sheet (chapter numbers/
+-- names read directly off each subject's own printed ToC); CA Foundation
+-- Quantitative Aptitude from telegram/source-docs/
+-- StudyHub_Master_Catalog.xlsx (chapter numbers/names read directly off
+-- the real study material file names/cover pages). paper_no for every
+-- subject that currently HAS question content was independently
+-- cross-checked against telegram/tools/cs_cma_common.py /
+-- build_study_bot_catalog.py's own already-verified (real cover-page-
+-- read) COURSE_META/FILE_META tables before being trusted here -- see
+-- populate_course_catalog.py's own module docstring for the exact
+-- per-subject provenance trail.
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS course_catalog (
+    catalog_id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    course                TEXT NOT NULL,     -- 'CA' | 'CS' | 'CMA'
+    level                  TEXT NOT NULL,    -- 'Foundation' | 'Inter' | 'Final' | 'CSEET' | 'Executive' | 'Professional' | 'Intermediate' -- CMA uses 'Intermediate', CA uses 'Inter' -- real, deliberate, NOT a typo (matches profile_flow.py's own COURSE_LEVELS taxonomy exactly)
+    level_num              INTEGER NOT NULL, -- 1/2/3, per Pranav's confirmed mapping (2026-08-11): Foundation/CSEET=1, Inter/Executive/Intermediate=2, Final/Professional=3
+    paper_no                TEXT NOT NULL,   -- e.g. '1', '5', '7A' -- kept as TEXT (some ICAI/ICMAI papers split A/B, e.g. Direct/Indirect Tax)
+    subject                  TEXT NOT NULL,  -- full official subject name
+    chapter_no                INTEGER NOT NULL,
+    chapter_name                TEXT NOT NULL,
+    chapter_name_short            TEXT,       -- abridged name, Pranav's own ask ("abridged names for subjects and chapters and units")
+    unit_no                        INTEGER NOT NULL DEFAULT 0,  -- 0 = single-unit chapter / no ICSI-ICMAI sub-unit structure
+    unit_name                       TEXT,
+    unit_name_short                  TEXT,
+    source                             TEXT NOT NULL,  -- which real source file this row was read from -- see module docstring above
+    updated_at                          TEXT NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_course_catalog_key
+    ON course_catalog(course, level, paper_no, chapter_no, unit_no);
+CREATE INDEX IF NOT EXISTS idx_course_catalog_lookup ON course_catalog(course, level, subject);

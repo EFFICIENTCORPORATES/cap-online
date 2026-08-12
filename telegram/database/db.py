@@ -1,0 +1,229 @@
+"""
+telegram/database/db.py -- the shared platform database helper (2026-08-10)
+-----------------------------------------------------------------------------
+Every bot process (study/exam/unified -- see telegram/config/bots.json)
+imports this module instead of opening its own SQLite file. All of them now
+write to the SAME file, telegram/database/platform.db, running
+telegram/database/schema.sql's tables -- see that file's own comments for
+the full schema and the "shared table per bot kind + bot_id column" design
+decision this implements.
+
+Because this file is now written to by MULTIPLE OS PROCESSES concurrently
+(not just multiple threads in one process, which SQLite's `check_same_thread
+=False` alone would cover) -- every connection here is opened in WAL mode
+with a real busy_timeout, and every write goes through execute_with_retry()
+as a second line of defense against a transient "database is locked" under
+real contention. This is the single most important correctness concern this
+module exists to centralize -- don't open a raw sqlite3.connect() to this
+file anywhere else in the codebase; go through get_connection() here so
+every writer gets the same protection.
+
+MyFiles Hub is the one exception: its own users/otps/files/tags/
+file_tags/activity_log tables intentionally stay in their own separate
+myfiles_hub.db (primary application data, not "logs" -- see schema.sql's
+own note on this). It still calls send_heartbeat() from here so the
+dashboard can show it alongside every other bot.
+"""
+
+import os
+import sqlite3
+import time
+import logging
+from pathlib import Path
+from datetime import datetime, timezone
+
+logger = logging.getLogger(__name__)
+
+REPO_ROOT = Path(__file__).resolve().parents[2]   # telegram/database/db.py -> repo root
+PLATFORM_DB_PATH = REPO_ROOT / "telegram" / "database" / "platform.db"
+SCHEMA_PATH = REPO_ROOT / "telegram" / "database" / "schema.sql"
+
+_BUSY_TIMEOUT_MS = 30_000   # how long SQLite itself will wait for a lock before raising
+_RETRY_ATTEMPTS = 5
+_RETRY_BACKOFF_SECONDS = 0.25
+
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def get_connection() -> sqlite3.Connection:
+    """One connection per call -- bot scripts should open one at startup
+    and reuse it (same pattern exam_hub_bot.py already used for its own
+    per-tenant DB), not reconnect per query. WAL mode lets readers and
+    writers coexist without blocking each other; busy_timeout makes SQLite
+    itself retry internally for up to _BUSY_TIMEOUT_MS before raising
+    "database is locked" -- execute_with_retry() below is the outer,
+    application-level retry on top of that inner one."""
+    os.makedirs(PLATFORM_DB_PATH.parent, exist_ok=True)
+    conn = sqlite3.connect(str(PLATFORM_DB_PATH), timeout=_BUSY_TIMEOUT_MS / 1000, check_same_thread=False)
+    conn.execute("PRAGMA journal_mode=WAL;")
+    conn.execute(f"PRAGMA busy_timeout={_BUSY_TIMEOUT_MS};")
+    conn.execute("PRAGMA foreign_keys=ON;")
+    return conn
+
+
+def init_schema(conn: sqlite3.Connection):
+    """Idempotent -- every CREATE TABLE/INDEX in schema.sql is IF NOT
+    EXISTS, so calling this from every bot's startup is safe and expected
+    (whichever bot starts first actually creates the tables; every bot
+    after that is a no-op)."""
+    sql = SCHEMA_PATH.read_text(encoding="utf-8")
+    conn.executescript(sql)
+    conn.commit()
+    _run_column_migrations(conn)
+
+
+# New columns added to EXISTING tables since this repo went live (both
+# `students` and `exam_hub_sessions` already had real rows) -- SQLite has
+# no `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` (confirmed by testing
+# directly, 2026-08-11: it's a syntax error, unlike `CREATE TABLE`/
+# `CREATE INDEX IF NOT EXISTS`, which SQLite does support). schema.sql's
+# own CREATE TABLE statements only describe a table's shape for a brand-new
+# database; a column added after go-live has to be migrated in here
+# instead, checking `PRAGMA table_info` first so re-running this on every
+# bot startup (like every other part of init_schema()) is safe. Add new
+# entries here, never as a plain `ALTER TABLE` in schema.sql directly.
+_COLUMN_MIGRATIONS = {
+    "students": [
+        ("mobile_number", "TEXT"),
+        ("email_verification_method", "TEXT CHECK (email_verification_method IN ('otp', 'echo_confirm') OR email_verification_method IS NULL)"),
+        ("mobile_verification_method", "TEXT CHECK (mobile_verification_method IN ('echo_confirm') OR mobile_verification_method IS NULL)"),
+        ("report_channel_preference", "TEXT CHECK (report_channel_preference IN ('telegram', 'email', 'both') OR report_channel_preference IS NULL)"),
+        # References student_profiles(username) -- safe because schema.sql's
+        # executescript() (which creates student_profiles) always runs
+        # BEFORE this migration function, in init_schema() below.
+        ("lavya_username", "TEXT REFERENCES student_profiles(username)"),
+    ],
+}
+
+
+def _run_column_migrations(conn: sqlite3.Connection):
+    for table, columns in _COLUMN_MIGRATIONS.items():
+        existing = {row[1] for row in conn.execute(f"PRAGMA table_info({table})").fetchall()}
+        for col_name, col_def in columns:
+            if col_name not in existing:
+                conn.execute(f"ALTER TABLE {table} ADD COLUMN {col_name} {col_def}")
+                logger.info(f"Migrated: added {table}.{col_name}")
+    conn.commit()
+
+
+def execute_with_retry(conn: sqlite3.Connection, sql: str, params=()):
+    """Write helper with a real retry-with-backoff loop on top of SQLite's
+    own busy_timeout, for the rare case even that isn't enough under real
+    concurrent load from multiple bot processes. Commits on success.
+    Raises the underlying exception if every attempt is exhausted -- never
+    silently drops a write."""
+    last_exc = None
+    for attempt in range(_RETRY_ATTEMPTS):
+        try:
+            conn.execute(sql, params)
+            conn.commit()
+            return
+        except sqlite3.OperationalError as e:
+            last_exc = e
+            if "locked" not in str(e).lower() and "busy" not in str(e).lower():
+                raise
+            logger.warning(f"DB write contended (attempt {attempt + 1}/{_RETRY_ATTEMPTS}): {e}")
+            time.sleep(_RETRY_BACKOFF_SECONDS * (attempt + 1))
+    raise last_exc
+
+
+# ---------------------------------------------------------------------------
+# Shared writers -- every bot calls these instead of hand-rolling its own
+# INSERT/UPDATE for these specific concerns.
+# ---------------------------------------------------------------------------
+
+def upsert_student(conn, user):
+    """`user` is a telegram.User (or anything with .id/.username/.first_name/
+    .last_name). Writes to the ONE shared `students` table -- see schema.sql's
+    "centralized account model" note. Safe to call on every /start and every
+    message; cheap upsert."""
+    now_str = now()
+    row = conn.execute(
+        "SELECT telegram_user_id FROM students WHERE telegram_user_id=?", (user.id,)
+    ).fetchone()
+    if row:
+        execute_with_retry(
+            conn,
+            "UPDATE students SET username=?, first_name=?, last_name=?, last_seen_at=? WHERE telegram_user_id=?",
+            (user.username, user.first_name, user.last_name, now_str, user.id),
+        )
+    else:
+        execute_with_retry(
+            conn,
+            "INSERT INTO students (telegram_user_id, username, first_name, last_name, first_seen_at, last_seen_at) "
+            "VALUES (?,?,?,?,?,?)",
+            (user.id, user.username, user.first_name, user.last_name, now_str, now_str),
+        )
+
+
+def log_interaction(conn, bot_id: str, telegram_user_id: int, event_type: str):
+    """The generic, uniform log every bot writes to -- see bot_interactions'
+    own comment in schema.sql for why this exists separately from the
+    richer per-bot-kind tables. Never raises on a logging failure blocking
+    the actual student-facing action -- catches and logs a warning instead,
+    same "logging must never break the product" principle
+    myfiles_hub_bot.py's activity_log already follows."""
+    try:
+        execute_with_retry(
+            conn,
+            "INSERT INTO bot_interactions (bot_id, telegram_user_id, event_type, created_at) VALUES (?,?,?,?)",
+            (bot_id, telegram_user_id, event_type, now()),
+        )
+    except Exception as e:
+        logger.warning(f"log_interaction failed (bot_id={bot_id}, event={event_type}): {e}")
+
+
+def send_heartbeat(conn, bot_id: str, pid: int, started_at: str):
+    """Upsert -- one row per bot_id, always. See bot_heartbeats' own
+    comment in schema.sql for how the dashboard/process manager use this
+    to tell "configured but not running" apart from "actually alive".
+
+    BUG FIXED 2026-08-11 (found while building telegram/branding's smoke
+    test, which added a real use for started_at -- detecting whether a live
+    process predates a source-code change, i.e. needs a restart): the
+    UPDATE branch below never wrote `started_at`, only `pid`/
+    `last_heartbeat_at` -- so after any restart, this column kept showing
+    the FIRST time this bot_id ever got a heartbeat row, across every past
+    process, not the current process's actual start time. Every caller
+    (schedule_heartbeat() below, dashboard_server.py's own heartbeat loop)
+    already computes `started_at` correctly once at process startup and
+    passes the SAME correct value on every tick -- the fix is just to
+    actually write it on the UPDATE path too (idempotent on repeat ticks
+    within one process's life; correctly picks up the new value the moment
+    a new process's first heartbeat arrives after a restart)."""
+    now_str = now()
+    try:
+        row = conn.execute("SELECT bot_id FROM bot_heartbeats WHERE bot_id=?", (bot_id,)).fetchone()
+        if row:
+            execute_with_retry(
+                conn, "UPDATE bot_heartbeats SET pid=?, started_at=?, last_heartbeat_at=? WHERE bot_id=?",
+                (pid, started_at, now_str, bot_id),
+            )
+        else:
+            execute_with_retry(
+                conn,
+                "INSERT INTO bot_heartbeats (bot_id, pid, started_at, last_heartbeat_at) VALUES (?,?,?,?)",
+                (bot_id, pid, started_at, now_str),
+            )
+    except Exception as e:
+        logger.warning(f"send_heartbeat failed (bot_id={bot_id}): {e}")
+
+
+def schedule_heartbeat(application, bot_id: str, interval_seconds: int = 120):
+    """Call once from each bot's main(), after building the Application but
+    before app.run_polling(). Uses python-telegram-bot's JobQueue (requires
+    the `job-queue` extra -- pip install "python-telegram-bot[job-queue]",
+    already added to every bot's own SETUP docstring) so the heartbeat runs
+    on the bot's own event loop -- no extra thread, no separate process."""
+    conn = get_connection()
+    init_schema(conn)
+    pid = os.getpid()
+    started_at = now()
+
+    async def _tick(context):
+        send_heartbeat(conn, bot_id, pid, started_at)
+
+    send_heartbeat(conn, bot_id, pid, started_at)  # write one immediately, don't wait for the first interval
+    application.job_queue.run_repeating(_tick, interval=interval_seconds, first=interval_seconds)
