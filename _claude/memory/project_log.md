@@ -2,6 +2,883 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-08-12 — New telegram/FIRST_PROMPT.md orientation doc
+
+Pranav asked for a lean map file any agent can be handed to get oriented in
+`telegram/` fast — folder-by-folder purpose, which doc to read for which
+topic, read order, and a "how to inform your own working memory" section
+(don't re-derive settled architecture, don't re-litigate locked scope,
+verify visually not just structurally, ask before assuming on high-stakes
+changes). Scoped to Telegram only (not the whole repo) and built to sit
+*alongside* CLAUDE.md §11, not replace it — §11 stays the detailed dated
+history/reasoning log; FIRST_PROMPT.md is the short index that points into
+it. Explicit instruction: keep this updated going forward whenever
+`telegram/` changes structurally — treat it like a living map, not a
+one-time snapshot.
+
+## 2026-08-12 — Real Course Catalog gap found + fixed; confirmed year-warning fix still holds
+
+Pranav checked the live Admin Portal himself: "I saw many subjects and
+chapters missing" for CA — correct. The first course_catalog build only
+covered 2 of CA's 17 real subjects (Adv Accounting + Quant Aptitude); CA
+Final had zero. CS/CMA were always complete. Root cause:
+`rows_from_studyhub_catalog()` was hand-scoped to one subject instead of
+importing `build_study_bot_catalog.py`'s own already-verified
+`COURSE_META` (all 17 CA subjects, real paper numbers) directly.
+
+Fixing this surfaced two MORE real bugs, both caught by the catalog's own
+duplicate-key collision check doing its job: (1) CA Final Advanced
+Auditing chapter 14 is genuinely 2 units (Banks/NBFCs) — fixed by parsing
+the real unit number from each file's own filename (verified against all
+314 real CA filenames first, 0 unmatched); (2) CA Inter Financial
+Management chapter 9 has 6 real named units but EVERY filename says U0 —
+fixed by checking each row's own Label text for an explicit "Unit N"
+prefix (roman/arabic) as authoritative over the filename, and correctly
+excluding 3 genuine chapter-level review files ("Comprehensive
+Illustrations," "Test Your Knowledge," "Appendix") that aren't real
+syllabus units at all.
+
+Result: 957 catalog rows (up from 701), all 17 CA subjects present, CA
+Final populated for the first time. human_id generator re-confirmed fully
+idempotent against the larger catalog (0 new IDs — no new question
+content, only catalog coverage). 5 new permanent regression checks added.
+Visually re-verified: CA Final Financial Reporting (previously empty) now
+shows its real 46-row structure. Also re-confirmed the "year" warning fix
+from the day before is still clean everywhere (raw validator, both
+dashboards, bot logs) — Pranav's separate ask to double-check this held.
+Full detail: `telegram/COURSE-CATALOG.md`'s new section.
+
+## 2026-08-11 — Course Catalog DB table + human-readable MCQ IDs + year-warning fix
+
+Pranav asked for a Course/Level/Subject-wise Course Catalog view, that
+this catalog become the single DB source of truth for every MCQ/
+descriptive question's chapter/unit tagging (not independently typed),
+and a new additive human-readable ID per question
+(`CA_L2_P01_C3_U4_00876`), retrofitted onto ALL existing questions,
+deterministically, via a catalog-driven script. Also asked to fix a
+"Recommended field 'year' is missing" Content Health warning.
+
+Investigated before building anything: found 4 different, mutually
+inconsistent MCQ ID schemes already in production across the 4 existing
+content files, but also found real, ALREADY-VERIFIED raw material to
+build from (file 1's canonical CA Inter Adv Accounting index,
+CS_CMA_Chapter_Catalog.xlsx's 647 real chapters w/ PaperNo,
+StudyHub_Master_Catalog.xlsx's CA Foundation Quant Aptitude chapters —
+none needed fresh research). Asked 4 clarifying questions before writing
+code (CMA vs CO course code — every existing platform reference uses CMA,
+not CO; CS level-number mapping; whether to re-verify paper numbers
+against real sources; retrofit-now vs new-content-only pace) — confirmed:
+CMA not CO, CSEET=L1/Executive=L2/Professional=L3, re-verify (all 4
+paper numbers cross-checked against already-verified sources, confirmed
+correct), and retrofit all ~2,500 existing questions now via deterministic
+script.
+
+Built: new `course_catalog` DB table (701 rows, 3 sources) via
+`populate_course_catalog.py`; `generate_mcq_human_ids.py` — catalog-is-
+authoritative retrofit (a real mismatch found+correctly resolved: CA
+Foundation Quant Aptitude's MCQs all self-tag U1, but the real ICAI
+material has no sub-unit structure there — catalog's U0 used instead,
+loudly reported not silently patched), idempotent (verified via an actual
+second real run assigning exactly 0 new ids). 2,486 questions across 6
+files now carry a human_id alongside their existing internal ID. New
+Admin Portal → Content → Course Catalog page (Course/Level/Subject
+dropdowns, filterable/paginated/exportable). `smoke_test_course_catalog.py`
+(new, 39 checks) + `smoke_test_admin_portal.py` (grew to 72). Content
+validator: 0 errors/warnings platform-wide.
+
+Also fixed the year warning: root cause was `--year` never passed when
+converting Arun's CMA Foundation Law docx (375 records got `year: null`
+while the sibling Intermediate file correctly had `"2026"`) — fixed at
+the source, re-merged, re-validated. All affected bots restarted;
+`health_check.py` shows no new issues. Full detail:
+`telegram/COURSE-CATALOG.md`.
+
+## 2026-08-11 — Admin Portal: Analytics tier built (universal table export, bulk report emails, full Student Master)
+
+Same day as the Foundation tier, Pranav asked for: (1) download any DB
+table as JSON/CSV/XLSX; (2) send the performance report by email to one
+or many students, from the portal itself; (3) full Student Master
+visibility; (4) pagination + filtering + Excel export on every tabular
+view; (5) every analytics dashboard downloadable as CSV, and as HTML or
+PDF on demand. Asked 4 clarifying questions first (report-sending scope,
+recipient-email source, table-export scoping, build pace) — all answered
+with the recommended option.
+
+Built shared infrastructure (`exporters.py`): in-memory filter/paginate
+helpers (reusing `analytics.py`'s already-tested functions unchanged,
+deliberate given real data volumes), CSV/XLSX/JSON response builders, and
+ONE shared branded-HTML-snapshot source reused for both "download as
+HTML" and "download as PDF" (via `xhtml2pdf`) so the two never drift
+apart. New Jinja globals `page_url()`/`clear_filter_url()` preserve
+filter state across pagination.
+
+Built 5 Analytics views (Student Master, Bot-wise Usage, Faculty Report +
+chapter drill-down, Content Health, Email Analytics) + the generic Data
+Export page (every real table, no scoping — Pranav's confirmed choice).
+Student Master's bulk "Send Report to Selected" only emails students with
+an already-confirmed email on file (never guessed/typed for them), sent
+from the admin portal's own dedicated `reports@1lavya.com` address.
+`smoke_test_admin_portal.py` grew from 26 to **68 checks**, all passing —
+including a mocked bulk-send verified to skip the emailless student and
+send to exactly the right address for the other, with precise (delivery-
+id-based) cleanup of every test-inserted row. Visually verified via
+headless-Edge screenshots (Student Master's real 65-row data, Data
+Export's real table list). `health_check.py`: same 16 pre-existing
+failures, nothing new. Full detail: `telegram/admin_portal/README.md`.
+
+Still not built, by design: Masters display/editing, Faculty/New Bot
+addition, Question Catalog metadata editor, Leaderboard edits, Users &
+Access (RBAC) — each its own build → smoke test → confirmation cycle.
+
+## 2026-08-11 — Admin Portal (Phase 4) foundation tier built + 3rd leaderboard added
+
+Pranav asked to (1) build the 3 leaderboards (CS Arun Chouhan: CMA Inter +
+Foundation Law; CA Pranav: CA Inter Advanced Accounts), all ranked by Top
+10 Most Attempted / Most Accurate / Most Time Spent, and (2) start the
+full Admin Portal — Flask, sidebar+sub-tabs, and an extensive module list
+(analytics, masters, bot restart, question catalog edits, faculty/bot
+addition, leaderboard edits, email analytics, bot logs), plus later
+module-wise RBAC. Explicitly asked to be asked, not assumed.
+
+Added the 3rd leaderboard entry to `leaderboards.json` (capranav-exam
+posting, course=CA/level=Inter, same 3-metric set as the other two — all
+still `status: "inactive"`, waiting on real channel IDs). For the Admin
+Portal, asked 4 clarifying questions before writing code (auth approach
+given RBAC is coming later; Question Catalog edit depth; build
+sequencing across ~12 modules; confirmation-safeguard requirement for
+destructive actions) — all answered with the recommended option: single-
+admin login now (RBAC layers on later), metadata-only catalog editor
+first, foundation-tier-first build order, explicit confirm dialogs on
+destructive actions.
+
+Built the Foundation tier: `telegram/admin_portal/` — Flask app
+(`app.py`), single-admin session auth (`auth.py`, structured for RBAC
+later via `role_required()`), an `admin_actions` audit-log table + writer
+(`audit.py`), a branded sidebar shell (navy/gold, "Soon" badges for every
+not-yet-built module so the full intended shape is visible), single-admin
+login (credentials generated + given to Pranav once, only the hash
+stored), Bot Status & Restart (calls `manage_bots.py`'s own `restart_bot()`
+directly, not subprocessed), and Bot-wise Logs. Runs on port 8788,
+alongside the existing `:8787` dashboard (not replacing it until
+Analytics is migrated in a later tier). Registered as `1lavya-admin-portal`
+in `bots.json` so `manage_bots.py` manages it like every other process.
+
+Found and fixed one real bug during verification: `NAV_SECTIONS`' dict key
+`"items"` collided with Python's own `dict.items()` method — Jinja2's
+`section.items` attribute lookup silently grabbed the method instead of
+the key, 500-erroring every page. Renamed to `"links"`. Also hit (and
+resolved, not a code bug) two stale dev-server processes left listening
+on port 8788 from manual testing that `pkill -f` couldn't find on Windows
+— cleared by PID via PowerShell directly.
+
+`smoke_test_admin_portal.py`: 26/26 passed via Flask's `test_client()`
+(auth gating, audit logging, unknown-bot handling, a mocked real-bot
+restart). **Manually verified against a real bot** (`1lavya-platform-watcher`):
+actual restart, actual audit row, and a correctly-blocked unauthenticated
+attempt. Visually verified via headless-Edge screenshots (login, Overview,
+Bot Status table with all 9 other bots' real live data). `health_check.py`:
+same 16 pre-existing failures, nothing new. Full detail:
+`telegram/admin_portal/README.md`.
+
+**Not built yet, by design** (confirmed sequencing): Analytics tabs,
+Masters display/editing, Faculty/New Bot addition (clarified: can only
+ever generate config — BotFather registration has no API, stays a manual
+human step), Question Catalog metadata editor, Leaderboard edits, Users &
+Access (RBAC). Each gets its own build → smoke test → confirmation cycle.
+
+## 2026-08-11 — Real UX bug: report flow re-asked for contact info already on file
+
+Pranav: "even after sharing the mobile number and email id once, if I
+again ask for report than it again asks for my number/email... does not
+the bot check with existing database." Confirmed real —
+`_handle_channel_choice()` never checked `students.mobile_number`/`.email`
+before asking, on every single report request. Fixed in three places in
+`report_flow.py` (initial channel choice, the "both" mobile→email handoff,
+and the post-delivery upsell) via a new `_existing_contact()` helper —
+each now skips straight to delivery when the needed value(s) are already
+on file, matching Pranav's exact ask ("directly send and then confirm its
+went"). A student who wants to change a stored value still can via the
+"profile" menu. New smoke-test coverage
+(`step7e_reuses_existing_contact_info`): asserts zero prompts, a real
+delivery, and the correct audit-trail event. All 5 bots restarted, full
+smoke test re-run clean.
+
+## 2026-08-11 — Real live email-delivery bug found + fixed (unquoted From header)
+
+Minutes after the Cloudflare Email Service integration went live, Pranav
+reported a real failure on the csarunchouhan bot: "report has been
+generated but delivery to one or more channels failed." Investigated via
+the actual `report_deliveries`/`report_flow_events` rows (not guessed) —
+found the exact Cloudflare error: HTTP 400
+`"email.sending.error.email.invalid"`. Reproduced the exact failure
+through the real production code path, then isolated `from`/`to`
+independently (both worked alone) before finding the real culprit:
+csarunchouhan's own `bots.json` `display_name` — `"CS Arun Chouhan (Study
++ Exam Practice, one bot)"` — contains a comma and parentheses, and
+`cf_email.py`'s hand-rolled `f"{name} <{email}>"` From-header wasn't
+RFC-5322-quoted for that case. Every other bot's display name is plain
+enough that this never surfaced elsewhere. Fixed with Python's own
+`email.utils.formataddr` via a new `cf_email.build_from_header()` helper;
+verified with a real send through the exact failing combination —
+delivered. Added a permanent regression check to
+`smoke_test_report_flow.py`. Also found and fixed, same delivery: a
+`telegram.error.TimedOut` on `send_document` (a one-off ~32KB-file network
+blip) — added one bounded retry (2s backoff) for the transient
+TimedOut/NetworkError classes only, real errors still fail immediately.
+All 5 bots restarted with both fixes; smoke test re-run clean.
+
+## 2026-08-11 — Cloudflare Email Service wired in + on-demand report trigger
+
+Pranav added real `CF_EMAIL_API_TOKEN` to `telegram/.env` and asked to wire
+up Cloudflare's Email Service (send-only, no inbox) for the student report
+pipeline: one dedicated unmonitored email per bot, all on one domain;
+support@1lavya.com / admin@1lavya.com referenced for real issues / new-bot
+requests; good 1LAVYA branding; plus a new "report"/"analysis"/"email"/
+"mail" on-demand trigger (parallel to "profile") so a student can request
+their report anytime, not just at the 20-question milestone.
+
+Researched the actual product first (WebSearch/WebFetch — Cloudflare Email
+Service, public beta since 2026-04-16, real REST API contract) rather than
+guessing, then asked 4 clarifying questions before touching anything real
+(domain onboarding status, Account ID, subdomain-vs-single-domain
+addressing, support/admin mailbox reality) since this touches live DNS/
+domain config I can't verify or set up myself. All confirmed: domain
+already onboarded, Account ID provided, single-domain/different-local-
+parts addressing (my recommendation, accepted), support@/admin@ already
+real mailboxes.
+
+Built: `telegram/database/cf_email.py` (raw REST client), rewrote
+`report_delivery.py` (per-bot `from_email` resolved from `bots.json`,
+fully 1LAVYA-branded HTML body via new `brand_kit.render_email_footer_html()`),
+threaded `bot_id` through `report_flow.py`'s entry points, added the
+on-demand trigger (`report_flow.start_report_flow_on_demand()`, reusing
+the milestone flow's entire pipeline) and wired it into all 3 bot
+scripts — `study_hub_bot.py` for the first time (never had report_flow
+wired in before). Verified with a REAL send through the actual production
+code path to Pranav's own email — confirmed delivered. Smoke test
+extended (Step 4 rewritten for the new backend, new Step 7d for the
+on-demand flow) — all passing, deliberately network-free by design (no
+`load_dotenv()` in the test script). All 5 affected bots restarted clean.
+Full detail: `telegram/REPORT-PIPELINE.md`'s new section.
+
+## 2026-08-11 — Leaderboard system built (Phase 3) + exam-attempt picker redesigned
+
+Pranav asked for: (1) the profile's Target Attempt field to be a guided
+Year-then-Month picker instead of free-text quick-picks; (2) a full
+leaderboard system inside the profile — students join up to 5 live
+leaderboards, scoped strictly to their own Course+Level, each mapped to
+one-or-more Telegram channels broadcasting nightly at 11:11 PM, with
+multiple ranking metrics (accuracy/questions attempted/time spent) driven
+by a metrics master; (3) a faculty-facing student-wise/chapter-wise report.
+
+Given the real architectural forks (leaderboard scope granularity, config
+vs. admin-UI management, single-vs-multi-metric display, minimum-attempts
+floor scope, faculty-report timing), asked 6 clarifying questions via
+AskUserQuestion before building — all confirmed: eligibility is fully
+manual per leaderboard (JSON config, same pattern as bots.json/
+tenants.json), multiple metrics render as SEPARATE mini-rankings per
+leaderboard (never a blended score), the minimum-attempts floor gates ALL
+metrics blanket-style, and the faculty report is built now as a dashboard
+card (not deferred to Phase 4).
+
+Built: `telegram/config/leaderboards.json` + README (2 example CMA Inter/
+Foundation Law boards, both inactive pending real channel IDs);
+`telegram/database/schema.sql`'s new `leaderboard_participants` +
+`leaderboard_broadcast_log` tables; `telegram/database/leaderboard_metrics.py`
+(config loading, eligibility matching, 3-metric registry, ranking
+computation aggregated per-username across every linked phone);
+`profile_flow.py`'s new 🏆 Leaderboards menu (join/leave, 5-board cap) and
+Year→Month exam-attempt picker; `telegram/bots/leaderboard_broadcaster.py`
+(standalone nightly job, fixed UTC+5:30 IST offset, `--once` test mode,
+full broadcast-log audit trail); `analytics.py`'s new
+`fetch_faculty_report()` + a new expandable "Faculty Report" dashboard
+card at `:8787`. New `smoke_test_leaderboards.py`: 28/28 passed against
+the real DB (multi-phone metric aggregation, exact-at-floor boundary,
+6th-join rejection, broadcast logging). Faculty Report verified against
+real production data through the actual dashboard pipeline; static
+dashboard regenerated, live `:8787` server restarted and confirmed
+serving the new data. All 5 profile-flow bots restarted clean. Full
+detail: `telegram/LEADERBOARD-SYSTEM.md`.
+
+Nothing is broadcasting live yet by design — every leaderboard ships
+`status: "inactive"` until Pranav creates real Telegram channels, adds the
+posting bot as channel admin, and fills in real chat_ids (a Telegram-side
+step this session cannot do).
+
+## 2026-08-11 — Student profile system built (identity foundation for Phase 3 Leaderboard)
+
+Pranav asked for students to be able to set up/edit a profile (username,
+display name, avatar, email, phone, course & level, exam attempt) by
+texting "profile"/"change profile" to any bot, with confirmation before
+editing and username permanently locked once set. Confirmed via
+AskUserQuestion: build this now as the Phase 3 (Leaderboard) identity
+foundation, avatar pulled live from Telegram (never stored), course/level
+via guided picker, username Instagram-style (3-20 chars, letters/numbers/
+underscore, case-insensitive).
+
+Built: `telegram/database/schema.sql`'s new `student_profiles` table
+(username PK, shared fields: display_name/course/level/exam_attempt) +
+`students.lavya_username` link column (via `db.py`'s column-migration
+mechanism, since SQLite has no `ALTER TABLE ADD COLUMN IF NOT EXISTS`).
+Extracted `telegram/bots/contact_utils.py` out of `report_flow.py` for
+shared mobile/email validation. New `telegram/bots/profile_flow.py` — full
+trigger/state-machine/menu flow, supporting one username linked across
+multiple chat_ids (a student's several phones) with shared vs. per-chat-id
+fields correctly separated (email/mobile stay per-chat-id; Pranav's own
+reasoning — different phones might use different emails). Wired into
+`exam_hub_bot.py`, `study_hub_bot.py`, `faculty_bot.py` with an explicitly
+scoped new `profile:`/`profileconfirm:` callback prefix (guarding against
+the callback-pattern-collision bug class already found 3x this session)
+and text-router priority ordering so a profile edit in progress is never
+swallowed by search/report-flow. New `smoke_test_profile_flow.py`: 41/41
+passed against the real DB with synthetic, self-cleaning chat_ids. All 5
+affected bot processes restarted, verified via `bot_heartbeats.started_at`
+(not log-grepping) and clean startup logs. Full detail:
+`telegram/PROFILE-SYSTEM.md`.
+
+Also this session: filled in the real admin chat IDs for the down/up
+watcher (see the entry directly below, same day, done first).
+
+## 2026-08-11 — Platform watcher activated with real admin chat IDs
+
+Pranav provided his own and Arun's real Telegram chat IDs. Filled into
+`telegram/config/alerts.json`'s `admin_chat_ids`, flipped
+`1lavya-platform-watcher`'s `bots.json` status to `active`, started it as a
+managed process. Verified real end-to-end delivery, not just configuration:
+safely perturbed one low-stakes bot's (`1lavya-dashboard`) alert state to a
+fake "down" via direct DB update (no real process touched), ran a real check
+pass, confirmed a genuine down→up transition alert — then sent an explicit,
+clearly-labeled one-time test DM to each admin chat ID individually and
+confirmed both delivered successfully via the Telegram API's own response.
+Platform down/up alerting is now genuinely live, not just theoretically
+configured.
+
+## 2026-08-11 — Post-delivery CTAs, Student Master dashboard, Unique Visitors explained
+
+Pranav's next round of live-test feedback, all addressed:
+
+1. **No CTA after report delivery.** Chose Telegram-only, got the PDF, conversation
+   just stopped — should have offered email too, then asked continue/done.
+   Restructured `report_flow.py`: extracted `_deliver_report()` (sends through a
+   given channel set, reusable) out of the old `_finalize()`; after delivering
+   through exactly ONE originally-chosen channel, now offers the other one
+   (`_offer_upsell_or_wrapup`) via the same echo-confirm collection, with a new
+   `report_flow_upsell` flag telling the confirm-step to send only the NEW
+   channel, never re-send what's already gone out. Either way, the conversation
+   now always ends with an explicit "Continue Practicing" / "I'm Done" question —
+   "Continue" deliberately reuses bare `restart` callback_data to fall through to
+   `button_router`'s already-tested reset handler, no new logic needed for it.
+   Email-sent message now explicitly says to check Spam and mark "Not Spam".
+   `report_deliveries.channels_requested` now logs the actual channels attempted
+   per call (not the original label) since one milestone can now produce two
+   delivery rows. New smoke-test step (`step7c`) covers the whole upsell/wrap-up
+   path — all green, ~13 new checks.
+2. **Student Master dashboard section.** New card: Chat ID, Name, Mobile, Email,
+   Faculty, Courses (derived from real activity, not a bot's full scope — a
+   platform-only user shows "Self Study"), Last Seen, with a live text filter.
+   New `analytics.fetch_student_master()`. Caught and fixed a real display
+   redundancy along the way: the same course+level showed up twice (with and
+   without subject, since exam-hub tables don't carry `subject` but
+   `study_hub_events` does) — deduped, preferring the more specific version.
+3. **"14+2=16 vs 32 Unique Visitors" investigated with real queries, not assumed
+   — confirmed not a bug, two different populations.** Summing Student
+   Breakdown's per-bot counts double-counts students active on multiple bots (2
+   such students at the time, true unique = 15, not the naive sum 17). "Unique
+   Visitors" counts ANY interaction across ALL 8 bots including Study Hub/MyFiles
+   Hub, not just MCQ attempts — 18 of 33 total visitors had never attempted a
+   single MCQ. Added a third, unambiguous stat tile ("Unique MCQ-Attempters,
+   all-time") plus tooltips and a cross-reference note on Student Breakdown, so
+   this can't cause the same confusion again.
+
+All three verified: smoke test full pass, direct queries against real data, and
+headless-Edge screenshots with real interactions simulated (dropdown switch,
+text-filter input) to confirm the UI actually responds, not just that the
+default view looks right. Restarted `1lavya-examhub`, `capranav-exam`,
+`csarunchouhan`, `1lavya-dashboard`; confirmed all four running code newer than
+every relevant source edit (via `bot_heartbeats.started_at` vs. file mtimes).
+Full detail: `telegram/REPORT-PIPELINE.md`.
+
+## 2026-08-11 — Real milestone bug found via live testing; fixed + audit trail + dashboard added
+
+Pranav manually tested Phase 2 with his own account (35+, later confirmed 67,
+answered MCQs) and the report prompt never fired. Confirmed against real data:
+67 answered, zero milestone rows. Root cause: `maybe_trigger_report_milestone()`
+required `count == 20` exactly. This account already had 27 answered questions
+at 08:49 UTC, *before* Phase 2 was even deployed (~09:00 UTC) — every answer
+since only pushed the count further past 20, so the exact-equality check could
+never become true again. The "only fire once" guarantee was already handled
+separately by the milestone-row-existence check right after it — the equality
+check was both redundant and the actual bug. Fixed: `count < MILESTONE_THRESHOLD:
+return` (i.e. `>=` fires it), confirmed correct for the real account
+(`will fire on next answer: True`). Added a permanent regression test
+(`step7b`) simulating a synthetic student already at 25 answered with no
+milestone row — must still fire on the very next check.
+
+Built the two things Pranav asked for alongside the fix:
+- **Complete audit trail**: new `report_flow_events` table, logged at every
+  step of the conversation (prompt shown, channel chosen, a value rejected,
+  collected-pending-confirm, confirmed, retried, report generated, delivery
+  attempted) — exactly the trail that would have made this bug obvious
+  immediately instead of needing a live debugging session. `detail` can hold
+  real contact values (same PII sensitivity as `students`, same DB, nothing
+  new exposed). Smoke-tested: the full synthetic-flow simulation now asserts
+  the exact expected event sequence, in order.
+- **Student-breakdown dashboard**: new "Student Breakdown" card on the
+  existing `:8787` dashboard — a bot-name dropdown (exam/unified kind bots
+  only) driving a chat-ID-wise table (attempted/answered/correct/wrong/
+  accuracy). New `analytics.fetch_student_breakdown_by_bot()`, wired into the
+  same `fetch_all()` both dashboard surfaces already share. Verified two ways:
+  a direct query test against real data, and a headless-Edge screenshot with
+  the dropdown programmatically switched to a bot with real data, confirming
+  the table actually re-renders correctly (not just that the default option
+  looks right).
+
+All changes re-ran through `smoke_test_report_flow.py` (still all green,
+including the new regression test and event-trail check) before deploying.
+Restarted `1lavya-examhub`, `capranav-exam`, `csarunchouhan`, and
+`1lavya-dashboard`; confirmed clean since restart on all four.
+`health_check.py`: same 16 pre-existing failures.
+
+## 2026-08-11 — Phase 2 (Report Pipeline) built, smoke-tested, deployed
+
+Pranav confirmed Phase 1 (branding) looked right and said to proceed. Built the
+full 20-question milestone report pipeline: `database/schema.sql` +
+`db.py`'s `_run_column_migrations()` (new `students` contact columns + 2 new
+tables — SQLite has no `ADD COLUMN IF NOT EXISTS`, confirmed by testing, so
+migrations are idempotent Python checking `PRAGMA table_info`, not raw SQL);
+`database/student_analytics.py` (accuracy, time-per-question, chapter-wise,
+time-on-bot, all platform-wide); `tools/generate_student_report.py` (branded
+HTML→PDF via the Phase 1 brand kit, both importable and a CLI);
+`database/report_delivery.py` (email, reusing MyFiles Hub's SMTP account);
+`bots/report_flow.py` (the conversational flow — milestone trigger,
+echo-and-confirm contact collection, no OTP anywhere per Pranav's repeated
+call, final generate+send).
+
+Caught and fixed one real design flaw before it shipped: first draft closed a
+session's `ended_at` when the next one started, which would have counted
+multi-day idle gaps between sessions as active practice time. Reverted;
+"time on bot" is now computed at query time as
+`MAX(activity timestamp) - started_at` per session, from real recorded
+activity only. Also caught a real regex bug via testing (not written
+correctly on the first pass): "+91 98765 43210" — real Indian 5+5 grouping
+with an internal space — failed the mobile validator; fixed by stripping
+separators before matching instead of encoding every separator position.
+
+Deliberately re-guarded against the EXACT bug class found twice already this
+session: `exam_hub_bot.py`'s `button_router` had no callback pattern at all
+(harmless only because nothing else claimed any callback_data) — adding
+`report_flow`'s own `report:`/`reportconfirm:` callbacks would have been
+silently swallowed by it. Fixed before shipping (explicit pattern on
+`button_router`, `report_flow` registered separately, same fix mirrored in
+`faculty_bot.py`) and added a permanent smoke-test check verifying every real
+callback string matches exactly one handler pattern.
+
+Built `bots/smoke_test_report_flow.py` — 7 steps, ~40 checks, including a
+full conversational-flow simulation against a synthetic test student (a
+telegram_user_id far outside any real range, always cleaned up after) that
+exercises the entire path: 19 answers (no prompt) → 20th (prompt fires once)
+→ 21st (no re-prompt) → choose "Both" → invalid mobile rejected → valid
+mobile (realistic format) → confirm → email → confirm → verifies DB state,
+milestone status, and a report_deliveries row. Real SMTP creds aren't
+configured in this dev environment — the test proved the email message
+builds correctly and that a genuine SMTP auth failure is caught and logged
+gracefully (verified for real, not simulated — the mock credentials
+predictably failed auth mid-test), not that a real email actually sends;
+flagged honestly for Pranav to verify once real creds are in `.env`.
+
+All checks passed. Restarted `1lavya-examhub`, `capranav-exam`, and
+`csarunchouhan` to deploy; confirmed clean (no new errors since restart,
+checked by timestamp against each log, since old pre-restart tracebacks are
+still visible in the same append-only log file). `health_check.py`: same 16
+pre-existing failures. Full detail: `telegram/REPORT-PIPELINE.md`.
+
+## 2026-08-11 — Phase 1 branding invisible on live :8787 (stale process); found + fixed, smoke test hardened
+
+Pranav reported no header/footer visible at `http://127.0.0.1:8787/`. Root cause:
+the live `1lavya-dashboard` process had been running since before
+`dashboard_html.py` was edited to add branding -- Python doesn't hot-reload
+changed source, so it kept serving the old unbranded page. My own smoke test's
+Step 5 only regenerated and checked the *static* `dashboard.html` file, never
+actually hit the live server, so this gap sailed through "all checks passed."
+Restarted the process; branding confirmed live via curl + a real headless-Edge
+screenshot of the actual `:8787` URL.
+
+Fixed the smoke test itself, not just the immediate symptom: added a new step
+that (1) fetches the live `:8787` endpoint directly and checks the branding is
+actually there, and (2) compares the live process's own recorded start time
+against `dashboard_html.py`/`brand_kit.py`'s mtimes -- a process older than the
+source is now a real, automatic "restart this" failure, not something that has
+to be remembered by hand.
+
+That staleness check immediately caught a second, separate real bug while
+being built: `db.py`'s `send_heartbeat()` only ever wrote `started_at` on the
+very first INSERT for a bot_id -- every subsequent UPDATE (i.e. every restart)
+left it untouched, so the column silently kept showing the first time that
+bot_id was ever seen, across every past process, not the current one. Every
+caller already computed the correct value per-process; the UPDATE statement
+just never wrote it. Fixed in `db.py` (now writes `started_at` on both branches
+-- idempotent within one process's life, correctly picks up the new value on
+restart). Confirmed nothing else in the codebase reads `started_at` today
+(only `last_heartbeat_at` is displayed anywhere), so this was safe to fix with
+no other blast radius. Restarted `1lavya-dashboard` to pick it up; left the
+other 6 bots running (same shared `db.py` fix, but no current user-facing
+impact for them, so no urgency to force a restart -- they'll pick it up
+naturally next time they restart for something else).
+
+Full smoke test re-run clean, 7/7 steps, including the new live-server and
+staleness checks. `health_check.py`: same 16 pre-existing failures.
+
+## 2026-08-11 — Big roadmap locked in; Phase 1 (Branding Kit) built + smoke-tested
+
+Pranav laid out a large roadmap in one message: conversational upgrades
+(greetings, free-text intent routing, faculty scope-limiting), deeper
+per-student analytics, a 20-question report pipeline (email/mobile,
+branded HTML→PDF, no OTP), a 30-question leaderboard built on a new
+globally-unique "1LAVYA username" identity system, and a full admin-portal
+buildout — all under consistent 1LAVYA branding. Reflected back a structured
+understanding (six subsystems, what already exists vs. genuinely new) and
+asked 4 decision-critical questions before writing any code: free-text
+search is scoped to the bot's tenant content_scope first (narrow via
+Course+Level then Subject if ambiguous, then query both hubs); the 20/30
+milestones are platform-wide; the admin portal moves to Flask (writes are
+coming, stdlib http.server won't scale to that safely); build order is
+strictly Branding Kit → Report Pipeline → Leaderboard → Admin Portal, each
+phase built + smoke-tested + documented before the next starts.
+
+**Phase 1 (Branding Kit) — built, smoke-tested, documented.**
+`telegram/branding/`: `build_brand_kit.py` derives a transparent-background
+PNG (feathered alpha, verified by compositing onto navy before trusting
+it), pre-sized thumbnails, and `brand_colors.json` (navy `#09284b`/gold
+`#d0942c`, sampled from the logo's actual pixels via hue-bucketing) from
+`telegram/1LAVYA_LOGO.jpeg`. `brand_kit.py` is the reusable module other
+code imports. Wired into the real dashboard (not left untested in
+isolation) via the shared `dashboard_html.py` template.
+
+Real bug caught by the smoke test, not by inspection: `letter-spacing:
+0.02em` rendered fine in a browser but `xhtml2pdf`/`reportlab` (Phase 2's
+future PDF engine) silently dropped it — `em` units aren't parseable there,
+and `pisa`'s own error count stayed 0 even though a real rule was lost.
+Caught by actually rendering through both engines and inspecting output
+(headless-Edge screenshot for the browser; a real PDF read directly via
+Claude's own PDF-viewing for xhtml2pdf) rather than trusting a "0 errors"
+result — the same lesson already relearned twice today on the
+csarunchouhan content pipeline, now relearned a third time here and fixed
+before it could repeat (the smoke test has a permanent step guarding this
+exact regression class going forward).
+
+`health_check.py`: same 16 pre-existing failures, nothing new. Phase 1
+awaiting Pranav's manual confirmation before Phase 2 (Report Pipeline)
+starts, per the locked build-order process.
+
+## 2026-08-11 — Exam Hub base-format package
+
+Created `telegram/base_formats/` for sharing the required faculty input
+contract. It contains a three-page PDF guide, an Excel workbook with MCQ,
+descriptive, provenance and validation sheets, and compact valid JSON examples
+for both live bot schemas. The examples are generated from the current
+`mcq_questions_extracted.json` and `book_questions_extracted.json` shapes; the
+large production banks are not duplicated. Added a README and generator script.
+Artifact validation passed: JSON arrays load, workbook sheets exist, and the PDF
+opens successfully. `file_index.py` passed; health check retains the same 16
+pre-existing repository failures.
+
+## 2026-08-10 — csarunchouhan: correct answer was leaked inline in 50 MCQ options
+
+Pranav reported: the bot shows a checkmark against the right option inside the
+question itself, before the student answers. Scanned the live merged JSON
+directly for checkmark characters in `options` -- found exactly **50 records**,
+all from one file (`Factories_Act_50_MCQs_June2026 (1).docx`).
+
+Root cause: `convert_inter_law_mcqs.py` already had logic to detect and strip an
+inline "✓ CORRECT ANSWER" marker (this docx set doesn't follow
+FACULTY-MCQ-TEMPLATE.md's answer-key-table-only convention) -- but the regex
+required the literal word "ANSWER" after "CORRECT". Scanned all 14 source docx
+files for every distinct marker phrase actually used (not guessed): exactly two
+exist -- `"✓ CORRECT ANSWER"` (13 files, correctly stripped) and `"✓ CORRECT"`
+with no "ANSWER" (this one file, 50 questions) -- so every one of those 50 kept
+the checkmark AND the word "CORRECT" visible in the option text shown to
+students before they answered. Checked Foundation content independently for the
+same defect class: clean, 0/375.
+
+Fixed the regex to make "ANSWER" optional (`✓\s*CORRECT(?:\s*ANSWER)?`) rather
+than special-casing the one file. Re-ran the converter: 0 remaining checkmarks
+across all 650 Intermediate records, and the converter's own answer-key
+cross-check found no mismatches (the inline marker agreed with the answer-key
+table on all 50, so `correct_option` itself didn't change -- only the leaked
+text). Re-ran the merge, re-validated, restarted, and verified by directly
+simulating rendering against all 50 previously-affected records plus a broader
+random sample of 20 across the full 1,025-record bank -- 0 leaks either way.
+
+**Hardened `validate_content_json.py`** with a new check: any checkmark
+character (✓✔✅) in an MCQ's `options` or `question_html` is now an ERROR --
+scoped to those two fields only (never `answer_html`, which is supposed to
+reveal the answer after the student responds), and to the checkmark glyph
+specifically (not the bare word "correct," which shows up legitimately in
+normal question phrasing like "which of the following is CORRECT" and
+shouldn't be flagged). Verified the new check actually fires against a
+synthetic reproduction of the real bug before trusting it.
+
+This is the third real content bug found in this tenant's pipeline today (after
+the null-vs-missing-field crash and the blank-question paragraph-parsing bug).
+All three were things a validator or converter's own "0 issues" report said were
+fine. The recurring lesson, now written into
+[[1lavya-csarunchouhan-demo-content]]: a structural "0 errors" result is not the
+same as "students will see the right thing" -- worth an actual rendering
+spot-check on any new faculty content batch before calling it done, not just
+after a live bug report.
+
+## 2026-08-10 — csarunchouhan: all 650 Intermediate MCQs had a blank question (converter bug, not the merge)
+
+Pranav reported: MCQs now render with visible A/B/C/D options but a completely
+blank question. Checked the actual JSON directly: **all 650/650 Intermediate
+records** had `question_html: "<p></p>"` — genuinely empty, present in the file
+before today's merge, not something the merge introduced.
+
+Root-caused by reading the real source docx
+(`AcceptanceDeposits_50MCQs_June2026.docx`) paragraph-by-paragraph: these
+particular files put `"Q1.  [Section 2(31) — Definition of Deposit]"` on its own
+paragraph with nothing after the bracket, then the ACTUAL question text
+("Under Section 2(31)... 'deposit' means:") on a separate, following paragraph,
+before any options. `convert_inter_law_mcqs.py`'s parsing loop only ever set
+`question_text` once, at the moment it matched `"Q<n>."`, from whatever text sat
+on that same line (empty here) — any paragraph that came after and matched
+neither the question pattern, an option pattern, nor "Explanation:" fell through
+every branch and was silently dropped. Exactly the class of "silently ignored
+error" Pranav suspected.
+
+Fixed the parser: any paragraph appearing after a `"Q<n>."` match but before the
+first matched option is now appended to `question_text` instead of discarded
+(gated on "no options captured yet for this question," so it never fires once
+options have started, and correctly handles a genuine multi-paragraph stem too,
+not just this one document shape). Re-ran the converter: 0/650 blank afterward.
+Re-ran `merge_faculty_mcq_sources.py` (the converter writes straight to the
+shared tenant file again, wiping the Foundation merge — exactly the documented
+operational rule). Restarted the bot; **this time verified by directly simulating
+`send_mcq()`'s own rendering logic against a random sample of 12 real records
+spanning both levels** (not just checking the JSON in isolation, which is what
+let this slip through originally) — 0/12 blank, real readable question text.
+
+**Also strengthened `validate_content_json.py`** so this exact bug class can
+never pass silently again: `_is_present()` now strips HTML tags before checking
+for blank content, so `"<p></p>"` correctly counts as empty everywhere, not just
+as a literal empty string. Verified against a synthetic reproduction of the
+original bug (correctly flagged as ERROR).
+
+**Honest note on my own process**: I declared the earlier merge "validated
+clean" based on the converter's own report (0 issues) plus my validator (0
+errors) — neither actually checked whether `question_html` contained real text,
+only whether the field was present as a non-empty string. Two real bugs in two
+consecutive checks now (the null-vs-missing crash, and this one) both came from
+trusting a structural "0 errors" result without exercising the actual rendered
+output first. Fixed the validator gap this time; the broader lesson — spot-check
+real rendering before calling faculty content "done," not just the JSON shape —
+is now written into memory ([[1lavya-csarunchouhan-demo-content]]).
+
+## 2026-08-10 — csarunchouhan: real crash bug found + fixed (null-value fields, not just missing ones)
+
+Pranav reported a live bug: tapping "FACULTY_PRACTICE" (an Exam Type) gave no
+response at all. Logs (`telegram/database/run/logs/csarunchouhan.log`) showed the
+real cause: `telegram.error.BadRequest: Can't parse inlinekeyboardbutton: can't
+find field "text"`, from `exam_hub_bot.py:752` (the Year-selection screen), plus a
+follow-on `KeyError: 'exam_type'` once the student's session state and the
+(never-updated, because the edit failed) displayed menu diverged.
+
+Root cause: `McqBank.years()` used `q.get("year", "Unknown")` — but `dict.get(key,
+default)` only substitutes the default when the KEY IS ABSENT, not when it's
+present with an explicit `null`. All 375 Foundation records merged in earlier today
+have `"year": null` (key present, value None) — so `years()` returned `None` for
+that bucket, and `InlineKeyboardButton(None, ...)` builds fine in Python but gets
+rejected by Telegram's API at send time. This is the exact same class of mistake
+this session already fixed once today in `faculty_bot.py`'s callback regex (a
+"missing" case handled, an adjacent "differently-shaped" case wasn't) — should
+have anticipated this specific failure mode when the Foundation merge produced 375
+"missing year" warnings earlier, not just filed it as a cosmetic gap.
+
+Fixed properly, not just at the one crash site: every `.get(field, default)` in
+both `McqBank` and `QuestionBank` that could face an explicit `null` (not just an
+absent key) was changed to `q.get(field) or default` — `exam_types()`, `years()`,
+`chapters()` (both classes), `_filter()`'s equality comparisons (had to match the
+same normalization or a synthesized "Unknown"/"unknown" bucket would silently
+match zero records instead of crashing — same root cause, quieter failure mode),
+and the MCQ meta line (was about to render the literal word "None" to students for
+`year`/`difficulty`). Verified the exact reproduction path directly (no live
+Telegram needed): `years('FACULTY_PRACTICE', 'CMA', 'Foundation')` now returns
+`['Unknown']` (a real button-safe string) instead of `[None]`, and
+`filter_questions(...)` correctly finds all 375 records under that bucket.
+Restarted csarunchouhan again to deploy; startup log clean, no errors.
+`validate_content_json.py` re-run: still 0 errors (the 375 "missing year"
+warnings are now honestly true to what the code does, not a broken promise).
+
+## 2026-08-10 — csarunchouhan: stale-content drift found + fixed; Foundation MCQs merged in
+
+Pranav asked to confirm the bot loads from JSON not DB (yes, re-verified). Found a
+real, live issue while checking: another concurrent session's new
+`convert_inter_law_mcqs.py` (see the entry directly below — 650 CMA Intermediate
+Law MCQs across 6 modules) had already overwritten the tenant's live-configured
+`mcq_questions_extracted.json` at 19:10, but the running bot process (last started
+18:16) had no way to know — it was still serving its stale 20-question in-memory
+snapshot. Same for the descriptive file (47 records on disk, bot still serving 5).
+This repo's multi-agent-concurrency note (CLAUDE.md section 2) applied literally
+here, one file layer down: not a git-history divergence this time, but a bot
+process silently diverging from a file another session had already rewritten.
+Validated the new content two ways before deploying — the converter's own report
+(650/650 expected, 0 issues) and an independent run of `validate_content_json.py`
+(0 errors) — then restarted to deploy both.
+
+Also found: all 650 new MCQs were `(CMA, Intermediate)` only — the previously-known
+375-question Foundation file was still sitting unmerged, so `AVAILABLE_DATA` for
+this tenant showed Intermediate only, meaning a CMA Foundation student got zero MCQs
+despite Study Hub happily serving them Foundation study materials. Pranav confirmed:
+merge Foundation in too. Inspected first — all 375 Foundation records are
+self-labeled `publication_status: "draft"` with **zero real explanations** (every
+`answer_html` is a bare `"(B)"`, unlike Intermediate's real explanations) — flagged
+this explicitly before merging; Pranav confirmed merge as-is, explanations to follow
+later without needing a re-merge.
+
+Built `telegram/tools/merge_faculty_mcq_sources.py` rather than hand-editing the
+JSON — the actual root cause here is architectural: two independent per-level
+converters both writing toward the same shared tenant-facing file with no merge
+step between them, so whichever runs last silently clobbers the other. The new
+script reads a tenant's configured source list, fails loudly on any `mcq_id`
+collision (none found — Foundation uses `CMAF-P1-...`, Intermediate `CMAI-P5-...`),
+writes the combined 1025-record file, and re-runs `validate_content_json.py`
+against its own output before declaring success. Restarted csarunchouhan again;
+`AVAILABLE_DATA` now correctly shows `{('CMA','Foundation'), ('CMA','Intermediate')}`.
+Documented the operational rule (re-run the merge after any future re-run of
+`convert_inter_law_mcqs.py`, since it writes directly to the shared file) in the
+merge script's own docstring.
+
+## 2026-08-10 — Arun Chouhan Intermediate Law MCQ bank
+
+Built `telegram/assets/faculty/csarunchouhan-cma-inter-law/
+convert_inter_law_mcqs.py` for the 14 actual MCQ DOCX papers in the faculty
+folder. The deterministic converter preserves the Exam Hub MCQ list schema,
+cross-checks inline marked answers against each answer-key table, maps records
+to exact CMA catalog modules M7–M12, and retains every explicit DOCX topic label.
+Final result: 650/650 records, 650 unique IDs, valid A-D options, zero answer
+mismatches, zero exclusions, and no missing topics. Published the bot input at
+`telegram/assets/exam_bot/faculty/csarunchouhan/mcq_questions_extracted.json`;
+source JSON and a separate validation report remain beside the faculty source.
+The three non-MCQ reference sheets were deliberately excluded. The RAG master
+spec was updated with the implementation decision and the current limitation:
+the catalog is exact at module level, while CMA topic IDs are not yet governed
+by a separate master taxonomy.
+
+## 2026-08-10 — Reporting roadmap discussed; Content Health validator built
+
+Pranav laid out a bigger roadmap (content-schema consistency, a full admin portal
+at :8787, student-wise analytics, a faculty leaderboard, PDF reports emailed to
+students) and asked for feedback before committing. Pushed back on three points:
+"no email verification needed" doesn't hold (people mistype emails regardless of
+intent; risk is a real student's performance data reaching a stranger) — agreed
+on echo-and-confirm instead of OTP or send-immediately. Leaderboard scoring
+wasn't decided — Pranav chose accuracy with a minimum-attempts floor. The
+existing `watermark_for_print.py` (rasterizes every page for print/anti-piracy)
+is the wrong tool for an emailed report — `exam_hub_bot.py` already has a
+working `xhtml2pdf`/`pisa` PDF pipeline to reuse instead; no 1LAVYA logo asset
+exists yet in this repo (still open).
+
+Pranav chose to build the smallest piece first: `telegram/tools/
+validate_content_json.py`. Its core-field contract was derived by grepping every
+real field access in `exam_hub_bot.py`'s `QuestionBank`/`McqBank`, not guessed —
+ERROR for anything that crashes or silently corrupts an answer (bad
+`correct_option`, <2 options, duplicate `mcq_id`/`book_id` shadowing an earlier
+record), WARNING for safe-fallback-but-degraded fields, and extra
+faculty-specific fields never flagged at all. Verified against all 4 real
+content files (clean) and a synthetic negative-control file covering all 4
+defect classes (all caught). Wired into both dashboards as a live "Content
+Health" card via `analytics.fetch_content_health()` (added to the same shared
+`fetch_all()` both dashboards already call, so no extra wiring needed there).
+`health_check.py`: same 16 pre-existing failures, nothing new.
+
+Still open, by choice: student-wise analytics, leaderboard, PDF report/email —
+next in the build order once picked up again.
+
+## 2026-08-10 — csarunchouhan Next/I'm-Done bug fixed live; dashboard + down-alert watcher built
+
+Pranav reported that on the live `csarunchouhan` bot, "Back to Chapter List" worked
+after an MCQ answer but "Next Question" and "I'm Done" gave no response. Verified
+independently by reading the code: `faculty_bot.py`'s exam-hub `CallbackQueryHandler`
+pattern required a trailing colon (`...|next|mcqopt|restart):`), but `exam_hub_bot.py`'s
+Next/I'm-Done buttons use bare `callback_data` ("next"/"restart", no colon, by design) —
+so in the unified bot specifically, no handler ever matched and Telegram never even got
+`query.answer()` back. Standalone `exam_hub_bot.py` was unaffected. Fixed the regex to
+`(:|$)`, verified against every real callback shape, and deployed live (restarted
+`csarunchouhan` — confirmed via the DB it was only Pranav's own test session at the
+time). Discovered in passing that all 6 real bots, including `capranav-study`/
+`capranav-exam`, were already running — Pranav confirmed he'd started them himself.
+
+Pranav then asked for "a robust architecture and a perfect reporting tool." Built,
+same day:
+- `telegram/bots/watcher_bot.py` — down/up DM alerts via the MyFiles Hub bot's token to
+  `telegram/config/alerts.json`'s `admin_chat_ids` (empty by design until Pranav fills
+  in real chat IDs). Edge-triggered off heartbeat freshness, state tracked in a new
+  `bot_alert_state` table so a restart doesn't re-fire. Both transition directions
+  verified against the real live DB (not mocked) by temporarily perturbing one real
+  bot's state at a time and confirming detection, then letting it self-correct.
+- `telegram/tools/dashboard_server.py` — live dashboard (127.0.0.1:8787) with a Refresh
+  button that re-queries `platform.db` in place, no page reload. Runs as a managed
+  process (`bots.json`'s `1lavya-dashboard` entry).
+- Bot-wise usage summary (interactions, unique users, downloads/searches, MCQ accuracy,
+  descriptive views) added as a dashboard view, per Pranav's choice over a Telegram
+  command.
+- Refactored the pre-existing static `generate_dashboard.py` onto a shared query layer
+  (`telegram/database/analytics.py`) and page template (`dashboard_html.py`) so the live
+  and static dashboards can't drift into disagreeing about a number.
+
+Self-caught bug before shipping: the dashboard's first `bots.json` entry used a relative
+`"../tools/..."` script path, which would have silently broken `manage_bots.py`'s
+"already running" detection (forward-slash string never matches the backslash-separated
+string Windows actually launches with). Fixed properly — `manage_bots.py` gained
+`resolve_script_path()` + an optional `script_dir` field, verified via a real start/
+status/duplicate-start cycle.
+
+Flagged, not fixed: `manage_bots.py stop`/`restart` hit `WinError 87` on the
+`CTRL_BREAK_EVENT` graceful-stop signal every time in this session's shell (fell through
+to force-terminate harmlessly) — likely that shell having no attached Windows console,
+not a code defect, but the "verified working on Windows" claim in the docs no longer
+holds unconditionally. Worth Pranav checking from his own terminal.
+
+Full detail in CLAUDE.md section 11's new dated entry. `health_check.py`: same 16
+pre-existing, unrelated failures as before, nothing new. Still open: `alerts.json`'s
+`admin_chat_ids` needs Pranav's real chat ID(s) before the watcher can send anything.
+
+## 2026-08-10 — Arun Chouhan Companies Act descriptive bank
+
+Built `telegram/assets/faculty/csarunchouhan-cma-inter-law/
+faculty_descriptive_pdf_to_json.py` to extract the faculty's Companies Act PDF
+into the shared descriptive-question shape. It generated 47 CMA Intermediate
+Law descriptive records with source hash, page ranges, faculty provenance and
+draft/review status, and published the bot input to
+`telegram/assets/exam_bot/faculty/csarunchouhan/book_questions_extracted.json`,
+the path already configured for Arun's Exam Hub tenant. The source PDF has 47
+detected prompts but only 46 literal `Ans.` markers because of its irregular
+column/page layout; this discrepancy is reported for review, while all 47
+prompt-answer segments are retained. Existing CA question files were untouched.
+
+## 2026-08-10 — RAG master specification amended
+
+Expanded `telegram/assets/CA_CS_CMA_Knowledge_Base_RAG_Master_Spec.md` with
+the project-specific handoff architecture: current 1,084-document corpus,
+unified JSON catalog contract, native CA/CS/CMA structures, separate syllabus
+taxonomy, typed content blocks, complete implementation phases, Question Bank
+Engine integration, white-label permissions, source-integrity rules, update
+protocol and decision log. The document is now the living specification for
+future bots and AI agents joining the RAG build. Markdown diagnostics passed;
+the repository health check retains the same 16 pre-existing failures.
+
+## 2026-08-09 — Unified knowledge-base document catalog
+
+Built `telegram/tools/build_knowledge_base_catalog.py`, which reads the CA and
+CS/CMA source catalogs plus the existing Exam Materials catalog and generates
+`telegram/source-docs/knowledge_base_documents.json`. The manifest preserves
+native course metadata, adds physical-file-specific document IDs, SHA-256 hashes,
+PDF page counts, processing status, and review flags, and validates both catalog
+directions against the 1,084 PDFs on disk. Validation passed: 1,026 Study
+Materials and 58 Exam Materials. The known ICSI merged Lesson 6 with no physical
+PDF is excluded consistently with the existing master-catalog pipeline. `file_index.py`
+completed; `health_check.py` retains the same 16 pre-existing repository failures.
+
 ---
 
 ## 2026-08-08/09 — Study Hub Bot unified for CA + CS + CMA across 3 material categories
