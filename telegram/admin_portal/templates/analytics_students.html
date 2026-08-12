@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Student Master -- 1LAVYA Admin Portal{% endblock %}
+{% block page_title %}Student Master{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h2>Student Master <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ total_filtered }}{% if total_filtered != total_all %} of {{ total_all }}{% endif %})</span></h2>
+  <p class="card-note">
+    Every known student: contact info, and which faculty/course(s) they've actually studied
+    (derived from real activity). Select students below and send them their existing performance
+    report by email -- only to a student's own already-confirmed email on file; students with none
+    are shown clearly and never emailed.
+  </p>
+
+  {% include "_export_toolbar.html" %}
+
+  <form id="send-report-form" method="post" action="{{ url_for('analytics_students_send_report') }}">
+    <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" onclick="toggleAllCheckboxes(this)"></th>
+          <th>Chat ID</th><th>Name</th><th>Mobile</th><th>Email</th><th>Faculty</th><th>Courses</th><th>Last Seen</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+        <tr>
+          <td>
+            {% if r.email %}
+              <input type="checkbox" name="telegram_user_id" value="{{ r.telegram_user_id }}">
+            {% else %}
+              <input type="checkbox" disabled title="No confirmed email on file">
+            {% endif %}
+          </td>
+          <td>{{ r.telegram_user_id }}</td>
+          <td>{{ r.display_name }}{% if r.username %} (@{{ r.username }}){% endif %}</td>
+          <td>{{ r.mobile_number or '—' }}</td>
+          <td>{% if r.email %}{{ r.email }}{% else %}<span style="color:#bbb;">no email on file</span>{% endif %}</td>
+          <td>{{ r.faculty|join(', ') if r.faculty else '—' }}</td>
+          <td>{{ r.courses|join(', ') if r.courses else '—' }}</td>
+          <td>{{ r.last_seen_at or '—' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="8" style="color:#999;">No students match.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+
+    <div style="margin-top:14px;">
+      <button type="submit" class="btn btn-primary"
+        onclick="return confirmAction('send-report-form', 'Send performance reports?', 'This emails each SELECTED student their own existing performance report, only where they have a confirmed email on file. Unselected/emailless students are skipped.')">
+        &#128231; Send Report to Selected
+      </button>
+    </div>
+  </form>
+
+  {% include "_pagination.html" %}
+</div>
+
+{% endblock %}

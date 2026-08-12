@@ -1,0 +1,27 @@
+{# Shared filter + export toolbar -- every analytics view uses this same
+   partial (Pranav's ask: pagination/filter/export on every tabular view,
+   one component not rebuilt per page). Expects `filter_query` and
+   `export_urls` ({fmt: url}) in context; `filter_extra_fields` (list of
+   (name, value) tuples, optional) preserves any other filter state
+   (e.g. Faculty Report's bot_id) across a text-filter submit. #}
+<div class="toolbar">
+  <form method="get" class="filter-form">
+    {% for name, value in (filter_extra_fields or []) %}
+      <input type="hidden" name="{{ name }}" value="{{ value }}">
+    {% endfor %}
+    <input type="text" name="q" value="{{ filter_query or '' }}" placeholder="Filter...">
+    <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+    {% if filter_query %}
+      <a class="btn btn-secondary btn-sm" href="{{ clear_filter_url() }}">Clear</a>
+    {% endif %}
+  </form>
+  {% if export_urls %}
+  <div class="export-buttons">
+    <span class="export-label">Export:</span>
+    <a class="btn btn-secondary btn-sm" href="{{ export_urls.csv }}">CSV</a>
+    <a class="btn btn-secondary btn-sm" href="{{ export_urls.xlsx }}">Excel</a>
+    <a class="btn btn-secondary btn-sm" href="{{ export_urls.html }}">HTML</a>
+    <a class="btn btn-secondary btn-sm" href="{{ export_urls.pdf }}">PDF</a>
+  </div>
+  {% endif %}
+</div>

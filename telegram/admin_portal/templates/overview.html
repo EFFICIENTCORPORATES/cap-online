@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Overview -- 1LAVYA Admin Portal{% endblock %}
+{% block page_title %}Overview{% endblock %}
+{% block content %}
+
+<div class="stat-row">
+  <div class="stat-tile">
+    <div class="label">Bots Configured</div>
+    <div class="value">{{ total_bots }}</div>
+  </div>
+  <div class="stat-tile">
+    <div class="label">Online Now</div>
+    <div class="value">{{ online_count }}</div>
+  </div>
+  <div class="stat-tile">
+    <div class="label">Unique MCQ-Attempters (all-time)</div>
+    <div class="value">{{ unique_mcq_attempters }}</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Welcome{% if current_user %}, {{ current_user }}{% endif %}</h2>
+  <p class="card-note">
+    This is the foundation tier of the Admin Portal -- Bot Status/Restart and Logs are live now.
+    Analytics, Masters, Question Catalog, Leaderboard editing, and Users &amp; Access are being
+    built next, in that order (see the sidebar for what's coming).
+  </p>
+  <p style="font-size:13.5px; color:#555;">
+    Start with <a href="{{ url_for('bots_status') }}" style="color:var(--navy); font-weight:600;">Bot Status &amp; Restart</a>
+    to see every bot's live state, or view a bot's own log from there.
+  </p>
+</div>
+
+{% endblock %}

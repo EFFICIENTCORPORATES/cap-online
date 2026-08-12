@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Log in -- 1LAVYA Admin Portal{% endblock %}
+{% block bare_content %}
+<div class="login-card">
+  <div class="login-brand">
+    <div class="brand-mark">1LAVYA</div>
+    <div class="brand-sub">Admin Portal</div>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="post">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" autofocus required>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">Log in</button>
+  </form>
+</div>
+{% endblock %}

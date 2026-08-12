@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Course Catalog -- 1LAVYA Admin Portal{% endblock %}
+{% block page_title %}Course Catalog{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h2>Course Catalog <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ total_filtered }})</span></h2>
+  <p class="card-note">
+    The single source of truth for Chapter/Unit numbering and names, per Course &rarr; Level &rarr; Subject --
+    every MCQ/descriptive question's human-readable ID is derived from exactly this data
+    (<code>telegram/tools/populate_course_catalog.py</code> / <code>generate_mcq_human_ids.py</code>).
+  </p>
+
+  <form method="get" style="display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap;">
+    <div>
+      <label style="font-size:12.5px; font-weight:600; color:#555; display:block; margin-bottom:4px;">Course</label>
+      <select name="course" onchange="this.form.submit()" style="padding:6px 10px; border:1px solid #d8dae0; border-radius:6px; font-size:13px;">
+        {% for c in courses %}<option value="{{ c }}" {{ 'selected' if c == selected_course }}>{{ c }}</option>{% endfor %}
+      </select>
+    </div>
+    <div>
+      <label style="font-size:12.5px; font-weight:600; color:#555; display:block; margin-bottom:4px;">Level</label>
+      <select name="level" onchange="this.form.submit()" style="padding:6px 10px; border:1px solid #d8dae0; border-radius:6px; font-size:13px;">
+        {% for l in levels %}<option value="{{ l }}" {{ 'selected' if l == selected_level }}>{{ l }}</option>{% endfor %}
+      </select>
+    </div>
+    <div>
+      <label style="font-size:12.5px; font-weight:600; color:#555; display:block; margin-bottom:4px;">Subject</label>
+      <select name="subject" onchange="this.form.submit()" style="padding:6px 10px; border:1px solid #d8dae0; border-radius:6px; font-size:13px; max-width:320px;">
+        {% for s in subjects %}<option value="{{ s }}" {{ 'selected' if s == selected_subject }}>{{ s }}</option>{% endfor %}
+      </select>
+    </div>
+  </form>
+
+  {% if not subjects %}
+    <p style="color:#999;">No catalog data for this course/level yet.</p>
+  {% else %}
+    {% include "_export_toolbar.html" %}
+
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Paper</th><th>Chapter</th><th>Chapter Name</th><th>Short Name</th><th>Unit</th><th>Unit Name</th></tr></thead>
+      <tbody>
+        {% for r in rows %}
+        <tr>
+          <td>{{ r.paper_display }}</td>
+          <td>C{{ r.chapter_no }}</td>
+          <td>{{ r.chapter_name }}</td>
+          <td>{{ r.chapter_name_short or '—' }}</td>
+          <td>U{{ r.unit_no }}</td>
+          <td>{{ r.unit_name or (r.unit_name_short or '—') }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" style="color:#999;">No chapters match.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+
+    {% include "_pagination.html" %}
+  {% endif %}
+</div>
+
+{% endblock %}

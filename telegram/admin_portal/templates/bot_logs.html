@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ bot.display_name }} Logs -- 1LAVYA Admin Portal{% endblock %}
+{% block page_title %}Logs -- {{ bot.display_name }}{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h2>{{ bot.bot_id }}</h2>
+  <p class="card-note">
+    {{ log_path }} -- showing the last {{ tail_n }} of {{ total_lines }} lines.
+    <a href="{{ url_for('bots_logs', bot_id=bot.bot_id, lines=1000) }}" style="color:var(--navy);">Show last 1000</a>
+    &middot;
+    <a href="{{ url_for('bots_status') }}" style="color:var(--navy);">&larr; Back to Bot Status</a>
+  </p>
+  <pre class="log-view">{{ log_text }}</pre>
+</div>
+
+{% endblock %}

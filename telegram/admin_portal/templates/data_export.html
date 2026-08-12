@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Data Export -- 1LAVYA Admin Portal{% endblock %}
+{% block page_title %}Data Export{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h2>Export Any Table</h2>
+  <p class="card-note">
+    Every table in the platform database, downloadable directly -- no scoping (single-admin
+    login is the only gate today; a role-based restriction can be added once Users &amp; Access
+    exists). For curated, filtered views (Student Master, Bot Usage, etc.), use their own pages
+    under Analytics instead -- those export exactly what's currently filtered, not the whole table.
+  </p>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Table</th><th>Rows</th><th>Export</th></tr></thead>
+    <tbody>
+      {% for t in tables %}
+      <tr>
+        <td><code>{{ t.name }}</code></td>
+        <td>{{ t.row_count }}</td>
+        <td>
+          <a class="btn btn-secondary btn-sm" href="{{ url_for('export_table', table_name=t.name, fmt='json') }}">JSON</a>
+          <a class="btn btn-secondary btn-sm" href="{{ url_for('export_table', table_name=t.name, fmt='csv') }}">CSV</a>
+          <a class="btn btn-secondary btn-sm" href="{{ url_for('export_table', table_name=t.name, fmt='xlsx') }}">Excel</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+{% endblock %}

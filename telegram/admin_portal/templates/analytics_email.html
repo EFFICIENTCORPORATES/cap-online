@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Email Analytics -- 1LAVYA Admin Portal{% endblock %}
+{% block page_title %}Email Analytics{% endblock %}
+{% block content %}
+
+<div class="stat-row">
+  <div class="stat-tile">
+    <div class="label">Total Delivery Attempts</div>
+    <div class="value">{{ total_all }}</div>
+  </div>
+  <div class="stat-tile">
+    <div class="label">Emails Sent</div>
+    <div class="value" style="color:#1a7a3e;">{{ sent_count }}</div>
+  </div>
+  <div class="stat-tile">
+    <div class="label">Emails Failed</div>
+    <div class="value" style="color:{{ '#a3312f' if failed_count else 'var(--navy)' }};">{{ failed_count }}</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Report Delivery Log <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ total_filtered }})</span></h2>
+  <p class="card-note">
+    Every performance-report delivery attempt -- bot-triggered (20-question milestone, on-demand
+    "report" trigger) and admin-triggered (Student Master's bulk send) alike, in one trail.
+  </p>
+
+  {% include "_export_toolbar.html" %}
+
+  <div class="table-scroll">
+  <table>
+    <thead>
+      <tr><th>Chat ID</th><th>Name</th><th>Email</th><th>Generated</th><th>Criteria</th><th>Channels</th><th>Email Status</th><th>Telegram Status</th><th>Error</th></tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td>{{ r.telegram_user_id }}</td>
+        <td>{{ r.display_name }}</td>
+        <td>{{ r.email or '—' }}</td>
+        <td>{{ r.generated_at }}</td>
+        <td>{{ r.criteria }}</td>
+        <td>{{ r.channels_requested }}</td>
+        <td>{% if r.email_status %}<span class="pill {{ 'pill-online' if r.email_status == 'sent' else 'pill-offline' }}">{{ r.email_status }}</span>{% else %}—{% endif %}</td>
+        <td>{% if r.telegram_status %}<span class="pill {{ 'pill-online' if r.telegram_status == 'sent' else 'pill-offline' }}">{{ r.telegram_status }}</span>{% else %}—{% endif %}</td>
+        <td style="max-width:220px; white-space:normal;">{{ r.error_detail or '—' }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="9" style="color:#999;">No report deliveries recorded yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  {% include "_pagination.html" %}
+</div>
+
+{% endblock %}

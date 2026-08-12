@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Bot-wise Usage -- 1LAVYA Admin Portal{% endblock %}
+{% block page_title %}Bot-wise Usage Summary{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h2>Bot-wise Usage <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ total_filtered }})</span></h2>
+  <p class="card-note">All-time totals per bot -- interactions, downloads/searches (Study Hub), sessions/MCQs/accuracy (Exam Hub).</p>
+
+  {% include "_export_toolbar.html" %}
+
+  <div class="table-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>Bot</th><th>Interactions</th><th>Unique Users</th><th>Downloads</th><th>Searches</th>
+        <th>Sessions</th><th>MCQ Shown</th><th>MCQ Answered</th><th>Accuracy</th><th>Descriptive Shown</th><th>Last Seen</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td><strong>{{ r.display_name }}</strong><br><span style="color:#999; font-size:11px;">{{ r.bot_id }}</span></td>
+        <td>{{ r.total_interactions }}</td>
+        <td>{{ r.unique_users }}</td>
+        <td>{{ r.downloads }}</td>
+        <td>{{ r.searches }}</td>
+        <td>{{ r.sessions }}</td>
+        <td>{{ r.mcq_shown }}</td>
+        <td>{{ r.mcq_answered }}</td>
+        <td>{% if r.mcq_accuracy_pct is not none %}{{ r.mcq_accuracy_pct }}%{% else %}—{% endif %}</td>
+        <td>{{ r.descriptive_shown }}</td>
+        <td>{{ r.last_seen_at or '—' }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="11" style="color:#999;">No activity recorded yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  {% include "_pagination.html" %}
+</div>
+
+{% endblock %}

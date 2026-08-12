@@ -1,0 +1,14 @@
+{# Shared pagination control -- expects `pagination` (from exporters.paginate())
+   in context. Uses the page_url() Jinja global (app.py) so every other
+   current query arg (filter text, bot_id, ...) survives a page change. #}
+{% if pagination.total_pages > 1 %}
+<div class="pagination">
+  <a class="btn btn-secondary btn-sm {{ 'btn-disabled' if not pagination.has_prev }}"
+     href="{{ page_url(pagination.page - 1) if pagination.has_prev else '#' }}">&larr; Prev</a>
+  <span class="pagination-info">Page {{ pagination.page }} of {{ pagination.total_pages }} ({{ pagination.total }} total)</span>
+  <a class="btn btn-secondary btn-sm {{ 'btn-disabled' if not pagination.has_next }}"
+     href="{{ page_url(pagination.page + 1) if pagination.has_next else '#' }}">Next &rarr;</a>
+</div>
+{% else %}
+<div class="pagination-info" style="margin-top:10px;">{{ pagination.total }} total</div>
+{% endif %}

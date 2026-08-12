@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{ student.display_name }} -- Chapters -- 1LAVYA Admin Portal{% endblock %}
+{% block page_title %}Chapter Breakdown -- {{ student.display_name }}{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h2>{{ student.display_name }} <span style="color:#999; font-weight:normal; font-size:12.5px;">(chat ID {{ student.telegram_user_id }})</span></h2>
+  <p class="card-note">
+    <a href="{{ url_for('analytics_faculty_report', bot_id=bot_id) }}" style="color:var(--navy);">&larr; Back to Faculty Report</a>
+    &middot; Total: {{ student.total_attempted }} attempted, {{ student.total_correct }} correct
+    {% if student.accuracy_pct is not none %}({{ student.accuracy_pct }}%){% endif %}
+  </p>
+
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Chapter</th><th>MCQ Attempted</th><th>Correct</th><th>Accuracy</th><th>Descriptive Viewed</th></tr></thead>
+    <tbody>
+      {% for c in rows %}
+      <tr>
+        <td>{{ c.chapter_label }}</td>
+        <td>{{ c.mcq_attempted }}</td>
+        <td>{{ c.mcq_correct }}</td>
+        <td>{% if c.accuracy_pct is not none %}{{ c.accuracy_pct }}%{% else %}—{% endif %}</td>
+        <td>{{ c.descriptive_shown }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  {% include "_pagination.html" %}
+</div>
+
+{% endblock %}
