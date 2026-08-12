@@ -1,0 +1,268 @@
+{
+  "chapter": 18,
+  "title": "INDEX NUMBERS",
+  "total_questions": 44,
+  "exercise_mcqs": [
+    {
+      "id": "Ex_1",
+      "question": "A series of numerical figures which show the relative position is called",
+      "options": ["a) index number", "b) relative number", "c) absolute number", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_2",
+      "question": "Index number for the base period is always taken as",
+      "options": ["a) 200", "b) 50", "c) 1", "d) 100"],
+      "answer": "d"
+    },
+    {
+      "id": "Ex_3",
+      "question": "___ play a very important part in the construction of index numbers.",
+      "options": ["a) weights", "b) classes", "c) estimations", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_4",
+      "question": "___ is particularly suitable for the construction of index numbers.",
+      "options": ["a) H.M.", "b) A.M.", "c) G.M.", "d) none"],
+      "answer": "c"
+    },
+    {
+      "id": "Ex_5",
+      "question": "Index numbers show ___ changes rather than absolute amounts of change.",
+      "options": ["a) relative", "b) percentage", "c) both", "d) none"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_6",
+      "question": "The ___ makes index numbers time-reversible.",
+      "options": ["a) A.M.", "b) G.M.", "c) H.M.", "d) none"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_7",
+      "question": "Price relative is equal to",
+      "options": ["a) (Price in given year / Price in base year) * 100", "b) (Price in base year / Price in given year) * 100", "c) Price in given year * 100", "d) Price in base year * 100"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_8",
+      "question": "Index number is equal to",
+      "options": ["a) sum of price relatives", "b) average of the price relatives", "c) product of price relative", "d) none"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_9",
+      "question": "The ___ of group indices gives the General Index",
+      "options": ["a) H.M.", "b) G.M.", "c) A.M.", "d) none"],
+      "answer": "c"
+    },
+    {
+      "id": "Ex_10",
+      "question": "Circular Test is one of the tests of", "options": ["a) index numbers", "b) hypothesis", "c) both", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_11",
+      "question": "___ is an extension of time reversal test",
+      "options": ["a) Factor Reversal test", "b) Circular test", "c) both", "d) none"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_12",
+      "question": "Weighted G.M. of relative with fixed weights formula satisfy",
+      "options": ["a) Time Reversal Test", "b) Circular test", "c) Factor Reversal Test", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_13",
+      "question": "Factor Reversal test is satisfied by",
+      "options": ["a) Fisher's Ideal Index", "b) Laspeyres Index", "c) Paasches Index", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_14",
+      "question": "Laspeyre's formula does not satisfy",
+      "options": ["a) Factor Reversal Test", "b) Time Reversal Test", "c) Circular Test", "d) all the above"],
+      "answer": "d"
+    },
+    {
+      "id": "Ex_15",
+      "question": "A ratio or an average of ratios expressed as a percentage is called",
+      "options": ["a) a relative number", "b) an absolute number", "c) an index number", "d) none"],
+      "answer": "c"
+    },
+    {
+      "id": "Ex_16",
+      "question": "The value at the base time period serves as the standard point of comparison",
+      "options": ["a) false", "b) true", "c) both", "d) none"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_17",
+      "question": "An index time series is a list of ___ numbers for two or more periods of time",
+      "options": ["a) index", "b) absolute", "c) relative", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_18",
+      "question": "Index numbers are often constructed from the",
+      "options": ["a) frequency", "b) class", "c) sample", "d) none"],
+      "answer": "c"
+    },
+    {
+      "id": "Ex_19",
+      "question": "___ is a point of reference in comparing various data describing individual behaviour.",
+      "options": ["a) Sample", "b) Base period", "c) Estimation", "d) none"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_20",
+      "question": "The ratio of price of single commodity in a given period to its price in the preceding year price is called the",
+      "options": ["a) base period", "b) price ratio", "c) relative price", "d) none"],
+      "answer": "c"
+    },
+    {
+      "id": "Ex_21",
+      "question": "Sum of all commodity prices in current year * 100 / Sum of all commodity prices in base year is",
+      "options": ["a) Relative Price Index", "b) Simple Aggregative Price Index", "c) both", "d) none"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_22",
+      "question": "Chain index is equal to",
+      "options": ["a) link relative of current year * chain index of current year / 100", "b) link relative of previous year * chain index of current year / 100", "c) link relative of current year * chain index of previous year / 100", "d) link relative of previous year * chain index of previous year / 100"],
+      "answer": "c"
+    },
+    {
+      "id": "Ex_23",
+      "question": "P01 is the index for time",
+      "options": ["a) 1 on 0", "b) 0 on 1", "c) 1 on 1", "d) 0 on 0"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_24",
+      "question": "P10 is the index for time",
+      "options": ["a) 1 on 0", "b) 0 on 1", "c) 1 on 1", "d) 0 on 0"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_25",
+      "question": "When the product of price index and the quantity index is equal to the corresponding value index then the test that holds is",
+      "options": ["a) Unit Test", "b) Time Reversal Test", "c) Factor Reversal Test", "d) none holds"], "answer": "c"
+    },
+    {
+      "id": "Ex_26",
+      "question": "The formula should be independent of the unit in which or for which price and quantities are quoted in",
+      "options": ["a) Unit Test", "b) Time Reversal Test", "c) Factor Reversal Test", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_27",
+      "question": "Laspeyre's method and Paasche's method do not satisfy",
+      "options": ["a) Unit Test", "b) Time Reversal Test", "c) Factor Reversal Test", "d) b & c"],
+      "answer": "d"
+    },
+    {
+      "id": "Ex_28",
+      "question": "The purpose determines the type of index number to use",
+      "options": ["a) yes", "b) no", "c) may be", "d) may not be"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_29",
+      "question": "The index number is a special type of average",
+      "options": ["a) false", "b) true", "c) both", "d) none"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_30",
+      "question": "The choice of suitable base period is at best temporary solution",
+      "options": ["a) true", "b) false", "c) both", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_31",
+      "question": "Fisher's Ideal Formula for calculating index numbers satisfies the ___ tests",
+      "options": ["a) Unit Test", "b) Factor Reversal Test", "c) both", "d) none"],
+      "answer": "c"
+    },
+    {
+      "id": "Ex_32", "question": "Fisher's Ideal Formula does not satisfy ___ test",
+      "options": ["a) Unit Test", "b) Circular Test", "c) Time Reversal Test", "d) none"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_33",
+      "question": "___ satisfies circular test",
+      "options": ["a) G.M. of price relatives or the weighted aggregate with fixed weights", "b) A.M. of price relatives or the weighted aggregate with fixed weights", "c) H.M. of price relatives or the weighted aggregate with fixed weights", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_34",
+      "question": "Laspeyre's and Paasche's method ___ time reversal test",
+      "options": ["a) satisfy", "b) do not satisfy", "c) are", "d) are not"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_35",
+      "question": "There is no such thing as unweighted index numbers",
+      "options": ["a) false", "b) true", "c) both", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_36",
+      "question": "Theoretically, G.M. is the best average in the construction of index numbers but in practice, mostly the A.M. is used",
+      "options": ["a) false", "b) true", "c) both", "d) none"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_37",
+      "question": "Laspeyre's or Paasche's or the Fisher's ideal index do not satisfy",
+      "options": ["a) Time Reversal Test", "b) Unit Test", "c) Circular Test", "d) none"],
+      "answer": "c"
+    },
+    {
+      "id": "Ex_38",
+      "question": "___ is concerned with the measurement of price changes over a period of years, when it is desirable to shift the base",
+      "options": ["a) Unit Test", "b) Circular Test", "c) Time Reversal Test", "d) none"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_39",
+      "question": "The test of shifting the base is called",
+      "options": ["a) Unit Test", "b) Time Reversal Test", "c) Circular Test", "d) none"],
+      "answer": "c"
+    },
+    {
+      "id": "Ex_40",
+      "question": "The formula for conversion to current value",
+      "options": ["a) Deflated value = Price Index of current year / previous value", "b) Deflated value = current value / Price Index of current year", "c) Deflated value = Price Index of previous year / previous value", "d) Deflated value = previous value / Price Index of previous year"],
+      "answer": "b"
+    },
+    {
+      "id": "Ex_41",
+      "question": "Shifted price Index = (Original Price / Price Index of year shifted) * 100",
+      "options": ["a) True", "b) false", "c) both", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_42",
+      "question": "The number of test of Adequacy is",
+      "options": ["a) 2", "b) 5", "c) 3", "d) 4"],
+      "answer": "d"
+    },
+    {
+      "id": "Ex_43",
+      "question": "We use price index numbers",
+      "options": ["a) To measure and compare prices", "b) to measure prices", "c) to compare prices", "d) none"],
+      "answer": "a"
+    },
+    {
+      "id": "Ex_44",
+      "question": "Simple aggregate of quantities is a type of",
+      "options": ["a) Quantity control", "b) Quantity indices", "c) both", "d) none"],
+      "answer": "b"
+    }
+  ]
+}

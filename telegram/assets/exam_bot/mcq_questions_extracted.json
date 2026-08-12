@@ -24,7 +24,8 @@
     "chapter_slug": "as11",
     "chapter_label": "AS 11: The Effects of Changes in Foreign Exchange Rates",
     "unitcode": "M2-C7-U3",
-    "topic_text": "AS 11 (3.4): Foreign currency monetary item (trade receivable) restated at the closing rate on the balance sheet date"
+    "topic_text": "AS 11 (3.4): Foreign currency monetary item (trade receivable) restated at the closing rate on the balance sheet date",
+    "human_id": "CA_L2_P01_C7_U3_00001"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q1-b",
@@ -51,7 +52,8 @@
     "chapter_slug": "as11",
     "chapter_label": "AS 11: The Effects of Changes in Foreign Exchange Rates",
     "unitcode": "M2-C7-U3",
-    "topic_text": "AS 11 (3.5): Exchange gain on restatement of a monetary asset (trade receivable) recognised in the period"
+    "topic_text": "AS 11 (3.5): Exchange gain on restatement of a monetary asset (trade receivable) recognised in the period",
+    "human_id": "CA_L2_P01_C7_U3_00002"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q1-c",
@@ -78,7 +80,8 @@
     "chapter_slug": "as11",
     "chapter_label": "AS 11: The Effects of Changes in Foreign Exchange Rates",
     "unitcode": "M2-C7-U3",
-    "topic_text": "AS 11 (3.4): Foreign currency monetary item (loan) restated at the closing rate on the balance sheet date"
+    "topic_text": "AS 11 (3.4): Foreign currency monetary item (loan) restated at the closing rate on the balance sheet date",
+    "human_id": "CA_L2_P01_C7_U3_00003"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q1-d",
@@ -105,7 +108,8 @@
     "chapter_slug": "as11",
     "chapter_label": "AS 11: The Effects of Changes in Foreign Exchange Rates",
     "unitcode": "M2-C7-U3",
-    "topic_text": "AS 11 (3.5): Exchange difference on restatement of a monetary liability (loan) recognised in the period"
+    "topic_text": "AS 11 (3.5): Exchange difference on restatement of a monetary liability (loan) recognised in the period",
+    "human_id": "CA_L2_P01_C7_U3_00004"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q2-a",
@@ -132,7 +136,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.5): Weighted-average cost per share after a bonus issue, applied to shares sold"
+    "topic_text": "AS 13 (3.5): Weighted-average cost per share after a bonus issue, applied to shares sold",
+    "human_id": "CA_L2_P01_C5_U3_00005"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q2-b",
@@ -159,7 +164,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.5): Cost of bonus shares is nil, by analogy to AS 13's rights-share cost-spreading principle"
+    "topic_text": "AS 13 (3.5): Cost of bonus shares is nil, by analogy to AS 13's rights-share cost-spreading principle",
+    "human_id": "CA_L2_P01_C5_U3_00006"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q2-c",
@@ -186,7 +192,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.5): Profit on sale computed using the weighted-average cost basis across original and bonus shares"
+    "topic_text": "AS 13 (3.5): Profit on sale computed using the weighted-average cost basis across original and bonus shares",
+    "human_id": "CA_L2_P01_C5_U3_00007"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q2-d",
@@ -213,7 +220,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.6): Current investment carried at the lower of (weighted-average) cost and fair value"
+    "topic_text": "AS 13 (3.6): Current investment carried at the lower of (weighted-average) cost and fair value",
+    "human_id": "CA_L2_P01_C5_U3_00008"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q3-a",
@@ -240,7 +248,8 @@
     "chapter_slug": "as23",
     "chapter_label": "AS 23: Accounting for Investments in Associates in CFS",
     "unitcode": "M2-C10-U2",
-    "topic_text": "AS 23 (2.3): Associate relationship via direct significant influence; an indirect stake held through another associate does not itself confer associate status"
+    "topic_text": "AS 23 (2.3): Associate relationship via direct significant influence; an indirect stake held through another associate does not itself confer associate status",
+    "human_id": "CA_L2_P01_C10_U2_00009"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q3-b",
@@ -267,7 +276,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.5): Separate financial statements: a pre-acquisition dividend received is deducted from the cost of investment"
+    "topic_text": "AS 13 (3.5): Separate financial statements: a pre-acquisition dividend received is deducted from the cost of investment",
+    "human_id": "CA_L2_P01_C5_U3_00010"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q3-c",
@@ -294,7 +304,8 @@
     "chapter_slug": "as23",
     "chapter_label": "AS 23: Accounting for Investments in Associates in CFS",
     "unitcode": "M2-C10-U2",
-    "topic_text": "AS 23 (2.6): Equity-method carrying amount: cost net of pre-acquisition dividend plus a time-apportioned share of post-acquisition profit"
+    "topic_text": "AS 23 (2.6): Equity-method carrying amount: cost net of pre-acquisition dividend plus a time-apportioned share of post-acquisition profit",
+    "human_id": "CA_L2_P01_C10_U2_00011"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q3-d",
@@ -321,7 +332,8 @@
     "chapter_slug": "as23",
     "chapter_label": "AS 23: Accounting for Investments in Associates in CFS",
     "unitcode": "M2-C10-U2",
-    "topic_text": "AS 23 (2.3): Evidences of significant influence under AS 23 - excludes a mere right to receive dividend"
+    "topic_text": "AS 23 (2.3): Evidences of significant influence under AS 23 - excludes a mere right to receive dividend",
+    "human_id": "CA_L2_P01_C10_U2_00012"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q4",
@@ -348,7 +360,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.6): Current investment written up only to original cost, never above cost, even if fair value later exceeds cost"
+    "topic_text": "AS 13 (3.6): Current investment written up only to original cost, never above cost, even if fair value later exceeds cost",
+    "human_id": "CA_L2_P01_C5_U3_00013"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q5",
@@ -375,7 +388,8 @@
     "chapter_slug": "as20",
     "chapter_label": "AS 20: Earnings Per Share",
     "unitcode": "M1-C4-U5",
-    "topic_text": "AS 20 (5.12): AS 20 mandatory disclosures, including the nominal value of shares alongside EPS figures"
+    "topic_text": "AS 20 (5.12): AS 20 mandatory disclosures, including the nominal value of shares alongside EPS figures",
+    "human_id": "CA_L2_P01_C4_U5_00014"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S1-PI-Q6",
@@ -402,7 +416,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.2): Scope of AS 10 - bearer plants included (produce excluded); biological assets and wasting assets excluded"
+    "topic_text": "AS 10 (2.2): Scope of AS 10 - bearer plants included (produce excluded); biological assets and wasting assets excluded",
+    "human_id": "CA_L2_P01_C5_U2_00015"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q1",
@@ -429,7 +444,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.2): Inventories held for sale in the ordinary course of business - self-constructed real estate for sale is inventory, not PPE"
+    "topic_text": "AS 2 (1.2): Inventories held for sale in the ordinary course of business - self-constructed real estate for sale is inventory, not PPE",
+    "human_id": "CA_L2_P01_C5_U1_00016"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q2",
@@ -456,7 +472,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.9): Administrative overheads not contributing to location/condition excluded from inventory cost"
+    "topic_text": "AS 2 (1.9): Administrative overheads not contributing to location/condition excluded from inventory cost",
+    "human_id": "CA_L2_P01_C5_U1_00017"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q3",
@@ -483,7 +500,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.3): Reclassification to PPE once the held-for-sale intention ends and own-use intention begins"
+    "topic_text": "AS 10 (2.3): Reclassification to PPE once the held-for-sale intention ends and own-use intention begins",
+    "human_id": "CA_L2_P01_C5_U2_00018"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q4",
@@ -510,7 +528,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.6-2.7): Cost on reclassification = carried-forward value plus directly attributable costs to ready the asset for its intended use"
+    "topic_text": "AS 10 (2.6-2.7): Cost on reclassification = carried-forward value plus directly attributable costs to ready the asset for its intended use",
+    "human_id": "CA_L2_P01_C5_U2_00019"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q5",
@@ -537,7 +556,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.8): Grants of the nature of promoters' contribution credited to Capital Reserve"
+    "topic_text": "AS 12 (1.8): Grants of the nature of promoters' contribution credited to Capital Reserve",
+    "human_id": "CA_L2_P01_C9_U1_00020"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q6",
@@ -564,7 +584,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.6-2.7): Cost of PPE = purchase price plus directly attributable costs; depreciation time-apportioned from the date ready for intended use"
+    "topic_text": "AS 10 (2.6-2.7): Cost of PPE = purchase price plus directly attributable costs; depreciation time-apportioned from the date ready for intended use",
+    "human_id": "CA_L2_P01_C5_U2_00021"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q7",
@@ -591,7 +612,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.6-2.7): Nature of the expenditure, not its funding source, determines capitalisation versus expensing"
+    "topic_text": "AS 10 (2.6-2.7): Nature of the expenditure, not its funding source, determines capitalisation versus expensing",
+    "human_id": "CA_L2_P01_C5_U2_00022"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q8",
@@ -618,7 +640,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.3): Ownership and control, not the funding source, determine PPE recognition"
+    "topic_text": "AS 10 (2.3): Ownership and control, not the funding source, determine PPE recognition",
+    "human_id": "CA_L2_P01_C5_U2_00023"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q9",
@@ -645,7 +668,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Section 68(2)(c) - 25% of paid-up capital and free reserves buy-back ceiling"
+    "topic_text": "Buy-back of Securities (1): Section 68(2)(c) - 25% of paid-up capital and free reserves buy-back ceiling",
+    "human_id": "CA_L2_P01_C12_U0_00024"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q10",
@@ -672,7 +696,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Shares Outstanding Test - 25% of total equity shares currently outstanding"
+    "topic_text": "Buy-back of Securities (1): Shares Outstanding Test - 25% of total equity shares currently outstanding",
+    "human_id": "CA_L2_P01_C12_U0_00025"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q11",
@@ -699,7 +724,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities: Resources Test - 25% of paid-up capital plus free reserves (excluding specific-purpose reserves), divided by buy-back price"
+    "topic_text": "Buy-back of Securities: Resources Test - 25% of paid-up capital plus free reserves (excluding specific-purpose reserves), divided by buy-back price",
+    "human_id": "CA_L2_P01_C12_U0_00026"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q12",
@@ -726,7 +752,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test - post-buy-back debt not to exceed twice paid-up capital plus free reserves"
+    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test - post-buy-back debt not to exceed twice paid-up capital plus free reserves",
+    "human_id": "CA_L2_P01_C12_U0_00027"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q13",
@@ -753,7 +780,8 @@
     "chapter_slug": "as19",
     "chapter_label": "AS 19: Leases",
     "unitcode": "M2-C5-U5",
-    "topic_text": "AS 19 (5.2): Definition of a lease versus AS 19's explicit scope exclusions"
+    "topic_text": "AS 19 (5.2): Definition of a lease versus AS 19's explicit scope exclusions",
+    "human_id": "CA_L2_P01_C5_U5_00028"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q14",
@@ -780,7 +808,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.6): Dividend paid classified as a financing activity cash outflow"
+    "topic_text": "Cash Flow Statement (2.6): Dividend paid classified as a financing activity cash outflow",
+    "human_id": "CA_L2_P01_C11_U2_00029"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-01-S2-PI-Q15",
@@ -807,7 +836,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.3): Worked NRV example for a partly finished unit that cannot be sold in semi-finished form"
+    "topic_text": "AS 2 (1.3): Worked NRV example for a partly finished unit that cannot be sold in semi-finished form",
+    "human_id": "CA_L2_P01_C5_U1_00030"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q1",
@@ -834,7 +864,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.4.2): Operating cash flow from post-reconstruction adjustment entries"
+    "topic_text": "Cash Flow Statement (2.4.2): Operating cash flow from post-reconstruction adjustment entries",
+    "human_id": "CA_L2_P01_C11_U2_00031"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q2",
@@ -861,7 +892,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.4.2): Investing cash flow from asset disposal and dividend receipt"
+    "topic_text": "Cash Flow Statement (2.4.2): Investing cash flow from asset disposal and dividend receipt",
+    "human_id": "CA_L2_P01_C11_U2_00032"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q3",
@@ -888,7 +920,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.4): Closing cash balance reconciliation"
+    "topic_text": "Cash Flow Statement (2.4): Closing cash balance reconciliation",
+    "human_id": "CA_L2_P01_C11_U2_00033"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q4",
@@ -915,7 +948,8 @@
     "chapter_slug": "internal-reconstruction",
     "chapter_label": "Internal Reconstruction",
     "unitcode": "M3-C14-U0",
-    "topic_text": "Internal Reconstruction (1): Post-reconstruction equity share capital balance after multiple simultaneous scheme adjustments"
+    "topic_text": "Internal Reconstruction (1): Post-reconstruction equity share capital balance after multiple simultaneous scheme adjustments",
+    "human_id": "CA_L2_P01_C14_U0_00034"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q5",
@@ -942,7 +976,8 @@
     "chapter_slug": "financial-statements",
     "chapter_label": "Financial Statements of Companies (Schedule III)",
     "unitcode": "M3-C11-U1",
-    "topic_text": "Preparation of Financial Statements (1.3): Current vs non-current classification - assets held for sale"
+    "topic_text": "Preparation of Financial Statements (1.3): Current vs non-current classification - assets held for sale",
+    "human_id": "CA_L2_P01_C11_U1_00035"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q6",
@@ -969,7 +1004,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (1.4): Revenue split between goods delivered and services not yet rendered (installation)"
+    "topic_text": "AS 9 (1.4): Revenue split between goods delivered and services not yet rendered (installation)",
+    "human_id": "CA_L2_P01_C8_U2_00036"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q7",
@@ -996,7 +1032,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (1.4): Deferred installation-service revenue recognised on completion"
+    "topic_text": "AS 9 (1.4): Deferred installation-service revenue recognised on completion",
+    "human_id": "CA_L2_P01_C8_U2_00037"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q8",
@@ -1023,7 +1060,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (1.4): Trade discounts deducted from gross revenue, not recognised separately"
+    "topic_text": "AS 9 (1.4): Trade discounts deducted from gross revenue, not recognised separately",
+    "human_id": "CA_L2_P01_C8_U2_00038"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q9",
@@ -1050,7 +1088,8 @@
     "chapter_slug": "as29",
     "chapter_label": "AS 29: Provisions, Contingent Liabilities and Contingent Assets",
     "unitcode": "M2-C6-U2",
-    "topic_text": "AS 29 (1.4): Warranty provision - present obligation estimated from past claims experience"
+    "topic_text": "AS 29 (1.4): Warranty provision - present obligation estimated from past claims experience",
+    "human_id": "CA_L2_P01_C6_U2_00039"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q10",
@@ -1077,7 +1116,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.4): Long-term investments carried at cost, written down only for other-than-temporary decline"
+    "topic_text": "AS 13 (3.4): Long-term investments carried at cost, written down only for other-than-temporary decline",
+    "human_id": "CA_L2_P01_C5_U3_00040"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q11",
@@ -1103,7 +1143,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.4): Judgment-based assessment of other-than-temporary decline"
+    "topic_text": "AS 13 (3.4): Judgment-based assessment of other-than-temporary decline",
+    "human_id": "CA_L2_P01_C5_U3_00041"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q12",
@@ -1130,7 +1171,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.4): Provision for diminution charged to profit and loss"
+    "topic_text": "AS 13 (3.4): Provision for diminution charged to profit and loss",
+    "human_id": "CA_L2_P01_C5_U3_00042"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q13",
@@ -1157,7 +1199,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.2): Cost of investment includes the entire acquisition consideration, including any strategic premium"
+    "topic_text": "AS 13 (3.2): Cost of investment includes the entire acquisition consideration, including any strategic premium",
+    "human_id": "CA_L2_P01_C5_U3_00043"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q14",
@@ -1184,7 +1227,8 @@
     "chapter_slug": "as18",
     "chapter_label": "AS 18: Related Party Disclosures",
     "unitcode": "M1-C4-U4",
-    "topic_text": "AS 18 (4.3): Significant influence via combined direct and full (non-diluted) indirect voting power held through a controlled subsidiary"
+    "topic_text": "AS 18 (4.3): Significant influence via combined direct and full (non-diluted) indirect voting power held through a controlled subsidiary",
+    "human_id": "CA_L2_P01_C4_U4_00044"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S1-PI-Q15",
@@ -1211,7 +1255,8 @@
     "chapter_slug": "as19",
     "chapter_label": "AS 19: Leases",
     "unitcode": "M2-C5-U5",
-    "topic_text": "AS 19 (5.2): Operating lessor's target rental recovery apportioned by the leased asset's output consumed during the lease term, out of its full economic-life output"
+    "topic_text": "AS 19 (5.2): Operating lessor's target rental recovery apportioned by the leased asset's output consumed during the lease term, out of its full economic-life output",
+    "human_id": "CA_L2_P01_C5_U5_00045"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q1",
@@ -1238,7 +1283,8 @@
     "chapter_slug": "as23",
     "chapter_label": "AS 23: Accounting for Investments in Associates in CFS",
     "unitcode": "M2-C10-U2",
-    "topic_text": "AS 23 (2.2): Associate relationship does not extend through a non-controlled intermediate holding"
+    "topic_text": "AS 23 (2.2): Associate relationship does not extend through a non-controlled intermediate holding",
+    "human_id": "CA_L2_P01_C10_U2_00046"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q2",
@@ -1265,7 +1311,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.4): Investments in associates carried at cost in separate financial statements, not equity-accounted"
+    "topic_text": "AS 13 (3.4): Investments in associates carried at cost in separate financial statements, not equity-accounted",
+    "human_id": "CA_L2_P01_C5_U3_00047"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q3",
@@ -1292,7 +1339,8 @@
     "chapter_slug": "as23",
     "chapter_label": "AS 23: Accounting for Investments in Associates in CFS",
     "unitcode": "M2-C10-U2",
-    "topic_text": "AS 23 (2.6): Equity method - time-apportioned post-acquisition profit share, less dividends received"
+    "topic_text": "AS 23 (2.6): Equity method - time-apportioned post-acquisition profit share, less dividends received",
+    "human_id": "CA_L2_P01_C10_U2_00048"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q4",
@@ -1319,7 +1367,8 @@
     "chapter_slug": "as23",
     "chapter_label": "AS 23: Accounting for Investments in Associates in CFS",
     "unitcode": "M2-C10-U2",
-    "topic_text": "AS 23 (2.2): Indicators of significant influence - listed factors"
+    "topic_text": "AS 23 (2.2): Indicators of significant influence - listed factors",
+    "human_id": "CA_L2_P01_C10_U2_00049"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q5",
@@ -1346,7 +1395,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.4): Cost of purchase excludes recoverable GST, includes directly attributable acquisition costs"
+    "topic_text": "AS 2 (1.4): Cost of purchase excludes recoverable GST, includes directly attributable acquisition costs",
+    "human_id": "CA_L2_P01_C5_U1_00050"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q6",
@@ -1373,7 +1423,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.4): Closing stock valued at cost per kg derived after normal loss absorption"
+    "topic_text": "AS 2 (1.4): Closing stock valued at cost per kg derived after normal loss absorption",
+    "human_id": "CA_L2_P01_C5_U1_00051"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q7",
@@ -1400,7 +1451,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.4): Normal loss absorbed into the cost of remaining good units, abnormal loss excluded"
+    "topic_text": "AS 2 (1.4): Normal loss absorbed into the cost of remaining good units, abnormal loss excluded",
+    "human_id": "CA_L2_P01_C5_U1_00052"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q8",
@@ -1427,7 +1479,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.9): Abnormal waste excluded from inventory cost, expensed to P&L"
+    "topic_text": "AS 2 (1.9): Abnormal waste excluded from inventory cost, expensed to P&L",
+    "human_id": "CA_L2_P01_C5_U1_00053"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q9",
@@ -1454,7 +1507,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.4.2): Operating cash flow from post-reconstruction adjustment entries"
+    "topic_text": "Cash Flow Statement (2.4.2): Operating cash flow from post-reconstruction adjustment entries",
+    "human_id": "CA_L2_P01_C11_U2_00054"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q10",
@@ -1481,7 +1535,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.4.2): Investing cash flow from asset disposal and dividend receipt"
+    "topic_text": "Cash Flow Statement (2.4.2): Investing cash flow from asset disposal and dividend receipt",
+    "human_id": "CA_L2_P01_C11_U2_00055"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q11",
@@ -1508,7 +1563,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.4): Closing cash balance reconciliation"
+    "topic_text": "Cash Flow Statement (2.4): Closing cash balance reconciliation",
+    "human_id": "CA_L2_P01_C11_U2_00056"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q12",
@@ -1535,7 +1591,8 @@
     "chapter_slug": "internal-reconstruction",
     "chapter_label": "Internal Reconstruction",
     "unitcode": "M3-C14-U0",
-    "topic_text": "Internal Reconstruction (1): Post-reconstruction equity share capital balance after multiple simultaneous scheme adjustments"
+    "topic_text": "Internal Reconstruction (1): Post-reconstruction equity share capital balance after multiple simultaneous scheme adjustments",
+    "human_id": "CA_L2_P01_C14_U0_00057"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q13",
@@ -1562,7 +1619,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.1): Not a qualifying asset merely because time is needed to build a market for the output"
+    "topic_text": "AS 16 (4.1): Not a qualifying asset merely because time is needed to build a market for the output",
+    "human_id": "CA_L2_P01_C5_U4_00058"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q14",
@@ -1589,7 +1647,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.7): Specific identification for non-interchangeable items and project-specific goods"
+    "topic_text": "AS 2 (1.7): Specific identification for non-interchangeable items and project-specific goods",
+    "human_id": "CA_L2_P01_C5_U1_00059"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-01-S2-PI-Q15",
@@ -1616,7 +1675,8 @@
     "chapter_slug": "as20",
     "chapter_label": "AS 20: Earnings Per Share",
     "unitcode": "M1-C4-U5",
-    "topic_text": "AS 20 (5.5): Weighted average shares with a mid-year fresh issue and buy-back"
+    "topic_text": "AS 20 (5.5): Weighted average shares with a mid-year fresh issue and buy-back",
+    "human_id": "CA_L2_P01_C4_U5_00060"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q1-i",
@@ -1643,7 +1703,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (2.3): Agency relationship - gross vs net (commission-only) revenue determined by who bears risks and rewards"
+    "topic_text": "AS 9 (2.3): Agency relationship - gross vs net (commission-only) revenue determined by who bears risks and rewards",
+    "human_id": "CA_L2_P01_C8_U2_00061"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q1-ii",
@@ -1670,7 +1731,8 @@
     "chapter_slug": "as11",
     "chapter_label": "AS 11: The Effects of Changes in Foreign Exchange Rates",
     "unitcode": "M2-C7-U3",
-    "topic_text": "AS 11 (3.11): Hedging forward exchange contracts - premium/discount amortised over the contract life"
+    "topic_text": "AS 11 (3.11): Hedging forward exchange contracts - premium/discount amortised over the contract life",
+    "human_id": "CA_L2_P01_C7_U3_00062"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q1-iii",
@@ -1697,7 +1759,8 @@
     "chapter_slug": "as05",
     "chapter_label": "AS 5: Net Profit or Loss, Prior Period Items and Changes in Accounting Policies",
     "unitcode": "M2-C7-U2",
-    "topic_text": "AS 5 (2.5): Changes in Accounting Policies - first-time adoption for a previously non-existent item is not a policy change"
+    "topic_text": "AS 5 (2.5): Changes in Accounting Policies - first-time adoption for a previously non-existent item is not a policy change",
+    "human_id": "CA_L2_P01_C7_U2_00063"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q1-iv",
@@ -1724,7 +1787,8 @@
     "chapter_slug": "as23",
     "chapter_label": "AS 23: Accounting for Investments in Associates in CFS",
     "unitcode": "M2-C10-U2",
-    "topic_text": "AS 23 (2.3): Effective direct-plus-indirect associate holding through an intermediate/controlled subsidiary, tested at the group level"
+    "topic_text": "AS 23 (2.3): Effective direct-plus-indirect associate holding through an intermediate/controlled subsidiary, tested at the group level",
+    "human_id": "CA_L2_P01_C10_U2_00064"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q2-i",
@@ -1751,7 +1815,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.6-2.7): Cost elements includable/excluded when self-constructing an asset"
+    "topic_text": "AS 10 (2.6-2.7): Cost elements includable/excluded when self-constructing an asset",
+    "human_id": "CA_L2_P01_C5_U2_00065"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q2-ii",
@@ -1778,7 +1843,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.8): Self-constructed asset - direct construction-period costs capitalised on the same principles as an acquired asset"
+    "topic_text": "AS 10 (2.8): Self-constructed asset - direct construction-period costs capitalised on the same principles as an acquired asset",
+    "human_id": "CA_L2_P01_C5_U2_00066"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q2-iii",
@@ -1805,7 +1871,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.5): Specific-borrowing cost capitalisation net of temporary-investment income earned on unutilised proceeds"
+    "topic_text": "AS 16 (4.5): Specific-borrowing cost capitalisation net of temporary-investment income earned on unutilised proceeds",
+    "human_id": "CA_L2_P01_C5_U4_00067"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q2-iv",
@@ -1832,7 +1899,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.8): Component depreciation (roof vs remaining structure) of a self-constructed asset from its ready-for-use date"
+    "topic_text": "AS 10 (2.8): Component depreciation (roof vs remaining structure) of a self-constructed asset from its ready-for-use date",
+    "human_id": "CA_L2_P01_C5_U2_00068"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q3-i",
@@ -1859,7 +1927,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Shares Outstanding Test - 25% of total outstanding equity shares"
+    "topic_text": "Buy-back of Securities (1): Shares Outstanding Test - 25% of total outstanding equity shares",
+    "human_id": "CA_L2_P01_C12_U0_00069"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q3-ii",
@@ -1886,7 +1955,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Resources Test - 25% of paid-up capital plus free reserves, divided by buy-back price"
+    "topic_text": "Buy-back of Securities (1): Resources Test - 25% of paid-up capital plus free reserves, divided by buy-back price",
+    "human_id": "CA_L2_P01_C12_U0_00070"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q3-iii",
@@ -1913,7 +1983,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test - post buy-back debt capped at twice post buy-back paid-up capital and free reserves"
+    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test - post buy-back debt capped at twice post buy-back paid-up capital and free reserves",
+    "human_id": "CA_L2_P01_C12_U0_00071"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q3-iv",
@@ -1940,7 +2011,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Maximum permissible buy-back - the least of the three statutory tests governs"
+    "topic_text": "Buy-back of Securities (1): Maximum permissible buy-back - the least of the three statutory tests governs",
+    "human_id": "CA_L2_P01_C12_U0_00072"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q4",
@@ -1967,7 +2039,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.6): Fixed production overhead absorbed systematically over normal capacity - includable in cost of conversion"
+    "topic_text": "AS 2 (1.6): Fixed production overhead absorbed systematically over normal capacity - includable in cost of conversion",
+    "human_id": "CA_L2_P01_C5_U1_00073"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q5",
@@ -1994,7 +2067,8 @@
     "chapter_slug": "as18",
     "chapter_label": "AS 18: Related Party Disclosures",
     "unitcode": "M1-C4-U4",
-    "topic_text": "AS 18 (4.4): Who is NOT deemed a related party under AS 18 - providers of finance/utilities in the normal course of business"
+    "topic_text": "AS 18 (4.4): Who is NOT deemed a related party under AS 18 - providers of finance/utilities in the normal course of business",
+    "human_id": "CA_L2_P01_C4_U4_00074"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q6",
@@ -2021,7 +2095,8 @@
     "chapter_slug": "internal-reconstruction",
     "chapter_label": "Internal Reconstruction",
     "unitcode": "M3-C14-U0",
-    "topic_text": "Internal Reconstruction (1): Internal reconstruction (no winding up) vs external reconstruction (amalgamation in the nature of merger)"
+    "topic_text": "Internal Reconstruction (1): Internal reconstruction (no winding up) vs external reconstruction (amalgamation in the nature of merger)",
+    "human_id": "CA_L2_P01_C14_U0_00075"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q1",
@@ -2048,7 +2123,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.6-2.7): Cost of a self-constructed asset - directly attributable costs only, general/HO overhead excluded"
+    "topic_text": "AS 10 (2.6-2.7): Cost of a self-constructed asset - directly attributable costs only, general/HO overhead excluded",
+    "human_id": "CA_L2_P01_C5_U2_00076"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q2",
@@ -2075,7 +2151,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.10): Suspension of capitalisation during an extended interruption to active development"
+    "topic_text": "AS 16 (4.10): Suspension of capitalisation during an extended interruption to active development",
+    "human_id": "CA_L2_P01_C5_U4_00077"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q3",
@@ -2102,7 +2179,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.6-2.7): Aggregating directly attributable costs, including capitalised borrowing cost, into total asset cost"
+    "topic_text": "AS 10 (2.6-2.7): Aggregating directly attributable costs, including capitalised borrowing cost, into total asset cost",
+    "human_id": "CA_L2_P01_C5_U2_00078"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q4",
@@ -2129,7 +2207,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (Depreciation – commencement rules): Depreciation commences only once the asset is ready for its intended use"
+    "topic_text": "AS 10 (Depreciation – commencement rules): Depreciation commences only once the asset is ready for its intended use",
+    "human_id": "CA_L2_P01_C5_U2_00079"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q5",
@@ -2156,7 +2235,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "AS 3 (2.4): Interest received by a financial enterprise on its core lending activity is an operating cash flow"
+    "topic_text": "AS 3 (2.4): Interest received by a financial enterprise on its core lending activity is an operating cash flow",
+    "human_id": "CA_L2_P01_C11_U2_00080"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q6",
@@ -2183,7 +2263,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "AS 3 (2.4): Interest/dividend receipts classified as operating for a financial enterprise, unlike a non-financial enterprise"
+    "topic_text": "AS 3 (2.4): Interest/dividend receipts classified as operating for a financial enterprise, unlike a non-financial enterprise",
+    "human_id": "CA_L2_P01_C11_U2_00081"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q7",
@@ -2210,7 +2291,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "AS 3 (2.5): Acquisition of a business unit/long-term earning asset is an investing cash flow even for a financial enterprise"
+    "topic_text": "AS 3 (2.5): Acquisition of a business unit/long-term earning asset is an investing cash flow even for a financial enterprise",
+    "human_id": "CA_L2_P01_C11_U2_00082"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q8",
@@ -2237,7 +2319,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "AS 3 (2.4): Taxes on income classified as operating unless specifically identifiable with financing/investing activity"
+    "topic_text": "AS 3 (2.4): Taxes on income classified as operating unless specifically identifiable with financing/investing activity",
+    "human_id": "CA_L2_P01_C11_U2_00083"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q9",
@@ -2264,7 +2347,8 @@
     "chapter_slug": "as18",
     "chapter_label": "AS 18: Related Party Disclosures",
     "unitcode": "M1-C4-U4",
-    "topic_text": "AS 18 (4.7): Disclosure requirement for a related-party transaction (interest-free loan to a wholly-owned subsidiary)"
+    "topic_text": "AS 18 (4.7): Disclosure requirement for a related-party transaction (interest-free loan to a wholly-owned subsidiary)",
+    "human_id": "CA_L2_P01_C4_U4_00084"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q10",
@@ -2291,7 +2375,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test - post-buyback debt capped at 2x paid-up capital and free reserves"
+    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test - post-buyback debt capped at 2x paid-up capital and free reserves",
+    "human_id": "CA_L2_P01_C12_U0_00085"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q11",
@@ -2318,7 +2403,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Maximum permitted buy-back amount under the Debt-Equity Ratio Test"
+    "topic_text": "Buy-back of Securities (1): Maximum permitted buy-back amount under the Debt-Equity Ratio Test",
+    "human_id": "CA_L2_P01_C12_U0_00086"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q12",
@@ -2345,7 +2431,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Number of shares corresponding to the maximum permitted buy-back amount at a given price"
+    "topic_text": "Buy-back of Securities (1): Number of shares corresponding to the maximum permitted buy-back amount at a given price",
+    "human_id": "CA_L2_P01_C12_U0_00087"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q13",
@@ -2372,7 +2459,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (Retirements and De-recognition): Retirements and de-recognition - gain/loss recognised when risks and rewards transfer, not on later legal registration"
+    "topic_text": "AS 10 (Retirements and De-recognition): Retirements and de-recognition - gain/loss recognised when risks and rewards transfer, not on later legal registration",
+    "human_id": "CA_L2_P01_C5_U2_00088"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q14",
@@ -2399,7 +2487,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.8): Disposal of investments - gain/loss is the difference between disposal proceeds and carrying amount, net of expenses"
+    "topic_text": "AS 13 (3.8): Disposal of investments - gain/loss is the difference between disposal proceeds and carrying amount, net of expenses",
+    "human_id": "CA_L2_P01_C5_U3_00089"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-05-S2-PI-Q15",
@@ -2426,7 +2515,8 @@
     "chapter_slug": "as19",
     "chapter_label": "AS 19: Leases",
     "unitcode": "M2-C5-U5",
-    "topic_text": "AS 19 (5.8): Lessor's gross investment less net investment equals unearned finance income"
+    "topic_text": "AS 19 (5.8): Lessor's gross investment less net investment equals unearned finance income",
+    "human_id": "CA_L2_P01_C5_U5_00090"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q1",
@@ -2453,7 +2543,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test using the Section 68/69 simultaneous-equation method (CRR transfer carved out of the free-reserves base)"
+    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test using the Section 68/69 simultaneous-equation method (CRR transfer carved out of the free-reserves base)",
+    "human_id": "CA_L2_P01_C12_U0_00091"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q2",
@@ -2480,7 +2571,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Maximum permissible buy-back amount (y) solved by simultaneous equation under the Debt-Equity Ratio Test"
+    "topic_text": "Buy-back of Securities (1): Maximum permissible buy-back amount (y) solved by simultaneous equation under the Debt-Equity Ratio Test",
+    "human_id": "CA_L2_P01_C12_U0_00092"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q3",
@@ -2507,7 +2599,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Future equity shareholder fund (Present equity minus CRR-transfer) under the Debt-Equity Ratio Test simultaneous equation"
+    "topic_text": "Buy-back of Securities (1): Future equity shareholder fund (Present equity minus CRR-transfer) under the Debt-Equity Ratio Test simultaneous equation",
+    "human_id": "CA_L2_P01_C12_U0_00093"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q4",
@@ -2534,7 +2627,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Resources Test - 25% of paid-up capital plus free reserves (including securities premium), divided by buy-back price"
+    "topic_text": "Buy-back of Securities (1): Resources Test - 25% of paid-up capital plus free reserves (including securities premium), divided by buy-back price",
+    "human_id": "CA_L2_P01_C12_U0_00094"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q5",
@@ -2561,7 +2655,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (2.8): Goods subject to a substantive buyer inspection/acceptance procedure - revenue recognised on completion of inspection, not dispatch"
+    "topic_text": "AS 9 (2.8): Goods subject to a substantive buyer inspection/acceptance procedure - revenue recognised on completion of inspection, not dispatch",
+    "human_id": "CA_L2_P01_C8_U2_00095"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q6",
@@ -2588,7 +2683,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (2.3): Agency relationship - principal-vs-agent determined by who bears risks and rewards, not merely by invoicing pass-through wording"
+    "topic_text": "AS 9 (2.3): Agency relationship - principal-vs-agent determined by who bears risks and rewards, not merely by invoicing pass-through wording",
+    "human_id": "CA_L2_P01_C8_U2_00096"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q7",
@@ -2615,7 +2711,8 @@
     "chapter_slug": "as04",
     "chapter_label": "AS 4: Contingencies and Events Occurring After the Balance Sheet Date",
     "unitcode": "M2-C7-U1",
-    "topic_text": "AS 4 (1.4): Adjusting events - provide additional evidence of conditions existing at the balance sheet date"
+    "topic_text": "AS 4 (1.4): Adjusting events - provide additional evidence of conditions existing at the balance sheet date",
+    "human_id": "CA_L2_P01_C7_U1_00097"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q8",
@@ -2642,7 +2739,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.5): Non-monetary grants recorded at acquisition cost or nominal value if free; grants are not distributable as dividend without regard to AS 12 presentation"
+    "topic_text": "AS 12 (1.5): Non-monetary grants recorded at acquisition cost or nominal value if free; grants are not distributable as dividend without regard to AS 12 presentation",
+    "human_id": "CA_L2_P01_C9_U1_00098"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q9",
@@ -2669,7 +2767,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.6-2.7): Cost of a self-constructed asset - directly attributable costs only, general/administrative overheads excluded"
+    "topic_text": "AS 10 (2.6-2.7): Cost of a self-constructed asset - directly attributable costs only, general/administrative overheads excluded",
+    "human_id": "CA_L2_P01_C5_U2_00099"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q10",
@@ -2696,7 +2795,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.10): Suspension of capitalisation during an extended period of interrupted active development"
+    "topic_text": "AS 16 (4.10): Suspension of capitalisation during an extended period of interrupted active development",
+    "human_id": "CA_L2_P01_C5_U4_00100"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q11",
@@ -2723,7 +2823,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.8): Total cost of a self-constructed asset - directly attributable costs including capitalised borrowing cost and legally-mandated compliance costs"
+    "topic_text": "AS 10 (2.8): Total cost of a self-constructed asset - directly attributable costs including capitalised borrowing cost and legally-mandated compliance costs",
+    "human_id": "CA_L2_P01_C5_U2_00101"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q12",
@@ -2750,7 +2851,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.6-2.7): Depreciation commences only when an asset is ready for its intended use, not while still under construction"
+    "topic_text": "AS 10 (2.6-2.7): Depreciation commences only when an asset is ready for its intended use, not while still under construction",
+    "human_id": "CA_L2_P01_C5_U2_00102"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q13",
@@ -2777,7 +2879,8 @@
     "chapter_slug": "as18",
     "chapter_label": "AS 18: Related Party Disclosures",
     "unitcode": "M1-C4-U4",
-    "topic_text": "AS 18 (4.3): Significant influence via combined direct and full (non-diluted) indirect voting power held through a controlled subsidiary"
+    "topic_text": "AS 18 (4.3): Significant influence via combined direct and full (non-diluted) indirect voting power held through a controlled subsidiary",
+    "human_id": "CA_L2_P01_C4_U4_00103"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q14",
@@ -2804,7 +2907,8 @@
     "chapter_slug": "as19",
     "chapter_label": "AS 19: Leases",
     "unitcode": "M2-C5-U5",
-    "topic_text": "AS 19 (5.2): Operating lessor's target rental recovery apportioned by the leased asset's output consumed during the lease term, out of its full economic-life output"
+    "topic_text": "AS 19 (5.2): Operating lessor's target rental recovery apportioned by the leased asset's output consumed during the lease term, out of its full economic-life output",
+    "human_id": "CA_L2_P01_C5_U5_00104"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S1-PI-Q15",
@@ -2831,7 +2935,8 @@
     "chapter_slug": "internal-reconstruction",
     "chapter_label": "Internal Reconstruction",
     "unitcode": "M3-C14-U0",
-    "topic_text": "Internal Reconstruction (1): Internal reconstruction defined and distinguished from external reconstruction/amalgamation"
+    "topic_text": "Internal Reconstruction (1): Internal reconstruction defined and distinguished from external reconstruction/amalgamation",
+    "human_id": "CA_L2_P01_C14_U0_00105"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q1-a",
@@ -2858,7 +2963,8 @@
     "chapter_slug": "as26",
     "chapter_label": "AS 26: Intangible Assets",
     "unitcode": "M2-C5-U6",
-    "topic_text": "AS 26 — Intangible Assets (6.19-6.23): Amortisation of two concurrently-held intangible assets, each on its own disclosed benefit/useful-life pattern"
+    "topic_text": "AS 26 — Intangible Assets (6.19-6.23): Amortisation of two concurrently-held intangible assets, each on its own disclosed benefit/useful-life pattern",
+    "human_id": "CA_L2_P01_C5_U6_00106"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q1-b",
@@ -2885,7 +2991,8 @@
     "chapter_slug": "as26",
     "chapter_label": "AS 26: Intangible Assets",
     "unitcode": "M2-C5-U6",
-    "topic_text": "AS 26 — Intangible Assets (6.19-6.23): Combined year-2 amortisation charge across both concurrently-held intangible assets"
+    "topic_text": "AS 26 — Intangible Assets (6.19-6.23): Combined year-2 amortisation charge across both concurrently-held intangible assets",
+    "human_id": "CA_L2_P01_C5_U6_00107"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q1-c",
@@ -2912,7 +3019,8 @@
     "chapter_slug": "as26",
     "chapter_label": "AS 26: Intangible Assets",
     "unitcode": "M2-C5-U6",
-    "topic_text": "AS 26 — Intangible Assets (6.24-6.25): Full write-off of an intangible asset's remaining carrying amount once no future economic benefit is expected, alongside continuing normal amortisation of the unrelated asset"
+    "topic_text": "AS 26 — Intangible Assets (6.24-6.25): Full write-off of an intangible asset's remaining carrying amount once no future economic benefit is expected, alongside continuing normal amortisation of the unrelated asset",
+    "human_id": "CA_L2_P01_C5_U6_00108"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q1-d",
@@ -2939,7 +3047,8 @@
     "chapter_slug": "as26",
     "chapter_label": "AS 26: Intangible Assets",
     "unitcode": "M2-C5-U6",
-    "topic_text": "AS 26 — Intangible Assets (6.19-6.23): Accelerated amortisation of the entire remaining carrying amount following a revised estimate of the benefit period"
+    "topic_text": "AS 26 — Intangible Assets (6.19-6.23): Accelerated amortisation of the entire remaining carrying amount following a revised estimate of the benefit period",
+    "human_id": "CA_L2_P01_C5_U6_00109"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q2-a",
@@ -2966,7 +3075,8 @@
     "chapter_slug": "as22",
     "chapter_label": "AS 22: Accounting for Taxes on Income",
     "unitcode": "M2-C7-U4",
-    "topic_text": "AS 22 — Accounting for Taxes on Income (4.5): Deferred tax liability on a timing difference from accelerated tax depreciation"
+    "topic_text": "AS 22 — Accounting for Taxes on Income (4.5): Deferred tax liability on a timing difference from accelerated tax depreciation",
+    "human_id": "CA_L2_P01_C7_U4_00110"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q2-b",
@@ -2993,7 +3103,8 @@
     "chapter_slug": "as22",
     "chapter_label": "AS 22: Accounting for Taxes on Income",
     "unitcode": "M2-C7-U4",
-    "topic_text": "AS 22 — Accounting for Taxes on Income (4.5): Same timing difference re-measured at a different tax rate"
+    "topic_text": "AS 22 — Accounting for Taxes on Income (4.5): Same timing difference re-measured at a different tax rate",
+    "human_id": "CA_L2_P01_C7_U4_00111"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q2-c",
@@ -3020,7 +3131,8 @@
     "chapter_slug": "as22",
     "chapter_label": "AS 22: Accounting for Taxes on Income",
     "unitcode": "M2-C7-U4",
-    "topic_text": "AS 22 — Accounting for Taxes on Income (4.10): Deferred tax asset on a Section 43B expense disallowed on accrual and deductible only on payment"
+    "topic_text": "AS 22 — Accounting for Taxes on Income (4.10): Deferred tax asset on a Section 43B expense disallowed on accrual and deductible only on payment",
+    "human_id": "CA_L2_P01_C7_U4_00112"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q2-d",
@@ -3047,7 +3159,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 — Impairment of Assets (7.3): Internal-source impairment indicators distinguished from external-source indicators"
+    "topic_text": "AS 28 — Impairment of Assets (7.3): Internal-source impairment indicators distinguished from external-source indicators",
+    "human_id": "CA_L2_P01_C5_U7_00113"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q3-a",
@@ -3074,7 +3187,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Shares Outstanding Test - 25% cap on number of equity shares bought back"
+    "topic_text": "Buy-back of Securities (1): Shares Outstanding Test - 25% cap on number of equity shares bought back",
+    "human_id": "CA_L2_P01_C12_U0_00114"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q3-b",
@@ -3101,7 +3215,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Resources Test - 25% cap on buy-back value against paid-up capital plus free reserves"
+    "topic_text": "Buy-back of Securities (1): Resources Test - 25% cap on buy-back value against paid-up capital plus free reserves",
+    "human_id": "CA_L2_P01_C12_U0_00115"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q3-c",
@@ -3128,7 +3243,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test - post buy-back borrowed funds capped at twice paid-up capital plus free reserves"
+    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test - post buy-back borrowed funds capped at twice paid-up capital plus free reserves",
+    "human_id": "CA_L2_P01_C12_U0_00116"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q3-d",
@@ -3155,7 +3271,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Overall buy-back ceiling as the most restrictive of the three statutory tests"
+    "topic_text": "Buy-back of Securities (1): Overall buy-back ceiling as the most restrictive of the three statutory tests",
+    "human_id": "CA_L2_P01_C12_U0_00117"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q4",
@@ -3182,7 +3299,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.2): Primary packing material essential to saleable condition is inventory; secondary packing, standby equipment and publicity material are not"
+    "topic_text": "AS 2 (1.2): Primary packing material essential to saleable condition is inventory; secondary packing, standby equipment and publicity material are not",
+    "human_id": "CA_L2_P01_C5_U1_00118"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q5",
@@ -3209,7 +3327,8 @@
     "chapter_slug": "as19",
     "chapter_label": "AS 19: Leases",
     "unitcode": "M2-C5-U5",
-    "topic_text": "AS 19 (5.2): Finance lease indicator - lease term for the major part of the asset's economic life"
+    "topic_text": "AS 19 (5.2): Finance lease indicator - lease term for the major part of the asset's economic life",
+    "human_id": "CA_L2_P01_C5_U5_00119"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-05-S2-PI-Q6",
@@ -3236,7 +3355,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.5): Bonus shares added at nil cost, re-averaging total cost over the enlarged holding, then valuing the remaining balance after a partial sale"
+    "topic_text": "AS 13 (3.5): Bonus shares added at nil cost, re-averaging total cost over the enlarged holding, then valuing the remaining balance after a partial sale",
+    "human_id": "CA_L2_P01_C5_U3_00120"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q1",
@@ -3263,7 +3383,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 — Revenue Recognition (2.8): Sale of goods subject to installation - revenue deferred until installation complete"
+    "topic_text": "AS 9 — Revenue Recognition (2.8): Sale of goods subject to installation - revenue deferred until installation complete",
+    "human_id": "CA_L2_P01_C8_U2_00121"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q2",
@@ -3290,7 +3411,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 — Revenue Recognition (2.8): Sale of goods subject to installation - revenue deferred until installation complete"
+    "topic_text": "AS 9 — Revenue Recognition (2.8): Sale of goods subject to installation - revenue deferred until installation complete",
+    "human_id": "CA_L2_P01_C8_U2_00122"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q3",
@@ -3317,7 +3439,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 — Revenue Recognition (2.8): Trade discounts and volume rebates excluded from revenue"
+    "topic_text": "AS 9 — Revenue Recognition (2.8): Trade discounts and volume rebates excluded from revenue",
+    "human_id": "CA_L2_P01_C8_U2_00123"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q4",
@@ -3344,7 +3467,8 @@
     "chapter_slug": "as29",
     "chapter_label": "AS 29: Provisions, Contingent Liabilities and Contingent Assets",
     "unitcode": "M2-C6-U2",
-    "topic_text": "AS 29 — Provisions, Contingent Liabilities and Contingent Assets (2.4): Recognition of a provision - present obligation, probable outflow, reliable estimate"
+    "topic_text": "AS 29 — Provisions, Contingent Liabilities and Contingent Assets (2.4): Recognition of a provision - present obligation, probable outflow, reliable estimate",
+    "human_id": "CA_L2_P01_C6_U2_00124"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q5",
@@ -3371,7 +3495,8 @@
     "chapter_slug": "as18",
     "chapter_label": "AS 18: Related Party Disclosures",
     "unitcode": "M1-C4-U4",
-    "topic_text": "AS 18 — Related Party Disclosures (4.4): Who are NOT deemed to be related parties"
+    "topic_text": "AS 18 — Related Party Disclosures (4.4): Who are NOT deemed to be related parties",
+    "human_id": "CA_L2_P01_C4_U4_00125"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q6",
@@ -3398,7 +3523,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 — Revenue Recognition (2.9): Effect of uncertainties on revenue recognition - post-sale collectability uncertainty"
+    "topic_text": "AS 9 — Revenue Recognition (2.9): Effect of uncertainties on revenue recognition - post-sale collectability uncertainty",
+    "human_id": "CA_L2_P01_C8_U2_00126"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q7",
@@ -3425,7 +3551,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 — Accounting for Investments (3.6): Carrying amount - current vs long-term investments, other than temporary decline"
+    "topic_text": "AS 13 — Accounting for Investments (3.6): Carrying amount - current vs long-term investments, other than temporary decline",
+    "human_id": "CA_L2_P01_C5_U3_00127"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q8",
@@ -3452,7 +3579,8 @@
     "chapter_slug": "as11",
     "chapter_label": "AS 11: The Effects of Changes in Foreign Exchange Rates",
     "unitcode": "M2-C7-U3",
-    "topic_text": "AS 11 — Effects of Changes in Foreign Exchange Rates (3.4/3.5): Reporting monetary items at closing rate; recognition of exchange differences"
+    "topic_text": "AS 11 — Effects of Changes in Foreign Exchange Rates (3.4/3.5): Reporting monetary items at closing rate; recognition of exchange differences",
+    "human_id": "CA_L2_P01_C7_U3_00128"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q9",
@@ -3479,7 +3607,8 @@
     "chapter_slug": "as24",
     "chapter_label": "AS 24: Discontinuing Operations",
     "unitcode": "M1-C4-U6",
-    "topic_text": "AS 24 — Discontinuing Operations (6.3): Initial disclosure event"
+    "topic_text": "AS 24 — Discontinuing Operations (6.3): Initial disclosure event",
+    "human_id": "CA_L2_P01_C4_U6_00129"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q10",
@@ -3506,7 +3635,8 @@
     "chapter_slug": "as19",
     "chapter_label": "AS 19: Leases",
     "unitcode": "M2-C5-U5",
-    "topic_text": "AS 19 — Leases (5.10): Sale and leaseback - leaseback as operating lease, sale price equal to fair value"
+    "topic_text": "AS 19 — Leases (5.10): Sale and leaseback - leaseback as operating lease, sale price equal to fair value",
+    "human_id": "CA_L2_P01_C5_U5_00130"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q11",
@@ -3533,7 +3663,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Capital Redemption Reserve on redemption of preference shares / buy-back"
+    "topic_text": "Buy-back of Securities (1): Capital Redemption Reserve on redemption of preference shares / buy-back",
+    "human_id": "CA_L2_P01_C12_U0_00131"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q12",
@@ -3560,7 +3691,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Cash effects of redemption of preference shares and buy-back financed by sale of investments"
+    "topic_text": "Buy-back of Securities (1): Cash effects of redemption of preference shares and buy-back financed by sale of investments",
+    "human_id": "CA_L2_P01_C12_U0_00132"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q13",
@@ -3587,7 +3719,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Use of securities premium and general reserve/P&L to fund premium on redemption"
+    "topic_text": "Buy-back of Securities (1): Use of securities premium and general reserve/P&L to fund premium on redemption",
+    "human_id": "CA_L2_P01_C12_U0_00133"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q14",
@@ -3614,7 +3747,8 @@
     "chapter_slug": "financial-statements",
     "chapter_label": "Financial Statements of Companies (Schedule III)",
     "unitcode": "M3-C11-U1",
-    "topic_text": "Preparation of Financial Statements (1.5): Negative Reserves and Surplus presentation - netting accumulated loss against reserves"
+    "topic_text": "Preparation of Financial Statements (1.5): Negative Reserves and Surplus presentation - netting accumulated loss against reserves",
+    "human_id": "CA_L2_P01_C11_U1_00134"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S1-PI-Q15",
@@ -3641,7 +3775,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 — Accounting for Investments (3.8): Disposal of investments - gain/loss recognised in P&L regardless of principal business"
+    "topic_text": "AS 13 — Accounting for Investments (3.8): Disposal of investments - gain/loss recognised in P&L regardless of principal business",
+    "human_id": "CA_L2_P01_C5_U3_00135"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q1",
@@ -3668,7 +3803,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.4): Eligible borrowing cost net of temporary-investment income"
+    "topic_text": "AS 16 (4.4): Eligible borrowing cost net of temporary-investment income",
+    "human_id": "CA_L2_P01_C5_U4_00136"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q2",
@@ -3695,7 +3831,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.4): Full borrowing cost capitalised once funds are fully utilised"
+    "topic_text": "AS 16 (4.4): Full borrowing cost capitalised once funds are fully utilised",
+    "human_id": "CA_L2_P01_C5_U4_00137"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q3",
@@ -3722,7 +3859,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.11): Cessation of capitalisation for a completed, independently usable part of a project constructed in parts"
+    "topic_text": "AS 16 (4.11): Cessation of capitalisation for a completed, independently usable part of a project constructed in parts",
+    "human_id": "CA_L2_P01_C5_U4_00138"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q4",
@@ -3749,7 +3887,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.11): Balance of interest remains capitalised for the still-incomplete stretches"
+    "topic_text": "AS 16 (4.11): Balance of interest remains capitalised for the still-incomplete stretches",
+    "human_id": "CA_L2_P01_C5_U4_00139"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q5",
@@ -3776,7 +3915,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Only fully-paid securities are eligible for buy-back"
+    "topic_text": "Buy-back of Securities (1): Only fully-paid securities are eligible for buy-back",
+    "human_id": "CA_L2_P01_C12_U0_00140"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q6",
@@ -3803,7 +3943,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.7): Excluded costs - general administration overheads not directly attributable to construction"
+    "topic_text": "AS 10 (2.7): Excluded costs - general administration overheads not directly attributable to construction",
+    "human_id": "CA_L2_P01_C5_U2_00141"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q7",
@@ -3830,7 +3971,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.10): Suspension of capitalisation during an extended interruption to active development"
+    "topic_text": "AS 16 (4.10): Suspension of capitalisation during an extended interruption to active development",
+    "human_id": "CA_L2_P01_C5_U4_00142"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q8",
@@ -3857,7 +3999,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.7): Directly attributable costs including regulatory-mandated modifications"
+    "topic_text": "AS 10 (2.7): Directly attributable costs including regulatory-mandated modifications",
+    "human_id": "CA_L2_P01_C5_U2_00143"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q9",
@@ -3884,7 +4027,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.10): Depreciation commences only when the asset is ready for its intended use"
+    "topic_text": "AS 10 (2.10): Depreciation commences only when the asset is ready for its intended use",
+    "human_id": "CA_L2_P01_C5_U2_00144"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q10",
@@ -3911,7 +4055,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.4): Cost of purchase excludes recoverable GST, includes directly attributable acquisition costs"
+    "topic_text": "AS 2 (1.4): Cost of purchase excludes recoverable GST, includes directly attributable acquisition costs",
+    "human_id": "CA_L2_P01_C5_U1_00145"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q11",
@@ -3938,7 +4083,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.4): Closing stock valued at cost per kg derived after normal loss absorption"
+    "topic_text": "AS 2 (1.4): Closing stock valued at cost per kg derived after normal loss absorption",
+    "human_id": "CA_L2_P01_C5_U1_00146"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q12",
@@ -3965,7 +4111,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.4): Normal loss absorbed into the cost of remaining good units, abnormal loss excluded"
+    "topic_text": "AS 2 (1.4): Normal loss absorbed into the cost of remaining good units, abnormal loss excluded",
+    "human_id": "CA_L2_P01_C5_U1_00147"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q13",
@@ -3992,7 +4139,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.9): Abnormal waste excluded from inventory cost, expensed to P&L"
+    "topic_text": "AS 2 (1.9): Abnormal waste excluded from inventory cost, expensed to P&L",
+    "human_id": "CA_L2_P01_C5_U1_00148"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q14",
@@ -4019,7 +4167,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.1): Not a qualifying asset - substantial period to prepare for intended use vs. time to build market demand"
+    "topic_text": "AS 16 (4.1): Not a qualifying asset - substantial period to prepare for intended use vs. time to build market demand",
+    "human_id": "CA_L2_P01_C5_U4_00149"
   },
   {
     "mcq_id": "CAI-P1-MTP-2026-05-S2-PI-Q15",
@@ -4046,7 +4195,8 @@
     "chapter_slug": "as18",
     "chapter_label": "AS 18: Related Party Disclosures",
     "unitcode": "M1-C4-U4",
-    "topic_text": "AS 18 (4.3): Significant influence via combined direct and full (non-diluted) indirect voting power held through a controlled subsidiary"
+    "topic_text": "AS 18 (4.3): Significant influence via combined direct and full (non-diluted) indirect voting power held through a controlled subsidiary",
+    "human_id": "CA_L2_P01_C4_U4_00150"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q1-a",
@@ -4073,7 +4223,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Section 68(2) statutory ceiling on aggregate buy-back – 25% of paid-up capital and free reserves"
+    "topic_text": "Buy-back of Securities (1): Section 68(2) statutory ceiling on aggregate buy-back – 25% of paid-up capital and free reserves",
+    "human_id": "CA_L2_P01_C12_U0_00151"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q1-b",
@@ -4100,7 +4251,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Shares Outstanding Test – 25% of the number of equity shares outstanding"
+    "topic_text": "Buy-back of Securities (1): Shares Outstanding Test – 25% of the number of equity shares outstanding",
+    "human_id": "CA_L2_P01_C12_U0_00152"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q1-c",
@@ -4127,7 +4279,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Resources Test – 25% of (paid-up capital + free reserves), divided by buy-back price"
+    "topic_text": "Buy-back of Securities (1): Resources Test – 25% of (paid-up capital + free reserves), divided by buy-back price",
+    "human_id": "CA_L2_P01_C12_U0_00153"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q1-d",
@@ -4154,7 +4307,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Debt Equity Ratio Test – post-buyback debt must not exceed twice paid-up capital and free reserves"
+    "topic_text": "Buy-back of Securities (1): Debt Equity Ratio Test – post-buyback debt must not exceed twice paid-up capital and free reserves",
+    "human_id": "CA_L2_P01_C12_U0_00154"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q2-a",
@@ -4181,7 +4335,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.5): Non-monetary grant given free of cost recorded at nominal value"
+    "topic_text": "AS 12 (1.5): Non-monetary grant given free of cost recorded at nominal value",
+    "human_id": "CA_L2_P01_C9_U1_00155"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q2-b",
@@ -4208,7 +4363,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.8): Grant in the nature of promoters' contribution (percentage of total investment) credited to Capital Reserve"
+    "topic_text": "AS 12 (1.8): Grant in the nature of promoters' contribution (percentage of total investment) credited to Capital Reserve",
+    "human_id": "CA_L2_P01_C9_U1_00156"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q2-c",
@@ -4235,7 +4391,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.6): Grant related to a specific fixed asset presented as deferred income"
+    "topic_text": "AS 12 (1.6): Grant related to a specific fixed asset presented as deferred income",
+    "human_id": "CA_L2_P01_C9_U1_00157"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q2-d",
@@ -4262,7 +4419,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.6): Only the specific-asset-linked grant is amortised to P&L over useful life"
+    "topic_text": "AS 12 (1.6): Only the specific-asset-linked grant is amortised to P&L over useful life",
+    "human_id": "CA_L2_P01_C9_U1_00158"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q3-a",
@@ -4289,7 +4447,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "AS 3 (2.3): Deferred-credit asset purchase split between investing (cash price) and financing (interest element)"
+    "topic_text": "AS 3 (2.3): Deferred-credit asset purchase split between investing (cash price) and financing (interest element)",
+    "human_id": "CA_L2_P01_C11_U2_00159"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q3-b",
@@ -4316,7 +4475,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.6-2.7): Asset acquired on deferred credit terms recognised at cash price equivalent, excess treated as interest"
+    "topic_text": "AS 10 (2.6-2.7): Asset acquired on deferred credit terms recognised at cash price equivalent, excess treated as interest",
+    "human_id": "CA_L2_P01_C5_U2_00160"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q3-c",
@@ -4343,7 +4503,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "AS 3 (2.3): Tax specifically identifiable with an investing transaction classified under investing activities"
+    "topic_text": "AS 3 (2.3): Tax specifically identifiable with an investing transaction classified under investing activities",
+    "human_id": "CA_L2_P01_C11_U2_00161"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q3-d",
@@ -4370,7 +4531,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "AS 3 (2.5): Interest received classified as an investing activity"
+    "topic_text": "AS 3 (2.5): Interest received classified as an investing activity",
+    "human_id": "CA_L2_P01_C11_U2_00162"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q4",
@@ -4397,7 +4559,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.5): Borrowing cost capitalised net of income on temporary investment of surplus specific-borrowing funds"
+    "topic_text": "AS 16 (4.5): Borrowing cost capitalised net of income on temporary investment of surplus specific-borrowing funds",
+    "human_id": "CA_L2_P01_C5_U4_00163"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q5",
@@ -4424,7 +4587,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.6): Current investment carrying value write-back capped at original cost, never above cost"
+    "topic_text": "AS 13 (3.6): Current investment carrying value write-back capped at original cost, never above cost",
+    "human_id": "CA_L2_P01_C5_U3_00164"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S1-PI-Q6",
@@ -4451,7 +4615,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.9): Exclusions from the cost of inventories – abnormal waste, unnecessary storage, selling/distribution costs"
+    "topic_text": "AS 2 (1.9): Exclusions from the cost of inventories – abnormal waste, unnecessary storage, selling/distribution costs",
+    "human_id": "CA_L2_P01_C5_U1_00165"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q1",
@@ -4478,7 +4643,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.5): Cost of purchase excludes recoverable GST, includes directly attributable acquisition costs"
+    "topic_text": "AS 2 (1.5): Cost of purchase excludes recoverable GST, includes directly attributable acquisition costs",
+    "human_id": "CA_L2_P01_C5_U1_00166"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q2",
@@ -4505,7 +4671,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.4): Closing stock valued at cost per kg derived after normal loss absorption"
+    "topic_text": "AS 2 (1.4): Closing stock valued at cost per kg derived after normal loss absorption",
+    "human_id": "CA_L2_P01_C5_U1_00167"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q3",
@@ -4532,7 +4699,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.4): Normal loss absorbed into the cost of remaining good units, abnormal loss excluded"
+    "topic_text": "AS 2 (1.4): Normal loss absorbed into the cost of remaining good units, abnormal loss excluded",
+    "human_id": "CA_L2_P01_C5_U1_00168"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q4",
@@ -4559,7 +4727,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.9): Abnormal waste excluded from inventory cost, expensed to P&L"
+    "topic_text": "AS 2 (1.9): Abnormal waste excluded from inventory cost, expensed to P&L",
+    "human_id": "CA_L2_P01_C5_U1_00169"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q5",
@@ -4586,7 +4755,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Sale of investments to fund a combined preference redemption and equity buyback"
+    "topic_text": "Buy-back of Securities (1): Sale of investments to fund a combined preference redemption and equity buyback",
+    "human_id": "CA_L2_P01_C12_U0_00170"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q6",
@@ -4613,7 +4783,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Premium on redemption of preference shares provided out of Securities Premium, per Section 52"
+    "topic_text": "Buy-back of Securities (1): Premium on redemption of preference shares provided out of Securities Premium, per Section 52",
+    "human_id": "CA_L2_P01_C12_U0_00171"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q7",
@@ -4640,7 +4811,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Capital Redemption Reserve transfer for combined preference redemption and equity buyback"
+    "topic_text": "Buy-back of Securities (1): Capital Redemption Reserve transfer for combined preference redemption and equity buyback",
+    "human_id": "CA_L2_P01_C12_U0_00172"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q8",
@@ -4667,7 +4839,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Cash reconciliation across investment sale, bank loan, preference redemption, and equity buyback"
+    "topic_text": "Buy-back of Securities (1): Cash reconciliation across investment sale, bank loan, preference redemption, and equity buyback",
+    "human_id": "CA_L2_P01_C12_U0_00173"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q9",
@@ -4694,7 +4867,8 @@
     "chapter_slug": "as26",
     "chapter_label": "AS 26: Intangible Assets",
     "unitcode": "M2-C5-U6",
-    "topic_text": "AS 26 (6.19-6.23): Intangible asset recognised on actual readiness for intended use, not a decision or target date"
+    "topic_text": "AS 26 (6.19-6.23): Intangible asset recognised on actual readiness for intended use, not a decision or target date",
+    "human_id": "CA_L2_P01_C5_U6_00174"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q10",
@@ -4721,7 +4895,8 @@
     "chapter_slug": "as26",
     "chapter_label": "AS 26: Intangible Assets",
     "unitcode": "M2-C5-U6",
-    "topic_text": "AS 26 (6.7-6.11): Initial cost of a purchased intangible net of a vendor refund for delay"
+    "topic_text": "AS 26 (6.7-6.11): Initial cost of a purchased intangible net of a vendor refund for delay",
+    "human_id": "CA_L2_P01_C5_U6_00175"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q11",
@@ -4748,7 +4923,8 @@
     "chapter_slug": "as26",
     "chapter_label": "AS 26: Intangible Assets",
     "unitcode": "M2-C5-U6",
-    "topic_text": "AS 26 (6.18): Subsequent expenditure expensed unless it generates benefits beyond originally assessed performance"
+    "topic_text": "AS 26 (6.18): Subsequent expenditure expensed unless it generates benefits beyond originally assessed performance",
+    "human_id": "CA_L2_P01_C5_U6_00176"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q12",
@@ -4775,7 +4951,8 @@
     "chapter_slug": "as26",
     "chapter_label": "AS 26: Intangible Assets",
     "unitcode": "M2-C5-U6",
-    "topic_text": "AS 26 (6.16): Cost accumulated as intangible asset under development during the implementation period"
+    "topic_text": "AS 26 (6.16): Cost accumulated as intangible asset under development during the implementation period",
+    "human_id": "CA_L2_P01_C5_U6_00177"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q13",
@@ -4802,7 +4979,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.1): Not a qualifying asset merely because time is needed to build a market for the output"
+    "topic_text": "AS 16 (4.1): Not a qualifying asset merely because time is needed to build a market for the output",
+    "human_id": "CA_L2_P01_C5_U4_00178"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q14",
@@ -4829,7 +5007,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.10): Specific identification for non-interchangeable items and project-specific goods"
+    "topic_text": "AS 2 (1.10): Specific identification for non-interchangeable items and project-specific goods",
+    "human_id": "CA_L2_P01_C5_U1_00179"
   },
   {
     "mcq_id": "CAI-P1-MTP-2024-09-S2-PI-Q15",
@@ -4856,7 +5035,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.1-3.2): Securities held as stock-in-trade are excluded from the definition of Investments"
+    "topic_text": "AS 13 (3.1-3.2): Securities held as stock-in-trade are excluded from the definition of Investments",
+    "human_id": "CA_L2_P01_C5_U3_00180"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q1-a",
@@ -4883,7 +5063,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 — Accounting for Investments (3.5/3.6): Cost of investment includes incidental acquisition charges; long-term investments carried at cost"
+    "topic_text": "AS 13 — Accounting for Investments (3.5/3.6): Cost of investment includes incidental acquisition charges; long-term investments carried at cost",
+    "human_id": "CA_L2_P01_C5_U3_00181"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q1-b",
@@ -4910,7 +5091,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 — Accounting for Investments (3.5/3.6): Carrying value of remaining holding after a bonus issue and part-disposal"
+    "topic_text": "AS 13 — Accounting for Investments (3.5/3.6): Carrying value of remaining holding after a bonus issue and part-disposal",
+    "human_id": "CA_L2_P01_C5_U3_00182"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q1-c",
@@ -4937,7 +5119,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 — Accounting for Investments (3.6): Long-term investments carried at cost regardless of favourable market movement"
+    "topic_text": "AS 13 — Accounting for Investments (3.6): Long-term investments carried at cost regardless of favourable market movement",
+    "human_id": "CA_L2_P01_C5_U3_00183"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q1-d",
@@ -4964,7 +5147,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 — Accounting for Investments (3.5): Cost of a bonus issue apportioned pro-rata across the enlarged holding, not treated as nil"
+    "topic_text": "AS 13 — Accounting for Investments (3.5): Cost of a bonus issue apportioned pro-rata across the enlarged holding, not treated as nil",
+    "human_id": "CA_L2_P01_C5_U3_00184"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q2-a",
@@ -4991,7 +5175,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 — Impairment of Assets (7.7): Carrying amount written down to recoverable amount when impaired"
+    "topic_text": "AS 28 — Impairment of Assets (7.7): Carrying amount written down to recoverable amount when impaired",
+    "human_id": "CA_L2_P01_C5_U7_00185"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q2-b",
@@ -5018,7 +5203,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 — Impairment of Assets (7.7): Impairment loss on a revalued asset set off against revaluation reserve first, excess to P&L"
+    "topic_text": "AS 28 — Impairment of Assets (7.7): Impairment loss on a revalued asset set off against revaluation reserve first, excess to P&L",
+    "human_id": "CA_L2_P01_C5_U7_00186"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q2-c",
@@ -5045,7 +5231,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 — Impairment of Assets (7.7): Post-impairment depreciation over the remaining useful life"
+    "topic_text": "AS 28 — Impairment of Assets (7.7): Post-impairment depreciation over the remaining useful life",
+    "human_id": "CA_L2_P01_C5_U7_00187"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q2-d",
@@ -5072,7 +5259,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 — Impairment of Assets (7.7): Revaluation reserve fully extinguished when an impairment loss equals or exceeds it"
+    "topic_text": "AS 28 — Impairment of Assets (7.7): Revaluation reserve fully extinguished when an impairment loss equals or exceeds it",
+    "human_id": "CA_L2_P01_C5_U7_00188"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q3-a",
@@ -5099,7 +5287,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 — Borrowing Costs (4.5/4.6): Eligible borrowing cost net of temporary-investment income before funds are deployed"
+    "topic_text": "AS 16 — Borrowing Costs (4.5/4.6): Eligible borrowing cost net of temporary-investment income before funds are deployed",
+    "human_id": "CA_L2_P01_C5_U4_00189"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q3-b",
@@ -5126,7 +5315,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 — Borrowing Costs (4.5/4.6): Full borrowing cost capitalised once no temporary-investment income remains"
+    "topic_text": "AS 16 — Borrowing Costs (4.5/4.6): Full borrowing cost capitalised once no temporary-investment income remains",
+    "human_id": "CA_L2_P01_C5_U4_00190"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q3-c",
@@ -5153,7 +5343,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 — Borrowing Costs (4.10/4.11): Cessation of capitalisation for a physically completed part of a qualifying asset"
+    "topic_text": "AS 16 — Borrowing Costs (4.10/4.11): Cessation of capitalisation for a physically completed part of a qualifying asset",
+    "human_id": "CA_L2_P01_C5_U4_00191"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q3-d",
@@ -5180,7 +5371,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 — Borrowing Costs (4.10/4.11): Capitalisation continues for the part of a qualifying asset still under construction"
+    "topic_text": "AS 16 — Borrowing Costs (4.10/4.11): Capitalisation continues for the part of a qualifying asset still under construction",
+    "human_id": "CA_L2_P01_C5_U4_00192"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q4",
@@ -5207,7 +5399,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Only fully paid-up securities are eligible for buy-back"
+    "topic_text": "Buy-back of Securities (1): Only fully paid-up securities are eligible for buy-back",
+    "human_id": "CA_L2_P01_C12_U0_00193"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q5",
@@ -5234,7 +5427,8 @@
     "chapter_slug": "as19",
     "chapter_label": "AS 19: Leases",
     "unitcode": "M2-C5-U5",
-    "topic_text": "AS 19 — Leases (5.3): Definition of unearned finance income"
+    "topic_text": "AS 19 — Leases (5.3): Definition of unearned finance income",
+    "human_id": "CA_L2_P01_C5_U5_00194"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S1-PI-Q6",
@@ -5261,7 +5455,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 — Borrowing Costs (4.11): Cessation of capitalisation for independently usable completed parts of a qualifying asset"
+    "topic_text": "AS 16 — Borrowing Costs (4.11): Cessation of capitalisation for independently usable completed parts of a qualifying asset",
+    "human_id": "CA_L2_P01_C5_U4_00195"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q1",
@@ -5288,7 +5483,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.8): Investment subsidy tied to total investment (not a specific depreciable asset) is credited to Capital Reserve as promoters' contribution, not recognised as revenue"
+    "topic_text": "AS 12 (1.8): Investment subsidy tied to total investment (not a specific depreciable asset) is credited to Capital Reserve as promoters' contribution, not recognised as revenue",
+    "human_id": "CA_L2_P01_C9_U1_00196"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q2",
@@ -5315,7 +5511,8 @@
     "chapter_slug": "as23",
     "chapter_label": "AS 23: Accounting for Investments in Associates in CFS",
     "unitcode": "M2-C10-U2",
-    "topic_text": "AS 23 (2.3): Group's combined direct and indirect (through a jointly-controlled entity) interest assessed together for significant influence in consolidated accounts"
+    "topic_text": "AS 23 (2.3): Group's combined direct and indirect (through a jointly-controlled entity) interest assessed together for significant influence in consolidated accounts",
+    "human_id": "CA_L2_P01_C10_U2_00197"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q3",
@@ -5342,7 +5539,8 @@
     "chapter_slug": "as25",
     "chapter_label": "AS 25: Interim Financial Reporting",
     "unitcode": "M1-C4-U7",
-    "topic_text": "AS 25 (7.11): Costs incurred unevenly (training, donation provision, budgeted depreciation, incentive accrual) evaluated against interim-period recognition principles"
+    "topic_text": "AS 25 (7.11): Costs incurred unevenly (training, donation provision, budgeted depreciation, incentive accrual) evaluated against interim-period recognition principles",
+    "human_id": "CA_L2_P01_C4_U7_00198"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q4",
@@ -5369,7 +5567,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 (7.3): Interest-rate rise indicating possible impairment of an unquoted equity holding triggers a formal recoverable-amount estimate, not an automatic write-up"
+    "topic_text": "AS 28 (7.3): Interest-rate rise indicating possible impairment of an unquoted equity holding triggers a formal recoverable-amount estimate, not an automatic write-up",
+    "human_id": "CA_L2_P01_C5_U7_00199"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q5",
@@ -5396,7 +5595,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.3): Exchange difference on foreign-currency borrowing capitalised as an interest adjustment only via the AS 11 election; absent that, only the plain interest is a borrowing cost"
+    "topic_text": "AS 16 (4.3): Exchange difference on foreign-currency borrowing capitalised as an interest adjustment only via the AS 11 election; absent that, only the plain interest is a borrowing cost",
+    "human_id": "CA_L2_P01_C5_U4_00200"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q6",
@@ -5423,7 +5623,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.3): Land held for sale as plotted development reclassified from PPE to inventory at carrying amount, with inventory recognised at the same amount"
+    "topic_text": "AS 10 (2.3): Land held for sale as plotted development reclassified from PPE to inventory at carrying amount, with inventory recognised at the same amount",
+    "human_id": "CA_L2_P01_C5_U2_00201"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q7",
@@ -5450,7 +5651,8 @@
     "chapter_slug": "as27",
     "chapter_label": "AS 27: Financial Reporting of Interests in Joint Ventures",
     "unitcode": "M2-C10-U3",
-    "topic_text": "AS 27 (1): Proportionate consolidation applies venturer by venturer to each entity's own individual interest, not to a group's combined interest as one block"
+    "topic_text": "AS 27 (1): Proportionate consolidation applies venturer by venturer to each entity's own individual interest, not to a group's combined interest as one block",
+    "human_id": "CA_L2_P01_C10_U3_00202"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q8",
@@ -5477,7 +5679,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (2.7): Tariff-linked income-tax reimbursement received as part of the regulated power-tariff mechanism is revenue, not a tax-provision offset"
+    "topic_text": "AS 9 (2.7): Tariff-linked income-tax reimbursement received as part of the regulated power-tariff mechanism is revenue, not a tax-provision offset",
+    "human_id": "CA_L2_P01_C8_U2_00203"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q9",
@@ -5504,7 +5707,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.10): Major inspection/overhaul cost capitalised as a separate component with its own depreciation period, not expensed when incurred"
+    "topic_text": "AS 10 (2.10): Major inspection/overhaul cost capitalised as a separate component with its own depreciation period, not expensed when incurred",
+    "human_id": "CA_L2_P01_C5_U2_00204"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q10",
@@ -5531,7 +5735,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 (7.13): Impairment reversal permitted for non-goodwill CGU assets, capped at the no-impairment carrying amount; goodwill impairment is never reversed"
+    "topic_text": "AS 28 (7.13): Impairment reversal permitted for non-goodwill CGU assets, capped at the no-impairment carrying amount; goodwill impairment is never reversed",
+    "human_id": "CA_L2_P01_C5_U7_00205"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q11",
@@ -5558,7 +5763,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Board Resolution alone authorises buy-back only up to 10% of paid-up capital plus free reserves; beyond that a special resolution is required"
+    "topic_text": "Buy-back of Securities (1): Board Resolution alone authorises buy-back only up to 10% of paid-up capital plus free reserves; beyond that a special resolution is required",
+    "human_id": "CA_L2_P01_C12_U0_00206"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q12",
@@ -5585,7 +5791,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Resource Test caps buy-back at 25% of paid-up capital plus free reserves"
+    "topic_text": "Buy-back of Securities (1): Resource Test caps buy-back at 25% of paid-up capital plus free reserves",
+    "human_id": "CA_L2_P01_C12_U0_00207"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q13",
@@ -5612,7 +5819,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Post-buy-back Debt-Equity Ratio test caps total debt at twice paid-up capital plus free reserves"
+    "topic_text": "Buy-back of Securities (1): Post-buy-back Debt-Equity Ratio test caps total debt at twice paid-up capital plus free reserves",
+    "human_id": "CA_L2_P01_C12_U0_00208"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q14",
@@ -5639,7 +5847,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.10): Change of cost formula valued at lower of new-method cost and NRV, with full quantified disclosure of the policy change per AS 1"
+    "topic_text": "AS 2 (1.10): Change of cost formula valued at lower of new-method cost and NRV, with full quantified disclosure of the policy change per AS 1",
+    "human_id": "CA_L2_P01_C5_U1_00209"
   },
   {
     "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q15",
@@ -5666,7 +5875,8 @@
     "chapter_slug": "financial-statements",
     "chapter_label": "Financial Statements of Companies (Schedule III)",
     "unitcode": "M3-C11-U1",
-    "topic_text": "Preparation of Financial Statements (1.5): Interest accrued but not due on a secured loan disclosed under Other Current Liabilities, separate from the long-term borrowings principal"
+    "topic_text": "Preparation of Financial Statements (1.5): Interest accrued but not due on a secured loan disclosed under Other Current Liabilities, separate from the long-term borrowings principal",
+    "human_id": "CA_L2_P01_C11_U1_00210"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q1",
@@ -5693,7 +5903,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.6): Presentation of grants related to specific fixed assets - Method I, grant deducted from asset's gross value, reducing depreciation"
+    "topic_text": "AS 12 (1.6): Presentation of grants related to specific fixed assets - Method I, grant deducted from asset's gross value, reducing depreciation",
+    "human_id": "CA_L2_P01_C9_U1_00211"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q2",
@@ -5720,7 +5931,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.9): Refund of government grants - book value of the asset increased by the refunded amount, depreciation revised prospectively"
+    "topic_text": "AS 12 (1.9): Refund of government grants - book value of the asset increased by the refunded amount, depreciation revised prospectively",
+    "human_id": "CA_L2_P01_C9_U1_00212"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q3",
@@ -5747,7 +5959,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 (7.7): Recognition and measurement of an impairment loss - carrying amount less recoverable amount, debited to Profit and Loss"
+    "topic_text": "AS 28 (7.7): Recognition and measurement of an impairment loss - carrying amount less recoverable amount, debited to Profit and Loss",
+    "human_id": "CA_L2_P01_C5_U7_00213"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q5",
@@ -5774,7 +5987,8 @@
     "chapter_slug": "as22",
     "chapter_label": "AS 22: Accounting for Taxes on Income",
     "unitcode": "M2-C7-U4",
-    "topic_text": "AS 22 (4.5): Measurement of deferred tax assets - timing differences reversing/originating, and the Sec 43B proviso exception for interest paid before the return-filing due date"
+    "topic_text": "AS 22 (4.5): Measurement of deferred tax assets - timing differences reversing/originating, and the Sec 43B proviso exception for interest paid before the return-filing due date",
+    "human_id": "CA_L2_P01_C7_U4_00214"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q6",
@@ -5801,7 +6015,8 @@
     "chapter_slug": "as22",
     "chapter_label": "AS 22: Accounting for Taxes on Income",
     "unitcode": "M2-C7-U4",
-    "topic_text": "AS 22 (4.5): Measurement of deferred tax liabilities - depreciation timing difference where tax depreciation exceeds book depreciation"
+    "topic_text": "AS 22 (4.5): Measurement of deferred tax liabilities - depreciation timing difference where tax depreciation exceeds book depreciation",
+    "human_id": "CA_L2_P01_C7_U4_00215"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q7",
@@ -5828,7 +6043,8 @@
     "chapter_slug": "as22",
     "chapter_label": "AS 22: Accounting for Taxes on Income",
     "unitcode": "M2-C7-U4",
-    "topic_text": "AS 22 (4.4): Reversal of a previously-recognised deferred tax asset when the underlying timing difference reverses"
+    "topic_text": "AS 22 (4.4): Reversal of a previously-recognised deferred tax asset when the underlying timing difference reverses",
+    "human_id": "CA_L2_P01_C7_U4_00216"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q8",
@@ -5855,7 +6071,8 @@
     "chapter_slug": "as22",
     "chapter_label": "AS 22: Accounting for Taxes on Income",
     "unitcode": "M2-C7-U4",
-    "topic_text": "AS 22 (4.3): Definitions - permanent differences (never reverse) vs. timing differences (originate in one period, reverse in another)"
+    "topic_text": "AS 22 (4.3): Definitions - permanent differences (never reverse) vs. timing differences (originate in one period, reverse in another)",
+    "human_id": "CA_L2_P01_C7_U4_00217"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q9",
@@ -5882,7 +6099,8 @@
     "chapter_slug": "as07",
     "chapter_label": "AS 7: Construction Contracts",
     "unitcode": "M2-C8-U1",
-    "topic_text": "AS 7 (1.6): Percentage of Completion Method - immediate recognition of the entire foreseeable loss when total estimated cost exceeds contract price"
+    "topic_text": "AS 7 (1.6): Percentage of Completion Method - immediate recognition of the entire foreseeable loss when total estimated cost exceeds contract price",
+    "human_id": "CA_L2_P01_C8_U1_00218"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q10",
@@ -5909,7 +6127,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.5): Recognition criteria - capitalisation restricted to borrowing costs directly attributable to acquisition/construction of a qualifying asset held by the borrowing entity itself"
+    "topic_text": "AS 16 (4.5): Recognition criteria - capitalisation restricted to borrowing costs directly attributable to acquisition/construction of a qualifying asset held by the borrowing entity itself",
+    "human_id": "CA_L2_P01_C5_U4_00219"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q11",
@@ -5936,7 +6155,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "AS 3 (2.4): Direct-method classification of receipts and payments into operating activities"
+    "topic_text": "AS 3 (2.4): Direct-method classification of receipts and payments into operating activities",
+    "human_id": "CA_L2_P01_C11_U2_00220"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q12",
@@ -5963,7 +6183,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "AS 3 (2.5): Calculation of cash flows from investing activities"
+    "topic_text": "AS 3 (2.5): Calculation of cash flows from investing activities",
+    "human_id": "CA_L2_P01_C11_U2_00221"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q13",
@@ -5990,7 +6211,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "AS 3 (2.6): Calculation of cash flows from financing activities - share issue, loan proceeds, redemption, interest and issue-related costs"
+    "topic_text": "AS 3 (2.6): Calculation of cash flows from financing activities - share issue, loan proceeds, redemption, interest and issue-related costs",
+    "human_id": "CA_L2_P01_C11_U2_00222"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q14",
@@ -6017,7 +6239,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "AS 3 (2.3): Classification of cash flow activities - operating vs. investing vs. financing"
+    "topic_text": "AS 3 (2.3): Classification of cash flow activities - operating vs. investing vs. financing",
+    "human_id": "CA_L2_P01_C11_U2_00223"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-01-PI-Q15",
@@ -6044,7 +6267,8 @@
     "chapter_slug": "financial-statements",
     "chapter_label": "Financial Statements of Companies (Schedule III)",
     "unitcode": "M3-C11-U1",
-    "topic_text": "Schedule III (1.5): Schedule III balance sheet presentation, incl. current-vs-long-term loan classification"
+    "topic_text": "Schedule III (1.5): Schedule III balance sheet presentation, incl. current-vs-long-term loan classification",
+    "human_id": "CA_L2_P01_C11_U1_00224"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q1",
@@ -6071,7 +6295,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.3): Exchange differences on foreign currency borrowings - capped at the local-currency-equivalent interest cost"
+    "topic_text": "AS 16 (4.3): Exchange differences on foreign currency borrowings - capped at the local-currency-equivalent interest cost",
+    "human_id": "CA_L2_P01_C5_U4_00225"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q2",
@@ -6098,7 +6323,8 @@
     "chapter_slug": "as11",
     "chapter_label": "AS 11: The Effects of Changes in Foreign Exchange Rates",
     "unitcode": "M2-C7-U3",
-    "topic_text": "AS 11 (3.5): Recognition of exchange differences on a foreign currency loan, net of the AS 16 borrowing-cost-cap portion"
+    "topic_text": "AS 11 (3.5): Recognition of exchange differences on a foreign currency loan, net of the AS 16 borrowing-cost-cap portion",
+    "human_id": "CA_L2_P01_C7_U3_00226"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q3",
@@ -6125,7 +6351,8 @@
     "chapter_slug": "as23",
     "chapter_label": "AS 23: Accounting for Investments in Associates in CFS",
     "unitcode": "M2-C10-U2",
-    "topic_text": "AS 23 (2.3): Significant influence evidenced by board representation, even below the 20% voting-power threshold"
+    "topic_text": "AS 23 (2.3): Significant influence evidenced by board representation, even below the 20% voting-power threshold",
+    "human_id": "CA_L2_P01_C10_U2_00227"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q4",
@@ -6152,7 +6379,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.6): Fixed production overhead absorbed at the actual-production rate (not normal capacity) when actual output is abnormally high, so inventory is not carried above cost"
+    "topic_text": "AS 2 (1.6): Fixed production overhead absorbed at the actual-production rate (not normal capacity) when actual output is abnormally high, so inventory is not carried above cost",
+    "human_id": "CA_L2_P01_C5_U1_00228"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q5",
@@ -6179,7 +6407,8 @@
     "chapter_slug": "as29",
     "chapter_label": "AS 29: Provisions, Contingent Liabilities and Contingent Assets",
     "unitcode": "M2-C6-U2",
-    "topic_text": "AS 29 (2.9): Certain costs provided in full; a possible-but-not-probable settlement disclosed as a contingent liability"
+    "topic_text": "AS 29 (2.9): Certain costs provided in full; a possible-but-not-probable settlement disclosed as a contingent liability",
+    "human_id": "CA_L2_P01_C6_U2_00229"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q6",
@@ -6206,7 +6435,8 @@
     "chapter_slug": "as07",
     "chapter_label": "AS 7: Construction Contracts",
     "unitcode": "M2-C8-U1",
-    "topic_text": "AS 7 (1.6): Percentage of completion revenue plus immediate recognition of the entire foreseeable loss on a loss-making contract"
+    "topic_text": "AS 7 (1.6): Percentage of completion revenue plus immediate recognition of the entire foreseeable loss on a loss-making contract",
+    "human_id": "CA_L2_P01_C8_U1_00230"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q7",
@@ -6233,7 +6463,8 @@
     "chapter_slug": "as23",
     "chapter_label": "AS 23: Accounting for Investments in Associates in CFS",
     "unitcode": "M2-C10-U2",
-    "topic_text": "AS 23 (2.6): Equity method - carrying amount adjusted for investor's share of post-acquisition profit (time-apportioned) and always reduced by dividends received, regardless of pre/post-acquisition profit source"
+    "topic_text": "AS 23 (2.6): Equity method - carrying amount adjusted for investor's share of post-acquisition profit (time-apportioned) and always reduced by dividends received, regardless of pre/post-acquisition profit source",
+    "human_id": "CA_L2_P01_C10_U2_00231"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q8",
@@ -6260,7 +6491,8 @@
     "chapter_slug": "as25",
     "chapter_label": "AS 25: Interim Financial Reporting",
     "unitcode": "M1-C4-U7",
-    "topic_text": "AS 25 (7.9): Income tax per interim period using the estimated weighted average annual tax rate"
+    "topic_text": "AS 25 (7.9): Income tax per interim period using the estimated weighted average annual tax rate",
+    "human_id": "CA_L2_P01_C4_U7_00232"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q9",
@@ -6287,7 +6519,8 @@
     "chapter_slug": "as22",
     "chapter_label": "AS 22: Accounting for Taxes on Income",
     "unitcode": "M2-C7-U4",
-    "topic_text": "AS 22 (4.4): Deferred tax on timing differences - depreciation and preliminary expenses; a penalty is a permanent difference, excluded"
+    "topic_text": "AS 22 (4.4): Deferred tax on timing differences - depreciation and preliminary expenses; a penalty is a permanent difference, excluded",
+    "human_id": "CA_L2_P01_C7_U4_00233"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q10",
@@ -6314,7 +6547,8 @@
     "chapter_slug": "as18",
     "chapter_label": "AS 18: Related Party Disclosures",
     "unitcode": "M1-C4-U4",
-    "topic_text": "AS 18 (4.7): Disclosure required regardless of pricing terms, covering subsidiary/holding transactions and KMP remuneration"
+    "topic_text": "AS 18 (4.7): Disclosure required regardless of pricing terms, covering subsidiary/holding transactions and KMP remuneration",
+    "human_id": "CA_L2_P01_C4_U4_00234"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q11",
@@ -6341,7 +6575,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.4.2): Indirect method - non-cash expense add-backs"
+    "topic_text": "Cash Flow Statement (2.4.2): Indirect method - non-cash expense add-backs",
+    "human_id": "CA_L2_P01_C11_U2_00235"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q12",
@@ -6368,7 +6603,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.4.2): Indirect method - working capital adjustments and tax paid, with interest paid reclassified to financing activities"
+    "topic_text": "Cash Flow Statement (2.4.2): Indirect method - working capital adjustments and tax paid, with interest paid reclassified to financing activities",
+    "human_id": "CA_L2_P01_C11_U2_00236"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q13",
@@ -6395,7 +6631,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.6): Financing activities - share issue, loan proceeds/repayment, interest and dividend paid"
+    "topic_text": "Cash Flow Statement (2.6): Financing activities - share issue, loan proceeds/repayment, interest and dividend paid",
+    "human_id": "CA_L2_P01_C11_U2_00237"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q14",
@@ -6422,7 +6659,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.4): Aggregating operating, investing and financing cash flows to the closing cash balance"
+    "topic_text": "Cash Flow Statement (2.4): Aggregating operating, investing and financing cash flows to the closing cash balance",
+    "human_id": "CA_L2_P01_C11_U2_00238"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q15",
@@ -6449,7 +6687,8 @@
     "chapter_slug": "as14",
     "chapter_label": "AS 14: Amalgamation of Companies",
     "unitcode": "M3-C13-U0",
-    "topic_text": "Amalgamation of Companies (2): External reconstruction vs. absorption vs. amalgamation - distinguishing definitions"
+    "topic_text": "Amalgamation of Companies (2): External reconstruction vs. absorption vs. amalgamation - distinguishing definitions",
+    "human_id": "CA_L2_P01_C13_U0_00239"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q1",
@@ -6476,7 +6715,8 @@
     "chapter_slug": "as07",
     "chapter_label": "AS 7: Construction Contracts",
     "unitcode": "M2-C8-U1",
-    "topic_text": "AS 7 (1.9): Stage of completion under the cost-proportion method, excluding costs relating to future activity (e.g. unused material) from the numerator"
+    "topic_text": "AS 7 (1.9): Stage of completion under the cost-proportion method, excluding costs relating to future activity (e.g. unused material) from the numerator",
+    "human_id": "CA_L2_P01_C8_U1_00240"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q2",
@@ -6503,7 +6743,8 @@
     "chapter_slug": "as07",
     "chapter_label": "AS 7: Construction Contracts",
     "unitcode": "M2-C8-U1",
-    "topic_text": "AS 7 (1.6): Percentage of completion method - revenue and profit recognised in proportion to stage of completion, matched against actual costs incurred"
+    "topic_text": "AS 7 (1.6): Percentage of completion method - revenue and profit recognised in proportion to stage of completion, matched against actual costs incurred",
+    "human_id": "CA_L2_P01_C8_U1_00241"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q3",
@@ -6530,7 +6771,8 @@
     "chapter_slug": "as07",
     "chapter_label": "AS 7: Construction Contracts",
     "unitcode": "M2-C8-U1",
-    "topic_text": "AS 7 (1.6): Cumulative revenue recognition across years, updating the total contract price for a customer-requested variation"
+    "topic_text": "AS 7 (1.6): Cumulative revenue recognition across years, updating the total contract price for a customer-requested variation",
+    "human_id": "CA_L2_P01_C8_U1_00242"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q4",
@@ -6557,7 +6799,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.5): Recognition criteria - an asset known in advance to provide no future economic benefit is never capitalised as PPE"
+    "topic_text": "AS 10 (2.5): Recognition criteria - an asset known in advance to provide no future economic benefit is never capitalised as PPE",
+    "human_id": "CA_L2_P01_C5_U2_00243"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q5",
@@ -6584,7 +6827,8 @@
     "chapter_slug": "as26",
     "chapter_label": "AS 26: Intangible Assets",
     "unitcode": "M2-C5-U6",
-    "topic_text": "AS 26 (6.19-6.23): Rebuttable presumption that an intangible asset's useful life cannot exceed ten years from the date it becomes available for use"
+    "topic_text": "AS 26 (6.19-6.23): Rebuttable presumption that an intangible asset's useful life cannot exceed ten years from the date it becomes available for use",
+    "human_id": "CA_L2_P01_C5_U6_00244"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q6",
@@ -6611,7 +6855,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (2.9): Revenue recognised in full where no uncertainty existed at the time of sale; a later inability to collect is a separate bad-debts event, not a revenue adjustment"
+    "topic_text": "AS 9 (2.9): Revenue recognised in full where no uncertainty existed at the time of sale; a later inability to collect is a separate bad-debts event, not a revenue adjustment",
+    "human_id": "CA_L2_P01_C8_U2_00245"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q7",
@@ -6638,7 +6883,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.6): Current investments carried at lower of cost and fair value; an other-than-temporary decline in a long-term investment is also charged to the profit and loss account"
+    "topic_text": "AS 13 (3.6): Current investments carried at lower of cost and fair value; an other-than-temporary decline in a long-term investment is also charged to the profit and loss account",
+    "human_id": "CA_L2_P01_C5_U3_00246"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q8",
@@ -6665,7 +6911,8 @@
     "chapter_slug": "as11",
     "chapter_label": "AS 11: The Effects of Changes in Foreign Exchange Rates",
     "unitcode": "M2-C7-U3",
-    "topic_text": "AS 11 (3.5): Monetary items restated at the closing rate on the balance sheet date; the resulting exchange difference goes to profit and loss for that year, independent of a later settlement rate"
+    "topic_text": "AS 11 (3.5): Monetary items restated at the closing rate on the balance sheet date; the resulting exchange difference goes to profit and loss for that year, independent of a later settlement rate",
+    "human_id": "CA_L2_P01_C7_U3_00247"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q9",
@@ -6692,7 +6939,8 @@
     "chapter_slug": "as24",
     "chapter_label": "AS 24: Discontinuing Operations",
     "unitcode": "M1-C4-U6",
-    "topic_text": "AS 24 (6.3): Initial disclosure event - the earlier of a binding sale agreement or board approval combined with announcement to affected parties"
+    "topic_text": "AS 24 (6.3): Initial disclosure event - the earlier of a binding sale agreement or board approval combined with announcement to affected parties",
+    "human_id": "CA_L2_P01_C4_U6_00248"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q10",
@@ -6719,7 +6967,8 @@
     "chapter_slug": "as19",
     "chapter_label": "AS 19: Leases",
     "unitcode": "M2-C5-U5",
-    "topic_text": "AS 19 (5.10): Sale and leaseback as an operating lease where sale price equals fair value - profit recognised immediately by the seller-lessee"
+    "topic_text": "AS 19 (5.10): Sale and leaseback as an operating lease where sale price equals fair value - profit recognised immediately by the seller-lessee",
+    "human_id": "CA_L2_P01_C5_U5_00249"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q11",
@@ -6746,7 +6995,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Capital Redemption Reserve funded from free reserves equal to the nominal value of preference shares redeemed and equity shares bought back"
+    "topic_text": "Buy-back of Securities (1): Capital Redemption Reserve funded from free reserves equal to the nominal value of preference shares redeemed and equity shares bought back",
+    "human_id": "CA_L2_P01_C12_U0_00250"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q12",
@@ -6773,7 +7023,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Cash movement through a preference redemption, an equity buy-back, an investment sale and an ESOP exercise occurring together"
+    "topic_text": "Buy-back of Securities (1): Cash movement through a preference redemption, an equity buy-back, an investment sale and an ESOP exercise occurring together",
+    "human_id": "CA_L2_P01_C12_U0_00251"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q13",
@@ -6800,7 +7051,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Securities Premium and free reserves movement through redemption premium, buy-back premium, CRR transfer, ESOP exercise premium and investment-sale profit"
+    "topic_text": "Buy-back of Securities (1): Securities Premium and free reserves movement through redemption premium, buy-back premium, CRR transfer, ESOP exercise premium and investment-sale profit",
+    "human_id": "CA_L2_P01_C12_U0_00252"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q14",
@@ -6827,7 +7079,8 @@
     "chapter_slug": "financial-statements",
     "chapter_label": "Financial Statements of Companies (Schedule III)",
     "unitcode": "M3-C11-U1",
-    "topic_text": "Preparation of Financial Statements (1.5): An accumulated loss exceeding available reserves is netted within Reserves and Surplus as a negative balance, never shown as an asset"
+    "topic_text": "Preparation of Financial Statements (1.5): An accumulated loss exceeding available reserves is netted within Reserves and Surplus as a negative balance, never shown as an asset",
+    "human_id": "CA_L2_P01_C11_U1_00253"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-05-PI-Q15",
@@ -6854,7 +7107,8 @@
     "chapter_slug": "internal-reconstruction",
     "chapter_label": "Internal Reconstruction",
     "unitcode": "M3-C14-U0",
-    "topic_text": "Internal Reconstruction (3): A previously unprovided contingent liability crystallising during reconstruction is debited to the Reconstruction Account net of any related recovery"
+    "topic_text": "Internal Reconstruction (3): A previously unprovided contingent liability crystallising during reconstruction is debited to the Reconstruction Account net of any related recovery",
+    "human_id": "CA_L2_P01_C14_U0_00254"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q1",
@@ -6881,7 +7135,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.6): Method I - grant deducted from asset cost, depreciation on the net depreciable amount"
+    "topic_text": "AS 12 (1.6): Method I - grant deducted from asset cost, depreciation on the net depreciable amount",
+    "human_id": "CA_L2_P01_C9_U1_00255"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q2",
@@ -6908,7 +7163,8 @@
     "chapter_slug": "as23",
     "chapter_label": "AS 23: Accounting for Investments in Associates in CFS",
     "unitcode": "M2-C10-U2",
-    "topic_text": "AS 23 (2.6): Step acquisition to significant influence - goodwill/capital reserve computed on the tranche that achieves significant influence"
+    "topic_text": "AS 23 (2.6): Step acquisition to significant influence - goodwill/capital reserve computed on the tranche that achieves significant influence",
+    "human_id": "CA_L2_P01_C10_U2_00256"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q3",
@@ -6935,7 +7191,8 @@
     "chapter_slug": "as07",
     "chapter_label": "AS 7: Construction Contracts",
     "unitcode": "M2-C8-U1",
-    "topic_text": "AS 7 (1.6): Percentage of completion method - revenue recognised in proportion to costs incurred against total estimated cost"
+    "topic_text": "AS 7 (1.6): Percentage of completion method - revenue recognised in proportion to costs incurred against total estimated cost",
+    "human_id": "CA_L2_P01_C8_U1_00257"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q4",
@@ -6962,7 +7219,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.6): Costs of testing whether an asset is functioning properly vs commercial operating activity - trial run distinction"
+    "topic_text": "AS 10 (2.6): Costs of testing whether an asset is functioning properly vs commercial operating activity - trial run distinction",
+    "human_id": "CA_L2_P01_C5_U2_00258"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q5",
@@ -6989,7 +7247,8 @@
     "chapter_slug": "as20",
     "chapter_label": "AS 20: Earnings Per Share",
     "unitcode": "M1-C4-U5",
-    "topic_text": "AS 20 (5.4): Partly-paid equity shares - weighting by the proportion actually paid up until fully called"
+    "topic_text": "AS 20 (5.4): Partly-paid equity shares - weighting by the proportion actually paid up until fully called",
+    "human_id": "CA_L2_P01_C4_U5_00259"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q6",
@@ -7016,7 +7275,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.14): Materials held for use in production are written down to replacement cost when the finished product they produce is expected to sell below cost"
+    "topic_text": "AS 2 (1.14): Materials held for use in production are written down to replacement cost when the finished product they produce is expected to sell below cost",
+    "human_id": "CA_L2_P01_C5_U1_00260"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q7",
@@ -7043,7 +7303,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.8): Cost of a self-constructed asset - materials at cost, labour, installation, apportioned borrowing cost"
+    "topic_text": "AS 10 (2.8): Cost of a self-constructed asset - materials at cost, labour, installation, apportioned borrowing cost",
+    "human_id": "CA_L2_P01_C5_U2_00261"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q8",
@@ -7070,7 +7331,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.5): Pre-acquisition dividend treated as a recovery of cost, deducted from carrying cost"
+    "topic_text": "AS 13 (3.5): Pre-acquisition dividend treated as a recovery of cost, deducted from carrying cost",
+    "human_id": "CA_L2_P01_C5_U3_00262"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q9",
@@ -7097,7 +7359,8 @@
     "chapter_slug": "as04",
     "chapter_label": "AS 4: Contingencies and Events Occurring After the Balance Sheet Date",
     "unitcode": "M2-C7-U1",
-    "topic_text": "AS 4 (1.4): Adjusting event - fraud relating to the period, discovered before approval of financial statements"
+    "topic_text": "AS 4 (1.4): Adjusting event - fraud relating to the period, discovered before approval of financial statements",
+    "human_id": "CA_L2_P01_C7_U1_00263"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q10",
@@ -7124,7 +7387,8 @@
     "chapter_slug": "as25",
     "chapter_label": "AS 25: Interim Financial Reporting",
     "unitcode": "M1-C4-U7",
-    "topic_text": "AS 25 (7.10/7.11/7.12): Costs not meeting the asset definition are expensed as incurred, not deferred to match anticipated future revenue; one-time gains are not apportioned across quarters; a mid-year accounting-estimate change is recognised in full in the period of change"
+    "topic_text": "AS 25 (7.10/7.11/7.12): Costs not meeting the asset definition are expensed as incurred, not deferred to match anticipated future revenue; one-time gains are not apportioned across quarters; a mid-year accounting-estimate change is recognised in full in the period of change",
+    "human_id": "CA_L2_P01_C4_U7_00264"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q11",
@@ -7151,7 +7415,8 @@
     "chapter_slug": "internal-reconstruction",
     "chapter_label": "Internal Reconstruction",
     "unitcode": "M3-C14-U0",
-    "topic_text": "Internal Reconstruction (3): Order of application of Capital Reduction credit - P&L debit balance first, remainder to goodwill"
+    "topic_text": "Internal Reconstruction (3): Order of application of Capital Reduction credit - P&L debit balance first, remainder to goodwill",
+    "human_id": "CA_L2_P01_C14_U0_00265"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q12",
@@ -7178,7 +7443,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.4.2): Indirect method - PBT adjusted for depreciation, working capital changes, tax paid"
+    "topic_text": "Cash Flow Statement (2.4.2): Indirect method - PBT adjusted for depreciation, working capital changes, tax paid",
+    "human_id": "CA_L2_P01_C11_U2_00266"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q13",
@@ -7205,7 +7471,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Capital Redemption Reserve - nominal value of shares redeemed/bought back out of free reserves"
+    "topic_text": "Buy-back of Securities (1): Capital Redemption Reserve - nominal value of shares redeemed/bought back out of free reserves",
+    "human_id": "CA_L2_P01_C12_U0_00267"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q14",
@@ -7232,7 +7499,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Cash effects of redemption at premium and equity buy-back, tracing through the year's operating cash flow"
+    "topic_text": "Buy-back of Securities (1): Cash effects of redemption at premium and equity buy-back, tracing through the year's operating cash flow",
+    "human_id": "CA_L2_P01_C12_U0_00268"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q15",
@@ -7259,7 +7527,8 @@
     "chapter_slug": "as14",
     "chapter_label": "AS 14: Amalgamation of Companies",
     "unitcode": "M3-C13-U0",
-    "topic_text": "Amalgamation of Companies (5): Amalgamation Adjustment Reserve - preserving statutory reserves under the Purchase Method"
+    "topic_text": "Amalgamation of Companies (5): Amalgamation Adjustment Reserve - preserving statutory reserves under the Purchase Method",
+    "human_id": "CA_L2_P01_C13_U0_00269"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q1",
@@ -7286,7 +7555,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.14): NRV of materials held for use - written down to replacement cost once the finished product they'll be incorporated into is expected to sell below cost"
+    "topic_text": "AS 2 (1.14): NRV of materials held for use - written down to replacement cost once the finished product they'll be incorporated into is expected to sell below cost",
+    "human_id": "CA_L2_P01_C5_U1_00270"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q2",
@@ -7313,7 +7583,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.8): Cost of a self-constructed asset, including the AS 16 borrowing cost eligible for capitalisation"
+    "topic_text": "AS 10 (2.8): Cost of a self-constructed asset, including the AS 16 borrowing cost eligible for capitalisation",
+    "human_id": "CA_L2_P01_C5_U2_00271"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q3",
@@ -7340,7 +7611,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.7): General (non-specific-seeming but wholly traceable) borrowings - apportioning interest between qualifying-asset use and non-qualifying use"
+    "topic_text": "AS 16 (4.7): General (non-specific-seeming but wholly traceable) borrowings - apportioning interest between qualifying-asset use and non-qualifying use",
+    "human_id": "CA_L2_P01_C5_U4_00272"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q4",
@@ -7367,7 +7639,8 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.5): Pre-acquisition dividend received treated as a recovery of the cost of investment, not credited to Profit and Loss"
+    "topic_text": "AS 13 (3.5): Pre-acquisition dividend received treated as a recovery of the cost of investment, not credited to Profit and Loss",
+    "human_id": "CA_L2_P01_C5_U3_00273"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q5",
@@ -7394,7 +7667,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (2.8): Bill-and-hold sale at buyer's request, and sale-on-approval revenue on formal acceptance or expiry of the rejection period"
+    "topic_text": "AS 9 (2.8): Bill-and-hold sale at buyer's request, and sale-on-approval revenue on formal acceptance or expiry of the rejection period",
+    "human_id": "CA_L2_P01_C8_U2_00274"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q6",
@@ -7421,7 +7695,8 @@
     "chapter_slug": "as29",
     "chapter_label": "AS 29: Provisions, Contingent Liabilities and Contingent Assets",
     "unitcode": "M2-C6-U2",
-    "topic_text": "AS 29 (2.4/2.9): Certain cost provided in full; a possible-but-not-probable settlement disclosed only as a contingent liability"
+    "topic_text": "AS 29 (2.4/2.9): Certain cost provided in full; a possible-but-not-probable settlement disclosed only as a contingent liability",
+    "human_id": "CA_L2_P01_C6_U2_00275"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q7",
@@ -7448,7 +7723,8 @@
     "chapter_slug": "as04",
     "chapter_label": "AS 4: Contingencies and Events Occurring After the Balance Sheet Date",
     "unitcode": "M2-C7-U1",
-    "topic_text": "AS 4 (1.4): Adjusting event - post-year-end insolvency confirming a condition (impaired receivable) that existed at the balance sheet date"
+    "topic_text": "AS 4 (1.4): Adjusting event - post-year-end insolvency confirming a condition (impaired receivable) that existed at the balance sheet date",
+    "human_id": "CA_L2_P01_C7_U1_00276"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q8",
@@ -7475,7 +7751,8 @@
     "chapter_slug": "as18",
     "chapter_label": "AS 18: Related Party Disclosures",
     "unitcode": "M1-C4-U4",
-    "topic_text": "AS 18 (4.3): Aggregating direct and subsidiary-held voting power to test for control/significant influence over a related party"
+    "topic_text": "AS 18 (4.3): Aggregating direct and subsidiary-held voting power to test for control/significant influence over a related party",
+    "human_id": "CA_L2_P01_C4_U4_00277"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q9",
@@ -7502,7 +7779,8 @@
     "chapter_slug": "as19",
     "chapter_label": "AS 19: Leases",
     "unitcode": "M2-C5-U5",
-    "topic_text": "AS 19 (5.8): Manufacturer/dealer lessor selling profit; lease rental recovery apportioned by output consumed during a lease term shorter than total economic life"
+    "topic_text": "AS 19 (5.8): Manufacturer/dealer lessor selling profit; lease rental recovery apportioned by output consumed during a lease term shorter than total economic life",
+    "human_id": "CA_L2_P01_C5_U5_00278"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q10",
@@ -7529,7 +7807,8 @@
     "chapter_slug": "as20",
     "chapter_label": "AS 20: Earnings Per Share",
     "unitcode": "M1-C4-U5",
-    "topic_text": "AS 20 (5.4): Time-weighted average number of equity shares, weighting each tranche by the exact number of months outstanding"
+    "topic_text": "AS 20 (5.4): Time-weighted average number of equity shares, weighting each tranche by the exact number of months outstanding",
+    "human_id": "CA_L2_P01_C4_U5_00279"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q11",
@@ -7556,7 +7835,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.4): Operating cash flow: interest on trade advances, tax paid, and cash recovered from an insolvent debtor's estate"
+    "topic_text": "Cash Flow Statement (2.4): Operating cash flow: interest on trade advances, tax paid, and cash recovered from an insolvent debtor's estate",
+    "human_id": "CA_L2_P01_C11_U2_00280"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q12",
@@ -7583,7 +7863,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.5): Investing cash flow: dividend received on a long-term investment and proceeds from disposal of a fixed asset sold at a loss"
+    "topic_text": "Cash Flow Statement (2.5): Investing cash flow: dividend received on a long-term investment and proceeds from disposal of a fixed asset sold at a loss",
+    "human_id": "CA_L2_P01_C11_U2_00281"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q13",
@@ -7610,7 +7891,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.3-2.6): Aggregating operating, investing and financing cash flows (including a fresh equity issue) to the closing cash balance"
+    "topic_text": "Cash Flow Statement (2.3-2.6): Aggregating operating, investing and financing cash flows (including a fresh equity issue) to the closing cash balance",
+    "human_id": "CA_L2_P01_C11_U2_00282"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q14",
@@ -7637,7 +7919,8 @@
     "chapter_slug": "internal-reconstruction",
     "chapter_label": "Internal Reconstruction",
     "unitcode": "M3-C14-U0",
-    "topic_text": "Internal Reconstruction (3): Post-reconstruction equity share capital: capital surrender, debt-to-equity conversion, and a fresh cash issue combined"
+    "topic_text": "Internal Reconstruction (3): Post-reconstruction equity share capital: capital surrender, debt-to-equity conversion, and a fresh cash issue combined",
+    "human_id": "CA_L2_P01_C14_U0_00283"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2024-09-PI-Q15",
@@ -7664,7 +7947,8 @@
     "chapter_slug": "financial-statements",
     "chapter_label": "Financial Statements of Companies (Schedule III)",
     "unitcode": "M3-C11-U1",
-    "topic_text": "Preparation of Financial Statements (1.5): Schedule III classification of assets retired from active use and held for disposal"
+    "topic_text": "Preparation of Financial Statements (1.5): Schedule III classification of assets retired from active use and held for disposal",
+    "human_id": "CA_L2_P01_C11_U1_00284"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q1",
@@ -7691,7 +7975,8 @@
     "chapter_slug": "as17",
     "chapter_label": "AS 17: Segment Reporting",
     "unitcode": "M1-C4-U3",
-    "topic_text": "AS 17 (3.3): Revenue reportability test - 10% of total (external+internal) segment revenue"
+    "topic_text": "AS 17 (3.3): Revenue reportability test - 10% of total (external+internal) segment revenue",
+    "human_id": "CA_L2_P01_C4_U3_00285"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q2",
@@ -7718,7 +8003,8 @@
     "chapter_slug": "as17",
     "chapter_label": "AS 17: Segment Reporting",
     "unitcode": "M1-C4-U3",
-    "topic_text": "AS 17 (3.3): Profitability reportability test - 10% of the greater of combined profit or combined loss of all segments"
+    "topic_text": "AS 17 (3.3): Profitability reportability test - 10% of the greater of combined profit or combined loss of all segments",
+    "human_id": "CA_L2_P01_C4_U3_00286"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q3",
@@ -7745,7 +8031,8 @@
     "chapter_slug": "as17",
     "chapter_label": "AS 17: Segment Reporting",
     "unitcode": "M1-C4-U3",
-    "topic_text": "AS 17 (3.3): Assets reportability test - 10% of total segment assets"
+    "topic_text": "AS 17 (3.3): Assets reportability test - 10% of total segment assets",
+    "human_id": "CA_L2_P01_C4_U3_00287"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q4",
@@ -7772,7 +8059,8 @@
     "chapter_slug": "as17",
     "chapter_label": "AS 17: Segment Reporting",
     "unitcode": "M1-C4-U3",
-    "topic_text": "AS 17 (3.3): Overall reportable-segment set - union of segments qualifying on any single test, checked against the 75% coverage rule"
+    "topic_text": "AS 17 (3.3): Overall reportable-segment set - union of segments qualifying on any single test, checked against the 75% coverage rule",
+    "human_id": "CA_L2_P01_C4_U3_00288"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q5",
@@ -7799,7 +8087,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.6): Borrowing cost capitalisation restricted to the loan-funded portion of qualifying-asset expenditure"
+    "topic_text": "AS 16 (4.6): Borrowing cost capitalisation restricted to the loan-funded portion of qualifying-asset expenditure",
+    "human_id": "CA_L2_P01_C5_U4_00289"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q6",
@@ -7826,7 +8115,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.7): Refund of a grant recognised via Deferred Income - full amount debited to Deferred Grant Account"
+    "topic_text": "AS 12 (1.7): Refund of a grant recognised via Deferred Income - full amount debited to Deferred Grant Account",
+    "human_id": "CA_L2_P01_C9_U1_00290"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q7",
@@ -7853,7 +8143,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.8): Promoters'-contribution grants credited to Capital Reserve - neither deferred income nor distributable"
+    "topic_text": "AS 12 (1.8): Promoters'-contribution grants credited to Capital Reserve - neither deferred income nor distributable",
+    "human_id": "CA_L2_P01_C9_U1_00291"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q8",
@@ -7880,7 +8171,8 @@
     "chapter_slug": "as26",
     "chapter_label": "AS 26: Intangible Assets",
     "unitcode": "M2-C5-U6",
-    "topic_text": "AS 26 (6.5): Publicity/research expenditure with no resulting future benefit is expensed, never capitalised"
+    "topic_text": "AS 26 (6.5): Publicity/research expenditure with no resulting future benefit is expensed, never capitalised",
+    "human_id": "CA_L2_P01_C5_U6_00292"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q9",
@@ -7907,7 +8199,8 @@
     "chapter_slug": "as10",
     "chapter_label": "AS 10: Property, Plant and Equipment",
     "unitcode": "M2-C5-U2",
-    "topic_text": "AS 10 (2.4): Directly attributable costs capitalised; operating losses before commercial production and deferred-credit interest excluded"
+    "topic_text": "AS 10 (2.4): Directly attributable costs capitalised; operating losses before commercial production and deferred-credit interest excluded",
+    "human_id": "CA_L2_P01_C5_U2_00293"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q10",
@@ -7934,7 +8227,8 @@
     "chapter_slug": "as15",
     "chapter_label": "AS 15: Employee Benefits",
     "unitcode": "M2-C6-U1",
-    "topic_text": "AS 15 (1.9): Actual return on plan assets - closing less opening fair value, adjusted for contributions in and benefits out"
+    "topic_text": "AS 15 (1.9): Actual return on plan assets - closing less opening fair value, adjusted for contributions in and benefits out",
+    "human_id": "CA_L2_P01_C6_U1_00294"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q11",
@@ -7961,7 +8255,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test can render buy-back impossible (Nil) when existing debt is too high relative to equity"
+    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test can render buy-back impossible (Nil) when existing debt is too high relative to equity",
+    "human_id": "CA_L2_P01_C12_U0_00295"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q12",
@@ -7988,7 +8283,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test becomes binding constraint once loan is reduced"
+    "topic_text": "Buy-back of Securities (1): Debt-Equity Ratio Test becomes binding constraint once loan is reduced",
+    "human_id": "CA_L2_P01_C12_U0_00296"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q13",
@@ -8015,7 +8311,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Sequencing a loan repayment before buy-back to satisfy the Debt-Equity Ratio Test"
+    "topic_text": "Buy-back of Securities (1): Sequencing a loan repayment before buy-back to satisfy the Debt-Equity Ratio Test",
+    "human_id": "CA_L2_P01_C12_U0_00297"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q14",
@@ -8042,7 +8339,8 @@
     "chapter_slug": "buyback",
     "chapter_label": "Buy-back of Securities",
     "unitcode": "M3-C12-U0",
-    "topic_text": "Buy-back of Securities (1): Post-buyback equity share capital - opening capital less nominal value of shares bought back"
+    "topic_text": "Buy-back of Securities (1): Post-buyback equity share capital - opening capital less nominal value of shares bought back",
+    "human_id": "CA_L2_P01_C12_U0_00298"
   },
   {
     "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q15",
@@ -8069,7 +8367,8 @@
     "chapter_slug": "financial-statements",
     "chapter_label": "Financial Statements of Companies (Schedule III)",
     "unitcode": "M3-C11-U1",
-    "topic_text": "Preparation of Financial Statements (1.6): Dividend Rules cap on withdrawal from accumulated reserves"
+    "topic_text": "Preparation of Financial Statements (1.6): Dividend Rules cap on withdrawal from accumulated reserves",
+    "human_id": "CA_L2_P01_C11_U1_00299"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-01-PI-Q1-a",
@@ -8096,7 +8395,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 (7.4): Recoverable amount is the higher of net selling price and value in use; total impairment loss = carrying amount less recoverable amount"
+    "topic_text": "AS 28 (7.4): Recoverable amount is the higher of net selling price and value in use; total impairment loss = carrying amount less recoverable amount",
+    "human_id": "CA_L2_P01_C5_U7_00300"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-01-PI-Q1-b",
@@ -8123,7 +8423,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 (7.7): Impairment loss on a revalued asset is treated as a revaluation decrease to the extent of the available reserve, with the balance charged to profit and loss"
+    "topic_text": "AS 28 (7.7): Impairment loss on a revalued asset is treated as a revaluation decrease to the extent of the available reserve, with the balance charged to profit and loss",
+    "human_id": "CA_L2_P01_C5_U7_00301"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-01-PI-Q1-c",
@@ -8150,7 +8451,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 (7.4): No impairment loss arises when the higher-of-NSP-and-VIU recoverable amount exceeds the asset's carrying amount"
+    "topic_text": "AS 28 (7.4): No impairment loss arises when the higher-of-NSP-and-VIU recoverable amount exceeds the asset's carrying amount",
+    "human_id": "CA_L2_P01_C5_U7_00302"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-01-PI-Q1-d",
@@ -8177,7 +8479,8 @@
     "chapter_slug": "as28",
     "chapter_label": "AS 28: Impairment of Assets",
     "unitcode": "M2-C5-U7",
-    "topic_text": "AS 28 (7.7): Post-impairment carrying value = pre-impairment carrying amount less the total impairment loss for the year, regardless of how that loss is split between reserves and profit and loss"
+    "topic_text": "AS 28 (7.7): Post-impairment carrying value = pre-impairment carrying amount less the total impairment loss for the year, regardless of how that loss is split between reserves and profit and loss",
+    "human_id": "CA_L2_P01_C5_U7_00303"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-01-PI-Q2",
@@ -8204,7 +8507,8 @@
     "chapter_slug": "as11",
     "chapter_label": "AS 11: The Effects of Changes in Foreign Exchange Rates",
     "unitcode": "M2-C7-U3",
-    "topic_text": "AS 11 (3.13): Presentation of FCMITDA as a separate line item under Reserves and Surplus, in the absence of a dedicated Schedule III line item"
+    "topic_text": "AS 11 (3.13): Presentation of FCMITDA as a separate line item under Reserves and Surplus, in the absence of a dedicated Schedule III line item",
+    "human_id": "CA_L2_P01_C7_U3_00304"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-01-PI-Q1-a",
@@ -8231,7 +8535,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.4): Borrowing cost net of temporary-investment income on surplus funds"
+    "topic_text": "AS 16 (4.4): Borrowing cost net of temporary-investment income on surplus funds",
+    "human_id": "CA_L2_P01_C5_U4_00305"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-01-PI-Q1-b",
@@ -8258,7 +8563,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.4): Full interest capitalised once all borrowed funds are in active use"
+    "topic_text": "AS 16 (4.4): Full interest capitalised once all borrowed funds are in active use",
+    "human_id": "CA_L2_P01_C5_U4_00306"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-01-PI-Q1-c",
@@ -8285,7 +8591,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.11): Cessation of capitalisation for a substantially complete part of a qualifying asset, proportionate to that part"
+    "topic_text": "AS 16 (4.11): Cessation of capitalisation for a substantially complete part of a qualifying asset, proportionate to that part",
+    "human_id": "CA_L2_P01_C5_U4_00307"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-01-PI-Q1-d",
@@ -8312,7 +8619,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 (4.11): Remaining capitalised borrowing cost after partial cessation"
+    "topic_text": "AS 16 (4.11): Remaining capitalised borrowing cost after partial cessation",
+    "human_id": "CA_L2_P01_C5_U4_00308"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-01-PI-Q2",
@@ -8339,7 +8647,8 @@
     "chapter_slug": "as19",
     "chapter_label": "AS 19: Leases",
     "unitcode": "M2-C5-U5",
-    "topic_text": "AS 19 (5.2): Operating lessor's target rental recovery apportioned by the leased asset's output consumed during the lease term, out of its full economic-life output"
+    "topic_text": "AS 19 (5.2): Operating lessor's target rental recovery apportioned by the leased asset's output consumed during the lease term, out of its full economic-life output",
+    "human_id": "CA_L2_P01_C5_U5_00309"
   },
   {
     "mcq_id": "CAI-P1-RTP-2024-05-PI-Q1-i",
@@ -8366,7 +8675,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 — Revenue Recognition (2.4-2.5): Timing of revenue recognition on sale of goods - transfer of significant risks/rewards, inspection as a substantive condition of sale"
+    "topic_text": "AS 9 — Revenue Recognition (2.4-2.5): Timing of revenue recognition on sale of goods - transfer of significant risks/rewards, inspection as a substantive condition of sale",
+    "human_id": "CA_L2_P01_C8_U2_00310"
   },
   {
     "mcq_id": "CAI-P1-RTP-2024-05-PI-Q1-ii",
@@ -8393,7 +8703,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 — Valuation of Inventories (1.9): Normal loss absorbed into cost of good production; abnormal loss valued separately and excluded from inventory"
+    "topic_text": "AS 2 — Valuation of Inventories (1.9): Normal loss absorbed into cost of good production; abnormal loss valued separately and excluded from inventory",
+    "human_id": "CA_L2_P01_C5_U1_00311"
   },
   {
     "mcq_id": "CAI-P1-RTP-2024-05-PI-Q1-iii",
@@ -8420,7 +8731,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 — Accounting for Government Grants (1.5/1.8): Grants of the nature of promoters' contribution go to Capital Reserve, not dividend; non-monetary grants received free are recorded at nominal value, not left unrecorded"
+    "topic_text": "AS 12 — Accounting for Government Grants (1.5/1.8): Grants of the nature of promoters' contribution go to Capital Reserve, not dividend; non-monetary grants received free are recorded at nominal value, not left unrecorded",
+    "human_id": "CA_L2_P01_C9_U1_00312"
   },
   {
     "mcq_id": "CAI-P1-RTP-2024-05-PI-Q2",
@@ -8447,7 +8759,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 — Borrowing Costs (4.4): Income on temporary investment of surplus borrowed funds is netted against interest paid to arrive at capitalisable borrowing cost"
+    "topic_text": "AS 16 — Borrowing Costs (4.4): Income on temporary investment of surplus borrowed funds is netted against interest paid to arrive at capitalisable borrowing cost",
+    "human_id": "CA_L2_P01_C5_U4_00313"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-05-PI-Q1",
@@ -8474,7 +8787,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 — Valuation of Inventories (1.3): Lower of cost and NRV, applied to the newly-adopted cost formula after a change in accounting policy"
+    "topic_text": "AS 2 — Valuation of Inventories (1.3): Lower of cost and NRV, applied to the newly-adopted cost formula after a change in accounting policy",
+    "human_id": "CA_L2_P01_C5_U1_00314"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-05-PI-Q2",
@@ -8501,7 +8815,8 @@
     "chapter_slug": "financial-statements",
     "chapter_label": "Financial Statements of Companies (Schedule III)",
     "unitcode": "M3-C11-U1",
-    "topic_text": "Preparation of Financial Statements (1.5): Interest accrued but not due on borrowings is classified under Other Current Liabilities, separate from the borrowing itself"
+    "topic_text": "Preparation of Financial Statements (1.5): Interest accrued but not due on borrowings is classified under Other Current Liabilities, separate from the borrowing itself",
+    "human_id": "CA_L2_P01_C11_U1_00315"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-05-PI-Q3",
@@ -8528,7 +8843,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 — Valuation of Inventories (1.7): By-products, scrap and waste, being immaterial, are valued at net realisable value"
+    "topic_text": "AS 2 — Valuation of Inventories (1.7): By-products, scrap and waste, being immaterial, are valued at net realisable value",
+    "human_id": "CA_L2_P01_C5_U1_00316"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-05-PI-Q1-i",
@@ -8555,7 +8871,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 — Borrowing Costs (4.9): Commencement of capitalisation while construction is actively in progress"
+    "topic_text": "AS 16 — Borrowing Costs (4.9): Commencement of capitalisation while construction is actively in progress",
+    "human_id": "CA_L2_P01_C5_U4_00317"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-05-PI-Q1-ii",
@@ -8582,7 +8899,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 — Borrowing Costs (4.4): Borrowing costs eligible for capitalisation"
+    "topic_text": "AS 16 — Borrowing Costs (4.4): Borrowing costs eligible for capitalisation",
+    "human_id": "CA_L2_P01_C5_U4_00318"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-05-PI-Q1-iii",
@@ -8609,7 +8927,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 — Borrowing Costs (4.11): Cessation of capitalisation once the qualifying asset is substantially complete and ready for use"
+    "topic_text": "AS 16 — Borrowing Costs (4.11): Cessation of capitalisation once the qualifying asset is substantially complete and ready for use",
+    "human_id": "CA_L2_P01_C5_U4_00319"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-05-PI-Q1-iv",
@@ -8636,7 +8955,8 @@
     "chapter_slug": "as16",
     "chapter_label": "AS 16: Borrowing Costs",
     "unitcode": "M2-C5-U4",
-    "topic_text": "AS 16 — Borrowing Costs (4.4): Borrowing costs eligible for capitalisation on the still-incomplete tower only"
+    "topic_text": "AS 16 — Borrowing Costs (4.4): Borrowing costs eligible for capitalisation on the still-incomplete tower only",
+    "human_id": "CA_L2_P01_C5_U4_00320"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-05-PI-Q2",
@@ -8663,7 +8983,8 @@
     "chapter_slug": "as19",
     "chapter_label": "AS 19: Leases",
     "unitcode": "M2-C5-U5",
-    "topic_text": "AS 19 — Leases (5.8): Finance lease - lessee's initial recognition at lower of fair value and PV of minimum lease payments"
+    "topic_text": "AS 19 — Leases (5.8): Finance lease - lessee's initial recognition at lower of fair value and PV of minimum lease payments",
+    "human_id": "CA_L2_P01_C5_U5_00321"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-05-PI-Q3",
@@ -8690,7 +9011,8 @@
     "chapter_slug": "cash-flow-statement",
     "chapter_label": "Cash Flow Statement (AS 3)",
     "unitcode": "M3-C11-U2",
-    "topic_text": "Cash Flow Statement (2.2): Elements of cash - restricted/earmarked vs freely available balances"
+    "topic_text": "Cash Flow Statement (2.2): Elements of cash - restricted/earmarked vs freely available balances",
+    "human_id": "CA_L2_P01_C11_U2_00322"
   },
   {
     "mcq_id": "CAI-P1-RTP-2026-05-PI-Q4",
@@ -8717,7 +9039,8 @@
     "chapter_slug": "as26",
     "chapter_label": "AS 26: Intangible Assets",
     "unitcode": "M2-C5-U6",
-    "topic_text": "AS 26 — Intangible Assets (6.14): Research Phase - no intangible asset ever recognised, always expensed"
+    "topic_text": "AS 26 — Intangible Assets (6.14): Research Phase - no intangible asset ever recognised, always expensed",
+    "human_id": "CA_L2_P01_C5_U6_00323"
   },
   {
     "mcq_id": "CAI-P1-RTP-2024-09-PI-Q1-a",
@@ -8744,7 +9067,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (2.8): Goods subject to installation - deferral of the installation-linked portion of revenue until installation is complete"
+    "topic_text": "AS 9 (2.8): Goods subject to installation - deferral of the installation-linked portion of revenue until installation is complete",
+    "human_id": "CA_L2_P01_C8_U2_00324"
   },
   {
     "mcq_id": "CAI-P1-RTP-2024-09-PI-Q1-b",
@@ -8771,7 +9095,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (2.8): Installation-fee revenue recognised in the period installation is actually completed"
+    "topic_text": "AS 9 (2.8): Installation-fee revenue recognised in the period installation is actually completed",
+    "human_id": "CA_L2_P01_C8_U2_00325"
   },
   {
     "mcq_id": "CAI-P1-RTP-2024-09-PI-Q1-c",
@@ -8798,7 +9123,8 @@
     "chapter_slug": "as09",
     "chapter_label": "AS 9: Revenue Recognition",
     "unitcode": "M2-C8-U2",
-    "topic_text": "AS 9 (2.8): Trade discounts deducted in determining revenue, not recognised separately"
+    "topic_text": "AS 9 (2.8): Trade discounts deducted in determining revenue, not recognised separately",
+    "human_id": "CA_L2_P01_C8_U2_00326"
   },
   {
     "mcq_id": "CAI-P1-RTP-2024-09-PI-Q1-d",
@@ -8825,7 +9151,8 @@
     "chapter_slug": "as29",
     "chapter_label": "AS 29: Provisions, Contingent Liabilities and Contingent Assets",
     "unitcode": "M2-C6-U2",
-    "topic_text": "AS 29 (2.4): Present obligation from a past event triggers a provision, estimated using past trends"
+    "topic_text": "AS 29 (2.4): Present obligation from a past event triggers a provision, estimated using past trends",
+    "human_id": "CA_L2_P01_C6_U2_00327"
   },
   {
     "mcq_id": "CAI-P1-RTP-2024-09-PI-Q2",
@@ -8852,7 +9179,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.2): Scope of inventories - primary packing material necessary to reach saleable condition is includible; spare parts/standby equipment and publicity/secondary-packing costs generally are not"
+    "topic_text": "AS 2 (1.2): Scope of inventories - primary packing material necessary to reach saleable condition is includible; spare parts/standby equipment and publicity/secondary-packing costs generally are not",
+    "human_id": "CA_L2_P01_C5_U1_00328"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-09-PI-Q1-a",
@@ -8879,7 +9207,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.2): Classifying a grant given specifically for a named asset as a grant related to specific fixed assets"
+    "topic_text": "AS 12 (1.2): Classifying a grant given specifically for a named asset as a grant related to specific fixed assets",
+    "human_id": "CA_L2_P01_C9_U1_00329"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-09-PI-Q1-b",
@@ -8906,7 +9235,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.4): Grant deducted from asset cost - depreciation charged on the net (grant-reduced) depreciable amount"
+    "topic_text": "AS 12 (1.4): Grant deducted from asset cost - depreciation charged on the net (grant-reduced) depreciable amount",
+    "human_id": "CA_L2_P01_C9_U1_00330"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-09-PI-Q1-c",
@@ -8933,7 +9263,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.5): Deferred-income approach - grant recognised as income systematically over the asset's useful life"
+    "topic_text": "AS 12 (1.5): Deferred-income approach - grant recognised as income systematically over the asset's useful life",
+    "human_id": "CA_L2_P01_C9_U1_00331"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-09-PI-Q1-d",
@@ -8960,7 +9291,8 @@
     "chapter_slug": "as12",
     "chapter_label": "AS 12: Accounting for Government Grants",
     "unitcode": "M2-C9-U1",
-    "topic_text": "AS 12 (1.5): Deferred-income approach - depreciation computed on the full (un-reduced) gross cost of the asset"
+    "topic_text": "AS 12 (1.5): Deferred-income approach - depreciation computed on the full (un-reduced) gross cost of the asset",
+    "human_id": "CA_L2_P01_C9_U1_00332"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-09-PI-Q2",
@@ -8987,7 +9319,8 @@
     "chapter_slug": "as02",
     "chapter_label": "AS 2: Valuation of Inventories",
     "unitcode": "M2-C5-U1",
-    "topic_text": "AS 2 (1.2): Change in cost formula requires full disclosure of the change and its quantified financial effect"
+    "topic_text": "AS 2 (1.2): Change in cost formula requires full disclosure of the change and its quantified financial effect",
+    "human_id": "CA_L2_P01_C5_U1_00333"
   },
   {
     "mcq_id": "CAI-P1-RTP-2025-09-PI-Q3",
@@ -9014,6 +9347,7 @@
     "chapter_slug": "as13",
     "chapter_label": "AS 13: Accounting for Investments",
     "unitcode": "M2-C5-U3",
-    "topic_text": "AS 13 (3.3): Current investments carried at the lower of cost and fair value - never marked up beyond original cost"
+    "topic_text": "AS 13 (3.3): Current investments carried at the lower of cost and fair value - never marked up beyond original cost",
+    "human_id": "CA_L2_P01_C5_U3_00334"
   }
 ]
