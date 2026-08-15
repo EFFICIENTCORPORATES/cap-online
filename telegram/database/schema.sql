@@ -54,39 +54,86 @@ CREATE TABLE IF NOT EXISTS students (
 -- balance column is how real financial data silently corrupts under a crash
 -- or a double-fired payment webhook. A ledger can always be audited and
 -- replayed; a balance column can't.
+-- RESHAPED 2026-08-15 (Test Mode billing rollout, third round of that
+-- discussion -- see telegram/assets/exam_bot/Tests/TEST-MODE-ROADMAP.md §9
+-- for the full decision trail). Originally keyed by telegram_user_id;
+-- changed to `username` (student_profiles.username) so a student's balance
+-- follows them across every linked phone/chat_id, consistent with how
+-- leaderboard/profile data already aggregate identity on this platform.
+-- Consequence, by design: a student must have claimed a 1LAVYA username
+-- before they can recharge or spend from the wallet -- there is no
+-- "pending credit against a chat_id with no username yet" state; the bot
+-- routes them into profile_flow.py's username-creation step first, same
+-- precondition leaderboard-joining already has.
+--
+-- This table had zero real rows when reshaped (verified directly against
+-- the live platform.db before migrating, same discipline the
+-- faculty_master table's mid-session reshape used on 2026-08-14) -- see
+-- db.py's _migrate_wallet_ledger_shape() for the one-time drop+recreate
+-- this required (a column identity change + a widened CHECK constraint,
+-- neither of which SQLite's ALTER TABLE can express, unlike the simple
+-- ADD COLUMN migrations in _COLUMN_MIGRATIONS below).
 CREATE TABLE IF NOT EXISTS wallet_ledger (
     ledger_id            INTEGER PRIMARY KEY AUTOINCREMENT,
-    telegram_user_id     INTEGER NOT NULL REFERENCES students(telegram_user_id),
+    username              TEXT NOT NULL REFERENCES student_profiles(username),
     tenant_id            TEXT NOT NULL,   -- which bot context this happened in, e.g. 'capranav', '1lavya-examhub'; 'platform' for platform-level events not tied to any one bot
     event_type           TEXT NOT NULL CHECK (event_type IN (
                               'free_monthly_grant',  -- the 100-free-MCQs/month top-up, granted once per student per calendar month
                               'mcq_debit',            -- -1 credit, one per MCQ shown (see telegram/database/README.md for why "shown" not "answered")
+                              'descriptive_debit',    -- -10 credits, one per descriptive practice question shown (₹1/10 questions, flat regardless of marks -- locked 2026-08-15)
+                              'test_debit',           -- -10 credits per mark of an assembled Test Mode session, charged once at "Start Test" (₹1/10 marks -- covers question delivery + upload/PDF assembly ONLY, not AI evaluation, which is priced separately and not yet decided)
                               'recharge_credit',      -- +N credits from a paid top-up (see payments table for the money side)
                               'manual_adjustment',    -- admin correction; `reference` must explain why
                               'refund'                -- reversal of a recharge_credit or manual_adjustment
                           )),
-    amount                INTEGER NOT NULL,   -- signed: positive = credit, negative = debit. Units are MCQ-credits, never rupees directly.
-    reference             TEXT,               -- mcq_id for a debit; payments.payment_id for a recharge; free-text reason for manual_adjustment/refund
+    amount                INTEGER NOT NULL,   -- signed: positive = credit, negative = debit. Units are credits; RECOMMENDED (not yet re-confirmed by Pranav) exchange rate is 1 credit = ₹0.01, which makes every locked rate above a clean whole-credit number -- see TEST-MODE-ROADMAP.md §9.2.
+    reference             TEXT,               -- mcq_id / book_id / test_id for a debit (whichever applies); payments.gateway_txn_id (the Razorpay Payment Link id) for a recharge; free-text reason for manual_adjustment/refund
+    idempotency_key       TEXT UNIQUE,        -- set on debits/credits that could otherwise be double-applied by a retry/restart (e.g. "test_debit:{test_id}", "recharge:{payment_link_id}") -- NULL is fine for events that are naturally safe to repeat (a mcq_debit's own PK-per-row already prevents literal duplication at the call site)
     created_at            TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
 );
 
-CREATE INDEX IF NOT EXISTS idx_wallet_ledger_student ON wallet_ledger(telegram_user_id);
+CREATE INDEX IF NOT EXISTS idx_wallet_ledger_username ON wallet_ledger(username);
 CREATE INDEX IF NOT EXISTS idx_wallet_ledger_tenant  ON wallet_ledger(tenant_id);
-CREATE INDEX IF NOT EXISTS idx_wallet_ledger_month   ON wallet_ledger(telegram_user_id, event_type, created_at);
+CREATE INDEX IF NOT EXISTS idx_wallet_ledger_month   ON wallet_ledger(username, event_type, created_at);
 
 -- Real money, both directions: faculty's flat one-time ₹5,000 onboarding fee,
 -- and a student's credit-pack recharge (see tenants.README.md /
 -- 1lavya-faculty-onboarding-model memory for why literal ₹1 charges aren't
--- practical -- recharges are packs, e.g. ₹50 for 5,000 credits).
+-- practical -- recharges are packs, ₹20 minimum -- locked 2026-08-15, see
+-- TEST-MODE-ROADMAP.md §9.4).
+--
+-- Gateway locked 2026-08-15: Razorpay, live keys, via the Payment Links
+-- product (a Payment Link generated per recharge attempt and sent to the
+-- student in-chat -- no website checkout). `gateway_txn_id` holds the
+-- Razorpay Payment Link id (e.g. "plink_...") from the moment it's created,
+-- not just once paid -- this is what makes a retried "create the link"
+-- call idempotent (the UNIQUE constraint rejects a second row for a link
+-- that's already being tracked) and is also the reconciliation key a
+-- polling job checks via GET /v1/payment_links/{id} (see
+-- telegram/database/razorpay_client.py). `status` moves pending ->
+-- completed once that poll (or, later, a webhook) confirms `paid`.
+--
+-- `username` is who the credits actually go to -- separate from
+-- `telegram_user_id`, which stays as the audit record of which chat_id/
+-- phone actually initiated this specific recharge attempt. They're
+-- expected to always resolve to the same person today (a recharge requires
+-- a username to already exist -- see wallet_ledger's own note above), kept
+-- as two columns because they answer two different questions ("whose
+-- balance grew" vs. "which device did this"). This table was empty
+-- (verified against the live platform.db) when `username` was added, so it
+-- got the same inline-CREATE-TABLE treatment as wallet_ledger's reshape
+-- rather than a column migration -- see db.py's
+-- _migrate_wallet_ledger_shape() (handles both tables despite the name).
 CREATE TABLE IF NOT EXISTS payments (
     payment_id           INTEGER PRIMARY KEY AUTOINCREMENT,
     kind                  TEXT NOT NULL CHECK (kind IN ('faculty_onboarding_fee', 'student_credit_recharge')),
-    tenant_id             TEXT,               -- the faculty tenant_id for an onboarding fee; the tenant the student recharged from, for a recharge (informational -- wallet itself is shared, see wallet_ledger)
+    tenant_id             TEXT,               -- the faculty tenant_id for an onboarding fee; the tenant/bot_id the student recharged from, for a recharge (informational -- wallet itself is shared, see wallet_ledger)
     telegram_user_id      INTEGER REFERENCES students(telegram_user_id),  -- NULL for a faculty_onboarding_fee (faculty isn't a student row)
+    username              TEXT REFERENCES student_profiles(username),   -- NULL for a faculty_onboarding_fee; the student whose wallet this recharge credits
     amount_inr            NUMERIC NOT NULL,
     credits_granted       INTEGER,            -- NULL for faculty_onboarding_fee; the pack size for a recharge (mirrored into wallet_ledger.amount on completion)
-    gateway                TEXT,               -- e.g. 'razorpay', 'upi_manual'
-    gateway_txn_id         TEXT UNIQUE,        -- idempotency key: a retried/duplicate webhook for the same txn_id must be a no-op, not a double-credit
+    gateway                TEXT,               -- 'razorpay' for every recharge going forward (locked 2026-08-15); 'upi_manual' reserved for a hand-credited stopgap, not currently used anywhere
+    gateway_txn_id         TEXT UNIQUE,        -- idempotency key: a retried/duplicate webhook (or poll) for the same txn_id must be a no-op, not a double-credit
     status                 TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'completed', 'failed', 'refunded')),
     created_at             TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
     completed_at           TEXT
@@ -94,6 +141,7 @@ CREATE TABLE IF NOT EXISTS payments (
 
 CREATE INDEX IF NOT EXISTS idx_payments_student ON payments(telegram_user_id);
 CREATE INDEX IF NOT EXISTS idx_payments_tenant  ON payments(tenant_id);
+CREATE INDEX IF NOT EXISTS idx_payments_username ON payments(username);
 
 -- ---------------------------------------------------------------------------
 -- Content-ownership tagging convention (documentation only -- NOT a table

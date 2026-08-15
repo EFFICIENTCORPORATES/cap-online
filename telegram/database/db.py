@@ -68,10 +68,69 @@ def init_schema(conn: sqlite3.Connection):
     EXISTS, so calling this from every bot's startup is safe and expected
     (whichever bot starts first actually creates the tables; every bot
     after that is a no-op)."""
+    _migrate_wallet_ledger_shape(conn)
     sql = SCHEMA_PATH.read_text(encoding="utf-8")
     conn.executescript(sql)
     conn.commit()
     _run_column_migrations(conn)
+
+
+def _migrate_wallet_ledger_shape(conn: sqlite3.Connection):
+    """One-time reshape for wallet_ledger (telegram_user_id -> username,
+    widened event_type CHECK to add test_debit/descriptive_debit) and
+    payments (added a `username` column) -- 2026-08-15, Test Mode billing
+    rollout (see telegram/assets/exam_bot/Tests/TEST-MODE-ROADMAP.md §9 for
+    the full decision trail: wallet balance now follows a student's shared
+    1LAVYA username, not one phone/chat_id).
+
+    SQLite's ALTER TABLE can't rename/retype a column or widen a CHECK
+    constraint (confirmed by this codebase's own established convention --
+    see _COLUMN_MIGRATIONS' docstring above for the same limitation on
+    plain ADD COLUMN cases), so the only option is DROP + let
+    executescript() below recreate both tables fresh from schema.sql's new
+    CREATE TABLE text. This is safe ONLY because both tables were verified
+    empty (0 rows each) directly against the live platform.db before this
+    function was written -- not assumed. Guards the same way going forward:
+    refuses to drop either table if it ever finds a real row, rather than
+    silently destroying data, so a future re-run after real rows exist
+    fails loudly instead of quietly eating them.
+
+    Must run BEFORE executescript() in init_schema() -- CREATE TABLE IF NOT
+    EXISTS is a no-op against an already-existing old-shape table, so the
+    drop has to happen first or the new shape never takes effect."""
+    tables = conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name IN ('wallet_ledger','payments')"
+    ).fetchall()
+    existing_tables = {row[0] for row in tables}
+
+    if "wallet_ledger" in existing_tables:
+        cols = {row[1] for row in conn.execute("PRAGMA table_info(wallet_ledger)").fetchall()}
+        if "telegram_user_id" in cols and "username" not in cols:
+            count = conn.execute("SELECT COUNT(*) FROM wallet_ledger").fetchone()[0]
+            if count > 0:
+                raise RuntimeError(
+                    f"wallet_ledger has {count} real row(s) under the old telegram_user_id "
+                    "shape -- refusing to auto-drop. This migration was only ever verified "
+                    "safe against an empty table; a real data-preserving migration (INSERT "
+                    "... SELECT joining students.lavya_username) is needed instead."
+                )
+            conn.execute("DROP TABLE wallet_ledger")
+            logger.info("Migrated: dropped old-shape wallet_ledger (verified empty) for username-scoped reshape")
+
+    if "payments" in existing_tables:
+        cols = {row[1] for row in conn.execute("PRAGMA table_info(payments)").fetchall()}
+        if "username" not in cols:
+            count = conn.execute("SELECT COUNT(*) FROM payments").fetchone()[0]
+            if count > 0:
+                raise RuntimeError(
+                    f"payments has {count} real row(s) without a username column -- "
+                    "refusing to auto-drop. This migration was only ever verified safe "
+                    "against an empty table; a real data-preserving migration is needed instead."
+                )
+            conn.execute("DROP TABLE payments")
+            logger.info("Migrated: dropped old-shape payments (verified empty) to add username column")
+
+    conn.commit()
 
 
 # New columns added to EXISTING tables since this repo went live (both

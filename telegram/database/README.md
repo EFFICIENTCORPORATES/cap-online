@@ -20,10 +20,30 @@ and `mcq_issue_reports` (added 2026-08-13, `telegram/bots/mcq_issue_flow.py`'s
 folder's README). `exam_hub_mcq_attempts`/`exam_hub_descriptive_events`
 each also gained `content_owner` and `human_id` columns that same day (see
 "content_owner tagging" below).
-**Still schema-only, not wired into any bot**: `wallet_ledger` and
-`payments` — those were designed for the ₹5,000 faculty-fee / MCQ-credit
-billing model, which hasn't been built into any bot's actual flow yet (no
-gating, no payment webhook). MyFiles Hub's own `users`/`otps`/`files`/
+**Reshaped 2026-08-15** for the Test Mode billing rollout (see
+`telegram/assets/exam_bot/Tests/TEST-MODE-ROADMAP.md` §9 for the full
+decision trail): `wallet_ledger` now keys on `username`
+(`student_profiles.username`), not `telegram_user_id` — a student's balance
+follows them across every linked phone, consistent with the leaderboard/
+profile identity model, rather than fragmenting per chat_id. `payments`
+gained a `username` column alongside its existing `telegram_user_id` (which
+chat_id/phone actually initiated a given recharge vs. whose balance it
+credits). Both tables were verified empty before this reshape and migrated
+via `db.py`'s `_migrate_wallet_ledger_shape()` (a one-time drop+recreate,
+since SQLite can't `ALTER` a column's identity or widen a `CHECK`
+constraint) — see that function's docstring for the full reasoning and its
+guard against ever doing this again once real rows exist.
+
+**Primitives now exist** (`telegram/database/wallet.py` — balance/credit/
+debit with idempotency-key protection against double-charging on a
+retry/restart) **and a Razorpay Payment Links client**
+(`telegram/database/razorpay_client.py` — live keys, `RAZORPAY_1LAVYA_key_id`/
+`_key_secret` in `telegram/.env`), both smoke-tested
+(`telegram/database/smoke_test_wallet.py`, DB logic only, makes no network
+call). **Still not wired into any bot's actual flow** — no conversational
+recharge flow, no gating on MCQ/Descriptive practice or Test Mode yet, no
+Cloudflare Tunnel/webhook (a polling-based confirmation is the planned v1
+instead — see roadmap §9.5). MyFiles Hub's own `users`/`otps`/`files`/
 `tags`/`file_tags`/`activity_log` deliberately stay in their own separate
 `myfiles_hub.db` — primary application data, not logs, out of scope for
 this migration (see `schema.sql`'s own note).
@@ -185,8 +205,10 @@ FROM payments WHERE kind = 'student_credit_recharge' AND status = 'completed'
 GROUP BY tenant_id;
 
 -- A specific student's current credit balance (always derived, never stored)
+-- keyed by their 1LAVYA username since 2026-08-15, not telegram_user_id --
+-- see telegram/database/wallet.py's get_balance() for the real callable version.
 SELECT COALESCE(SUM(amount), 0) AS balance
-FROM wallet_ledger WHERE telegram_user_id = ?;
+FROM wallet_ledger WHERE username = ?;
 ```
 
 ## content_owner tagging (wired in 2026-08-13)
