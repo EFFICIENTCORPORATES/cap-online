@@ -102,6 +102,7 @@ import mcq_issue_flow  # noqa: E402 -- telegram/bots/mcq_issue_flow.py, the "Rep
 import wallet  # noqa: E402 -- telegram/database/wallet.py, the credit-wallet ledger (2026-08-15/16)
 import identity  # noqa: E402 -- telegram/database/identity.py, auto-provisioned wallet identity (2026-08-16)
 import test_flow  # noqa: E402 -- telegram/bots/test_flow.py, Test Mode / Pre-Designed Tests (2026-08-16)
+import wallet_flow  # noqa: E402 -- telegram/bots/wallet_flow.py, wallet status + recharge (2026-08-16)
 
 # ---------------------------------------------------------------------------
 # CONFIG
@@ -260,14 +261,16 @@ def db_ensure_wallet(user):
 def _out_of_balance_text() -> str:
     """Shown instead of a question when a student's balance can't cover
     it. Deliberately never mentions money/rupees (Pranav's explicit rule,
-    2026-08-15/16) -- and deliberately doesn't promise a working recharge
-    flow yet, since wallet_flow.py (the actual top-up conversation) isn't
-    built as of this writing -- see roadmap §0.2. Update this once it is."""
-    return (
-        "\U0001F6D1 You've used up your free access for now. "
-        "Recharging your balance is coming very soon — check back shortly, "
-        "or type <code>profile</code> to see your account."
-    )
+    2026-08-15/16)."""
+    return "\U0001F6D1 You've used up your balance for now."
+
+
+def _out_of_balance_markup():
+    """The Recharge Wallet button, callback_data literal (not imported
+    from wallet_flow.py -- these flow modules stay loosely coupled via
+    string-based callback prefixes, same as every other cross-flow
+    reference on this platform, rather than importing each other)."""
+    return InlineKeyboardMarkup([[InlineKeyboardButton("\U0001F4B3 Recharge Wallet", callback_data="walletrc:start")]])
 
 
 def db_start_session(user_id) -> int:
@@ -1391,7 +1394,7 @@ async def send_question(query, context):
     if not ok:
         await context.bot.send_message(
             chat_id=query.message.chat_id, text=_out_of_balance_text(), parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(next_step_rows(context, include_next=False)),
+            reply_markup=_out_of_balance_markup(),
         )
         return
 
@@ -1509,7 +1512,7 @@ async def send_mcq(query, context):
     if not ok:
         await context.bot.send_message(
             chat_id=query.message.chat_id, text=_out_of_balance_text(), parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(next_step_rows(context, include_next=False)),
+            reply_markup=_out_of_balance_markup(),
         )
         return
 
@@ -1634,13 +1637,17 @@ async def text_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
     their message swallowed by anything else. Anything else is silently
     ignored rather than guessed at."""
     text = (update.message.text or "").strip()
-    # 2026-08-16: Test Mode's own upload-collection state, checked FIRST of
-    # all -- a student actively uploading pages for a descriptive question
-    # (typing "done" to finish) must never have that text swallowed by
-    # anything else, same "most specific active state first" discipline
-    # every other check below already follows.
+    # 2026-08-16: Test Mode's own upload-collection state, and the wallet
+    # recharge flow's custom-amount prompt, both checked FIRST of all -- a
+    # student actively mid-way through either (typing "done", or typing a
+    # rupee amount) must never have that text swallowed by anything else,
+    # same "most specific active state first" discipline every other check
+    # below already follows.
     if test_flow.is_collecting_upload(context):
         if await test_flow.handle_upload_text_input(update, context, sys.modules[__name__]):
+            return
+    if wallet_flow.is_awaiting_custom_amount(context):
+        if await wallet_flow.handle_custom_amount_text(update, context, sys.modules[__name__]):
             return
     if mcq_issue_flow.is_awaiting_text_input(context):
         if await mcq_issue_flow.handle_issue_text_input(update, context):
@@ -1650,6 +1657,15 @@ async def text_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
     if profile_flow.matches_trigger(text):
         await profile_flow.start_profile_flow(update, context)
+        return
+    # Wallet status / recharge triggers -- "wallet" mirrors "profile"'s own
+    # convention exactly (Pranav's explicit ask); "recharge" works as its
+    # own standalone trigger too, not just via the wallet screen's button.
+    if wallet_flow.matches_wallet_trigger(text):
+        await wallet_flow.show_wallet_status(update, context, sys.modules[__name__])
+        return
+    if wallet_flow.matches_recharge_trigger(text):
+        await wallet_flow.start_recharge_flow(update, context, sys.modules[__name__])
         return
     # Test Mode's own triggers -- "test"/"take a test"/etc. to start/resume
     # a test, "upload" to submit a descriptive answer while one is active.
@@ -1708,6 +1724,7 @@ def main():
     # pattern per module" discipline as every flow above (the callback-
     # pattern-collision bug class this platform has hit 3+ times already).
     app.add_handler(CallbackQueryHandler(_test_flow_callback_wrapper, pattern=r"^(testflow|tnav|topt|tgo|tupload)(:|$)"))
+    app.add_handler(CallbackQueryHandler(_wallet_flow_callback_wrapper, pattern=r"^walletrc(:|$)"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_router))
     # Photo/document uploads -- only meaningful during Test Mode's upload
     # collection; test_flow.handle_upload_photo_or_document() is a no-op
@@ -1721,6 +1738,7 @@ def main():
     # platform). Must happen AFTER the Application (and its job_queue) is
     # built, before run_polling() starts serving real traffic.
     test_flow.rearm_pending_test_jobs(app, sys.modules[__name__])
+    wallet_flow.rearm_pending_recharge_jobs(app, sys.modules[__name__])
 
     logger.info(f"Exam Hub Bot starting for bot_id '{BOT_ID}' (tenant '{TENANT_ID}', {TENANT['display_name']})...")
     app.run_polling()
@@ -1728,6 +1746,10 @@ def main():
 
 async def _test_flow_callback_wrapper(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await test_flow.test_flow_callback(update, context, BOT_ID, sys.modules[__name__])
+
+
+async def _wallet_flow_callback_wrapper(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await wallet_flow.wallet_flow_callback(update, context, BOT_ID, sys.modules[__name__])
 
 
 async def _upload_router(update: Update, context: ContextTypes.DEFAULT_TYPE):

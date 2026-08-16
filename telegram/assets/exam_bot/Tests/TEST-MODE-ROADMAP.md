@@ -212,72 +212,85 @@ only, the sole subject with real "sitting" data). Full engine, not a demo:
   UI. Worth Pranav doing once, the same "human-verified first real
   transaction" caveat already flagged for the wallet/Razorpay work.
 
+### 0.1c Update, 2026-08-16 (same day, later still) — wallet status screen, real recharge flow, Test size tiers
+
+Three more pieces, all built, tested, and deployed:
+
+1. **`telegram/bots/wallet_flow.py`** (new) — typing `wallet` (mirrors
+   `profile`'s exact trigger convention) shows current balance in question/
+   mark terms (never rupees), the nearest grant-expiry date if one is
+   pending, and a real "💳 Recharge Wallet" button. Typing `recharge` (or
+   tapping that button) opens an amount picker (₹20/₹50/₹100 + custom,
+   ₹20 minimum) that creates a REAL Razorpay Payment Link — **the first
+   live Razorpay API call this platform has ever made** — sends the
+   payable URL in-chat, and polls for confirmation every 20s
+   (`context.job_queue`, re-armed on restart the same way Test Mode's own
+   expiry jobs are) crediting the wallet the instant payment clears. The
+   two `_out_of_balance_text()` call sites in `exam_hub_bot.py`, and both
+   of `test_flow.py`'s insufficient-balance messages, now carry this same
+   real Recharge Wallet button instead of the old "coming very soon" text.
+2. **Test Mode size tiers** (`test_flow.py`) — Pranav's explicit
+   correction: no more mandatory full-paper test. Every sitting now offers
+   **up to 3 size options — 20 / 50 / 100 marks** (a tier at or above the
+   sitting's own total collapses to one "Full Paper (N marks)" option
+   instead of a phantom oversized choice). A tier's actual question subset
+   is built deterministically — the same 20-mark version of a given
+   sitting is always the same questions, not randomized — using a 30:70
+   MCQ:Descriptive split (the same ratio Pranav already confirmed for the
+   still-unbuilt Custom Test's own assembly, reused rather than inventing
+   a second competing ratio), taking the largest in-order prefix of each
+   pool that fits its sub-target, with any leftover reallocated to
+   whichever pool still has room. The wallet charge and test duration are
+   both computed from the tier's REAL resulting marks (often slightly
+   under the nominal target — can't split one question to hit an exact
+   number), never the nominal tier value.
+3. **Verified for real**: `smoke_test_wallet_flow.py` (new, 21/21) —
+   **every Razorpay call in this test is explicitly mocked**
+   (`unittest.mock.patch.object`), a real safety requirement discovered
+   while writing it: this platform's actual live Razorpay keys are loaded
+   into any process that imports `exam_hub_bot.py`, so an unmocked call
+   here would have created real, live, payable Razorpay links on every
+   test run. `smoke_test_test_flow.py` grew to 39 checks (was 32) covering
+   the new tier-picker step and a full 27-sitting × tier cross-check
+   (every real sitting's every tier produces a valid, non-empty,
+   correctly-capped subset — 0 problems). Two more real test-cleanup bugs
+   were caught and fixed (same FK-ordering lesson recurring a third time:
+   `payments.telegram_user_id` also references `students`, on top of
+   every other FK already known about — worth remembering as a durable
+   pattern, not just a one-off). All 4 suites together: 122 checks passing
+   (49 + 13 + 39 + 21).
+4. **Deployed**: `1lavya-examhub` and `capranav-exam` restarted, confirmed
+   clean.
+
+**Still true**: no human has completed a real live payment through this
+flow yet. Everything above is verified by driving the real code (including
+the real DB writes and real message construction) with the Razorpay layer
+mocked — genuine, meaningful verification, but not the same as an actual
+UPI payment clearing. This remains the one gap only a human can close.
+
 ### 0.2 What is NOT built yet — the actual next steps, in order
 
-1. **`telegram/bots/wallet_flow.py`** (doesn't exist yet) — the conversational
-   recharge flow. Shape it should follow (matches this codebase's existing
-   `profile_flow.py`/`report_flow.py`/`mcq_issue_flow.py` pattern: a standalone
-   module owning its own callback-prefix + text-trigger, imported and wired
-   into each bot's handler registration, not a rewrite of the host bot):
-   - Text trigger: `"recharge"` / `"top up"` / `"add money"` (same
-     `filters.Regex(...)` style the existing `"profile"`/`"report"` triggers use).
-   - **Precondition check first**: does this `telegram_user_id` have a
-     `students.lavya_username` set? If not, route into `profile_flow.py`'s
-     existing username-creation step before proceeding — do not build a
-     second, competing username-collection flow.
-   - Ask amount (buttons for common packs, e.g. ₹20/₹50/₹100, plus a
-     "custom amount" free-text option) — enforce the ₹20 minimum
-     (`wallet.RECHARGE_MINIMUM_INR`, needs adding as an importable constant
-     if not already — check `wallet.py` before assuming).
-   - Build a `reference_id` for Razorpay that's unique per attempt (e.g.
-     `f"recharge:{username}:{int(time.time())}"`), call
-     `razorpay_client.create_payment_link(...)`, **immediately** write a
-     `payments` row (`status='pending'`, `gateway_txn_id` = the returned
-     Payment Link id) before sending anything to the student — so a crash
-     between link-creation and confirmation still leaves an auditable
-     pending record, never an orphaned real Razorpay link with no local trace.
-   - Send the `short_url` to the student in-chat.
-   - **Poll for confirmation** via `context.job_queue.run_repeating()` (same
-     mechanism `db.py`'s `schedule_heartbeat()` already establishes) calling
-     `razorpay_client.fetch_payment_link()` every N seconds (suggest 15–20s)
-     until `status == "paid"`, or the link's own `expire_by` passes (stop
-     polling, mark the `payments` row `status='failed'`, tell the student it
-     expired). On `paid`: update `payments.status='completed'`, call
-     `wallet.credit_for_recharge()`, confirm the new balance to the student.
-   - **This job must survive a bot restart** — same discipline as the Test
-     Mode timer jobs in §5.3 below: on every bot startup, sweep
-     `payments WHERE status='pending'` and re-arm a polling job for each,
-     don't assume an in-memory `JobQueue` job survives a crash/restart.
-2. **Wire `wallet_flow.py` into the live bots** (`exam_hub_bot.py`,
-   `study_hub_bot.py`, `faculty_bot.py` — same 3 places `mcq_issue_flow.py`/
-   `report_flow.py` are already wired into) — genuinely deploys this to real
-   students, needs its own explicit go-ahead and a restart of the affected
-   bot processes. Not done by this session on purpose.
-3. **A human-verified first real transaction** — once wired, a real ₹20 (or
-   whatever) recharge should be run and watched end-to-end by a person before
-   trusting the pipeline generally, given there's no test-mode safety net.
-   This is not optional given §9.5's "live keys, no test mode" decision.
-4. **Cloudflare Tunnel + webhook** (optional upgrade, not a blocker for the
-   above — polling alone is a complete, correct v1) — still blocked on
-   Pranav's own interactive `cloudflared login`; see §9.5.
-5. ~~Gating MCQ/Descriptive practice on the wallet~~ — **DONE, 2026-08-16**
-   (see §0.1a) — live on `1lavya-examhub`/`capranav-exam`/`csarunchouhan`.
-   Test Mode's own `debit_for_test()` is still unused, waiting on Test Mode
-   itself (§1–§8's feature build), which remains completely unbuilt as of
-   this writing — everything above is billing *infrastructure*, not the
-   Test Mode feature.
-6. **Extend identity/grant to Study Hub + MyFiles Hub bots** — a student
-   whose genuine first-ever platform touch is Study Hub doesn't see the
-   welcome-bonus message at that moment today (see §0.1a's "known gap").
-   Same functions, different bot script — small, not done this round.
-7. **Schedule `wallet.sweep_expired_grants()`** — built and tested, but not
+1. **A human-verified first real transaction** — the recharge flow exists,
+   is deployed, and is verified with every Razorpay call mocked. No one has
+   completed a real live payment through it yet. This is the single most
+   important remaining gap, given there's no test-mode safety net (§9.5's
+   "live keys, no test mode" decision) — a real recharge should be run and
+   watched end-to-end by a person before trusting the pipeline generally.
+2. **Cloudflare Tunnel + webhook** (optional upgrade, not a blocker —
+   polling alone is a complete, correct v1) — still blocked on Pranav's own
+   interactive `cloudflared login`; see §9.5.
+3. **Extend identity/grant/wallet display to Study Hub + MyFiles Hub bots**
+   — a student whose genuine first-ever platform touch is Study Hub doesn't
+   see the welcome-bonus message at that moment today, and can't type
+   `wallet` there either (see §0.1a's "known gap"). Same functions,
+   different bot scripts — small, not done this round.
+4. **Schedule `wallet.sweep_expired_grants()`** — built and tested, but not
    wired to any recurring job yet (no urgency: the earliest possible real
    expiry is 365 days out). A low-frequency `job_queue` task in one bot, or
    a standalone scheduled tool script, either is fine.
-6. **Test Mode the actual feature** (§1–§8 of this document) — none of it is
-   built. The wallet/billing work above is a prerequisite this session chose
-   to build first (triggered by the live Razorpay keys arriving), not a sign
-   Test Mode itself has started.
+5. **The 3-PDF delivery bundle, AI evaluation (Phase 2), Student Customised
+   Test, and milestone timer reminders** — see §0.1b's own "explicitly not
+   built" list; all still true, nothing changed here.
 
 ### 0.3 Verification trail (so "done" isn't taken on faith)
 
@@ -293,9 +306,9 @@ only, the sole subject with real "sitting" data). Full engine, not a demo:
 - `health_check.py` and `file_index.py` were re-run after every structural
   change in this work, per `/CLAUDE.md`'s non-negotiable rule — same 16
   pre-existing, already-documented failures both times, nothing new.
-- **Not yet verified**: anything involving the actual Razorpay API (no call
-  has been made), and the eventual `wallet_flow.py` (doesn't exist yet, so
-  nothing to verify).
+- **Not yet verified**: the actual live Razorpay API itself (every call in
+  every automated test is deliberately mocked, per §0.1c's safety note — no
+  real payment has ever been completed through this pipeline).
 
 ### 0.4 A note on concurrent work in this exact area
 

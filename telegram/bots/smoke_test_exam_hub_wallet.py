@@ -150,7 +150,11 @@ async def main():
         check("out-of-balance: bot.send_message was called with the out-of-balance text", ctx5.bot.send_message.await_count == 1)
         sent_text = ctx5.bot.send_message.await_args.kwargs.get("text", "")
         check("out-of-balance message never mentions rupees", "₹" not in sent_text)
-        check("out-of-balance message doesn't falsely promise a working recharge", "recharg" in sent_text.lower())
+        # 2026-08-16: now carries a REAL Recharge Wallet button (walletrc:start)
+        # rather than just promising text -- checked via the actual markup,
+        # not string-matching the message body.
+        sent_markup = ctx5.bot.send_message.await_args.kwargs.get("reply_markup")
+        check("out-of-balance message includes a real Recharge Wallet button", sent_markup is not None and "walletrc:start" in str(sent_markup))
 
     finally:
         cleanup()

@@ -74,6 +74,19 @@ UD_PICKER_CATALOG_KEY = "testflow_picked_catalog_key"
 UD_AWAITING_UPLOAD_PICK = "testflow_awaiting_upload_pick"   # bool -- "upload" was typed, waiting for a seq_no choice
 UD_UPLOAD_SEQ = "testflow_upload_seq"                        # int or None -- actively collecting pages for this seq_no
 UD_UPLOAD_PAGE_COUNTER = "testflow_upload_page_counter"
+UD_PICKER_TIER_MARKS = "testflow_picked_tier_marks"           # int -- the chosen size tier's target marks (2026-08-16)
+
+# --- Size tiers (2026-08-16, Pranav's explicit ask: "we should not have the
+# mandatory 100 marks test, instead we should have 3 options... 20/50/100
+# marks") -- offered per real sitting, never a mandatory full-paper size.
+# A tier at or above the sitting's own total collapses to "Full Paper" (no
+# point offering a phantom 100-mark option on a 62-mark paper) -- see
+# _tier_options() below. Split 30:70 MCQ:Descriptive when building a
+# tier's actual question subset -- the SAME ratio Pranav already confirmed
+# for the (still unbuilt) Custom Test's own marks-assembly, reused here
+# rather than inventing a second, competing ratio decision.
+SIZE_TIERS = [20, 50, 100]
+TIER_MCQ_SHARE = 0.3
 
 
 def matches_trigger(text: str) -> bool:
@@ -244,18 +257,100 @@ async def _show_sitting_picker(message_or_query, context, conn, course, level, s
         await message_or_query.reply_text(text, reply_markup=markup)
 
 
-def _summary_text_and_markup(conn, catalog_key, username, tenant_id):
-    row = conn.execute(
-        "SELECT title, total_marks, duration_minutes, mcq_count, mcq_marks, descriptive_count, descriptive_marks "
-        "FROM predesigned_tests WHERE catalog_key=?",
-        (catalog_key,),
-    ).fetchone()
-    title, total_marks, duration_minutes, mcq_count, mcq_marks, descriptive_count, descriptive_marks = row
+def _tier_options(total_marks: int):
+    """Returns [(label, target_marks), ...] -- a tier at or above the
+    sitting's own total collapses to one 'Full Paper' option instead of a
+    phantom '100 marks' on, say, a 62-mark paper. Never more than
+    len(SIZE_TIERS) options, per Pranav's explicit '3 options' ask."""
+    options = []
+    for t in SIZE_TIERS:
+        if t >= total_marks:
+            options.append((f"Full Paper ({total_marks} marks)", total_marks))
+            break
+        options.append((f"{t} marks", t))
+    return options
+
+
+async def _show_tier_picker(message_or_query, context, conn, catalog_key, edit=True):
+    row = conn.execute("SELECT title, total_marks FROM predesigned_tests WHERE catalog_key=?", (catalog_key,)).fetchone()
+    title, total_marks = row
+    options = _tier_options(total_marks)
+    context.user_data["testflow_tier_options"] = [m for _, m in options]
+    rows = [[InlineKeyboardButton(label, callback_data=f"testflow:tier:{i}")] for i, (label, _) in enumerate(options)]
+    text = f"\U0001F4DD <b>{title}</b> — how long a test?"
+    markup = InlineKeyboardMarkup(rows)
+    if edit:
+        await message_or_query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=markup)
+    else:
+        await message_or_query.reply_text(text, parse_mode=ParseMode.HTML, reply_markup=markup)
+
+
+def _build_subset_questions(mcq_qs: list, desc_qs: list, target_marks: int):
+    """Splits target_marks 30:70 between MCQ:Descriptive (the same ratio
+    already confirmed for Custom Test's own marks-assembly -- reused here
+    rather than inventing a second, competing ratio), then takes the
+    largest PREFIX of each pool (in the sitting's own original order) that
+    doesn't exceed its sub-target. Deterministic -- the same tier on the
+    same sitting always yields the same subset, never randomized, so 'the
+    20-mark version of MTP May 2026 Set 1' is a stable, well-defined thing.
+    Any marks left over after both prefixes run out of room (a pool ran
+    dry before its sub-target) are reallocated to the OTHER pool -- never
+    silently under-delivers a tier's target if the content exists to fill it.
+
+    Returns (mcq_subset, desc_subset, actual_total_marks) -- actual_total
+    is often slightly UNDER target_marks (can't split a single question to
+    hit an exact number) and this is expected, not a bug."""
+    def take_prefix(qs, target, marks_fn):
+        selected, total = [], 0
+        for q in qs:
+            m = marks_fn(q)
+            if total + m <= target:
+                selected.append(q)
+                total += m
+            else:
+                break
+        return selected, total
+
+    mcq_marks_fn = lambda q: q.get("marks") or 0  # noqa: E731
+    desc_marks_fn = _parse_desc_marks
+
+    mcq_target = round(target_marks * TIER_MCQ_SHARE)
+    desc_target = target_marks - mcq_target
+
+    mcq_selected, mcq_total = take_prefix(mcq_qs, mcq_target, mcq_marks_fn)
+    desc_selected, desc_total = take_prefix(desc_qs, desc_target, desc_marks_fn)
+
+    leftover = target_marks - mcq_total - desc_total
+    if leftover > 0:
+        more_desc, more_total = take_prefix(desc_qs[len(desc_selected):], leftover, desc_marks_fn)
+        desc_selected += more_desc
+        desc_total += more_total
+        leftover -= more_total
+    if leftover > 0:
+        more_mcq, more_total = take_prefix(mcq_qs[len(mcq_selected):], leftover, mcq_marks_fn)
+        mcq_selected += more_mcq
+        mcq_total += more_total
+
+    return mcq_selected, desc_selected, mcq_total + desc_total
+
+
+def _summary_text_and_markup(conn, catalog_key, tier_marks, username, tenant_id, host):
+    row = conn.execute("SELECT title FROM predesigned_tests WHERE catalog_key=?", (catalog_key,)).fetchone()
+    title = row[0]
+
+    mcq_qs = _mcqs_for_catalog(host, catalog_key)
+    desc_qs = _descs_for_catalog(host, catalog_key)
+    mcq_subset, desc_subset, total_marks = _build_subset_questions(mcq_qs, desc_qs, tier_marks)
+    mcq_count, descriptive_count = len(mcq_subset), len(desc_subset)
+    mcq_marks = sum(q.get("marks") or 0 for q in mcq_subset)
+    descriptive_marks = total_marks - mcq_marks
+    duration_minutes = max(10, int(total_marks * 1.8 + 0.999))
+
     cost_credits = total_marks * wallet.RATE_TEST_CREDIT_PER_MARK
     balance = wallet.get_balance(conn, username)
 
     lines = [
-        f"\U0001F4DD <b>{title}</b>",
+        f"\U0001F4DD <b>{title}</b> — {tier_marks}-mark version",
         f"Total: {total_marks} marks (~{duration_minutes} minutes)",
         f"MCQs: {mcq_count} ({mcq_marks} marks) | Descriptive: {descriptive_count} ({descriptive_marks} marks)",
         "",
@@ -269,7 +364,10 @@ def _summary_text_and_markup(conn, catalog_key, username, tenant_id):
     if balance < cost_credits:
         lines.append("")
         lines.append("⚠️ Your balance isn't enough for this test right now.")
-        rows = [[InlineKeyboardButton("\U0001F519 Back to practice mode", callback_data="restart")]]
+        rows = [
+            [InlineKeyboardButton("\U0001F4B3 Recharge Wallet", callback_data="walletrc:start")],
+            [InlineKeyboardButton("\U0001F519 Back to practice mode", callback_data="restart")],
+        ]
     else:
         rows = [
             [InlineKeyboardButton("\U0001F3C1 Start Test", callback_data="testflow:confirm")],
@@ -286,27 +384,25 @@ def _new_test_id(telegram_user_id: int) -> str:
     return f"T-{telegram_user_id}-{int(datetime.now(timezone.utc).timestamp())}"
 
 
-async def _start_test(update_or_query, context, conn, telegram_user_id, bot_id, catalog_key, host, is_callback):
+async def _start_test(update_or_query, context, conn, telegram_user_id, bot_id, catalog_key, tier_marks, host, is_callback):
     user = update_or_query.from_user if is_callback else update_or_query.effective_user
     username, _ = identity.ensure_wallet_identity(conn, user)
 
-    cat = conn.execute(
-        "SELECT total_marks, duration_minutes, mcq_count, descriptive_count FROM predesigned_tests WHERE catalog_key=?",
-        (catalog_key,),
-    ).fetchone()
-    total_marks, duration_minutes, mcq_count, descriptive_count = cat
+    mcq_qs = _mcqs_for_catalog(host, catalog_key)
+    desc_qs = _descs_for_catalog(host, catalog_key)
+    mcq_qs, desc_qs, total_marks = _build_subset_questions(mcq_qs, desc_qs, tier_marks)
+    mcq_count, descriptive_count = len(mcq_qs), len(desc_qs)
+    duration_minutes = max(10, int(total_marks * 1.8 + 0.999))
 
     test_id = _new_test_id(telegram_user_id)
     ok, new_balance, already_applied = wallet.debit_for_test(conn, username, host.TENANT_ID, test_id, total_marks)
     if not ok:
-        text = (
-            "⚠️ Your balance isn't enough to start this test. "
-            "Recharging is coming very soon — check back shortly."
-        )
+        text = "⚠️ Your balance isn't enough to start this test."
+        markup = InlineKeyboardMarkup([[InlineKeyboardButton("\U0001F4B3 Recharge Wallet", callback_data="walletrc:start")]])
         if is_callback:
-            await update_or_query.edit_message_text(text)
+            await update_or_query.edit_message_text(text, reply_markup=markup)
         else:
-            await update_or_query.message.reply_text(text)
+            await update_or_query.message.reply_text(text, reply_markup=markup)
         return
 
     now_dt = datetime.now(timezone.utc)
@@ -321,9 +417,6 @@ async def _start_test(update_or_query, context, conn, telegram_user_id, bot_id, 
         (test_id, bot_id, telegram_user_id, username, catalog_key, total_marks, mcq_count, descriptive_count,
          duration_minutes, started_at, expires_at),
     )
-
-    mcq_qs = _mcqs_for_catalog(host, catalog_key)
-    desc_qs = _descs_for_catalog(host, catalog_key)
 
     seq_no = 1
     for q in mcq_qs:
@@ -590,16 +683,23 @@ async def _handle_picker_callback(query, context, conn, data, bot_id, host):
         idx = int(parts[2])
         catalog_key = context.user_data.get(UD_PICKER_SITTINGS, [])[idx]
         context.user_data[UD_PICKER_CATALOG_KEY] = catalog_key
+        await _show_tier_picker(query, context, conn, catalog_key, edit=True)
+    elif action == "tier":
+        idx = int(parts[2])
+        tier_marks = context.user_data.get("testflow_tier_options", [])[idx]
+        context.user_data[UD_PICKER_TIER_MARKS] = tier_marks
+        catalog_key = context.user_data.get(UD_PICKER_CATALOG_KEY)
         user = query.from_user
         username, _ = identity.ensure_wallet_identity(conn, user)
-        text, markup = _summary_text_and_markup(conn, catalog_key, username, host.TENANT_ID)
+        text, markup = _summary_text_and_markup(conn, catalog_key, tier_marks, username, host.TENANT_ID, host)
         await query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=markup)
     elif action == "confirm":
         catalog_key = context.user_data.get(UD_PICKER_CATALOG_KEY)
-        if not catalog_key:
+        tier_marks = context.user_data.get(UD_PICKER_TIER_MARKS)
+        if not catalog_key or not tier_marks:
             await query.edit_message_text("⚠️ Something went wrong — type <code>test</code> to start again.", parse_mode=ParseMode.HTML)
             return
-        await _start_test(query, context, conn, query.from_user.id, bot_id, catalog_key, host, is_callback=True)
+        await _start_test(query, context, conn, query.from_user.id, bot_id, catalog_key, tier_marks, host, is_callback=True)
     elif action == "jump_advacc":
         courses = _available_courses(conn)
         context.user_data[UD_PICKER_COURSES] = courses

@@ -139,30 +139,54 @@ async def main():
         sittings = context.user_data.get(test_flow.UD_PICKER_SITTINGS, [])
         check("at least one real sitting is offered", len(sittings) > 0)
 
-        # 3. Pick the first sitting -> summary/confirm screen.
+        # 3. Pick the first sitting -> size-tier picker (2026-08-16: no more
+        # mandatory full-paper size -- 20/50/100 marks, or "Full Paper" for
+        # a sitting smaller than the tier).
         q1 = mock_query(user)
         q1.edit_message_text = AsyncMock()
         await test_flow._handle_picker_callback(q1, context, conn, "testflow:sitting:0", "1lavya-examhub", host)
-        summary_text = last_text(q1.edit_message_text)
+        tier_text = last_text(q1.edit_message_text)
+        check("sitting pick leads to a size-tier picker, not straight to summary", "how long a test" in tier_text.lower())
+        tier_options = context.user_data.get("testflow_tier_options", [])
+        check("at most 3 size tiers offered", 1 <= len(tier_options) <= 3)
+        check("every tier option is a positive, sane marks value", all(0 < m <= 200 for m in tier_options))
+
+        # 3b. Pick the smallest tier (20 marks, or the sitting's own total
+        # if it's under 20) -> summary/confirm screen.
+        q1b = mock_query(user)
+        q1b.edit_message_text = AsyncMock()
+        await test_flow._handle_picker_callback(q1b, context, conn, "testflow:tier:0", "1lavya-examhub", host)
+        summary_text = last_text(q1b.edit_message_text)
         check("summary screen shows total marks", "Total:" in summary_text)
         check("summary screen shows credit cost, never rupees", "credits" in summary_text and "₹" not in summary_text)
         check("summary screen shows current balance", "you currently have" in summary_text)
+        chosen_tier = tier_options[0]
+        check("summary reflects the chosen tier's marks, not the full paper's", f"{chosen_tier}-mark version" in summary_text)
 
         # 4. Confirm -> Start Test (wallet debit + first question shown).
+        # Expected counts must come from the SAME subset-building logic the
+        # real code uses (the chosen TIER's marks, not the full sitting's) --
+        # reading predesigned_tests directly here would test the wrong thing
+        # now that a tier is always a subset, not necessarily the full paper.
         balance_before_start = wallet.get_balance(conn, username)
         catalog_key = context.user_data[test_flow.UD_PICKER_CATALOG_KEY]
-        cat_row = conn.execute("SELECT total_marks, mcq_count, descriptive_count FROM predesigned_tests WHERE catalog_key=?", (catalog_key,)).fetchone()
-        total_marks, mcq_count, descriptive_count = cat_row
+        expected_mcqs = test_flow._mcqs_for_catalog(host, catalog_key)
+        expected_descs = test_flow._descs_for_catalog(host, catalog_key)
+        _, _, expected_total_marks = test_flow._build_subset_questions(expected_mcqs, expected_descs, chosen_tier)
         q2 = mock_query(user)
         q2.edit_message_text = AsyncMock()
         await test_flow._handle_picker_callback(q2, context, conn, "testflow:confirm", "1lavya-examhub", host)
         active = test_flow._get_active_test(conn, CHAT_ID)
         check("a test_sessions row was created", active is not None)
         test_id = active[0]
-        expected_cost = total_marks * wallet.RATE_TEST_CREDIT_PER_MARK
-        check(f"wallet debited exactly {expected_cost} credits at Start Test", wallet.get_balance(conn, username) == balance_before_start - expected_cost)
+        expected_cost = expected_total_marks * wallet.RATE_TEST_CREDIT_PER_MARK
+        check(f"wallet debited exactly {expected_cost} credits at Start Test (the tier's marks, not the full paper's)", wallet.get_balance(conn, username) == balance_before_start - expected_cost)
+        check("test_sessions total_marks matches the tier's actual subset, not the full sitting", conn.execute("SELECT total_marks FROM test_sessions WHERE test_id=?", (test_id,)).fetchone()[0] == expected_total_marks)
         qcount = conn.execute("SELECT COUNT(*) FROM test_questions WHERE test_id=?", (test_id,)).fetchone()[0]
-        check("test_questions rows created for every question in the sitting", qcount == mcq_count + descriptive_count)
+        mcq_count = conn.execute("SELECT COUNT(*) FROM test_questions WHERE test_id=? AND qtype='mcq'", (test_id,)).fetchone()[0]
+        descriptive_count = conn.execute("SELECT COUNT(*) FROM test_questions WHERE test_id=? AND qtype='descriptive'", (test_id,)).fetchone()[0]
+        check("test_questions rows created for exactly the tier's subset", qcount == mcq_count + descriptive_count and qcount > 0)
+        check("a 20-ish-mark tier is meaningfully smaller than the full sitting (subsetting actually happened)", qcount <= len(expected_mcqs) + len(expected_descs))
         check("Start Test message doesn't reveal any answer", "correct" not in last_text(q2.edit_message_text).lower())
 
         # 5. First question is an MCQ (sittings are ordered MCQ-then-descriptive) if mcq_count > 0.
@@ -256,6 +280,21 @@ async def main():
         # since the previous test was submitted, this should show a fresh
         # picker again, not "resume" -- confirms status transitions correctly.
         check("after submission, a new 'test' trigger offers a fresh picker (not stuck resuming a closed test)", test_flow._get_active_test(conn, CHAT_ID) is None)
+
+        # 15. Size-tier subsetting is sane across EVERY real sitting in the
+        # catalog, not just the one this test happened to pick -- catches a
+        # tier that silently produces an empty/oversized/broken subset for
+        # some sitting this test's own single-sitting path wouldn't exercise.
+        all_sittings = conn.execute("SELECT catalog_key, total_marks FROM predesigned_tests").fetchall()
+        tier_problems = 0
+        for ck, tm in all_sittings:
+            mcqs = test_flow._mcqs_for_catalog(host, ck)
+            descs = test_flow._descs_for_catalog(host, ck)
+            for _, target in test_flow._tier_options(tm):
+                m, d, actual = test_flow._build_subset_questions(mcqs, descs, target)
+                if actual <= 0 or actual > target or (len(m) + len(d)) == 0:
+                    tier_problems += 1
+        check(f"all {len(all_sittings)} real sittings' size tiers produce valid, non-empty, correctly-capped subsets", tier_problems == 0)
 
     finally:
         cleanup()
