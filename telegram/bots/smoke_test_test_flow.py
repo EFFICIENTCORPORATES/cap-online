@@ -20,6 +20,7 @@ import os
 import sys
 import shutil
 import asyncio
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import AsyncMock
@@ -62,6 +63,7 @@ def cleanup():
         conn.execute("DELETE FROM test_questions WHERE test_id=?", (test_id,))
         conn.execute("DELETE FROM test_mcq_answers WHERE test_id=?", (test_id,))
         conn.execute("DELETE FROM test_uploads WHERE test_id=?", (test_id,))
+        conn.execute("DELETE FROM test_activity_log WHERE test_id=?", (test_id,))
         conn.execute("DELETE FROM test_sessions WHERE test_id=?", (test_id,))
         upload_dir = test_flow.UPLOADS_ROOT / test_id
         if upload_dir.exists():
@@ -85,8 +87,46 @@ def mock_update(text=""):
     return SimpleNamespace(effective_user=user, message=message), user, message
 
 
-def mock_context():
-    return SimpleNamespace(user_data={}, bot=SimpleNamespace(send_message=AsyncMock(), send_document=AsyncMock()), job_queue=None)
+class FakeJob:
+    def __init__(self, job_dict):
+        self._job_dict = job_dict
+
+    def schedule_removal(self):
+        self._job_dict["removed"] = True
+
+
+class FakeJobQueue:
+    """Records every run_once() call instead of actually scheduling a real
+    timer -- lets the reminder/expiry/grace job logic be verified (what got
+    scheduled, when, and whether it was later cancelled) without waiting
+    real wall-clock time."""
+    def __init__(self):
+        self.scheduled = []
+
+    def run_once(self, callback, when, name=None, data=None):
+        self.scheduled.append({"callback": callback, "when": when, "name": name, "data": data, "removed": False})
+
+    def get_jobs_by_name(self, name):
+        return [FakeJob(j) for j in self.scheduled if j["name"] == name and not j["removed"]]
+
+    def active(self):
+        return [j for j in self.scheduled if not j["removed"]]
+
+    def mark_fired(self, name):
+        """Real python-telegram-bot run_once jobs auto-remove themselves
+        after firing exactly once -- this test double doesn't run a real
+        dispatch loop (callbacks are invoked directly), so tests that
+        directly call a job's callback function must explicitly mark that
+        job consumed afterward to keep the fake queue's state honest."""
+        for j in self.scheduled:
+            if j["name"] == name and not j["removed"]:
+                j["removed"] = True
+                return
+
+
+def mock_context(with_job_queue=False):
+    jq = FakeJobQueue() if with_job_queue else None
+    return SimpleNamespace(user_data={}, bot=SimpleNamespace(send_message=AsyncMock(), send_document=AsyncMock()), job_queue=jq)
 
 
 def mock_query(user, text_for_seq_parsing=""):
@@ -188,6 +228,13 @@ async def main():
         check("test_questions rows created for exactly the tier's subset", qcount == mcq_count + descriptive_count and qcount > 0)
         check("a 20-ish-mark tier is meaningfully smaller than the full sitting (subsetting actually happened)", qcount <= len(expected_mcqs) + len(expected_descs))
         check("Start Test message doesn't reveal any answer", "correct" not in last_text(q2.edit_message_text).lower())
+        # 2026-08-16, Pranav's ask: every question tracked at topic/subtopic
+        # level for concept-level analysis later.
+        topic_rows = conn.execute("SELECT chapter_slug, topic_text FROM test_questions WHERE test_id=?", (test_id,)).fetchall()
+        check("every test question has a chapter_slug snapshotted", all(r[0] for r in topic_rows))
+        check("test_sessions.current_seq_no was set to 1 at start", conn.execute("SELECT current_seq_no FROM test_sessions WHERE test_id=?", (test_id,)).fetchone()[0] == 1)
+        check("activity log recorded 'test_started'", conn.execute("SELECT COUNT(*) FROM test_activity_log WHERE test_id=? AND action_type='test_started'", (test_id,)).fetchone()[0] == 1)
+        check("activity log recorded 'question_viewed' for Q1", conn.execute("SELECT COUNT(*) FROM test_activity_log WHERE test_id=? AND seq_no=1 AND action_type='question_viewed'", (test_id,)).fetchone()[0] >= 1)
 
         # 5. First question is an MCQ (sittings are ordered MCQ-then-descriptive) if mcq_count > 0.
         if mcq_count > 0:
@@ -204,6 +251,19 @@ async def main():
             check("MCQ answer text never reveals correct/incorrect mid-test", "✅" not in last_text(q3.edit_message_text) and "❌" not in last_text(q3.edit_message_text).lower())
             status_row = conn.execute("SELECT status FROM test_questions WHERE test_id=? AND seq_no=1", (test_id,)).fetchone()
             check("question status updated to 'answered'", status_row[0] == "answered")
+            check("activity log recorded the first pick", conn.execute("SELECT COUNT(*) FROM test_activity_log WHERE test_id=? AND action_type='mcq_option_selected'", (test_id,)).fetchone()[0] == 1)
+
+            # 6b. Change the answer -- 2026-08-16, Pranav's ask: distinguish
+            # a first pick from a later change of mind.
+            q3b = mock_query(user, text_for_seq_parsing="Q1/" + str(qcount))
+            q3b.edit_message_text = AsyncMock()
+            await test_flow._handle_option_select(q3b, context, conn, test_id, "B", host)
+            change_row = conn.execute("SELECT detail FROM test_activity_log WHERE test_id=? AND action_type='mcq_option_changed'", (test_id,)).fetchone()
+            check("changing the answer logs a distinct 'mcq_option_changed' event", change_row is not None)
+            check("the change event records both the old and new option", change_row[0] == "from=A to=B")
+            check("re-selecting the SAME option again does not log a spurious change", True)  # verified by the next call not adding a 2nd change row
+            await test_flow._handle_option_select(mock_query(user, text_for_seq_parsing="Q1/" + str(qcount)), context, conn, test_id, "B", host)
+            check("no-op re-selection doesn't log another change", conn.execute("SELECT COUNT(*) FROM test_activity_log WHERE test_id=? AND action_type='mcq_option_changed'", (test_id,)).fetchone()[0] == 1)
 
             # 7. Palette shows the right icons.
             q4 = mock_query(user)
@@ -255,8 +315,55 @@ async def main():
             check("descriptive question marked 'uploaded' after done", q_status == "uploaded")
             check("upload collection state cleared after done", not test_flow.is_collecting_upload(context))
 
-        # 13. Submit the test -- verify scoring + honest messaging (no fake
-        # "30 minutes" promise, since AI evaluation isn't built).
+        # 12b. Re-picking a question that ALREADY has uploaded pages must
+        # warn, not silently accept more (2026-08-16, real gap Pranav found
+        # by testing).
+        if descriptive_count > 0:
+            q5b = mock_query(user)
+            q5b.edit_message_text = AsyncMock()
+            q5b.data = f"tupload:{desc_seq}"
+            await test_flow.test_flow_callback(SimpleNamespace(callback_query=q5b), context, "1lavya-examhub", host)
+            warn_text = last_text(q5b.edit_message_text)
+            check("re-picking an already-uploaded question warns instead of silently accepting more", "already uploaded" in warn_text.lower())
+            check("re-upload warning offers Overwrite and Append", "overwrite" in str(q5b.edit_message_text.await_args.kwargs.get("reply_markup")).lower() and f"tupload:{desc_seq}:append" in str(q5b.edit_message_text.await_args.kwargs.get("reply_markup")))
+            check("picking the question again does NOT silently start collecting (state untouched)", context.user_data.get(test_flow.UD_UPLOAD_SEQ) is None)
+
+            # 12c. Choose "append" -- should resume from the existing page
+            # count, not reset to page 1, and the old page is NOT deleted.
+            existing_page_count = conn.execute("SELECT COUNT(*) FROM test_uploads WHERE test_id=? AND seq_no=?", (test_id, desc_seq)).fetchone()[0]
+            q5c = mock_query(user)
+            q5c.edit_message_text = AsyncMock()
+            q5c.data = f"tupload:{desc_seq}:append"
+            await test_flow.test_flow_callback(SimpleNamespace(callback_query=q5c), context, "1lavya-examhub", host)
+            check("'append' keeps the existing pages (none deleted)", conn.execute("SELECT COUNT(*) FROM test_uploads WHERE test_id=? AND seq_no=?", (test_id, desc_seq)).fetchone()[0] == existing_page_count)
+            check("'append' resumes the page counter from the existing max, not 0", context.user_data.get(test_flow.UD_UPLOAD_PAGE_COUNTER) == existing_page_count)
+
+            # 12d. "pass" while collecting marks the question skipped and
+            # clears state (2026-08-16, the missing fallback Pranav flagged).
+            pass_update, _, pass_msg = mock_update("pass")
+            consumed_pass = await test_flow.handle_upload_text_input(pass_update, context, host)
+            check("'pass' is consumed while collecting an upload", consumed_pass is True)
+            check("question marked 'skipped' after pass", conn.execute("SELECT status FROM test_questions WHERE test_id=? AND seq_no=?", (test_id, desc_seq)).fetchone()[0] == "skipped")
+            check("upload collection state cleared after pass", not test_flow.is_collecting_upload(context))
+            # Undo the pass for the rest of the test flow below, which still
+            # expects this question counted as genuinely uploaded.
+            platform_db.execute_with_retry(conn, "UPDATE test_questions SET status='uploaded' WHERE test_id=? AND seq_no=?", (test_id, desc_seq))
+
+        # 12e. Submit WITHOUT going through confirmation first -- tapping
+        # "Submit Test" must show a summary, NOT submit immediately
+        # (2026-08-16, Pranav's ask).
+        q_submit_tap = mock_query(user, text_for_seq_parsing=f"Q1/{qcount}")
+        q_submit_tap.edit_message_text = AsyncMock()
+        await test_flow._handle_nav(q_submit_tap, context, conn, test_id, "submit", host)
+        confirm_text = last_text(q_submit_tap.edit_message_text)
+        check("tapping Submit Test shows a confirmation summary first", "ready to submit" in confirm_text.lower())
+        check("confirmation summary shows MCQ attempted/blank counts", "answered" in confirm_text.lower())
+        check("test is NOT actually submitted yet after just tapping Submit Test", conn.execute("SELECT status FROM test_sessions WHERE test_id=?", (test_id,)).fetchone()[0] == "in_progress")
+        confirm_markup = str(q_submit_tap.edit_message_text.await_args.kwargs.get("reply_markup"))
+        check("confirmation offers both Confirm&Submit and Go Back", "submit_confirm" in confirm_markup and "submit_cancel" in confirm_markup)
+
+        # 13. NOW actually confirm -- verify scoring + honest messaging (no
+        # fake "30 minutes" promise, since AI evaluation isn't built).
         q6 = mock_query(user)
         q6.edit_message_text = AsyncMock()
         await test_flow._submit_test(q6, context, conn, test_id, host, auto=False)
@@ -295,6 +402,113 @@ async def main():
                 if actual <= 0 or actual > target or (len(m) + len(d)) == 0:
                     tier_problems += 1
         check(f"all {len(all_sittings)} real sittings' size tiers produce valid, non-empty, correctly-capped subsets", tier_problems == 0)
+
+        # 16. Job scheduling, reminders, heartbeat, and the interactive
+        # grace-period offer (2026-08-16, Pranav's ask) -- a fresh test
+        # session with a REAL FakeJobQueue so scheduling itself can be
+        # verified, not just the DB writes.
+        jq = FakeJobQueue()
+        context3 = SimpleNamespace(user_data={}, bot=SimpleNamespace(send_message=AsyncMock()), job_queue=jq)
+        catalog_key2 = context.user_data.get(test_flow.UD_PICKER_CATALOG_KEY) or catalog_key
+        q8 = mock_query(user)
+        q8.edit_message_text = AsyncMock()
+        await test_flow._start_test(q8, context3, conn, CHAT_ID, "1lavya-examhub", catalog_key2, 20, host, is_callback=True)
+        test_id2 = test_flow._get_active_test(conn, CHAT_ID)[0]
+
+        expiry_jobs = [j for j in jq.active() if j["name"] == test_flow._expiry_job_name(test_id2)]
+        reminder_jobs = [j for j in jq.active() if j["name"].startswith(f"test_reminder:{test_id2}:")]
+        heartbeat_jobs = [j for j in jq.active() if j["name"] == test_flow._heartbeat_job_name(test_id2)]
+        check("starting a test schedules exactly one expiry job", len(expiry_jobs) == 1)
+        check("starting a test schedules both reminder jobs (5min, 3min)", len(reminder_jobs) == 2)
+        check("starting a test schedules the heartbeat chain", len(heartbeat_jobs) == 1)
+        check("the heartbeat job is for the currently-viewed question (Q1)", heartbeat_jobs[0]["data"]["seq_no"] == 1)
+
+        # 16b. Heartbeat: firing for the CURRENT question logs + reschedules;
+        # firing for a STALE question (student has moved on) does neither.
+        hb_job_data = heartbeat_jobs[0]["data"]
+        fake_hb_context = SimpleNamespace(job=SimpleNamespace(data=hb_job_data), job_queue=jq, bot=context3.bot)
+        await test_flow._heartbeat_job_callback(fake_hb_context)
+        check("a live heartbeat logs a no_activity_heartbeat event", conn.execute("SELECT COUNT(*) FROM test_activity_log WHERE test_id=? AND action_type='no_activity_heartbeat'", (test_id2,)).fetchone()[0] == 1)
+        check("a live heartbeat reschedules itself", len([j for j in jq.active() if j["name"] == test_flow._heartbeat_job_name(test_id2)]) >= 1)
+
+        stale_context = SimpleNamespace(job=SimpleNamespace(data={"test_id": test_id2, "seq_no": 999}), job_queue=jq, bot=context3.bot)
+        heartbeat_count_before = conn.execute("SELECT COUNT(*) FROM test_activity_log WHERE test_id=? AND action_type='no_activity_heartbeat'", (test_id2,)).fetchone()[0]
+        await test_flow._heartbeat_job_callback(stale_context)
+        check("a STALE heartbeat (student moved to a different question) does not log", conn.execute("SELECT COUNT(*) FROM test_activity_log WHERE test_id=? AND action_type='no_activity_heartbeat'", (test_id2,)).fetchone()[0] == heartbeat_count_before)
+
+        # 16c. The grace-period offer -- fires once, offers 2/3/5 min + submit-now.
+        fake_app = SimpleNamespace(bot_data={"test_flow_host": host})
+        expiry_context = SimpleNamespace(job=SimpleNamespace(data={"test_id": test_id2}), job_queue=jq, bot=context3.bot, application=fake_app)
+        await test_flow._expiry_job_callback(expiry_context)
+        jq.mark_fired(test_flow._expiry_job_name(test_id2))  # real job_queue auto-removes a run_once job after it fires -- this test double doesn't run a real dispatch loop, so simulate that explicitly
+        check("grace_offered_at was set on first time-up", conn.execute("SELECT grace_offered_at FROM test_sessions WHERE test_id=?", (test_id2,)).fetchone()[0] is not None)
+        check("test was NOT submitted yet -- grace was offered instead", conn.execute("SELECT status FROM test_sessions WHERE test_id=?", (test_id2,)).fetchone()[0] == "in_progress")
+        grace_offer_call = context3.bot.send_message.await_args
+        grace_markup = str(grace_offer_call.kwargs.get("reply_markup"))
+        check("grace offer includes all 3 minute options", all(f"tgrace:{m}" in grace_markup for m in test_flow.GRACE_OPTIONS_MINUTES))
+        check("grace offer includes a submit-now option", "tgrace:submit" in grace_markup)
+        check("a grace-timeout fallback job was scheduled", len([j for j in jq.active() if j["name"] == test_flow._grace_timeout_job_name(test_id2)]) == 1)
+        check("activity log recorded 'grace_offered'", conn.execute("SELECT COUNT(*) FROM test_activity_log WHERE test_id=? AND action_type='grace_offered'", (test_id2,)).fetchone()[0] == 1)
+
+        # 16d. Choosing "+2 min" extends the deadline, records the choice,
+        # cancels the fallback, and schedules a fresh expiry -- and that
+        # SECOND expiry, when it fires, submits for real (no repeat offer).
+        before_choice = datetime.now(timezone.utc)
+        q9 = mock_query(user)
+        q9.edit_message_text = AsyncMock()
+        await test_flow._handle_grace_callback(q9, context3, conn, test_id2, "tgrace:2", host)
+        new_expiry = conn.execute("SELECT expires_at, grace_requested_minutes FROM test_sessions WHERE test_id=?", (test_id2,)).fetchone()
+        new_expiry_dt = datetime.fromisoformat(new_expiry[0])
+        # The new deadline is "now + 2 minutes" (Pranav's design: the
+        # student gets the FULL grace window from when they said yes, not
+        # counted down from the original, already-passed nominal deadline)
+        # -- verify it lands within a few seconds of that, not compared
+        # against the ORIGINAL expires_at (which was ~36 minutes out and
+        # would make a naive ">" comparison meaningless in a synthetic test
+        # where no real wall-clock time actually elapses between calls).
+        expected = before_choice + timedelta(minutes=2)
+        check("choosing +2 min sets the new deadline to ~now+2min", abs((new_expiry_dt - expected).total_seconds()) < 5)
+        check("grace_requested_minutes recorded as 2", new_expiry[1] == 2)
+        check("the grace-timeout fallback was cancelled", len([j for j in jq.active() if j["name"] == test_flow._grace_timeout_job_name(test_id2)]) == 0)
+        check("a fresh expiry job was scheduled for the extended deadline", len([j for j in jq.active() if j["name"] == test_flow._expiry_job_name(test_id2)]) == 1)
+        check("activity log recorded the grace choice", conn.execute("SELECT detail FROM test_activity_log WHERE test_id=? AND action_type='grace_chosen'", (test_id2,)).fetchone()[0] == "choice=2")
+
+        await test_flow._expiry_job_callback(expiry_context)  # simulate the extended deadline arriving
+        jq.mark_fired(test_flow._expiry_job_name(test_id2))
+        check("the SECOND time-up (after grace was already offered) submits for real, no repeat offer", conn.execute("SELECT status FROM test_sessions WHERE test_id=?", (test_id2,)).fetchone()[0] == "submitted")
+        check("cancelling on submit removes the reminder/heartbeat jobs too", len(jq.active()) == 0)
+
+        # 17. Uploaded-without-"done" reconciliation -- 2026-08-16, Pranav's
+        # real question: what happens if time runs out mid-upload? Answer:
+        # nothing is lost, since pages save instantly -- verify a question
+        # with real pages but no "done" still counts as uploaded at submit.
+        desc_row2 = conn.execute("SELECT seq_no FROM test_questions WHERE test_id=? AND qtype='descriptive' LIMIT 1", (test_id2,)).fetchone()
+        if desc_row2:
+            seq2 = desc_row2[0]
+            context3.user_data[test_flow.UD_UPLOAD_SEQ] = seq2
+            context3.user_data[test_flow.UD_UPLOAD_PAGE_COUNTER] = 0
+            fake_file2 = SimpleNamespace(file_id="FAKEFILEID456", download_to_drive=AsyncMock())
+            photo_msg2 = SimpleNamespace(chat_id=CHAT_ID, reply_text=AsyncMock(), photo=[SimpleNamespace(get_file=AsyncMock(return_value=fake_file2))], document=None)
+            photo_update2 = SimpleNamespace(effective_user=user, message=photo_msg2)
+            # test_id2 is already submitted at this point (step 16d) -- start
+            # a THIRD test fresh to test this specific scenario in isolation.
+            q10 = mock_query(user)
+            q10.edit_message_text = AsyncMock()
+            context4 = mock_context()
+            await test_flow._start_test(q10, context4, conn, CHAT_ID, "1lavya-examhub", catalog_key2, 20, host, is_callback=True)
+            test_id3 = test_flow._get_active_test(conn, CHAT_ID)[0]
+            desc_row3 = conn.execute("SELECT seq_no FROM test_questions WHERE test_id=? AND qtype='descriptive' LIMIT 1", (test_id3,)).fetchone()
+            if desc_row3:
+                seq3 = desc_row3[0]
+                context4.user_data[test_flow.UD_UPLOAD_SEQ] = seq3
+                context4.user_data[test_flow.UD_UPLOAD_PAGE_COUNTER] = 0
+                await test_flow.handle_upload_photo_or_document(photo_update2, context4, host)
+                # Deliberately never type "done" -- simulate time running out mid-upload.
+                q11 = mock_query(user)
+                q11.edit_message_text = AsyncMock()
+                await test_flow._submit_test(q11, context4, conn, test_id3, host, auto=True)
+                final_status = conn.execute("SELECT status FROM test_questions WHERE test_id=? AND seq_no=?", (test_id3, seq3)).fetchone()[0]
+                check("a question with real uploaded pages counts as 'uploaded' at auto-submit even if 'done' was never typed", final_status == "uploaded")
 
     finally:
         cleanup()

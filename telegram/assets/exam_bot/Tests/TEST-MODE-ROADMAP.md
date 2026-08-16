@@ -268,6 +268,77 @@ the real DB writes and real message construction) with the Razorpay layer
 mocked — genuine, meaningful verification, but not the same as an actual
 UPI payment clearing. This remains the one gap only a human can close.
 
+### 0.1d Update, 2026-08-16 (same day, later still) — real bugs from Pranav's manual test, plus full activity logging
+
+Pranav manually tested a real run and reported 6 concrete issues/gaps. All
+fixed/built, all tested (81 + 49 + 13 + 21 = 164 checks across 4 suites):
+
+1. **Re-uploading over an already-uploaded question now warns first**
+   ("You've already uploaded N page(s) — Overwrite / Add more pages")
+   instead of silently accepting more on top. Overwrite deletes the old
+   pages/files and resets; Append resumes the page counter from the real
+   existing max, never resets to page 1.
+2. **The literal `<code>` tags showing in the "no pages uploaded" message
+   were a real bug** — `parse_mode=ParseMode.HTML` was missing on that one
+   call while every sibling call had it. Fixed, and simplified the wording
+   per Pranav's ask (plain quotes, not code-styled).
+3. **`"pass"` is now a real, first-class way to decline a descriptive
+   question** while in upload-collection state — marks it `skipped`
+   (reusing the same status value MCQ skip already used), distinct from
+   "forgot," clears the collection state, and is mentioned in the "no
+   pages" message as the honest alternative to trying again.
+4. **Submit Test now shows a confirmation summary first** (MCQs
+   answered/blank, descriptive uploaded/passed/missing) with Confirm &
+   Submit / Go Back — tapping the button no longer submits immediately.
+5. **Timer reminders (5-min, 3-min) now exist** — genuinely didn't before.
+   **The interactive grace-period offer, per Pranav's real design call**:
+   at nominal time-up, the student is offered 2/3/5 extra minutes (or
+   submit now) — **exactly once**, tracked (`test_sessions.grace_offered_at`/
+   `grace_requested_minutes`), with a 60-second fallback that submits
+   automatically if there's no response. Confirmed and fixed the real
+   underlying concern: no data is actually at risk mid-upload either way,
+   since every photo saves to disk/DB the instant it's sent — a question
+   with real pages but no "done" now correctly counts as uploaded at
+   submission (auto or manual), reconciled explicitly rather than relying
+   on the student remembering to type "done" before time runs out.
+6. **Comprehensive activity/analytics logging, built from scratch** — a
+   new `test_activity_log` append-only event table (Pranav's own proposed
+   "action + timestamp" shape, same architectural pattern this schema
+   already uses for `wallet_ledger`/`report_flow_events`) capturing every
+   question view, MCQ pick AND later change (with old→new value), upload
+   page/done/pass/overwrite/append, reminders, the grace offer/choice, and
+   submission — all timestamped. A **60-second no-activity heartbeat**
+   (self-terminating design: each firing re-checks whether the student is
+   still on that exact question before logging and rescheduling itself,
+   so it naturally stops the instant they navigate away, no separate
+   cancellation needed) guarantees at most 60 seconds of "what was the
+   student doing" is ever unaccounted for, even if the phone dies mid-test.
+   **Exact-point resume**: `test_sessions.current_seq_no` now tracks the
+   literal question last shown, and resuming an in-progress test returns
+   there specifically (not just "the first unanswered question"), restored
+   correctly across a bot restart too. **Topic/subtopic tracking**:
+   `test_questions.chapter_slug`/`topic_text` are snapshotted from the
+   real content bank at test-build time, so every question is analyzable
+   at concept level later, not just chapter level. The student-facing
+   "activity" dashboard view Pranav described is NOT built — this is the
+   data-capture layer only, a UI to browse it is a separate future piece.
+
+**Two real bugs caught by the tests themselves while building this**, both
+fixed: `_cancel_test_timers()` never cancelled the heartbeat chain (harmless
+in practice — the heartbeat self-checks status and would have quietly
+stopped on its next fire — but fixed properly rather than left relying on
+that); `_new_test_id()` used second-precision timestamps, a real (if
+unlikely) collision risk for two Start-Test calls within the same second,
+now millisecond-precision.
+
+**Deployed**: `1lavya-examhub` and `capranav-exam` restarted.
+
+**Explicitly not built this round**: the 2-PDF result bundle (MCQ
+Evaluation + Descriptive Evaluation, per Pranav's detailed spec) — a
+separate, substantial piece (image-to-PDF conversion, precise page-break
+merging) intentionally not rushed at the tail end of this already-large
+round. That's the clear next deliverable.
+
 ### 0.2 What is NOT built yet — the actual next steps, in order
 
 1. **A human-verified first real transaction** — the recharge flow exists,

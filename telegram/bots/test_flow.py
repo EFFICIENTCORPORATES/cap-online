@@ -102,6 +102,69 @@ def is_collecting_upload(context) -> bool:
 
 
 # ---------------------------------------------------------------------------
+# ACTIVITY LOG -- added 2026-08-16, Pranav's ask: capture every point of
+# possible data during a test, timestamped, so at most 60 seconds of
+# activity is ever unaccounted for even if the student's phone dies
+# mid-test, and so understanding can later be analyzed at topic/subtopic
+# granularity. See schema.sql's own test_activity_log comment for the full
+# design reasoning (append-only event log underneath the current-state
+# tables, same pattern wallet_ledger/report_flow_events already use).
+# ---------------------------------------------------------------------------
+
+def _log_activity(conn, test_id: str, seq_no, action_type: str, detail: str = None):
+    platform_db.execute_with_retry(
+        conn,
+        "INSERT INTO test_activity_log (test_id, seq_no, action_type, detail, occurred_at) VALUES (?,?,?,?,?)",
+        (test_id, seq_no, action_type, detail, platform_db.now()),
+    )
+
+
+HEARTBEAT_INTERVAL_SECONDS = 60  # Pranav's explicit ask: lose at most 60s of "what was the student doing" data
+
+
+def _heartbeat_job_name(test_id: str) -> str:
+    return f"test_heartbeat:{test_id}"
+
+
+def _schedule_heartbeat_check(context, test_id: str, seq_no: int):
+    """Self-terminating by design: each firing re-checks whether seq_no is
+    STILL the question being shown (test_sessions.current_seq_no) before
+    logging anything or rescheduling itself. The moment the student
+    navigates away, the next stale firing (if any is still pending) simply
+    finds a mismatch and stops -- no explicit cross-navigation cancellation
+    needed, and a new call from wherever the question actually changes
+    starts a fresh chain for the new seq_no."""
+    if not context.job_queue:
+        return
+    context.job_queue.run_once(
+        _heartbeat_job_callback, when=HEARTBEAT_INTERVAL_SECONDS,
+        name=_heartbeat_job_name(test_id), data={"test_id": test_id, "seq_no": seq_no},
+    )
+
+
+async def _heartbeat_job_callback(context):
+    test_id = context.job.data["test_id"]
+    seq_no = context.job.data["seq_no"]
+    conn = platform_db.get_connection()
+    row = conn.execute("SELECT status, current_seq_no FROM test_sessions WHERE test_id=?", (test_id,)).fetchone()
+    if not row or row[0] != "in_progress" or row[1] != seq_no:
+        return  # test ended, or the student has moved to a different question -- this chain stops here
+    _log_activity(conn, test_id, seq_no, "no_activity_heartbeat")
+    _schedule_heartbeat_check(context, test_id, seq_no)
+
+
+def _mark_question_viewed(context, conn, test_id: str, seq_no: int):
+    """Called from every code path that actually shows a question to the
+    student (start, next/prev, palette jump) -- updates current_seq_no
+    (both the exact-point-resume marker and what the heartbeat checks
+    against), logs the view, and (re)starts the heartbeat chain for the
+    new question."""
+    platform_db.execute_with_retry(conn, "UPDATE test_sessions SET current_seq_no=? WHERE test_id=?", (seq_no, test_id))
+    _log_activity(conn, test_id, seq_no, "question_viewed")
+    _schedule_heartbeat_check(context, test_id, seq_no)
+
+
+# ---------------------------------------------------------------------------
 # DB-SOURCED TRUTH -- never context.user_data for anything that must survive
 # a restart (roadmap's own explicit rule, §7).
 # ---------------------------------------------------------------------------
@@ -381,7 +444,12 @@ def _summary_text_and_markup(conn, catalog_key, tier_marks, username, tenant_id,
 # ---------------------------------------------------------------------------
 
 def _new_test_id(telegram_user_id: int) -> str:
-    return f"T-{telegram_user_id}-{int(datetime.now(timezone.utc).timestamp())}"
+    """Millisecond precision, not seconds -- a real collision risk found
+    while testing (2026-08-16): two Start-Test calls for the same student
+    within the same second (e.g. rapid back-to-back test attempts, or a
+    duplicate webhook update) would otherwise generate the exact same
+    test_id and fail on test_sessions' PRIMARY KEY."""
+    return f"T-{telegram_user_id}-{int(datetime.now(timezone.utc).timestamp() * 1000)}"
 
 
 async def _start_test(update_or_query, context, conn, telegram_user_id, bot_id, catalog_key, tier_marks, host, is_callback):
@@ -422,21 +490,25 @@ async def _start_test(update_or_query, context, conn, telegram_user_id, bot_id, 
     for q in mcq_qs:
         platform_db.execute_with_retry(
             conn,
-            "INSERT INTO test_questions (test_id, seq_no, qtype, source_id, human_id, marks, status) "
-            "VALUES (?,?,'mcq',?,?,?,'pending')",
-            (test_id, seq_no, q.get("mcq_id"), q.get("human_id"), q.get("marks") or 0),
+            "INSERT INTO test_questions (test_id, seq_no, qtype, source_id, human_id, marks, status, chapter_slug, topic_text) "
+            "VALUES (?,?,'mcq',?,?,?,'pending',?,?)",
+            (test_id, seq_no, q.get("mcq_id"), q.get("human_id"), q.get("marks") or 0,
+             q.get("chapter_slug"), q.get("topic_text")),
         )
         seq_no += 1
     for q in desc_qs:
         platform_db.execute_with_retry(
             conn,
-            "INSERT INTO test_questions (test_id, seq_no, qtype, source_id, human_id, marks, status) "
-            "VALUES (?,?,'descriptive',?,?,?,'not_uploaded')",
-            (test_id, seq_no, q.get("book_id"), q.get("human_id"), _parse_desc_marks(q)),
+            "INSERT INTO test_questions (test_id, seq_no, qtype, source_id, human_id, marks, status, chapter_slug, topic_text) "
+            "VALUES (?,?,'descriptive',?,?,?,'not_uploaded',?,?)",
+            (test_id, seq_no, q.get("book_id"), q.get("human_id"), _parse_desc_marks(q),
+             q.get("chapter_slug"), q.get("topic_text")),
         )
         seq_no += 1
 
-    _schedule_expiry_job(context, test_id, expires_at)
+    platform_db.execute_with_retry(conn, "UPDATE test_sessions SET current_seq_no=1 WHERE test_id=?", (test_id,))
+    _log_activity(conn, test_id, None, "test_started", f"catalog_key={catalog_key} tier_marks={tier_marks} actual_marks={total_marks}")
+    _schedule_test_timers(context, test_id, expires_at)
 
     intro = (
         f"\U0001F3C1 <b>Test started!</b> You have <b>{duration_minutes} minutes</b>.\n"
@@ -546,16 +618,22 @@ async def _show_question_by_chat(context, chat_id, conn, test_id, seq_no, host):
     """Sends a fresh message (not an edit) -- used for Next/Prev navigation
     and after starting a test, so the question history stays scrollable in
     the chat rather than being overwritten in place."""
+    _mark_question_viewed(context, conn, test_id, seq_no)
     text, markup = _render_question(conn, test_id, seq_no, host)
     await host.send_long_message(context, chat_id, text, reply_markup=markup)
 
 
 async def _show_current_question(message_or_query, context, test_id, host):
+    """2026-08-16, Pranav's ask: resume from the EXACT question the
+    student was last looking at (current_seq_no), not just 'the first
+    unanswered one' -- if they'd navigated ahead to review something
+    before a dropped connection, resuming should put them back exactly
+    there, not silently jump them somewhere else."""
     conn = platform_db.get_connection()
-    row = conn.execute("SELECT status, expires_at FROM test_sessions WHERE test_id=?", (test_id,)).fetchone()
+    row = conn.execute("SELECT status, expires_at, current_seq_no FROM test_sessions WHERE test_id=?", (test_id,)).fetchone()
     if not row or row[0] != "in_progress":
         return
-    seq_no = _first_unanswered_or_first(conn, test_id)
+    seq_no = row[2] or _first_unanswered_or_first(conn, test_id)
     chat_id = message_or_query.chat_id if hasattr(message_or_query, "chat_id") else message_or_query.message.chat_id
     await _show_question_by_chat(context, chat_id, conn, test_id, seq_no, host)
 
@@ -605,10 +683,15 @@ def _render_question(conn, test_id, seq_no, host):
     if not q:
         return f"{time_line}\n\n(Question unavailable.)", _nav_keyboard(test_id, seq_no, total)
     question_text = host.html_to_telegram_text(q.get("question_html", ""))
-    upload_status = "✅ Uploaded" if status == "uploaded" else "❌ Not uploaded yet"
+    if status == "uploaded":
+        upload_status = "✅ Uploaded"
+    elif status == "skipped":
+        upload_status = "⏭ Passed (you can still upload before submitting)"
+    else:
+        upload_status = "❌ Not uploaded yet"
     text = (
         f"{time_line}\n\U0001F194 {human_id or source_id}\n\n{question_text}\n\n"
-        f"<i>{upload_status} — type <code>upload</code> to submit your written answer for this question.</i>"
+        f'<i>{upload_status} — type "upload" to submit your written answer for this question.</i>'
     )
     return text, _nav_keyboard(test_id, seq_no, total)
 
@@ -644,18 +727,66 @@ async def test_flow_callback(update, context, bot_id: str, host):
         await _handle_option_select(query, context, conn, test_id, letter, host)
     elif data.startswith("tgo:"):
         seq_no = int(data.split(":", 1)[1])
+        _mark_question_viewed(context, conn, test_id, seq_no)
         text, markup = _render_question(conn, test_id, seq_no, host)
         await query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=markup)
     elif data.startswith("tupload:"):
-        seq_no = int(data.split(":", 1)[1])
-        context.user_data[UD_UPLOAD_SEQ] = seq_no
-        context.user_data[UD_UPLOAD_PAGE_COUNTER] = 0
-        context.user_data[UD_AWAITING_UPLOAD_PICK] = False
-        await query.edit_message_text(
-            f"\U0001F4F7 Send photo(s) of your answer for Q{seq_no} now — one at a time. "
-            f"Type <code>done</code> when finished with this question.",
-            parse_mode=ParseMode.HTML,
-        )
+        await _handle_tupload_callback(query, context, conn, test_id, data, host)
+    elif data.startswith("tgrace:"):
+        await _handle_grace_callback(query, context, conn, test_id, data, host)
+
+
+async def _handle_tupload_callback(query, context, conn, test_id, data, host):
+    parts = data.split(":")
+    seq_no = int(parts[1])
+
+    if len(parts) == 2:
+        # Initial pick from the question list. If this question already has
+        # uploaded pages, don't silently accept more on top -- ask first
+        # (real gap Pranav found by testing: the bot used to just start
+        # accepting new photos with no warning at all).
+        existing_pages = conn.execute(
+            "SELECT COUNT(*) FROM test_uploads WHERE test_id=? AND seq_no=?", (test_id, seq_no)
+        ).fetchone()[0]
+        if existing_pages > 0:
+            await query.edit_message_text(
+                f"You've already uploaded {existing_pages} page(s) for Q{seq_no}. What would you like to do?",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("\U0001F504 Overwrite (start fresh)", callback_data=f"tupload:{seq_no}:overwrite")],
+                    [InlineKeyboardButton("➕ Add more pages", callback_data=f"tupload:{seq_no}:append")],
+                ]),
+            )
+            return
+        await _begin_upload_collection(query, context, seq_no, start_page=0)
+        return
+
+    # len(parts) == 3 -- the overwrite/append choice was just made.
+    mode = parts[2]
+    if mode == "overwrite":
+        rows = conn.execute("SELECT file_path FROM test_uploads WHERE test_id=? AND seq_no=?", (test_id, seq_no)).fetchall()
+        for (file_path,) in rows:
+            try:
+                Path(file_path).unlink(missing_ok=True)
+            except Exception:
+                pass
+        platform_db.execute_with_retry(conn, "DELETE FROM test_uploads WHERE test_id=? AND seq_no=?", (test_id, seq_no))
+        platform_db.execute_with_retry(conn, "UPDATE test_questions SET status='not_uploaded' WHERE test_id=? AND seq_no=?", (test_id, seq_no))
+        _log_activity(conn, test_id, seq_no, "upload_overwrite_chosen", f"discarded_pages={len(rows)}")
+        await _begin_upload_collection(query, context, seq_no, start_page=0)
+    else:  # append
+        max_page = conn.execute("SELECT COALESCE(MAX(page_no), 0) FROM test_uploads WHERE test_id=? AND seq_no=?", (test_id, seq_no)).fetchone()[0]
+        _log_activity(conn, test_id, seq_no, "upload_append_chosen", f"existing_pages={max_page}")
+        await _begin_upload_collection(query, context, seq_no, start_page=max_page)
+
+
+async def _begin_upload_collection(query, context, seq_no, start_page: int):
+    context.user_data[UD_UPLOAD_SEQ] = seq_no
+    context.user_data[UD_UPLOAD_PAGE_COUNTER] = start_page
+    context.user_data[UD_AWAITING_UPLOAD_PICK] = False
+    await query.edit_message_text(
+        f"\U0001F4F7 Send photo(s) of your answer for Q{seq_no} now — one at a time. "
+        f'Type "done" when finished with this question, or "pass" if you don\'t want to answer it.',
+    )
 
 
 async def _handle_picker_callback(query, context, conn, data, bot_id, host):
@@ -713,16 +844,54 @@ async def _handle_nav(query, context, conn, test_id, action, host):
     current = _current_seq_no(query, context, conn, test_id)
 
     if action == "next" and current < total:
+        _mark_question_viewed(context, conn, test_id, current + 1)
         text, markup = _render_question(conn, test_id, current + 1, host)
         await query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=markup)
     elif action == "prev" and current > 1:
+        _mark_question_viewed(context, conn, test_id, current - 1)
         text, markup = _render_question(conn, test_id, current - 1, host)
         await query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=markup)
     elif action == "palette":
         text, markup = _render_palette(conn, test_id)
         await query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=markup)
     elif action == "submit":
+        # 2026-08-16, Pranav's ask: show a summary before actually
+        # submitting, not submit immediately on the first tap.
+        _log_activity(conn, test_id, None, "submit_confirmation_shown")
+        text, markup = _submit_confirmation_text_and_markup(conn, test_id)
+        await query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=markup)
+    elif action == "submit_confirm":
         await _submit_test(query, context, conn, test_id, host, auto=False)
+    elif action == "submit_cancel":
+        current = _first_unanswered_or_first(conn, test_id)
+        _mark_question_viewed(context, conn, test_id, current)
+        text, markup = _render_question(conn, test_id, current, host)
+        await query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=markup)
+
+
+def _submit_confirmation_text_and_markup(conn, test_id):
+    mcq_total = conn.execute("SELECT COUNT(*) FROM test_questions WHERE test_id=? AND qtype='mcq'", (test_id,)).fetchone()[0]
+    mcq_answered = conn.execute("SELECT COUNT(*) FROM test_questions WHERE test_id=? AND qtype='mcq' AND status='answered'", (test_id,)).fetchone()[0]
+    desc_total = conn.execute("SELECT COUNT(*) FROM test_questions WHERE test_id=? AND qtype='descriptive'", (test_id,)).fetchone()[0]
+    desc_uploaded = conn.execute("SELECT COUNT(*) FROM test_questions WHERE test_id=? AND qtype='descriptive' AND status='uploaded'", (test_id,)).fetchone()[0]
+    desc_skipped = conn.execute("SELECT COUNT(*) FROM test_questions WHERE test_id=? AND qtype='descriptive' AND status='skipped'", (test_id,)).fetchone()[0]
+    desc_missing = desc_total - desc_uploaded - desc_skipped
+
+    lines = ["\U0001F4CB <b>Ready to submit?</b>", ""]
+    if mcq_total > 0:
+        lines.append(f"MCQs: <b>{mcq_answered}/{mcq_total} answered</b> ({mcq_total - mcq_answered} left blank)")
+    if desc_total > 0:
+        lines.append(f"Descriptive: <b>{desc_uploaded}/{desc_total} uploaded</b>"
+                      + (f", {desc_skipped} passed" if desc_skipped else "")
+                      + (f", {desc_missing} not yet uploaded" if desc_missing else ""))
+    lines.append("")
+    lines.append("Once submitted, you can't go back and change anything.")
+
+    markup = InlineKeyboardMarkup([
+        [InlineKeyboardButton("✅ Confirm & Submit", callback_data="tnav:submit_confirm")],
+        [InlineKeyboardButton("◀ Go Back (keep working)", callback_data="tnav:submit_cancel")],
+    ])
+    return "\n".join(lines), markup
 
 
 def _current_seq_no(query, context, conn, test_id):
@@ -764,17 +933,24 @@ def _render_palette(conn, test_id):
 async def _handle_option_select(query, context, conn, test_id, letter, host):
     seq_no = _current_seq_no(query, context, conn, test_id)
     now = platform_db.now()
-    existing = conn.execute("SELECT 1 FROM test_mcq_answers WHERE test_id=? AND seq_no=?", (test_id, seq_no)).fetchone()
+    existing = conn.execute("SELECT selected_option FROM test_mcq_answers WHERE test_id=? AND seq_no=?", (test_id, seq_no)).fetchone()
     if existing:
+        previous_option = existing[0]
         platform_db.execute_with_retry(
             conn, "UPDATE test_mcq_answers SET selected_option=?, answered_at=? WHERE test_id=? AND seq_no=?",
             (letter, now, test_id, seq_no),
         )
+        # 2026-08-16, Pranav's ask: distinguish a first pick from a later
+        # CHANGE of mind -- both matter for understanding how confident a
+        # student actually was, not just what they ended up with.
+        if previous_option != letter:
+            _log_activity(conn, test_id, seq_no, "mcq_option_changed", f"from={previous_option} to={letter}")
     else:
         platform_db.execute_with_retry(
             conn, "INSERT INTO test_mcq_answers (test_id, seq_no, selected_option, answered_at) VALUES (?,?,?,?)",
             (test_id, seq_no, letter, now),
         )
+        _log_activity(conn, test_id, seq_no, "mcq_option_selected", f"option={letter}")
     platform_db.execute_with_retry(
         conn, "UPDATE test_questions SET status='answered' WHERE test_id=? AND seq_no=?", (test_id, seq_no),
     )
@@ -801,6 +977,20 @@ async def _submit_test(update_or_query, context, conn, test_id, host, auto: bool
         if not ans:
             platform_db.execute_with_retry(conn, "UPDATE test_questions SET status='skipped' WHERE test_id=? AND seq_no=?", (test_id, seq_no))
 
+    # 2026-08-16: a question with real uploaded pages counts as uploaded at
+    # submission time EVEN IF "done" was never typed (e.g. time ran out
+    # mid-upload) -- nothing is actually lost, since every photo is saved
+    # to disk/DB the instant it's sent, not batched behind "done". This is
+    # what makes the grace-period question moot from a data-safety
+    # standpoint: reconcile any question with real pages but a stale
+    # 'not_uploaded' status before counting.
+    platform_db.execute_with_retry(
+        conn,
+        "UPDATE test_questions SET status='uploaded' WHERE test_id=? AND qtype='descriptive' AND status='not_uploaded' "
+        "AND seq_no IN (SELECT DISTINCT seq_no FROM test_uploads WHERE test_id=?)",
+        (test_id, test_id),
+    )
+
     descriptive_count = sum(1 for _, qtype, _, _ in tqs if qtype == "descriptive")
     uploaded_count = conn.execute(
         "SELECT COUNT(*) FROM test_questions WHERE test_id=? AND qtype='descriptive' AND status='uploaded'", (test_id,)
@@ -812,7 +1002,8 @@ async def _submit_test(update_or_query, context, conn, test_id, host, auto: bool
         "UPDATE test_sessions SET status='submitted', submitted_at=?, mcq_score=?, mcq_max=? WHERE test_id=?",
         (now, mcq_score, mcq_max, test_id),
     )
-    _cancel_expiry_job(context, test_id)
+    _log_activity(conn, test_id, None, "test_submitted", f"auto={auto} mcq_score={mcq_score}/{mcq_max} descriptive_uploaded={uploaded_count}/{descriptive_count}")
+    _cancel_test_timers(context, test_id)
 
     lines = ["\U0001F3C1 <b>Test submitted!</b>"]
     if auto:
@@ -836,35 +1027,159 @@ async def _submit_test(update_or_query, context, conn, test_id, host, auto: bool
 
 
 # ---------------------------------------------------------------------------
-# EXPIRY JOB -- survives restart via rearm_pending_test_jobs() at startup
+# TIMERS -- expiry, reminders, and the interactive grace-period offer, all
+# surviving a restart via rearm_pending_test_jobs() at startup. Added/
+# expanded 2026-08-16 per Pranav's real manual-testing feedback: reminders
+# didn't exist at all before, and time-up used to hard-submit immediately
+# with no grace whatsoever.
 # ---------------------------------------------------------------------------
 
-def _job_name(test_id):
+REMINDER_MINUTES_BEFORE = [5, 3]     # Pranav's explicit ask
+GRACE_OPTIONS_MINUTES = [2, 3, 5]    # offered once; student picks at most one
+GRACE_TIMEOUT_SECONDS = 60           # how long to wait for a response to the grace offer before submitting anyway
+
+
+def _expiry_job_name(test_id):
     return f"test_expiry:{test_id}"
 
 
-def _schedule_expiry_job(context, test_id, expires_at_iso):
+def _reminder_job_name(test_id, minutes_before):
+    return f"test_reminder:{test_id}:{minutes_before}"
+
+
+def _grace_timeout_job_name(test_id):
+    return f"test_grace_timeout:{test_id}"
+
+
+def _schedule_test_timers(context, test_id, expires_at_iso):
+    """Schedules the expiry job AND both reminder jobs. A reminder whose
+    fire-time has already passed (e.g. re-arming a short-remaining test
+    after a restart) is simply skipped, never scheduled with a negative
+    delay."""
     if not context.job_queue:
         return
+    now = datetime.now(timezone.utc)
     expires_dt = datetime.fromisoformat(expires_at_iso)
-    delay = max(1, (expires_dt - datetime.now(timezone.utc)).total_seconds())
-    context.job_queue.run_once(_expiry_job_callback, when=delay, name=_job_name(test_id), data={"test_id": test_id})
+    delay = max(1, (expires_dt - now).total_seconds())
+    context.job_queue.run_once(_expiry_job_callback, when=delay, name=_expiry_job_name(test_id), data={"test_id": test_id})
+
+    for minutes_before in REMINDER_MINUTES_BEFORE:
+        fire_at = expires_dt - timedelta(minutes=minutes_before)
+        reminder_delay = (fire_at - now).total_seconds()
+        if reminder_delay > 0:
+            context.job_queue.run_once(
+                _reminder_job_callback, when=reminder_delay, name=_reminder_job_name(test_id, minutes_before),
+                data={"test_id": test_id, "minutes_before": minutes_before},
+            )
 
 
-def _cancel_expiry_job(context, test_id):
+def _cancel_test_timers(context, test_id):
+    """Cancels every job class this test might have pending -- expiry,
+    both reminders, the grace-timeout fallback, and the heartbeat chain --
+    called whenever a test ends for any reason (manual submit, grace choice
+    made, etc.) so nothing fires against an already-finished test. The
+    heartbeat is self-limiting even without this (it checks status='in_progress'
+    before rescheduling itself), but explicitly cancelling it here avoids
+    one wasted no-op firing after a test ends."""
     if not context.job_queue:
         return
-    for job in context.job_queue.get_jobs_by_name(_job_name(test_id)):
-        job.schedule_removal()
+    names = [_expiry_job_name(test_id), _grace_timeout_job_name(test_id), _heartbeat_job_name(test_id)]
+    names += [_reminder_job_name(test_id, m) for m in REMINDER_MINUTES_BEFORE]
+    for name in names:
+        for job in context.job_queue.get_jobs_by_name(name):
+            job.schedule_removal()
 
 
-async def _expiry_job_callback(context):
+async def _reminder_job_callback(context):
     test_id = context.job.data["test_id"]
+    minutes_before = context.job.data["minutes_before"]
     conn = platform_db.get_connection()
     row = conn.execute("SELECT status, telegram_user_id FROM test_sessions WHERE test_id=?", (test_id,)).fetchone()
     if not row or row[0] != "in_progress":
         return
-    telegram_user_id = row[1]
+    _log_activity(conn, test_id, None, "reminder_sent", f"minutes_before={minutes_before}")
+    await context.bot.send_message(chat_id=row[1], text=f"⏰ {minutes_before} minute(s) left in your test!")
+
+
+async def _expiry_job_callback(context):
+    """Fires at the nominal time limit. The FIRST time this fires for a
+    test, it doesn't submit -- it offers the student a one-time choice of
+    a few extra minutes (Pranav's explicit ask, 2026-08-16). If they've
+    already been offered (this is a re-fire at an extended deadline, or a
+    stray duplicate), it submits for real -- the offer is never repeated."""
+    test_id = context.job.data["test_id"]
+    conn = platform_db.get_connection()
+    row = conn.execute("SELECT status, telegram_user_id, grace_offered_at FROM test_sessions WHERE test_id=?", (test_id,)).fetchone()
+    if not row or row[0] != "in_progress":
+        return
+    telegram_user_id, grace_offered_at = row[1], row[2]
+
+    if grace_offered_at is None:
+        now = platform_db.now()
+        platform_db.execute_with_retry(conn, "UPDATE test_sessions SET grace_offered_at=? WHERE test_id=?", (now, test_id))
+        _log_activity(conn, test_id, None, "grace_offered")
+        option_row = [InlineKeyboardButton(f"+{m} min", callback_data=f"tgrace:{m}") for m in GRACE_OPTIONS_MINUTES]
+        markup = InlineKeyboardMarkup([option_row, [InlineKeyboardButton("Submit now", callback_data="tgrace:submit")]])
+        await context.bot.send_message(
+            chat_id=telegram_user_id,
+            text="⏰ Time's up! Need a few extra minutes to finish? This can only be offered once.",
+            reply_markup=markup,
+        )
+        if context.job_queue:
+            context.job_queue.run_once(
+                _grace_timeout_job_callback, when=GRACE_TIMEOUT_SECONDS,
+                name=_grace_timeout_job_name(test_id), data={"test_id": test_id},
+            )
+        return
+
+    await _finalize_submit(context, conn, test_id)
+
+
+async def _grace_timeout_job_callback(context):
+    """No response to the grace offer within GRACE_TIMEOUT_SECONDS --
+    treated as an implicit 'no', submits for real."""
+    test_id = context.job.data["test_id"]
+    conn = platform_db.get_connection()
+    row = conn.execute("SELECT status FROM test_sessions WHERE test_id=?", (test_id,)).fetchone()
+    if not row or row[0] != "in_progress":
+        return
+    await _finalize_submit(context, conn, test_id)
+
+
+async def _handle_grace_callback(query, context, conn, test_id, data, host):
+    choice = data.split(":", 1)[1]
+    _log_activity(conn, test_id, None, "grace_chosen", f"choice={choice}")
+    if context.job_queue:
+        for job in context.job_queue.get_jobs_by_name(_grace_timeout_job_name(test_id)):
+            job.schedule_removal()
+
+    if choice == "submit":
+        await query.edit_message_text("Submitting now...")
+        await _finalize_submit(context, conn, test_id)
+        return
+
+    minutes = int(choice)
+    new_expiry = datetime.now(timezone.utc) + timedelta(minutes=minutes)
+    platform_db.execute_with_retry(
+        conn, "UPDATE test_sessions SET expires_at=?, grace_requested_minutes=? WHERE test_id=?",
+        (new_expiry.isoformat(timespec="seconds"), minutes, test_id),
+    )
+    if context.job_queue:
+        context.job_queue.run_once(
+            _expiry_job_callback, when=minutes * 60, name=_expiry_job_name(test_id), data={"test_id": test_id},
+        )
+    await query.edit_message_text(f"✅ You have {minutes} more minute(s). Good luck!")
+
+
+async def _finalize_submit(context, conn, test_id):
+    """Shared by the grace-timeout path and the 'already offered, this is
+    the real deadline' expiry path -- both end up here to actually call
+    _submit_test() with a synthetic query object (no real callback query
+    exists when a job_queue job, not a button tap, is what triggers this)."""
+    row = conn.execute("SELECT telegram_user_id FROM test_sessions WHERE test_id=?", (test_id,)).fetchone()
+    if not row:
+        return
+    telegram_user_id = row[0]
 
     class _FakeQuery:
         def __init__(self, chat_id):
@@ -879,30 +1194,51 @@ async def _expiry_job_callback(context):
 
     host = context.application.bot_data.get("test_flow_host")
     if host is None:
-        logger.warning(f"test_flow: expiry job fired for {test_id} but no host module registered -- cannot auto-submit correctly.")
+        logger.warning(f"test_flow: finalize-submit fired for {test_id} but no host module registered -- cannot auto-submit correctly.")
         return
     await _submit_test(_FakeQuery(telegram_user_id), context, conn, test_id, host, auto=True)
 
 
 def rearm_pending_test_jobs(application, host):
     """Called once at bot startup. Sweeps every in_progress test_sessions
-    row: already past expiry -> finalize immediately (submit as auto);
-    still valid -> re-arm its expiry job (job_queue jobs don't survive a
-    process restart, same reasoning already established for the wallet
-    recharge polling design and the platform's other job_queue users)."""
+    row: already past expiry with the grace offer already shown (or
+    overdue either way) -> finalize immediately; already past expiry but
+    never offered grace yet -> re-arm the expiry job so the offer still
+    happens correctly; still valid -> re-arm expiry + reminder jobs
+    (job_queue jobs don't survive a process restart, same reasoning
+    already established for the wallet recharge polling design and the
+    platform's other job_queue users)."""
     application.bot_data["test_flow_host"] = host
     conn = platform_db.get_connection()
     platform_db.init_schema(conn)
-    rows = conn.execute("SELECT test_id, expires_at FROM test_sessions WHERE status='in_progress'").fetchall()
+    rows = conn.execute("SELECT test_id, expires_at, grace_offered_at, current_seq_no FROM test_sessions WHERE status='in_progress'").fetchall()
     now = datetime.now(timezone.utc)
     rearmed, finalized = 0, 0
-    for test_id, expires_at in rows:
+    for test_id, expires_at, grace_offered_at, current_seq_no in rows:
         if datetime.fromisoformat(expires_at) <= now:
-            application.job_queue.run_once(_expiry_job_callback, when=1, name=_job_name(test_id), data={"test_id": test_id})
+            if grace_offered_at is not None:
+                application.job_queue.run_once(_grace_timeout_job_callback, when=1, name=_grace_timeout_job_name(test_id), data={"test_id": test_id})
+            else:
+                application.job_queue.run_once(_expiry_job_callback, when=1, name=_expiry_job_name(test_id), data={"test_id": test_id})
             finalized += 1
         else:
             delay = (datetime.fromisoformat(expires_at) - now).total_seconds()
-            application.job_queue.run_once(_expiry_job_callback, when=delay, name=_job_name(test_id), data={"test_id": test_id})
+            application.job_queue.run_once(_expiry_job_callback, when=delay, name=_expiry_job_name(test_id), data={"test_id": test_id})
+            for minutes_before in REMINDER_MINUTES_BEFORE:
+                fire_at = datetime.fromisoformat(expires_at) - timedelta(minutes=minutes_before)
+                reminder_delay = (fire_at - now).total_seconds()
+                if reminder_delay > 0:
+                    application.job_queue.run_once(
+                        _reminder_job_callback, when=reminder_delay, name=_reminder_job_name(test_id, minutes_before),
+                        data={"test_id": test_id, "minutes_before": minutes_before},
+                    )
+            # Re-arm the no-activity heartbeat chain too (2026-08-16) -- it
+            # doesn't survive a restart any more than the other jobs do.
+            if current_seq_no:
+                application.job_queue.run_once(
+                    _heartbeat_job_callback, when=HEARTBEAT_INTERVAL_SECONDS, name=_heartbeat_job_name(test_id),
+                    data={"test_id": test_id, "seq_no": current_seq_no},
+                )
             rearmed += 1
     if rearmed or finalized:
         logger.info(f"test_flow: startup sweep -- re-armed {rearmed} in-progress test(s), finalizing {finalized} already-expired test(s).")
@@ -939,12 +1275,36 @@ async def start_upload_pick(update, context, host):
     await update.message.reply_text("Which question is this answer for?", reply_markup=InlineKeyboardMarkup(rows))
 
 
+PASS_UPLOAD_PHRASES = {"pass"}
+
+
 async def handle_upload_text_input(update, context, host) -> bool:
-    """Returns True if the message was consumed. Handles 'done' while
+    """Returns True if the message was consumed. Handles 'done' (finish
+    this question, keeping whatever was uploaded) and 'pass' (2026-08-16,
+    Pranav's ask: an explicit way to decline a descriptive question rather
+    than leaving no fallback for "I don't want to upload this") while
     actively collecting pages for a question."""
     text = (update.message.text or "").strip().lower()
-    if is_collecting_upload(context) and text in DONE_UPLOAD_PHRASES:
-        seq_no = context.user_data.pop(UD_UPLOAD_SEQ)
+    if not is_collecting_upload(context):
+        return False
+
+    seq_no = context.user_data.get(UD_UPLOAD_SEQ)
+
+    if text in PASS_UPLOAD_PHRASES:
+        context.user_data.pop(UD_UPLOAD_SEQ, None)
+        context.user_data.pop(UD_UPLOAD_PAGE_COUNTER, None)
+        conn = platform_db.get_connection()
+        active = _get_active_test(conn, update.effective_user.id)
+        if active:
+            cols = [d[0] for d in conn.execute("SELECT * FROM test_sessions LIMIT 0").description]
+            test_id = dict(zip(cols, active))["test_id"]
+            platform_db.execute_with_retry(conn, "UPDATE test_questions SET status='skipped' WHERE test_id=? AND seq_no=?", (test_id, seq_no))
+            _log_activity(conn, test_id, seq_no, "question_passed")
+            await update.message.reply_text(f'Q{seq_no} marked as passed — you can still come back to it later by typing "upload" again before you submit.')
+        return True
+
+    if text in DONE_UPLOAD_PHRASES:
+        context.user_data.pop(UD_UPLOAD_SEQ, None)
         context.user_data.pop(UD_UPLOAD_PAGE_COUNTER, None)
         conn = platform_db.get_connection()
         active = _get_active_test(conn, update.effective_user.id)
@@ -954,10 +1314,12 @@ async def handle_upload_text_input(update, context, host) -> bool:
             page_count = conn.execute("SELECT COUNT(*) FROM test_uploads WHERE test_id=? AND seq_no=?", (test_id, seq_no)).fetchone()[0]
             if page_count > 0:
                 platform_db.execute_with_retry(conn, "UPDATE test_questions SET status='uploaded' WHERE test_id=? AND seq_no=?", (test_id, seq_no))
-                await update.message.reply_text(f"✅ Saved {page_count} page(s) for Q{seq_no}. Type <code>test</code> to continue, or <code>upload</code> for another question.", parse_mode=ParseMode.HTML)
+                _log_activity(conn, test_id, seq_no, "upload_done", f"page_count={page_count}")
+                await update.message.reply_text(f'✅ Saved {page_count} page(s) for Q{seq_no}. Type "test" to continue, or "upload" for another question.')
             else:
-                await update.message.reply_text(f"No pages were received for Q{seq_no} — nothing saved. Type <code>upload</code> to try again.")
+                await update.message.reply_text(f'No pages were received for Q{seq_no} — nothing saved. Type "upload" to try again, or "pass" if you don\'t want to answer it.')
         return True
+
     return False
 
 
@@ -1003,5 +1365,6 @@ async def handle_upload_photo_or_document(update, context, host) -> bool:
         "VALUES (?,?,?,?,?,?,?)",
         (test_id, seq_no, page_no, str(dest_path), file_obj.file_id, mime_type, platform_db.now()),
     )
-    await update.message.reply_text(f"\U0001F4C4 Page {page_no} saved for Q{seq_no}. Send another page, or type <code>done</code> to finish this question.", parse_mode=ParseMode.HTML)
+    _log_activity(conn, test_id, seq_no, "upload_page_added", f"page_no={page_no} mime_type={mime_type}")
+    await update.message.reply_text(f'\U0001F4C4 Page {page_no} saved for Q{seq_no}. Send another page, or type "done" to finish this question.')
     return True

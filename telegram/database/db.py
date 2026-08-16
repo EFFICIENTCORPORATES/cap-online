@@ -202,6 +202,26 @@ _COLUMN_MIGRATIONS = {
         # created table (CREATE TABLE IF NOT EXISTS doesn't ALTER).
         ("human_id", "TEXT"),
     ],
+    "test_sessions": [
+        # Added 2026-08-16 for the interactive grace-period offer (Pranav:
+        # ask the student if they need 2/3/5 extra minutes when time runs
+        # out, offered exactly once, tracked) -- test_sessions was created
+        # (via schema.sql's CREATE TABLE) earlier the same session, so this
+        # needs the same ALTER-via-migration treatment as every other
+        # post-go-live column in this dict.
+        ("grace_offered_at", "TEXT"),
+        ("grace_requested_minutes", "INTEGER"),
+        # Added same day, same reasoning -- exact-point resume + what the
+        # no-activity heartbeat checks against (see test_activity_log).
+        ("current_seq_no", "INTEGER"),
+    ],
+    "test_questions": [
+        # Added 2026-08-16 -- topic/subtopic snapshot per question, for
+        # concept-level analysis (Pranav's ask). test_questions was created
+        # earlier the same session, needs the same migration treatment.
+        ("chapter_slug", "TEXT"),
+        ("topic_text", "TEXT"),
+    ],
 }
 
 

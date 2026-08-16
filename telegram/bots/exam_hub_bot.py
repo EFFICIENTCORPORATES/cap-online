@@ -1723,7 +1723,7 @@ def main():
     # 2026-08-16: Test Mode's own callback prefixes -- same "explicit
     # pattern per module" discipline as every flow above (the callback-
     # pattern-collision bug class this platform has hit 3+ times already).
-    app.add_handler(CallbackQueryHandler(_test_flow_callback_wrapper, pattern=r"^(testflow|tnav|topt|tgo|tupload)(:|$)"))
+    app.add_handler(CallbackQueryHandler(_test_flow_callback_wrapper, pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)"))
     app.add_handler(CallbackQueryHandler(_wallet_flow_callback_wrapper, pattern=r"^walletrc(:|$)"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_router))
     # Photo/document uploads -- only meaningful during Test Mode's upload

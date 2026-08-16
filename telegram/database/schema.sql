@@ -730,7 +730,10 @@ CREATE TABLE IF NOT EXISTS test_sessions (
                                              )),
     submitted_at                               TEXT,
     mcq_score                                    INTEGER,   -- NULL until submitted
-    mcq_max                                        INTEGER
+    mcq_max                                        INTEGER,
+    grace_offered_at                               TEXT,      -- set the FIRST (and only) time the "need extra minutes?" offer is shown, so it's never offered twice -- see wallet_flow.py's twin note on offering things exactly once
+    grace_requested_minutes                          INTEGER,  -- NULL if never asked or the student chose "submit now"; otherwise 2/3/5 -- the actual extension granted
+    current_seq_no                                    INTEGER   -- the question currently being shown -- 2026-08-16, Pranav's ask: exact-point resume after a dropped phone/dead battery, AND what the no-activity heartbeat (test_activity_log) checks against to know it should stop rescheduling itself once the student has moved on
 );
 
 CREATE INDEX IF NOT EXISTS idx_test_sessions_user   ON test_sessions(telegram_user_id, status);
@@ -748,9 +751,11 @@ CREATE TABLE IF NOT EXISTS test_questions (
     human_id                 TEXT,
     marks                      INTEGER NOT NULL,
     status                       TEXT NOT NULL CHECK (status IN (
-                                     'pending', 'answered', 'skipped',       -- mcq
+                                     'pending', 'answered', 'skipped',       -- mcq (also reused for a descriptive question the student explicitly "passed" on -- see test_flow.py's PASS_UPLOAD_PHRASES)
                                      'not_uploaded', 'uploaded'              -- descriptive
                                  )),
+    chapter_slug                   TEXT,     -- snapshotted at test-build time (2026-08-16, Pranav's ask: track every question down to topic/subtopic for concept-level analysis) -- never re-derived from the live content bank later, so a test's own record stays stable even if content is re-tagged afterward
+    topic_text                       TEXT,
     PRIMARY KEY (test_id, seq_no)
 );
 
@@ -781,4 +786,47 @@ CREATE TABLE IF NOT EXISTS test_uploads (
 );
 
 CREATE INDEX IF NOT EXISTS idx_test_uploads_question ON test_uploads(test_id, seq_no, page_no);
+
+-- ===========================================================================
+-- TEST ACTIVITY LOG -- added 2026-08-16 (Pranav: capture every point of
+-- possible data during a test -- question views, MCQ option picks AND
+-- later changes, upload pages, passive no-activity heartbeats every 60s,
+-- reminders, the grace-period offer/choice, submission -- all timestamped,
+-- so a student's understanding can be analyzed later at topic/subtopic
+-- granularity, not just "got it right or wrong").
+--
+-- Deliberately ONE lean append-only event log, not a wide table-per-action-
+-- type -- same "subject/action/object + timestamp" shape Pranav proposed,
+-- and the same architectural pattern this schema already uses elsewhere
+-- (wallet_ledger, report_flow_events, leaderboard_broadcast_log): an
+-- append-only log is what makes "resume from the exact point, lose at most
+-- 60 seconds of data even if the phone dies mid-test" possible at all --
+-- test_sessions/test_questions/test_mcq_answers stay the CURRENT-STATE
+-- tables (fast to query for "what's the score"), this table is the FULL
+-- HISTORY underneath them (fast to query for "what actually happened, in
+-- order"). `test_questions.chapter_slug`/`topic_text` (added same day)
+-- carry the topic/subtopic tag onto every question snapshot, so per-topic
+-- analysis is a straightforward join from here, not a re-parse of the
+-- live content bank.
+--
+-- action_type values (free-text, not CHECK-constrained -- new action
+-- types are expected to be added over time as the test-taking flow grows,
+-- same reasoning bot_interactions.event_type already documents for
+-- exactly this tradeoff): 'test_started', 'question_viewed',
+-- 'mcq_option_selected', 'mcq_option_changed', 'upload_page_added',
+-- 'upload_done', 'upload_overwrite_chosen', 'upload_append_chosen',
+-- 'question_passed', 'no_activity_heartbeat', 'reminder_sent',
+-- 'grace_offered', 'grace_chosen', 'submit_confirmation_shown',
+-- 'test_submitted'.
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS test_activity_log (
+    activity_id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    test_id             TEXT NOT NULL,
+    seq_no                INTEGER,            -- NULL for a test-level event not tied to one question (test_started, test_submitted, grace_offered)
+    action_type             TEXT NOT NULL,
+    detail                     TEXT,            -- free-text or JSON-encoded payload -- e.g. the selected option, previous+new option on a change, page count, minutes chosen
+    occurred_at                   TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_test_activity_log_test ON test_activity_log(test_id, occurred_at);
 
