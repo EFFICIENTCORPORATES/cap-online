@@ -43,6 +43,175 @@ historical log.
 | `telegram/database/smoke_test_wallet.py` | **New, passing 21/21** | Pure DB-logic test for `wallet.py` (balance/credit/debit/idempotency/rate-helpers/currency conversion). Makes zero network calls by design — safe to re-run any time. Does NOT test `razorpay_client.py` at all (nothing to test without spending real money). |
 | `telegram/assets/exam_bot/Tests/TEST-MODE-ROADMAP.md` | This file | The plan. Sections 1–8 are the original Test Mode feature design (mostly still just planning); §9 is the billing/wallet design + decision trail; §0 (this section) is the living status. |
 
+### 0.1a Update, 2026-08-16 — platform-wide identity + signup grant + live MCQ/Descriptive billing
+
+Scope grew significantly beyond Test Mode itself this round (Pranav's
+explicit direction) — building the wallet foundation turned into turning on
+real billing for ordinary practice across the exam-hub bots, immediately.
+**Built, tested, and DEPLOYED LIVE** (per Pranav's explicit "wire in and
+restart yourself, no check-in needed"):
+
+- **`telegram/database/identity.py`** (new) — `ensure_wallet_identity()`
+  auto-provisions a student's permanent 1LAVYA username from their Telegram
+  `@username` (falling back to a `tg{id}` placeholder if they have none, or
+  it's invalid/already claimed) — no manual profile-setup step required.
+  Confirmed necessary: 96 real students existed at build time, only 1 had
+  ever set up a username manually. Reuses `profile_flow.py`'s exact
+  validation/insert pattern — an auto-provisioned username is
+  indistinguishable in the DB from a manually-set one, and is bound by the
+  same **permanent, never-editable** rule already shown to students via
+  "profile" (a real tension with Pranav's ask for one-time editability,
+  resolved by NOT promising editability rather than contradicting existing
+  on-screen text — see §9.6).
+- **`wallet_ledger`/`payments` reshaped a second time**: `event_type`
+  renamed `free_monthly_grant`→`signup_grant`, added `descriptive_debit`/
+  `grant_expired`. New **`wallet_grants`** table tracks each grant's own
+  365-day expiry lifecycle separately from the ledger (see schema.sql's own
+  comment for the clawback-cap math: never expires more than the grant's
+  own original size or the student's current balance, so a real recharge is
+  never wrongly touched by an old grant's expiry).
+- **`wallet.py` gained**: `grant_signup_bonus()` (1000 credits, ₹10-
+  equivalent, ONE-TIME ever, idempotent), `sweep_expired_grants()` (365-day
+  clawback, capped and safe, meant to run periodically — not wired to a
+  schedule yet, see §0.2), `build_signup_grant_message()` (the exact
+  question/marks-only framing Pranav specified, one shared pool not three
+  separate ones, no rupee figures ever).
+- **`exam_hub_bot.py` wired in** (the shared script behind `1lavya-examhub`,
+  `capranav-exam`, and — via `faculty_bot.py`'s import — `csarunchouhan`):
+  `db_ensure_wallet()` runs on every `/start`/restart, granting the
+  one-time bonus and showing the welcome message on a student's genuine
+  first-ever touch (platform-wide, keyed by username — whichever exam-hub
+  bot they touch first). `send_question()`/`send_mcq()` now debit
+  (`descriptive_debit`=10 credits, `mcq_debit`=1 credit) **before** showing
+  content; an out-of-balance student sees an honest message (no rupees, no
+  false promise of a working recharge yet) instead of the question.
+- **Two integration test suites, both passing**: `telegram/database/
+  smoke_test_wallet.py` (49/49 — ledger/identity/grant/expiry logic in
+  isolation, including a real bug caught and fixed mid-build: the FK from
+  `students.lavya_username` to `student_profiles.username`, on top of
+  `wallet_ledger`'s own FK, meant cleanup order mattered and the first
+  version got it backwards) and `telegram/bots/
+  smoke_test_exam_hub_wallet.py` (13/13, new — drives the REAL
+  `exam_hub_bot.py` functions, not just `wallet.py` in isolation, catching
+  what a module-only test can't: wiring bugs. One real test-setup bug
+  caught here too — a synthetic Telegram handle exceeding the 20-char limit
+  correctly triggered the placeholder fallback, which was `identity.py`
+  working as designed, not a bug).
+- **Deployed**: all three bots restarted via `manage_bots.py`, confirmed
+  fresh PIDs and clean startup logs (no tracebacks) via `manage_bots.py
+  status`.
+
+**Known gap, stated honestly**: this round's identity/grant wiring only
+touches the exam-hub-kind bots. Study Hub and MyFiles Hub bots do NOT call
+`db_ensure_wallet()` on their own `/start` — a student whose actual first-
+ever platform touch is Study Hub won't see the welcome-bonus message at
+that moment (they still get the grant automatically, just later, the first
+time they hit a wallet-gated exam-hub flow — a UX gap, not a financial or
+correctness one). Extending this to Study Hub/MyFiles Hub is straightforward
+(same `identity.ensure_wallet_identity()` + `wallet.grant_signup_bonus()`
+calls, different bot script) but wasn't done this round given the size of
+what was already in flight.
+
+**Incident, not swept under the rug**: while restarting `1lavya-examhub`,
+a `tail` of its log to check for a clean startup was displayed unfiltered
+and briefly showed the bot's live Telegram token in plaintext (standard
+`httpx` request-logging behavior, not something this session's code
+introduced — but displaying it without filtering was this session's own
+mistake). Practical exposure is low (a bot token controls that bot's
+messages, not money), but rotating it via BotFather is worth considering
+since it's now sat in a conversation transcript.
+
+### 0.1b Update, 2026-08-16 (same day, later) — Test Mode itself: BUILT and DEPLOYED
+
+**Pre-Designed Tests, the actual feature, is now live** on `1lavya-examhub`
+and `capranav-exam` (Pranav's confirmed scope: CA Inter Advanced Accounting
+only, the sole subject with real "sitting" data). Full engine, not a demo:
+
+- **`telegram/tools/generate_predesigned_tests.py`** (new) — groups the
+  REAL, already-loaded MCQ + descriptive banks by real sitting (verified
+  matching key: both sides encode exam_type/year/month/set consistently —
+  confirmed by inspecting real `mcq_id`s and `src_text`s directly, not
+  assumed). **RTP is excluded** — every real RTP record, MCQ and
+  descriptive alike, was confirmed to carry no reliable stated marks, so a
+  ₹-based test fee and a "total marks" summary would both be meaningless.
+  **27 real sittings generated** (18 MTP, 9 PYQ) into the new
+  `predesigned_tests` table, ranging 62–125 marks. A cross-check ran
+  after the fact: `test_flow.py`'s own (separately implemented) question-
+  matching logic was checked against all 27 catalog rows and agreed
+  exactly on every one — 0 mismatches, meaning a student is never shown a
+  summary promising different content than what they actually receive.
+- **`telegram/bots/test_flow.py`** (new, ~600 lines) — the full engine:
+  Course→Level→Subject→sitting picker (auto-skips when only one real
+  option, same discipline as practice mode; a subject with no tests gets
+  an honest "not available yet, here's what you can do instead" message,
+  never a dead end); a summary/confirm screen showing cost in credits
+  (never rupees) against the student's real balance; `Start Test` debits
+  the wallet upfront via the already-built `debit_for_test()`; MCQ
+  delivery with the answer genuinely hidden until submission (a real,
+  separate render path from practice mode, not a flag on it); skip-and-
+  revisit navigation; a question-list "palette" (✅/⚪/🟡/📝 status icons);
+  descriptive delivery with an `upload`-triggered, question-scoped photo/
+  document collection flow (`Page N saved... type done`); submission that
+  grades MCQs immediately and honestly reports descriptive answers as
+  "saved, evaluation coming in a future update" (no false 30-minute
+  promise, since AI evaluation — a separate, differently-priced feature —
+  isn't built); a scheduled auto-submit at time-up that **survives a bot
+  restart** (`rearm_pending_test_jobs()`, swept at every startup, same
+  discipline this platform already established for every other scheduled
+  job). Uses a "host module" dependency-injection pattern (passes
+  `exam_hub_bot` itself into `test_flow.py`'s functions) specifically to
+  reuse `exam_hub_bot.py`'s existing HTML-rendering/message-splitting
+  helpers without a circular import or duplicating that logic.
+- **Wired into `exam_hub_bot.py`**: new callback prefixes
+  (`testflow:`/`tnav:`/`topt:`/`tgo:`/`tupload:`, same explicit-pattern-
+  per-module discipline as every existing flow, guarding against the
+  callback-collision bug class this platform has hit 3+ times), a new
+  photo/document `MessageHandler` (this bot never needed one before Test
+  Mode), and the `"test"`/`"upload"` text triggers checked in the same
+  "most specific active state first" order as every other trigger.
+- **`telegram/assets/exam_bot/Tests/uploads/`** added to `.gitignore` —
+  binary + personal student data, before any real file could land there.
+- **Three new DB tables** (`test_sessions`, `test_questions`,
+  `test_mcq_answers`, `test_uploads` — 4, really) plus `predesigned_tests`,
+  all created cleanly (brand new tables, no reshape needed).
+- **Three test suites, all passing, run for real**:
+  `smoke_test_test_flow.py` (new, 32/32 — drives the ACTUAL conversation
+  sequence end to end: trigger → picker → summary → paid start → MCQ
+  answer with correctness hidden → palette → descriptive view → upload
+  trigger → question pick → mocked photo → `done` → submit → honest
+  result — this is the specific "smoke test the conversation/message
+  sequence" check Pranav asked for), plus the two wallet suites from
+  §0.1a re-verified still passing (49 + 13). **Two real test-script bugs
+  were caught and fixed while building this** (both in the test script
+  itself, not the product): a premature callback-handler call before its
+  mock `.data` attribute was set, and stray empty upload directories left
+  behind by a mocked file download — both fixed, cleanup verified leaves
+  zero residue.
+- **Deployed**: `1lavya-examhub` and `capranav-exam` restarted (per
+  Pranav's explicit scope — `csarunchouhan` was NOT included this round,
+  since he doesn't teach CA Inter Advanced Accounting), confirmed fresh
+  PIDs and clean startup logs.
+
+**Explicitly NOT built this round, by deliberate choice, not oversight**:
+- **The 3-PDF delivery bundle** (§10 — Suggested Answer / Question Paper /
+  Student Answer Sheet PDFs). Uploaded files are safely stored on disk and
+  in `test_uploads` regardless — nothing is lost by deferring this: it can
+  be built later as a pure addition, without touching the core flow above.
+- **AI evaluation (Phase 2)** — still correctly blocked on evaluation
+  pricing, per Pranav's own "we'll discuss separately."
+- **Student Customised Test** — out of scope for this round per Pranav's
+  own confirmed choice (Pre-Designed only).
+- **Reminder messages at 50%/75%/90%/T-5min** — the roadmap's §7 flagged
+  these as a "nice to have"; only the essential mechanics shipped (a live
+  "time remaining" line on every question, freshly computed, plus the
+  hard auto-submit at expiry). No milestone reminder pings.
+- **A live end-to-end test with real Telegram** (an actual person tapping
+  through a real test in the real app) — everything above is verified by
+  driving the real code programmatically, which is real and meaningful
+  verification, but is not the same as a human clicking through the real
+  UI. Worth Pranav doing once, the same "human-verified first real
+  transaction" caveat already flagged for the wallet/Razorpay work.
+
 ### 0.2 What is NOT built yet — the actual next steps, in order
 
 1. **`telegram/bots/wallet_flow.py`** (doesn't exist yet) — the conversational
@@ -91,14 +260,20 @@ historical log.
 4. **Cloudflare Tunnel + webhook** (optional upgrade, not a blocker for the
    above — polling alone is a complete, correct v1) — still blocked on
    Pranav's own interactive `cloudflared login`; see §9.5.
-5. **Actually gating MCQ/Descriptive practice on the wallet** (i.e., calling
-   `wallet.debit()` from `exam_hub_bot.py`'s `send_question()`/`send_mcq()`)
-   — this is explicitly a SEPARATE, much higher-blast-radius change (it
-   would start blocking existing free usage for every current student the
-   moment it ships) and has not been scoped or started. Test Mode's own
-   `debit_for_test()` is ready to wire in once Test Mode itself
-   (§1–§8's feature build) exists, which it doesn't yet either — the wallet
-   work so far is billing *infrastructure*, not the Test Mode feature itself.
+5. ~~Gating MCQ/Descriptive practice on the wallet~~ — **DONE, 2026-08-16**
+   (see §0.1a) — live on `1lavya-examhub`/`capranav-exam`/`csarunchouhan`.
+   Test Mode's own `debit_for_test()` is still unused, waiting on Test Mode
+   itself (§1–§8's feature build), which remains completely unbuilt as of
+   this writing — everything above is billing *infrastructure*, not the
+   Test Mode feature.
+6. **Extend identity/grant to Study Hub + MyFiles Hub bots** — a student
+   whose genuine first-ever platform touch is Study Hub doesn't see the
+   welcome-bonus message at that moment today (see §0.1a's "known gap").
+   Same functions, different bot script — small, not done this round.
+7. **Schedule `wallet.sweep_expired_grants()`** — built and tested, but not
+   wired to any recurring job yet (no urgency: the earliest possible real
+   expiry is 365 days out). A low-frequency `job_queue` task in one bot, or
+   a standalone scheduled tool script, either is fine.
 6. **Test Mode the actual feature** (§1–§8 of this document) — none of it is
    built. The wallet/billing work above is a prerequisite this session chose
    to build first (triggered by the live Razorpay keys arriving), not a sign
@@ -801,6 +976,27 @@ for confirmation), wiring it into any live bot's handler registration, and
 the Cloudflare Tunnel/webhook (still blocked on Pranav's own interactive
 `cloudflared login`). None of the live bot processes have been touched or
 restarted by this work.
+
+### 9.6 Auto-provisioned identity vs. the permanent-username promise (flagged 2026-08-16)
+
+Pranav asked (2026-08-16) for a student's wallet identity to be silently
+auto-set from their Telegram `@username`, with "he can anytime edit it once."
+`profile_flow.py`'s existing username system is explicitly **permanent,
+locked forever once claimed** — and says so directly to the student: typing
+"profile" renders `Username: xxxxx (permanent, cannot be changed)` verbatim
+(`profile_flow.py`'s `_profile_summary_text()`). Auto-setting a username and
+then allowing one edit would make that on-screen text false the moment a
+student who got auto-provisioned checks their profile.
+
+**Resolution taken**: `identity.py` auto-provisions silently, exactly as
+asked, but does **not** offer a one-time edit — the auto-set username is
+bound by the exact same permanent rule as a manually-chosen one, no
+exception carved out. This is the safer default (never promise something
+untrue to a student) but is a real, deliberate deviation from Pranav's
+literal ask, flagged here rather than silently decided. If a one-time-edit
+exception for auto-provisioned usernames specifically is actually wanted,
+that's a `profile_flow.py` change (a new "was this auto-assigned and never
+confirmed?" flag, checked before permanently locking) — not built.
 
 ## 10. Answer-Sheet PDF Assembly & Delivery Bundle (added 2026-08-15, second round)
 

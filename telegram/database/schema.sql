@@ -78,13 +78,14 @@ CREATE TABLE IF NOT EXISTS wallet_ledger (
     username              TEXT NOT NULL REFERENCES student_profiles(username),
     tenant_id            TEXT NOT NULL,   -- which bot context this happened in, e.g. 'capranav', '1lavya-examhub'; 'platform' for platform-level events not tied to any one bot
     event_type           TEXT NOT NULL CHECK (event_type IN (
-                              'free_monthly_grant',  -- the 100-free-MCQs/month top-up, granted once per student per calendar month
+                              'signup_grant',         -- ONE-TIME 1000-credit (₹10-equivalent) bonus on a student's first-ever interaction with any 1LAVYA bot -- RENAMED from 'free_monthly_grant' 2026-08-16 (that name/shape was never actually used -- 0 rows -- before this rename; see wallet_grants below for the 365-day expiry this grant carries, tracked separately from this ledger row since expiry needs its own lifecycle, not just a balance entry)
                               'mcq_debit',            -- -1 credit, one per MCQ shown (see telegram/database/README.md for why "shown" not "answered")
                               'descriptive_debit',    -- -10 credits, one per descriptive practice question shown (₹1/10 questions, flat regardless of marks -- locked 2026-08-15)
                               'test_debit',           -- -10 credits per mark of an assembled Test Mode session, charged once at "Start Test" (₹1/10 marks -- covers question delivery + upload/PDF assembly ONLY, not AI evaluation, which is priced separately and not yet decided)
                               'recharge_credit',      -- +N credits from a paid top-up (see payments table for the money side)
                               'manual_adjustment',    -- admin correction; `reference` must explain why
-                              'refund'                -- reversal of a recharge_credit or manual_adjustment
+                              'refund',                -- reversal of a recharge_credit or manual_adjustment
+                              'grant_expired'           -- offsetting debit posted by the wallet_grants sweep once a signup_grant's 365-day window passes unused -- see wallet_grants below
                           )),
     amount                INTEGER NOT NULL,   -- signed: positive = credit, negative = debit. Units are credits; RECOMMENDED (not yet re-confirmed by Pranav) exchange rate is 1 credit = ₹0.01, which makes every locked rate above a clean whole-credit number -- see TEST-MODE-ROADMAP.md §9.2.
     reference             TEXT,               -- mcq_id / book_id / test_id for a debit (whichever applies); payments.gateway_txn_id (the Razorpay Payment Link id) for a recharge; free-text reason for manual_adjustment/refund
@@ -142,6 +143,51 @@ CREATE TABLE IF NOT EXISTS payments (
 CREATE INDEX IF NOT EXISTS idx_payments_student ON payments(telegram_user_id);
 CREATE INDEX IF NOT EXISTS idx_payments_tenant  ON payments(tenant_id);
 CREATE INDEX IF NOT EXISTS idx_payments_username ON payments(username);
+
+-- ===========================================================================
+-- WALLET GRANTS -- added 2026-08-16 (Pranav: a one-time ₹10-equivalent
+-- signup bonus for every student, framed to them only as "free MCQs /
+-- Descriptive Questions / Test marks," expiring 365 days after grant if
+-- unused, never renewed -- see
+-- telegram/assets/exam_bot/Tests/TEST-MODE-ROADMAP.md §0/§9 for the full
+-- decision trail).
+--
+-- Separate from wallet_ledger on purpose: the ledger's `signup_grant` row
+-- is what actually moves the balance (a plain +1000 credit) and is
+-- permanent/append-only like every other ledger row. THIS table tracks the
+-- grant's own EXPIRY LIFECYCLE, which the ledger has no concept of --
+-- when it was granted, when it expires, and (once swept) how much of it
+-- was actually clawed back unused. One row per grant per username (today,
+-- always exactly one -- 'signup_bonus' is the only grant_type, and there
+-- is deliberately no renewal).
+--
+-- Expiry math, kept deliberately simple for v1 rather than full FIFO
+-- lot-accounting: at sweep time, `expired_amount = min(amount_credits,
+-- current_balance)` -- i.e. NEVER claws back more than this specific
+-- grant's own original size, and NEVER claws back more than the student
+-- currently has (so a student who has since made a real Razorpay recharge
+-- never has their PAID credits wrongly zeroed out by an old free grant's
+-- expiry -- the cap at `amount_credits` is what guarantees that). This is
+-- an approximation (it doesn't track "was this specific credit spent
+-- before that one" in strict FIFO order), documented as such -- correct
+-- for the common case (a grant-only balance, which is every student's
+-- reality until recharges exist for real), and safe (never over-claws)
+-- even once recharges are common.
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS wallet_grants (
+    grant_id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    username           TEXT NOT NULL REFERENCES student_profiles(username),
+    grant_type          TEXT NOT NULL CHECK (grant_type IN ('signup_bonus')),
+    amount_credits        INTEGER NOT NULL,
+    ledger_reference        TEXT,    -- the wallet_ledger.idempotency_key this grant posted under, e.g. "signup_grant:{username}" -- lets a sweep trace straight back to the original credit row
+    granted_at              TEXT NOT NULL,
+    expires_at                TEXT NOT NULL,
+    expired_amount              INTEGER,   -- NULL until swept; the actual amount clawed back (<= amount_credits, capped by balance at sweep time -- see comment above)
+    swept_at                      TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_wallet_grants_username ON wallet_grants(username);
+CREATE INDEX IF NOT EXISTS idx_wallet_grants_sweep     ON wallet_grants(expires_at, swept_at);
 
 -- ---------------------------------------------------------------------------
 -- Content-ownership tagging convention (documentation only -- NOT a table
@@ -617,3 +663,122 @@ CREATE TABLE IF NOT EXISTS mcq_issue_reports (
 
 CREATE INDEX IF NOT EXISTS idx_mcq_issue_reports_mcq    ON mcq_issue_reports(mcq_id);
 CREATE INDEX IF NOT EXISTS idx_mcq_issue_reports_status ON mcq_issue_reports(status, created_at);
+
+-- ===========================================================================
+-- TEST MODE -- added 2026-08-16 (Pre-Designed Tests only, per the confirmed
+-- scope -- see telegram/assets/exam_bot/Tests/TEST-MODE-ROADMAP.md for the
+-- full design). Reuses real MTP/PYQ sittings (RTP excluded -- neither its
+-- MCQs nor its descriptive questions carry reliable stated marks, confirmed
+-- by inspecting every real RTP record before this table was designed) as
+-- ready-made timed tests. CA Inter Advanced Accounting only, today -- the
+-- only subject with genuine "one real paper" sitting data (see
+-- predesigned_tests.course/level/subject below, which is what lets a
+-- student asking for another subject be told honestly "not available yet"
+-- rather than silently shown nothing).
+-- ===========================================================================
+
+-- Generated by telegram/tools/generate_predesigned_tests.py from the real,
+-- already-loaded question banks (never hand-typed) -- one row per real
+-- sitting (an MTP Set counts as its own sitting; PYQ has no sets). A
+-- sitting with 0 usable marks on both sides (i.e. every RTP sitting) is
+-- never emitted. `active=0` lets a specific sitting be hidden without
+-- deleting its row (e.g. a sitting later found to have a real content bug).
+CREATE TABLE IF NOT EXISTS predesigned_tests (
+    catalog_key         TEXT PRIMARY KEY,   -- e.g. "CA-Inter-AdvAcc-MTP-2024-05-S1"
+    course               TEXT NOT NULL,
+    level                 TEXT NOT NULL,
+    subject                TEXT NOT NULL,
+    exam_type                TEXT NOT NULL,   -- 'MTP' | 'PYQ' (never 'RTP' -- see comment above)
+    year                      TEXT NOT NULL,
+    month                      TEXT,           -- e.g. "May" -- NULL only if genuinely undetectable (never expected in practice, both source patterns always carry it)
+    set_no                      TEXT,           -- NULL for PYQ (no sets); '1'/'2' for MTP
+    title                        TEXT NOT NULL,
+    total_marks                   INTEGER NOT NULL,
+    duration_minutes                INTEGER NOT NULL,
+    mcq_count                        INTEGER NOT NULL,
+    mcq_marks                         INTEGER NOT NULL,
+    descriptive_count                  INTEGER NOT NULL,
+    descriptive_marks                   INTEGER NOT NULL,
+    active                                INTEGER NOT NULL DEFAULT 1,
+    generated_at                            TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_predesigned_tests_scope ON predesigned_tests(course, level, subject, active);
+
+-- One row per test a student has actually started. `username` is who pays/
+-- is scored (the wallet identity -- see identity.py); `telegram_user_id`/
+-- `bot_id` are the actual device/bot context, kept separately for the same
+-- reason payments.username vs payments.telegram_user_id are (schema.sql's
+-- own comment on that table explains the split). `test_id` is a plain
+-- readable string (not autoincrement) so it can double as a wallet debit's
+-- idempotency-key reference and a file-path component (see test_uploads)
+-- without a lookup.
+CREATE TABLE IF NOT EXISTS test_sessions (
+    test_id             TEXT PRIMARY KEY,
+    bot_id                TEXT NOT NULL,
+    telegram_user_id       INTEGER NOT NULL,
+    username                 TEXT NOT NULL REFERENCES student_profiles(username),
+    catalog_key                TEXT NOT NULL REFERENCES predesigned_tests(catalog_key),
+    total_marks                  INTEGER NOT NULL,
+    mcq_count                      INTEGER NOT NULL,
+    descriptive_count                INTEGER NOT NULL,
+    duration_minutes                   INTEGER NOT NULL,
+    started_at                           TEXT NOT NULL,
+    expires_at                             TEXT NOT NULL,
+    status                                   TEXT NOT NULL CHECK (status IN (
+                                                 'in_progress', 'submitted', 'expired', 'abandoned'
+                                             )),
+    submitted_at                               TEXT,
+    mcq_score                                    INTEGER,   -- NULL until submitted
+    mcq_max                                        INTEGER
+);
+
+CREATE INDEX IF NOT EXISTS idx_test_sessions_user   ON test_sessions(telegram_user_id, status);
+CREATE INDEX IF NOT EXISTS idx_test_sessions_expiry ON test_sessions(status, expires_at);
+
+-- One row per question WITHIN a test -- seq_no is the test's OWN numbering
+-- (1..N), never the source sitting's own qno_text, per the roadmap's own
+-- design note (a test question's identity inside the test must never be
+-- confused with its identity in the original paper).
+CREATE TABLE IF NOT EXISTS test_questions (
+    test_id          TEXT NOT NULL REFERENCES test_sessions(test_id),
+    seq_no             INTEGER NOT NULL,
+    qtype                TEXT NOT NULL CHECK (qtype IN ('mcq', 'descriptive')),
+    source_id              TEXT NOT NULL,   -- mcq_id or book_id
+    human_id                 TEXT,
+    marks                      INTEGER NOT NULL,
+    status                       TEXT NOT NULL CHECK (status IN (
+                                     'pending', 'answered', 'skipped',       -- mcq
+                                     'not_uploaded', 'uploaded'              -- descriptive
+                                 )),
+    PRIMARY KEY (test_id, seq_no)
+);
+
+CREATE INDEX IF NOT EXISTS idx_test_questions_test ON test_questions(test_id);
+
+CREATE TABLE IF NOT EXISTS test_mcq_answers (
+    test_id           TEXT NOT NULL,
+    seq_no              INTEGER NOT NULL,
+    selected_option        TEXT,
+    is_correct                INTEGER,   -- NULL until the test is submitted -- never computed/shown mid-test
+    answered_at                 TEXT,
+    PRIMARY KEY (test_id, seq_no)
+);
+
+-- One row per uploaded PAGE (a student's answer to one descriptive question
+-- may span several photos). page_no orders pages WITHIN a question;
+-- file_path points into telegram/assets/exam_bot/Tests/uploads/{test_id}/
+-- {seq_no}/ (gitignored in full -- binary + personal data, never committed).
+CREATE TABLE IF NOT EXISTS test_uploads (
+    upload_id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    test_id              TEXT NOT NULL,
+    seq_no                 INTEGER NOT NULL,
+    page_no                  INTEGER NOT NULL,
+    file_path                  TEXT NOT NULL,
+    telegram_file_id             TEXT,
+    mime_type                      TEXT,
+    uploaded_at                      TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_test_uploads_question ON test_uploads(test_id, seq_no, page_no);
+

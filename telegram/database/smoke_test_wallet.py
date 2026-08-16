@@ -1,5 +1,6 @@
 """
-telegram/database/smoke_test_wallet.py -- smoke test for wallet.py (2026-08-15)
+telegram/database/smoke_test_wallet.py -- smoke test for wallet.py + identity.py
+(2026-08-15, extended 2026-08-16 for auto-identity + signup grant/expiry)
 --------------------------------------------------------------------------------
 Same discipline as smoke_test_leaderboards.py / smoke_test_profile_flow.py:
 synthetic usernames, the real shared platform.db, no mocking of the DB layer
@@ -15,14 +16,25 @@ own module docstring once that's built.
 """
 
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from types import SimpleNamespace
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import db as platform_db  # noqa: E402
 import wallet  # noqa: E402
+import identity  # noqa: E402
 
 USERNAME = "smoketest_wallet_x"
+USERNAME_GRANTS = "smoketest_wallet_grants"  # separate from USERNAME on purpose -- tests 1-10 deliberately drive USERNAME's balance deeply negative (test 9's allow_negative admin adjustment), which would silently invalidate the grant/expiry tests' own assumptions if they shared a username
 TENANT = "smoketest"
+
+# Synthetic chat_ids for identity.py's tests -- well out of any real
+# Telegram ID range this platform would ever see.
+CHAT_WITH_TG_USERNAME = 900_200_001
+CHAT_NO_TG_USERNAME = 900_200_002
+CHAT_COLLISION = 900_200_003
+TG_USERNAME_CANDIDATE = "smoketest_tg_handle"
 
 conn = platform_db.get_connection()
 platform_db.init_schema(conn)
@@ -52,9 +64,39 @@ def seed_profile(username):
     conn.commit()
 
 
+def seed_bare_student(chat_id):
+    """A students row with NO lavya_username -- the state identity.py's
+    functions are meant to operate on. Mirrors db.upsert_student()'s own
+    shape minimally (only the columns identity.py actually reads/writes)."""
+    now = platform_db.now()
+    conn.execute("DELETE FROM students WHERE telegram_user_id=?", (chat_id,))
+    conn.execute(
+        "INSERT INTO students (telegram_user_id, username, first_name, last_name, first_seen_at, last_seen_at) "
+        "VALUES (?,?,?,?,?,?)",
+        (chat_id, f"tg_{chat_id}", "Smoke", "Test", now, now),
+    )
+    conn.commit()
+
+
 def cleanup():
-    conn.execute("DELETE FROM wallet_ledger WHERE username=?", (USERNAME,))
-    conn.execute("DELETE FROM student_profiles WHERE username=?", (USERNAME,))
+    # Deletion order matters: students.lavya_username ALSO carries a FK to
+    # student_profiles(username) (db.py's _COLUMN_MIGRATIONS), on top of
+    # wallet_ledger's/wallet_grants' own FKs -- a real bug caught by
+    # actually running this cleanup, not assumed: `students` must be
+    # deleted (or unlinked) BEFORE `student_profiles`, not after.
+    for chat_id in (CHAT_WITH_TG_USERNAME, CHAT_NO_TG_USERNAME, CHAT_COLLISION):
+        row = conn.execute("SELECT lavya_username FROM students WHERE telegram_user_id=?", (chat_id,)).fetchone()
+        username = row[0] if row else None
+        conn.execute("DELETE FROM students WHERE telegram_user_id=?", (chat_id,))
+        if username:
+            conn.execute("DELETE FROM wallet_ledger WHERE username=?", (username,))
+            conn.execute("DELETE FROM wallet_grants WHERE username=?", (username,))
+            conn.execute("DELETE FROM student_profiles WHERE username=?", (username,))
+    conn.execute("DELETE FROM student_profiles WHERE username=?", (TG_USERNAME_CANDIDATE,))
+    for uname in (USERNAME, USERNAME_GRANTS):
+        conn.execute("DELETE FROM wallet_ledger WHERE username=?", (uname,))
+        conn.execute("DELETE FROM wallet_grants WHERE username=?", (uname,))
+        conn.execute("DELETE FROM student_profiles WHERE username=?", (uname,))
     conn.commit()
 
 
@@ -124,6 +166,125 @@ def main():
         # 10. Currency conversion sanity (1 credit = ₹0.01).
         check("credits_to_inr(2000) == 20.0", wallet.credits_to_inr(2000) == 20.0)
         check("inr_to_credits(20) == 2000", wallet.inr_to_credits(20) == 2000)
+
+        # 11. identity.ensure_wallet_identity: a student WITH a valid,
+        #     unclaimed Telegram @username gets that as their permanent
+        #     1LAVYA username, silently, no prompt.
+        seed_bare_student(CHAT_WITH_TG_USERNAME)
+        tg_user = SimpleNamespace(id=CHAT_WITH_TG_USERNAME, username=TG_USERNAME_CANDIDATE)
+        uname, was_created = identity.ensure_wallet_identity(conn, tg_user)
+        check("auto-identity uses the real Telegram @username", uname == TG_USERNAME_CANDIDATE)
+        check("auto-identity reports was_auto_created=True on first call", was_created is True)
+        row = conn.execute("SELECT lavya_username FROM students WHERE telegram_user_id=?", (CHAT_WITH_TG_USERNAME,)).fetchone()
+        check("students.lavya_username actually got linked", row[0] == TG_USERNAME_CANDIDATE)
+
+        # 12. Idempotent: calling again for the same chat_id returns the
+        #     same username, was_auto_created=False, no duplicate row.
+        uname2, was_created2 = identity.ensure_wallet_identity(conn, tg_user)
+        check("auto-identity is idempotent (same username)", uname2 == TG_USERNAME_CANDIDATE)
+        check("auto-identity second call reports was_auto_created=False", was_created2 is False)
+
+        # 13. A student with NO Telegram @username at all falls back to the
+        #     deterministic tg{id} placeholder.
+        seed_bare_student(CHAT_NO_TG_USERNAME)
+        no_handle_user = SimpleNamespace(id=CHAT_NO_TG_USERNAME, username=None)
+        uname3, _ = identity.ensure_wallet_identity(conn, no_handle_user)
+        check("no Telegram @username -> falls back to tg{id} placeholder", uname3 == f"tg{CHAT_NO_TG_USERNAME}")
+
+        # 14. A student whose Telegram @username collides with an ALREADY
+        #     CLAIMED different profile also falls back to the placeholder
+        #     -- never silently takes over someone else's identity.
+        seed_bare_student(CHAT_COLLISION)
+        colliding_user = SimpleNamespace(id=CHAT_COLLISION, username=TG_USERNAME_CANDIDATE)  # already claimed by CHAT_WITH_TG_USERNAME above
+        uname4, _ = identity.ensure_wallet_identity(conn, colliding_user)
+        check("colliding Telegram @username -> falls back to placeholder, not a takeover", uname4 == f"tg{CHAT_COLLISION}")
+        check("the original claimant's link is untouched by the collision", uname == TG_USERNAME_CANDIDATE)
+
+        # 15. grant_signup_bonus: grants the locked amount exactly once.
+        # Uses a DEDICATED username (USERNAME_GRANTS), isolated from
+        # USERNAME's own tests above -- test 9 deliberately drives USERNAME
+        # deeply negative (allow_negative admin adjustment), which would
+        # silently break the expiry-clawback assumptions below if reused.
+        seed_profile(USERNAME_GRANTS)
+        bal, already = wallet.grant_signup_bonus(conn, USERNAME_GRANTS, TENANT)
+        check(f"grant_signup_bonus credits {wallet.SIGNUP_GRANT_CREDITS} credits", bal == wallet.SIGNUP_GRANT_CREDITS)
+        check("grant_signup_bonus first call is fresh", already is False)
+        grant_row = conn.execute(
+            "SELECT amount_credits, expires_at FROM wallet_grants WHERE username=? AND grant_type='signup_bonus'",
+            (USERNAME_GRANTS,),
+        ).fetchone()
+        check("wallet_grants row created with the right amount", grant_row[0] == wallet.SIGNUP_GRANT_CREDITS)
+        expires_dt = datetime.fromisoformat(grant_row[1])
+        days_out = (expires_dt - datetime.now(timezone.utc)).days
+        check("expiry is ~365 days out", 363 <= days_out <= 365)
+
+        # 16. Idempotent: a second grant attempt for the same username is a no-op.
+        bal2, already2 = wallet.grant_signup_bonus(conn, USERNAME_GRANTS, TENANT)
+        check("grant_signup_bonus second call reports already_granted", already2 is True)
+        check("grant_signup_bonus second call does not change the balance", bal2 == bal)
+        count = conn.execute(
+            "SELECT COUNT(*) FROM wallet_grants WHERE username=? AND grant_type='signup_bonus'", (USERNAME_GRANTS,)
+        ).fetchone()[0]
+        check("exactly one wallet_grants row exists, not two", count == 1)
+
+        # 17. sweep_expired_grants: a grant whose expiry is in the FUTURE is untouched.
+        swept = wallet.sweep_expired_grants(conn, TENANT)
+        check("sweep does nothing to a not-yet-expired grant", swept == 0)
+        check("balance unaffected by a no-op sweep", wallet.get_balance(conn, USERNAME_GRANTS) == wallet.SIGNUP_GRANT_CREDITS)
+
+        # 18. Backdate the grant's expiry into the past, spend PART of it,
+        #     then sweep -- should claw back only what's left (capped at
+        #     the original grant size and the current balance), never more.
+        wallet.debit(conn, USERNAME_GRANTS, TENANT, "mcq_debit", 300, reference="smoketest-spend-before-expiry")
+        balance_before_sweep = wallet.get_balance(conn, USERNAME_GRANTS)
+        past = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat(timespec="seconds")
+        conn.execute("UPDATE wallet_grants SET expires_at=? WHERE username=? AND grant_type='signup_bonus'", (past, USERNAME_GRANTS))
+        conn.commit()
+        swept2 = wallet.sweep_expired_grants(conn, TENANT)
+        check("sweep processes exactly the one due grant", swept2 == 1)
+        check("balance after sweep is 0 (the whole remaining grant was clawed back)", wallet.get_balance(conn, USERNAME_GRANTS) == 0)
+        swept_row = conn.execute(
+            "SELECT expired_amount, swept_at FROM wallet_grants WHERE username=? AND grant_type='signup_bonus'", (USERNAME_GRANTS,)
+        ).fetchone()
+        check("expired_amount recorded correctly (balance_before_sweep, not the full original grant)", swept_row[0] == balance_before_sweep)
+        check("swept_at is now set", swept_row[1] is not None)
+
+        # 19. Re-running the sweep is a safe no-op (swept_at already set).
+        swept3 = wallet.sweep_expired_grants(conn, TENANT)
+        check("re-running the sweep touches nothing already swept", swept3 == 0)
+
+        # 20. Separately, confirm the clawback cap really does protect a
+        #     student who has since recharged -- the expiry must NEVER
+        #     touch more than the grant's own original size, even if their
+        #     balance (including real paid recharge money) is much larger.
+        seed_profile(USERNAME_GRANTS + "_funded")
+        wallet.grant_signup_bonus(conn, USERNAME_GRANTS + "_funded", TENANT)
+        wallet.credit(conn, USERNAME_GRANTS + "_funded", TENANT, "recharge_credit", 5000, reference="smoketest-real-recharge")
+        balance_with_recharge = wallet.get_balance(conn, USERNAME_GRANTS + "_funded")
+        conn.execute(
+            "UPDATE wallet_grants SET expires_at=? WHERE username=? AND grant_type='signup_bonus'",
+            (past, USERNAME_GRANTS + "_funded"),
+        )
+        conn.commit()
+        wallet.sweep_expired_grants(conn, TENANT)
+        after = wallet.get_balance(conn, USERNAME_GRANTS + "_funded")
+        check(
+            "expiry never claws back more than the grant's own size, even with a real recharge sitting in the wallet",
+            after == balance_with_recharge - wallet.SIGNUP_GRANT_CREDITS,
+        )
+        conn.execute("DELETE FROM wallet_ledger WHERE username=?", (USERNAME_GRANTS + "_funded",))
+        conn.execute("DELETE FROM wallet_grants WHERE username=?", (USERNAME_GRANTS + "_funded",))
+        conn.execute("DELETE FROM student_profiles WHERE username=?", (USERNAME_GRANTS + "_funded",))
+        conn.commit()
+
+        # 20. The welcome-message builder uses question/mark language only,
+        #     never rupees, and the numbers match the locked rates exactly.
+        msg = wallet.build_signup_grant_message()
+        check("grant message mentions 1000 MCQs", "1000 MCQs" in msg)
+        check("grant message mentions 100 Descriptive Questions", "100 Descriptive Questions" in msg)
+        check("grant message mentions 100 marks worth of Tests", "100 marks worth of Tests" in msg)
+        check("grant message mentions the 365-day validity", "365 days" in msg)
+        check("grant message never mentions rupees/money", "₹" not in msg and "rupee" not in msg.lower() and "inr" not in msg.lower())
 
     finally:
         cleanup()

@@ -38,6 +38,7 @@ per this platform's own established "build -> confirm -> deploy" discipline.
 
 import sys
 import logging
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -52,6 +53,16 @@ RATE_DESCRIPTIVE_CREDIT = 10     # credits per descriptive question shown
 RATE_TEST_CREDIT_PER_MARK = 10   # credits per mark of an assembled Test Mode session
 
 RECHARGE_MINIMUM_INR = 20  # locked 2026-08-15, third round
+
+# --- Signup grant (locked 2026-08-16) -------------------------------------
+# ONE-TIME per student, ever -- no renewal, no monthly recurrence (confirmed
+# explicitly: "NO further grant is given, once exhausted they need to
+# recharge the wallet"). Framed to students only in question/mark terms,
+# NEVER in rupees -- see build_signup_grant_message() below. Expires 365
+# days after grant if unused -- see wallet_grants (schema.sql) and
+# sweep_expired_grants() below for the mechanics.
+SIGNUP_GRANT_CREDITS = 1000        # = ₹10 at the CREDIT_TO_INR rate above
+SIGNUP_GRANT_VALIDITY_DAYS = 365
 
 
 def credits_to_inr(credits: int) -> float:
@@ -162,4 +173,113 @@ def credit_for_recharge(conn, username: str, tenant_id: str, payment_link_id: st
     return credit(
         conn, username, tenant_id, "recharge_credit", credits_granted,
         reference=payment_link_id, idempotency_key=f"recharge:{payment_link_id}",
+    )
+
+
+def grant_signup_bonus(conn, username: str, tenant_id: str):
+    """Grants SIGNUP_GRANT_CREDITS exactly ONCE per username, ever -- call
+    this on a student's first-ever interaction with any 1LAVYA bot (after
+    identity.ensure_wallet_identity() has resolved their username). Safe to
+    call more than once for the same username (e.g. a student's first
+    message arrives on two different bots in quick succession) -- the
+    ledger idempotency_key AND a direct wallet_grants existence check both
+    guard against a double-grant.
+
+    Returns (new_balance, already_granted: bool). Posts BOTH a
+    wallet_ledger credit (moves the balance) and a wallet_grants row
+    (tracks the 365-day expiry lifecycle -- see that table's own schema.sql
+    comment for why these are separate)."""
+    existing = conn.execute(
+        "SELECT grant_id FROM wallet_grants WHERE username=? AND grant_type='signup_bonus'",
+        (username,),
+    ).fetchone()
+    if existing:
+        return get_balance(conn, username), True
+
+    now_dt = datetime.now(timezone.utc)
+    granted_at = now_dt.isoformat(timespec="seconds")
+    expires_at = (now_dt + timedelta(days=SIGNUP_GRANT_VALIDITY_DAYS)).isoformat(timespec="seconds")
+    idem_key = f"signup_grant:{username}"
+
+    new_balance, already_applied = credit(
+        conn, username, tenant_id, "signup_grant", SIGNUP_GRANT_CREDITS,
+        reference="signup_bonus", idempotency_key=idem_key,
+    )
+    if already_applied:
+        # Ledger already had this grant (a race with another call) but
+        # wallet_grants somehow didn't -- back-fill the tracking row so
+        # the expiry sweep still knows about it, rather than silently
+        # leaving an ungoverned credit with no expiry.
+        pass
+
+    db.execute_with_retry(
+        conn,
+        "INSERT INTO wallet_grants (username, grant_type, amount_credits, ledger_reference, granted_at, expires_at) "
+        "VALUES (?, 'signup_bonus', ?, ?, ?, ?)",
+        (username, SIGNUP_GRANT_CREDITS, idem_key, granted_at, expires_at),
+    )
+    return new_balance, False
+
+
+def sweep_expired_grants(conn, tenant_id: str = "platform"):
+    """Finds every wallet_grants row past its expires_at that hasn't been
+    swept yet, and claws back whatever's left of it (capped at the grant's
+    own original size AND the student's current balance -- see the
+    wallet_grants schema.sql comment for why this never touches money
+    beyond what this specific grant originally gave). Posts a
+    'grant_expired' ledger debit for the clawed-back amount (skipped
+    entirely if the remaining amount is 0 -- a fully-spent grant needs no
+    ledger row, just marking swept).
+
+    Meant to be run periodically (a scheduled tool script or a low-frequency
+    job_queue task in one bot) -- NOT on every bot startup like
+    init_schema(), since 365-day expiries are inherently a slow-moving
+    concern, not something that needs checking every process restart.
+    Idempotent and safe to re-run at any cadence -- only ever acts on rows
+    with swept_at IS NULL.
+
+    Returns the number of grants swept (for a caller to log/report)."""
+    now_iso = db.now()
+    due = conn.execute(
+        "SELECT grant_id, username, amount_credits, ledger_reference "
+        "FROM wallet_grants WHERE expires_at <= ? AND swept_at IS NULL",
+        (now_iso,),
+    ).fetchall()
+
+    swept_count = 0
+    for grant_id, username, amount_credits, ledger_reference in due:
+        balance = get_balance(conn, username)
+        expired_amount = max(0, min(amount_credits, balance))
+        if expired_amount > 0:
+            debit(
+                conn, username, tenant_id, "grant_expired", expired_amount,
+                reference=f"wallet_grants:{grant_id}",
+                idempotency_key=f"grant_expired:{grant_id}",
+                allow_negative=True,  # this IS the clawback -- must be allowed to zero out even the last credit
+            )
+        db.execute_with_retry(
+            conn, "UPDATE wallet_grants SET expired_amount=?, swept_at=? WHERE grant_id=?",
+            (expired_amount, now_iso, grant_id),
+        )
+        swept_count += 1
+        logger.info(f"wallet: swept expired grant_id={grant_id} username={username!r}, clawed back {expired_amount} credits")
+    return swept_count
+
+
+def build_signup_grant_message() -> str:
+    """The exact framing Pranav asked for: illustrative equivalences of ONE
+    shared credit pool (never three separate allowances -- a student who
+    mixes MCQs/Descriptive/Tests draws down the SAME balance, not three
+    independent buckets), and NEVER a rupee figure. Centralized here so
+    every bot's welcome message uses identical wording rather than each
+    hand-rolling its own version."""
+    mcq_equiv = SIGNUP_GRANT_CREDITS // RATE_MCQ_CREDIT
+    desc_equiv = SIGNUP_GRANT_CREDITS // RATE_DESCRIPTIVE_CREDIT
+    test_marks_equiv = SIGNUP_GRANT_CREDITS // RATE_TEST_CREDIT_PER_MARK
+    return (
+        f"\U0001F381 You've got free access to get started — enough for about "
+        f"<b>{mcq_equiv} MCQs</b>, or <b>{desc_equiv} Descriptive Questions</b>, or "
+        f"<b>{test_marks_equiv} marks worth of Tests</b> (use any mix — it's one shared "
+        f"balance, not three separate ones). Valid for {SIGNUP_GRANT_VALIDITY_DAYS} days. "
+        f"Go ahead and try!"
     )

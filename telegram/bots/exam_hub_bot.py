@@ -99,6 +99,9 @@ import student_analytics  # noqa: E402 -- telegram/database/student_analytics.py
 import report_flow  # noqa: E402 -- telegram/bots/report_flow.py, the 20-question milestone report pipeline (2026-08-11)
 import profile_flow  # noqa: E402 -- telegram/bots/profile_flow.py, the "profile"/"change profile" identity flow (2026-08-11)
 import mcq_issue_flow  # noqa: E402 -- telegram/bots/mcq_issue_flow.py, the "Report Issue in MCQ" flow (2026-08-13)
+import wallet  # noqa: E402 -- telegram/database/wallet.py, the credit-wallet ledger (2026-08-15/16)
+import identity  # noqa: E402 -- telegram/database/identity.py, auto-provisioned wallet identity (2026-08-16)
+import test_flow  # noqa: E402 -- telegram/bots/test_flow.py, Test Mode / Pre-Designed Tests (2026-08-16)
 
 # ---------------------------------------------------------------------------
 # CONFIG
@@ -226,6 +229,45 @@ platform_db.init_schema(DB_CONN)
 def db_upsert_student(user):
     platform_db.upsert_student(DB_CONN, user)
     platform_db.log_interaction(DB_CONN, BOT_ID, user.id, "start")
+
+
+# ---------------------------------------------------------------------------
+# WALLET -- billing rollout, 2026-08-16 (see
+# telegram/assets/exam_bot/Tests/TEST-MODE-ROADMAP.md §0/§9 for the full
+# decision trail). MUST be called AFTER db_upsert_student(user) -- both
+# identity.ensure_wallet_identity() and wallet.grant_signup_bonus() below
+# read/write the `students` row db_upsert_student() just created/updated.
+# ---------------------------------------------------------------------------
+
+def db_ensure_wallet(user):
+    """Auto-provisions this student's wallet identity (their Telegram
+    @username if valid/unclaimed, else a tg{id} placeholder -- see
+    identity.py's own docstring for why) and grants the one-time signup
+    bonus if they've never received one before (platform-wide -- the grant
+    is keyed by username, not bot_id, so whichever 1LAVYA bot a student
+    touches first is the one that grants it). Returns a welcome-bonus
+    message to show the student, or None if they'd already been granted
+    one (i.e. this isn't their genuine first-ever interaction) -- callers
+    append this to whatever they're already about to send, never send it
+    as a separate message."""
+    username, _ = identity.ensure_wallet_identity(DB_CONN, user)
+    _, already_granted = wallet.grant_signup_bonus(DB_CONN, username, "platform")
+    if already_granted:
+        return None
+    return wallet.build_signup_grant_message()
+
+
+def _out_of_balance_text() -> str:
+    """Shown instead of a question when a student's balance can't cover
+    it. Deliberately never mentions money/rupees (Pranav's explicit rule,
+    2026-08-15/16) -- and deliberately doesn't promise a working recharge
+    flow yet, since wallet_flow.py (the actual top-up conversation) isn't
+    built as of this writing -- see roadmap §0.2. Update this once it is."""
+    return (
+        "\U0001F6D1 You've used up your free access for now. "
+        "Recharging your balance is coming very soon — check back shortly, "
+        "or type <code>profile</code> to see your account."
+    )
 
 
 def db_start_session(user_id) -> int:
@@ -1002,12 +1044,17 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data.clear()
     user = update.effective_user
     db_upsert_student(user)
+    welcome_bonus_text = db_ensure_wallet(user)
     context.user_data["session_id"] = db_start_session(user.id)
 
     text, markup, updates = resolve_entry(context)
     if updates:
         context.user_data.update(updates)
         db_update_session(context.user_data["session_id"], **updates)
+    if welcome_bonus_text:
+        # Sent as its own message, ahead of the menu, so it's never lost in
+        # (or made to look like part of) the Markdown-formatted menu text.
+        await update.message.reply_text(welcome_bonus_text, parse_mode=ParseMode.HTML)
     await update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
 
@@ -1051,11 +1098,14 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data.clear()
         user = query.from_user
         db_upsert_student(user)
+        welcome_bonus_text = db_ensure_wallet(user)  # no-op/None for a real restart; covers the rare case this is somehow their first-ever interaction
         context.user_data["session_id"] = db_start_session(user.id)
         text, markup, updates = resolve_entry(context)
         if updates:
             context.user_data.update(updates)
             db_update_session(context.user_data["session_id"], **updates)
+        if welcome_bonus_text:
+            await context.bot.send_message(chat_id=query.message.chat_id, text=welcome_bonus_text, parse_mode=ParseMode.HTML)
         await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
         return
 
@@ -1329,6 +1379,22 @@ async def send_question(query, context):
     context.user_data["queue_pos"] = pos + 1
     q = bank.get_by_book_id(book_id)
 
+    # WALLET -- billing rollout, 2026-08-16. Debited on every question
+    # SHOWN (matches how mcq_debit already works, and Pranav's literal
+    # instruction: "deducted with every MCQ or Descriptive questions
+    # interacted by the students"), before any content is sent. No
+    # idempotency_key here on purpose -- unlike a Test Mode charge or a
+    # recharge, a genuine repeat VIEW of a question (navigating back to it)
+    # is intended to debit again each time, not be protected against.
+    username, _ = identity.ensure_wallet_identity(DB_CONN, query.from_user)
+    ok, _, _ = wallet.debit(DB_CONN, username, TENANT_ID, "descriptive_debit", wallet.RATE_DESCRIPTIVE_CREDIT, reference=book_id)
+    if not ok:
+        await context.bot.send_message(
+            chat_id=query.message.chat_id, text=_out_of_balance_text(), parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(next_step_rows(context, include_next=False)),
+        )
+        return
+
     # ID line shows human_id -- the platform's globally-unique, human-
     # readable question identifier (see COURSE-CATALOG.md) -- rather than
     # the internal book_id, so a student can actually reference "which
@@ -1435,6 +1501,17 @@ async def send_mcq(query, context):
     mcq_id = queue[pos]
     context.user_data["queue_pos"] = pos + 1
     q = mcq_bank.get_by_id(mcq_id)
+
+    # WALLET -- billing rollout, 2026-08-16, same shape as send_question()'s
+    # own debit above -- see that comment for the full reasoning.
+    username, _ = identity.ensure_wallet_identity(DB_CONN, query.from_user)
+    ok, _, _ = wallet.debit(DB_CONN, username, TENANT_ID, "mcq_debit", wallet.RATE_MCQ_CREDIT, reference=mcq_id)
+    if not ok:
+        await context.bot.send_message(
+            chat_id=query.message.chat_id, text=_out_of_balance_text(), parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(next_step_rows(context, include_next=False)),
+        )
+        return
 
     # `or ''` not `.get(key, '')` -- an explicit `null` (present on every one
     # of the 375 merged CMA Foundation records' "year"/"difficulty" fields)
@@ -1557,6 +1634,14 @@ async def text_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
     their message swallowed by anything else. Anything else is silently
     ignored rather than guessed at."""
     text = (update.message.text or "").strip()
+    # 2026-08-16: Test Mode's own upload-collection state, checked FIRST of
+    # all -- a student actively uploading pages for a descriptive question
+    # (typing "done" to finish) must never have that text swallowed by
+    # anything else, same "most specific active state first" discipline
+    # every other check below already follows.
+    if test_flow.is_collecting_upload(context):
+        if await test_flow.handle_upload_text_input(update, context, sys.modules[__name__]):
+            return
     if mcq_issue_flow.is_awaiting_text_input(context):
         if await mcq_issue_flow.handle_issue_text_input(update, context):
             return
@@ -1565,6 +1650,14 @@ async def text_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
     if profile_flow.matches_trigger(text):
         await profile_flow.start_profile_flow(update, context)
+        return
+    # Test Mode's own triggers -- "test"/"take a test"/etc. to start/resume
+    # a test, "upload" to submit a descriptive answer while one is active.
+    if test_flow.matches_trigger(text):
+        await test_flow.start_test_flow(update, context, BOT_ID, sys.modules[__name__])
+        return
+    if test_flow.matches_upload_trigger(text):
+        await test_flow.start_upload_pick(update, context, sys.modules[__name__])
         return
     # report_flow's own on-demand trigger ("report"/"analysis"/"email"/
     # "mail") -- guarded by `not is_awaiting_text_input` so a genuine
@@ -1611,10 +1704,34 @@ def main():
     # "issuecancel") -- registered separately, same "explicit pattern per
     # module" discipline as report_flow/profile_flow above.
     app.add_handler(CallbackQueryHandler(mcq_issue_flow.mcq_issue_flow_callback, pattern=r"^(issuecat|issuecancel)(:|$)"))
+    # 2026-08-16: Test Mode's own callback prefixes -- same "explicit
+    # pattern per module" discipline as every flow above (the callback-
+    # pattern-collision bug class this platform has hit 3+ times already).
+    app.add_handler(CallbackQueryHandler(_test_flow_callback_wrapper, pattern=r"^(testflow|tnav|topt|tgo|tupload)(:|$)"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_router))
+    # Photo/document uploads -- only meaningful during Test Mode's upload
+    # collection; test_flow.handle_upload_photo_or_document() is a no-op
+    # (returns False) when no upload is actively being collected, so this
+    # handler is safe to register unconditionally.
+    app.add_handler(MessageHandler((filters.PHOTO | filters.Document.ALL) & ~filters.COMMAND, _upload_router))
+
+    # Sweep any in-progress tests from before this restart and re-arm their
+    # expiry jobs -- job_queue jobs do NOT survive a process restart (same
+    # reasoning already established for every other scheduled job on this
+    # platform). Must happen AFTER the Application (and its job_queue) is
+    # built, before run_polling() starts serving real traffic.
+    test_flow.rearm_pending_test_jobs(app, sys.modules[__name__])
 
     logger.info(f"Exam Hub Bot starting for bot_id '{BOT_ID}' (tenant '{TENANT_ID}', {TENANT['display_name']})...")
     app.run_polling()
+
+
+async def _test_flow_callback_wrapper(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await test_flow.test_flow_callback(update, context, BOT_ID, sys.modules[__name__])
+
+
+async def _upload_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await test_flow.handle_upload_photo_or_document(update, context, sys.modules[__name__])
 
 
 if __name__ == "__main__":

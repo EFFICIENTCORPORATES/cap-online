@@ -105,17 +105,33 @@ def _migrate_wallet_ledger_shape(conn: sqlite3.Connection):
 
     if "wallet_ledger" in existing_tables:
         cols = {row[1] for row in conn.execute("PRAGMA table_info(wallet_ledger)").fetchall()}
-        if "telegram_user_id" in cols and "username" not in cols:
+        current_sql = conn.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='wallet_ledger'"
+        ).fetchone()
+        current_sql = current_sql[0] if current_sql else ""
+        # Stale if EITHER the pre-2026-08-15 shape (telegram_user_id, no
+        # username) OR the pre-2026-08-16 event_type enum (missing the new
+        # 'grant_expired' CHECK value) -- both require a reshape SQLite's
+        # ALTER TABLE can't express in place. Deliberately checks for the
+        # PRESENCE of the new marker ('grant_expired'), not the absence of
+        # the old name ('free_monthly_grant') -- a real bug caught while
+        # building this: schema.sql's own explanatory comment on the rename
+        # mentions the old name in prose, which would make an
+        # absence-of-old-name check permanently misfire as "still stale"
+        # even after the reshape actually happened, re-dropping the table
+        # (harmless while empty, but would hard-crash via the row-count
+        # guard below on every restart once real rows exist).
+        is_stale = ("telegram_user_id" in cols and "username" not in cols) or ("grant_expired" not in current_sql)
+        if is_stale:
             count = conn.execute("SELECT COUNT(*) FROM wallet_ledger").fetchone()[0]
             if count > 0:
                 raise RuntimeError(
-                    f"wallet_ledger has {count} real row(s) under the old telegram_user_id "
-                    "shape -- refusing to auto-drop. This migration was only ever verified "
-                    "safe against an empty table; a real data-preserving migration (INSERT "
-                    "... SELECT joining students.lavya_username) is needed instead."
+                    f"wallet_ledger has {count} real row(s) under a stale shape -- refusing "
+                    "to auto-drop. This migration was only ever verified safe against an "
+                    "empty table; a real data-preserving migration is needed instead."
                 )
             conn.execute("DROP TABLE wallet_ledger")
-            logger.info("Migrated: dropped old-shape wallet_ledger (verified empty) for username-scoped reshape")
+            logger.info("Migrated: dropped stale-shape wallet_ledger (verified empty) for reshape")
 
     if "payments" in existing_tables:
         cols = {row[1] for row in conn.execute("PRAGMA table_info(payments)").fetchall()}

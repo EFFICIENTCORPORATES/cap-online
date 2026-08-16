@@ -126,6 +126,10 @@ local_settings.py
 # manage_bots.py runtime state (PID files, per-bot logs) -- local only
 telegram/database/run/
 
+# Test Mode: students' uploaded answer-sheet photos/documents -- binary +
+# personal data, never committed (see TEST-MODE-ROADMAP.md §7's privacy note)
+telegram/assets/exam_bot/Tests/uploads/
+
 # Secrets / credentials -- never commit live tokens/keys
 telegram/creds.txt
 **/creds.txt
