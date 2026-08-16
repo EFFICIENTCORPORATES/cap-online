@@ -1,5 +1,13 @@
 # Test Mode — Roadmap (planning + in-progress build)
 
+> **This file is now supplementary.** The primary, canonical reference for
+> the whole Test Mode + wallet/billing system — architecture, every locked
+> decision and why, full data model, file map, build chronology, and open
+> points with their plans — is **`/TELEGRAM-TEST-MODE-SYSTEM.md`** (repo
+> root), written 2026-08-16. Read that file first. This document is kept
+> for its original granular edge-case planning and decision-by-decision
+> trail, useful as backing detail, but no longer the first thing to read.
+
 **Status: PLANNING, WITH REAL IMPLEMENTATION STARTED 2026-08-15.** This began
 as a pure thinking-through-edge-cases pass (Pranav, 2026-08-15) before any code
 was written — most of this document is still that planning material and should

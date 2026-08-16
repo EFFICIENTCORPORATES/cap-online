@@ -55,6 +55,7 @@ than feature count until that list is worked through.
 | Faculty MCQ docx → JSON conversion (deterministic, zero-AI) | `config/FACULTY-MCQ-TEMPLATE.md` | `tools/convert_faculty_mcq_docx.py`, `tools/merge_faculty_mcq_sources.py` |
 | MCQ JSON creation prompt for external AI models (PDF → MCQ JSON) | `base_formats/MCQ_PROMPT.md` | `base_formats/generate_base_formats.py` (field-contract source), `tools/ingest_ca_foundation_accounting_economics_mcqs.py` (the ingestion pattern any resulting batch still needs) |
 | Question Bank Book (PYQ/MTP/RTP → chapter books, separate from this bot platform) | `_claude/skills/SKILL-question-bank-pipeline-overview.md` | `first_run/` (repo root, not under `telegram/`) |
+| Test Mode (paid, timed mock tests) + wallet/billing (identity, credits, Razorpay recharge) | `/TELEGRAM-TEST-MODE-SYSTEM.md` (repo root — canonical; `assets/exam_bot/Tests/TEST-MODE-ROADMAP.md` is supplementary) | `bots/test_flow.py`, `bots/wallet_flow.py`, `database/wallet.py`, `database/identity.py`, `database/razorpay_client.py` |
 
 ## Folder map
 

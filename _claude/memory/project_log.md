@@ -2,6 +2,40 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-08-16 — Test Mode + wallet/billing: comprehensive root-level reference doc written
+
+Closing out the multi-round Test Mode + wallet/billing build (Pre-Designed
+Tests, wallet identity/credits/Razorpay recharge, size tiers, the 6-issue
+manual-QA fix round, and full activity logging — see prior sessions'
+history), Pranav asked for the whole system documented end-to-end in a new
+root-level MD file "so that any new AI model can also refer this MD file
+and understand and build the things exactly from the point we left off."
+
+Wrote **`/TELEGRAM-TEST-MODE-SYSTEM.md`** (repo root, per his explicit
+instruction — a deliberate exception to this platform's usual convention
+of keeping feature docs like `PROFILE-SYSTEM.md`/`LEADERBOARD-SYSTEM.md`
+inside `telegram/`) — architecture, the full wallet/credit/identity model
+and why each rate/decision was chosen, the Test Mode engine end-to-end
+(sitting catalog generation, size tiers, timers/grace period, activity
+logging/topic tracking/exact-point resume), the complete data model, a
+file-by-file map, testing discipline, a dated build chronology, the
+recurring concurrent-session git-entanglement lesson (§10, worth any
+future session reading before committing to `schema.sql`), and every open
+point named honestly with its actual plan (no real live Razorpay payment
+completed yet; the 2-PDF evaluation bundle is the clear next build; AI
+evaluation blocked on pricing; Study Hub/MyFiles Hub wallet extension;
+`sweep_expired_grants()` unscheduled; Custom Test out of scope; no
+student-facing activity-log UI yet).
+
+Added a pointer at the top of the original planning doc
+(`telegram/assets/exam_bot/Tests/TEST-MODE-ROADMAP.md`) marking it
+supplementary now that the root file is canonical, and a new row in
+`telegram/FIRST_PROMPT.md`'s index table pointing to both. Ran
+`tools/health_check.py` (16 pre-existing, unrelated failures only — stale
+`EXPECTED_DIRS`, 9 pre-existing NUL-byte files elsewhere, undocumented
+`capranav_com/` — nothing new from this change) and `tools/file_index.py`
+to regenerate the index. No code changed this round — documentation only.
+
 ## 2026-08-13 (cont'd) — Standing "everything joins the flagship" rule, human_id made live, Issue Reports in Admin Portal
 
 Pranav clarified and extended the earlier CMA-merge decision: it's not a
