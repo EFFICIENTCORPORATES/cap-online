@@ -2960,6 +2960,10 @@ Any new bot or AI joining this project should understand the following:
 12. Faculty white-labeling requires tenant ownership and permission filters.
 13. This file must be updated whenever the implementation or understanding
    changes.
+14. Parser adapters are config profiles resolved by (course, level,
+   document_type) at runtime, not hardcoded per course — see section 56.
+15. Content applicability for law/tax/audit/ethics is filtered by the
+   student's declared exam attempt, not by publish date — see section 57.
 
 The final mental model is:
 
@@ -2974,3 +2978,233 @@ Immutable PDFs
               -> hybrid retrieval
                 -> RAG, MCQ engine, answer checker, MCP and bots
 ```
+
+------------------------------------------------------------------------
+
+# 56. Parser Configuration Model — One Engine, N Config Profiles
+
+**Status:** authoritative implementation addendum
+
+**Added:** 2026-08-16 (from architecture discussion with Pranav)
+
+## 56.1 Decision
+
+Do not hardcode one parser per course (3) or one parser per course-level (9)
+in advance. Build ONE parsing engine plus N configuration profiles, resolved
+at runtime by `(course, level, document_type)`.
+
+```text
+one parser engine
+    -> resolves at runtime by (course, level, document_type)
+    ->
+config profile: regex patterns, heading keywords, confidence thresholds
+```
+
+Reason: the correct number of profiles is an empirical question, not an
+upfront design decision. A course/level boundary only deserves its own
+profile if the 9-document pilot (section 54.9, Phase 2/3) actually shows a
+different heading/numbering convention there. Splitting before that evidence
+exists risks the same ID/scheme-proliferation mistake already rejected once
+for the Question Bank Book (see the external-AI-review rejection recorded in
+`CLAUDE.md` section 6, 2026-07-24 entry — a parallel topic-ID namespace was
+rejected for the same reason).
+
+A new course, level or document type becomes a new config file, never new
+parser code. If the pilot shows CA Foundation needs different patterns than
+CA Final, that is a second CA profile (`CA_FOUNDATION_STUDY_MATERIAL`), not a
+rewrite.
+
+## 56.2 Config Profile Shape
+
+```yaml
+profile_id: CA_INTERMEDIATE_STUDY_MATERIAL
+
+identity:
+  course: CA
+  institute: ICAI
+  level: Intermediate
+  document_type: Study Material
+
+native_levels: [Module, Chapter, Unit, Topic, Subtopic]
+
+structure_patterns:
+  chapter:
+    - "^CHAPTER\\s+\\d+"
+    - "^Module\\s+\\d+"
+  unit:
+    - "^UNIT\\s+[IVX]+"
+  topic:
+    - "^\\d+\\.\\d+\\s"
+  subtopic:
+    - "^\\d+\\.\\d+\\.\\d+\\s"
+
+strip_patterns:
+  - "^ICAI\\s*-\\s*Study Material$"
+  - "^\\d+$"
+
+content_labels:
+  example: ["Example", "Illustration"]
+  summary: ["Summary", "Let Us Recapitulate"]
+  practice_question: ["Test Your Knowledge", "Exercise"]
+  note: ["Note:", "Important:"]
+
+toc_authority: supporting_evidence
+
+confidence_thresholds:
+  explicit: 0.95
+  inferred: 0.80
+  human_review_below: 0.70
+
+canonical_mapping:
+  Module: chapter_group
+  Chapter: chapter
+  Unit: chapter
+  Topic: topic
+  Subtopic: subtopic
+```
+
+`identity` decides which profile the engine loads for a given document (via
+the document manifest's course/level/document_type fields). Everything else
+is data the shared engine consumes, never document-specific code.
+
+## 56.3 Next Action
+
+During pilot review (Phase B, step 6 of the crisp step list — see the
+project chat log or re-derive from section 54.9), explicitly record whether
+each course's Foundation/Intermediate/Final documents needed different
+`structure_patterns`/`content_labels`, or shared one profile. That answer,
+not a guess, sets the real profile count going forward.
+
+------------------------------------------------------------------------
+
+# 57. Edition, Amendment and Attempt-Applicability Model
+
+**Status:** authoritative implementation addendum
+
+**Added:** 2026-08-16 (from architecture discussion with Pranav)
+
+## 57.1 Core Principle
+
+For law, tax, audit and ethics subjects, "attempt-applicable" is a different
+and more authoritative axis than "current as of today." ICAI/ICSI/ICMAI apply
+a cutoff rule: amendments notified after a fixed date before an exam are not
+examinable for the immediately following attempt. A change can be legally in
+force and still not be the syllabus for the next exam. The platform must
+filter content by the **declared applicable attempt**, sourced from the
+institute's own applicability circular, never inferred from a notification or
+publish date.
+
+This is especially critical where an Act is wholly replaced, not merely
+amended — e.g. a new Income Tax Act replacing the old one. Section numbers
+and provisions can change so completely that old MTP/RTP/PYQ material becomes
+actively misleading if served without correction, not just outdated.
+
+## 57.2 Metadata Additions
+
+Document edition and governing law/standard version are separate axes:
+
+```text
+document_edition: "2026"
+governing_law_version: "Income-tax Act, 2026"
+```
+
+Law/standard versions carry an applicability window:
+
+```text
+effective_from: 2026-04-01
+effective_to: null
+supersedes: "Income-tax Act, 1961"
+```
+
+Amendments (Finance Act/Bill, revised Standards on Auditing, revised Code of
+Ethics) are tracked as their own entity. Applicability is sourced from the
+real institute circular, never computed from the notification date:
+
+```text
+amendment_id: "Finance Act 2026"
+amends: "Income-tax Act, 2026"
+notified_date: 2026-02-01
+icai_applicability_circular: "<link/reference to the real notification>"
+applicable_from_attempt: "Nov 2026"
+```
+
+Every document, provision and question carries:
+
+```text
+attempt_applicability: ["May 2026", "Nov 2026"]
+exam_relevance: "current" | "law_updated_annotated" | "excluded_obsolete"
+```
+
+## 57.3 Reuse the Existing Student Attempt Field
+
+`student_profiles.exam_attempt` (Year -> Month picker, already built as part
+of the profile system — see `telegram/PROFILE-SYSTEM.md`) is the default
+filter for RAG retrieval, MCQ pool selection, descriptive-question pool
+selection, and MTP/RTP/PYQ pool selection. Do not build a second
+attempt-collection mechanism; read the stored value, re-confirm once per
+session if needed, and reuse it everywhere content is served.
+
+## 57.4 Three Relevance Tiers (Not a Blanket Exclude)
+
+```text
+current               -> provision unchanged in substance, serve as-is
+law_updated_annotated -> pattern still valuable, numbering/provision changed,
+                          must be served WITH a correction note attached
+excluded_obsolete     -> substantively wrong if served even annotated;
+                          kept in the archive, never served in practice pools
+```
+
+Decide the tier per subject, not platform-wide. Tax/Company Law after a
+wholesale Act replacement will lean toward aggressive `excluded_obsolete`;
+subjects with mostly cosmetic changes (e.g. some Accounting Standards) can
+stay `law_updated_annotated` longer. This decision needs subject-specific
+input from Pranav or the relevant faculty — it is not a default to apply
+uniformly, and it is not yet made.
+
+## 57.5 Old/New Referencing at Scale — Reuse the Existing Provenance Pattern
+
+Extend the Question Bank Book's existing Examiner's-Comment-vs-Author's-Note
+labeled-box pattern with a third note type, rather than inventing a new
+mechanism:
+
+```json
+{
+  "note_type": "law_update",
+  "old_ref": "Income-tax Act 1961, Sec 80C",
+  "new_ref": "Income-tax Act 2026, Sec 142",
+  "delta_description": "Provision retained in substance; renumbered; deduction cap unchanged.",
+  "source": "Synthesized per law-update-writing-skill — not ICAI-sourced | ICAI applicability circular, verbatim",
+  "review_status": "approved | pending"
+}
+```
+
+Rendered the same visibly-labeled way the existing provenance boxes are.
+Never blended silently into the original question/answer text; the original
+verbatim text is never edited.
+
+Pipeline, same shape as MCQ validation (section 33):
+
+```text
+detect affected content
+  (keyword / section-number scan, scoped to subjects known to have had
+   a wholesale change)
+    -> AI drafts old-to-new mapping note
+      -> human/faculty review and approval
+        -> publish (attached to the question record)
+```
+
+Built once per subject that had a wholesale change, driven by a detection
+scan across that subject's existing questions — not hand-written per
+question, and not run against subjects that never had this kind of change.
+
+## 57.6 Open Decisions / Next Actions
+
+- Which subjects get aggressive `excluded_obsolete` treatment vs staying
+  `law_updated_annotated` — needs a subject-by-subject call, not a platform
+  default. Ask before building.
+- Real ICAI/ICSI/ICMAI applicability circulars need to be sourced per
+  amendment when this is actually built — `applicable_from_attempt` must
+  never be guessed from a notification date.
+- The Finance Act/Bill and amendment-tracking table itself is not yet built.
+  This section records the design; implementation is future work, after the
+  9-document pilot proves the base parsing/taxonomy pipeline.
