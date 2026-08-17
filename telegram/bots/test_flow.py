@@ -42,6 +42,7 @@ _get_active_test()).
 import os
 import re
 import sys
+import json
 import logging
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -236,22 +237,74 @@ def _sittings_for(conn, course, level, subject):
     ).fetchall()
 
 
-def _not_available_text_and_markup(what: str, offer_advacc: bool = True):
-    """offer_advacc: only show the 'Try CA Inter Advanced Accounting' shortcut
-    when that subject is actually inside THIS tenant's own content_scope --
-    a CMA-only faculty bot must never dangle a button into CA content just
-    because that's the only real Test Mode catalog on the platform today."""
+FLAGSHIP_EXAM_BOT_ID = "1lavya-examhub"  # the one tenant with content_scope=="ALL", so it always
+# has CA Inter Advanced Accounting -- the only course Test Mode has real content for today (see
+# module docstring). Used only to point a student at a DIFFERENT bot when Test Mode can never be
+# reached from this one (this tenant's own content_scope doesn't include CA Inter Adv Acc at all).
+
+
+def _flagship_exam_bot_username():
+    """Reads bots.json's own bot_username for FLAGSHIP_EXAM_BOT_ID rather than hardcoding an
+    @handle here -- same "JSON is the source of truth" discipline as everywhere else on this
+    platform (see config/bots.README.md), so a token/handle rotation there is picked up for
+    free. Returns None (never raises) on any read/parse problem or a missing/blank username --
+    callers must treat that as "don't show this button," not a crash."""
+    try:
+        data = json.loads((REPO_ROOT / "telegram" / "config" / "bots.json").read_text(encoding="utf-8"))
+        for b in data["bots"]:
+            if b["bot_id"] == FLAGSHIP_EXAM_BOT_ID:
+                return b.get("bot_username") or None
+    except Exception:
+        logger.warning("Could not read flagship exam bot username from bots.json", exc_info=True)
+    return None
+
+
+def _no_content_cta_rows(host, offer_advacc: bool):
+    """The buttons shown EVERY time Test Mode has nothing for this student right now -- never a
+    bare text message with no way forward. Added 2026-08-17 after a real live report: a student
+    who typed "test" on a bot with no CA Inter Advanced Accounting in scope got a dead-end reply
+    with zero buttons at all.
+
+    offer_advacc: only show the in-bot 'Try CA Inter Advanced Accounting' jump when that subject
+    is actually inside THIS tenant's own content_scope -- a CMA-only faculty bot must never
+    dangle a button into CA content just because that's the only real Test Mode catalog on the
+    platform today. When it's NOT in scope, point at the flagship Exam Hub bot instead (a
+    cross-bot url= button, not callback_data -- Test Mode genuinely isn't reachable from here),
+    so the student always has somewhere real to go, never just "come back later."
+
+    MCQ/Descriptive are gated on host._available_modes() (real, in-scope content for THIS
+    tenant), never shown blindly -- same discipline as every other mode-picker in this bot."""
+    rows = []
+    if offer_advacc:
+        rows.append([InlineKeyboardButton("\U0001F4DD Try CA Inter Advanced Accounting", callback_data="testflow:jump_advacc")])
+    else:
+        username = _flagship_exam_bot_username()
+        if username:
+            rows.append([InlineKeyboardButton(
+                "\U0001F310 Try Test Mode on our main Exam Hub bot",
+                url=f"https://t.me/{username.lstrip('@')}",
+            )])
+    modes = host._available_modes()
+    if "mcq" in modes:
+        rows.append([InlineKeyboardButton("✅ Practice MCQs", callback_data="mode:mcq")])
+    if "descriptive" in modes:
+        rows.append([InlineKeyboardButton("\U0001F4DD Practice Descriptive", callback_data="mode:descriptive")])
+    if not rows:
+        # Extremely unlikely (no advacc jump, no flagship username, no modes at all) -- still
+        # never leave the student with zero buttons.
+        rows.append([InlineKeyboardButton("\U0001F519 Back to practice mode", callback_data="restart")])
+    rows.append([InlineKeyboardButton("\U0001F3C1 I'm Done", callback_data="imdone")])
+    return rows
+
+
+def _not_available_text_and_markup(what: str, host, offer_advacc: bool = True):
     text = (
         f"\U0001F615 Tests aren't available for {what} yet"
         + (" — only CA Inter Advanced Accounting has ready-made tests right now." if offer_advacc
            else ".")
         + " What would you like to do instead?"
     )
-    rows = []
-    if offer_advacc:
-        rows.append([InlineKeyboardButton("\U0001F4DD Try CA Inter Advanced Accounting", callback_data="testflow:jump_advacc")])
-    rows.append([InlineKeyboardButton("\U0001F519 Back to practice mode", callback_data="restart")])
-    return text, InlineKeyboardMarkup(rows)
+    return text, InlineKeyboardMarkup(_no_content_cta_rows(host, offer_advacc))
 
 
 async def start_test_flow(update, context, bot_id: str, host):
@@ -282,17 +335,29 @@ async def start_test_flow(update, context, bot_id: str, host):
         any_courses_at_all = conn.execute(
             "SELECT 1 FROM predesigned_tests WHERE active=1 LIMIT 1"
         ).fetchone()
+        # offer_advacc mirrors _show_sitting_picker()'s own check one level
+        # down -- if this tenant's content_scope doesn't include CA Inter
+        # Advanced Accounting at all (the common case here, since a scope
+        # that DID include it would normally have produced a non-empty
+        # `courses` above), _no_content_cta_rows() points at the flagship
+        # bot instead of an in-bot jump that has nothing to jump to.
+        offer_advacc = host._scope_allows_subject("CA", "Inter", "Advanced Accounting")
         if any_courses_at_all:
-            await update.message.reply_text(
+            text = (
                 "\U0001F615 Test Mode doesn't have ready-made tests for your subjects yet — "
                 "only CA Inter Advanced Accounting has tests right now, and more subjects are "
-                "being added over time. You can still practice MCQs and Descriptive questions "
-                "as usual!"
+                "being added over time. What would you like to do instead?"
             )
         else:
-            await update.message.reply_text(
-                "\U0001F615 No tests are available on this platform yet — check back soon!"
-            )
+            text = "\U0001F615 No tests are available on this platform yet — check back soon! What would you like to do instead?"
+        # BUG FIXED 2026-08-17: this used to be a bare reply_text with NO
+        # reply_markup at all -- a real live dead end (a student typing
+        # "test" on a bot with no CA Inter Advanced Accounting in scope got
+        # a message and nowhere to go from it). Now always offers a real
+        # next step -- see _no_content_cta_rows()'s own docstring.
+        await update.message.reply_text(
+            text, reply_markup=InlineKeyboardMarkup(_no_content_cta_rows(host, offer_advacc))
+        )
         return
 
     if len(courses) == 1:
@@ -372,7 +437,7 @@ async def _show_sitting_picker(message_or_query, context, conn, course, level, s
     sittings = _sittings_for(conn, course, level, subject)
     if not sittings:
         offer_advacc = host._scope_allows_subject("CA", "Inter", "Advanced Accounting")
-        text, markup = _not_available_text_and_markup(f"{course} {level} {subject}", offer_advacc=offer_advacc)
+        text, markup = _not_available_text_and_markup(f"{course} {level} {subject}", host, offer_advacc=offer_advacc)
         if edit:
             await message_or_query.edit_message_text(text, reply_markup=markup)
         else:

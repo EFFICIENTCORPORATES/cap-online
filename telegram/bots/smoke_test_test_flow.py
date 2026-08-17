@@ -164,10 +164,16 @@ async def main():
         wallet.credit(conn, username, "smoketest", "recharge_credit", 5000, reference="smoketest-seed")
 
         # 1. "Gracefully deny" path -- a subject with no predesigned tests.
-        text, markup = test_flow._not_available_text_and_markup("CS Executive Company Law")
+        text, markup = test_flow._not_available_text_and_markup("CS Executive Company Law", host)
         check("graceful-deny message doesn't dead-end (offers real alternatives)", "\U0001F4DD" in str(markup.inline_keyboard) or len(markup.inline_keyboard) >= 1)
         check("graceful-deny message never says 'error' or crashes-sounding text", "error" not in text.lower())
         check("graceful-deny message names what IS available", "CA Inter" in text)
+        # 2026-08-17: the dead-end fix -- this response must now ALWAYS carry
+        # a real next step (MCQ/Descriptive/I'm Done at minimum), never just
+        # the two test-mode-specific buttons from before.
+        cb_data = [b.callback_data for row in markup.inline_keyboard for b in row if b.callback_data]
+        check("graceful-deny message offers 'I'm Done'", "imdone" in cb_data)
+        check("graceful-deny message offers a direct MCQ/Descriptive shortcut", "mode:mcq" in cb_data or "mode:descriptive" in cb_data)
 
         # 2. Trigger "test" -- since only CA/Inter/Advanced Accounting has
         # any predesigned tests, Course/Level/Subject all auto-skip straight
@@ -568,12 +574,23 @@ async def main():
         # IS on the platform for transparency -- the actual bug was ACCESS
         # (the picker letting a CMA-scoped student actually start a CA
         # test), not the word "CA" appearing in an explanatory sentence. So
-        # the real regression check is: no button/markup offers a path INTO
-        # that content from this screen.
-        check("scoped tenant's deny message offers no button/markup at all (informational only, no actionable path to CA)", scoped_message.reply_text.await_args.kwargs.get("reply_markup") is None)
+        # the real regression check is: no button on this screen offers a
+        # path INTO that content -- NOT "no markup at all" (that was always
+        # just a proxy for the real invariant, and is now outdated by
+        # design: 2026-08-17 added a real CTA -- MCQ/Descriptive/I'm Done,
+        # plus a cross-bot link to the flagship when offer_advacc is False
+        # -- to this exact screen specifically because "no markup at all"
+        # used to mean a live dead end for the student, a separate, real
+        # bug reported after this access-control fix shipped).
+        scoped_markup = scoped_message.reply_text.await_args.kwargs.get("reply_markup")
+        scoped_cb_data = [b.callback_data for row in scoped_markup.inline_keyboard for b in row if b.callback_data] if scoped_markup else []
+        check("scoped tenant's deny message offers no in-bot path into CA content (no jump_advacc)", "testflow:jump_advacc" not in scoped_cb_data)
+        check("scoped tenant's deny message never leaves a bare dead end (always has a real next step)", bool(scoped_markup) and len(scoped_markup.inline_keyboard) > 0)
+        check("scoped tenant's deny message offers 'I'm Done' as a next step", "imdone" in scoped_cb_data)
 
-        offer_text, offer_markup = test_flow._not_available_text_and_markup("CMA Intermediate Business Laws and Ethics", offer_advacc=False)
+        offer_text, offer_markup = test_flow._not_available_text_and_markup("CMA Intermediate Business Laws and Ethics", host, offer_advacc=False)
         check("offer_advacc=False never renders the jump-to-CA button", "jump_advacc" not in str(offer_markup.inline_keyboard))
+        check("offer_advacc=False still offers a real next step, not a dead end", len(offer_markup.inline_keyboard) > 0)
 
         # Defense-in-depth: even if a stale/replayed callback_data handed
         # _start_test() a real CA catalog_key directly (bypassing the
