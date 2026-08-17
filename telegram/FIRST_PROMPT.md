@@ -45,7 +45,8 @@ than feature count until that list is worked through.
 | Leaderboard system (join, nightly broadcast) | `LEADERBOARD-SYSTEM.md` | `bots/leaderboard_broadcaster.py`, `database/leaderboard_metrics.py`, `config/leaderboards.json` |
 | Course/chapter/unit taxonomy + human-readable question IDs + Study/Exam/Revision/Question-Bank catalogues | `COURSE-CATALOG.md` | `tools/populate_course_catalog.py`, `tools/generate_mcq_human_ids.py`, `admin_portal/document_catalog.py` |
 | Logging/observability: fine-grained activity log, correlation IDs, `bot_admin` RBAC + Activity Log viewer | `LOGGING-ARCHITECTURE.md` | `bots/activity_logger.py`, `admin_portal/auth.py` + `/logs/activity`, `config/admin_access.json`, `admin_portal/manage_bot_admin.py` — built + deployed 2026-08-17, see doc's own §9 |
-| Admin Portal (Flask, :8788) | `admin_portal/README.md` | `admin_portal/app.py` (Analytics > "MCQ Issue Reports" is the newest tab, 2026-08-13) |
+| Admin Portal (Flask, :8788) | `admin_portal/README.md` | `admin_portal/app.py` (Overview's 5th "SQL Query" tab, added 2026-08-17, is the newest addition — see next row) |
+| Writing SQL against `platform.db` (schema map, verified join recipes, SQLite gotchas) + the read-only ad hoc SQL Query tab (Overview → SQL Query, filter/sort/paginate) | `_claude/skills/SKILL-telegram-sql-query.md` | `admin_portal/sql_query_tool.py` |
 | Down/up alerting | `/CLAUDE.md` §11 (2026-08-10 entry) | `bots/watcher_bot.py`, `config/alerts.json` |
 | Live dashboard (:8787, pre-Admin-Portal) | `/CLAUDE.md` §11 | `tools/dashboard_server.py`, `database/analytics.py`, `database/dashboard_html.py` |
 | 1LAVYA branding kit (colors, logo, PDF/email header-footer) | `branding/README.md` | `branding/brand_kit.py` |
