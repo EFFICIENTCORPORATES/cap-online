@@ -137,3 +137,6 @@ telegram/creds.txt
 .env
 books/bridge-course/YogaMembersListNameMumbers.md
 books/concept-book/characters/animations/.thumbnail
+
+# Node.js dependencies (tools/as19 and any future JS tooling)
+node_modules/
