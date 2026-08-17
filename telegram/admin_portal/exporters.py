@@ -187,3 +187,45 @@ def pdf_export_response(title: str, columns: list, rows: list, brand_colors: dic
         buf.getvalue(), mimetype="application/pdf",
         headers={"Content-Disposition": f'attachment; filename="{_safe_filename(filename)}.pdf"'},
     )
+
+
+# ---------------------------------------------------------------------------
+# Chart export -- HTML (the same inline SVG charts.py already renders
+# on-screen, wrapped as a standalone downloadable file) and PDF (routed to
+# charts_pdf.py's reportlab-native rendering instead -- see that module's
+# own docstring for why the SVG path can't be reused for PDF). Added
+# 2026-08-13 for the Overview rebuild's "graphs downloadable as HTML or
+# PDF" requirement, alongside the existing table export functions above.
+# ---------------------------------------------------------------------------
+def render_printable_chart(title: str, subtitle: str, svg_markup: str, brand_colors: dict) -> str:
+    navy, gold = brand_colors["navy"], brand_colors["gold"]
+    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    subtitle_html = f'<div style="font-size:12px; color:#666; margin-bottom:10px;">{subtitle}</div>' if subtitle else ""
+    return f"""
+<html><head><meta charset="utf-8"><title>{title}</title></head>
+<body style="font-family:Arial,Helvetica,sans-serif; color:#222; margin:24px;">
+  <div style="font-family:Georgia,'Times New Roman',serif; font-size:18px; font-weight:bold; color:{navy};">1LAVYA Admin Portal</div>
+  <div style="font-size:10px; color:{gold}; text-transform:uppercase; margin-bottom:6px;">{title}</div>
+  {subtitle_html}
+  <div style="font-size:10px; color:#888; margin-bottom:16px;">Generated {generated_at}</div>
+  {svg_markup}
+</body></html>
+"""
+
+
+def chart_html_response(title: str, subtitle: str, svg_markup: str, brand_colors: dict, filename: str) -> Response:
+    html = render_printable_chart(title, subtitle, svg_markup, brand_colors)
+    return Response(
+        html, mimetype="text/html",
+        headers={"Content-Disposition": f'attachment; filename="{_safe_filename(filename)}.html"'},
+    )
+
+
+def chart_pdf_response(pdf_bytes: bytes, filename: str) -> Response:
+    """Takes already-rendered bytes from charts_pdf.py (bar_chart_pdf_bytes/
+    donut_chart_pdf_bytes) -- this function only wraps them in the right
+    Flask Response, it doesn't render anything itself."""
+    return Response(
+        pdf_bytes, mimetype="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{_safe_filename(filename)}.pdf"'},
+    )

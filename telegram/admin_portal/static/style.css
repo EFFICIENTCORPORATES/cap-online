@@ -338,6 +338,7 @@ tr:hover td { background: #fafbfc; }
 
 .pill-online { background: #e6f7ec; color: #1a7a3e; }
 .pill-offline { background: #fbeaea; color: #a3312f; }
+.pill-warn { background: #fdf2e0; color: #9a6412; }
 .pill-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 
 .btn {

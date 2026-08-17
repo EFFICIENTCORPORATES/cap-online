@@ -47,6 +47,8 @@ def _cleanup_audit(conn):
     conn.execute("DELETE FROM admin_actions WHERE target=? OR target LIKE ?", (FAKE_BOT_ID, f"%{SYNTHETIC_MARKER}%"))
     conn.execute("DELETE FROM report_deliveries WHERE criteria LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
     conn.execute("DELETE FROM mcq_issue_reports WHERE mcq_id LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
+    conn.execute("DELETE FROM faculty_report_deliveries WHERE delivered_to LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
+    conn.execute("DELETE FROM faculty_master WHERE notes LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
     conn.commit()
 
 
@@ -324,15 +326,187 @@ def main():
     check("An invalid subject falls back to a real one instead of an unexplained empty table",
           b"No chapters match" not in resp.data and b"Advanced Accounting" in resp.data)
 
+    print("\n--- Step 14d: Overview rebuild -- 4 sub-tabs, date ranges, charts, exports (2026-08-13) ---")
+    for tab in ("students", "content", "performance", "faculty"):
+        resp = client.get(f"/?tab={tab}")
+        check(f"Overview tab '{tab}' renders", resp.status_code == 200)
+        check(f"Overview tab '{tab}' has no unrendered Jinja", b"{{" not in resp.data and b"{%" not in resp.data)
+
+    resp = client.get("/?tab=students&preset=30d")
+    check("Overview Students tab accepts a 30d preset", resp.status_code == 200 and b"Last 30 days" in resp.data)
+    resp = client.get("/?tab=students&preset=all")
+    check("Overview Students tab accepts the 'all time' preset", resp.status_code == 200 and b"All time" in resp.data)
+    resp = client.get("/?tab=performance&perf_course=CA&perf_level=Inter&min_attempts=1")
+    check("Overview Performance tab accepts course/level/min-attempts filters", resp.status_code == 200)
+
+    for fmt, ctype_fragment in (("csv", "text/csv"), ("xlsx", "spreadsheetml"), ("html", "text/html"), ("pdf", "application/pdf")):
+        for tab_export in ("students", "content", "performance", "faculty"):
+            resp = client.get(f"/overview/{tab_export}.{fmt}")
+            check(f"Overview {tab_export} export .{fmt} returns 200", resp.status_code == 200)
+            check(f"Overview {tab_export} export .{fmt} has the right content-type", ctype_fragment in resp.headers.get("Content-Type", ""),
+                  resp.headers.get("Content-Type"))
+
+    for chart_id in ("students_daily", "content_daily", "content_split", "performance_daily", "faculty_interactions"):
+        for fmt in ("html", "pdf"):
+            resp = client.get(f"/overview/chart/{chart_id}.{fmt}")
+            check(f"Chart export {chart_id}.{fmt} returns 200", resp.status_code == 200, f"got {resp.status_code}")
+            check(f"Chart export {chart_id}.{fmt} is non-trivially sized", len(resp.data) > 500)
+    resp = client.get("/overview/chart/not-a-real-chart.html")
+    check("An unknown chart_id 404s instead of crashing", resp.status_code == 404)
+    resp = client.get("/overview/chart/students_daily.svg")
+    check("An unsupported export format 404s instead of crashing", resp.status_code == 404)
+
+    # Data-correctness spot check: the Content tab's "New Questions Added"
+    # stat and its underlying content_ingestion_log rows must agree with
+    # what fetch_content_growth() itself reports -- proves the template
+    # renders the SAME number the query layer computed, not a second
+    # hand-derived one.
+    growth = analytics.fetch_content_growth(conn)
+    resp = client.get("/?tab=content&preset=all")
+    check("Content tab's total-in-range figure matches fetch_content_growth()",
+          str(growth["total_in_range"]).encode() in resp.data)
+
+    print("\n--- Step 14e: Faculty Comprehensive Report (2026-08-14) ---")
+    import faculty_report  # noqa: E402 -- telegram/admin_portal/faculty_report.py
+    reportable = faculty_report.list_reportable_tenants(conn, manage_bots.load_bots())
+    check("At least one reportable faculty/tenant exists", len(reportable) > 0)
+    if reportable:
+        sample_tenant = reportable[0]["tenant_id"]
+
+        resp = client.get("/reports/faculty")
+        check("GET /reports/faculty (no tenant selected yet) returns 200", resp.status_code == 200)
+
+        resp = client.get(f"/reports/faculty?tenant_id={sample_tenant}")
+        check(f"GET /reports/faculty?tenant_id={sample_tenant} returns 200", resp.status_code == 200)
+        check(
+            "Report page includes all 6 section headings",
+            all(s.encode() in resp.data for s in (
+                "Content Availability", "Chapter-wise Practice", "Student Performance",
+                "Last 7 Days Activity", "Chapter Matrix", "Question-wise Difficulty",
+            )),
+        )
+
+        resp = client.get(f"/reports/faculty/{sample_tenant}.pdf")
+        check("Full report PDF export returns 200", resp.status_code == 200)
+        check("Full report PDF has the right content-type", "application/pdf" in resp.headers.get("Content-Type", ""))
+        check("Full report PDF is non-trivially sized", len(resp.data) > 500)
+
+        resp = client.get(f"/reports/faculty/{sample_tenant}.xlsx")
+        check("Full report XLSX export returns 200", resp.status_code == 200)
+        check("Full report XLSX has the right content-type", "spreadsheetml" in resp.headers.get("Content-Type", ""))
+
+        resp = client.get(f"/reports/faculty/{sample_tenant}.html")
+        check("Full report HTML export returns 200", resp.status_code == 200)
+
+        resp = client.get(f"/reports/faculty/{sample_tenant}.svg")
+        check("An unsupported export format 400s instead of crashing", resp.status_code == 400)
+
+        resp = client.get(f"/reports/faculty/{FAKE_BOT_ID}.pdf")
+        check("An unknown tenant_id in the export route 404s instead of crashing", resp.status_code == 404)
+
+        print("    --- email delivery: invalid address rejected, valid address sends (send_report_email MOCKED, no real network call) ---")
+        resp = client.post(f"/reports/faculty/{sample_tenant}/email", data={"email": "not-an-email"}, follow_redirects=True)
+        check("Invalid email address is rejected with a flash message, no send attempted", b"valid email" in resp.data)
+
+        marker_email = f"{SYNTHETIC_MARKER}@example.com"
+        with patch("app.faculty_report.send_report_email") as mock_send:
+            resp = client.post(f"/reports/faculty/{sample_tenant}/email", data={"email": marker_email}, follow_redirects=True)
+            check("Valid email triggers a 200 response after redirect", resp.status_code == 200)
+            check("send_report_email() was called exactly once", mock_send.call_count == 1)
+            check("send_report_email() was called with the typed email address", mock_send.call_args[0][0] == marker_email)
+        row = conn.execute(
+            "SELECT status FROM faculty_report_deliveries WHERE delivered_to=? ORDER BY delivery_id DESC LIMIT 1", (marker_email,),
+        ).fetchone()
+        check("A 'sent' delivery row was logged for the (mocked) successful email", row is not None and row[0] == "sent")
+
+        print("    --- email delivery: send_report_email() FAILS (mocked) -> logged as 'failed', flashed, no crash ---")
+        with patch("app.faculty_report.send_report_email", side_effect=RuntimeError("smoketest forced failure")):
+            resp = client.post(f"/reports/faculty/{sample_tenant}/email", data={"email": marker_email}, follow_redirects=True)
+            check("A failed send still returns 200 (flash, not a crash)", resp.status_code == 200)
+            check("Failure is flashed to the admin", b"Failed to send report" in resp.data)
+        row = conn.execute(
+            "SELECT status, error_detail FROM faculty_report_deliveries WHERE delivered_to=? ORDER BY delivery_id DESC LIMIT 1", (marker_email,),
+        ).fetchone()
+        check("A 'failed' delivery row was logged with the error detail",
+              row is not None and row[0] == "failed" and "forced failure" in (row[1] or ""))
+
+    print("\n--- Step 14f: Faculty Master DB table (Masters > Faculty Details, 2026-08-14) ---")
+    import faculty_master  # noqa: E402 -- telegram/admin_portal/faculty_master.py
+    resp = client.get("/masters/faculty")
+    check("GET /masters/faculty returns 200", resp.status_code == 200)
+    check("Faculty Details list shows every real tenant",
+          all(tid.encode() in resp.data for tid in faculty_master.load_tenants().keys()))
+
+    resp = client.get(f"/masters/faculty/{sample_tenant}")
+    check(f"GET /masters/faculty/{sample_tenant} (edit form) returns 200", resp.status_code == 200)
+
+    resp = client.get(f"/masters/faculty/{FAKE_BOT_ID}")
+    check("GET /masters/faculty/<unknown tenant_id> returns 404, not a crash", resp.status_code == 404)
+
+    # This route can hold REAL admin-entered data by the time this test runs
+    # again -- capture whatever's there now so it can be restored exactly,
+    # rather than losing it just because this step exercised the save path.
+    original_master_row = faculty_master.get_faculty_master(conn, sample_tenant)
+
+    marker_notes = f"synthetic test row -- {SYNTHETIC_MARKER}"
+    resp = client.post(f"/masters/faculty/{sample_tenant}", data={
+        "contact_email": "smoketest@example.com", "contact_phone": "+91 90000 00000", "notes": marker_notes,
+    }, follow_redirects=True)
+    check("POST /masters/faculty/<tenant_id> (save) returns 200 after redirect", resp.status_code == 200)
+    check("Save is flashed to the admin", b"Saved details" in resp.data)
+    row = faculty_master.get_faculty_master(conn, sample_tenant)
+    check("Row reflects the submitted values",
+          row is not None and row["contact_email"] == "smoketest@example.com" and row["notes"] == marker_notes)
+
+    resp = client.post(f"/masters/faculty/{sample_tenant}", data={
+        "contact_email": "smoketest2@example.com", "contact_phone": "", "notes": marker_notes,
+    }, follow_redirects=True)
+    check("POST /masters/faculty/<tenant_id> (a second save) returns 200 after redirect", resp.status_code == 200)
+    row2 = faculty_master.get_faculty_master(conn, sample_tenant)
+    check("A second save UPDATES the same row (email changed), no duplicate (tenant_id is the PK)",
+          row2 is not None and row2["contact_email"] == "smoketest2@example.com")
+    check("An empty field submitted on save clears that column", row2 is not None and row2["contact_phone"] is None)
+
+    resp = client.get(f"/reports/faculty?tenant_id={sample_tenant}")
+    check("Faculty Comprehensive Report's email box now pre-fills from the saved faculty_master row",
+          b"smoketest2@example.com" in resp.data)
+
+    # Restore exactly what was there before this step touched it -- delete
+    # if nothing existed, or write the original field values back (via the
+    # same upsert function the route itself uses) if something real did.
+    if original_master_row is None:
+        conn.execute("DELETE FROM faculty_master WHERE tenant_id=?", (sample_tenant,))
+        conn.commit()
+        restored_ok = faculty_master.get_faculty_master(conn, sample_tenant) is None
+    else:
+        faculty_master.upsert_faculty_master(
+            conn, sample_tenant, original_master_row["contact_email"],
+            original_master_row["contact_phone"], original_master_row["notes"],
+        )
+        restored = faculty_master.get_faculty_master(conn, sample_tenant)
+        restored_ok = (restored is not None
+                       and restored["contact_email"] == original_master_row["contact_email"]
+                       and restored["contact_phone"] == original_master_row["contact_phone"]
+                       and restored["notes"] == original_master_row["notes"])
+    check("faculty_master row for the sample tenant was restored/cleaned up correctly (no test residue, no data loss)", restored_ok)
+
     print("\n--- Step 15: every new export/analytics route requires auth ---")
     client.get("/logout")
     for path in ("/export", "/export/students.csv", "/analytics/students", "/analytics/students.csv",
                  "/analytics/bots", "/analytics/faculty-report", "/analytics/content-health", "/analytics/email",
-                 "/analytics/issue-reports", "/content/course-catalog"):
+                 "/analytics/issue-reports", "/content/course-catalog",
+                 "/overview/students.csv", "/overview/content.csv", "/overview/performance.csv", "/overview/faculty.csv",
+                 "/overview/chart/students_daily.html", "/overview/chart/students_daily.pdf",
+                 "/reports/faculty", f"/reports/faculty/{FAKE_BOT_ID}.pdf",
+                 "/masters/faculty", f"/masters/faculty/{FAKE_BOT_ID}"):
         resp = client.get(path, follow_redirects=False)
         check(f"GET {path} unauthenticated redirects (not served directly)", resp.status_code == 302, f"got {resp.status_code}")
     resp = client.post("/analytics/students/send-report", data={"telegram_user_id": ["1"]}, follow_redirects=False)
     check("POST send-report unauthenticated redirects, does not execute", resp.status_code == 302)
+    resp = client.post(f"/reports/faculty/{FAKE_BOT_ID}/email", data={"email": "x@example.com"}, follow_redirects=False)
+    check("POST .../faculty/<tenant_id>/email unauthenticated redirects, does not execute", resp.status_code == 302)
+    resp = client.post(f"/masters/faculty/{FAKE_BOT_ID}", data={"contact_email": "x@example.com"}, follow_redirects=False)
+    check("POST /masters/faculty/<tenant_id> unauthenticated redirects, does not execute", resp.status_code == 302)
 
     print(f"\n{'='*70}")
     if failures:

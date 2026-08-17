@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% block title %}Faculty Comprehensive Report -- 1LAVYA Admin Portal{% endblock %}
+{% block page_title %}Faculty Comprehensive Report{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h2>Select Faculty / Bot Pool</h2>
+  <p class="card-note">
+    Covers every subject/level live for this faculty, chapter-wise practice, student-wise performance,
+    the last 7 days student-wise, a student &times; chapter breakdown, and a question-wise difficulty
+    analysis (which MCQs students get wrong most often, and what they chose instead of the right answer).
+    All figures are raw, deterministic counts read from platform activity logs -- no commentary.
+  </p>
+  <form method="get" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+    <label style="font-size:12.5px; font-weight:600; color:#555;">Faculty / Bot Pool:</label>
+    <select name="tenant_id" onchange="this.form.submit()" style="padding:6px 10px; border:1px solid #d8dae0; border-radius:6px; font-size:13px;">
+      {% for t in tenants %}
+      <option value="{{ t.tenant_id }}" {{ 'selected' if t.tenant_id == selected_tenant }}>{{ t.display_name }} ({{ t.kind }})</option>
+      {% else %}
+      <option value="">No faculty/bot pools with linked bots yet.</option>
+      {% endfor %}
+    </select>
+  </form>
+</div>
+
+{% if selected_tenant and data %}
+
+<div class="card">
+  <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+    <span style="font-size:11.5px; color:#999; text-transform:uppercase; letter-spacing:.04em; margin-right:4px;">Range:</span>
+    {% for p, label in range_presets.items() %}
+      <a class="btn {{ 'btn-primary' if preset == p else 'btn-secondary' }} btn-sm" href="{{ range_urls[p] }}">{{ label }}</a>
+    {% endfor %}
+    <form method="get" style="display:flex; align-items:center; gap:6px; margin-left:10px;">
+      <input type="hidden" name="tenant_id" value="{{ selected_tenant }}">
+      <input type="date" name="from" value="{{ start_date or '' }}" style="padding:5px 8px; border:1px solid #d8dae0; border-radius:6px; font-size:12.5px;">
+      <span style="color:#999; font-size:12px;">to</span>
+      <input type="date" name="to" value="{{ end_date or '' }}" style="padding:5px 8px; border:1px solid #d8dae0; border-radius:6px; font-size:12.5px;">
+      <button type="submit" class="btn btn-secondary btn-sm">Apply</button>
+    </form>
+  </div>
+  <div style="font-size:12px; color:#777; margin:8px 0 14px;">
+    Showing: <strong>{{ data.range_label }}</strong> &middot; Bots covered: <strong>{{ data.bot_ids | join(', ') or '—' }}</strong>
+  </div>
+
+  <div class="export-buttons" style="margin-bottom:16px;">
+    <span class="export-label">Full Report:</span>
+    <a class="btn btn-secondary btn-sm" href="{{ export_urls.html }}">Download HTML</a>
+    <a class="btn btn-secondary btn-sm" href="{{ export_urls.xlsx }}">Download Excel</a>
+    <a class="btn btn-secondary btn-sm" href="{{ export_urls.pdf }}">Download PDF</a>
+  </div>
+
+  <form method="post" action="{{ url_for('faculty_report_email', tenant_id=selected_tenant) }}"
+        style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px;">
+    <input type="hidden" name="preset" value="{{ preset }}">
+    <input type="hidden" name="start_date" value="{{ start_date or '' }}">
+    <input type="hidden" name="end_date" value="{{ end_date or '' }}">
+    <label style="font-size:12.5px; font-weight:600; color:#555;">Email report to:</label>
+    <input type="email" name="email" value="{{ data.contact_email or '' }}" placeholder="faculty@example.com" required
+           style="padding:6px 10px; border:1px solid #d8dae0; border-radius:6px; font-size:13px; min-width:240px;">
+    <button type="submit" class="btn btn-primary btn-sm">Send Email (PDF attached)</button>
+  </form>
+  {% if not data.contact_email %}
+  <p style="font-size:11px; color:#999; margin:0;">No contact email on file for this faculty yet -- type one in above before sending.</p>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h2>1. Content Availability <span style="color:#999; font-weight:normal; font-size:12.5px;">-- Subjects &amp; Levels Live</span></h2>
+  <p class="card-note">What this faculty's students can currently access -- a static snapshot, not date-ranged.</p>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Course</th><th>Level</th><th>Subject</th><th>Chapters w/ Content</th><th>Chapters Total</th><th>MCQ Count</th><th>Descriptive Count</th><th>Total Questions</th></tr></thead>
+    <tbody>
+      {% for r in data.content_availability %}
+      <tr>
+        <td>{{ r.course }}</td><td>{{ r.level }}</td><td>{{ r.subject }}</td>
+        <td>{{ r.chapters_with_content }}</td><td>{{ r.chapters_total }}</td>
+        <td>{{ r.mcq_count }}</td><td>{{ r.descriptive_count }}</td><td>{{ r.total_count }}</td>
+      </tr>
+      {% else %}<tr><td colspan="8" style="color:#999;">No content_scope entries for this tenant.</td></tr>{% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>2. Chapter-wise Practice <span style="color:#999; font-weight:normal; font-size:12.5px;">(most accessed / practiced first, across every subject &amp; course this faculty serves)</span></h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Chapter</th><th>Course</th><th>Level</th><th>Unique Students</th><th>MCQ Shown</th><th>MCQ Answered</th><th>MCQ Correct</th><th>Accuracy</th><th>Time Spent (min)</th><th>Descriptive Viewed</th></tr></thead>
+    <tbody>
+      {% for r in data.chapter_stats %}
+      <tr>
+        <td>{{ r.chapter_label }}</td><td>{{ r.course }}</td><td>{{ r.level }}</td>
+        <td>{{ r.unique_students }}</td><td>{{ r.mcq_shown }}</td><td>{{ r.mcq_answered }}</td><td>{{ r.mcq_correct }}</td>
+        <td>{% if r.mcq_accuracy_pct is not none %}{{ r.mcq_accuracy_pct }}%{% else %}—{% endif %}</td>
+        <td>{{ r.time_spent_minutes }}</td><td>{{ r.descriptive_shown }}</td>
+      </tr>
+      {% else %}<tr><td colspan="10" style="color:#999;">No chapter activity recorded in this range.</td></tr>{% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>3. Student Performance <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ data.student_performance | length }} student(s))</span></h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Chat ID</th><th>Student</th><th>MCQ Shown</th><th>MCQ Answered</th><th>MCQ Correct</th><th>Accuracy</th><th>Descriptive Viewed</th><th>Time Spent (min)</th><th>Last Active</th></tr></thead>
+    <tbody>
+      {% for r in data.student_performance %}
+      <tr>
+        <td>{{ r.telegram_user_id }}</td><td>{{ r.display_name }}</td>
+        <td>{{ r.mcq_shown }}</td><td>{{ r.mcq_answered }}</td><td>{{ r.mcq_correct }}</td>
+        <td>{% if r.accuracy_pct is not none %}{{ r.accuracy_pct }}%{% else %}—{% endif %}</td>
+        <td>{{ r.descriptive_shown }}</td><td>{{ r.time_spent_minutes }}</td>
+        <td>{{ (r.last_active_at or '—')[:19].replace('T', ' ') }}</td>
+      </tr>
+      {% else %}<tr><td colspan="9" style="color:#999;">No student activity recorded in this range.</td></tr>{% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>4. Last 7 Days Activity, Student-wise <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ data.last_7_days.start }} to {{ data.last_7_days.end }} -- always the real last 7 days, regardless of the range above)</span></h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Date</th><th>Chat ID</th><th>Student</th><th>MCQ Shown</th><th>MCQ Answered</th><th>MCQ Correct</th><th>Accuracy</th><th>Descriptive Viewed</th><th>Time Spent (min)</th></tr></thead>
+    <tbody>
+      {% for r in data.last_7_days.rows %}
+      <tr>
+        <td>{{ r.date }}</td><td>{{ r.telegram_user_id }}</td><td>{{ r.display_name }}</td>
+        <td>{{ r.mcq_shown }}</td><td>{{ r.mcq_answered }}</td><td>{{ r.mcq_correct }}</td>
+        <td>{% if r.accuracy_pct is not none %}{{ r.accuracy_pct }}%{% else %}—{% endif %}</td>
+        <td>{{ r.descriptive_shown }}</td><td>{{ r.time_spent_minutes }}</td>
+      </tr>
+      {% else %}<tr><td colspan="9" style="color:#999;">No activity in the last 7 days.</td></tr>{% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>5. Student &times; Chapter Matrix <span style="color:#999; font-weight:normal; font-size:12.5px;">(each student's own chapters, ranked by their own activity -- "which student is doing which chapters the most")</span></h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Student</th><th>Chat ID</th><th>Rank</th><th>Chapter</th><th>MCQ Attempted</th><th>MCQ Correct</th><th>Accuracy</th><th>Descriptive Viewed</th></tr></thead>
+    <tbody>
+      {% for r in data.student_chapter_matrix %}
+      <tr>
+        <td>{{ r.display_name }}</td><td>{{ r.telegram_user_id }}</td><td>{{ r.rank_for_student }}</td><td>{{ r.chapter_label }}</td>
+        <td>{{ r.mcq_attempted }}</td><td>{{ r.mcq_correct }}</td>
+        <td>{% if r.accuracy_pct is not none %}{{ r.accuracy_pct }}%{% else %}—{% endif %}</td>
+        <td>{{ r.descriptive_shown }}</td>
+      </tr>
+      {% else %}<tr><td colspan="8" style="color:#999;">No data in this range.</td></tr>{% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>6. Question-wise Difficulty <span style="color:#999; font-weight:normal; font-size:12.5px;">(most wrongly answered first, min. 2 real attempts)</span></h2>
+  <p class="card-note">"Most Common Wrong Option Chosen" is the single wrong option students picked most often for that question -- not just "wrong" in general.</p>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Question ID</th><th>Chapter</th><th>Course</th><th>Level</th><th>Times Answered</th><th>Times Wrong</th><th>Wrong %</th><th>Correct Option</th><th>Most Common Wrong Option</th><th>Chose It</th></tr></thead>
+    <tbody>
+      {% for r in data.question_difficulty %}
+      <tr>
+        <td>{{ r.human_id }}</td><td>{{ r.chapter_label }}</td><td>{{ r.course }}</td><td>{{ r.level }}</td>
+        <td>{{ r.times_answered }}</td><td>{{ r.times_wrong }}</td><td>{{ r.wrong_pct }}%</td>
+        <td>{{ r.correct_option }}</td><td>{{ r.most_common_wrong_option or '—' }}</td><td>{{ r.most_common_wrong_option_count }}</td>
+      </tr>
+      {% else %}<tr><td colspan="10" style="color:#999;">No qualifying MCQ data in this range.</td></tr>{% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}

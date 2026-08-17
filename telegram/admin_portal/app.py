@@ -45,10 +45,11 @@ import os
 import sys
 import time
 import threading
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlencode
 
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, Response
 from dotenv import load_dotenv
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -70,6 +71,11 @@ import report_delivery  # noqa: E402 -- telegram/database/report_delivery.py
 import student_analytics  # noqa: E402 -- telegram/database/student_analytics.py
 import generate_student_report  # noqa: E402 -- telegram/tools/generate_student_report.py
 import document_catalog  # noqa: E402 -- telegram/admin_portal/document_catalog.py
+import charts  # noqa: E402 -- telegram/admin_portal/charts.py, inline SVG (2026-08-13)
+import charts_pdf  # noqa: E402 -- telegram/admin_portal/charts_pdf.py, reportlab-native PDF charts (2026-08-13)
+import faculty_report  # noqa: E402 -- telegram/admin_portal/faculty_report.py, Comprehensive Faculty Report (2026-08-14)
+import faculty_master  # noqa: E402 -- telegram/admin_portal/faculty_master.py, Faculty Master DB table (2026-08-14)
+import backup_status  # noqa: E402 -- telegram/admin_portal/backup_status.py, Backup Snapshot Summary (2026-08-16)
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("ADMIN_PORTAL_SECRET_KEY") or os.urandom(32)
@@ -98,6 +104,7 @@ NAV_SECTIONS = [
         {"label": "Student Master", "endpoint": "analytics_students", "icon": "\U0001F393", "enabled": True},
         {"label": "Bot-wise Usage", "endpoint": "analytics_bots", "icon": "\U0001F4C8", "enabled": True},
         {"label": "Faculty Report", "endpoint": "analytics_faculty_report", "icon": "\U0001F4CB", "enabled": True},
+        {"label": "Faculty Comprehensive Report", "endpoint": "faculty_report_view", "icon": "\U0001F4D1", "enabled": True},
         {"label": "Content Health", "endpoint": "analytics_content_health", "icon": "\U0001FA7A", "enabled": True},
         {"label": "Email Analytics", "endpoint": "analytics_email", "icon": "\U0001F4E7", "enabled": True},
         {"label": "MCQ Issue Reports", "endpoint": "analytics_issue_reports", "icon": "\U0001F6A9", "enabled": True},
@@ -106,6 +113,7 @@ NAV_SECTIONS = [
         {"label": "Export Any Table", "endpoint": "data_export_index", "icon": "\U00002B07\U0000FE0F", "enabled": True},
     ]},
     {"label": "Masters", "links": [
+        {"label": "Faculty Details", "endpoint": "masters_faculty_list", "icon": "\U0001F9D1\U0000200D\U0001F3EB", "enabled": True},
         {"label": "Tenants & Bots", "endpoint": None, "icon": "\U0001F5C2️", "enabled": False},
         {"label": "Faculty / New Bot", "endpoint": None, "icon": "➕", "enabled": False},
     ]},
@@ -187,8 +195,135 @@ def logout():
 
 
 # ---------------------------------------------------------------------------
-# OVERVIEW
+# OVERVIEW -- rebuilt 2026-08-13 (Pranav's ask: onboarding/content/
+# performance/faculty analytics, date-ranged, filterable, exportable,
+# sub-tab organized). This is a SUMMARY layer -- charts + top-line tables
+# per sub-tab, each linking into the already-built detailed Analytics
+# pages (Student Master, Course Catalog, Faculty Report) for full
+# row-level drill-down, per his confirmed choice (AskUserQuestion,
+# 2026-08-13) rather than duplicating those pages' full tables here.
 # ---------------------------------------------------------------------------
+OVERVIEW_TABS = ("students", "content", "performance", "faculty")
+OVERVIEW_TAB_LABELS = {
+    "students": "Students", "content": "Content", "performance": "Performance", "faculty": "Faculty",
+}
+RANGE_PRESETS = {"7d": "Last 7 days", "30d": "Last 30 days", "90d": "Last 90 days", "all": "All time"}
+
+
+def _date_range_from_args():
+    """(start_date, end_date, label) from ?preset=7d/30d/90d/all or an
+    explicit ?from=&to=. Defaults to the last 7 days when nothing is
+    given (the page's first load) -- every date-ranged tab shares this
+    one implementation, so a range picked on one tab means the same thing
+    on every other."""
+    preset = request.args.get("preset")
+    today = datetime.now(timezone.utc).date()
+    if preset in ("7d", "30d", "90d"):
+        days = int(preset[:-1])
+        return (today - timedelta(days=days - 1)).isoformat(), today.isoformat(), RANGE_PRESETS[preset]
+    if preset == "all":
+        return None, None, RANGE_PRESETS["all"]
+    frm, to = request.args.get("from"), request.args.get("to")
+    if frm or to:
+        return frm or None, to or None, f"{frm or '…'} to {to or '…'}"
+    return (today - timedelta(days=6)).isoformat(), today.isoformat(), RANGE_PRESETS["7d"]
+
+
+def _current_preset() -> str:
+    preset = request.args.get("preset")
+    if preset in RANGE_PRESETS:
+        return preset
+    if request.args.get("from") or request.args.get("to"):
+        return "custom"
+    return "7d"
+
+
+# --- chart data builders -- ONE function per chart, reused for both the
+# on-page render and the chart's own HTML/PDF export endpoint below, so
+# neither can silently drift from the other (same discipline every table
+# export in this file already follows). ---
+def _students_chart_data(conn, start_date, end_date):
+    return [(d["date"], d["count"]) for d in analytics.fetch_student_onboarding(conn, start_date, end_date)["daily"]]
+
+
+def _content_daily_chart_data(conn, start_date, end_date):
+    return [(d["date"], d["count"]) for d in analytics.fetch_content_growth(conn, start_date, end_date)["daily"]]
+
+
+def _content_split_chart_data(conn, start_date, end_date):
+    by_qtype = analytics.fetch_content_growth(conn, start_date, end_date)["by_qtype"]
+    return [("MCQ", by_qtype.get("mcq", 0)), ("Descriptive", by_qtype.get("descriptive", 0))]
+
+
+def _performance_daily_chart_data(conn, start_date, end_date):
+    return [(d["date"], d["shown"]) for d in analytics.fetch_questions_attempted(conn, start_date, end_date)["daily"]]
+
+
+def _faculty_chart_data(conn, start_date, end_date):
+    roster = analytics.fetch_faculty_roster(conn, manage_bots.load_bots())
+    return [(r["display_name"], r["total_interactions"]) for r in roster]
+
+
+CHART_BUILDERS = {
+    "students_daily":      {"title": "New Students",           "kind": "bar",   "color_key": "navy", "fn": _students_chart_data},
+    "content_daily":       {"title": "New Questions Added",    "kind": "bar",   "color_key": "navy", "fn": _content_daily_chart_data},
+    "content_split":       {"title": "MCQ vs Descriptive",     "kind": "donut", "fn": _content_split_chart_data},
+    "performance_daily":   {"title": "Questions Attempted",    "kind": "bar",   "color_key": "navy", "fn": _performance_daily_chart_data},
+    "faculty_interactions":{"title": "Faculty -- Total Interactions (all-time)", "kind": "bar", "color_key": "gold", "fn": _faculty_chart_data},
+}
+DONUT_PALETTE = ["#09284b", "#d0942c", "#5a7a9a", "#c96a4e"]
+
+
+def _chart_svg_for(chart_id, conn, start_date, end_date):
+    spec = CHART_BUILDERS[chart_id]
+    data = spec["fn"](conn, start_date, end_date)
+    if spec["kind"] == "bar":
+        return charts.bar_chart_svg(data, color=brand_kit.colors().get(spec.get("color_key", "navy")))
+    segs = [(l, v, DONUT_PALETTE[i % len(DONUT_PALETTE)]) for i, (l, v) in enumerate(data)]
+    return charts.donut_chart_svg(segs)
+
+
+def _chart_download_urls(chart_id, start_date, end_date):
+    args = {}
+    if start_date:
+        args["from"] = start_date
+    if end_date:
+        args["to"] = end_date
+    return {
+        "html": url_for("overview_chart_export", chart_id=chart_id, fmt="html", **args),
+        "pdf": url_for("overview_chart_export", chart_id=chart_id, fmt="pdf", **args),
+    }
+
+
+@app.route("/overview/chart/<chart_id>.<fmt>")
+@auth.role_required("admin")
+def overview_chart_export(chart_id, fmt):
+    if chart_id not in CHART_BUILDERS or fmt not in ("html", "pdf"):
+        return "Unknown chart or format.", 404
+    conn = get_conn()
+    spec = CHART_BUILDERS[chart_id]
+    start_date, end_date, range_label = _date_range_from_args()
+    data = spec["fn"](conn, start_date, end_date)
+    colors = brand_kit.colors()
+    title = spec["title"]
+    audit.log_action(conn, auth.current_user(), "chart_export", chart_id, fmt)
+
+    if fmt == "html":
+        if spec["kind"] == "bar":
+            svg = charts.bar_chart_svg(data, color=colors.get(spec.get("color_key", "navy")))
+        else:
+            segs = [(l, v, DONUT_PALETTE[i % len(DONUT_PALETTE)]) for i, (l, v) in enumerate(data)]
+            svg = charts.donut_chart_svg(segs)
+        return exporters.chart_html_response(title, range_label, svg, colors, chart_id)
+
+    if spec["kind"] == "bar":
+        pdf_bytes = charts_pdf.bar_chart_pdf_bytes(title, data, colors, subtitle=range_label)
+    else:
+        segs = [(l, v, DONUT_PALETTE[i % len(DONUT_PALETTE)]) for i, (l, v) in enumerate(data)]
+        pdf_bytes = charts_pdf.donut_chart_pdf_bytes(title, segs, colors, subtitle=range_label)
+    return exporters.chart_pdf_response(pdf_bytes, chart_id)
+
+
 @app.route("/")
 @auth.role_required("admin")
 def overview():
@@ -197,11 +332,174 @@ def overview():
     heartbeats = analytics.fetch_heartbeats(conn)
     online_count = sum(1 for b in bots if heartbeats.get(b["bot_id"], {}).get("online"))
     unique_mcq = analytics.fetch_unique_mcq_attempters(conn)
-    return render_template(
-        "overview.html",
-        total_bots=len(bots), online_count=online_count,
-        unique_mcq_attempters=unique_mcq,
+
+    tab = request.args.get("tab", "students")
+    if tab not in OVERVIEW_TABS:
+        tab = "students"
+    start_date, end_date, range_label = _date_range_from_args()
+    preset = _current_preset()
+
+    range_urls = {p: url_for("overview", tab=tab, preset=p) for p in RANGE_PRESETS}
+    tab_urls = {
+        t: url_for("overview", tab=t, **({"preset": preset} if preset != "custom" else {"from": start_date, "to": end_date}))
+        for t in OVERVIEW_TABS
+    }
+
+    ctx = dict(
+        total_bots=len(bots), online_count=online_count, unique_mcq_attempters=unique_mcq,
+        tab=tab, tabs=OVERVIEW_TABS, tab_labels=OVERVIEW_TAB_LABELS, tab_urls=tab_urls,
+        range_label=range_label, range_urls=range_urls, range_presets=RANGE_PRESETS, preset=preset,
+        start_date=start_date, end_date=end_date,
     )
+
+    if tab == "students":
+        onboarding = analytics.fetch_student_onboarding(conn, start_date, end_date)
+        page = exporters.paginate(onboarding["daily"], request.args.get("page", 1, type=int), per_page=25)
+        ctx.update(
+            onboarding=onboarding, pagination=page, daily_rows=page["items"],
+            chart_svg=_chart_svg_for("students_daily", conn, start_date, end_date),
+            chart_download_urls=_chart_download_urls("students_daily", start_date, end_date),
+            export_urls={fmt: url_for("overview_students_export", fmt=fmt, preset=preset, **({} if preset != "custom" else {"from": start_date, "to": end_date}))
+                          for fmt in ("csv", "xlsx", "html", "pdf")},
+        )
+
+    elif tab == "content":
+        growth = analytics.fetch_content_growth(conn, start_date, end_date)
+        totals = document_catalog.platform_question_totals(conn)
+        q = request.args.get("q", "").strip()
+        filtered = exporters.filter_rows(growth["rows"], q, ["subject", "chapter_label", "qtype", "source_file", "content_owner"])
+        page = exporters.paginate(filtered, request.args.get("page", 1, type=int), per_page=25)
+        ctx.update(
+            growth=growth, totals=totals, pagination=page, rows=page["items"],
+            filter_query=q, total_filtered=len(filtered),
+            chart_svg=_chart_svg_for("content_daily", conn, start_date, end_date),
+            chart_download_urls=_chart_download_urls("content_daily", start_date, end_date),
+            donut_svg=_chart_svg_for("content_split", conn, start_date, end_date),
+            donut_download_urls=_chart_download_urls("content_split", start_date, end_date),
+            export_urls={fmt: url_for("overview_content_export", fmt=fmt, q=q, preset=preset, **({} if preset != "custom" else {"from": start_date, "to": end_date}))
+                          for fmt in ("csv", "xlsx", "html", "pdf")},
+        )
+
+    elif tab == "performance":
+        qa = analytics.fetch_questions_attempted(conn, start_date, end_date)
+        time_today = analytics.fetch_time_spent_today(conn)
+        course_levels = _course_catalog_course_levels(conn)
+        perf_course = request.args.get("perf_course") or None
+        perf_level = request.args.get("perf_level") or None
+        min_attempts = request.args.get("min_attempts", 5, type=int)
+        top = analytics.fetch_top_performers(conn, course=perf_course, level=perf_level, min_attempts=min_attempts, limit=15)
+        ctx.update(
+            qa=qa, time_today=time_today, top_performers=top, min_attempts=min_attempts,
+            perf_course=perf_course, perf_level=perf_level,
+            perf_courses=list(course_levels.keys()),
+            perf_levels=course_levels.get(perf_course, []) if perf_course else [],
+            chart_svg=_chart_svg_for("performance_daily", conn, start_date, end_date),
+            chart_download_urls=_chart_download_urls("performance_daily", start_date, end_date),
+            export_urls={fmt: url_for("overview_performance_export", fmt=fmt, preset=preset,
+                                       perf_course=perf_course or "", perf_level=perf_level or "", min_attempts=min_attempts,
+                                       **({} if preset != "custom" else {"from": start_date, "to": end_date}))
+                          for fmt in ("csv", "xlsx", "html", "pdf")},
+        )
+
+    elif tab == "faculty":
+        roster = analytics.fetch_faculty_roster(conn, bots)
+        ctx.update(
+            roster=roster,
+            chart_svg=_chart_svg_for("faculty_interactions", conn, start_date, end_date),
+            chart_download_urls=_chart_download_urls("faculty_interactions", start_date, end_date),
+            export_urls={fmt: url_for("overview_faculty_export", fmt=fmt) for fmt in ("csv", "xlsx", "html", "pdf")},
+        )
+
+    return render_template("overview.html", **ctx)
+
+
+@app.route("/overview/students.<fmt>")
+@auth.role_required("admin")
+def overview_students_export(fmt):
+    if fmt not in ("csv", "xlsx", "html", "pdf"):
+        return "Unsupported format.", 400
+    conn = get_conn()
+    start_date, end_date, range_label = _date_range_from_args()
+    onboarding = analytics.fetch_student_onboarding(conn, start_date, end_date)
+    cols = ["date", "count"]
+    out_rows = [[d["date"], d["count"]] for d in onboarding["daily"]]
+    audit.log_action(conn, auth.current_user(), "overview_export", "students", fmt)
+    title = f"New Students -- {range_label}"
+    if fmt == "csv":
+        return exporters.csv_response(cols, out_rows, "new_students_daily")
+    if fmt == "xlsx":
+        return exporters.xlsx_response(cols, out_rows, "new_students_daily")
+    if fmt == "html":
+        return exporters.html_export_response(title, cols, out_rows, brand_kit.colors(), "new_students_daily")
+    return exporters.pdf_export_response(title, cols, out_rows, brand_kit.colors(), "new_students_daily")
+
+
+@app.route("/overview/content.<fmt>")
+@auth.role_required("admin")
+def overview_content_export(fmt):
+    if fmt not in ("csv", "xlsx", "html", "pdf"):
+        return "Unsupported format.", 400
+    conn = get_conn()
+    start_date, end_date, range_label = _date_range_from_args()
+    growth = analytics.fetch_content_growth(conn, start_date, end_date)
+    q = request.args.get("q", "").strip()
+    filtered = exporters.filter_rows(growth["rows"], q, ["subject", "chapter_label", "qtype", "source_file", "content_owner"])
+    cols = ["logged_at", "qtype", "course", "level", "subject", "chapter_label", "question_count", "source_file", "content_owner", "note"]
+    out_rows = [[r.get(c) for c in cols] for r in filtered]
+    audit.log_action(conn, auth.current_user(), "overview_export", "content_growth", fmt)
+    title = f"New Questions Added -- {range_label}"
+    if fmt == "csv":
+        return exporters.csv_response(cols, out_rows, "content_growth")
+    if fmt == "xlsx":
+        return exporters.xlsx_response(cols, out_rows, "content_growth")
+    if fmt == "html":
+        return exporters.html_export_response(title, cols, out_rows, brand_kit.colors(), "content_growth")
+    return exporters.pdf_export_response(title, cols, out_rows, brand_kit.colors(), "content_growth")
+
+
+@app.route("/overview/performance.<fmt>")
+@auth.role_required("admin")
+def overview_performance_export(fmt):
+    if fmt not in ("csv", "xlsx", "html", "pdf"):
+        return "Unsupported format.", 400
+    conn = get_conn()
+    perf_course = request.args.get("perf_course") or None
+    perf_level = request.args.get("perf_level") or None
+    min_attempts = request.args.get("min_attempts", 5, type=int)
+    top = analytics.fetch_top_performers(conn, course=perf_course, level=perf_level, min_attempts=min_attempts, limit=100)
+    cols = ["display_name", "username", "attempted", "correct", "accuracy_pct"]
+    out_rows = [[r.get(c) for c in cols] for r in top]
+    audit.log_action(conn, auth.current_user(), "overview_export", "top_performers", fmt)
+    title = "Top Performing Students"
+    if fmt == "csv":
+        return exporters.csv_response(cols, out_rows, "top_performers")
+    if fmt == "xlsx":
+        return exporters.xlsx_response(cols, out_rows, "top_performers")
+    if fmt == "html":
+        return exporters.html_export_response(title, cols, out_rows, brand_kit.colors(), "top_performers")
+    return exporters.pdf_export_response(title, cols, out_rows, brand_kit.colors(), "top_performers")
+
+
+@app.route("/overview/faculty.<fmt>")
+@auth.role_required("admin")
+def overview_faculty_export(fmt):
+    if fmt not in ("csv", "xlsx", "html", "pdf"):
+        return "Unsupported format.", 400
+    conn = get_conn()
+    roster = analytics.fetch_faculty_roster(conn, manage_bots.load_bots())
+    cols = ["display_name", "tenant_id", "onboarding_fee_paid", "onboarding_fee_amount_inr", "content_scope",
+            "linked_bots", "mcq_contributed", "descriptive_contributed", "total_interactions",
+            "unique_users_approx", "mcq_shown", "mcq_answered", "mcq_accuracy_pct"]
+    out_rows = [[r.get(c) for c in cols] for r in roster]
+    audit.log_action(conn, auth.current_user(), "overview_export", "faculty_roster", fmt)
+    title = "Faculty Roster"
+    if fmt == "csv":
+        return exporters.csv_response(cols, out_rows, "faculty_roster")
+    if fmt == "xlsx":
+        return exporters.xlsx_response(cols, out_rows, "faculty_roster")
+    if fmt == "html":
+        return exporters.html_export_response(title, cols, out_rows, brand_kit.colors(), "faculty_roster")
+    return exporters.pdf_export_response(title, cols, out_rows, brand_kit.colors(), "faculty_roster")
 
 
 # ---------------------------------------------------------------------------
@@ -229,7 +527,8 @@ def bots_status():
             "online": bool(hb and hb["online"]),
             "has_log": (manage_bots.LOG_DIR / f"{bot_id}.log").exists(),
         })
-    return render_template("bots.html", rows=rows)
+    backup_summary = backup_status.fetch_backup_summary(conn)
+    return render_template("bots.html", rows=rows, backup=backup_summary)
 
 
 @app.route("/bots/<bot_id>/restart", methods=["POST"])
@@ -582,6 +881,162 @@ def analytics_faculty_report_chapters(bot_id, telegram_user_id):
     page = request.args.get("page", 1, type=int)
     pg = exporters.paginate(student["chapters"], page, per_page=25)
     return render_template("analytics_faculty_chapters.html", student=student, rows=pg["items"], pagination=pg, bot_id=bot_id)
+
+
+# ---------------------------------------------------------------------------
+# FACULTY COMPREHENSIVE REPORT -- added 2026-08-14 (Pranav: a full per-
+# faculty, any-date-range report -- content availability across every
+# subject/level live for them, chapter-wise practice, student-wise
+# performance, the last 7 days student-wise, a student x chapter
+# breakdown, and question-wise difficulty analysis, downloadable as
+# PDF/XLSX/HTML and emailable straight to the faculty). Distinct from the
+# existing "Analytics > Faculty Report" above (analytics_faculty_report,
+# one-bot-at-a-time student list + chapter drill-down) -- this is the
+# bigger, multi-section, whole-tenant version. See
+# telegram/admin_portal/faculty_report.py for the full query/render layer;
+# this section is routing only, same thin-route discipline as every other
+# view in this file.
+# ---------------------------------------------------------------------------
+@app.route("/reports/faculty")
+@auth.role_required("admin")
+def faculty_report_view():
+    conn = get_conn()
+    bots = manage_bots.load_bots()
+    tenants = faculty_report.list_reportable_tenants(conn, bots)
+    tenant_ids = [t["tenant_id"] for t in tenants]
+    requested_tenant = request.args.get("tenant_id")
+    selected_tenant = requested_tenant if requested_tenant in tenant_ids else (tenant_ids[0] if tenant_ids else None)
+
+    start_date, end_date, range_label = _date_range_from_args()
+    preset = _current_preset()
+
+    data = faculty_report.build_report(conn, selected_tenant, bots, start_date, end_date) if selected_tenant else None
+
+    range_urls = {p: url_for("faculty_report_view", tenant_id=selected_tenant, preset=p) for p in RANGE_PRESETS}
+    export_args = {} if preset != "custom" else {"from": start_date, "to": end_date}
+    export_urls = {
+        fmt: url_for("faculty_report_export", tenant_id=selected_tenant, fmt=fmt, preset=preset, **export_args)
+        for fmt in ("pdf", "xlsx", "html")
+    } if selected_tenant else {}
+
+    return render_template(
+        "faculty_full_report.html", tenants=tenants, selected_tenant=selected_tenant, data=data,
+        range_label=range_label, range_urls=range_urls, range_presets=RANGE_PRESETS, preset=preset,
+        start_date=start_date, end_date=end_date, export_urls=export_urls,
+    )
+
+
+@app.route("/reports/faculty/<tenant_id>.<fmt>")
+@auth.role_required("admin")
+def faculty_report_export(tenant_id, fmt):
+    if fmt not in ("pdf", "xlsx", "html"):
+        return "Unsupported format -- use .pdf, .xlsx, or .html", 400
+    conn = get_conn()
+    bots = manage_bots.load_bots()
+    start_date, end_date, _ = _date_range_from_args()
+    try:
+        data = faculty_report.build_report(conn, tenant_id, bots, start_date, end_date)
+    except ValueError:
+        return "Unknown tenant_id.", 404
+
+    audit.log_action(conn, auth.current_user(), "faculty_report_export", tenant_id, fmt)
+    filename = f"faculty_report_{tenant_id}_{start_date or 'all'}_{end_date or 'all'}"
+
+    if fmt == "html":
+        faculty_report.log_report_delivery(conn, tenant_id, data["range_label"], "download:html", "downloaded")
+        return Response(
+            faculty_report.render_full_report_html(data), mimetype="text/html",
+            headers={"Content-Disposition": f'attachment; filename="{filename}.html"'},
+        )
+    if fmt == "pdf":
+        faculty_report.log_report_delivery(conn, tenant_id, data["range_label"], "download:pdf", "downloaded")
+        return Response(
+            faculty_report.build_report_pdf(data), mimetype="application/pdf",
+            headers={"Content-Disposition": f'attachment; filename="{filename}.pdf"'},
+        )
+    faculty_report.log_report_delivery(conn, tenant_id, data["range_label"], "download:xlsx", "downloaded")
+    return Response(
+        faculty_report.build_report_xlsx(data),
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f'attachment; filename="{filename}.xlsx"'},
+    )
+
+
+@app.route("/reports/faculty/<tenant_id>/email", methods=["POST"])
+@auth.role_required("admin")
+def faculty_report_email(tenant_id):
+    conn = get_conn()
+    bots = manage_bots.load_bots()
+    to_email = request.form.get("email", "").strip()
+    start_date = request.form.get("start_date") or None
+    end_date = request.form.get("end_date") or None
+    preset = request.form.get("preset") or "custom"
+    redirect_args = {"tenant_id": tenant_id, "preset": preset}
+    if preset == "custom":
+        redirect_args.update({"from": start_date, "to": end_date})
+
+    if not to_email or "@" not in to_email:
+        flash("Enter a valid email address to send the report to.", "error")
+        return redirect(url_for("faculty_report_view", **redirect_args))
+
+    range_label = None
+    try:
+        data = faculty_report.build_report(conn, tenant_id, bots, start_date, end_date)
+        range_label = data["range_label"]
+        pdf_bytes = faculty_report.build_report_pdf(data)
+        faculty_report.send_report_email(to_email, data, pdf_bytes)
+        faculty_report.log_report_delivery(conn, tenant_id, range_label, to_email, "sent")
+        flash(f"Report emailed to {to_email}.", "success")
+        audit.log_action(conn, auth.current_user(), "faculty_report_email", tenant_id, f"sent to {to_email}")
+    except Exception as e:
+        faculty_report.log_report_delivery(conn, tenant_id, range_label, to_email, "failed", str(e))
+        flash(f"Failed to send report: {e}", "error")
+        audit.log_action(conn, auth.current_user(), "faculty_report_email", tenant_id, f"failed: {e}")
+
+    return redirect(url_for("faculty_report_view", **redirect_args))
+
+
+# ---------------------------------------------------------------------------
+# MASTERS > Faculty Details -- added 2026-08-14 (Pranav's direct ask: "a
+# faculty table where we can store the details of the faculty," confirmed
+# as a DB table, not JSON -- see telegram/admin_portal/faculty_master.py
+# for the full reasoning). Every tenant from tenants.json listed, joined
+# to its faculty_master row (if any) -- an unentered faculty shows blank
+# fields, not an error. Onboarding-fee status shown read-only (still
+# sourced from tenants.json, never duplicated here).
+# ---------------------------------------------------------------------------
+@app.route("/masters/faculty")
+@auth.role_required("admin")
+def masters_faculty_list():
+    conn = get_conn()
+    rows = faculty_master.list_faculty_master(conn)
+    return render_template("masters_faculty_list.html", rows=rows)
+
+
+@app.route("/masters/faculty/<tenant_id>", methods=["GET", "POST"])
+@auth.role_required("admin")
+def masters_faculty_edit(tenant_id):
+    conn = get_conn()
+    all_tenants = faculty_master.load_tenants()
+    if tenant_id not in all_tenants:
+        return "Unknown tenant_id.", 404
+    tenant = all_tenants[tenant_id]
+
+    if request.method == "POST":
+        contact_email = request.form.get("contact_email", "").strip() or None
+        contact_phone = request.form.get("contact_phone", "").strip() or None
+        notes = request.form.get("notes", "").strip() or None
+        faculty_master.upsert_faculty_master(conn, tenant_id, contact_email, contact_phone, notes)
+        audit.log_action(conn, auth.current_user(), "faculty_master_edit", tenant_id, "saved")
+        flash(f"Saved details for {tenant.get('display_name', tenant_id)}.", "success")
+        return redirect(url_for("masters_faculty_list"))
+
+    master = faculty_master.get_faculty_master(conn, tenant_id) or {
+        "tenant_id": tenant_id, "contact_email": None, "contact_phone": None, "notes": None,
+        "created_at": None, "updated_at": None,
+    }
+    fee = tenant.get("onboarding_fee") or {}
+    return render_template("masters_faculty_edit.html", tenant=tenant, tenant_id=tenant_id, master=master, fee=fee)
 
 
 # ---------------------------------------------------------------------------

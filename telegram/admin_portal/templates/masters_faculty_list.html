@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Faculty Details -- 1LAVYA Admin Portal{% endblock %}
+{% block page_title %}Faculty Details{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h2>Faculty Master <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ rows | length }})</span></h2>
+  <p class="card-note">
+    Contact/administrative details (email, phone, notes) for every tenant, stored in the DB's
+    <code>faculty_master</code> table -- editable here. Onboarding fee status is shown for reference
+    only (still sourced from <code>tenants.json</code>, not editable here yet).
+  </p>
+  <div class="table-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>Tenant</th><th>Kind</th><th>Contact Email</th><th>Contact Phone</th>
+        <th>Onboarding Fee</th><th>Notes</th><th>Last Updated</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td>{{ r.display_name }} <span style="color:#999; font-size:11px;">({{ r.tenant_id }})</span></td>
+        <td>{{ r.kind }}</td>
+        <td>{{ r.contact_email or '—' }}</td>
+        <td>{{ r.contact_phone or '—' }}</td>
+        <td>
+          {% if r.onboarding_fee_amount_inr is not none %}
+            ₹{{ r.onboarding_fee_amount_inr }}
+            {% if r.onboarding_fee_paid %}(paid{% if r.onboarding_fee_paid_at %} {{ r.onboarding_fee_paid_at[:10] }}{% endif %}){% else %}(unpaid){% endif %}
+          {% else %}—{% endif %}
+        </td>
+        <td>{{ r.notes or '—' }}</td>
+        <td>{{ (r.updated_at or '—')[:19].replace('T', ' ') }}</td>
+        <td><a class="btn btn-secondary btn-sm" href="{{ url_for('masters_faculty_edit', tenant_id=r.tenant_id) }}">Edit</a></td>
+      </tr>
+      {% else %}<tr><td colspan="8" style="color:#999;">No tenants found.</td></tr>{% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+{% endblock %}

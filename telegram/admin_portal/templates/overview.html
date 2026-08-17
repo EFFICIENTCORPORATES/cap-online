@@ -18,17 +18,378 @@
   </div>
 </div>
 
-<div class="card">
-  <h2>Welcome{% if current_user %}, {{ current_user }}{% endif %}</h2>
-  <p class="card-note">
-    This is the foundation tier of the Admin Portal -- Bot Status/Restart and Logs are live now.
-    Analytics, Masters, Question Catalog, Leaderboard editing, and Users &amp; Access are being
-    built next, in that order (see the sidebar for what's coming).
-  </p>
-  <p style="font-size:13.5px; color:#555;">
-    Start with <a href="{{ url_for('bots_status') }}" style="color:var(--navy); font-weight:600;">Bot Status &amp; Restart</a>
-    to see every bot's live state, or view a bot's own log from there.
-  </p>
+<div style="display:flex; gap:6px; margin-bottom:20px; border-bottom:1px solid #e5e7ee; flex-wrap:wrap;">
+  {% for t in tabs %}
+    <a href="{{ tab_urls[t] }}"
+       style="padding:9px 16px; font-size:13.5px; font-weight:700; text-decoration:none; border-bottom:2px solid {{ 'var(--gold)' if t == tab else 'transparent' }}; color:{{ 'var(--navy)' if t == tab else '#888' }};">
+      {{ tab_labels[t] }}
+    </a>
+  {% endfor %}
 </div>
+
+{% macro range_picker(base_endpoint) %}
+<div class="toolbar" style="border-bottom:none; margin-bottom:14px; padding-bottom:0;">
+  <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+    <span style="font-size:11.5px; color:#999; text-transform:uppercase; letter-spacing:.04em; margin-right:4px;">Range:</span>
+    {% for p, label in range_presets.items() %}
+      <a class="btn {{ 'btn-primary' if preset == p else 'btn-secondary' }} btn-sm" href="{{ range_urls[p] }}">{{ label }}</a>
+    {% endfor %}
+    <form method="get" style="display:flex; align-items:center; gap:6px; margin-left:10px;">
+      <input type="hidden" name="tab" value="{{ tab }}">
+      <input type="date" name="from" value="{{ start_date or '' }}" style="padding:5px 8px; border:1px solid #d8dae0; border-radius:6px; font-size:12.5px;">
+      <span style="color:#999; font-size:12px;">to</span>
+      <input type="date" name="to" value="{{ end_date or '' }}" style="padding:5px 8px; border:1px solid #d8dae0; border-radius:6px; font-size:12.5px;">
+      <button type="submit" class="btn btn-secondary btn-sm">Apply</button>
+    </form>
+  </div>
+  <div style="font-size:12px; color:#777; margin-top:6px;">Showing: <strong>{{ range_label }}</strong></div>
+</div>
+{% endmacro %}
+
+{# =====================================================================
+   STUDENTS
+===================================================================== #}
+{% if tab == "students" %}
+  {{ range_picker("overview") }}
+  <div class="stat-row">
+    <div class="stat-tile">
+      <div class="label">New Students ({{ range_label }})</div>
+      <div class="value">{{ onboarding.total_in_range }}</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Total Students (all-time)</div>
+      <div class="value">{{ onboarding.total_all_time }}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>New Student Signups, by Day</h2>
+    <p class="card-note">Based on each student's first-ever interaction with any platform bot.</p>
+    <div style="overflow-x:auto;">{{ chart_svg | safe }}</div>
+    <div style="margin-top:10px; display:flex; gap:6px;">
+      <a class="btn btn-secondary btn-sm" href="{{ chart_download_urls.html }}">Download Chart (HTML)</a>
+      <a class="btn btn-secondary btn-sm" href="{{ chart_download_urls.pdf }}">Download Chart (PDF)</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Daily Breakdown <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ onboarding.daily | length }} day(s) with signups)</span></h2>
+    <div class="export-buttons" style="margin-bottom:14px;">
+      <span class="export-label">Export:</span>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.csv }}">CSV</a>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.xlsx }}">Excel</a>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.html }}">HTML</a>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.pdf }}">PDF</a>
+    </div>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Date</th><th>New Students</th></tr></thead>
+      <tbody>
+        {% for r in daily_rows %}
+        <tr><td>{{ r.date }}</td><td>{{ r.count }}</td></tr>
+        {% else %}
+        <tr><td colspan="2" style="color:#999;">No new students in this range.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    {% include "_pagination.html" %}
+  </div>
+
+  <p class="card-note">Need contact info, faculty, or which courses a student is studying? <a href="{{ url_for('analytics_students') }}" style="color:var(--navy); font-weight:600;">View the full Student Master &rarr;</a></p>
+
+{# =====================================================================
+   CONTENT
+===================================================================== #}
+{% elif tab == "content" %}
+  {{ range_picker("overview") }}
+  <div class="stat-row">
+    <div class="stat-tile">
+      <div class="label">Total Questions (all-time)</div>
+      <div class="value">{{ totals.total_mcq + totals.total_descriptive }}</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">New Questions Added ({{ range_label }})</div>
+      <div class="value">{{ growth.total_in_range }}</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Subjects with Content</div>
+      <div class="value">{{ totals.subjects_with_content }} <span style="font-size:15px; color:#999;">/ {{ totals.subjects_total }}</span></div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Chapters Covered</div>
+      <div class="value">{{ totals.chapters_covered }} <span style="font-size:15px; color:#999;">/ {{ totals.chapters_total }}</span></div>
+    </div>
+  </div>
+
+  {% if growth.tracking_started_at %}
+  <p class="card-note" style="background:#fff8ec; border:1px solid #f0e0bc; border-radius:8px; padding:10px 14px; margin-bottom:18px;">
+    New-question tracking began {{ growth.tracking_started_at[:10] }} -- there is no historical ingestion-date data
+    from before that (content files never carried an "added on" timestamp). "New Questions Added" only reflects
+    batches wired in on or after that date, not the platform's full content history.
+  </p>
+  {% endif %}
+
+  <div style="display:flex; gap:18px; flex-wrap:wrap;">
+    <div class="card" style="flex:2; min-width:340px;">
+      <h2>New Questions Added, by Day</h2>
+      <div style="overflow-x:auto;">{{ chart_svg | safe }}</div>
+      <div style="margin-top:10px; display:flex; gap:6px;">
+        <a class="btn btn-secondary btn-sm" href="{{ chart_download_urls.html }}">Download Chart (HTML)</a>
+        <a class="btn btn-secondary btn-sm" href="{{ chart_download_urls.pdf }}">Download Chart (PDF)</a>
+      </div>
+    </div>
+    <div class="card" style="flex:1; min-width:280px;">
+      <h2>MCQ vs Descriptive <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ range_label }})</span></h2>
+      <div style="overflow-x:auto;">{{ donut_svg | safe }}</div>
+      <div style="margin-top:10px; display:flex; gap:6px;">
+        <a class="btn btn-secondary btn-sm" href="{{ donut_download_urls.html }}">Download Chart (HTML)</a>
+        <a class="btn btn-secondary btn-sm" href="{{ donut_download_urls.pdf }}">Download Chart (PDF)</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Subject-wise Question Bank Summary <span style="color:#999; font-weight:normal; font-size:12.5px;">(all-time)</span></h2>
+    <p class="card-note">Derived from every real question's own <code>human_id</code> -- see the Question Bank catalogue for full chapter-level drill-down.</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Course</th><th>Level</th><th>Subject</th><th>MCQs</th><th>Descriptive</th><th>Total</th><th>Chapters Covered</th></tr></thead>
+      <tbody>
+        {% for r in totals.by_subject %}
+        <tr>
+          <td>{{ r.course }}</td><td>{{ r.level }}</td><td>{{ r.subject }}</td>
+          <td>{{ r.mcq_count }}</td><td>{{ r.descriptive_count }}</td><td><strong>{{ r.total_count }}</strong></td>
+          <td>{{ r.chapters_covered }} / {{ r.chapters_total }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" style="color:#999;">No content yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>New-Content Log <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ total_filtered }} in range)</span></h2>
+    {% include "_export_toolbar.html" %}
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Date</th><th>Type</th><th>Course</th><th>Level</th><th>Subject</th><th>Chapter</th><th>Count</th><th>Source File</th><th>Owner</th></tr></thead>
+      <tbody>
+        {% for r in rows %}
+        <tr>
+          <td>{{ r.logged_at[:10] }}</td><td>{{ r.qtype }}</td><td>{{ r.course or '—' }}</td><td>{{ r.level or '—' }}</td>
+          <td>{{ r.subject or '—' }}</td><td>{{ r.chapter_label or '—' }}</td><td>{{ r.question_count }}</td>
+          <td style="font-family:monospace; font-size:11px;">{{ r.source_file or '—' }}</td><td>{{ r.content_owner or '—' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="9" style="color:#999;">No content ingestion logged in this range.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    {% include "_pagination.html" %}
+  </div>
+
+  <p class="card-note">Full document/question-level drill-down (per chapter, per file): <a href="{{ url_for('course_catalog') }}" style="color:var(--navy); font-weight:600;">View the full Course Catalog &rarr;</a></p>
+
+{# =====================================================================
+   PERFORMANCE
+===================================================================== #}
+{% elif tab == "performance" %}
+  {{ range_picker("overview") }}
+  <div class="stat-row">
+    <div class="stat-tile">
+      <div class="label">Questions Attempted ({{ range_label }})</div>
+      <div class="value">{{ qa.total_shown }}</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Answered / Accuracy</div>
+      <div class="value">{{ qa.total_answered }} <span style="font-size:15px; color:#999;">{{ '(%s%%)'|format(qa.accuracy_pct) if qa.accuracy_pct is not none else '' }}</span></div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Time Spent Today (all bots, platform-wide)</div>
+      <div class="value">{{ time_today.total_minutes_today }} <span style="font-size:15px; color:#999;">min</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Questions Attempted, by Day</h2>
+    <div style="overflow-x:auto;">{{ chart_svg | safe }}</div>
+    <div style="margin-top:10px; display:flex; gap:6px;">
+      <a class="btn btn-secondary btn-sm" href="{{ chart_download_urls.html }}">Download Chart (HTML)</a>
+      <a class="btn btn-secondary btn-sm" href="{{ chart_download_urls.pdf }}">Download Chart (PDF)</a>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:18px; flex-wrap:wrap;">
+    <div class="card" style="flex:1; min-width:280px;">
+      <h2>By Course <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ range_label }})</span></h2>
+      <div class="table-scroll">
+      <table>
+        <thead><tr><th>Course</th><th>Shown</th><th>Answered</th><th>Accuracy</th></tr></thead>
+        <tbody>
+          {% for r in qa.by_course %}
+          <tr><td>{{ r.course }}</td><td>{{ r.shown }}</td><td>{{ r.answered }}</td><td>{{ r.accuracy_pct ~ '%' if r.accuracy_pct is not none else '—' }}</td></tr>
+          {% else %}
+          <tr><td colspan="4" style="color:#999;">No activity in this range.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <div class="card" style="flex:1; min-width:280px;">
+      <h2>Time Spent Today, by Bot</h2>
+      <div class="table-scroll">
+      <table>
+        <thead><tr><th>Bot</th><th>Minutes</th><th>Questions</th></tr></thead>
+        <tbody>
+          {% for r in time_today.by_bot %}
+          <tr><td>{{ r.bot_id }}</td><td>{{ r.minutes }}</td><td>{{ r.questions }}</td></tr>
+          {% else %}
+          <tr><td colspan="3" style="color:#999;">No activity yet today.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Top Performing Students <span style="color:#999; font-weight:normal; font-size:12.5px;">(accuracy %, min. {{ min_attempts }} answered questions, all-time)</span></h2>
+    <p class="card-note">Same ranking rule already live on the student-facing Telegram leaderboards: accuracy % with a minimum-attempts floor, aggregated across every phone linked to one student's identity.</p>
+    <form method="get" style="display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap; align-items:flex-end;">
+      <input type="hidden" name="tab" value="performance">
+      {% if preset != "custom" %}<input type="hidden" name="preset" value="{{ preset }}">
+      {% else %}<input type="hidden" name="from" value="{{ start_date or '' }}"><input type="hidden" name="to" value="{{ end_date or '' }}">{% endif %}
+      <div>
+        <label style="font-size:12px; font-weight:600; color:#555; display:block; margin-bottom:4px;">Course</label>
+        <select name="perf_course" onchange="this.form.submit()" style="padding:6px 10px; border:1px solid #d8dae0; border-radius:6px; font-size:13px;">
+          <option value="">All Courses</option>
+          {% for c in perf_courses %}<option value="{{ c }}" {{ 'selected' if c == perf_course }}>{{ c }}</option>{% endfor %}
+        </select>
+      </div>
+      {% if perf_course %}
+      <div>
+        <label style="font-size:12px; font-weight:600; color:#555; display:block; margin-bottom:4px;">Level</label>
+        <select name="perf_level" onchange="this.form.submit()" style="padding:6px 10px; border:1px solid #d8dae0; border-radius:6px; font-size:13px;">
+          <option value="">All Levels</option>
+          {% for l in perf_levels %}<option value="{{ l }}" {{ 'selected' if l == perf_level }}>{{ l }}</option>{% endfor %}
+        </select>
+      </div>
+      {% endif %}
+      <div>
+        <label style="font-size:12px; font-weight:600; color:#555; display:block; margin-bottom:4px;">Min. Attempts</label>
+        <input type="number" name="min_attempts" value="{{ min_attempts }}" min="1" style="width:90px; padding:6px 10px; border:1px solid #d8dae0; border-radius:6px; font-size:13px;">
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+    </form>
+    <div class="export-buttons" style="margin-bottom:14px;">
+      <span class="export-label">Export:</span>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.csv }}">CSV</a>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.xlsx }}">Excel</a>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.html }}">HTML</a>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.pdf }}">PDF</a>
+    </div>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>#</th><th>Student</th><th>Attempted</th><th>Correct</th><th>Accuracy</th></tr></thead>
+      <tbody>
+        {% for r in top_performers %}
+        <tr>
+          <td>{{ loop.index }}</td><td>{{ r.display_name }}</td><td>{{ r.attempted }}</td><td>{{ r.correct }}</td>
+          <td><strong>{{ r.accuracy_pct }}%</strong></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" style="color:#999;">No students meet the minimum-attempts floor yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <p class="card-note">Student-wise / chapter-wise detail per faculty bot: <a href="{{ url_for('analytics_faculty_report') }}" style="color:var(--navy); font-weight:600;">View the full Faculty Report &rarr;</a></p>
+
+{# =====================================================================
+   FACULTY
+===================================================================== #}
+{% elif tab == "faculty" %}
+  <div class="stat-row">
+    <div class="stat-tile">
+      <div class="label">Faculty Onboarded</div>
+      <div class="value">{{ roster | length }}</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Onboarding Fee Paid</div>
+      <div class="value">{{ roster | selectattr("onboarding_fee_paid") | list | length }} <span style="font-size:15px; color:#999;">/ {{ roster | length }}</span></div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Questions Contributed (own content)</div>
+      <div class="value">{{ roster | sum(attribute="mcq_contributed") + roster | sum(attribute="descriptive_contributed") }}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Faculty -- Total Interactions (all-time)</h2>
+    <div style="overflow-x:auto;">{{ chart_svg | safe }}</div>
+    <div style="margin-top:10px; display:flex; gap:6px;">
+      <a class="btn btn-secondary btn-sm" href="{{ chart_download_urls.html }}">Download Chart (HTML)</a>
+      <a class="btn btn-secondary btn-sm" href="{{ chart_download_urls.pdf }}">Download Chart (PDF)</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Faculty Roster</h2>
+    <p class="card-note">
+      "Questions Contributed" counts only content genuinely sourced from that faculty's own folder -- not shared/flagship
+      content their bot also has access to (see the underlying <code>fetch_faculty_roster()</code> for why that
+      distinction matters).
+    </p>
+    <div class="export-buttons" style="margin-bottom:14px;">
+      <span class="export-label">Export:</span>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.csv }}">CSV</a>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.xlsx }}">Excel</a>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.html }}">HTML</a>
+      <a class="btn btn-secondary btn-sm" href="{{ export_urls.pdf }}">PDF</a>
+    </div>
+    <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Faculty</th><th>Fee Paid</th><th>Content Scope</th><th>Linked Bot(s)</th>
+          <th>MCQ Contributed</th><th>Descriptive Contributed</th>
+          <th>Interactions</th><th>Unique Users (approx)</th><th>MCQ Accuracy</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in roster %}
+        <tr>
+          <td><strong>{{ r.display_name }}</strong></td>
+          <td>
+            {% if r.onboarding_fee_paid %}
+              <span style="display:inline-block; padding:2px 9px; border-radius:10px; font-size:11.5px; font-weight:600; background:#e6f4ea; color:#1e7e34;">Paid</span>
+            {% else %}
+              <span style="display:inline-block; padding:2px 9px; border-radius:10px; font-size:11.5px; font-weight:600; background:#fdecea; color:#a33322;">Unpaid (₹{{ r.onboarding_fee_amount_inr }})</span>
+            {% endif %}
+          </td>
+          <td style="white-space:normal; max-width:260px;">{{ r.content_scope }}</td>
+          <td style="font-family:monospace; font-size:11.5px;">{{ r.linked_bots }}</td>
+          <td>{{ r.mcq_contributed }}</td>
+          <td>{{ r.descriptive_contributed }}</td>
+          <td>{{ r.total_interactions }}</td>
+          <td>{{ r.unique_users_approx }}</td>
+          <td>{{ r.mcq_accuracy_pct ~ '%' if r.mcq_accuracy_pct is not none else '—' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="9" style="color:#999;">No faculty tenants configured yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <p class="card-note">Per-faculty student-wise / chapter-wise drill-down: <a href="{{ url_for('analytics_faculty_report') }}" style="color:var(--navy); font-weight:600;">View the full Faculty Report &rarr;</a></p>
+{% endif %}
 
 {% endblock %}

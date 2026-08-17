@@ -238,3 +238,40 @@ def question_bank_rows(conn, course, level, subject) -> list:
         out.append({**c, "mcq_count": cnt["mcq"], "descriptive_count": cnt["descriptive"],
                      "total_count": cnt["mcq"] + cnt["descriptive"]})
     return out
+
+
+def platform_question_totals(conn) -> dict:
+    """Whole-platform MCQ/Descriptive question-count summary, by (course,
+    level, subject) -- added 2026-08-13 for the Admin Portal Overview
+    rebuild's Content tab. Reuses question_bank_rows() per real (course,
+    level, subject) triple in course_catalog (a few dozen combos, cheap for
+    an admin tool) rather than re-deriving its human_id-counting logic a
+    second time -- same "100% accurate by construction" guarantee that
+    function already documents."""
+    triples = conn.execute(
+        "SELECT DISTINCT course, level, subject FROM course_catalog ORDER BY course, level, subject"
+    ).fetchall()
+    out = []
+    total_mcq = total_descriptive = chapters_covered = chapters_total = 0
+    for course, level, subject in triples:
+        rows = question_bank_rows(conn, course, level, subject)
+        mcq = sum(r["mcq_count"] for r in rows)
+        desc = sum(r["descriptive_count"] for r in rows)
+        covered = sum(1 for r in rows if r["mcq_count"] or r["descriptive_count"])
+        total_mcq += mcq
+        total_descriptive += desc
+        chapters_covered += covered
+        chapters_total += len(rows)
+        if mcq or desc:
+            out.append({
+                "course": course, "level": level, "subject": subject,
+                "mcq_count": mcq, "descriptive_count": desc, "total_count": mcq + desc,
+                "chapters_covered": covered, "chapters_total": len(rows),
+            })
+    out.sort(key=lambda r: r["total_count"], reverse=True)
+    return {
+        "by_subject": out,
+        "total_mcq": total_mcq, "total_descriptive": total_descriptive,
+        "subjects_with_content": len(out), "subjects_total": len(triples),
+        "chapters_covered": chapters_covered, "chapters_total": chapters_total,
+    }
