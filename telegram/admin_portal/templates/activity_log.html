@@ -15,13 +15,17 @@
 </div>
 
 <div class="card">
-  <h2>Every Action, Every Bot{% if is_bot_admin %} <span style="color:#999; font-weight:normal; font-size:12.5px;">(scoped to your bot)</span>{% endif %} <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ total_filtered }})</span></h2>
+  <h2 style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+    <span>Every Action, Every Bot{% if is_bot_admin %} <span style="color:#999; font-weight:normal; font-size:12.5px;">(scoped to your bot)</span>{% endif %} <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ total_filtered }})</span></span>
+    <a class="btn btn-secondary btn-sm" href="{{ request.full_path }}" title="Re-query the database for the latest activity">&#8635; Refresh</a>
+  </h2>
   <p class="card-note">
     One row per command/button-tap/message across every bot -- who, what action, how long it took, and
     whether it succeeded. Sensitive input (email, mobile, OTP, wallet amounts) is never stored here, only
     "&lt;redacted&gt;" -- see telegram/LOGGING-ARCHITECTURE.md for the full design. Use the
     <code>correlation_id</code> column to find the matching lines in that bot's own raw log file for a
-    real error's full traceback.
+    real error's full traceback. Times shown in <strong>IST</strong> (this platform stores UTC internally,
+    same as every other timestamp on this platform -- only the display here is converted).
   </p>
 
   <div class="toolbar" style="border-bottom:none; margin-bottom:10px; padding-bottom:0;">
@@ -64,7 +68,7 @@
     <tbody>
       {% for r in rows %}
       <tr>
-        <td style="white-space:nowrap;">{{ r.created_at }}</td>
+        <td style="white-space:nowrap;">{{ r.created_at | ist }}</td>
         <td>{{ r.bot_id }}</td>
         <td>{{ r.telegram_user_id }}</td>
         <td><code>{{ r.action }}</code></td>

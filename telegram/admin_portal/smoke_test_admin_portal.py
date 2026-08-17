@@ -515,12 +515,13 @@ def main():
 
     # Seed two rows for two DIFFERENT bot_ids -- real data, real assertions
     # about WHICH rows each role can actually see, not just a 200 status.
+    row_a_created_at = platform_db.now()
     conn.execute(
         "INSERT INTO user_activity_log (correlation_id, bot_id, telegram_user_id, handler_kind, action, "
         "action_detail, handler_name, duration_ms, status, created_at) VALUES "
         "(?,?,?,?,?,?,?,?,?,?)",
         ("smoketest-corr-a", "smoketest-bot-a", 900700001, "callback", "smoketestaction", "x",
-         "fake_handler", 12, "ok", platform_db.now()),
+         "fake_handler", 12, "ok", row_a_created_at),
     )
     conn.execute(
         "INSERT INTO user_activity_log (correlation_id, bot_id, telegram_user_id, handler_kind, action, "
@@ -537,6 +538,18 @@ def main():
     check("super-admin CAN reach /logs/activity", resp.status_code == 200)
     check("super-admin sees bot-a's row", b"smoketest-bot-a" in resp.data)
     check("super-admin sees bot-b's row too (no scope restriction)", b"smoketest-bot-b" in resp.data)
+    # 2026-08-17 (Pranav's ask after testing the page): timestamps must
+    # render in IST, not the raw stored UTC -- computed independently here
+    # (not just re-calling the app's own to_ist(), which would only prove
+    # the function agrees with itself) against the EXACT created_at used
+    # to seed row-a above.
+    expected_ist = (
+        __import__("datetime").datetime.fromisoformat(row_a_created_at)
+        + __import__("datetime").timedelta(hours=5, minutes=30)
+    ).strftime("%Y-%m-%d %H:%M:%S")
+    check("timestamps render in IST (UTC+5:30), not raw UTC", expected_ist.encode() in resp.data)
+    check("the raw UTC string is NOT what's shown on screen", row_a_created_at.encode() not in resp.data)
+    check("a Refresh control is present on the page", b"Refresh" in resp.data)
     client.get("/logout")
 
     # A bot_admin scoped to ONLY smoketest-bot-a -- mocked the same way the

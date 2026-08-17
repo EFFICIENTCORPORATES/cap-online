@@ -166,6 +166,38 @@ def range_url(preset: str) -> str:
     return f"{request.path}?{urlencode(args)}"
 
 
+# 2026-08-17 (Pranav's ask, after testing the Activity Log page): every
+# timestamp stored on this platform is UTC (db.py's now(), by design --
+# see that module's own docstring), but this machine's own OS clock is
+# already India Standard Time (confirmed directly: time.tzname ==
+# ('India Standard Time', 'India Daylight Time')) -- which means the RAW
+# .log files (Python logging's default %(asctime)s uses LOCAL time, not
+# UTC) are already IST. Converting ONLY the on-screen display to IST here
+# -- never the stored value, which stays UTC everywhere else on this
+# platform, same "store UTC, display local" split leaderboard_broadcaster.py
+# already uses for its own fixed-offset scheduling -- actually makes the
+# Activity Log's timestamps MATCH the raw log files' own timestamps, not
+# just read more naturally.
+IST = timezone(timedelta(hours=5, minutes=30))
+
+
+@app.template_filter("ist")
+def to_ist(value):
+    """A UTC ISO timestamp string (e.g. "2026-08-17T07:14:43+00:00") ->
+    "2026-08-17 12:44:43 IST". Never raises on a malformed/missing value --
+    a broken timestamp on one row should show as-is, not break the whole
+    table."""
+    if not value:
+        return value
+    try:
+        dt = datetime.fromisoformat(value)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(IST).strftime("%Y-%m-%d %H:%M:%S") + " IST"
+    except (ValueError, TypeError):
+        return value
+
+
 @app.template_global()
 def clear_filter_url() -> str:
     """Used by templates/_export_toolbar.html's "Clear" link -- drops `q`
