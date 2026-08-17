@@ -473,14 +473,24 @@ def _build_catalog_lookup(conn) -> dict:
 
 def _build_chapter_catalog_lookup(conn) -> dict:
     """(course, level_num, paper_no, chapter_no, unit_no) -> a real chapter/
-    unit name (short form preferred), for the Chapter-label disambiguation
-    pass below."""
+    unit name, for the Chapter-label disambiguation pass below.
+
+    Prefers the FULL `chapter_name` over `chapter_name_short` (reversed
+    2026-08-17 -- see _disambiguate_chapter_labels' docstring). Telegram
+    button text has no meaningful width limit the way an Admin Portal
+    table column does, and `chapter_name_short` for the CS/CMA-sourced
+    rows (CS_CMA_Chapter_Catalog.xlsx) is a hard 35-char CamelCase
+    truncation that regularly amputates the one word that actually
+    distinguishes two chapters -- e.g. paper 13 chapters 8/9 both truncate
+    to 'LawsAndRegulationsRelatedTo', silently dropping 'Insurance Sector'
+    / 'MSME Sector' entirely. The CA-sourced rows' chapter_name is usually
+    short enough already that this changes nothing there."""
     rows = conn.execute(
         "SELECT course, level_num, paper_no, chapter_no, unit_no, chapter_name_short, chapter_name FROM course_catalog"
     ).fetchall()
     lookup = {}
     for course, level_num, paper_no, chapter_no, unit_no, name_short, name in rows:
-        lookup[(course, str(level_num), paper_no, str(chapter_no), str(unit_no))] = name_short or name
+        lookup[(course, str(level_num), paper_no, str(chapter_no), str(unit_no))] = name or name_short
     return lookup
 
 
@@ -517,26 +527,53 @@ def _resolve_course_level_subject(q: dict) -> tuple:
     return course or hid_course, level or catalog_level, subject or catalog_subject
 
 
-def _disambiguate_chapter_labels(questions: list) -> None:
-    """Second resolution pass, added 2026-08-13 -- runs AFTER course/level/
-    subject are resolved. Within each (course, level, subject) group, if
-    the same `chapter_label` string is shared by more than one distinct
-    `chapter_slug`, the Chapter picker shows identical-looking buttons
-    that actually lead to different question sets (confirmed live: CA
-    Foundation Accounting/Business Economics were ingested with a bare
-    "Chapt N"/"Chapt. N" label carrying no Unit distinction -- e.g.
-    "Chapt 1" shared by 7 genuinely different units, "Chapt 7" by 4 --
-    exactly Pranav's report, "many chapters are simply coming repeated").
+_GENERIC_CHAPTER_LABEL_RE = re.compile(r"^(module|chapter|chapt\.?)\s*\d+[a-z]?$", re.IGNORECASE)
 
-    Resolves ONLY the colliding groups -- a label that's already unique
-    (the flagship's "AS 11: ..." style labels, CMA's real per-chapter Act
-    names) is never touched, so already-good labels don't get a
-    redundant/worse suffix. Disambiguates by appending the real chapter/
-    unit name from course_catalog (via human_id ->
-    (course, level_num, paper_no, chapter_no, unit_no), the SAME join
-    mechanism _resolve_course_level_subject uses) -- falling back to a
-    title-cased chapter_slug if even that lookup fails, so a label is
-    NEVER left silently ambiguous either way.
+
+def _disambiguate_chapter_labels(questions: list) -> None:
+    """Second resolution pass, added 2026-08-13, widened 2026-08-17 -- runs
+    AFTER course/level/subject are resolved. Two distinct problems, both
+    fixed the same way (appending the real chapter name from
+    course_catalog):
+
+    1. COLLIDING labels: within a (course, level, subject) group, the same
+       `chapter_label` string shared by more than one distinct
+       `chapter_slug` -- the Chapter picker shows identical-looking
+       buttons that actually lead to different question sets (confirmed
+       live: CA Foundation Accounting/Business Economics were ingested
+       with a bare "Chapt N"/"Chapt. N" label carrying no Unit
+       distinction -- e.g. "Chapt 1" shared by 7 genuinely different
+       units, "Chapt 7" by 4 -- Pranav's original report, "many chapters
+       are simply coming repeated").
+
+    2. GENERIC-but-unique labels (found 2026-08-17, Pranav: CMA Final Law
+       and "some other" subjects showing "Module 1".."Module 11" in the
+       Chapter picker with no indication of what any module actually IS).
+       Each module number here IS unique per (course, level, subject), so
+       case 1's collision check alone never caught this -- the label
+       itself just carries zero real information. `_GENERIC_CHAPTER_LABEL_RE`
+       catches "Module N" / "Chapter N" / "Chapt N" regardless of
+       collision, so a student never has to guess what a module covers
+       from its number alone.
+
+    A label that's already descriptive and unique (the flagship's
+    "AS 11: ..." style labels, a real per-chapter Act name) is never
+    touched in either case -- only genuinely uncollided AND genuinely
+    non-generic labels skip the fix, so nothing already good gets a
+    redundant/worse suffix.
+
+    Disambiguates by appending the real chapter/unit name from
+    course_catalog (via human_id -> (course, level_num, paper_no,
+    chapter_no, unit_no), the SAME join mechanism
+    _resolve_course_level_subject uses). CS/CMA source content's own
+    human_id encodes real per-question sub-unit numbers (U1, U2, ...) even
+    though course_catalog only ever stores those chapters at unit_no=0
+    (ICSI/ICMAI chapters have no real sub-unit structure -- see
+    COURSE-CATALOG.md) -- an exact (chapter_no, unit_no) miss now retries
+    once at unit_no="0" before giving up, so the real catalog name is
+    still found for exactly this shape of content. Only falls back to a
+    title-cased chapter_slug if even that retry misses, so a label is
+    NEVER left silently uninformative either way.
 
     Sets q["_chapter_label"] on every record -- QuestionBank/McqBank's
     chapters() methods must read that, never the raw `chapter_label`
@@ -552,7 +589,8 @@ def _disambiguate_chapter_labels(questions: list) -> None:
     for q in questions:
         raw_label = q.get("chapter_label") or (q.get("chapter_slug") or "unknown")
         key = (q["_course"], q["_level"], q["_subject"], raw_label)
-        if key not in ambiguous_keys:
+        needs_fix = key in ambiguous_keys or bool(_GENERIC_CHAPTER_LABEL_RE.match(raw_label.strip()))
+        if not needs_fix:
             q["_chapter_label"] = raw_label
             continue
 
@@ -562,6 +600,11 @@ def _disambiguate_chapter_labels(questions: list) -> None:
             hid_course, level_num, paper_no = m.group(1), m.group(2), m.group(3).lstrip("0") or "0"
             chapter_no, unit_no = m.group(4), m.group(5)
             catalog_name = _CHAPTER_CATALOG_LOOKUP.get((hid_course, level_num, paper_no, chapter_no, unit_no))
+            if not catalog_name:
+                # CS/CMA catalog rows are chapter-level only (unit_no
+                # always 0) -- retry at that granularity before falling
+                # back to the raw slug. See docstring above.
+                catalog_name = _CHAPTER_CATALOG_LOOKUP.get((hid_course, level_num, paper_no, chapter_no, "0"))
         if not catalog_name:
             catalog_name = (q.get("chapter_slug") or "unknown").replace("-", " ").title()
         q["_chapter_label"] = f"{raw_label}: {catalog_name}"
