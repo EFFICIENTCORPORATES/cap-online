@@ -494,24 +494,112 @@ def overview():
         )
 
     elif tab == "sql":
-        sql_text = request.args.get("sql", "")
-        sql_result = None
-        sql_error = None
-        if sql_text.strip():
-            try:
-                sql_result = sql_query_tool.run_query(sql_text)
-                audit.log_action(conn, auth.current_user(), "sql_query_run", None, sql_text[:500])
-            except (sql_query_tool.QueryRejected, sql_query_tool.QueryFailed) as e:
-                sql_error = str(e)
-                audit.log_action(conn, auth.current_user(), "sql_query_rejected", None, f"{sql_text[:300]!r} -- {e}")
-        ctx.update(
-            sql_text=sql_text, sql_result=sql_result, sql_error=sql_error,
-            sql_preview_limit=sql_query_tool.PREVIEW_ROW_LIMIT,
-            export_urls=({fmt: url_for("overview_sql_export", fmt=fmt, sql=sql_text) for fmt in ("csv", "xlsx", "json")}
-                         if sql_text.strip() and sql_result is not None else {}),
+        sql_ctx = _sql_tab_context(conn)
+        page_size = request.args.get("page_size", sql_query_tool.DEFAULT_PAGE_SIZE, type=int)
+        if page_size not in sql_query_tool.PAGE_SIZE_CHOICES:
+            page_size = sql_query_tool.DEFAULT_PAGE_SIZE
+        page = request.args.get("page", 1, type=int)
+        pagination = exporters.paginate(sql_ctx["sql_filtered_rows"], page, per_page=page_size)
+
+        # Every current arg (sql, q, cfN..., sort, dir, page_size) carries
+        # through to export EXCEPT page/tab -- export always returns the
+        # full filtered+sorted set, pagination is a display-only concern,
+        # and `tab` is redundant on a route that's already SQL-tab-specific.
+        export_args = request.args.to_dict(flat=True)
+        export_args.pop("page", None)
+        export_args.pop("tab", None)
+        export_urls = ({fmt: url_for("overview_sql_export", fmt=fmt, **export_args) for fmt in ("csv", "xlsx", "json")}
+                       if sql_ctx["sql_text"].strip() and sql_ctx["sql_result"] is not None else {})
+
+        sql_ctx.update(
+            # `pagination` (not a sql_-prefixed name) matches every other
+            # Overview tab's own convention -- _pagination.html's shared
+            # partial and the page_url() Jinja global both read this exact
+            # key name directly, same as the Students/Content/Performance
+            # tabs already do.
+            pagination=pagination, sql_page_rows=pagination["items"], sql_page_size=page_size,
+            sql_page_size_choices=sql_query_tool.PAGE_SIZE_CHOICES,
+            sql_col_filters=_sql_tab_column_filters(sql_ctx["sql_columns"]),
+            sql_fetch_limit=sql_query_tool.FETCH_ROW_LIMIT,
+            export_urls=export_urls,
         )
+        ctx.update(sql_ctx)
 
     return render_template("overview.html", **ctx)
+
+
+def _sql_tab_column_filters(columns: list) -> dict:
+    """Reads ?cf0=...&cf1=...  (index-based, not column-name-based -- a
+    query's own column names/aliases can contain characters that are
+    awkward as a form-field/query-param name, and index-based means a
+    brand-new query's filter inputs never accidentally inherit meaning
+    from a DIFFERENT previous query's same-named param). Returns
+    {column_name: filter_text} with empty filters dropped, keyed by the
+    REAL column name so sql_query_tool.filter_rows_by_column() can just
+    read row dicts directly."""
+    out = {}
+    for i, col in enumerate(columns):
+        v = request.args.get(f"cf{i}", "").strip()
+        if v:
+            out[col] = v
+    return out
+
+
+def _sql_tab_context(conn) -> dict:
+    """Shared by the /?tab=sql page and the /overview/sql.<fmt> export
+    route -- both run the query, then apply the SAME global filter,
+    per-column filters, AND sort order (so "export what I'm looking at"
+    genuinely matches the screen). Only pagination is display-only and
+    layered on top separately, by the page route below -- export always
+    returns the full filtered+sorted set (up to sql_query_tool's own fetch
+    ceiling), never just one page of it."""
+    sql_text = request.args.get("sql", "")
+    q = request.args.get("q", "").strip()
+    sort_idx = request.args.get("sort", type=int)
+    sort_dir = request.args.get("dir", "asc")
+    sql_result = None
+    sql_error = None
+    filtered_dicts = []
+    columns = []
+
+    if sql_text.strip():
+        try:
+            sql_result = sql_query_tool.run_query(sql_text)
+            audit.log_action(conn, auth.current_user(), "sql_query_run", None, sql_text[:500])
+            columns = sql_result["columns"]
+            dict_rows = sql_query_tool.rows_as_dicts(sql_result)
+            col_filters = _sql_tab_column_filters(columns)
+            filtered_dicts = exporters.filter_rows(dict_rows, q, columns) if q else dict_rows
+            filtered_dicts = sql_query_tool.filter_rows_by_column(filtered_dicts, col_filters)
+            if sort_idx is not None and 0 <= sort_idx < len(columns):
+                filtered_dicts = sql_query_tool.sort_rows(filtered_dicts, columns[sort_idx], reverse=(sort_dir == "desc"))
+        except (sql_query_tool.QueryRejected, sql_query_tool.QueryFailed) as e:
+            sql_error = str(e)
+            audit.log_action(conn, auth.current_user(), "sql_query_rejected", None, f"{sql_text[:300]!r} -- {e}")
+
+    return {
+        "sql_text": sql_text, "sql_result": sql_result, "sql_error": sql_error,
+        "sql_columns": columns, "sql_filtered_rows": filtered_dicts, "sql_q": q,
+        "sql_sort_idx": sort_idx, "sql_sort_dir": sort_dir,
+    }
+
+
+@app.template_global()
+def sql_sort_url(col_index: int) -> str:
+    """Used by the SQL Query tab's column headers -- toggles asc/desc on
+    that column, preserves every other current arg (sql, q, cfN..., page_size),
+    and resets to page 1 (a new sort order makes any previously-open page
+    number meaningless)."""
+    args = request.args.to_dict(flat=True)
+    current_sort = args.get("sort")
+    current_dir = args.get("dir", "asc")
+    if current_sort == str(col_index) and current_dir == "asc":
+        args["dir"] = "desc"
+    else:
+        args["dir"] = "asc"
+    args["sort"] = str(col_index)
+    args.pop("page", None)
+    return f"{request.path}?{urlencode(args)}"
 
 
 @app.route("/overview/students.<fmt>")
@@ -606,23 +694,26 @@ def overview_faculty_export(fmt):
 @app.route("/overview/sql.<fmt>")
 @auth.role_required("admin")
 def overview_sql_export(fmt):
-    """Re-runs the exact query text from ?sql= (never caches the preview's
-    result) at the export ceiling (sql_query_tool.EXPORT_ROW_LIMIT, higher
-    than the on-screen preview) -- same stateless re-run pattern every
-    other export route on this portal already follows. Read-only guarantee
-    is enforced inside sql_query_tool itself, not here -- see that
-    module's own docstring."""
+    """Re-runs the exact query text from ?sql= (never caches the on-screen
+    result) via the SAME _sql_tab_context() the page itself uses -- so the
+    export reflects whatever global/per-column filters and sort order were
+    active on screen, at sql_query_tool's fetch ceiling (higher than any
+    one page of the on-screen table). Pagination is NOT applied here --
+    export always returns the full filtered+sorted set, not just one page.
+    Read-only guarantee is enforced inside sql_query_tool itself, not
+    here -- see that module's own docstring."""
     if fmt not in ("csv", "xlsx", "json"):
         return "Unsupported format -- use .csv, .xlsx, or .json", 400
-    sql_text = request.args.get("sql", "")
     conn = get_conn()
-    try:
-        result = sql_query_tool.run_query_for_export(sql_text)
-    except (sql_query_tool.QueryRejected, sql_query_tool.QueryFailed) as e:
-        audit.log_action(conn, auth.current_user(), "sql_query_rejected", None, f"{sql_text[:300]!r} -- {e}")
-        return f"Query error: {e}", 400
-    audit.log_action(conn, auth.current_user(), "sql_query_export", None, f"{fmt} -- {sql_text[:500]}")
-    columns, rows = result["columns"], result["rows"]
+    sql_ctx = _sql_tab_context(conn)
+    if sql_ctx["sql_error"]:
+        return f"Query error: {sql_ctx['sql_error']}", 400
+    if sql_ctx["sql_result"] is None:
+        return "No query submitted.", 400
+
+    audit.log_action(conn, auth.current_user(), "sql_query_export", None, f"{fmt} -- {sql_ctx['sql_text'][:500]}")
+    columns = sql_ctx["sql_columns"]
+    columns, rows = exporters.rows_from_dicts(sql_ctx["sql_filtered_rows"], columns)
     if fmt == "csv":
         return exporters.csv_response(columns, rows, "sql_query_result")
     if fmt == "xlsx":

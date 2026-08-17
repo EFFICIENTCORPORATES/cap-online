@@ -52,7 +52,8 @@ def _cleanup_audit(conn):
     # other audit-logged action on this portal follows explicitly forbids.
     conn.execute(
         "DELETE FROM admin_actions WHERE action_type IN ('sql_query_run', 'sql_query_rejected', 'sql_query_export') "
-        "AND (detail LIKE '%GROUP BY username ORDER BY balance DESC LIMIT 3%' OR detail LIKE \"%email='pwned'%\")"
+        "AND (detail LIKE '%GROUP BY username ORDER BY balance DESC LIMIT 3%' OR detail LIKE \"%email='pwned'%\" "
+        "OR detail LIKE '%Karan%,1000%' OR detail LIKE '%RECURSIVE t(n)%')"
     )
     conn.execute("DELETE FROM report_deliveries WHERE criteria LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
     conn.execute("DELETE FROM mcq_issue_reports WHERE mcq_id LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
@@ -416,6 +417,73 @@ def main():
     check("the rejected query was ALSO audit-logged (not silently dropped)", conn.execute(
         "SELECT 1 FROM admin_actions WHERE action_type='sql_query_rejected' ORDER BY action_id DESC LIMIT 1"
     ).fetchone() is not None)
+
+    print("\n--- Step 14d-3: SQL Query tab -- global filter, per-column filter, sort, pagination (2026-08-17) ---")
+    # A fully deterministic, synthetic-data query (not real platform.db
+    # rows, which can drift) so every expected value below is exact and
+    # re-runnable forever, same discipline as the sql_query_tool module's
+    # own standalone tests.
+    values_sql = (
+        "WITH t(name, credits) AS (VALUES "
+        "('Karan',1000),('Anmol',250),('Piyush',1000),('Harsh',NULL),('taslim',78)"
+        ") SELECT name, credits FROM t"
+    )
+
+    resp = client.get("/", query_string={"tab": "sql", "sql": values_sql})
+    check("baseline (no filter) shows all 5 synthetic rows", resp.status_code == 200 and b"5 row(s) match" in resp.data)
+
+    # Scoped to the actual TABLE ROWS (`>Name<`), not the whole page -- the
+    # submitted SQL text itself contains every name (echoed back verbatim
+    # in the textarea/hidden fields/"Clear filters" link), so a bare
+    # substring check against the WHOLE response would trivially "pass"
+    # regardless of whether filtering actually worked.
+    def _row_has(resp_data: bytes, name: str) -> bool:
+        return f">{name}<".encode() in resp_data
+
+    # Global filter ("any word or letter across any column") -- 'arsh'
+    # matches Harsh by name, nothing else.
+    resp = client.get("/", query_string={"tab": "sql", "sql": values_sql, "q": "arsh"})
+    check("global filter matches a substring in ANY column", _row_has(resp.data, "Harsh") and not _row_has(resp.data, "Karan"))
+
+    # Per-column filter -- index-based (cf0=name column, cf1=credits column).
+    resp = client.get("/", query_string={"tab": "sql", "sql": values_sql, "cf1": "1000"})
+    check("per-column filter (cf1 on 'credits') matches only that column's values",
+          _row_has(resp.data, "Karan") and _row_has(resp.data, "Piyush") and not _row_has(resp.data, "Anmol"))
+    resp = client.get("/", query_string={"tab": "sql", "sql": values_sql, "cf0": "a", "cf1": "1000"})
+    check("per-column filters combine (AND) -- only Karan has 'a' in name AND credits=1000",
+          _row_has(resp.data, "Karan") and not _row_has(resp.data, "Piyush"))
+
+    # Sort -- credits is column index 1; must be numeric (78 before 250
+    # before 1000), never lexicographic (which would put "1000" first).
+    resp = client.get("/", query_string={"tab": "sql", "sql": values_sql, "sort": "1", "dir": "asc"})
+    body = resp.data.decode("utf-8", errors="replace")
+    check("ascending sort on credits is numeric (78 appears before 250, which appears before 1000)",
+          body.find(">78<") < body.find(">250<") < body.find(">1000<"))
+    resp = client.get("/", query_string={"tab": "sql", "sql": values_sql, "sort": "1", "dir": "desc"})
+    check("descending sort reverses order (a sort-column header link for the SAME column now points back to asc)",
+          b'sort=1&amp;dir=asc' in resp.data or b'sort=1&dir=asc' in resp.data)
+
+    # Pagination -- page_size only accepts the 3 real choices (20/100/500),
+    # same as the <select> in the UI offers, so a 25-row set with
+    # page_size=20 is what actually exercises real multi-page behavior
+    # (the 5-row set above is too small for ANY real page_size to paginate).
+    bigger_sql = "WITH RECURSIVE t(n) AS (SELECT 1 UNION ALL SELECT n+1 FROM t WHERE n<25) SELECT n, n*n AS square FROM t"
+    resp = client.get("/", query_string={"tab": "sql", "sql": bigger_sql, "page_size": "999"})
+    check("an invalid page_size falls back to the default (100), not a crash", resp.status_code == 200 and b"25 row(s) match" in resp.data)
+
+    resp = client.get("/", query_string={"tab": "sql", "sql": bigger_sql, "page_size": "20"})
+    check("page_size=20 shows exactly 20 data rows on page 1", resp.data.count(b"<td>") == 20 * 2)  # 2 columns per row
+    check("pagination control reflects 2 total pages at page_size=20 for 25 rows", b"Page 1 of 2" in resp.data)
+    resp2 = client.get("/", query_string={"tab": "sql", "sql": bigger_sql, "page_size": "20", "page": "2"})
+    check("page 2 shows the remaining 5 rows", resp2.data.count(b"<td>") == 5 * 2)
+    check("page 2's content genuinely differs from page 1's", resp.data != resp2.data)
+
+    # Export must reflect the SAME filter/sort as the screen, but the FULL
+    # filtered set (never just one page of it).
+    resp = client.get("/overview/sql.csv", query_string={"sql": values_sql, "cf1": "1000"})
+    csv_text = resp.data.decode("utf-8")
+    check("filtered export contains only the matching rows (Karan, Piyush)", "Karan" in csv_text and "Piyush" in csv_text)
+    check("filtered export excludes non-matching rows (Anmol)", "Anmol" not in csv_text)
 
     print("\n--- Step 14e: Faculty Comprehensive Report (2026-08-14) ---")
     import faculty_report  # noqa: E402 -- telegram/admin_portal/faculty_report.py

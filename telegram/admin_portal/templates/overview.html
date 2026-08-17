@@ -408,8 +408,9 @@
       <code>UPDATE</code>/<code>DELETE</code>/<code>DROP</code> (yours or an AI's mistake) simply
       cannot execute here, no matter what text is submitted; only <code>SELECT</code>/<code>WITH</code>
       queries are accepted, and they run against a connection SQLite itself refuses to let write.
-      Results are capped at {{ sql_preview_limit }} rows on-screen (export goes higher) and a query
-      is stopped automatically if it runs too long, so this can never slow down the live bots.
+      Up to {{ "{:,}".format(sql_fetch_limit) }} rows are fetched (a query is also stopped automatically if it
+      runs too long) so this can never slow down the live bots -- the filter box below and every
+      column's own filter search that ENTIRE fetched set, not just whatever page is on screen.
     </p>
     <form method="get" style="margin-bottom:4px;">
       <input type="hidden" name="tab" value="sql">
@@ -417,9 +418,7 @@
                 style="width:100%; box-sizing:border-box; font-family:'SFMono-Regular',Consolas,Menlo,monospace; font-size:13px; padding:10px 12px; border:1px solid #d8dae0; border-radius:8px; resize:vertical; color:#222;">{{ sql_text }}</textarea>
       <div style="margin-top:10px; display:flex; gap:8px; align-items:center;">
         <button type="submit" class="btn btn-primary">Run Query</button>
-        {% if sql_result is not none %}
-          <span style="font-size:12px; color:#888;">{{ sql_result.row_count }} row(s){% if sql_result.truncated %} (truncated at {{ sql_preview_limit }} -- export for more){% endif %} &middot; {{ "%.0f" | format(sql_result.elapsed_ms) }}ms</span>
-        {% endif %}
+        <span style="font-size:11.5px; color:#bbb;">Running a new query here clears any filters/sort below (they're specific to one query's columns).</span>
       </div>
     </form>
   </div>
@@ -431,25 +430,73 @@
     </div>
   {% elif sql_result is not none %}
     <div class="card">
-      {% if sql_result.columns %}
-        <div class="export-buttons" style="margin-bottom:14px;">
-          <span class="export-label">Export (full result, up to a higher cap):</span>
-          <a class="btn btn-secondary btn-sm" href="{{ export_urls.csv }}">CSV</a>
-          <a class="btn btn-secondary btn-sm" href="{{ export_urls.xlsx }}">Excel</a>
-          <a class="btn btn-secondary btn-sm" href="{{ export_urls.json }}">JSON</a>
+      {% if sql_columns %}
+        <div class="toolbar">
+          <form method="get" class="filter-form" id="sql-filter-form">
+            <input type="hidden" name="tab" value="sql">
+            <input type="hidden" name="sql" value="{{ sql_text }}">
+            {% if sql_sort_idx is not none %}<input type="hidden" name="sort" value="{{ sql_sort_idx }}">{% endif %}
+            <input type="hidden" name="dir" value="{{ sql_sort_dir }}">
+            <input type="text" name="q" value="{{ sql_q or '' }}" placeholder="Filter (all columns)...">
+            <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+            {% if sql_q or sql_col_filters %}
+              <a class="btn btn-secondary btn-sm" href="{{ url_for('overview', tab='sql', sql=sql_text) }}">Clear all filters</a>
+            {% endif %}
+            <select name="page_size" onchange="this.form.submit()" style="padding:6px 8px; border:1px solid #d8dae0; border-radius:6px; font-size:12.5px; margin-left:auto;">
+              {% for size in sql_page_size_choices %}
+                <option value="{{ size }}" {{ 'selected' if size == sql_page_size }}>{{ size }} / page</option>
+              {% endfor %}
+            </select>
+          </form>
+          <div class="export-buttons">
+            <span class="export-label">Export (full filtered result):</span>
+            <a class="btn btn-secondary btn-sm" href="{{ export_urls.csv }}">CSV</a>
+            <a class="btn btn-secondary btn-sm" href="{{ export_urls.xlsx }}">Excel</a>
+            <a class="btn btn-secondary btn-sm" href="{{ export_urls.json }}">JSON</a>
+          </div>
         </div>
+        <p class="card-note" style="margin-top:-6px;">
+          {{ pagination.total }} row(s) match{% if pagination.total != sql_result.row_count %} (of {{ sql_result.row_count }} fetched){% endif %}
+          {% if sql_result.truncated %} -- the query itself returned more than {{ "{:,}".format(sql_fetch_limit) }} rows; only the first {{ "{:,}".format(sql_fetch_limit) }} were fetched and are searchable here{% endif %}.
+        </p>
+
+        {# Per-column filter inputs -- one small text box per column, all
+           submitted together via the SAME form above (each input's `form`
+           attribute points back at it, since a <thead> row can't be
+           nested inside that <form> once it's also wrapping the toolbar
+           above -- simplest fix is giving the form an id and referencing
+           it from these inputs directly). #}
         <div class="table-scroll">
         <table>
-          <thead><tr>{% for c in sql_result.columns %}<th>{{ c }}</th>{% endfor %}</tr></thead>
+          <thead>
+            <tr>
+              {% for c in sql_columns %}
+                <th>
+                  <a href="{{ sql_sort_url(loop.index0) }}" style="color:inherit; text-decoration:none;">
+                    {{ c }}{% if sql_sort_idx == loop.index0 %}{{ ' ▲' if sql_sort_dir == 'asc' else ' ▼' }}{% endif %}
+                  </a>
+                </th>
+              {% endfor %}
+            </tr>
+            <tr>
+              {% for c in sql_columns %}
+                <th style="padding-top:0;">
+                  <input type="text" name="cf{{ loop.index0 }}" value="{{ sql_col_filters.get(c, '') }}" form="sql-filter-form"
+                         placeholder="filter..." style="width:100%; box-sizing:border-box; padding:4px 6px; font-size:11.5px; border:1px solid #e2e2e2; border-radius:5px;">
+                </th>
+              {% endfor %}
+            </tr>
+          </thead>
           <tbody>
-            {% for row in sql_result.rows %}
-            <tr>{% for v in row %}<td>{{ v if v is not none else '—' }}</td>{% endfor %}</tr>
+            {% for row in sql_page_rows %}
+            <tr>{% for c in sql_columns %}<td>{{ row[c] if row[c] is not none else '—' }}</td>{% endfor %}</tr>
             {% else %}
-            <tr><td colspan="{{ sql_result.columns | length }}" style="color:#999;">Query ran successfully but returned no rows.</td></tr>
+            <tr><td colspan="{{ sql_columns | length }}" style="color:#999;">No rows match the current filter(s).</td></tr>
             {% endfor %}
           </tbody>
         </table>
         </div>
+        {% include "_pagination.html" %}
       {% else %}
         <p style="color:#999; margin:0;">Query ran successfully but returned no columns.</p>
       {% endif %}

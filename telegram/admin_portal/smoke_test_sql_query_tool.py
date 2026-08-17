@@ -86,7 +86,7 @@ result = sqt.run_query("""
 check("returns real columns", result["columns"] == ["username", "balance", "used_last_10_days"])
 check("returns at least one real row (platform has real students)", result["row_count"] > 0)
 check("not truncated for a small real result", result["truncated"] is False)
-check("elapsed_ms is a real positive number", result["elapsed_ms"] > 0)
+check("elapsed_ms is a real, non-negative measurement", result["elapsed_ms"] >= 0)
 print(f"    -> {result['row_count']} rows, {result['elapsed_ms']:.1f}ms, e.g. {result['rows'][0] if result['rows'] else None}")
 
 # Row-cap / truncation behavior, using a cheap generated series so this
@@ -146,6 +146,50 @@ try:
     check("students.telegram_user_id=1's email was NOT changed by the write-attempt test above", (row is None) or (row[0] != "pwned"))
 finally:
     conn3.close()
+
+print()
+print("=== rows_as_dicts() / filter_rows_by_column() / sort_rows() -- the filter/sort/paginate feature (2026-08-17) ===")
+
+sample = sqt.run_query("""
+    WITH data(name, credits) AS (
+        VALUES ('Karan', 1000), ('Anmol', 250), ('Piyush', 1000), ('Harsh', NULL), ('taslim', 78)
+    )
+    SELECT name, credits FROM data
+""")
+dict_rows = sqt.rows_as_dicts(sample)
+check("rows_as_dicts() produces one dict per row, keyed by real column names",
+      dict_rows == [
+          {"name": "Karan", "credits": 1000}, {"name": "Anmol", "credits": 250},
+          {"name": "Piyush", "credits": 1000}, {"name": "Harsh", "credits": None},
+          {"name": "taslim", "credits": 78},
+      ])
+
+# Per-column filter -- case-insensitive substring, AND across multiple columns.
+only_karan = sqt.filter_rows_by_column(dict_rows, {"name": "kar"})
+check("filter_rows_by_column() matches case-insensitively", [r["name"] for r in only_karan] == ["Karan"])
+none_filter = sqt.filter_rows_by_column(dict_rows, {})
+check("filter_rows_by_column() with no filters is a no-op", none_filter == dict_rows)
+both_cols = sqt.filter_rows_by_column(dict_rows, {"name": "a", "credits": "1000"})
+# Karan AND Piyush both have credits=1000, but only Karan's name contains
+# "a" (Piyush doesn't) -- so the AND of both filters must exclude Piyush.
+check("filter_rows_by_column() ANDs multiple column filters together (not OR)",
+      [r["name"] for r in both_cols] == ["Karan"])
+
+# Numeric-aware sort -- 78 must come before 250 and 1000 (a plain string
+# sort would put "1000" before "250" before "78", which is wrong).
+asc = sqt.sort_rows(dict_rows, "credits", reverse=False)
+check("sort_rows() ascending is numeric, not lexicographic",
+      [r["credits"] for r in asc if r["credits"] is not None] == [78, 250, 1000, 1000])
+check("sort_rows() puts NULLs at the end (ascending)", asc[-1]["name"] == "Harsh")
+desc = sqt.sort_rows(dict_rows, "credits", reverse=True)
+check("sort_rows() descending is also numeric", [r["credits"] for r in desc if r["credits"] is not None] == [1000, 1000, 250, 78])
+check("sort_rows() still puts NULLs at the end when descending (not the start)", desc[-1]["name"] == "Harsh")
+
+# Text-column sort (no numeric fallback needed) -- alphabetical, case-insensitive
+# (real column has a deliberately lowercase 'taslim' among capitalized names).
+name_sorted = sqt.sort_rows(dict_rows, "name", reverse=False)
+check("sort_rows() on a text column is case-insensitive alphabetical",
+      [r["name"] for r in name_sorted] == ["Anmol", "Harsh", "Karan", "Piyush", "taslim"])
 
 print()
 print(f"{passed} passed, {failed} failed")

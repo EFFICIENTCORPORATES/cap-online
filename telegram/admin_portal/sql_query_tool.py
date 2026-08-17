@@ -42,6 +42,19 @@ performance incident even though it can only ever READ.
 
 Every query run through here is audit-logged by the caller (app.py), same
 discipline as every other action-performing route on this portal.
+
+FILTER/SORT/PAGINATE (2026-08-17, Pranav's ask): the global text filter,
+per-column filters, and column sorting all have to see EVERY row the query
+produced, not just whatever's on the currently-displayed page -- so
+run_query() fetches up to FETCH_ROW_LIMIT rows (raised from the old 500-row
+on-screen-only preview to the same generous ceiling exports already used),
+and app.py does filter -> sort -> paginate in memory over that full
+fetched set, same "already-tested small-data-volume in-memory" pattern
+exporters.py's own docstring documents and every other analytics page on
+this portal already uses -- not reinvented here, just applied to a
+dynamic-columns result set instead of a fixed one. filter_rows_by_column()/
+sort_rows() below are this module's own additions for the per-column
+pieces exporters.filter_rows()/paginate() don't already cover.
 """
 
 import re
@@ -49,19 +62,22 @@ import sqlite3
 import time
 from pathlib import Path
 
+import exporters
+
 DB_PATH = Path(__file__).resolve().parents[1] / "database" / "platform.db"
 
-# Applies to the on-screen preview table (kept small -- this platform's own
-# real data volumes are "dozens to low hundreds of rows" per exporters.py's
-# own docstring, so this will essentially never bind in normal use).
-PREVIEW_ROW_LIMIT = 500
-# Applies to CSV/XLSX/JSON export -- generous, but still a real backstop
-# against a query that's technically valid SELECT but returns something
-# enormous (e.g. a careless cross join).
-EXPORT_ROW_LIMIT = 20_000
+# The one row-count safety ceiling, used for every fetch through this
+# module (interactive tab display AND export alike, now that both need the
+# full result set to filter/sort correctly, not just a small preview) --
+# generous, but still a real backstop against a query that's technically
+# valid SELECT but returns something enormous (e.g. a careless cross join).
+# This platform's real data volumes are "dozens to low hundreds of rows"
+# per exporters.py's own docstring, so this will essentially never bind.
+FETCH_ROW_LIMIT = 20_000
+FETCH_TIMEOUT_SECONDS = 15.0
 
-PREVIEW_TIMEOUT_SECONDS = 5.0
-EXPORT_TIMEOUT_SECONDS = 15.0
+PAGE_SIZE_CHOICES = (20, 100, 500)
+DEFAULT_PAGE_SIZE = 100
 
 _ALLOWED_LEADING_KEYWORDS = ("select", "with")
 
@@ -164,7 +180,7 @@ def _run_with_timeout(conn: sqlite3.Connection, sql: str, params: tuple, timeout
         conn.set_progress_handler(None, 0)
 
 
-def run_query(sql: str, row_limit: int = PREVIEW_ROW_LIMIT, timeout_seconds: float = PREVIEW_TIMEOUT_SECONDS) -> dict:
+def run_query(sql: str, row_limit: int = FETCH_ROW_LIMIT, timeout_seconds: float = FETCH_TIMEOUT_SECONDS) -> dict:
     """Validates, then executes, the given SQL against a read-only
     connection, capped at `row_limit` rows and `timeout_seconds` wall
     time. Returns {"columns": [...], "rows": [[...], ...], "row_count":
@@ -206,10 +222,57 @@ def run_query(sql: str, row_limit: int = PREVIEW_ROW_LIMIT, timeout_seconds: flo
     }
 
 
-def run_query_for_export(sql: str) -> dict:
-    """Same as run_query() but at the export ceiling/timeout instead of
-    the on-screen preview's smaller ones -- used by the CSV/XLSX/JSON
-    download routes, which re-run the exact same query text rather than
-    caching the preview's result (keeps this stateless, same pattern
-    every other export route on this portal already follows)."""
-    return run_query(sql, row_limit=EXPORT_ROW_LIMIT, timeout_seconds=EXPORT_TIMEOUT_SECONDS)
+def rows_as_dicts(result: dict) -> list:
+    """result is run_query()'s own return shape -- converts its
+    columns/rows (list-of-lists, positional) into a list of dicts (keyed by
+    column name), which is what filter_rows_by_column()/sort_rows()/
+    exporters.filter_rows()/exporters.paginate() all expect. A query with a
+    duplicate column NAME (e.g. `SELECT a.id, b.id FROM a JOIN b ...` with
+    no alias) will collapse to one dict key, keeping only the last value --
+    a real SQL-authoring footgun, not something this function can fix; the
+    fix on the query-author's side is just to alias the columns
+    (`SELECT a.id AS a_id, b.id AS b_id`)."""
+    columns = result["columns"]
+    return [dict(zip(columns, row)) for row in result["rows"]]
+
+
+def filter_rows_by_column(rows: list, col_filters: dict) -> list:
+    """col_filters: {column_name: filter_text}. ALL given filters must
+    match (AND, not OR) for a row to survive -- case-insensitive substring,
+    same matching rule exporters.filter_rows() (the global "any column"
+    filter) already uses, so the two feel consistent to a user combining
+    both. An empty/missing col_filters is a no-op, returns rows unchanged."""
+    if not col_filters:
+        return rows
+    out = []
+    for r in rows:
+        matched_all = True
+        for col, needle in col_filters.items():
+            if not needle:
+                continue
+            v = r.get(col)
+            haystack = "" if v is None else str(v)
+            if needle.lower() not in haystack.lower():
+                matched_all = False
+                break
+        if matched_all:
+            out.append(r)
+    return out
+
+
+def sort_rows(rows: list, column: str, reverse: bool = False) -> list:
+    """Sorts a list of dicts by one column. Numeric-aware where every
+    non-null value in the column can be read as a number (so a credits
+    column sorts 9 before 10, not lexicographically like a plain string
+    sort would) -- falls back to a case-insensitive string sort for
+    genuinely non-numeric columns. NULLs always sort to the end regardless
+    of direction (a missing value is never meaningfully "smallest" or
+    "largest" the way a real value is -- flipping direction shouldn't move
+    them from one end to the other)."""
+    present = [r for r in rows if r.get(column) is not None]
+    missing = [r for r in rows if r.get(column) is None]
+    try:
+        present.sort(key=lambda r: float(r.get(column)), reverse=reverse)
+    except (TypeError, ValueError):
+        present.sort(key=lambda r: str(r.get(column)).lower(), reverse=reverse)
+    return present + missing
