@@ -57,18 +57,33 @@ def check(label, cond):
         print(f"  FAIL {label}")
 
 
+REGRESSION_CHAT_ID = 900_300_002  # step 6's session-expired-loop regression check -- synthetic, never a real student's
+
+
 def cleanup():
-    row = conn.execute("SELECT lavya_username FROM students WHERE telegram_user_id=?", (CHAT_ID,)).fetchone()
-    username = row[0] if row else None
-    conn.execute("DELETE FROM exam_hub_sessions WHERE telegram_user_id=?", (CHAT_ID,))
-    conn.execute("DELETE FROM exam_hub_descriptive_events WHERE telegram_user_id=?", (CHAT_ID,))
-    conn.execute("DELETE FROM exam_hub_mcq_attempts WHERE telegram_user_id=?", (CHAT_ID,))
-    conn.execute("DELETE FROM bot_interactions WHERE telegram_user_id=?", (CHAT_ID,))
-    conn.execute("DELETE FROM students WHERE telegram_user_id=?", (CHAT_ID,))
-    if username:
-        conn.execute("DELETE FROM wallet_ledger WHERE username=?", (username,))
-        conn.execute("DELETE FROM wallet_grants WHERE username=?", (username,))
-        conn.execute("DELETE FROM student_profiles WHERE username=?", (username,))
+    for chat_id in (CHAT_ID, REGRESSION_CHAT_ID):
+        row = conn.execute("SELECT lavya_username FROM students WHERE telegram_user_id=?", (chat_id,)).fetchone()
+        username = row[0] if row else None
+        # BUG FIXED 2026-08-17: exam_hub_mcq_attempts/exam_hub_descriptive_events
+        # both FK-reference exam_hub_sessions(session_id) -- deleting
+        # exam_hub_sessions FIRST (the original order here) only ever
+        # worked by accident, because steps 3-5 above construct their mock
+        # context with session_id=None, so nothing they logged carried a
+        # real FK to clean up in the first place. Step 6's regression check
+        # calls the REAL bot.start() (real session_id throughout), which
+        # immediately surfaced this as a real IntegrityError -- children
+        # must be deleted before the parent they reference.
+        conn.execute("DELETE FROM exam_hub_descriptive_events WHERE telegram_user_id=?", (chat_id,))
+        conn.execute("DELETE FROM exam_hub_mcq_attempts WHERE telegram_user_id=?", (chat_id,))
+        conn.execute("DELETE FROM exam_hub_sessions WHERE telegram_user_id=?", (chat_id,))
+        conn.execute("DELETE FROM bot_interactions WHERE telegram_user_id=?", (chat_id,))
+        conn.execute("DELETE FROM students WHERE telegram_user_id=?", (chat_id,))
+        if username:
+            conn.execute("DELETE FROM wallet_ledger WHERE username=?", (username,))
+            conn.execute("DELETE FROM wallet_grants WHERE username=?", (username,))
+            conn.execute("DELETE FROM access_requests WHERE username=?", (username,))
+            conn.execute("DELETE FROM student_academic_profiles WHERE username=?", (username,))
+            conn.execute("DELETE FROM student_profiles WHERE username=?", (username,))
     conn.commit()
 
 
@@ -155,6 +170,66 @@ async def main():
         # not string-matching the message body.
         sent_markup = ctx5.bot.send_message.await_args.kwargs.get("reply_markup")
         check("out-of-balance message includes a real Recharge Wallet button", sent_markup is not None and "walletrc:start" in str(sent_markup))
+
+        # 6. REGRESSION (live bug report, 2026-08-17): "session expired"
+        # looping right after picking a Subject/Mode, for any subject whose
+        # Exam Type and/or Year auto-skip (2026-08-16's Mix-All fix).
+        # Root cause was two-fold: (a) the "subject" action discarded
+        # resolve_entry()'s `updates` entirely, so an auto-picked exam_type/
+        # year never reached context.user_data, and the very next tap
+        # (Chapter) always found them missing via _require_state() ->
+        # "session expired"; (b) once fixed naively, db_update_session()
+        # turned out to accept ANY kwarg as a literal SQL column with zero
+        # validation, crashing on exam_type/year (exam_hub_sessions only
+        # tracks mode/course/level/subject, by design). Both fixed --
+        # this walks the REAL button_router end to end across every real
+        # (course, level, subject) combo that has an auto-skip on Type or
+        # Year, on a synthetic chat_id (never a real student's), and
+        # asserts neither failure mode can recur.
+        reg_chat = 900_300_002
+        reg_user = SimpleNamespace(id=reg_chat, username=None, first_name="Smoke", last_name="Regression")
+
+        async def tap(ctx, data):
+            qq = SimpleNamespace(data=data, from_user=reg_user, message=SimpleNamespace(chat_id=reg_chat),
+                                  edit_message_text=AsyncMock(), answer=AsyncMock())
+            await bot.button_router(SimpleNamespace(callback_query=qq), ctx)
+            return qq
+
+        checked_a_real_autoskip_case = False
+        for mode in ("mcq", "descriptive"):
+            bank_obj = bot._mode_bank(mode)
+            for course in bank_obj.courses():
+                for level in bank_obj.levels(course):
+                    for i, subject in enumerate(bank_obj.subjects(course, level)):
+                        ets = bank_obj.exam_types(course, level, subject)
+                        if len(ets) > 1:
+                            continue  # only care about a subject whose Type step auto-skips
+                        ctx6 = SimpleNamespace(user_data={}, bot=SimpleNamespace(send_message=AsyncMock()))
+                        upd6 = SimpleNamespace(effective_user=reg_user, message=SimpleNamespace(reply_text=AsyncMock(), chat_id=reg_chat))
+                        await bot.start(upd6, ctx6)
+                        await tap(ctx6, f"mode:{mode}")
+                        # Drive Course/Level explicitly (bypasses Pranav's own
+                        # saved-profile auto-fill so this test exercises every
+                        # real combo, not just his one saved CA Inter profile).
+                        ctx6.user_data.update({"course": course, "level": level, "mode": mode})
+                        subjects = bank_obj.subjects(course, level)
+                        ctx6.user_data["subject_options"] = subjects
+                        q6 = await tap(ctx6, f"subject:{i}")
+                        crashed_or_expired = (
+                            q6.edit_message_text.call_args is None
+                            or "session has expired" in q6.edit_message_text.call_args[0][0].lower()
+                        )
+                        check(f"picking Subject '{subject}' ({course} {level}, {mode}, auto-skip Type) never itself shows session-expired", not crashed_or_expired)
+                        check(f"  -> exam_type WAS saved to user_data for '{subject}'", "exam_type" in ctx6.user_data)
+                        if "chapter_slugs" in ctx6.user_data:
+                            q7 = await tap(ctx6, "chapter:0")
+                            still_expired = (
+                                q7.edit_message_text.call_args is not None
+                                and "session has expired" in q7.edit_message_text.call_args[0][0].lower()
+                            )
+                            check(f"  -> the FOLLOW-UP Chapter tap for '{subject}' does not loop back to session-expired", not still_expired)
+                            checked_a_real_autoskip_case = True
+        check("at least one real (course, level, subject) combo with an auto-skipping Type step was actually exercised", checked_a_real_autoskip_case)
 
     finally:
         cleanup()

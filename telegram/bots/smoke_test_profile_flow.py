@@ -54,7 +54,13 @@ def check(label, cond):
 
 
 def mock_context():
-    return SimpleNamespace(user_data={})
+    # job_queue=None -- _schedule_auto_approval_job() already treats a
+    # missing job_queue as "nothing to schedule" (same convention
+    # wallet_flow.py/test_flow.py's own delayed-job schedulers use), so
+    # this test drives the ~10s auto-approval by calling
+    # _auto_approval_job_callback() directly instead of waiting on a real
+    # job_queue tick.
+    return SimpleNamespace(user_data={}, job_queue=None)
 
 
 def mock_query(user_id, data):
@@ -90,6 +96,10 @@ def seed_student(chat_id):
 
 
 def cleanup():
+    # Child tables first (both REFERENCE student_profiles(username) --
+    # deleting the parent row first would hit the FK constraint).
+    conn.execute("DELETE FROM access_requests WHERE username=?", (TEST_USERNAME,))
+    conn.execute("DELETE FROM student_academic_profiles WHERE username=?", (TEST_USERNAME,))
     conn.execute("DELETE FROM students WHERE telegram_user_id IN (?,?,?)", (CHAT_A, CHAT_B, CHAT_C))
     conn.execute("DELETE FROM student_profiles WHERE username=?", (TEST_USERNAME,))
     conn.commit()
@@ -165,26 +175,121 @@ async def main():
     link_c = conn.execute("SELECT lavya_username FROM students WHERE telegram_user_id=?", (CHAT_C,)).fetchone()
     check("chat C still has no lavya_username (link correctly rejected)", link_c and link_c[0] is None)
 
-    # --- 6. shared fields (course/level/exam_attempt/display_name) -------
-    print("\n[6] Shared fields (course/level/exam_attempt/display_name)")
+    # --- 6. multi-course profiles (2026-08-16) ----------------------------
+    print("\n[6] Multi-course academic profiles")
     ctx_a2 = mock_context()
     q_course = mock_query(CHAT_A, "profile:pick_course:CA")
     await profile_flow._handle_profile_action(q_course, ctx_a2, "pick_course:CA")
     check("pending course staged", ctx_a2.user_data.get("profile_flow_pending_course") == "CA")
     q_level = mock_query(CHAT_A, "profile:pick_level:Inter")
     await profile_flow._handle_profile_action(q_level, ctx_a2, "pick_level:Inter")
-    row = conn.execute("SELECT course, level FROM student_profiles WHERE username=?", (TEST_USERNAME,)).fetchone()
-    check("course/level saved", row == ("CA", "Inter"))
+    row = conn.execute(
+        "SELECT course, level FROM student_academic_profiles WHERE username=? AND course='CA'", (TEST_USERNAME,)
+    ).fetchone()
+    check("first course/level saved (self-service, brand-new course)", row == ("CA", "Inter"))
+    check("'add another?' prompt shown after a successful self-service add",
+          "another course or level" in q_level.edit_message_text.call_args[0][0].lower())
 
+    # A DIFFERENT course entirely -- still self-service, per Pranav's
+    # locked rule ("as many DIFFERENT courses as they like").
+    ctx_a2b = mock_context()
+    q_course2 = mock_query(CHAT_A, "profile:pick_course:CS")
+    await profile_flow._handle_profile_action(q_course2, ctx_a2b, "pick_course:CS")
+    q_level2 = mock_query(CHAT_A, "profile:pick_level:Executive")
+    await profile_flow._handle_profile_action(q_level2, ctx_a2b, "pick_level:Executive")
+    row2 = conn.execute(
+        "SELECT course, level FROM student_academic_profiles WHERE username=? AND course='CS'", (TEST_USERNAME,)
+    ).fetchone()
+    check("a SECOND, different course also saved self-service (no approval needed)", row2 == ("CS", "Executive"))
+    all_profiles = profile_flow.academic_profiles.list_profiles(conn, TEST_USERNAME)
+    check("username now holds exactly 2 academic profiles", len(all_profiles) == 2)
+
+    # A SECOND level within a course already on file (CA Inter already
+    # saved above) -- must NOT be added directly; must create a pending
+    # access_requests row instead (Pranav's locked rule, 2026-08-16).
+    ctx_a2c = mock_context()
+    q_course3 = mock_query(CHAT_A, "profile:pick_course:CA")
+    await profile_flow._handle_profile_action(q_course3, ctx_a2c, "pick_course:CA")
+    q_level3 = mock_query(CHAT_A, "profile:pick_level:Final")
+    await profile_flow._handle_profile_action(q_level3, ctx_a2c, "pick_level:Final")
+    row3 = conn.execute(
+        "SELECT course, level FROM student_academic_profiles WHERE username=? AND course='CA' AND level='Final'",
+        (TEST_USERNAME,),
+    ).fetchone()
+    check("a SECOND level in an already-held course is NOT added directly", row3 is None)
+    check("student is told this needs approval", "approval" in q_level3.edit_message_text.call_args[0][0].lower())
+    pending_req = conn.execute(
+        "SELECT request_id, status, course, level FROM access_requests WHERE username=? AND course='CA' AND level='Final'",
+        (TEST_USERNAME,),
+    ).fetchone()
+    check("a pending access_requests row was created instead", pending_req is not None and pending_req[1] == "pending")
+
+    # Simulate the ~10s auto-approval job firing (without actually waiting
+    # 10 real seconds) -- calls the exact same function the job_queue would.
+    fake_job_ctx = SimpleNamespace(job=SimpleNamespace(data={"request_id": pending_req[0]}),
+                                    bot=SimpleNamespace(send_message=AsyncMock()))
+    await profile_flow._auto_approval_job_callback(fake_job_ctx)
+    resolved_req = conn.execute("SELECT status, resolved_by FROM access_requests WHERE request_id=?", (pending_req[0],)).fetchone()
+    check("access request auto-approved", resolved_req == ("approved", "auto"))
+    ca_final_row = conn.execute(
+        "SELECT 1 FROM student_academic_profiles WHERE username=? AND course='CA' AND level='Final'", (TEST_USERNAME,)
+    ).fetchone()
+    check("approval created the real academic profile", ca_final_row is not None)
+    fake_job_ctx.bot.send_message.assert_called_once()
+    check("student was notified of the approval", "approved" in fake_job_ctx.bot.send_message.call_args.kwargs["text"].lower())
+
+    # Re-running the SAME job (e.g. a re-armed job firing twice across a
+    # restart) must be a safe no-op, never a crash or a double-notify.
+    fake_job_ctx2 = SimpleNamespace(job=SimpleNamespace(data={"request_id": pending_req[0]}),
+                                     bot=SimpleNamespace(send_message=AsyncMock()))
+    await profile_flow._auto_approval_job_callback(fake_job_ctx2)
+    check("re-running an already-resolved approval job is a safe no-op", fake_job_ctx2.bot.send_message.call_count == 0)
+
+    # Exact same (course, level) already on file -- adding it again is a
+    # harmless no-op, never a duplicate row or a spurious approval request.
+    ctx_a2d = mock_context()
+    q_course4 = mock_query(CHAT_A, "profile:pick_course:CA")
+    await profile_flow._handle_profile_action(q_course4, ctx_a2d, "pick_course:CA")
+    q_level4 = mock_query(CHAT_A, "profile:pick_level:Inter")
+    await profile_flow._handle_profile_action(q_level4, ctx_a2d, "pick_level:Inter")
+    check("re-adding the exact same course+level is a friendly no-op",
+          "already have" in q_level4.edit_message_text.call_args[0][0].lower())
+    dup_count = conn.execute(
+        "SELECT COUNT(*) FROM student_academic_profiles WHERE username=? AND course='CA' AND level='Inter'",
+        (TEST_USERNAME,),
+    ).fetchone()[0]
+    check("no duplicate row was created", dup_count == 1)
+
+    # --- exam attempt, now per-profile ------------------------------------
+    ca_inter_profile_id = conn.execute(
+        "SELECT profile_id FROM student_academic_profiles WHERE username=? AND course='CA' AND level='Inter'",
+        (TEST_USERNAME,),
+    ).fetchone()[0]
     ctx_a3 = mock_context()
+    q_setattempt = mock_query(CHAT_A, f"profile:setattempt:{ca_inter_profile_id}")
+    await profile_flow._handle_profile_action(q_setattempt, ctx_a3, f"setattempt:{ca_inter_profile_id}")
+    check("pending attempt profile_id staged", ctx_a3.user_data.get("profile_flow_pending_attempt_profile_id") == ca_inter_profile_id)
     q_year = mock_query(CHAT_A, "profile:pick_attempt_year:2027")
     await profile_flow._handle_profile_action(q_year, ctx_a3, "pick_attempt_year:2027")
     check("pending attempt year staged", ctx_a3.user_data.get("profile_flow_pending_attempt_year") == "2027")
     q_month = mock_query(CHAT_A, "profile:pick_attempt_month:November")
     await profile_flow._handle_profile_action(q_month, ctx_a3, "pick_attempt_month:November")
-    row = conn.execute("SELECT exam_attempt FROM student_profiles WHERE username=?", (TEST_USERNAME,)).fetchone()
-    check("exam_attempt saved as 'Month Year'", row[0] == "November 2027")
+    row = conn.execute("SELECT exam_attempt FROM student_academic_profiles WHERE profile_id=?", (ca_inter_profile_id,)).fetchone()
+    check("exam_attempt saved as 'Month Year' on the RIGHT profile only", row[0] == "November 2027")
     check("pending attempt year cleared after save", "profile_flow_pending_attempt_year" not in ctx_a3.user_data)
+    other_attempt = conn.execute(
+        "SELECT exam_attempt FROM student_academic_profiles WHERE username=? AND course='CS'", (TEST_USERNAME,)
+    ).fetchone()[0]
+    check("a DIFFERENT profile's exam_attempt is untouched (per-profile, not shared)", other_attempt is None)
+
+    # --- removing a profile -------------------------------------------
+    ctx_a2e = mock_context()
+    q_rm = mock_query(CHAT_A, f"profile:rmprofile:{ca_inter_profile_id}")
+    await profile_flow._handle_profile_action(q_rm, ctx_a2e, f"rmprofile:{ca_inter_profile_id}")
+    still_there = conn.execute("SELECT 1 FROM student_academic_profiles WHERE profile_id=?", (ca_inter_profile_id,)).fetchone()
+    check("removed profile is actually gone", still_there is None)
+    remaining = profile_flow.academic_profiles.list_profiles(conn, TEST_USERNAME)
+    check("the other 2 profiles (CS Executive, CA Final) are untouched by the removal", len(remaining) == 2)
 
     ctx_b2 = mock_context()
     ctx_b2.user_data["profile_flow_state"] = profile_flow.AWAITING_DISPLAY_NAME
@@ -194,9 +299,9 @@ async def main():
 
     profile_via_a = profile_flow._get_profile_for_chat(conn, CHAT_A)
     check("chat A sees display_name set via chat B (shared)", profile_via_a["display_name"] == "Rahul K")
-    check("chat A sees course/level/attempt too (shared)",
-          profile_via_a["course"] == "CA" and profile_via_a["level"] == "Inter"
-          and profile_via_a["exam_attempt"] == "November 2027")
+    profiles_via_a = profile_flow.academic_profiles.list_profiles(conn, profile_via_a["username"])
+    check("chat A sees the SAME academic profiles set via chat A (shared by username, same as display_name)",
+          {(p["course"], p["level"]) for p in profiles_via_a} == {("CS", "Executive"), ("CA", "Final")})
 
     # --- 7. per-chat-id fields (email/mobile) NOT shared ------------------
     print("\n[7] Per-chat-id fields (email/mobile) stay separate")

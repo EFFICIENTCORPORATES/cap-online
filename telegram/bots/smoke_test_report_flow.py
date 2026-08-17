@@ -600,6 +600,24 @@ async def step7d_ondemand_trigger_flow(conn):
         no_query = FakeQuery(SYNTHETIC_USER_ID_4, 12345, "report:ondemand_no")
         await report_flow.report_flow_callback(FakeCallbackUpdate(no_query), context2)
         check("declining shows a polite decline message", no_query.edit_message_text.call_count == 1)
+        # BUG FIXED 2026-08-16 (independent code review): this used to be a
+        # dead end -- plain text, zero buttons, no CTA. Must now offer
+        # Continue Practicing / I'm Done like every other decline path.
+        decline_cta_text = context2.bot.send_message.call_args.kwargs.get("text", "")
+        decline_cta_markup = context2.bot.send_message.call_args.kwargs.get("reply_markup")
+        check("declining the on-demand offer now also offers a Continue/Done CTA, not a dead end",
+              context2.bot.send_message.call_count == 1 and "continue practicing" in decline_cta_text.lower())
+        check("that CTA has real buttons", decline_cta_markup is not None and len(decline_cta_markup.inline_keyboard) == 2)
+
+        # --- "Not now" (skip) on the very FIRST channel picker -- the
+        # other confirmed dead end (2026-08-16 review): also used to end
+        # with plain text and no keyboard. ---
+        context3 = FakeContext()
+        skip_query = FakeQuery(SYNTHETIC_USER_ID_4, 12345, "report:skip")
+        await report_flow.report_flow_callback(FakeCallbackUpdate(skip_query), context3)
+        skip_cta_text = context3.bot.send_message.call_args.kwargs.get("text", "") if context3.bot.send_message.call_args else ""
+        check("'Not now' (skip) also offers a Continue/Done CTA instead of dead-ending",
+              context3.bot.send_message.call_count == 1 and "continue practicing" in skip_cta_text.lower())
     finally:
         _cleanup_synthetic(conn, SYNTHETIC_USER_ID_4)
         print("    (synthetic test data cleaned up)")

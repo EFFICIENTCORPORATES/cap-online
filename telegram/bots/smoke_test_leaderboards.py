@@ -131,14 +131,23 @@ def seed_mcq_attempts(chat_id, course, level, n_answered, n_correct):
 
 
 def cleanup():
-    # FK order matters: leaderboard_participants references student_profiles
-    # (must go first), students also references student_profiles (must go
-    # before student_profiles too) -- student_profiles itself goes last.
+    # FK order matters: leaderboard_participants/student_academic_profiles/
+    # access_requests all reference student_profiles (must go first),
+    # students also references student_profiles (must go before
+    # student_profiles too) -- student_profiles itself goes last.
+    # student_academic_profiles included since 2026-08-16: this test seeds
+    # course/level directly on the legacy student_profiles columns, and any
+    # profile_flow.py call in this test re-runs init_schema() (every
+    # profile_flow function does), which idempotently migrates that row
+    # into student_academic_profiles too -- leaving it un-cleaned would
+    # FK-block the student_profiles delete below.
     conn.execute("DELETE FROM leaderboard_participants WHERE leaderboard_id LIKE 'smoketest%'")
     conn.execute("DELETE FROM leaderboard_broadcast_log WHERE leaderboard_id LIKE 'smoketest%'")
     conn.execute("DELETE FROM exam_hub_mcq_attempts WHERE bot_id='smoketest-bot'")
     conn.execute("DELETE FROM exam_hub_sessions WHERE bot_id='smoketest-bot'")
     conn.execute("DELETE FROM students WHERE telegram_user_id IN (?,?,?,?)", (CHAT_X1, CHAT_X2, CHAT_Y, CHAT_Z))
+    conn.execute("DELETE FROM access_requests WHERE username IN (?,?,?)", (USERNAME_X, USERNAME_Y, USERNAME_Z))
+    conn.execute("DELETE FROM student_academic_profiles WHERE username IN (?,?,?)", (USERNAME_X, USERNAME_Y, USERNAME_Z))
     conn.execute("DELETE FROM student_profiles WHERE username IN (?,?,?)", (USERNAME_X, USERNAME_Y, USERNAME_Z))
     conn.commit()
 

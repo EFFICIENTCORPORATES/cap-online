@@ -91,11 +91,22 @@ def cleanup():
         if username:
             conn.execute("DELETE FROM wallet_ledger WHERE username=?", (username,))
             conn.execute("DELETE FROM wallet_grants WHERE username=?", (username,))
+            # student_academic_profiles/access_requests also FK to
+            # student_profiles(username) since 2026-08-16 -- defensively
+            # cleared here too, same reasoning smoke_test_leaderboards.py's
+            # own cleanup() comment gives (any init_schema() re-run, even
+            # from a module this test doesn't call directly, would migrate
+            # a course/level-bearing student_profiles row into the new
+            # table and FK-block the delete two lines down otherwise).
+            conn.execute("DELETE FROM access_requests WHERE username=?", (username,))
+            conn.execute("DELETE FROM student_academic_profiles WHERE username=?", (username,))
             conn.execute("DELETE FROM student_profiles WHERE username=?", (username,))
     conn.execute("DELETE FROM student_profiles WHERE username=?", (TG_USERNAME_CANDIDATE,))
     for uname in (USERNAME, USERNAME_GRANTS):
         conn.execute("DELETE FROM wallet_ledger WHERE username=?", (uname,))
         conn.execute("DELETE FROM wallet_grants WHERE username=?", (uname,))
+        conn.execute("DELETE FROM access_requests WHERE username=?", (uname,))
+        conn.execute("DELETE FROM student_academic_profiles WHERE username=?", (uname,))
         conn.execute("DELETE FROM student_profiles WHERE username=?", (uname,))
     conn.commit()
 

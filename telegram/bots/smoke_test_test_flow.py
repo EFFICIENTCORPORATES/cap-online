@@ -236,6 +236,25 @@ async def main():
         check("activity log recorded 'test_started'", conn.execute("SELECT COUNT(*) FROM test_activity_log WHERE test_id=? AND action_type='test_started'", (test_id,)).fetchone()[0] == 1)
         check("activity log recorded 'question_viewed' for Q1", conn.execute("SELECT COUNT(*) FROM test_activity_log WHERE test_id=? AND seq_no=1 AND action_type='question_viewed'", (test_id,)).fetchone()[0] >= 1)
 
+        # 4b. DOUBLE-TAP REGRESSION (found via independent code review,
+        # 2026-08-16, fixed same day): an impatient/slow-network double-tap
+        # on "Start Test" used to re-run _start_test() a second time --
+        # debiting the wallet twice and opening a second, orphaned
+        # test_sessions row -- because the "only one active test" guard
+        # only ever lived at start_test_flow()'s TEXT-trigger entry point,
+        # never at the actual confirm callback that creates the session.
+        # Simulates exactly that: fire "testflow:confirm" again for the
+        # SAME user, same picker state, immediately after test 4 above
+        # already started a real test.
+        balance_before_redundant_tap = wallet.get_balance(conn, username)
+        q2b = mock_query(user)
+        q2b.edit_message_text = AsyncMock()
+        await test_flow._handle_picker_callback(q2b, context, conn, "testflow:confirm", "1lavya-examhub", host)
+        check("a double-tap on Start Test does NOT take a second debit", wallet.get_balance(conn, username) == balance_before_redundant_tap)
+        check("a double-tap on Start Test does NOT open a second test_sessions row", conn.execute("SELECT COUNT(*) FROM test_sessions WHERE telegram_user_id=? AND status='in_progress'", (CHAT_ID,)).fetchone()[0] == 1)
+        check("a double-tap on Start Test resumes the SAME test_id, not a new one", test_flow._get_active_test(conn, CHAT_ID)[0] == test_id)
+        check("a double-tap on Start Test tells the student it's already in progress", "already have a test in progress" in last_text(q2b.edit_message_text).lower())
+
         # 5. First question is an MCQ (sittings are ordered MCQ-then-descriptive) if mcq_count > 0.
         if mcq_count > 0:
             first_q_row = conn.execute("SELECT qtype FROM test_questions WHERE test_id=? AND seq_no=1", (test_id,)).fetchone()
