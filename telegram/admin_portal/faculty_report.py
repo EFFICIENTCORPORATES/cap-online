@@ -10,9 +10,28 @@ performance... Last 7 days analysis... which student is doing which
 chapters the most... which were the questions which were mostly made
 wrong... All of these deterministic reports... need any commentary in
 report, just raw facts, arranged properly with proper table headings.")
+
+REVISED 2026-08-17 -- Level-wise segmentation + username-rollup identity
++ Day End Report + colorful PDF (Pranav's follow-up ask, confirmed via
+AskUserQuestion): "Students of Each level... in case of CS Arun, we have
+3 levels live... show the Report for each level separately." Two locked
+decisions from that confirmation round:
+  1. Student identity in Sections 3/4/5 is now the student's permanent
+     1LAVYA username (student_profiles/students.lavya_username), with
+     activity merged across every linked telegram_user_id (phone) --
+     matching telegram/database/leaderboard_metrics.py's own "one
+     identity, several phones" rollup, not a new mechanism. A student's
+     linked chat_ids are still shown (comma-joined) so a faculty can
+     still identify/message them -- just no longer the PRIMARY key.
+  2. The whole report is now built once per (course, level) pair in the
+     tenant's own content_scope (single combined document, level sections
+     stacked inside -- Pranav's confirmed choice over separate files per
+     level), reusing content_availability()'s existing source of that
+     (course, level) list -- no new config.
 --------------------------------------------------------------------------------
-Six sections, every one a plain deterministic table (no narrative text,
-no scoring/opinion) built straight from platform activity logs:
+Six sections per level, every one a plain deterministic table (no
+narrative text, no scoring/opinion) built straight from platform activity
+logs:
 
   1. content_availability()   -- which (course, level, subject) this
                                   faculty's students can access, and how
@@ -25,14 +44,14 @@ no scoring/opinion) built straight from platform activity logs:
                                   human_id-derived counter the Course
                                   Catalog page already uses -- not a second
                                   counting method.
-  2. chapter_stats()          -- per chapter, across every subject/course
-                                  this faculty's bot(s) serve: unique
-                                  students, MCQ shown/answered/correct/
-                                  accuracy, time spent, descriptive views.
-                                  Sorted most-practiced first.
-  3. student_performance()    -- per student (chat ID): the same metrics,
-                                  platform-activity-log derived, sorted
-                                  most-active first.
+  2. chapter_stats()          -- per chapter within ONE (course, level):
+                                  unique students (by username), MCQ
+                                  shown/answered/correct/accuracy, time
+                                  spent, descriptive views. Sorted
+                                  most-practiced first.
+  3. student_performance()    -- per STUDENT (by 1LAVYA username, every
+                                  linked chat_id's activity merged): the
+                                  same metrics, sorted most-active first.
   4. student_last7days()      -- per (student, day) for the real last 7
                                   UTC calendar days -- a FIXED window,
                                   independent of the report's own date
@@ -52,12 +71,13 @@ no scoring/opinion) built straight from platform activity logs:
                                   answer doesn't show as "100% wrong."
 
 Every function takes an open db connection (and, where relevant, the list
-of bot_ids to scope to) and returns plain JSON-serializable Python -- same
-convention telegram/database/analytics.py already follows. build_report()
-is the one function callers actually need; it assembles all six sections
-plus tenant/range metadata into one dict, which render_full_report_html()/
-build_report_pdf()/build_report_xlsx() then turn into the three downloadable
-formats, and send_report_email() emails the PDF version to the faculty.
+of bot_ids to scope to, plus an optional course/level filter) and returns
+plain JSON-serializable Python -- same convention telegram/database/
+analytics.py already follows. build_report() assembles one level-block per
+(course, level) the tenant serves, each with all 6 sections, plus tenant/
+range metadata into one dict; render_full_report_html()/build_report_pdf()/
+build_report_xlsx() turn that into the three downloadable formats, and
+send_report_email() emails the PDF version to the faculty.
 
 TENANT VS BOT: a tenant (telegram/config/tenants.json) can map to more than
 one bot process (telegram/config/bots.json) -- e.g. CA Pranav has two,
@@ -70,6 +90,15 @@ kind exam/unified (the only kinds that write exam_hub_mcq_attempts/
 exam_hub_descriptive_events) -- a study-only bot contributes nothing to
 those tables today, correctly excluded rather than silently double-counted
 as zero.
+
+DAY END REPORT (2026-08-17): no new mechanism -- "day end" is simply
+build_report(conn, tenant_id, bots, start_date=today, end_date=today) using
+the platform's existing UTC-calendar-day convention (same one
+last_7_days_range() already uses). Exposed two ways: (1) a "Day End
+(Today)" button on the Admin Portal's /reports/faculty page (app.py), and
+(2) telegram/tools/generate_day_end_faculty_reports.py, a scheduled batch
+script that generates + PDF-saves every real faculty's day-end report to
+disk nightly -- see that script's own docstring.
 """
 
 from __future__ import annotations
@@ -152,6 +181,14 @@ def list_reportable_tenants(conn, bots: list) -> list:
     return out
 
 
+def list_faculty_tenant_ids(conn, bots: list) -> list:
+    """Just the real faculty tenants (kind=="faculty") with linked bots --
+    e.g. ["capranav", "csarunchouhan"] today. Used by
+    generate_day_end_faculty_reports.py so that script never needs its own
+    copy of "what counts as a faculty" -- one definition, reused."""
+    return [t["tenant_id"] for t in list_reportable_tenants(conn, bots) if t["kind"] == "faculty"]
+
+
 def _exam_bot_ids_for_tenant(tenant_id: str, bots: list) -> list:
     """Only bots that actually write exam_hub_mcq_attempts/
     exam_hub_descriptive_events -- see module docstring."""
@@ -173,6 +210,19 @@ def _content_scope_entries(conn, tenant: dict) -> list:
         ).fetchall()
         return [{"course": c, "level": l, "subject": s} for c, l, s in rows]
     return [{"course": e["course"], "level": e["level"], "subject": e["subject"]} for e in (scope or [])]
+
+
+def _content_scope_levels(conn, tenant: dict) -> list:
+    """Distinct (course, level) pairs this tenant serves, in first-seen
+    order -- the report is built once per pair (see module docstring,
+    2026-08-17). Reuses _content_scope_entries(), the same source
+    content_availability() already reads -- no second scope mechanism."""
+    seen = []
+    for e in _content_scope_entries(conn, tenant):
+        key = (e["course"], e["level"])
+        if key not in seen:
+            seen.append(key)
+    return seen
 
 
 def content_availability(conn, tenant: dict) -> list:
@@ -205,6 +255,21 @@ def _date_where(column: str, start_date, end_date, params: list) -> list:
     return clauses
 
 
+def _scope_where(course, level, params: list) -> list:
+    """course/level filter shared by every Section 2-6 query -- both
+    exam_hub_mcq_attempts and exam_hub_descriptive_events already carry
+    their own course/level columns per row (set at content-tagging time),
+    so this is a plain equality filter, nothing new to compute."""
+    clauses = []
+    if course:
+        clauses.append("course = ?")
+        params.append(course)
+    if level:
+        clauses.append("level = ?")
+        params.append(level)
+    return clauses
+
+
 def _seconds_capped(shown_at, ended_at):
     if not (shown_at and ended_at):
         return 0.0
@@ -212,26 +277,64 @@ def _seconds_capped(shown_at, ended_at):
     return min(secs, TIME_CAP_SECONDS) if secs and secs >= 0 else 0.0
 
 
-def _student_display_names(conn) -> dict:
-    rows = conn.execute("SELECT telegram_user_id, first_name, last_name, username FROM students").fetchall()
+def today_utc_date() -> str:
+    """The platform's one definition of "today" for date-ranged queries --
+    a UTC calendar day, matching last_7_days_range() and every activity
+    timestamp (db.now() itself is UTC). Used for the Day End Report so it
+    means the same "today" everywhere it's read, not a separate local-time
+    definition."""
+    return datetime.now(timezone.utc).date().isoformat()
+
+
+# ---------------------------------------------------------------------------
+# Identity: username rollup (2026-08-17) -- every student in Sections 3-5
+# is keyed by their permanent 1LAVYA username, with activity merged across
+# every telegram_user_id (phone) linked to it, matching
+# leaderboard_metrics.py's own "one identity, several phones" model. A
+# student who has never touched a wallet-gated flow yet (no lavya_username
+# set) still gets a stable per-chat_id fallback key so no row is ever
+# silently dropped -- just never merged with anyone else's, correctly,
+# since there's nothing yet to merge.
+# ---------------------------------------------------------------------------
+def _uid_identity_map(conn) -> dict:
+    """telegram_user_id -> {"username": str, "display_name": str}.
+    `username` is students.lavya_username when set, else a private
+    per-chat_id placeholder (never shown to a faculty -- display_name
+    always reads naturally either way). display_name prefers the
+    student's own profile display_name (student_profiles, set via
+    "profile" in any bot), then their Telegram first+last name, then their
+    Telegram @handle, then a generic "Student {id}" -- same fallback order
+    student report/leaderboard code already uses elsewhere."""
+    rows = conn.execute(
+        "SELECT s.telegram_user_id, s.lavya_username, s.first_name, s.last_name, s.username, sp.display_name "
+        "FROM students s LEFT JOIN student_profiles sp ON sp.username = s.lavya_username"
+    ).fetchall()
     out = {}
-    for uid, first, last, username in rows:
-        name = " ".join(p for p in (first, last) if p).strip()
-        out[uid] = name or username or f"Student {uid}"
+    for uid, lavya_username, first, last, tg_username, profile_display in rows:
+        username = lavya_username or f"__unlinked_{uid}"
+        name = (profile_display or "").strip() or " ".join(p for p in (first, last) if p).strip() \
+            or tg_username or f"Student {uid}"
+        out[uid] = {"username": username, "display_name": name}
     return out
 
 
+def _identity_for(uid_map: dict, uid: int) -> dict:
+    return uid_map.get(uid) or {"username": f"__unlinked_{uid}", "display_name": f"Student {uid}"}
+
+
 # ---------------------------------------------------------------------------
-# Section 2 -- chapter-wise practice, across every subject/course this
-# faculty's bots serve
+# Section 2 -- chapter-wise practice, within ONE (course, level)
 # ---------------------------------------------------------------------------
-def chapter_stats(conn, bot_ids: list, start_date: str = None, end_date: str = None) -> list:
+def chapter_stats(conn, bot_ids: list, start_date: str = None, end_date: str = None,
+                   course: str = None, level: str = None, uid_map: dict = None) -> list:
     if not bot_ids:
         return []
+    uid_map = uid_map if uid_map is not None else _uid_identity_map(conn)
     placeholders = ",".join("?" * len(bot_ids))
 
     mcq_params = list(bot_ids)
-    mcq_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, mcq_params)
+    mcq_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, mcq_params) \
+        + _scope_where(course, level, mcq_params)
     mcq_rows = conn.execute(
         f"""SELECT chapter_slug, chapter_label, course, level, telegram_user_id, shown_at, answered_at, is_correct
             FROM exam_hub_mcq_attempts WHERE {' AND '.join(mcq_where)}""",
@@ -239,44 +342,45 @@ def chapter_stats(conn, bot_ids: list, start_date: str = None, end_date: str = N
     ).fetchall()
 
     desc_params = list(bot_ids)
-    desc_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, desc_params)
+    desc_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, desc_params) \
+        + _scope_where(course, level, desc_params)
     desc_rows = conn.execute(
         f"""SELECT chapter_slug, chapter_label, course, level, telegram_user_id, shown_at, answer_shown_at
             FROM exam_hub_descriptive_events WHERE {' AND '.join(desc_where)}""",
         desc_params,
     ).fetchall()
 
-    def _blank(chapter_slug, chapter_label, course, level):
+    def _blank(chapter_slug, chapter_label, course_, level_):
         return {
-            "chapter_slug": chapter_slug, "chapter_label": chapter_label or chapter_slug, "course": course, "level": level,
+            "chapter_slug": chapter_slug, "chapter_label": chapter_label or chapter_slug, "course": course_, "level": level_,
             "mcq_shown": 0, "mcq_answered": 0, "mcq_correct": 0, "mcq_seconds": 0.0,
-            "descriptive_shown": 0, "descriptive_seconds": 0.0, "students": set(),
+            "descriptive_shown": 0, "descriptive_seconds": 0.0, "usernames": set(),
         }
 
     by_chapter = {}
-    for chapter_slug, chapter_label, course, level, uid, shown_at, answered_at, is_correct in mcq_rows:
+    for chapter_slug, chapter_label, c_, l_, uid, shown_at, answered_at, is_correct in mcq_rows:
         key = chapter_slug or "unknown"
-        c = by_chapter.setdefault(key, _blank(key, chapter_label, course, level))
+        c = by_chapter.setdefault(key, _blank(key, chapter_label, c_, l_))
         c["mcq_shown"] += 1
-        c["students"].add(uid)
+        c["usernames"].add(_identity_for(uid_map, uid)["username"])
         if answered_at is not None:
             c["mcq_answered"] += 1
             c["mcq_seconds"] += _seconds_capped(shown_at, answered_at)
         if is_correct == 1:
             c["mcq_correct"] += 1
 
-    for chapter_slug, chapter_label, course, level, uid, shown_at, answer_shown_at in desc_rows:
+    for chapter_slug, chapter_label, c_, l_, uid, shown_at, answer_shown_at in desc_rows:
         key = chapter_slug or "unknown"
-        c = by_chapter.setdefault(key, _blank(key, chapter_label, course, level))
+        c = by_chapter.setdefault(key, _blank(key, chapter_label, c_, l_))
         c["descriptive_shown"] += 1
-        c["students"].add(uid)
+        c["usernames"].add(_identity_for(uid_map, uid)["username"])
         c["descriptive_seconds"] += _seconds_capped(shown_at, answer_shown_at)
 
     out = []
     for c in by_chapter.values():
         out.append({
             "chapter_slug": c["chapter_slug"], "chapter_label": c["chapter_label"],
-            "course": c["course"], "level": c["level"], "unique_students": len(c["students"]),
+            "course": c["course"], "level": c["level"], "unique_students": len(c["usernames"]),
             "mcq_shown": c["mcq_shown"], "mcq_answered": c["mcq_answered"], "mcq_correct": c["mcq_correct"],
             "mcq_accuracy_pct": round(100 * c["mcq_correct"] / c["mcq_answered"], 1) if c["mcq_answered"] else None,
             "time_spent_minutes": round((c["mcq_seconds"] + c["descriptive_seconds"]) / 60, 1),
@@ -287,23 +391,27 @@ def chapter_stats(conn, bot_ids: list, start_date: str = None, end_date: str = N
 
 
 # ---------------------------------------------------------------------------
-# Section 3 -- student-wise performance
+# Section 3 -- student-wise performance, by username (every linked phone
+# merged), within ONE (course, level)
 # ---------------------------------------------------------------------------
-def student_performance(conn, bot_ids: list, start_date: str = None, end_date: str = None) -> list:
+def student_performance(conn, bot_ids: list, start_date: str = None, end_date: str = None,
+                         course: str = None, level: str = None, uid_map: dict = None) -> list:
     if not bot_ids:
         return []
-    names = _student_display_names(conn)
+    uid_map = uid_map if uid_map is not None else _uid_identity_map(conn)
     placeholders = ",".join("?" * len(bot_ids))
 
     def _blank():
-        return {"mcq_shown": 0, "mcq_answered": 0, "mcq_correct": 0, "descriptive_shown": 0, "seconds": 0.0, "last_active_at": None}
+        return {"mcq_shown": 0, "mcq_answered": 0, "mcq_correct": 0, "descriptive_shown": 0,
+                "seconds": 0.0, "last_active_at": None, "chat_ids": set(), "display_name": None}
 
     def _bump_last_active(rec, *timestamps):
         candidates = [t for t in ([rec["last_active_at"]] + list(timestamps)) if t]
         rec["last_active_at"] = max(candidates) if candidates else None
 
     mcq_params = list(bot_ids)
-    mcq_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, mcq_params)
+    mcq_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, mcq_params) \
+        + _scope_where(course, level, mcq_params)
     mcq_rows = conn.execute(
         f"""SELECT telegram_user_id, shown_at, answered_at, is_correct
             FROM exam_hub_mcq_attempts WHERE {' AND '.join(mcq_where)}""",
@@ -311,7 +419,8 @@ def student_performance(conn, bot_ids: list, start_date: str = None, end_date: s
     ).fetchall()
 
     desc_params = list(bot_ids)
-    desc_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, desc_params)
+    desc_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, desc_params) \
+        + _scope_where(course, level, desc_params)
     desc_rows = conn.execute(
         f"""SELECT telegram_user_id, shown_at, answer_shown_at
             FROM exam_hub_descriptive_events WHERE {' AND '.join(desc_where)}""",
@@ -320,7 +429,10 @@ def student_performance(conn, bot_ids: list, start_date: str = None, end_date: s
 
     by_student = {}
     for uid, shown_at, answered_at, is_correct in mcq_rows:
-        s = by_student.setdefault(uid, _blank())
+        ident = _identity_for(uid_map, uid)
+        s = by_student.setdefault(ident["username"], _blank())
+        s["display_name"] = ident["display_name"]
+        s["chat_ids"].add(uid)
         s["mcq_shown"] += 1
         _bump_last_active(s, shown_at, answered_at)
         if answered_at is not None:
@@ -330,15 +442,19 @@ def student_performance(conn, bot_ids: list, start_date: str = None, end_date: s
             s["mcq_correct"] += 1
 
     for uid, shown_at, answer_shown_at in desc_rows:
-        s = by_student.setdefault(uid, _blank())
+        ident = _identity_for(uid_map, uid)
+        s = by_student.setdefault(ident["username"], _blank())
+        s["display_name"] = ident["display_name"]
+        s["chat_ids"].add(uid)
         s["descriptive_shown"] += 1
         _bump_last_active(s, shown_at, answer_shown_at)
         s["seconds"] += _seconds_capped(shown_at, answer_shown_at)
 
     out = []
-    for uid, s in by_student.items():
+    for username, s in by_student.items():
         out.append({
-            "telegram_user_id": uid, "display_name": names.get(uid, f"Student {uid}"),
+            "username": username, "display_name": s["display_name"] or username,
+            "chat_ids": sorted(s["chat_ids"]),
             "mcq_shown": s["mcq_shown"], "mcq_answered": s["mcq_answered"], "mcq_correct": s["mcq_correct"],
             "accuracy_pct": round(100 * s["mcq_correct"] / s["mcq_answered"], 1) if s["mcq_answered"] else None,
             "descriptive_shown": s["descriptive_shown"],
@@ -351,40 +467,50 @@ def student_performance(conn, bot_ids: list, start_date: str = None, end_date: s
 
 # ---------------------------------------------------------------------------
 # Section 4 -- last 7 real UTC calendar days, student-wise (a fixed window,
-# independent of the report's own chosen date range -- see module docstring)
+# independent of the report's own chosen date range -- see module
+# docstring), within ONE (course, level)
 # ---------------------------------------------------------------------------
 def last_7_days_range() -> tuple:
     today = datetime.now(timezone.utc).date()
     return (today - timedelta(days=6)).isoformat(), today.isoformat()
 
 
-def student_last7days(conn, bot_ids: list) -> list:
+def student_last7days(conn, bot_ids: list, course: str = None, level: str = None, uid_map: dict = None) -> list:
     if not bot_ids:
         return []
+    uid_map = uid_map if uid_map is not None else _uid_identity_map(conn)
     start, end = last_7_days_range()
-    names = _student_display_names(conn)
     placeholders = ",".join("?" * len(bot_ids))
 
+    mcq_params = list(bot_ids) + [start, end]
+    mcq_scope = _scope_where(course, level, mcq_params)
     mcq_rows = conn.execute(
         f"""SELECT telegram_user_id, date(shown_at) AS d, shown_at, answered_at, is_correct
             FROM exam_hub_mcq_attempts
-            WHERE bot_id IN ({placeholders}) AND date(shown_at) BETWEEN ? AND ?""",
-        list(bot_ids) + [start, end],
+            WHERE bot_id IN ({placeholders}) AND date(shown_at) BETWEEN ? AND ?
+            {' AND ' + ' AND '.join(mcq_scope) if mcq_scope else ''}""",
+        mcq_params,
     ).fetchall()
+    desc_params = list(bot_ids) + [start, end]
+    desc_scope = _scope_where(course, level, desc_params)
     desc_rows = conn.execute(
         f"""SELECT telegram_user_id, date(shown_at) AS d, shown_at, answer_shown_at
             FROM exam_hub_descriptive_events
-            WHERE bot_id IN ({placeholders}) AND date(shown_at) BETWEEN ? AND ?""",
-        list(bot_ids) + [start, end],
+            WHERE bot_id IN ({placeholders}) AND date(shown_at) BETWEEN ? AND ?
+            {' AND ' + ' AND '.join(desc_scope) if desc_scope else ''}""",
+        desc_params,
     ).fetchall()
 
-    def _blank(uid, d):
-        return {"telegram_user_id": uid, "date": d, "mcq_shown": 0, "mcq_answered": 0,
-                "mcq_correct": 0, "descriptive_shown": 0, "seconds": 0.0}
+    def _blank(username, d):
+        return {"username": username, "date": d, "mcq_shown": 0, "mcq_answered": 0,
+                "mcq_correct": 0, "descriptive_shown": 0, "seconds": 0.0, "display_name": None, "chat_ids": set()}
 
     by_key = {}
     for uid, d, shown_at, answered_at, is_correct in mcq_rows:
-        r = by_key.setdefault((uid, d), _blank(uid, d))
+        ident = _identity_for(uid_map, uid)
+        r = by_key.setdefault((ident["username"], d), _blank(ident["username"], d))
+        r["display_name"] = ident["display_name"]
+        r["chat_ids"].add(uid)
         r["mcq_shown"] += 1
         if answered_at is not None:
             r["mcq_answered"] += 1
@@ -392,15 +518,18 @@ def student_last7days(conn, bot_ids: list) -> list:
         if is_correct == 1:
             r["mcq_correct"] += 1
     for uid, d, shown_at, answer_shown_at in desc_rows:
-        r = by_key.setdefault((uid, d), _blank(uid, d))
+        ident = _identity_for(uid_map, uid)
+        r = by_key.setdefault((ident["username"], d), _blank(ident["username"], d))
+        r["display_name"] = ident["display_name"]
+        r["chat_ids"].add(uid)
         r["descriptive_shown"] += 1
         r["seconds"] += _seconds_capped(shown_at, answer_shown_at)
 
     out = []
     for r in by_key.values():
         out.append({
-            "telegram_user_id": r["telegram_user_id"],
-            "display_name": names.get(r["telegram_user_id"], f"Student {r['telegram_user_id']}"),
+            "username": r["username"], "display_name": r["display_name"] or r["username"],
+            "chat_ids": sorted(r["chat_ids"]),
             "date": r["date"], "mcq_shown": r["mcq_shown"], "mcq_answered": r["mcq_answered"], "mcq_correct": r["mcq_correct"],
             "accuracy_pct": round(100 * r["mcq_correct"] / r["mcq_answered"], 1) if r["mcq_answered"] else None,
             "descriptive_shown": r["descriptive_shown"], "time_spent_minutes": round(r["seconds"] / 60, 1),
@@ -411,16 +540,19 @@ def student_last7days(conn, bot_ids: list) -> list:
 
 # ---------------------------------------------------------------------------
 # Section 5 -- student x chapter matrix ("which student is doing which
-# chapters the most"), ranked within each student's own activity
+# chapters the most"), ranked within each student's own activity, by
+# username (every linked phone merged), within ONE (course, level)
 # ---------------------------------------------------------------------------
-def student_chapter_matrix(conn, bot_ids: list, start_date: str = None, end_date: str = None) -> list:
+def student_chapter_matrix(conn, bot_ids: list, start_date: str = None, end_date: str = None,
+                            course: str = None, level: str = None, uid_map: dict = None) -> list:
     if not bot_ids:
         return []
-    names = _student_display_names(conn)
+    uid_map = uid_map if uid_map is not None else _uid_identity_map(conn)
     placeholders = ",".join("?" * len(bot_ids))
 
     mcq_params = list(bot_ids)
-    mcq_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, mcq_params)
+    mcq_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, mcq_params) \
+        + _scope_where(course, level, mcq_params)
     mcq_rows = conn.execute(
         f"""SELECT telegram_user_id, chapter_slug, chapter_label, is_correct
             FROM exam_hub_mcq_attempts WHERE {' AND '.join(mcq_where)}""",
@@ -428,34 +560,42 @@ def student_chapter_matrix(conn, bot_ids: list, start_date: str = None, end_date
     ).fetchall()
 
     desc_params = list(bot_ids)
-    desc_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, desc_params)
+    desc_where = [f"bot_id IN ({placeholders})"] + _date_where("shown_at", start_date, end_date, desc_params) \
+        + _scope_where(course, level, desc_params)
     desc_rows = conn.execute(
         f"""SELECT telegram_user_id, chapter_slug, chapter_label
             FROM exam_hub_descriptive_events WHERE {' AND '.join(desc_where)}""",
         desc_params,
     ).fetchall()
 
-    def _blank(uid, chapter_slug, chapter_label):
-        return {"telegram_user_id": uid, "chapter_slug": chapter_slug, "chapter_label": chapter_label or chapter_slug,
-                "mcq_attempted": 0, "mcq_correct": 0, "descriptive_shown": 0}
+    def _blank(username, chapter_slug, chapter_label):
+        return {"username": username, "chapter_slug": chapter_slug, "chapter_label": chapter_label or chapter_slug,
+                "mcq_attempted": 0, "mcq_correct": 0, "descriptive_shown": 0, "display_name": None, "chat_ids": set()}
 
     by_student_chapter = {}
     for uid, chapter_slug, chapter_label, is_correct in mcq_rows:
-        key = (uid, chapter_slug or "unknown")
-        c = by_student_chapter.setdefault(key, _blank(uid, key[1], chapter_label))
+        ident = _identity_for(uid_map, uid)
+        key = (ident["username"], chapter_slug or "unknown")
+        c = by_student_chapter.setdefault(key, _blank(ident["username"], key[1], chapter_label))
+        c["display_name"] = ident["display_name"]
+        c["chat_ids"].add(uid)
         c["mcq_attempted"] += 1
         if is_correct == 1:
             c["mcq_correct"] += 1
     for uid, chapter_slug, chapter_label in desc_rows:
-        key = (uid, chapter_slug or "unknown")
-        c = by_student_chapter.setdefault(key, _blank(uid, key[1], chapter_label))
+        ident = _identity_for(uid_map, uid)
+        key = (ident["username"], chapter_slug or "unknown")
+        c = by_student_chapter.setdefault(key, _blank(ident["username"], key[1], chapter_label))
+        c["display_name"] = ident["display_name"]
+        c["chat_ids"].add(uid)
         c["descriptive_shown"] += 1
 
     per_student = defaultdict(list)
     for c in by_student_chapter.values():
         c["accuracy_pct"] = round(100 * c["mcq_correct"] / c["mcq_attempted"], 1) if c["mcq_attempted"] else None
-        c["display_name"] = names.get(c["telegram_user_id"], f"Student {c['telegram_user_id']}")
-        per_student[c["telegram_user_id"]].append(c)
+        c["display_name"] = c["display_name"] or c["username"]
+        c["chat_ids"] = sorted(c["chat_ids"])
+        per_student[c["username"]].append(c)
 
     out = []
     for chapters in per_student.values():
@@ -469,15 +609,18 @@ def student_chapter_matrix(conn, bot_ids: list, start_date: str = None, end_date
 
 # ---------------------------------------------------------------------------
 # Section 6 -- question-wise difficulty: which MCQs are most often wrong,
-# and what students chose instead of the right answer
+# and what students chose instead of the right answer, within ONE
+# (course, level)
 # ---------------------------------------------------------------------------
 def question_difficulty(conn, bot_ids: list, start_date: str = None, end_date: str = None,
+                         course: str = None, level: str = None,
                          min_attempts: int = MIN_ATTEMPTS_FOR_DIFFICULTY, limit: int = None) -> list:
     if not bot_ids:
         return []
     placeholders = ",".join("?" * len(bot_ids))
     params = list(bot_ids)
-    where = [f"bot_id IN ({placeholders})", "answered_at IS NOT NULL"] + _date_where("shown_at", start_date, end_date, params)
+    where = [f"bot_id IN ({placeholders})", "answered_at IS NOT NULL"] + _date_where("shown_at", start_date, end_date, params) \
+        + _scope_where(course, level, params)
     rows = conn.execute(
         f"""SELECT mcq_id, human_id, chapter_label, course, level, correct_option, selected_option, is_correct
             FROM exam_hub_mcq_attempts WHERE {' AND '.join(where)}""",
@@ -485,9 +628,9 @@ def question_difficulty(conn, bot_ids: list, start_date: str = None, end_date: s
     ).fetchall()
 
     by_q = {}
-    for mcq_id, human_id, chapter_label, course, level, correct_option, selected_option, is_correct in rows:
+    for mcq_id, human_id, chapter_label, course_, level_, correct_option, selected_option, is_correct in rows:
         q = by_q.setdefault(mcq_id, {
-            "mcq_id": mcq_id, "human_id": human_id, "chapter_label": chapter_label, "course": course, "level": level,
+            "mcq_id": mcq_id, "human_id": human_id, "chapter_label": chapter_label, "course": course_, "level": level_,
             "correct_option": correct_option, "times_answered": 0, "times_wrong": 0, "wrong_option_counts": defaultdict(int),
         })
         if human_id and not q["human_id"]:
@@ -515,7 +658,44 @@ def question_difficulty(conn, bot_ids: list, start_date: str = None, end_date: s
 
 
 # ---------------------------------------------------------------------------
-# Combined report
+# One level-block: all 6 sections, scoped to ONE (course, level) pair,
+# plus a scorecard summary (unique students / MCQs shown / avg accuracy /
+# time spent) computed from Section 3's own totals -- never a separate
+# count, so the scorecard can never disagree with the table beneath it.
+# ---------------------------------------------------------------------------
+def build_level_report(conn, tenant: dict, course: str, level: str, exam_bot_ids: list,
+                        start_date: str, end_date: str, uid_map: dict) -> dict:
+    subjects = sorted({e["subject"] for e in _content_scope_entries(conn, tenant)
+                        if e["course"] == course and e["level"] == level})
+    content = [r for r in content_availability(conn, tenant) if r["course"] == course and r["level"] == level]
+    students = student_performance(conn, exam_bot_ids, start_date, end_date, course=course, level=level, uid_map=uid_map)
+
+    total_mcq_shown = sum(r["mcq_shown"] for r in students)
+    total_mcq_answered = sum(r["mcq_answered"] for r in students)
+    total_mcq_correct = sum(r["mcq_correct"] for r in students)
+    total_time = round(sum(r["time_spent_minutes"] for r in students), 1)
+    avg_accuracy = round(100 * total_mcq_correct / total_mcq_answered, 1) if total_mcq_answered else None
+
+    return {
+        "course": course, "level": level, "subjects": subjects,
+        "content_availability": content,
+        "chapter_stats": chapter_stats(conn, exam_bot_ids, start_date, end_date, course=course, level=level, uid_map=uid_map),
+        "student_performance": students,
+        "last_7_days_rows": student_last7days(conn, exam_bot_ids, course=course, level=level, uid_map=uid_map),
+        "student_chapter_matrix": student_chapter_matrix(conn, exam_bot_ids, start_date, end_date, course=course, level=level, uid_map=uid_map),
+        "question_difficulty": question_difficulty(conn, exam_bot_ids, start_date, end_date, course=course, level=level),
+        "scorecard": {
+            "unique_students": len(students),
+            "total_mcq_shown": total_mcq_shown,
+            "total_mcq_answered": total_mcq_answered,
+            "avg_accuracy_pct": avg_accuracy,
+            "total_time_minutes": total_time,
+        },
+    }
+
+
+# ---------------------------------------------------------------------------
+# Combined report -- one level-block per (course, level) this tenant serves
 # ---------------------------------------------------------------------------
 def build_report(conn, tenant_id: str, bots: list, start_date: str = None, end_date: str = None) -> dict:
     tenants = _load_tenants()
@@ -528,6 +708,13 @@ def build_report(conn, tenant_id: str, bots: list, start_date: str = None, end_d
     l7_start, l7_end = last_7_days_range()
     range_label = f"{start_date or '…'} to {end_date or '…'}" if (start_date or end_date) else "All-time"
     master = faculty_master.get_faculty_master(conn, tenant_id)
+    uid_map = _uid_identity_map(conn)
+
+    level_pairs = _content_scope_levels(conn, tenant)
+    levels = [
+        build_level_report(conn, tenant, course, level, exam_bot_ids, start_date, end_date, uid_map)
+        for course, level in level_pairs
+    ]
 
     return {
         "tenant_id": tenant_id,
@@ -540,95 +727,157 @@ def build_report(conn, tenant_id: str, bots: list, start_date: str = None, end_d
         "start_date": start_date,
         "end_date": end_date,
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "content_availability": content_availability(conn, tenant),
-        "chapter_stats": chapter_stats(conn, exam_bot_ids, start_date, end_date),
-        "student_performance": student_performance(conn, exam_bot_ids, start_date, end_date),
-        "last_7_days": {"start": l7_start, "end": l7_end, "rows": student_last7days(conn, exam_bot_ids)},
-        "student_chapter_matrix": student_chapter_matrix(conn, exam_bot_ids, start_date, end_date),
-        "question_difficulty": question_difficulty(conn, exam_bot_ids, start_date, end_date),
+        "last_7_days": {"start": l7_start, "end": l7_end},
+        "levels": levels,
     }
 
 
 # ---------------------------------------------------------------------------
-# Rendering -- one branded HTML source, reused for the "download as HTML"
-# button (served as-is) and "download as PDF" (the same HTML through
-# xhtml2pdf) -- same discipline exporters.py's render_printable_table()
-# already follows, applied to a multi-section document instead of one
-# table.
+# Rendering -- one branded, colorful HTML source, reused for the "download
+# as HTML" button (served as-is) and "download as PDF" (the same HTML
+# through xhtml2pdf) -- same discipline exporters.py's
+# render_printable_table() already follows, applied to a multi-level,
+# multi-section document. Colorful by design (2026-08-17, Pranav: "Make
+# sure pdf is colorful and easy to understand") -- navy/gold brand banners
+# per level, a 4-tile scorecard per level, colored accuracy/wrong-%
+# badges (green/amber/red by threshold), alternating row bands. All of it
+# is plain inline CSS (xhtml2pdf has weak support for CSS custom
+# properties / :nth-child / flexbox -- see CLAUDE.md section 7 and this
+# module's own history) -- no gradients, no external assets beyond the
+# already-embedded brand_kit logo.
 # ---------------------------------------------------------------------------
 def _fmt(v):
     return "—" if v is None else v
 
 
-def _render_table(headers: list, rows: list, colors: dict) -> str:
-    navy, ink = colors["navy"], colors["ink"]
+def _pct_badge(pct, good_high: bool = True):
+    """A colored chip for a percentage value. good_high=True means a
+    HIGHER number is good (accuracy); False means a HIGHER number is bad
+    (wrong %) -- same three-color thresholds either way, just which end
+    is green vs red flips."""
+    if pct is None:
+        return '<span style="color:#999;">—</span>'
+    score = pct if good_high else (100 - pct)
+    color = "#1e8449" if score >= 70 else ("#b7791f" if score >= 40 else "#c0392b")
+    return (f'<span style="display:inline-block; padding:2px 9px; border-radius:10px; '
+            f'background:{color}; color:#ffffff; font-weight:bold; font-size:10.5px;">{pct}%</span>')
+
+
+def _chat_ids_cell(ids):
+    if not ids:
+        return "—"
+    return ", ".join(str(i) for i in ids)
+
+
+def _render_table(headers: list, rows: list, colors: dict, cell_renderers: dict = None) -> str:
+    cell_renderers = cell_renderers or {}
+    navy = colors["navy"]
     head = "".join(
-        f'<th style="text-align:left; padding:6px 8px; border-bottom:2px solid {navy}; font-size:10px; '
-        f'text-transform:uppercase; color:{ink};">{h}</th>'
+        f'<th style="text-align:left; padding:7px 8px; font-size:10px; text-transform:uppercase; '
+        f'color:#ffffff;">{h}</th>'
         for h in headers
-    )
-    body = "".join(
-        "<tr>" + "".join(
-            f'<td style="padding:5px 8px; border-bottom:1px solid #e2e2e2; font-size:11px;">{_fmt(v)}</td>' for v in row
-        ) + "</tr>"
-        for row in rows
     )
     if not rows:
         body = (f'<tr><td colspan="{len(headers)}" style="padding:12px; color:#888; text-align:center; font-size:11px;">'
                  f'No data for this period.</td></tr>')
-    return f'<table style="width:100%; border-collapse:collapse; margin-bottom:22px;"><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>'
+    else:
+        body_parts = []
+        for i, row in enumerate(rows):
+            bg = "#f4f6fb" if i % 2 else "#ffffff"
+            cells = "".join(
+                f'<td style="padding:5px 8px; border-bottom:1px solid #e6e6e6; font-size:11px;">'
+                f'{cell_renderers[j](v) if j in cell_renderers else _fmt(v)}</td>'
+                for j, v in enumerate(row)
+            )
+            body_parts.append(f'<tr style="background-color:{bg};">{cells}</tr>')
+        body = "".join(body_parts)
+    return (f'<table style="width:100%; border-collapse:collapse; margin-bottom:22px;">'
+            f'<thead><tr style="background-color:{navy};">{head}</tr></thead><tbody>{body}</tbody></table>')
 
 
-def _report_sections(data: dict) -> list:
-    l7 = data["last_7_days"]
+def _level_banner_html(level_block: dict, colors: dict) -> str:
+    navy, gold = colors["navy"], colors["gold"]
+    subj = ", ".join(level_block["subjects"]) or "—"
+    sc = level_block["scorecard"]
+    tiles = [
+        ("Unique Students", sc["unique_students"]),
+        ("MCQs Shown", sc["total_mcq_shown"]),
+        ("Avg Accuracy", f'{sc["avg_accuracy_pct"]}%' if sc["avg_accuracy_pct"] is not None else "—"),
+        ("Time Spent", f'{sc["total_time_minutes"]} min'),
+    ]
+    tile_bgs = ["#eaf1fb", "#fdf3e2", "#eaf1fb", "#fdf3e2"]
+    tiles_html = "".join(
+        f'<td style="text-align:center; padding:12px 6px; background-color:{tile_bgs[i]}; border-radius:6px;">'
+        f'<div style="font-size:19px; font-weight:bold; color:{navy};">{v}</div>'
+        f'<div style="font-size:9px; color:#777; text-transform:uppercase;">{label}</div></td>'
+        for i, (label, v) in enumerate(tiles)
+    )
+    return f"""
+<table style="width:100%; border-collapse:collapse; margin:28px 0 6px;"><tr>
+  <td style="background-color:{navy}; padding:11px 16px; border-radius:6px;">
+    <span style="color:#ffffff; font-size:15px; font-weight:bold;">LEVEL: {level_block['course']} — {level_block['level']}</span>
+    <span style="color:{gold}; font-size:11px; margin-left:12px;">{subj}</span>
+  </td>
+</tr></table>
+<table style="width:100%; border-collapse:separate; border-spacing:6px 0; margin-bottom:16px;"><tr>{tiles_html}</tr></table>
+""".strip()
+
+
+def _level_sections(level_block: dict, l7_start: str = "", l7_end: str = "") -> list:
+    l7_rows = level_block["last_7_days_rows"]
     return [
-        ("1. Content Availability -- Subjects & Levels Live",
-         ["Course", "Level", "Subject", "Chapters w/ Content", "Chapters Total", "MCQ Count", "Descriptive Count", "Total Questions"],
-         [[r["course"], r["level"], r["subject"], r["chapters_with_content"], r["chapters_total"],
-           r["mcq_count"], r["descriptive_count"], r["total_count"]] for r in data["content_availability"]]),
-        ("2. Chapter-wise Practice -- Most Accessed / Practiced Chapters",
-         ["Chapter", "Course", "Level", "Unique Students", "MCQ Shown", "MCQ Answered", "MCQ Correct",
-          "MCQ Accuracy %", "Time Spent (min)", "Descriptive Viewed"],
-         [[r["chapter_label"], r["course"], r["level"], r["unique_students"], r["mcq_shown"], r["mcq_answered"],
-           r["mcq_correct"], r["mcq_accuracy_pct"], r["time_spent_minutes"], r["descriptive_shown"]] for r in data["chapter_stats"]]),
-        ("3. Student Performance -- All Students",
-         ["Chat ID", "Student", "MCQ Shown", "MCQ Answered", "MCQ Correct", "Accuracy %",
-          "Descriptive Viewed", "Time Spent (min)", "Last Active"],
-         [[r["telegram_user_id"], r["display_name"], r["mcq_shown"], r["mcq_answered"], r["mcq_correct"],
+        ("1. Content Availability", ["Subject", "Chapters w/ Content", "Chapters Total", "MCQ Count", "Descriptive Count", "Total Questions"],
+         [[r["subject"], r["chapters_with_content"], r["chapters_total"], r["mcq_count"], r["descriptive_count"], r["total_count"]]
+          for r in level_block["content_availability"]], {}),
+        ("2. Chapter-wise Practice", ["Chapter", "Unique Students", "MCQ Shown", "MCQ Answered", "MCQ Correct",
+                                       "Accuracy", "Time Spent (min)", "Descriptive Viewed"],
+         [[r["chapter_label"], r["unique_students"], r["mcq_shown"], r["mcq_answered"], r["mcq_correct"],
+           r["mcq_accuracy_pct"], r["time_spent_minutes"], r["descriptive_shown"]] for r in level_block["chapter_stats"]],
+         {5: _pct_badge}),
+        ("3. Student Performance", ["1LAVYA Username", "Student", "Chat ID(s)", "MCQ Shown", "MCQ Answered", "MCQ Correct",
+                                      "Accuracy", "Descriptive Viewed", "Time Spent (min)", "Last Active"],
+         [[r["username"], r["display_name"], _chat_ids_cell(r["chat_ids"]), r["mcq_shown"], r["mcq_answered"], r["mcq_correct"],
            r["accuracy_pct"], r["descriptive_shown"], r["time_spent_minutes"],
-           (r["last_active_at"] or "—")[:19].replace("T", " ")] for r in data["student_performance"]]),
-        (f"4. Last 7 Days Activity, Student-wise ({l7['start']} to {l7['end']})",
-         ["Date", "Chat ID", "Student", "MCQ Shown", "MCQ Answered", "MCQ Correct", "Accuracy %",
-          "Descriptive Viewed", "Time Spent (min)"],
-         [[r["date"], r["telegram_user_id"], r["display_name"], r["mcq_shown"], r["mcq_answered"], r["mcq_correct"],
-           r["accuracy_pct"], r["descriptive_shown"], r["time_spent_minutes"]] for r in l7["rows"]]),
-        ("5. Student x Chapter Matrix -- Which Chapters Each Student Practices Most",
-         ["Student", "Chat ID", "Rank (within this student's own activity)", "Chapter", "MCQ Attempted",
-          "MCQ Correct", "Accuracy %", "Descriptive Viewed"],
-         [[r["display_name"], r["telegram_user_id"], r["rank_for_student"], r["chapter_label"],
-           r["mcq_attempted"], r["mcq_correct"], r["accuracy_pct"], r["descriptive_shown"]] for r in data["student_chapter_matrix"]]),
-        ("6. Question-wise Difficulty -- Most Wrongly Answered MCQs (min. 2 attempts)",
-         ["Question ID", "Chapter", "Course", "Level", "Times Answered", "Times Wrong", "Wrong %",
-          "Correct Option", "Most Common Wrong Option Chosen", "Chose It (count)"],
-         [[r["human_id"], r["chapter_label"], r["course"], r["level"], r["times_answered"], r["times_wrong"],
-           r["wrong_pct"], r["correct_option"], r["most_common_wrong_option"], r["most_common_wrong_option_count"]]
-          for r in data["question_difficulty"]]),
+           (r["last_active_at"] or "—")[:19].replace("T", " ")] for r in level_block["student_performance"]],
+         {6: _pct_badge}),
+        (f"4. Last 7 Days Activity, Student-wise ({l7_start} to {l7_end})",
+         ["Date", "1LAVYA Username", "Student", "MCQ Shown", "MCQ Answered", "MCQ Correct", "Accuracy", "Descriptive Viewed", "Time Spent (min)"],
+         [[r["date"], r["username"], r["display_name"], r["mcq_shown"], r["mcq_answered"], r["mcq_correct"],
+           r["accuracy_pct"], r["descriptive_shown"], r["time_spent_minutes"]] for r in l7_rows],
+         {6: _pct_badge}),
+        ("5. Student × Chapter Matrix", ["Student", "1LAVYA Username", "Rank (within student's own activity)", "Chapter",
+                                           "MCQ Attempted", "MCQ Correct", "Accuracy", "Descriptive Viewed"],
+         [[r["display_name"], r["username"], r["rank_for_student"], r["chapter_label"],
+           r["mcq_attempted"], r["mcq_correct"], r["accuracy_pct"], r["descriptive_shown"]]
+          for r in level_block["student_chapter_matrix"]], {6: _pct_badge}),
+        ("6. Question-wise Difficulty (min. 2 real attempts)",
+         ["Question ID", "Chapter", "Times Answered", "Times Wrong", "Wrong %", "Correct Option",
+          "Most Common Wrong Option", "Chose It (count)"],
+         [[r["human_id"], r["chapter_label"], r["times_answered"], r["times_wrong"], r["wrong_pct"],
+           r["correct_option"], r["most_common_wrong_option"], r["most_common_wrong_option_count"]]
+          for r in level_block["question_difficulty"]],
+         {4: lambda v: _pct_badge(v, good_high=False)}),
     ]
 
 
 def render_full_report_html(data: dict) -> str:
     c = brand_kit.colors()
+    l7_start, l7_end = data["last_7_days"]["start"], data["last_7_days"]["end"]
     body_html = ""
-    for title, headers, rows in _report_sections(data):
-        body_html += f'<h2 style="color:{c["navy"]}; font-size:14px; margin:22px 0 8px; font-family:Arial,Helvetica,sans-serif;">{title}</h2>'
-        body_html += _render_table(headers, rows, c)
+    for level_block in data["levels"]:
+        body_html += _level_banner_html(level_block, c)
+        for title, headers, rows, cell_renderers in _level_sections(level_block, l7_start, l7_end):
+            body_html += f'<h3 style="color:{c["navy"]}; font-size:12.5px; margin:16px 0 6px; font-family:Arial,Helvetica,sans-serif;">{title}</h3>'
+            body_html += _render_table(headers, rows, c, cell_renderers)
+    if not data["levels"]:
+        body_html = '<p style="color:#888;">This tenant has no content_scope entries -- nothing to report.</p>'
 
     subtitle = f"{data['display_name']} &middot; {data['range_label']}"
     return f"""<html><head><meta charset="utf-8"><title>Faculty Report -- {data['display_name']}</title></head>
 <body style="font-family:Arial,Helvetica,sans-serif; color:{c['ink']}; margin:24px;">
 {brand_kit.render_header_html("Comprehensive Faculty Report", subtitle)}
-<p style="font-size:10.5px; color:#888;">Bots covered: {', '.join(data['bot_ids']) or '—'} &middot; Report generated {data['generated_at'][:19].replace('T', ' ')} UTC</p>
-<p style="font-size:10px; color:#999;">All figures below are raw, deterministic counts read directly from platform activity logs -- no estimation, scoring, or commentary.</p>
+<p style="font-size:10.5px; color:#888;">Bots covered: {', '.join(data['bot_ids']) or '—'} &middot; Report generated {data['generated_at'][:19].replace('T', ' ')} UTC &middot; Last-7-Days window: {data['last_7_days']['start']} to {data['last_7_days']['end']}</p>
+<p style="font-size:10px; color:#999;">All figures below are raw, deterministic counts read directly from platform activity logs -- no estimation, scoring, or commentary. Students are identified by their permanent 1LAVYA username; activity from every phone/chat linked to that username is merged into one row.</p>
 {body_html}
 {brand_kit.render_footer_html()}
 </body></html>"""
@@ -646,15 +895,22 @@ def build_report_pdf(data: dict) -> bytes:
 def build_report_xlsx(data: dict) -> bytes:
     wb = Workbook()
     wb.remove(wb.active)
-    for title, headers, rows in _report_sections(data):
-        # Excel sheet names cap at 31 chars and can't start with a number
-        # in some strict readers -- strip the leading "N. " section number
-        # and truncate, keeping the sheet tab legible.
-        sheet_name = title.split(" -- ")[0].split(". ", 1)[-1][:31]
-        ws = wb.create_sheet(title=sheet_name)
-        ws.append(headers)
-        for row in rows:
-            ws.append(["" if v is None else v for v in row])
+    l7_start, l7_end = data["last_7_days"]["start"], data["last_7_days"]["end"]
+    for level_block in data["levels"]:
+        level_prefix = f"{level_block['course']}-{level_block['level']}"[:8]
+        for title, headers, rows, _ in _level_sections(level_block, l7_start, l7_end):
+            # Excel sheet names cap at 31 chars and can't start with a number
+            # in some strict readers -- strip the leading "N. " section
+            # number, prefix with a short level code so sheets across
+            # multiple levels don't collide, then truncate.
+            section_name = title.split(" (")[0].split(". ", 1)[-1]
+            sheet_name = f"{level_prefix}-{section_name}"[:31]
+            ws = wb.create_sheet(title=sheet_name)
+            ws.append(headers)
+            for row in rows:
+                ws.append(["" if v is None else v for v in row])
+    if not wb.sheetnames:
+        wb.create_sheet(title="No Content Scope")
     buf = io.BytesIO()
     wb.save(buf)
     return buf.getvalue()
@@ -681,16 +937,18 @@ def resolve_admin_portal_from_address() -> tuple:
 
 def build_report_email_html(data: dict) -> str:
     c = brand_kit.colors()
+    level_list = ", ".join(f"{lv['course']} {lv['level']}" for lv in data["levels"]) or "—"
     return f"""
 <div style="font-family:Arial,Helvetica,sans-serif; max-width:600px; margin:0 auto; padding:24px; color:{c['ink']};">
   <div style="font-size:20px; font-weight:bold; color:{c['navy']}; font-family:Georgia,'Times New Roman',serif;">{brand_kit.BRAND_NAME}</div>
   <div style="font-size:10px; color:{c['gold']}; text-transform:uppercase; margin-bottom:20px;">{brand_kit.TAGLINE}</div>
   <p style="font-size:14px; line-height:1.6;">Hi {data['display_name']},</p>
   <p style="font-size:14px; line-height:1.6;">
-    Attached is your comprehensive bot performance report for <b>{data['range_label']}</b> -- content availability
-    across every subject/level live for you, chapter-wise practice, student-wise performance, the last 7 days'
-    student-wise activity, a student &times; chapter breakdown, and a question-wise difficulty analysis (which
-    MCQs students get wrong most often, and what they chose instead of the right answer).
+    Attached is your comprehensive bot performance report for <b>{data['range_label']}</b> — broken out
+    separately for every level live for you ({level_list}): content availability, chapter-wise practice,
+    student-wise performance, the last 7 days' student-wise activity, a student &times; chapter breakdown,
+    and a question-wise difficulty analysis (which MCQs students get wrong most often, and what they chose
+    instead of the right answer).
   </p>
   {brand_kit.render_email_footer_html("1LAVYA Admin Portal")}
 </div>

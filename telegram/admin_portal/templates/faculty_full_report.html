@@ -3,13 +3,23 @@
 {% block page_title %}Faculty Comprehensive Report{% endblock %}
 {% block content %}
 
+{% macro pct_badge(pct, good_high=True) %}
+  {% if pct is none %}<span style="color:#999;">—</span>
+  {% else %}
+    {% set score = pct if good_high else (100 - pct) %}
+    {% set bg = '#1e8449' if score >= 70 else ('#b7791f' if score >= 40 else '#c0392b') %}
+    <span style="display:inline-block; padding:2px 9px; border-radius:10px; background:{{ bg }}; color:#fff; font-weight:bold; font-size:11px;">{{ pct }}%</span>
+  {% endif %}
+{% endmacro %}
+
 <div class="card">
   <h2>Select Faculty / Bot Pool</h2>
   <p class="card-note">
-    Covers every subject/level live for this faculty, chapter-wise practice, student-wise performance,
-    the last 7 days student-wise, a student &times; chapter breakdown, and a question-wise difficulty
-    analysis (which MCQs students get wrong most often, and what they chose instead of the right answer).
-    All figures are raw, deterministic counts read from platform activity logs -- no commentary.
+    One combined document per faculty, with a separate section for EACH level they teach (e.g. CS Arun
+    Chouhan's 3 live levels each get their own Content Availability / Chapter Practice / Student
+    Performance / Last 7 Days / Student &times; Chapter / Question Difficulty block). Students are
+    identified by their permanent 1LAVYA username, with activity from every linked phone merged into
+    one row. All figures are raw, deterministic counts read from platform activity logs -- no commentary.
   </p>
   <form method="get" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
     <label style="font-size:12.5px; font-weight:600; color:#555;">Faculty / Bot Pool:</label>
@@ -28,6 +38,7 @@
 <div class="card">
   <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
     <span style="font-size:11.5px; color:#999; text-transform:uppercase; letter-spacing:.04em; margin-right:4px;">Range:</span>
+    <a class="btn {{ 'btn-primary' if preset == 'today' else 'btn-secondary' }} btn-sm" href="{{ today_url }}" title="A single day's activity -- generated fresh each time you click, same data source the nightly auto-saved PDF uses.">&#128197; {{ today_label }}</a>
     {% for p, label in range_presets.items() %}
       <a class="btn {{ 'btn-primary' if preset == p else 'btn-secondary' }} btn-sm" href="{{ range_urls[p] }}">{{ label }}</a>
     {% endfor %}
@@ -41,13 +52,14 @@
   </div>
   <div style="font-size:12px; color:#777; margin:8px 0 14px;">
     Showing: <strong>{{ data.range_label }}</strong> &middot; Bots covered: <strong>{{ data.bot_ids | join(', ') or '—' }}</strong>
+    &middot; Levels in this report: <strong>{{ data.levels | length }}</strong>
   </div>
 
   <div class="export-buttons" style="margin-bottom:16px;">
     <span class="export-label">Full Report:</span>
     <a class="btn btn-secondary btn-sm" href="{{ export_urls.html }}">Download HTML</a>
     <a class="btn btn-secondary btn-sm" href="{{ export_urls.xlsx }}">Download Excel</a>
-    <a class="btn btn-secondary btn-sm" href="{{ export_urls.pdf }}">Download PDF</a>
+    <a class="btn btn-secondary btn-sm" href="{{ export_urls.pdf }}">Download PDF (colorful)</a>
   </div>
 
   <form method="post" action="{{ url_for('faculty_report_email', tenant_id=selected_tenant) }}"
@@ -65,120 +77,141 @@
   {% endif %}
 </div>
 
-<div class="card">
-  <h2>1. Content Availability <span style="color:#999; font-weight:normal; font-size:12.5px;">-- Subjects &amp; Levels Live</span></h2>
-  <p class="card-note">What this faculty's students can currently access -- a static snapshot, not date-ranged.</p>
+{% if not data.levels %}
+<div class="card"><p style="color:#999;">This tenant has no content_scope entries yet -- nothing to report.</p></div>
+{% endif %}
+
+{% for lv in data.levels %}
+<div class="card" style="padding:0; overflow:hidden; margin-bottom:24px; border:1px solid #e2e2e2;">
+
+  <div style="background:#09284b; padding:14px 18px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+    <div>
+      <span style="color:#fff; font-size:16px; font-weight:bold;">LEVEL: {{ lv.course }} — {{ lv.level }}</span>
+      <span style="color:#d0942c; font-size:12px; margin-left:12px;">{{ lv.subjects | join(', ') or '—' }}</span>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:10px; padding:14px 18px 4px; flex-wrap:wrap;">
+    {% set tiles = [
+      ('Unique Students', lv.scorecard.unique_students, '#eaf1fb'),
+      ('MCQs Shown', lv.scorecard.total_mcq_shown, '#fdf3e2'),
+      ('Avg Accuracy', (lv.scorecard.avg_accuracy_pct ~ '%') if lv.scorecard.avg_accuracy_pct is not none else '—', '#eaf1fb'),
+      ('Time Spent', (lv.scorecard.total_time_minutes ~ ' min'), '#fdf3e2'),
+    ] %}
+    {% for label, value, bg in tiles %}
+    <div style="flex:1; min-width:120px; text-align:center; padding:12px 8px; background:{{ bg }}; border-radius:6px;">
+      <div style="font-size:20px; font-weight:bold; color:#09284b;">{{ value }}</div>
+      <div style="font-size:9.5px; color:#777; text-transform:uppercase; letter-spacing:.03em;">{{ label }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div style="padding:6px 18px 18px;">
+
+  <h3 style="font-size:13px; color:#09284b; margin:18px 0 6px;">1. Content Availability</h3>
   <div class="table-scroll">
   <table>
-    <thead><tr><th>Course</th><th>Level</th><th>Subject</th><th>Chapters w/ Content</th><th>Chapters Total</th><th>MCQ Count</th><th>Descriptive Count</th><th>Total Questions</th></tr></thead>
+    <thead style="background:#09284b;"><tr><th style="color:#fff;">Subject</th><th style="color:#fff;">Chapters w/ Content</th><th style="color:#fff;">Chapters Total</th><th style="color:#fff;">MCQ Count</th><th style="color:#fff;">Descriptive Count</th><th style="color:#fff;">Total Questions</th></tr></thead>
     <tbody>
-      {% for r in data.content_availability %}
+      {% for r in lv.content_availability %}
       <tr>
-        <td>{{ r.course }}</td><td>{{ r.level }}</td><td>{{ r.subject }}</td>
-        <td>{{ r.chapters_with_content }}</td><td>{{ r.chapters_total }}</td>
+        <td>{{ r.subject }}</td><td>{{ r.chapters_with_content }}</td><td>{{ r.chapters_total }}</td>
         <td>{{ r.mcq_count }}</td><td>{{ r.descriptive_count }}</td><td>{{ r.total_count }}</td>
       </tr>
-      {% else %}<tr><td colspan="8" style="color:#999;">No content_scope entries for this tenant.</td></tr>{% endfor %}
+      {% else %}<tr><td colspan="6" style="color:#999;">No content_scope entries for this level.</td></tr>{% endfor %}
     </tbody>
   </table>
   </div>
-</div>
 
-<div class="card">
-  <h2>2. Chapter-wise Practice <span style="color:#999; font-weight:normal; font-size:12.5px;">(most accessed / practiced first, across every subject &amp; course this faculty serves)</span></h2>
+  <h3 style="font-size:13px; color:#09284b; margin:18px 0 6px;">2. Chapter-wise Practice</h3>
   <div class="table-scroll">
   <table>
-    <thead><tr><th>Chapter</th><th>Course</th><th>Level</th><th>Unique Students</th><th>MCQ Shown</th><th>MCQ Answered</th><th>MCQ Correct</th><th>Accuracy</th><th>Time Spent (min)</th><th>Descriptive Viewed</th></tr></thead>
+    <thead style="background:#09284b;"><tr><th style="color:#fff;">Chapter</th><th style="color:#fff;">Unique Students</th><th style="color:#fff;">MCQ Shown</th><th style="color:#fff;">MCQ Answered</th><th style="color:#fff;">MCQ Correct</th><th style="color:#fff;">Accuracy</th><th style="color:#fff;">Time Spent (min)</th><th style="color:#fff;">Descriptive Viewed</th></tr></thead>
     <tbody>
-      {% for r in data.chapter_stats %}
+      {% for r in lv.chapter_stats %}
       <tr>
-        <td>{{ r.chapter_label }}</td><td>{{ r.course }}</td><td>{{ r.level }}</td>
-        <td>{{ r.unique_students }}</td><td>{{ r.mcq_shown }}</td><td>{{ r.mcq_answered }}</td><td>{{ r.mcq_correct }}</td>
-        <td>{% if r.mcq_accuracy_pct is not none %}{{ r.mcq_accuracy_pct }}%{% else %}—{% endif %}</td>
+        <td>{{ r.chapter_label }}</td><td>{{ r.unique_students }}</td>
+        <td>{{ r.mcq_shown }}</td><td>{{ r.mcq_answered }}</td><td>{{ r.mcq_correct }}</td>
+        <td>{{ pct_badge(r.mcq_accuracy_pct) }}</td>
         <td>{{ r.time_spent_minutes }}</td><td>{{ r.descriptive_shown }}</td>
       </tr>
-      {% else %}<tr><td colspan="10" style="color:#999;">No chapter activity recorded in this range.</td></tr>{% endfor %}
+      {% else %}<tr><td colspan="8" style="color:#999;">No chapter activity recorded in this range.</td></tr>{% endfor %}
     </tbody>
   </table>
   </div>
-</div>
 
-<div class="card">
-  <h2>3. Student Performance <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ data.student_performance | length }} student(s))</span></h2>
+  <h3 style="font-size:13px; color:#09284b; margin:18px 0 6px;">3. Student Performance <span style="color:#999; font-weight:normal; font-size:11.5px;">({{ lv.student_performance | length }} student(s))</span></h3>
   <div class="table-scroll">
   <table>
-    <thead><tr><th>Chat ID</th><th>Student</th><th>MCQ Shown</th><th>MCQ Answered</th><th>MCQ Correct</th><th>Accuracy</th><th>Descriptive Viewed</th><th>Time Spent (min)</th><th>Last Active</th></tr></thead>
+    <thead style="background:#09284b;"><tr><th style="color:#fff;">1LAVYA Username</th><th style="color:#fff;">Student</th><th style="color:#fff;">Chat ID(s)</th><th style="color:#fff;">MCQ Shown</th><th style="color:#fff;">MCQ Answered</th><th style="color:#fff;">MCQ Correct</th><th style="color:#fff;">Accuracy</th><th style="color:#fff;">Descriptive Viewed</th><th style="color:#fff;">Time Spent (min)</th><th style="color:#fff;">Last Active</th></tr></thead>
     <tbody>
-      {% for r in data.student_performance %}
+      {% for r in lv.student_performance %}
       <tr>
-        <td>{{ r.telegram_user_id }}</td><td>{{ r.display_name }}</td>
+        <td>{{ r.username }}</td><td>{{ r.display_name }}</td><td>{{ r.chat_ids | join(', ') or '—' }}</td>
         <td>{{ r.mcq_shown }}</td><td>{{ r.mcq_answered }}</td><td>{{ r.mcq_correct }}</td>
-        <td>{% if r.accuracy_pct is not none %}{{ r.accuracy_pct }}%{% else %}—{% endif %}</td>
+        <td>{{ pct_badge(r.accuracy_pct) }}</td>
         <td>{{ r.descriptive_shown }}</td><td>{{ r.time_spent_minutes }}</td>
         <td>{{ (r.last_active_at or '—')[:19].replace('T', ' ') }}</td>
       </tr>
-      {% else %}<tr><td colspan="9" style="color:#999;">No student activity recorded in this range.</td></tr>{% endfor %}
+      {% else %}<tr><td colspan="10" style="color:#999;">No student activity recorded in this range.</td></tr>{% endfor %}
     </tbody>
   </table>
   </div>
-</div>
 
-<div class="card">
-  <h2>4. Last 7 Days Activity, Student-wise <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ data.last_7_days.start }} to {{ data.last_7_days.end }} -- always the real last 7 days, regardless of the range above)</span></h2>
+  <h3 style="font-size:13px; color:#09284b; margin:18px 0 6px;">4. Last 7 Days Activity, Student-wise <span style="color:#999; font-weight:normal; font-size:11.5px;">({{ data.last_7_days.start }} to {{ data.last_7_days.end }} -- always the real last 7 days, regardless of the range above)</span></h3>
   <div class="table-scroll">
   <table>
-    <thead><tr><th>Date</th><th>Chat ID</th><th>Student</th><th>MCQ Shown</th><th>MCQ Answered</th><th>MCQ Correct</th><th>Accuracy</th><th>Descriptive Viewed</th><th>Time Spent (min)</th></tr></thead>
+    <thead style="background:#09284b;"><tr><th style="color:#fff;">Date</th><th style="color:#fff;">1LAVYA Username</th><th style="color:#fff;">Student</th><th style="color:#fff;">MCQ Shown</th><th style="color:#fff;">MCQ Answered</th><th style="color:#fff;">MCQ Correct</th><th style="color:#fff;">Accuracy</th><th style="color:#fff;">Descriptive Viewed</th><th style="color:#fff;">Time Spent (min)</th></tr></thead>
     <tbody>
-      {% for r in data.last_7_days.rows %}
+      {% for r in lv.last_7_days_rows %}
       <tr>
-        <td>{{ r.date }}</td><td>{{ r.telegram_user_id }}</td><td>{{ r.display_name }}</td>
+        <td>{{ r.date }}</td><td>{{ r.username }}</td><td>{{ r.display_name }}</td>
         <td>{{ r.mcq_shown }}</td><td>{{ r.mcq_answered }}</td><td>{{ r.mcq_correct }}</td>
-        <td>{% if r.accuracy_pct is not none %}{{ r.accuracy_pct }}%{% else %}—{% endif %}</td>
+        <td>{{ pct_badge(r.accuracy_pct) }}</td>
         <td>{{ r.descriptive_shown }}</td><td>{{ r.time_spent_minutes }}</td>
       </tr>
       {% else %}<tr><td colspan="9" style="color:#999;">No activity in the last 7 days.</td></tr>{% endfor %}
     </tbody>
   </table>
   </div>
-</div>
 
-<div class="card">
-  <h2>5. Student &times; Chapter Matrix <span style="color:#999; font-weight:normal; font-size:12.5px;">(each student's own chapters, ranked by their own activity -- "which student is doing which chapters the most")</span></h2>
+  <h3 style="font-size:13px; color:#09284b; margin:18px 0 6px;">5. Student &times; Chapter Matrix <span style="color:#999; font-weight:normal; font-size:11.5px;">(each student's own chapters, ranked by their own activity)</span></h3>
   <div class="table-scroll">
   <table>
-    <thead><tr><th>Student</th><th>Chat ID</th><th>Rank</th><th>Chapter</th><th>MCQ Attempted</th><th>MCQ Correct</th><th>Accuracy</th><th>Descriptive Viewed</th></tr></thead>
+    <thead style="background:#09284b;"><tr><th style="color:#fff;">Student</th><th style="color:#fff;">1LAVYA Username</th><th style="color:#fff;">Rank</th><th style="color:#fff;">Chapter</th><th style="color:#fff;">MCQ Attempted</th><th style="color:#fff;">MCQ Correct</th><th style="color:#fff;">Accuracy</th><th style="color:#fff;">Descriptive Viewed</th></tr></thead>
     <tbody>
-      {% for r in data.student_chapter_matrix %}
+      {% for r in lv.student_chapter_matrix %}
       <tr>
-        <td>{{ r.display_name }}</td><td>{{ r.telegram_user_id }}</td><td>{{ r.rank_for_student }}</td><td>{{ r.chapter_label }}</td>
+        <td>{{ r.display_name }}</td><td>{{ r.username }}</td><td>{{ r.rank_for_student }}</td><td>{{ r.chapter_label }}</td>
         <td>{{ r.mcq_attempted }}</td><td>{{ r.mcq_correct }}</td>
-        <td>{% if r.accuracy_pct is not none %}{{ r.accuracy_pct }}%{% else %}—{% endif %}</td>
+        <td>{{ pct_badge(r.accuracy_pct) }}</td>
         <td>{{ r.descriptive_shown }}</td>
       </tr>
       {% else %}<tr><td colspan="8" style="color:#999;">No data in this range.</td></tr>{% endfor %}
     </tbody>
   </table>
   </div>
-</div>
 
-<div class="card">
-  <h2>6. Question-wise Difficulty <span style="color:#999; font-weight:normal; font-size:12.5px;">(most wrongly answered first, min. 2 real attempts)</span></h2>
-  <p class="card-note">"Most Common Wrong Option Chosen" is the single wrong option students picked most often for that question -- not just "wrong" in general.</p>
+  <h3 style="font-size:13px; color:#09284b; margin:18px 0 6px;">6. Question-wise Difficulty <span style="color:#999; font-weight:normal; font-size:11.5px;">(most wrongly answered first, min. 2 real attempts)</span></h3>
   <div class="table-scroll">
   <table>
-    <thead><tr><th>Question ID</th><th>Chapter</th><th>Course</th><th>Level</th><th>Times Answered</th><th>Times Wrong</th><th>Wrong %</th><th>Correct Option</th><th>Most Common Wrong Option</th><th>Chose It</th></tr></thead>
+    <thead style="background:#09284b;"><tr><th style="color:#fff;">Question ID</th><th style="color:#fff;">Chapter</th><th style="color:#fff;">Times Answered</th><th style="color:#fff;">Times Wrong</th><th style="color:#fff;">Wrong %</th><th style="color:#fff;">Correct Option</th><th style="color:#fff;">Most Common Wrong Option</th><th style="color:#fff;">Chose It</th></tr></thead>
     <tbody>
-      {% for r in data.question_difficulty %}
+      {% for r in lv.question_difficulty %}
       <tr>
-        <td>{{ r.human_id }}</td><td>{{ r.chapter_label }}</td><td>{{ r.course }}</td><td>{{ r.level }}</td>
-        <td>{{ r.times_answered }}</td><td>{{ r.times_wrong }}</td><td>{{ r.wrong_pct }}%</td>
+        <td>{{ r.human_id }}</td><td>{{ r.chapter_label }}</td>
+        <td>{{ r.times_answered }}</td><td>{{ r.times_wrong }}</td>
+        <td>{{ pct_badge(r.wrong_pct, good_high=False) }}</td>
         <td>{{ r.correct_option }}</td><td>{{ r.most_common_wrong_option or '—' }}</td><td>{{ r.most_common_wrong_option_count }}</td>
       </tr>
-      {% else %}<tr><td colspan="10" style="color:#999;">No qualifying MCQ data in this range.</td></tr>{% endfor %}
+      {% else %}<tr><td colspan="8" style="color:#999;">No qualifying MCQ data in this range.</td></tr>{% endfor %}
     </tbody>
   </table>
   </div>
+
+  </div>
 </div>
+{% endfor %}
 
 {% endif %}
 {% endblock %}

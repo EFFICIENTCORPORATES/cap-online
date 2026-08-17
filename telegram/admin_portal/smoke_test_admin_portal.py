@@ -523,6 +523,26 @@ def main():
         resp = client.get(f"/reports/faculty/{FAKE_BOT_ID}.pdf")
         check("An unknown tenant_id in the export route 404s instead of crashing", resp.status_code == 404)
 
+        print("    --- Level-wise segmentation + Day End Report (2026-08-17) ---")
+        resp = client.get(f"/reports/faculty?tenant_id={sample_tenant}&preset=today")
+        check("GET /reports/faculty?preset=today (Day End Report) returns 200", resp.status_code == 200)
+        check("Day End (Today) button is present and marked active for preset=today",
+              b"Day End (Today)" in resp.data and b"btn-primary" in resp.data)
+
+        resp = client.get(f"/reports/faculty/{sample_tenant}.pdf?preset=today")
+        check("Day End Report PDF export returns 200", resp.status_code == 200)
+        check("Day End Report PDF is non-trivially sized", len(resp.data) > 500)
+
+        multi_level_tenant = next((t["tenant_id"] for t in reportable if t["tenant_id"] == "csarunchouhan"), None)
+        if multi_level_tenant:
+            data = faculty_report.build_report(conn, multi_level_tenant, manage_bots.load_bots())
+            check("csarunchouhan's report has multiple level-blocks (3 levels live)", len(data["levels"]) >= 2)
+            resp = client.get(f"/reports/faculty?tenant_id={multi_level_tenant}")
+            level_banner_count = resp.data.count(b"LEVEL:")
+            check(f"Rendered page shows one LEVEL banner per level ({level_banner_count} found, expected {len(data['levels'])})",
+                  level_banner_count == len(data["levels"]))
+            check("Each student row shows a 1LAVYA Username column (identity rollup)", b"1LAVYA Username" in resp.data)
+
         print("    --- email delivery: invalid address rejected, valid address sends (send_report_email MOCKED, no real network call) ---")
         resp = client.post(f"/reports/faculty/{sample_tenant}/email", data={"email": "not-an-email"}, follow_redirects=True)
         check("Invalid email address is rejected with a flash message, no send attempted", b"valid email" in resp.data)

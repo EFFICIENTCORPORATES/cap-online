@@ -398,6 +398,88 @@ Not fixed speculatively — flagged for whenever that first becomes a real
 case, same "don't build for a case that doesn't exist yet" discipline
 this repo already follows elsewhere.
 
+### Revised 2026-08-17 — level-wise segmentation, username-rollup identity, Day End Report, colorful PDF
+
+Pranav's follow-up ask: "Students of Each level... in case of CS Arun, we
+have 3 levels live... show the Report for each level separately," plus a
+daily Day End Report reachable from the dashboard and auto-saved to disk,
+plus "make sure pdf is colorful and easy to understand." Two design
+decisions confirmed via AskUserQuestion before building: (1) roll Sections
+3–5's student identity up to the student's permanent 1LAVYA username
+(every linked phone's activity merged), matching
+`leaderboard_metrics.py`'s own model, instead of raw `telegram_user_id`;
+(2) one combined document per faculty with a section per level, not
+separate files per level.
+
+**`build_report()` now returns one level-block per (course, level) the
+tenant serves** (`data["levels"]`, resolved from `content_scope` — the
+same source `content_availability()` already read, no new config), each
+with its own `content_availability`/`chapter_stats`/`student_performance`/
+`last_7_days_rows`/`student_chapter_matrix`/`question_difficulty` plus a
+`scorecard` (unique students, MCQs shown, avg accuracy, time spent) —
+computed from Section 3's own totals, never a separate count, so it can
+never disagree with the table beneath it. For a 1-level faculty (Pranav)
+this is one level-block, visually identical to before plus a heading.
+
+**Identity**: new `_uid_identity_map()` resolves every `telegram_user_id`
+to its `lavya_username` (falling back to a private per-chat_id placeholder
+if never linked, so no row is ever silently dropped) and a display name
+(`student_profiles.display_name` → Telegram first/last name → Telegram
+handle → "Student {id}"). Sections 3–5 key on this username, showing a new
+"Chat ID(s)" column (comma-joined) so a faculty can still identify/message
+a specific device. `chapter_stats()`'s "Unique Students" count also
+switched to counting distinct usernames, not raw chat IDs.
+
+**Day End Report**: `today_utc_date()` + the platform's existing
+last-7-days UTC-calendar-day convention — "today" means the same thing
+everywhere it's read. Two access paths, no new mechanism:
+1. A **"📅 Day End (Today)"** button on `/reports/faculty`
+   (`app.py`'s `_date_range_from_args()`/`_current_preset()` gained a
+   `preset=today` case, kept OUT of the shared `RANGE_PRESETS` dict the
+   Overview tabs iterate, so it doesn't also appear as an unrequested
+   button there — a small `EXTRA_PRESET_LABELS` dict instead).
+2. **`telegram/tools/generate_day_end_faculty_reports.py`** (new) — a
+   run-to-completion batch script, same "not a bot.json process" shape as
+   `backup_to_cloudflare.py`, scheduled via Windows Task Scheduler
+   (**"1LAVYA Day End Faculty Reports"**, daily 23:50 local — 20 minutes
+   after the leaderboard broadcaster's 23:11 slot). For every real faculty
+   tenant (`faculty_report.list_faculty_tenant_ids()`, new — `kind ==
+   "faculty"`, i.e. `capranav`/`csarunchouhan` today, deliberately
+   excluding the platform-wide tenants), builds today's report and writes
+   the PDF to `telegram/reports/day_end/{tenant_id}/{tenant_id}_{date}.pdf`
+   (idempotent — a same-day re-run overwrites, never duplicates), logging
+   each save to `faculty_report_deliveries`. **Real bug caught by its own
+   first run**: that table's `status` column is CHECK-constrained to
+   `('sent', 'failed', 'downloaded')` — no `'saved'` value exists; fixed to
+   log `status="downloaded"` (the closest correct fit — a PDF was produced
+   and written to disk, same as a manual download click, just automatic),
+   with `delivered_to`'s `"local_file:{path}"` prefix as the actual
+   distinguishing detail. This archive is explicitly framed as **initial**
+   by Pranav ("later on we might not need this") — see
+   `telegram/reports/day_end/README.md`.
+
+**Colorful PDF**: navy section-header bars (white text), a per-level
+banner + 4-tile scorecard (navy/gold-tinted boxes), green/amber/red
+accuracy badges (70%+/40–70%/<40%, inverted for "Wrong %"), alternating
+row bands — all inline styles (xhtml2pdf has weak CSS support, see
+CLAUDE.md §7). **One real regression caught by testing, not inspection**:
+an initial `letter-spacing:.03em`/`.02em` on two header labels triggered
+xhtml2pdf/reportlab's known `em`-unit parsing failure (documented already
+in `branding/README.md`'s Phase-1 gotcha) — silently dropped rather than
+erroring, caught via a stray `getSize: Not a float` warning on PDF build,
+removed. Visually verified via a headless-Edge screenshot of the rendered
+HTML (this repo's own established discipline, CLAUDE.md §7) before
+trusting the layout — confirmed level banners, scorecards, and colored
+badges all render correctly against real production data (csarunchouhan's
+24/24/2-student 3-level split).
+
+**Verified**: `smoke_test_admin_portal.py` gained 7 new checks (Day End
+preset + PDF export, multi-level rendering count, identity-column
+presence) — full suite **280/280 passing**. Both real faculties' reports
+regenerated end-to-end (build → PDF → XLSX → HTML) against live data with
+no errors. `1lavya-admin-portal` restarted, confirmed live via a direct
+unauthenticated request (302 redirect, not a crash).
+
 ## Faculty Master DB table + Masters > Faculty Details — added 2026-08-14
 
 Pranav asked directly: "maintain a faculty table where we can store the

@@ -293,12 +293,25 @@ OVERVIEW_TAB_LABELS = {
 RANGE_PRESETS = {"7d": "Last 7 days", "30d": "Last 30 days", "90d": "Last 90 days", "all": "All time"}
 
 
+# "today" is NOT in RANGE_PRESETS (which the Overview tabs iterate to
+# render their own buttons) -- it's a separate, explicit preset value only
+# the Faculty Comprehensive Report page links to (its "Day End (Today)"
+# button, 2026-08-17, Pranav's ask), kept out of the shared dict so it
+# doesn't also appear as an unrequested button on every other date-ranged
+# tab. _date_range_from_args()/_current_preset() still recognize it
+# generically -- one date-range implementation, not two.
+EXTRA_PRESET_LABELS = {"today": "Day End (Today)"}
+
+
 def _date_range_from_args():
-    """(start_date, end_date, label) from ?preset=7d/30d/90d/all or an
-    explicit ?from=&to=. Defaults to the last 7 days when nothing is
+    """(start_date, end_date, label) from ?preset=7d/30d/90d/all/today or
+    an explicit ?from=&to=. Defaults to the last 7 days when nothing is
     given (the page's first load) -- every date-ranged tab shares this
     one implementation, so a range picked on one tab means the same thing
-    on every other."""
+    on every other. "today" is a single UTC calendar day -- the same
+    definition telegram/admin_portal/faculty_report.py's today_utc_date()/
+    last_7_days_range() already use, so "today" always means the same
+    thing everywhere it's read."""
     preset = request.args.get("preset")
     today = datetime.now(timezone.utc).date()
     if preset in ("7d", "30d", "90d"):
@@ -306,6 +319,8 @@ def _date_range_from_args():
         return (today - timedelta(days=days - 1)).isoformat(), today.isoformat(), RANGE_PRESETS[preset]
     if preset == "all":
         return None, None, RANGE_PRESETS["all"]
+    if preset == "today":
+        return today.isoformat(), today.isoformat(), EXTRA_PRESET_LABELS["today"]
     frm, to = request.args.get("from"), request.args.get("to")
     if frm or to:
         return frm or None, to or None, f"{frm or '…'} to {to or '…'}"
@@ -314,7 +329,7 @@ def _date_range_from_args():
 
 def _current_preset() -> str:
     preset = request.args.get("preset")
-    if preset in RANGE_PRESETS:
+    if preset in RANGE_PRESETS or preset in EXTRA_PRESET_LABELS:
         return preset
     if request.args.get("from") or request.args.get("to"):
         return "custom"
@@ -1132,6 +1147,7 @@ def faculty_report_view():
     data = faculty_report.build_report(conn, selected_tenant, bots, start_date, end_date) if selected_tenant else None
 
     range_urls = {p: url_for("faculty_report_view", tenant_id=selected_tenant, preset=p) for p in RANGE_PRESETS}
+    today_url = url_for("faculty_report_view", tenant_id=selected_tenant, preset="today")
     export_args = {} if preset != "custom" else {"from": start_date, "to": end_date}
     export_urls = {
         fmt: url_for("faculty_report_export", tenant_id=selected_tenant, fmt=fmt, preset=preset, **export_args)
@@ -1141,6 +1157,7 @@ def faculty_report_view():
     return render_template(
         "faculty_full_report.html", tenants=tenants, selected_tenant=selected_tenant, data=data,
         range_label=range_label, range_urls=range_urls, range_presets=RANGE_PRESETS, preset=preset,
+        today_url=today_url, today_label=EXTRA_PRESET_LABELS["today"],
         start_date=start_date, end_date=end_date, export_urls=export_urls,
     )
 

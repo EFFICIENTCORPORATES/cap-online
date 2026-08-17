@@ -2,6 +2,53 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-08-17 — Faculty Comprehensive Report: level-wise segmentation, username-rollup identity, Day End Report, colorful PDF
+
+Pranav asked whether a faculty-level bot-usage report already existed
+(one did — `telegram/admin_portal/faculty_report.py`, built 2026-08-14),
+then asked for it to break out **by level** (CS Arun Chouhan has 3 live:
+CMA Foundation/Intermediate/Final Law), be obtainable as a **"Day End
+Report"** every day from the Admin Portal, additionally auto-save a PDF
+to a folder while the platform is new, and be **colorful and easy to
+understand** — while staying 100% deterministic, Python + SQL only, no
+AI/manual content. Presented a plan first (per his ask), confirmed 2
+design forks via AskUserQuestion (username-rollup identity vs. raw
+chat_id; one combined document vs. separate files per level — both
+answered with the recommended option), then built.
+
+`faculty_report.build_report()` restructured: one level-block per
+(course, level) the tenant serves (resolved from `content_scope`, no new
+config), each with all 6 sections + a scorecard (unique students/MCQs
+shown/avg accuracy/time spent). Sections 3–5 now key on the student's
+permanent 1LAVYA username (every linked phone's activity merged),
+matching `leaderboard_metrics.py`'s own identity model, with a new "Chat
+ID(s)" column so a faculty can still identify/message a specific device.
+New `telegram/tools/generate_day_end_faculty_reports.py` — a
+run-to-completion batch script (same shape as `backup_to_cloudflare.py`,
+not a `bots.json` process), scheduled via a new Windows Task Scheduler
+job **"1LAVYA Day End Faculty Reports"** (daily 23:50 local), saves each
+real faculty's day-end PDF to `telegram/reports/day_end/{tenant_id}/`.
+Real bug caught by the script's own first run: `faculty_report_deliveries
+.status` is CHECK-constrained to `('sent','failed','downloaded')`, no
+`'saved'` value — fixed to log `"downloaded"`. A "Day End (Today)" button
+was added to `/reports/faculty` itself for on-demand use.
+
+PDF made colorful: navy section-header bars, a per-level banner + 4-tile
+scorecard, green/amber/red accuracy badges by threshold, alternating row
+bands — all inline styles (xhtml2pdf's weak CSS support, CLAUDE.md §7).
+One real regression caught by testing: `letter-spacing:.03em` triggered
+xhtml2pdf/reportlab's known `em`-unit parsing failure (same bug class
+already documented in `branding/README.md`'s Phase-1 gotcha) — caught via
+a stray warning on PDF build, removed. Visually verified via a
+headless-Edge screenshot of the rendered HTML against real production
+data before trusting the layout (this repo's own standing discipline).
+
+`smoke_test_admin_portal.py` gained 7 new checks, full suite **280/280
+passing**. Both real faculties' reports (capranav: 1 level, csarunchouhan:
+3 levels) regenerated end-to-end against live data with no errors.
+`1lavya-admin-portal` restarted and confirmed live. Full detail:
+`telegram/admin_portal/README.md`'s "Revised 2026-08-17" section.
+
 ## 2026-08-17 — One-time welcome-bonus credit + broadcast sent to 92 real students
 
 Pranav asked for a 1000-credit welcome bonus for every student whose
