@@ -75,7 +75,10 @@ def cleanup():
 def mock_update(text=""):
     user = SimpleNamespace(id=CHAT_ID, username=TG_HANDLE, first_name="Smoke", last_name="Test")
     message = SimpleNamespace(chat_id=CHAT_ID, text=text, reply_text=AsyncMock())
-    return SimpleNamespace(effective_user=user, message=message), user, message
+    # effective_message=message mirrors real telegram.Update's own property --
+    # needed since 2026-08-17's update.message -> update.effective_message
+    # fix in wallet_flow.py (show_wallet_status/start_recharge_flow).
+    return SimpleNamespace(effective_user=user, message=message, effective_message=message), user, message
 
 
 def mock_context():

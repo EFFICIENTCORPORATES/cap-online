@@ -237,6 +237,10 @@ class FakeUpdate:
     def __init__(self, user_id, chat_id, text):
         self.message = FakeMessage(chat_id, text)
         self.effective_user = FakeUser(user_id)
+        # mirrors real telegram.Update's own effective_message property --
+        # needed since 2026-08-17's update.message -> update.effective_message
+        # fix in report_flow.py (start_report_flow_on_demand).
+        self.effective_message = self.message
 
 
 class FakeCallbackUpdate:

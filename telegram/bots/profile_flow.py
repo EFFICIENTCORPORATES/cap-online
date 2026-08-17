@@ -403,7 +403,11 @@ async def start_profile_flow(update, context, bot_id: str = None):
         InlineKeyboardButton("Yes", callback_data="profile:confirm_yes"),
         InlineKeyboardButton("No", callback_data="profile:confirm_no"),
     ]]
-    await update.message.reply_text(
+    # update.effective_message not update.message -- same fix/reasoning as
+    # test_flow.start_test_flow()'s own 2026-08-17 fix: this is also
+    # reachable via fuzzy_trigger.py's callback-based re-dispatch, where
+    # update.message is None.
+    await update.effective_message.reply_text(
         "Would you like to view/edit your profile?", reply_markup=InlineKeyboardMarkup(keyboard),
     )
 

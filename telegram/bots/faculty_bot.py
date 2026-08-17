@@ -141,6 +141,26 @@ async def hub_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data.clear()
         user = query.from_user
         eh.db_upsert_student(user)
+        # BUG FIXED 2026-08-17 (real support tickets: students "asked for
+        # payment" despite never having attempted any real questions).
+        # eh.db_ensure_wallet() -- which BOTH provisions the wallet identity
+        # AND grants the one-time 1000-credit signup bonus -- used to be
+        # called only from exam_hub_bot.py's own start()/"restart" handlers.
+        # This unified bot's "Exam Practice Hub" tap is a THIRD entry point
+        # into the exact same wallet-gated flow, but only ever called
+        # ensure_wallet_identity() (creates the username) -- never
+        # grant_signup_bonus() -- so any student whose first-ever platform
+        # touch was tapping this button got a real wallet identity with a
+        # PERMANENT ZERO balance, and their very first MCQ/descriptive
+        # question hit the "balance isn't enough" wall instantly. Confirmed
+        # against the live DB: 5 real students on THIS bot (csarunchouhan --
+        # the only tenant that runs faculty_bot.py) had a student_profiles
+        # row with zero wallet_ledger rows at all, all with first_seen_at
+        # after the 2026-08-16 billing rollout. db_ensure_wallet() is
+        # idempotent (grant_signup_bonus() is a safe no-op if already
+        # granted, e.g. via a plain /start on a bot that already grants),
+        # so calling it here is always safe, never a double-grant.
+        welcome_bonus_text = eh.db_ensure_wallet(user)
         # 2026-08-16: same stash exam_hub_bot.py's own start()/"restart" do,
         # needed by resolve_entry()'s profile-based Course/Level auto-fill.
         context.user_data["lavya_username"], _ = eh.identity.ensure_wallet_identity(eh.DB_CONN, user)
@@ -153,6 +173,11 @@ async def hub_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if updates:
             context.user_data.update(updates)
             eh.db_update_session(context.user_data["session_id"], **updates)
+        if welcome_bonus_text:
+            # Sent as its own message ahead of the menu, same as
+            # exam_hub_bot.py's own start() -- never buried inside the
+            # Markdown-formatted menu text.
+            await context.bot.send_message(chat_id=query.message.chat_id, text=welcome_bonus_text, parse_mode=ParseMode.HTML)
         await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
 

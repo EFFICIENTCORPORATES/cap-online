@@ -310,7 +310,18 @@ def _not_available_text_and_markup(what: str, host, offer_advacc: bool = True):
 async def start_test_flow(update, context, bot_id: str, host):
     """Entry point -- the "test"/"take a test" text trigger. If the student
     already has a test in progress, resumes it instead of starting a new
-    picker (never two concurrent tests)."""
+    picker (never two concurrent tests).
+
+    BUG FIXED 2026-08-17: this (and 5 sibling entry points across
+    wallet_flow.py/profile_flow.py/report_flow.py) used `update.message`
+    directly, which is fine for a genuine text-message trigger but is
+    `None` -- crashing with `AttributeError: 'NoneType' object has no
+    attribute 'reply_text'` -- when reached via fuzzy_trigger.py's "did you
+    mean X?" confirmation button (added 2026-08-16), which re-dispatches
+    through this exact same function with a CALLBACK-QUERY-based `update`
+    instead. `update.effective_message` resolves correctly either way (the
+    real Message in both cases), so it's used everywhere below instead."""
+    message = update.effective_message
     conn = platform_db.get_connection()
     platform_db.init_schema(conn)
     user = update.effective_user
@@ -318,10 +329,10 @@ async def start_test_flow(update, context, bot_id: str, host):
 
     active = _get_active_test(conn, telegram_user_id)
     if active:
-        await update.message.reply_text(
+        await message.reply_text(
             "\U0001F4CB You already have a test in progress — picking up where you left off."
         )
-        await _show_current_question(update.message, context, active[0], host)
+        await _show_current_question(message, context, active[0], host)
         return
 
     courses = _available_courses(conn, host)
@@ -355,14 +366,14 @@ async def start_test_flow(update, context, bot_id: str, host):
         # "test" on a bot with no CA Inter Advanced Accounting in scope got
         # a message and nowhere to go from it). Now always offers a real
         # next step -- see _no_content_cta_rows()'s own docstring.
-        await update.message.reply_text(
+        await message.reply_text(
             text, reply_markup=InlineKeyboardMarkup(_no_content_cta_rows(host, offer_advacc))
         )
         return
 
     if len(courses) == 1:
         context.user_data[UD_PICKER_COURSE] = courses[0]
-        await _show_level_picker(update.message, context, conn, courses[0], host)
+        await _show_level_picker(message, context, conn, courses[0], host)
         return
 
     # 2026-08-16: same profile-based pre-fill as exam_hub_bot.py's
@@ -380,12 +391,12 @@ async def start_test_flow(update, context, bot_id: str, host):
     if len(profile_courses) == 1:
         course = next(iter(profile_courses))
         context.user_data[UD_PICKER_COURSE] = course
-        await _show_level_picker(update.message, context, conn, course, host)
+        await _show_level_picker(message, context, conn, course, host)
         return
 
     context.user_data[UD_PICKER_COURSES] = courses
     rows = [[InlineKeyboardButton(c, callback_data=f"testflow:course:{i}")] for i, c in enumerate(courses)]
-    await update.message.reply_text("\U0001F4DD Which course?", reply_markup=InlineKeyboardMarkup(rows))
+    await message.reply_text("\U0001F4DD Which course?", reply_markup=InlineKeyboardMarkup(rows))
 
 
 async def _show_level_picker(message_or_query, context, conn, course, host, edit=False):
@@ -1437,10 +1448,14 @@ def matches_upload_trigger(text: str) -> bool:
 
 
 async def start_upload_pick(update, context, host):
+    # Same fix as start_test_flow() above -- update.effective_message
+    # instead of update.message, since this is also reachable via
+    # fuzzy_trigger.py's callback-based re-dispatch.
+    message = update.effective_message
     conn = platform_db.get_connection()
     active = _get_active_test(conn, update.effective_user.id)
     if not active:
-        await update.message.reply_text("You don't have a test in progress right now. Type <code>test</code> to start one.", parse_mode=ParseMode.HTML)
+        await message.reply_text("You don't have a test in progress right now. Type <code>test</code> to start one.", parse_mode=ParseMode.HTML)
         return
     cols = [d[0] for d in conn.execute("SELECT * FROM test_sessions LIMIT 0").description]
     session = dict(zip(cols, active))
@@ -1449,14 +1464,14 @@ async def start_upload_pick(update, context, host):
         "SELECT seq_no, human_id, status FROM test_questions WHERE test_id=? AND qtype='descriptive' ORDER BY seq_no", (test_id,)
     ).fetchall()
     if not descs:
-        await update.message.reply_text("This test has no descriptive questions to upload an answer for.")
+        await message.reply_text("This test has no descriptive questions to upload an answer for.")
         return
     rows = []
     for seq_no, human_id, status in descs:
         icon = "✅" if status == "uploaded" else "❌"
         rows.append([InlineKeyboardButton(f"{icon} Q{seq_no} ({human_id or ''})", callback_data=f"tupload:{seq_no}")])
     context.user_data[UD_AWAITING_UPLOAD_PICK] = True
-    await update.message.reply_text("Which question is this answer for?", reply_markup=InlineKeyboardMarkup(rows))
+    await message.reply_text("Which question is this answer for?", reply_markup=InlineKeyboardMarkup(rows))
 
 
 PASS_UPLOAD_PHRASES = {"pass"}

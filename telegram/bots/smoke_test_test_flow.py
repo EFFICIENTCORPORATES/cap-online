@@ -84,7 +84,11 @@ def mock_update(text=""):
     user = SimpleNamespace(id=CHAT_ID, username=TG_HANDLE, first_name="Smoke", last_name="Test")
     message = mock_message()
     message.text = text
-    return SimpleNamespace(effective_user=user, message=message), user, message
+    # effective_message=message mirrors real telegram.Update's own property
+    # (resolves to .message for a genuine text-message update) -- needed
+    # since 2026-08-17's update.message -> update.effective_message fix in
+    # test_flow.py/wallet_flow.py/profile_flow.py/report_flow.py.
+    return SimpleNamespace(effective_user=user, message=message, effective_message=message), user, message
 
 
 class FakeJob:

@@ -222,7 +222,11 @@ async def start_report_flow_on_demand(update, context, bot_id: str):
         InlineKeyboardButton("Yes", callback_data="report:ondemand_yes"),
         InlineKeyboardButton("No", callback_data="report:ondemand_no"),
     ]]
-    await update.message.reply_text(
+    # update.effective_message not update.message -- same fix/reasoning as
+    # test_flow.start_test_flow()'s own 2026-08-17 fix: this is also
+    # reachable via fuzzy_trigger.py's callback-based re-dispatch, where
+    # update.message is None.
+    await update.effective_message.reply_text(
         "Would you like your 1LAVYA performance report -- accuracy, chapter-wise breakdown, "
         "and time spent practicing?",
         reply_markup=InlineKeyboardMarkup(keyboard),

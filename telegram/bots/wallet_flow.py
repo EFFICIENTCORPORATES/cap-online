@@ -111,12 +111,16 @@ def _status_text_and_markup(conn, username: str) -> tuple:
 
 
 async def show_wallet_status(update, context, host):
+    # update.effective_message not update.message -- same fix/reasoning as
+    # test_flow.start_test_flow()'s own 2026-08-17 fix: this is also
+    # reachable via fuzzy_trigger.py's callback-based re-dispatch, where
+    # update.message is None.
     conn = platform_db.get_connection()
     platform_db.init_schema(conn)
     user = update.effective_user
     username, _ = identity.ensure_wallet_identity(conn, user)
     text, markup = _status_text_and_markup(conn, username)
-    await update.message.reply_text(text, parse_mode=ParseMode.HTML, reply_markup=markup)
+    await update.effective_message.reply_text(text, parse_mode=ParseMode.HTML, reply_markup=markup)
 
 
 # ---------------------------------------------------------------------------
@@ -138,7 +142,16 @@ async def start_recharge_flow(update_or_query, context, host, is_callback=False)
     if is_callback:
         await update_or_query.edit_message_text(text, reply_markup=markup)
     else:
-        await update_or_query.message.reply_text(text, reply_markup=markup)
+        # update_or_query.effective_message not .message -- is_callback is
+        # always False when called with a real Update (never a bare
+        # CallbackQuery, which has no .effective_message and takes the
+        # is_callback=True branch above instead). Fixed 2026-08-17: this
+        # branch used to assume update_or_query.message is always set,
+        # which is None when reached via fuzzy_trigger.py's callback-based
+        # re-dispatch of the "recharge" trigger (see
+        # test_flow.start_test_flow()'s own fix, same date, for the full
+        # reasoning -- same bug class, found the same investigation).
+        await update_or_query.effective_message.reply_text(text, reply_markup=markup)
 
 
 async def _handle_custom_amount_prompt(query, context):
