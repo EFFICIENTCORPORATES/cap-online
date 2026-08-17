@@ -76,6 +76,7 @@ import charts_pdf  # noqa: E402 -- telegram/admin_portal/charts_pdf.py, reportla
 import faculty_report  # noqa: E402 -- telegram/admin_portal/faculty_report.py, Comprehensive Faculty Report (2026-08-14)
 import faculty_master  # noqa: E402 -- telegram/admin_portal/faculty_master.py, Faculty Master DB table (2026-08-14)
 import backup_status  # noqa: E402 -- telegram/admin_portal/backup_status.py, Backup Snapshot Summary (2026-08-16)
+import sql_query_tool  # noqa: E402 -- telegram/admin_portal/sql_query_tool.py, read-only ad hoc SQL query tab (2026-08-17)
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("ADMIN_PORTAL_SECRET_KEY") or os.urandom(32)
@@ -284,9 +285,10 @@ def logout():
 # row-level drill-down, per his confirmed choice (AskUserQuestion,
 # 2026-08-13) rather than duplicating those pages' full tables here.
 # ---------------------------------------------------------------------------
-OVERVIEW_TABS = ("students", "content", "performance", "faculty")
+OVERVIEW_TABS = ("students", "content", "performance", "faculty", "sql")
 OVERVIEW_TAB_LABELS = {
     "students": "Students", "content": "Content", "performance": "Performance", "faculty": "Faculty",
+    "sql": "SQL Query",
 }
 RANGE_PRESETS = {"7d": "Last 7 days", "30d": "Last 30 days", "90d": "Last 90 days", "all": "All time"}
 
@@ -491,6 +493,24 @@ def overview():
             export_urls={fmt: url_for("overview_faculty_export", fmt=fmt) for fmt in ("csv", "xlsx", "html", "pdf")},
         )
 
+    elif tab == "sql":
+        sql_text = request.args.get("sql", "")
+        sql_result = None
+        sql_error = None
+        if sql_text.strip():
+            try:
+                sql_result = sql_query_tool.run_query(sql_text)
+                audit.log_action(conn, auth.current_user(), "sql_query_run", None, sql_text[:500])
+            except (sql_query_tool.QueryRejected, sql_query_tool.QueryFailed) as e:
+                sql_error = str(e)
+                audit.log_action(conn, auth.current_user(), "sql_query_rejected", None, f"{sql_text[:300]!r} -- {e}")
+        ctx.update(
+            sql_text=sql_text, sql_result=sql_result, sql_error=sql_error,
+            sql_preview_limit=sql_query_tool.PREVIEW_ROW_LIMIT,
+            export_urls=({fmt: url_for("overview_sql_export", fmt=fmt, sql=sql_text) for fmt in ("csv", "xlsx", "json")}
+                         if sql_text.strip() and sql_result is not None else {}),
+        )
+
     return render_template("overview.html", **ctx)
 
 
@@ -581,6 +601,33 @@ def overview_faculty_export(fmt):
     if fmt == "html":
         return exporters.html_export_response(title, cols, out_rows, brand_kit.colors(), "faculty_roster")
     return exporters.pdf_export_response(title, cols, out_rows, brand_kit.colors(), "faculty_roster")
+
+
+@app.route("/overview/sql.<fmt>")
+@auth.role_required("admin")
+def overview_sql_export(fmt):
+    """Re-runs the exact query text from ?sql= (never caches the preview's
+    result) at the export ceiling (sql_query_tool.EXPORT_ROW_LIMIT, higher
+    than the on-screen preview) -- same stateless re-run pattern every
+    other export route on this portal already follows. Read-only guarantee
+    is enforced inside sql_query_tool itself, not here -- see that
+    module's own docstring."""
+    if fmt not in ("csv", "xlsx", "json"):
+        return "Unsupported format -- use .csv, .xlsx, or .json", 400
+    sql_text = request.args.get("sql", "")
+    conn = get_conn()
+    try:
+        result = sql_query_tool.run_query_for_export(sql_text)
+    except (sql_query_tool.QueryRejected, sql_query_tool.QueryFailed) as e:
+        audit.log_action(conn, auth.current_user(), "sql_query_rejected", None, f"{sql_text[:300]!r} -- {e}")
+        return f"Query error: {e}", 400
+    audit.log_action(conn, auth.current_user(), "sql_query_export", None, f"{fmt} -- {sql_text[:500]}")
+    columns, rows = result["columns"], result["rows"]
+    if fmt == "csv":
+        return exporters.csv_response(columns, rows, "sql_query_result")
+    if fmt == "xlsx":
+        return exporters.xlsx_response(columns, rows, "sql_query_result")
+    return exporters.json_response(columns, rows, "sql_query_result")
 
 
 # ---------------------------------------------------------------------------

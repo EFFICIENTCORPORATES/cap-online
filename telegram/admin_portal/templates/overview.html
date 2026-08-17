@@ -390,6 +390,71 @@
   </div>
 
   <p class="card-note">Per-faculty student-wise / chapter-wise drill-down: <a href="{{ url_for('analytics_faculty_report') }}" style="color:var(--navy); font-weight:600;">View the full Faculty Report &rarr;</a></p>
+
+{# =====================================================================
+   SQL QUERY (2026-08-17) -- ad hoc, READ-ONLY custom report builder.
+   See sql_query_tool.py's own docstring for the full safety design (a
+   genuinely read-only DB connection is what actually enforces this, not
+   just the text validation this page's error messages come from).
+===================================================================== #}
+{% elif tab == "sql" %}
+  <div class="card">
+    <h2>SQL Query</h2>
+    <p class="card-note">
+      Build any custom cross-table report -- e.g. student ID + current credits + a calculated
+      "credits used in last 10 days" column -- with a plain SQL <code>SELECT</code> query. Feed
+      an AI model the schema (<code>telegram/database/schema.sql</code>) and paste in whatever it
+      gives you. <strong>Read-only, enforced at the database connection level</strong> -- an
+      <code>UPDATE</code>/<code>DELETE</code>/<code>DROP</code> (yours or an AI's mistake) simply
+      cannot execute here, no matter what text is submitted; only <code>SELECT</code>/<code>WITH</code>
+      queries are accepted, and they run against a connection SQLite itself refuses to let write.
+      Results are capped at {{ sql_preview_limit }} rows on-screen (export goes higher) and a query
+      is stopped automatically if it runs too long, so this can never slow down the live bots.
+    </p>
+    <form method="get" style="margin-bottom:4px;">
+      <input type="hidden" name="tab" value="sql">
+      <textarea name="sql" rows="7" placeholder="SELECT username, SUM(amount) AS balance FROM wallet_ledger GROUP BY username ORDER BY balance ASC"
+                style="width:100%; box-sizing:border-box; font-family:'SFMono-Regular',Consolas,Menlo,monospace; font-size:13px; padding:10px 12px; border:1px solid #d8dae0; border-radius:8px; resize:vertical; color:#222;">{{ sql_text }}</textarea>
+      <div style="margin-top:10px; display:flex; gap:8px; align-items:center;">
+        <button type="submit" class="btn btn-primary">Run Query</button>
+        {% if sql_result is not none %}
+          <span style="font-size:12px; color:#888;">{{ sql_result.row_count }} row(s){% if sql_result.truncated %} (truncated at {{ sql_preview_limit }} -- export for more){% endif %} &middot; {{ "%.0f" | format(sql_result.elapsed_ms) }}ms</span>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+
+  {% if sql_error %}
+    <div class="card" style="border-color:#f3c8c4; background:#fdf5f4;">
+      <h2 style="color:#a33322;">Query not run</h2>
+      <p style="font-size:13px; color:#8a2e21; margin:0;">{{ sql_error }}</p>
+    </div>
+  {% elif sql_result is not none %}
+    <div class="card">
+      {% if sql_result.columns %}
+        <div class="export-buttons" style="margin-bottom:14px;">
+          <span class="export-label">Export (full result, up to a higher cap):</span>
+          <a class="btn btn-secondary btn-sm" href="{{ export_urls.csv }}">CSV</a>
+          <a class="btn btn-secondary btn-sm" href="{{ export_urls.xlsx }}">Excel</a>
+          <a class="btn btn-secondary btn-sm" href="{{ export_urls.json }}">JSON</a>
+        </div>
+        <div class="table-scroll">
+        <table>
+          <thead><tr>{% for c in sql_result.columns %}<th>{{ c }}</th>{% endfor %}</tr></thead>
+          <tbody>
+            {% for row in sql_result.rows %}
+            <tr>{% for v in row %}<td>{{ v if v is not none else '—' }}</td>{% endfor %}</tr>
+            {% else %}
+            <tr><td colspan="{{ sql_result.columns | length }}" style="color:#999;">Query ran successfully but returned no rows.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+      {% else %}
+        <p style="color:#999; margin:0;">Query ran successfully but returned no columns.</p>
+      {% endif %}
+    </div>
+  {% endif %}
 {% endif %}
 
 {% endblock %}

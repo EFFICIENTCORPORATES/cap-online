@@ -46,6 +46,14 @@ def check(label: str, condition: bool, detail: str = ""):
 
 def _cleanup_audit(conn):
     conn.execute("DELETE FROM admin_actions WHERE target=? OR target LIKE ?", (FAKE_BOT_ID, f"%{SYNTHETIC_MARKER}%"))
+    # Scoped to THIS test's own distinctive query text only -- action_type
+    # IN (...) alone would also delete Pranav's own real SQL-tab audit
+    # history between runs, which the "complete trail" discipline every
+    # other audit-logged action on this portal follows explicitly forbids.
+    conn.execute(
+        "DELETE FROM admin_actions WHERE action_type IN ('sql_query_run', 'sql_query_rejected', 'sql_query_export') "
+        "AND (detail LIKE '%GROUP BY username ORDER BY balance DESC LIMIT 3%' OR detail LIKE \"%email='pwned'%\")"
+    )
     conn.execute("DELETE FROM report_deliveries WHERE criteria LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
     conn.execute("DELETE FROM mcq_issue_reports WHERE mcq_id LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
     conn.execute("DELETE FROM faculty_report_deliveries WHERE delivered_to LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
@@ -367,6 +375,48 @@ def main():
     check("Content tab's total-in-range figure matches fetch_content_growth()",
           str(growth["total_in_range"]).encode() in resp.data)
 
+    print("\n--- Step 14d-2: Overview > SQL Query tab (2026-08-17) -- read-only report builder ---")
+    resp = client.get("/?tab=sql")
+    check("SQL tab renders with no query submitted yet", resp.status_code == 200)
+    check("SQL tab has no unrendered Jinja", b"{{" not in resp.data and b"{%" not in resp.data)
+
+    # A real, representative query -- exactly Pranav's own stated example
+    # (student id/username + credits + a calculated 'used in last N days'
+    # column) -- must actually run and render a real result table.
+    good_sql = "SELECT username, SUM(amount) AS balance FROM wallet_ledger GROUP BY username ORDER BY balance DESC LIMIT 3"
+    resp = client.get("/", query_string={"tab": "sql", "sql": good_sql})
+    check("a real SELECT query runs and returns 200", resp.status_code == 200)
+    check("the result table's own column header is rendered", b"balance" in resp.data)
+    check("no error card is shown for a valid query", b"Query not run" not in resp.data)
+
+    # The safety property THIS route must uphold: a write attempt is
+    # rejected with a clear message, never silently run, never a 500.
+    bad_sql = "UPDATE students SET email='pwned' WHERE telegram_user_id=1"
+    resp = client.get("/", query_string={"tab": "sql", "sql": bad_sql})
+    check("a write attempt (UPDATE) is rejected, not run", resp.status_code == 200)
+    check("the rejection reason is shown on screen", b"read-only" in resp.data or b"SELECT" in resp.data)
+    row = conn.execute("SELECT email FROM students WHERE telegram_user_id=1").fetchone()
+    check("the attempted UPDATE did NOT actually change real data", row is None or row[0] != "pwned")
+
+    # Export routes -- re-run the same query text, at the export ceiling.
+    for fmt, ctype_fragment in (("csv", "text/csv"), ("xlsx", "spreadsheetml"), ("json", "application/json")):
+        resp = client.get(f"/overview/sql.{fmt}", query_string={"sql": good_sql})
+        check(f"SQL export .{fmt} returns 200 for a valid query", resp.status_code == 200)
+        check(f"SQL export .{fmt} has the right content-type", ctype_fragment in resp.headers.get("Content-Type", ""))
+    resp = client.get("/overview/sql.csv", query_string={"sql": bad_sql})
+    check("SQL export .csv rejects a write attempt (400, not a downloaded file)", resp.status_code == 400)
+    resp = client.get("/overview/sql.svg", query_string={"sql": "SELECT 1"})
+    check("SQL export with an unsupported format 400s instead of crashing", resp.status_code == 400)
+
+    # Audit trail -- every run (accepted or rejected) is logged, same
+    # discipline as every other portal action.
+    check("the accepted query was audit-logged", conn.execute(
+        "SELECT 1 FROM admin_actions WHERE action_type='sql_query_run' ORDER BY action_id DESC LIMIT 1"
+    ).fetchone() is not None)
+    check("the rejected query was ALSO audit-logged (not silently dropped)", conn.execute(
+        "SELECT 1 FROM admin_actions WHERE action_type='sql_query_rejected' ORDER BY action_id DESC LIMIT 1"
+    ).fetchone() is not None)
+
     print("\n--- Step 14e: Faculty Comprehensive Report (2026-08-14) ---")
     import faculty_report  # noqa: E402 -- telegram/admin_portal/faculty_report.py
     reportable = faculty_report.list_reportable_tenants(conn, manage_bots.load_bots())
@@ -497,6 +547,7 @@ def main():
                  "/analytics/bots", "/analytics/faculty-report", "/analytics/content-health", "/analytics/email",
                  "/analytics/issue-reports", "/content/course-catalog",
                  "/overview/students.csv", "/overview/content.csv", "/overview/performance.csv", "/overview/faculty.csv",
+                 "/overview/sql.csv",
                  "/overview/chart/students_daily.html", "/overview/chart/students_daily.pdf",
                  "/reports/faculty", f"/reports/faculty/{FAKE_BOT_ID}.pdf",
                  "/masters/faculty", f"/masters/faculty/{FAKE_BOT_ID}"):
