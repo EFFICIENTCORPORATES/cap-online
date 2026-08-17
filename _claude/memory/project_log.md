@@ -2,6 +2,49 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-08-17 — One-time welcome-bonus credit + broadcast sent to 92 real students
+
+Pranav asked for a 1000-credit welcome bonus for every student whose
+wallet balance shows 0, plus a broadcast DM telling them about it (from
+1LAVYA, pointing at Study & Exam Bots, support@1lavya.com). Read
+`telegram/FIRST_PROMPT.md` + `/TELEGRAM-TEST-MODE-SYSTEM.md` first — this
+reuses the already-existing, audited `wallet.grant_signup_bonus()`
+mechanism (1000 credits, one-time-per-username-ever, idempotent), not a
+new credit type.
+
+Given this touches real production wallets and DMs ~100 real people
+(outward-facing, irreversible), confirmed 3 things via AskUserQuestion
+before writing anything: exclude the 2 admin/faculty accounts sitting in
+`students` (CAPRANAV = Pranav's own chat, Official1lavya), use the drafted
+message text as-is, and send a live preview to Pranav's own chat first
+before the real broadcast.
+
+Built `telegram/tools/welcome_bonus_broadcast.py` (dry-run by default,
+`--preview` sends only to Pranav, `--live` is the real thing). Eligibility
+= real student (excludes 2 synthetic smoke-test rows + the 2 admin
+accounts) with a CURRENT balance of exactly 0, checked live — this
+doubles as "hasn't already received the bonus," since the 13 students who
+already had it (via natural usage since 2026-08-16) all showed non-zero
+balances. Delivery bot per student resolved from `bot_interactions`
+(whichever bot they've actually started a conversation with — Telegram
+requires this) — never a fixed bot.
+
+Dry run: 92 eligible, 0 errors. Preview: sent to Pranav's chat via
+`capranav-exam`, accidentally sent twice (this session re-ran `--preview`
+to verify an unrelated stdout-encoding fix, not a script bug — the mass
+loop only sends once per student per run). Pranav approved the wording.
+**Live run: 92/92 credited (1000 each), 90/92 messages delivered** — 2
+failed for permanent Telegram-side reasons (one blocked the bot, one
+account deactivated); both were still credited per the agreed scope (only
+delivery failed, not eligibility). Split: 82 via `csarunchouhan`, 7 via
+`capranav-exam`, 3 via `1lavya-examhub`. Full per-student audit trail:
+`telegram/database/run/welcome_bonus_broadcast_live_20260817T135227Z.csv`.
+
+Not scheduled/repeating — this was a one-time proactive run of an
+already-live mechanism, not a new automated flow. Re-running the script
+later is safe (idempotent) but would only pick up students who are new or
+have never been granted since, matching its own eligibility check.
+
 ## 2026-08-17 — Test Mode tenant-scoping bug fixed (CS Arun Chouhan's bot was showing CA content)
 
 Pranav reported: typing "test" on CS Arun Chouhan's bot (CMA Law
