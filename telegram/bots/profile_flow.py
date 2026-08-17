@@ -28,11 +28,27 @@ student_profiles row (no new row created); no walks through creating a
 brand-new one.
 
 Editable at any time, shared across every chat_id linked to the same
-username: display_name, course, level, exam_attempt. Editable per-chat-id
-(NOT shared -- Pranav's own scenario: "he might give different email ids
-as well" across phones): email, mobile_number (reuses report_flow.py's
-exact echo-confirm collection pattern via the shared contact_utils.py).
-NEVER editable once set: username itself.
+username: display_name, and a LIST of academic profiles (course, level,
+each with its own exam_attempt -- see MULTI-COURSE PROFILES below).
+Editable per-chat-id (NOT shared -- Pranav's own scenario: "he might give
+different email ids as well" across phones): email, mobile_number (reuses
+report_flow.py's exact echo-confirm collection pattern via the shared
+contact_utils.py). NEVER editable once set: username itself.
+
+MULTI-COURSE PROFILES (added 2026-08-16, telegram/database/
+academic_profiles.py): a student can hold one academic profile (course +
+level + its own target exam attempt) per DIFFERENT course entirely
+self-service -- CS Final + CA Inter + CMA Foundation simultaneously is a
+normal, real case (Pranav's own example). Adding a SECOND LEVEL within a
+course the student ALREADY has (e.g. already "CA Inter", now also wants
+"CA Foundation") is instead the faculty/manager-testing scenario Pranav
+described, and routes through access_requests.py's self-service-request,
+auto-approved-in-~10s workflow -- see that module's own docstring. Session
+behavior (which profile is "active" right now) lives in each bot's own
+entry flow (exam_hub_bot.py's resolve_entry(), test_flow.py's
+start_test_flow()), not here -- this module only owns the DATA (add/
+list/edit/remove a profile), never which one a particular practice session
+is currently using.
 
 Avatar is NOT collected or stored here at all -- Pranav's choice: pulled
 live from the student's own Telegram profile photo whenever one is needed
@@ -65,6 +81,8 @@ sys.path.insert(0, str(REPO_ROOT / "telegram" / "database"))
 import db as platform_db  # noqa: E402
 import contact_utils  # noqa: E402
 import leaderboard_metrics  # noqa: E402 -- telegram/database/leaderboard_metrics.py, leaderboard config + eligibility (2026-08-11)
+import academic_profiles  # noqa: E402 -- telegram/database/academic_profiles.py, multi-course profiles (2026-08-16)
+import access_requests  # noqa: E402 -- telegram/database/access_requests.py, the same-course-extra-level approval gate (2026-08-16)
 
 logger = logging.getLogger(__name__)
 
@@ -144,13 +162,13 @@ def _valid_username(text: str) -> str | None:
 
 
 def _get_profile_for_chat(conn, telegram_user_id: int) -> dict | None:
-    """The full profile (shared fields from student_profiles + per-chat
-    fields from students) for this chat_id, or None if no username is
-    linked yet."""
+    """Identity + per-chat fields for this chat_id, or None if no username
+    is linked yet. Course/Level/exam_attempt are NOT here anymore
+    (2026-08-16) -- a student can hold several now, see
+    academic_profiles.list_profiles()."""
     row = conn.execute(
         """
-        SELECT sp.username, sp.display_name, sp.course, sp.level, sp.exam_attempt,
-               s.email, s.mobile_number
+        SELECT sp.username, sp.display_name, s.email, s.mobile_number
         FROM students s JOIN student_profiles sp ON sp.username = s.lavya_username
         WHERE s.telegram_user_id = ?
         """,
@@ -158,24 +176,31 @@ def _get_profile_for_chat(conn, telegram_user_id: int) -> dict | None:
     ).fetchone()
     if not row:
         return None
-    return {
-        "username": row[0], "display_name": row[1], "course": row[2], "level": row[3],
-        "exam_attempt": row[4], "email": row[5], "mobile_number": row[6],
-    }
+    return {"username": row[0], "display_name": row[1], "email": row[2], "mobile_number": row[3]}
+
+
+def _format_academic_profile_line(p: dict) -> str:
+    attempt = f" — targeting {p['exam_attempt']}" if p.get("exam_attempt") else " — no target attempt set"
+    return f"\U0001F393 {p['course']} {p['level']}{attempt}"
 
 
 def _profile_summary_text(profile: dict | None, telegram_user_id: int, conn) -> str:
     if not profile:
         return "You don't have a 1LAVYA profile set up yet."
+    academic = academic_profiles.list_profiles(conn, profile["username"])
     lines = [
         f"<b>Username:</b> {profile['username']} <i>(permanent, cannot be changed)</i>",
         f"<b>Display Name:</b> {profile['display_name'] or 'Not set'}",
-        f"<b>Course:</b> {profile['course'] or 'Not set'}",
-        f"<b>Level:</b> {profile['level'] or 'Not set'}",
-        f"<b>Target Attempt:</b> {profile['exam_attempt'] or 'Not set'}",
-        f"<b>Email:</b> {profile['email'] or 'Not set'}",
-        f"<b>Mobile:</b> {profile['mobile_number'] or 'Not set'}",
+        "",
+        "<b>Course &amp; Level:</b>",
     ]
+    if academic:
+        lines.extend(_format_academic_profile_line(p) for p in academic)
+    else:
+        lines.append("Not set yet -- add one below.")
+    lines.append("")
+    lines.append(f"<b>Email:</b> {profile['email'] or 'Not set'}")
+    lines.append(f"<b>Mobile:</b> {profile['mobile_number'] or 'Not set'}")
     return "\n".join(lines)
 
 
@@ -185,14 +210,18 @@ def _menu_keyboard(profile: dict | None) -> InlineKeyboardMarkup:
         rows.append([InlineKeyboardButton("\U0001F194 Set up my username", callback_data="profile:start_username")])
     else:
         rows.append([InlineKeyboardButton("✏️ Display Name", callback_data="profile:edit_display_name")])
-        rows.append([InlineKeyboardButton("\U0001F393 Course & Level", callback_data="profile:edit_course")])
-        rows.append([InlineKeyboardButton("\U0001F4C5 Target Attempt", callback_data="profile:edit_exam_attempt")])
+        # 2026-08-16: now the entry point to the multi-profile LIST screen
+        # (_show_course_level_menu), not a single course+level editor --
+        # Target Attempt is no longer its own top-level button, it moved
+        # per-profile into that same screen (each course/level can target a
+        # different attempt).
+        rows.append([InlineKeyboardButton("\U0001F393 Course & Level", callback_data="profile:course_menu")])
         rows.append([InlineKeyboardButton("\U0001F4E7 Email", callback_data="profile:edit_email")])
         rows.append([InlineKeyboardButton("\U0001F4F1 Mobile", callback_data="profile:edit_mobile")])
         # Leaderboards need an identity (username) to attach participation
         # to -- only offered once a profile actually exists. Course/Level
         # further gate WHICH boards show (see _show_leaderboards_menu), but
-        # the button itself is always reachable so a student without
+        # the button itself is always reachable so a student without any
         # Course/Level set yet still finds out why the list is empty,
         # rather than the menu option disappearing with no explanation.
         rows.append([InlineKeyboardButton("\U0001F3C6 Leaderboards", callback_data="profile:leaderboards")])
@@ -200,12 +229,111 @@ def _menu_keyboard(profile: dict | None) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(rows)
 
 
+async def _show_course_level_menu(query_or_message, context, telegram_user_id: int, edit: bool):
+    """The multi-profile LIST screen (2026-08-16) -- replaces the old
+    single course+level editor. Every saved academic profile gets its own
+    row with a "Set attempt" and "Remove" action; "+ Add Course & Level"
+    always leads into the has_course()-gated add flow in
+    _handle_profile_action() (self-service for a new course, an
+    access_requests approval round-trip for a second level in a course
+    already on file)."""
+    conn = platform_db.get_connection()
+    platform_db.init_schema(conn)
+    profile = _get_profile_for_chat(conn, telegram_user_id)
+    if not profile:
+        text = "Please set up your username first."
+        markup = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Back", callback_data="profile:confirm_yes")]])
+    else:
+        academic = academic_profiles.list_profiles(conn, profile["username"])
+        lines = ["<b>Your Course &amp; Level Profiles</b>", ""]
+        rows = []
+        if not academic:
+            lines.append("No courses saved yet -- add your first one below.")
+        else:
+            lines.extend(_format_academic_profile_line(p) for p in academic)
+            for p in academic:
+                rows.append([
+                    InlineKeyboardButton(f"\U0001F4C5 Set attempt: {p['course']} {p['level']}",
+                                          callback_data=f"profile:setattempt:{p['profile_id']}"),
+                ])
+                rows.append([
+                    InlineKeyboardButton(f"✕ Remove {p['course']} {p['level']}",
+                                          callback_data=f"profile:rmprofile:{p['profile_id']}"),
+                ])
+        rows.append([InlineKeyboardButton("➕ Add Course & Level", callback_data="profile:addcourse")])
+        rows.append([InlineKeyboardButton("⬅️ Back", callback_data="profile:confirm_yes")])
+        text = "\n".join(lines)
+        markup = InlineKeyboardMarkup(rows)
+
+    if edit:
+        await query_or_message.edit_message_text(text, parse_mode="HTML", reply_markup=markup)
+    else:
+        await query_or_message.reply_text(text, parse_mode="HTML", reply_markup=markup)
+
+
+# ---------------------------------------------------------------------------
+# ACCESS REQUESTS -- the same-course-extra-level approval gate (2026-08-16)
+# ---------------------------------------------------------------------------
+def _schedule_auto_approval_job(context, request_id: int):
+    """Delayed (~10s) auto-approval for a just-created access_requests row
+    -- see access_requests.py's own docstring for why this exists with no
+    real human review yet. job_queue jobs don't survive a bot restart (same
+    reasoning as every other delayed job on this platform -- wallet_flow.py's
+    recharge poll, test_flow.py's expiry/grace timers); rearm_pending_
+    access_requests() below is the startup sweep that re-arms anything
+    still pending after a restart."""
+    if not context.job_queue:
+        return
+    context.job_queue.run_once(
+        _auto_approval_job_callback, when=access_requests.AUTO_APPROVE_DELAY_SECONDS,
+        data={"request_id": request_id},
+        name=f"access_request_approve:{request_id}",
+    )
+
+
+async def _auto_approval_job_callback(context):
+    request_id = context.job.data["request_id"]
+    conn = platform_db.get_connection()
+    platform_db.init_schema(conn)
+    resolved = access_requests.approve_request(conn, request_id, resolved_by="auto")
+    if not resolved:
+        return  # already resolved (e.g. this job fired twice across a restart) -- nothing to notify
+    await context.bot.send_message(
+        chat_id=resolved["telegram_user_id"],
+        text=(
+            f"✅ Your request for <b>{resolved['course']} {resolved['level']}</b> has been approved! "
+            f"It's now added to your profiles -- type \"profile\" to see it."
+        ),
+        parse_mode="HTML",
+    )
+
+
+def rearm_pending_access_requests(application, bot_id: str):
+    """Call once from each bot's main(), same pattern as wallet_flow.py's
+    rearm_pending_recharge_jobs()/test_flow.py's rearm_pending_test_jobs()
+    -- sweeps every still-pending access_requests row THIS bot created
+    (bot_id-scoped, since only the bot that created a request can notify
+    through its own token) and re-arms its auto-approval job."""
+    conn = platform_db.get_connection()
+    platform_db.init_schema(conn)
+    rows = [r for r in access_requests.pending_requests(conn) if r["bot_id"] == bot_id]
+    for row in rows:
+        application.job_queue.run_once(
+            _auto_approval_job_callback, when=access_requests.AUTO_APPROVE_DELAY_SECONDS,
+            data={"request_id": row["request_id"]},
+            name=f"access_request_approve:{row['request_id']}",
+        )
+    if rows:
+        logger.info(f"profile_flow: startup sweep -- re-armed {len(rows)} pending access request(s) for bot_id={bot_id!r}.")
+
+
 async def _show_leaderboards_menu(query_or_message, context, telegram_user_id: int, edit: bool):
     conn = platform_db.get_connection()
     platform_db.init_schema(conn)
     profile = _get_profile_for_chat(conn, telegram_user_id)
+    academic = academic_profiles.list_profiles(conn, profile["username"]) if profile else []
 
-    if not profile or not profile.get("course") or not profile.get("level"):
+    if not profile or not academic:
         text = (
             "Set your <b>Course &amp; Level</b> first (from the profile menu) so we can show you "
             "leaderboards relevant to what you're actually studying."
@@ -213,7 +341,18 @@ async def _show_leaderboards_menu(query_or_message, context, telegram_user_id: i
         markup = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Back", callback_data="profile:confirm_yes")]])
     else:
         username = profile["username"]
-        eligible = leaderboard_metrics.eligible_leaderboards_for(profile["course"], profile["level"])
+        # 2026-08-16, multi-course profiles: eligibility is now the UNION
+        # across every saved course/level, not just one -- a student
+        # preparing for both CA Inter and CS Executive should see BOTH
+        # sets of leaderboards, not just whichever course happened to be
+        # first. Dedupe by leaderboard_id since two profiles could in
+        # theory both be eligible for the same board.
+        eligible_by_id = {}
+        for p in academic:
+            for lb in leaderboard_metrics.eligible_leaderboards_for(p["course"], p["level"]):
+                eligible_by_id[lb["leaderboard_id"]] = lb
+        eligible = list(eligible_by_id.values())
+
         joined_ids = {
             r[0] for r in conn.execute(
                 "SELECT leaderboard_id FROM leaderboard_participants WHERE username=?", (username,)
@@ -221,14 +360,15 @@ async def _show_leaderboards_menu(query_or_message, context, telegram_user_id: i
         }
         joined_count = len(joined_ids)
 
+        course_level_summary = ", ".join(f"{p['course']} {p['level']}" for p in academic)
         lines = [
-            f"<b>Leaderboards for {profile['course']} {profile['level']}</b>",
+            f"<b>Leaderboards for {course_level_summary}</b>",
             f"Joined: {joined_count}/{MAX_LEADERBOARDS_PER_STUDENT}",
             "",
         ]
         rows = []
         if not eligible:
-            lines.append("No live leaderboards for your Course &amp; Level yet -- check back soon!")
+            lines.append("No live leaderboards for your Course &amp; Level(s) yet -- check back soon!")
         else:
             for lb in eligible:
                 joined = lb["leaderboard_id"] in joined_ids
@@ -249,7 +389,15 @@ async def _show_leaderboards_menu(query_or_message, context, telegram_user_id: i
 # ---------------------------------------------------------------------------
 # ENTRY POINT (trigger phrase matched)
 # ---------------------------------------------------------------------------
-async def start_profile_flow(update, context):
+async def start_profile_flow(update, context, bot_id: str = None):
+    # bot_id stashed the same way report_flow.py's report_flow_bot_id is --
+    # needed later if this session ends up creating an access_requests row
+    # (the same-course-extra-level approval gate needs to know which bot's
+    # token to notify through once it auto-approves). Optional/backward-
+    # compatible: a caller that doesn't pass it just can't trigger that one
+    # specific path's notification -- everything else still works.
+    if bot_id:
+        context.user_data["profile_flow_bot_id"] = bot_id
     context.user_data["profile_flow_state"] = CONFIRMING_START
     keyboard = [[
         InlineKeyboardButton("Yes", callback_data="profile:confirm_yes"),
@@ -338,8 +486,13 @@ async def _handle_profile_action(query, context, value: str):
         await query.edit_message_text("What display name would you like to use? (This is public, shown on leaderboards.)")
         return
 
-    if value == "edit_course":
+    if value == "course_menu":
+        await _show_course_level_menu(query, context, telegram_user_id, edit=True)
+        return
+
+    if value == "addcourse":
         keyboard = [[InlineKeyboardButton(c, callback_data=f"profile:pick_course:{c}")] for c in COURSE_LEVELS]
+        keyboard.append([InlineKeyboardButton("⬅️ Back", callback_data="profile:course_menu")])
         await query.edit_message_text("Which course are you studying?", reply_markup=InlineKeyboardMarkup(keyboard))
         return
 
@@ -354,15 +507,52 @@ async def _handle_profile_action(query, context, value: str):
     if value.startswith("pick_level:"):
         level = value.split(":", 1)[1]
         course = context.user_data.pop("profile_flow_pending_course", None)
-        platform_db.execute_with_retry(
-            conn, "UPDATE student_profiles SET course=?, level=?, updated_at=? WHERE username=(SELECT lavya_username FROM students WHERE telegram_user_id=?)",
-            (course, level, _now(), telegram_user_id),
+        profile = _get_profile_for_chat(conn, telegram_user_id)
+        if not profile:
+            await query.edit_message_text("Please set up your username first.")
+            return
+        username = profile["username"]
+
+        already_exact = conn.execute(
+            "SELECT 1 FROM student_academic_profiles WHERE username=? AND course=? AND level=?",
+            (username, course, level),
+        ).fetchone()
+        if already_exact:
+            await query.edit_message_text(f"You already have <b>{course} {level}</b> saved.", parse_mode="HTML")
+            await _show_course_level_menu(query.message, context, telegram_user_id, edit=False)
+            return
+
+        # LOCKED RULE (Pranav, 2026-08-16): self-service allows any number
+        # of DIFFERENT courses, but at most ONE level per course --  a
+        # SECOND level within a course this username already has is the
+        # faculty/manager-testing scenario, routed through access_requests
+        # instead of being added directly. See academic_profiles.py's own
+        # docstring for the full reasoning.
+        if academic_profiles.has_course(conn, username, course):
+            bot_id = context.user_data.get("profile_flow_bot_id", "unknown")
+            request_id = access_requests.create_request(conn, username, telegram_user_id, bot_id, course, level)
+            await query.edit_message_text(
+                f"You already have a level saved for <b>{course}</b>. Adding <b>{level}</b> too needs a quick "
+                f"approval -- you'll be notified in a few seconds.",
+                parse_mode="HTML",
+            )
+            _schedule_auto_approval_job(context, request_id)
+            return
+
+        academic_profiles.add_profile(conn, username, course, level)
+        keyboard = [[
+            InlineKeyboardButton("Yes, add another", callback_data="profile:addcourse"),
+            InlineKeyboardButton("No, that's it", callback_data="profile:course_menu"),
+        ]]
+        await query.edit_message_text(
+            f"✅ Added: {course} {level}\n\nAre you also preparing for another course or level?",
+            reply_markup=InlineKeyboardMarkup(keyboard),
         )
-        await query.edit_message_text(f"✅ Course & Level updated: {course} {level}")
-        await _show_menu(query.message, context, telegram_user_id, edit=False)
         return
 
-    if value == "edit_exam_attempt":
+    if value.startswith("setattempt:"):
+        profile_id = int(value.split(":", 1)[1])
+        context.user_data["profile_flow_pending_attempt_profile_id"] = profile_id
         years = _attempt_years()
         # 3 per row -- 5 years fits as 2 rows of 3 (last row short), reads
         # better than one long row of 5 skinny buttons.
@@ -388,25 +578,30 @@ async def _handle_profile_action(query, context, value: str):
     if value.startswith("pick_attempt_month:"):
         month = value.split(":", 1)[1]
         year = context.user_data.pop("profile_flow_pending_attempt_year", None)
-        if not year:
-            # Stale/replayed callback with no year in context (e.g. bot
-            # restarted mid-flow) -- restart the picker rather than saving
-            # a month with no year attached.
-            await query.edit_message_text("Session expired -- let's try again. Which year are you targeting?")
-            await _handle_profile_action(query, context, "edit_exam_attempt")
+        profile_id = context.user_data.pop("profile_flow_pending_attempt_profile_id", None)
+        if not year or not profile_id:
+            # Stale/replayed callback with no year/profile in context (e.g.
+            # bot restarted mid-flow) -- go back to the course list rather
+            # than saving an attempt with nothing to attach it to.
+            await query.edit_message_text("Session expired -- let's try again from Course & Level.")
+            await _show_course_level_menu(query.message, context, telegram_user_id, edit=False)
             return
         attempt = f"{month} {year}"
-        platform_db.execute_with_retry(
-            conn, "UPDATE student_profiles SET exam_attempt=?, updated_at=? WHERE username=(SELECT lavya_username FROM students WHERE telegram_user_id=?)",
-            (attempt, _now(), telegram_user_id),
-        )
+        academic_profiles.update_exam_attempt(conn, profile_id, attempt)
         await query.edit_message_text(f"✅ Target attempt updated: {attempt}")
-        await _show_menu(query.message, context, telegram_user_id, edit=False)
+        await _show_course_level_menu(query.message, context, telegram_user_id, edit=False)
         return
 
     if value == "pick_attempt_other":
         context.user_data["profile_flow_state"] = AWAITING_EXAM_ATTEMPT_OTHER
         await query.edit_message_text("Please type the attempt you're targeting (e.g. \"Jan 2028\").")
+        return
+
+    if value.startswith("rmprofile:"):
+        profile_id = int(value.split(":", 1)[1])
+        academic_profiles.remove_profile(conn, profile_id)
+        await query.answer("Removed.")
+        await _show_course_level_menu(query, context, telegram_user_id, edit=True)
         return
 
     if value == "edit_email":
@@ -597,13 +792,18 @@ async def handle_profile_text_input(update, context) -> bool:
         return True
 
     if state == AWAITING_EXAM_ATTEMPT_OTHER:
-        platform_db.execute_with_retry(
-            conn, "UPDATE student_profiles SET exam_attempt=?, updated_at=? WHERE username=(SELECT lavya_username FROM students WHERE telegram_user_id=?)",
-            (text, _now(), telegram_user_id),
-        )
+        profile_id = context.user_data.pop("profile_flow_pending_attempt_profile_id", None)
         context.user_data["profile_flow_state"] = None
+        if not profile_id:
+            # Stale state with no profile to attach this to (e.g. bot
+            # restarted mid-flow) -- send them back to the course list
+            # rather than silently dropping the typed attempt.
+            await update.message.reply_text("Session expired -- let's try again from Course & Level.")
+            await _show_course_level_menu(update.message, context, telegram_user_id, edit=False)
+            return True
+        academic_profiles.update_exam_attempt(conn, profile_id, text)
         await update.message.reply_text(f"✅ Target attempt updated: {text}")
-        await _show_menu(update.message, context, telegram_user_id, edit=False)
+        await _show_course_level_menu(update.message, context, telegram_user_id, edit=False)
         return True
 
     if state == AWAITING_EMAIL:

@@ -445,6 +445,70 @@ CREATE TABLE IF NOT EXISTS report_flow_events (
 CREATE INDEX IF NOT EXISTS idx_report_flow_events_student ON report_flow_events(telegram_user_id, created_at);
 
 -- ===========================================================================
+-- FACULTY COMPREHENSIVE REPORT -- added 2026-08-14 (Pranav: a full
+-- content-availability + chapter-wise + student-wise + last-7-days +
+-- student-x-chapter + question-difficulty report per faculty/tenant, for
+-- any date range, downloadable as PDF/XLSX/HTML and emailable to the
+-- faculty). See telegram/admin_portal/faculty_report.py for the query and
+-- render layer this table supports. Audit trail only -- never stores the
+-- PDF/XLSX bytes themselves, same discipline as report_deliveries above --
+-- one row per report actually downloaded or emailed from the Admin Portal.
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS faculty_report_deliveries (
+    delivery_id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    tenant_id         TEXT NOT NULL,
+    generated_at        TEXT NOT NULL,
+    range_label           TEXT,
+    delivered_to            TEXT,   -- an email address, or 'download:pdf'/'download:xlsx'/'download:html' for a direct download (no email)
+    status                     TEXT NOT NULL CHECK (status IN ('sent', 'failed', 'downloaded')),
+    error_detail                 TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_faculty_report_deliveries_tenant ON faculty_report_deliveries(tenant_id, generated_at);
+
+-- ===========================================================================
+-- FACULTY MASTER -- added 2026-08-14 (Pranav's direct ask: "maintain a
+-- faculty table where we can store the details of the faculty," asked
+-- explicitly as a DB table vs a JSON file -- DB table confirmed). Holds
+-- ADMINISTRATIVE/CONTACT details only -- email, phone, free-text notes --
+-- editable through a real form in the Admin Portal (Masters > Faculty
+-- Details), with an audit trail (admin_actions, same as every other
+-- write in this portal).
+--
+-- Deliberately does NOT duplicate CONTENT-ROUTING fields (content_scope,
+-- own_content, exam_content, kind, welcome_message) -- those stay in
+-- telegram/config/tenants.json, unchanged, because the bot scripts read
+-- that file DIRECTLY at process startup; moving them here would mean
+-- rewriting every bot's own content-loading code for no benefit this ask
+-- needs. Same split-by-concern precedent bots.json (routing/tokens) vs
+-- tenants.json (content) already established in this schema's history --
+-- this table is the administrative-data half of the SAME tenant, not a
+-- competing definition of it.
+--
+-- Also deliberately does NOT duplicate `onboarding_fee` (amount_inr/paid/
+-- paid_at) -- that already lives in tenants.json and is already read by
+-- analytics.fetch_faculty_roster(); adding a second copy here would
+-- create exactly the dual-source-of-truth risk this table's own design
+-- is trying to avoid. The Faculty Details admin page shows that fee
+-- status READ-ONLY (sourced from tenants.json) alongside what IS
+-- editable here, for one coherent view -- editing fee status stays a
+-- direct tenants.json edit until/unless that's explicitly migrated too.
+--
+-- tenant_id is matched by CONVENTION against tenants.json's own tenant_id
+-- (not a real SQL foreign key -- tenants.json isn't a DB table) --
+-- telegram/admin_portal/faculty_master.py is the one place that owns
+-- reading/writing this table; see its own module docstring.
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS faculty_master (
+    tenant_id       TEXT PRIMARY KEY,
+    contact_email     TEXT,
+    contact_phone       TEXT,
+    notes                 TEXT,
+    created_at              TEXT NOT NULL,
+    updated_at                TEXT NOT NULL
+);
+
+-- ===========================================================================
 -- STUDENT PROFILE / IDENTITY SYSTEM -- added 2026-08-11 (telegram/bots/
 -- profile_flow.py), built as the identity foundation for the Phase 3
 -- (Leaderboard) roadmap item, per Pranav's explicit confirmation ("build
@@ -489,6 +553,73 @@ CREATE TABLE IF NOT EXISTS student_profiles (
 -- to change an already-set lavya_username, only to set one that's
 -- currently NULL, either by creating a new student_profiles row or linking
 -- to an existing one).
+
+-- ===========================================================================
+-- MULTI-COURSE ACADEMIC PROFILES -- added 2026-08-16 (Pranav: a student
+-- may genuinely be preparing for more than one course/level at once, e.g.
+-- CS Final + CA Inter + CMA Foundation simultaneously -- each with its OWN
+-- target exam attempt, since those can differ per course/level too).
+--
+-- Deliberately ADDITIVE, not a replacement of student_profiles.course/
+-- level/exam_attempt above: those three columns stay in place (untouched,
+-- never dropped -- SQLite table surgery on a table with real rows is a real
+-- risk this codebase avoids per its own established discipline, see
+-- db.py's _migrate_wallet_ledger_shape() comment on only ever doing that
+-- against a table verified EMPTY). Instead, db.py's own migration copies
+-- any existing single course/level/exam_attempt for a username into this
+-- table as its first row (idempotent, INSERT...WHERE NOT EXISTS, safe to
+-- run on every startup) -- from that point on, THIS table is the single
+-- source of truth every piece of code should read/write; the old columns
+-- are left as a frozen, no-longer-updated historical trace.
+--
+-- ONE ROW PER (username, course, level) -- a student can hold at most one
+-- profile per course+level pair (adding the SAME course+level twice is a
+-- no-op, not a duplicate). Locked rule (Pranav, 2026-08-16): a student can
+-- self-service add profiles for as many DIFFERENT courses as they like
+-- (CA + CS + CMA all at once is normal), but at most ONE LEVEL per course
+-- via self-service -- a SECOND level within a course they already have
+-- (e.g. already "CA Inter", now wants "CA Final" too) is exactly the
+-- faculty/manager-testing scenario Pranav described, and routes through
+-- access_requests below instead of being added directly.
+CREATE TABLE IF NOT EXISTS student_academic_profiles (
+    profile_id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    username        TEXT NOT NULL REFERENCES student_profiles(username),
+    course          TEXT NOT NULL,
+    level           TEXT NOT NULL,
+    exam_attempt    TEXT,        -- "{Month} {Year}", same free-text shape as student_profiles.exam_attempt; independent per course/level per Pranav's explicit note
+    created_at      TEXT NOT NULL,
+    updated_at      TEXT NOT NULL,
+    UNIQUE (username, course, level)
+);
+
+CREATE INDEX IF NOT EXISTS idx_student_academic_profiles_username ON student_academic_profiles(username);
+
+-- Real trust/optics gate for the "second level in the same course" case
+-- above -- Pranav's exact spec: "this will be sent for approval... in
+-- backend this should move into an auto approval... within 10 seconds the
+-- response should be given as this is approved." No real human review
+-- exists yet (self-service request -> a ~10s delayed job flips it to
+-- approved and creates the real student_academic_profiles row) -- but the
+-- request/audit trail is real and ready for when actual manual review is
+-- wanted later, without changing the student-facing flow at all. Open to
+-- ANY student, not faculty-restricted (Pranav's confirmed choice,
+-- 2026-08-16) -- there's no separate faculty/manager identity concept on
+-- this platform today to gate it on.
+CREATE TABLE IF NOT EXISTS access_requests (
+    request_id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    username         TEXT NOT NULL REFERENCES student_profiles(username),
+    telegram_user_id INTEGER NOT NULL,   -- the chat_id that made the request -- who gets notified once it resolves (a username can span multiple chat_ids; the requester's own chat is the natural one to tell, not every linked device)
+    bot_id           TEXT NOT NULL,      -- which bot's token to notify through (context.bot only works within the same bot process that created the request)
+    course           TEXT NOT NULL,
+    level            TEXT NOT NULL,
+    status           TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
+    requested_at    TEXT NOT NULL,
+    resolved_at     TEXT,
+    resolved_by     TEXT     -- 'auto' for the ~10s background approval every request gets today; reserved for a real admin username once manual review exists
+);
+
+CREATE INDEX IF NOT EXISTS idx_access_requests_status ON access_requests(status);
+CREATE INDEX IF NOT EXISTS idx_access_requests_username ON access_requests(username);
 
 -- ===========================================================================
 -- LEADERBOARDS -- added 2026-08-11 (Phase 3 of the branding-kit ->
@@ -830,3 +961,70 @@ CREATE TABLE IF NOT EXISTS test_activity_log (
 
 CREATE INDEX IF NOT EXISTS idx_test_activity_log_test ON test_activity_log(test_id, occurred_at);
 
+-- ===========================================================================
+-- CONTENT INGESTION LOG -- added 2026-08-13, for the Admin Portal Overview
+-- rebuild's "New Questions Added" trend (which subjects/chapters got new
+-- content, and when). One row per content BATCH wired into a tenant's
+-- exam_content (mcq_json/descriptive_json) in telegram/config/tenants.json
+-- -- not one row per question, and not auto-derived from file mtimes (an
+-- mtime reflects the last EDIT, e.g. a typo fix, not first publication --
+-- would misdate old content as "new" the moment anyone touches it).
+--
+-- HONEST GAP, not a bug: there is no historical ingestion-date data before
+-- this table existed. Every content batch wired into the platform before
+-- 2026-08-13 has NO row here and will not appear in date-ranged "new
+-- questions" charts that only cover dates before this table's first real
+-- entry -- confirmed decision (Pranav, 2026-08-13): track forward from
+-- today rather than attempt an approximate git-history backfill. See
+-- telegram/database/README.md.
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS content_ingestion_log (
+    log_id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    logged_at       TEXT NOT NULL,
+    qtype           TEXT NOT NULL CHECK (qtype IN ('mcq', 'descriptive')),
+    course          TEXT,
+    level           TEXT,
+    subject         TEXT,
+    chapter_label   TEXT,
+    question_count  INTEGER NOT NULL,
+    source_file     TEXT,
+    content_owner   TEXT,     -- '1lavya' or a faculty tenant_id, same convention as exam_hub_bot.py's _infer_content_owner()
+    note            TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_content_ingestion_log_date ON content_ingestion_log(logged_at);
+CREATE INDEX IF NOT EXISTS idx_content_ingestion_log_scope ON content_ingestion_log(course, level, subject);
+
+-- ===========================================================================
+-- BACKUP RUNS -- added 2026-08-16 (telegram/tools/backup_to_cloudflare.py,
+-- see that file's own docstring and telegram/database/README.md's
+-- "Off-machine backup" section for the full pipeline). One row per
+-- invocation -- inserted as 'running' at start, finalized at the end (or
+-- on a top-level failure) -- so the Admin Portal's Bot Status page can show
+-- a real "Backup Snapshot Summary" without parsing log files or making a
+-- live R2/D1 call on every page load (same "one query against the local
+-- DB, not a live external call" pattern every other audit table in this
+-- schema already follows). NOTE: because the DB-snapshot phase runs BEFORE
+-- this row is finalized, that run's own snapshot/D1-mirror will legitimately
+-- show its own row as 'running', not 'success' -- expected, not a bug; the
+-- NEXT run's snapshot/mirror correctly shows it finalized.
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS backup_runs (
+    run_id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+    started_at                 TEXT NOT NULL,
+    finished_at                  TEXT,
+    status                         TEXT NOT NULL CHECK (status IN ('running', 'success', 'failed')),
+    duration_seconds                 REAL,
+    platform_db_snapshot_kb            REAL,
+    myfiles_db_snapshot_kb                REAL,
+    secrets_backed_up                       INTEGER,
+    d1_tables_mirrored                        INTEGER,
+    d1_rows_mirrored                            INTEGER,
+    assets_uploaded                               INTEGER,
+    assets_unchanged                                INTEGER,
+    assets_failed                                     INTEGER,
+    failed_phases                                       TEXT,   -- comma-separated phase names, NULL if none
+    error_detail                                          TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_backup_runs_started ON backup_runs(started_at);

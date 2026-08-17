@@ -101,6 +101,9 @@ import profile_flow  # noqa: E402 -- telegram/bots/profile_flow.py, the "profile
 import mcq_issue_flow  # noqa: E402 -- telegram/bots/mcq_issue_flow.py, the "Report Issue in MCQ" flow (2026-08-13)
 import wallet  # noqa: E402 -- telegram/database/wallet.py, the credit-wallet ledger (2026-08-15/16)
 import identity  # noqa: E402 -- telegram/database/identity.py, auto-provisioned wallet identity (2026-08-16)
+import academic_profiles  # noqa: E402 -- telegram/database/academic_profiles.py, multi-course profiles (2026-08-16)
+import cancel_utils  # noqa: E402 -- telegram/bots/cancel_utils.py, universal "get me out of this" escape hatch (2026-08-16)
+import fuzzy_trigger  # noqa: E402 -- telegram/bots/fuzzy_trigger.py, "did you mean X?" typo confirmation (2026-08-16)
 import test_flow  # noqa: E402 -- telegram/bots/test_flow.py, Test Mode / Pre-Designed Tests (2026-08-16)
 import wallet_flow  # noqa: E402 -- telegram/bots/wallet_flow.py, wallet status + recharge (2026-08-16)
 
@@ -283,7 +286,23 @@ def db_start_session(user_id) -> int:
     return DB_CONN.execute("SELECT last_insert_rowid()").fetchone()[0]
 
 
+# exam_hub_sessions only ever tracks the Mode->Course->Level->Subject
+# funnel (see schema.sql's own comment on that table) -- Exam Type/Year/
+# Chapter go deeper than this table is designed for and are tracked
+# per-question instead (exam_hub_mcq_attempts/exam_hub_descriptive_events).
+# db_update_session() silently accepted ANY kwarg as a real column before
+# 2026-08-17 (a raw f-string passthrough, no validation) -- harmless while
+# every call site happened to only pass mode/course/level/subject, but a
+# real `sqlite3.OperationalError: no such column` crash the moment
+# _resolve_type_then_year()'s auto-skip (2026-08-16) started legitimately
+# producing exam_type/year in `updates` too. Found via a live bug report
+# (Pranav: "session expired" looping right after MCQ) -- see the two call
+# sites below (subject/type actions) for the full story.
+SESSION_TRACKED_FIELDS = {"mode", "course", "level", "subject"}
+
+
 def db_update_session(session_id, **fields):
+    fields = {k: v for k, v in fields.items() if k in SESSION_TRACKED_FIELDS}
     if not session_id or not fields:
         return
     cols = ", ".join(f"{k}=?" for k in fields)
@@ -954,12 +973,79 @@ def build_subject_menu(mode, course, level, subjects):
 def build_type_menu(mode, course, level, subject):
     exam_types = _mode_bank(mode).exam_types(course, level, subject)
     keyboard = [[InlineKeyboardButton(et, callback_data=f"type:{et}")] for et in exam_types]
-    keyboard.append([InlineKeyboardButton(MIX_LABEL, callback_data="type:MIX")])
+    # "Mix (All)" is only a REAL, distinct choice when there's more than one
+    # real exam type to mix -- appending it unconditionally used to give a
+    # student two buttons that do the exact same thing whenever a subject
+    # only has one exam type (e.g. CS Arun Chouhan's content, all
+    # "PRACTICE"). Found via independent code review, 2026-08-16 -- same
+    # fix applied to the Year/Chapter screens below.
+    if len(exam_types) > 1:
+        keyboard.append([InlineKeyboardButton(MIX_LABEL, callback_data="type:MIX")])
     text = (
         f"Mode: *{_label(mode)}* | Course: *{course}* | Level: *{level}* | Subject: *{subject}*\n"
         f"Select *Exam Type*:"
     )
     return text, InlineKeyboardMarkup(keyboard)
+
+
+def _year_screen_or_none(mode, course, level, subject, exam_type):
+    """Given a KNOWN exam_type, returns (text, markup) for the Year screen,
+    or (None, None) if there's only one real year -- nothing to pick, so
+    nothing to show (caller auto-selects it instead). Same reasoning as
+    build_type_menu()'s own comment above."""
+    years = _mode_bank(mode).years(exam_type, course, level, subject)
+    if len(years) <= 1:
+        return None, None
+    keyboard = [[InlineKeyboardButton(y, callback_data=f"year:{y}")] for y in years]
+    keyboard.append([InlineKeyboardButton(MIX_LABEL, callback_data="year:MIX")])
+    text = f"Type: *{exam_type}*\nSelect *Year*:"
+    return text, InlineKeyboardMarkup(keyboard)
+
+
+def _build_chapter_screen(context, mode, course, level, subject, exam_type, year):
+    """Factored out of button_router's "year" action (2026-08-16) so
+    _resolve_type_then_year() below can reach the same chapter screen when
+    Type AND Year both auto-skip in one go, without duplicating this
+    logic. See that action's own comment for the callback_data-length
+    reasoning behind the index-not-slug scheme."""
+    chapters = _mode_bank(mode).chapters(exam_type, year, course, level, subject)
+    context.user_data["chapter_slugs"] = [slug for slug, _label in chapters]
+    keyboard = [
+        [InlineKeyboardButton(label, callback_data=f"chapter:{i}")]
+        for i, (slug, label) in enumerate(chapters)
+    ]
+    if len(chapters) > 1:
+        keyboard.append([InlineKeyboardButton(ALL_CHAPTERS_LABEL, callback_data="chapter:ALL")])
+    text = f"Type: *{exam_type}* | Year: *{year}*\nSelect *Chapter*:"
+    return text, InlineKeyboardMarkup(keyboard)
+
+
+def _resolve_type_then_year(context, mode, course, level, subject):
+    """Resolves Exam Type -> Year -> (the Chapter screen), auto-skipping
+    any step that has only one real option -- same "never show a picker
+    with nothing to actually pick" philosophy resolve_entry() already
+    applies to Mode/Course/Level/Subject. Added 2026-08-16 after
+    independent code review found Type/Year always shown as their own full
+    screen even when there was only one real choice on it. Returns (text,
+    markup, updates) -- updates carries whichever of exam_type/year got
+    auto-picked, the same shape resolve_entry() itself returns, so every
+    caller already knows how to use it (merge into context.user_data +
+    db_update_session)."""
+    updates = {}
+    exam_types = _mode_bank(mode).exam_types(course, level, subject)
+    if len(exam_types) > 1:
+        return (*build_type_menu(mode, course, level, subject), updates)
+    exam_type = exam_types[0] if exam_types else "MIX"
+    updates["exam_type"] = exam_type
+
+    text, markup = _year_screen_or_none(mode, course, level, subject, exam_type)
+    if text is not None:
+        return text, markup, updates
+    years = _mode_bank(mode).years(exam_type, course, level, subject)
+    year = years[0] if years else "MIX"
+    updates["year"] = year
+
+    return (*_build_chapter_screen(context, mode, course, level, subject, exam_type, year), updates)
 
 
 def build_no_content_gate(mode=None, course=None, level=None):
@@ -973,6 +1059,46 @@ def build_no_content_gate(mode=None, course=None, level=None):
     header = (" | ".join(parts) + "\n\n") if parts else ""
     keyboard = [[InlineKeyboardButton("\U0001F519 Start Over", callback_data="restart")]]
     text = f"{header}\U0001F6A7 No questions available for this selection yet. We will shortly have more!"
+    return text, InlineKeyboardMarkup(keyboard)
+
+
+def _resolve_course_level_from_profile(context, bank_obj):
+    """Reads the student's saved academic profiles (telegram/database/
+    academic_profiles.py) and tries to resolve Course+Level from them --
+    added 2026-08-16 after independent code review found this bot never
+    consulted a student's already-saved Course/Level at all, always
+    re-asking from scratch even though profile_flow.py had it on file.
+    Only ever considers a profile whose course+level has real, in-scope
+    content on THIS bot (never resolves to something that would just
+    dead-end at build_no_content_gate() two steps later).
+
+    Returns:
+      None            -- no usable saved profile; caller falls back to the normal picker
+      "NEEDS_PICK"     -- 2+ usable profiles; caller shows the "which one today?" screen (options stashed in context.user_data["profile_options"])
+      (course, level)   -- exactly one usable profile; caller uses it directly, no extra screen -- SAME auto-skip-when-there's-only-one-real-choice philosophy this whole cascade already follows for Mode/Course/Level/Subject."""
+    username = context.user_data.get("lavya_username")
+    if not username:
+        return None
+    profiles = academic_profiles.list_profiles(DB_CONN, username)
+    usable = [
+        p for p in profiles
+        if p["course"] in bank_obj.courses() and _scope_allows_course(p["course"])
+        and p["level"] in bank_obj.levels(p["course"]) and _scope_allows_level(p["course"], p["level"])
+    ]
+    if not usable:
+        return None
+    if len(usable) == 1:
+        return (usable[0]["course"], usable[0]["level"])
+    context.user_data["profile_options"] = usable
+    return "NEEDS_PICK"
+
+
+def build_profile_picker(mode, profiles):
+    keyboard = [
+        [InlineKeyboardButton(f"{p['course']} {p['level']}", callback_data=f"sessprofile:{i}")]
+        for i, p in enumerate(profiles)
+    ]
+    text = f"Mode: *{_label(mode)}*\nWhich are you continuing today?"
     return text, InlineKeyboardMarkup(keyboard)
 
 
@@ -1009,13 +1135,21 @@ def resolve_entry(context, mode=None, course=None, level=None, subject=None):
     bank_obj = _mode_bank(mode)
 
     if course is None:
-        courses = [c for c in bank_obj.courses() if _scope_allows_course(c)]
-        if not courses:
-            return (*build_no_content_gate(mode), updates)
-        if len(courses) > 1:
-            return (*build_course_menu(mode, courses), updates)
-        course = courses[0]
-        updates["course"] = course
+        profile_resolution = _resolve_course_level_from_profile(context, bank_obj)
+        if profile_resolution == "NEEDS_PICK":
+            return (*build_profile_picker(mode, context.user_data["profile_options"]), updates)
+        if profile_resolution:
+            course, level = profile_resolution
+            updates["course"] = course
+            updates["level"] = level
+        else:
+            courses = [c for c in bank_obj.courses() if _scope_allows_course(c)]
+            if not courses:
+                return (*build_no_content_gate(mode), updates)
+            if len(courses) > 1:
+                return (*build_course_menu(mode, courses), updates)
+            course = courses[0]
+            updates["course"] = course
 
     if level is None:
         levels = [lv for lv in bank_obj.levels(course) if _scope_allows_level(course, lv)]
@@ -1036,7 +1170,9 @@ def resolve_entry(context, mode=None, course=None, level=None, subject=None):
         subject = subjects[0]
         updates["subject"] = subject
 
-    return (*build_type_menu(mode, course, level, subject), updates)
+    text, markup, ty_updates = _resolve_type_then_year(context, mode, course, level, subject)
+    updates.update(ty_updates)
+    return text, markup, updates
 
 
 # ---------------------------------------------------------------------------
@@ -1048,6 +1184,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     db_upsert_student(user)
     welcome_bonus_text = db_ensure_wallet(user)
+    # 2026-08-16: stashed so resolve_entry()'s profile-based Course/Level
+    # auto-fill (_resolve_course_level_from_profile()) can look up this
+    # student's saved academic profiles without re-resolving identity
+    # itself -- cheap/idempotent either way, but this avoids doing it twice
+    # per request.
+    context.user_data["lavya_username"], _ = identity.ensure_wallet_identity(DB_CONN, user)
     context.user_data["session_id"] = db_start_session(user.id)
 
     text, markup, updates = resolve_entry(context)
@@ -1102,6 +1244,7 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         user = query.from_user
         db_upsert_student(user)
         welcome_bonus_text = db_ensure_wallet(user)  # no-op/None for a real restart; covers the rare case this is somehow their first-ever interaction
+        context.user_data["lavya_username"], _ = identity.ensure_wallet_identity(DB_CONN, user)
         context.user_data["session_id"] = db_start_session(user.id)
         text, markup, updates = resolve_entry(context)
         if updates:
@@ -1131,6 +1274,33 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         db_update_session(session_id, course=course, **updates)
         await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
+    elif action == "sessprofile":
+        # 2026-08-16: "which of your saved Course/Level profiles are you
+        # continuing today?" -- only ever reached when the student has 2+
+        # usable saved profiles (see _resolve_course_level_from_profile());
+        # with exactly one, resolve_entry() already used it silently, no
+        # screen shown at all, same auto-skip philosophy as everywhere
+        # else in this cascade.
+        idx = int(data.split(":", 1)[1])
+        state = await _require_state(query, context, "mode")
+        if state is None:
+            return
+        options = context.user_data.get("profile_options") or []
+        try:
+            chosen = options[idx]
+        except IndexError:
+            await query.edit_message_text(
+                "⚠️ Your session has expired (the bot may have restarted). Please start over.",
+                reply_markup=_session_expired_markup(),
+            )
+            return
+        text, markup, updates = resolve_entry(context, mode=state["mode"], course=chosen["course"], level=chosen["level"])
+        context.user_data["course"] = chosen["course"]
+        context.user_data["level"] = chosen["level"]
+        context.user_data.update(updates)
+        db_update_session(session_id, course=chosen["course"], level=chosen["level"], **updates)
+        await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
+
     elif action == "level":
         level = data.split(":", 1)[1]
         state = await _require_state(query, context, "mode", "course")
@@ -1156,11 +1326,28 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 reply_markup=_session_expired_markup(),
             )
             return
-        text, markup, _updates = resolve_entry(
+        text, markup, updates = resolve_entry(
             context, mode=state["mode"], course=state["course"], level=state["level"], subject=subject
         )
         context.user_data["subject"] = subject
-        db_update_session(session_id, subject=subject)
+        # BUG FIXED 2026-08-17 (live report: "session expired" looping
+        # right after picking Subject/MCQ): this used to discard
+        # resolve_entry()'s `updates` entirely (`_updates`) -- harmless
+        # before 2026-08-16, when resolve_entry()'s tail always returned a
+        # static Type menu with nothing left to auto-skip. Once
+        # _resolve_type_then_year() started auto-skipping Exam Type and/or
+        # Year straight through to the Chapter screen, the auto-picked
+        # exam_type/year values were never actually saved to
+        # context.user_data -- the Chapter screen still rendered
+        # correctly (it doesn't need them), but the very next tap
+        # (`chapter:...`) requires them via _require_state() and always
+        # found them missing -> "session expired," every single time a
+        # subject's Type or Year had only one real option (confirmed via
+        # direct reproduction against Pranav's own real profile/content:
+        # CA Inter MCQ -> Cost and Management Accounting hits exactly this,
+        # since that subject has exactly one real Type AND Year).
+        context.user_data.update(updates)
+        db_update_session(session_id, subject=subject, **updates)
         await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
     elif action == "type":
@@ -1170,13 +1357,19 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if state is None:
             return
         mode, course, level, subject = state["mode"], state["course"], state["level"], state["subject"]
-        years = _mode_bank(mode).years(exam_type, course, level, subject)
-        keyboard = [[InlineKeyboardButton(y, callback_data=f"year:{y}")] for y in years]
-        keyboard.append([InlineKeyboardButton(MIX_LABEL, callback_data="year:MIX")])
-        await query.edit_message_text(
-            f"Type: *{exam_type}*\nSelect *Year*:",
-            parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
-        )
+        # 2026-08-16: Year auto-skips straight to the Chapter screen when
+        # there's only one real year for this type -- same reasoning as
+        # _resolve_type_then_year()'s own docstring (this is that exact
+        # logic, just entered from an explicit Type tap instead of via
+        # resolve_entry()'s auto-skip cascade).
+        text, markup = _year_screen_or_none(mode, course, level, subject, exam_type)
+        if text is None:
+            years = _mode_bank(mode).years(exam_type, course, level, subject)
+            year = years[0] if years else "MIX"
+            context.user_data["year"] = year
+            db_update_session(session_id, year=year)
+            text, markup = _build_chapter_screen(context, mode, course, level, subject, exam_type, year)
+        await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
     elif action == "year":
         year = data.split(":", 1)[1]
@@ -1186,7 +1379,6 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
         exam_type = state["exam_type"]
         mode, course, level, subject = state["mode"], state["course"], state["level"], state["subject"]
-        chapters = _mode_bank(mode).chapters(exam_type, year, course, level, subject)
         # Telegram's callback_data has a hard 64-BYTE limit. Some content
         # sources slugify the full chapter/unit name (e.g. "the-process-of-
         # budget-making-sources-of-revenue-expenditure-management-and-
@@ -1200,17 +1392,11 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # report. Fix: carry a small integer index in callback_data instead
         # (same fix already applied to Study Hub's buttons for this exact
         # bug class -- see CLAUDE.md section 8) and resolve it back via
-        # context.user_data, never the raw slug string.
-        context.user_data["chapter_slugs"] = [slug for slug, _label in chapters]
-        keyboard = [
-            [InlineKeyboardButton(label, callback_data=f"chapter:{i}")]
-            for i, (slug, label) in enumerate(chapters)
-        ]
-        keyboard.append([InlineKeyboardButton(ALL_CHAPTERS_LABEL, callback_data="chapter:ALL")])
-        await query.edit_message_text(
-            f"Type: *{exam_type}* | Year: *{year}*\nSelect *Chapter*:",
-            parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
-        )
+        # context.user_data, never the raw slug string. See
+        # _build_chapter_screen() for the shared implementation (also
+        # reached via Type/Year auto-skip above).
+        text, markup = _build_chapter_screen(context, mode, course, level, subject, exam_type, year)
+        await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
     elif action == "chapter":
         raw = data.split(":", 1)[1]
@@ -1637,6 +1823,15 @@ async def text_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
     their message swallowed by anything else. Anything else is silently
     ignored rather than guessed at."""
     text = (update.message.text or "").strip()
+
+    # 2026-08-16 (independent code review): a universal cancel phrase,
+    # checked before anything else -- see cancel_utils.py's own docstring.
+    if cancel_utils.matches_cancel(text):
+        if cancel_utils.cancel_all_flows(context):
+            await update.message.reply_text("❌ Cancelled — you can start fresh anytime.")
+            return
+        # nothing was active -- fall through to normal handling below.
+
     # 2026-08-16: Test Mode's own upload-collection state, and the wallet
     # recharge flow's custom-amount prompt, both checked FIRST of all -- a
     # student actively mid-way through either (typing "done", or typing a
@@ -1656,7 +1851,7 @@ async def text_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if await profile_flow.handle_profile_text_input(update, context):
             return
     if profile_flow.matches_trigger(text):
-        await profile_flow.start_profile_flow(update, context)
+        await profile_flow.start_profile_flow(update, context, BOT_ID)
         return
     # Wallet status / recharge triggers -- "wallet" mirrors "profile"'s own
     # convention exactly (Pranav's explicit ask); "recharge" works as its
@@ -1682,7 +1877,31 @@ async def text_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if report_flow.matches_trigger(text) and not report_flow.is_awaiting_text_input(context):
         await report_flow.start_report_flow_on_demand(update, context, BOT_ID)
         return
-    await report_flow.handle_contact_text_input(update, context)
+    if await report_flow.handle_contact_text_input(update, context):
+        return
+
+    # Nothing matched exactly -- check for a plausible TYPO of one of the
+    # trigger phrases above before silently doing nothing (this bot has no
+    # free-text search to fall back to -- on_decline=None, see
+    # fuzzy_trigger.py's own docstring on that case).
+    await fuzzy_trigger.maybe_confirm(update, context, _fuzzy_dispatch())
+
+
+def _fuzzy_dispatch():
+    """Shared by text_router() (detection) and _fuzzy_trigger_callback()
+    (resolution) -- must be the SAME mapping both times."""
+    return {
+        "profile": lambda u, c: profile_flow.start_profile_flow(u, c, BOT_ID),
+        "wallet": lambda u, c: wallet_flow.show_wallet_status(u, c, sys.modules[__name__]),
+        "recharge": lambda u, c: wallet_flow.start_recharge_flow(u, c, sys.modules[__name__]),
+        "test": lambda u, c: test_flow.start_test_flow(u, c, BOT_ID, sys.modules[__name__]),
+        "upload": lambda u, c: test_flow.start_upload_pick(u, c, sys.modules[__name__]),
+        "report": lambda u, c: report_flow.start_report_flow_on_demand(u, c, BOT_ID),
+    }
+
+
+async def _fuzzy_trigger_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await fuzzy_trigger.handle_confirm_callback(update, context, _fuzzy_dispatch(), on_decline=None)
 
 
 def main():
@@ -1712,7 +1931,7 @@ def main():
     # collides yet."
     app.add_handler(CallbackQueryHandler(
         button_router,
-        pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone)(:|$)",
+        pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone|sessprofile)(:|$)",
     ))
     app.add_handler(CallbackQueryHandler(report_flow.report_flow_callback, pattern=r"^(report|reportconfirm):"))
     app.add_handler(CallbackQueryHandler(profile_flow.profile_flow_callback, pattern=r"^(profile|profileconfirm):"))
@@ -1725,6 +1944,7 @@ def main():
     # pattern-collision bug class this platform has hit 3+ times already).
     app.add_handler(CallbackQueryHandler(_test_flow_callback_wrapper, pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)"))
     app.add_handler(CallbackQueryHandler(_wallet_flow_callback_wrapper, pattern=r"^walletrc(:|$)"))
+    app.add_handler(CallbackQueryHandler(_fuzzy_trigger_callback, pattern=r"^fuzzytrigger:"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_router))
     # Photo/document uploads -- only meaningful during Test Mode's upload
     # collection; test_flow.handle_upload_photo_or_document() is a no-op
@@ -1739,6 +1959,7 @@ def main():
     # built, before run_polling() starts serving real traffic.
     test_flow.rearm_pending_test_jobs(app, sys.modules[__name__])
     wallet_flow.rearm_pending_recharge_jobs(app, sys.modules[__name__])
+    profile_flow.rearm_pending_access_requests(app, BOT_ID)
 
     logger.info(f"Exam Hub Bot starting for bot_id '{BOT_ID}' (tenant '{TENANT_ID}', {TENANT['display_name']})...")
     app.run_polling()

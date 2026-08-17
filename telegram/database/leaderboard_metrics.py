@@ -194,14 +194,24 @@ def qualifying_participants(conn, leaderboard_id: str, eligibility: dict, min_at
     """Usernames who (a) opted into this leaderboard_id, (b) still match
     its eligibility per their CURRENT profile (re-checked at ranking time,
     never trusting a stale opt-in -- a student who joined then later
-    changed their course/level in their profile should not keep appearing
-    on a leaderboard that no longer matches them), and (c) meet the
-    min-attempts floor (gated on questions_attempted, the same metric
-    regardless of which metrics this leaderboard actually ranks by)."""
+    REMOVED the matching course/level from their profile should not keep
+    appearing on a leaderboard that no longer matches them), and (c) meet
+    the min-attempts floor (gated on questions_attempted, the same metric
+    regardless of which metrics this leaderboard actually ranks by).
+
+    2026-08-16: joins against student_academic_profiles, not
+    student_profiles.course/level directly -- those two columns are now a
+    frozen historical trace (see schema.sql's own comment on
+    student_academic_profiles), never written to by a profile created or
+    edited after the multi-course rollout, so a query still reading them
+    here would silently stop finding ANY newly-added profile's leaderboard
+    eligibility. A student matches if ANY of their (possibly several)
+    academic profiles has this exact course+level -- correct even for a
+    student simultaneously preparing for other courses too."""
     rows = conn.execute(
-        "SELECT lp.username FROM leaderboard_participants lp "
-        "JOIN student_profiles sp ON sp.username = lp.username "
-        "WHERE lp.leaderboard_id=? AND sp.course=? AND sp.level=?",
+        "SELECT DISTINCT lp.username FROM leaderboard_participants lp "
+        "JOIN student_academic_profiles sap ON sap.username = lp.username "
+        "WHERE lp.leaderboard_id=? AND sap.course=? AND sap.level=?",
         (leaderboard_id, eligibility["course"], eligibility["level"]),
     ).fetchall()
     qualifying = []

@@ -254,6 +254,12 @@ async def report_flow_callback(update, context):
             else:
                 await query.edit_message_text("No problem -- just type \"report\" anytime you'd like it.")
                 _log_event(conn, query.from_user.id, "ondemand_declined")
+                # BUG FIXED 2026-08-16 (independent code review): this used
+                # to be a bare text reply with no keyboard at all -- a real
+                # dead end, distinct from every other decline path in this
+                # module (which all route through _offer_continue_or_done()
+                # or a similar CTA). Give the same "what's next" choice.
+                await _offer_continue_or_done(context, query.message.chat_id)
         # "restart" (Continue Practicing) is NOT handled here -- it's a bare
         # callback_data value that matches button_router's own pattern
         # (registered separately in exam_hub_bot.py's main()), reusing the
@@ -295,6 +301,10 @@ async def _handle_channel_choice(query, context, choice: str):
         )
         await query.edit_message_text("No problem -- you can always ask your faculty for this later. Keep practicing!")
         _log_event(conn, telegram_user_id, "declined")
+        # BUG FIXED 2026-08-16 (independent code review): same dead-end
+        # class as the "ondemand_no" branch above -- this used to end the
+        # conversation with plain text and zero buttons.
+        await _offer_continue_or_done(context, query.message.chat_id)
         return
 
     context.user_data["report_flow_channels"] = choice  # 'telegram' | 'email' | 'both'

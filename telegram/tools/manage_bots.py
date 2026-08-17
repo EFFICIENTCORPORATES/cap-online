@@ -17,10 +17,26 @@ USAGE (from the repo root):
     python telegram/tools/manage_bots.py stop 1lavya-examhub
     python telegram/tools/manage_bots.py restart
     python telegram/tools/manage_bots.py status            # PID + heartbeat freshness for every bot
+    python telegram/tools/manage_bots.py ensure-running    # self-healing check, see below
 
 A thin manage_bots.bat wrapper in the same folder does `python
 manage_bots.py %*` for anyone who wants a literal double-clickable /
 `manage_bots.bat status`-from-cmd entry point.
+
+ENSURE-RUNNING (added 2026-08-15, for unattended/scheduled use -- Windows
+Startup folder + Task Scheduler, see telegram/tools/ensure_bots_running.bat
+and telegram/tools/WINDOWS-AUTOSTART.md): a self-healing check, safe to run
+repeatedly/concurrently. For every `active` bot in bots.json: if its
+process isn't running at all, start it (same as `start`'s own already-
+idempotent "skip if already running" check). If the process IS running
+but its heartbeat has gone STALE past HEARTBEAT_STALE_AFTER_SECONDS (the
+exact same "online" definition status()/the dashboard/the watcher already
+use) -- a hung process still holding its PID but no longer doing real
+work -- it gets a full `restart` (graceful-stop-then-start), not just left
+alone. A healthy bot is untouched. This is deliberately a superset of
+`start`, not a separate concept -- unattended contexts (a machine reboot,
+a scheduled health check) need both "wasn't running" and "is running but
+stuck" covered by the one command, so there's only one thing to schedule.
 
 WHAT "GRACEFUL STOP" ACTUALLY MEANS HERE (read this before trusting it
 blindly): each bot is started with CREATE_NEW_PROCESS_GROUP so `stop` can
@@ -206,13 +222,33 @@ def restart_bot(bot: dict):
     start_bot(bot)
 
 
-def status():
+def _get_conn():
     sys.path.insert(0, str(REPO_ROOT / "telegram" / "database"))
     import db as platform_db
 
     conn = platform_db.get_connection()
     platform_db.init_schema(conn)
+    return conn
 
+
+def _heartbeat_age_seconds(conn, bot_id: str):
+    """Seconds since bot_id's last recorded heartbeat, or None if it has
+    never sent one. Single implementation shared by status() and
+    ensure_running() so "how stale is too stale" is answered identically
+    in both places (the same reasoning schema.sql/analytics.py already
+    apply -- one definition, reused, never re-derived per caller)."""
+    row = conn.execute("SELECT last_heartbeat_at FROM bot_heartbeats WHERE bot_id=?", (bot_id,)).fetchone()
+    if not row:
+        return None
+    from datetime import datetime, timezone
+    last = datetime.fromisoformat(row[0].replace("Z", "+00:00")) if row[0].endswith("Z") else datetime.fromisoformat(row[0])
+    if last.tzinfo is None:
+        last = last.replace(tzinfo=timezone.utc)
+    return (datetime.now(timezone.utc) - last).total_seconds()
+
+
+def status():
+    conn = _get_conn()
     bots = load_bots()
     print(f"{'BOT_ID':<24} {'KIND':<10} {'STATUS':<12} {'PROCESS':<18} {'HEARTBEAT':<20}")
     print("-" * 90)
@@ -222,22 +258,44 @@ def status():
         proc = is_running(bot_id, resolve_script_path(bot))
         process_str = f"PID {proc.pid}" if proc else "not running"
 
-        row = conn.execute(
-            "SELECT last_heartbeat_at FROM bot_heartbeats WHERE bot_id=?", (bot_id,)
-        ).fetchone()
-        if not row:
+        age = _heartbeat_age_seconds(conn, bot_id)
+        if age is None:
             hb_str = "never"
         else:
-            from datetime import datetime, timezone
-            last = datetime.fromisoformat(row[0].replace("Z", "+00:00")) if row[0].endswith("Z") else datetime.fromisoformat(row[0])
-            age = (datetime.now(timezone.utc) - last.replace(tzinfo=timezone.utc) if last.tzinfo is None else datetime.now(timezone.utc) - last).total_seconds()
             hb_str = f"{int(age)}s ago" + ("" if age < HEARTBEAT_STALE_AFTER_SECONDS else " (STALE)")
 
         print(f"{bot_id:<24} {kind:<10} {cfg_status:<12} {process_str:<18} {hb_str:<20}")
 
 
+def ensure_running(bots: list):
+    """The self-healing check -- see this module's own docstring
+    ("ENSURE-RUNNING") for the full reasoning. Prints one line per bot so
+    an unattended log (Task Scheduler/Startup-folder output redirected to
+    a file) clearly shows what happened -- or that nothing needed to
+    change -- on every single run, not just the runs that did something."""
+    conn = _get_conn()
+    for bot in bots:
+        bot_id = bot["bot_id"]
+        script_path = resolve_script_path(bot)
+        proc = is_running(bot_id, script_path)
+
+        if not proc:
+            logger.info(f"[{bot_id}] not running -- starting.")
+            start_bot(bot)
+            continue
+
+        age = _heartbeat_age_seconds(conn, bot_id)
+        if age is None:
+            logger.info(f"[{bot_id}] running (PID {proc.pid}), no heartbeat recorded yet -- leaving it (likely just started).")
+        elif age < HEARTBEAT_STALE_AFTER_SECONDS:
+            logger.info(f"[{bot_id}] healthy (PID {proc.pid}, heartbeat {int(age)}s ago).")
+        else:
+            logger.warning(f"[{bot_id}] running (PID {proc.pid}) but heartbeat is STALE ({int(age)}s ago) -- restarting.")
+            restart_bot(bot)
+
+
 def main():
-    if len(sys.argv) < 2 or sys.argv[1] not in ("start", "stop", "restart", "status"):
+    if len(sys.argv) < 2 or sys.argv[1] not in ("start", "stop", "restart", "status", "ensure-running"):
         print(__doc__)
         sys.exit(1)
 
@@ -259,6 +317,10 @@ def main():
         if not bots:
             print("No `active` bots in bots.json.")
             return
+
+    if action == "ensure-running":
+        ensure_running(bots)
+        return
 
     fn = {"start": start_bot, "stop": stop_bot, "restart": restart_bot}[action]
     for bot in bots:

@@ -73,6 +73,7 @@ def init_schema(conn: sqlite3.Connection):
     conn.executescript(sql)
     conn.commit()
     _run_column_migrations(conn)
+    _migrate_legacy_single_academic_profile(conn)
 
 
 def _migrate_wallet_ledger_shape(conn: sqlite3.Connection):
@@ -233,6 +234,35 @@ def _run_column_migrations(conn: sqlite3.Connection):
                 conn.execute(f"ALTER TABLE {table} ADD COLUMN {col_name} {col_def}")
                 logger.info(f"Migrated: added {table}.{col_name}")
     conn.commit()
+
+
+def _migrate_legacy_single_academic_profile(conn: sqlite3.Connection):
+    """One-time (per username), idempotent, additive data copy -- 2026-08-16
+    multi-course profiles rollout (see schema.sql's own comment on
+    student_academic_profiles for the full reasoning). Any existing
+    student_profiles row that already has a course+level set gets copied
+    into student_academic_profiles as that username's first academic
+    profile -- the old columns are left untouched (never cleared, never
+    dropped), this only ever ADDS a row, and only if one matching this
+    username/course/level doesn't already exist (the UNIQUE constraint on
+    student_academic_profiles would reject a duplicate anyway, but the
+    explicit WHERE NOT EXISTS avoids even attempting the insert on every
+    single bot startup once migrated once). Safe to run on every
+    init_schema() call, same as every other migration in this file."""
+    execute_with_retry(
+        conn,
+        """
+        INSERT INTO student_academic_profiles (username, course, level, exam_attempt, created_at, updated_at)
+        SELECT sp.username, sp.course, sp.level, sp.exam_attempt, sp.updated_at, sp.updated_at
+        FROM student_profiles sp
+        WHERE sp.course IS NOT NULL AND sp.level IS NOT NULL
+          AND NOT EXISTS (
+              SELECT 1 FROM student_academic_profiles sap
+              WHERE sap.username = sp.username AND sap.course = sp.course AND sap.level = sp.level
+          )
+        """,
+        (),
+    )
 
 
 def execute_with_retry(conn: sqlite3.Connection, sql: str, params=()):

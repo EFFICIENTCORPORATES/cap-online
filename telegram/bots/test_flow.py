@@ -54,6 +54,7 @@ sys.path.insert(0, str(REPO_ROOT / "telegram" / "database"))
 import db as platform_db  # noqa: E402
 import wallet  # noqa: E402
 import identity  # noqa: E402
+import academic_profiles  # noqa: E402 -- telegram/database/academic_profiles.py, multi-course profiles (2026-08-16)
 
 logger = logging.getLogger(__name__)
 
@@ -261,6 +262,24 @@ async def start_test_flow(update, context, bot_id: str, host):
         await _show_level_picker(update.message, context, conn, courses[0])
         return
 
+    # 2026-08-16: same profile-based pre-fill as exam_hub_bot.py's
+    # resolve_entry() -- if the student's saved Course/Level (see
+    # academic_profiles.py) narrows this down to exactly ONE course that
+    # actually has real Test Mode content, skip the Course picker rather
+    # than re-asking what's already on file. With 2+ still-usable matches
+    # (or none), falls straight through to the existing picker below
+    # unchanged -- Test Mode's real content is CA Inter Advanced
+    # Accounting only today (see module docstring), so this mostly matters
+    # once more courses/levels exist here.
+    username, _ = identity.ensure_wallet_identity(conn, user)
+    context.user_data["lavya_username"] = username  # read by _show_level_picker() one step down
+    profile_courses = {p["course"] for p in academic_profiles.list_profiles(conn, username)} & set(courses)
+    if len(profile_courses) == 1:
+        course = next(iter(profile_courses))
+        context.user_data[UD_PICKER_COURSE] = course
+        await _show_level_picker(update.message, context, conn, course)
+        return
+
     context.user_data[UD_PICKER_COURSES] = courses
     rows = [[InlineKeyboardButton(c, callback_data=f"testflow:course:{i}")] for i, c in enumerate(courses)]
     await update.message.reply_text("\U0001F4DD Which course?", reply_markup=InlineKeyboardMarkup(rows))
@@ -272,6 +291,20 @@ async def _show_level_picker(message_or_query, context, conn, course, edit=False
         context.user_data[UD_PICKER_LEVEL] = levels[0]
         await _show_subject_picker(message_or_query, context, conn, course, levels[0], edit=edit)
         return
+
+    # 2026-08-16: same profile-based pre-fill reasoning as start_test_flow()'s
+    # own Course-level check above, one step down.
+    username = context.user_data.get("lavya_username")
+    if username:
+        profile_levels = {
+            p["level"] for p in academic_profiles.list_profiles(conn, username) if p["course"] == course
+        } & set(levels)
+        if len(profile_levels) == 1:
+            level = next(iter(profile_levels))
+            context.user_data[UD_PICKER_LEVEL] = level
+            await _show_subject_picker(message_or_query, context, conn, course, level, edit=edit)
+            return
+
     context.user_data[UD_PICKER_LEVELS] = levels
     rows = [[InlineKeyboardButton(lv, callback_data=f"testflow:level:{i}")] for i, lv in enumerate(levels)]
     text = f"\U0001F4DD {course} — which level?"
@@ -453,6 +486,27 @@ def _new_test_id(telegram_user_id: int) -> str:
 
 
 async def _start_test(update_or_query, context, conn, telegram_user_id, bot_id, catalog_key, tier_marks, host, is_callback):
+    # GUARD -- 2026-08-16 (found via independent code review): the roadmap's
+    # own rule ("only one active test at a time, never silently create a
+    # second concurrent session") was enforced at start_test_flow()'s "test"
+    # text-trigger entry point but NOT here, at the actual state-changing
+    # action -- so a double-tap on "Start Test" (ordinary impatient-user
+    # behavior, not an exotic race) could run this whole function twice,
+    # debiting the wallet twice and opening two test_sessions for the same
+    # student, with the first one silently orphaned (_get_active_test()
+    # always returns the most recent). This is the real chokepoint every
+    # path into a new test funnels through, so the check belongs here, not
+    # just at the one call site that happens to exist today.
+    active = _get_active_test(conn, telegram_user_id)
+    if active:
+        text = "\U0001F4CB You already have a test in progress — picking up where you left off."
+        if is_callback:
+            await update_or_query.edit_message_text(text)
+        else:
+            await update_or_query.message.reply_text(text)
+        await _show_current_question(update_or_query, context, active[0], host)
+        return
+
     user = update_or_query.from_user if is_callback else update_or_query.effective_user
     username, _ = identity.ensure_wallet_identity(conn, user)
 

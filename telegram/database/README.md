@@ -19,7 +19,15 @@ and `mcq_issue_reports` (added 2026-08-13, `telegram/bots/mcq_issue_flow.py`'s
 "Report Issue in MCQ" flow — has its own Admin Portal page, see that
 folder's README). `exam_hub_mcq_attempts`/`exam_hub_descriptive_events`
 each also gained `content_owner` and `human_id` columns that same day (see
-"content_owner tagging" below).
+"content_owner tagging" below). `content_ingestion_log` (added 2026-08-13,
+for the Admin Portal Overview rebuild's "New Questions Added" trend) is
+written to via `analytics.log_content_ingestion()` whenever a new content
+batch is wired into a tenant's `exam_content` — **tracks forward only**,
+there is no historical ingestion-date data before this table existed
+(content files never carried an "added on" timestamp, and file mtimes
+would misdate an old file's later typo-fix as "new content" — deliberately
+not used as a proxy). See `telegram/admin_portal/README.md`'s "Overview
+rebuild" section for the full picture.
 **Reshaped 2026-08-15** for the Test Mode billing rollout (see
 `telegram/assets/exam_bot/Tests/TEST-MODE-ROADMAP.md` §9 for the full
 decision trail): `wallet_ledger` now keys on `username`
@@ -170,6 +178,190 @@ exists — debiting on shown is a small addition there, not a new concept.
   Verified against all 4 real live content files (clean) and a synthetic
   negative-control file covering all 4 defect classes above (all correctly
   caught) before being trusted.
+
+## Self-healing autostart: Windows Startup + Task Scheduler (added 2026-08-15)
+
+Found the ENTIRE platform down (every bot's heartbeat stale by ~4.7
+hours) after a routine check — this machine has no auto-restart-on-crash,
+per the known scale-readiness gap already flagged right after CLAUDE.md
+§2. Pranav asked for two things to guard against this going forward:
+
+1. **A script that auto-runs at Windows startup** and restarts whatever
+   isn't running.
+2. **A Task Scheduler job, every 30 minutes, as a safer-side recurring
+   check** — restarts anything found down.
+
+**`manage_bots.py` gained a new `ensure-running` action** (alongside its
+existing `start`/`stop`/`restart`/`status`) — the self-healing check both
+mechanisms below call. For every `active` bot: if its process isn't
+running at all, start it (same idempotent check `start` already does). If
+it IS running but its heartbeat has gone stale past
+`HEARTBEAT_STALE_AFTER_SECONDS` — a hung process still holding its PID
+but no longer doing real work — it gets a full restart, not just left
+alone. A healthy bot is untouched. One command covers both "wasn't
+running" and "is running but stuck," so there's only one thing to
+schedule.
+
+**`telegram/tools/ensure_bots_running.bat`** (new) is the actual
+unattended entry point both mechanisms below call — explicitly uses the
+repo's own `.venv\Scripts\python.exe` (never bare `python` off PATH,
+which a Startup-folder/Task-Scheduler process doesn't reliably have set
+up the way an interactive terminal does), logs every run to
+`telegram/database/run/logs/ensure_bots_running.log`, and opens with a
+20-second `ping`-based delay (NOT `timeout.exe`, which hard-refuses to
+run — "Input redirection is not supported" — with no real interactive
+console attached, exactly the case for both triggers below; confirmed by
+testing, not assumed) so Windows networking has a moment to be ready
+right after boot/logon.
+
+**Wired into two places**, per Pranav's explicit ask for both:
+1. A shortcut in the current user's Startup folder (`shell:startup`,
+   `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\1LAVYA Bots -
+   Ensure Running.lnk`) — points at the canonical repo `.bat` (not a
+   copy), so any future edit to the script is picked up automatically,
+   no re-placing needed. Runs once at this user's logon.
+2. A Task Scheduler job, **"1LAVYA Bots - Health Check"**, `schtasks /sc
+   minute /mo 30` — runs indefinitely, every 30 minutes, no end date.
+
+**Known limitation, named honestly**: a true "at system boot, before any
+user logs in" Task Scheduler trigger (`schtasks /sc onstart`) needs
+elevated rights this session's shell doesn't have (`ERROR: Access is
+denied`) — not created. In practice this doesn't leave a real gap: the
+Startup-folder shortcut covers this user's own logon, and the 30-minute
+recurring task independently guarantees recovery within, at most, 30
+minutes of any outage regardless of *why* the bots went down (a crash,
+not just a reboot). If Pranav wants true pre-login boot coverage too, he
+can run `schtasks /create /tn "1LAVYA Bots - Startup Check" /tr
+"D:\EffCorp_Projects\cap-online\telegram\tools\ensure_bots_running.bat"
+/sc onstart /f` himself from an elevated (Run as Administrator) prompt.
+
+**A real bug found and fixed while restarting everything**: an earlier
+manual test (verifying `ensure-running`'s stale-heartbeat-restart path)
+left a **timezone-naive** `last_heartbeat_at` value in `bot_heartbeats`
+for one bot (written via raw SQLite `datetime('now', ...)`, which
+produces a different shape than `db.py`'s own `now()`). `analytics.
+fetch_heartbeats()`'s existing `try/except` only guarded the *parse* step
+— the actual crash was one line later, subtracting a timezone-aware `now`
+from that naive value (`TypeError: can't subtract offset-naive and
+offset-aware datetimes`), **outside** the guarded block, which aborted
+the whole function and therefore silently dropped *every other bot's*
+heartbeat too, not just the bad row's. This wasn't a hypothetical — it
+put `1lavya-platform-watcher` into a real crash loop ("Check pass failed
+— will retry next interval," every 60s). Fixed in two places: the bad DB
+value itself (rewritten via `db.py`'s own `now()`), and `_parse_iso()`/
+`fetch_heartbeats()` hardened to (a) treat a naive timestamp as UTC
+instead of crashing, and (b) catch `TypeError` alongside `ValueError`, so
+one malformed row can never again take down every bot's heartbeat
+display. All 9 active bots restarted afterward to pick up the fix
+(Python doesn't hot-reload a running process's imports); verified clean
+— confirmed the exact bad-shape row no longer crashes `fetch_heartbeats()`
+and the watcher stopped erroring.
+
+**Also investigated and ruled out, worth knowing so a future session
+doesn't waste time re-diagnosing it**: every restarted bot briefly appears
+as **two** OS processes — one at `.venv\Scripts\python.exe`, one at the
+machine's global `Python312\python.exe`, the child of the first. This
+looks exactly like a duplicate/conflicting second instance (and was
+chased as one, including a live-monitored kill-and-watch test) before
+`.venv\pyvenv.cfg` settled it: Python 3.11+'s Windows venv launcher makes
+`.venv\Scripts\python.exe` a tiny redirector stub that spawns the real
+base interpreter as a child and waits on it, relaying its exit code —
+completely normal, intentional behavior, not a bug, not a second bot
+instance, not a second Telegram poller. `manage_bots.py`'s own PID
+tracking already correctly targets the stub (confirmed: killing it
+correctly cascades to the child too).
+
+## Off-machine backup: Cloudflare R2 + D1 (added 2026-08-16)
+
+Closes the other half of scale-readiness gap #1 (the self-healing
+autostart above only restarts a *crashed process* on the *same* machine —
+it does nothing if the machine/disk itself is what's gone). Pranav asked
+what to back up and how; a real inventory (not guesswork) confirmed
+`database/platform.db`, the separate `assets/myfiles_bot/myfiles_hub.db` +
+its `uploads/` folder (real student-uploaded files), and ~1.4GB of
+live-served PDFs/JSON under `assets/study_bot/`, `assets/faculty/`,
+`assets/exam_bot/` are **100% local-only** — all gitignored by design
+(`**/*.db`, `**/*.pdf`, `*.env`, `creds.txt`). Python code + question-bank
+JSON + config JSON are already safe via `git push` and are NOT part of
+this pipeline.
+
+**`telegram/tools/backup_to_cloudflare.py`** — run nightly at 3:30 AM via
+a Windows Task Scheduler job, **"1LAVYA Platform Backup"** (deliberately
+NOT a `bots.json` entry — this is a run-to-completion batch job, not a
+long-running heartbeat process manage_bots.py knows how to model). Four
+phases, each independently try/excepted so one failing doesn't block the
+others:
+
+1. **SQLite-consistent DB snapshots** — `platform.db` + `myfiles_hub.db`,
+   via `sqlite3`'s own `.backup()` API (never a raw file copy — safe even
+   while WAL-mode bot processes are actively writing), gzipped,
+   timestamped, 60-day retention (pruned automatically each run).
+2. **A full D1 mirror of `platform.db`** — a genuinely queryable off-site
+   copy, not just a blob. Schema replayed verbatim from the source's own
+   `sqlite_master` (every statement is `IF NOT EXISTS`, safe to repeat
+   every run); table order for wipe/reinsert derived at RUNTIME from
+   `PRAGMA foreign_key_list` (never a hand-maintained list that could
+   silently drift from `schema.sql` as tables are added). Full refresh
+   (`DELETE` then reinsert) every run rather than incremental sync — at
+   today's data volume (a few thousand rows total) this is simpler and
+   more robust than tracking deltas.
+3. **Encrypted secrets backup** — `.env`/`creds.txt`, Fernet-encrypted
+   with a PBKDF2-derived key from `CF_BACKUP_ENCRYPTION_PASSPHRASE`
+   (`telegram/.env`). **Silently sending these unencrypted was never on
+   the table** — the phase is skipped loudly (logged warning, not a
+   crash) if that passphrase is unset. Real disaster-recovery path exists
+   via `--decrypt-secret <downloaded-file>`, not just one-way upload —
+   verified with an actual download-decrypt-read round trip before this
+   was considered done. **The passphrase must also live somewhere other
+   than this PC** (a password manager) — if only stored in `.env`, it
+   protects nothing once this machine is the thing that's gone.
+4. **Asset sync** — `study_bot/`, `faculty/`, `exam_bot/` (PDFs+JSON),
+   `myfiles_bot/uploads/`. Compares each local file's MD5 against the
+   object's R2 ETag (kept as a plain MD5 by forcing single-part uploads —
+   multipart ETags aren't a plain MD5 and would silently break this
+   comparison) and only uploads new/changed files. **Never deletes a
+   remote object based on local state** — a backup that can destroy
+   backed-up content because a local file moved/vanished is a liability,
+   not a safety net. `assets/backup pdfs/` (1.5GB, already documented
+   elsewhere in this repo as pre-restructuring/unused) is deliberately
+   excluded from scope.
+
+**On any phase failure**, sends a DM via `watcher_bot.py`'s existing
+sender-token/`alerts.json` plumbing — reused directly (same function
+calls), not reimplemented. Silent on success, same edge-triggered
+philosophy as the down/up watcher (no nightly "it worked" noise).
+
+**Cloudflare account**: the existing **EfficientCorporates (ECPL)**
+account (same one `CF_EMAIL_*` already uses), not a separate 1LAVYA
+account Pranav also has — his call, since `1lavya.com`'s domain currently
+lives on ECPL; see `_claude/memory`'s `1lavya-cloudflare-account` for the
+full history and the 1LAVYA account id kept on file for when the domain
+migrates. The R2 Access Key ID/Secret Access Key in `telegram/.env`
+(`CF_BACKUP_R2_*`) are **not separately generated** — they're
+deterministically derived from `CF_BACKUP_API_TOKEN` per Cloudflare's own
+documented mechanism (Access Key ID = the token's `id`, Secret = SHA-256
+of the token value) and were verified with a real signed S3 `ListBuckets`
+call before being trusted.
+
+**First real run, verified**: bucket (`1lavya-platform-backups`) and D1
+database (`1lavya_platform_mirror`) both auto-created on first run. D1
+mirror: 29 tables, 3,981 rows, cross-checked against live query results
+on `platform.db` directly (not just trusted from the script's own log
+line) — `course_catalog` (static reference data) matched exactly at 975
+rows both times; the live-activity tables had genuinely grown between two
+checks minutes apart, confirming the mirror reflects real current state,
+not a stale copy. DB snapshots + encrypted secrets + D1 mirror: ~200s.
+Asset sync (the one-time full 1.4GB upload): materially longer — every
+future nightly run only touches new/changed files, so this cost is paid
+once, not nightly.
+
+**Restore path**: `python telegram/tools/backup_to_cloudflare.py
+--decrypt-secret <path>` for `.env`/`creds.txt`; a `db-snapshots/*.db.gz`
+object is a real, complete SQLite file once gunzipped — copy it over
+`platform.db`/`myfiles_hub.db` directly; the D1 mirror is queryable
+as-is from the Cloudflare dashboard or API with zero extra steps, useful
+even before a full machine restore. Asset files restore via a plain S3
+`GetObject`/`sync` back into `telegram/assets/`.
 
 ## Example analytics queries (against `platform.db`)
 

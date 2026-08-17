@@ -85,6 +85,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
 import profile_flow  # noqa: E402 -- telegram/bots/profile_flow.py, the "profile"/"change profile" identity flow (2026-08-11)
 import report_flow  # noqa: E402 -- telegram/bots/report_flow.py, now also reachable from Study Hub via its on-demand "report"/"analysis"/"email"/"mail" trigger (2026-08-11)
+import cancel_utils  # noqa: E402 -- telegram/bots/cancel_utils.py, universal "get me out of this" escape hatch (2026-08-16)
+import fuzzy_trigger  # noqa: E402 -- telegram/bots/fuzzy_trigger.py, "did you mean X?" typo confirmation (2026-08-16)
 
 # ---------------------------------------------------------------------------
 # CONFIG
@@ -680,12 +682,39 @@ async def prompt_download_more(chat_id, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+def _fuzzy_dispatch():
+    """Shared by free_text_search() (detection) and
+    _fuzzy_trigger_callback() (resolution) -- must be the SAME mapping
+    both times, see fuzzy_trigger.py's own docstring."""
+    return {
+        "profile": lambda u, c: profile_flow.start_profile_flow(u, c, BOT_ID),
+        "report": lambda u, c: report_flow.start_report_flow_on_demand(u, c, BOT_ID),
+    }
+
+
+async def _search_original_text(update, context, original_text):
+    update.message.text = original_text
+    await free_text_search(update, context)
+
+
+async def _fuzzy_trigger_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await fuzzy_trigger.handle_confirm_callback(update, context, _fuzzy_dispatch(), on_decline=_search_original_text)
+
+
 async def free_text_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handles direct text like 'CA Inter cash flow' or 'CS company law',
     searched across every course and category at once -- except a
     standalone greeting/"reset" (see RESET_TRIGGER_RE), which resets the
     conversation via start() instead of being treated as a search query."""
     query_text = update.message.text
+
+    # 2026-08-16 (independent code review): a universal cancel phrase,
+    # checked before anything else -- see cancel_utils.py's own docstring.
+    if cancel_utils.matches_cancel(query_text):
+        if cancel_utils.cancel_all_flows(context):
+            await update.message.reply_text("❌ Cancelled — you can start fresh anytime.")
+            return
+        # nothing was active -- fall through to normal handling below.
 
     # Profile flow takes priority over both search and the reset-greeting
     # check below -- a display-name/username reply mid-edit must never be
@@ -696,7 +725,7 @@ async def free_text_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if await profile_flow.handle_profile_text_input(update, context):
             return
     if profile_flow.matches_trigger(query_text):
-        await profile_flow.start_profile_flow(update, context)
+        await profile_flow.start_profile_flow(update, context, BOT_ID)
         return
     if report_flow.matches_trigger(query_text) and not report_flow.is_awaiting_text_input(context):
         await report_flow.start_report_flow_on_demand(update, context, BOT_ID)
@@ -707,6 +736,14 @@ async def free_text_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if RESET_TRIGGER_RE.match(query_text):
         await start(update, context)
+        return
+
+    # 2026-08-16: nothing matched exactly -- check for a plausible TYPO of
+    # "profile"/"report" (the only two triggers Study Hub itself has) before
+    # silently running it as a search (see fuzzy_trigger.py's own
+    # docstring -- this is what stops "dne" from returning unrelated PDF
+    # results instead of a "did you mean X?" confirmation).
+    if await fuzzy_trigger.maybe_confirm(update, context, _fuzzy_dispatch()):
         return
 
     results = catalog.search_text(query_text)
@@ -774,7 +811,13 @@ def main():
     app.add_handler(CallbackQueryHandler(browse_callback, pattern=r"^(browse|cat|crs|lvl|subj|pt|file|mainmenu):"))
     app.add_handler(CallbackQueryHandler(profile_flow.profile_flow_callback, pattern=r"^(profile|profileconfirm):"))
     app.add_handler(CallbackQueryHandler(report_flow.report_flow_callback, pattern=r"^(report|reportconfirm):"))
+    app.add_handler(CallbackQueryHandler(_fuzzy_trigger_callback, pattern=r"^fuzzytrigger:"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, free_text_search))
+
+    # Re-arm any access_requests still pending from before this restart
+    # (job_queue jobs do not survive a restart) -- see profile_flow.py's
+    # own docstring.
+    profile_flow.rearm_pending_access_requests(app, BOT_ID)
 
     logger.info(f"Study Hub Bot starting for bot_id '{BOT_ID}' (tenant '{TENANT_ID}', {TENANT['display_name']})...")
     app.run_polling()

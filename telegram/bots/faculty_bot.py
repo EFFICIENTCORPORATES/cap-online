@@ -63,6 +63,8 @@ from telegram.ext import (
 
 import study_hub_bot as sh
 import exam_hub_bot as eh
+import cancel_utils  # noqa: E402 -- telegram/bots/cancel_utils.py, universal "get me out of this" escape hatch (2026-08-16)
+import fuzzy_trigger  # noqa: E402 -- telegram/bots/fuzzy_trigger.py, "did you mean X?" typo confirmation (2026-08-16)
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
@@ -131,6 +133,9 @@ async def hub_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data.clear()
         user = query.from_user
         eh.db_upsert_student(user)
+        # 2026-08-16: same stash exam_hub_bot.py's own start()/"restart" do,
+        # needed by resolve_entry()'s profile-based Course/Level auto-fill.
+        context.user_data["lavya_username"], _ = eh.identity.ensure_wallet_identity(eh.DB_CONN, user)
         context.user_data["session_id"] = eh.db_start_session(user.id)
         # resolve_entry() (renamed from entry_screen_and_updates() in the
         # 2026-08-12 Mode-first rewrite) auto-skips Course/Level/Subject
@@ -143,31 +148,112 @@ async def hub_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
 
+def _fuzzy_dispatch():
+    """Shared by text_router() (detection) and _fuzzy_trigger_callback()
+    (resolution) -- must be the SAME mapping both times, see
+    fuzzy_trigger.py's own docstring."""
+    return {
+        "profile": lambda u, c: eh.profile_flow.start_profile_flow(u, c, BOT_ID),
+        "wallet": lambda u, c: eh.wallet_flow.show_wallet_status(u, c, eh),
+        "recharge": lambda u, c: eh.wallet_flow.start_recharge_flow(u, c, eh),
+        "test": lambda u, c: eh.test_flow.start_test_flow(u, c, BOT_ID, eh),
+        "upload": lambda u, c: eh.test_flow.start_upload_pick(u, c, eh),
+        "report": lambda u, c: eh.report_flow.start_report_flow_on_demand(u, c, BOT_ID),
+    }
+
+
+async def _search_original_text(update, context, original_text):
+    """fuzzy_trigger.py's on_decline callback for this bot -- "No, search
+    instead" on the "did you mean X?" prompt means run Study Hub's own
+    search on the ORIGINAL typed text, not the matched trigger phrase."""
+    update.message.text = original_text
+    await sh.free_text_search(update, context)
+
+
+async def _fuzzy_trigger_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await fuzzy_trigger.handle_confirm_callback(update, context, _fuzzy_dispatch(), on_decline=_search_original_text)
+
+
 async def text_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Free text in this unified bot normally means Study Hub's own
-    fuzzy-search (sh.free_text_search) -- but if the report flow is mid-
-    dialog waiting for a mobile number or email (eh.report_flow's own
-    state), that has to be checked FIRST, or Study Hub's search would
-    swallow "9876543210" as a garbled catalog query instead of the report
-    flow ever seeing it. Same "check the more specific state first" rule as
-    exam_hub_bot.py's own text_router, just composed with Study Hub's
-    handler here since this bot has one. mcq_issue_flow's awaiting-state is
-    checked FIRST of all (2026-08-13), same "most specific active state
-    first" discipline -- a student mid-way through describing a wrong-
-    answer report should never have that message swallowed by search."""
+    fuzzy-search (sh.free_text_search) -- but every awaiting-state check
+    below has to run first, most-specific first, same "check the more
+    specific state first" rule as exam_hub_bot.py's own text_router.
+
+    BUG FIXED 2026-08-16 (independent code review): this router never
+    checked test_flow's/wallet_flow's own awaiting-states or trigger
+    phrases at all -- meaning Test Mode and wallet status/recharge were
+    completely unreachable through this unified bot (the ONE Telegram bot
+    a single-token faculty like CS Arun Chouhan actually runs: no "Start
+    Test" flow, no "wallet"/"recharge" trigger, and typing "done"/"pass"
+    mid-upload fell straight through to Study Hub's search instead of
+    completing the upload). Mirrored here now, same ordering as
+    exam_hub_bot.py's own text_router. Also added: a universal cancel
+    phrase (cancel_utils.py) and a "did you mean X?" confirmation for a
+    near-miss on any of the trigger words below (fuzzy_trigger.py) --
+    both found missing by the same review."""
+    text = (update.message.text or "").strip()
+
+    if cancel_utils.matches_cancel(text):
+        if cancel_utils.cancel_all_flows(context):
+            await update.message.reply_text("❌ Cancelled — you can start fresh anytime.")
+            return
+        # nothing was active -- fall through to normal handling, same
+        # reasoning cancel_utils.cancel_all_flows()'s own docstring gives.
+
+    if eh.test_flow.is_collecting_upload(context):
+        if await eh.test_flow.handle_upload_text_input(update, context, eh):
+            return
+    if eh.wallet_flow.is_awaiting_custom_amount(context):
+        if await eh.wallet_flow.handle_custom_amount_text(update, context, eh):
+            return
     if eh.mcq_issue_flow.is_awaiting_text_input(context):
         if await eh.mcq_issue_flow.handle_issue_text_input(update, context):
             return
     if eh.profile_flow.is_awaiting_text_input(context):
         if await eh.profile_flow.handle_profile_text_input(update, context):
             return
-    if eh.profile_flow.matches_trigger((update.message.text or "").strip()):
-        await eh.profile_flow.start_profile_flow(update, context)
+    if eh.profile_flow.matches_trigger(text):
+        await eh.profile_flow.start_profile_flow(update, context, BOT_ID)
+        return
+    if eh.wallet_flow.matches_wallet_trigger(text):
+        await eh.wallet_flow.show_wallet_status(update, context, eh)
+        return
+    if eh.wallet_flow.matches_recharge_trigger(text):
+        await eh.wallet_flow.start_recharge_flow(update, context, eh)
+        return
+    if eh.test_flow.matches_trigger(text):
+        await eh.test_flow.start_test_flow(update, context, BOT_ID, eh)
+        return
+    if eh.test_flow.matches_upload_trigger(text):
+        await eh.test_flow.start_upload_pick(update, context, eh)
+        return
+    if eh.report_flow.matches_trigger(text) and not eh.report_flow.is_awaiting_text_input(context):
+        await eh.report_flow.start_report_flow_on_demand(update, context, BOT_ID)
         return
     if eh.report_flow.is_awaiting_text_input(context):
-        await eh.report_flow.handle_contact_text_input(update, context)
+        if await eh.report_flow.handle_contact_text_input(update, context):
+            return
+
+    # Nothing matched exactly -- check for a plausible TYPO of one of the
+    # trigger phrases above before falling through to Study Hub's search
+    # (see fuzzy_trigger.py's own docstring).
+    if await fuzzy_trigger.maybe_confirm(update, context, _fuzzy_dispatch()):
         return
+
     await sh.free_text_search(update, context)
+
+
+async def _test_flow_callback_wrapper(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await eh.test_flow.test_flow_callback(update, context, BOT_ID, eh)
+
+
+async def _wallet_flow_callback_wrapper(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await eh.wallet_flow.wallet_flow_callback(update, context, BOT_ID, eh)
+
+
+async def _upload_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await eh.test_flow.handle_upload_photo_or_document(update, context, eh)
 
 
 def main():
@@ -204,7 +290,7 @@ def main():
     # acknowledged at all). Standalone exam_hub_bot.py never had this bug --
     # its own CallbackQueryHandler(button_router) has no pattern restriction.
     # Found 2026-08-10 via a live user report on the csarunchouhan bot.
-    app.add_handler(CallbackQueryHandler(eh.button_router, pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone)(:|$)"))
+    app.add_handler(CallbackQueryHandler(eh.button_router, pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone|sessprofile)(:|$)"))
     # 2026-08-11: report_flow's callbacks, same as exam_hub_bot.py's own
     # standalone registration -- eh.report_flow is exam_hub_bot.py's own
     # already-imported module reference, not a fresh import here.
@@ -214,7 +300,29 @@ def main():
     app.add_handler(CallbackQueryHandler(eh.profile_flow.profile_flow_callback, pattern=r"^(profile|profileconfirm):"))
     # eh.mcq_issue_flow, same reuse pattern, added 2026-08-13.
     app.add_handler(CallbackQueryHandler(eh.mcq_issue_flow.mcq_issue_flow_callback, pattern=r"^(issuecat|issuecancel)(:|$)"))
+    # 2026-08-16 (independent code review): Test Mode + wallet callbacks --
+    # previously missing entirely from this bot, see text_router()'s own
+    # docstring for the full bug.
+    app.add_handler(CallbackQueryHandler(_test_flow_callback_wrapper, pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)"))
+    app.add_handler(CallbackQueryHandler(_wallet_flow_callback_wrapper, pattern=r"^walletrc(:|$)"))
+    app.add_handler(CallbackQueryHandler(_fuzzy_trigger_callback, pattern=r"^fuzzytrigger:"))
+    # Photo/document uploads -- only meaningful during Test Mode's upload
+    # collection; handle_upload_photo_or_document() is a no-op (returns
+    # False) when no upload is actively being collected, so this handler
+    # is safe to register unconditionally, same as exam_hub_bot.py's own.
+    app.add_handler(MessageHandler((filters.PHOTO | filters.Document.ALL) & ~filters.COMMAND, _upload_router))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_router))
+
+    # Sweep any in-progress tests/pending recharges/pending access requests
+    # from before this restart and re-arm their jobs -- job_queue jobs do
+    # NOT survive a process restart. Must happen AFTER the Application (and
+    # its job_queue) is built, before run_polling() starts serving real
+    # traffic. Same calls exam_hub_bot.py's own main() already makes --
+    # previously missing here entirely (another symptom of the same gap
+    # text_router()'s docstring describes).
+    eh.test_flow.rearm_pending_test_jobs(app, eh)
+    eh.wallet_flow.rearm_pending_recharge_jobs(app, eh)
+    eh.profile_flow.rearm_pending_access_requests(app, BOT_ID)
 
     logger.info(f"Faculty Bot starting for bot_id '{BOT_ID}' (tenant '{TENANT_ID}', {TENANT['display_name']})...")
     app.run_polling()
