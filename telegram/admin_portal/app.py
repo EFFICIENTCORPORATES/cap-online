@@ -1535,6 +1535,15 @@ def activity_log():
     link_args = request.args.to_dict()
     if scoped is not None:
         link_args.pop("bot_id", None)
+    # "q" is passed explicitly below -- popping it here too is required, not
+    # cosmetic: request.args.to_dict() already carries "q" whenever the
+    # Filter box was used, and url_for(..., q=q, **link_args) with "q" in
+    # BOTH places raises "got multiple values for keyword argument 'q'"
+    # (a Python-level TypeError, uncaught -> 500) on every filtered request.
+    # Found 2026-08-17 via a real "Internal Server Error" filtering this
+    # page by a chat ID. Every other Analytics view's export_urls only ever
+    # passes q=q (never **link_args), so none of them share this bug.
+    link_args.pop("q", None)
     export_urls = {fmt: url_for("activity_log_export", fmt=fmt, q=q, **link_args) for fmt in ("csv", "xlsx", "html", "pdf")}
     extra_fields = [(k, v) for k, v in link_args.items() if k not in ("q", "page")]
     return render_template(

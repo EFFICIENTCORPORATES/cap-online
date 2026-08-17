@@ -689,6 +689,25 @@ def main():
     check("timestamps render in IST (UTC+5:30), not raw UTC", expected_ist.encode() in resp.data)
     check("the raw UTC string is NOT what's shown on screen", row_a_created_at.encode() not in resp.data)
     check("a Refresh control is present on the page", b"Refresh" in resp.data)
+
+    # REGRESSION (real bug, found 2026-08-17): the Filter box submits as
+    # ?q=..., and export_urls used to build export links via
+    # url_for(..., q=q, **link_args) where link_args (= request.args.to_dict())
+    # ALREADY contained "q" -- a duplicate keyword argument, uncaught
+    # TypeError, 500 on every single filtered request on this page. Pranav
+    # hit this filtering by a real student's chat ID. Fixed by popping "q"
+    # from link_args before the **-spread; this check guards the exact
+    # shape of that request (a non-empty q= filter as a real admin would
+    # type it) plus every export link it renders.
+    resp = client.get("/logs/activity?preset=all&q=900700001", follow_redirects=False)
+    check("filtering /logs/activity by q= does not 500 (duplicate-kwarg regression)", resp.status_code == 200)
+    body = resp.data.decode("utf-8", errors="replace")
+    export_links = re.findall(r'href="(/logs/activity\.\w+\?[^"]*)"', body)
+    check("filtered page still renders all 4 export links", len(export_links) == 4, f"got {export_links}")
+    for link in export_links:
+        er = client.get(link, follow_redirects=False)
+        check(f"export link resolves without error: {link}", er.status_code == 200)
+
     client.get("/logout")
 
     # A bot_admin scoped to ONLY smoketest-bot-a -- mocked the same way the
