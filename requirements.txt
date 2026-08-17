@@ -29,6 +29,11 @@ psutil==7.2.2
 pillow==12.3.0
 reportlab==4.5.1
 xhtml2pdf==0.2.17
+boto3==1.43.72          # telegram/tools/backup_to_cloudflare.py -- R2 (S3-compatible) uploads
+botocore==1.43.72
+s3transfer==0.19.2
+jmespath==1.1.0
+cryptography==50.0.0    # telegram/tools/backup_to_cloudflare.py -- encrypts .env/creds.txt before backup
 
 # --- used elsewhere in the repo (books/ pillar tooling, content scripts) ---
 requests==2.34.2

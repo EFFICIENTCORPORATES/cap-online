@@ -2,6 +2,44 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-08-16 (cont'd) — Backup Snapshot Summary added to Admin Portal; real D1-mirror idempotency bug found + fixed
+
+Pranav asked for the backup pipeline (built earlier this same session --
+see the entry below) to show its status under the Admin Portal's
+`/bots` page, plus asked what kind of backup this actually is and why
+that approach was chosen over the alternatives.
+
+Built: new `backup_runs` DB table (schema.sql) -- one row per invocation
+of `backup_to_cloudflare.py`, inserted as `'running'` at start, finalized
+with real per-phase metrics at the end, same "one fast local query, no
+live external call" audit-trail pattern every other table in this schema
+already follows. New `telegram/admin_portal/backup_status.py` +
+a "Backup Snapshot Summary" card wired into the existing `/bots` template
+-- last-run status, DB snapshot sizes, D1 tables/rows mirrored, assets
+uploaded/unchanged/failed, secrets backed up, and a recent-runs history
+table. Honestly renders `--` (not `0`) for any phase a run skipped.
+
+**Real bug found by actually re-running the backup a second time**: the
+D1 mirror's schema replay assumed `sqlite_master.sql`'s stored CREATE
+TABLE/INDEX text would carry the "IF NOT EXISTS" clause schema.sql's own
+DDL always uses -- it doesn't; SQLite silently strips that clause from
+the canonical stored text. The first-ever run (empty D1 database) worked
+by coincidence; the second run (against the now-populated database) hit a
+real `SQLITE_ERROR: table students already exists`. Fixed by re-inserting
+the clause before replay (`_ensure_if_not_exists()`), verified by actually
+re-running against the already-populated database (32 tables, 4,104 rows,
+0 errors) rather than trusting the fix by inspection. Both the original
+failure and the fixed success are visible in `backup_runs`' own history.
+
+Verified further: a real full run with asset sync confirmed the
+incremental design works as intended -- 0 uploaded, 1,244 unchanged, 35s
+total (vs. ~22 minutes on the very first full upload). Page rendering
+checked via Flask's `test_client()` (same technique
+`smoke_test_admin_portal.py` uses for auth-gated routes) plus a real
+headless-Edge screenshot of the output. `1lavya-admin-portal` restarted,
+confirmed clean. Full detail: `telegram/admin_portal/README.md`'s new
+"Backup Snapshot Summary" section.
+
 ## 2026-08-16 — Test Mode + wallet/billing: comprehensive root-level reference doc written
 
 Closing out the multi-round Test Mode + wallet/billing build (Pre-Designed
@@ -35,6 +73,357 @@ supplementary now that the root file is canonical, and a new row in
 `EXPECTED_DIRS`, 9 pre-existing NUL-byte files elsewhere, undocumented
 `capranav_com/` — nothing new from this change) and `tools/file_index.py`
 to regenerate the index. No code changed this round — documentation only.
+
+## 2026-08-16 — All 9 bots restarted after a ~9.7h outage; Cloudflare R2+D1 off-machine backup pipeline built and deployed
+
+Asked to check/restart all bots — found all 9 down (heartbeats stale ~9.7h,
+same class of gap as 2026-08-15's entry below). Restarted via
+`manage_bots.py restart`, confirmed clean startup logs, fresh heartbeats.
+
+Separately, walked `telegram/` for a real inventory of what's genuinely
+local-only and irreplaceable: `database/platform.db` (880KB then, 83
+students/395 MCQ attempts/etc.), `assets/myfiles_bot/myfiles_hub.db` +
+its `uploads/` (real student-uploaded files), and ~1.4GB of live-served
+PDFs/JSON — all gitignored by design, zero off-machine copy. Presented a
+backup plan (R2 for blobs, D1 for a queryable mirror); Pranav confirmed
+the direction, then separately created a Custom Cloudflare API Token
+(`Workers R2 Storage: Edit` + `D1: Edit`) and asked where to get R2's
+Access Key ID/Secret — derived both **without any extra dashboard step**
+per Cloudflare's own documented mechanism (Access Key ID = the token's
+own `id`, Secret = SHA-256 of the token value), verified with a real
+signed S3 `ListBuckets` call before trusting it. Confirmed staying on the
+existing EfficientCorporates (ECPL) Cloudflare account (not a separate
+1LAVYA account Pranav also created) since `1lavya.com`'s domain currently
+lives there.
+
+Built and deployed `telegram/tools/backup_to_cloudflare.py`: SQLite-
+consistent DB snapshots (via `.backup()` API, WAL-safe), a full D1 mirror
+of `platform.db` (table order derived at runtime from
+`PRAGMA foreign_key_list`, never hand-maintained), Fernet-encrypted
+`.env`/`creds.txt` with a real `--decrypt-secret` restore path, and an
+MD5-vs-R2-ETag asset sync that only uploads new/changed files and never
+deletes remote objects based on local state. Registered as a new Windows
+Task Scheduler job, "1LAVYA Platform Backup," nightly at 3:30 AM
+(deliberately not a `bots.json` entry — batch job, not a heartbeat
+process). Bucket + D1 database both auto-created on first run.
+
+**Verified for real, not just trusted**: D1 mirror cross-checked against
+live `platform.db` query results (29 tables, 3,981 rows; `course_catalog`
+matched exactly at 975 rows on two checks minutes apart, confirming the
+mirror reflects genuine current state, not a stale copy); the encrypted-
+secrets path proven with an actual download→decrypt→read round trip.
+First full asset sync (the one-time 1.4GB upload) completed clean before
+session end: **1,244 files uploaded, 0 failed**, full run (DB snapshots +
+secrets + asset sync) in ~1,298s. Every future nightly run only touches
+changed files, so this cost is paid once. `health_check.py`: same 16
+pre-existing failures, nothing new introduced.
+Full detail: `telegram/database/README.md`'s new "Off-machine backup"
+section, CLAUDE.md's 2026-08-16 dated entry under §11, and memory
+`1lavya-cloudflare-account`.
+
+## 2026-08-15 — Whole platform found down; Windows autostart + 30-min health-check automation built
+
+Asked to check if the bots were working. Found ALL 9 down — heartbeats
+stale ~4.7 hours, matching the known "no auto-restart-on-crash, single
+machine" gap flagged in CLAUDE.md right after §2. Restarted everything
+via `manage_bots.py start`, confirmed all real content loading /
+Telegram API calls succeeding, no tracebacks.
+
+Pranav then asked for two standing safeguards: an auto-run-at-Windows-
+startup script, and a Task Scheduler job every 30 minutes to restart
+anything found down. Built:
+- `manage_bots.py` gained a new `ensure-running` action — starts a bot
+  that isn't running, RESTARTS one that's running but heartbeat-stale
+  (a hung process, not just a dead one).
+- `telegram/tools/ensure_bots_running.bat` (new) — the unattended entry
+  point, explicit `.venv` python (not bare `python` off PATH), logs to
+  its own file, `ping`-based startup delay (not `timeout.exe`, which
+  refuses to run without a real console — found by testing).
+- A Startup-folder shortcut (`shell:startup`) pointing at the canonical
+  `.bat`, and a new Task Scheduler job "1LAVYA Bots - Health Check"
+  (every 30 min, indefinite). A true pre-login "at boot" trigger needed
+  admin rights this shell doesn't have — documented as a known gap with
+  the exact command Pranav can run himself if he wants it too; the two
+  mechanisms built already bound any outage to ≤30 min regardless.
+
+**Real bug found and fixed**: my own earlier manual test (verifying the
+new stale-heartbeat-restart path) left a timezone-naive timestamp in
+`bot_heartbeats` for one bot. `analytics.fetch_heartbeats()`'s existing
+try/except only guarded the parse step, not the later naive-minus-aware
+subtraction one line down — so it crashed, uncaught, aborting the WHOLE
+function and silently dropping every other bot's heartbeat too. This was
+live and real: it put `1lavya-platform-watcher` into an actual 60s crash
+loop. Fixed the bad DB value and hardened `fetch_heartbeats()`/
+`_parse_iso()` (treat naive as UTC, catch `TypeError` too) so one bad row
+can never do this again. Restarted all 9 bots to pick up the fix (Python
+doesn't hot-reload).
+
+**Also chased and ruled out**: every restarted bot briefly appeared as
+TWO OS processes (a `.venv` one and a global-Python child of it) —
+looked exactly like a duplicate-instance/Telegram-polling-conflict risk,
+investigated seriously (including a live-monitored kill-and-watch test)
+before `.venv\pyvenv.cfg` confirmed it: normal Python 3.11+ Windows
+venv-launcher stub+worker behavior, not a bug. Noted in
+`telegram/database/README.md` so a future session doesn't re-chase it.
+
+`health_check.py`: same 16 pre-existing failures, nothing new.
+`file_index.py` re-run. Full detail: `telegram/database/README.md`'s
+"Self-healing autostart" section, `CLAUDE.md` section 11's matching entry.
+
+## 2026-08-14 (cont'd) — Faculty Master DB table + Masters > Faculty Details
+
+Same day, right after the Faculty Comprehensive Report entry below:
+Pranav asked to "maintain a faculty table where we can store the details
+of the faculty," and directly asked JSON file vs. DB table — confirmed
+via AskUserQuestion: **DB table**. Separately reported not being able to
+find the new report/email box anywhere — confirmed it's the Admin Portal
+at **port 8788** (not the old dashboard at 8787), sidebar **Analytics →
+Faculty Comprehensive Report**; the running process's PID/heartbeat was
+checked live to confirm it was serving the just-built code, not a stale
+process.
+
+Built `faculty_master` (`schema.sql`) — `contact_email`/`contact_phone`/
+`notes`, one row per `tenant_id`, upserted. Deliberately does NOT
+duplicate `tenants.json`'s `content_scope`/`kind`/`onboarding_fee` (those
+stay there, read directly by the bot scripts at startup) — this is
+purely the new administrative layer. New
+`telegram/admin_portal/faculty_master.py` (list/get/upsert) and a new
+**Masters → Faculty Details** page (list + per-tenant edit form),
+audit-logged like every other portal write. Removed the `contact_email`
+field I'd added to `tenants.json` earlier the same day (nothing depended
+on it yet) and repointed the Faculty Comprehensive Report's email
+pre-fill at the new table instead.
+
+**Real mid-build issue, caught and fixed**: the live `1lavya-admin-portal`
+process re-runs `init_schema()` on every request, so a live request
+landed between this table's first draft (had 2 fee-status columns I
+later decided to drop, to avoid duplicating `tenants.json`'s existing
+`onboarding_fee`) and the trimmed final version — the real DB table got
+created with the wrong (draft) shape before the file settled.
+`CREATE TABLE IF NOT EXISTS` doesn't retroactively fix that. Caught by
+checking `PRAGMA table_info` before trusting it (not by inspection
+alone), confirmed 0 rows existed yet (nothing real to lose), fixed with a
+`DROP TABLE` + re-`init_schema()`.
+
+**Verified**: `smoke_test_admin_portal.py` grew from 205 to **220
+checks** — list/edit pages, create-then-update via the same `tenant_id`
+primary key (proves no duplicate row), unknown-tenant 404, empty-field-
+clears-column, the report page's email box reflecting a freshly-saved
+address, and full auth-gating. One check specifically **captures and
+restores** whatever real row already exists for the tenant it exercises
+(rather than overwriting-then-deleting), since this route can hold real
+admin-entered data by the time the test runs again. `health_check.py`:
+same 16 pre-existing failures, nothing new. `1lavya-admin-portal`
+restarted twice this session (once after the report build, again after
+this table), confirmed live both times with clean startup logs. Full
+detail: `telegram/admin_portal/README.md`'s "Faculty Master DB table"
+section, `CLAUDE.md` section 11's matching dated entry.
+
+## 2026-08-14 — Faculty Comprehensive Report built (Admin Portal)
+
+Pranav asked for a full, deterministic per-faculty report, for any date
+range: subjects/levels live for that faculty + how many MCQ/Descriptive
+questions exist; chapter-wise practice (most accessed, MCQ attempted/
+correct/time spent) across every subject/course that faculty serves;
+student-wise performance; a fixed last-7-days student-wise trend; which
+chapters each student practices most; and a question-wise difficulty
+analysis (which MCQs are most often wrong, and what students chose
+instead of the right answer) — all downloadable as PDF/XLSX/HTML by
+button and emailable straight to the faculty, with no commentary, just
+raw facts in properly-headed tables (his explicit wording).
+
+Explored the existing Admin Portal stack first (`app.py`, `analytics.py`,
+`exporters.py`, `document_catalog.py`, `student_analytics.py`,
+`report_delivery.py`/`cf_email.py`, `brand_kit.py`, `schema.sql`) rather
+than inventing new patterns, then built:
+
+- **`telegram/admin_portal/faculty_report.py`** (new) — the query/render/
+  email layer. Six sections: `content_availability()` (static, reuses
+  `document_catalog.question_bank_rows()`'s human_id-derived counts),
+  `chapter_stats()`, `student_performance()`, `student_last7days()` (a
+  fixed real-last-7-UTC-days window, independent of the report's own date
+  range), `student_chapter_matrix()` (ranked within each student's own
+  activity), `question_difficulty()` (≥2-attempt filtered, surfaces the
+  single most commonly chosen WRONG option per question, not just "wrong"
+  in general). `build_report()` assembles all six; `render_full_report_
+  html()`/`build_report_pdf()`/`build_report_xlsx()` share one section
+  list so the 3 formats can't drift; `send_report_email()` reuses the
+  same Cloudflare Email Service backend `report_delivery.py` already
+  uses, sent from the Admin Portal's own dedicated address.
+- **`faculty_report_deliveries`** table (`schema.sql`) — audit trail of
+  every download/email attempt, same discipline as `report_deliveries`.
+- **`contact_email`** field added to faculty tenants in `tenants.json`
+  (null today — pre-fills the send box when set, always overridable by
+  typing a different address).
+- **3 new routes** in `app.py` (`GET /reports/faculty`, `GET /reports/
+  faculty/<tenant_id>.{pdf,xlsx,html}`, `POST /reports/faculty/
+  <tenant_id>/email`) + a new template `faculty_full_report.html` + a new
+  sidebar entry, **Analytics → Faculty Comprehensive Report** — distinct
+  from and alongside the existing per-bot "Faculty Report" page (kept
+  unchanged). Scoped to a whole tenant, not one bot, since a faculty can
+  have more than one bot (e.g. Pranav's `capranav-study` +
+  `capranav-exam`) — this report pools activity across all of them.
+
+**Real bug found and fixed by actually running the code against the live
+DB** (not by inspection): `student_performance()`'s "last active"
+tracker started every student at `None` and called `max()` across a mix
+of `None` and real ISO timestamp strings on their first row — Python
+can't compare `str`/`NoneType`, so every real call crashed immediately.
+Fixed by filtering `None`s out before `max()`, then re-verified clean
+against all 4 real tenants (`capranav`, `csarunchouhan`, `1lavya-examhub`,
+`1lavya-studyhub`) with real data — every section returns correct,
+non-crashing rows (`1lavya-studyhub` correctly shows all-empty activity
+sections, since it's a study-only bot with no exam-hub data — an honest
+empty state, not a bug).
+
+**Verified**: `smoke_test_admin_portal.py` grew from 182 to **205
+checks**, all passing — the report page, all 3 downloadable formats
+against a real tenant, an unsupported-format 400, an unknown-tenant 404,
+invalid-email rejection, a mocked successful email logging a `'sent'`
+row with the exact address, a mocked forced-failure email logging a
+`'failed'` row with the error detail and flashing without crashing, and
+full auth-gating on every new route. `health_check.py`: same 16
+pre-existing failures, nothing new. `tools/file_index.py` re-run.
+`1lavya-admin-portal` restarted to deploy; confirmed live on port 8788
+with a clean startup log (0 tracebacks) and the new route correctly
+redirecting when unauthenticated. Full detail: `telegram/admin_portal/
+README.md`'s "Faculty Comprehensive Report" section, and CLAUDE.md
+section 11's matching dated entry.
+
+## 2026-08-13 (cont'd, 3) — Admin Portal Overview rebuilt into a real analytics dashboard
+
+Pranav asked for the Admin Portal's Overview page (`:8788/`, previously a
+3-tile placeholder) to become a full executive dashboard: new-student
+onboarding trends over any date range, new questions added (MCQ/
+Descriptive split, which subjects), top performing students, total
+platform time-spent today (+ bot-wise), questions attempted, subject/
+chapter drill-down, and a faculty roster — all filterable, exportable
+(CSV/Excel/HTML/PDF, including the charts themselves), sub-tab organized,
+"top industry level." Told explicitly not to assume anything and to ask
+first.
+
+Asked 4 clarifying questions via AskUserQuestion before writing any code
+(all answered with the recommended option): Overview becomes a **summary
+dashboard** (charts + top-line tables per sub-tab) that links into the
+already-built detailed Analytics pages (Student Master, Course Catalog,
+Faculty Report) for full drill-down, rather than duplicating them;
+**"New Questions Added" tracks forward from today only** — confirmed no
+historical ingestion-date data exists anywhere (content JSON files never
+carried an "added on" field), so a new `content_ingestion_log` DB table
+starts the real trail today rather than an approximate git-history
+backfill; **charts are self-built inline SVG**, no new JS charting
+library, matching this repo's existing no-CDN/self-contained practice;
+**"Top Performing Students" reuses the exact accuracy-%-with-minimum-
+attempts-floor definition** already live on the student-facing Telegram
+leaderboards, not a new ranking invented for this view.
+
+**Built**: `schema.sql`'s new `content_ingestion_log` table, backfilled
+honestly with 7 real rows for the same-day Cost & Management Accounting
+wiring (see the entry below) as its first real data. 8 new query
+functions in `telegram/database/analytics.py` (`fetch_student_
+onboarding`, `log_content_ingestion`, `fetch_content_growth`,
+`fetch_time_spent_today`, `fetch_questions_attempted`,
+`fetch_top_performers`, `fetch_faculty_roster`) plus `document_catalog.
+platform_question_totals()` — every one individually tested against the
+real live DB before being wired into any route. `telegram/admin_portal/
+charts.py` (dependency-free inline SVG bar/donut charts) and a
+**separate** `charts_pdf.py` (reportlab-native `VerticalBarChart`/`Pie`
+flowables) for PDF chart export — found before shipping, not after, that
+`xhtml2pdf` (the engine every table export already uses) has no reliable
+inline-`<svg>` support, so PDF chart export needed its own code path;
+reportlab is already a hard dependency here (via `xhtml2pdf` and
+`generate_base_formats.py`), so this added nothing new to install. Both
+chart types verified visually (a rendered bar and pie PDF read directly
+via Claude's own PDF-viewing capability) before trusting them, not just
+structurally.
+
+Rebuilt `overview.html` with 4 sub-tabs (Students / Content / Performance
+/ Faculty) sharing one date-range picker (`_date_range_from_args()`,
+7d/30d/90d/all-time presets + explicit from/to). `fetch_faculty_roster()`
+correctly counts "questions contributed" ONLY from a faculty's own
+`faculty/<tenant_id>/` content files — verified against real data before
+trusting it: `capranav`'s own `exam_content` still points at the
+flagship's shared Advanced Accounting bank, and the roster correctly
+shows 0 questions contributed for him (matches his real
+`own_content.status == "not_ingested"`), while `csarunchouhan` shows his
+real 1,025 MCQ + 47 descriptive.
+
+**Verified, multiple layers**: every new analytics function unit-tested
+against the real live DB directly before wiring into any route (caught
+nothing wrong — all returned sensible real numbers first try).
+`smoke_test_admin_portal.py` grew from 110 to **182 checks, 0 failures**
+— every tab render, every preset/filter combination, all 16 table ×
+format export combinations (content-type checked, not just status), all
+10 chart × format export combinations with a non-trivial size check, an
+unknown chart_id and an unsupported format both 404 cleanly, a
+data-correctness spot check (the Content tab's on-page total matches
+`fetch_content_growth()`'s own return value verbatim), and full auth
+gating on every new route. **Visually verified** via headless-Edge
+screenshots of all 4 tabs against real live data — on a **throwaway**
+diagnostic Flask instance with auth monkeypatched to a no-op (never the
+real deployed process, never a change to `auth.py` itself), on a
+different port, killed immediately after. One real mistake made and
+caught in the same pass: cleaning up leftover diagnostic processes
+afterward, a PID-matching command accidentally killed the REAL production
+`1lavya-admin-portal` process instead of only the throwaway ones —
+caught immediately via `manage_bots.py status` showing it "not running,"
+fixed with a normal `restart` (which was needed anyway to deploy the new
+code), verified back online with a fresh PID and a clean startup log, and
+every OTHER bot process's PID confirmed unchanged throughout. Re-ran
+`smoke_test_course_catalog.py` and `validate_content_json.py` afterward
+— both still clean, no regression. `health_check.py`: same pre-existing
+failures, nothing new from this change (structural: only new files in
+already-existing folders, no new top-level folder).
+
+Documented in `telegram/admin_portal/README.md`'s new "Overview rebuild"
+section, `telegram/database/README.md`'s `content_ingestion_log` note,
+and `CLAUDE.md` section 11.
+
+## 2026-08-13 (cont'd, 2) — CA Inter Cost & Management Accounting MCQs (700 questions, 7 chapters) reviewed and wired live
+
+An external contributor (govinjee@gmail.com) submitted MCQ batches for CA
+Inter Cost & Management Accounting into a new
+`telegram/assets/exam_bot/ca-inter-cost-accounting/` folder, in 3 rounds:
+(1) an initial Ch2 Material Cost file (75 MCQs) reviewed and found to be
+missing `human_id`/`subject`, using `"Intermediate"` instead of the
+catalog's `"Inter"`, and inventing a `"Unit 1"` where the real syllabus
+chapter has no sub-units — flagged back via a drafted (unsent) email;
+(2) a corrected Ch4/Ch5 resubmission (200 MCQs) that fixed every one of
+those gaps — reviewed clean, including independently re-deriving every
+"Hard"-difficulty numeric question's arithmetic, and a second draft email
+sent reporting no issues; (3) 5 more chapters (Ch3, Ch6, Ch7, Ch8, Ch9 —
+500 more MCQs, 700 total across the folder) submitted the same way.
+
+All 700 questions passed the full validation pass: structurally clean
+(`telegram/tools/validate_content_json.py --file`, 0 errors on every
+file), `human_id` correctly formatted and matching `course_catalog`
+exactly (course=CA, level=Inter, paper=04, chapter/unit correct per
+chapter), zero `mcq_id`/`human_id` collisions either within the 7 files
+or against any of the ~4,500 questions already live on the platform.
+
+**Wired into `telegram/config/tenants.json`**: all 7 files added to
+`1lavya-examhub`'s `exam_content.mcq_json` list (entries 6–12), per the
+2026-08-13 standing rule that every question on the platform joins the
+flagship bot's pool — the notes field's own running history was updated
+to document this addition the same way every prior one is documented.
+Verified end-to-end **before** touching the live process: imported
+`exam_hub_bot` in an isolated interpreter with `BOT_ID=1lavya-examhub`
+and confirmed all 700 questions resolve correctly to
+`CA → Inter → Cost and Management Accounting` with all 7 chapters
+showing in the right order — no "Unknown" bucket, no exceptions. Only
+then restarted the `1lavya-examhub` process (the only bot that reads this
+tenant's `mcq_json`); confirmed via its log that all 12 files (5 prior +
+7 new) loaded cleanly with 0 tracebacks since restart, and via
+`manage_bots.py status` that every other bot's PID was untouched. Full
+platform-wide `validate_content_json.py` re-run clean (14 files, 0
+errors/0 warnings) and `smoke_test_course_catalog.py` /
+`smoke_test_admin_portal.py` both re-run clean afterward.
+
+Total platform MCQ pool: 4,497 → 5,197. Two draft emails sit unsent in
+Gmail for Pranav to review/send at his discretion (the flagged-issues one
+for the superseded Ch2 file, and the clean-review one for Ch4/Ch5) — no
+email was sent for this final 5-chapter/700-question batch since it was
+wired in directly per Pranav's own instruction, not flagged for revision.
 
 ## 2026-08-13 (cont'd) — Standing "everything joins the flagship" rule, human_id made live, Issue Reports in Admin Portal
 

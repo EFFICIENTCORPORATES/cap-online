@@ -1,0 +1,344 @@
+================================================================================
+telegram/assets/exam_bot/CMA Final Law Json
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Final Law Json\CMA_Final_P13_M10_Cyber_Security_and_Data_Privacy_20_MCQ.json
+  count: 20
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 20 / 20
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Final'}
+  subject: {'Corporate and Economic Laws'}
+  chapter_label: {'Module 10'}
+  unitcode: {'Unit 1', 'Unit 2', 'Unit 3'}
+  chapter_slug: {'cyber-security-and-data-privacy'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Final Law Json\CMA_Final_P13_M11_Anti_Money_Laundering_20_MCQ.json
+  count: 20
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 20 / 20
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Final'}
+  subject: {'Corporate and Economic Laws'}
+  chapter_label: {'Module 11'}
+  unitcode: {'Unit 1', 'Unit 2'}
+  chapter_slug: {'anti-money-laundering'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Final Law Json\CMA_Final_P13_M1_Companies_Act_2013_180_MCQ.json
+  count: 180
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 180 / 180
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Final'}
+  subject: {'Corporate and Economic Laws'}
+  chapter_label: {'Module 1'}
+  unitcode: {'Unit 2', 'Unit 5', 'Unit 6', 'Unit 1', 'Unit 9', 'Unit 8', 'Unit 4', 'Unit 3', 'Unit 7'}
+  chapter_slug: {'the-companies-act-2013'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Final Law Json\CMA_Final_P13_M2_Insolvency_and_Bankruptcy_Code_2016_25_MCQ.json
+  count: 25
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 25 / 25
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Final'}
+  subject: {'Corporate and Economic Laws'}
+  chapter_label: {'Module 2'}
+  unitcode: {'Unit 1', 'Unit 2', 'Unit 4', 'Unit 3'}
+  chapter_slug: {'insolvency-and-bankruptcy-code-2016'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Final Law Json\CMA_Final_P13_M3_Corporate_Governance_and_CSR_25_MCQ.json
+  count: 25
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 25 / 25
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Final'}
+  subject: {'Corporate and Economic Laws'}
+  chapter_label: {'Module 3'}
+  unitcode: {'Unit 2', 'Unit 5', 'Unit 1', 'Unit 4', 'Unit 3'}
+  chapter_slug: {'corporate-governance-social-responsibility-and-sustainability'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Final Law Json\CMA_Final_P13_M4_SEBI_Laws_and_Regulations_25_MCQ.json
+  count: 25
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 25 / 25
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Final'}
+  subject: {'Corporate and Economic Laws'}
+  chapter_label: {'Module 4'}
+  unitcode: {'Unit 1', 'Unit 2', 'Unit 3'}
+  chapter_slug: {'sebi-laws-and-regulations'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Final Law Json\CMA_Final_P13_M5_The_Competition_Act_2002_20_MCQ.json
+  count: 20
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 20 / 20
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Final'}
+  subject: {'Corporate and Economic Laws'}
+  chapter_label: {'Module 5'}
+  unitcode: {'Unit 1', 'Unit 2'}
+  chapter_slug: {'the-competition-act-2002'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Final Law Json\CMA_Final_P13_M6_FEMA_1999_20_MCQ.json
+  count: 20
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 20 / 20
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Final'}
+  subject: {'Corporate and Economic Laws'}
+  chapter_label: {'Module 6'}
+  unitcode: {'Unit 1', 'Unit 2', 'Unit 4', 'Unit 3'}
+  chapter_slug: {'foreign-exchange-management-act-1999'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Final Law Json\CMA_Final_P13_M7_Banking_Sector_20_MCQ.json
+  count: 20
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 20 / 20
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Final'}
+  subject: {'Corporate and Economic Laws'}
+  chapter_label: {'Module 7'}
+  unitcode: {'Unit 1', 'Unit 2', 'Unit 3'}
+  chapter_slug: {'laws-and-regulations-related-to-banking-sector'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Final Law Json\CMA_Final_P13_M8_Insurance_Sector_20_MCQ.json
+  count: 20
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 20 / 20
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Final'}
+  subject: {'Corporate and Economic Laws'}
+  chapter_label: {'Module 8'}
+  unitcode: {'Unit 1', 'Unit 2'}
+  chapter_slug: {'laws-and-regulations-related-to-insurance-sector'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Final Law Json\CMA_Final_P13_M9_MSME_Sector_20_MCQ.json
+  count: 20
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 20 / 20
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Final'}
+  subject: {'Corporate and Economic Laws'}
+  chapter_label: {'Module 9'}
+  unitcode: {'Unit 1', 'Unit 2'}
+  chapter_slug: {'specific-legal-provisions-related-to-msme-sector'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+================================================================================
+telegram/assets/exam_bot/CMA Found Accout. Json
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Found Accout. Json\CMA_Foundation_P2_M1_Accounting_Fundamentals_120_MCQ.json
+  count: 120
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 120 / 120
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Foundation'}
+  subject: {'Fundamentals of Financial and Cost Accounting'}
+  chapter_label: {'Module 1'}
+  unitcode: {'Unit 2', 'Unit 5', 'Unit 6', 'Unit 1', 'Unit 9', 'Unit 10', 'Unit 8', 'Unit 4', 'Unit 3', 'Unit 7'}
+  chapter_slug: {'accounting-fundamentals'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Found Accout. Json\CMA_Foundation_P2_M2_U1_Consignment_30_MCQ.json
+  count: 30
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 30 / 30
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Foundation'}
+  subject: {'Fundamentals of Financial and Cost Accounting'}
+  chapter_label: {'Module 2'}
+  unitcode: {'Unit 1'}
+  chapter_slug: {'accounting-for-special-transactions'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Found Accout. Json\CMA_Foundation_P2_M2_U2_Joint_Venture_30_MCQ.json
+  count: 30
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 30 / 30
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Foundation'}
+  subject: {'Fundamentals of Financial and Cost Accounting'}
+  chapter_label: {'Module 2'}
+  unitcode: {'Unit 2'}
+  chapter_slug: {'accounting-for-special-transactions'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Found Accout. Json\CMA_Foundation_P2_M2_U3_Bills_of_Exchange_30_MCQ.json
+  count: 30
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 30 / 30
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Foundation'}
+  subject: {'Fundamentals of Financial and Cost Accounting'}
+  chapter_label: {'Module 2'}
+  unitcode: {'Unit 3'}
+  chapter_slug: {'accounting-for-special-transactions'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Found Accout. Json\CMA_Foundation_P2_M3_U1_Final_Accounts_Sole_Proprietorship_50_MCQ.json
+  count: 50
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 50 / 50
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Foundation'}
+  subject: {'Fundamentals of Financial and Cost Accounting'}
+  chapter_label: {'Module 3'}
+  unitcode: {'Unit 1'}
+  chapter_slug: {'preparation-of-final-accounts'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}
+----------------------------------------------------------------------
+telegram/assets/exam_bot/CMA Found Accout. Json\CMA_Foundation_P2_M3_U2_Not_For_Profit_Organisation_60_MCQ.json
+  count: 60
+  extra keys vs expected 29-field contract: set()
+  missing keys (union): set()
+  missing on SOME records: set()
+  has human_id: True  | all have it: True
+  has subject: True  | all have it: True
+  unique mcq_id: 60 / 60
+  bad-format human_id (non-null but wrong shape): 0 []
+  bad correct_option: 0 []
+  bad option count: 0
+  course: {'CMA'}
+  level: {'Foundation'}
+  subject: {'Fundamentals of Financial and Cost Accounting'}
+  chapter_label: {'Module 3'}
+  unitcode: {'Unit 2'}
+  chapter_slug: {'preparation-of-final-accounts'}
+  exam_type: {'PRACTICE'}
+  validation_status: {'Verified'}

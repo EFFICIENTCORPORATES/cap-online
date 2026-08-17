@@ -33,7 +33,7 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 
 Pranav's target is **100,000+ students** on the Telegram bot platform (`telegram/`, see §11), currently ~100. An independent PM+CTO-level code review that day found the *feature* layer solid (ledger-based wallet, JSON-source-of-truth configs, audit trails, real smoke tests) but the *infrastructure* layer is still prototype-scale. Anyone picking up `telegram/` work should know these before adding more features on top — fix order matters more than feature count here:
 
-1. **Single point of failure**: every bot process runs hand-managed (`manage_bots.py`, PID files, no auto-restart-on-crash) on one local Windows PC, all writing to one SQLite file, with **no real off-machine backup**. One hardware/power/OS-update failure takes down the entire platform and all student data at once. Highest priority — move to real hosted infra + automated backups before anything else below.
+1. **Single point of failure**: every bot process runs hand-managed (`manage_bots.py`, PID files, no auto-restart-on-crash) on one local Windows PC, all writing to one SQLite file. **The "no real off-machine backup" half of this is now fixed (2026-08-16)** — see `telegram/tools/backup_to_cloudflare.py`: a Windows Task Scheduler job runs it nightly at 3:30 AM, pushing SQLite-consistent snapshots of `platform.db`/`myfiles_hub.db`, a full queryable D1 mirror of `platform.db`, Fernet-encrypted `.env`/`creds.txt`, and the live-served asset folders (PDFs/JSON, student-uploaded files) to Cloudflare R2 (ECPL account) — see `telegram/database/README.md`'s "Off-machine backup" section for full detail, retention policy, and the disaster-recovery (`--decrypt-secret`) path. **The "no auto-restart-on-crash" half is still open** — one hardware/power/OS-update failure still takes the live platform itself offline (student data would now survive, but service wouldn't) until a hosted-infra move happens. Still the highest remaining priority below.
 2. **DB/concurrency model untested under load**: each bot opens one SQLite connection at process start and reuses it for every concurrent update; sqlite3 calls are synchronous and block the bot's single asyncio event loop (same for the synchronous `open(...).read()` PDF sends). WAL+retry is a stopgap, Postgres is the named eventual target (see `database/schema.sql`'s own comments) but the migration trigger is "gated on real load" that has never actually been measured. Load-test this now, while it's cheap to fail.
 3. **No working billing/quota enforcement anywhere in the bot code** — `wallet_ledger`/`payments` tables are schema-only, well-designed, never wired into any bot flow. If monetization is part of what justifies scaling to 100k, this needs to be built and load-tested well before the user base that would make retrofitting it risky.
 4. **Long-polling architecture (`run_polling()`), not webhooks** — no horizontal scaling path for a single popular bot; will need to change before any one bot's DAU is large enough to need it.
@@ -2120,3 +2120,232 @@ that check gave a false positive from exactly that mistake).
 `admin_portal/README.md` updated to match. Full session-by-session detail
 for everything in this and the 3 entries above:
 `_claude/memory/project_log.md`'s 2026-08-12/2026-08-13 entries.
+
+### External-contributor CA Inter Cost & Management Accounting MCQs reviewed + wired live (2026-08-13, later still)
+
+An external contributor (govinjee@gmail.com) submitted MCQ batches for CA
+Inter Cost & Management Accounting into a new `telegram/assets/exam_bot/
+ca-inter-cost-accounting/` folder, in 3 rounds — an initial 75-question
+file with real format gaps (missing `human_id`/`subject`, wrong `level`
+value, an invented `unitcode`), flagged back via a drafted email; a
+corrected 200-question resubmission reviewed clean (including
+independently re-deriving every "Hard" question's arithmetic); then 5
+more chapters (500 more MCQs, 700 total) submitted the same way and wired
+directly per Pranav's instruction. All 700 validated (0 errors, 0
+ID/`human_id` collisions against ~4,500 already-live questions), wired
+into `1lavya-examhub`'s `mcq_json` list in `tenants.json`, dry-run
+verified against the real loading logic before the live bot was touched,
+then deployed with a clean restart and 0 regressions elsewhere. Platform
+MCQ pool: 4,497 → 5,197. Full detail: `_claude/memory/project_log.md`'s
+2026-08-13 (cont'd, 2) entry.
+
+### Admin Portal Overview rebuilt into a real analytics dashboard (2026-08-13, later still)
+
+Pranav asked for the Overview page (previously a 3-tile placeholder) to
+become a full executive dashboard: student onboarding trends, content
+growth, top performers, time spent, questions attempted, and a faculty
+roster — date-ranged, filterable, and exportable (CSV/Excel/HTML/PDF,
+charts included), sub-tab organized, with content-catalog drill-down.
+Asked 4 clarifying questions before building (all his recommended
+choices): Overview is a **summary layer** linking into the already-built
+detailed Analytics pages, not a duplicate of them; **new-questions
+tracking starts today forward only** (a new `content_ingestion_log` DB
+table — no historical ingestion-date data exists anywhere to backfill
+from); **charts are self-built inline SVG**, no new JS dependency;
+**"Top Performing Students" reuses the exact student-facing leaderboard
+definition** (accuracy % + minimum-attempts floor), not a new ranking.
+
+Built 4 sub-tabs (Students / Content / Performance / Faculty) with a
+shared date-range picker, `telegram/admin_portal/charts.py` (inline SVG)
++ `charts_pdf.py` (reportlab-native PDF chart rendering — found and
+worked around before shipping that `xhtml2pdf` can't reliably render
+inline `<svg>`, so PDF chart export needed its own code path, no new
+dependency since reportlab is already vendored). Faculty roster correctly
+counts "questions contributed" only from a faculty's own `faculty/
+<tenant_id>/` content files, never a shared/flagship file their tenant
+also references — verified against real data (`capranav` correctly shows
+0 contributed, matching his `own_content.status == "not_ingested"`).
+`smoke_test_admin_portal.py` grew from 110 to 182 checks, all passing;
+visually verified via headless-Edge screenshots of all 4 tabs against
+real data on a throwaway diagnostic instance before deploying to the real
+process. Full detail: `telegram/admin_portal/README.md`'s "Overview
+rebuild" section.
+
+### Faculty Comprehensive Report built (2026-08-14)
+
+Pranav asked for a full, deterministic, per-faculty report for any date
+range: which subjects/levels are live for that faculty and how many MCQ/
+Descriptive questions exist, which chapters are most accessed/practiced
+(MCQ attempted/correct/time spent), student-wise performance, a last-7-
+days student-wise trend, which chapters each student practices most, and
+a question-wise difficulty analysis (which MCQs are most often wrong, and
+what students chose instead of the right answer) — downloadable as PDF/
+XLSX/HTML by button and emailable straight to the faculty, with **no
+commentary, just raw facts in properly-headed tables** (his explicit
+wording).
+
+Built as a new **Analytics → Faculty Comprehensive Report** page
+(`/reports/faculty`), distinct from and alongside the existing per-bot
+"Faculty Report" page. New `telegram/admin_portal/faculty_report.py` (the
+query/render/email layer, six sections, all pooling activity across every
+bot a tenant has — e.g. Pranav's `capranav-study` + `capranav-exam`
+together, not one bot's slice), a new `faculty_report_deliveries` audit
+table, and three new routes wired into `app.py`. Reused every existing
+pattern rather than inventing new ones: `document_catalog.question_bank_
+rows()` for the human_id-derived question counts, `brand_kit.py` for the
+branded PDF/HTML/email look, the same Cloudflare Email Service backend
+`report_delivery.py` already uses for student reports.
+
+**Real bug found and fixed via actually running it against the live DB**
+(not by inspection): the student "last active" tracker tried `max()`
+across a mix of `None` and real timestamp strings on a student's first
+row, crashing every call — fixed by filtering `None`s out first, then
+re-verified clean against all 4 real tenants with real data.
+`smoke_test_admin_portal.py` grew from 182 to 205 checks, all passing;
+`health_check.py`: same 16 pre-existing failures, nothing new;
+`1lavya-admin-portal` restarted, confirmed live with a clean startup log
+immediately after. Full detail: `telegram/admin_portal/README.md`'s
+"Faculty Comprehensive Report" section.
+
+### Faculty Master DB table + Masters → Faculty Details built (2026-08-14, later same day)
+
+Pranav asked directly whether faculty contact/admin details should live
+in a DB table or a JSON file — confirmed via AskUserQuestion: **DB
+table**. New `faculty_master` table (`schema.sql`) holds `contact_email`/
+`contact_phone`/`notes` only — deliberately not duplicating anything
+`tenants.json` already owns (`content_scope`/`kind`/`onboarding_fee`
+etc. stay there, read directly by the bot scripts at startup). New
+`telegram/admin_portal/faculty_master.py` (list/get/upsert) and a new
+**Masters → Faculty Details** page (`/masters/faculty`, list + per-
+tenant edit form), audit-logged like every other portal write. The
+Faculty Comprehensive Report's email box now pre-fills from this table
+instead of the `tenants.json` field the earlier entry above added (that
+field was removed the same day, before anything depended on it).
+
+**Real mid-build issue caught and fixed**: since the live
+`1lavya-admin-portal` process re-runs `init_schema()` (`CREATE TABLE IF
+NOT EXISTS`) on every request, a live request landed between this
+table's first draft and its trimmed final column set, creating the real
+table with the wrong (draft) columns before the file settled — caught by
+checking `PRAGMA table_info`, confirmed 0 rows existed yet, fixed with a
+`DROP TABLE` + re-`init_schema()`. Worth remembering: a table's *shape*
+isn't safely re-editable mid-session once any live process may have
+already created it from an earlier draft of the same file.
+
+`smoke_test_admin_portal.py` grew from 205 to **220 checks** — including
+one that captures and restores whatever real row already exists for the
+tenant it exercises (rather than blindly overwriting-then-deleting,
+which would have destroyed real admin-entered data on a re-run).
+`health_check.py`: same 16 pre-existing failures, nothing new;
+`1lavya-admin-portal` restarted, confirmed live. Full detail:
+`telegram/admin_portal/README.md`'s "Faculty Master DB table" section.
+
+### Whole platform found down + Windows autostart/health-check automation built (2026-08-15)
+
+Asked to check whether the bots were working — found **every single one**
+down, heartbeats stale by ~4.7 hours (the exact "no auto-restart-on-crash"
+gap already flagged right after §2). Restarted all 9 via `manage_bots.py
+start`. Pranav then asked for two standing safeguards: a script that
+auto-runs at Windows startup, and a Task Scheduler job every 30 minutes
+that restarts anything found down.
+
+Added a new `ensure-running` action to `manage_bots.py` — starts any
+`active` bot that isn't running, and (new) **restarts** any bot that IS
+running but whose heartbeat has gone stale (a hung process, not just a
+dead one). New `telegram/tools/ensure_bots_running.bat`, the actual
+unattended entry point, using the repo's `.venv` interpreter explicitly
+and a `ping`-based delay (`timeout.exe` hard-refuses to run with no real
+console attached — confirmed by testing). Wired into **both** requested
+places: a Startup-folder shortcut (`shell:startup`, points at the
+canonical repo `.bat`, not a copy) and a new Task Scheduler job,
+**"1LAVYA Bots - Health Check"**, every 30 minutes indefinitely. A true
+pre-login "at system boot" trigger needs elevated rights this session's
+shell doesn't have — not created; documented as a known gap with the
+exact elevated command to run if Pranav wants it too (the Startup
+shortcut + 30-min recurring task already bound any real outage to ≤30
+min regardless).
+
+**A real bug found and fixed along the way**: an earlier manual test left
+a timezone-naive heartbeat timestamp in the DB for one bot, which crashed
+`analytics.fetch_heartbeats()` — outside its existing `try/except`, which
+only guarded the parse step, not the later naive-minus-aware subtraction
+— silently dropping *every* bot's heartbeat, not just the bad row's, and
+put the platform watcher into a real 60s crash loop. Fixed the bad value
+and hardened `fetch_heartbeats()`/`_parse_iso()` so one malformed row can
+never take the whole function down again. All 9 bots restarted to pick up
+the fix (imports don't hot-reload).
+
+**Also investigated and ruled out**: every bot briefly showing as *two*
+OS processes (one `.venv` path, one the machine's global Python, the
+global one a child of the venv one) looked exactly like a duplicate
+instance/Telegram-polling-conflict risk — chased with a live-monitored
+kill-and-watch test before `.venv\pyvenv.cfg` settled it: this is Python
+3.11+'s normal Windows venv-launcher stub-plus-worker behavior, not a
+bug, not a second bot instance. Worth knowing so a future session doesn't
+re-chase the same ghost. Full detail, all of the above:
+`telegram/database/README.md`'s "Self-healing autostart" section.
+
+### Off-machine backup built: Cloudflare R2 + D1, nightly (2026-08-16)
+
+Directly follows from the scale-readiness gap #1 callout right after §2
+("no real off-machine backup") — this closes that half of the gap (the
+"no auto-restart-on-crash" half is still open). Pranav asked what to back
+up and how, given the platform runs off one standalone PC; after a real
+inventory (not guesswork) confirmed the exposure — `database/platform.db`
+(880KB then, live student/wallet/MCQ data), the separate
+`assets/myfiles_bot/myfiles_hub.db` + its `uploads/` (real student-
+uploaded files), and 1,803 sourced PDFs (~1.4GB actually served) are
+**100% local-only** (gitignored by design: `**/*.db`, `**/*.pdf`, `*.env`,
+`creds.txt`) — while Python code + question-bank JSON + config JSON are
+already safe via `git push` — the plan was scoped to exactly the
+git-uncovered set, R2 for blob storage + a D1 mirror for a queryable
+off-site copy (Pranav's confirmed choice over R2-only).
+
+**Account decision, corrected mid-flow**: initially set up against a new,
+separate 1LAVYA Cloudflare account Pranav created — he then confirmed
+staying on the existing **EfficientCorporates (ECPL) account** instead
+(same one `CF_EMAIL_*` already uses), since `1lavya.com`'s domain
+currently lives there; the 1LAVYA account id is kept on file in
+`telegram/.env`'s comments for whenever the domain itself migrates. Pranav
+created one Custom API Token himself (`Account > Workers R2 Storage >
+Edit` + `Account > D1 > Edit`) and pasted the raw value into chat — Claude
+then derived the R2 S3-compatible Access Key ID/Secret Access Key
+**without any extra dashboard step**, per Cloudflare's own documented
+mechanism (Access Key ID = the token's `id`, Secret = SHA-256 of the token
+value), and verified this for real (not just computed) with an actual
+signed `ListBuckets` S3 call before trusting it.
+
+**Built**: `telegram/tools/backup_to_cloudflare.py` — SQLite-consistent
+snapshots (via `sqlite3`'s own `.backup()` API, never a raw file copy, so
+it's safe even while WAL-mode writers are live) of both DBs, gzipped,
+60-day retention; a full D1 mirror of `platform.db` refreshed (wipe +
+reinsert) every run, table order derived at runtime from
+`PRAGMA foreign_key_list` (never a hand-maintained list that could drift
+from `schema.sql`); Fernet-encrypted `.env`/`creds.txt` (PBKDF2-derived
+key from a new `CF_BACKUP_ENCRYPTION_PASSPHRASE`, generated this session
+and handed to Pranav to also save in a password manager — if only stored
+next to the files it encrypts, it protects nothing once this PC is the
+thing that's gone) with a real `--decrypt-secret` CLI path for actual
+disaster recovery, not just one-way upload; and an MD5-vs-R2-ETag asset
+sync for the live-served folders (`study_bot/`, `faculty/`, `exam_bot/`,
+`myfiles_bot/uploads/`) that only uploads new/changed files and never
+deletes a remote object based on local state. `assets/backup pdfs/`
+(1.5GB, already documented elsewhere in this file as unused) is
+deliberately excluded. On any phase failure, sends a DM via the same
+`watcher_bot.py` sender/alerts.json plumbing already used for bot down/up
+alerts — reused directly, not reimplemented. Deliberately NOT registered
+in `bots.json`/`manage_bots.py` (a run-to-completion batch job, not a
+long-running heartbeat process) — instead runs via a new Windows Task
+Scheduler job, **"1LAVYA Platform Backup"**, nightly at 3:30 AM.
+
+**Verified for real before trusting any of it**: bucket + D1 database
+auto-created on first run; D1 mirror row counts cross-checked against
+live `platform.db` query results (matched, including catching real
+platform growth between two checks minutes apart — `course_catalog`,
+static reference data, matched exactly at 975 both times, confirming the
+mirror isn't just coincidentally close); the encrypted-secrets path proven
+with an actual download-decrypt-read round trip (not just "upload
+succeeded") via the script's own `--decrypt-secret` flag. Full first real
+run: DB snapshots + secrets + D1 mirror in ~200s, asset sync separately.
+Full detail, retention policy, and the disaster-recovery procedure:
+`telegram/database/README.md`'s "Off-machine backup" section.
