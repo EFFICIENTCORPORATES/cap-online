@@ -1,6 +1,6 @@
 # Telegram Platform — Test Mode & Wallet System: Complete Reference
 
-**Status: primary, canonical reference for this whole system, as of 2026-08-16.**
+**Status: primary, canonical reference for this whole system, as of 2026-08-17.**
 If you are an AI agent (or a human) picking this up cold, read this file
 start to finish before touching any code under `telegram/`. It explains not
 just *what* exists but *why* every non-obvious decision was made, exactly
@@ -435,6 +435,84 @@ Pranav described ("visible to the student under an activity option under
 his dashboard"). This document's system is the data-capture layer only —
 a UI to browse it is a distinct, separate, future piece.
 
+### 5.8 Tenant scoping — a real bug, found 2026-08-17, now fixed
+
+**What happened**: Pranav reported that typing `test` on CS Arun Chouhan's
+bot (`csarunchouhan`, `tenants.json` `content_scope` = CMA Law only, never
+CA) showed the CA Inter Advanced Accounting test catalog — content
+entirely outside that bot's own scope.
+
+**Root cause**: `test_flow.py`'s picker (`_available_courses`/
+`_available_levels`/`_available_subjects`) queried `predesigned_tests`
+globally, with **no tenant filter of any kind**. This is a real, plain
+omission — not a deliberate simplification that later became wrong.
+`exam_hub_bot.py`'s own MCQ/Descriptive picker has filtered every course/
+level/subject list through `SCOPE_TRIPLES` (a `(course, level, subject)`
+allow-list derived from `content_scope`, with `None` meaning unrestricted
+for an "ALL"-scoped tenant like the flagship) since 2026-08-12 — Test Mode
+was simply never wired into that already-existing, already-correct
+mechanism when it was built on 2026-08-16. It went unnoticed for a full
+day because the only two bots with `test_flow.py` wired in at that point
+(`1lavya-examhub`, `capranav-exam`) both legitimately include CA Inter
+Advanced Accounting in their own scope — there was nothing to filter out
+yet. `csarunchouhan` (reached via `faculty_bot.py`'s shared import of
+`exam_hub_bot.py`'s functions) was the first genuinely scope-mismatched
+tenant to actually exercise the gap.
+
+**The fix** (`telegram/bots/test_flow.py`, 2026-08-17): every picker
+function now takes `host` and filters its result set through
+`host._scope_allows_course()`/`_scope_allows_level()`/
+`_scope_allows_subject()` — the exact same predicates `exam_hub_bot.py`
+already exposes, not a second, parallel scoping mechanism. The "Try CA
+Inter Advanced Accounting" shortcut on the graceful-deny screen is now
+conditional on that subject actually being in the tenant's own scope
+(`offer_advacc` parameter), with a defense-in-depth re-check in its own
+callback handler too. A **second, independent guard was added directly in
+`_start_test()`** — the actual wallet-debiting, session-creating action
+every path funnels through — re-verifying the chosen `catalog_key`'s
+course/level/subject against the tenant's scope one more time before
+proceeding. This matters because it protects against more than just the
+picker: a stale or replayed `callback_data`, or a future picker bug, can
+never again debit a student or start a test outside their own bot's
+tenant scope, because the check sits at the one true chokepoint, not just
+upstream of it. (This mirrors an identical "the real chokepoint" guard
+already added on 2026-08-16 for the double-tap/double-debit bug — see
+`_start_test`'s own comments for both.)
+
+**The zero-overlap case** (a tenant whose scope has no real Test Mode
+content at all — `csarunchouhan` today, since only CA Inter Advanced
+Accounting exists in `predesigned_tests`) now gets an honest, specific
+message ("Test Mode doesn't have ready-made tests for your subjects yet
+… you can still practice MCQs and Descriptive questions as usual") rather
+than either the wrong catalog or a generic "no tests on this platform"
+message that would incorrectly suggest a platform-wide outage.
+
+**Verification**: 14 new checks in `smoke_test_test_flow.py` (its §18),
+simulating a CMA-scoped host by wrapping the *real* `exam_hub_bot` module
+and overriding only the three scope predicates — every other function
+`test_flow.py` calls on `host` is still the real thing, so this exercises
+the real picker/guard code, not a reimplementation. Covers: CA absent
+from the scoped course list, the deny message never offering an
+actionable path into CA (no button/markup at all on that screen),
+`offer_advacc=False` suppressing the jump-to-CA button, and — the
+important one — `_start_test()` refusing a real CA `catalog_key` even
+when handed it directly (simulating a bypass of the picker entirely): no
+wallet debit, no `test_sessions` row created. Full suite: **94/94
+passing**. `smoke_test_exam_hub_wallet.py` re-run clean (41/41) to
+confirm the pre-existing `SCOPE_TRIPLES` mechanism itself was untouched.
+Deployed: `1lavya-examhub`, `capranav-exam`, `csarunchouhan` all
+restarted, confirmed clean startup logs, confirmed `csarunchouhan` now
+resolves to `mcq`/`descriptive` courses = `['CMA']` only (never `CA`) at
+boot.
+
+**The lesson for future features on this platform**: any new picker/
+catalog/content-listing surface that queries a shared table directly
+(rather than going through a bank/index object that's already
+scope-aware) needs to explicitly consult `SCOPE_TRIPLES`/
+`_scope_allows_*()` from day one — it is not something that becomes
+"obviously needed" only once a second scoped tenant exists to expose the
+gap, as this bug demonstrates.
+
 ---
 
 ## 6. Data model — every new table, in one place
@@ -547,6 +625,12 @@ throughout, consistent with how this whole platform has always been built:
    back what was wrong or missing. Deployed.
 7. **This document** — written after round 6, consolidating everything
    above into one canonical reference.
+8. **2026-08-17 (tenant-scoping bug fix)** — see §5.8 in full. `test_flow.py`'s
+   picker never consulted `content_scope`, so `csarunchouhan`'s bot (CMA
+   Law only) was showing the CA Inter Advanced Accounting catalog — the
+   first genuinely scope-mismatched tenant to exercise a gap that had
+   existed since round 4. Fixed at both the picker and, as defense-in-depth,
+   `_start_test()` itself. 14 new regression checks, full suite 94/94.
 
 Every round in this list followed the same cycle: build → automated test →
 deploy (restart the affected bot processes, confirm clean logs) → commit →
@@ -589,14 +673,23 @@ file directly** rather than trusting this section blindly.
 
 ---
 
-## 11. Deployment status (as of 2026-08-16, end of round 6)
+## 11. Deployment status (as of 2026-08-17, end of round 8)
 
-Live on `1lavya-examhub` and `capranav-exam` (both restarted after every
-round, confirmed clean startup logs each time). **Not** deployed to
-`csarunchouhan` — he doesn't teach CA Inter Advanced Accounting, so Test
-Mode has nothing to offer his students; the practice-mode wallet debiting
-*is* live for him too, though (via `faculty_bot.py`'s shared import of
-`exam_hub_bot.py`'s functions).
+The Test Mode code (`test_flow.py`) is wired into all three bots that
+import `exam_hub_bot.py`'s functions — `1lavya-examhub`, `capranav-exam`,
+and `csarunchouhan` (via `faculty_bot.py`). It is **not** the case that
+`csarunchouhan` never had the code reachable — an earlier version of this
+document said so, but that was inaccurate even before the §5.8 fix: the
+picker was always callable from his bot, it just (incorrectly, until
+round 8) showed CA content instead of gracefully denying. As of round 8,
+all three bots correctly show only what's in their own `content_scope`:
+`1lavya-examhub` (scope "ALL") sees the full catalog, `capranav-exam`
+(CA Inter Advanced Accounting only) sees exactly that, and
+`csarunchouhan` (CMA Law only) correctly sees "not available for your
+subjects yet" since no CMA content exists in `predesigned_tests`. Wallet/
+identity/practice-mode billing is live on all three, unaffected by any of
+this (that mechanism was always tenant-agnostic by design — the wallet
+itself has no notion of subject, only the Test Mode catalog picker did).
 
 ---
 
@@ -658,14 +751,45 @@ Mode has nothing to offer his students; the practice-mode wallet debiting
 
 7. **Student Customised Test** (chapter picker + free-form marks target,
    as opposed to a Pre-Designed sitting) — explicitly out of scope for this
-   edition, Pranav's own confirmed choice, not a gap.
-   *Plan*: if/when revisited, the 30:70 MCQ:Descriptive ratio and the
-   marks-approximate assembly approach are already designed (see
-   `TEST-MODE-ROADMAP.md` §6) — this document's size-tier subsetting logic
-   in `test_flow.py`'s `_build_subset_questions()` is directly reusable,
-   since it already solves "assemble a target-marks subset with a fixed
-   MCQ:Descriptive ratio," just currently scoped to one sitting rather than
-   across the whole subject.
+   edition, Pranav's own confirmed choice, not a gap. **Updated 2026-08-17:
+   this is no longer just "a nicer alternative" — it's the only viable path
+   to extending Test Mode to any subject beyond CA Inter Advanced
+   Accounting**, confirmed by inspecting the real content for every other
+   subject currently live (`csarunchouhan`'s CMA Law, CA Inter Costing,
+   CA Foundation Accounting/Economics/Quant): every one of it is a flat,
+   chapter-tagged `exam_type: "PRACTICE"` pool (`set: null`, no real MTP/
+   RTP/PYQ paper structure) — there is no "real sitting" for
+   `generate_predesigned_tests.py`'s regex-based grouping to find, because
+   none of this content was ever a single coherent real exam paper to
+   begin with. Pre-Designed Tests can never cover these subjects no matter
+   how much more PRACTICE content is added — a fundamentally different
+   selection mechanism (pick chapters + a marks target, let the engine
+   assemble a subset) is required, not a data problem to source around.
+   *Plan*: the 30:70 MCQ:Descriptive ratio and the marks-approximate
+   assembly approach are already designed (see `TEST-MODE-ROADMAP.md` §6),
+   and `test_flow.py`'s `_build_subset_questions()` is directly reusable
+   as-is — it already solves "assemble a target-marks subset with a fixed
+   ratio" from any two input lists, regardless of whether those lists came
+   from one real sitting or a whole chapter-tagged subject pool. The real
+   new work is: (a) a chapter-scoped picker (course→level→subject→
+   chapter(s), reusing the same `SCOPE_TRIPLES`/`course_catalog` machinery
+   `exam_hub_bot.py`'s practice-mode picker and §5.8's fix both already
+   use — not a new scoping mechanism); (b) querying the flat MCQ/
+   descriptive pools by `human_id`/chapter tag instead of by a
+   `predesigned_tests` catalog row; (c) a marks-target UI (preset tiers or
+   free entry) in place of "pick a sitting, then a tier." Nothing about
+   the wallet debit, timer/grace system, activity logging, or submission/
+   scoring engine needs to change — all of it already operates on
+   `test_questions` rows generically, regardless of how those rows were
+   selected. **One real, separate gap found while confirming this**:
+   descriptive content outside CA Inter Advanced Accounting doesn't
+   reliably carry a real `marks` value either — e.g. `csarunchouhan`'s
+   Companies Act descriptive bank has `"marks_text": "Marks: Not stated in
+   source"` on every record. A Custom Test's marks-target assembly needs
+   *some* number to sum against, so this needs either a default/estimated-
+   marks convention (e.g. by question length/complexity) or requiring real
+   marks as part of any future faculty content-submission template —
+   Pranav's call, not decided.
 
 8. **The student-facing "activity" dashboard** (Pranav: "visible to the
    student under an activity option under his dashboard") — the data

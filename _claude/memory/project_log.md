@@ -2,6 +2,57 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-08-17 — Test Mode tenant-scoping bug fixed (CS Arun Chouhan's bot was showing CA content)
+
+Pranav reported: typing "test" on CS Arun Chouhan's bot (CMA Law
+`content_scope`, no CA content at all) showed the CA Inter Advanced
+Accounting test catalog. Confirmed real, root-caused directly (not
+guessed): `test_flow.py`'s picker (`_available_courses`/`_levels`/
+`_subjects`) queried `predesigned_tests` globally with no tenant filter
+at all — unlike `exam_hub_bot.py`'s own MCQ/Descriptive picker, which has
+filtered every list through `SCOPE_TRIPLES` since 2026-08-12. Test Mode
+was simply never wired into that existing mechanism when built
+2026-08-16; invisible until `csarunchouhan` (via `faculty_bot.py`) became
+the first genuinely scope-mismatched tenant to exercise it.
+
+Fixed by threading `host` through the whole picker chain and filtering
+every course/level/subject list through the same `host._scope_allows_*()`
+predicates `exam_hub_bot.py` already exposes — no new scoping mechanism
+invented. Added a second, independent defense-in-depth guard directly in
+`_start_test()` (the actual wallet-debiting, session-creating action every
+path funnels through) so a stale callback or future picker bug can never
+again bill/start a test outside a bot's own tenant scope. The "jump to CA"
+shortcut on the graceful-deny screen is now scope-gated too. A tenant with
+zero real overlap (csarunchouhan today — no CMA content exists in
+`predesigned_tests`) now gets an honest "not for your subjects yet"
+message instead of either the wrong catalog or a platform-appears-empty
+one.
+
+14 new regression checks in `smoke_test_test_flow.py` (§18), simulating a
+CMA-scoped host by wrapping the real `exam_hub_bot` module and overriding
+only the 3 scope predicates — exercises the real picker/guard code, not a
+reimplementation. Full suite 94/94 passing; `smoke_test_exam_hub_wallet.py`
+re-run clean (41/41). Deployed: `1lavya-examhub`, `capranav-exam`,
+`csarunchouhan` all restarted, confirmed clean startup logs, confirmed
+`csarunchouhan` resolves to `mcq`/`descriptive` courses = `['CMA']` only.
+
+Also updated `/TELEGRAM-TEST-MODE-SYSTEM.md` (new §5.8, plus updated §9/
+§11/§12) with the full writeup, and answered Pranav's follow-up question
+("what's the roadmap for Test Mode on other subjects") by actually
+inspecting the real content for every other live subject
+(`csarunchouhan`'s CMA Law, CA Inter Costing, CA Foundation Accounting/
+Economics/Quant): all of it is flat `exam_type: "PRACTICE"` chapter-tagged
+content, not real MTP/RTP/PYQ sittings — so Pre-Designed Tests can never
+extend to these subjects no matter how much more content is added; the
+already-designed-but-deferred Student Customised Test (chapter picker +
+marks-target assembly) is the only viable path, and is now flagged in
+§12 item 7 as such rather than just "a nicer alternative." Also surfaced
+a real, separate gap while confirming this: descriptive content outside
+CA Inter Advanced Accounting doesn't reliably carry a real marks value
+(e.g. csarunchouhan's Companies Act bank: `"Marks: Not stated in
+source"` on every record) — needed before a marks-target assembly could
+work for that content, Pranav's call on how to resolve.
+
 ## 2026-08-16 (cont'd) — Backup Snapshot Summary added to Admin Portal; real D1-mirror idempotency bug found + fixed
 
 Pranav asked for the backup pipeline (built earlier this same session --
