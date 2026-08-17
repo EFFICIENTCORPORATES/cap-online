@@ -191,23 +191,40 @@ def _row_to_dict(cursor_row, conn):
 # PICKER: Course -> Level -> Subject -> sitting -> summary/confirm
 # ---------------------------------------------------------------------------
 
-def _available_courses(conn):
-    return [r[0] for r in conn.execute(
+# 2026-08-17 (real bug, reported by Pranav): typing "test" on CS Arun
+# Chouhan's bot was showing the CA Inter Advanced Accounting test catalog
+# -- content entirely outside his tenants.json content_scope (CMA Law
+# only). Root cause: these three functions queried predesigned_tests
+# globally, with NO tenant filter at all -- unlike exam_hub_bot.py's own
+# MCQ/Descriptive picker, which has filtered every course/level/subject
+# list through SCOPE_TRIPLES (host._scope_allows_course/level/subject)
+# since 2026-08-12. Test Mode was simply never wired into that existing
+# mechanism -- it went unnoticed because the only two bots with test_flow
+# wired in until 2026-08-17 (1lavya-examhub, capranav-exam) both
+# legitimately include CA Inter Advanced Accounting in their own scope, so
+# there was nothing to filter out yet. The fix reuses the exact same
+# host._scope_allows_*() predicates exam_hub_bot.py already exposes,
+# rather than inventing a second, parallel scoping mechanism.
+def _available_courses(conn, host):
+    courses = [r[0] for r in conn.execute(
         "SELECT DISTINCT course FROM predesigned_tests WHERE active=1 ORDER BY course"
     ).fetchall()]
+    return [c for c in courses if host._scope_allows_course(c)]
 
 
-def _available_levels(conn, course):
-    return [r[0] for r in conn.execute(
+def _available_levels(conn, course, host):
+    levels = [r[0] for r in conn.execute(
         "SELECT DISTINCT level FROM predesigned_tests WHERE active=1 AND course=? ORDER BY level", (course,)
     ).fetchall()]
+    return [lv for lv in levels if host._scope_allows_level(course, lv)]
 
 
-def _available_subjects(conn, course, level):
-    return [r[0] for r in conn.execute(
+def _available_subjects(conn, course, level, host):
+    subjects = [r[0] for r in conn.execute(
         "SELECT DISTINCT subject FROM predesigned_tests WHERE active=1 AND course=? AND level=? ORDER BY subject",
         (course, level),
     ).fetchall()]
+    return [s for s in subjects if host._scope_allows_subject(course, level, s)]
 
 
 def _sittings_for(conn, course, level, subject):
@@ -219,16 +236,22 @@ def _sittings_for(conn, course, level, subject):
     ).fetchall()
 
 
-def _not_available_text_and_markup(what: str):
+def _not_available_text_and_markup(what: str, offer_advacc: bool = True):
+    """offer_advacc: only show the 'Try CA Inter Advanced Accounting' shortcut
+    when that subject is actually inside THIS tenant's own content_scope --
+    a CMA-only faculty bot must never dangle a button into CA content just
+    because that's the only real Test Mode catalog on the platform today."""
     text = (
-        f"\U0001F615 Tests aren't available for {what} yet — only CA Inter Advanced Accounting has "
-        f"ready-made tests right now. What would you like to do instead?"
+        f"\U0001F615 Tests aren't available for {what} yet"
+        + (" — only CA Inter Advanced Accounting has ready-made tests right now." if offer_advacc
+           else ".")
+        + " What would you like to do instead?"
     )
-    markup = InlineKeyboardMarkup([
-        [InlineKeyboardButton("\U0001F4DD Try CA Inter Advanced Accounting", callback_data="testflow:jump_advacc")],
-        [InlineKeyboardButton("\U0001F519 Back to practice mode", callback_data="restart")],
-    ])
-    return text, markup
+    rows = []
+    if offer_advacc:
+        rows.append([InlineKeyboardButton("\U0001F4DD Try CA Inter Advanced Accounting", callback_data="testflow:jump_advacc")])
+    rows.append([InlineKeyboardButton("\U0001F519 Back to practice mode", callback_data="restart")])
+    return text, InlineKeyboardMarkup(rows)
 
 
 async def start_test_flow(update, context, bot_id: str, host):
@@ -248,18 +271,33 @@ async def start_test_flow(update, context, bot_id: str, host):
         await _show_current_question(update.message, context, active[0], host)
         return
 
-    courses = _available_courses(conn)
+    courses = _available_courses(conn, host)
     if not courses:
-        # Should never happen in practice (the catalog generator has run),
-        # but never crash/dead-end if it somehow does.
-        await update.message.reply_text(
-            "\U0001F615 No tests are available on this platform yet — check back soon!"
-        )
+        # Distinguish a genuinely empty platform-wide catalog (should never
+        # happen -- the generator has run) from "the catalog has content,
+        # just none of it is in THIS tenant's content_scope" -- the common,
+        # real case for any faculty bot outside CA Inter Advanced
+        # Accounting. Never claim "no tests on the platform" when tests
+        # exist, just not for this student's subjects.
+        any_courses_at_all = conn.execute(
+            "SELECT 1 FROM predesigned_tests WHERE active=1 LIMIT 1"
+        ).fetchone()
+        if any_courses_at_all:
+            await update.message.reply_text(
+                "\U0001F615 Test Mode doesn't have ready-made tests for your subjects yet — "
+                "only CA Inter Advanced Accounting has tests right now, and more subjects are "
+                "being added over time. You can still practice MCQs and Descriptive questions "
+                "as usual!"
+            )
+        else:
+            await update.message.reply_text(
+                "\U0001F615 No tests are available on this platform yet — check back soon!"
+            )
         return
 
     if len(courses) == 1:
         context.user_data[UD_PICKER_COURSE] = courses[0]
-        await _show_level_picker(update.message, context, conn, courses[0])
+        await _show_level_picker(update.message, context, conn, courses[0], host)
         return
 
     # 2026-08-16: same profile-based pre-fill as exam_hub_bot.py's
@@ -277,7 +315,7 @@ async def start_test_flow(update, context, bot_id: str, host):
     if len(profile_courses) == 1:
         course = next(iter(profile_courses))
         context.user_data[UD_PICKER_COURSE] = course
-        await _show_level_picker(update.message, context, conn, course)
+        await _show_level_picker(update.message, context, conn, course, host)
         return
 
     context.user_data[UD_PICKER_COURSES] = courses
@@ -285,11 +323,11 @@ async def start_test_flow(update, context, bot_id: str, host):
     await update.message.reply_text("\U0001F4DD Which course?", reply_markup=InlineKeyboardMarkup(rows))
 
 
-async def _show_level_picker(message_or_query, context, conn, course, edit=False):
-    levels = _available_levels(conn, course)
+async def _show_level_picker(message_or_query, context, conn, course, host, edit=False):
+    levels = _available_levels(conn, course, host)
     if len(levels) == 1:
         context.user_data[UD_PICKER_LEVEL] = levels[0]
-        await _show_subject_picker(message_or_query, context, conn, course, levels[0], edit=edit)
+        await _show_subject_picker(message_or_query, context, conn, course, levels[0], host, edit=edit)
         return
 
     # 2026-08-16: same profile-based pre-fill reasoning as start_test_flow()'s
@@ -302,7 +340,7 @@ async def _show_level_picker(message_or_query, context, conn, course, edit=False
         if len(profile_levels) == 1:
             level = next(iter(profile_levels))
             context.user_data[UD_PICKER_LEVEL] = level
-            await _show_subject_picker(message_or_query, context, conn, course, level, edit=edit)
+            await _show_subject_picker(message_or_query, context, conn, course, level, host, edit=edit)
             return
 
     context.user_data[UD_PICKER_LEVELS] = levels
@@ -315,10 +353,10 @@ async def _show_level_picker(message_or_query, context, conn, course, edit=False
         await message_or_query.reply_text(text, reply_markup=markup)
 
 
-async def _show_subject_picker(message_or_query, context, conn, course, level, edit=False):
-    subjects = _available_subjects(conn, course, level)
+async def _show_subject_picker(message_or_query, context, conn, course, level, host, edit=False):
+    subjects = _available_subjects(conn, course, level, host)
     if len(subjects) == 1:
-        await _show_sitting_picker(message_or_query, context, conn, course, level, subjects[0], edit=edit)
+        await _show_sitting_picker(message_or_query, context, conn, course, level, subjects[0], host, edit=edit)
         return
     context.user_data[UD_PICKER_SUBJECTS] = subjects
     rows = [[InlineKeyboardButton(s, callback_data=f"testflow:subject:{i}")] for i, s in enumerate(subjects)]
@@ -330,10 +368,11 @@ async def _show_subject_picker(message_or_query, context, conn, course, level, e
         await message_or_query.reply_text(text, reply_markup=markup)
 
 
-async def _show_sitting_picker(message_or_query, context, conn, course, level, subject, edit=False):
+async def _show_sitting_picker(message_or_query, context, conn, course, level, subject, host, edit=False):
     sittings = _sittings_for(conn, course, level, subject)
     if not sittings:
-        text, markup = _not_available_text_and_markup(f"{course} {level} {subject}")
+        offer_advacc = host._scope_allows_subject("CA", "Inter", "Advanced Accounting")
+        text, markup = _not_available_text_and_markup(f"{course} {level} {subject}", offer_advacc=offer_advacc)
         if edit:
             await message_or_query.edit_message_text(text, reply_markup=markup)
         else:
@@ -505,6 +544,25 @@ async def _start_test(update_or_query, context, conn, telegram_user_id, bot_id, 
         else:
             await update_or_query.message.reply_text(text)
         await _show_current_question(update_or_query, context, active[0], host)
+        return
+
+    # GUARD -- 2026-08-17 (real bug, reported by Pranav: CS Arun Chouhan's
+    # bot was starting CA Inter Advanced Accounting tests, entirely outside
+    # his own content_scope). The picker chain above is now scope-filtered
+    # (_available_courses/_levels/_subjects), but this is the actual
+    # state-changing, wallet-debiting action every path funnels through --
+    # same "the real chokepoint" reasoning as the concurrent-test guard
+    # right above. A stale callback_data, a future picker bug, or a
+    # not-yet-imagined new entry point should never be able to debit a
+    # student for, or start, a test outside their own bot's tenant scope --
+    # so re-verify here too, not just trust the picker got it right upstream.
+    catrow = _catalog_row(host, catalog_key)
+    if not catrow or not host._scope_allows_subject(catrow[0], catrow[1], catrow[2]):
+        text = "\U0001F615 That test isn't available for this bot. Type <code>test</code> to see what's actually available to you."
+        if is_callback:
+            await update_or_query.edit_message_text(text, parse_mode=ParseMode.HTML)
+        else:
+            await update_or_query.message.reply_text(text, parse_mode=ParseMode.HTML)
         return
 
     user = update_or_query.from_user if is_callback else update_or_query.effective_user
@@ -851,19 +909,19 @@ async def _handle_picker_callback(query, context, conn, data, bot_id, host):
         idx = int(parts[2])
         course = context.user_data.get(UD_PICKER_COURSES, [])[idx]
         context.user_data[UD_PICKER_COURSE] = course
-        await _show_level_picker(query, context, conn, course, edit=True)
+        await _show_level_picker(query, context, conn, course, host, edit=True)
     elif action == "level":
         idx = int(parts[2])
         level = context.user_data.get(UD_PICKER_LEVELS, [])[idx]
         context.user_data[UD_PICKER_LEVEL] = level
         course = context.user_data[UD_PICKER_COURSE]
-        await _show_subject_picker(query, context, conn, course, level, edit=True)
+        await _show_subject_picker(query, context, conn, course, level, host, edit=True)
     elif action == "subject":
         idx = int(parts[2])
         subject = context.user_data.get(UD_PICKER_SUBJECTS, [])[idx]
         course = context.user_data[UD_PICKER_COURSE]
         level = context.user_data[UD_PICKER_LEVEL]
-        await _show_sitting_picker(query, context, conn, course, level, subject, edit=True)
+        await _show_sitting_picker(query, context, conn, course, level, subject, host, edit=True)
     elif action == "sitting":
         idx = int(parts[2])
         catalog_key = context.user_data.get(UD_PICKER_SITTINGS, [])[idx]
@@ -886,11 +944,18 @@ async def _handle_picker_callback(query, context, conn, data, bot_id, host):
             return
         await _start_test(query, context, conn, query.from_user.id, bot_id, catalog_key, tier_marks, host, is_callback=True)
     elif action == "jump_advacc":
-        courses = _available_courses(conn)
+        # Defense-in-depth: this button is only ever shown when
+        # _not_available_text_and_markup()'s offer_advacc computed True for
+        # this tenant, but never trust that alone -- a stale/replayed
+        # callback_data could still reach here. Re-check scope directly
+        # before jumping into CA content.
+        if not host._scope_allows_subject("CA", "Inter", "Advanced Accounting"):
+            return
+        courses = _available_courses(conn, host)
         context.user_data[UD_PICKER_COURSES] = courses
         if "CA" in courses:
             context.user_data[UD_PICKER_COURSE] = "CA"
-            await _show_level_picker(query, context, conn, "CA", edit=True)
+            await _show_level_picker(query, context, conn, "CA", host, edit=True)
 
 
 async def _handle_nav(query, context, conn, test_id, action, host):

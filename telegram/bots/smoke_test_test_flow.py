@@ -529,6 +529,66 @@ async def main():
                 final_status = conn.execute("SELECT status FROM test_questions WHERE test_id=? AND seq_no=?", (test_id3, seq3)).fetchone()[0]
                 check("a question with real uploaded pages counts as 'uploaded' at auto-submit even if 'done' was never typed", final_status == "uploaded")
 
+        # 18. TENANT SCOPING -- regression test for the real bug reported by
+        # Pranav 2026-08-17: typing "test" on CS Arun Chouhan's bot (CMA Law
+        # content_scope, NO CA content at all) was showing CA Inter Advanced
+        # Accounting's test catalog, because the picker never consulted
+        # content_scope at all. Simulate that exact tenant here by wrapping
+        # the REAL host module and overriding only the 3 scope predicates --
+        # every other function test_flow.py calls on `host` (bank, mcq_bank,
+        # rendering helpers, TENANT_ID) is still the real thing, so this
+        # exercises the real picker/guard code, not a reimplementation.
+        cma_scope = {("CMA", "Foundation", "Fundamentals of Business Laws and Business Communication"),
+                     ("CMA", "Intermediate", "Business Laws and Ethics"),
+                     ("CMA", "Final", "Corporate and Economic Laws")}
+        scoped_host = SimpleNamespace(
+            **{k: getattr(host, k) for k in dir(host) if not k.startswith("__")},
+        )
+        scoped_host._scope_allows_course = lambda c: any(c == cc for cc, _l, _s in cma_scope)
+        scoped_host._scope_allows_level = lambda c, lv: any(c == cc and lv == ll for cc, ll, _s in cma_scope)
+        scoped_host._scope_allows_subject = lambda c, lv, s: (c, lv, s) in cma_scope
+
+        check("scoped host: CA is NOT in the scoped available-courses list", "CA" not in test_flow._available_courses(conn, scoped_host))
+        # NOTE: CMA does NOT appear in _available_courses(conn, scoped_host)
+        # even though the scope allows it -- predesigned_tests has zero real
+        # CMA rows (Test Mode content is CA Inter Advanced Accounting only
+        # today), so there's nothing to filter IN. That's correct, not a
+        # bug -- verify the scope predicate itself allows CMA (the thing
+        # this fix actually controls), separately from real content existing.
+        check("scoped host's own predicate allows CMA (the gate itself is permissive for in-scope subjects)", scoped_host._scope_allows_course("CMA") is True)
+        check("scoped host's own predicate blocks CA (the actual reported bug)", scoped_host._scope_allows_course("CA") is False)
+
+        scoped_update, scoped_user, scoped_message = mock_update("test")
+        scoped_context = mock_context()
+        await test_flow.start_test_flow(scoped_update, scoped_context, "csarunchouhan", scoped_host)
+        scoped_reply_text = last_text(scoped_message.reply_text)
+        check("scoped tenant with zero real overlap gets the 'not for your subjects' message, not the generic platform-empty one", "your subjects" in scoped_reply_text)
+        # It's fine (and consistent with _not_available_text_and_markup's
+        # own established behavior elsewhere) for this message to NAME what
+        # IS on the platform for transparency -- the actual bug was ACCESS
+        # (the picker letting a CMA-scoped student actually start a CA
+        # test), not the word "CA" appearing in an explanatory sentence. So
+        # the real regression check is: no button/markup offers a path INTO
+        # that content from this screen.
+        check("scoped tenant's deny message offers no button/markup at all (informational only, no actionable path to CA)", scoped_message.reply_text.await_args.kwargs.get("reply_markup") is None)
+
+        offer_text, offer_markup = test_flow._not_available_text_and_markup("CMA Intermediate Business Laws and Ethics", offer_advacc=False)
+        check("offer_advacc=False never renders the jump-to-CA button", "jump_advacc" not in str(offer_markup.inline_keyboard))
+
+        # Defense-in-depth: even if a stale/replayed callback_data handed
+        # _start_test() a real CA catalog_key directly (bypassing the
+        # picker entirely), the scoped host must still refuse -- no wallet
+        # debit, no test_sessions row created.
+        scoped_balance_before = wallet.get_balance(conn, username)
+        q_scoped = mock_query(user)
+        q_scoped.edit_message_text = AsyncMock()
+        context_scoped = mock_context()
+        await test_flow._start_test(q_scoped, context_scoped, conn, CHAT_ID, "csarunchouhan", catalog_key, 20, scoped_host, is_callback=True)
+        check("_start_test refuses a catalog_key outside the scoped host's content_scope", wallet.get_balance(conn, username) == scoped_balance_before)
+        check("_start_test's refusal message doesn't crash and says the test isn't available", "isn't available" in last_text(q_scoped.edit_message_text).lower())
+        no_new_session = test_flow._get_active_test(conn, CHAT_ID)
+        check("no new test_session was created by the refused scoped start", no_new_session is None)
+
     finally:
         cleanup()
 
