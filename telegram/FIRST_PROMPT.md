@@ -44,6 +44,7 @@ than feature count until that list is worked through.
 | 20-question report pipeline (email/PDF) | `REPORT-PIPELINE.md` | `bots/report_flow.py`, `database/report_delivery.py`, `database/cf_email.py` |
 | Leaderboard system (join, nightly broadcast) | `LEADERBOARD-SYSTEM.md` | `bots/leaderboard_broadcaster.py`, `database/leaderboard_metrics.py`, `config/leaderboards.json` |
 | Course/chapter/unit taxonomy + human-readable question IDs + Study/Exam/Revision/Question-Bank catalogues | `COURSE-CATALOG.md` | `tools/populate_course_catalog.py`, `tools/generate_mcq_human_ids.py`, `admin_portal/document_catalog.py` |
+| Logging/observability architecture (fine-grained activity log + correlation IDs) | `LOGGING-ARCHITECTURE.md` | **Design doc only, 2026-08-17 — not yet implemented.** Read before building any of it; has the evaluation, the decorator design, and the phased roadmap |
 | Admin Portal (Flask, :8788) | `admin_portal/README.md` | `admin_portal/app.py` (Analytics > "MCQ Issue Reports" is the newest tab, 2026-08-13) |
 | Down/up alerting | `/CLAUDE.md` §11 (2026-08-10 entry) | `bots/watcher_bot.py`, `config/alerts.json` |
 | Live dashboard (:8787, pre-Admin-Portal) | `/CLAUDE.md` §11 | `tools/dashboard_server.py`, `database/analytics.py`, `database/dashboard_html.py` |
