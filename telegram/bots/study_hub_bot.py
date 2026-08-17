@@ -87,6 +87,7 @@ import profile_flow  # noqa: E402 -- telegram/bots/profile_flow.py, the "profile
 import report_flow  # noqa: E402 -- telegram/bots/report_flow.py, now also reachable from Study Hub via its on-demand "report"/"analysis"/"email"/"mail" trigger (2026-08-11)
 import cancel_utils  # noqa: E402 -- telegram/bots/cancel_utils.py, universal "get me out of this" escape hatch (2026-08-16)
 import fuzzy_trigger  # noqa: E402 -- telegram/bots/fuzzy_trigger.py, "did you mean X?" typo confirmation (2026-08-16)
+import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17)
 
 # ---------------------------------------------------------------------------
 # CONFIG
@@ -215,9 +216,9 @@ RESET_TRIGGER_RE = re.compile(
     r"^\s*(hi+|hey+|hello+|hiya|yo|namaste|reset)\s*[!.]*\s*$", re.IGNORECASE
 )
 
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
-)
+logging.basicConfig(format=activity_logger.LOG_FORMAT_WITH_CORRELATION, level=logging.INFO)
+logging.getLogger("httpx").setLevel(logging.WARNING)  # 2026-08-17: see LOGGING-ARCHITECTURE.md §6
+activity_logger.install_correlation_filter()
 logger = logging.getLogger(__name__)
 
 # Shared platform DB (telegram/database/platform.db) -- every bot writes
@@ -806,13 +807,15 @@ def main():
     app = Application.builder().token(BOT_TOKEN).build()
     platform_db.schedule_heartbeat(app, BOT_ID)
 
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("reset", start))
-    app.add_handler(CallbackQueryHandler(browse_callback, pattern=r"^(browse|cat|crs|lvl|subj|pt|file|mainmenu):"))
-    app.add_handler(CallbackQueryHandler(profile_flow.profile_flow_callback, pattern=r"^(profile|profileconfirm):"))
-    app.add_handler(CallbackQueryHandler(report_flow.report_flow_callback, pattern=r"^(report|reportconfirm):"))
-    app.add_handler(CallbackQueryHandler(_fuzzy_trigger_callback, pattern=r"^fuzzytrigger:"))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, free_text_search))
+    # 2026-08-17: every handler below wrapped with activity_logger.log_activity()
+    # at registration time only -- see telegram/LOGGING-ARCHITECTURE.md §3.
+    app.add_handler(CommandHandler("start", activity_logger.log_activity("command", BOT_ID)(start)))
+    app.add_handler(CommandHandler("reset", activity_logger.log_activity("command", BOT_ID)(start)))
+    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(browse_callback), pattern=r"^(browse|cat|crs|lvl|subj|pt|file|mainmenu):"))
+    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
+    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
+    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, activity_logger.log_activity("text", BOT_ID)(free_text_search)))
 
     # Re-arm any access_requests still pending from before this restart
     # (job_queue jobs do not survive a restart) -- see profile_flow.py's

@@ -106,6 +106,7 @@ import cancel_utils  # noqa: E402 -- telegram/bots/cancel_utils.py, universal "g
 import fuzzy_trigger  # noqa: E402 -- telegram/bots/fuzzy_trigger.py, "did you mean X?" typo confirmation (2026-08-16)
 import test_flow  # noqa: E402 -- telegram/bots/test_flow.py, Test Mode / Pre-Designed Tests (2026-08-16)
 import wallet_flow  # noqa: E402 -- telegram/bots/wallet_flow.py, wallet status + recharge (2026-08-16)
+import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17)
 
 # ---------------------------------------------------------------------------
 # CONFIG
@@ -204,9 +205,9 @@ ALL_CHAPTERS_LABEL = "\U0001F4DA All Chapters"
 # content + this allow-list, never a hand-maintained "show every course
 # even empty ones" list -- Pranav's explicit choice).
 
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
-)
+logging.basicConfig(format=activity_logger.LOG_FORMAT_WITH_CORRELATION, level=logging.INFO)
+logging.getLogger("httpx").setLevel(logging.WARNING)  # 2026-08-17: httpx's own per-poll INFO lines were most of every log file's bulk, drowning out real content -- see LOGGING-ARCHITECTURE.md §6
+activity_logger.install_correlation_filter()
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
@@ -1916,7 +1917,15 @@ def main():
     app = Application.builder().token(BOT_TOKEN).build()
     platform_db.schedule_heartbeat(app, BOT_ID)
 
-    app.add_handler(CommandHandler("start", start))
+    # 2026-08-17: every handler below is wrapped with activity_logger.
+    # log_activity() AT REGISTRATION TIME ONLY -- see
+    # telegram/LOGGING-ARCHITECTURE.md §3 for why this is the right place
+    # (captures who/what/when/how-long for every handler on the platform
+    # with ZERO changes inside any handler's own body) and
+    # telegram/bots/activity_logger.py's own module docstring for the
+    # safety guarantees (logging is always best-effort; a real handler
+    # exception is still raised exactly as before, never swallowed).
+    app.add_handler(CommandHandler("start", activity_logger.log_activity("command", BOT_ID)(start)))
     # 2026-08-11: button_router now needs an explicit pattern -- it used to
     # have none (matched every callback), which was harmless only because
     # nothing else claimed any callback_data. The moment a second handler
@@ -1930,27 +1939,27 @@ def main():
     # scoping this explicitly now instead of relying on "nothing else
     # collides yet."
     app.add_handler(CallbackQueryHandler(
-        button_router,
+        activity_logger.log_activity("callback", BOT_ID)(button_router),
         pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone|sessprofile)(:|$)",
     ))
-    app.add_handler(CallbackQueryHandler(report_flow.report_flow_callback, pattern=r"^(report|reportconfirm):"))
-    app.add_handler(CallbackQueryHandler(profile_flow.profile_flow_callback, pattern=r"^(profile|profileconfirm):"))
+    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
+    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
     # 2026-08-13: mcq_issue_flow's own callbacks ("issuecat:<i>", bare
     # "issuecancel") -- registered separately, same "explicit pattern per
     # module" discipline as report_flow/profile_flow above.
-    app.add_handler(CallbackQueryHandler(mcq_issue_flow.mcq_issue_flow_callback, pattern=r"^(issuecat|issuecancel)(:|$)"))
+    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(mcq_issue_flow.mcq_issue_flow_callback), pattern=r"^(issuecat|issuecancel)(:|$)"))
     # 2026-08-16: Test Mode's own callback prefixes -- same "explicit
     # pattern per module" discipline as every flow above (the callback-
     # pattern-collision bug class this platform has hit 3+ times already).
-    app.add_handler(CallbackQueryHandler(_test_flow_callback_wrapper, pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)"))
-    app.add_handler(CallbackQueryHandler(_wallet_flow_callback_wrapper, pattern=r"^walletrc(:|$)"))
-    app.add_handler(CallbackQueryHandler(_fuzzy_trigger_callback, pattern=r"^fuzzytrigger:"))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_router))
+    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_test_flow_callback_wrapper), pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)"))
+    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_wallet_flow_callback_wrapper), pattern=r"^walletrc(:|$)"))
+    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, activity_logger.log_activity("text", BOT_ID)(text_router)))
     # Photo/document uploads -- only meaningful during Test Mode's upload
     # collection; test_flow.handle_upload_photo_or_document() is a no-op
     # (returns False) when no upload is actively being collected, so this
     # handler is safe to register unconditionally.
-    app.add_handler(MessageHandler((filters.PHOTO | filters.Document.ALL) & ~filters.COMMAND, _upload_router))
+    app.add_handler(MessageHandler((filters.PHOTO | filters.Document.ALL) & ~filters.COMMAND, activity_logger.log_activity("photo", BOT_ID)(_upload_router)))
 
     # Sweep any in-progress tests from before this restart and re-arm their
     # expiry jobs -- job_queue jobs do NOT survive a process restart (same

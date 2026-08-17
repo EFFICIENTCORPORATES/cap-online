@@ -1,11 +1,16 @@
 # LOGGING-ARCHITECTURE.md — how this platform should observe itself
 
-**Status: design doc, not yet implemented.** Written 2026-08-17, prompted directly by
-a real debugging session that day (see `/CLAUDE.md` §11's most recent entries) where
-diagnosing two live bugs meant manually grepping multi-megabyte plain-text log files
-and, for one of the two, reproducing the bug by hand against the live database because
-the failure left no error trace at all. This doc exists so the next incident is a
-query, not an archaeology dig.
+**Status: Phase 0 + Phase 1 + Phase 2 BUILT and deployed, 2026-08-17** (the design
+below was written the same day; §9 records exactly what shipped and how it was
+verified before touching any live, student-facing bot). §7's roadmap originally
+phased this as 0→1→2→3; in practice Pranav asked for 0–2 plus a working, RBAC'd
+viewer (originally §7's Phase 3) all in one pass — §9 is the accurate record of what
+that actually became. Written 2026-08-17, prompted directly by a real debugging
+session that day (see `/CLAUDE.md` §11's most recent entries) where diagnosing two
+live bugs meant manually grepping multi-megabyte plain-text log files and, for one
+of the two, reproducing the bug by hand against the live database because the
+failure left no error trace at all. This doc exists so the next incident is a query,
+not an archaeology dig.
 
 **Read order**: §1 (the reference taxonomy) if you want the industry background this
 is built on; skip straight to §2 (evaluation) and §3 (the architecture decision) if you
@@ -373,3 +378,97 @@ Per this repo's own "ask before assuming on foundational changes" discipline:
    what exists today; any future flow that collects sensitive free text needs to
    remember to add itself to that list. Worth a lint/checklist item, not just
    documentation, before Phase 1 ships.
+
+---
+
+## 9. What actually got built (2026-08-17, implementation record)
+
+Pranav's real ask went beyond §7's original Phase 0-only framing: log hygiene AND
+the activity log AND correlation IDs AND a working, RBAC-gated viewer, "in one
+initial phase," with an explicit, repeated instruction to be careful since real
+students were practicing on these bots at the time. Built and verified in that
+order, never skipping the verification step before moving to the next piece.
+
+**Delivered:**
+- **§6 hygiene**: httpx's own INFO noise silenced (`logging.getLogger("httpx").
+  setLevel(logging.WARNING)`) in all 4 bots. Log ROTATION was deliberately NOT done
+  via restructuring each bot's file handler (§6 originally proposed this) --
+  `manage_bots.py`'s existing `subprocess.Popen(stdout=log_file)` redirection is a
+  working, unmodified mechanism; touching it carried more risk than benefit for
+  this pass. Rotation stays open, not shipped.
+- **§3-4 activity log**: `user_activity_log` table, `telegram/bots/activity_logger.py`
+  (`@log_activity` decorator), wired into the actual handler REGISTRATIONS (never
+  inside any flow module) of all 4 bots -- including `myfiles_hub_bot.py`'s
+  `ConversationHandler`, deliberately scoped out of the original plan but included
+  once the same wrapping pattern proved safe on the other 3 bots first.
+- **§5 correlation IDs**: `contextvars` + a `logging.Filter`, `LOG_FORMAT_WITH_
+  CORRELATION` in every bot's `logging.basicConfig()`.
+- **RBAC + viewer** (collapsed forward from §7's Phase 3, plus a genuinely new
+  ask not in the original plan): a second login role, `bot_admin` --
+  `admin_accounts` DB table (credentials) + `telegram/config/admin_access.json`
+  (scope policy, git-tracked, same pattern as `bots.json`/`tenants.json`) +
+  `telegram/admin_portal/manage_bot_admin.py` (account management, mirrors
+  `set_password.py`). A `bot_admin` can reach exactly one page,
+  `/logs/activity`, scoped to their own `bot_id`(s) -- every other existing route
+  stays `role_required("admin")` completely untouched, so the new role is
+  structurally incapable of reaching anything else, with zero changes to those
+  routes. The existing super-admin login (`telegram/.env`) is untouched.
+
+**Four real bugs found by this work's own tests, before any live bot was
+touched with the change that would have shipped them:**
+1. `CorrelationIdFilter` attached to the root **logger** via `addFilter()` silently
+   never ran for records from any NAMED child logger (httpx, apscheduler, a bot's
+   own `logging.getLogger(__name__)`) -- Python only re-applies a logger's own
+   filters at the record's originating logger, not at each ancestor during
+   propagation. Caught by this session's own "import every bot with a real BOT_ID,
+   check for tracebacks" discipline -- every bot crashed on its first log line
+   before any handler even ran. Fixed by attaching the filter to the root logger's
+   **handlers** instead (`Handler.handle()` does re-check its own filters for
+   every record that reaches it, regardless of origin).
+2. The decorator's own exception-handling had only one layer of defense: if
+   `_write_activity_row()` itself raised for a reason its internal `try/except`
+   didn't anticipate, the wrapped handler's real return value could be clobbered.
+   Found by this module's own smoke test deliberately monkeypatching that function
+   to simulate a total DB outage. Fixed with a second, redundant `try/except`
+   directly in `wrapper()`'s own `finally` block.
+3. A single shared `try/except` around both `telegram_user_id` and `action`
+   extraction meant a failure in ONE discarded an already-successfully-computed
+   value from the OTHER -- specifically, a real `telegram_user_id` could get reset
+   to `None`, which then failed `user_activity_log`'s own `NOT NULL` constraint and
+   silently dropped the row. Found via an end-to-end check against real
+   `exam_hub_bot.py` handlers wrapped exactly as `main()` registers them (the
+   existing smoke tests call handlers directly, unwrapped, so this specific path
+   was never exercised until this check was written on purpose). Fixed by giving
+   each extraction its own independent `try/except`.
+4. Redaction only had ONE mechanism (`context.user_data` flags), which
+   `myfiles_hub_bot.py`'s `ConversationHandler`-based state (a completely different
+   architecture from every other flow module) cannot be detected by at all --
+   would have logged real emails and OTP codes verbatim the moment that bot's
+   `AUTH_EMAIL`/`AUTH_OTP`/`DELETE_OTP` handlers were wrapped. Found by reasoning
+   through myfiles_hub_bot.py's actual state machine before wiring it in, not by a
+   test failure. Fixed with an explicit `always_redact=True` parameter on
+   `log_activity()`, used only for those three handlers.
+
+**Verification, before any bot restart**: `smoke_test_activity_logger.py` (36
+checks, entirely synthetic, zero live-bot dependency) proves the decorator/
+redaction/correlation mechanism correct in isolation. Every real bot module
+(`exam_hub_bot`, `study_hub_bot`, `faculty_bot`, `myfiles_hub_bot`) re-imported
+with its real `BOT_ID` (including both `capranav-*` and the flagship `1lavya-*`
+variants) and checked for tracebacks -- this is what caught bug #1. A further
+end-to-end check drove real `exam_hub_bot.py` handlers through the EXACT wrapped
+callable `main()` constructs (not the raw functions the existing smoke tests
+already called) -- this is what caught bug #3. `smoke_test_admin_portal.py` grew
+by 18 checks covering the full RBAC surface: a real `bot_admin` login seeing only
+their own bot's rows, provably blocked from every other existing route (403, not
+a redirect), unable to widen scope via a raw query argument, and one check against
+the REAL (unmocked) `verify_bot_admin_credentials()` confirming a username with no
+active `admin_access.json` entry can never log in regardless of password. Full
+existing regression suite (9 smoke test files, 400+ checks total) re-run clean
+after every stage. Bots restarted ONE AT A TIME, each verified (fresh PID, fresh
+heartbeat, zero tracebacks since restart) before moving to the next.
+
+**Still open, named honestly**: log rotation (§6, deliberately deferred, see
+above); §8's three questions (retention period, full audit of who should see
+`/logs/activity`, keeping the redaction denylist complete as new flows get added)
+remain genuinely unanswered -- nothing in this pass required an answer to ship,
+but they don't go away either.

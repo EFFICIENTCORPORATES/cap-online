@@ -28,6 +28,7 @@ import db as platform_db  # noqa: E402
 import app as portal_app  # noqa: E402
 import manage_bots  # noqa: E402
 import analytics  # noqa: E402
+import auth as auth_module  # noqa: E402 -- imported directly (not just via portal_app.auth) for the one REAL, unmocked bot_admin-credential check in Step 16
 
 REAL_USERNAME = "pranav"   # must match telegram/.env's ADMIN_PORTAL_USERNAME for the positive-login test to pass
 FAKE_BOT_ID = "smoketest-nonexistent-bot"
@@ -507,6 +508,93 @@ def main():
     check("POST .../faculty/<tenant_id>/email unauthenticated redirects, does not execute", resp.status_code == 302)
     resp = client.post(f"/masters/faculty/{FAKE_BOT_ID}", data={"contact_email": "x@example.com"}, follow_redirects=False)
     check("POST /masters/faculty/<tenant_id> unauthenticated redirects, does not execute", resp.status_code == 302)
+
+    print("\n--- Step 16: Activity Log + the new bot_admin role (2026-08-17) ---")
+    resp = client.get("/logs/activity", follow_redirects=False)
+    check("GET /logs/activity unauthenticated redirects", resp.status_code == 302)
+
+    # Seed two rows for two DIFFERENT bot_ids -- real data, real assertions
+    # about WHICH rows each role can actually see, not just a 200 status.
+    conn.execute(
+        "INSERT INTO user_activity_log (correlation_id, bot_id, telegram_user_id, handler_kind, action, "
+        "action_detail, handler_name, duration_ms, status, created_at) VALUES "
+        "(?,?,?,?,?,?,?,?,?,?)",
+        ("smoketest-corr-a", "smoketest-bot-a", 900700001, "callback", "smoketestaction", "x",
+         "fake_handler", 12, "ok", platform_db.now()),
+    )
+    conn.execute(
+        "INSERT INTO user_activity_log (correlation_id, bot_id, telegram_user_id, handler_kind, action, "
+        "action_detail, handler_name, duration_ms, status, created_at) VALUES "
+        "(?,?,?,?,?,?,?,?,?,?)",
+        ("smoketest-corr-b", "smoketest-bot-b", 900700002, "callback", "smoketestaction", "y",
+         "fake_handler", 8, "ok", platform_db.now()),
+    )
+    conn.commit()
+
+    with patch("app.auth.verify_credentials", return_value=True):
+        client.post("/login", data={"username": REAL_USERNAME, "password": "whatever"})
+    resp = client.get("/logs/activity?preset=all", follow_redirects=False)
+    check("super-admin CAN reach /logs/activity", resp.status_code == 200)
+    check("super-admin sees bot-a's row", b"smoketest-bot-a" in resp.data)
+    check("super-admin sees bot-b's row too (no scope restriction)", b"smoketest-bot-b" in resp.data)
+    client.get("/logout")
+
+    # A bot_admin scoped to ONLY smoketest-bot-a -- mocked the same way the
+    # existing super-admin test above mocks verify_credentials (no real
+    # admin_accounts row/password needed to test the ROUTE/SCOPE logic).
+    with patch("app.auth.verify_credentials", return_value=False), \
+         patch("app.auth.verify_bot_admin_credentials", return_value=True), \
+         patch("app.auth.bot_admin_allowed_bot_ids", return_value=["smoketest-bot-a"]):
+        resp = client.post("/login", data={"username": "smoketest_bot_admin", "password": "whatever"}, follow_redirects=False)
+        check("bot_admin login redirects away from /login", resp.status_code == 302 and "/login" not in resp.headers.get("Location", ""))
+        with client.session_transaction() as sess:
+            check("session role is 'bot_admin'", sess.get("role") == "bot_admin")
+            check("session allowed_bot_ids matches the mocked scope", sess.get("allowed_bot_ids") == ["smoketest-bot-a"])
+
+    resp = client.get("/logs/activity?preset=all", follow_redirects=False)
+    check("bot_admin CAN reach /logs/activity", resp.status_code == 200)
+    check("bot_admin sees bot-a's row (their own scope)", b"smoketest-bot-a" in resp.data)
+    check("bot_admin does NOT see bot-b's row (out of scope)", b"smoketest-bot-b" not in resp.data)
+
+    # A bot_admin trying to widen their own scope via a raw query arg --
+    # _scoped_bot_ids() must ignore ?bot_id= entirely for this role, never
+    # let a request argument override the session's own real scope.
+    resp = client.get("/logs/activity?preset=all&bot_id=smoketest-bot-b", follow_redirects=False)
+    # Checks the actual DATA (bot-b's distinctive telegram_user_id), not a
+    # bare "smoketest-bot-b" substring -- that string can also appear
+    # harmlessly inside an export-link URL even when correctly scoped
+    # (an ineffective ?bot_id= gets stripped from those links separately,
+    # see app.py's own comment on why -- this check is about the actual
+    # ROWS shown, which is the real security property that matters here).
+    check("bot_admin's actual DATA ROWS never include bot-b's, even with ?bot_id=smoketest-bot-b in the URL", b"900700002" not in resp.data)
+
+    # The real structural guarantee: bot_admin is STRUCTURALLY blocked from
+    # every other existing admin-only route, with zero changes to those
+    # routes themselves -- role_required("admin") still means "admin" only.
+    for path in ("/bots", "/analytics/students", "/export", "/masters/faculty"):
+        resp = client.get(path, follow_redirects=False)
+        check(f"bot_admin is FORBIDDEN from {path} (403, not just a redirect)", resp.status_code == 403)
+
+    # Sidebar is the smaller BOT_ADMIN_NAV_SECTIONS, not the full admin one.
+    resp = client.get("/logs/activity?preset=all")
+    check("bot_admin's sidebar does NOT show admin-only links (e.g. Bot Status)", b"Bot Status" not in resp.data)
+    client.get("/logout")
+
+    # An INACTIVE/nonexistent admin_access.json entry must never grant
+    # real login, even with a technically-correct password -- verified
+    # against the REAL (unmocked) auth.verify_bot_admin_credentials() this
+    # time, proving the DB-account-plus-active-JSON-entry requirement is
+    # enforced for real, not just in the mocked route test above.
+    check(
+        "a bot_admin username with no admin_access.json entry at all is correctly refused (real function, not mocked)",
+        auth_module.verify_bot_admin_credentials("no_such_bot_admin_username", "whatever-password") is False,
+    )
+
+    conn.execute("DELETE FROM user_activity_log WHERE correlation_id IN ('smoketest-corr-a', 'smoketest-corr-b')")
+    conn.commit()
+    check("synthetic activity_log rows cleaned up", conn.execute(
+        "SELECT COUNT(*) FROM user_activity_log WHERE correlation_id IN ('smoketest-corr-a', 'smoketest-corr-b')"
+    ).fetchone()[0] == 0)
 
     print(f"\n{'='*70}")
     if failures:

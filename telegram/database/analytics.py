@@ -742,3 +742,70 @@ def fetch_all(conn, bots: list) -> dict:
         "student_master": fetch_student_master(conn, bots),
         "unique_mcq_attempters": fetch_unique_mcq_attempters(conn),
     }
+
+
+# ---------------------------------------------------------------------------
+# ACTIVITY LOG -- added 2026-08-17, Phase 1 of the logging build (see
+# telegram/LOGGING-ARCHITECTURE.md). Backs the Admin Portal's /logs/activity
+# page -- the one page a bot_admin account can reach at all (see
+# telegram/admin_portal/auth.py's own docstring on that role).
+#
+# Deliberately NOT "fetch the whole table into memory, filter in Python"
+# like every other analytics.py function above -- exporters.py's own
+# module docstring notes that pattern is safe only because every OTHER
+# table on this platform holds dozens to low hundreds of rows. A
+# tap-by-tap activity log grows far faster than that (every button press,
+# every message), so this queries with a real SQL WHERE clause bounded by
+# date range FIRST, and only free-text-filters/paginates the (much
+# smaller) already-bounded result in Python via exporters.py, same
+# discipline LOGGING-ARCHITECTURE.md §4 called for.
+# ---------------------------------------------------------------------------
+def fetch_activity_log(conn, bot_ids: list = None, start_date: str = None, end_date: str = None,
+                        telegram_user_id: int = None, action: str = None, status: str = None) -> list:
+    """bot_ids: None means "every bot" (super-admin only -- callers MUST
+    pass a real, non-None list for a bot_admin session, never None, or
+    scope enforcement silently disappears). start_date/end_date: 'YYYY-MM-DD'
+    strings, both inclusive; defaults applied by the CALLER (the route),
+    not here, so this function stays a pure "given these bounds, fetch
+    these rows" query with no opinion about what a sensible default
+    window is."""
+    where = []
+    params = []
+    if bot_ids is not None:
+        if not bot_ids:
+            return []  # a bot_admin scoped to zero bots sees zero rows -- never falls through to "no bot_id filter = everything"
+        where.append(f"bot_id IN ({','.join('?' * len(bot_ids))})")
+        params.extend(bot_ids)
+    if start_date:
+        where.append("created_at >= ?")
+        params.append(f"{start_date}T00:00:00")
+    if end_date:
+        where.append("created_at <= ?")
+        params.append(f"{end_date}T23:59:59")
+    if telegram_user_id:
+        where.append("telegram_user_id = ?")
+        params.append(telegram_user_id)
+    if action:
+        where.append("action = ?")
+        params.append(action)
+    if status:
+        where.append("status = ?")
+        params.append(status)
+
+    sql = "SELECT * FROM user_activity_log"
+    if where:
+        sql += " WHERE " + " AND ".join(where)
+    sql += " ORDER BY activity_id DESC LIMIT 5000"  # a hard ceiling regardless of range chosen -- see module note above on why this table can't use the "fetch everything" pattern; 5000 is generous for any one query while still bounding worst-case memory/render cost
+
+    cols = [d[0] for d in conn.execute("SELECT * FROM user_activity_log LIMIT 0").description]
+    return [dict(zip(cols, row)) for row in conn.execute(sql, params).fetchall()]
+
+
+def fetch_activity_log_bot_ids(conn) -> list:
+    """Every distinct bot_id that has ever written an activity row --
+    powers the bot-filter dropdown for a super-admin (a bot_admin's own
+    dropdown is pre-scoped to their own allowed_bot_ids instead, never
+    this)."""
+    return [r[0] for r in conn.execute(
+        "SELECT DISTINCT bot_id FROM user_activity_log ORDER BY bot_id"
+    ).fetchall()]

@@ -112,6 +112,9 @@ NAV_SECTIONS = [
     {"label": "Data Export", "links": [
         {"label": "Export Any Table", "endpoint": "data_export_index", "icon": "\U00002B07\U0000FE0F", "enabled": True},
     ]},
+    {"label": "Logs", "links": [
+        {"label": "Activity Log", "endpoint": "activity_log", "icon": "\U0001F4CB", "enabled": True},
+    ]},
     {"label": "Masters", "links": [
         {"label": "Faculty Details", "endpoint": "masters_faculty_list", "icon": "\U0001F9D1\U0000200D\U0001F3EB", "enabled": True},
         {"label": "Tenants & Bots", "endpoint": None, "icon": "\U0001F5C2️", "enabled": False},
@@ -149,6 +152,21 @@ def page_url(page: int) -> str:
 
 
 @app.template_global()
+def range_url(preset: str) -> str:
+    """Used by activity_log.html's own simple range-preset picker --
+    preserves every other current query arg (bot_id, action, status, q),
+    sets `preset`, and drops any explicit from/to (a preset and an
+    explicit range are mutually exclusive -- picking a preset should
+    always win over a stale explicit range still sitting in the URL)."""
+    args = request.args.to_dict(flat=True)
+    args["preset"] = preset
+    args.pop("from", None)
+    args.pop("to", None)
+    args.pop("page", None)
+    return f"{request.path}?{urlencode(args)}"
+
+
+@app.template_global()
 def clear_filter_url() -> str:
     """Used by templates/_export_toolbar.html's "Clear" link -- drops `q`
     and `page` but preserves everything else (e.g. Faculty Report's
@@ -160,11 +178,29 @@ def clear_filter_url() -> str:
     return f"{request.path}?{urlencode(args)}" if args else request.path
 
 
+# 2026-08-17: a bot_admin's sidebar is NOT the full NAV_SECTIONS -- every
+# other route still requires role_required("admin") so a bot_admin
+# couldn't actually open any of them anyway, but showing the full ops/
+# analytics/masters sidebar to an account that can reach exactly one page
+# is confusing, not just harmless. Deliberately a SEPARATE small constant,
+# not a filtered copy of NAV_SECTIONS -- keeps the two roles' navigation
+# structurally independent so a future NAV_SECTIONS edit can never
+# accidentally leak a new admin-only link into the bot_admin sidebar by
+# omission.
+BOT_ADMIN_NAV_SECTIONS = [
+    {"label": "Logs", "links": [
+        {"label": "Activity Log", "endpoint": "activity_log", "icon": "\U0001F4CB", "enabled": True},
+    ]},
+]
+
+
 @app.context_processor
 def inject_globals():
+    nav = BOT_ADMIN_NAV_SECTIONS if auth.current_role() == "bot_admin" else NAV_SECTIONS
     return {
-        "nav_sections": NAV_SECTIONS,
+        "nav_sections": nav,
         "current_user": auth.current_user(),
+        "current_role": auth.current_role(),
         "brand_colors": brand_kit.colors(),
         "current_endpoint": request.endpoint,
     }
@@ -178,11 +214,24 @@ def login():
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
+        # Super-admin checked FIRST, exactly the original single-account
+        # path, completely unchanged -- Pranav's own login can never be
+        # affected by anything below this line.
         if auth.verify_credentials(username, password):
             session.clear()
             session["username"] = username
             session["role"] = "admin"
             next_url = request.args.get("next") or url_for("overview")
+            return redirect(next_url)
+        # 2026-08-17: a bot_admin account (see auth.py's own docstring) --
+        # only reachable if BOTH a real admin_accounts row AND a real
+        # active admin_access.json entry exist for this username.
+        if auth.verify_bot_admin_credentials(username, password):
+            session.clear()
+            session["username"] = username
+            session["role"] = "bot_admin"
+            session["allowed_bot_ids"] = auth.bot_admin_allowed_bot_ids(username)
+            next_url = request.args.get("next") or url_for("activity_log")
             return redirect(next_url)
         flash("Invalid username or password.", "error")
     return render_template("login.html")
@@ -1235,6 +1284,103 @@ def analytics_issue_reports_export(fmt):
     if fmt == "html":
         return exporters.html_export_response("MCQ Issue Reports", cols, out_rows, brand_kit.colors(), "mcq_issue_reports")
     return exporters.pdf_export_response("MCQ Issue Reports", cols, out_rows, brand_kit.colors(), "mcq_issue_reports")
+
+
+# ---------------------------------------------------------------------------
+# ACTIVITY LOG -- added 2026-08-17, Phase 1 of the logging build (see
+# telegram/LOGGING-ARCHITECTURE.md). The ONE page a bot_admin role can
+# reach at all -- role_required() below deliberately allows BOTH "admin"
+# (sees every bot) and "bot_admin" (sees only their own, enforced by
+# _scoped_bot_ids() below, never by role_required() itself, which only
+# checks role membership, not per-resource scope).
+# ---------------------------------------------------------------------------
+ACTIVITY_LOG_FILTER_FIELDS = ["action", "action_detail", "handler_name", "error_summary", "bot_id"]
+
+
+def _scoped_bot_ids():
+    """None for a super-admin (fetch_activity_log() then applies NO bot_id
+    filter at all); a real list (possibly empty) for a bot_admin --
+    ALWAYS re-derived from the session's own allowed_bot_ids, never
+    trusted from a request argument, so a bot_admin can never widen their
+    own scope by editing a query string."""
+    if auth.current_role() == "bot_admin":
+        return auth.current_allowed_bot_ids() or []
+    return None
+
+
+def _get_activity_log_rows(conn):
+    start_date, end_date, range_label = _date_range_from_args()
+    requested_bot_id = request.args.get("bot_id", "").strip()
+    scoped = _scoped_bot_ids()
+    if scoped is not None:
+        bot_ids = scoped  # bot_admin -- ignore any ?bot_id= request arg entirely, never let it widen scope
+    elif requested_bot_id:
+        bot_ids = [requested_bot_id]
+    else:
+        bot_ids = None
+    telegram_user_id = request.args.get("telegram_user_id", type=int)
+    action = request.args.get("action", "").strip() or None
+    status = request.args.get("status", "").strip() or None
+    rows = analytics.fetch_activity_log(
+        conn, bot_ids=bot_ids, start_date=start_date, end_date=end_date,
+        telegram_user_id=telegram_user_id, action=action, status=status,
+    )
+    return rows, start_date, end_date, range_label
+
+
+@app.route("/logs/activity")
+@auth.role_required("admin", "bot_admin")
+def activity_log():
+    conn = get_conn()
+    rows, start_date, end_date, range_label = _get_activity_log_rows(conn)
+    q = request.args.get("q", "").strip()
+    filtered = exporters.filter_rows(rows, q, ACTIVITY_LOG_FILTER_FIELDS)
+    page = request.args.get("page", 1, type=int)
+    pg = exporters.paginate(filtered, page, per_page=50)
+    error_count = sum(1 for r in rows if r["status"] == "error")
+    scoped = _scoped_bot_ids()
+    available_bot_ids = scoped if scoped is not None else analytics.fetch_activity_log_bot_ids(conn)
+    # A bot_admin's own ?bot_id= is never actually consulted (see
+    # _scoped_bot_ids() above -- their real scope always wins), but
+    # echoing it back into the export link's URL is still confusing/
+    # misleading UI even though it changes nothing functionally -- strip
+    # it from what gets reflected into links for that role specifically.
+    link_args = request.args.to_dict()
+    if scoped is not None:
+        link_args.pop("bot_id", None)
+    export_urls = {fmt: url_for("activity_log_export", fmt=fmt, q=q, **link_args) for fmt in ("csv", "xlsx", "html", "pdf")}
+    extra_fields = [(k, v) for k, v in link_args.items() if k not in ("q", "page")]
+    return render_template(
+        "activity_log.html", rows=pg["items"], pagination=pg, filter_query=q,
+        total_filtered=len(filtered), error_count=error_count, total_all=len(rows),
+        range_label=range_label, current_preset=_current_preset(),
+        available_bot_ids=available_bot_ids, is_bot_admin=(scoped is not None),
+        selected_bot_id=request.args.get("bot_id", ""),
+        selected_action=request.args.get("action", ""), selected_status=request.args.get("status", ""),
+        export_urls=export_urls, filter_extra_fields=extra_fields,
+    )
+
+
+@app.route("/logs/activity.<fmt>")
+@auth.role_required("admin", "bot_admin")
+def activity_log_export(fmt):
+    if fmt not in ("csv", "xlsx", "html", "pdf"):
+        return "Unsupported format.", 400
+    conn = get_conn()
+    rows, _start, _end, _label = _get_activity_log_rows(conn)
+    q = request.args.get("q", "").strip()
+    filtered = exporters.filter_rows(rows, q, ACTIVITY_LOG_FILTER_FIELDS)
+    cols = ["activity_id", "correlation_id", "bot_id", "telegram_user_id", "conversation_id", "handler_kind",
+            "action", "action_detail", "handler_name", "duration_ms", "status", "error_summary", "created_at"]
+    out_rows = [[r.get(c) for c in cols] for r in filtered]
+    audit.log_action(conn, auth.current_user(), "analytics_export", "activity_log", fmt)
+    if fmt == "csv":
+        return exporters.csv_response(cols, out_rows, "activity_log")
+    if fmt == "xlsx":
+        return exporters.xlsx_response(cols, out_rows, "activity_log")
+    if fmt == "html":
+        return exporters.html_export_response("Activity Log", cols, out_rows, brand_kit.colors(), "activity_log")
+    return exporters.pdf_export_response("Activity Log", cols, out_rows, brand_kit.colors(), "activity_log")
 
 
 # ---------------------------------------------------------------------------

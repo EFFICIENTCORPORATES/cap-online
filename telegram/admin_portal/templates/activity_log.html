@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Activity Log -- 1LAVYA Admin Portal{% endblock %}
+{% block page_title %}Activity Log{% endblock %}
+{% block content %}
+
+<div class="stat-row">
+  <div class="stat-tile">
+    <div class="label">Rows in range ({{ range_label }})</div>
+    <div class="value">{{ total_all }}</div>
+  </div>
+  <div class="stat-tile">
+    <div class="label">Errors</div>
+    <div class="value" style="color:{{ '#a3312f' if error_count else 'var(--navy)' }};">{{ error_count }}</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Every Action, Every Bot{% if is_bot_admin %} <span style="color:#999; font-weight:normal; font-size:12.5px;">(scoped to your bot)</span>{% endif %} <span style="color:#999; font-weight:normal; font-size:12.5px;">({{ total_filtered }})</span></h2>
+  <p class="card-note">
+    One row per command/button-tap/message across every bot -- who, what action, how long it took, and
+    whether it succeeded. Sensitive input (email, mobile, OTP, wallet amounts) is never stored here, only
+    "&lt;redacted&gt;" -- see telegram/LOGGING-ARCHITECTURE.md for the full design. Use the
+    <code>correlation_id</code> column to find the matching lines in that bot's own raw log file for a
+    real error's full traceback.
+  </p>
+
+  <div class="toolbar" style="border-bottom:none; margin-bottom:10px; padding-bottom:0;">
+    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+      <span style="font-size:11.5px; color:#999; text-transform:uppercase; letter-spacing:.04em; margin-right:2px;">Range:</span>
+      {% for p, label in {"7d": "7 days", "30d": "30 days", "90d": "90 days", "all": "All time"}.items() %}
+        <a class="btn {{ 'btn-primary' if current_preset == p else 'btn-secondary' }} btn-sm" href="{{ range_url(p) }}">{{ label }}</a>
+      {% endfor %}
+    </div>
+    <div style="font-size:12px; color:#777; margin-top:6px;">Showing: <strong>{{ range_label }}</strong></div>
+  </div>
+
+  <form method="get" style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:14px;">
+    <input type="hidden" name="preset" value="{{ current_preset }}">
+    {% if not is_bot_admin %}
+    <select name="bot_id" onchange="this.form.submit()" style="padding:6px 8px; border:1px solid #d8dae0; border-radius:6px; font-size:12.5px;">
+      <option value="">All bots</option>
+      {% for bid in available_bot_ids %}
+        <option value="{{ bid }}" {{ 'selected' if bid == selected_bot_id else '' }}>{{ bid }}</option>
+      {% endfor %}
+    </select>
+    {% endif %}
+    <select name="status" onchange="this.form.submit()" style="padding:6px 8px; border:1px solid #d8dae0; border-radius:6px; font-size:12.5px;">
+      <option value="">Any status</option>
+      <option value="ok" {{ 'selected' if selected_status == 'ok' else '' }}>OK</option>
+      <option value="error" {{ 'selected' if selected_status == 'error' else '' }}>Error</option>
+    </select>
+    <input type="text" name="action" value="{{ selected_action }}" placeholder="Action (e.g. profile)" style="padding:6px 8px; border:1px solid #d8dae0; border-radius:6px; font-size:12.5px; width:160px;">
+    <button type="submit" class="btn btn-secondary btn-sm">Apply</button>
+  </form>
+
+  {% include "_export_toolbar.html" %}
+
+  <div class="table-scroll">
+  <table>
+    <thead>
+      <tr><th>Time</th><th>Bot</th><th>User</th><th>Action</th><th>Detail</th><th>Handler</th>
+          <th>ms</th><th>Status</th><th>Error</th><th>Correlation ID</th></tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td style="white-space:nowrap;">{{ r.created_at }}</td>
+        <td>{{ r.bot_id }}</td>
+        <td>{{ r.telegram_user_id }}</td>
+        <td><code>{{ r.action }}</code></td>
+        <td style="max-width:220px; white-space:normal; word-break:break-word;">{{ r.action_detail or '—' }}</td>
+        <td style="color:#777; font-size:11.5px;">{{ r.handler_name }}</td>
+        <td>{{ r.duration_ms if r.duration_ms is not none else '—' }}</td>
+        <td><span class="pill {{ 'pill-online' if r.status == 'ok' else 'pill-offline' }}">{{ r.status }}</span></td>
+        <td style="max-width:220px; white-space:normal; word-break:break-word; color:#a3312f;">{{ r.error_summary or '' }}</td>
+        <td style="font-size:10.5px; color:#999; font-family:monospace;">{{ r.correlation_id }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="10" style="color:#999;">No activity recorded for this range/filter yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  {% include "_pagination.html" %}
+</div>
+
+{% endblock %}

@@ -44,7 +44,7 @@ than feature count until that list is worked through.
 | 20-question report pipeline (email/PDF) | `REPORT-PIPELINE.md` | `bots/report_flow.py`, `database/report_delivery.py`, `database/cf_email.py` |
 | Leaderboard system (join, nightly broadcast) | `LEADERBOARD-SYSTEM.md` | `bots/leaderboard_broadcaster.py`, `database/leaderboard_metrics.py`, `config/leaderboards.json` |
 | Course/chapter/unit taxonomy + human-readable question IDs + Study/Exam/Revision/Question-Bank catalogues | `COURSE-CATALOG.md` | `tools/populate_course_catalog.py`, `tools/generate_mcq_human_ids.py`, `admin_portal/document_catalog.py` |
-| Logging/observability architecture (fine-grained activity log + correlation IDs) | `LOGGING-ARCHITECTURE.md` | **Design doc only, 2026-08-17 — not yet implemented.** Read before building any of it; has the evaluation, the decorator design, and the phased roadmap |
+| Logging/observability: fine-grained activity log, correlation IDs, `bot_admin` RBAC + Activity Log viewer | `LOGGING-ARCHITECTURE.md` | `bots/activity_logger.py`, `admin_portal/auth.py` + `/logs/activity`, `config/admin_access.json`, `admin_portal/manage_bot_admin.py` — built + deployed 2026-08-17, see doc's own §9 |
 | Admin Portal (Flask, :8788) | `admin_portal/README.md` | `admin_portal/app.py` (Analytics > "MCQ Issue Reports" is the newest tab, 2026-08-13) |
 | Down/up alerting | `/CLAUDE.md` §11 (2026-08-10 entry) | `bots/watcher_bot.py`, `config/alerts.json` |
 | Live dashboard (:8787, pre-Admin-Portal) | `/CLAUDE.md` §11 | `tools/dashboard_server.py`, `database/analytics.py`, `database/dashboard_html.py` |
@@ -100,16 +100,23 @@ than feature count until that list is worked through.
 
 ## Status snapshot (update this, don't let it rot)
 
-As of 2026-08-13: all 9 real bot/service processes running
-(`1lavya-studyhub`, `1lavya-examhub`, `1lavya-myfileshub`, `csarunchouhan`,
-`capranav-study`, `capranav-exam`, `1lavya-dashboard`, `1lavya-platform-watcher`,
-`1lavya-admin-portal`). Content validator: 0 errors/0 warnings platform-wide.
-`course_catalog`: 975 rows, all CA/CS/CMA subjects with real content covered.
-Leaderboards: 3 configured, all `status: "inactive"` pending real Telegram
-channel IDs. Admin Portal: Foundation + Analytics tiers built (6 Analytics
-views as of 2026-08-13, incl. MCQ Issue Reports); Masters editing, Faculty/Bot
-addition, Leaderboard edits, Question Catalog content editing, and RBAC not
-yet built.
+As of 2026-08-13 (bot-process list/counts stale beyond this date -- see
+`/CLAUDE.md` §11's own dated entries for everything since, incl. wallet/
+Test Mode billing, multi-course profiles, and the 2026-08-17 logging build
+below, for the current real picture): all 9 real bot/service processes
+running (`1lavya-studyhub`, `1lavya-examhub`, `1lavya-myfileshub`,
+`csarunchouhan`, `capranav-study`, `capranav-exam`, `1lavya-dashboard`,
+`1lavya-platform-watcher`, `1lavya-admin-portal`). Content validator: 0
+errors/0 warnings platform-wide. `course_catalog`: 975 rows, all CA/CS/CMA
+subjects with real content covered. Leaderboards: 3 configured, all
+`status: "inactive"` pending real Telegram channel IDs. Admin Portal:
+Foundation + Analytics tiers built (6 Analytics views as of 2026-08-13,
+incl. MCQ Issue Reports); Masters editing, Faculty/Bot addition, Leaderboard
+edits, and Question Catalog content editing still not built. **RBAC
+correction (2026-08-17): a real second role, `bot_admin`, now exists** --
+scoped to `/logs/activity` only, for exactly one `bot_id` at a time, see
+`LOGGING-ARCHITECTURE.md` §9. Full portal-wide RBAC (per-module roles
+beyond this one page) is still not built.
 
 **Exam Hub (`bots/exam_hub_bot.py`) flow, current as of 2026-08-13**: Mode →
 Course → Level → Subject → Exam Type → Year → Chapter → question, every step

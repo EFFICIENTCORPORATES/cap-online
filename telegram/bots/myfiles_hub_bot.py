@@ -81,6 +81,7 @@ load_dotenv(REPO_ROOT / "telegram" / ".env")      # secrets live in telegram/.en
 # online/offline alongside every other bot -- see main() below.
 sys.path.insert(0, str(REPO_ROOT / "telegram" / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
+import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17) -- writes to the SHARED platform.db like send_heartbeat() already does, even though this bot's own primary data stays in its separate myfiles_hub.db
 MYFILES_BOT_ID = "1lavya-myfileshub"   # must match telegram/config/bots.json's entry
 
 BOT_TOKEN = os.environ.get("TELEGRAM_MYFILES_BOT_TOKEN", "PASTE_YOUR_BOTFATHER_TOKEN_HERE")
@@ -113,10 +114,12 @@ STARTER_TAGS = [
 LOG_FILE_PATH = os.path.join(os.path.dirname(DB_PATH) or ".", "myfiles_hub.log")
 os.makedirs(os.path.dirname(LOG_FILE_PATH), exist_ok=True)
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    format=activity_logger.LOG_FORMAT_WITH_CORRELATION,
     level=logging.INFO,
     handlers=[logging.StreamHandler(), logging.FileHandler(LOG_FILE_PATH, encoding="utf-8")],
 )
+logging.getLogger("httpx").setLevel(logging.WARNING)  # 2026-08-17: see LOGGING-ARCHITECTURE.md §6
+activity_logger.install_correlation_filter()
 logger = logging.getLogger(__name__)
 
 # Conversation states
@@ -1299,48 +1302,69 @@ def main():
     app = Application.builder().token(BOT_TOKEN).build()
     platform_db.schedule_heartbeat(app, MYFILES_BOT_ID)
 
+    # 2026-08-17: every handler function below wrapped with
+    # activity_logger.log_activity() at registration time only -- see
+    # telegram/LOGGING-ARCHITECTURE.md §3. Every pattern/filter/state key
+    # is UNCHANGED from before -- only the callback reference passed to
+    # each Handler constructor is wrapped, nothing about this
+    # ConversationHandler's own structure or routing logic is touched.
+    # UPLOAD_WAIT_ITEM's combined (Document|PHOTO|TEXT) handler is tagged
+    # "text" (not "photo") -- it's the closest of the 4 valid handler_kind
+    # values for a genuinely mixed filter, and activity_logger's own text
+    # extraction already handles a photo/document update safely (no
+    # .text attribute -> falls back to empty, never crashes), just labels
+    # it a little less precisely than a dedicated "mixed" kind would.
+    def _la(kind, func):
+        return activity_logger.log_activity(kind, MYFILES_BOT_ID)(func)
+
     conv = ConversationHandler(
         entry_points=[
-            CommandHandler("start", start),
-            MessageHandler(filters.Regex(GREETING_RE) & filters.TEXT & ~filters.COMMAND, start),
+            CommandHandler("start", _la("command", start)),
+            MessageHandler(filters.Regex(GREETING_RE) & filters.TEXT & ~filters.COMMAND, _la("text", start)),
         ],
         states={
-            AUTH_MENU: [CallbackQueryHandler(auth_menu_choice, pattern=r"^auth:")],
-            AUTH_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, auth_email_received)],
-            AUTH_OTP: [MessageHandler(filters.TEXT & ~filters.COMMAND, auth_otp_received)],
-            PROFILE_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, profile_name_received)],
-            MAIN_MENU: [CallbackQueryHandler(main_menu_choice, pattern=r"^menu:")],
+            AUTH_MENU: [CallbackQueryHandler(_la("callback", auth_menu_choice), pattern=r"^auth:")],
+            # always_redact=True: these two collect an email address and an
+            # OTP code via PTB's OWN ConversationHandler state, which
+            # activity_logger's context.user_data-based redaction detection
+            # cannot see at all -- see activity_logger.py's own REDACTION
+            # comment block for the full reasoning (a real gap found and
+            # fixed before this wiring went in, not a theoretical one).
+            AUTH_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, activity_logger.log_activity("text", MYFILES_BOT_ID, always_redact=True)(auth_email_received))],
+            AUTH_OTP: [MessageHandler(filters.TEXT & ~filters.COMMAND, activity_logger.log_activity("text", MYFILES_BOT_ID, always_redact=True)(auth_otp_received))],
+            PROFILE_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, _la("text", profile_name_received))],
+            MAIN_MENU: [CallbackQueryHandler(_la("callback", main_menu_choice), pattern=r"^menu:")],
             UPLOAD_WAIT_ITEM: [
-                MessageHandler((filters.Document.ALL | filters.PHOTO | filters.TEXT) & ~filters.COMMAND, upload_item_received),
-                CallbackQueryHandler(batch_same_choice, pattern=r"^batch_same:"),
+                MessageHandler((filters.Document.ALL | filters.PHOTO | filters.TEXT) & ~filters.COMMAND, _la("text", upload_item_received)),
+                CallbackQueryHandler(_la("callback", batch_same_choice), pattern=r"^batch_same:"),
                 # Also registered here (not just under UPLOAD_TAG_SELECT/UPLOAD_TAG_CREATE):
                 # a single-item upload's tag prompt is sent by a background task
                 # (_finalize_batch), which can't move the conversation state, so the
                 # very first tag interaction still arrives while formally in this state.
-                CallbackQueryHandler(upload_tag_toggle, pattern=r"^utag:"),
-                CallbackQueryHandler(upload_tag_new_prompt, pattern=r"^utag_new$"),
-                CallbackQueryHandler(upload_tag_done, pattern=r"^utag_done$"),
+                CallbackQueryHandler(_la("callback", upload_tag_toggle), pattern=r"^utag:"),
+                CallbackQueryHandler(_la("callback", upload_tag_new_prompt), pattern=r"^utag_new$"),
+                CallbackQueryHandler(_la("callback", upload_tag_done), pattern=r"^utag_done$"),
             ],
             UPLOAD_TAG_SELECT: [
-                CallbackQueryHandler(upload_tag_toggle, pattern=r"^utag:"),
-                CallbackQueryHandler(upload_tag_new_prompt, pattern=r"^utag_new$"),
-                CallbackQueryHandler(upload_tag_done, pattern=r"^utag_done$"),
+                CallbackQueryHandler(_la("callback", upload_tag_toggle), pattern=r"^utag:"),
+                CallbackQueryHandler(_la("callback", upload_tag_new_prompt), pattern=r"^utag_new$"),
+                CallbackQueryHandler(_la("callback", upload_tag_done), pattern=r"^utag_done$"),
             ],
-            UPLOAD_TAG_CREATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, upload_tag_create_received)],
+            UPLOAD_TAG_CREATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, _la("text", upload_tag_create_received))],
             RETRIEVE_TAG_SELECT: [
-                CallbackQueryHandler(retrieve_tag_toggle, pattern=r"^rtag:"),
-                CallbackQueryHandler(retrieve_mode_toggle, pattern=r"^rtag_mode$"),
-                CallbackQueryHandler(retrieve_search, pattern=r"^rtag_search$"),
+                CallbackQueryHandler(_la("callback", retrieve_tag_toggle), pattern=r"^rtag:"),
+                CallbackQueryHandler(_la("callback", retrieve_mode_toggle), pattern=r"^rtag_mode$"),
+                CallbackQueryHandler(_la("callback", retrieve_search), pattern=r"^rtag_search$"),
             ],
-            RETRIEVE_RESULTS: [CallbackQueryHandler(retrieve_results_action, pattern=r"^(send_one:|send_all|delete_request)")],
-            DELETE_OTP: [MessageHandler(filters.TEXT & ~filters.COMMAND, delete_otp_received)],
-            TAG_MANAGE: [CallbackQueryHandler(tag_manager_action, pattern=r"^tagmgr_")],
-            TAG_MANAGE_CREATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, tag_manager_create_received)],
-            TAG_MANAGE_RENAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, tag_manager_rename_received)],
+            RETRIEVE_RESULTS: [CallbackQueryHandler(_la("callback", retrieve_results_action), pattern=r"^(send_one:|send_all|delete_request)")],
+            DELETE_OTP: [MessageHandler(filters.TEXT & ~filters.COMMAND, activity_logger.log_activity("text", MYFILES_BOT_ID, always_redact=True)(delete_otp_received))],  # always_redact=True -- an OTP code, same reasoning as AUTH_EMAIL/AUTH_OTP above
+            TAG_MANAGE: [CallbackQueryHandler(_la("callback", tag_manager_action), pattern=r"^tagmgr_")],
+            TAG_MANAGE_CREATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, _la("text", tag_manager_create_received))],
+            TAG_MANAGE_RENAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, _la("text", tag_manager_rename_received))],
         },
         # "start" here too (not just in entry_points) so /start also works as a reset
         # from *inside* an active conversation, not just as the very first message.
-        fallbacks=[CommandHandler("cancel", cancel), CommandHandler("start", start)],
+        fallbacks=[CommandHandler("cancel", _la("command", cancel)), CommandHandler("start", _la("command", start))],
     )
 
     app.add_handler(conv)

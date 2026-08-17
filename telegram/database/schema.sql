@@ -1028,3 +1028,62 @@ CREATE TABLE IF NOT EXISTS backup_runs (
 );
 
 CREATE INDEX IF NOT EXISTS idx_backup_runs_started ON backup_runs(started_at);
+
+-- ===========================================================================
+-- LOGGING/OBSERVABILITY -- Phase 1, added 2026-08-17. Full design/reasoning
+-- lives in telegram/LOGGING-ARCHITECTURE.md -- read that before touching
+-- either table below; this is only the schema, not the "why."
+-- ===========================================================================
+
+-- The fine-grained "who did what, when" trail every bot handler now writes
+-- to via telegram/bots/activity_logger.py's @log_activity decorator --
+-- deliberately additive, does NOT replace bot_interactions (kept exactly
+-- as-is, existing dashboard queries still read it unchanged) or any
+-- per-feature table (wallet_ledger, exam_hub_mcq_attempts, ...), which stay
+-- the source of truth for domain-specific detail this generic envelope
+-- can't infer. See LOGGING-ARCHITECTURE.md §3 for the two-layer reasoning.
+CREATE TABLE IF NOT EXISTS user_activity_log (
+    activity_id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    correlation_id    TEXT NOT NULL,      -- same id stamped into the raw .log text for this same request -- see LOGGING-ARCHITECTURE.md §5
+    bot_id            TEXT NOT NULL,
+    telegram_user_id  INTEGER NOT NULL,
+    conversation_id   TEXT,               -- a UUID minted whenever context.user_data is cleared (/start, restart) -- the closest thing this platform has to "one session," see §4
+    handler_kind      TEXT NOT NULL CHECK (handler_kind IN ('command', 'callback', 'text', 'photo')),
+    action             TEXT NOT NULL,      -- e.g. 'profile', 'walletrc', 'chapter', 'free_text' -- derived automatically from callback_data's own prefix or a matched trigger phrase, never hand-authored per call site
+    action_detail       TEXT,              -- the rest of callback_data after the action, or a short text summary -- REDACTED ("<redacted>") for any state on activity_logger.py's own denylist (email/mobile/wallet-amount collection), never the raw value
+    handler_name          TEXT NOT NULL,    -- the Python function name -- ties a row straight back to one place in the code
+    duration_ms              INTEGER,
+    status                     TEXT NOT NULL CHECK (status IN ('ok', 'error')),
+    error_summary               TEXT,        -- exception type + message ONLY, never a full traceback (that stays in the text log; correlation_id links the two)
+    created_at                    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_user_activity_log_user   ON user_activity_log(telegram_user_id, created_at);
+CREATE INDEX IF NOT EXISTS idx_user_activity_log_corr   ON user_activity_log(correlation_id);
+CREATE INDEX IF NOT EXISTS idx_user_activity_log_bot    ON user_activity_log(bot_id, created_at);
+CREATE INDEX IF NOT EXISTS idx_user_activity_log_status ON user_activity_log(status, created_at);
+
+-- Login credentials for the NEW "bot_admin" role (2026-08-17) -- a faculty-
+-- scoped admin who can view ONLY the Activity Log page, ONLY for their own
+-- bot_id(s). Deliberately SEPARATE from the existing single super-admin
+-- login (telegram/.env's ADMIN_PORTAL_USERNAME/PASSWORD_HASH, set via
+-- set_password.py) -- that account is untouched by this table, stays the
+-- one and only 'admin' role (== super_admin, sees every bot), exactly as
+-- before, so nothing about Pranav's own login changes. Rows here are
+-- purely additive accounts for someone else (e.g. a faculty's own admin
+-- contact) who should see LESS than the full portal, never more.
+--
+-- WHO gets which bot_id(s) is authorization POLICY, not a secret -- that
+-- lives in telegram/config/admin_access.json (human-editable, git-tracked,
+-- same "JSON is the source of truth for what an id even means" pattern
+-- tenants.json/bots.json/leaderboards.json already use). This table is
+-- ONLY authentication (can this username log in at all) -- password
+-- hashes never belong in a git-tracked file, same reasoning telegram/.env
+-- is gitignored for the super-admin's own hash.
+CREATE TABLE IF NOT EXISTS admin_accounts (
+    admin_id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    username       TEXT NOT NULL UNIQUE COLLATE NOCASE,
+    password_hash  TEXT NOT NULL,
+    created_at     TEXT NOT NULL,
+    updated_at     TEXT NOT NULL
+);

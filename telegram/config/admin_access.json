@@ -1,0 +1,13 @@
+{
+  "$comment": "telegram/admin_portal/auth.py's bot_admin scope policy (added 2026-08-17, part of the Phase 1 logging build -- see telegram/LOGGING-ARCHITECTURE.md). This file answers ONE question: for a given bot_admin username, which bot_id(s) can they see on the Activity Log page. It is authorization POLICY only -- never a password or a hash. The super-admin (Pranav's existing telegram/.env login, role 'admin') is NOT listed here at all -- that account already sees every bot, unconditionally, and always has; this file only ever adds narrower accounts on top, never widens the super-admin's own access. A username listed here must ALSO have a row in the admin_accounts DB table (created via telegram/admin_portal/manage_bot_admin.py) before they can actually log in -- this file alone grants no login, only scope once logged in. The one entry below is a placeholder, 'status': 'inactive', exactly the leaderboards.json convention for 'designed, not yet turned on' -- flip to 'active' once a real bot_admin account has actually been created for that username.",
+  "schema_version": 1,
+
+  "bot_admins": [
+    {
+      "username": "csarunchouhan_admin",
+      "status": "inactive",
+      "bot_ids": ["csarunchouhan"],
+      "note": "Placeholder for CS Arun Chouhan's own admin access to his bot's Activity Log only. No admin_accounts row exists for this username yet -- create one with manage_bot_admin.py, then flip status to 'active', before this has any real effect."
+    }
+  ]
+}
