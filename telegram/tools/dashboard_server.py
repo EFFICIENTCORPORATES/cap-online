@@ -47,6 +47,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT / "telegram" / "database"))
 import db as platform_db  # noqa: E402
+import log_rotation  # noqa: E402 -- telegram/database/log_rotation.py, Layer 1 of the log-rotation policy (2026-08-18)
 import analytics  # noqa: E402
 from dashboard_html import render_page  # noqa: E402
 
@@ -54,7 +55,13 @@ BOTS_PATH = REPO_ROOT / "telegram" / "config" / "bots.json"
 PORT = int(os.environ.get("DASHBOARD_PORT", "8787"))
 HOST = "127.0.0.1"   # local only -- see module docstring
 
-logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO)
+DASHBOARD_BOT_ID = "1lavya-dashboard"   # must match telegram/config/bots.json's entry
+
+# 2026-08-18: handlers=[...] explicit now -- see LOGGING-ARCHITECTURE.md §6/§10.
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO,
+    handlers=log_rotation.build_handlers(DASHBOARD_BOT_ID),
+)
 logger = logging.getLogger("dashboard_server")
 
 

@@ -81,6 +81,7 @@ load_dotenv(REPO_ROOT / "telegram" / ".env")      # secrets live in telegram/.en
 # online/offline alongside every other bot -- see main() below.
 sys.path.insert(0, str(REPO_ROOT / "telegram" / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
+import log_rotation  # noqa: E402 -- telegram/database/log_rotation.py, Layer 1 of the log-rotation policy (2026-08-18)
 import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17) -- writes to the SHARED platform.db like send_heartbeat() already does, even though this bot's own primary data stays in its separate myfiles_hub.db
 MYFILES_BOT_ID = "1lavya-myfileshub"   # must match telegram/config/bots.json's entry
 
@@ -111,12 +112,22 @@ STARTER_TAGS = [
     "Accounting", "Costing", "Taxation", "Law", "Audit",
 ]
 
-LOG_FILE_PATH = os.path.join(os.path.dirname(DB_PATH) or ".", "myfiles_hub.log")
-os.makedirs(os.path.dirname(LOG_FILE_PATH), exist_ok=True)
+# BUG FIXED 2026-08-18: this used to write to its OWN separate file
+# (assets/myfiles_bot/myfiles_hub.log, next to DB_PATH) via an explicit
+# FileHandler, on TOP OF manage_bots.py's own OS-level stdout/stderr
+# capture of this same StreamHandler's output into
+# database/run/logs/1lavya-myfileshub.log -- two full copies of every log
+# line, in two different locations, neither one ever read by the Admin
+# Portal's Bot-wise Logs viewer (confirmed: it only ever reads
+# manage_bots.LOG_DIR / f"{bot_id}.log"). Found while auditing every
+# process's logging setup for LOGGING-ARCHITECTURE.md's rotation policy --
+# the stray copy was already 12.5MB, pure waste. Consolidated onto the
+# SAME bounded, rotated handler every other bot now uses, writing to the
+# ONE path that's actually read.
 logging.basicConfig(
     format=activity_logger.LOG_FORMAT_WITH_CORRELATION,
     level=logging.INFO,
-    handlers=[logging.StreamHandler(), logging.FileHandler(LOG_FILE_PATH, encoding="utf-8")],
+    handlers=log_rotation.build_handlers(MYFILES_BOT_ID),
 )
 logging.getLogger("httpx").setLevel(logging.WARNING)  # 2026-08-17: see LOGGING-ARCHITECTURE.md §6
 activity_logger.install_correlation_filter()

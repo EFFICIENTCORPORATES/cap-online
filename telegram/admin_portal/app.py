@@ -44,6 +44,7 @@ async job queue built for this yet.
 import os
 import sys
 import time
+import logging
 import threading
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -61,6 +62,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 load_dotenv(REPO_ROOT / "telegram" / ".env")
 
 import db as platform_db  # noqa: E402
+import log_rotation  # noqa: E402 -- telegram/database/log_rotation.py, Layer 1 of the log-rotation policy (2026-08-18)
 import analytics  # noqa: E402
 import manage_bots  # noqa: E402
 import brand_kit  # noqa: E402
@@ -77,6 +79,33 @@ import faculty_report  # noqa: E402 -- telegram/admin_portal/faculty_report.py, 
 import faculty_master  # noqa: E402 -- telegram/admin_portal/faculty_master.py, Faculty Master DB table (2026-08-14)
 import backup_status  # noqa: E402 -- telegram/admin_portal/backup_status.py, Backup Snapshot Summary (2026-08-16)
 import sql_query_tool  # noqa: E402 -- telegram/admin_portal/sql_query_tool.py, read-only ad hoc SQL query tab (2026-08-17)
+
+# 2026-08-18: this process previously had NO explicit logging config at
+# all -- Flask/Werkzeug's own dev-server request logging just fell
+# through to the root logger's handler-of-last-resort (stderr), captured
+# unbounded by manage_bots.py's OS-level redirect. This basicConfig()
+# gives THIS app's own logger.* calls the same bounded, rotated handler
+# every other process now uses (LOGGING-ARCHITECTURE.md §6/§10).
+#
+# BUG FOUND AND FIXED same day, by actually curling the restarted process
+# and checking WHICH file the request line landed in -- not by reading
+# the code: Werkzeug's dev server does NOT simply propagate to the root
+# logger's handlers. Its own werkzeug.serving module checks "does the
+# 'werkzeug' logger already have a handler of its OWN"; finding none, it
+# attaches a bare StreamHandler DIRECTLY to that logger with
+# propagate=False -- so every request line ("GET / 302") bypassed root
+# entirely and went straight to stderr, which manage_bots.py's redirect
+# then captured into the UNBOUNDED crash.log, silently defeating the
+# rotation policy for the single noisiest thing this process logs.
+# Fix: explicitly give the 'werkzeug' logger the SAME handlers BEFORE
+# app.run() ever gets a chance to trigger Werkzeug's own auto-attach --
+# finding handlers already present, it never adds its own.
+ADMIN_PORTAL_BOT_ID = "1lavya-admin-portal"   # must match telegram/config/bots.json's entry
+_admin_portal_log_handlers = log_rotation.build_handlers(ADMIN_PORTAL_BOT_ID)
+logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO, handlers=_admin_portal_log_handlers)
+_werkzeug_logger = logging.getLogger("werkzeug")
+_werkzeug_logger.handlers = _admin_portal_log_handlers
+_werkzeug_logger.propagate = False
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("ADMIN_PORTAL_SECRET_KEY") or os.urandom(32)

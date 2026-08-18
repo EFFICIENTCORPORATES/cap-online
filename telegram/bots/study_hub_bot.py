@@ -83,6 +83,7 @@ from telegram.ext import (
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
+import log_rotation  # noqa: E402 -- telegram/database/log_rotation.py, Layer 1 of the log-rotation policy (2026-08-18)
 import profile_flow  # noqa: E402 -- telegram/bots/profile_flow.py, the "profile"/"change profile" identity flow (2026-08-11)
 import report_flow  # noqa: E402 -- telegram/bots/report_flow.py, now also reachable from Study Hub via its on-demand "report"/"analysis"/"email"/"mail" trigger (2026-08-11)
 from telegram_safety import safe_edit_message_text  # noqa: E402 -- 2026-08-18, see that module's own docstring
@@ -217,7 +218,16 @@ RESET_TRIGGER_RE = re.compile(
     r"^\s*(hi+|hey+|hello+|hiya|yo|namaste|reset)\s*[!.]*\s*$", re.IGNORECASE
 )
 
-logging.basicConfig(format=activity_logger.LOG_FORMAT_WITH_CORRELATION, level=logging.INFO)
+# 2026-08-18: handlers=[...] explicit now (was implicit stderr-only before)
+# -- see LOGGING-ARCHITECTURE.md §6/§10 and log_rotation.py's own docstring
+# for why. StreamHandler kept alongside so a manual/interactive run still
+# prints to the terminal same as before; RotatingFileHandler is the new,
+# BOUNDED replacement for what used to be manage_bots.py's unbounded
+# OS-level stdout redirect into this exact same file path.
+logging.basicConfig(
+    format=activity_logger.LOG_FORMAT_WITH_CORRELATION, level=logging.INFO,
+    handlers=log_rotation.build_handlers(BOT_ID),
+)
 logging.getLogger("httpx").setLevel(logging.WARNING)  # 2026-08-17: see LOGGING-ARCHITECTURE.md §6
 activity_logger.install_correlation_filter()
 logger = logging.getLogger(__name__)

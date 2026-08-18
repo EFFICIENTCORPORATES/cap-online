@@ -1,8 +1,9 @@
 # LOGGING-ARCHITECTURE.md — how this platform should observe itself
 
-**Status: Phase 0 + Phase 1 + Phase 2 BUILT and deployed, 2026-08-17** (the design
-below was written the same day; §9 records exactly what shipped and how it was
-verified before touching any live, student-facing bot). §7's roadmap originally
+**Status: Phase 0 + Phase 1 + Phase 2 BUILT and deployed, 2026-08-17; log ROTATION
+(§6's own deferred item) BUILT and deployed 2026-08-18 — see §10.** The design in §1-8
+was written 2026-08-17; §9 records exactly what shipped that day and how it was
+verified before touching any live, student-facing bot. §7's roadmap originally
 phased this as 0→1→2→3; in practice Pranav asked for 0–2 plus a working, RBAC'd
 viewer (originally §7's Phase 3) all in one pass — §9 is the accurate record of what
 that actually became. Written 2026-08-17, prompted directly by a real debugging
@@ -11,6 +12,10 @@ live bugs meant manually grepping multi-megabyte plain-text log files and, for o
 of the two, reproducing the bug by hand against the live database because the
 failure left no error trace at all. This doc exists so the next incident is a query,
 not an archaeology dig.
+
+**§10 is the current, active section for anyone touching logging/rotation today** —
+read it first if that's your task; §1-9 are the original design record, still
+accurate, but §10 is where the most recent real bugs and their fixes live.
 
 **Read order**: §1 (the reference taxonomy) if you want the industry background this
 is built on; skip straight to §2 (evaluation) and §3 (the architecture decision) if you
@@ -468,7 +473,217 @@ after every stage. Bots restarted ONE AT A TIME, each verified (fresh PID, fresh
 heartbeat, zero tracebacks since restart) before moving to the next.
 
 **Still open, named honestly**: log rotation (§6, deliberately deferred, see
-above); §8's three questions (retention period, full audit of who should see
-`/logs/activity`, keeping the redaction denylist complete as new flows get added)
-remain genuinely unanswered -- nothing in this pass required an answer to ship,
-but they don't go away either.
+above -- **built 2026-08-18, see §10**); §8's three questions (retention period for
+`user_activity_log` specifically -- distinct from §10's R2-side log-file retention,
+which IS now answered -- full audit of who should see `/logs/activity`, keeping the
+redaction denylist complete as new flows get added) remain genuinely unanswered --
+nothing in this pass required an answer to ship, but they don't go away either.
+
+**Correction, 2026-08-18**: a routine activity-log review the next day found the
+correlation-ID mechanism above (§5, bug #1's fix) had its OWN bug from day one --
+`activity_logger.py`'s decorator reset the `contextvars` correlation ID
+unconditionally in its `finally` block, which runs BEFORE a re-raised exception
+actually leaves the function -- so by the time `telegram.ext.Application` logged the
+real traceback moments later (same task, no intervening `.set()` call), the ID was
+already back to `"-"`. Confirmed against all 3 real tracebacks in production at the
+time: every one showed `[-]` instead of its row's actual correlation UUID, directly
+contradicting this section's own "verify by forcing one real exception" claim above.
+**Fixed 2026-08-18**: the `finally` block now only resets on the SUCCESS path (`if
+status == "ok":`) -- on error, the ID is deliberately left set so PTB's own traceback
+logger (same task, moments later) gets the real value; the next wrapped call's own
+`.set()` overwrites it before anything else meaningful runs, so nothing leaks
+long-term. Verified with a direct repro (not just the existing smoke test, which
+never exercised the actual PTB-exception-logging-after-wrapper-returns sequence) both
+for the error path (ID survives) and the success path (still resets cleanly, no
+regression). `smoke_test_activity_logger.py`'s existing 36 checks re-run clean.
+
+---
+
+## 10. Log rotation, built 2026-08-18 (§6's deferred item, now closed)
+
+Pranav's ask, verbatim shape: **1GB total local budget** for everything under
+`telegram/database/run/logs/`, combined; anything that would push the total over
+that gets **zipped and shipped to Cloudflare R2, under a folder identifiable by
+timestamp**; and the logs staying on the local machine needed **confirmed** to
+already be covered by continuous off-machine backup.
+
+### 10.0 The backup claim, checked and corrected before building anything
+
+Pranav believed the logs were already both R2-backed-up and git-tracked. Neither was
+true, confirmed directly rather than assumed:
+- `telegram/tools/backup_to_cloudflare.py`'s own docstring says outright:
+  *"DELIBERATELY EXCLUDED: ... `database/run/logs/` (diagnostic, regenerates
+  itself)."* The nightly backup job has never touched the logs folder.
+- `.gitignore` line 127 excludes `telegram/database/run/` entirely, and `git
+  ls-files telegram/database/run/` returned zero tracked files -- confirmed, not
+  inferred.
+
+This is exactly why §10's design below folds R2 shipping into the rotation policy
+itself (Layer 2) rather than assuming a separate mechanism already had it covered.
+
+### 10.1 The two-layer design
+
+**Layer 1 -- per-process bounded rotation** (`telegram/database/log_rotation.py`,
+new). Every process's `logging.basicConfig()` now gets an explicit
+`handlers=log_rotation.build_handlers(bot_id)` instead of the old implicit
+stderr-only default. `build_rotating_handler(bot_id)` wraps
+`logging.handlers.RotatingFileHandler` at `MAX_BYTES = 20MB`, `BACKUP_COUNT = 2` --
+so each process keeps at most 1 active + 2 rotated chunks (~60MB worst case) locally,
+writing to the EXACT SAME path (`database/run/logs/{bot_id}.log`) `manage_bots.py`
+and the Admin Portal's Bot-wise Logs viewer already expect -- zero changes needed in
+either consumer, only WHO writes that file changed.
+
+Wired into all 9 active processes (all 6 real Telegram bots via `study_hub_bot.py`/
+`exam_hub_bot.py`/`myfiles_hub_bot.py`, `faculty_bot.py`'s own call is a documented
+no-op since `study_hub_bot`'s import wins the root-logger race first) plus
+`dashboard_server.py`, `watcher_bot.py`, `admin_portal/app.py` (which had NO logging
+config at all before this), and `leaderboard_broadcaster.py` (currently inactive,
+fixed for when it goes live). `backup_to_cloudflare.py`'s own already-explicit
+`FileHandler` was also upgraded to `RotatingFileHandler` for consistency (low-risk --
+it's a run-to-completion batch job, no cross-restart file-lock concern at all).
+
+**Layer 2 -- the global ~1GB ceiling, overflow to R2**
+(`telegram/tools/rotate_logs_to_r2.py`, new). Runs hourly (Task Scheduler -- see
+`CRONJOBS.md`), reuses `backup_to_cloudflare.py`'s R2 client/bucket/credentials
+directly (imported, not duplicated -- same bucket, new `logs/` key prefix). Checks
+the TOTAL size of everything under `database/run/logs/`; once it crosses an **800MB
+watermark** (80% of the 1GB ceiling -- headroom against bursty growth between hourly
+checks, never actually hits the hard limit in practice), ships the OLDEST
+already-rotated chunks (`{bot_id}.log.1`, `.log.2`, ...) to R2 as
+`logs/{bot_id}/{bot_id}_{UTC_timestamp}.log.gz`, deleting each locally only after a
+verified successful upload, oldest-first, until back under the watermark. **Never
+touches an active `{bot_id}.log`** (still open, owned by a live process) -- only
+files Layer 1 has already rotated OUT, which Python's logging module closes before
+renaming, so nothing holds them open once they exist under that name. A small
+allowlist (`DIRECT_MANAGE_FILES`, currently just `ensure_bots_running.log`) covers
+non-Python batch-script logs with no owning long-running process holding them open --
+shipped whole + TRUNCATED (never deleted, since the `.bat` script's next `>>` append
+assumes the file still exists) once they cross their own 5MB threshold. R2-side
+retention: 90 days (matches §8's original suggested default for the DB-side
+question, now answered for the log-file side specifically). On any failure, alerts
+via the same `watcher_bot.py` DM plumbing `backup_to_cloudflare.py` already uses.
+
+`--dry-run` reports what WOULD ship/delete, touches nothing; `--force` ships
+regardless of the current total (for testing).
+
+### 10.2 `manage_bots.py`'s own change
+
+`start_bot()` used to redirect the child process's stdout/stderr straight into
+`f"{bot_id}.log"` -- the SAME file Layer 1's `RotatingFileHandler` now owns directly.
+Two independent writers holding the same file open (one unbounded OS-level append,
+one in-process handler that occasionally renames/truncates it) would fight each
+other. Fixed: that redirect now goes to a separate, small `f"{bot_id}.crash.log"`
+instead -- its only real job is catching something that happens BEFORE the bot's own
+`logging.basicConfig()` runs (an import error at the very top of the script) or
+bypasses the logging module entirely (Python's unhandled-exception printer, the
+`warnings` module -- both write straight to real OS-level stderr independent of any
+logging handler). `start_bot()` also now sets `env["BOT_MANAGED"] = "1"` on every
+process it launches -- see the next section for why.
+
+### 10.3 Four real bugs found while building this, each caught by actually checking
+
+Every one of these was caught by inspecting the REAL restarted processes' real log
+files and a real Task-Scheduler-triggered run -- not by reading the code, matching
+this platform's own established "0 structural errors isn't enough" discipline
+(`/CLAUDE.md` §7, `FIRST_PROMPT.md`'s own lessons list).
+
+1. **StreamHandler duplication into crash.log.** The first draft of every process's
+   `handlers=[...]` list included a bare `logging.StreamHandler()` alongside the
+   `RotatingFileHandler`, for local/interactive terminal visibility. That
+   StreamHandler writes to stderr -- which `manage_bots.py`'s own redirect (10.2)
+   ALSO captures wholesale into `crash.log`. Result: every routine log line was
+   being duplicated into TWO files, one bounded and one NOT -- the exact "two full
+   copies in two places" class of bug already found once this same day (see #4
+   below) reintroduced by this fix's own first draft. Confirmed by restarting a bot
+   and watching BOTH `{bot_id}.log` AND `{bot_id}.crash.log` grow in lockstep with
+   ordinary apscheduler tick lines. Fixed: `env["BOT_MANAGED"]` (10.2) + a new
+   `log_rotation.build_handlers()` that only adds the StreamHandler when that env
+   var is NOT set -- a developer's manual `python study_hub_bot.py` run still gets
+   live terminal output, a `manage_bots.py`-launched process does not duplicate.
+2. **Werkzeug bypasses root-logger handlers entirely.** `admin_portal/app.py`'s
+   Flask/Werkzeug dev server does NOT simply propagate its request-log lines to the
+   root logger's handlers, contrary to this doc's own first-draft comment claiming
+   it does. Werkzeug's `serving` module checks whether the `'werkzeug'` logger
+   already has a handler of ITS OWN; finding none, it attaches a bare
+   `StreamHandler` directly to that logger with `propagate=False` -- so every
+   request line ("GET / 302") went straight to stderr, captured by
+   `manage_bots.py`'s redirect into the unbounded `crash.log`, bypassing the
+   bounded handler entirely. Caught by literally curling the restarted process and
+   checking which file the request line landed in. Fixed: `admin_portal/app.py` now
+   explicitly assigns `logging.getLogger("werkzeug").handlers` to the SAME handler
+   list and sets `.propagate = False` itself, BEFORE `app.run()` ever gets a chance
+   to trigger Werkzeug's own auto-attach check -- finding handlers already present,
+   it never adds its own. Re-verified against the live process: the same curl now
+   lands correctly in the bounded `.log`, `crash.log` stays at 0 bytes.
+3. **`rotate_logs_to_r2.py`'s own log landed in `backup_to_cloudflare.py`'s file.**
+   Import order bug: `rotate_logs_to_r2.py` imported `backup_to_cloudflare` (which
+   calls its OWN `logging.basicConfig()` at import time) BEFORE calling its own
+   `logging.basicConfig()` -- Python's `basicConfig()` is a no-op once the root
+   logger already has handlers, so `backup_to_cloudflare`'s config silently won the
+   race every time. Caught by triggering the real Task Scheduler job and finding
+   `rotate-logs-to-r2.log` untouched (0 bytes) while `backup.log` had gained new
+   entries at exactly the scheduled run's timestamp. Fixed: moved
+   `rotate_logs_to_r2.py`'s own `logging.basicConfig()` call to run BEFORE `import
+   backup_to_cloudflare`. Re-verified against a real, second Task-Scheduler-triggered
+   run: the entry now lands in the correct file.
+4. **A pre-existing duplicate log file, found auditing every process's setup.**
+   `myfiles_hub_bot.py` had its OWN separate `FileHandler` writing to
+   `assets/myfiles_bot/myfiles_hub.log` (next to its DB), IN ADDITION to
+   `manage_bots.py`'s OS-level capture of that same handler-set's StreamHandler
+   output into `database/run/logs/1lavya-myfileshub.log` -- two full copies, in two
+   locations, and (confirmed by reading `admin_portal/app.py`'s log-viewer route
+   directly) neither the Admin Portal nor anything else ever read the
+   `assets/myfiles_bot/` copy. Already 12.5MB, pure waste. Consolidated onto the
+   same `log_rotation.build_handlers()` every other bot now uses, writing only to
+   the one path that's actually read; the orphaned 12.5MB file was deleted.
+
+### 10.4 Verification
+
+`telegram/tools/smoke_test_log_rotation.py` (new, 29 checks, zero real-file/real-R2
+dependency): Layer 1's rotation actually triggering and producing a `.log.1`
+sibling; Layer 2's watermark trigger, oldest-first ordering, `--dry-run` touching
+nothing, a failed upload leaving the local file in place (never deleted on
+failure), `DIRECT_MANAGE_FILES` shipping-then-TRUNCATING (never deleting); a
+permanent regression guard for bug #1 (`BOT_MANAGED` correctly suppresses the
+StreamHandler only when set); a permanent regression guard for bug #2's general
+pattern (a third-party logger pre-armed with our handlers + `propagate=False`
+actually receives records, the general shape of the Werkzeug fix). All entirely
+inside a temp directory with a `LOG_DIR` monkeypatch restored in a `finally` block --
+never touches the real `database/run/logs/` or makes a real network call.
+
+Full existing regression suite re-run clean after every stage (`smoke_test_
+activity_logger.py` 36/36, `smoke_test_report_flow.py`, `smoke_test_profile_flow.py`
+59/59, `smoke_test_leaderboards.py` 28/28, `smoke_test_test_flow.py` 99/99,
+`smoke_test_exam_hub_wallet.py` 41/41, `smoke_test_wallet_flow.py` 21/21,
+`smoke_test_admin_portal.py`, `smoke_test_course_catalog.py`'s content-validator
+check -- all passing, zero regressions from this pass).
+
+All 9 active processes restarted ONE AT A TIME (the 10th, `1lavya-leaderboard-
+broadcaster`, stays inactive per its own unrelated gating), each verified before
+moving to the next: fresh PID, fresh heartbeat, `crash.log` confirmed to stay at (or
+return to) 0 bytes -- except `1lavya-myfileshub`'s, which correctly caught one
+pre-existing, one-time `PTBUserWarning` (bypasses the logging module entirely, same
+category as a genuine crash, correctly still caught). `user_activity_log` showed 0
+new `status='error'` rows across the entire restart sequence.
+
+The real Windows Scheduled Task ("1LAVYA Log Rotation", hourly, see `CRONJOBS.md`)
+was triggered twice for real during this build (`Start-ScheduledTask`) -- both times
+`LastTaskResult: 0`, `NextRunTime` correctly one hour out, and (after bug #3's fix)
+its own log content landing in the correct file.
+
+### 10.5 What's genuinely NOT covered, named honestly
+
+- **`user_activity_log`'s own retention** (§8 Q1, the DB-table row-count question --
+  distinct from this section's R2 log-FILE retention, which IS answered at 90 days)
+  is still open.
+- **No dedicated smoke-test coverage for `mcq_issue_flow.py`** or the
+  `safe_edit_message_text`/correlation-ID fixes made earlier the same day (2026-08-18)
+  during the activity-log review that prompted this whole rotation pass -- those were
+  verified by direct repro + full existing-suite re-runs + live-process restarts, not
+  a new permanent smoke-test file, since they're outside this doc's own scope
+  (Markdown-parsing and Telegram-API-quirk fixes, not logging architecture).
+- **The existing large log files won't shrink retroactively.** Several bots' current
+  active `.log` files (e.g. `csarunchouhan.log` at ~11MB) are still under the new
+  20MB Layer-1 threshold, so they won't rotate until they cross it naturally --
+  expected, not a bug; the policy governs growth going forward, not a one-time
+  cleanup of pre-existing content.

@@ -162,17 +162,38 @@ def start_bot(bot: dict):
         return
 
     LOG_DIR.mkdir(parents=True, exist_ok=True)
-    log_file = open(LOG_DIR / f"{bot_id}.log", "a", encoding="utf-8")
+    # BUG FIXED 2026-08-18: this used to redirect stdout/stderr straight
+    # into f"{bot_id}.log" -- the SAME file every bot's own
+    # logging.basicConfig() now writes to directly via a bounded
+    # RotatingFileHandler (see telegram/database/log_rotation.py,
+    # LOGGING-ARCHITECTURE.md §6/§10). Two independent writers holding the
+    # same file open (one unbounded OS-level append, one in-process
+    # rotating handler that occasionally renames/truncates it) would
+    # fight each other -- so this redirect now goes to a SEPARATE,
+    # small "{bot_id}.crash.log" instead. Its only real job is catching
+    # something that happens BEFORE the bot's own logging.basicConfig()
+    # runs (an import error at the very top of the script) -- routine
+    # output no longer lands here at all, so it should stay tiny. The
+    # Admin Portal's Bot-wise Logs viewer and every other existing
+    # consumer of f"{bot_id}.log" needs ZERO changes -- that filename and
+    # location are unchanged, only WHO writes it changed.
+    crash_log_file = open(LOG_DIR / f"{bot_id}.crash.log", "a", encoding="utf-8")
 
     env = os.environ.copy()
     env["BOT_ID"] = bot_id
+    # 2026-08-18: tells log_rotation.build_handlers() this process is
+    # managed (its stdout/stderr already goes to crash_log_file below) --
+    # see that function's own docstring for the duplication bug this
+    # prevents. Never set for a manual `python study_hub_bot.py` run from
+    # an interactive terminal, which still gets a live StreamHandler.
+    env["BOT_MANAGED"] = "1"
 
     creationflags = subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0
     popen = subprocess.Popen(
         [sys.executable, str(script_path)],
         cwd=str(script_path.parent),
         env=env,
-        stdout=log_file,
+        stdout=crash_log_file,
         stderr=subprocess.STDOUT,
         creationflags=creationflags,
     )

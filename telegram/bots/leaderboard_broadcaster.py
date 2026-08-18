@@ -69,6 +69,7 @@ from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
 import db as platform_db  # noqa: E402
+import log_rotation  # noqa: E402 -- telegram/database/log_rotation.py, Layer 1 of the log-rotation policy (2026-08-18)
 import leaderboard_metrics  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -79,7 +80,11 @@ IST_OFFSET = timedelta(hours=5, minutes=30)
 
 load_dotenv(REPO_ROOT / "telegram" / ".env")
 
-logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO)
+# 2026-08-18: handlers=[...] explicit now -- see LOGGING-ARCHITECTURE.md §6/§10.
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO,
+    handlers=log_rotation.build_handlers(BROADCASTER_BOT_ID),
+)
 logger = logging.getLogger("leaderboard_broadcaster")
 
 

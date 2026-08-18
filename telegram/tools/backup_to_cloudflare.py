@@ -44,7 +44,12 @@ WHAT GETS BACKED UP (see CLAUDE.md's telegram/ backup-planning conversation,
 
 DELIBERATELY EXCLUDED: assets/backup pdfs/ (1.5GB, documented in CLAUDE.md
 as pre-restructuring leftover, "not read by anything" -- Pranav's explicit
-call, 2026-08-13) and database/run/logs/ (diagnostic, regenerates itself).
+call, 2026-08-13) and database/run/logs/ (diagnostic, regenerates itself --
+see telegram/tools/rotate_logs_to_r2.py instead, 2026-08-18, its own
+SEPARATE hourly job that ships only the overflow once the local log
+budget is exceeded -- see LOGGING-ARCHITECTURE.md §6/§10 for why this
+stays a different script on a different schedule rather than a 5th phase
+bolted onto this one).
 Python code + question-bank JSON + config JSON are already safe via git.
 
 USAGE:
@@ -72,6 +77,7 @@ import gzip
 import hashlib
 import json
 import logging
+import logging.handlers
 import os
 import re
 import sqlite3
@@ -102,10 +108,19 @@ load_dotenv(TELEGRAM_DIR / ".env")
 
 LOG_PATH = TELEGRAM_DIR / "database" / "run" / "logs" / "backup.log"
 LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+# 2026-08-18: RotatingFileHandler instead of a plain FileHandler -- see
+# LOGGING-ARCHITECTURE.md §6/§10. Low-risk here specifically: this is a
+# run-to-completion batch job (Task Scheduler, nightly), not a persistent
+# process, so there's no cross-restart file-lock concern at all -- unlike
+# the long-running bots, this one didn't NEED telegram/database/log_rotation.py's
+# shared handler, but uses the same numbers for consistency.
 logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     level=logging.INFO,
-    handlers=[logging.FileHandler(LOG_PATH, encoding="utf-8"), logging.StreamHandler()],
+    handlers=[
+        logging.handlers.RotatingFileHandler(LOG_PATH, maxBytes=20 * 1024 * 1024, backupCount=2, encoding="utf-8"),
+        logging.StreamHandler(),
+    ],
 )
 logger = logging.getLogger("backup_to_cloudflare")
 

@@ -95,6 +95,7 @@ from telegram.ext import (
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
+import log_rotation  # noqa: E402 -- telegram/database/log_rotation.py, Layer 1 of the log-rotation policy (2026-08-18)
 import student_analytics  # noqa: E402 -- telegram/database/student_analytics.py, for the "I'm Done" today-summary (2026-08-13)
 import report_flow  # noqa: E402 -- telegram/bots/report_flow.py, the 20-question milestone report pipeline (2026-08-11)
 import profile_flow  # noqa: E402 -- telegram/bots/profile_flow.py, the "profile"/"change profile" identity flow (2026-08-11)
@@ -205,7 +206,12 @@ ALL_CHAPTERS_LABEL = "\U0001F4DA All Chapters"
 # content + this allow-list, never a hand-maintained "show every course
 # even empty ones" list -- Pranav's explicit choice).
 
-logging.basicConfig(format=activity_logger.LOG_FORMAT_WITH_CORRELATION, level=logging.INFO)
+# 2026-08-18: handlers=[...] explicit now -- see LOGGING-ARCHITECTURE.md
+# §6/§10 and log_rotation.py's own docstring.
+logging.basicConfig(
+    format=activity_logger.LOG_FORMAT_WITH_CORRELATION, level=logging.INFO,
+    handlers=log_rotation.build_handlers(BOT_ID),
+)
 logging.getLogger("httpx").setLevel(logging.WARNING)  # 2026-08-17: httpx's own per-poll INFO lines were most of every log file's bulk, drowning out real content -- see LOGGING-ARCHITECTURE.md §6
 activity_logger.install_correlation_filter()
 logger = logging.getLogger(__name__)
