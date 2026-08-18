@@ -3,7 +3,22 @@ Build the Exam Hub Bot's MCQ export file.
 -------------------------------------------
 Source: first_run/output/generated-from-script/questions_index.json (831 rows,
 mixed Part I / Part II records from the Question Bank Book pipeline -- see
-CLAUDE.md section 6 for the full pipeline history).
+CLAUDE.md section 6 for the full pipeline history). That file lives OUTSIDE
+telegram/ (it's the Question Bank Book pillar's own output), which used to
+make this the one script in telegram/tools/ that couldn't run at all once
+telegram/ was detached from the rest of cap-online.
+
+FIXED 2026-08-18 (telegram/ standalone-portability pass, see FIRST_PROMPT.md):
+prefers the LIVE first_run/ source when it's actually present (so running
+this from inside the full cap-online checkout still picks up fresh sittings
+automatically, same as always) and falls back to a bundled snapshot,
+telegram/reference-data/questions_index_snapshot.json, when it isn't (so the
+script keeps working once telegram/ is copied into an unrelated repo).
+Deliberate tradeoff, confirmed rather than assumed: the snapshot WILL go
+stale the moment cap-online's Question Bank Book pipeline tags a new
+sitting -- re-copy it by hand (see that file's own "_snapshot_note") if you
+ever need this script to reflect a newer corpus after the move. See
+_resolve_source_index() below for the exact precedence.
 
 This script:
   1. Filters to Part I (MCQ) rows only (part == "I") -- 335 of 831 as of
@@ -39,10 +54,34 @@ import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
+TELEGRAM_ROOT = os.path.join(REPO_ROOT, "telegram")
 
-SOURCE_INDEX = os.path.join(
+LIVE_SOURCE_INDEX = os.path.join(
     REPO_ROOT, "first_run", "output", "generated-from-script", "questions_index.json"
 )
+BUNDLED_SNAPSHOT_INDEX = os.path.join(
+    TELEGRAM_ROOT, "reference-data", "questions_index_snapshot.json"
+)
+
+
+def _resolve_source_index():
+    """LIVE first_run/ source wins when present (running from inside the
+    full cap-online checkout, unchanged behavior) -- falls back to the
+    bundled snapshot only when first_run/ genuinely isn't there (telegram/
+    copied into a different repo). Never silently picks a THIRD, unexpected
+    file -- exactly these two paths, in exactly this order."""
+    if os.path.exists(LIVE_SOURCE_INDEX):
+        return LIVE_SOURCE_INDEX, False
+    if os.path.exists(BUNDLED_SNAPSHOT_INDEX):
+        return BUNDLED_SNAPSHOT_INDEX, True
+    raise SystemExit(
+        "Neither the live source (" + LIVE_SOURCE_INDEX + ") nor the bundled "
+        "snapshot (" + BUNDLED_SNAPSHOT_INDEX + ") exists -- nothing to build from."
+    )
+
+
+SOURCE_INDEX, USING_BUNDLED_SNAPSHOT = _resolve_source_index()
+
 DESCRIPTIVE_JSON = os.path.join(
     REPO_ROOT, "telegram", "assets", "exam_bot", "book_questions_extracted.json"
 )
@@ -112,6 +151,14 @@ def build_topic_text(row: dict) -> str:
 
 
 def main():
+    if USING_BUNDLED_SNAPSHOT:
+        print(
+            "WARNING: first_run/ not found -- building from the bundled snapshot "
+            f"({SOURCE_INDEX}), which may be STALE relative to cap-online's real "
+            "Question Bank Book corpus. Re-copy that snapshot by hand from a full "
+            "cap-online checkout if you need this build to reflect newer sittings."
+        )
+
     with open(SOURCE_INDEX, "r", encoding="utf-8") as f:
         all_rows = json.load(f)
 

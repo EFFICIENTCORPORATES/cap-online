@@ -19,6 +19,44 @@ than feature count until that list is worked through.
 
 ---
 
+## Running this folder standalone (moved into a different repo)
+
+`telegram/` is designed to be dropped into any other repo/computer as a whole folder and
+just work, with zero code changes. This depends on a discipline audited repeatedly
+(2026-08-12 through 2026-08-18): every script locates itself via
+`Path(__file__).resolve().parents[N]`, never a hardcoded machine path, and nothing under
+`telegram/` reads a file outside `telegram/` — the one historical exception,
+`tools/build_exam_bot_mcq_export.py`, now prefers the live `first_run/` source when present
+and falls back to a bundled snapshot (`reference-data/questions_index_snapshot.json`)
+otherwise, see that script's own docstring.
+
+**First-time setup in a new location:**
+1. Create a Python 3.11+ venv and `pip install -r telegram/requirements.txt` — this file
+   lives INSIDE `telegram/` (separate from the cap-online repo's own root-level
+   `requirements.txt`, which also covers other pillars) specifically so it travels with
+   the folder.
+2. `cp telegram/.env.example telegram/.env` and fill in every real secret listed there
+   (bot tokens, SMTP, Cloudflare Email + backup infra, Razorpay, Admin Portal login).
+   That file is the audited, complete checklist of every env var the code actually reads
+   (as of 2026-08-18) — if you add a new `os.environ.get(...)` anywhere under `telegram/`,
+   add it there too in the same pass, or it silently won't travel next time.
+3. `python telegram/tools/manage_bots.py start` (or `ensure-running`) to bring up every
+   `active` bot in `config/bots.json`.
+
+**What does NOT travel with a plain folder copy — redo by hand on the new machine:**
+- The `.venv` itself (step 1 above recreates it).
+- `telegram/database/platform.db`, `telegram/assets/myfiles_bot/`, `telegram/database/run/`
+  — gitignored runtime state (real student data, live PIDs/logs). Copy manually if you
+  want existing data to carry over; otherwise the platform just starts fresh.
+- Windows Task Scheduler jobs + the Startup-folder autostart entry (see `CRONJOBS.md`) —
+  OS-level config on the OLD machine, not part of this folder. Re-register them on the
+  new machine for the same self-healing/backup/broadcast automation there.
+- `tools/restart_all_bots.bat`/`tools/ensure_bots_running.bat` hardcode an absolute
+  `REPO_ROOT` line BY NECESSITY — they're meant to be copied into the Startup folder,
+  physically outside this repo. Update that one line after copying either script over.
+
+---
+
 ## Read order
 
 1. This file (map + read order).
@@ -76,7 +114,10 @@ than feature count until that list is worked through.
 | `assets/myfiles_bot/` | MyFiles Hub's own storage area |
 | `assets/backup pdfs/` | Pre-restructuring backup, not read by anything live |
 | `source-docs/` | Generated Excel catalogs (`StudyHub_Master_Catalog.xlsx` is what Study Hub actually loads) |
-| `*.env`, `*.env.example`, `creds.txt` | Secrets — gitignored, never commit |
+| `reference-data/` | Bundled snapshots of canonical data owned by OTHER cap-online pillars (e.g. the CA Inter Adv Acc topic index, the Question Bank Book's `questions_index.json`) — exist purely so scripts under `telegram/` still run once this folder is detached from the rest of cap-online. See each file's own `.README.md`/`_snapshot_note` for provenance and how to refresh it; these go stale on their own, never auto-update |
+| `requirements.txt` | This folder's OWN pinned dependency list (added 2026-08-18) — separate from the cap-online repo's root-level one, specifically so it travels with `telegram/` on its own |
+| `.gitignore` | This folder's OWN ignore rules (added 2026-08-18, mirrors the cap-online root `.gitignore`'s telegram-relevant entries) — so `telegram/` is safe to `git add .` inside any repo it's copied into, not just this one |
+| `*.env`, `*.env.example`, `creds.txt` | Secrets — gitignored, never commit. `.env.example` is the audited checklist of every real env var the code reads |
 
 ## How to inform your own working memory (i.e. don't re-derive what's already known)
 

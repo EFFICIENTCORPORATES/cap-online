@@ -1,0 +1,37 @@
+# telegram/requirements.txt — self-contained dependency list for this folder
+#
+# Lives INSIDE telegram/ (unlike the cap-online repo's own root-level
+# requirements.txt, which also covers other pillars' tooling) specifically
+# so it travels automatically when this folder is copied/cloned into a
+# different repo — see FIRST_PROMPT.md's portability notes. Kept in sync
+# with the root requirements.txt's "telegram/ bot platform" block; if you
+# add a new third-party import anywhere under telegram/, add it to BOTH
+# files in the same pass.
+#
+# Install (after creating and activating a venv):
+#   pip install -r telegram/requirements.txt
+#
+# Every version below is pinned to what's actually installed and proven
+# working in this repo's own .venv (via `pip list --format=freeze`), not
+# guessed.
+
+python-telegram-bot[job-queue]==22.8
+Flask==3.1.3
+Werkzeug==3.1.8
+python-dotenv==1.2.2
+pypdf==6.15.0
+python-docx==1.2.0
+openpyxl==3.1.5
+pandas==3.0.5
+numpy==2.5.1
+beautifulsoup4==4.14.3
+rapidfuzz==3.14.5
+psutil==7.2.2
+pillow==12.3.0
+reportlab==4.5.1
+xhtml2pdf==0.2.17
+boto3==1.43.72          # telegram/tools/backup_to_cloudflare.py -- R2 (S3-compatible) uploads
+botocore==1.43.72
+s3transfer==0.19.2
+jmespath==1.1.0
+cryptography==50.0.0    # telegram/tools/backup_to_cloudflare.py -- encrypts .env/creds.txt before backup

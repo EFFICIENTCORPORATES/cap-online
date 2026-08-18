@@ -1,0 +1,114 @@
+# telegram/.gitignore — self-contained ignore rules for this folder
+#
+# Added 2026-08-18 so this folder is safe to `git add .` inside ANY repo it's
+# copied into (a website repo, a fresh clone, anywhere) without depending on
+# the cap-online repo's own root .gitignore also being present. Mirrors that
+# root file's telegram-relevant rules, rewritten relative to telegram/ itself
+# — if you change one, check whether the other needs the same change.
+#
+# Principle (same as the root file): no binary files, no secrets, no
+# generated/runtime state in git. Source/text is tracked; everything heavy,
+# binary, secret, or regenerable is excluded.
+
+# Secrets / credentials -- never commit live tokens/keys
+.env
+*.env
+creds.txt
+**/creds.txt
+
+# Documents / office binaries (student-facing PDFs etc. -- real content,
+# kept on disk, never in git; see FIRST_PROMPT.md on how these get here)
+**/*.pdf
+**/*.docx
+**/*.doc
+**/*.pptx
+**/*.ppt
+**/*.xlsx
+**/*.xls
+
+# Images (raster)
+**/*.jpg
+**/*.jpeg
+**/*.png
+**/*.gif
+**/*.bmp
+**/*.tiff
+**/*.tif
+**/*.webp
+**/*.psd
+**/*.ico
+
+# Audio / video (e.g. any future voice-note or explainer-video features)
+**/*.mp3
+**/*.wav
+**/*.m4a
+**/*.aac
+**/*.flac
+**/*.ogg
+**/*.mp4
+**/*.mov
+**/*.mkv
+**/*.avi
+**/*.webm
+**/*.wmv
+
+# Archives & executables / large binaries
+**/*.zip
+**/*.rar
+**/*.7z
+**/*.tar
+**/*.gz
+**/*.exe
+**/*.dll
+**/*.msi
+**/*.bin
+**/*.iso
+
+# Databases (binary; platform.db, myfiles_hub.db, and any *.db-wal/-shm)
+**/*.db
+**/*.db-wal
+**/*.db-shm
+**/*.sqlite
+**/*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.python-version
+pip-log.txt
+
+# Virtual environments -- NOT bundled with this folder; recreate via
+# `pip install -r telegram/requirements.txt` after copying telegram/ anywhere
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Packaging
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Editor / OS
+.idea/
+.vscode/
+.ipynb_checkpoints/
+.spyproject
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Telegram-specific runtime/generated state (local only, regenerates itself)
+tools/_reports/
+database/run/
+assets/myfiles_bot/
+assets/exam_bot/Tests/uploads/
