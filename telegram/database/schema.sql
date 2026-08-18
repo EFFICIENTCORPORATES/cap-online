@@ -1131,3 +1131,20 @@ CREATE TABLE IF NOT EXISTS broadcast_deliveries (
 
 CREATE INDEX IF NOT EXISTS idx_broadcast_deliveries_campaign ON broadcast_deliveries(campaign_id);
 CREATE INDEX IF NOT EXISTS idx_broadcast_deliveries_user     ON broadcast_deliveries(telegram_user_id);
+
+-- Admin Portal login attempts (LOGGING-ARCHITECTURE.md sec7's "security logs" item,
+-- built 2026-08-18: the cheap slice, not the full deferred pillar). Covers BOTH the
+-- super-admin and every bot_admin account -- one shared login route, one shared
+-- table. Every attempt is logged, success or failure (an audit trail of who logged
+-- in when is useful on its own, not just for the lockout check below). Username is
+-- stored AS TYPED, not validated against a real account first -- a wrong username is
+-- itself a signal worth keeping (e.g. someone guessing "admin"/"pranav"/"root").
+CREATE TABLE IF NOT EXISTS admin_login_attempts (
+    attempt_id     INTEGER PRIMARY KEY AUTOINCREMENT,
+    username        TEXT NOT NULL,
+    success          INTEGER NOT NULL CHECK (success IN (0, 1)),
+    remote_addr       TEXT,        -- request.remote_addr -- this app is bound to 127.0.0.1 only (see its own module docstring), so this is mostly a formality today, kept for when/if that ever changes
+    created_at          TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_admin_login_attempts_username ON admin_login_attempts(username, created_at);

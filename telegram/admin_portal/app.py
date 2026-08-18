@@ -276,10 +276,23 @@ def login():
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
+
+        # 2026-08-18: lockout check FIRST, before even looking at the
+        # password -- see auth.py's is_locked_out() docstring. A locked-out
+        # account is refused even with the CORRECT password, which is the
+        # whole point; the failed attempt that triggers this message is
+        # itself still logged below so the lockout window keeps extending
+        # for as long as someone keeps trying.
+        if auth.is_locked_out(username):
+            auth.log_login_attempt(username, success=False, remote_addr=request.remote_addr)
+            flash(f"Too many failed attempts. Try again in a few minutes.", "error")
+            return render_template("login.html")
+
         # Super-admin checked FIRST, exactly the original single-account
         # path, completely unchanged -- Pranav's own login can never be
         # affected by anything below this line.
         if auth.verify_credentials(username, password):
+            auth.log_login_attempt(username, success=True, remote_addr=request.remote_addr)
             session.clear()
             session["username"] = username
             session["role"] = "admin"
@@ -289,12 +302,14 @@ def login():
         # only reachable if BOTH a real admin_accounts row AND a real
         # active admin_access.json entry exist for this username.
         if auth.verify_bot_admin_credentials(username, password):
+            auth.log_login_attempt(username, success=True, remote_addr=request.remote_addr)
             session.clear()
             session["username"] = username
             session["role"] = "bot_admin"
             session["allowed_bot_ids"] = auth.bot_admin_allowed_bot_ids(username)
             next_url = request.args.get("next") or url_for("activity_log")
             return redirect(next_url)
+        auth.log_login_attempt(username, success=False, remote_addr=request.remote_addr)
         flash("Invalid username or password.", "error")
     return render_template("login.html")
 

@@ -106,6 +106,61 @@ def bot_admin_allowed_bot_ids(username: str) -> list:
     return _bot_admin_scope_map().get(username.lower(), [])
 
 
+# ---------------------------------------------------------------------------
+# LOGIN ATTEMPT LOGGING + LOCKOUT (2026-08-18) -- LOGGING-ARCHITECTURE.md
+# sec7's "security logs" item, the cheap slice built now rather than fully
+# deferred: this portal controls live bot restarts and (with Test Mode
+# billing live) touches real money, and had ZERO record of anyone trying
+# to brute-force the login before this. Covers BOTH the super-admin and
+# every bot_admin account -- one shared table, one shared check, since
+# they share one login route.
+# ---------------------------------------------------------------------------
+MAX_FAILED_ATTEMPTS = 5
+LOCKOUT_WINDOW_MINUTES = 15   # both the window failures are counted over AND the effective lockout length -- a rolling window, no separate "unlock" step needed; it just ages out
+
+
+def log_login_attempt(username: str, success: bool, remote_addr: str | None):
+    """Best-effort, never blocks the actual login outcome -- a logging
+    failure here must not turn a correct login into a rejected one, same
+    "logging must never break the product" principle activity_logger.py
+    already established."""
+    try:
+        conn = platform_db.get_connection()
+        platform_db.init_schema(conn)
+        platform_db.execute_with_retry(
+            conn,
+            "INSERT INTO admin_login_attempts (username, success, remote_addr) VALUES (?, ?, ?)",
+            (username, 1 if success else 0, remote_addr),
+        )
+    except Exception:
+        pass
+
+
+def is_locked_out(username: str) -> bool:
+    """True if this username has MAX_FAILED_ATTEMPTS or more failed
+    attempts within the last LOCKOUT_WINDOW_MINUTES. Checked BEFORE
+    verifying a submitted password, so a locked-out account is refused
+    even with the CORRECT password -- the whole point of a lockout.
+    Best-effort: a DB read failure here fails OPEN (returns False, i.e.
+    "not locked out") rather than permanently locking every admin out of
+    their own portal because of an unrelated DB hiccup -- a lockout
+    false-negative is recoverable (the attempt just gets logged and
+    counted next time); a false-positive that can never be checked again
+    is not."""
+    try:
+        conn = platform_db.get_connection()
+        platform_db.init_schema(conn)
+        row = conn.execute(
+            "SELECT COUNT(*) FROM admin_login_attempts "
+            "WHERE username = ? AND success = 0 "
+            "AND created_at >= strftime('%Y-%m-%dT%H:%M:%fZ', 'now', ?)",
+            (username, f"-{LOCKOUT_WINDOW_MINUTES} minutes"),
+        ).fetchone()
+        return bool(row and row[0] >= MAX_FAILED_ATTEMPTS)
+    except Exception:
+        return False
+
+
 def current_user():
     return session.get("username")
 

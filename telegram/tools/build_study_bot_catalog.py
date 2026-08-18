@@ -61,7 +61,15 @@ COURSE_META = {
     "ca-inter-audit-may27":        ("CA", "Inter", "Auditing & Ethics", "Audit", "Paper 5", "May27"),
     "ca-inter-costacc-may27":      ("CA", "Inter", "Cost and Management Accounting", "CostAcc", "Paper 4", "May27"),
     "ca-inter-fm-may26":           ("CA", "Inter", "Financial Management", "FM", "Paper 6A", "May26"),
-    "ca-inter-gsttax-may27":       ("CA", "Inter", "Taxation - Goods and Services Tax", "GST", "Paper 3B", "May27"),
+    # GST has TWO simultaneously-live ICAI editions as of 2026-08-18 (the
+    # May26/Sep26/Jan27 attempt cycle and the May27/Sep27/Jan28 cycle both
+    # remain relevant to real, currently-enrolled students) -- kept as two
+    # distinct Subject strings (not one "GST" entry) specifically so
+    # populate_course_catalog.py's per-subject chapter_no grouping never
+    # sees two editions' identically-numbered chapters as one fabricated
+    # "multi-unit chapter" collision. See telegram/COURSE-CATALOG.md.
+    "ca-inter-gsttax-may26":       ("CA", "Inter", "Taxation - Goods and Services Tax (May 2026/Sep 2026/Jan 2027 Attempt)", "GST", "Paper 3B", "May26"),
+    "ca-inter-gsttax-may27":       ("CA", "Inter", "Taxation - Goods and Services Tax (May 2027/Sep 2027/Jan 2028 Attempt)", "GST", "Paper 3B", "May27"),
     "ca-inter-incometax-may27":    ("CA", "Inter", "Taxation - Income-tax Law", "IncomeTax", "Paper 3A", "May27"),
     "ca-inter-law-may27":          ("CA", "Inter", "Corporate and Other Laws", "Law", "Paper 2", "May27"),
     "ca-sm-inter-p6b-may2027":     ("CA", "Inter", "Strategic Management", "SM", "Paper 6B", "May27"),

@@ -358,6 +358,41 @@ def main():
           f"{len(cs_cma_rows)} CS/CMA, "
           f"{len(studyhub_rows)} CA -- every other subject).")
 
+    # course_catalog's real DB uniqueness constraint (schema.sql's
+    # idx_course_catalog_key) is (course, level, paper_no, chapter_no,
+    # unit_no) -- deliberately NOT including subject, because until
+    # 2026-08-18 one paper_no always meant exactly one subject. GST is the
+    # first exception: ICAI now has TWO simultaneously-valid editions
+    # (May26/Sep26/Jan27 attempt vs May27/Sep27/Jan28 attempt) both live
+    # in the Study Materials catalog under the same paper_no ('3B'), on
+    # purpose (see telegram/COURSE-CATALOG.md) -- a real collision, not a
+    # bug to paper over by faking a distinct paper_no.
+    #
+    # Widening the unique key to include subject is a real schema
+    # decision with ~26 downstream consumers (human_id generation, the
+    # Admin Portal's Course Catalog / Study Materials / Question Bank
+    # tabs, exam_hub_bot's course/level/subject resolver) that hasn't
+    # been made yet -- flagged to Pranav, not decided here. Until then:
+    # any (course, level, paper_no) with more than one distinct subject
+    # is EXCLUDED from course_catalog (loudly, never silently) rather
+    # than crashing the whole rebuild for every other subject. The
+    # excluded subject's Study Material PDFs are still fully live via
+    # StudyHub_Master_Catalog.xlsx (what study_hub_bot.py actually reads)
+    # -- only this secondary DB-backed layer (Admin Portal visibility +
+    # any future MCQ human_id under that paper_no) is affected.
+    subjects_by_paper = {}
+    for r in all_rows:
+        pk = (r["course"], r["level"], r["paper_no"])
+        subjects_by_paper.setdefault(pk, set()).add(r["subject"])
+    colliding_papers = {pk for pk, subs in subjects_by_paper.items() if len(subs) > 1}
+    if colliding_papers:
+        for pk in sorted(colliding_papers):
+            print(f"  (WARNING: excluded {pk[0]}/{pk[1]} paper_no={pk[2]!r} from course_catalog -- "
+                  f"{len(subjects_by_paper[pk])} distinct subjects share this paper_no "
+                  f"({sorted(subjects_by_paper[pk])}); needs a schema decision, see comment above)")
+        all_rows = [r for r in all_rows
+                    if (r["course"], r["level"], r["paper_no"]) not in colliding_papers]
+
     # Sanity check: the unique key (course, level, paper_no, chapter_no,
     # unit_no) must actually be unique across everything collected --
     # a collision here would mean two real chapters mapping to the same

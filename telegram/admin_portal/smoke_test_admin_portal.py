@@ -59,6 +59,7 @@ def _cleanup_audit(conn):
     conn.execute("DELETE FROM mcq_issue_reports WHERE mcq_id LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
     conn.execute("DELETE FROM faculty_report_deliveries WHERE delivered_to LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
     conn.execute("DELETE FROM faculty_master WHERE notes LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
+    conn.execute("DELETE FROM admin_login_attempts WHERE username LIKE 'smoketest%'")
     conn.commit()
 
 
@@ -88,6 +89,34 @@ def main():
     check("flashes an 'Invalid' message", b"Invalid" in resp.data)
     with client.session_transaction() as sess:
         check("session has no username after a failed login", "username" not in sess)
+
+    print("\n--- Step 2b: failed-login lockout (2026-08-18, LOGGING-ARCHITECTURE.md sec7) ---")
+    LOCKOUT_TEST_USER = "smoketest_lockout_user"   # NEVER REAL_USERNAME -- would risk locking out the real admin mid-test-run
+    conn.execute("DELETE FROM admin_login_attempts WHERE username=?", (LOCKOUT_TEST_USER,))
+    conn.commit()
+    for i in range(auth_module.MAX_FAILED_ATTEMPTS):
+        resp = client.post("/login", data={"username": LOCKOUT_TEST_USER, "password": "wrong"})
+        check(f"failed attempt #{i+1}/{auth_module.MAX_FAILED_ATTEMPTS} does not yet lock out ({'expected before threshold' if i < auth_module.MAX_FAILED_ATTEMPTS - 1 else 'this one crosses the threshold'})",
+              resp.status_code == 200)
+    attempts_logged = conn.execute(
+        "SELECT COUNT(*) FROM admin_login_attempts WHERE username=?", (LOCKOUT_TEST_USER,)
+    ).fetchone()[0]
+    check(f"exactly {auth_module.MAX_FAILED_ATTEMPTS} attempts were logged to admin_login_attempts",
+          attempts_logged == auth_module.MAX_FAILED_ATTEMPTS)
+    check(f"is_locked_out() is now True after {auth_module.MAX_FAILED_ATTEMPTS} failures",
+          auth_module.is_locked_out(LOCKOUT_TEST_USER) is True)
+    # Even a request whose password would otherwise verify correctly must
+    # still be refused once locked out -- the whole point of a lockout.
+    with patch("app.auth.verify_credentials", return_value=True):
+        resp = client.post("/login", data={"username": LOCKOUT_TEST_USER, "password": "actually-correct-now"})
+        check("a locked-out account is refused even with a password that WOULD verify",
+              resp.status_code == 200 and b"Too many failed attempts" in resp.data)
+        with client.session_transaction() as sess:
+            check("no session was created for the locked-out attempt", "username" not in sess)
+    check("a DIFFERENT username is completely unaffected by this lockout",
+          auth_module.is_locked_out("smoketest_some_other_user") is False)
+    conn.execute("DELETE FROM admin_login_attempts WHERE username=?", (LOCKOUT_TEST_USER,))
+    conn.commit()
 
     print("\n--- Step 3: login accepts real credentials (from telegram/.env) ---")
     import os
