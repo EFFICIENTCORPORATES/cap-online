@@ -63,6 +63,7 @@ from telegram.ext import (
 
 import study_hub_bot as sh
 import exam_hub_bot as eh
+from telegram_safety import safe_edit_message_text  # noqa: E402 -- 2026-08-18, see that module's own docstring
 import cancel_utils  # noqa: E402 -- telegram/bots/cancel_utils.py, universal "get me out of this" escape hatch (2026-08-16)
 import fuzzy_trigger  # noqa: E402 -- telegram/bots/fuzzy_trigger.py, "did you mean X?" typo confirmation (2026-08-16)
 import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17)
@@ -135,7 +136,7 @@ async def hub_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if choice == "study":
         context.user_data.clear()
         text, markup = _study_hub_own_entry()
-        await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
+        await safe_edit_message_text(query, text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
     elif choice == "exam":
         context.user_data.clear()
@@ -178,7 +179,7 @@ async def hub_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             # exam_hub_bot.py's own start() -- never buried inside the
             # Markdown-formatted menu text.
             await context.bot.send_message(chat_id=query.message.chat_id, text=welcome_bonus_text, parse_mode=ParseMode.HTML)
-        await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
+        await safe_edit_message_text(query, text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
 
 def _fuzzy_dispatch():

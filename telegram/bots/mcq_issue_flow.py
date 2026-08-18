@@ -44,6 +44,7 @@ from pathlib import Path
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.constants import ParseMode
+from telegram.helpers import escape_markdown
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
@@ -81,12 +82,23 @@ async def start_issue_report(query, context, bot_id: str, *, mcq_id: str, human_
         "chapter_slug": chapter_slug, "chapter_label": chapter_label, "return_markup": return_markup,
         "awaiting_description": False,
     }
-    id_line = f"ID: {human_id}\n\n" if human_id else ""
+    # BUG FIXED 2026-08-18: human_id values (e.g. "CMA_L2_P05_C12_U0_00001")
+    # contain underscores, which legacy ParseMode.MARKDOWN treats as an
+    # unescaped italic delimiter -- an odd underscore count (the common
+    # case for this ID shape) left one unterminated and Telegram rejected
+    # the WHOLE message with BadRequest: "can't parse entities", crashing
+    # this screen before the student ever saw a category button. Legacy
+    # Markdown has no documented escaping mechanism at all, so the fix is
+    # MARKDOWN_V2 + escape_markdown(..., entity_type="code") (only escapes
+    # backtick/backslash, correct for text placed inside a `code` span) --
+    # not a hand-rolled underscore replace, which would silently break
+    # again the next time this ID format gains a new special character.
+    id_line = f"ID: `{escape_markdown(str(human_id), version=2, entity_type='code')}`\n\n" if human_id else ""
     keyboard = [[InlineKeyboardButton(label, callback_data=f"issuecat:{i}")] for i, (_code, label) in enumerate(CATEGORIES)]
     keyboard.append([InlineKeyboardButton("✖ Cancel", callback_data="issuecancel")])
     await query.edit_message_text(
         f"\U0001F6A9 *Report an Issue*\n\n{id_line}What's wrong with this question?",
-        parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode=ParseMode.MARKDOWN_V2, reply_markup=InlineKeyboardMarkup(keyboard),
     )
 
 

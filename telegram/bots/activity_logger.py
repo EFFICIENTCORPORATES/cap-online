@@ -309,9 +309,28 @@ def log_activity(handler_kind: str, bot_id: str, always_redact: bool = False):
                     )
                 except Exception as e:
                     logger.warning(f"activity_logger: logging itself failed (non-fatal, handler result unaffected): {e}")
-                try:
-                    _correlation_id_var.reset(token)
-                except Exception:
-                    pass
+                # BUG FIXED 2026-08-18: this used to reset() unconditionally,
+                # which defeated the ENTIRE point of correlation IDs for the
+                # one case they matter most -- an error. `raise` above
+                # re-raises, but the exception doesn't actually leave this
+                # function until AFTER this `finally` block finishes -- so an
+                # unconditional reset() here put the contextvar back to "-"
+                # BEFORE the exception ever reached PTB's own
+                # `Application.process_update`, which is what logs the real
+                # traceback (via logging.Filter, same task, no intervening
+                # correlation_id_var.set() in between). Confirmed by
+                # reproducing the exact sequence in isolation, and by
+                # checking real production tracebacks: every one showed the
+                # unset default "-" instead of the row's actual correlation
+                # UUID. Fix: only reset on the SUCCESS path. On error, leave
+                # it set -- PTB's traceback log line (moments later, same
+                # task) now gets the real ID; the NEXT wrapped handler call
+                # overwrites it with a fresh one via its own .set() before
+                # anything else meaningful runs, so nothing leaks long-term.
+                if status == "ok":
+                    try:
+                        _correlation_id_var.reset(token)
+                    except Exception:
+                        pass
         return wrapper
     return decorator

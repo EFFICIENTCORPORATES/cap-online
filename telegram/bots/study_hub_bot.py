@@ -85,6 +85,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
 import profile_flow  # noqa: E402 -- telegram/bots/profile_flow.py, the "profile"/"change profile" identity flow (2026-08-11)
 import report_flow  # noqa: E402 -- telegram/bots/report_flow.py, now also reachable from Study Hub via its on-demand "report"/"analysis"/"email"/"mail" trigger (2026-08-11)
+from telegram_safety import safe_edit_message_text  # noqa: E402 -- 2026-08-18, see that module's own docstring
 import cancel_utils  # noqa: E402 -- telegram/bots/cancel_utils.py, universal "get me out of this" escape hatch (2026-08-16)
 import fuzzy_trigger  # noqa: E402 -- telegram/bots/fuzzy_trigger.py, "did you mean X?" typo confirmation (2026-08-16)
 import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17)
@@ -476,7 +477,7 @@ async def route_browse(query, context, data):
             [InlineKeyboardButton(f"{CATEGORY_ICONS.get(c, '')} {c}", callback_data=f"cat:{i}")]
             for i, c in enumerate(CATEGORIES)
         ]
-        await query.edit_message_text(
+        await safe_edit_message_text(query,
             "Select a *Category*:", parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(keyboard),
         )
@@ -487,7 +488,7 @@ async def route_browse(query, context, data):
         courses = catalog.courses_for_category(category)
         if not courses:
             keyboard = [[InlineKeyboardButton("⬅️ Back", callback_data="browse:start")]]
-            await query.edit_message_text(
+            await safe_edit_message_text(query,
                 f"No *{category}* available yet — check back soon!",
                 parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
             )
@@ -499,7 +500,7 @@ async def route_browse(query, context, data):
             return
         keyboard = [[InlineKeyboardButton(c, callback_data=f"crs:{cat_idx}:{c}")] for c in courses]
         keyboard.append([InlineKeyboardButton("⬅️ Back", callback_data="browse:start")])
-        await query.edit_message_text(
+        await safe_edit_message_text(query,
             f"Category: *{category}*\nSelect your *Course*:", parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(keyboard),
         )
@@ -515,7 +516,7 @@ async def route_browse(query, context, data):
             [InlineKeyboardButton(lv, callback_data=f"lvl:{cat_idx}:{course}:{lv}")] for lv in levels
         ]
         keyboard.append([InlineKeyboardButton("⬅️ Back", callback_data=effective_course_back(cat_idx, category))])
-        await query.edit_message_text(
+        await safe_edit_message_text(query,
             f"Category: *{category}* | Course: *{course}*\nSelect your *Level*:",
             parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
         )
@@ -537,7 +538,7 @@ async def route_browse(query, context, data):
             for i, s in enumerate(subjects)
         ]
         keyboard.append([InlineKeyboardButton("⬅️ Back", callback_data=effective_level_back(cat_idx, category, course))])
-        await query.edit_message_text(
+        await safe_edit_message_text(query,
             f"Category: *{category}* | Course: *{course}* | Level: *{level}*\nSelect your *Subject*:",
             parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
         )
@@ -557,7 +558,7 @@ async def route_browse(query, context, data):
             keyboard.append(
                 [InlineKeyboardButton("⬅️ Back", callback_data=effective_subject_back(cat_idx, category, course, level))]
             )
-            await query.edit_message_text(
+            await safe_edit_message_text(query,
                 f"Subject: *{subject}*\nSelect *Paper Type*:",
                 parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
             )
@@ -575,7 +576,7 @@ async def route_browse(query, context, data):
             keyboard.append(
                 [InlineKeyboardButton("⬅️ Back", callback_data=effective_subject_back(cat_idx, category, course, level))]
             )
-            await query.edit_message_text(
+            await safe_edit_message_text(query,
                 f"Category: *{category}* | Course: *{course}* | Level: *{level}* | Subject: *{subject}*\n"
                 f"Select a *Chapter*:",
                 parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
@@ -594,7 +595,7 @@ async def route_browse(query, context, data):
         keyboard.append(
             [InlineKeyboardButton("⬅️ Back", callback_data=f"subj:{cat_idx}:{course}:{level}:{subj_idx}")]
         )
-        await query.edit_message_text(
+        await safe_edit_message_text(query,
             f"Subject: *{subject}* | Paper Type: *{paper_type}*\nSelect a file:",
             parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
         )
@@ -606,7 +607,7 @@ async def route_browse(query, context, data):
     elif action == "mainmenu":
         context.user_data.clear()
         text, markup = welcome_text_and_keyboard()
-        await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
+        await safe_edit_message_text(query, text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
 
 async def send_file(query_or_update, context, row_id):
