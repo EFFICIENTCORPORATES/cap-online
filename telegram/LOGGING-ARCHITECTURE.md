@@ -687,3 +687,82 @@ its own log content landing in the correct file.
   20MB Layer-1 threshold, so they won't rotate until they cross it naturally --
   expected, not a bug; the policy governs growth going forward, not a one-time
   cleanup of pre-existing content.
+
+---
+
+## 11. Two more §8/§7 items closed the same day (2026-08-18, later)
+
+Asked directly what was still pending per this doc; both answered and built the same
+session rather than left open further.
+
+### 11.1 §8 Q1 answered: `user_activity_log` retention = 180 days
+
+Pranav's explicit choice (AskUserQuestion, 2026-08-18) -- distinct from §10's R2
+log-FILE retention (90 days), which governs shipped `.log.gz` chunks, not this DB
+table's own rows. New `telegram/tools/purge_activity_log.py` -- deletes
+`user_activity_log` rows older than `RETENTION_DAYS = 180` via
+`strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-180 days')`, the same format the column
+itself is stored in (no Python-vs-SQLite format mismatch risk). `--dry-run` reports
+the count without touching anything. Deliberately a SEPARATE script from
+`backup_to_cloudflare.py`/`rotate_logs_to_r2.py` (different concern -- deleting DB
+rows, not shipping files -- and a much lighter cadence, daily is generous for a
+180-day window), matching this platform's established "one script, one job"
+precedent. Scheduled via a new Task Scheduler job, "1LAVYA Activity Log Purge",
+daily -- see `CRONJOBS.md`.
+
+Verified with a real, synthetic-row test against the real DB (not just a 0-rows-
+deleted no-op run, which wouldn't have proven the `WHERE` clause correct): inserted
+one row 200 days old and one row 1 day old, ran the real purge, confirmed the old
+row was deleted and the recent row survived, cleaned up. New permanent regression
+test, `telegram/tools/smoke_test_purge_activity_log.py` (5 checks, including an
+exactly-at-the-180-day-boundary case), plus the real Task Scheduler job triggered
+once for real (`LastTaskResult: 0`, correct `NextRunTime`, output confirmed landing
+in its own `purge-activity-log.log`, not another script's -- learned that exact
+import-order lesson the hard way in §10's bug #3, applied correctly here from the
+start).
+
+### 11.2 §7's "security logs" item, the cheap slice: failed-login logging + lockout
+
+Not the full deferred pillar (still no IP-reputation/abuse-pattern detection, still
+not scheduled) -- specifically the piece flagged as worth doing NOW rather than
+deferred further: the Admin Portal controls live bot restarts and (with Test Mode
+billing live) real money, and had zero record of anyone attempting to brute-force
+its login before this.
+
+New `admin_login_attempts` DB table (`schema.sql`) -- one row per login attempt,
+success or failure, for BOTH the super-admin and every `bot_admin` account (one
+shared login route, one shared table). `admin_portal/auth.py` gained
+`log_login_attempt()` (best-effort, never blocks the actual login outcome -- same
+"logging must never break the product" principle `activity_logger.py` already
+established) and `is_locked_out()` -- `MAX_FAILED_ATTEMPTS = 5` within a
+`LOCKOUT_WINDOW_MINUTES = 15` rolling window. `app.py`'s `/login` route checks
+`is_locked_out()` FIRST, before even looking at the submitted password -- a
+locked-out account is refused even with the CORRECT password, which is the whole
+point.
+
+**Deliberate design choice, stated plainly rather than left implicit**: a
+SUCCESSFUL login does NOT reset the failure counter -- it's a pure rolling window
+that only ages out after `LOCKOUT_WINDOW_MINUTES`. More conservative (an attacker
+who gets lucky once doesn't get a fresh attempt budget) at the cost of a legitimate
+admin who mistypes a few times, gets it right, then mistypes again minutes later
+finding themselves locked out. No real harm either way -- the lockout is time-boxed,
+never permanent, never requires a manual unlock.
+
+Verified three ways: (1) a real, synthetic-username test directly against
+`auth.py`'s functions (4 failures = not locked, 5th = locked, a different username
+unaffected, a success does NOT reset the count); (2) a new Step 2b in
+`smoke_test_admin_portal.py` (10 checks) driving the REAL `/login` route through
+Flask's test client, confirming the lockout message renders and no session is
+created even when the password would otherwise verify; (3) a live curl-based test
+against the actual restarted, running process -- 5 failed POSTs, a 6th correctly
+showing "Too many failed attempts," confirmed via a direct query against the real
+`admin_login_attempts` table, cleaned up. `1lavya-admin-portal` restarted, confirmed
+clean (fresh PID, `crash.log` stays at 0 bytes, the real login flow for the actual
+admin account re-verified working immediately after via the existing Step 3 check).
+
+**Still deferred, unchanged**: IP-based rate limiting/reputation, a dedicated Admin
+Portal viewer page for `admin_login_attempts` (the table exists and is queryable via
+the existing SQL Query tab today; a dedicated Analytics view wasn't asked for this
+pass), and change/deployment logs (§7 -- still low priority at single-operator
+scale). Full regression suite (10 smoke-test files) re-run clean after both 11.1 and
+11.2; `health_check.py`: same pre-existing failures, nothing new.

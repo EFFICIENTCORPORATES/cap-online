@@ -59,7 +59,25 @@ def _cleanup_audit(conn):
     conn.execute("DELETE FROM mcq_issue_reports WHERE mcq_id LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
     conn.execute("DELETE FROM faculty_report_deliveries WHERE delivered_to LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
     conn.execute("DELETE FROM faculty_master WHERE notes LIKE ?", (f"%{SYNTHETIC_MARKER}%",))
-    conn.execute("DELETE FROM admin_login_attempts WHERE username LIKE 'smoketest%'")
+    conn.execute("DELETE FROM admin_login_attempts WHERE username LIKE 'smoketest%' OR username LIKE 'curltest%'")
+    # BUG FIXED 2026-08-18, same day admin_login_attempts was introduced:
+    # Step 2/Step 3 below both POST to /login using REAL_USERNAME (the
+    # actual configured admin username, e.g. "pranav") to exercise the
+    # real wrong-password/right-password paths -- every one of those POSTs
+    # now ALSO logs a real row to admin_login_attempts via the real
+    # auth.log_login_attempt() call (not mocked), same as a genuine login
+    # would. Running this suite repeatedly (as this session's own
+    # verification passes did) left a growing trail of test-generated
+    # rows under the REAL admin's username -- more than cosmetic: enough
+    # runs within LOCKOUT_WINDOW_MINUTES could have actually LOCKED OUT
+    # THE REAL ADMIN from their own portal. Found by directly querying the
+    # live table after this session's own repeated runs, not anticipated
+    # in advance. Every row for REAL_USERNAME is test-generated noise in
+    # THIS process either way (a real concurrent login during a maybe-
+    # 1-second test run is vanishingly unlikely, and losing one audit row
+    # is a far smaller harm than an accidental real lockout) -- clean ALL
+    # of it, not just a synthetic-prefix subset.
+    conn.execute("DELETE FROM admin_login_attempts WHERE username = ?", (REAL_USERNAME,))
     conn.commit()
 
 

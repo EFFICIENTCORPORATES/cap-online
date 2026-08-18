@@ -54,6 +54,16 @@ list here is worse than no list.
 | **Doc** | `LOGGING-ARCHITECTURE.md` §10 (the full design, including 4 real bugs found + fixed while building this) |
 | **Manual run** | `python telegram/tools/rotate_logs_to_r2.py --dry-run` (report only, touches nothing) / `--force` (act regardless of current total, for testing) |
 
+### 1LAVYA Activity Log Purge *(new, 2026-08-18)*
+| | |
+|---|---|
+| **Schedule** | Daily at 4:00 AM local — after the 3:30 AM Platform Backup |
+| **Runs** | `.venv\Scripts\python.exe telegram\tools\purge_activity_log.py` |
+| **What it does** | Deletes `user_activity_log` DB rows older than **180 days** (Pranav's explicit choice, 2026-08-18 — `LOGGING-ARCHITECTURE.md` §8 Q1). Distinct from the Log Rotation job above — this deletes DB *rows*, not log *files* |
+| **Log** | `telegram/database/run/logs/purge-activity-log.log` (self-bounded, same Layer-1 policy) |
+| **Doc** | `LOGGING-ARCHITECTURE.md` §11.1 |
+| **Manual run** | `python telegram/tools/purge_activity_log.py --dry-run` (reports the row count that would be deleted, touches nothing) |
+
 ### 1LAVYA Day End Faculty Reports
 | | |
 |---|---|
