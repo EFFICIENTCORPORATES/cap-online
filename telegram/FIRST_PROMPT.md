@@ -86,6 +86,7 @@ otherwise, see that script's own docstring.
 | Every scheduled/unattended job on this platform (Windows Task Scheduler + Startup) — the single "what runs on a timer" list | `CRONJOBS.md` | `tools/ensure_bots_running.bat`, `tools/backup_to_cloudflare.py`, `tools/rotate_logs_to_r2.py`, `tools/generate_day_end_faculty_reports.py` |
 | Admin Portal (Flask, :8788) | `admin_portal/README.md` | `admin_portal/app.py` (Overview's 5th "SQL Query" tab, added 2026-08-17, is the newest addition — see next row) |
 | Writing SQL against `platform.db` (schema map, verified join recipes, SQLite gotchas) + the read-only ad hoc SQL Query tab (Overview → SQL Query, filter/sort/paginate) | `_claude/skills/SKILL-telegram-sql-query.md` | `admin_portal/sql_query_tool.py` |
+| Ready-to-run SQL reports for non-technical use (active students, MCQ-practice counts, top performers, contact-info coverage) — each with one clearly marked number to edit for the time window/threshold | `SQL-QUERY-COOKBOOK.md` | `admin_portal/sql_query_tool.py` |
 | Down/up alerting | `/CLAUDE.md` §11 (2026-08-10 entry) | `bots/watcher_bot.py`, `config/alerts.json` |
 | Live dashboard (:8787, pre-Admin-Portal) | `/CLAUDE.md` §11 | `tools/dashboard_server.py`, `database/analytics.py`, `database/dashboard_html.py` |
 | 1LAVYA branding kit (colors, logo, PDF/email header-footer) | `branding/README.md` | `branding/brand_kit.py` |
