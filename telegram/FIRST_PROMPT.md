@@ -28,7 +28,10 @@ just work, with zero code changes. This depends on a discipline audited repeated
 `telegram/` reads a file outside `telegram/` — the one historical exception,
 `tools/build_exam_bot_mcq_export.py`, now prefers the live `first_run/` source when present
 and falls back to a bundled snapshot (`reference-data/questions_index_snapshot.json`)
-otherwise, see that script's own docstring.
+otherwise, see that script's own docstring. As of 2026-08-18 this also covers
+non-code context: the telegram-relevant Claude skill docs and a point-in-time export of
+Claude's own session memory both live inside `_claude/` here now too — see that
+folder's own `README.md`.
 
 **First-time setup in a new location:**
 1. Create a Python 3.11+ venv and `pip install -r telegram/requirements.txt` — this file
@@ -69,7 +72,7 @@ otherwise, see that script's own docstring.
 
 | Topic | Read this doc | Code lives in |
 |---|---|---|
-| Who owns this platform, faculty model | `/CLAUDE.md` §11 opening + `_claude/memory/1lavya-*` | — |
+| Who owns this platform, faculty model | `/CLAUDE.md` §11 opening + `_claude/memory/1lavya-*` (a portable, point-in-time snapshot living right here in `telegram/` — see `_claude/README.md`) | — |
 | Which bot processes exist, tokens, ports | `config/bots.README.md` | `config/bots.json` |
 | What each faculty teaches / content scope | `config/tenants.README.md` | `config/tenants.json` |
 | Shared platform DB (schema, tables, retry logic) | `database/README.md` | `database/schema.sql`, `database/db.py` |
@@ -85,18 +88,19 @@ otherwise, see that script's own docstring.
 | Logging/observability: fine-grained activity log, correlation IDs, `bot_admin` RBAC + Activity Log viewer, log ROTATION (1GB local budget, overflow → R2), `user_activity_log` retention (180 days), failed-admin-login lockout | `LOGGING-ARCHITECTURE.md` (§9 = activity log/correlation/RBAC build, §10 = rotation, §11 = retention + login lockout) | `bots/activity_logger.py`, `admin_portal/auth.py` + `/logs/activity`, `config/admin_access.json`, `admin_portal/manage_bot_admin.py`, `database/log_rotation.py` (Layer 1), `tools/rotate_logs_to_r2.py` (Layer 2, hourly), `tools/purge_activity_log.py` (daily) — see `CRONJOBS.md` for all 3 schedules |
 | Every scheduled/unattended job on this platform (Windows Task Scheduler + Startup) — the single "what runs on a timer" list | `CRONJOBS.md` | `tools/ensure_bots_running.bat`, `tools/backup_to_cloudflare.py`, `tools/rotate_logs_to_r2.py`, `tools/generate_day_end_faculty_reports.py` |
 | Admin Portal (Flask, :8788) | `admin_portal/README.md` | `admin_portal/app.py` (Overview's 5th "SQL Query" tab, added 2026-08-17, is the newest addition — see next row) |
-| Writing SQL against `platform.db` (schema map, verified join recipes, SQLite gotchas) + the read-only ad hoc SQL Query tab (Overview → SQL Query, filter/sort/paginate) | `_claude/skills/SKILL-telegram-sql-query.md` | `admin_portal/sql_query_tool.py` |
+| Writing SQL against `platform.db` (schema map, verified join recipes, SQLite gotchas) + the read-only ad hoc SQL Query tab (Overview → SQL Query, filter/sort/paginate) | `_claude/skills/SKILL-telegram-sql-query.md` (copied here 2026-08-18, portable) | `admin_portal/sql_query_tool.py` |
 | Ready-to-run SQL reports for non-technical use (active students, MCQ-practice counts, top performers, contact-info coverage) — each with one clearly marked number to edit for the time window/threshold | `SQL-QUERY-COOKBOOK.md` | `admin_portal/sql_query_tool.py` |
 | Down/up alerting | `/CLAUDE.md` §11 (2026-08-10 entry) | `bots/watcher_bot.py`, `config/alerts.json` |
 | Live dashboard (:8787, pre-Admin-Portal) | `/CLAUDE.md` §11 | `tools/dashboard_server.py`, `database/analytics.py`, `database/dashboard_html.py` |
 | 1LAVYA branding kit (colors, logo, PDF/email header-footer) | `branding/README.md` | `branding/brand_kit.py` |
 | Content field-consistency validator | `/CLAUDE.md` §11 (2026-08-10 Content Health entry) | `tools/validate_content_json.py` |
 | Process management (start/stop/restart/status) | `/CLAUDE.md` §11 | `tools/manage_bots.py` (+ `.bat`) |
-| CA Study Hub catalog build (flat-folder PDFs → Excel) | `_claude/skills/SKILL-study-bot-catalog-pipeline.md` | `tools/scan_study_bot_source.py`, `tools/build_study_bot_catalog.py` |
-| CS/CMA chapter ToC extraction + PDF splitting | `_claude/skills/SKILL-cs-cma-toc-pipeline.md` | `tools/scan_cs_cma_toc.py`, `tools/build_cs_cma_catalog.py`, `tools/split_cs_cma_pdfs.py` |
+| CA Study Hub catalog build (flat-folder PDFs → Excel) | `_claude/skills/SKILL-study-bot-catalog-pipeline.md` (copied here 2026-08-18, portable) | `tools/scan_study_bot_source.py`, `tools/build_study_bot_catalog.py` |
+| CS/CMA chapter ToC extraction + PDF splitting | `_claude/skills/SKILL-cs-cma-toc-pipeline.md` (copied here 2026-08-18, portable) | `tools/scan_cs_cma_toc.py`, `tools/build_cs_cma_catalog.py`, `tools/split_cs_cma_pdfs.py` |
+| Study Hub bot's unified 3-category/3-course architecture (the layer above both catalog-pipeline skills above) | `_claude/skills/SKILL-study-hub-bot-architecture.md` (copied here 2026-08-18, portable) | `bots/study_hub_bot.py` |
 | Faculty MCQ docx → JSON conversion (deterministic, zero-AI) | `config/FACULTY-MCQ-TEMPLATE.md` | `tools/convert_faculty_mcq_docx.py`, `tools/merge_faculty_mcq_sources.py` |
 | MCQ JSON creation prompt for external AI models (PDF → MCQ JSON) | `base_formats/MCQ_PROMPT.md` | `base_formats/generate_base_formats.py` (field-contract source), `tools/ingest_ca_foundation_accounting_economics_mcqs.py` (the ingestion pattern any resulting batch still needs) |
-| Question Bank Book (PYQ/MTP/RTP → chapter books, separate from this bot platform) | `_claude/skills/SKILL-question-bank-pipeline-overview.md` | `first_run/` (repo root, not under `telegram/`) |
+| Question Bank Book (PYQ/MTP/RTP → chapter books, separate from this bot platform) | `_claude/skills/SKILL-question-bank-pipeline-overview.md` (cap-online REPO ROOT only, not copied here — this is a different pillar, not this platform's own content) | `first_run/` (repo root, not under `telegram/`) |
 | Test Mode (paid, timed mock tests) + wallet/billing (identity, credits, Razorpay recharge) | `/TELEGRAM-TEST-MODE-SYSTEM.md` (repo root — canonical; `assets/exam_bot/Tests/TEST-MODE-ROADMAP.md` is supplementary) | `bots/test_flow.py`, `bots/wallet_flow.py`, `database/wallet.py`, `database/identity.py`, `database/razorpay_client.py` |
 
 ## Folder map
@@ -116,6 +120,7 @@ otherwise, see that script's own docstring.
 | `assets/backup pdfs/` | Pre-restructuring backup, not read by anything live |
 | `source-docs/` | Generated Excel catalogs (`StudyHub_Master_Catalog.xlsx` is what Study Hub actually loads) |
 | `reference-data/` | Bundled snapshots of canonical data owned by OTHER cap-online pillars (e.g. the CA Inter Adv Acc topic index, the Question Bank Book's `questions_index.json`) — exist purely so scripts under `telegram/` still run once this folder is detached from the rest of cap-online. See each file's own `.README.md`/`_snapshot_note` for provenance and how to refresh it; these go stale on their own, never auto-update |
+| `_claude/` | Portable copy (added 2026-08-18) of the telegram-relevant `_claude/skills/` docs AND a point-in-time export of Claude's own session memory for this project (normally stored outside git entirely, machine-and-path-specific) — see `_claude/README.md` for exactly what's here and its "goes stale, doesn't auto-update" caveat |
 | `requirements.txt` | This folder's OWN pinned dependency list (added 2026-08-18) — separate from the cap-online repo's root-level one, specifically so it travels with `telegram/` on its own |
 | `.gitignore` | This folder's OWN ignore rules (added 2026-08-18, mirrors the cap-online root `.gitignore`'s telegram-relevant entries) — so `telegram/` is safe to `git add .` inside any repo it's copied into, not just this one |
 | `*.env`, `*.env.example`, `creds.txt` | Secrets — gitignored, never commit. `.env.example` is the audited checklist of every real env var the code reads |
