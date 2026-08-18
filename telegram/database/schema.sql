@@ -1087,3 +1087,47 @@ CREATE TABLE IF NOT EXISTS admin_accounts (
     created_at     TEXT NOT NULL,
     updated_at     TEXT NOT NULL
 );
+
+-- ===========================================================================
+-- BROADCAST MESSAGES -- added 2026-08-18. Pranav's explicit ask, verbatim
+-- (after the 2026-08-17 welcome-bonus broadcast, an ad hoc script with no
+-- persistence): "all these broadcast message which are being done...should
+-- get stored in a persistent table inside of a database..with all relevant
+-- details like timestamp, category, chat id, bot id, message content
+-- html.. and also if we can track their interactions on these message then
+-- the same should also get tracked and stored." Two tables, same
+-- "current-state row + append-only-enough trail" shape this platform
+-- already uses for wallet_ledger/leaderboard_broadcast_log/
+-- faculty_report_deliveries -- one row per CAMPAIGN (the message itself,
+-- sent once, to many people) and one row per DELIVERY (one specific
+-- chat_id's copy, its send outcome, and -- new -- whether/how they
+-- interacted with it). Every future broadcast (welcome bonuses, milestone
+-- congratulations, announcements, etc.) should write through these tables
+-- via telegram/database/broadcast.py rather than being a one-off,
+-- unlogged script -- see that module's own docstring.
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS broadcast_campaigns (
+    campaign_id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    category                TEXT NOT NULL,   -- free text, not enum-constrained -- e.g. 'welcome_bonus', 'mcq_milestone_congrats' -- same "loose on purpose, categories will grow" reasoning as bot_interactions.event_type
+    message_text             TEXT NOT NULL,  -- the plain-text template (before any per-recipient personalization, e.g. an MCQ count)
+    message_html               TEXT,         -- the exact HTML/markup actually sent (parse_mode=HTML), if any -- NULL if the send was plain text
+    criteria_description          TEXT,       -- human-readable description of who was targeted, e.g. "MCQs answered > 10, all-time, real students, excluding admin/smoke-test accounts"
+    created_by                      TEXT,     -- e.g. a script filename or 'admin:pranav-session' -- audit, not a login
+    created_at                        TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS broadcast_deliveries (
+    delivery_id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    campaign_id             INTEGER NOT NULL REFERENCES broadcast_campaigns(campaign_id),
+    telegram_user_id          INTEGER NOT NULL,   -- the chat_id this specific copy was sent to
+    bot_id                      TEXT NOT NULL,    -- which bot process actually sent it (resolved per-recipient -- a student can only be DM'd by a bot they've started)
+    message_text                  TEXT,           -- the ACTUAL text sent to THIS recipient (may differ from the campaign's own template, e.g. their real MCQ count) -- kept per-row so the true historical record never needs reconstructing from a template + external data later
+    sent_at                          TEXT,
+    status                             TEXT NOT NULL CHECK (status IN ('sent', 'failed')),
+    error_detail                         TEXT,
+    interacted_at                          TEXT,   -- NULL until the recipient does something trackable (e.g. taps a button embedded in the message) -- never guessed/inferred from unrelated activity
+    interaction_type                         TEXT   -- e.g. 'report_button_tap' -- free text, not enum-constrained, same reasoning as category above
+);
+
+CREATE INDEX IF NOT EXISTS idx_broadcast_deliveries_campaign ON broadcast_deliveries(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_broadcast_deliveries_user     ON broadcast_deliveries(telegram_user_id);

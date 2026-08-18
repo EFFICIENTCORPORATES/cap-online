@@ -34,6 +34,21 @@ reuses the bare `restart` callback_data (no `report:` prefix at all) so it
 falls through to button_router's own already-registered handler instead of
 this module needing to reimplement "reset and show the entry screen."
 
+BROADCAST INTERACTION TRACKING (added 2026-08-18): `report:bcast:
+<campaign_id>:<bot_id>` is a THIRD `report:` sub-value, deliberately
+reusing the exact same already-registered `report:` CallbackQueryHandler
+pattern in every bot -- no bot script needed a new handler registration
+for this to work (see telegram/tools/broadcast_sender.py's
+get_report_button_markup(), which builds this exact callback_data). A tap
+logs a real interaction (telegram/database/broadcast.py's
+log_interaction()) against that recipient's specific broadcast_deliveries
+row, then drops straight into the SAME channel-picker + delivery pipeline
+every other report request uses -- a broadcast's "Get My Report" button IS
+the on-demand trigger, not a separate feature. `bot_id` is embedded
+directly in the callback_data (not read from context.user_data) because a
+student tapping this button may never have used the report flow before,
+so context.user_data["report_flow_bot_id"] can't be assumed to exist yet.
+
 POST-DELIVERY FLOW (added 2026-08-11, Pranav's ask after live-testing:
 "it should have asked me whether I need report in email as well" when he'd
 only chosen Telegram): after delivering through whichever channel(s) the
@@ -71,6 +86,7 @@ import student_analytics  # noqa: E402
 import report_delivery  # noqa: E402
 import generate_student_report  # noqa: E402
 import contact_utils  # noqa: E402 -- shared with profile_flow.py, same directory (telegram/bots/)
+import broadcast  # noqa: E402 -- telegram/database/broadcast.py (2026-08-18), for the "report:bcast:<id>:<bot_id>" branch below
 
 logger = logging.getLogger(__name__)
 
@@ -264,6 +280,33 @@ async def report_flow_callback(update, context):
                 # module (which all route through _offer_continue_or_done()
                 # or a similar CTA). Give the same "what's next" choice.
                 await _offer_continue_or_done(context, query.message.chat_id)
+        elif value.startswith("bcast:"):
+            # A broadcast's "Get My Report" button -- see this module's own
+            # docstring ("BROADCAST INTERACTION TRACKING") and
+            # telegram/database/broadcast.py. value shape:
+            # "bcast:<campaign_id>:<bot_id>".
+            _, campaign_id_str, bcast_bot_id = value.split(":", 2)
+            conn = platform_db.get_connection()
+            platform_db.init_schema(conn)
+            try:
+                campaign_id = int(campaign_id_str)
+            except ValueError:
+                campaign_id = None
+            if campaign_id is not None:
+                matched = broadcast.log_interaction(conn, campaign_id, query.from_user.id, "report_button_tap")
+                if not matched:
+                    # A stale/replayed callback_data referencing a
+                    # campaign_id that was never actually sent to this
+                    # chat_id -- logged, never crashes the tap. The report
+                    # flow itself still proceeds either way (a student
+                    # tapping a button that happens to reference bad
+                    # tracking data should still get their report).
+                    logger.warning(f"broadcast.log_interaction: no matching delivery row for "
+                                    f"campaign_id={campaign_id} telegram_user_id={query.from_user.id}")
+            context.user_data["report_flow_bot_id"] = bcast_bot_id
+            await query.edit_message_text("Great! Where would you like it sent?")
+            await _send_channel_picker(context, query.message.chat_id, "Choose a delivery channel:")
+            _log_event(conn, query.from_user.id, "ondemand_confirmed", detail=f"via broadcast campaign {campaign_id_str}")
         # "restart" (Continue Practicing) is NOT handled here -- it's a bare
         # callback_data value that matches button_router's own pattern
         # (registered separately in exam_hub_bot.py's main()), reusing the

@@ -60,12 +60,14 @@ import generate_student_report  # noqa: E402
 import report_delivery  # noqa: E402
 import cf_email  # noqa: E402
 import report_flow  # noqa: E402
+import broadcast  # noqa: E402 -- telegram/database/broadcast.py (2026-08-18), for Step 7f
 
 SYNTHETIC_USER_ID = -999999001  # negative, well outside any real Telegram user id
 SYNTHETIC_USER_ID_2 = -999999002  # separate id for the already-past-threshold regression test
 SYNTHETIC_USER_ID_3 = -999999003  # separate id for the post-delivery upsell/wrap-up flow test
 SYNTHETIC_USER_ID_4 = -999999004  # separate id for the on-demand trigger flow test
 SYNTHETIC_USER_ID_5 = -999999005  # separate id for the existing-contact-info reuse test
+SYNTHETIC_USER_ID_6 = -999999006  # separate id for the broadcast "Get My Report" button test (2026-08-18)
 REAL_TEST_USER_ID = 5777734732  # a real student with real data, used read-only (no writes)
 
 failures = []
@@ -690,6 +692,83 @@ async def step7e_reuses_existing_contact_info(conn):
         print("    (synthetic test data cleaned up)")
 
 
+async def step7f_broadcast_report_button(conn):
+    """2026-08-18: the 'Get My Report' button embedded in a broadcast
+    message -- callback_data 'report:bcast:<campaign_id>:<bot_id>'. Real
+    checks: (1) a genuine tap logs an interaction against the exact
+    matching broadcast_deliveries row (never a guess/inference from
+    unrelated activity), sets report_flow_bot_id from the callback_data
+    itself (not context.user_data, which wouldn't exist yet for a student
+    who's never used the report flow before), and drops straight into the
+    same channel picker every other on-demand request uses; (2) a stale/
+    replayed campaign_id with no matching delivery row does NOT crash --
+    the report flow still proceeds (logged as a warning, not an error)."""
+    print("\n--- Step 7f: broadcast 'Get My Report' button (2026-08-18) ---")
+    _cleanup_synthetic(conn, SYNTHETIC_USER_ID_6)
+    campaign_id = None
+    try:
+        user = FakeUser(SYNTHETIC_USER_ID_6)
+        platform_db.upsert_student(conn, user)
+
+        campaign_id = broadcast.create_campaign(
+            conn, category="smoketest_category", message_text="smoketest message",
+            message_html="<b>smoketest</b> message", criteria_description="smoketest",
+            created_by="smoke_test_report_flow.py",
+        )
+        broadcast.log_delivery(conn, campaign_id, SYNTHETIC_USER_ID_6, "smoketest-examhub",
+                                "smoketest message (personalized)", status="sent")
+
+        context = FakeContext()
+        tap_query = FakeQuery(SYNTHETIC_USER_ID_6, 12345, f"report:bcast:{campaign_id}:smoketest-examhub")
+        await report_flow.report_flow_callback(FakeCallbackUpdate(tap_query), context)
+
+        check("report_flow_bot_id is set from the callback_data itself",
+              context.user_data.get("report_flow_bot_id") == "smoketest-examhub")
+        check("the tap drops into the channel picker (edit_message_text called)",
+              tap_query.edit_message_text.await_count >= 1)
+
+        delivery_row = conn.execute(
+            "SELECT interacted_at, interaction_type FROM broadcast_deliveries WHERE campaign_id=? AND telegram_user_id=?",
+            (campaign_id, SYNTHETIC_USER_ID_6),
+        ).fetchone()
+        check("a real interaction was logged against the matching delivery row", delivery_row is not None and delivery_row[0] is not None)
+        check("interaction_type is 'report_button_tap'", delivery_row is not None and delivery_row[1] == "report_button_tap")
+
+        event_types = [r[0] for r in conn.execute(
+            "SELECT event_type FROM report_flow_events WHERE telegram_user_id=? ORDER BY event_id",
+            (SYNTHETIC_USER_ID_6,),
+        ).fetchall()]
+        check("'ondemand_confirmed' event was logged for the broadcast-sourced tap", "ondemand_confirmed" in event_types)
+
+        # --- a second tap doesn't overwrite the original interaction timestamp ---
+        first_interacted_at = delivery_row[0]
+        context2 = FakeContext()
+        tap_query2 = FakeQuery(SYNTHETIC_USER_ID_6, 12345, f"report:bcast:{campaign_id}:smoketest-examhub")
+        await report_flow.report_flow_callback(FakeCallbackUpdate(tap_query2), context2)
+        delivery_row2 = conn.execute(
+            "SELECT interacted_at FROM broadcast_deliveries WHERE campaign_id=? AND telegram_user_id=?",
+            (campaign_id, SYNTHETIC_USER_ID_6),
+        ).fetchone()
+        check("a second tap does not overwrite the original interaction timestamp",
+              delivery_row2 is not None and delivery_row2[0] == first_interacted_at)
+
+        # --- stale/replayed campaign_id with no matching delivery row: must not crash ---
+        context3 = FakeContext()
+        bogus_query = FakeQuery(SYNTHETIC_USER_ID_6, 12345, "report:bcast:999999999:smoketest-examhub")
+        await report_flow.report_flow_callback(FakeCallbackUpdate(bogus_query), context3)
+        check("a stale/unmatched campaign_id does not crash the tap",
+              bogus_query.edit_message_text.await_count >= 1)
+        check("the report flow still proceeds even with unmatched tracking data",
+              context3.user_data.get("report_flow_bot_id") == "smoketest-examhub")
+    finally:
+        if campaign_id is not None:
+            conn.execute("DELETE FROM broadcast_deliveries WHERE campaign_id=?", (campaign_id,))
+            conn.execute("DELETE FROM broadcast_campaigns WHERE campaign_id=?", (campaign_id,))
+            conn.commit()
+        _cleanup_synthetic(conn, SYNTHETIC_USER_ID_6)
+        print("    (synthetic test data cleaned up)")
+
+
 def main():
     conn = platform_db.get_connection()
     step1_migration_idempotent(conn)
@@ -703,6 +782,7 @@ def main():
     asyncio.run(step7c_upsell_and_wrapup_flow(conn))
     asyncio.run(step7d_ondemand_trigger_flow(conn))
     asyncio.run(step7e_reuses_existing_contact_info(conn))
+    asyncio.run(step7f_broadcast_report_button(conn))
 
     print(f"\n{'='*70}")
     if failures:

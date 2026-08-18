@@ -2,6 +2,52 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-08-18 — "10+ MCQs" congrats broadcast + persistent, trackable broadcast infrastructure
+
+Pranav asked to broadcast a congratulations message to every student who's
+answered more than 10 MCQs, nudging them to get their report via the
+existing report flow (Telegram/Email/Both, their choice) — explicitly NOT
+a proactive send (no confirmed contact details for most students). Asked
+several clarifying questions first per his explicit "don't assume": MCQs
+answered (not shown), nudge not proactive-send, exact per-student count
+(not "10+"), preview-first. Mid-conversation he added a real
+infrastructure requirement: every broadcast should be persisted (category,
+timestamp, chat_id, bot_id, message content, interaction tracking), not
+another one-off unlogged script like 2026-08-17's welcome-bonus broadcast.
+
+Built: `broadcast_campaigns`/`broadcast_deliveries` tables (schema.sql);
+`telegram/database/broadcast.py` (create_campaign/log_delivery/
+log_interaction/campaign_summary); `telegram/tools/broadcast_sender.py`
+(reusable bot-resolution + raw HTTP send, extracted from the 2026-08-17
+script). Real interaction tracking via a "📊 Get My Report" inline button
+whose callback_data encodes the campaign_id — wired into
+`report_flow.py`'s ALREADY-REGISTERED `report:` callback prefix (a new
+`bcast:` sub-value), so **no bot script needed any new handler
+registration** — deliberately avoiding this codebase's own documented
+callback-collision bug class. A tap logs a real interaction against that
+exact delivery row, then drops straight into the existing channel-picker
+flow (the button IS the on-demand trigger).
+
+`telegram/tools/send_mcq_congrats_broadcast.py`: eligibility = MCQs
+answered > 10, all-time, rolled up by 1LAVYA username (multi-device
+merged), excluding admin/smoke-test accounts — 12 real students (11–148
+answered). Real bug caught by Pranav's own preview check: the first
+preview used a hardcoded placeholder count (999) instead of a real
+number — fixed to query the preview recipient's own real answered-MCQ
+count live (103), re-previewed, confirmed, then broadcast for real.
+
+6 new regression checks added to `smoke_test_report_flow.py` (the "bcast:"
+branch: real interaction logged, bot_id read from callback_data not
+context.user_data, a second tap doesn't overwrite the first timestamp, a
+stale/unmatched campaign_id doesn't crash) — full suite passing. All 5
+bots importing `report_flow.py` restarted (0 tracebacks since). Backfilled
+2026-08-17's welcome-bonus broadcast CSV into the new tables too, so the
+persistent record covers both real broadcasts sent so far, not just future
+ones. **Live result: 12/12 sent, 0 failed** — and a real student tapped
+"Get My Report" 20 seconds after receiving it, confirming the whole
+tracked pipeline end-to-end in production before this was even reported
+back as done.
+
 ## 2026-08-17 — Faculty Comprehensive Report: level-wise segmentation, username-rollup identity, Day End Report, colorful PDF
 
 Pranav asked whether a faculty-level bot-usage report already existed
