@@ -117,3 +117,24 @@ def get_start_practicing_button_markup(campaign_id: int) -> dict:
         [{"text": "▶️ Start Practicing Now", "callback_data": f"restart:bcast:{campaign_id}"}],
         [{"text": "\U0001F515 Not Interested", "callback_data": f"report:bcastdismiss:{campaign_id}"}],
     ]}
+
+
+def get_continue_practicing_button_markup(campaign_id: int) -> dict:
+    """'▶️ Continue Practicing' + '📖 Show Chapter List' + '🔕 Not
+    Interested', 2026-08-18 (for the "1-9 MCQs answered" nudge campaign).
+    The first is identical to get_start_practicing_button_markup()'s
+    primary button. The second is NEW -- callback_data 'restart:
+    bcastchapters:<campaign_id>' -- jumps straight to a chapter picker
+    for the ONE subject this specific student has actually been
+    practicing (derived from their own real attempt history, never
+    guessed), with exam type AND year both pre-set to the bank's existing
+    "MIX (All)" sentinel -- so a chapter tap starts MCQs pooled across
+    every real exam type/year for that chapter, exactly matching Pranav's
+    "all Exam Type and All Years Mixed" spec. See exam_hub_bot.py's
+    button_router() "restart" branch for the full mechanics. The third
+    reuses report_flow.py's already-registered generic dismiss button."""
+    return {"inline_keyboard": [
+        [{"text": "▶️ Continue Practicing", "callback_data": f"restart:bcast:{campaign_id}"}],
+        [{"text": "\U0001F4D6 Show Chapter List", "callback_data": f"restart:bcastchapters:{campaign_id}"}],
+        [{"text": "\U0001F515 Not Interested", "callback_data": f"report:bcastdismiss:{campaign_id}"}],
+    ]}

@@ -42,6 +42,8 @@ import exam_hub_bot as bot  # noqa: E402 -- real module, real DB_CONN, real load
 CHAT_ID = 900_300_001
 TG_HANDLE = "smoketst_ehwallet"  # <=20 chars, per identity.py's MAX_USERNAME_LEN -- a longer handle here would correctly fall back to the tg{id} placeholder, which is a real identity.py behavior, not a bug (caught by running this test with too-long a handle first)
 BCAST_CHAT_ID = 900_300_003  # step 7's broadcast "restart:bcast:<id>" tracked-tap test -- synthetic, never a real student's
+BCAST_CHAPTERS_CHAT_ID = 900_300_004  # step 7's "restart:bcastchapters:<id>" (Show Chapter List, WITH prior MCQ history) test
+BCAST_NOHISTORY_CHAT_ID = 900_300_005  # step 7's "restart:bcastchapters:<id>" fallback test (NO prior MCQ history)
 
 conn = bot.DB_CONN  # the SAME connection the bot module itself uses -- not a separate one
 
@@ -63,7 +65,7 @@ REGRESSION_CHAT_ID = 900_300_002  # step 6's session-expired-loop regression che
 
 
 def cleanup():
-    for chat_id in (CHAT_ID, REGRESSION_CHAT_ID, BCAST_CHAT_ID):
+    for chat_id in (CHAT_ID, REGRESSION_CHAT_ID, BCAST_CHAT_ID, BCAST_CHAPTERS_CHAT_ID, BCAST_NOHISTORY_CHAT_ID):
         row = conn.execute("SELECT lavya_username FROM students WHERE telegram_user_id=?", (chat_id,)).fetchone()
         username = row[0] if row else None
         # BUG FIXED 2026-08-17: exam_hub_mcq_attempts/exam_hub_descriptive_events
@@ -280,6 +282,57 @@ async def main():
             ctx7c = SimpleNamespace(user_data={}, bot=SimpleNamespace(send_message=AsyncMock()))
             q7c = await tap_as(ctx7c, bcast_user, BCAST_CHAT_ID, "restart:bcast:999999999")
             check("a stale/unmatched campaign_id does not crash the tap", q7c.edit_message_text.await_count == 1)
+
+            # (d) "Show Chapter List" -- restart:bcastchapters:<id>, WITH
+            # real prior MCQ history: jumps straight to a chapter picker
+            # for the student's own most-practiced subject, MIX exam
+            # type/year, no Course/Level/Subject picker shown at all.
+            chapters_user = SimpleNamespace(id=BCAST_CHAPTERS_CHAT_ID, username=None, first_name="Smoke", last_name="Chapters")
+            real_mcq_id = bot.mcq_bank.questions[0]["mcq_id"]
+            real_q = bot.mcq_bank.get_by_id(real_mcq_id)
+            platform_db.upsert_student(conn, chapters_user)
+            platform_db.execute_with_retry(
+                conn,
+                "INSERT INTO exam_hub_mcq_attempts (bot_id, telegram_user_id, mcq_id, course, level, shown_at, correct_option) "
+                "VALUES (?,?,?,?,?,?,?)",
+                (bot.BOT_ID, BCAST_CHAPTERS_CHAT_ID, real_mcq_id, real_q.get("_course"), real_q.get("_level"),
+                 platform_db.now(), real_q.get("correct_option", "A")),
+            )
+            broadcast.log_delivery(conn, campaign_id, BCAST_CHAPTERS_CHAT_ID, bot.BOT_ID, "smoketest (personalized)", status="sent")
+
+            resolved = bot._students_own_mcq_subject(BCAST_CHAPTERS_CHAT_ID)
+            check("_students_own_mcq_subject() resolves a real (course, level, subject) from the seeded attempt",
+                  resolved is not None and resolved == (real_q.get("_course"), real_q.get("_level"), real_q.get("_subject")))
+
+            ctx7d = SimpleNamespace(user_data={}, bot=SimpleNamespace(send_message=AsyncMock()))
+            q7d = await tap_as(ctx7d, chapters_user, BCAST_CHAPTERS_CHAT_ID, f"restart:bcastchapters:{campaign_id}")
+            check("'Show Chapter List' tap renders a real screen", q7d.edit_message_text.await_count == 1)
+            shown_text = q7d.edit_message_text.call_args[0][0]
+            check("the shown screen is the CHAPTER picker, not the generic Mode/entry screen",
+                  "Select *Chapter*" in shown_text)
+            check("Course/Level/Subject/mode were set directly (no picker shown for them)",
+                  ctx7d.user_data.get("mode") == "mcq" and ctx7d.user_data.get("course") == real_q.get("_course")
+                  and ctx7d.user_data.get("level") == real_q.get("_level") and ctx7d.user_data.get("subject") == real_q.get("_subject"))
+            check("exam_type/year were pre-set (MIX or the sole real value, never left unset)",
+                  ctx7d.user_data.get("exam_type") and ctx7d.user_data.get("year"))
+            row_d = conn.execute(
+                "SELECT interacted_at, interaction_type FROM broadcast_deliveries WHERE campaign_id=? AND telegram_user_id=?",
+                (campaign_id, BCAST_CHAPTERS_CHAT_ID),
+            ).fetchone()
+            check("interaction_type is 'show_chapters_tap'", row_d is not None and row_d[1] == "show_chapters_tap")
+
+            # (e) "Show Chapter List" with NO prior MCQ history -- must fall
+            # back gracefully to the normal entry screen, never crash or
+            # show a broken/empty chapter list.
+            nohistory_user = SimpleNamespace(id=BCAST_NOHISTORY_CHAT_ID, username=None, first_name="Smoke", last_name="NoHistory")
+            broadcast.log_delivery(conn, campaign_id, BCAST_NOHISTORY_CHAT_ID, bot.BOT_ID, "smoketest (personalized)", status="sent")
+            ctx7e = SimpleNamespace(user_data={}, bot=SimpleNamespace(send_message=AsyncMock()))
+            q7e = await tap_as(ctx7e, nohistory_user, BCAST_NOHISTORY_CHAT_ID, f"restart:bcastchapters:{campaign_id}")
+            check("'Show Chapter List' with zero prior history falls back without crashing",
+                  q7e.edit_message_text.await_count == 1)
+            fallback_text = q7e.edit_message_text.call_args[0][0]
+            check("the fallback is NOT a chapter screen (no history to show chapters for)",
+                  "Select *Chapter*" not in fallback_text)
         finally:
             conn.execute("DELETE FROM broadcast_deliveries WHERE campaign_id=?", (campaign_id,))
             conn.execute("DELETE FROM broadcast_campaigns WHERE campaign_id=?", (campaign_id,))

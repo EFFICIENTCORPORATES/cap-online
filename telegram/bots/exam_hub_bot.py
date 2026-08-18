@@ -824,6 +824,38 @@ def _mode_bank(mode):
     return bank if mode == "descriptive" else mcq_bank
 
 
+def _students_own_mcq_subject(telegram_user_id: int):
+    """Most-attempted (course, level, subject) for this student, derived
+    from their OWN real MCQ attempt history via the live-loaded mcq_bank
+    (never guessed/assumed -- each attempt row's mcq_id is looked up in the
+    bank, which already carries _course/_level/_subject resolved at load
+    time via _resolve_course_level_subject()). Returns None if they have
+    no MCQ attempts yet. Built 2026-08-18 for the broadcast "Show Chapter
+    List" button -- lets a tap jump straight to a chapter picker for the
+    ONE subject this specific student has actually been practicing,
+    without needing its own Course/Level/Subject picker. Deliberately
+    queries exam_hub_mcq_attempts with NO bot_id filter (platform-wide,
+    matching this platform's own "one identity, several phones/bots"
+    model) -- a student's most-practiced subject is the same fact
+    regardless of which bot happened to log a given attempt."""
+    rows = DB_CONN.execute(
+        "SELECT mcq_id, COUNT(*) n FROM exam_hub_mcq_attempts WHERE telegram_user_id=? GROUP BY mcq_id",
+        (telegram_user_id,),
+    ).fetchall()
+    tally = {}
+    for mcq_id, n in rows:
+        q = mcq_bank.get_by_id(mcq_id)
+        if not q:
+            continue
+        key = (q.get("_course"), q.get("_level"), q.get("_subject"))
+        if not all(key):
+            continue
+        tally[key] = tally.get(key, 0) + n
+    if not tally:
+        return None
+    return max(tally.items(), key=lambda kv: kv[1])[0]
+
+
 # tenants.json's content_scope, consumed as a (course, level, subject)
 # allow-list. None = unrestricted (the flagship's "ALL" scope) -- a scoped
 # (faculty) tenant's bot never shows a course/level/subject outside this
@@ -1297,41 +1329,69 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         welcome_bonus_text = db_ensure_wallet(user)  # no-op/None for a real restart; covers the rare case this is somehow their first-ever interaction
         context.user_data["lavya_username"], _ = identity.ensure_wallet_identity(DB_CONN, user)
         context.user_data["session_id"] = db_start_session(user.id)
-        text, markup, updates = resolve_entry(context)
-        if updates:
-            context.user_data.update(updates)
-            db_update_session(context.user_data["session_id"], **updates)
+
+        # 2026-08-18: optional broadcast entry variants -- callback_data
+        # "restart:bcast:<campaign_id>" (tracked "Start Practicing") or
+        # "restart:bcastchapters:<campaign_id>" (tracked "Show Chapter
+        # List" -- jumps straight to a chapter picker for the ONE subject
+        # this student has actually been practicing, skipping Course/
+        # Level/Subject/Type/Year entirely via the MIX sentinel both bank
+        # classes already support). Both reuse THIS branch (deliberately,
+        # not "mode:mcq") because it's the one entry point that already
+        # fully reinitializes identity/session from scratch regardless of
+        # prior state -- safe for a button tapped fresh from a broadcast
+        # message with no /start in this process, or after a bot restart,
+        # neither of which the "mode"/"chapter" branches below can assume
+        # (they read context.user_data without reinitializing it). A bare
+        # "restart" (the overwhelming majority of real taps, e.g. every
+        # "Continue Practicing" button) has data.split(":") == ["restart"],
+        # length 1 -- bcast_variant stays None and the code below is
+        # BYTE-FOR-BYTE the original resolve_entry() path, so existing
+        # behavior is provably unchanged for that case.
+        parts = data.split(":")
+        bcast_campaign_id, bcast_variant = None, None
+        if len(parts) >= 3 and parts[1] in ("bcast", "bcastchapters"):
+            bcast_variant = parts[1]
+            try:
+                bcast_campaign_id = int(parts[2])
+            except ValueError:
+                bcast_campaign_id = None
+
+        own_subject = _students_own_mcq_subject(user.id) if bcast_variant == "bcastchapters" else None
+        if own_subject and mcq_bank.exam_types(*own_subject):
+            course, level, subject = own_subject
+            exam_types = mcq_bank.exam_types(course, level, subject)
+            exam_type = exam_types[0] if len(exam_types) == 1 else "MIX"
+            years = mcq_bank.years(exam_type, course, level, subject)
+            year = years[0] if len(years) == 1 else "MIX"
+            context.user_data.update({"mode": "mcq", "course": course, "level": level, "subject": subject,
+                                       "exam_type": exam_type, "year": year})
+            db_update_session(context.user_data["session_id"], mode="mcq", course=course, level=level, subject=subject)
+            text, markup = _build_chapter_screen(context, "mcq", course, level, subject, exam_type, year)
+        else:
+            # Either a bare/tracked-only restart, OR a "Show Chapter List"
+            # tap from a student with no MCQ history yet, OR (defensive)
+            # their most-practiced subject has zero content on THIS bot's
+            # own mcq_bank (e.g. a cross-bot mismatch) -- falls back to the
+            # normal picker cascade rather than showing a broken/empty
+            # chapter screen.
+            text, markup, updates = resolve_entry(context)
+            if updates:
+                context.user_data.update(updates)
+                db_update_session(context.user_data["session_id"], **updates)
+
         if welcome_bonus_text:
             await context.bot.send_message(chat_id=query.message.chat_id, text=welcome_bonus_text, parse_mode=ParseMode.HTML)
         await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
 
-        # 2026-08-18: optional broadcast interaction tracking -- callback_data
-        # "restart:bcast:<campaign_id>" (see telegram/database/broadcast.py,
-        # telegram/tools/broadcast_sender.py). A broadcast's "Start
-        # Practicing" button reuses THIS exact branch (deliberately, not
-        # "mode:mcq") because this is the one entry point that already fully
-        # reinitializes identity/session from scratch regardless of prior
-        # state -- safe for a button tapped fresh from a broadcast message
-        # with no /start in this process, or after a bot restart, neither
-        # of which the "mode" branch below can assume (it reads
-        # context.user_data["session_id"] etc. without reinitializing them).
-        # A bare "restart" (the overwhelming majority of real taps, e.g.
-        # every "Continue Practicing" button) has data.split(":") ==
-        # ["restart"], length 1 -- the block below never runs for those,
-        # so existing behavior is provably unchanged. Logged AFTER the real
-        # UI response is already sent, so a tracking hiccup can never
-        # block/delay showing the menu.
-        parts = data.split(":")
-        if len(parts) >= 3 and parts[1] == "bcast":
-            try:
-                campaign_id = int(parts[2])
-            except ValueError:
-                campaign_id = None
-            if campaign_id is not None:
-                matched = broadcast.log_interaction(DB_CONN, campaign_id, user.id, "start_practicing_tap")
-                if not matched:
-                    logger.warning(f"broadcast.log_interaction: no matching delivery row for "
-                                    f"campaign_id={campaign_id} telegram_user_id={user.id}")
+        # Logged AFTER the real UI response is already sent, so a tracking
+        # hiccup can never block/delay showing the menu.
+        if bcast_campaign_id is not None:
+            interaction_type = "show_chapters_tap" if bcast_variant == "bcastchapters" else "start_practicing_tap"
+            matched = broadcast.log_interaction(DB_CONN, bcast_campaign_id, user.id, interaction_type)
+            if not matched:
+                logger.warning(f"broadcast.log_interaction: no matching delivery row for "
+                                f"campaign_id={bcast_campaign_id} telegram_user_id={user.id}")
         return
 
     if action == "mode":
