@@ -49,6 +49,16 @@ directly in the callback_data (not read from context.user_data) because a
 student tapping this button may never have used the report flow before,
 so context.user_data["report_flow_bot_id"] can't be assumed to exist yet.
 
+A FOURTH sub-value, `report:bcastdismiss:<campaign_id>`, is a GENERIC
+"not interested" dismiss button any future broadcast can use (not
+report-specific -- it lives here purely because this prefix is already
+registered everywhere). Just logs the interaction and acknowledges, no
+other state touched. See telegram/bots/exam_hub_bot.py's own
+`restart:bcast:<campaign_id>` for the third broadcast-tracking entry point
+(a "Start Practicing" button) -- that one lives in exam_hub_bot.py instead
+of here since it needs to reuse ITS "restart" cold-reinitialization path,
+not this module's.
+
 POST-DELIVERY FLOW (added 2026-08-11, Pranav's ask after live-testing:
 "it should have asked me whether I need report in email as well" when he'd
 only chosen Telegram): after delivering through whichever channel(s) the
@@ -307,6 +317,28 @@ async def report_flow_callback(update, context):
             await query.edit_message_text("Great! Where would you like it sent?")
             await _send_channel_picker(context, query.message.chat_id, "Choose a delivery channel:")
             _log_event(conn, query.from_user.id, "ondemand_confirmed", detail=f"via broadcast campaign {campaign_id_str}")
+        elif value.startswith("bcastdismiss:"):
+            # GENERIC "not interested"/dismiss button for ANY broadcast
+            # (first used 2026-08-18 by the "start practicing" nudge, not
+            # report-specific despite living under the `report:` prefix --
+            # reused here purely because it's already registered everywhere,
+            # same reasoning as the `bcast:` branch above). value shape:
+            # "bcastdismiss:<campaign_id>". Just acknowledges + logs the
+            # interaction -- does not touch the report flow or any other
+            # state at all.
+            _, campaign_id_str = value.split(":", 1)
+            conn = platform_db.get_connection()
+            platform_db.init_schema(conn)
+            try:
+                campaign_id = int(campaign_id_str)
+            except ValueError:
+                campaign_id = None
+            if campaign_id is not None:
+                matched = broadcast.log_interaction(conn, campaign_id, query.from_user.id, "dismissed")
+                if not matched:
+                    logger.warning(f"broadcast.log_interaction: no matching delivery row for "
+                                    f"campaign_id={campaign_id} telegram_user_id={query.from_user.id} (dismiss)")
+            await query.edit_message_text("No problem — whenever you're ready, just type \"mode\" or tap into the bot's menu to start practicing.")
         # "restart" (Continue Practicing) is NOT handled here -- it's a bare
         # callback_data value that matches button_router's own pattern
         # (registered separately in exam_hub_bot.py's main()), reusing the

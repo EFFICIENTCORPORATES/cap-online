@@ -97,3 +97,23 @@ def get_report_button_markup(campaign_id: int, bot_id: str) -> dict:
     return {"inline_keyboard": [[
         {"text": "\U0001F4CA Get My Report", "callback_data": f"report:bcast:{campaign_id}:{bot_id}"},
     ]]}
+
+
+def get_start_practicing_button_markup(campaign_id: int) -> dict:
+    """'▶️ Start Practicing Now' + '🔕 Not Interested', 2026-08-18. The
+    first reuses exam_hub_bot.py's already-registered `restart`
+    CallbackQueryHandler pattern (callback_data 'restart:bcast:
+    <campaign_id>') -- see that module's own button_router() comment for
+    why "restart" specifically (full cold reinitialization, safe even if
+    context.user_data is completely empty) rather than 'mode:mcq' (which
+    assumes an in-memory session already exists). The second reuses
+    report_flow.py's already-registered `report:` pattern (callback_data
+    'report:bcastdismiss:<campaign_id>') -- a generic dismiss button, not
+    report-specific. Neither needs bot_id embedded (unlike
+    get_report_button_markup()) since both branches read it from other
+    already-available context (exam_hub_bot.py's own DB_CONN/BOT_ID
+    globals, or simply don't need it)."""
+    return {"inline_keyboard": [
+        [{"text": "▶️ Start Practicing Now", "callback_data": f"restart:bcast:{campaign_id}"}],
+        [{"text": "\U0001F515 Not Interested", "callback_data": f"report:bcastdismiss:{campaign_id}"}],
+    ]}

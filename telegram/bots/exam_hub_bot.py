@@ -98,6 +98,7 @@ import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() abov
 import log_rotation  # noqa: E402 -- telegram/database/log_rotation.py, Layer 1 of the log-rotation policy (2026-08-18)
 import student_analytics  # noqa: E402 -- telegram/database/student_analytics.py, for the "I'm Done" today-summary (2026-08-13)
 import report_flow  # noqa: E402 -- telegram/bots/report_flow.py, the 20-question milestone report pipeline (2026-08-11)
+import broadcast  # noqa: E402 -- telegram/database/broadcast.py (2026-08-18), for the "restart:bcast:<id>" tracked-tap branch below
 import profile_flow  # noqa: E402 -- telegram/bots/profile_flow.py, the "profile"/"change profile" identity flow (2026-08-11)
 import mcq_issue_flow  # noqa: E402 -- telegram/bots/mcq_issue_flow.py, the "Report Issue in MCQ" flow (2026-08-13)
 import wallet  # noqa: E402 -- telegram/database/wallet.py, the credit-wallet ledger (2026-08-15/16)
@@ -1303,6 +1304,34 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if welcome_bonus_text:
             await context.bot.send_message(chat_id=query.message.chat_id, text=welcome_bonus_text, parse_mode=ParseMode.HTML)
         await query.edit_message_text(text, parse_mode=ParseMode.MARKDOWN, reply_markup=markup)
+
+        # 2026-08-18: optional broadcast interaction tracking -- callback_data
+        # "restart:bcast:<campaign_id>" (see telegram/database/broadcast.py,
+        # telegram/tools/broadcast_sender.py). A broadcast's "Start
+        # Practicing" button reuses THIS exact branch (deliberately, not
+        # "mode:mcq") because this is the one entry point that already fully
+        # reinitializes identity/session from scratch regardless of prior
+        # state -- safe for a button tapped fresh from a broadcast message
+        # with no /start in this process, or after a bot restart, neither
+        # of which the "mode" branch below can assume (it reads
+        # context.user_data["session_id"] etc. without reinitializing them).
+        # A bare "restart" (the overwhelming majority of real taps, e.g.
+        # every "Continue Practicing" button) has data.split(":") ==
+        # ["restart"], length 1 -- the block below never runs for those,
+        # so existing behavior is provably unchanged. Logged AFTER the real
+        # UI response is already sent, so a tracking hiccup can never
+        # block/delay showing the menu.
+        parts = data.split(":")
+        if len(parts) >= 3 and parts[1] == "bcast":
+            try:
+                campaign_id = int(parts[2])
+            except ValueError:
+                campaign_id = None
+            if campaign_id is not None:
+                matched = broadcast.log_interaction(DB_CONN, campaign_id, user.id, "start_practicing_tap")
+                if not matched:
+                    logger.warning(f"broadcast.log_interaction: no matching delivery row for "
+                                    f"campaign_id={campaign_id} telegram_user_id={user.id}")
         return
 
     if action == "mode":

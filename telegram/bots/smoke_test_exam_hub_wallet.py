@@ -36,10 +36,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
 import db as platform_db  # noqa: E402
 import wallet  # noqa: E402
 import identity  # noqa: E402
+import broadcast  # noqa: E402 -- telegram/database/broadcast.py (2026-08-18), for step 7 below
 import exam_hub_bot as bot  # noqa: E402 -- real module, real DB_CONN, real loaded content banks
 
 CHAT_ID = 900_300_001
 TG_HANDLE = "smoketst_ehwallet"  # <=20 chars, per identity.py's MAX_USERNAME_LEN -- a longer handle here would correctly fall back to the tg{id} placeholder, which is a real identity.py behavior, not a bug (caught by running this test with too-long a handle first)
+BCAST_CHAT_ID = 900_300_003  # step 7's broadcast "restart:bcast:<id>" tracked-tap test -- synthetic, never a real student's
 
 conn = bot.DB_CONN  # the SAME connection the bot module itself uses -- not a separate one
 
@@ -61,7 +63,7 @@ REGRESSION_CHAT_ID = 900_300_002  # step 6's session-expired-loop regression che
 
 
 def cleanup():
-    for chat_id in (CHAT_ID, REGRESSION_CHAT_ID):
+    for chat_id in (CHAT_ID, REGRESSION_CHAT_ID, BCAST_CHAT_ID):
         row = conn.execute("SELECT lavya_username FROM students WHERE telegram_user_id=?", (chat_id,)).fetchone()
         username = row[0] if row else None
         # BUG FIXED 2026-08-17: exam_hub_mcq_attempts/exam_hub_descriptive_events
@@ -189,11 +191,14 @@ async def main():
         reg_chat = 900_300_002
         reg_user = SimpleNamespace(id=reg_chat, username=None, first_name="Smoke", last_name="Regression")
 
-        async def tap(ctx, data):
-            qq = SimpleNamespace(data=data, from_user=reg_user, message=SimpleNamespace(chat_id=reg_chat),
+        async def tap_as(ctx, user, chat_id, data):
+            qq = SimpleNamespace(data=data, from_user=user, message=SimpleNamespace(chat_id=chat_id),
                                   edit_message_text=AsyncMock(), answer=AsyncMock())
             await bot.button_router(SimpleNamespace(callback_query=qq), ctx)
             return qq
+
+        async def tap(ctx, data):
+            return await tap_as(ctx, reg_user, reg_chat, data)
 
         checked_a_real_autoskip_case = False
         for mode in ("mcq", "descriptive"):
@@ -230,6 +235,55 @@ async def main():
                             check(f"  -> the FOLLOW-UP Chapter tap for '{subject}' does not loop back to session-expired", not still_expired)
                             checked_a_real_autoskip_case = True
         check("at least one real (course, level, subject) combo with an auto-skipping Type step was actually exercised", checked_a_real_autoskip_case)
+
+        # 7. Broadcast "Start Practicing Now" button (2026-08-18) --
+        # callback_data "restart:bcast:<campaign_id>". Real checks: (a) a
+        # bare "restart" tap (the overwhelming majority of real traffic,
+        # e.g. every "Continue Practicing" button) is COMPLETELY unaffected
+        # -- still resets to the entry screen, no broadcast code path
+        # touched at all; (b) a genuine "restart:bcast:<id>" tap does the
+        # SAME full reinitialization (proving the extension didn't change
+        # existing behavior) AND logs a real interaction against the exact
+        # matching broadcast_deliveries row; (c) a stale/unmatched
+        # campaign_id doesn't crash the tap -- the menu still renders.
+        bcast_user = SimpleNamespace(id=BCAST_CHAT_ID, username=None, first_name="Smoke", last_name="Broadcast")
+        campaign_id = broadcast.create_campaign(
+            conn, category="smoketest_category", message_text="smoketest", message_html="<b>smoketest</b>",
+            criteria_description="smoketest", created_by="smoke_test_exam_hub_wallet.py",
+        )
+        broadcast.log_delivery(conn, campaign_id, BCAST_CHAT_ID, bot.BOT_ID, "smoketest (personalized)", status="sent")
+        try:
+            # (a) bare "restart" -- provably unaffected
+            ctx7a = SimpleNamespace(user_data={}, bot=SimpleNamespace(send_message=AsyncMock()))
+            q7a = await tap(ctx7a, "restart")
+            check("a bare 'restart' tap still resets to the entry screen (unaffected by the extension)",
+                  q7a.edit_message_text.await_count == 1)
+            no_interaction_row = conn.execute(
+                "SELECT interacted_at FROM broadcast_deliveries WHERE campaign_id=? AND telegram_user_id=?",
+                (campaign_id, reg_chat),
+            ).fetchone()
+            check("a bare 'restart' tap never touches broadcast tracking (no row for an unrelated chat_id)",
+                  no_interaction_row is None)
+
+            # (b) the real tracked tap
+            ctx7b = SimpleNamespace(user_data={}, bot=SimpleNamespace(send_message=AsyncMock()))
+            q7b = await tap_as(ctx7b, bcast_user, BCAST_CHAT_ID, f"restart:bcast:{campaign_id}")
+            check("a tracked 'restart:bcast:<id>' tap still shows the real entry screen", q7b.edit_message_text.await_count == 1)
+            row = conn.execute(
+                "SELECT interacted_at, interaction_type FROM broadcast_deliveries WHERE campaign_id=? AND telegram_user_id=?",
+                (campaign_id, BCAST_CHAT_ID),
+            ).fetchone()
+            check("a real interaction was logged against the matching delivery row", row is not None and row[0] is not None)
+            check("interaction_type is 'start_practicing_tap'", row is not None and row[1] == "start_practicing_tap")
+
+            # (c) stale/unmatched campaign_id -- must not crash
+            ctx7c = SimpleNamespace(user_data={}, bot=SimpleNamespace(send_message=AsyncMock()))
+            q7c = await tap_as(ctx7c, bcast_user, BCAST_CHAT_ID, "restart:bcast:999999999")
+            check("a stale/unmatched campaign_id does not crash the tap", q7c.edit_message_text.await_count == 1)
+        finally:
+            conn.execute("DELETE FROM broadcast_deliveries WHERE campaign_id=?", (campaign_id,))
+            conn.execute("DELETE FROM broadcast_campaigns WHERE campaign_id=?", (campaign_id,))
+            conn.commit()
 
     finally:
         cleanup()

@@ -68,6 +68,7 @@ SYNTHETIC_USER_ID_3 = -999999003  # separate id for the post-delivery upsell/wra
 SYNTHETIC_USER_ID_4 = -999999004  # separate id for the on-demand trigger flow test
 SYNTHETIC_USER_ID_5 = -999999005  # separate id for the existing-contact-info reuse test
 SYNTHETIC_USER_ID_6 = -999999006  # separate id for the broadcast "Get My Report" button test (2026-08-18)
+SYNTHETIC_USER_ID_7 = -999999007  # separate id for the broadcast "Not Interested" dismiss button test (2026-08-18)
 REAL_TEST_USER_ID = 5777734732  # a real student with real data, used read-only (no writes)
 
 failures = []
@@ -769,6 +770,54 @@ async def step7f_broadcast_report_button(conn):
         print("    (synthetic test data cleaned up)")
 
 
+async def step7g_broadcast_dismiss_button(conn):
+    """2026-08-18: the generic 'Not Interested' dismiss button --
+    callback_data 'report:bcastdismiss:<campaign_id>'. Real checks: logs a
+    real interaction (interaction_type='dismissed') against the matching
+    delivery row, acknowledges politely, does NOT touch report_flow_state
+    or any other report-flow behavior; a stale/unmatched campaign_id
+    doesn't crash."""
+    print("\n--- Step 7g: broadcast 'Not Interested' dismiss button (2026-08-18) ---")
+    _cleanup_synthetic(conn, SYNTHETIC_USER_ID_7)
+    campaign_id = None
+    try:
+        user = FakeUser(SYNTHETIC_USER_ID_7)
+        platform_db.upsert_student(conn, user)
+
+        campaign_id = broadcast.create_campaign(
+            conn, category="smoketest_category", message_text="smoketest", message_html="<b>smoketest</b>",
+            criteria_description="smoketest", created_by="smoke_test_report_flow.py",
+        )
+        broadcast.log_delivery(conn, campaign_id, SYNTHETIC_USER_ID_7, "smoketest-examhub", "smoketest (personalized)", status="sent")
+
+        context = FakeContext()
+        tap_query = FakeQuery(SYNTHETIC_USER_ID_7, 12345, f"report:bcastdismiss:{campaign_id}")
+        await report_flow.report_flow_callback(FakeCallbackUpdate(tap_query), context)
+
+        check("dismiss tap acknowledges (edit_message_text called)", tap_query.edit_message_text.await_count == 1)
+        check("no report_flow_state was entered by a dismiss tap", context.user_data.get("report_flow_state") is None)
+
+        row = conn.execute(
+            "SELECT interacted_at, interaction_type FROM broadcast_deliveries WHERE campaign_id=? AND telegram_user_id=?",
+            (campaign_id, SYNTHETIC_USER_ID_7),
+        ).fetchone()
+        check("a real interaction was logged against the matching delivery row", row is not None and row[0] is not None)
+        check("interaction_type is 'dismissed'", row is not None and row[1] == "dismissed")
+
+        # stale/unmatched campaign_id -- must not crash
+        context2 = FakeContext()
+        bogus_query = FakeQuery(SYNTHETIC_USER_ID_7, 12345, "report:bcastdismiss:999999999")
+        await report_flow.report_flow_callback(FakeCallbackUpdate(bogus_query), context2)
+        check("a stale/unmatched campaign_id does not crash the dismiss tap", bogus_query.edit_message_text.await_count == 1)
+    finally:
+        if campaign_id is not None:
+            conn.execute("DELETE FROM broadcast_deliveries WHERE campaign_id=?", (campaign_id,))
+            conn.execute("DELETE FROM broadcast_campaigns WHERE campaign_id=?", (campaign_id,))
+            conn.commit()
+        _cleanup_synthetic(conn, SYNTHETIC_USER_ID_7)
+        print("    (synthetic test data cleaned up)")
+
+
 def main():
     conn = platform_db.get_connection()
     step1_migration_idempotent(conn)
@@ -783,6 +832,7 @@ def main():
     asyncio.run(step7d_ondemand_trigger_flow(conn))
     asyncio.run(step7e_reuses_existing_contact_info(conn))
     asyncio.run(step7f_broadcast_report_button(conn))
+    asyncio.run(step7g_broadcast_dismiss_button(conn))
 
     print(f"\n{'='*70}")
     if failures:

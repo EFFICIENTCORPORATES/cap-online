@@ -2,6 +2,45 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-08-18 (cont'd) — "Haven't practiced yet" nudge broadcast, 2 new tracked buttons
+
+Pranav asked for a second broadcast: students who've started an exam-
+capable bot but never practiced a single MCQ, nudged with their own bot's
+real MCQ counts by subject/level (chapter-wise, pick any), their real
+credit balance, and interactive buttons — all logged in the same
+persistent tables built earlier today.
+
+Confirmed 4 things via AskUserQuestion first: eligibility = zero MCQ
+attempts anywhere platform-wide (rolled up by identity), not just on one
+bot; go ahead with a small, carefully-tested addition to exam_hub_bot.py's
+existing "restart" handler (the live "Continue Practicing" hot path) for a
+tracked button rather than the less-safe "mode:mcq" shortcut; message
+direction approved; preview-first.
+
+**Real bug caught before writing any code**: the naive eligibility query
+included 4 phantom telegram_user_ids with no matching `students` row at
+all — orphaned `bot_interactions` residue from other smoke test suites'
+incomplete cleanup, not real people. Fixed by requiring an INNER JOIN to
+`students` — 64 candidates → 60 genuinely real eligible students.
+
+Built: `exam_hub_bot.py`'s "restart" branch extended (not replaced) to
+recognize `restart:bcast:<campaign_id>` alongside the existing bare
+`restart` — proven behaviorally identical for the 99.9% bare-restart case
+via a new regression check, only the new 3-part value triggers tracking.
+`report_flow.py` gained a second generic `report:bcastdismiss:<campaign_id>`
+branch (a "🔕 Not Interested" button, not report-specific, reusing that
+already-registered prefix). `broadcast_sender.py` gained
+`get_start_practicing_button_markup()`. Content breakdown reuses
+`faculty_report.content_availability()` directly, filtered to
+mcq_count > 0 only, personalized per recipient's own bot/tenant scope.
+
+10 new regression checks added across `smoke_test_exam_hub_wallet.py` (the
+restart extension) and `smoke_test_report_flow.py` (the dismiss button) —
+both suites fully passing. All 5 bots restarted, 0 tracebacks since.
+**Live result: 60 recipients, 58 sent, 2 failed** (same 2 permanent
+Telegram-side cases as the earlier campaign — one blocked, one
+deactivated). campaign_id=7 in `broadcast_campaigns`/`broadcast_deliveries`.
+
 ## 2026-08-18 — "10+ MCQs" congrats broadcast + persistent, trackable broadcast infrastructure
 
 Pranav asked to broadcast a congratulations message to every student who's
