@@ -56,13 +56,32 @@ def normalize_ws(s):
 # ---------------------------------------------------------------------------
 # Study Materials -- from the two existing per-course catalogs
 # ---------------------------------------------------------------------------
+# Every CA study-material filename is "<CourseLevel>-<SubjectShort>-<Session>_M...",
+# e.g. "CAInter-GST-May27_M1-C1-U0_....pdf" -> Session="May27". Read here
+# (not hand-typed anywhere) so a subject with more than one live ICAI
+# edition -- first hit 2026-08-18 with GST's May26/May27 dual editions --
+# gets its edition surfaced as real per-file data, not baked into Subject
+# text (Pranav's call: Subject appears once in the bot's picker, Edition
+# is its own drill-down step -- see study_hub_bot.py's "ed:" action).
+CA_STUDY_SESSION_RE = re.compile(r"^[A-Za-z]+-[A-Za-z0-9]+-(?P<session>[A-Za-z]+\d+)_M")
+
+
+def session_from_filename(filename: str) -> str:
+    m = CA_STUDY_SESSION_RE.match(filename)
+    return m.group("session") if m else ""
+
+
 def load_ca_study_rows():
     wb = openpyxl.load_workbook(CA_CATALOG, data_only=True)
     ws = wb["File Mapping"]
     headers = [c.value for c in ws[1]]
     rows = []
+    unmatched_session = []
     for r in ws.iter_rows(min_row=2, values_only=True):
         d = dict(zip(headers, r))
+        session = session_from_filename(d["FileName"])
+        if not session:
+            unmatched_session.append(d["FileName"])
         rows.append({
             "Category": CATEGORY_STUDY,
             "Course": d["Course"],
@@ -71,10 +90,14 @@ def load_ca_study_rows():
             "Label": d["ChapterName"],
             "ShortLabel": d["ChapterName"][:35],
             "ChapterNo": d["ChapterNo"],
-            "PaperType": "", "Session": "", "SetLabel": "", "DocType": "",
+            "PaperType": "", "Session": session, "SetLabel": "", "DocType": "",
             "Keywords": d.get("Keywords", ""),
             "FileName": d["FileName"],
         })
+    if unmatched_session:
+        print(f"  (NOTE: {len(unmatched_session)} CA Study Materials filename(s) didn't match the "
+              f"<CourseLevel>-<SubjectShort>-<Session>_M... pattern -- Session left blank, "
+              f"treated as a single-edition subject: {unmatched_session[:5]})")
     return rows
 
 

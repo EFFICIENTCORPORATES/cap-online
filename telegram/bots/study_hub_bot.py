@@ -283,16 +283,41 @@ class Catalog:
         ]
         return sorted(sub["Subject"].unique().tolist())
 
-    def chapters_for(self, category, course, level, subject):
-        """Study/Revision Materials: every row is one chapter/file. Each
-        dict also carries its stable catalog row id under 'row_id' --
-        Telegram callback_data has a hard 64-byte limit, so callers must
-        use this id (not the FileName or Label, which can be much
-        longer) when building a callback_data string."""
+    def editions_for(self, category, course, level, subject):
+        """Distinct real Session values (e.g. "May26", "May27") among a
+        subject's Study/Revision Materials rows -- sorted so the picker
+        order is stable across runs. Empty list means "no edition split
+        needed" (either every row shares one Session, or Session is blank
+        for this subject entirely) -- callers auto-skip the Edition step
+        in that case, same auto-skip convention as Course/Level/Subject
+        above. First needed 2026-08-18: GST is the first subject with two
+        simultaneously-live ICAI editions -- see build_master_catalog.py's
+        session_from_filename() for where this value actually comes from."""
         sub = self.df[
             (self.df["Category"] == category) & (self.df["Course"] == course)
             & (self.df["Level"] == level) & (self.df["Subject"] == subject)
         ]
+        sessions = sorted(s for s in sub["Session"].unique().tolist() if s)
+        return sessions if len(sessions) > 1 else []
+
+    def chapters_for(self, category, course, level, subject, edition=None):
+        """Study/Revision Materials: every row is one chapter/file. Each
+        dict also carries its stable catalog row id under 'row_id' --
+        Telegram callback_data has a hard 64-byte limit, so callers must
+        use this id (not the FileName or Label, which can be much
+        longer) when building a callback_data string.
+
+        edition, when given, filters to just that Session -- used once a
+        student has picked an Edition for a subject with >1 live one (see
+        editions_for() above). None (the default) means "no filter",
+        correct both for single-edition subjects and for the small number
+        of Revision Material rows that may have no Session at all."""
+        sub = self.df[
+            (self.df["Category"] == category) & (self.df["Course"] == course)
+            & (self.df["Level"] == level) & (self.df["Subject"] == subject)
+        ]
+        if edition is not None:
+            sub = sub[sub["Session"] == edition]
         sub = sub.sort_values(["ChapterNo", "Label"], na_position="last")
         return [dict(row, row_id=idx) for idx, row in sub.iterrows()]
 
@@ -449,6 +474,29 @@ def effective_subject_back(cat_idx, category, course, level):
     return f"lvl:{cat_idx}:{course}:{level}"
 
 
+async def render_chapter_list(query, context, cat_idx, category, course, level, subject,
+                               edition, back_cb, return_to):
+    """Shared by the "subj" branch (single-edition subjects, edition=None)
+    and the "ed" branch (edition picked) -- one place renders the actual
+    chapter keyboard so the two paths can never drift apart. Remembers
+    return_to so send_file()'s post-download "Download more" button comes
+    straight back to this exact list, not just one level up."""
+    context.user_data["return_to"] = return_to
+    chapters = catalog.chapters_for(category, course, level, subject, edition=edition)
+    keyboard = []
+    for ch in chapters:
+        chno = ch.get("ChapterNo")
+        label = f"Ch {chno:g} - {ch['Label']}" if pd.notna(chno) else ch["Label"]
+        keyboard.append([InlineKeyboardButton(label[:80], callback_data=f"file:{ch['row_id']}")])
+    keyboard.append([InlineKeyboardButton("⬅️ Back", callback_data=back_cb)])
+    edition_bit = f" | Edition: *{edition}*" if edition else ""
+    await safe_edit_message_text(query,
+        f"Category: *{category}* | Course: *{course}* | Level: *{level}* | Subject: *{subject}*{edition_bit}\n"
+        f"Select a *Chapter*:",
+        parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
+    )
+
+
 async def browse_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
@@ -475,6 +523,7 @@ async def route_browse(query, context, data):
       crs:{cat_idx}:{course}
       lvl:{cat_idx}:{course}:{level}
       subj:{cat_idx}:{course}:{level}:{subj_idx}
+      ed:{cat_idx}:{course}:{level}:{subj_idx}:{ed_idx}   (only for a subject with >1 live edition -- see editions_for())
       pt:{cat_idx}:{course}:{level}:{subj_idx}:{paper_type}
       file:{row_id}
       mainmenu:go   (from the post-download "Main Menu" button)
@@ -573,24 +622,45 @@ async def route_browse(query, context, data):
                 parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
             )
         else:
-            # Remembered so send_file()'s post-download "Download more" button
-            # can bring the student straight back to this exact chapter list,
-            # not just one level up.
-            context.user_data["return_to"] = f"subj:{cat_idx}:{course}:{level}:{subj_idx}"
-            chapters = catalog.chapters_for(category, course, level, subject)
-            keyboard = []
-            for ch in chapters:
-                chno = ch.get("ChapterNo")
-                label = f"Ch {chno:g} - {ch['Label']}" if pd.notna(chno) else ch["Label"]
-                keyboard.append([InlineKeyboardButton(label[:80], callback_data=f"file:{ch['row_id']}")])
-            keyboard.append(
-                [InlineKeyboardButton("⬅️ Back", callback_data=effective_subject_back(cat_idx, category, course, level))]
-            )
-            await safe_edit_message_text(query,
-                f"Category: *{category}* | Course: *{course}* | Level: *{level}* | Subject: *{subject}*\n"
-                f"Select a *Chapter*:",
-                parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
-            )
+            # A subject with >1 live ICAI edition (first hit 2026-08-18,
+            # GST) gets an Edition picker here instead of going straight to
+            # Chapter -- editions_for() returns [] for every ordinary
+            # single-edition subject, so this is a no-op auto-skip for
+            # everything else, same convention as Course/Level/Subject.
+            editions = catalog.editions_for(category, course, level, subject)
+            if editions:
+                keyboard = [
+                    [InlineKeyboardButton(ed, callback_data=f"ed:{cat_idx}:{course}:{level}:{subj_idx}:{i}")]
+                    for i, ed in enumerate(editions)
+                ]
+                keyboard.append(
+                    [InlineKeyboardButton("⬅️ Back", callback_data=effective_subject_back(cat_idx, category, course, level))]
+                )
+                await safe_edit_message_text(query,
+                    f"Category: *{category}* | Course: *{course}* | Level: *{level}* | Subject: *{subject}*\n"
+                    f"This subject has more than one live ICAI edition — select the *attempt/session* "
+                    f"you're preparing for:",
+                    parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(keyboard),
+                )
+            else:
+                await render_chapter_list(
+                    query, context, cat_idx, category, course, level, subject, None,
+                    effective_subject_back(cat_idx, category, course, level),
+                    f"subj:{cat_idx}:{course}:{level}:{subj_idx}",
+                )
+
+    elif action == "ed":
+        cat_idx, course, level, subj_idx, ed_idx = int(parts[1]), parts[2], parts[3], int(parts[4]), int(parts[5])
+        category = CATEGORIES[cat_idx]
+        subjects = catalog.subjects_for(category, course, level)
+        subject = subjects[subj_idx]
+        editions = catalog.editions_for(category, course, level, subject)
+        edition = editions[ed_idx]
+        await render_chapter_list(
+            query, context, cat_idx, category, course, level, subject, edition,
+            f"subj:{cat_idx}:{course}:{level}:{subj_idx}",
+            f"ed:{cat_idx}:{course}:{level}:{subj_idx}:{ed_idx}",
+        )
 
     elif action == "pt":
         cat_idx, course, level, subj_idx, paper_type = int(parts[1]), parts[2], parts[3], int(parts[4]), parts[5]
@@ -653,8 +723,9 @@ async def send_file(query_or_update, context, row_id):
 
     # This IS a file/PDF delivery -- the one place in this bot that keeps
     # the brand footer, per Pranav's 2026-08-10 scoping.
+    edition_bit = f" ({row.get('Session')} Attempt)" if row.get("Session") else ""
     caption = with_brand(
-        f"\U0001F4C4 {row.get('Label', filename)}\n"
+        f"\U0001F4C4 {row.get('Label', filename)}{edition_bit}\n"
         f"{row.get('Category','')} — {row.get('Course','')} {row.get('Level','')} — "
         f"{row.get('Subject','')}"
     )
@@ -793,8 +864,12 @@ async def free_text_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # the same title can legitimately appear more than once across
         # them (e.g. "Inventories" in both CA Foundation and CA Final;
         # "Cash Flow Statement" as both a chapter AND an exam question set)
-        # -- without them, two buttons could be indistinguishable.
-        label = f"{row.get('Label', row['FileName'])} — {row.get('Category','')} · {row.get('Course','')} {row.get('Level','')} {row.get('Subject','')}"
+        # -- without them, two buttons could be indistinguishable. Session
+        # is included too (2026-08-18) for the same reason one level deeper
+        # -- a subject with >1 live edition (e.g. GST) has literally
+        # identical chapter titles across editions.
+        session_bit = f" ({row.get('Session')})" if row.get("Session") else ""
+        label = f"{row.get('Label', row['FileName'])}{session_bit} — {row.get('Category','')} · {row.get('Course','')} {row.get('Level','')} {row.get('Subject','')}"
         # row_id, never FileName, in callback_data -- see the 64-byte note in browse_callback.
         keyboard.append([InlineKeyboardButton(label[:80], callback_data=f"file:{row_id}")])
     await update.message.reply_text(
@@ -822,7 +897,7 @@ def main():
     # at registration time only -- see telegram/LOGGING-ARCHITECTURE.md §3.
     app.add_handler(CommandHandler("start", activity_logger.log_activity("command", BOT_ID)(start)))
     app.add_handler(CommandHandler("reset", activity_logger.log_activity("command", BOT_ID)(start)))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(browse_callback), pattern=r"^(browse|cat|crs|lvl|subj|pt|file|mainmenu):"))
+    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(browse_callback), pattern=r"^(browse|cat|crs|lvl|subj|ed|pt|file|mainmenu):"))
     app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
     app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
     app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))

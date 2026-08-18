@@ -48,11 +48,33 @@ def main():
 
     # No duplicate keys (the population script itself refuses to write
     # duplicates -- this re-confirms the DB actually reflects that).
+    # Includes session (2026-08-18) to match idx_course_catalog_key's real
+    # widened definition -- a subject with >1 live ICAI edition (GST is
+    # the first) legitimately has the SAME (chapter,unit) twice, once per
+    # session, and that is correct, not a duplicate. See
+    # populate_course_catalog.py's module docstring.
     dupes = conn.execute(
-        "SELECT course, level, paper_no, chapter_no, unit_no, COUNT(*) c "
-        "FROM course_catalog GROUP BY course, level, paper_no, chapter_no, unit_no HAVING c > 1"
+        "SELECT course, level, paper_no, chapter_no, unit_no, session, COUNT(*) c "
+        "FROM course_catalog GROUP BY course, level, paper_no, chapter_no, unit_no, session HAVING c > 1"
     ).fetchall()
-    check("no duplicate (course,level,paper,chapter,unit) keys", len(dupes) == 0, str(dupes[:3]))
+    check("no duplicate (course,level,paper,chapter,unit,session) keys", len(dupes) == 0, str(dupes[:3]))
+
+    # A subject with >1 live edition must have exactly one row per
+    # (chapter,unit) PER session (real ICAI content, not a partial/missing
+    # edition) -- GST-specific regression guard for the 2026-08-18 fix.
+    gst_sessions = conn.execute(
+        "SELECT session, COUNT(*) FROM course_catalog "
+        "WHERE course='CA' AND level='Inter' AND subject='Taxation - Goods and Services Tax' "
+        "GROUP BY session ORDER BY session"
+    ).fetchall()
+    check("GST has exactly 2 editions (May26, May27), 15 chapters each",
+          gst_sessions == [("May26", 15), ("May27", 15)], str(gst_sessions))
+    gst_subject_count = conn.execute(
+        "SELECT COUNT(DISTINCT subject) FROM course_catalog WHERE course='CA' AND level='Inter' "
+        "AND subject LIKE 'Taxation - Goods%'"
+    ).fetchone()[0]
+    check("GST is ONE subject, not split by edition (Pranav's 2026-08-18 call)",
+          gst_subject_count == 1, f"got {gst_subject_count} distinct subject(s)")
 
     # Cross-check specific real, independently-confirmed facts.
     row = conn.execute(
@@ -111,18 +133,29 @@ def main():
     # (Chapter 1/2/3 for General Clauses Act/Interpretation of Statutes/
     # FEMA 1999) -- same numbers Module 1 already uses. Offset to continue
     # the subject's existing sequence (13/14/15) instead of colliding.
+    # Scoped to session='May27' (2026-08-18: this subject gained a second
+    # live edition, May26 -- see the module-wide session checks below for
+    # that) so this specific offset check stays a stable, single-edition
+    # assertion rather than silently doubling.
     rows = conn.execute(
         "SELECT chapter_no, chapter_name FROM course_catalog WHERE course='CA' AND level='Inter' "
-        "AND subject='Corporate and Other Laws' AND chapter_no IN (13, 14, 15) ORDER BY chapter_no"
+        "AND subject='Corporate and Other Laws' AND session='May27' AND chapter_no IN (13, 14, 15) "
+        "ORDER BY chapter_no"
     ).fetchall()
     check("CA Inter Corporate and Other Laws: Module 4's 3 chapters offset to 13/14/15, not colliding with Module 1's 1/2/3",
           [r[1] for r in rows] == ["The General Clauses Act, 1897", "Interpretation of Statutes",
                                     "The Foreign Exchange Management Act, 1999"], str(rows))
-    row = conn.execute(
-        "SELECT COUNT(*) FROM course_catalog WHERE course='CA' AND level='Inter' AND subject='Corporate and Other Laws'"
-    ).fetchone()
-    check("CA Inter Corporate and Other Laws: 15 real chapters total (12 Company Law + 3 Other Laws)",
-          row[0] == 15, str(row))
+    # 2026-08-18: this subject now has 2 live ICAI editions (May26, May27,
+    # same GST-style dual-edition situation) -- 15 chapters each, one
+    # Subject entry (not duplicated), matching study_hub_bot.py's
+    # editions_for()/"ed:" drill-down design.
+    law_sessions = conn.execute(
+        "SELECT session, COUNT(*) FROM course_catalog WHERE course='CA' AND level='Inter' "
+        "AND subject='Corporate and Other Laws' GROUP BY session ORDER BY session"
+    ).fetchall()
+    check("CA Inter Corporate and Other Laws: 15 real chapters total (12 Company Law + 3 Other Laws), "
+          "2 editions (May26, May27)",
+          law_sessions == [("May26", 15), ("May27", 15)], str(law_sessions))
 
     # Real, found 2026-08-12 (later same day): Pranav asked whether the new
     # CA Foundation Accounting MCQ set's chapters 8-11 (NPO Financial

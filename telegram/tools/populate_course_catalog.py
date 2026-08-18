@@ -201,6 +201,7 @@ def rows_from_file1() -> list:
             "chapter_name_short": c.get("chapter_name_short"),
             "unit_no": unit_no, "unit_name": c.get("unit_name"),
             "unit_name_short": c.get("standard") or c.get("chapter_name_short"),
+            "session": "",
             "source": "1-ca-inter-adv-accounts-topic-page-index.json",
         })
     return rows
@@ -235,6 +236,7 @@ def rows_from_cs_cma_catalog() -> list:
             "chapter_no": int(r["ChapterNo"]), "chapter_name": r["ChapterName"],
             "chapter_name_short": r.get("ShortChapterName"),
             "unit_no": 0, "unit_name": None, "unit_name_short": None,
+            "session": "",
             "source": "CS_CMA_Chapter_Catalog.xlsx",
         })
     if skipped_no_paper_no:
@@ -257,7 +259,19 @@ def rows_from_studyhub_catalog() -> list:
     StudyHub-sourced subject collapsed these into one fabricated
     collision. Most subjects here really ARE single-unit chapters
     (unit_no=0 is correct for them), but that's now verified per-row from
-    the real filename, never assumed as a blanket rule again."""
+    the real filename, never assumed as a blanket rule again.
+
+    Found and fixed again 2026-08-18: GST is the first subject with TWO
+    simultaneously-live ICAI editions (May26 vs May27 attempt cycles),
+    both catalogued under the same Subject text on purpose (Pranav's
+    call -- Subject appears once in the bot's picker, edition is its own
+    drill-down step, see study_hub_bot.py's editions_for()/"ed:" action).
+    Grouping by chapter_no ALONE would have wrongly treated both
+    editions' identically-numbered chapters as one fabricated multi-unit
+    chapter. Now grouped by (chapter_no, Session) instead -- rows from
+    different editions never merge, and session rides along on every
+    output row so course_catalog can tell them apart too (see its own
+    idx_course_catalog_key, widened to include session)."""
     df = pd.read_excel(STUDYHUB_CATALOG_PATH, sheet_name="Catalog")
     ca_subjects = sorted({
         (meta[1], meta[2]) for meta in build_study_bot_catalog.COURSE_META.values()
@@ -288,10 +302,15 @@ def rows_from_studyhub_catalog() -> list:
             return int(row["ChapterNo"]) + offset
         subset["EffectiveChapterNo"] = subset.apply(_effective_chapter_no, axis=1)
 
-        # Group by chapter_no first, so a multi-unit chapter's units are
-        # only distinguished by REAL unit numbers, not by row iteration
-        # order (which the dataframe doesn't guarantee is unit-ordered).
-        for chapter_no, group in subset.groupby("EffectiveChapterNo"):
+        # Group by (chapter_no, Session) -- Session first added 2026-08-18,
+        # blank ("") for every ordinary single-edition subject, so this is
+        # a no-op there. A multi-unit chapter's units are then only
+        # distinguished by REAL unit numbers, not by row iteration order
+        # (which the dataframe doesn't guarantee is unit-ordered), and
+        # never confused with a same-numbered chapter from a DIFFERENT
+        # edition.
+        subset["Session"] = subset["Session"].fillna("")
+        for (chapter_no, session), group in subset.groupby(["EffectiveChapterNo", "Session"]):
             is_multi_unit = len(group) > 1
             for _, r in group.iterrows():
                 if is_multi_unit and _is_auxiliary_label(r["Label"]):
@@ -326,6 +345,7 @@ def rows_from_studyhub_catalog() -> list:
                     "unit_no": unit_no,
                     "unit_name": r["Label"] if is_multi_unit else None,
                     "unit_name_short": r.get("ShortLabel") if is_multi_unit else None,
+                    "session": session,
                     "source": "StudyHub_Master_Catalog.xlsx",
                 })
     if excluded_auxiliary:
@@ -360,46 +380,24 @@ def main():
 
     # course_catalog's real DB uniqueness constraint (schema.sql's
     # idx_course_catalog_key) is (course, level, paper_no, chapter_no,
-    # unit_no) -- deliberately NOT including subject, because until
-    # 2026-08-18 one paper_no always meant exactly one subject. GST is the
-    # first exception: ICAI now has TWO simultaneously-valid editions
-    # (May26/Sep26/Jan27 attempt vs May27/Sep27/Jan28 attempt) both live
-    # in the Study Materials catalog under the same paper_no ('3B'), on
-    # purpose (see telegram/COURSE-CATALOG.md) -- a real collision, not a
-    # bug to paper over by faking a distinct paper_no.
+    # unit_no, session) -- session added 2026-08-18. Subject is
+    # deliberately NOT part of this key: Pranav's call that day is that a
+    # subject with more than one live ICAI edition (GST is the first,
+    # May26/Sep26/Jan27 vs May27/Sep27/Jan28) still shows as ONE Subject
+    # entry in the bot's picker, with edition/session as its own
+    # drill-down step (see study_hub_bot.py's editions_for()/"ed:"
+    # action) -- so session, not subject, is the real differentiator here
+    # too, consistently. rows_from_studyhub_catalog() already groups by
+    # (chapter_no, Session) for exactly this reason; every row from every
+    # source now carries a "session" key (blank "" for the many subjects
+    # with only one live edition).
     #
-    # Widening the unique key to include subject is a real schema
-    # decision with ~26 downstream consumers (human_id generation, the
-    # Admin Portal's Course Catalog / Study Materials / Question Bank
-    # tabs, exam_hub_bot's course/level/subject resolver) that hasn't
-    # been made yet -- flagged to Pranav, not decided here. Until then:
-    # any (course, level, paper_no) with more than one distinct subject
-    # is EXCLUDED from course_catalog (loudly, never silently) rather
-    # than crashing the whole rebuild for every other subject. The
-    # excluded subject's Study Material PDFs are still fully live via
-    # StudyHub_Master_Catalog.xlsx (what study_hub_bot.py actually reads)
-    # -- only this secondary DB-backed layer (Admin Portal visibility +
-    # any future MCQ human_id under that paper_no) is affected.
-    subjects_by_paper = {}
-    for r in all_rows:
-        pk = (r["course"], r["level"], r["paper_no"])
-        subjects_by_paper.setdefault(pk, set()).add(r["subject"])
-    colliding_papers = {pk for pk, subs in subjects_by_paper.items() if len(subs) > 1}
-    if colliding_papers:
-        for pk in sorted(colliding_papers):
-            print(f"  (WARNING: excluded {pk[0]}/{pk[1]} paper_no={pk[2]!r} from course_catalog -- "
-                  f"{len(subjects_by_paper[pk])} distinct subjects share this paper_no "
-                  f"({sorted(subjects_by_paper[pk])}); needs a schema decision, see comment above)")
-        all_rows = [r for r in all_rows
-                    if (r["course"], r["level"], r["paper_no"]) not in colliding_papers]
-
-    # Sanity check: the unique key (course, level, paper_no, chapter_no,
-    # unit_no) must actually be unique across everything collected --
-    # a collision here would mean two real chapters mapping to the same
-    # catalog slot, which must never happen silently.
+    # A same-subject collision that ISN'T session-based would still be a
+    # genuine bug (e.g. a real duplicate chapter row) -- caught below by
+    # the unique-key check same as always, just widened by one column.
     seen = {}
     for r in all_rows:
-        key = (r["course"], r["level"], r["paper_no"], r["chapter_no"], r["unit_no"])
+        key = (r["course"], r["level"], r["paper_no"], r["chapter_no"], r["unit_no"], r.get("session", ""))
         if key in seen:
             raise SystemExit(f"FATAL: duplicate catalog key {key} -- {seen[key]!r} vs {r!r}")
         seen[key] = r
@@ -416,11 +414,11 @@ def main():
         conn.execute(
             """INSERT INTO course_catalog
                (course, level, level_num, paper_no, subject, chapter_no, chapter_name,
-                chapter_name_short, unit_no, unit_name, unit_name_short, source, updated_at)
-               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                chapter_name_short, unit_no, unit_name, unit_name_short, session, source, updated_at)
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
             (r["course"], r["level"], r["level_num"], r["paper_no"], r["subject"], r["chapter_no"],
              r["chapter_name"], r.get("chapter_name_short"), r["unit_no"], r.get("unit_name"),
-             r.get("unit_name_short"), r["source"], now),
+             r.get("unit_name_short"), r.get("session", ""), r["source"], now),
         )
     conn.commit()
     total = conn.execute("SELECT COUNT(*) FROM course_catalog").fetchone()[0]

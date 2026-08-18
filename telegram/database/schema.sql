@@ -752,12 +752,13 @@ CREATE TABLE IF NOT EXISTS course_catalog (
     unit_no                        INTEGER NOT NULL DEFAULT 0,  -- 0 = single-unit chapter / no ICSI-ICMAI sub-unit structure
     unit_name                       TEXT,
     unit_name_short                  TEXT,
+    session                              TEXT NOT NULL DEFAULT '',  -- e.g. 'May26', 'May27' -- added 2026-08-18, blank for every subject with only ONE live ICAI edition. A subject with more than one (GST first) keeps ONE Subject entry (never duplicated in the bot's picker) and uses this column to tell editions apart instead -- see study_hub_bot.py's editions_for()/"ed:" drill-down step and populate_course_catalog.py's rows_from_studyhub_catalog() for where it's actually populated (read straight from each file's own FileName via build_master_catalog.py's session_from_filename(), never hand-typed).
     source                             TEXT NOT NULL,  -- which real source file this row was read from -- see module docstring above
     updated_at                          TEXT NOT NULL
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_course_catalog_key
-    ON course_catalog(course, level, paper_no, chapter_no, unit_no);
+    ON course_catalog(course, level, paper_no, chapter_no, unit_no, session);
 CREATE INDEX IF NOT EXISTS idx_course_catalog_lookup ON course_catalog(course, level, subject);
 
 -- ===========================================================================

@@ -69,6 +69,7 @@ def init_schema(conn: sqlite3.Connection):
     (whichever bot starts first actually creates the tables; every bot
     after that is a no-op)."""
     _migrate_wallet_ledger_shape(conn)
+    _migrate_course_catalog_session(conn)
     sql = SCHEMA_PATH.read_text(encoding="utf-8")
     conn.executescript(sql)
     conn.commit()
@@ -146,6 +147,43 @@ def _migrate_wallet_ledger_shape(conn: sqlite3.Connection):
                 )
             conn.execute("DROP TABLE payments")
             logger.info("Migrated: dropped old-shape payments (verified empty) to add username column")
+
+    conn.commit()
+
+
+def _migrate_course_catalog_session(conn: sqlite3.Connection):
+    """One-time addition of course_catalog.session -- 2026-08-18, the GST
+    dual-edition fix (see schema.sql's own comment on the column, and
+    populate_course_catalog.py's module docstring). Unlike every other
+    entry in _COLUMN_MIGRATIONS below, this one can't be a plain ADD
+    COLUMN there: schema.sql's idx_course_catalog_key UNIQUE INDEX now
+    includes session, and CREATE UNIQUE INDEX IF NOT EXISTS is a name-only
+    check in SQLite -- it will NOT pick up the new column list on an
+    index that already exists under the old 5-column definition. So this
+    must run BEFORE executescript() in init_schema(): add the column
+    first (so the index CAN reference it), then drop the stale index by
+    name so executescript()'s own CREATE UNIQUE INDEX IF NOT EXISTS
+    recreates it fresh, 6 columns this time. No data-loss risk either
+    way -- an index holds no data of its own, and the new column defaults
+    every existing row to '' (correct: every subject catalogued before
+    today has exactly one live edition)."""
+    exists = conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='course_catalog'"
+    ).fetchone()
+    if not exists:
+        return  # brand-new DB -- schema.sql's own CREATE TABLE text already has the column
+
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(course_catalog)").fetchall()}
+    if "session" not in cols:
+        conn.execute("ALTER TABLE course_catalog ADD COLUMN session TEXT NOT NULL DEFAULT ''")
+        logger.info("Migrated: added course_catalog.session")
+
+    index_sql = conn.execute(
+        "SELECT sql FROM sqlite_master WHERE type='index' AND name='idx_course_catalog_key'"
+    ).fetchone()
+    if index_sql and index_sql[0] and "session" not in index_sql[0]:
+        conn.execute("DROP INDEX idx_course_catalog_key")
+        logger.info("Migrated: dropped stale (5-column) idx_course_catalog_key for recreation with session")
 
     conn.commit()
 
