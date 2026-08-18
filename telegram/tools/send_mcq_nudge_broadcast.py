@@ -108,9 +108,19 @@ MESSAGE_TEMPLATE_HTML = (
 )
 
 
-def _strip_html(html: str) -> str:
+def _strip_html(html_text: str) -> str:
     import re
-    return re.sub(r"<[^>]+>", "", html)
+    return re.sub(r"<[^>]+>", "", html_text)
+
+
+def _esc(text: str) -> str:
+    """HTML-escape free text before interpolating into an HTML parse_mode
+    message -- see send_mcq_progress_broadcast.py's own _esc() docstring
+    for the real live bug this guards against (a Telegram first_name
+    containing '</>' broke the HTML parser for exactly that recipient).
+    Applied here defensively too, for any future re-run of this script."""
+    import html as html_module
+    return html_module.escape(text or "", quote=False)
 
 
 def load_bots() -> list:
@@ -201,7 +211,7 @@ def build_message_for(conn, telegram_user_id: int, first_name: str, lavya_userna
         wallet.grant_signup_bonus(conn, username, "platform")
     balance = wallet.get_balance(conn, username)
     breakdown = build_breakdown(conn, tenant)
-    return MESSAGE_TEMPLATE_HTML.format(first_name=first_name, breakdown=breakdown, credit_left=balance)
+    return MESSAGE_TEMPLATE_HTML.format(first_name=_esc(first_name), breakdown=breakdown, credit_left=balance)
 
 
 def run(mode: str):

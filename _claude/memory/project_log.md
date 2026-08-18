@@ -2,6 +2,54 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-08-18 (cont'd, 2) — "1-10 MCQs" progress broadcast, new "Show Chapter List" button, live HTML-escaping bug found+fixed
+
+Third and final tier of the day's MCQ-activity broadcast series: students
+with 1-10 MCQs answered (the gap between the 0-MCQ nudge and the >10
+congrats campaigns). Confirmed via AskUserQuestion: include the exactly-
+10 boundary case (closes the gap between the two earlier campaigns
+cleanly), message direction, and a genuinely new interactive feature --
+"Show Chapter List" jumping straight to the student's own most-practiced
+chapter list, all exam types/years mixed, per Pranav's explicit spec.
+
+Investigated before building: confirmed the platform ALREADY has
+everything needed for "all exam type/years mixed" -- both McqBank/
+QuestionBank already support a "MIX (All)" sentinel for exam_type/year,
+and `_build_chapter_screen()` already appends an "All Chapters" trailing
+button. No new aggregation logic was needed -- built new
+`_students_own_mcq_subject()` (resolves a student's own most-practiced
+(course, level, subject) from their real attempt history via the live
+mcq_bank, never guessed) and extended `exam_hub_bot.py`'s "restart" branch
+a second time (already extended once earlier today) for a third variant,
+`restart:bcastchapters:<campaign_id>` -- proven behaviorally identical to
+bare "restart" for the 99.9% real-traffic case via new regression checks,
+with a defensive fallback if the resolved subject has zero content on
+that specific bot (cross-bot mismatch protection, unneeded but present
+for the real 23 recipients -- verified none had one).
+
+**Real bug caught live, not in testing**: one student's real Telegram
+first_name is literally `⏤͟͞𝘿𝙞𝙖𝙣𝙖™ </>` — the unescaped `</>` broke
+Telegram's HTML parser (400 "can't parse entities"), silently failing
+delivery to exactly that one recipient during the live broadcast. Root-
+caused immediately (not guessed), fixed with proper `html.escape()` on
+all Telegram-supplied free text before HTML interpolation (applied to
+both this script and the earlier same-day nudge script, which had the
+identical latent vulnerability), then retried delivery to just that one
+student (not a full resend) — succeeded, preserved as a second row in
+`broadcast_deliveries` alongside the original failed attempt, an honest
+history rather than overwriting it.
+
+8 new regression checks in `smoke_test_exam_hub_wallet.py` (Show Chapter
+List: happy path with real MCQ history resolving the correct subject/
+exam_type/year and rendering the real chapter screen; graceful fallback
+with zero history; bare-restart unaffected). All 5 bots restarted, 0
+tracebacks since. **Live result: 23/23 recipients delivered** (22 on the
+first pass + 1 retry after the escaping fix) — `campaign_id=11`. This
+closes the loop on MCQ-activity segmentation for today: every real
+student who's answered 1+ MCQ now falls into exactly one of the two
+activity-based campaigns (1-10 or >10), and everyone who's started but
+never practiced got the third (0-MCQ) campaign earlier today.
+
 ## 2026-08-18 (cont'd) — "Haven't practiced yet" nudge broadcast, 2 new tracked buttons
 
 Pranav asked for a second broadcast: students who've started an exam-

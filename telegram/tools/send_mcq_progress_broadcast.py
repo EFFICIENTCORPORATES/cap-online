@@ -91,9 +91,22 @@ MESSAGE_TEMPLATE_HTML = (
 )
 
 
-def _strip_html(html: str) -> str:
+def _strip_html(html_text: str) -> str:
     import re
-    return re.sub(r"<[^>]+>", "", html)
+    return re.sub(r"<[^>]+>", "", html_text)
+
+
+def _esc(text: str) -> str:
+    """HTML-escape free text before interpolating into an HTML parse_mode
+    message. Real bug found live, 2026-08-18: one student's Telegram
+    first_name is literally '⏤͟͞𝘿𝙞𝙖𝙣𝙖™ </>' -- the un-escaped '</>' broke
+    Telegram's HTML parser (400 'can't parse entities'), silently failing
+    delivery to exactly that one student. first_name (and any other
+    Telegram-supplied free text) is untrusted input the moment it's
+    interpolated into HTML, same as any other injection surface -- always
+    escape it."""
+    import html as html_module
+    return html_module.escape(text or "", quote=False)
 
 
 def eligible_students(conn) -> list:
@@ -130,7 +143,7 @@ def build_message_for(conn, username: str, first_name: str, n: int) -> str:
     remaining = max(TARGET_ANSWERED - n, 1)
     balance = wallet.get_balance(conn, username) if username and not username.startswith("__unlinked_") else 0
     return MESSAGE_TEMPLATE_HTML.format(
-        first_name=first_name, n=n, plural="" if n == 1 else "s", remaining=remaining, credit_left=balance,
+        first_name=_esc(first_name), n=n, plural="" if n == 1 else "s", remaining=remaining, credit_left=balance,
     )
 
 
