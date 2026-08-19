@@ -95,10 +95,60 @@ logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=lo
 logger = logging.getLogger("manage_bots")
 
 
+TENANTS_PATH = REPO_ROOT / "telegram" / "config" / "tenants.json"
+
+
 def load_bots():
     import json
     data = json.loads(BOTS_PATH.read_text(encoding="utf-8"))
     return data["bots"]
+
+
+def _content_paths_for_bot(bot: dict) -> list:
+    """Every JSON file this bot's tenant loads at startup (mcq_json +
+    descriptive_json from tenants.json, string-or-list both handled) --
+    used by ensure_running()'s freshness check below. Non-exam-hub bots
+    (dashboard/watcher/admin-portal/myfiles) have no tenant_id or no
+    exam_content and simply return []."""
+    import json
+    tenant_id = bot.get("tenant_id")
+    if not tenant_id:
+        return []
+    tenants = json.loads(TENANTS_PATH.read_text(encoding="utf-8"))["tenants"]
+    tenant = next((t for t in tenants if t["tenant_id"] == tenant_id), None)
+    if not tenant:
+        return []
+    ec = tenant.get("exam_content") or {}
+    paths = []
+    for key in ("mcq_json", "descriptive_json"):
+        v = ec.get(key)
+        if not v:
+            continue
+        paths.extend(v if isinstance(v, list) else [v])
+    return [REPO_ROOT / p for p in paths]
+
+
+def _stale_content_reason(proc: psutil.Process, bot: dict):
+    """None if this bot's wired content is no newer than when its process
+    started; otherwise a short string naming the newest-changed file, for
+    the log line. Compares against the OS process's own create_time() --
+    not a DB heartbeat field -- so this check has no dependency on the
+    bot's own code ever having run correctly."""
+    paths = _content_paths_for_bot(bot)
+    if not paths:
+        return None
+    started_at = proc.create_time()
+    newest_path, newest_mtime = None, started_at
+    for p in paths:
+        try:
+            m = p.stat().st_mtime
+        except OSError:
+            continue
+        if m > newest_mtime:
+            newest_path, newest_mtime = p, m
+    if newest_path is None:
+        return None
+    return f"{newest_path.name} changed {int(newest_mtime - started_at)}s after process start"
 
 
 def pidfile_path(bot_id: str) -> Path:
@@ -308,11 +358,27 @@ def ensure_running(bots: list):
         age = _heartbeat_age_seconds(conn, bot_id)
         if age is None:
             logger.info(f"[{bot_id}] running (PID {proc.pid}), no heartbeat recorded yet -- leaving it (likely just started).")
-        elif age < HEARTBEAT_STALE_AFTER_SECONDS:
-            logger.info(f"[{bot_id}] healthy (PID {proc.pid}, heartbeat {int(age)}s ago).")
-        else:
+            continue
+        if age >= HEARTBEAT_STALE_AFTER_SECONDS:
             logger.warning(f"[{bot_id}] running (PID {proc.pid}) but heartbeat is STALE ({int(age)}s ago) -- restarting.")
             restart_bot(bot)
+            continue
+
+        # Added 2026-08-19: heartbeat alone only proves the process is
+        # ALIVE, not that it's serving current content -- mcq_bank/bank
+        # load once at startup and never re-read disk (see
+        # exam_hub_bot.py's own docstring). A content edit after startup
+        # would otherwise sit invisible to students until someone
+        # remembers to restart by hand. Reusing this same 30-min
+        # ensure-running cadence caps that staleness window instead of
+        # requiring a new, separately-scheduled check.
+        stale_reason = _stale_content_reason(proc, bot)
+        if stale_reason:
+            logger.warning(f"[{bot_id}] running (PID {proc.pid}) but content is stale ({stale_reason}) -- restarting.")
+            restart_bot(bot)
+            continue
+
+        logger.info(f"[{bot_id}] healthy (PID {proc.pid}, heartbeat {int(age)}s ago).")
 
 
 def main():
