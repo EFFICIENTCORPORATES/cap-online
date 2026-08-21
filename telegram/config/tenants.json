@@ -70,7 +70,21 @@
           "telegram/assets/exam_bot/CA Inter Income tax Json/CA_Inter_IncomeTax_Ch1_Basic_Concepts_100_MCQ.json",
           "telegram/assets/exam_bot/CA Inter Income tax Json/CA_Inter_IncomeTax_Ch2_Residential_Status_100_MCQ.json",
           "telegram/assets/exam_bot/CA Inter Income tax Json/CA_Inter_IncomeTax_Ch4_Income_of_Other_Persons_100_MCQ.json",
-          "telegram/assets/exam_bot/CA Inter Income tax Json/CA_Inter_IncomeTax_Ch8_Provisions_for_Filing_Return_of_Income_100_MCQ.json"
+          "telegram/assets/exam_bot/CA Inter Income tax Json/CA_Inter_IncomeTax_Ch8_Provisions_for_Filing_Return_of_Income_100_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch1_The_General_Clauses_Act_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch2_Interpretation_of_Statutes_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch2_Incorporation_of_Company_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch3_Prospectus_and_Allotment_of_Securities_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch3_The_Foreign_Exchange_Management_Act_75_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch4_Share_Capital_and_Debentures_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch5_Acceptance_of_Deposits_by_Companies_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch6_Registration_of_Charges_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch7_Management_and_Administration_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch8_Declaration_and_Payment_of_Dividend_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch9_Accounts_of_Companies_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch10_Audit_and_Auditors_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch11_Companies_Incorporated_Outside_India_60_MCQ.json",
+          "telegram/assets/exam_bot/CA Inter Law Json/CA_Inter_Law_Ch12_The_Limited_Liability_Partnership_Act_75_MCQ.json"
         ],
         "descriptive_json": [
           "telegram/assets/exam_bot/book_questions_extracted.json",
