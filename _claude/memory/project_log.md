@@ -37,14 +37,35 @@ Also found (not a bug in this system) one run that failed with an SSL
 the year 2030 — flagged to Pranav as a clock-reliability concern, not fixed
 in code since there's nothing in this pipeline to fix.
 
+**Fixing the asset-prefix bug surfaced something bigger, investigated properly
+before touching anything**: comparing old-vs-new prefix objects found 1,131
+files (1.57GB) that existed under the old prefix with NO counterpart in the
+freshly-corrected sync. Rather than assume either "just stale duplicates" or
+"real data loss," checked directly: confirmed the old filenames genuinely don't
+exist locally anymore, THEN confirmed the same content DOES exist locally under
+a new naming convention (`CA_L3_P01_C0_U1-1_...` etc., matching the platform's
+existing human-readable-ID scheme) -- a real, undocumented content-reorganization
+pass happened locally between 08-16 and 08-20/22, apparently by someone else's
+work this session hasn't seen logged. Confirmed benign (164 CA Final files alone
+verified present under new names, in some cases split MORE granularly than
+before) before deleting the 2,494 stale old-prefix objects -- byte-for-byte
+ETag-verified first that nothing about the still-current 1,363 files was lost.
+Also found and flagged (not deleted, not this session's file): a 1.25GB
+`Study Materials.zip` sitting directly in the live-served `study_bot/` folder,
+undated pre-rename safety copy, harmlessly-but-redundantly swept into the
+backup by the same sync.
+
 **New `telegram/BACKUP-STRATEGY.md`** — the full strategy doc Pranav asked
 for: what's backed up and why, every alternative considered and rejected
 per data type (full vs incremental vs continuous replication for the DB;
 R2 vs S3/GCS/a second local drive; D1 mirror vs R2-only vs Postgres;
 full-reupload vs delta sync for assets), the real 6-night track record
-table, all bugs found with dates, the restore procedure, and honest RPO/RTO
-limitations (~24h RPO, manual RTO -- this system makes data survivable, not
-the service self-healing). Full detail there; this log entry is the pointer.
+table, all bugs found with dates (including the rename discovery above),
+the restore procedure, and honest RPO/RTO limitations (~24h RPO, manual RTO
+-- this system makes data survivable, not the service self-healing). Final
+clean end-to-end run confirmed after all fixes: D1 37 tables/12,836 rows,
+assets 0 uploaded/1,363 unchanged/0 failed. Full detail there; this log
+entry is the pointer.
 
 ## 2026-08-18 (cont'd, 2) — "1-10 MCQs" progress broadcast, new "Show Chapter List" button, live HTML-escaping bug found+fixed
 
