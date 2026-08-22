@@ -2,6 +2,50 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-08-22 — Backup pipeline audit: 3 real bugs found across 6 nights of production drift, all fixed; BACKUP-STRATEGY.md written
+
+Pranav asked to (1) verify the backup pipeline (built 2026-08-16) is actually
+working, (2) get a full strategy doc, (3) make sure there's no real data-loss
+risk. Checked real state rather than re-asserting the build-time verification —
+queried `backup_runs`' full history (10 rows) and Windows Task Scheduler's
+actual run history, not just "is the task registered."
+
+**Found the pipeline had been silently degraded for days**: Task Scheduler
+triggered every single night without fail (0 missed runs) but the D1 mirror
+phase had failed 4 of the last 5 nights. Root cause: another session's
+unrelated feature work added a `session` column to `course_catalog` via
+`ALTER TABLE` — the D1 replay's `CREATE TABLE IF NOT EXISTS` is a no-op
+against a table D1 already has, so that column never reached D1, and every
+insert referencing it failed. **Real disaster-recovery data was never at
+risk** (DB snapshots + assets kept succeeding every night regardless, since
+phases are deliberately isolated) — only the D1 convenience-mirror layer went
+stale. Fixed structurally: D1 tables are now DROP + recreated from the
+current authoritative schema every run (data was already being fully wiped
+and reinserted regardless, so this costs nothing extra and makes the whole
+bug class impossible, not just this instance). Verified against the real
+4-nights-stale database: 37 tables, 12,834 rows, 0 errors.
+
+**Two more real, independent bugs found the same pass**: every asset object
+had been stored under a doubled `assets/assets/...` prefix since the very
+first run (content always correct, just a wrong/undocumented path — fixed,
+existing ~2,500 objects re-synced onto the correct prefix); and the
+failure-alert DM function only logged on its own failure, never on success,
+making "did Pranav actually get notified about those 4 bad nights"
+genuinely unanswerable from the log alone — fixed to always log the outcome.
+Also found (not a bug in this system) one run that failed with an SSL
+"certificate expired" error traced to the machine's clock briefly reading
+the year 2030 — flagged to Pranav as a clock-reliability concern, not fixed
+in code since there's nothing in this pipeline to fix.
+
+**New `telegram/BACKUP-STRATEGY.md`** — the full strategy doc Pranav asked
+for: what's backed up and why, every alternative considered and rejected
+per data type (full vs incremental vs continuous replication for the DB;
+R2 vs S3/GCS/a second local drive; D1 mirror vs R2-only vs Postgres;
+full-reupload vs delta sync for assets), the real 6-night track record
+table, all bugs found with dates, the restore procedure, and honest RPO/RTO
+limitations (~24h RPO, manual RTO -- this system makes data survivable, not
+the service self-healing). Full detail there; this log entry is the pointer.
+
 ## 2026-08-18 (cont'd, 2) — "1-10 MCQs" progress broadcast, new "Show Chapter List" button, live HTML-escaping bug found+fixed
 
 Third and final tier of the day's MCQ-activity broadcast series: students

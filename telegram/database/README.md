@@ -273,6 +273,15 @@ correctly cascades to the child too).
 
 ## Off-machine backup: Cloudflare R2 + D1 (added 2026-08-16)
 
+**`telegram/BACKUP-STRATEGY.md` is now the canonical doc for this system** —
+full strategy + every alternative considered and why it lost, the real
+night-by-night track record, real bugs found during a 2026-08-22 audit
+(the D1 mirror silently going stale for 4 nights, a doubled-prefix asset
+path bug, a failure-alert logging gap), the restore procedure, and honest
+RPO/RTO limitations. What follows below is the original build narrative —
+still accurate for the design rationale, but read the strategy doc first
+for current status.
+
 Closes the other half of scale-readiness gap #1 (the self-healing
 autostart above only restarts a *crashed process* on the *same* machine —
 it does nothing if the machine/disk itself is what's gone). Pranav asked
