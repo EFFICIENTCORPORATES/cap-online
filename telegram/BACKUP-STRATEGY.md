@@ -245,6 +245,13 @@ phases are deliberately isolated (one phase failing doesn't abort the others),
 and that design paid off exactly as intended here — a real bug degraded one
 layer without silently taking down the whole backup.
 
+**As of the 2026-08-22 audit and fix**: all three code bugs (§8.1–8.3) are fixed
+and verified against real, already-drifted production state (not just a clean
+test environment) — D1 mirror rebuilt fresh (37 tables, 12,834 rows, 0 errors),
+asset objects moved onto the correct, documented prefix (1,363 files, byte-
+verified before the ~2,500 stale doubled-prefix objects were deleted), and the
+next scheduled 3:30 AM run will be the first genuinely clean run since 08-17.
+
 ## 8. Real bugs found and fixed (read this — verification at build time was not enough)
 
 Everything below was caught by actually re-running the pipeline against real,
@@ -297,6 +304,42 @@ and wasn't.
 
 See §5. Fixed so the outcome of a failure-alert send is always logged, not just on
 its own failure path.
+
+### 8.6 — Fixing 8.3 surfaced a large undocumented local rename (verified benign, not data loss)
+
+Comparing the doubled-prefix objects against the corrected sync found **1,131
+files (1.57GB) that existed under the old prefix with no counterpart under the
+new one** — spanning nearly every CA subject (Foundation/Inter/Final). Before
+assuming either "just cleanup" or "real data loss," this was investigated
+directly rather than guessed either way:
+
+- Confirmed the old filenames (e.g. `CAFinal-AFM-May26_M1-C0-U1_InitialPages.pdf`)
+  no longer exist anywhere on local disk.
+- Confirmed the *content* they represent does still exist locally, under a
+  **new naming convention** (`CA_L3_P01_C0_U1-1_InitialPages.pdf` — matching the
+  same `course_L{level}_P{paper}_C{chapter}_U{unit}` scheme already used
+  elsewhere on this platform for MCQ human-readable IDs) — 164 CA Final files
+  alone, confirmed present, in some cases split into *finer* sub-parts than the
+  old naming had (e.g. one old `InitialPages.pdf` now several `U1-1`...`U1-5`
+  files).
+- Conclusion: a real, coherent, apparently deliberate content-reorganization
+  pass renamed the entire `Study Materials` folder sometime between 2026-08-16
+  and 2026-08-20/22 — not documented in this repo's own session log at the time
+  this was found, so **flagged to Pranav to confirm it was intentional**, but
+  the evidence strongly supports "deliberate improvement," not "accidental
+  loss." The 1,131 old-prefix objects were the now-stale pre-rename copies;
+  deleted after confirming (byte-for-byte ETag match on every file that exists
+  under both names) that nothing about the still-current 1,363 files was lost
+  in the process.
+- **Also found in the same pass**: a 1.25GB `Study Materials.zip` sitting
+  directly inside `telegram/assets/study_bot/` (dated 2026-08-18, almost
+  certainly a manual pre-rename safety copy someone made) — not excluded by
+  this backup's file filters, so it got uploaded to R2 too. Harmless (R2 storage
+  is effectively free at this volume) but redundant, since the same content is
+  already backed up file-by-file. Left in place rather than deleted
+  unilaterally (not this session's file to remove) — flagged to Pranav: either
+  move it out of `study_bot/` (a live-served folder) or accept it'll sit in both
+  places.
 
 ## 9. Restore procedure (disaster recovery)
 
