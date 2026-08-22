@@ -378,22 +378,42 @@ def mirror_to_d1(database_id: str):
     conn = sqlite3.connect(f"file:{(TELEGRAM_DIR / 'database' / 'platform.db').as_posix()}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
 
-    # Schema: replay every CREATE TABLE/INDEX statement from the live
-    # source's own sqlite_master, with "IF NOT EXISTS" re-inserted (see
-    # _ensure_if_not_exists) so repeated runs against an already-populated
-    # D1 database are genuinely safe, not just assumed safe.
-    for row in conn.execute(
-        "SELECT sql FROM sqlite_master WHERE type IN ('table','index') "
+    # Pull every CREATE TABLE/INDEX statement from the live source's own
+    # sqlite_master, keyed so tables and their indexes can be handled
+    # separately below.
+    table_ddls = {}
+    index_ddls = []
+    for kind, name, sql in conn.execute(
+        "SELECT type, name, sql FROM sqlite_master WHERE type IN ('table','index') "
         "AND sql IS NOT NULL AND name NOT LIKE 'sqlite_%'"
     ).fetchall():
-        d1_query(database_id, _ensure_if_not_exists(row[0]))
+        if kind == "table":
+            table_ddls[name] = sql
+        else:
+            index_ddls.append(sql)
 
-    order = _topological_table_order(conn)
+    order = [t for t in _topological_table_order(conn) if t in table_ddls]
 
-    # Wipe children-first, reinsert parents-first -- avoids FK ordering
-    # issues either direction regardless of whether D1 enforces them.
+    # DROP + recreate every table's SCHEMA every run (data was already being
+    # fully wiped and reinserted every run regardless -- see the insert loop
+    # below), rather than "CREATE TABLE IF NOT EXISTS" + DELETE FROM as this
+    # originally worked. Real bug found live, 2026-08-19: IF-NOT-EXISTS is a
+    # no-op against a table that already exists in D1, so a column added
+    # locally via ALTER TABLE (course_catalog's `session` column, added by
+    # unrelated feature work after D1 already had an older copy of that
+    # table) never reached D1 -- silently, for FOUR consecutive nightly runs,
+    # each one failing on "table course_catalog has no column named session"
+    # the moment the insert loop tried to write it. Dropping and recreating
+    # the table from the CURRENT authoritative DDL text every run makes this
+    # class of drift structurally impossible, not just patched around.
+    # Indexes are dropped along with their table (SQLite behavior) so they're
+    # recreated fresh afterward too.
     for table in reversed(order):
-        d1_query(database_id, f'DELETE FROM "{table}"')
+        d1_query(database_id, f'DROP TABLE IF EXISTS "{table}"')
+    for table in order:
+        d1_query(database_id, _ensure_if_not_exists(table_ddls[table]))
+    for idx_sql in index_ddls:
+        d1_query(database_id, _ensure_if_not_exists(idx_sql))
 
     total_rows = 0
     for table in order:
@@ -429,6 +449,16 @@ def _local_md5(path: Path) -> str:
 
 
 def sync_assets(s3):
+    """Object keys are `rel` AS-IS (e.g. "assets/study_bot/...") -- NOT
+    "assets/" + rel. `rel` already starts with "assets/" on its own, since
+    TELEGRAM_DIR (the relative-to base) is assets/'s own parent directory.
+    A real bug, live in production since the very first run (2026-08-16):
+    every uploaded key was actually "assets/assets/study_bot/...", a doubled
+    prefix -- found 2026-08-22 by listing real bucket contents directly, not
+    by reading the code. Content was never at risk (every file's bytes were
+    always correct, just filed under a redundant path); see the one-time
+    cleanup this fix's rollout ran to move the existing ~2,500 objects onto
+    the correct prefix, documented in telegram/database/README.md."""
     uploaded = skipped = failed = 0
     for base_dir in ASSET_SYNC_DIRS:
         if not base_dir.exists():
@@ -437,15 +467,14 @@ def sync_assets(s3):
         prefix_root = base_dir.relative_to(TELEGRAM_DIR).as_posix()
         remote_etags = {}
         paginator = s3.get_paginator("list_objects_v2")
-        for page in paginator.paginate(Bucket=BUCKET_NAME, Prefix=f"assets/{prefix_root}/"):
+        for page in paginator.paginate(Bucket=BUCKET_NAME, Prefix=f"{prefix_root}/"):
             for obj in page.get("Contents", []):
                 remote_etags[obj["Key"]] = obj["ETag"].strip('"')
 
         for path in base_dir.rglob("*"):
             if path.is_dir() or path.name in SKIP_FILENAMES or path.name.startswith("."):
                 continue
-            rel = path.relative_to(TELEGRAM_DIR).as_posix()
-            key = f"assets/{rel}"
+            key = path.relative_to(TELEGRAM_DIR).as_posix()
             try:
                 digest = _local_md5(path)
             except OSError as e:
@@ -481,8 +510,18 @@ def alert_failure(text: str):
             logger.warning("Could not send failure alert (no sender token / admin_chat_ids configured).")
             return
         full_text = f"\U0001F534 BACKUP FAILED\n{text}\nLog: telegram/database/run/logs/backup.log"
-        for cid in chat_ids:
-            watcher_bot.send_telegram_dm(token, cid, full_text)
+        # send_telegram_dm() only logs on its OWN failure path (silent on
+        # success) -- log the outcome here explicitly either way, so a
+        # future "did the alert actually go out" question is answerable
+        # from this log alone, not left ambiguous (a real gap found
+        # 2026-08-22: 4 real failed nights left zero trace either way).
+        results = [watcher_bot.send_telegram_dm(token, cid, full_text) for cid in chat_ids]
+        if all(results):
+            logger.info(f"Failure alert sent to {len(chat_ids)} admin chat_id(s).")
+        else:
+            sent = sum(results)
+            logger.warning(f"Failure alert sent to only {sent}/{len(chat_ids)} admin chat_id(s) "
+                            "-- see the sendMessage error(s) above.")
     except Exception:
         logger.exception("Failed to send the failure alert itself.")
 
