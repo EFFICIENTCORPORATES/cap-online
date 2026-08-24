@@ -96,6 +96,7 @@ import student_analytics  # noqa: E402
 import report_delivery  # noqa: E402
 import generate_student_report  # noqa: E402
 import contact_utils  # noqa: E402 -- shared with profile_flow.py, same directory (telegram/bots/)
+import rate_limiter  # noqa: E402 -- telegram/bots/rate_limiter.py, per-user flood/abuse controls (2026-08-24, SECURITY.md Phase 1)
 import broadcast  # noqa: E402 -- telegram/database/broadcast.py (2026-08-18), for the "report:bcast:<id>:<bot_id>" branch below
 
 logger = logging.getLogger(__name__)
@@ -576,29 +577,50 @@ async def _deliver_report(conn, context, chat_id: int, telegram_user_id: int, ch
     email_status, telegram_status, error_parts = None, None, []
 
     if "email" in channels_to_send:
-        row = conn.execute("SELECT email FROM students WHERE telegram_user_id=?", (telegram_user_id,)).fetchone()
         bot_id = context.user_data.get("report_flow_bot_id")
-        try:
-            report_delivery.send_report_email(bot_id, row[0], pdf_bytes, display_name, "All-time")
-            email_status = "sent"
-            # Pranav's ask, 2026-08-11: tell the student explicitly to check
-            # Spam/Junk and mark it "Not Spam" -- a first email from a new
-            # sender routinely lands there, and without this nudge a student
-            # who only checks Inbox would conclude nothing was ever sent.
+        # SECURITY.md §4.2 -- a dedicated cooldown on the email channel
+        # specifically (real Cloudflare Email send quota/cost per hit,
+        # reaches an actual inbox) -- checked HERE, the one chokepoint every
+        # email send funnels through (milestone prompt, on-demand trigger,
+        # and the post-delivery "add email" upsell all call _deliver_report()).
+        # Deliberately does NOT `return` early -- channels_to_send can be
+        # {"email", "telegram"} together ("both"), and a rate-limited email
+        # must never suppress an otherwise-unrelated Telegram delivery in
+        # the same call; falls through to the "telegram" branch below.
+        if not rate_limiter.check(bot_id, telegram_user_id, "email_report"):
+            rate_limiter.log_hit(bot_id, telegram_user_id, "email_report", "_deliver_report")
+            email_status = "rate_limited"
+            error_parts.append("email: rate-limited")
             await context.bot.send_message(
                 chat_id=chat_id,
                 text=(
-                    "\U0001F4E7 <b>Report sent to your email!</b>\n\n"
-                    "If you don't see it in your Inbox within a few minutes, please check your "
-                    "<b>Spam/Junk folder</b> too -- and mark it <b>\"Not Spam\"</b> there, so future "
-                    "reports land directly in your Inbox."
+                    "⏳ You've requested a few reports by email recently -- please wait "
+                    "a bit before requesting another."
                 ),
-                parse_mode="HTML",
             )
-        except Exception as e:
-            email_status = "failed"
-            error_parts.append(f"email: {e}")
-            logger.exception(f"Report email failed for telegram_user_id={telegram_user_id}")
+        else:
+            row = conn.execute("SELECT email FROM students WHERE telegram_user_id=?", (telegram_user_id,)).fetchone()
+            try:
+                report_delivery.send_report_email(bot_id, row[0], pdf_bytes, display_name, "All-time")
+                email_status = "sent"
+                # Pranav's ask, 2026-08-11: tell the student explicitly to check
+                # Spam/Junk and mark it "Not Spam" -- a first email from a new
+                # sender routinely lands there, and without this nudge a student
+                # who only checks Inbox would conclude nothing was ever sent.
+                await context.bot.send_message(
+                    chat_id=chat_id,
+                    text=(
+                        "\U0001F4E7 <b>Report sent to your email!</b>\n\n"
+                        "If you don't see it in your Inbox within a few minutes, please check your "
+                        "<b>Spam/Junk folder</b> too -- and mark it <b>\"Not Spam\"</b> there, so future "
+                        "reports land directly in your Inbox."
+                    ),
+                    parse_mode="HTML",
+                )
+            except Exception as e:
+                email_status = "failed"
+                error_parts.append(f"email: {e}")
+                logger.exception(f"Report email failed for telegram_user_id={telegram_user_id}")
 
     if "telegram" in channels_to_send:
         # ONE retry, short backoff, ONLY for the transient network-error

@@ -68,6 +68,7 @@ BUCKETS = {
     "mcq_issue_report":    _Bucket(max_calls=5,  window_seconds=600),  # mcq_issue_flow.py submit
     "pdf_generation":      _Bucket(max_calls=10, window_seconds=60),   # exam_hub_bot.py send_pdf()
     "upload":              _Bucket(max_calls=15, window_seconds=60),   # myfiles_hub_bot.py upload_item_received()
+    "otp_attempt":         _Bucket(max_calls=8,  window_seconds=600),  # myfiles_hub_bot.py's AUTH_EMAIL/AUTH_OTP/DELETE_OTP -- OTP request/guess attempts specifically
 }
 
 DEFAULT_BLOCK_MESSAGE = "⏳ You're doing that a lot -- please wait a bit and try again."
@@ -237,6 +238,26 @@ def rate_limited(bucket: str, bot_id: str, message: str | None = None):
             return None
         return wrapper
     return decorator
+
+
+def check(bot_id: str, telegram_user_id: int, bucket: str) -> bool:
+    """Pure check -- no notification, no audit-row side effect -- for a
+    caller that only has a bot_id/telegram_user_id in hand, not an
+    Update/CallbackQuery (e.g. report_flow.py's _deliver_report(), called
+    well after the tap that triggered it, deep inside a helper that never
+    sees the original Update). Pair with log_hit() below to record a block.
+    Never raises -- fails open."""
+    try:
+        return _check(bot_id, telegram_user_id, bucket)
+    except Exception as e:
+        logger.warning(f"rate_limiter.check: failed (non-fatal, failing open): {e}")
+        return True
+
+
+def log_hit(bot_id: str, telegram_user_id: int, bucket: str, handler_name: str = "inline"):
+    """Public wrapper around the best-effort audit-row writer, for a caller
+    using check() directly instead of check_and_notify()."""
+    _log_hit_best_effort(bot_id, telegram_user_id, bucket, handler_name)
 
 
 async def check_and_notify(update, context, bot_id: str, bucket: str, *, message: str | None = None) -> bool:

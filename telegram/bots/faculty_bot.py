@@ -318,10 +318,16 @@ def main():
     # sh.start is patched (see above) to show the top-level picker, not
     # Study Hub's own screen -- exactly the desired /start and /reset
     # behavior for this unified bot.
-    app.add_handler(CommandHandler("start", activity_logger.log_activity("command", BOT_ID)(sh.start)))
-    app.add_handler(CommandHandler("reset", activity_logger.log_activity("command", BOT_ID)(sh.start)))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(hub_callback), pattern=r"^hub:"))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(sh.browse_callback), pattern=r"^(browse|cat|crs|lvl|subj|pt|file|mainmenu):"))
+    # 2026-08-24: rate_limiter.rate_limited() wraps OUTERMOST around every
+    # handler below (see that module's own docstring for why) -- a
+    # "general" flood cap, SECURITY.md §4.1.
+    def _rl(kind, func):
+        return rate_limiter.rate_limited("general", BOT_ID)(activity_logger.log_activity(kind, BOT_ID)(func))
+
+    app.add_handler(CommandHandler("start", _rl("command", sh.start)))
+    app.add_handler(CommandHandler("reset", _rl("command", sh.start)))
+    app.add_handler(CallbackQueryHandler(_rl("callback", hub_callback), pattern=r"^hub:"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", sh.browse_callback), pattern=r"^(browse|cat|crs|lvl|subj|pt|file|mainmenu):"))
     # (:|$) not a literal trailing ":" -- "next" and "restart" are bare
     # callback_data values with NO colon (see exam_hub_bot.py's next_step_rows()
     # and its "Start Over" buttons), unlike every other action here which is
@@ -333,28 +339,28 @@ def main():
     # acknowledged at all). Standalone exam_hub_bot.py never had this bug --
     # its own CallbackQueryHandler(button_router) has no pattern restriction.
     # Found 2026-08-10 via a live user report on the csarunchouhan bot.
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(eh.button_router), pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone|sessprofile)(:|$)"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", eh.button_router), pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone|sessprofile)(:|$)"))
     # 2026-08-11: report_flow's callbacks, same as exam_hub_bot.py's own
     # standalone registration -- eh.report_flow is exam_hub_bot.py's own
     # already-imported module reference, not a fresh import here.
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(eh.report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", eh.report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
     # eh.profile_flow is exam_hub_bot.py's own already-imported module
     # reference, same reuse pattern as eh.report_flow directly above.
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(eh.profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", eh.profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
     # eh.mcq_issue_flow, same reuse pattern, added 2026-08-13.
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(eh.mcq_issue_flow.mcq_issue_flow_callback), pattern=r"^(issuecat|issuecancel)(:|$)"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", eh.mcq_issue_flow.mcq_issue_flow_callback), pattern=r"^(issuecat|issuecancel)(:|$)"))
     # 2026-08-16 (independent code review): Test Mode + wallet callbacks --
     # previously missing entirely from this bot, see text_router()'s own
     # docstring for the full bug.
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_test_flow_callback_wrapper), pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)"))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_wallet_flow_callback_wrapper), pattern=r"^walletrc(:|$)"))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", _test_flow_callback_wrapper), pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", _wallet_flow_callback_wrapper), pattern=r"^walletrc(:|$)"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", _fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))
     # Photo/document uploads -- only meaningful during Test Mode's upload
     # collection; handle_upload_photo_or_document() is a no-op (returns
     # False) when no upload is actively being collected, so this handler
     # is safe to register unconditionally, same as exam_hub_bot.py's own.
-    app.add_handler(MessageHandler((filters.PHOTO | filters.Document.ALL) & ~filters.COMMAND, activity_logger.log_activity("photo", BOT_ID)(_upload_router)))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, activity_logger.log_activity("text", BOT_ID)(text_router)))
+    app.add_handler(MessageHandler((filters.PHOTO | filters.Document.ALL) & ~filters.COMMAND, _rl("photo", _upload_router)))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, _rl("text", text_router)))
 
     # Sweep any in-progress tests/pending recharges/pending access requests
     # from before this restart and re-arm their jobs -- job_queue jobs do

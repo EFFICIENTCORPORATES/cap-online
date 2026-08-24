@@ -82,6 +82,8 @@ load_dotenv(REPO_ROOT / "telegram" / ".env")      # secrets live in telegram/.en
 sys.path.insert(0, str(REPO_ROOT / "telegram" / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
 import log_rotation  # noqa: E402 -- telegram/database/log_rotation.py, Layer 1 of the log-rotation policy (2026-08-18)
+import rate_limiter  # noqa: E402 -- telegram/bots/rate_limiter.py, per-user flood/abuse controls (2026-08-24, SECURITY.md Phase 1) -- same directory (telegram/bots/), no extra sys.path needed
+import input_guard  # noqa: E402 -- telegram/bots/input_guard.py, free-text sanitization + upload validation (2026-08-24, SECURITY.md Phase 1)
 import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17) -- writes to the SHARED platform.db like send_heartbeat() already does, even though this bot's own primary data stays in its separate myfiles_hub.db
 MYFILES_BOT_ID = "1lavya-myfileshub"   # must match telegram/config/bots.json's entry
 
@@ -762,6 +764,12 @@ async def _parse_incoming_item(update: Update, chat_id: int):
 
     if message.document:
         doc = message.document
+        # SECURITY.md §3.A.6 -- validate BEFORE downloading, so a rejected
+        # upload (too large, or a blocked executable/script extension)
+        # never touches disk at all.
+        ok, reason = input_guard.validate_upload(doc.file_name, doc.file_size)
+        if not ok:
+            return {"rejected": True, "reason": reason}
         folder = user_folder(chat_id)
         stored_path = os.path.join(folder, doc.file_name)
         file_obj = await doc.get_file()
@@ -777,6 +785,12 @@ async def _parse_incoming_item(update: Update, chat_id: int):
 
     if message.photo:
         photo = message.photo[-1]  # highest-resolution size Telegram sent
+        # No extension check here (Telegram always sends a real .jpg for a
+        # photo message) -- just the size ceiling, same reasoning as
+        # documents above.
+        ok, reason = input_guard.validate_upload(None, photo.file_size)
+        if not ok:
+            return {"rejected": True, "reason": reason}
         folder = user_folder(chat_id)
         filename = f"photo_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}.jpg"
         stored_path = os.path.join(folder, filename)
@@ -817,10 +831,19 @@ async def upload_item_received(update: Update, context: ContextTypes.DEFAULT_TYP
     if context.user_data.get("upload_tag_create_mode") and update.message.text:
         return await upload_tag_create_received(update, context)
 
+    # SECURITY.md §3.A.2 -- a dedicated limit on uploads specifically
+    # (each one downloads a real file to disk), checked before doing any
+    # work at all.
+    if not await rate_limiter.check_and_notify(update, context, MYFILES_BOT_ID, "upload"):
+        return UPLOAD_WAIT_ITEM
+
     chat_id = update.effective_chat.id
     item = await _parse_incoming_item(update, chat_id)
     if item is None:
         await update.message.reply_text("Please send a document file, a photo, or a valid http(s) link.")
+        return UPLOAD_WAIT_ITEM
+    if item.get("rejected"):
+        await update.message.reply_text(f"⚠️ {item['reason']}")
         return UPLOAD_WAIT_ITEM
 
     batch = context.user_data.setdefault("pending_batch", [])
@@ -1325,8 +1348,20 @@ def main():
     # extraction already handles a photo/document update safely (no
     # .text attribute -> falls back to empty, never crashes), just labels
     # it a little less precisely than a dedicated "mixed" kind would.
+    # 2026-08-24: rate_limiter.rate_limited() wraps OUTERMOST (see that
+    # module's own docstring for why) -- a "general" flood cap on every
+    # handler, SECURITY.md §4.1.
     def _la(kind, func):
-        return activity_logger.log_activity(kind, MYFILES_BOT_ID)(func)
+        return rate_limiter.rate_limited("general", MYFILES_BOT_ID)(activity_logger.log_activity(kind, MYFILES_BOT_ID)(func))
+
+    # AUTH_EMAIL/AUTH_OTP/DELETE_OTP get the tighter "otp_attempt" bucket
+    # instead of "general" -- these are OTP request/guess attempts
+    # specifically (real login/account-security surface, distinct from
+    # ordinary menu navigation), see rate_limiter.BUCKETS' own comment.
+    def _la_otp(func):
+        return rate_limiter.rate_limited("otp_attempt", MYFILES_BOT_ID)(
+            activity_logger.log_activity("text", MYFILES_BOT_ID, always_redact=True)(func)
+        )
 
     conv = ConversationHandler(
         entry_points=[
@@ -1341,8 +1376,8 @@ def main():
             # cannot see at all -- see activity_logger.py's own REDACTION
             # comment block for the full reasoning (a real gap found and
             # fixed before this wiring went in, not a theoretical one).
-            AUTH_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, activity_logger.log_activity("text", MYFILES_BOT_ID, always_redact=True)(auth_email_received))],
-            AUTH_OTP: [MessageHandler(filters.TEXT & ~filters.COMMAND, activity_logger.log_activity("text", MYFILES_BOT_ID, always_redact=True)(auth_otp_received))],
+            AUTH_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, _la_otp(auth_email_received))],
+            AUTH_OTP: [MessageHandler(filters.TEXT & ~filters.COMMAND, _la_otp(auth_otp_received))],
             PROFILE_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, _la("text", profile_name_received))],
             MAIN_MENU: [CallbackQueryHandler(_la("callback", main_menu_choice), pattern=r"^menu:")],
             UPLOAD_WAIT_ITEM: [
@@ -1368,7 +1403,7 @@ def main():
                 CallbackQueryHandler(_la("callback", retrieve_search), pattern=r"^rtag_search$"),
             ],
             RETRIEVE_RESULTS: [CallbackQueryHandler(_la("callback", retrieve_results_action), pattern=r"^(send_one:|send_all|delete_request)")],
-            DELETE_OTP: [MessageHandler(filters.TEXT & ~filters.COMMAND, activity_logger.log_activity("text", MYFILES_BOT_ID, always_redact=True)(delete_otp_received))],  # always_redact=True -- an OTP code, same reasoning as AUTH_EMAIL/AUTH_OTP above
+            DELETE_OTP: [MessageHandler(filters.TEXT & ~filters.COMMAND, _la_otp(delete_otp_received))],  # always_redact=True -- an OTP code, same reasoning as AUTH_EMAIL/AUTH_OTP above
             TAG_MANAGE: [CallbackQueryHandler(_la("callback", tag_manager_action), pattern=r"^tagmgr_")],
             TAG_MANAGE_CREATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, _la("text", tag_manager_create_received))],
             TAG_MANAGE_RENAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, _la("text", tag_manager_rename_received))],

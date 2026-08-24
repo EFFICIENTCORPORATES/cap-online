@@ -83,6 +83,8 @@ import contact_utils  # noqa: E402
 import leaderboard_metrics  # noqa: E402 -- telegram/database/leaderboard_metrics.py, leaderboard config + eligibility (2026-08-11)
 import academic_profiles  # noqa: E402 -- telegram/database/academic_profiles.py, multi-course profiles (2026-08-16)
 import access_requests  # noqa: E402 -- telegram/database/access_requests.py, the same-course-extra-level approval gate (2026-08-16)
+import rate_limiter  # noqa: E402 -- telegram/bots/rate_limiter.py, per-user flood/abuse controls (2026-08-24, SECURITY.md Phase 1)
+import input_guard  # noqa: E402 -- telegram/bots/input_guard.py, free-text sanitization (2026-08-24, SECURITY.md Phase 1)
 
 logger = logging.getLogger(__name__)
 
@@ -623,6 +625,13 @@ async def _handle_profile_action(query, context, value: str):
         return
 
     if value.startswith("toggle_lb:"):
+        # SECURITY.md §3.A.2 -- a dedicated limit on join/leave taps
+        # specifically (each one is a real DB write), inline here rather
+        # than via the registration-time decorator so it doesn't throttle
+        # ordinary profile-menu navigation in the same callback.
+        bot_id = context.user_data.get("profile_flow_bot_id", "unknown")
+        if not await rate_limiter.check_and_notify(query, context, bot_id, "leaderboard_toggle"):
+            return
         leaderboard_id = value.split(":", 1)[1]
         profile = _get_profile_for_chat(conn, telegram_user_id)
         if not profile:
@@ -742,7 +751,12 @@ async def handle_profile_text_input(update, context) -> bool:
     conn = platform_db.get_connection()
     platform_db.init_schema(conn)
     telegram_user_id = update.effective_user.id
-    text = (update.message.text or "").strip()
+    # SECURITY.md §3.A.4 -- bound length + strip control characters before
+    # this reaches a DB write, a public leaderboard display, or a username
+    # comparison. sanitize_free_text() is hygiene only (never rejects
+    # outright) -- _valid_username()/the empty-text checks below still do
+    # the real format validation.
+    text = input_guard.sanitize_free_text(update.message.text)
 
     if state == AWAITING_EXISTING_USERNAME:
         row = conn.execute("SELECT username FROM student_profiles WHERE username=?", (text,)).fetchone()

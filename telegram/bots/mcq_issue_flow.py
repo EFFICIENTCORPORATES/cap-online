@@ -48,6 +48,8 @@ from telegram.helpers import escape_markdown
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
+import rate_limiter  # noqa: E402 -- telegram/bots/rate_limiter.py, per-user flood/abuse controls (2026-08-24, SECURITY.md Phase 1)
+import input_guard  # noqa: E402 -- telegram/bots/input_guard.py, free-text sanitization (2026-08-24, SECURITY.md Phase 1)
 
 logger = logging.getLogger(__name__)
 
@@ -114,9 +116,16 @@ async def handle_issue_text_input(update, context) -> bool:
     if not state or not state.get("awaiting_description"):
         return False
 
-    description = (update.message.text or "").strip()
+    description = input_guard.sanitize_free_text(update.message.text)
     if not description:
         await update.message.reply_text("Please type a short description of the issue (or tap Cancel above).")
+        return True
+
+    # SECURITY.md §3.A.2 -- a dedicated limit on issue-report submissions
+    # specifically (each one is a real DB write reviewed by a human later),
+    # checked here rather than via the registration-time decorator so it
+    # doesn't throttle ordinary MCQ navigation in the same text_router.
+    if not await rate_limiter.check_and_notify(update, context, state["bot_id"], "mcq_issue_report"):
         return True
 
     conn = platform_db.get_connection()
