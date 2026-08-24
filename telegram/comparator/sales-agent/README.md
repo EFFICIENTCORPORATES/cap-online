@@ -54,24 +54,47 @@ Pranav's explicit instruction (2026-08-24) — each institute's bot interaction 
 (searches, course views, buy-link clicks) stays in its own file, not pooled with
 1LAVYA's own flagship-bot data or another client's.
 
-## Running the sample bot (coceducation)
+## Status: LIVE (2026-08-24)
+
+`coceducation`'s bot is running as **@Official1LavyaFacultySearchBot** — real token
+in `telegram/.env`'s `SALES_AGENT_COCEDUCATION_BOT_TOKEN`, registered in
+`telegram/config/bots.json` (`bot_id: "coceducation"`), managed exactly like every
+other 1LAVYA bot:
+
+- **`telegram/tools/manage_bots.py start|stop|restart|status [coceducation]`**
+  starts/stops it (PID-tracked, own log at
+  `telegram/database/run/logs/coceducation.log`).
+- The existing Windows Task Scheduler **"1LAVYA Bots - Health Check"** job (runs
+  `manage_bots.py ensure-running` every 30 min, see
+  `telegram/tools/WINDOWS-AUTOSTART.md`) automatically covers this bot too — no
+  separate scheduler entry was needed, `status: "active"` in `bots.json` was enough.
+  If the process crashes or hangs, it self-heals within 30 minutes, same as the rest
+  of the platform.
+- Sends a heartbeat to the shared `platform.db` (same as every other bot) so
+  `manage_bots.py status`, the Admin Portal, and the down/up DM watcher all see it —
+  while its own real interaction data (searches, course views) stays in its own
+  `sales_agent.db`, per Pranav's instruction.
+
+**Student-facing usage doc**: `coceducation/Faculty Search.md`.
+
+## Running / rebuilding manually
 
 ```bash
 # 1. Rebuild the catalog if the site mirror has changed:
 .venv/Scripts/python telegram/comparator/sales-agent/coceducation/extract_catalog.py
 
-# 2. Set a REAL BotFather token (get one from @BotFather on Telegram):
-export SALES_AGENT_COCEDUCATION_BOT_TOKEN="123456:ABC-real-token-here"
-
-# 3. Run it:
+# 2. Manual/interactive run (not via manage_bots.py) -- token comes from
+#    telegram/.env automatically:
 .venv/Scripts/python telegram/bots/sales_agent_bot.py
+
+# 3. Or manage it like every other platform bot:
+.venv/Scripts/python telegram/tools/manage_bots.py restart coceducation
+.venv/Scripts/python telegram/tools/manage_bots.py status coceducation
 ```
 
-Without a real token in that env var, the bot loads its catalog and logs a clear
-warning, then refuses to call Telegram — it will not silently crash with a cryptic
-auth error. `client_config.json`'s `bot_token_placeholder` value
-(`REPLACE_WITH_COCEDUCATION_BOT_TOKEN`) is a placeholder only, exactly as asked; there
-is no real token anywhere in this repo.
+Without a real token in `SALES_AGENT_<CLIENT>_BOT_TOKEN`, the bot loads its catalog
+and logs a clear warning, then refuses to call Telegram — it will not silently crash
+with a cryptic auth error.
 
 **Smoke test** (no real Telegram connection needed):
 ```bash
@@ -115,12 +138,12 @@ No change to `sales_agent_bot.py` itself should be needed for a same-shaped cata
 - **The cross-institute "comparator" bot** Pranav described (where a student compares
   faculties across multiple institutes in one place) — a materially different product
   from "one bot per client answering about that client only," not started.
-- **Process management / `bots.json` registration** — every other live bot on this
-  platform is managed via `telegram/tools/manage_bots.py` + `bots.json`
-  (start/stop/restart, heartbeats, the down/up alert watcher). This sample bot is
-  standalone and isn't wired into that yet — worth doing before any of these go live,
-  so they get the same crash-recovery/monitoring as the rest of the platform.
 - **Formal legal agreement text with each institute** — Pranav says this is "already
   entering into agreement"; this repo has no signed-agreement artifact for any of the
-  4 clients. Confirm the coceducation agreement is actually finalized before this
-  sample bot (or its data) goes anywhere client-facing or public.
+  4 clients. This bot is now live and public even though that confirmation is still
+  outstanding — worth Pranav double-checking the coceducation agreement is actually
+  finalized, since the bot going live isn't itself proof of that.
+- **Rate limiting / input sanitization are wired in** (`rate_limiter.py`,
+  `input_guard.py` — SECURITY.md Phase 1), but this bot has had no adversarial/abuse
+  testing beyond the automated smoke test. It's the platform's first fully public,
+  unauthenticated, free-text-search bot — worth extra attention if usage grows.

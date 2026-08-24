@@ -121,6 +121,18 @@
       "script": "leaderboard_broadcaster.py",
       "status": "inactive",
       "notes": "Added 2026-08-11 (Phase 3 of the roadmap). Not a Telegram bot with its own token -- bot_token_env is null on purpose, see leaderboard_broadcaster.py; each individual leaderboard in telegram/config/leaderboards.json specifies its OWN broadcast_bot_token_env (the bot that actually posts to that leaderboard's channels). Deliberately 'inactive' until at least one leaderboard in leaderboards.json is flipped to 'active' with real channel chat_ids -- starting it before then is harmless (it just finds nothing to broadcast every check) but pointless."
+    },
+
+    {
+      "bot_id": "coceducation",
+      "tenant_id": null,
+      "kind": "sales-agent",
+      "display_name": "1LAVYA Faculty Search -- COC Education",
+      "bot_username": "@Official1LavyaFacultySearchBot",
+      "bot_token_env": "SALES_AGENT_COCEDUCATION_BOT_TOKEN",
+      "script": "sales_agent_bot.py",
+      "status": "active",
+      "notes": "Added 2026-08-24. First of the 'sales-agent' bot kind (see telegram/comparator/sales-agent/README.md) -- one bot per client institute, all running sales_agent_bot.py. tenant_id is null on purpose: sales-agent clients aren't platform tenants, they have no tenants.json entry -- bot_id IS the client slug directly (matches telegram/comparator/sales-agent/coceducation/'s own folder name and client_config.json), same choice csarunchouhan's bot_id/tenant_id made for a different reason. Answers ONLY from that client's own catalog.json (built from their own public site content, per the client agreement -- see the README); every 'Buy Now' link points at their own real coceducation.com URL, this bot never takes a payment itself. Uses its OWN sqlite file (sales_agent.db, not the shared platform.db) for per-client business data, per Pranav's explicit instruction -- only sends a heartbeat + a generic interaction-log mirror to platform.db, same as every other bot, so it's visible in manage_bots.py status/ensure-running, the Admin Portal, and the down/up watcher."
     }
   ]
 }

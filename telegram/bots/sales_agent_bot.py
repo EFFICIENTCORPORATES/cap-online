@@ -1,13 +1,31 @@
 """
-telegram/bots/sales_agent_bot.py -- "1LAVYA Faculty Search" sales-agent bot (sample build, 2026-08-24)
+telegram/bots/sales_agent_bot.py -- "1LAVYA Faculty Search" sales-agent bot
+(sample build 2026-08-24, went live the same day as @Official1LavyaFacultySearchBot
+-- coceducation's own bot -- registered in bots.json as bot_id "coceducation")
 --------------------------------------------------------------------------------------------------
 One generic bot script, reused per client institute -- same pattern as study_hub_bot.py
 being reused per faculty tenant. Which client this process serves is picked with the
-SALES_AGENT_CLIENT env var (default: "coceducation", the one client with a real catalog
-built so far). Adding vcgurukul / bbvirtuals / vsmartacademy later is: run
-extract_catalog.py-equivalent for that client's own site-mirror, add a
-client_config.json next to it, start a new process with SALES_AGENT_CLIENT set --
-no code change here.
+BOT_ID env var, matching every other bot on this platform (manage_bots.py sets this
+automatically when it launches a bot from bots.json) -- falls back to
+SALES_AGENT_CLIENT then "coceducation" for a manual/interactive run. bot_id IS the
+client slug for this product (same choice csarunchouhan's bot_id/tenant_id made) --
+there's no separate tenants.json entry, sales-agent clients aren't platform tenants.
+Adding vcgurukul / bbvirtuals / vsmartacademy later is: build that client's own
+extract_catalog.py + catalog.json, add a client_config.json, add a bots.json entry
+with a real token in telegram/.env -- no code change here.
+
+Live-management (added 2026-08-24, matching every other 1LAVYA bot): registered in
+telegram/config/bots.json (bot_id "coceducation") so telegram/tools/manage_bots.py
+starts/stops/restarts it, the existing Windows Task Scheduler "1LAVYA Bots - Health
+Check" job auto-restarts it if it crashes or hangs (same `ensure-running` sweep every
+other bot already gets -- no separate scheduler entry needed), and it sends a
+heartbeat to the shared platform.db so the Admin Portal/dashboard/down-up watcher all
+see it. Logging goes through log_rotation.build_handlers() like every other bot (so
+Admin Portal's Bot-wise Logs page can read it), and free-text search + every handler
+tap go through rate_limiter.py + input_guard.py -- SECURITY.md's Phase 1 controls,
+applied here from day one since this is the platform's first fully public,
+unauthenticated, free-text-search-driven bot (exactly the surface
+SCRAPING-INCIDENT-CASE-STUDY.md's §7 flagged as needing this).
 
 Per-client folder layout (telegram/comparator/sales-agent/<client>/):
     client_config.json  -- display name, token env var, file paths (see coceducation/)
@@ -40,9 +58,11 @@ import json
 import logging
 import os
 import sqlite3
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from dotenv import load_dotenv
 from rapidfuzz import fuzz, process
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
@@ -55,17 +75,30 @@ from telegram.ext import (
     filters,
 )
 
+REPO_ROOT = Path(__file__).resolve().parents[2]  # telegram/bots/sales_agent_bot.py -> repo root
+SALES_AGENT_ROOT = REPO_ROOT / "telegram" / "comparator" / "sales-agent"
+
+load_dotenv(REPO_ROOT / "telegram" / ".env")  # real tokens live here, gitignored -- see .env.example
+
+sys.path.insert(0, str(REPO_ROOT / "telegram" / "database"))
+import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above -- shared heartbeat/interaction-log table
+import log_rotation  # noqa: E402 -- telegram/database/log_rotation.py, same bounded-rotating-file policy every other bot uses
+import rate_limiter  # noqa: E402 -- telegram/bots/rate_limiter.py (same dir as this file, no extra sys.path needed) -- SECURITY.md Phase 1
+import input_guard  # noqa: E402 -- telegram/bots/input_guard.py -- SECURITY.md Phase 1
+
+# BOT_ID doubles as the client slug (see module docstring) -- resolved the same way
+# every other bot resolves it, so manage_bots.py's `env["BOT_ID"] = bot_id` just works.
+BOT_ID = os.environ.get("BOT_ID") or os.environ.get("SALES_AGENT_CLIENT", "coceducation")
+CLIENT_SLUG = BOT_ID
+CLIENT_DIR = SALES_AGENT_ROOT / CLIENT_SLUG
+
 logging.basicConfig(
     format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     level=logging.INFO,
+    handlers=log_rotation.build_handlers(BOT_ID),
 )
+logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger("sales_agent_bot")
-
-REPO_ROOT = Path(__file__).resolve().parents[2]
-SALES_AGENT_ROOT = REPO_ROOT / "telegram" / "comparator" / "sales-agent"
-
-CLIENT_SLUG = os.environ.get("SALES_AGENT_CLIENT", "coceducation")
-CLIENT_DIR = SALES_AGENT_ROOT / CLIENT_SLUG
 
 PAGE_SIZE = 8  # courses per page in "Browse by Exam" listings
 SEARCH_RESULT_LIMIT = 6
@@ -80,7 +113,7 @@ def load_client_config() -> dict:
     if not config_path.exists():
         raise SystemExit(
             f"No client_config.json for '{CLIENT_SLUG}' at {config_path}. "
-            f"Set SALES_AGENT_CLIENT to a folder that has one, e.g. 'coceducation'."
+            f"Set BOT_ID (or SALES_AGENT_CLIENT for a manual run) to a folder that has one, e.g. 'coceducation'."
         )
     return json.loads(config_path.read_text(encoding="utf-8"))
 
@@ -135,6 +168,12 @@ def init_db() -> None:
 
 
 def log_event(user_id: int, event_type: str, *, query_text: str | None = None, course_slug: str | None = None) -> None:
+    """Writes to THIS client's own sales_agent.db (the detailed, per-client
+    record -- query text, which course, etc.). Also best-effort mirrors a bare
+    event into the shared platform.db's generic bot_interactions log, same as
+    every other bot, purely so this bot shows up in the Admin
+    Portal/dashboard's bot-wise usage views -- a failure here never blocks the
+    real per-client log above."""
     conn = sqlite3.connect(DB_PATH)
     try:
         conn.execute(
@@ -148,12 +187,19 @@ def log_event(user_id: int, event_type: str, *, query_text: str | None = None, c
     finally:
         conn.close()
 
+    try:
+        platform_db.log_interaction(PLATFORM_DB_CONN, BOT_ID, user_id, event_type)
+    except Exception:
+        logger.exception("Failed to mirror event into shared platform.db (event_type=%s)", event_type)
+
 
 CONFIG = load_client_config()
 CATALOG = load_catalog(CONFIG)
 COURSES: list[dict] = CATALOG["courses"]
 ORG = CATALOG["org"]
 BOT_TOKEN = resolve_bot_token(CONFIG)
+PLATFORM_DB_CONN = platform_db.get_connection()  # shared platform.db -- heartbeat + generic interaction log only, never this client's own course/business data
+platform_db.init_schema(PLATFORM_DB_CONN)  # safe to call more than once (schedule_heartbeat() also calls it) -- ensures bot_interactions exists before the first log_event() call, which can happen before main() reaches schedule_heartbeat()
 
 # Course lookup by small integer index, not by slug -- callback_data has Telegram's
 # hard 64-byte limit, and several real slugs here (e.g. long "By <faculty>" titles)
@@ -396,10 +442,16 @@ async def button_router(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
 
 async def free_text_search(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    text = (update.message.text or "").strip()
+    # SECURITY.md Phase 1 -- sanitize before it's ever logged/echoed back, and
+    # rate-limit the actual search specifically (not via the registration-time
+    # "general" wrap, which every handler already gets -- this is the narrower,
+    # dedicated "search" bucket study_hub_bot.py's own free_text_search uses).
+    text = input_guard.sanitize_free_text(update.message.text).strip()
     if not text:
         return
     user_id = update.effective_user.id
+    if not await rate_limiter.check_and_notify(update, context, BOT_ID, "search"):
+        return
     log_event(user_id, "search", query_text=text)
 
     results = search_courses(text)
@@ -419,9 +471,13 @@ async def free_text_search(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 
 def build_application() -> Application:
     app = Application.builder().token(BOT_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CallbackQueryHandler(button_router))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, free_text_search))
+    # rate_limiter.rate_limited("general", BOT_ID) wraps OUTERMOST on every
+    # handler (same discipline as every other bot on this platform -- see
+    # rate_limiter.py's own docstring) -- free_text_search ALSO gets its own
+    # narrower "search" check inline, above, for the dedicated search bucket.
+    app.add_handler(CommandHandler("start", rate_limiter.rate_limited("general", BOT_ID)(start)))
+    app.add_handler(CallbackQueryHandler(rate_limiter.rate_limited("general", BOT_ID)(button_router)))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, rate_limiter.rate_limited("general", BOT_ID)(free_text_search)))
     return app
 
 
@@ -443,6 +499,7 @@ def main() -> None:
         )
         return
     app = build_application()
+    platform_db.schedule_heartbeat(app, BOT_ID)  # so manage_bots.py status/ensure-running, the Admin Portal, and the down/up watcher all see this bot
     logger.info("Starting %s ...", CONFIG["bot_display_name"])
     app.run_polling(allowed_updates=Update.ALL_TYPES)
 

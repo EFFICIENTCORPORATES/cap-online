@@ -135,6 +135,11 @@ telegram/creds.txt
 **/creds.txt
 *.env
 .env
+# 2026-08-24: found untracked-but-not-ignored -- telegram/comparator/sales-agent/
+# secrets.txt held a live BotFather token in plaintext with no gitignore coverage
+# at all (unlike creds.txt/*.env above). Covered generically so this class of
+# mistake (a plaintext secrets dump under any future client folder) can't recur.
+**/secrets.txt
 books/bridge-course/YogaMembersListNameMumbers.md
 books/concept-book/characters/animations/.thumbnail
 
