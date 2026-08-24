@@ -111,6 +111,7 @@ import wallet_flow  # noqa: E402 -- telegram/bots/wallet_flow.py, wallet status 
 import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17)
 import rate_limiter  # noqa: E402 -- telegram/bots/rate_limiter.py, per-user flood/abuse controls (2026-08-24, SECURITY.md Phase 1)
 import input_guard  # noqa: E402 -- telegram/bots/input_guard.py, free-text sanitization (2026-08-24, SECURITY.md Phase 1)
+import callback_registry  # noqa: E402 -- telegram/bots/callback_registry.py, central callback_data route registry (2026-08-24, SECURITY.md Phase 2)
 
 # ---------------------------------------------------------------------------
 # CONFIG
@@ -2081,6 +2082,13 @@ def main():
     def _rl(kind, func):
         return rate_limiter.rate_limited("general", BOT_ID)(activity_logger.log_activity(kind, BOT_ID)(func))
 
+    # 2026-08-24: callback_registry.CallbackRegistry -- a drop-in
+    # replacement for constructing CallbackQueryHandler directly, so
+    # registry.validate() (below, right before run_polling()) turns the
+    # collision class described in the comment just below into a loud
+    # startup failure instead of something a human has to notice by eye.
+    registry = callback_registry.CallbackRegistry(BOT_ID)
+
     app.add_handler(CommandHandler("start", _rl("command", start)))
     # 2026-08-11: button_router now needs an explicit pattern -- it used to
     # have none (matched every callback), which was harmless only because
@@ -2094,28 +2102,30 @@ def main():
     # (2026-08-10, faculty_bot.py's "next"/"restart" callback pattern) --
     # scoping this explicitly now instead of relying on "nothing else
     # collides yet."
-    app.add_handler(CallbackQueryHandler(
+    app.add_handler(registry.callback_handler(
         _rl("callback", button_router),
         pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone|sessprofile)(:|$)",
+        label="button_router",
     ))
-    app.add_handler(CallbackQueryHandler(_rl("callback", report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
-    app.add_handler(CallbackQueryHandler(_rl("callback", profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
+    app.add_handler(registry.callback_handler(_rl("callback", report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):", label="report_flow_callback"))
+    app.add_handler(registry.callback_handler(_rl("callback", profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):", label="profile_flow_callback"))
     # 2026-08-13: mcq_issue_flow's own callbacks ("issuecat:<i>", bare
     # "issuecancel") -- registered separately, same "explicit pattern per
     # module" discipline as report_flow/profile_flow above.
-    app.add_handler(CallbackQueryHandler(_rl("callback", mcq_issue_flow.mcq_issue_flow_callback), pattern=r"^(issuecat|issuecancel)(:|$)"))
+    app.add_handler(registry.callback_handler(_rl("callback", mcq_issue_flow.mcq_issue_flow_callback), pattern=r"^(issuecat|issuecancel)(:|$)", label="mcq_issue_flow_callback"))
     # 2026-08-16: Test Mode's own callback prefixes -- same "explicit
     # pattern per module" discipline as every flow above (the callback-
     # pattern-collision bug class this platform has hit 3+ times already).
-    app.add_handler(CallbackQueryHandler(_rl("callback", _test_flow_callback_wrapper), pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)"))
-    app.add_handler(CallbackQueryHandler(_rl("callback", _wallet_flow_callback_wrapper), pattern=r"^walletrc(:|$)"))
-    app.add_handler(CallbackQueryHandler(_rl("callback", _fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))
+    app.add_handler(registry.callback_handler(_rl("callback", _test_flow_callback_wrapper), pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)", label="_test_flow_callback_wrapper"))
+    app.add_handler(registry.callback_handler(_rl("callback", _wallet_flow_callback_wrapper), pattern=r"^walletrc(:|$)", label="_wallet_flow_callback_wrapper"))
+    app.add_handler(registry.callback_handler(_rl("callback", _fuzzy_trigger_callback), pattern=r"^fuzzytrigger:", label="_fuzzy_trigger_callback"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, _rl("text", text_router)))
     # Photo/document uploads -- only meaningful during Test Mode's upload
     # collection; test_flow.handle_upload_photo_or_document() is a no-op
     # (returns False) when no upload is actively being collected, so this
     # handler is safe to register unconditionally.
     app.add_handler(MessageHandler((filters.PHOTO | filters.Document.ALL) & ~filters.COMMAND, _rl("photo", _upload_router)))
+    registry.validate()
 
     # Sweep any in-progress tests from before this restart and re-arm their
     # expiry jobs -- job_queue jobs do NOT survive a process restart (same

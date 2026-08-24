@@ -92,6 +92,7 @@ import fuzzy_trigger  # noqa: E402 -- telegram/bots/fuzzy_trigger.py, "did you m
 import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17)
 import rate_limiter  # noqa: E402 -- telegram/bots/rate_limiter.py, per-user flood/abuse controls (2026-08-24, SECURITY.md Phase 1)
 import input_guard  # noqa: E402 -- telegram/bots/input_guard.py, free-text sanitization (2026-08-24, SECURITY.md Phase 1)
+import callback_registry  # noqa: E402 -- telegram/bots/callback_registry.py, central callback_data route registry (2026-08-24, SECURITY.md Phase 2)
 
 # ---------------------------------------------------------------------------
 # CONFIG
@@ -912,13 +913,21 @@ def main():
     def _rl(kind, func):
         return rate_limiter.rate_limited("general", BOT_ID)(activity_logger.log_activity(kind, BOT_ID)(func))
 
+    # 2026-08-24: callback_registry.CallbackRegistry -- a drop-in
+    # replacement for constructing CallbackQueryHandler directly, so
+    # registry.validate() (below, right before run_polling()) can catch a
+    # pattern collision at STARTUP instead of a student's tap silently
+    # doing nothing. See callback_registry.py's own docstring for scope.
+    registry = callback_registry.CallbackRegistry(BOT_ID)
+
     app.add_handler(CommandHandler("start", _rl("command", start)))
     app.add_handler(CommandHandler("reset", _rl("command", start)))
-    app.add_handler(CallbackQueryHandler(_rl("callback", browse_callback), pattern=r"^(browse|cat|crs|lvl|subj|ed|pt|file|mainmenu):"))
-    app.add_handler(CallbackQueryHandler(_rl("callback", profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
-    app.add_handler(CallbackQueryHandler(_rl("callback", report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
-    app.add_handler(CallbackQueryHandler(_rl("callback", _fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))
+    app.add_handler(registry.callback_handler(_rl("callback", browse_callback), pattern=r"^(browse|cat|crs|lvl|subj|ed|pt|file|mainmenu):", label="browse_callback"))
+    app.add_handler(registry.callback_handler(_rl("callback", profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):", label="profile_flow_callback"))
+    app.add_handler(registry.callback_handler(_rl("callback", report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):", label="report_flow_callback"))
+    app.add_handler(registry.callback_handler(_rl("callback", _fuzzy_trigger_callback), pattern=r"^fuzzytrigger:", label="_fuzzy_trigger_callback"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, _rl("text", free_text_search)))
+    registry.validate()
 
     # Re-arm any access_requests still pending from before this restart
     # (job_queue jobs do not survive a restart) -- see profile_flow.py's

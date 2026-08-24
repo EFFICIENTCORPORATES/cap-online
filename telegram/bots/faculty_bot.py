@@ -68,6 +68,7 @@ import cancel_utils  # noqa: E402 -- telegram/bots/cancel_utils.py, universal "g
 import fuzzy_trigger  # noqa: E402 -- telegram/bots/fuzzy_trigger.py, "did you mean X?" typo confirmation (2026-08-16)
 import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17)
 import rate_limiter  # noqa: E402 -- telegram/bots/rate_limiter.py, per-user flood/abuse controls (2026-08-24, SECURITY.md Phase 1)
+import callback_registry  # noqa: E402 -- telegram/bots/callback_registry.py, central callback_data route registry (2026-08-24, SECURITY.md Phase 2)
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database"))
 import db as platform_db  # noqa: E402 -- must follow the sys.path.insert() above
@@ -324,10 +325,17 @@ def main():
     def _rl(kind, func):
         return rate_limiter.rate_limited("general", BOT_ID)(activity_logger.log_activity(kind, BOT_ID)(func))
 
+    # 2026-08-24: callback_registry.CallbackRegistry -- a drop-in
+    # replacement for constructing CallbackQueryHandler directly, so
+    # registry.validate() (below, right before run_polling()) can catch
+    # exactly the collision bug class the comment a few lines down
+    # describes at STARTUP, not via a live user report.
+    registry = callback_registry.CallbackRegistry(BOT_ID)
+
     app.add_handler(CommandHandler("start", _rl("command", sh.start)))
     app.add_handler(CommandHandler("reset", _rl("command", sh.start)))
-    app.add_handler(CallbackQueryHandler(_rl("callback", hub_callback), pattern=r"^hub:"))
-    app.add_handler(CallbackQueryHandler(_rl("callback", sh.browse_callback), pattern=r"^(browse|cat|crs|lvl|subj|pt|file|mainmenu):"))
+    app.add_handler(registry.callback_handler(_rl("callback", hub_callback), pattern=r"^hub:", label="hub_callback"))
+    app.add_handler(registry.callback_handler(_rl("callback", sh.browse_callback), pattern=r"^(browse|cat|crs|lvl|subj|pt|file|mainmenu):", label="sh.browse_callback"))
     # (:|$) not a literal trailing ":" -- "next" and "restart" are bare
     # callback_data values with NO colon (see exam_hub_bot.py's next_step_rows()
     # and its "Start Over" buttons), unlike every other action here which is
@@ -339,28 +347,29 @@ def main():
     # acknowledged at all). Standalone exam_hub_bot.py never had this bug --
     # its own CallbackQueryHandler(button_router) has no pattern restriction.
     # Found 2026-08-10 via a live user report on the csarunchouhan bot.
-    app.add_handler(CallbackQueryHandler(_rl("callback", eh.button_router), pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone|sessprofile)(:|$)"))
+    app.add_handler(registry.callback_handler(_rl("callback", eh.button_router), pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone|sessprofile)(:|$)", label="eh.button_router"))
     # 2026-08-11: report_flow's callbacks, same as exam_hub_bot.py's own
     # standalone registration -- eh.report_flow is exam_hub_bot.py's own
     # already-imported module reference, not a fresh import here.
-    app.add_handler(CallbackQueryHandler(_rl("callback", eh.report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
+    app.add_handler(registry.callback_handler(_rl("callback", eh.report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):", label="eh.report_flow_callback"))
     # eh.profile_flow is exam_hub_bot.py's own already-imported module
     # reference, same reuse pattern as eh.report_flow directly above.
-    app.add_handler(CallbackQueryHandler(_rl("callback", eh.profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
+    app.add_handler(registry.callback_handler(_rl("callback", eh.profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):", label="eh.profile_flow_callback"))
     # eh.mcq_issue_flow, same reuse pattern, added 2026-08-13.
-    app.add_handler(CallbackQueryHandler(_rl("callback", eh.mcq_issue_flow.mcq_issue_flow_callback), pattern=r"^(issuecat|issuecancel)(:|$)"))
+    app.add_handler(registry.callback_handler(_rl("callback", eh.mcq_issue_flow.mcq_issue_flow_callback), pattern=r"^(issuecat|issuecancel)(:|$)", label="eh.mcq_issue_flow_callback"))
     # 2026-08-16 (independent code review): Test Mode + wallet callbacks --
     # previously missing entirely from this bot, see text_router()'s own
     # docstring for the full bug.
-    app.add_handler(CallbackQueryHandler(_rl("callback", _test_flow_callback_wrapper), pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)"))
-    app.add_handler(CallbackQueryHandler(_rl("callback", _wallet_flow_callback_wrapper), pattern=r"^walletrc(:|$)"))
-    app.add_handler(CallbackQueryHandler(_rl("callback", _fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))
+    app.add_handler(registry.callback_handler(_rl("callback", _test_flow_callback_wrapper), pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)", label="_test_flow_callback_wrapper"))
+    app.add_handler(registry.callback_handler(_rl("callback", _wallet_flow_callback_wrapper), pattern=r"^walletrc(:|$)", label="_wallet_flow_callback_wrapper"))
+    app.add_handler(registry.callback_handler(_rl("callback", _fuzzy_trigger_callback), pattern=r"^fuzzytrigger:", label="_fuzzy_trigger_callback"))
     # Photo/document uploads -- only meaningful during Test Mode's upload
     # collection; handle_upload_photo_or_document() is a no-op (returns
     # False) when no upload is actively being collected, so this handler
     # is safe to register unconditionally, same as exam_hub_bot.py's own.
     app.add_handler(MessageHandler((filters.PHOTO | filters.Document.ALL) & ~filters.COMMAND, _rl("photo", _upload_router)))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, _rl("text", text_router)))
+    registry.validate()
 
     # Sweep any in-progress tests/pending recharges/pending access requests
     # from before this restart and re-arm their jobs -- job_queue jobs do
