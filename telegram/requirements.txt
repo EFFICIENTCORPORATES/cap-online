@@ -35,3 +35,6 @@ botocore==1.43.72
 s3transfer==0.19.2
 jmespath==1.1.0
 cryptography==50.0.0    # telegram/tools/backup_to_cloudflare.py -- encrypts .env/creds.txt before backup
+playwright==1.62.0      # telegram/comparator/sales-agent/render_capture.py -- headless-browser capture
+                         # of JS-rendered comparator sites. Also needs the browser binary itself:
+                         #   playwright install chromium
