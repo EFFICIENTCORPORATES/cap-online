@@ -1,3 +1,0 @@
-[1/3] (depth 0) GET https://www.vcgurukul.com/
-[2/3] (depth 1) GET https://www.vcgurukul.com/free-resources
-[3/3] (depth 1) GET https://www.vcgurukul.com/about
