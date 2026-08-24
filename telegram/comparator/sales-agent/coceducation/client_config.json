@@ -1,0 +1,12 @@
+{
+  "client_slug": "coceducation",
+  "display_name": "COC Education",
+  "bot_display_name": "1LAVYA Faculty Search — COC Education",
+  "bot_token_env": "SALES_AGENT_COCEDUCATION_BOT_TOKEN",
+  "bot_token_placeholder": "REPLACE_WITH_COCEDUCATION_BOT_TOKEN",
+  "catalog_path": "catalog.json",
+  "db_path": "sales_agent.db",
+  "website": "https://coceducation.com",
+  "exam_groups": ["CA", "CMA", "CFM", "Other"],
+  "$comment": "One of these files per client (vcgurukul, bbvirtuals, vsmartacademy, ...) lets sales_agent_bot.py serve every institute from the same code, one bot process + one token + one catalog + one DB per client. See telegram/comparator/sales-agent/README.md."
+}
