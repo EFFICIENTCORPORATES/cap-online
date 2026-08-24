@@ -116,6 +116,78 @@ def path_to_filename(url: str) -> str:
     return safe[:150]  # keep filenames sane on Windows
 
 
+def discover_dropdown_links(page, base_netloc: str) -> list[str]:
+    """Some sites hide real navigation links inside a hover/click-revealed
+    mega-menu -- they have no <a href> at all until you interact with the
+    trigger element, so the plain a[href] scan never sees them. Found on
+    vcgurukul.com's own "Free Courses" menu: the trigger itself has no href
+    (it's a styled <div>, not a link), and "CA Foundation" underneath it
+    only exists in the page's embedded nav config, revealed in the DOM only
+    once the trigger is hovered.
+
+    This hovers (never clicks -- see below) every plausible trigger inside
+    <header>/<nav>, re-scans for newly-visible a[href] elements after each
+    one, then moves the mouse away before trying the next trigger so open
+    panels don't stack and confuse the next hover.
+
+    Hover-only, deliberately: a click on the wrong element (a real button
+    mis-identified as a menu trigger -- "Add to Cart", "Submit", a modal
+    trigger) could cause a real, unwanted side effect on a live site.
+    Hovering a CSS-driven dropdown open carries essentially none of that
+    risk, which is why this doesn't just click everything that looks
+    clickable.
+    """
+    try:
+        trigger_count = page.eval_on_selector_all(
+            "header *, nav *",
+            """
+            els => {
+                let n = 0;
+                els.forEach(el => {
+                    const isRealLink = el.tagName === 'A' && el.hasAttribute('href');
+                    if (isRealLink) return;
+                    const style = window.getComputedStyle(el);
+                    const looksClickable = style.cursor === 'pointer';
+                    const hasIconChild = el.querySelector('svg, i[class*="chevron"], i[class*="arrow"]') !== null;
+                    if (looksClickable || hasIconChild) {
+                        el.setAttribute('data-rc-trigger', String(n));
+                        n += 1;
+                    }
+                });
+                return n;
+            }
+            """,
+        )
+    except Exception:  # noqa: BLE001
+        return []
+
+    discovered: set[str] = set()
+    for i in range(min(trigger_count, 25)):  # sane cap -- a real nav bar never has more triggers than this
+        try:
+            trigger = page.query_selector(f'[data-rc-trigger="{i}"]')
+            if trigger is None:
+                continue
+            trigger.hover(timeout=2000)
+            page.wait_for_timeout(300)  # let a CSS/JS-driven panel finish opening
+            hrefs = page.eval_on_selector_all("a[href]", "els => els.map(e => e.href)")
+            for href in hrefs:
+                if same_site(href, base_netloc):
+                    discovered.add(href)
+            page.mouse.move(0, 0)  # close whatever just opened before the next hover
+            page.wait_for_timeout(150)
+        except Exception:  # noqa: BLE001 -- one bad trigger must not abort discovery
+            continue
+
+    try:
+        page.eval_on_selector_all(
+            "[data-rc-trigger]", "els => els.forEach(el => el.removeAttribute('data-rc-trigger'))"
+        )
+    except Exception:  # noqa: BLE001
+        pass
+
+    return sorted(discovered)
+
+
 def load_robots(base_url: str, ignore_robots: bool) -> urllib.robotparser.RobotFileParser | None:
     if ignore_robots:
         print("  [robots] --ignore-robots passed -- skipping robots.txt entirely.")
@@ -160,6 +232,12 @@ def main() -> int:
                      help="Run with a visible browser window instead of headless (debugging).")
     ap.add_argument("--ignore-robots", action="store_true",
                      help="Explicit override -- see module docstring's robots.txt section.")
+    ap.add_argument("--no-dropdown-discovery", action="store_true",
+                     help="Skip hovering nav/header elements to reveal dropdown-menu links "
+                          "(see discover_dropdown_links). On by default -- it's what catches "
+                          "links like vcgurukul.com's 'Free Courses' mega-menu that a plain "
+                          "a[href] scan misses; turn it off only if it's slowing a run down "
+                          "on a site that doesn't need it.")
     args = ap.parse_args()
 
     try:
@@ -296,6 +374,12 @@ def main() -> int:
                         )
                     except Exception:  # noqa: BLE001
                         hrefs = []
+                    if not args.no_dropdown_discovery:
+                        dropdown_hrefs = discover_dropdown_links(page, base_netloc)
+                        if dropdown_hrefs:
+                            log(f"  found {len(dropdown_hrefs)} link(s) inside hover/dropdown "
+                                f"menus not present in the plain DOM scan")
+                        hrefs = list(hrefs) + dropdown_hrefs
                     for href in hrefs:
                         if urlparse(href).scheme in SKIP_SCHEMES:
                             continue
