@@ -97,7 +97,11 @@
       "Bash(/d/EffCorp_Projects/cap-online/.venv/Scripts/python.exe -c ' *)",
       "Bash(\"/d/EffCorp_Projects/cap-online/.venv/Scripts/python.exe\" telegram/tools/populate_course_catalog.py --dry-run)",
       "Bash(\"/d/EffCorp_Projects/cap-online/.venv/Scripts/python.exe\" telegram/branding/smoke_test_brand_kit.py)",
-      "Bash(/d/EffCorp_Projects/cap-online/.venv/Scripts/python.exe /d/EffCorp_Projects/cap-online/telegram/tools/manage_bots.py status)"
+      "Bash(/d/EffCorp_Projects/cap-online/.venv/Scripts/python.exe /d/EffCorp_Projects/cap-online/telegram/tools/manage_bots.py status)",
+      "PowerShell(Get-Command wget -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command curl -ErrorAction SilentlyContinue)",
+      "PowerShell(winget list --id GNU.Wget2 2>$null)",
+      "PowerShell(winget search --id wget2 --source winget)"
     ],
     "additionalDirectories": [
       "C:\\Users\\asus\\AppData\\Local\\Temp\\claude"
@@ -109,8 +113,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "cd /d/EffCorp_Projects/cap-online && if [ -n \"$(git status --porcelain 2>/dev/null)\" ]; then git add -A && NFILES=$(git diff --cached --name-only | wc -l | tr -d ' ') && git commit -m \"auto: ${NFILES} file(s) updated — $(date '+%Y-%m-%d %H:%M')\" && git push origin HEAD; fi 2>/dev/null; exit 0",
+            "shell": "bash",
             "timeout": 60,
             "statusMessage": "Auto-committing and pushing changes to git..."
           }
