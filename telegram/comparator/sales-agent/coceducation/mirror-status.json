@@ -1,0 +1,15 @@
+{
+  "url": "https://coceducation.com/",
+  "slug": "coceducation",
+  "started_at": "2026-08-24T07:50:00+00:00",
+  "finished_at": "2026-08-24T08:04:00+00:00",
+  "elapsed_seconds": 840.0,
+  "wget2_exit_code": 8,
+  "result": "success",
+  "file_count": 1111,
+  "total_bytes": 394659594,
+  "external_hosts_not_followed": [
+    "pub-15f5cd07c9124f94a418d4be1cdce34f.r2.dev"
+  ],
+  "note": "Built manually in-session before mirror_sites.py existed (see this folder's own SCRAPING-INCIDENT-CASE-STUDY.md for the full incident writeup): 595 files from the main-domain --mirror pass + 442 CDN images + 74 admin-content images recovered via two follow-up passes against the pub-15f5cd07c9124f94a418d4be1cdce34f.r2.dev CDN host. This status.json was backfilled to match, so mirror_sites.py correctly treats this site as already done and never re-downloads it."
+}
