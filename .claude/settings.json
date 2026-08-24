@@ -101,7 +101,10 @@
       "PowerShell(Get-Command wget -ErrorAction SilentlyContinue)",
       "PowerShell(Get-Command curl -ErrorAction SilentlyContinue)",
       "PowerShell(winget list --id GNU.Wget2 2>$null)",
-      "PowerShell(winget search --id wget2 --source winget)"
+      "PowerShell(winget search --id wget2 --source winget)",
+      "PowerShell(winget install --id GNU.Wget2 -e --source winget --silent --accept-package-agreements --accept-source-agreements)",
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); wget2 --version | Select-Object -First 3)",
+      "PowerShell(Get-Process wget2 -ErrorAction SilentlyContinue | Select-Object Id, StartTime, CPU; Write-Host \"---\"; \\(Get-Content \"C:\\\\Users\\\\asus\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--EffCorp-Projects-cap-online\\\\7e0a6e28-bcd6-47e9-8a2f-8249383cf7fb\\\\tasks\\\\b6odmebqj.output\"\\).Count)"
     ],
     "additionalDirectories": [
       "C:\\Users\\asus\\AppData\\Local\\Temp\\claude"
