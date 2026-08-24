@@ -1149,3 +1149,25 @@ CREATE TABLE IF NOT EXISTS admin_login_attempts (
 );
 
 CREATE INDEX IF NOT EXISTS idx_admin_login_attempts_username ON admin_login_attempts(username, created_at);
+
+-- Rate-limit audit trail (SECURITY.md Phase 1, built 2026-08-24). The
+-- limiter's own sliding-window counters live IN-MEMORY, per bot process --
+-- see telegram/bots/rate_limiter.py's own docstring for why a DB
+-- round-trip on every single message would defeat the point of a rate
+-- limiter. This table is NOT the limiter's source of truth, it's the audit
+-- trail: one row per BLOCKED attempt, so (a) traffic-anomaly alerting
+-- (watcher_bot.py) has real, already-collected abuse signal to query
+-- instead of re-deriving it from user_activity_log (which records every
+-- action, blocked or not), and (b) a human can ask "who's actually hitting
+-- these limits" via the SQL Query tab / a future Admin Portal view.
+CREATE TABLE IF NOT EXISTS rate_limit_hits (
+    hit_id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    bot_id            TEXT NOT NULL,
+    telegram_user_id  INTEGER NOT NULL,
+    bucket            TEXT NOT NULL,   -- e.g. 'general', 'search', 'email_report' -- see rate_limiter.py's BUCKETS
+    handler_name      TEXT,            -- the Python function name -- ties a row back to one place in the code, same convention as user_activity_log.handler_name
+    created_at        TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_rate_limit_hits_user   ON rate_limit_hits(telegram_user_id, created_at);
+CREATE INDEX IF NOT EXISTS idx_rate_limit_hits_bucket ON rate_limit_hits(bot_id, bucket, created_at);

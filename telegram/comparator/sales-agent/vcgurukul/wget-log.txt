@@ -1,0 +1,75 @@
+[0] Downloading 'https://www.vcgurukul.com/robots.txt' ...
+HTTP ERROR response 403  [https://www.vcgurukul.com/robots.txt]
+[0] Downloading 'https://www.vcgurukul.com/' ...
+Saving 'site-mirror/index.html'
+HTTP response 200  [https://www.vcgurukul.com/]
+URI content encoding = 'utf-8' (set by server response)
+URL 'https://cdn.edportal.in/static-assets/_next/static/css/763be56bd3d239c7.css' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/css/6b1edd33475892f7.css' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/webpack-4ec515a6599ea363.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/87c73c54-43fba8581da26c0a.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/8315-36082f23bffc50e1.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/main-app-2040daaf0f62e600.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/1765-86f12ecebcc00d2e.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/app/loading-a04521bd2a267505.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/b6ff252e-8722ee51fb441490.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/32ac8672-e238b50e3da8d736.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/ef3d1a43-385270336b13d742.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/51af2d27-234dee28c3a018d9.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/d24f3a7f-a602eb2b023a2a95.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/c6ede321-f4f90e55c53fe95b.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/483ecf8a-601a2d4ac3606e99.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/dccfb526-a6650602390b5101.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/f245bf5a-11436ca41afbc17b.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/17a9af85-b8026e3cd40a558c.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/a9f06191-d5dec0b474b86c1f.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/7de6e931-8286c605c935ad73.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/933cdb49-54aeac98fff7c66a.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/7dccf9e0-f224c4f6e2fbd9a5.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/da774d26-c3658647a54b6c89.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/b091cbf2-888d61892e88c10c.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/90bde008-1bb68b90947fa403.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/df7857ae-df8b2abb33772faf.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/78dcd220-405db867cd5088d5.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/61af6f7f-bb309b491cc8a8ef.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/5e141d3c-e5b3e820c0eaf4a9.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/960f643d-2eb0f1a94a087298.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/9fb599d8-6ddbe43c9a592dc5.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/feb79a86-732fdf7b3a46fdef.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/3602-cfe2a9972e24dea7.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/3869-029f69f67a282b8e.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/4745-9798c2939e906aef.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/4397-dbf01072d81f6db5.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/9665-e4249bfab257196d.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/5331-2b8b888c0c7744a5.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/9725-9bda1ab59649aadf.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/7125-f9960d08d5a6c01a.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/6921-0290762310cdec2a.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/6719-40b738a2db9c2ac8.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/1539-54b4b5adc78d8980.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/7014-20290b210d7dad54.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/2749-583ebf41a14f999c.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/5794-1fa4f61aada8ee43.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/6640-03aa055bef78a9e2.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/6393-fac05b3b5895dfe9.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/5748-fe55699b40e3fcc5.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/2418-611abcc56c2ecc2b.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/8662-242e83bd21f3cb98.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/app/project-internal/%5BprojectId%5D/%5B...url_slug%5D/page-2a6d95da400baa3d.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/app/error-d7f74277a97ed306.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/app/not-found-ff57b3791d0c5f1b.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/app/project-internal/%5BprojectId%5D/layout-0ade40c18c8a3b72.js' not followed (no host-spanning requested)
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/app/project-internal/%5BprojectId%5D/error-760cb100d90d988e.js' not followed (no host-spanning requested)
+URL 'https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css' not followed (no host-spanning requested)
+Enqueue https://www.vcgurukul.com
+Enqueue https://www.vcgurukul.com/favicon.ico
+URL 'https://cdn.edportal.in/static-assets/_next/static/chunks/polyfills-42372ed130431b0a.js' not followed (no host-spanning requested)
+[1] Downloading 'https://www.vcgurukul.com' ...
+Saving 'site-mirror/index.html'
+HTTP response 200  [https://www.vcgurukul.com]
+URI content encoding = 'utf-8' (set by server response)
+[0] Downloading 'https://www.vcgurukul.com/favicon.ico' ...
+Saving 'site-mirror/favicon.ico'
+HTTP response 200  [https://www.vcgurukul.com/favicon.ico]
+Downloaded: 3 files, 42.40K bytes, 0 redirects, 1 errors
+convert site-mirror/index.html https://www.vcgurukul.com/ utf-8

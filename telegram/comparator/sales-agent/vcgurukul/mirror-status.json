@@ -1,0 +1,15 @@
+{
+  "url": "https://www.vcgurukul.com/",
+  "slug": "vcgurukul",
+  "started_at": "2026-08-24T09:14:52.663367+00:00",
+  "finished_at": "2026-08-24T09:14:55.842769+00:00",
+  "elapsed_seconds": 3.2,
+  "wget2_exit_code": 8,
+  "result": "success",
+  "file_count": 2,
+  "total_bytes": 114558,
+  "external_hosts_not_followed": [
+    "cdn.edportal.in",
+    "cdn.jsdelivr.net"
+  ]
+}

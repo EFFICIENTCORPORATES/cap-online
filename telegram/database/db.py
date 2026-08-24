@@ -423,6 +423,22 @@ def log_mcq_issue_report(conn, bot_id: str, telegram_user_id: int, mcq_id: str, 
     return conn.execute("SELECT last_insert_rowid()").fetchone()[0]
 
 
+def log_rate_limit_hit(conn, bot_id: str, telegram_user_id: int, bucket: str, handler_name: str = None):
+    """See rate_limit_hits' own comment in schema.sql -- one row per
+    BLOCKED attempt (telegram/bots/rate_limiter.py). Never raises on a
+    logging failure blocking the actual (already-decided) allow/deny
+    outcome -- same "logging must never break the product" principle
+    log_interaction()/log_mcq_issue_report() above already follow."""
+    try:
+        execute_with_retry(
+            conn,
+            "INSERT INTO rate_limit_hits (bot_id, telegram_user_id, bucket, handler_name, created_at) VALUES (?,?,?,?,?)",
+            (bot_id, telegram_user_id, bucket, handler_name, now()),
+        )
+    except Exception as e:
+        logger.warning(f"log_rate_limit_hit failed (bot_id={bot_id}, bucket={bucket}): {e}")
+
+
 def schedule_heartbeat(application, bot_id: str, interval_seconds: int = 120):
     """Call once from each bot's main(), after building the Application but
     before app.run_polling(). Uses python-telegram-bot's JobQueue (requires

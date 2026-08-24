@@ -109,6 +109,8 @@ import fuzzy_trigger  # noqa: E402 -- telegram/bots/fuzzy_trigger.py, "did you m
 import test_flow  # noqa: E402 -- telegram/bots/test_flow.py, Test Mode / Pre-Designed Tests (2026-08-16)
 import wallet_flow  # noqa: E402 -- telegram/bots/wallet_flow.py, wallet status + recharge (2026-08-16)
 import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17)
+import rate_limiter  # noqa: E402 -- telegram/bots/rate_limiter.py, per-user flood/abuse controls (2026-08-24, SECURITY.md Phase 1)
+import input_guard  # noqa: E402 -- telegram/bots/input_guard.py, free-text sanitization (2026-08-24, SECURITY.md Phase 1)
 
 # ---------------------------------------------------------------------------
 # CONFIG
@@ -1788,6 +1790,14 @@ async def send_pdf(query, context, book_id):
         await query.answer("Question not found.", show_alert=True)
         return
 
+    # SECURITY.md §3.A.2 -- a dedicated limit on PDF generation specifically
+    # (an xhtml2pdf render + a send_document call per tap, more expensive
+    # than a plain menu callback), inline here rather than via the
+    # registration-time decorator so it doesn't throttle ordinary
+    # navigation taps in the same button_router.
+    if not await rate_limiter.check_and_notify(query, context, BOT_ID, "pdf_generation"):
+        return
+
     db_log_descriptive_pdf(context.user_data.get("current_descriptive_event_id"))
 
     title = f"{q.get('_chapter_label') or q.get('chapter_label','')} — {q.get('qno_text','')}"
@@ -2063,7 +2073,15 @@ def main():
     # telegram/bots/activity_logger.py's own module docstring for the
     # safety guarantees (logging is always best-effort; a real handler
     # exception is still raised exactly as before, never swallowed).
-    app.add_handler(CommandHandler("start", activity_logger.log_activity("command", BOT_ID)(start)))
+    # 2026-08-24: rate_limiter.rate_limited() wraps OUTERMOST around every
+    # handler below (see that module's own docstring for why) -- a
+    # "general" flood cap, SECURITY.md §4.1. Narrower per-action buckets
+    # ("pdf_generation", "mcq_issue_report", ...) are applied INLINE at
+    # their specific chokepoints instead -- see send_pdf()/mcq_issue_flow.py.
+    def _rl(kind, func):
+        return rate_limiter.rate_limited("general", BOT_ID)(activity_logger.log_activity(kind, BOT_ID)(func))
+
+    app.add_handler(CommandHandler("start", _rl("command", start)))
     # 2026-08-11: button_router now needs an explicit pattern -- it used to
     # have none (matched every callback), which was harmless only because
     # nothing else claimed any callback_data. The moment a second handler
@@ -2077,27 +2095,27 @@ def main():
     # scoping this explicitly now instead of relying on "nothing else
     # collides yet."
     app.add_handler(CallbackQueryHandler(
-        activity_logger.log_activity("callback", BOT_ID)(button_router),
+        _rl("callback", button_router),
         pattern=r"^(course|level|mode|subject|type|year|chapter|answer|pdf|next|mcqopt|restart|reportissue|imdone|sessprofile)(:|$)",
     ))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
     # 2026-08-13: mcq_issue_flow's own callbacks ("issuecat:<i>", bare
     # "issuecancel") -- registered separately, same "explicit pattern per
     # module" discipline as report_flow/profile_flow above.
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(mcq_issue_flow.mcq_issue_flow_callback), pattern=r"^(issuecat|issuecancel)(:|$)"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", mcq_issue_flow.mcq_issue_flow_callback), pattern=r"^(issuecat|issuecancel)(:|$)"))
     # 2026-08-16: Test Mode's own callback prefixes -- same "explicit
     # pattern per module" discipline as every flow above (the callback-
     # pattern-collision bug class this platform has hit 3+ times already).
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_test_flow_callback_wrapper), pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)"))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_wallet_flow_callback_wrapper), pattern=r"^walletrc(:|$)"))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, activity_logger.log_activity("text", BOT_ID)(text_router)))
+    app.add_handler(CallbackQueryHandler(_rl("callback", _test_flow_callback_wrapper), pattern=r"^(testflow|tnav|topt|tgo|tupload|tgrace)(:|$)"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", _wallet_flow_callback_wrapper), pattern=r"^walletrc(:|$)"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", _fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, _rl("text", text_router)))
     # Photo/document uploads -- only meaningful during Test Mode's upload
     # collection; test_flow.handle_upload_photo_or_document() is a no-op
     # (returns False) when no upload is actively being collected, so this
     # handler is safe to register unconditionally.
-    app.add_handler(MessageHandler((filters.PHOTO | filters.Document.ALL) & ~filters.COMMAND, activity_logger.log_activity("photo", BOT_ID)(_upload_router)))
+    app.add_handler(MessageHandler((filters.PHOTO | filters.Document.ALL) & ~filters.COMMAND, _rl("photo", _upload_router)))
 
     # Sweep any in-progress tests from before this restart and re-arm their
     # expiry jobs -- job_queue jobs do NOT survive a process restart (same

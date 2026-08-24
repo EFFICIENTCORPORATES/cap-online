@@ -90,6 +90,8 @@ from telegram_safety import safe_edit_message_text  # noqa: E402 -- 2026-08-18, 
 import cancel_utils  # noqa: E402 -- telegram/bots/cancel_utils.py, universal "get me out of this" escape hatch (2026-08-16)
 import fuzzy_trigger  # noqa: E402 -- telegram/bots/fuzzy_trigger.py, "did you mean X?" typo confirmation (2026-08-16)
 import activity_logger  # noqa: E402 -- telegram/bots/activity_logger.py, the fine-grained activity log + correlation IDs (2026-08-17)
+import rate_limiter  # noqa: E402 -- telegram/bots/rate_limiter.py, per-user flood/abuse controls (2026-08-24, SECURITY.md Phase 1)
+import input_guard  # noqa: E402 -- telegram/bots/input_guard.py, free-text sanitization (2026-08-24, SECURITY.md Phase 1)
 
 # ---------------------------------------------------------------------------
 # CONFIG
@@ -789,7 +791,7 @@ async def free_text_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
     searched across every course and category at once -- except a
     standalone greeting/"reset" (see RESET_TRIGGER_RE), which resets the
     conversation via start() instead of being treated as a search query."""
-    query_text = update.message.text
+    query_text = input_guard.sanitize_free_text(update.message.text)
 
     # 2026-08-16 (independent code review): a universal cancel phrase,
     # checked before anything else -- see cancel_utils.py's own docstring.
@@ -827,6 +829,13 @@ async def free_text_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # docstring -- this is what stops "dne" from returning unrelated PDF
     # results instead of a "did you mean X?" confirmation).
     if await fuzzy_trigger.maybe_confirm(update, context, _fuzzy_dispatch()):
+        return
+
+    # SECURITY.md §3.A.2 -- a narrower, dedicated limit on real catalog
+    # searches specifically (checked here, not via the registration-time
+    # decorator, so it never throttles the flow-trigger/awaiting-input
+    # branches above -- those are legitimate continuations, not searches).
+    if not await rate_limiter.check_and_notify(update, context, BOT_ID, "search"):
         return
 
     results = catalog.search_text(query_text)
@@ -895,13 +904,21 @@ def main():
 
     # 2026-08-17: every handler below wrapped with activity_logger.log_activity()
     # at registration time only -- see telegram/LOGGING-ARCHITECTURE.md §3.
-    app.add_handler(CommandHandler("start", activity_logger.log_activity("command", BOT_ID)(start)))
-    app.add_handler(CommandHandler("reset", activity_logger.log_activity("command", BOT_ID)(start)))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(browse_callback), pattern=r"^(browse|cat|crs|lvl|subj|ed|pt|file|mainmenu):"))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
-    app.add_handler(CallbackQueryHandler(activity_logger.log_activity("callback", BOT_ID)(_fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, activity_logger.log_activity("text", BOT_ID)(free_text_search)))
+    # 2026-08-24: rate_limiter.rate_limited() wraps OUTERMOST (see that
+    # module's own docstring for why) -- a "general" flood cap on every
+    # handler, SECURITY.md §4.1. Narrower per-action buckets (e.g. "search")
+    # are applied INLINE at the specific expensive chokepoint instead --
+    # see free_text_search()'s own body.
+    def _rl(kind, func):
+        return rate_limiter.rate_limited("general", BOT_ID)(activity_logger.log_activity(kind, BOT_ID)(func))
+
+    app.add_handler(CommandHandler("start", _rl("command", start)))
+    app.add_handler(CommandHandler("reset", _rl("command", start)))
+    app.add_handler(CallbackQueryHandler(_rl("callback", browse_callback), pattern=r"^(browse|cat|crs|lvl|subj|ed|pt|file|mainmenu):"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", profile_flow.profile_flow_callback), pattern=r"^(profile|profileconfirm):"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", report_flow.report_flow_callback), pattern=r"^(report|reportconfirm):"))
+    app.add_handler(CallbackQueryHandler(_rl("callback", _fuzzy_trigger_callback), pattern=r"^fuzzytrigger:"))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, _rl("text", free_text_search)))
 
     # Re-arm any access_requests still pending from before this restart
     # (job_queue jobs do not survive a restart) -- see profile_flow.py's
