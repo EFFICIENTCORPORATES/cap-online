@@ -1171,3 +1171,23 @@ CREATE TABLE IF NOT EXISTS rate_limit_hits (
 
 CREATE INDEX IF NOT EXISTS idx_rate_limit_hits_user   ON rate_limit_hits(telegram_user_id, created_at);
 CREATE INDEX IF NOT EXISTS idx_rate_limit_hits_bucket ON rate_limit_hits(bot_id, bucket, created_at);
+
+-- Traffic-anomaly alert audit trail (SECURITY.md Phase 3, built 2026-08-24).
+-- watcher_bot.py's check_traffic_anomalies() writes one row here each time
+-- it actually DMs an admin about one telegram_user_id -- this table is
+-- BOTH the audit trail AND how the cooldown check works (query the most
+-- recent row for a (telegram_user_id, signal) pair; skip re-alerting
+-- within TRAFFIC_ANOMALY_ALERT_COOLDOWN_MINUTES of it), same "the log IS
+-- the state" pattern bot_alert_state already established for bot up/down
+-- alerts, just cooldown-based here instead of edge-triggered (a flood is
+-- naturally a sustained condition, not a discrete state transition).
+CREATE TABLE IF NOT EXISTS traffic_anomaly_alerts (
+    alert_id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    telegram_user_id  INTEGER NOT NULL,
+    signal            TEXT NOT NULL,   -- 'high_volume' (user_activity_log rows in the window) | 'repeated_rate_limit_hits' (rate_limit_hits rows in the window)
+    window_minutes    INTEGER NOT NULL,
+    observed_count    INTEGER NOT NULL,
+    created_at        TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_traffic_anomaly_alerts_user ON traffic_anomaly_alerts(telegram_user_id, signal, created_at);

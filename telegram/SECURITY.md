@@ -11,6 +11,18 @@ reasonably want" from "what to actually implement first." Pairs with
 `/CLAUDE.md`'s "known scale-readiness gaps" callout (gap #8 is this document's direct
 ancestor).
 
+**Implementation status (updated 2026-08-24, same day): §4 Phases 1–3 built,
+verified, and deployed live** — per-user rate limiting + input validation
+(`telegram/bots/rate_limiter.py` + `input_guard.py`), the central
+callback-data route registry (`telegram/bots/callback_registry.py`), and
+traffic-anomaly alerting (extended into `watcher_bot.py`). Full detail:
+`_claude/memory/project_log.md`'s 2026-08-24 entry. **§4 items 3, 4, and 7
+(Admin Portal: never expose the raw port / CSRF / a second factor) and §6's
+Cloudflare Tunnel + Access path are still open** — each needs an explicit
+decision or action from Pranav first (a new, narrowly-scoped Cloudflare
+token; a hostname; who gets Access; TOTP enrollment) — see the phase-wise
+plan already given; not started without that.
+
 ---
 
 ## 1. Why this platform's attack surface is different from a normal website

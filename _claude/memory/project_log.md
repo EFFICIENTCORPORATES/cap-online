@@ -2,6 +2,82 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-08-24 — SECURITY.md Phases 1-3 built, verified, and deployed live
+
+Pranav asked to review `telegram/SECURITY.md` (written the same day, off the
+scraping-incident case study) and proceed with a phase-wise plan; then asked
+to build and complete Phases 1-3 (of the plan's own §4 priority ordering).
+All three built, smoke-tested, dry-run/import-checked against every real
+tenant, then deployed to all affected live bots one at a time with fresh-PID/
+fresh-heartbeat/clean-log verification after each restart -- same discipline
+this repo's own history already established for every prior fix.
+
+**Phase 1 -- per-user abuse controls** (SECURITY.md §4.1/§4.2/§3.A.2/§3.A.6):
+new `telegram/bots/rate_limiter.py` (in-memory per-process sliding-window
+limiter, `rate_limited()` decorator applied OUTERMOST at every handler
+registration across `study_hub_bot.py`/`exam_hub_bot.py`/`faculty_bot.py`/
+`myfiles_hub_bot.py`, plus an inline `check_and_notify()`/`check()` pair for
+narrower per-action buckets at specific chokepoints: `study_hub_bot.py`'s
+catalog search, `report_flow.py`'s email-send channel specifically (a
+cooldown, not a block on Telegram delivery), `profile_flow.py`'s leaderboard
+join/leave, `mcq_issue_flow.py`'s issue-report submit, `exam_hub_bot.py`'s
+`send_pdf()`, and `myfiles_hub_bot.py`'s upload + OTP-attempt handlers) and
+new `telegram/bots/input_guard.py` (free-text sanitization, applied to
+Study Hub search/profile display-name/MCQ-issue description; a MyFiles Hub
+upload validator -- size ceiling + an executable/script extension deny-list,
+checked BEFORE download). New `rate_limit_hits` DB table (audit trail, also
+feeds Phase 3). 36-check `smoke_test_rate_limiter.py`, all passing.
+
+**Phase 2 -- central callback-data route registry** (SECURITY.md §4.5/§3.A.5):
+new `telegram/bots/callback_registry.py` -- `CallbackRegistry.validate()`,
+called once per bot right before `run_polling()`, parses every registered
+pattern's literal callback_data prefixes and raises a loud `RuntimeError` at
+STARTUP on a real collision or an unrestricted pattern coexisting with
+another handler (exactly the bug class that recurred 3+ times per
+`/CLAUDE.md`'s own callout) -- an unparseable pattern (outside this
+platform's own established `^(a|b)(:|$)`/`^literal:` shapes) logs a loud
+WARNING instead of either crashing or a false sense of safety. Wired into
+`study_hub_bot.py`/`exam_hub_bot.py`/`faculty_bot.py` (not
+`myfiles_hub_bot.py` -- its `ConversationHandler`-based routing is
+structurally collision-safe already, explained in the module's own
+docstring). Validated 0 collisions against every real bot's actual
+registrations (4/4, 7/7, 9/9 patterns). 16-check
+`smoke_test_callback_registry.py`, including a synthetic positive collision
+control that genuinely raises.
+
+**Phase 3 -- traffic-anomaly alerting** (SECURITY.md §4.6/§3.A.7): extended
+`watcher_bot.py` (reusing its already-proven admin-DM pipe, not a new
+system) with `check_traffic_anomalies()` -- two signals, cooldown-gated (not
+edge-triggered, since a flood is a sustained condition) via a new
+`traffic_anomaly_alerts` table that doubles as the audit trail: `high_volume`
+(>150 `user_activity_log` rows from one `telegram_user_id` in 5 minutes,
+across ANY bot) and `repeated_rate_limit_hits` (>10 `rate_limit_hits` rows in
+5 minutes -- a stronger, more specific abuse signal). Verified against the
+real live DB via `--once` (silent success, nothing to report) and a 7-check
+`smoke_test_traffic_anomaly.py` (positive/negative controls, cooldown
+suppression, real DB writes, cleaned up).
+
+**Deployed live**: `1lavya-studyhub`, `1lavya-examhub`, `1lavya-myfileshub`,
+`csarunchouhan`, `capranav-study`, `capranav-exam`, `1lavya-platform-watcher`
+restarted one at a time -- each confirmed via fresh PID, fresh heartbeat,
+`callback_registry` logging "0 collisions" in its own startup line, and a
+clean `.crash.log` (the one pre-existing crash.log traceback found during
+verification, an SSL "certificate has expired" error, is the SAME
+machine-clock-reads-2030 issue already flagged in the 2026-08-22 entry
+below -- confirmed stale by its file mtime, not from this restart). Full
+regression suite (13 smoke-test files) re-run clean; `health_check.py`: 17
+pre-existing issues, all pre-dating this session and unrelated to
+`telegram/` (stale `question-bank`/`syllabus-engine` EXPECTED_DIRS, NUL
+bytes in `books/bridge-course/`, two undocumented top-level folders) --
+zero new issues from this work.
+
+**Not done, deliberately** -- the remaining SECURITY.md §4 items (Admin
+Portal CSRF/session hardening/MFA, the Cloudflare Tunnel + Access path) were
+scoped by Pranav as Phases 4-7, not asked for yet; §4.7 (Admin Portal MFA)
+and the Tunnel work both need a decision/action from Pranav first (a new
+Cloudflare token, a hostname, TOTP enrollment) per the phase-wise plan
+already given.
+
 ## 2026-08-22 — Backup pipeline audit: 3 real bugs found across 6 nights of production drift, all fixed; BACKUP-STRATEGY.md written
 
 Pranav asked to (1) verify the backup pipeline (built 2026-08-16) is actually
