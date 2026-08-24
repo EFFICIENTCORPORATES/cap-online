@@ -1,10 +1,10 @@
 {
   "url": "https://www.vcgurukul.com/",
   "slug": "vcgurukul",
-  "started_at": "2026-08-24T10:06:57.025648+00:00",
-  "finished_at": "2026-08-24T10:07:20.418265+00:00",
-  "elapsed_seconds": 23.4,
-  "pages_captured": 2,
+  "started_at": "2026-08-24T10:07:30.910871+00:00",
+  "finished_at": "2026-08-24T10:28:09.894735+00:00",
+  "elapsed_seconds": 1239.0,
+  "pages_captured": 70,
   "max_pages_reached": true,
   "errors": [],
   "robots_ignored": true,
@@ -12,23 +12,571 @@
   "offsite_hosts_not_followed": [
     "apps.apple.com",
     "play.google.com",
-    "www.techhand.in"
+    "t.me",
+    "techhand.in",
+    "www.instagram.com",
+    "www.techhand.in",
+    "www.youtube.com"
   ],
   "pages": [
     {
       "url": "https://www.vcgurukul.com/",
       "depth": 0,
-      "html_file": "rendered-pages\\index-2.html",
-      "text_file": "rendered-pages\\index-2.txt",
+      "html_file": "rendered-pages\\index-3.html",
+      "text_file": "rendered-pages\\index-3.txt",
       "text_chars": 3015,
       "screenshot": null
     },
     {
       "url": "https://www.vcgurukul.com/free-resources",
       "depth": 1,
-      "html_file": "rendered-pages\\free-resources-2.html",
-      "text_file": "rendered-pages\\free-resources-2.txt",
+      "html_file": "rendered-pages\\free-resources-3.html",
+      "text_file": "rendered-pages\\free-resources-3.txt",
       "text_chars": 2033,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/about",
+      "depth": 1,
+      "html_file": "rendered-pages\\about-2.html",
+      "text_file": "rendered-pages\\about-2.txt",
+      "text_chars": 756,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/cart",
+      "depth": 1,
+      "html_file": "rendered-pages\\cart-2.html",
+      "text_file": "rendered-pages\\cart-2.txt",
+      "text_chars": 824,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/products/CA%20Inter%20Both%20Group?&subjectNames=Advanced%20Accounting,Corporate%20and%20Other%20Laws,Taxation%20and%20GST,Financial%20Management%20and%20Strategic%20Management,Auditing%20and%20Ethics,Cost%20and%20Management%20Accounting&categoryNames=Book,Course&subCategoryNames=Combo",
+      "depth": 1,
+      "html_file": "rendered-pages\\products_CA_20Inter_20Both_20Group-2.html",
+      "text_file": "rendered-pages\\products_CA_20Inter_20Both_20Group-2.txt",
+      "text_chars": 1418,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/cmafoundation",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_cmafoundation-2.html",
+      "text_file": "rendered-pages\\product_cmafoundation-2.txt",
+      "text_chars": 1581,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/products/CA%20Foundation?page=1&Subject=Quantitative+Aptitude%2CBusiness+Economics%2CAccounting%2CBusiness+Law&Category=Book%2CCourse%2CCombo&Sub+Category=Individual%2CCombo",
+      "depth": 1,
+      "html_file": "rendered-pages\\products_CA_20Foundation-2.html",
+      "text_file": "rendered-pages\\products_CA_20Foundation-2.txt",
+      "text_chars": 1991,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ai-astra-learn-earn-build?variant=4O6B8CDMUCQPCYJ4JODF7MF2XR66UT51&src=product_list&variantId=4O6B8CDMUCQPCYJ4JODF7MF2XR66UT51",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_ai-astra-learn-earn-build-2.html",
+      "text_file": "rendered-pages\\product_ai-astra-learn-earn-build-2.txt",
+      "text_chars": 3042,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-nirmaan-20-batch-jan-27",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_ca-foundation-nirmaan-20-batch-jan-27-3.html",
+      "text_file": "rendered-pages\\product_ca-foundation-nirmaan-20-batch-jan-27-3.txt",
+      "text_chars": 3093,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/businesslawcafoundation",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_businesslawcafoundation-3.html",
+      "text_file": "rendered-pages\\product_businesslawcafoundation-3.txt",
+      "text_chars": 2097,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-quantitative-aptitude-prof-rahul-bhutani-jan27-may27",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_ca-foundation-quantitative-aptitude-prof-rahul-bhutani-jan27-may27-2.html",
+      "text_file": "rendered-pages\\product_ca-foundation-quantitative-aptitude-prof-rahul-bhutani-jan27-may27-2.txt",
+      "text_chars": 2833,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-accounting-ca-rishabh-rohra-jan27-may27",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_ca-foundation-accounting-ca-rishabh-rohra-jan27-may27-2.html",
+      "text_file": "rendered-pages\\product_ca-foundation-accounting-ca-rishabh-rohra-jan27-may27-2.txt",
+      "text_chars": 2070,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-business-economics-ca-jyoti-deshwal-jan27-may27",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_ca-foundation-business-economics-ca-jyoti-deshwal-jan27-may27-2.html",
+      "text_file": "rendered-pages\\product_ca-foundation-business-economics-ca-jyoti-deshwal-jan27-may27-2.txt",
+      "text_chars": 2114,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/caintermediategr1may27",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_caintermediategr1may27-2.html",
+      "text_file": "rendered-pages\\product_caintermediategr1may27-2.txt",
+      "text_chars": 3567,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/caintermediatebothgroupmay27",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_caintermediatebothgroupmay27-3.html",
+      "text_file": "rendered-pages\\product_caintermediatebothgroupmay27-3.txt",
+      "text_chars": 2399,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27-3.html",
+      "text_file": "rendered-pages\\product_ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27-3.txt",
+      "text_chars": 2203,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/caintermediategr2may27",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_caintermediategr2may27-2.html",
+      "text_file": "rendered-pages\\product_caintermediategr2may27-2.txt",
+      "text_chars": 2180,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-intermediate-gr2-mukaam-exam-oriented-jan27",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_ca-intermediate-gr2-mukaam-exam-oriented-jan27-2.html",
+      "text_file": "rendered-pages\\product_ca-intermediate-gr2-mukaam-exam-oriented-jan27-2.txt",
+      "text_chars": 2954,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/cmaintergroup1",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_cmaintergroup1-2.html",
+      "text_file": "rendered-pages\\product_cmaintergroup1-2.txt",
+      "text_chars": 1662,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/cmaintergroup2vcg",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_cmaintergroup2vcg-2.html",
+      "text_file": "rendered-pages\\product_cmaintergroup2vcg-2.txt",
+      "text_chars": 1656,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/cagurpreetsingh",
+      "depth": 1,
+      "html_file": "rendered-pages\\cagurpreetsingh-2.html",
+      "text_file": "rendered-pages\\cagurpreetsingh-2.txt",
+      "text_chars": 3124,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/aboutfaculty88",
+      "depth": 1,
+      "html_file": "rendered-pages\\aboutfaculty88-2.html",
+      "text_file": "rendered-pages\\aboutfaculty88-2.txt",
+      "text_chars": 2828,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/carishabhrohra",
+      "depth": 1,
+      "html_file": "rendered-pages\\carishabhrohra-2.html",
+      "text_file": "rendered-pages\\carishabhrohra-2.txt",
+      "text_chars": 3066,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/cajyotideshwal",
+      "depth": 1,
+      "html_file": "rendered-pages\\cajyotideshwal-2.html",
+      "text_file": "rendered-pages\\cajyotideshwal-2.txt",
+      "text_chars": 2604,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/capranavpratik",
+      "depth": 1,
+      "html_file": "rendered-pages\\capranavpratik-2.html",
+      "text_file": "rendered-pages\\capranavpratik-2.txt",
+      "text_chars": 3374,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/camanishatejwani",
+      "depth": 1,
+      "html_file": "rendered-pages\\camanishatejwani-2.html",
+      "text_file": "rendered-pages\\camanishatejwani-2.txt",
+      "text_chars": 2741,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/deepakgusain",
+      "depth": 1,
+      "html_file": "rendered-pages\\deepakgusain-2.html",
+      "text_file": "rendered-pages\\deepakgusain-2.txt",
+      "text_chars": 2442,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/terms",
+      "depth": 1,
+      "html_file": "rendered-pages\\terms-2.html",
+      "text_file": "rendered-pages\\terms-2.txt",
+      "text_chars": 756,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/refund",
+      "depth": 1,
+      "html_file": "rendered-pages\\refund-2.html",
+      "text_file": "rendered-pages\\refund-2.txt",
+      "text_chars": 756,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/contact",
+      "depth": 1,
+      "html_file": "rendered-pages\\contact-2.html",
+      "text_file": "rendered-pages\\contact-2.txt",
+      "text_chars": 1078,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/privacy",
+      "depth": 1,
+      "html_file": "rendered-pages\\privacy-2.html",
+      "text_file": "rendered-pages\\privacy-2.txt",
+      "text_chars": 756,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/cafoundationlaw?utm_source=fomo",
+      "depth": 1,
+      "html_file": "rendered-pages\\product_cafoundationlaw.html",
+      "text_file": "rendered-pages\\product_cafoundationlaw.txt",
+      "text_chars": 1133,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/cafoundationexamoriented-quantitativeaptitude-profrahulbhutani-sep26?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_cafoundationexamoriented-quantitativeaptitude-profrahulbhutani-sep26.html",
+      "text_file": "rendered-pages\\product_cafoundationexamoriented-quantitativeaptitude-profrahulbhutani-sep26.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/caintermediatebothgroupmay27?variant=c4g_orva1781248871_sit925&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_caintermediatebothgroupmay27-4.html",
+      "text_file": "rendered-pages\\product_caintermediatebothgroupmay27-4.txt",
+      "text_chars": 2399,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/caintermediatebothgroupmay27-duplicate?variant=0fcf5fa1-4c17-45fc-bf01-1e99241d8d23&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_caintermediatebothgroupmay27-duplicate-2.html",
+      "text_file": "rendered-pages\\product_caintermediatebothgroupmay27-duplicate-2.txt",
+      "text_chars": 3031,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27-shrey?variant=4NSYRIANEF4OHMN77I3VEULTDT7LIWZM&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27-shrey-2.html",
+      "text_file": "rendered-pages\\product_ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27-shrey-2.txt",
+      "text_chars": 3060,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/archived-ca-intermediate-real-evaluated-test-series-jan27?variant=IWNE0ZK0LONN82UI5ZAGWVII3SBJQDM5&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_archived-ca-intermediate-real-evaluated-test-series-jan27-2.html",
+      "text_file": "rendered-pages\\product_archived-ca-intermediate-real-evaluated-test-series-jan27-2.txt",
+      "text_chars": 2269,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27?variant=Z1I4XS55IMLLGY0NIVSS35LFNSWESYGI&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27-4.html",
+      "text_file": "rendered-pages\\product_ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27-4.txt",
+      "text_chars": 2203,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/economicscafoundation?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_economicscafoundation.html",
+      "text_file": "rendered-pages\\product_economicscafoundation.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/cmafoundation?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_cmafoundation-3.html",
+      "text_file": "rendered-pages\\product_cmafoundation-3.txt",
+      "text_chars": 1581,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-nirmaan-20-batch-jan-27?variant=31df6dc6-d127-4729-b07d-73a450a4e184&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-foundation-nirmaan-20-batch-jan-27-4.html",
+      "text_file": "rendered-pages\\product_ca-foundation-nirmaan-20-batch-jan-27-4.txt",
+      "text_chars": 3093,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/annual-batch-ca-foundation-may27?variant=ILDN2I50IWDH1G9YH79WOWLR25R1QOK4&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_annual-batch-ca-foundation-may27-2.html",
+      "text_file": "rendered-pages\\product_annual-batch-ca-foundation-may27-2.txt",
+      "text_chars": 3344,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-real-fastrack-sep26?variant=FDBP9LY6KUFMDJCR7IPHIDGB3EQAXNB1&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-foundation-real-fastrack-sep26-2.html",
+      "text_file": "rendered-pages\\product_ca-foundation-real-fastrack-sep26-2.txt",
+      "text_chars": 2604,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/businesslawcafoundation?variant=G1P1CM6VO0LTXVVK3EADPXZEPVGMTP7F&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_businesslawcafoundation-4.html",
+      "text_file": "rendered-pages\\product_businesslawcafoundation-4.txt",
+      "text_chars": 2097,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-quantitative-aptitude-prof-rahul-bhutani-jan27-may27?variant=c4g_yzcl1761726729_zyj768&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-foundation-quantitative-aptitude-prof-rahul-bhutani-jan27-may27-3.html",
+      "text_file": "rendered-pages\\product_ca-foundation-quantitative-aptitude-prof-rahul-bhutani-jan27-may27-3.txt",
+      "text_chars": 2833,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-accounting-ca-rishabh-rohra-jan27-may27?variant=HR3FDK9IFJRMXBPV7V3I5V1CB08D8GCV&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-foundation-accounting-ca-rishabh-rohra-jan27-may27-3.html",
+      "text_file": "rendered-pages\\product_ca-foundation-accounting-ca-rishabh-rohra-jan27-may27-3.txt",
+      "text_chars": 2070,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-business-economics-ca-jyoti-deshwal-jan27-may27?variant=N7REY217565ABQ91JUBH0KLG947ZBPX2&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-foundation-business-economics-ca-jyoti-deshwal-jan27-may27-3.html",
+      "text_file": "rendered-pages\\product_ca-foundation-business-economics-ca-jyoti-deshwal-jan27-may27-3.txt",
+      "text_chars": 2114,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-buniyaad-20-batch-jan-27?variant=e55fe0b9-236f-4531-8a6b-b21a3a236f6c&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-foundation-buniyaad-20-batch-jan-27.html",
+      "text_file": "rendered-pages\\product_ca-foundation-buniyaad-20-batch-jan-27.txt",
+      "text_chars": 2759,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-exam-oriented-accounting-ca-rishabh-rohra-jan-27-may-27?variant=58c12609-691d-42ce-aa2b-52e523c02f83&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-foundation-exam-oriented-accounting-ca-rishabh-rohra-jan-27-may-27.html",
+      "text_file": "rendered-pages\\product_ca-foundation-exam-oriented-accounting-ca-rishabh-rohra-jan-27-may-27.txt",
+      "text_chars": 2002,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-exam-oriented-business-law-ca-gurpreet-singh-jan-27-may-27?variant=HJKWG1A0OJCED77EVGV3DJPSQSBAYO8M&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-foundation-exam-oriented-business-law-ca-gurpreet-singh-jan-27-may-27.html",
+      "text_file": "rendered-pages\\product_ca-foundation-exam-oriented-business-law-ca-gurpreet-singh-jan-27-may-27.txt",
+      "text_chars": 2006,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-exam-oriented-business-economics-prof-rahul-bhutani-jan-27-may-27?variant=54799932-a0f8-4521-8806-0574de5e59da&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-foundation-exam-oriented-business-economics-prof-rahul-bhutani-jan-27-may-27.html",
+      "text_file": "rendered-pages\\product_ca-foundation-exam-oriented-business-economics-prof-rahul-bhutani-jan-27-may-27.txt",
+      "text_chars": 2010,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/ca-foundation-exam-oriented-quantitative-aptitude-prof-rahul-bhutani-jan-27-may-27?variant=7f32c444-8b07-4a00-92ce-e1019ea4067a&src=product_list",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_ca-foundation-exam-oriented-quantitative-aptitude-prof-rahul-bhutani-jan-27-may-27.html",
+      "text_file": "rendered-pages\\product_ca-foundation-exam-oriented-quantitative-aptitude-prof-rahul-bhutani-jan-27-may-27.txt",
+      "text_chars": 2022,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/fmsmbook?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_fmsmbook.html",
+      "text_file": "rendered-pages\\product_fmsmbook.txt",
+      "text_chars": 1671,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/examoriented?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_examoriented.html",
+      "text_file": "rendered-pages\\product_examoriented.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/caintermediategr1-mukaambatch-jan27?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_caintermediategr1-mukaambatch-jan27.html",
+      "text_file": "rendered-pages\\product_caintermediategr1-mukaambatch-jan27.txt",
+      "text_chars": 2200,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/cainterabyaas?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_cainterabyaas.html",
+      "text_file": "rendered-pages\\product_cainterabyaas.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/corporatelawgurpreetsingh?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_corporatelawgurpreetsingh.html",
+      "text_file": "rendered-pages\\product_corporatelawgurpreetsingh.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/lawinterbook?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_lawinterbook.html",
+      "text_file": "rendered-pages\\product_lawinterbook.txt",
+      "text_chars": 1514,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/practicebook?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_practicebook.html",
+      "text_file": "rendered-pages\\product_practicebook.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/buniyaadbatchmaster?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_buniyaadbatchmaster.html",
+      "text_file": "rendered-pages\\product_buniyaadbatchmaster.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/examoriented-businesseconomics-cajyotideshwal?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_examoriented-businesseconomics-cajyotideshwal.html",
+      "text_file": "rendered-pages\\product_examoriented-businesseconomics-cajyotideshwal.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/accountscainter?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_accountscainter.html",
+      "text_file": "rendered-pages\\product_accountscainter.txt",
+      "text_chars": 1463,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/QDAI1772264016?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_QDAI1772264016.html",
+      "text_file": "rendered-pages\\product_QDAI1772264016.txt",
+      "text_chars": 1109,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/nirmaanmasterbridgebatch?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_nirmaanmasterbridgebatch.html",
+      "text_file": "rendered-pages\\product_nirmaanmasterbridgebatch.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/advancedaccounting-carishabhrohra-may26?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_advancedaccounting-carishabhrohra-may26.html",
+      "text_file": "rendered-pages\\product_advancedaccounting-carishabhrohra-may26.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/taxationandgstclasses?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_taxationandgstclasses.html",
+      "text_file": "rendered-pages\\product_taxationandgstclasses.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/practicebookbusinesslawebook?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_practicebookbusinesslawebook.html",
+      "text_file": "rendered-pages\\product_practicebookbusinesslawebook.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/gr2exam-oriented-costmanagementaccounting-sep26jan27?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_gr2exam-oriented-costmanagementaccounting-sep26jan27.html",
+      "text_file": "rendered-pages\\product_gr2exam-oriented-costmanagementaccounting-sep26jan27.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/mission15?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_mission15.html",
+      "text_file": "rendered-pages\\product_mission15.txt",
+      "text_chars": 815,
+      "screenshot": null
+    },
+    {
+      "url": "https://www.vcgurukul.com/product/caintergr2combo?utm_source=fomo",
+      "depth": 2,
+      "html_file": "rendered-pages\\product_caintergr2combo.html",
+      "text_file": "rendered-pages\\product_caintergr2combo.txt",
+      "text_chars": 815,
       "screenshot": null
     }
   ]

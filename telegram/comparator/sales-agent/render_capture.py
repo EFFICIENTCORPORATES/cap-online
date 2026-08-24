@@ -136,36 +136,68 @@ def discover_dropdown_links(page, base_netloc: str) -> list[str]:
     Hovering a CSS-driven dropdown open carries essentially none of that
     risk, which is why this doesn't just click everything that looks
     clickable.
+
+    Two real bugs found and fixed while building this, both worth knowing
+    about since either could recur on a different site:
+
+    1. **Visibility.** vcgurukul.com renders a DUPLICATE, hidden copy of its
+       whole nav (almost certainly a mobile-drawer variant). The hidden copy
+       has a perfectly normal non-zero bounding box -- a hand-rolled raw-JS
+       visibility check (`getBoundingClientRect`/`offsetParent`) picked the
+       WRONG duplicate with no error at all, just silently found nothing.
+       Fixed by using Playwright's own `ElementHandle.is_visible()` -- real
+       actionability logic, not a reimplementation -- which correctly told
+       the two apart where the raw-JS check couldn't.
+    2. **Staleness across hovers.** The first fix still didn't work end to
+       end. Root cause: this function used to tag every candidate ONCE up
+       front (a `data-rc-trigger` attribute), then loop through the tags.
+       React re-renders the menu DOM on hover-driven state changes, and can
+       silently replace/remount nodes -- which drops any attribute added
+       from outside React's own render, invalidating tags for elements not
+       yet reached in the loop. Fixed by re-querying the DOM **fresh, by
+       position, on every single iteration** (see the JS below) instead of
+       trusting attributes to survive N rounds of hover-triggered
+       re-rendering.
+    """
+    ELIGIBLE_COUNT_JS = """
+        () => Array.from(document.querySelectorAll('header *, nav *')).filter(el => {
+            if (el.tagName === 'A' && el.hasAttribute('href')) return false;
+            const style = window.getComputedStyle(el);
+            const looksClickable = style.cursor === 'pointer';
+            const hasIconChild = el.querySelector('svg, i[class*="chevron"], i[class*="arrow"]') !== null;
+            return looksClickable || hasIconChild;
+        }).length
     """
     try:
-        trigger_count = page.eval_on_selector_all(
-            "header *, nav *",
-            """
-            els => {
-                let n = 0;
-                els.forEach(el => {
-                    const isRealLink = el.tagName === 'A' && el.hasAttribute('href');
-                    if (isRealLink) return;
-                    const style = window.getComputedStyle(el);
-                    const looksClickable = style.cursor === 'pointer';
-                    const hasIconChild = el.querySelector('svg, i[class*="chevron"], i[class*="arrow"]') !== null;
-                    if (looksClickable || hasIconChild) {
-                        el.setAttribute('data-rc-trigger', String(n));
-                        n += 1;
-                    }
-                });
-                return n;
-            }
-            """,
-        )
+        trigger_count = page.evaluate(ELIGIBLE_COUNT_JS)
     except Exception:  # noqa: BLE001
         return []
 
     discovered: set[str] = set()
-    for i in range(min(trigger_count, 25)):  # sane cap -- a real nav bar never has more triggers than this
+    # NOT capped low -- a real site can genuinely have 100+ eligible elements
+    # once every phone/email link, icon button, and duplicate hidden nav copy
+    # is counted (vcgurukul.com's own homepage has 107). An earlier version
+    # of this function capped at 40 "to be safe," which silently truncated
+    # the loop before it ever reached the correct "Free Courses" trigger
+    # (sitting around index 67-75 here) -- the bug hid completely, no error,
+    # just a quietly incomplete result. MAX_TRIGGERS is a genuine safety
+    # ceiling only, not a tuned-for-this-site number.
+    MAX_TRIGGERS = 300
+    for i in range(min(trigger_count, MAX_TRIGGERS)):
         try:
-            trigger = page.query_selector(f'[data-rc-trigger="{i}"]')
-            if trigger is None:
+            handle = page.evaluate_handle(
+                f"""
+                () => Array.from(document.querySelectorAll('header *, nav *')).filter(el => {{
+                    if (el.tagName === 'A' && el.hasAttribute('href')) return false;
+                    const style = window.getComputedStyle(el);
+                    const looksClickable = style.cursor === 'pointer';
+                    const hasIconChild = el.querySelector('svg, i[class*="chevron"], i[class*="arrow"]') !== null;
+                    return looksClickable || hasIconChild;
+                }})[{i}]
+                """
+            )
+            trigger = handle.as_element()
+            if trigger is None or not trigger.is_visible():
                 continue
             trigger.hover(timeout=2000)
             page.wait_for_timeout(300)  # let a CSS/JS-driven panel finish opening
@@ -177,13 +209,6 @@ def discover_dropdown_links(page, base_netloc: str) -> list[str]:
             page.wait_for_timeout(150)
         except Exception:  # noqa: BLE001 -- one bad trigger must not abort discovery
             continue
-
-    try:
-        page.eval_on_selector_all(
-            "[data-rc-trigger]", "els => els.forEach(el => el.removeAttribute('data-rc-trigger'))"
-        )
-    except Exception:  # noqa: BLE001
-        pass
 
     return sorted(discovered)
 

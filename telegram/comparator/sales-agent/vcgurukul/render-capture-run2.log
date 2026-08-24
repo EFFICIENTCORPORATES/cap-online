@@ -1,0 +1,147 @@
+  [robots] --ignore-robots passed -- skipping robots.txt entirely.
+
+=== Rendering https://www.vcgurukul.com/  ->  D:\EffCorp_Projects\cap-online\telegram\comparator\sales-agent\vcgurukul\rendered-pages  (max 70 pages, depth 3) ===
+  [1/70] (depth 0) GET https://www.vcgurukul.com/
+    found 32 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [2/70] (depth 1) GET https://www.vcgurukul.com/free-resources
+  [3/70] (depth 1) GET https://www.vcgurukul.com/about
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [4/70] (depth 1) GET https://www.vcgurukul.com/cart
+    found 8 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [5/70] (depth 1) GET https://www.vcgurukul.com/products/CA%20Inter%20Both%20Group?&subjectNames=Advanced%20Accounting,Corporate%20and%20Other%20Laws,Taxation%20and%20GST,Financial%20Management%20and%20Strategic%20Management,Auditing%20and%20Ethics,Cost%20and%20Management%20Accounting&categoryNames=Book,Course&subCategoryNames=Combo
+    found 14 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [6/70] (depth 1) GET https://www.vcgurukul.com/product/cmafoundation
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [7/70] (depth 1) GET https://www.vcgurukul.com/products/CA%20Foundation?page=1&Subject=Quantitative+Aptitude%2CBusiness+Economics%2CAccounting%2CBusiness+Law&Category=Book%2CCourse%2CCombo&Sub+Category=Individual%2CCombo
+    found 21 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [8/70] (depth 1) GET https://www.vcgurukul.com/product/ai-astra-learn-earn-build?variant=4O6B8CDMUCQPCYJ4JODF7MF2XR66UT51&src=product_list&variantId=4O6B8CDMUCQPCYJ4JODF7MF2XR66UT51
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [9/70] (depth 1) GET https://www.vcgurukul.com/product/ca-foundation-nirmaan-20-batch-jan-27
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [10/70] (depth 1) GET https://www.vcgurukul.com/product/businesslawcafoundation
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [11/70] (depth 1) GET https://www.vcgurukul.com/product/ca-foundation-quantitative-aptitude-prof-rahul-bhutani-jan27-may27
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [12/70] (depth 1) GET https://www.vcgurukul.com/product/ca-foundation-accounting-ca-rishabh-rohra-jan27-may27
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [13/70] (depth 1) GET https://www.vcgurukul.com/product/ca-foundation-business-economics-ca-jyoti-deshwal-jan27-may27
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [14/70] (depth 1) GET https://www.vcgurukul.com/product/caintermediategr1may27
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [15/70] (depth 1) GET https://www.vcgurukul.com/product/caintermediatebothgroupmay27
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [16/70] (depth 1) GET https://www.vcgurukul.com/product/ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [17/70] (depth 1) GET https://www.vcgurukul.com/product/caintermediategr2may27
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [18/70] (depth 1) GET https://www.vcgurukul.com/product/ca-intermediate-gr2-mukaam-exam-oriented-jan27
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [19/70] (depth 1) GET https://www.vcgurukul.com/product/cmaintergroup1
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [20/70] (depth 1) GET https://www.vcgurukul.com/product/cmaintergroup2vcg
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [21/70] (depth 1) GET https://www.vcgurukul.com/cagurpreetsingh
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [22/70] (depth 1) GET https://www.vcgurukul.com/aboutfaculty88
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [23/70] (depth 1) GET https://www.vcgurukul.com/carishabhrohra
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [24/70] (depth 1) GET https://www.vcgurukul.com/cajyotideshwal
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [25/70] (depth 1) GET https://www.vcgurukul.com/capranavpratik
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [26/70] (depth 1) GET https://www.vcgurukul.com/camanishatejwani
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [27/70] (depth 1) GET https://www.vcgurukul.com/deepakgusain
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [28/70] (depth 1) GET https://www.vcgurukul.com/terms
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [29/70] (depth 1) GET https://www.vcgurukul.com/refund
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [30/70] (depth 1) GET https://www.vcgurukul.com/contact
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [31/70] (depth 1) GET https://www.vcgurukul.com/privacy
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [32/70] (depth 1) GET https://www.vcgurukul.com/product/cafoundationlaw?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [33/70] (depth 2) GET https://www.vcgurukul.com/product/cafoundationexamoriented-quantitativeaptitude-profrahulbhutani-sep26?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [34/70] (depth 2) GET https://www.vcgurukul.com/product/caintermediatebothgroupmay27?variant=c4g_orva1781248871_sit925&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [35/70] (depth 2) GET https://www.vcgurukul.com/product/caintermediatebothgroupmay27-duplicate?variant=0fcf5fa1-4c17-45fc-bf01-1e99241d8d23&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [36/70] (depth 2) GET https://www.vcgurukul.com/product/ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27-shrey?variant=4NSYRIANEF4OHMN77I3VEULTDT7LIWZM&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [37/70] (depth 2) GET https://www.vcgurukul.com/product/archived-ca-intermediate-real-evaluated-test-series-jan27?variant=IWNE0ZK0LONN82UI5ZAGWVII3SBJQDM5&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [38/70] (depth 2) GET https://www.vcgurukul.com/product/ca-intermediate-both-group-exam-oriented-mukaam-batch-jan27?variant=Z1I4XS55IMLLGY0NIVSS35LFNSWESYGI&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [39/70] (depth 2) GET https://www.vcgurukul.com/product/economicscafoundation?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [40/70] (depth 2) GET https://www.vcgurukul.com/product/cmafoundation?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [41/70] (depth 2) GET https://www.vcgurukul.com/product/ca-foundation-nirmaan-20-batch-jan-27?variant=31df6dc6-d127-4729-b07d-73a450a4e184&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [42/70] (depth 2) GET https://www.vcgurukul.com/product/annual-batch-ca-foundation-may27?variant=ILDN2I50IWDH1G9YH79WOWLR25R1QOK4&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [43/70] (depth 2) GET https://www.vcgurukul.com/product/ca-foundation-real-fastrack-sep26?variant=FDBP9LY6KUFMDJCR7IPHIDGB3EQAXNB1&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [44/70] (depth 2) GET https://www.vcgurukul.com/product/businesslawcafoundation?variant=G1P1CM6VO0LTXVVK3EADPXZEPVGMTP7F&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [45/70] (depth 2) GET https://www.vcgurukul.com/product/ca-foundation-quantitative-aptitude-prof-rahul-bhutani-jan27-may27?variant=c4g_yzcl1761726729_zyj768&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [46/70] (depth 2) GET https://www.vcgurukul.com/product/ca-foundation-accounting-ca-rishabh-rohra-jan27-may27?variant=HR3FDK9IFJRMXBPV7V3I5V1CB08D8GCV&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [47/70] (depth 2) GET https://www.vcgurukul.com/product/ca-foundation-business-economics-ca-jyoti-deshwal-jan27-may27?variant=N7REY217565ABQ91JUBH0KLG947ZBPX2&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [48/70] (depth 2) GET https://www.vcgurukul.com/product/ca-foundation-buniyaad-20-batch-jan-27?variant=e55fe0b9-236f-4531-8a6b-b21a3a236f6c&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [49/70] (depth 2) GET https://www.vcgurukul.com/product/ca-foundation-exam-oriented-accounting-ca-rishabh-rohra-jan-27-may-27?variant=58c12609-691d-42ce-aa2b-52e523c02f83&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [50/70] (depth 2) GET https://www.vcgurukul.com/product/ca-foundation-exam-oriented-business-law-ca-gurpreet-singh-jan-27-may-27?variant=HJKWG1A0OJCED77EVGV3DJPSQSBAYO8M&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [51/70] (depth 2) GET https://www.vcgurukul.com/product/ca-foundation-exam-oriented-business-economics-prof-rahul-bhutani-jan-27-may-27?variant=54799932-a0f8-4521-8806-0574de5e59da&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [52/70] (depth 2) GET https://www.vcgurukul.com/product/ca-foundation-exam-oriented-quantitative-aptitude-prof-rahul-bhutani-jan-27-may-27?variant=7f32c444-8b07-4a00-92ce-e1019ea4067a&src=product_list
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [53/70] (depth 2) GET https://www.vcgurukul.com/product/fmsmbook?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [54/70] (depth 2) GET https://www.vcgurukul.com/product/examoriented?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [55/70] (depth 2) GET https://www.vcgurukul.com/product/caintermediategr1-mukaambatch-jan27?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [56/70] (depth 2) GET https://www.vcgurukul.com/product/cainterabyaas?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [57/70] (depth 2) GET https://www.vcgurukul.com/product/corporatelawgurpreetsingh?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [58/70] (depth 2) GET https://www.vcgurukul.com/product/lawinterbook?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [59/70] (depth 2) GET https://www.vcgurukul.com/product/practicebook?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [60/70] (depth 2) GET https://www.vcgurukul.com/product/buniyaadbatchmaster?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [61/70] (depth 2) GET https://www.vcgurukul.com/product/examoriented-businesseconomics-cajyotideshwal?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [62/70] (depth 2) GET https://www.vcgurukul.com/product/accountscainter?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [63/70] (depth 2) GET https://www.vcgurukul.com/product/QDAI1772264016?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [64/70] (depth 2) GET https://www.vcgurukul.com/product/nirmaanmasterbridgebatch?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [65/70] (depth 2) GET https://www.vcgurukul.com/product/advancedaccounting-carishabhrohra-may26?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [66/70] (depth 2) GET https://www.vcgurukul.com/product/taxationandgstclasses?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [67/70] (depth 2) GET https://www.vcgurukul.com/product/practicebookbusinesslawebook?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [68/70] (depth 2) GET https://www.vcgurukul.com/product/gr2exam-oriented-costmanagementaccounting-sep26jan27?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [69/70] (depth 2) GET https://www.vcgurukul.com/product/mission15?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+  [70/70] (depth 2) GET https://www.vcgurukul.com/product/caintergr2combo?utm_source=fomo
+    found 9 link(s) inside hover/dropdown menus not present in the plain DOM scan
+
+  result: 70 page(s) rendered and captured  |  0 error(s)  |  1239s
+  saved to: D:\EffCorp_Projects\cap-online\telegram\comparator\sales-agent\vcgurukul\rendered-pages
+  NOTE: hit the --max-pages cap (70) -- there may be more pages on this site than were captured. Re-run with a higher --max-pages if you want more, once you've reviewed what's here.
+  NOTE: 7 other-domain host(s) linked from this site were not followed (by design -- only same-site pages are crawled): apps.apple.com, play.google.com, t.me, techhand.in, www.instagram.com, www.techhand.in, www.youtube.com
