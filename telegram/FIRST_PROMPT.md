@@ -102,6 +102,7 @@ folder's own `README.md`.
 | MCQ JSON creation prompt for external AI models (PDF → MCQ JSON) | `base_formats/MCQ_PROMPT.md` | `base_formats/generate_base_formats.py` (field-contract source), `tools/ingest_ca_foundation_accounting_economics_mcqs.py` (the ingestion pattern any resulting batch still needs) |
 | Question Bank Book (PYQ/MTP/RTP → chapter books, separate from this bot platform) | `_claude/skills/SKILL-question-bank-pipeline-overview.md` (cap-online REPO ROOT only, not copied here — this is a different pillar, not this platform's own content) | `first_run/` (repo root, not under `telegram/`) |
 | Test Mode (paid, timed mock tests) + wallet/billing (identity, credits, Razorpay recharge) | `/TELEGRAM-TEST-MODE-SYSTEM.md` (repo root — canonical; `assets/exam_bot/Tests/TEST-MODE-ROADMAP.md` is supplementary) | `bots/test_flow.py`, `bots/wallet_flow.py`, `database/wallet.py`, `database/identity.py`, `database/razorpay_client.py` |
+| Student engagement broadcasts (MCQ-activity + streak-based nudges, persistence, anti-spam plan for a future daily cron — PLAN not yet scheduled, see that file's own status note) | `BROADCASTING.md` | `database/broadcast.py`, `tools/broadcast_sender.py`, `tools/send_mcq_nudge_broadcast.py` / `_progress_` / `_congrats_`, `tools/send_streak_engagement_broadcast.py` |
 
 ## Folder map
 
