@@ -265,11 +265,21 @@ def db_ensure_wallet(user):
     one (i.e. this isn't their genuine first-ever interaction) -- callers
     append this to whatever they're already about to send, never send it
     as a separate message."""
-    username, _ = identity.ensure_wallet_identity(DB_CONN, user)
-    _, already_granted = wallet.grant_signup_bonus(DB_CONN, username, "platform")
-    if already_granted:
-        return None
-    return wallet.build_signup_grant_message()
+    # 2026-08-24: identity.ensure_wallet_identity() now grants the signup
+    # bonus itself, the instant it auto-creates a username (see that
+    # function's own comment -- this closed a real "zero balance, asked to
+    # recharge on the very first question" bug for students whose identity
+    # got created from a DIFFERENT call site than this one). was_new is
+    # therefore now the correct signal for "did a grant just happen" --
+    # calling grant_signup_bonus() again here would always see
+    # already_granted=True (it just ran, inside ensure_wallet_identity)
+    # and this function would stop returning the welcome message for
+    # EVERY student, including the normal /start path. Do not re-add a
+    # second grant_signup_bonus() call here.
+    username, was_new = identity.ensure_wallet_identity(DB_CONN, user)
+    if was_new:
+        return wallet.build_signup_grant_message()
+    return None
 
 
 def _out_of_balance_text() -> str:

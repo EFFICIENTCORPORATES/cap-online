@@ -45,6 +45,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import db  # noqa: E402
+import wallet  # noqa: E402
 
 MIN_USERNAME_LEN, MAX_USERNAME_LEN = 3, 20  # mirrors profile_flow.py's own MIN/MAX exactly -- keep in sync if that ever changes
 
@@ -100,4 +101,25 @@ def ensure_wallet_identity(conn, telegram_user) -> tuple:
         conn, "UPDATE students SET lavya_username=? WHERE telegram_user_id=?",
         (username, telegram_user_id),
     )
+
+    # BUG FIXED 2026-08-24 (real complaint: newly-enrolled students hitting
+    # "recharge your wallet" on their very first question, no welcome-bonus
+    # message ever shown). Root cause: this exact same "identity provisioned,
+    # bonus never granted" gap was already found and fixed once, 2026-08-17,
+    # but only at ONE call site (faculty_bot.py's "Exam Practice Hub"
+    # button) -- exam_hub_bot.py's own send_question()/send_mcq(), plus
+    # test_flow.py and wallet_flow.py (all built after that fix), each call
+    # ensure_wallet_identity() directly and independently, the same
+    # unguarded way the fixed call site used to. Patching each call site
+    # individually is exactly how it recurred -- fixing it HERE instead
+    # means every existing AND future caller is safe by construction: the
+    # instant a username is auto-created anywhere on the platform, the
+    # one-time signup grant is applied in the same breath, before this
+    # function ever returns to whichever flow needs the balance next.
+    # grant_signup_bonus() is itself idempotent (checked by
+    # wallet_grants + a ledger idempotency_key), so callers that ALSO
+    # explicitly grant afterward (db_ensure_wallet(), for the welcome
+    # message) never double-grant -- this call is always a safe no-op on
+    # the (common) path where the bonus was already applied here first.
+    wallet.grant_signup_bonus(conn, username, "platform")
     return username, True
