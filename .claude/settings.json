@@ -104,10 +104,17 @@
       "PowerShell(winget search --id wget2 --source winget)",
       "PowerShell(winget install --id GNU.Wget2 -e --source winget --silent --accept-package-agreements --accept-source-agreements)",
       "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); wget2 --version | Select-Object -First 3)",
-      "PowerShell(Get-Process wget2 -ErrorAction SilentlyContinue | Select-Object Id, StartTime, CPU; Write-Host \"---\"; \\(Get-Content \"C:\\\\Users\\\\asus\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--EffCorp-Projects-cap-online\\\\7e0a6e28-bcd6-47e9-8a2f-8249383cf7fb\\\\tasks\\\\b6odmebqj.output\"\\).Count)"
+      "PowerShell(Get-Process wget2 -ErrorAction SilentlyContinue | Select-Object Id, StartTime, CPU; Write-Host \"---\"; \\(Get-Content \"C:\\\\Users\\\\asus\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--EffCorp-Projects-cap-online\\\\7e0a6e28-bcd6-47e9-8a2f-8249383cf7fb\\\\tasks\\\\b6odmebqj.output\"\\).Count)",
+      "Bash(NEW=\"/d/EffCorp_Products/Main1Lavya/Main1lavyaAIAgents/examstudyhub\" *)",
+      "Read(//d/EffCorp_Products/Main1Lavya/Main1lavyaAIAgents/examstudyhub/**)",
+      "Read(//d/EffCorp_Products/Main1Lavya/Main1lavyaAIAgents/examstudyhub/config/**)",
+      "Read(//d/EffCorp_Products/Main1Lavya/Main1lavyaAIAgents/examstudyhub/source-docs/**)",
+      "Bash(grep -n \"REPO_ROOT=\" \"D:\\\\EffCorp_Products\\\\Main1Lavya\\\\Main1lavyaAIAgents\\\\examstudyhub\\\\tools\\\\ensure_bots_running.bat\" \"D:\\\\EffCorp_Products\\\\Main1Lavya\\\\Main1lavyaAIAgents\\\\examstudyhub\\\\tools\\\\restart_all_bots.bat\")",
+      "Read(//d/EffCorp_Products/Main1Lavya/Main1lavyaAIAgents/examstudyhub/tools/**)"
     ],
     "additionalDirectories": [
-      "C:\\Users\\asus\\AppData\\Local\\Temp\\claude"
+      "C:\\Users\\asus\\AppData\\Local\\Temp\\claude",
+      "D:\\EffCorp_Products\\Main1Lavya\\Main1lavyaAIAgents\\sales-agent"
     ]
   },
   "hooks": {
