@@ -14,6 +14,17 @@ Adding vcgurukul / bbvirtuals / vsmartacademy later is: build that client's own
 extract_catalog.py + catalog.json, add a client_config.json, add a bots.json entry
 with a real token in telegram/.env -- no code change here.
 
+PRODUCT SEPARATION (2026-08-26): this is the "Sales Agent" product -- a whitelabelled,
+one-institute-only receptionist bot. It is DISTINCT from the "Faculty Search"
+cross-institute comparator product (D:\EffCorp_Products\Main1Lavya\ai-agents\
+faculty-search\ -- not built yet, no code in this repo). The two currently SHARE one
+bot/token (@Official1LavyaFacultySearchBot) purely as a demo device -- confirmed
+intentional by Pranav: this bot is shown to a prospective institute client as a demo
+of what a dedicated bot would look like for them; once they sign up, they get their
+own separate token/process, not this shared one. See bots.json's coceducation entry
+and D:\EffCorp_Products\Main1Lavya\ai-agents\sales-agent\README.md for the full
+picture -- do not assume this script also serves the comparator use case, it doesn't.
+
 Live-management (added 2026-08-24, matching every other 1LAVYA bot): registered in
 telegram/config/bots.json (bot_id "coceducation") so telegram/tools/manage_bots.py
 starts/stops/restarts it, the existing Windows Task Scheduler "1LAVYA Bots - Health
@@ -27,7 +38,8 @@ applied here from day one since this is the platform's first fully public,
 unauthenticated, free-text-search-driven bot (exactly the surface
 SCRAPING-INCIDENT-CASE-STUDY.md's §7 flagged as needing this).
 
-Per-client folder layout (telegram/comparator/sales-agent/<client>/):
+Per-client folder layout (SALES_AGENT_ROOT/<client>/ -- see SALES_AGENT_ROOT above,
+currently D:\EffCorp_Products\Main1Lavya\ai-agents\sales-agent\, NOT inside this repo):
     client_config.json  -- display name, token env var, file paths (see coceducation/)
     catalog.json         -- the knowledge base this bot actually answers from,
                              built by extract_catalog.py from that client's own
@@ -76,7 +88,17 @@ from telegram.ext import (
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[2]  # telegram/bots/sales_agent_bot.py -> repo root
-SALES_AGENT_ROOT = REPO_ROOT / "telegram" / "comparator" / "sales-agent"
+# Moved out of the cap-online repo 2026-08-26 -- this product's data (per-client
+# catalog.json/client_config.json/sales_agent.db, one folder per client) now lives
+# at its own permanent home outside this repo, alongside the separate faculty-search
+# product's data. Overridable via SALES_AGENT_ROOT in telegram/.env; falls back to
+# the old in-repo path only so a fresh clone without that env var set still starts
+# (and fails with a clear "no client_config.json" error rather than a silent wrong
+# answer, if the fallback path is empty too -- see load_client_config()).
+SALES_AGENT_ROOT = Path(
+    os.environ.get("SALES_AGENT_ROOT")
+    or r"D:\EffCorp_Products\Main1Lavya\ai-agents\sales-agent"
+)
 
 load_dotenv(REPO_ROOT / "telegram" / ".env")  # real tokens live here, gitignored -- see .env.example
 
