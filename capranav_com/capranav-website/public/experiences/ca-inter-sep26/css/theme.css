@@ -1,0 +1,261 @@
+/* ============================================================
+   THEME — design tokens for the Sep-26 strategy video deck
+   Sources:
+     books/strategy-book/design/design-spec.md  (bucket colours)
+     CA Pranav P Tulshyan brand: BLUE (logical) + GREEN (friendly)
+     — from DISC / "Surrounded by Idiots"
+   ============================================================ */
+
+:root {
+  /* ----- brand (chrome: headers, footers, watermark, accents) ----- */
+  --brand-blue:       #1F6FB2;
+  --brand-blue-deep:  #14466F;
+  --brand-blue-soft:  #4A9BD8;
+  --brand-green:      #2E9E6B;
+  --brand-green-deep: #1F6B49;
+  --brand-green-soft: #58C28F;
+  --brand-grad: linear-gradient(90deg, var(--brand-blue) 0%, var(--brand-green) 100%);
+
+  /* ----- bucket colours (must match the book design-spec) ----- */
+  --b0: #5C6B7A;   /* slate    — Foundation, runs beneath everything */
+  --b1: #0E7C7B;   /* teal     — Before Classes */
+  --b2: #2E8B57;   /* green    — During Classes */
+  --b3: #E8A13D;   /* mustard  — Revision Time */
+  --b4: #E07A2F;   /* orange   — 45 days before */
+  --b5: #8E2C3A;   /* maroon   — Exam Days */
+  --b6: #4A90C4;   /* sky      — After Exams */
+  --ai: #6C4FB8;   /* violet   — AI content */
+  --gold: #C9A227; /* gold     — Booti / special moments only */
+  --red:  #E03131; /* warnings: NO NEW MATERIAL etc. */
+  --green-ok: #3DA45E;
+
+  /* ----- dark theme (emotional moments) ----- */
+  --dark-bg:    #0F1115;
+  --dark-bg-2:  #161922;
+  --dark-text:  #F2EFE9;
+  --dark-dim:   #878C99;
+
+  /* ----- light theme (content slides) ----- */
+  --light-bg:   #FAF7F1;
+  --light-bg-2: #FFFFFF;
+  --light-text: #1F2933;
+  --light-dim:  #6F727A;
+
+  /* ----- type ----- */
+  --font-head: 'Archivo', 'Arial Black', sans-serif;
+  --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-dev:  'Noto Serif Devanagari', 'Mangal', serif;
+  --font-mono: 'Consolas', 'Menlo', monospace;
+}
+
+/* ---------- base ---------- */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-body);
+}
+
+body { transition: background-color .7s ease; }
+body.theme-dark  { background: var(--dark-bg);  color: var(--dark-text); }
+body.theme-light { background: var(--light-bg); color: var(--light-text); }
+
+.dev { font-family: var(--font-dev); }
+
+/* ---------- fixed 1920x1080 stage, scaled to fit window ---------- */
+
+#viewport {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#stage {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  flex: 0 0 auto;
+  transform-origin: center center;
+}
+
+/* ---------- slide skeleton: header / body / footer ---------- */
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+}
+.slide.active { display: flex; }
+
+.slide-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 140px;
+  text-align: center;
+  min-height: 0;
+}
+
+/* ----- header: bilingual title + live chip ----- */
+
+.sl-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 44px 90px 20px;
+  position: relative;
+}
+.sl-header::after {              /* brand underline */
+  content: "";
+  position: absolute;
+  left: 90px;
+  right: 90px;
+  bottom: 0;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--brand-grad);
+  opacity: .85;
+}
+.sl-title { text-align: left; }
+.sl-title h1 {
+  font: 800 46px/1.1 var(--font-head);
+  letter-spacing: .5px;
+}
+.sl-title .h-dev {
+  font: 600 30px/1.4 var(--font-dev);
+  margin-top: 6px;
+}
+body.theme-dark  .sl-title .h-dev { color: var(--brand-green-soft); }
+body.theme-light .sl-title .h-dev { color: var(--brand-green-deep); }
+
+.sl-chip {
+  font: 700 24px/1 var(--font-head);
+  letter-spacing: 1px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+body.theme-dark  .sl-chip { color: var(--dark-text);  background: var(--dark-bg-2);  border: 2px solid var(--brand-blue); }
+body.theme-light .sl-chip { color: var(--light-text); background: var(--light-bg-2); border: 2px solid var(--brand-blue); }
+.sl-chip b { color: var(--brand-blue-soft); }
+body.theme-light .sl-chip b { color: var(--brand-blue); }
+
+/* ----- footer: journey strip + watermark ----- */
+
+.sl-footer {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 16px 90px 30px;
+}
+
+.journey { width: 880px; flex: 0 0 auto; }
+.j-row { display: flex; height: 14px; border-radius: 7px; overflow: hidden; gap: 3px; }
+.j-seg { height: 100%; opacity: .28; transition: opacity .4s; position: relative; }
+.j-seg.on { opacity: 1; box-shadow: 0 0 0 2px rgba(255,255,255,.25); }
+.j-b0 {
+  margin-top: 5px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--b0);
+  opacity: .45;
+  position: relative;
+}
+.j-b0.on { opacity: 1; }
+.j-label {
+  margin-top: 7px;
+  font: 700 15px/1 var(--font-head);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-align: left;
+}
+body.theme-dark  .j-label { color: var(--dark-dim); }
+body.theme-light .j-label { color: var(--light-dim); }
+
+.wm {
+  font: 700 22px/1 var(--font-head);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: .65;
+}
+.wm::before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--brand-grad);
+  flex: 0 0 auto;
+}
+body.theme-dark  .wm { color: var(--dark-dim); }
+body.theme-light .wm { color: var(--light-dim); }
+.wm b { font-weight: 900; }
+body.theme-dark  .wm b { color: var(--dark-text); }
+body.theme-light .wm b { color: var(--light-text); }
+
+/* ---------- reveal steps ---------- */
+
+.step {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .65s ease, transform .65s ease;
+  will-change: opacity, transform;
+}
+.step.on { opacity: 1; transform: translateY(0); }
+
+/* slower, scale-in entrance — the big "83" */
+.step[data-fx="scale"] {
+  transform: scale(.82);
+  transition: opacity 1.1s ease, transform 1.1s cubic-bezier(.16, 1, .3, 1);
+}
+.step[data-fx="scale"].on { transform: scale(1); }
+
+/* red flash entrance — warnings */
+.step[data-fx="flash"] { transition: opacity .35s ease; transform: none; }
+.step[data-fx="flash"].on { animation: flashIn .9s ease; }
+@keyframes flashIn {
+  0%   { opacity: 0; }
+  30%  { opacity: 1; filter: brightness(1.9); }
+  55%  { filter: brightness(.85); }
+  75%  { filter: brightness(1.45); }
+  100% { opacity: 1; filter: brightness(1); }
+}
+
+/* soft pulse — used on deadline markers */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224, 122, 47, .55); }
+  50%      { box-shadow: 0 0 0 14px rgba(224, 122, 47, 0); }
+}
+.pulse { animation: pulse 1.8s ease infinite; }
+
+/* ---------- presenter HUD ---------- */
+
+#hud {
+  position: fixed;
+  right: 14px;
+  bottom: 10px;
+  font: 600 13px/1 var(--font-mono);
+  letter-spacing: .5px;
+  opacity: .35;
+  user-select: none;
+  pointer-events: none;
+  z-index: 99;
+}
+body.theme-dark  #hud { color: var(--dark-dim); }
+body.theme-light #hud { color: var(--light-dim); }
+#hud.hidden { display: none; }

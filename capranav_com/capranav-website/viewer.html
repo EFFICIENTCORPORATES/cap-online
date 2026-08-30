@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f172a">
+  <title>Experience | CA Pranav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/viewer.css">
+</head>
+<body>
+  <header class="viewer-bar">
+    <a href="index.html" class="viewer-brand" aria-label="Return to CA Pranav home">
+      <span class="viewer-mark">P</span>
+      <span>CA PRANAV</span>
+    </a>
+    <div class="viewer-title">
+      <span>Now viewing</span>
+      <strong id="experience-title">Experience</strong>
+    </div>
+    <div class="viewer-actions">
+      <button id="fullscreen-button" type="button">Full screen</button>
+      <a href="index.html">Close <span aria-hidden="true">×</span></a>
+    </div>
+  </header>
+  <main>
+    <iframe id="experience-frame" title="CA Pranav interactive experience" allow="fullscreen"></iframe>
+    <div class="viewer-error" id="viewer-error" hidden>
+      <h1>Experience not found</h1>
+      <p>Please return to the home page and choose an available experience.</p>
+      <a href="index.html">Return home</a>
+    </div>
+  </main>
+  <script src="assets/viewer.js"></script>
+</body>
+</html>

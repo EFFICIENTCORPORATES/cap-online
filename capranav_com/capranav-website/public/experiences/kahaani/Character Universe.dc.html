@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="react.min.js"></script>
+<script src="react-dom.min.js"></script>
+<script src="support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#0d0d14;font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',sans-serif;}
+  body{overflow-x:auto;overflow-y:auto;}
+  @keyframes uFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</helmet>
+<template id="__bundler_thumbnail"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#1A1A2E"/><circle cx="70" cy="90" r="22" fill="#E8813A"/><circle cx="115" cy="90" r="22" fill="#6B3FA0"/><circle cx="92" cy="125" r="22" fill="#F0A500"/><text x="100" y="175" font-size="20" fill="#fff" text-anchor="middle" font-family="Segoe UI,sans-serif">CAST</text></svg></template>
+{{ app }}
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  C = { navy:'#1A1A2E', orange:'#E8813A', gold:'#F0A500', purple:'#6B3FA0', green:'#2D8653', red:'#C0392B',
+        teal:'#1F8A7A', eblue:'#2A6FDB', black:'#23232A', maroon:'#7E2B3B',
+        bg:'#FDF8F3', skin:'#E7B189', skinD:'#C98C5E', hairD:'#2E2422', grey:'#B0ABA4', shirt:'#EFE9DD', ink:'#1A1A2E' };
+
+  cast = [
+    { who:'gurpreet', name:'GURPREET SIR', color:'#23232A', role:'Partner · Signing Auditor', firm:'GP & Associates  (Audit Firm)',
+      accessory:'Maroon turban + black blazer · hands in pockets', vibe:'Chill, charming, law-first. Asks the naive-but-right question.',
+      line:'“Tension nahi lena — Pranav sambhal lega.”', emojis:['🙂','😎','👍'] },
+    { who:'pranav', name:'PRANAV', color:'#1A1A2E', role:'Article · The Explainer', firm:'GP & Associates  (Audit Firm)',
+      accessory:'Glasses + navy blazer · notebook always in hand', vibe:'Sharp, precise, never lets wrong accounting pass. The brand voice.',
+      line:'“Sir, yahan ek problem hai…”', emojis:['🤔','👉','📓'] },
+    { who:'diya', name:'DIYA  (Dr. D)', color:'#6B3FA0', role:'Owner · Senior Accountant', firm:'Accounting Doctors',
+      accessory:'Specs + purple blazer · sleek bun', vibe:'Strict boss-energy. Strong on basics; overconfident on advanced. (Dr = Debit)',
+      line:'“Main sahi hoon… yeh toh always aise hi hota hai.”', emojis:['😌','😠','😳'] },
+    { who:'rolly', name:'ROLLY', color:'#E8813A', role:'Junior Accountant · The Learner', firm:'Accounting Doctors',
+      accessory:'Orange scarf + navy top · neat bun · clipboard', vibe:'Cheerful, fast, lovable. Makes the foundational error — students see themselves in her.',
+      line:'“Done ho gaya! …Wait, yeh kya tha?”', emojis:['🙂','💡','😅'] },
+    { who:'sethji', name:'SETHJI', color:'#F0A500', role:'Owner · The Business Impact', firm:'BCPL — Bade Chalo Pvt Ltd',
+      accessory:'Cream kurta · grey hair · reading glasses', vibe:'Old-school Lala. Wants the bottom line, not the standard. Feels the consequence.',
+      line:'“Mujhe sirf bottom line chahiye.”', emojis:['🙂','😟','😄'] },
+    { who:'cfo', name:'CFO SIR', color:'#2A6FDB', role:'CFO · The Pressure Valve', firm:'ECPL — Effective Corporates Pvt Ltd',
+      accessory:'Electric-blue suit · headset · laptop always open', vibe:'Urban, structured, KPI-driven. Demands advanced accounting done right.',
+      line:'“Yeh acceptable nahi hai — standard kya kehta hai?”', emojis:['🧐','📊','✅'] },
+  ];
+
+  // ---------------- character vector art ----------------
+  head(extra, skin){
+    const S=this.C; skin=skin||S.skin;
+    return `<rect x="90" y="98" width="20" height="26" fill="${skin}"/><circle cx="100" cy="70" r="40" fill="${skin}"/>
+      <circle cx="86" cy="72" r="3.4" fill="#3a2c22"/><circle cx="114" cy="72" r="3.4" fill="#3a2c22"/>${extra}`;
+  }
+  svgFor(who){
+    const S=this.C;
+    if(who==='rolly'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="80" y="226" width="18" height="68" rx="8" fill="#2a3450"/><rect x="102" y="226" width="18" height="68" rx="8" fill="#2a3450"/>
+        <rect x="44" y="132" width="17" height="78" rx="8.5" fill="${S.navy}"/><rect x="139" y="132" width="17" height="78" rx="8.5" fill="${S.navy}"/>
+        <circle cx="52" cy="208" r="10" fill="${S.skin}"/><circle cx="148" cy="208" r="10" fill="${S.skin}"/>
+        <rect x="56" y="122" width="88" height="112" rx="22" fill="${S.navy}"/>
+        <path d="M62 126 L122 232 L100 234 L52 138 Z" fill="${S.orange}"/>
+        ${this.head(`<path d="M60 70 a40 40 0 0 1 80 0 q-40 -30 -80 0 Z" fill="${S.hairD}"/><circle cx="100" cy="28" r="13" fill="${S.hairD}"/><path d="M91 88 q9 7 18 0" stroke="#b5704a" stroke-width="3" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    if(who==='pranav'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="80" y="226" width="18" height="68" rx="8" fill="#2a2e44"/><rect x="102" y="226" width="18" height="68" rx="8" fill="#2a2e44"/>
+        <rect x="46" y="132" width="16" height="80" rx="8" fill="#D8E4F2"/><rect x="138" y="132" width="16" height="80" rx="8" fill="#D8E4F2"/>
+        <circle cx="54" cy="210" r="9.5" fill="${S.skin}"/><circle cx="146" cy="210" r="9.5" fill="${S.skin}"/>
+        <rect x="56" y="124" width="88" height="112" rx="16" fill="#D8E4F2"/>
+        <path d="M100 124 L89 124 L97 139 Z" fill="#ffffff"/><path d="M100 124 L111 124 L103 139 Z" fill="#ffffff"/>
+        <path d="M100 130 L105 139 L103 180 L97 180 L95 139 Z" fill="${S.navy}"/>
+        <circle cx="100" cy="194" r="2.4" fill="#b9c6d8"/><circle cx="100" cy="210" r="2.4" fill="#b9c6d8"/>
+        ${this.head(`<path d="M58 74 q-8 -52 42 -52 q50 0 42 52 q-5 -17 -16 -13 q-4 -15 -26 -15 q-23 0 -27 17 q-11 -3 -15 11 Z" fill="#241b18"/><path d="M72 50 q20 12 46 3 q-7 15 -25 15 q-17 0 -21 -18 Z" fill="#2e221d"/><g stroke="${S.navy}" stroke-width="2.4" fill="none"><circle cx="86" cy="73" r="8.5"/><circle cx="114" cy="73" r="8.5"/><path d="M94.5 73 h11"/></g><path d="M91 90 q9 5 18 0" stroke="#b5704a" stroke-width="3" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    if(who==='sethji'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="78" y="232" width="20" height="62" rx="8" fill="#cdbfa0"/><rect x="102" y="232" width="20" height="62" rx="8" fill="#cdbfa0"/>
+        <rect x="44" y="140" width="18" height="74" rx="9" fill="${S.shirt}"/><rect x="138" y="140" width="18" height="74" rx="9" fill="${S.shirt}"/>
+        <circle cx="53" cy="212" r="10" fill="${S.skin}"/><circle cx="147" cy="212" r="10" fill="${S.skin}"/>
+        <rect x="50" y="130" width="100" height="108" rx="22" fill="${S.shirt}"/>
+        <path d="M58 132 q-2 60 26 104 l16 -6 q-26 -46 -24 -100 Z" fill="#dcc79e"/>
+        <rect x="98" y="132" width="4" height="60" fill="#c9b88f"/><circle cx="100" cy="148" r="2.6" fill="#b9a679"/><circle cx="100" cy="166" r="2.6" fill="#b9a679"/>
+        ${this.head(`<path d="M60 66 a40 40 0 0 1 80 0 q-40 -24 -80 0 Z" fill="${S.grey}"/><g stroke="#6a5a48" stroke-width="2" fill="none"><circle cx="86" cy="72" r="8.5"/><circle cx="114" cy="72" r="8.5"/><path d="M94.5 72 h11"/></g><path d="M84 90 q16 7 32 0" stroke="#7a6a5a" stroke-width="4" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    if(who==='diya'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="80" y="226" width="18" height="68" rx="8" fill="#3a2f48"/><rect x="102" y="226" width="18" height="68" rx="8" fill="#3a2f48"/>
+        <rect x="44" y="132" width="17" height="80" rx="8.5" fill="${S.purple}"/><rect x="139" y="132" width="17" height="80" rx="8.5" fill="${S.purple}"/>
+        <circle cx="52" cy="210" r="10" fill="${S.skin}"/><circle cx="148" cy="210" r="10" fill="${S.skin}"/>
+        <rect x="54" y="122" width="92" height="112" rx="20" fill="${S.purple}"/>
+        <path d="M100 124 L122 124 L100 182 L78 124 Z" fill="#efe9f5"/><rect x="96" y="124" width="8" height="42" fill="#8a5cc4"/>
+        ${this.head(`<path d="M58 76 q2 -46 42 -46 q40 0 42 46 q-12 -16 -22 -6 q-6 -10 -20 -10 q-14 0 -20 10 q-10 -10 -22 6 Z" fill="${S.hairD}"/><circle cx="138" cy="92" r="13" fill="${S.hairD}"/><g stroke="${S.purple}" stroke-width="2.4" fill="none"><rect x="77" y="65" width="18" height="14" rx="3"/><rect x="105" y="65" width="18" height="14" rx="3"/><path d="M95 72 h10"/></g><path d="M91 90 q9 5 18 0" stroke="#b5704a" stroke-width="3" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    if(who==='gurpreet'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="80" y="232" width="18" height="62" rx="8" fill="#2a2a30"/><rect x="102" y="232" width="18" height="62" rx="8" fill="#2a2a30"/>
+        <!-- arms into pockets -->
+        <path d="M48 140 q-8 44 22 70 l14 -8 q-22 -22 -16 -58 Z" fill="${S.black}"/>
+        <path d="M152 140 q8 44 -22 70 l-14 -8 q22 -22 16 -58 Z" fill="${S.black}"/>
+        <rect x="54" y="130" width="92" height="108" rx="20" fill="${S.black}"/>
+        <path d="M100 132 L120 132 L100 188 L80 132 Z" fill="#ECECEF"/><rect x="96" y="132" width="8" height="40" fill="${S.maroon}"/>
+        ${this.head(`<path d="M66 96 q4 18 34 18 q30 0 34 -18 q-2 16 -34 16 q-32 0 -34 -16 Z" fill="${S.hairD}"/><path d="M78 86 q22 16 44 0 q-2 16 -22 16 q-20 0 -22 -16 Z" fill="${S.hairD}"/><path d="M54 60 q4 -34 46 -34 q42 0 46 34 q2 8 -8 10 q-38 -14 -76 0 q-10 -2 -8 -10 Z" fill="${S.maroon}"/><path d="M92 30 q8 -8 16 0 q-2 8 -8 8 q-6 0 -8 -8 Z" fill="${S.maroon}"/><path d="M70 56 q30 -10 60 0" stroke="#5e1f2c" stroke-width="2" fill="none"/><path d="M90 88 q10 6 20 0" stroke="#7a4a30" stroke-width="3" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    // cfo
+    return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <rect x="82" y="232" width="17" height="62" rx="8" fill="#23314f"/><rect x="101" y="232" width="17" height="62" rx="8" fill="#23314f"/>
+      <rect x="46" y="132" width="16" height="82" rx="8" fill="${S.eblue}"/><rect x="138" y="132" width="16" height="82" rx="8" fill="${S.eblue}"/>
+      <circle cx="54" cy="212" r="9.5" fill="${S.skin}"/><circle cx="146" cy="212" r="9.5" fill="${S.skin}"/>
+      <rect x="56" y="124" width="88" height="112" rx="18" fill="${S.eblue}"/>
+      <path d="M100 126 L118 126 L100 178 L82 126 Z" fill="#fff"/><path d="M100 126 L107 126 L103 168 L97 152 Z" fill="#1b2d52"/>
+      ${this.head(`<path d="M62 58 q38 -32 76 0 q-4 -24 -38 -24 q-34 0 -38 24 Z" fill="${S.hairD}"/><path d="M88 89 q12 5 24 0" stroke="#b5704a" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M60 70 a40 42 0 0 0 0 6" stroke="#33373d" stroke-width="6" fill="none"/><rect x="52" y="68" width="13" height="20" rx="6" fill="#33373d"/><path d="M62 60 q40 -26 76 2" stroke="#33373d" stroke-width="5" fill="none"/><path d="M58 86 q-10 8 -6 20" stroke="#33373d" stroke-width="3" fill="none"/><circle cx="52" cy="106" r="4" fill="#33373d"/>`)}
+    </svg>`;
+  }
+
+  // ---------------- building blocks ----------------
+  portrait(who, h, scale, dur){
+    const R=React.createElement;
+    return R('div',{ style:{ width:160, height:226, filter:'drop-shadow(0 8px 10px rgba(26,26,46,.16))' },
+      dangerouslySetInnerHTML:{ __html:this.svgFor(who) } });
+  }
+
+  card(c, idx){
+    const R=React.createElement, S=this.C;
+    return R('div',{ key:c.who, style:{ background:'#fff', borderRadius:16, overflow:'hidden',
+        boxShadow:'0 14px 34px rgba(0,0,0,.28)', display:'flex', flexDirection:'column',
+        border:'1px solid rgba(0,0,0,.04)' } },
+      // portrait zone
+      R('div',{ style:{ position:'relative', height:236, background:'linear-gradient(180deg,'+this.tint(c.color)+',#ffffff)',
+          display:'flex', alignItems:'flex-end', justifyContent:'center', overflow:'hidden' } },
+        R('div',{ style:{ position:'absolute', top:14, left:14, width:14, height:14, borderRadius:'50%', background:c.color } }),
+        R('div',{ style:{ width:160, height:226, filter:'drop-shadow(0 8px 10px rgba(26,26,46,.16))' }, dangerouslySetInnerHTML:{ __html:this.svgFor(c.who) } }),
+        R('div',{ style:{ position:'absolute', top:14, right:14, display:'flex', gap:6 } },
+          c.emojis.map((e,k)=> R('div',{ key:k, style:{ width:30, height:30, borderRadius:'50%', background:'#fff',
+            boxShadow:'0 2px 7px rgba(26,26,46,.16)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:16 } }, e)))
+      ),
+      // info zone
+      R('div',{ style:{ padding:'16px 20px 20px' } },
+        R('div',{ style:{ display:'inline-block', background:c.color, color:'#fff', fontSize:16, fontWeight:800,
+            letterSpacing:'.04em', padding:'5px 14px', borderRadius:20 } }, c.name),
+        R('div',{ style:{ fontSize:14, fontWeight:700, color:S.ink, marginTop:10 } }, c.role),
+        R('div',{ style:{ fontSize:13, color:c.color, fontWeight:700, marginTop:3 } }, c.firm),
+        R('div',{ style:{ fontSize:13.5, color:'#5a5650', lineHeight:1.45, marginTop:10 } }, c.vibe),
+        R('div',{ style:{ marginTop:13 } },
+          R('div',{ style:{ fontSize:11, fontWeight:800, letterSpacing:'.1em', color:'#a59f97', textTransform:'uppercase' } }, 'Look')),
+        R('div',{ style:{ fontSize:12.5, color:'#6a655e', lineHeight:1.4, marginTop:2 } }, c.accessory),
+        R('div',{ style:{ marginTop:14, padding:'10px 14px', background:this.tint(c.color), borderRadius:10,
+            fontSize:14, fontStyle:'italic', color:S.ink, fontWeight:600 } }, c.line)
+      )
+    );
+  }
+  tint(hex){
+    // light wash of a hex color
+    const n=hex.replace('#',''); const r=parseInt(n.slice(0,2),16),g=parseInt(n.slice(2,4),16),b=parseInt(n.slice(4,6),16);
+    return 'rgba('+r+','+g+','+b+',0.10)';
+  }
+
+  firmBox(title, sub, people, color){
+    const R=React.createElement, S=this.C;
+    return R('div',{ style:{ background:'#fff', borderRadius:12, padding:'14px 18px', minWidth:188, textAlign:'center',
+        boxShadow:'0 8px 22px rgba(0,0,0,.22)', borderTop:'4px solid '+color } },
+      R('div',{ style:{ fontSize:15, fontWeight:800, color:S.ink } }, title),
+      R('div',{ style:{ fontSize:11.5, color:'#8a857d', marginTop:2, fontWeight:600 } }, sub),
+      R('div',{ style:{ fontSize:12.5, color:color, fontWeight:700, marginTop:8 } }, people)
+    );
+  }
+  arrow(label){
+    const R=React.createElement;
+    return R('div',{ style:{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', color:'rgba(255,255,255,.55)', minWidth:96 } },
+      R('div',{ style:{ fontSize:11, fontWeight:700, letterSpacing:'.06em', marginBottom:4 } }, label),
+      R('div',{ style:{ fontSize:22, lineHeight:1 } }, '↓'));
+  }
+
+  sectionTitle(kicker, title){
+    const R=React.createElement, S=this.C;
+    return R('div',{ style:{ marginBottom:22 } },
+      R('div',{ style:{ fontSize:13, letterSpacing:'.2em', color:S.orange, fontWeight:800 } }, kicker),
+      R('div',{ style:{ fontSize:30, fontWeight:800, color:'#fff', marginTop:6 } }, title));
+  }
+
+  renderVals(){
+    const R=React.createElement, S=this.C;
+    const W=1240;
+
+    // ---- header ----
+    const header = R('div',{ style:{ textAlign:'center', padding:'8px 0 40px' } },
+      R('div',{ style:{ fontSize:14, letterSpacing:'.26em', color:S.orange, fontWeight:800 } }, 'CA INTER · ADVANCED ACCOUNTING'),
+      R('div',{ style:{ fontSize:'clamp(32px, 5vw, 50px)', fontWeight:800, color:'#fff', marginTop:14, lineHeight:1.08 } }, 'The Accounting Universe'),
+      R('div',{ style:{ fontSize:20, color:'#b8b4c4', marginTop:10 } }, 'Character Bible — visual single source of truth'),
+      R('div',{ style:{ fontSize:14, color:'#6f6b7e', marginTop:14, letterSpacing:'.06em' } }, '#pranavBhaiya  ·  #NewtonofAccounts  ·  CA Pranav Learning'));
+
+    // ---- ecosystem ----
+    const eco = R('div',{ style:{ background:'rgba(255,255,255,.04)', border:'1px solid rgba(255,255,255,.08)',
+        borderRadius:18, padding:'30px 32px', marginBottom:54 } },
+      this.sectionTitle('THE ECOSYSTEM', 'Two companies · one accounting firm · one audit firm'),
+      R('div',{ style:{ display:'flex', justifyContent:'center', marginBottom:6 } },
+        this.firmBox('GP & Associates', 'Audit Firm · Noida', 'Gurpreet Sir + Pranav', S.black)),
+      R('div',{ style:{ display:'flex', justifyContent:'center' } }, this.arrow('audits both')),
+      R('div',{ style:{ display:'flex', justifyContent:'center', gap:60, margin:'4px 0' } },
+        this.firmBox('BCPL', 'Bade Chalo Pvt Ltd · Muzaffarpur', 'Sethji', S.gold),
+        this.firmBox('ECPL', 'Effective Corporates Pvt Ltd · Bangalore', 'CFO Sir', S.eblue)),
+      R('div',{ style:{ display:'flex', justifyContent:'center' } }, this.arrow('books kept by')),
+      R('div',{ style:{ display:'flex', justifyContent:'center' } },
+        this.firmBox('Accounting Doctors', 'Accounting Firm · Raipur', 'Diya (Dr. D) + Rolly', S.purple)),
+      R('div',{ style:{ textAlign:'center', marginTop:24, fontSize:14.5, color:'#cfcadb', lineHeight:1.6, maxWidth:880, marginLeft:'auto', marginRight:'auto' } },
+        R('b',{ style:{ color:S.orange } }, 'The teaching loop:  '),
+        'Rolly / Diya make an error  →  Sethji or CFO Sir feels the consequence  →  Pranav catches it in audit  →  Gurpreet Sir asks the naive question  →  Pranav explains the standard  →  entry rectified  →  the student understands the ', R('i',null,'why'), '.')
+    );
+
+    // ---- cast grid ----
+    const grid = R('div',null,
+      this.sectionTitle('THE CAST', 'Six characters · locked colour + accessory + emoji set'),
+      R('div',{ style:{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:24 } }, this.cast.map((c,k)=> this.card(c,k)))
+    );
+
+    // ---- ICAI Says device ----
+    const icai = R('div',{ style:{ marginTop:56 } },
+      this.sectionTitle('THE NARRATOR DEVICE', '“ICAI Says” — every concept callout comes from here'),
+      R('div',{ style:{ display:'flex', gap:30, alignItems:'stretch', flexWrap:'wrap' } },
+        R('div',{ style:{ flex:'1 1 420px', background:S.navy, borderRadius:16, padding:'8px', boxShadow:'0 14px 34px rgba(0,0,0,.3)' } },
+          R('div',{ style:{ border:'2px solid '+S.gold, borderRadius:12, padding:'24px 28px' } },
+            R('div',{ style:{ display:'flex', alignItems:'center', gap:14, marginBottom:16 } },
+              R('div',{ style:{ width:54, height:54, borderRadius:'50%', border:'2.5px solid '+S.gold, color:S.gold,
+                  display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800, fontSize:15, letterSpacing:'.02em' } }, 'ICAI'),
+              R('div',null,
+                R('div',{ style:{ color:S.gold, fontWeight:800, fontSize:18, letterSpacing:'.08em' } }, 'ICAI SAYS'),
+                R('div',{ style:{ color:'rgba(255,255,255,.55)', fontSize:12, fontWeight:600, letterSpacing:'.04em' } }, 'The Standard · neutral · authoritative'))),
+            R('div',{ style:{ color:'#fff', fontSize:22, fontWeight:600, lineHeight:1.45 } },
+              'Value inventory at the ', R('b',{ style:{ color:S.gold } }, 'lower of cost and net realisable value'), '.'))),
+        R('div',{ style:{ flex:'1 1 320px', background:'rgba(255,255,255,.04)', border:'1px solid rgba(255,255,255,.08)',
+            borderRadius:16, padding:'24px 26px', color:'#cfcadb', fontSize:14.5, lineHeight:1.6 } },
+          R('div',{ style:{ fontWeight:800, color:'#fff', fontSize:16, marginBottom:10 } }, 'Why a device, not a person'),
+          'All dialogue stays in-world (the six characters). Concept truth is delivered by ',
+          R('b',{ style:{ color:S.gold } }, 'ICAI Says'),
+          ' — a neutral navy + gold panel that carries the rule, the standard number, and the final takeaways. It never has a face, so the authority feels institutional, not personal.')
+      )
+    );
+
+    // ---- background rules ----
+    const doItem=(t)=> R('div',{ style:{ display:'flex', gap:10, alignItems:'flex-start', marginBottom:11 } },
+      R('div',{ style:{ color:S.green, fontWeight:800, fontSize:16, lineHeight:1.4 } }, '✓'),
+      R('div',{ style:{ fontSize:14.5, color:'#d8d4e2', lineHeight:1.45 } }, t));
+    const dontItem=(t)=> R('div',{ style:{ display:'flex', gap:10, alignItems:'flex-start', marginBottom:11 } },
+      R('div',{ style:{ color:S.red, fontWeight:800, fontSize:16, lineHeight:1.4 } }, '✕'),
+      R('div',{ style:{ fontSize:14.5, color:'#d8d4e2', lineHeight:1.45 } }, t));
+
+    const bg = R('div',{ style:{ marginTop:56 } },
+      this.sectionTitle('SCENE BACKGROUNDS', 'Flat, subtle, never competing with bubbles or numbers'),
+      R('div',{ style:{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:24, marginBottom:24 } },
+        R('div',{ style:{ background:'rgba(45,134,83,.10)', border:'1px solid rgba(45,134,83,.35)', borderRadius:16, padding:'24px 26px' } },
+          R('div',{ style:{ color:S.green, fontWeight:800, fontSize:17, marginBottom:16, letterSpacing:'.04em' } }, 'DO'),
+          doItem('Keep it flat and low-contrast — muted tints so characters and panels pop.'),
+          doItem('Signal location with 2–3 simple prop shapes max (shelves = godown, desk = office, server rack = ECPL).'),
+          doItem('Hold one consistent floor line + horizon across a scene.'),
+          doItem('Match the place: GP office (Noida), Accounting Doctors (Raipur), BCPL godown (Muzaffarpur), ECPL office (Bangalore).')),
+        R('div',{ style:{ background:'rgba(192,57,43,.10)', border:'1px solid rgba(192,57,43,.35)', borderRadius:16, padding:'24px 26px' } },
+          R('div',{ style:{ color:S.red, fontWeight:800, fontSize:17, marginBottom:16, letterSpacing:'.04em' } }, "DON'T"),
+          dontItem('No detailed or realistic scenery — this is flat-vector, not a render.'),
+          dontItem('No busy patterns, textures or gradients behind text panels.'),
+          dontItem('No high-saturation backgrounds that fight the character colours.'),
+          dontItem('Never place a speech bubble or number panel over a busy prop cluster.'))
+      ),
+      // location swatches
+      R('div',{ style:{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:16 } },
+        [['Godown','#e9eaf2','BCPL · Muzaffarpur'],['Office','#fdf8f3','GP / Doctors'],['ECPL Floor','#eef3fb','Bangalore'],['Spotlight','#1A1A2E','Concept / recap']].map((b,k)=>
+          R('div',{ key:k, style:{ borderRadius:12, overflow:'hidden', border:'1px solid rgba(255,255,255,.1)' } },
+            R('div',{ style:{ height:60, background:b[1] } }),
+            R('div',{ style:{ background:'rgba(255,255,255,.04)', padding:'10px 12px' } },
+              R('div',{ style:{ fontSize:14, fontWeight:800, color:'#fff' } }, b[0]),
+              R('div',{ style:{ fontSize:11.5, color:'#9a95a8', marginTop:2 } }, b[2])))))
+    );
+
+    const footer = R('div',{ style:{ textAlign:'center', padding:'56px 0 20px', color:'#5f5b6e', fontSize:13, letterSpacing:'.05em' } },
+      'CA Inter · Advanced Accounting    ·    #pranavBhaiya  #NewtonofAccounts    ·    CA Pranav Learning');
+
+    const page = R('div',{ style:{ width:'100%', maxWidth:W, margin:'0 auto', padding:'48px 28px 0' } }, header, eco, grid, icai, bg, footer);
+
+    return { app: R('div',{ style:{ minHeight:'100vh', background:'radial-gradient(circle at 50% 0%, #1c1c2b, #0d0d14 60%)', paddingBottom:20 } }, page) };
+  }
+}
+</script>
+</body>
+</html>

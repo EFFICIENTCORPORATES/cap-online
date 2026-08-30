@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="252 curated CA student guides, study strategies, revision systems and Advanced Accounting resource pathways from CA Pranav.">
+  <meta name="theme-color" content="#111827">
+  <title>Student Knowledge Library — CA Pranav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/knowledge.css">
+</head>
+<body>
+  <a class="skip-link" href="#library">Skip to library</a>
+  <header class="knowledge-header">
+    <a class="brand" href="index.html"><span class="brand-mark">P</span><span><strong>CA PRANAV</strong><small>Student Knowledge Library</small></span></a>
+    <div class="header-actions"><a href="student-learning.html">Learning guides</a><a href="index.html">Main website ↗</a></div>
+  </header>
+
+  <main>
+    <section class="knowledge-hero compact-knowledge-hero">
+      <div>
+        <p class="eyebrow">A simpler way to find the right resource</p>
+        <h1>Tell us your present problem.</h1>
+        <p class="hero-copy">Answer four short questions. We will show only five relevant resources for your present stage.</p>
+        <div class="hero-choice"><a href="#path-finder">Find my five resources</a><a href="#library">Open full catalogue</a></div>
+      </div>
+      <div class="finder-preview" aria-label="Four-question recommendation process">
+        <span>01 · Your level</span><span>02 · Your attempt</span><span>03 · Current stage</span><span>04 · Biggest difficulty</span>
+        <strong>Five focused recommendations</strong>
+      </div>
+    </section>
+
+    <section class="journey-section path-finder-section" id="path-finder">
+      <div class="journey-heading">
+        <div><p class="eyebrow">Four quick questions</p><h2>Find your next step.</h2></div>
+        <p>No long form and no account required. Your answers stay in this browser and are used only to select five useful resources.</p>
+      </div>
+      <form id="pathForm" class="path-form">
+        <fieldset><legend><span>01</span>Your level</legend><div class="choice-grid"><label><input type="radio" name="level" value="foundation" required><span>CA Foundation</span></label><label><input type="radio" name="level" value="inter"><span>CA Intermediate</span></label></div></fieldset>
+        <fieldset><legend><span>02</span>Your attempt</legend><div class="choice-grid choice-grid-3"><label><input type="radio" name="attempt" value="sep26" required><span>September 2026</span></label><label><input type="radio" name="attempt" value="jan27"><span>January 2027</span></label><label><input type="radio" name="attempt" value="may27"><span>May 2027 or later</span></label></div></fieldset>
+        <fieldset><legend><span>03</span>Your current stage</legend><div class="choice-grid choice-grid-3"><label><input type="radio" name="stage" value="learning" required><span>Learning first time</span></label><label><input type="radio" name="stage" value="revision"><span>Revision or Fastrack</span></label><label><input type="radio" name="stage" value="practice"><span>Question practice</span></label><label><input type="radio" name="stage" value="planning"><span>Planning my attempt</span></label><label><input type="radio" name="stage" value="final"><span>Final exam phase</span></label></div></fieldset>
+        <fieldset><legend><span>04</span>Your biggest difficulty</legend><div class="choice-grid choice-grid-3"><label><input type="radio" name="difficulty" value="concept" required><span>Conceptual clarity</span></label><label><input type="radio" name="difficulty" value="standards"><span>Accounting Standards</span></label><label><input type="radio" name="difficulty" value="time"><span>Completing the paper</span></label><label><input type="radio" name="difficulty" value="presentation"><span>Answer presentation</span></label><label><input type="radio" name="difficulty" value="discipline"><span>Consistency and focus</span></label><label><input type="radio" name="difficulty" value="resources"><span>Finding useful material</span></label></div></fieldset>
+        <button class="recommend-button" type="submit">Show my five resources</button>
+      </form>
+      <div id="pathResults" class="path-results" hidden>
+        <div class="path-results-head"><div><p class="eyebrow">Your focused starting point</p><h3>Five resources for you</h3></div><button id="editAnswers" type="button">Change answers</button></div>
+        <div id="recommendedGrid" class="recommended-grid"></div>
+        <p class="recommendation-note">Complete these in order. Return to the full catalogue only when these five no longer address your present need.</p>
+      </div>
+    </section>
+
+    <section class="library-shell" id="library">
+      <div class="library-top">
+        <div>
+          <p class="eyebrow">Search when you know what you need</p>
+          <h2>Complete catalogue.</h2>
+        </div>
+        <div class="library-stats" aria-label="Library statistics">
+          <div><strong id="visibleCount">252</strong><span>Available</span></div>
+          <div><strong id="savedCount">0</strong><span>Saved</span></div>
+          <div><strong id="doneCount">0</strong><span>Completed</span></div>
+        </div>
+      </div>
+
+      <div id="journeyBanner" class="journey-banner" hidden><div><span>Your selected path</span><strong id="journeyTitle"></strong></div><button id="clearJourney" type="button">Show complete catalogue</button></div>
+
+      <div class="controls">
+        <label class="search-box"><span>Search</span><input id="searchInput" type="search" placeholder="Try AS 2, timetable, mock, sleep, PYQ…" autocomplete="off"></label>
+        <label><span>Category</span><select id="categorySelect"><option value="All">All categories</option></select></label>
+        <button id="clearFilters" type="button">Reset filters</button>
+      </div>
+      <details class="advanced-filters">
+        <summary>More filters</summary>
+        <div>
+          <label><span>Material type</span><select id="typeSelect"><option value="All">All types</option></select></label>
+          <label><span>My progress</span><select id="statusSelect"><option value="All">Everything</option><option value="Saved">Saved only</option><option value="Completed">Completed only</option><option value="Unread">Not completed</option></select></label>
+          <label><span>Subject</span><select id="subjectSelect"><option value="All">All subjects</option></select></label>
+          <label><span>Attempt</span><select id="attemptSelect"><option value="All">All attempts</option></select></label>
+          <label><span>Revision layer</span><select id="layerSelect"><option value="All">All layers</option></select></label>
+          <label><span>Difficulty</span><select id="difficultySelect"><option value="All">All levels</option></select></label>
+          <label><span>Access</span><select id="accessSelect"><option value="All">All access types</option></select></label>
+          <label><span>Freshness</span><select id="freshnessSelect"><option value="All">New or updated</option></select></label>
+        </div>
+      </details>
+
+      <div class="active-row"><div id="categoryPills" class="category-pills" aria-label="Quick category filters"></div><p id="resultMessage" aria-live="polite"></p></div>
+      <div id="knowledgeGrid" class="knowledge-grid"></div>
+      <div class="load-row"><button id="loadMore" type="button">Load more resources</button></div>
+    </section>
+
+    <section class="source-map">
+      <div><p class="eyebrow">Transparent content architecture</p><h2>Every route connects back to a real source.</h2></div>
+      <div class="source-map-grid">
+        <a href="viewer.html?experience=ca-inter-sep26"><span>01</span><strong>CA Inter Strategy</strong><p>Preparation architecture, revision layers, mocks and examination execution.</p></a>
+        <a href="viewer.html?experience=ca-foundation-sep26"><span>02</span><strong>Foundation Battle Plan</strong><p>Thirty-day planning, Sanjeevani Bootis, MCQ rules and gap-day plans.</p></a>
+        <a href="viewer.html?experience=bucket-0"><span>03</span><strong>Bucket 0</strong><p>Sleep, health, focus, targets, reflection and daily discipline.</p></a>
+        <a href="viewer.html?experience=teaching-style"><span>04</span><strong>3K Teaching System</strong><p>Kahaani, Koncept, Karma, assessment and layered revision.</p></a>
+        <a href="viewer.html?experience=koncept"><span>05</span><strong>Advanced Accounting</strong><p>AS‑2 concept notes, practical stories and examination applications.</p></a>
+        <a href="notes.html"><span>06</span><strong>Study Resources</strong><p>ICAI material, notes, revision files, question banks and practical references.</p></a>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="readerDialog" class="reader-dialog">
+    <button class="close-reader" type="button" aria-label="Close guide">×</button>
+    <div class="reader-inner">
+      <div class="reader-meta"><span id="readerId"></span><span id="readerCategory"></span><span id="readerType"></span></div>
+      <h2 id="readerTitle"></h2>
+      <p id="readerSummary" class="reader-summary"></p>
+      <section><p class="reader-label">How to use this guide</p><ol id="readerActions"></ol></section>
+      <section class="mistake-box"><p class="reader-label">Avoid these mistakes</p><ul id="readerMistakes"></ul></section>
+      <div id="readerTags" class="reader-tags"></div>
+      <div class="reader-buttons"><button id="saveReader" type="button">Save for later</button><button id="doneReader" type="button">Mark completed</button><a id="sourceReader" target="_blank" rel="noopener">Open connected source ↗</a><a id="downloadReader" target="_blank" rel="noopener" hidden>Download resource ↓</a></div>
+      <div id="relatedBlock" class="related-block"><p class="reader-label">Continue learning</p><div id="relatedItems"></div></div>
+    </div>
+  </dialog>
+
+  <footer><span>CA Pranav · Student Knowledge Library</span><a href="policies.html">About · Contact · Privacy · Terms · Policies</a><a href="#path-finder">Find another path ↑</a></footer>
+  <script src="assets/knowledge-data.js"></script>
+  <script src="assets/knowledge.js"></script>
+</body>
+</html>
