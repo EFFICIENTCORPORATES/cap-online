@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vault Blueprint</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --paper: #f5f6f3;
+    --surface: #ffffff;
+    --surface-2: #ecefe9;
+    --ink: #161a20;
+    --muted: #5c6470;
+    --line: #dde1da;
+    --accent: #b07f28;
+    --accent-ink: #6e4e15;
+    --accent-soft: #f1e3c4;
+    --flag: #a1442e;
+    --flag-soft: #f3ddd5;
+    --good: #3d6b52;
+    --good-soft: #dde9e0;
+    --radius: 10px;
+    --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #11141a;
+      --surface: #171b22;
+      --surface-2: #1c212a;
+      --ink: #eef0f4;
+      --muted: #9aa3b2;
+      --line: #2a2f3a;
+      --accent: #d9ad5c;
+      --accent-ink: #f3d99a;
+      --accent-soft: #3a2f18;
+      --flag: #dd8267;
+      --flag-soft: #3a241e;
+      --good: #7fb89b;
+      --good-soft: #1e2b24;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #11141a;
+    --surface: #171b22;
+    --surface-2: #1c212a;
+    --ink: #eef0f4;
+    --muted: #9aa3b2;
+    --line: #2a2f3a;
+    --accent: #d9ad5c;
+    --accent-ink: #f3d99a;
+    --accent-soft: #3a2f18;
+    --flag: #dd8267;
+    --flag-soft: #3a241e;
+    --good: #7fb89b;
+    --good-soft: #1e2b24;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent-soft); color: var(--ink); }
+
+  a { color: var(--accent-ink); }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px 120px; }
+
+  header.top {
+    border-bottom: 1px solid var(--line);
+    padding: 40px 0 28px;
+    margin-bottom: 40px;
+  }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .kicker::before {
+    content: "";
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  h1.title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 46px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 14px 0 12px;
+    text-wrap: balance;
+  }
+  .dek {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 62ch;
+    margin: 0 0 20px;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .meta-row b { color: var(--ink); font-weight: 600; }
+
+  nav.toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 28px 0 0;
+  }
+  nav.toc a {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    text-decoration: none;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 6px 11px;
+    border-radius: 999px;
+    transition: color .15s, border-color .15s;
+  }
+  nav.toc a:hover { color: var(--accent-ink); border-color: var(--accent); }
+
+  section { margin: 64px 0; }
+  section > .num-tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-ink);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(23px, 3vw, 28px);
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+    margin: 28px 0 10px;
+  }
+  p { margin: 0 0 14px; max-width: 68ch; }
+  section > p:first-of-type { margin-top: -4px; }
+  ul, ol { margin: 0 0 14px; padding-left: 22px; max-width: 66ch; }
+  li { margin-bottom: 7px; }
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.87em;
+    background: var(--surface-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+  }
+  strong { font-weight: 600; }
+
+  .callout {
+    display: flex;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin: 18px 0;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--accent-ink);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* system cards */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 14px;
+    margin: 22px 0 6px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .card .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .card h4 {
+    font-family: var(--font-display);
+    font-size: 16.5px;
+    margin: 6px 0 8px;
+  }
+  .card p { font-size: 14px; color: var(--muted); margin: 0; max-width: none; }
+
+  /* architecture chain */
+  .chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0;
+    margin: 24px 0;
+    font-family: var(--font-mono);
+  }
+  .chain-node {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 13px 15px;
+    min-width: 150px;
+    flex: 1 1 150px;
+  }
+  .chain-node .node-kind { font-size: 10.5px; color: var(--accent-ink); text-transform: uppercase; letter-spacing: .06em; }
+  .chain-node .node-name { font-size: 13.5px; font-weight: 600; color: var(--ink); margin-top: 3px; }
+  .chain-node .node-role { font-size: 11.5px; color: var(--muted); margin-top: 5px; line-height: 1.4; }
+  .chain-arrow {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 8px; color: var(--muted); font-size: 15px;
+    flex: 0 0 auto;
+  }
+  .chain-node.new { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+  .chain-node.reuse { background: var(--good-soft); border-color: var(--good); }
+
+  .legend { display: flex; gap: 18px; font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); margin: 10px 0 0; flex-wrap: wrap; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 9px; height: 9px; border-radius: 3px; display: inline-block; }
+  .legend .i-new { background: var(--surface); border: 1.5px solid var(--accent); }
+  .legend .i-reuse { background: var(--good); }
+
+  /* pipeline steps */
+  .steps { list-style: none; padding: 0; margin: 22px 0; border-left: 2px solid var(--line); }
+  .steps li { position: relative; padding: 2px 0 22px 26px; margin: 0; max-width: 62ch; }
+  .steps li::before {
+    content: attr(data-n);
+    position: absolute; left: -13px; top: -1px;
+    width: 24px; height: 24px;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    font-family: var(--font-mono);
+    font-size: 11px; font-weight: 600; color: var(--accent-ink);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .steps li strong { display: block; font-family: var(--font-display); font-size: 14.5px; margin-bottom: 3px; }
+  .steps li p { font-size: 14.5px; color: var(--muted); margin: 0; }
+
+  /* data model table */
+  .table-wrap { overflow-x: auto; margin: 20px 0; border: 1px solid var(--line); border-radius: var(--radius); }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 13.5px; }
+  thead th {
+    text-align: left; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--muted); background: var(--surface-2);
+    padding: 10px 14px; border-bottom: 1px solid var(--line);
+  }
+  tbody td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody td:first-child { font-family: var(--font-mono); font-size: 12.5px; color: var(--accent-ink); white-space: nowrap; }
+  tbody tr:hover { background: var(--surface-2); }
+
+  /* roadmap */
+  .roadmap { display: flex; flex-direction: column; gap: 0; margin: 26px 0; }
+  .phase {
+    display: grid; grid-template-columns: 64px 1fr; gap: 18px;
+    padding: 20px 0; border-top: 1px solid var(--line);
+  }
+  .phase:last-child { border-bottom: 1px solid var(--line); }
+  .phase-num { font-family: var(--font-mono); font-size: 22px; font-weight: 600; color: var(--line); padding-top: 2px; }
+  .phase h4 { font-family: var(--font-display); font-size: 16.5px; margin: 0 0 6px; }
+  .phase p { font-size: 14.5px; color: var(--muted); margin: 0 0 8px; max-width: 58ch; }
+  .gate {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-mono); font-size: 11px; color: var(--good);
+    background: var(--good-soft); border-radius: 999px; padding: 4px 10px;
+  }
+
+  /* decisions */
+  .decision-list { display: flex; flex-direction: column; gap: 10px; margin: 22px 0; }
+  .decision {
+    background: var(--flag-soft);
+    border: 1px solid color-mix(in srgb, var(--flag) 35%, var(--line));
+    border-radius: var(--radius);
+    padding: 14px 16px;
+  }
+  .decision .q { font-family: var(--font-display); font-weight: 700; font-size: 14.5px; color: var(--ink); margin-bottom: 4px; }
+  .decision .rec { font-size: 13.5px; color: var(--muted); }
+  .decision .rec b { color: var(--flag); font-weight: 600; }
+
+  hr.rule { border: none; border-top: 1px solid var(--line); margin: 0; }
+
+  footer.end {
+    margin-top: 70px; padding-top: 22px; border-top: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    .phase { grid-template-columns: 40px 1fr; gap: 12px; }
+    .phase-num { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <p class="kicker">Build plan · not yet started</p>
+    <h1 class="title">The Vault Blueprint</h1>
+    <p class="dek">How capranav.com grows from a static resource site into a small platform: email login, a page-by-page book viewer that can't be casually downloaded, a free sample chapter, checkout, and — later — courses.</p>
+    <div class="meta-row">
+      <span><b>Site today</b> — static, Cloudflare Pages, zero backend</span>
+      <span><b>Infra</b> — same ECPL Cloudflare account, isolated database + bucket</span>
+      <span><b>Payments</b> — Razorpay</span>
+    </div>
+    <nav class="toc">
+      <a href="#state">Current state</a>
+      <a href="#systems">What's being added</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#login">Login</a>
+      <a href="#vault">The Vault</a>
+      <a href="#demo">Free demo</a>
+      <a href="#checkout">Checkout</a>
+      <a href="#data">Data model</a>
+      <a href="#courses">Courses</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#legal">Policy updates</a>
+      <a href="#decisions">Open decisions</a>
+    </nav>
+  </header>
+
+  <section id="state">
+    <p class="num-tag">Starting point</p>
+    <h2>What capranav.com actually is today</h2>
+    <p>Read through the whole site before drafting anything below. It's a fully static bundle — plain HTML, CSS and JS, no framework, no build step, no server — shipped straight to Cloudflare Pages (<code>README.txt</code> literally says "upload the complete contents of this folder"). There is no login, no user record anywhere, and no payment code. That's not an oversight — <code>policies.html</code>'s own Refund section says so directly: <em>"This static website does not itself collect course payments. Where a course is purchased through an external enrollment provider, the refund and cancellation terms displayed by that provider at the time of purchase apply."</em> Today, capranav.com markets and teaches for free; a separate provider handles enrollment and money.</p>
+    <p>That means everything in this plan — accounts, a paywall, a protected reader, checkout — is genuinely new infrastructure, not a tweak to something half-built. Good news: this repo already runs a comparable system for the Telegram bot platform (login-free OTP flows, a shared database, branded PDF generation, Cloudflare email sending), so the pattern is proven, just not yet pointed at this site.</p>
+  </section>
+
+  <section id="systems">
+    <p class="num-tag">Scope</p>
+    <h2>Four systems, one platform</h2>
+    <p>Everything you described breaks into four pieces. The first three ship together as one connected flow; courses are real but scoped as a second wave once the book vault is proven.</p>
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">01 · Accounts</span>
+        <h4>Sign in by email</h4>
+        <p>No passwords to manage or leak. A student types their email, gets a 6-digit code, is in.</p>
+      </div>
+      <div class="card">
+        <span class="tag">02 · The Vault</span>
+        <h4>Read, can't lift</h4>
+        <p>Books render page-by-page inside the site itself. No PDF file ever reaches the browser.</p>
+      </div>
+      <div class="card">
+        <span class="tag">03 · Checkout</span>
+        <h4>Pay, unlock instantly</h4>
+        <p>Razorpay handles money; the moment it confirms, the same page re-opens as the paid version.</p>
+      </div>
+      <div class="card">
+        <span class="tag">04 · Courses</span>
+        <h4>Phase two</h4>
+        <p>Same accounts, same paywall logic, applied to video instead of pages. Scoped, not built yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture">
+    <p class="num-tag">Infrastructure</p>
+    <h2>Where each piece lives</h2>
+    <p>Per your call: this stays on the <strong>same Cloudflare account (ECPL)</strong> that already runs the Telegram platform's R2 and D1 — but with its own database and its own bucket, so a bug or a spike in one product can never touch the other's data. The static front-end you already have doesn't move.</p>
+    <div class="chain">
+      <div class="chain-node reuse">
+        <div class="node-kind">Unchanged</div>
+        <div class="node-name">Cloudflare Pages</div>
+        <div class="node-role">The existing static site — same repo, same deploy.</div>
+      </div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-node new">
+        <div class="node-kind">New</div>
+        <div class="node-name">Pages Functions</div>
+        <div class="node-role">Serverless API routes: OTP, session check, page-render, Razorpay webhook.</div>
+      </div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-node new">
+        <div class="node-kind">New database</div>
+        <div class="node-name">D1 · capranav_platform</div>
+        <div class="node-role">Users, sessions, books, orders, entitlements. Separate from platform.db.</div>
+      </div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-node new">
+        <div class="node-kind">New bucket</div>
+        <div class="node-name">R2 · capranav-vault</div>
+        <div class="node-role">Private. Source PDFs and rendered page images. Never public.</div>
+      </div>
+    </div>
+    <div class="chain">
+      <div class="chain-node reuse">
+        <div class="node-kind">Reused pattern</div>
+        <div class="node-name">Cloudflare Email Service</div>
+        <div class="node-role">Same mechanism as the report-email pipeline — sends OTP codes, capranav.com address.</div>
+      </div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-node new">
+        <div class="node-kind">New</div>
+        <div class="node-name">Razorpay</div>
+        <div class="node-role">Checkout + webhook. UPI-friendly for Indian students.</div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="i-reuse"></i> already exists / same account, reused pattern</span>
+      <span><i class="i-new"></i> newly built for this platform</span>
+    </div>
+  </section>
+
+  <section id="login">
+    <p class="num-tag">01 · Accounts</p>
+    <h2>Signing in</h2>
+    <p>Email + one-time code, nothing else. Students already know this pattern from the Telegram bots' contact verification.</p>
+    <ol>
+      <li>Student enters their email on any "Read this book" or "Buy" button.</li>
+      <li>A 6-digit code is emailed (Cloudflare Email Service), valid 10 minutes, one active code per address at a time.</li>
+      <li>Correct code sets a signed session cookie. No password, ever, means nothing to leak or reset.</li>
+      <li>Returning students who purchased before just enter their email again — the session, not a purchase receipt, decides what unlocks.</li>
+    </ol>
+  </section>
+
+  <section id="vault">
+    <p class="num-tag">02 · The Vault</p>
+    <h2>A book you can read but not take</h2>
+    <p>This is the real engineering problem, and it's worth being honest up front: <strong>no method makes a screen un-photographable.</strong> The goal here is to make casual copying — save-as-PDF, right-click-save, sharing the file — genuinely hard, and to make anything that does leak traceable back to the one account it was shown to. That's the strongest practical option, which is what you asked for.</p>
+    <div class="steps">
+      <li data-n="1"><strong>Source PDF stays private</strong><p>The finished, watermarked book (this repo already produces exactly this shape of file for the Question Bank Book) is uploaded once to the private R2 bucket. It is never linked, never served whole, never has a public URL.</p></li>
+      <li data-n="2"><strong>Every page becomes an image</strong><p>Each page is rendered to a high-resolution image ahead of time and cached in R2 — the same idea as this repo's existing print-watermarking script, run per-page instead of per-book.</p></li>
+      <li data-n="3"><strong>The viewer checks who's asking</strong><p>A Pages Function looks up the signed-in session, checks the entitlements table for that book, and only then allows the request to proceed.</p></li>
+      <li data-n="4"><strong>A personal stamp is burned into the pixels</strong><p>At request time, the reader's name, email, order ID and a timestamp are overlaid on the page image as a faint diagonal tile before it's sent — not stored that way, generated fresh per view. A page that leaks points at exactly one buyer.</p></li>
+      <li data-n="5"><strong>Pages arrive one at a time, briefly</strong><p>The front-end reader fetches each page image through a link that expires in roughly a minute, just ahead of where the student is scrolling. The whole book is never sitting in one downloadable response.</p></li>
+      <li data-n="6"><strong>The page itself resists the obvious shortcuts</strong><p>Right-click, text selection, browser print and Ctrl+S are disabled; a page-visibility check dims the reader if dev tools open. Deterrents, not guarantees — stated as such in the Terms.</p></li>
+    </ol>
+    <div class="callout">
+      <div>
+        <span class="label">Why images, not an embedded PDF</span>
+        <p>A real PDF file — even inside a locked-down viewer — is one "inspect element" away from a direct URL. Rendered, watermarked, short-lived images close that gap and double as a leak trace. The cost is engineering effort up front (the render pipeline) and slightly more server work per page view, both one-time or marginal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo">
+    <p class="num-tag">Built into the Vault</p>
+    <h2>The free sample chapter</h2>
+    <p>Same pipeline, one flag flipped. Every book gets a configurable <code>demo_page_count</code> (you mentioned 5–10 pages) stored alongside it. Requesting a page inside that range skips the entitlement check entirely — no login, no payment — and requesting anything beyond it redirects to sign-in-or-buy. This is one code path, not a separate viewer, so it can never drift out of sync with the paid version.</p>
+    <p>One open question below: whether the demo stays fully anonymous, or asks for an email first (still free) so a demo reader becomes a lead you can follow up with.</p>
+  </section>
+
+  <section id="checkout">
+    <p class="num-tag">03 · Checkout</p>
+    <h2>Paying and unlocking</h2>
+    <ol>
+      <li>Student taps <strong>Buy</strong>. A pending order is written to D1 with a Razorpay order ID.</li>
+      <li>Razorpay's checkout overlay opens — UPI, card, netbanking, wallets.</li>
+      <li>Razorpay calls back a Pages Function webhook. The signature is verified before anything else happens.</li>
+      <li>On a confirmed payment, an entitlement row is written for that student and book. The order ID is the uniqueness key, so a retried or duplicate webhook can never grant a second entitlement.</li>
+      <li>The student is dropped straight back into the reader, now unlocked — no separate "check your email for access" step.</li>
+    </ol>
+  </section>
+
+  <section id="data">
+    <p class="num-tag">Foundations</p>
+    <h2>What the new database holds</h2>
+    <p>One new D1 database, <code>capranav_platform</code>, entirely separate from the Telegram platform's <code>platform.db</code>.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Table</th><th>Holds</th></tr></thead>
+        <tbody>
+          <tr><td>users</td><td>Email, display name, created-at. No password field — there isn't one.</td></tr>
+          <tr><td>otp_codes</td><td>Short-lived login codes, one active per email, expiry timestamp.</td></tr>
+          <tr><td>sessions</td><td>Signed session tokens issued after a correct code.</td></tr>
+          <tr><td>books</td><td>Title, price, source file reference, page count, demo_page_count.</td></tr>
+          <tr><td>orders</td><td>Razorpay order ID, student, book, amount, status (pending / paid / failed).</td></tr>
+          <tr><td>entitlements</td><td>Which student can read which book — the one table the viewer actually checks.</td></tr>
+          <tr><td>viewer_access_log</td><td>Every page served: who, which book, which page, when — the forensic trail behind the watermark.</td></tr>
+          <tr><td>courses / course_entitlements</td><td>Phase 2 — same shape as books/entitlements, applied to video.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="courses">
+    <p class="num-tag">04 · Phase two</p>
+    <h2>Courses, once the Vault is proven</h2>
+    <p>The accounts and entitlements system carries over unchanged — a course purchase is the same order-and-unlock flow as a book, just pointed at video instead of pages. The one new piece is video delivery: <strong>Cloudflare Stream</strong> is the natural fit here since it stays in the same account and account bill, supports signed playback URLs and domain-locking the same way the Vault locks page images.</p>
+    <p>This section is deliberately light — course structure, pricing and whether any video content actually exists yet aren't decided (see below). The architecture is designed so this slots in without touching the book system.</p>
+  </section>
+
+  <section id="roadmap">
+    <p class="num-tag">Sequencing</p>
+    <h2>Build order</h2>
+    <p>Same discipline this repo already uses on the Telegram platform: build one phase, prove it with a real (not just structural) test, get your sign-off, then move on. Nothing here starts until you say go.</p>
+    <div class="roadmap">
+      <div class="phase">
+        <div class="phase-num">0</div>
+        <div>
+          <h4>Foundations</h4>
+          <p>Create the D1 database and R2 bucket, register the Razorpay account, onboard capranav.com for Cloudflare Email Sending.</p>
+          <span class="gate">Gate — nothing user-facing yet</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">1</div>
+        <div>
+          <h4>Accounts</h4>
+          <p>Email OTP login, session handling, a simple "My Library" page. Ships with zero purchasable content — safe to test live.</p>
+          <span class="gate">Gate — real login round-trip, your test email</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">2</div>
+        <div>
+          <h4>The Vault, one pilot book</h4>
+          <p>Full render → watermark → stream pipeline and the free demo range, built and proven against a single book you choose.</p>
+          <span class="gate">Gate — you personally read the demo and the full book</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">3</div>
+        <div>
+          <h4>Checkout</h4>
+          <p>Razorpay wired to that same pilot book — a real, small test payment, refunded after, before anything goes public.</p>
+          <span class="gate">Gate — one real rupee moves and unlocks correctly</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">4</div>
+        <div>
+          <h4>Remaining books</h4>
+          <p>Every other title goes through the now-proven pipeline. Mostly upload-and-configure, not new engineering.</p>
+          <span class="gate">Gate — each title spot-checked before it goes live</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">5</div>
+        <div>
+          <h4>Courses</h4>
+          <p>Cloudflare Stream wired to the same entitlement system. Scope depends on what's decided below.</p>
+          <span class="gate">Gate — separate go-ahead once scoped</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="legal">
+    <p class="num-tag">Housekeeping</p>
+    <h2>What has to change in Policies</h2>
+    <p><code>policies.html</code> is written for the current world, where an external provider handles money and access. Three sections stop being accurate the day this ships and need a rewrite, not a patch:</p>
+    <ul>
+      <li><strong>Refunds</strong> — currently disclaims collecting payment at all. Needs a real digital-goods refund policy once capranav.com is the seller of record.</li>
+      <li><strong>Course Access</strong> — currently points at "the enrollment terms shown at purchase" from a third party. Needs to state the account/entitlement model directly.</li>
+      <li><strong>A new fair-use clause</strong> — should say plainly that books are licensed for personal reading, not redistribution, and that copies are watermarked to the buyer. Sets expectations honestly rather than overpromising protection this plan can't actually deliver.</li>
+    </ul>
+  </section>
+
+  <section id="decisions">
+    <p class="num-tag">Before phase 0 starts</p>
+    <h2>What only you can decide</h2>
+    <div class="decision-list">
+      <div class="decision">
+        <div class="q">Which book launches first — the pilot in Phase 2?</div>
+        <div class="rec">The Question Bank Book already has a finished, watermarked "V1_protect" PDF in <code>first_run/output/final_deliverable/</code> — <b>likely the fastest real pilot</b> since the source file already exists.</div>
+      </div>
+      <div class="decision">
+        <div class="q">Price per book, and any bundle pricing across the Strategy Book / Concept Book / Question Bank Book?</div>
+        <div class="rec">Needed before Phase 3's real test payment.</div>
+      </div>
+      <div class="decision">
+        <div class="q">Does the free demo require an email first, or stay fully anonymous?</div>
+        <div class="rec"><b>Recommend requiring email</b> — still free, but turns sampling into a list you can follow up with, at the cost of one extra tap.</div>
+      </div>
+      <div class="decision">
+        <div class="q">Exact demo length per book — flat 5–10 pages, or does it vary by book size?</div>
+        <div class="rec">A flat count is simplest to configure; a proportional cut (e.g. first 5%) may read fairer for a very long book.</div>
+      </div>
+      <div class="decision">
+        <div class="q">Refund terms for a digital book once a purchase unlocks the full reader?</div>
+        <div class="rec">Common practice for digital goods is <b>no refund once the paid pages have been opened</b> — needs your explicit call, since it goes directly into Policies.</div>
+      </div>
+      <div class="decision">
+        <div class="q">Does this replace the existing external-provider enrollment, or run alongside it for existing courses?</div>
+        <div class="rec">Affects how much of <code>policies.html</code>'s current wording can stay versus needs replacing.</div>
+      </div>
+      <div class="decision">
+        <div class="q">For courses — is there real video content ready today, or is Phase 5 purely a placeholder for later?</div>
+        <div class="rec">Determines whether Phase 5 gets scoped in detail now or genuinely waits.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="end">
+    Nothing in <code>capranav-website/</code> has been touched. This document is the plan only — build starts at Phase 0 once you've reviewed the decisions above.
+  </footer>
+
+</div>
+</body>
+</html>
