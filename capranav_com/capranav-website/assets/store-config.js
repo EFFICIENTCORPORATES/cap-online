@@ -16,4 +16,4 @@
   Until step 1–2 is done, every Buy button shows a "payment isn't switched
   on yet" message instead of failing silently.
 */
-window.RAZORPAY_KEY_ID = "rzp_test_TX2ycJYWbesiVW";
+window.RAZORPAY_KEY_ID = "rzp_test_TX85a0CzJNZWjg";

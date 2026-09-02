@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/store.css">
+  <link rel="stylesheet" href="assets/whiteboard-theme.css?v=20260902">
+  <link rel="icon" href="assets/favicon-whiteboard.svg" type="image/svg+xml">
 </head>
 <body>
   <header class="store-header">
@@ -19,10 +21,10 @@
     </a>
     <nav aria-label="Store navigation">
       <a href="index.html">Home</a>
-      <a href="courses.html">Courses</a>
+      <a href="courses.html">Course</a>
       <a class="is-current" href="books.html">Books</a>
-      <a href="notes.html">Free Notes</a>
-      <a href="https://1lavya.com/" target="_blank" rel="noopener">Exam Practice</a>
+      <a href="knowledge.html">Free Resources</a>
+      <a href="https://t.me/CAPranavExamBot" target="_blank" rel="noopener">Free MCQ Bot</a>
     </nav>
   </header>
 
@@ -37,6 +39,10 @@
       <div class="book-grid" id="book-grid"></div>
       <p class="book-shipping-note" id="shipping-note" style="margin-top:20px;"></p>
     </section>
+
+    <section class="store-section" style="padding-top:0;">
+      <div id="mcq-promo"></div>
+    </section>
   </main>
 
   <footer style="padding:40px clamp(22px,7vw,110px) 60px; border-top:1px solid var(--line); text-align:center; color:var(--muted); font-size:12px;">
@@ -46,6 +52,8 @@
   <script src="assets/catalogue-data.js"></script>
   <script src="assets/store-config.js"></script>
   <script src="assets/checkout.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="assets/mcq-promo.js"></script>
   <script>
     const CAT = window.CATALOGUE;
     const shipping = CAT.books.flatShippingRupees;
@@ -63,11 +71,15 @@
            </span>
            <button type="button" class="button button-primary" data-book-index="${i}">Order</button>`
         : `<span class="chapter-soon">Price coming soon</span>`;
+      const statsBlock = book.stats
+        ? `<div class="book-stats">${book.stats.map((s) => `<div><strong>${s.value}</strong><span>${s.label}</span></div>`).join("")}</div>`
+        : "";
       return `
         <article class="book-card">
           <p class="eyebrow">${book.subtitle}</p>
           <h3>${book.title}</h3>
           <p>${book.description}</p>
+          ${statsBlock}
           <div class="book-card-foot">${priceBlock}</div>
         </article>`;
     }).join("");
@@ -84,6 +96,10 @@
         notesExtra: { book_id: book.id },
       });
     });
+
+    document.getElementById("mcq-promo").outerHTML = window.renderMcqPromo(CAT.mcqBot);
+    window.initMcqPromoQrCodes();
   </script>
+  <script src="assets/whiteboard-theme.js?v=20260902"></script>
 </body>
 </html>

@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="CA Inter Gr.1 Advanced Accounting — the complete course, or buy any single chapter (AS 2, AS 10, AS 13 and more) on its own.">
+  <meta name="description" content="CA Inter Gr.1 Advanced Accounting — the complete course, Live + Recorded, Plus plan. Jan'27 and May'27 batches.">
   <meta name="theme-color" content="#111827">
-  <title>Courses | CA Pranav</title>
+  <title>Course | CA Pranav</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/store.css">
+  <link rel="stylesheet" href="assets/whiteboard-theme.css?v=20260902">
+  <link rel="icon" href="assets/favicon-whiteboard.svg" type="image/svg+xml">
 </head>
 <body>
   <header class="store-header">
@@ -19,32 +21,42 @@
     </a>
     <nav aria-label="Store navigation">
       <a href="index.html">Home</a>
-      <a class="is-current" href="courses.html">Courses</a>
+      <a class="is-current" href="courses.html">Course</a>
       <a href="books.html">Books</a>
-      <a href="notes.html">Free Notes</a>
-      <a href="https://1lavya.com/" target="_blank" rel="noopener">Exam Practice</a>
+      <a href="knowledge.html">Free Resources</a>
+      <a href="https://t.me/CAPranavExamBot" target="_blank" rel="noopener">Free MCQ Bot</a>
     </nav>
   </header>
 
   <main>
     <section class="store-hero">
       <p class="eyebrow">CA Inter · Advanced Accounting</p>
-      <h1>Learn it whole,<br>or one <em>chapter</em> at a time.</h1>
-      <p>Enrol in the complete course, or buy any single chapter on its own — useful for a quick revision pass, or for filling one specific gap before the exam.</p>
+      <h1>The complete course.<br>Pick your <em>attempt.</em></h1>
+      <p>One plan, everything included — live classes, unlimited-view recordings, doubt sessions and full syllabus coverage. Choose Jan'27 or May'27.</p>
     </section>
 
     <section class="store-section" id="full-course">
-      <div class="store-section-head">
-        <h2>The complete course</h2>
-        <p>Every chapter of the syllabus, taught the same way this website's free resources are built around — Kahaani (the story), Koncept (the theory) and Karma (the practice).</p>
-      </div>
-
       <article class="course-feature">
         <div class="course-feature-copy">
-          <p class="eyebrow">CA Inter Gr.1</p>
+          <p class="eyebrow" id="full-course-subtitle">CA Pranav Pratik Tulshyan</p>
           <h3 id="full-course-title">CA Inter Gr.1 Advanced Accounting</h3>
-          <p id="full-course-desc">Every chapter of CA Inter Advanced Accounting, end to end.</p>
-          <div class="course-batches" id="full-course-batches"></div>
+          <p id="full-course-desc"></p>
+
+          <div class="picker-row">
+            <span class="picker-label">Attempt</span>
+            <div class="picker-group" id="attempt-picker"></div>
+          </div>
+          <div class="picker-row">
+            <span class="picker-label">Mode</span>
+            <div class="picker-group"><span class="picker-pill is-fixed" id="mode-pill"></span></div>
+          </div>
+          <div class="picker-row">
+            <span class="picker-label">Plan</span>
+            <div class="picker-group"><span class="picker-pill is-fixed" id="plan-pill"></span></div>
+          </div>
+
+          <ul class="plan-features" id="plan-features"></ul>
+
           <button type="button" class="button button-primary" id="full-course-buy">Enrol now</button>
         </div>
         <div class="course-feature-price">
@@ -55,12 +67,8 @@
       </article>
     </section>
 
-    <section class="store-section" id="chapters">
-      <div class="store-section-head">
-        <h2>Buy a single chapter</h2>
-        <p>All 36 chapters of the syllabus, in teaching order. A priced chapter is ready today; the rest are marked Coming Soon and will open the same way as they're finished.</p>
-      </div>
-      <div class="chapter-grid" id="chapter-grid"></div>
+    <section class="store-section" style="padding-top:0;">
+      <div class="mcq-promo" id="mcq-promo"></div>
     </section>
   </main>
 
@@ -71,56 +79,54 @@
   <script src="assets/catalogue-data.js"></script>
   <script src="assets/store-config.js"></script>
   <script src="assets/checkout.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="assets/mcq-promo.js"></script>
   <script>
     const CAT = window.CATALOGUE;
-
-    // ---- full course -----------------------------------------------
     const fc = CAT.fullCourse;
+
     document.getElementById("full-course-title").textContent = fc.title;
+    document.getElementById("full-course-subtitle").textContent = fc.subtitle;
     document.getElementById("full-course-desc").textContent = fc.description;
-    document.getElementById("full-course-batches").innerHTML =
-      fc.batches.map((b) => `<span>${b}</span>`).join("");
-    document.getElementById("full-course-price").textContent =
-      fc.price ? "₹" + fc.price.toLocaleString("en-IN") : "Price TBC";
+    document.getElementById("mode-pill").textContent = fc.mode;
+    document.getElementById("plan-pill").textContent = fc.plan;
+    document.getElementById("plan-features").innerHTML =
+      fc.planFeatures.map((f) => `<li>${f}</li>`).join("");
+
+    let selectedBatch = fc.batches[0];
+
+    function renderAttemptPicker() {
+      const el = document.getElementById("attempt-picker");
+      el.innerHTML = fc.batches.map((b) =>
+        `<button type="button" class="picker-pill${b.id === selectedBatch.id ? " is-selected" : ""}" data-batch="${b.id}">${b.label}</button>`
+      ).join("");
+    }
+    function renderPrice() {
+      document.getElementById("full-course-price").textContent = "₹" + selectedBatch.price.toLocaleString("en-IN");
+    }
+    renderAttemptPicker();
+    renderPrice();
+
+    document.getElementById("attempt-picker").addEventListener("click", (event) => {
+      const btn = event.target.closest("[data-batch]");
+      if (!btn) return;
+      selectedBatch = fc.batches.find((b) => b.id === btn.dataset.batch);
+      renderAttemptPicker();
+      renderPrice();
+    });
+
     document.getElementById("full-course-buy").addEventListener("click", () => {
       window.Store.buy({
         type: "course",
-        title: fc.title,
-        amountRupees: fc.price,
-        notesExtra: { batches: fc.batches.join(" / ") },
+        title: fc.title + " — " + selectedBatch.label,
+        amountRupees: selectedBatch.price,
+        notesExtra: { batch: selectedBatch.label, mode: fc.mode, plan: fc.plan },
       });
     });
 
-    // ---- chapter grid -------------------------------------------------
-    const grid = document.getElementById("chapter-grid");
-    grid.innerHTML = CAT.chapters.map((ch, i) => {
-      const label = ch.as ? ch.as : "Chapter " + ch.seq;
-      const foot = ch.price
-        ? `<span class="chapter-price">₹${ch.price.toLocaleString("en-IN")}</span>
-           <button type="button" class="chapter-buy" data-chapter-index="${i}">Buy</button>`
-        : `<span class="chapter-soon">Coming soon</span>`;
-      return `
-        <article class="chapter-card">
-          <div class="chapter-card-top">
-            <span class="chapter-as">${label}</span>
-            <span class="chapter-seq">Ch. ${ch.seq}</span>
-          </div>
-          <h4>${ch.title}</h4>
-          <div class="chapter-card-foot">${foot}</div>
-        </article>`;
-    }).join("");
-
-    grid.addEventListener("click", (event) => {
-      const btn = event.target.closest("[data-chapter-index]");
-      if (!btn) return;
-      const ch = CAT.chapters[Number(btn.dataset.chapterIndex)];
-      window.Store.buy({
-        type: "chapter",
-        title: (ch.as ? ch.as + " — " : "") + ch.title,
-        amountRupees: ch.price,
-        notesExtra: { chapter_id: ch.id, chapter_seq: ch.seq },
-      });
-    });
+    document.getElementById("mcq-promo").outerHTML = window.renderMcqPromo(CAT.mcqBot);
+    window.initMcqPromoQrCodes();
   </script>
+  <script src="assets/whiteboard-theme.js?v=20260902"></script>
 </body>
 </html>

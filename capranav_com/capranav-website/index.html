@@ -11,6 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css?v=20260801a">
   <link rel="stylesheet" href="assets/store.css">
+  <link rel="stylesheet" href="assets/whiteboard-theme.css?v=20260902">
+  <link rel="icon" href="assets/favicon-whiteboard.svg" type="image/svg+xml">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -79,7 +81,7 @@
       <div class="shop-strip-head">
         <p class="eyebrow">Enrol · Practise · Own the book</p>
         <h2>Everything you can buy, in one place.</h2>
-        <p>The complete course, any single chapter on its own, or the printed books — delivered to your door.</p>
+        <p>The complete course, the printed books, or free MCQ practice to start today.</p>
       </div>
       <div class="shop-cards">
         <a class="shop-card" href="courses.html#full-course">
@@ -88,19 +90,23 @@
           <p>Live + recorded, complete syllabus. Jan'27 &amp; May'27 batch.</p>
           <em id="shop-course-price">→</em>
         </a>
-        <a class="shop-card" href="courses.html#chapters">
-          <span class="tag">02 · Chapter-wise</span>
-          <strong>Buy one chapter at a time</strong>
-          <p>AS 2, AS 10, AS 13 and more — priced individually for a focused revision pass.</p>
-          <em id="shop-chapter-price">→</em>
-        </a>
         <a class="shop-card" href="books.html">
-          <span class="tag">03 · Printed books</span>
+          <span class="tag">02 · Printed books</span>
           <strong>Books, delivered to your door</strong>
           <p>The Question Bank Book and the Exam Strategy Book, shipped to your address.</p>
           <em>See the books →</em>
         </a>
+        <a class="shop-card" href="https://t.me/CAPranavExamBot" target="_blank" rel="noopener">
+          <span class="tag">03 · Free</span>
+          <strong>Practise on the MCQ bot</strong>
+          <p>300+ MCQs, 450+ descriptive questions on Telegram — free, no login.</p>
+          <em>Open @CAPranavExamBot ↗</em>
+        </a>
       </div>
+    </section>
+
+    <section class="store-section" id="mcq-bot">
+      <div id="mcq-promo"></div>
     </section>
 
     <section class="book-preview-section" id="strategy-book">
@@ -464,24 +470,26 @@
 
   <script src="assets/app.js?v=20260801a"></script>
   <script src="assets/catalogue-data.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="assets/mcq-promo.js"></script>
   <script>
     (function () {
       const cat = window.CATALOGUE;
       if (!cat) return;
       const coursePrice = document.getElementById("shop-course-price");
-      const chapterPrice = document.getElementById("shop-chapter-price");
       if (coursePrice) {
-        coursePrice.textContent = cat.fullCourse.price
-          ? "From ₹" + cat.fullCourse.price.toLocaleString("en-IN") + " →"
+        const prices = cat.fullCourse.batches.map((b) => b.price);
+        coursePrice.textContent = prices.length
+          ? "From ₹" + Math.min(...prices).toLocaleString("en-IN") + " →"
           : "Enrol →";
       }
-      if (chapterPrice) {
-        const priced = cat.chapters.filter((c) => c.price).map((c) => c.price);
-        chapterPrice.textContent = priced.length
-          ? "From ₹" + Math.min(...priced).toLocaleString("en-IN") + " →"
-          : "See chapters →";
+      const mcqPromo = document.getElementById("mcq-promo");
+      if (mcqPromo) {
+        mcqPromo.outerHTML = window.renderMcqPromo(cat.mcqBot);
+        window.initMcqPromoQrCodes();
       }
     })();
   </script>
+  <script src="assets/whiteboard-theme.js?v=20260902"></script>
 </body>
 </html>

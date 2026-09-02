@@ -1,31 +1,43 @@
 /*
-  CATALOGUE — single source of truth for everything sold on capranav.com.
-  Edit prices/availability here only; courses.html, books.html and index.html
-  all read from this one file so a price never needs updating in two places.
+  CATALOGUE — single source of truth for everything sold/shown on capranav.com.
+  Edit here only; index.html, courses.html and books.html all read from this
+  one file so a price or fact never needs updating in two places.
 
   Chapter list and unique_chapter_id values are taken directly from the
   canonical syllabus index: books/concept-book/syllabus-engine/data/
   1-ca-inter-adv-accounts-topic-page-index.json (locked, 36 chapters).
 
   price: null  ->  shown as "Coming soon", no Buy button.
-  Fill in a number (rupees, no commas) to make an item purchasable.
 */
 window.CATALOGUE = {
 
   fullCourse: {
     id: "full-course-adv-accounts",
     title: "CA Inter Gr.1 Advanced Accounting",
-    subtitle: "Complete course — live + recorded, full syllabus",
-    batches: ["January 2027", "May 2027"],
-    price: 6999,
-    description: "Every chapter of CA Inter Advanced Accounting taught end to end — the Kahaani (story), Koncept (theory) and Karma (practice) method, built around the same syllabus this website's free resources are organised on.",
+    subtitle: "CA Pranav Pratik Tulshyan",
+    mode: "Live + Recorded",
+    plan: "Plus",
+    planFeatures: [
+      "Live Classes",
+      "Recorded Lectures with Unlimited Views",
+      "Regular Doubt Session",
+      "E-Book Access in App",
+      "100% Detailed Syllabus Coverage",
+      "Unlimited MCQs Practice",
+      "Hard Copy Books",
+    ],
+    // Two batches, each its own price — shown as an Attempt picker.
+    batches: [
+      { id: "jan27", label: "Jan'27", price: 4999 },
+      { id: "may27", label: "May'27", price: 5999 },
+    ],
+    description: "Every chapter of CA Inter Advanced Accounting, taught end to end — live classes with unlimited-view recordings, regular doubt sessions and full syllabus coverage.",
   },
 
-  // 36 chapters, in ICAI teaching sequence. `as` is the Accounting Standard
-  // number where one applies (null for the four non-AS chapters: Framework,
-  // Applicability, Financial Statements of Companies, and the four
-  // company-law chapters — Amalgamation, Buyback, Internal Reconstruction,
-  // Branch Accounting).
+  // Chapter-by-chapter selling is on hold — not currently permitted.
+  // Data kept intact for when it reopens; no chapter Buy UI is rendered
+  // anywhere on the site while chaptersSellingEnabled is false.
+  chaptersSellingEnabled: false,
   chapters: [
     { seq: "1",   id: "M1-C1-U0",  as: null,    title: "Introduction to Accounting Standards", price: null },
     { seq: "2",   id: "M1-C3-U0",  as: null,    title: "Applicability of Accounting Standards", price: null },
@@ -73,7 +85,12 @@ window.CATALOGUE = {
         id: "question-bank-book",
         title: "The Question Bank Book",
         subtitle: "Every MTP · RTP · PYQ question, chapter by chapter",
-        description: "Every Advanced Accounting question from Mock Test Papers, RTPs and Past Year Papers (2023 onward), organised chapter-wise with official answers, topic tags and Examiner's Comments where available.",
+        description: "Every Advanced Accounting question from Mock Test Papers, RTPs and Past Year Papers, organised chapter-wise with official answers, topic tags and real ICAI Examiner's Comments where available.",
+        stats: [
+          { label: "Questions covered", value: "450+" },
+          { label: "Exam sittings covered", value: "34 (2023–2026)" },
+          { label: "Chapters", value: "34" },
+        ],
         mrp: 990,
         price: 699, // all-inclusive of shipping
       },
@@ -81,10 +98,32 @@ window.CATALOGUE = {
         id: "strategy-book",
         title: "The Exam Strategy Book",
         subtitle: "Plan · Learn · Revise · Deliver",
-        description: "The complete CA Inter exam-strategy book in print — the same 5×5 framework as the interactive edition, fixing your attempt, chapter calendar, revision rounds and exam-day system.",
+        description: "The complete CA Inter exam-strategy book in print — fixing your attempt, chapter calendar, revision rounds and exam-day delivery system, built around the same approach that took CA Pranav to AIR 1, AIR 1 and AIR 5.",
+        stats: [
+          { label: "Framework", value: "5×5" },
+          { label: "Built around", value: "Plan · Learn · Revise · Deliver" },
+        ],
         mrp: 990,
         price: 699, // all-inclusive of shipping
       },
+    ],
+  },
+
+  // Free MCQ + descriptive practice bot on Telegram — a funnel into the
+  // paid course/books, not a paid product itself.
+  mcqBot: {
+    username: "CAPranavExamBot",
+    url: "https://t.me/CAPranavExamBot",
+    stats: [
+      { label: "MCQs", value: "300+" },
+      { label: "Descriptive questions", value: "450+" },
+    ],
+    features: [
+      "Practice by chapter, MCQ or full descriptive questions",
+      "Instant answers with explanations after every attempt",
+      "Real ICAI Examiner's Comments shown where available",
+      "A personal report on request — accuracy, chapters practised, time spent",
+      "Always free",
     ],
   },
 };

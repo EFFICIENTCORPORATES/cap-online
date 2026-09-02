@@ -1,0 +1,15 @@
+# Files excluded from the Cloudflare Workers static-assets upload.
+# NOT the same as .gitignore — this must be explicit, or a gitignored
+# secret file (like .env) would still be uploaded and become publicly
+# downloadable at capranav.com/.env.
+.env
+.env.example
+.assetsignore
+wrangler.toml
+tools/
+README.txt
+VAULT-BLUEPRINT.html
+.git/
+.wrangler/
+desktop.ini
+**/desktop.ini
