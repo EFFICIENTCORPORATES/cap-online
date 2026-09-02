@@ -50,14 +50,17 @@
     const CAT = window.CATALOGUE;
     const shipping = CAT.books.flatShippingRupees;
 
-    document.getElementById("shipping-note").textContent = shipping
-      ? `Flat shipping: ₹${shipping.toLocaleString("en-IN")} across India, added at checkout.`
-      : "Shipping charges will be added at checkout once finalised.";
+    document.getElementById("shipping-note").textContent =
+      "Shipping is included in the price — no extra charge at checkout. "
+      + (CAT.books.prepaidOnly ? "Only prepaid orders are accepted (Cash on Delivery is not available)." : "");
 
     const grid = document.getElementById("book-grid");
     grid.innerHTML = CAT.books.items.map((book, i) => {
       const priceBlock = book.price
-        ? `<span class="book-price">₹${book.price.toLocaleString("en-IN")}<small>+ shipping</small></span>
+        ? `<span class="book-price">
+             ${book.mrp && book.mrp > book.price ? `<s class="book-mrp">₹${book.mrp.toLocaleString("en-IN")}</s> ` : ""}₹${book.price.toLocaleString("en-IN")}
+             <small>shipping included</small>
+           </span>
            <button type="button" class="button button-primary" data-book-index="${i}">Order</button>`
         : `<span class="chapter-soon">Price coming soon</span>`;
       return `

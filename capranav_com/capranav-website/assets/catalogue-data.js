@@ -66,21 +66,24 @@ window.CATALOGUE = {
   ],
 
   books: {
-    flatShippingRupees: null, // set once you tell me the flat All-India shipping charge
+    flatShippingRupees: 0, // shipping is built into the sale price (all-inclusive)
+    prepaidOnly: true,     // no Cash on Delivery
     items: [
       {
         id: "question-bank-book",
         title: "The Question Bank Book",
         subtitle: "Every MTP · RTP · PYQ question, chapter by chapter",
         description: "Every Advanced Accounting question from Mock Test Papers, RTPs and Past Year Papers (2023 onward), organised chapter-wise with official answers, topic tags and Examiner's Comments where available.",
-        price: null, // set the per-copy price to activate ordering
+        mrp: 990,
+        price: 699, // all-inclusive of shipping
       },
       {
         id: "strategy-book",
         title: "The Exam Strategy Book",
         subtitle: "Plan · Learn · Revise · Deliver",
         description: "The complete CA Inter exam-strategy book in print — the same 5×5 framework as the interactive edition, fixing your attempt, chapter calendar, revision rounds and exam-day system.",
-        price: null, // set the per-copy price to activate ordering
+        mrp: 990,
+        price: 699, // all-inclusive of shipping
       },
     ],
   },
