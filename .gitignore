@@ -139,6 +139,9 @@ telegram/creds.txt
 # Cloudflare Wrangler local build cache/state -- never useful in git
 .wrangler/
 **/.wrangler/
+# Wrangler's own local-dev secrets file (equivalent to .env for `wrangler dev`)
+.dev.vars
+**/.dev.vars
 # 2026-08-24: found untracked-but-not-ignored -- telegram/comparator/sales-agent/
 # secrets.txt held a live BotFather token in plaintext with no gitignore coverage
 # at all (unlike creds.txt/*.env above). Covered generically so this class of

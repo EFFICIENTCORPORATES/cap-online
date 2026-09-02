@@ -1,0 +1,54 @@
+-- capranav.com (revamped) — D1 schema
+-- Run once: wrangler d1 execute capranav-platform --remote --file=schema.sql
+
+CREATE TABLE IF NOT EXISTS otp_codes (
+  email      TEXT NOT NULL,
+  code       TEXT NOT NULL,
+  expires_at TEXT NOT NULL,
+  consumed   INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_otp_email ON otp_codes(email);
+
+CREATE TABLE IF NOT EXISTS sessions (
+  token      TEXT PRIMARY KEY,
+  user_email TEXT NOT NULL,
+  expires_at TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_sessions_email ON sessions(user_email);
+
+-- One row per checkout attempt. Amount is always looked up server-side from
+-- the product catalogue in worker code — never trusted from the client.
+CREATE TABLE IF NOT EXISTS orders (
+  id                   TEXT PRIMARY KEY,
+  razorpay_order_id    TEXT UNIQUE NOT NULL,
+  razorpay_payment_id  TEXT,
+  product_id           TEXT NOT NULL,
+  product_type         TEXT NOT NULL, -- course | book_physical | book_pdf
+  amount_rupees        INTEGER NOT NULL,
+  buyer_name           TEXT,
+  buyer_email          TEXT,
+  buyer_phone          TEXT,
+  shipping_json        TEXT,          -- only for product_type = book_physical
+  status                TEXT NOT NULL DEFAULT 'pending', -- pending | paid | failed
+  created_at           TEXT NOT NULL DEFAULT (datetime('now')),
+  paid_at              TEXT
+);
+
+-- Who can open the locked-down reader for which PDF product.
+CREATE TABLE IF NOT EXISTS entitlements (
+  user_email TEXT NOT NULL,
+  product_id TEXT NOT NULL,
+  order_id   TEXT,
+  granted_at TEXT NOT NULL DEFAULT (datetime('now')),
+  PRIMARY KEY (user_email, product_id)
+);
+
+CREATE TABLE IF NOT EXISTS contact_messages (
+  id         TEXT PRIMARY KEY,
+  name       TEXT,
+  email      TEXT,
+  message    TEXT,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);

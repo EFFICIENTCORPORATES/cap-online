@@ -1,0 +1,20 @@
+name = "capranav"
+main = "worker/index.js"
+compatibility_date = "2026-09-02"
+
+[assets]
+directory = "public"
+binding = "ASSETS"
+not_found_handling = "404-page"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "capranav-platform"
+database_id = "03830ea8-b539-480b-b106-0743aeda1b1f"
+
+[[r2_buckets]]
+binding = "VAULT"
+bucket_name = "capranav-vault"
+
+# Secrets (RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET, CF_EMAIL_ACCOUNT_ID,
+# CF_EMAIL_API_TOKEN) are set via `wrangler secret put <NAME>`, never here.
