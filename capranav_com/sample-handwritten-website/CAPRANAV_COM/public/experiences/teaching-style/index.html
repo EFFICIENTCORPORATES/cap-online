@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pranav Sir's Teaching Method | Advanced Accounts | CA Pranav</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:         #1a1a2e;
+      --navy-light:   #2a2a4e;
+      --orange:       #e8813a;
+      --orange-dark:  #c96d25;
+      --orange-bg:    rgba(232,129,58,0.1);
+      --green:        #2d8653;
+      --green-bg:     rgba(45,134,83,0.1);
+      --blue:         #2a6db5;
+      --blue-bg:      rgba(42,109,181,0.1);
+      --purple:       #6b3fa0;
+      --purple-bg:    rgba(107,63,160,0.1);
+      --gray-100:     #f8f9fa;
+      --gray-200:     #e9ecef;
+      --gray-300:     #dee2e6;
+      --gray-500:     #adb5bd;
+      --gray-600:     #6c757d;
+      --text:         #2c2c2c;
+      --text-light:   #555;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #f4f4f8;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(150deg, #12122a 0%, #2a2a5a 55%, #1a1a3a 100%);
+      padding: 72px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 450px; height: 450px;
+      background: radial-gradient(circle, rgba(232,129,58,0.13) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -60px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(45,134,83,0.07) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 5vw, 46px);
+      font-weight: 900;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 36px;
+    }
+    .hero-cred {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 40px;
+      padding: 10px 22px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+    }
+    .hero-cred .medal {
+      background: var(--orange);
+      color: white;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    /* ===== BATCH OVERVIEW STRIP ===== */
+    .batch-strip {
+      background: white;
+      border-bottom: 3px solid var(--orange);
+      padding: 28px 24px;
+    }
+    .batch-strip-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+    }
+    .batch-stat {
+      text-align: center;
+    }
+    .batch-stat-val {
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+    .batch-stat-val.orange { color: var(--orange); }
+    .batch-stat-label {
+      font-size: 11px;
+      color: var(--gray-600);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== SECTION ===== */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+    .section + .section {
+      padding-top: 0;
+    }
+    .section-eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      max-width: 680px;
+      margin-bottom: 36px;
+    }
+
+    /* ===== 3K CARDS ===== */
+    .k-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .k-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+    .k-card-header {
+      padding: 28px 28px 20px;
+      color: white;
+    }
+    .k-card-header.k1 { background: linear-gradient(135deg, #c96d25 0%, #e8813a 100%); }
+    .k-card-header.k2 { background: linear-gradient(135deg, #1a3a6e 0%, #2a6db5 100%); }
+    .k-card-header.k3 { background: linear-gradient(135deg, #1e5e38 0%, #2d8653 100%); }
+    .k-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border-radius: 6px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 3px 10px;
+      margin-bottom: 12px;
+    }
+    .k-card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+    .k-card-meaning {
+      font-size: 12px;
+      opacity: 0.8;
+      font-style: italic;
+    }
+    .k-card-body {
+      background: white;
+      padding: 24px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .k-tagline {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      border-left: 3px solid var(--orange);
+      padding-left: 10px;
+      line-height: 1.4;
+    }
+    .k-card-body.k2-body .k-tagline { border-color: var(--blue); }
+    .k-card-body.k3-body .k-tagline { border-color: var(--green); }
+    .k-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .k-points li {
+      font-size: 13px;
+      color: var(--text-light);
+      display: flex;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .k-points li::before {
+      content: '▸';
+      color: var(--orange);
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .k-card-body.k2-body .k-points li::before { color: var(--blue); }
+    .k-card-body.k3-body .k-points li::before { color: var(--green); }
+    .k-time-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--orange-bg);
+      border: 1px solid rgba(232,129,58,0.25);
+      color: var(--orange-dark);
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-top: auto;
+    }
+    .k-card-body.k2-body .k-time-pill {
+      background: var(--blue-bg);
+      border-color: rgba(42,109,181,0.25);
+      color: var(--blue);
+    }
+    .k-card-body.k3-body .k-time-pill {
+      background: var(--green-bg);
+      border-color: rgba(45,134,83,0.25);
+      color: var(--green);
+    }
+
+    /* ===== STORY TYPES EXPANDER ===== */
+    .story-types {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .story-type {
+      background: var(--gray-100);
+      border-radius: 8px;
+      padding: 12px 14px;
+      border-left: 3px solid var(--orange);
+    }
+    .story-type-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .story-type-desc {
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* ===== LAYER SYSTEM ===== */
+    .layer-bg {
+      background: var(--navy);
+      padding: 64px 24px;
+    }
+    .layer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .layer-eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+    .layer-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 8px;
+    }
+    .layer-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      max-width: 620px;
+      margin-bottom: 36px;
+    }
+    .layer-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .layer-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .layer-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .layer-card.l1::before { background: var(--orange); }
+    .layer-card.l2::before { background: var(--blue); }
+    .layer-card.l3::before { background: var(--green); }
+    .layer-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .layer-card.l1 .layer-num { color: var(--orange); }
+    .layer-card.l2 .layer-num { color: #5b9bd5; }
+    .layer-card.l3 .layer-num { color: #4dab7a; }
+    .layer-card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 8px;
+    }
+    .layer-card-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .layer-when {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      font-style: italic;
+    }
+    .layer-compass {
+      margin-top: 28px;
+      background: rgba(232,129,58,0.12);
+      border: 1px solid rgba(232,129,58,0.2);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .layer-compass-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .layer-compass-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+    }
+    .layer-compass-text strong { color: var(--orange); }
+
+    /* ===== THREE BOOKS ===== */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .book-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 3px 18px rgba(0,0,0,0.08);
+    }
+    .book-card-top {
+      padding: 24px 22px 18px;
+      color: white;
+    }
+    .book-card-top.b1 { background: linear-gradient(135deg, #c96d25, #e8813a); }
+    .book-card-top.b2 { background: linear-gradient(135deg, #1a3a6e, #2a6db5); }
+    .book-card-top.b3 { background: linear-gradient(135deg, #4a2a72, #6b3fa0); }
+    .book-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+    .book-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+    .book-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .book-card-body {
+      padding: 18px 22px 22px;
+    }
+    .book-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .book-points li {
+      font-size: 12.5px;
+      color: var(--text-light);
+      display: flex;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .book-points li::before {
+      content: '✓';
+      font-weight: 700;
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .book-card:nth-child(1) .book-points li::before { color: var(--orange); }
+    .book-card:nth-child(2) .book-points li::before { color: var(--blue); }
+    .book-card:nth-child(3) .book-points li::before { color: var(--purple); }
+    .book-note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--gray-500);
+      font-style: italic;
+    }
+
+    /* ===== ASSESSMENT ===== */
+    .assess-bg {
+      background: var(--gray-100);
+      padding: 64px 24px;
+    }
+    .assess-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .assess-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .assess-card {
+      background: white;
+      border-radius: 14px;
+      padding: 28px 24px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+      border-top: 3px solid var(--orange);
+    }
+    .assess-card.blue-top { border-top-color: var(--blue); }
+    .assess-card.red-top  { border-top-color: #c0392b; }
+    .assess-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .assess-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .assess-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .assess-points li {
+      font-size: 13px;
+      color: var(--text-light);
+      display: flex;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .assess-points li::before {
+      content: '▸';
+      color: var(--orange);
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .assess-card.blue-top .assess-points li::before { color: var(--blue); }
+    .assess-card.red-top  .assess-points li::before { color: #c0392b; }
+
+    /* ===== ZOOM ===== */
+    .zoom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .zoom-what {
+      background: white;
+      border-radius: 14px;
+      padding: 28px 26px;
+      box-shadow: 0 3px 18px rgba(0,0,0,0.08);
+    }
+    .zoom-what-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+    .zoom-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .zoom-points li {
+      font-size: 13px;
+      color: var(--text-light);
+      display: flex;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .zoom-points li::before {
+      content: '✦';
+      color: var(--orange);
+      font-size: 10px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .zoom-schedule {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .zoom-session-card {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .zoom-session-num {
+      background: var(--orange);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .zoom-session-info {}
+    .zoom-session-date {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+    }
+    .zoom-session-desc {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+    }
+    .zoom-meta {
+      background: var(--orange-bg);
+      border: 1px solid rgba(232,129,58,0.22);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 12.5px;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+    .zoom-meta strong { color: var(--navy); }
+
+    /* ===== OUTCOMES ===== */
+    .outcomes-bg {
+      background: var(--navy);
+      padding: 64px 24px;
+    }
+    .outcomes-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .outcome-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .outcome-check {
+      background: var(--orange);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .outcome-text {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.55;
+    }
+
+    /* ===== MISC CARDS ROW ===== */
+    .misc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .misc-card {
+      background: white;
+      border-radius: 14px;
+      padding: 28px 26px;
+      box-shadow: 0 3px 18px rgba(0,0,0,0.07);
+    }
+    .misc-card-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+    .misc-card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .misc-card-body {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+    .misc-card-body p + p { margin-top: 8px; }
+    .inline-pill {
+      display: inline-block;
+      background: var(--orange-bg);
+      border: 1px solid rgba(232,129,58,0.22);
+      color: var(--orange-dark);
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      vertical-align: middle;
+    }
+    .doubt-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .doubt-list li {
+      font-size: 13px;
+      color: var(--text-light);
+      display: flex;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    .doubt-channel {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--orange-dark);
+      background: var(--orange-bg);
+      border-radius: 4px;
+      padding: 2px 7px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0f0f1a;
+      padding: 36px 24px;
+      text-align: center;
+    }
+    .footer-text {
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.8;
+    }
+    .footer-text strong { color: rgba(255,255,255,0.45); }
+    .footer-orange { color: var(--orange); opacity: 0.7; font-weight: 700; }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      height: 1px;
+      background: var(--gray-200);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 760px) {
+      .k-cards, .layer-cards, .books-grid, .assess-cards, .outcomes-grid, .misc-grid {
+        grid-template-columns: 1fr;
+      }
+      .zoom-grid { grid-template-columns: 1fr; }
+      .batch-strip-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <p class="hero-eyebrow">CA Inter &middot; Advanced Accounting &middot; CA Pranav Learning</p>
+  <h1 class="hero-title">How Pranav Sir Teaches</h1>
+  <p class="hero-sub">The system behind the July &ndash; November 2026 batch</p>
+  <div class="hero-cred">
+    <span>CA Pranav Pratik Tulshyan</span>
+    <span class="medal">AIR 1 &mdash; CPT &amp; IPC</span>
+    <span>Batch starts 13 Jul 2026</span>
+  </div>
+</header>
+
+<!-- ===== BATCH OVERVIEW STRIP ===== -->
+<div class="batch-strip">
+  <div class="batch-strip-inner">
+    <div class="batch-stat">
+      <div class="batch-stat-val orange">7:00 – 9:30 AM</div>
+      <div class="batch-stat-label">Class Timing · Mon–Sat</div>
+    </div>
+    <div class="batch-stat">
+      <div class="batch-stat-val">210 hrs</div>
+      <div class="batch-stat-label">Total Teaching Hours</div>
+    </div>
+    <div class="batch-stat">
+      <div class="batch-stat-val">84 days</div>
+      <div class="batch-stat-label">Teaching Days</div>
+    </div>
+    <div class="batch-stat">
+      <div class="batch-stat-val">34</div>
+      <div class="batch-stat-label">Sequences / Chapters</div>
+    </div>
+    <div class="batch-stat">
+      <div class="batch-stat-val orange">Online Live</div>
+      <div class="batch-stat-label">Mode</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 3K SECTION ===== -->
+<div class="section">
+  <p class="section-eyebrow">The Core Framework</p>
+  <h2 class="section-title">The 3K Framework</h2>
+  <p class="section-desc">Every single class — for every chapter — follows the same three-phase structure. No exceptions. This is how each 2.5-hour session is built.</p>
+
+  <div class="k-cards">
+
+    <!-- K1 -->
+    <div class="k-card">
+      <div class="k-card-header k1">
+        <span class="k-badge">K1</span>
+        <div class="k-card-title">Kahaani</div>
+        <div class="k-card-meaning">Story — "the why before the rule"</div>
+      </div>
+      <div class="k-card-body">
+        <p class="k-tagline">Every concept enters through a story — not a definition.</p>
+        <p style="font-size:13px;color:var(--text-light);">The human brain retains events and consequences — not abstract rules. Every accounting standard has a real story: a mistake made, a consequence paid, a rule born.</p>
+        <div class="story-types">
+          <div class="story-type">
+            <div class="story-type-label">Type 1 — The Arjun Universe</div>
+            <div class="story-type-desc">Arjun is every CA student. These stories are grounded in human reality — exam anxiety, the bus ride home, the conversation that changes how you see accounting.</div>
+          </div>
+          <div class="story-type">
+            <div class="story-type-label">Type 2 — The Accounting Universe</div>
+            <div class="story-type-desc">BCPL &amp; ECPL (companies), Diya &amp; Rolly (Accounting Doctors), Gurpreet Sir + Pranav (audit firm). Diya makes an error → Pranav catches it in audit → Gurpreet asks → concept is explained. One continuous season across all 34 chapters.</div>
+          </div>
+          <div class="story-type">
+            <div class="story-type-label">Type 3 — Real Professional Experience</div>
+            <div class="story-type-desc">IOCL (Bihar &amp; Jharkhand, 2019–24), PPAC / Ministry of Petroleum (Additional Director — Finance), D2C CFO advisory, CA Practice. Real problems, real stakes.</div>
+          </div>
+        </div>
+        <span class="k-time-pill">⏱ 20–30 min per class</span>
+      </div>
+    </div>
+
+    <!-- K2 -->
+    <div class="k-card">
+      <div class="k-card-header k2">
+        <span class="k-badge">K2</span>
+        <div class="k-card-title">Koncept</div>
+        <div class="k-card-meaning">Theory — "the official rule, fully understood"</div>
+      </div>
+      <div class="k-card-body k2-body">
+        <p class="k-tagline">ICAI study material — chapter by chapter, no shortcuts.</p>
+        <ul class="k-points">
+          <li>Source is always the official ICAI Advanced Accounting study material. Definitions that matter for marks are never paraphrased.</li>
+          <li>Key definitions, recognition criteria, conditions, and exceptions are highlighted as we read.</li>
+          <li>Every concept is immediately connected to the Kahaani: <em>"Remember when Diya did X? This is the rule that would have stopped her."</em></li>
+          <li>Real-world references woven in from professional experience: <em>"At IOCL, this timing difference appeared every year."</em></li>
+          <li>Goal: every student can apply every principle independently under exam conditions.</li>
+        </ul>
+        <span class="k-time-pill">⏱ 60–70 min per class</span>
+      </div>
+    </div>
+
+    <!-- K3 -->
+    <div class="k-card">
+      <div class="k-card-header k3">
+        <span class="k-badge">K3</span>
+        <div class="k-card-title">Karma</div>
+        <div class="k-card-meaning">Practice — "the action that gets the marks"</div>
+      </div>
+      <div class="k-card-body k3-body">
+        <p class="k-tagline">The most important phase. Listening alone doesn't get marks — practice does.</p>
+        <ul class="k-points">
+          <li><strong>MCQ 30/30 Target:</strong> Advanced Accounts has 30 MCQ marks. The system target is 30/30. Topic-based MCQs are given daily through the online platform — relentless repetition.</li>
+          <li><strong>Exam Format Practice:</strong> Every practical question is solved in exact exam format — working notes, correct headings, Schedule III structure. Practised from Day 1.</li>
+          <li><strong>Error Register:</strong> Every mistake — wrong classification, missed condition, incorrect journal — is recorded in a personal Error Register. This becomes the most valuable revision tool before the exam.</li>
+          <li><strong>Chapter Tests:</strong> Conducted after each chapter — MCQ + theory + practical, reviewed in the next session.</li>
+        </ul>
+        <span class="k-time-pill">⏱ 45–60 min per class</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== LAYER SYSTEM ===== -->
+<div class="layer-bg">
+  <div class="layer-inner">
+    <p class="layer-eyebrow">Revision Architecture</p>
+    <h2 class="layer-title">The Layer Revision System</h2>
+    <p class="layer-desc">Every chapter is encountered three times, in three different forms, at decreasing depth. This is how long-term retention is built.</p>
+    <div class="layer-cards">
+      <div class="layer-card l1">
+        <div class="layer-num">Layer 1</div>
+        <div class="layer-card-title">Full ICAI Study Material</div>
+        <div class="layer-card-desc">The complete official text — every word that matters for the exam. Read and discussed in class during the Koncept phase.</div>
+        <div class="layer-when">When: In class, during Koncept</div>
+      </div>
+      <div class="layer-card l2">
+        <div class="layer-num">Layer 2</div>
+        <div class="layer-card-title">Concept Book</div>
+        <div class="layer-card-desc">Chapter-wise summary of theory + explanation of each ICAI illustration. Given as the Concept Book — for revision before chapter tests and exams.</div>
+        <div class="layer-when">When: Self-study &amp; before tests</div>
+      </div>
+      <div class="layer-card l3">
+        <div class="layer-num">Layer 3</div>
+        <div class="layer-card-title">One-Liners</div>
+        <div class="layer-card-desc">The entire chapter compressed into one page — one line per topic. Read at the end of every class (5–10 min) and used to open the next class.</div>
+        <div class="layer-when">When: End of every class; exam revision</div>
+      </div>
+    </div>
+    <div class="layer-compass">
+      <div class="layer-compass-icon">🧭</div>
+      <div class="layer-compass-text">
+        <strong>Layer 3 is the compass.</strong> At the end of every class, the Layer 3 summary for that day's topics is read aloud. At the start of the next class, the previous day's Layer 3 is reviewed. This creates the <em>yesterday → today</em> revision habit automatically — without any extra effort.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== THREE BOOKS ===== -->
+<div class="section">
+  <p class="section-eyebrow">Physical Materials</p>
+  <h2 class="section-title">The Three Books</h2>
+  <p class="section-desc">Every student receives three physical books on Day 1 — A4, spiral-bound, colour printed. These are the complete toolkit for the entire batch.</p>
+  <div class="books-grid">
+    <div class="book-card">
+      <div class="book-card-top b1">
+        <div class="book-num">Book 1</div>
+        <span class="book-icon">📖</span>
+        <div class="book-name">The Concept Book</div>
+      </div>
+      <div class="book-card-body">
+        <ul class="book-points">
+          <li>Full Kahaani (story) for every chapter</li>
+          <li>ICAI theory highlights — Layer 1</li>
+          <li>Layer 2 chapter summaries</li>
+          <li>Layer 3 one-liners</li>
+          <li>Complete reference for all theory content</li>
+        </ul>
+        <p class="book-note">Updated chapter by chapter as the batch progresses.</p>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-card-top b2">
+        <div class="book-num">Book 2</div>
+        <span class="book-icon">📝</span>
+        <div class="book-name">The Question Bank</div>
+      </div>
+      <div class="book-card-body">
+        <ul class="book-points">
+          <li>Chapter-wise questions from PYQ, MTP, RTP (7+ years)</li>
+          <li>Full solutions in exam format</li>
+          <li>"Possible Mistakes" section for each question</li>
+          <li>"Examiner's Tricks" — what the paper-setter is testing</li>
+          <li>Every answer written exactly as expected in the actual paper</li>
+        </ul>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-card-top b3">
+        <div class="book-num">Book 3</div>
+        <span class="book-icon">🎯</span>
+        <div class="book-name">The Exam Strategy Book</div>
+      </div>
+      <div class="book-card-body">
+        <ul class="book-points">
+          <li>Complete exam prep guide — Day 0 to exam day</li>
+          <li>100+ strategies, 20–30 implementation frameworks</li>
+          <li>Advanced Accounts specific: how to prepare this paper</li>
+          <li>Monthly implementation plans &amp; revision timetables</li>
+          <li>Paper-solving strategy for exam conditions</li>
+        </ul>
+        <p class="book-note">Handed on Day 1 — strategy starts from the first class, not the last.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ASSESSMENT ===== -->
+<div class="assess-bg">
+  <div class="assess-inner">
+    <p class="section-eyebrow">Assessment System</p>
+    <h2 class="section-title">How Progress is Tested</h2>
+    <p class="section-desc" style="margin-bottom:32px">Three layers of assessment — daily, chapter-wise, and full-syllabus. Each level feeds the next.</p>
+    <div class="assess-cards">
+      <div class="assess-card">
+        <span class="assess-icon">📱</span>
+        <div class="assess-title">Daily MCQ (Online Platform)</div>
+        <ul class="assess-points">
+          <li>Topic-based MCQ sets available 24/7</li>
+          <li>Student selects any chapter or topic and gets immediate practice</li>
+          <li>Difficulty levels: Foundation, Standard, Advanced</li>
+          <li>Questions sourced from PYQ, MTP, RTP and theory bank</li>
+          <li>Per-topic accuracy tracked — student can see exactly where they're weak</li>
+          <li>Target: 30/30 MCQ marks in the CA Inter paper</li>
+        </ul>
+      </div>
+      <div class="assess-card blue-top">
+        <span class="assess-icon">📋</span>
+        <div class="assess-title">Chapter Tests</div>
+        <ul class="assess-points">
+          <li>Conducted after completing each chapter or chapter group</li>
+          <li>Format: MCQ + 1–2 short theory questions + 1 practical (exam format)</li>
+          <li>Test and review in a single 2.5-hour session</li>
+          <li>Errors discussed in class — students update their Error Registers</li>
+          <li>6 chapter tests total across the batch (at end of each phase)</li>
+        </ul>
+      </div>
+      <div class="assess-card red-top">
+        <span class="assess-icon">🏆</span>
+        <div class="assess-title">ITD Tests — Full Syllabus</div>
+        <ul class="assess-points">
+          <li>ITD = "Initial Till Date" — comprehensive cumulative tests</li>
+          <li>ITD Test 1: Seq 1–26 (mid-batch, ~September 2026)</li>
+          <li>ITD Test 2: Full syllabus (end-batch, ~October 2026)</li>
+          <li>Format: 3-hour paper — same pattern as the actual CA Inter exam</li>
+          <li>Purpose: Identify systemic gaps before the real exam, while there is still time to fix them</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ZOOM + online video platform + DOUBTS ===== -->
+<div class="section">
+  <p class="section-eyebrow">Beyond the Classroom</p>
+  <h2 class="section-title">Monthly Zooms &amp; More</h2>
+  <p class="section-desc">Three sessions each month that go beyond accounting — covering mental health, exam readiness across all subjects, and revision.</p>
+
+  <div class="zoom-grid" style="margin-bottom:28px">
+    <div class="zoom-what">
+      <div class="zoom-what-title">What Happens in a Zoom Session</div>
+      <ul class="zoom-points">
+        <li>Anonymous pre-form: confidence ratings for all papers, biggest fear, biggest strength, what you wish your teacher knew</li>
+        <li>Overall exam readiness check — not just Accounts, all subjects</li>
+        <li>Anonymous concerns discussed openly (no names, ever)</li>
+        <li>Mental health and study-life balance — openly, honestly</li>
+        <li>Accounts chapter coverage check + upcoming chapter preview</li>
+        <li>Motivational anchoring: connecting today to the exam-day goal</li>
+      </ul>
+      <div class="zoom-meta" style="margin-top:16px">
+        <strong>Duration:</strong> 2–3 hours &nbsp;&nbsp; <strong>Frequency:</strong> Once per month, last Sunday &nbsp;&nbsp; <strong>Access:</strong> All batch students
+      </div>
+    </div>
+    <div class="zoom-schedule">
+      <div class="zoom-session-card">
+        <div class="zoom-session-num">Z1</div>
+        <div class="zoom-session-info">
+          <div class="zoom-session-date">Sunday, 30 August 2026</div>
+          <div class="zoom-session-desc">After Phase 2 &amp; 3 · ~Seq 1–19 covered</div>
+        </div>
+      </div>
+      <div class="zoom-session-card">
+        <div class="zoom-session-num">Z2</div>
+        <div class="zoom-session-info">
+          <div class="zoom-session-date">Sunday, 27 September 2026</div>
+          <div class="zoom-session-desc">Post ITD Test 1 · ~Seq 1–26 covered</div>
+        </div>
+      </div>
+      <div class="zoom-session-card">
+        <div class="zoom-session-num">Z3</div>
+        <div class="zoom-session-info">
+          <div class="zoom-session-date">Sunday, 25 October 2026</div>
+          <div class="zoom-session-desc">Final month · approaching ITD Test 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="misc-grid">
+    <div class="misc-card">
+      <span class="misc-card-icon">▶️</span>
+      <div class="misc-card-title">Chapter Revision Resources</div>
+      <div class="misc-card-body">
+        <p>On completing each chapter, a revision video is released on the CA Pranav student learning library — Kahaani-Koncept-Karma condensed into 45–90 minutes per chapter.</p>
+        <p style="margin-top:10px"><span class="inline-pill">Members Only</span> &nbsp; Batch students are automatically added as channel members. Revise any chapter at any time — before tests, during holidays, in exam prep.</p>
+      </div>
+    </div>
+    <div class="misc-card">
+      <span class="misc-card-icon">🙋</span>
+      <div class="misc-card-title">Doubt Solving Protocol</div>
+      <div class="misc-card-body">
+        <ul class="doubt-list">
+          <li><span class="doubt-channel">In Class</span> Addressed throughout; dedicated doubt slots built into every Karma session.</li>
+          <li><span class="doubt-channel">Between Classes</span> Submit in the class group. Priority doubts addressed at the start of the next class.</li>
+          <li><span class="doubt-channel">Zoom Sessions</span> The Karma portion of every Zoom is reserved for doubt solving.</li>
+          <li><span class="doubt-channel">Anonymous</span> Submit via the Zoom pre-form — addressed in the Zoom without naming the student.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== OUTCOMES ===== -->
+<div class="outcomes-bg">
+  <div class="outcomes-inner">
+    <p class="layer-eyebrow">What You Walk Away With</p>
+    <h2 class="layer-title">By the End of This Batch</h2>
+    <p class="layer-desc">A student who completes this system — all 84 teaching days — will have:</p>
+    <div class="outcomes-grid">
+      <div class="outcome-item">
+        <div class="outcome-check">✓</div>
+        <div class="outcome-text">Read every chapter of ICAI Advanced Accounts at <strong style="color:var(--orange)">Layer 1</strong> level (in class) and <strong style="color:var(--orange)">Layer 2</strong> level (Concept Book revision)</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-check">✓</div>
+        <div class="outcome-text">Practised every chapter's PYQ, MTP, and RTP questions in <strong style="color:var(--orange)">exact exam format</strong> — correct headings, correct structure</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-check">✓</div>
+        <div class="outcome-text">A personal <strong style="color:var(--orange)">Error Register</strong> built on your own mistakes — the most targeted revision tool possible</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-check">✓</div>
+        <div class="outcome-text">All <strong style="color:var(--orange)">34 chapters' Layer 3 one-liners</strong> — the ability to recall the entire chapter structure in under a minute</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-check">✓</div>
+        <div class="outcome-text">Enough <strong style="color:var(--orange)">MCQ repetition</strong> across every subtopic to approach <strong style="color:var(--orange)">30/30</strong> with genuine confidence</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-check">✓</div>
+        <div class="outcome-text">A comprehensive <strong style="color:var(--orange)">Exam Strategy Book</strong> in your hands from Day 1 — not handed out the week before the exam</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-text">
+    <div><strong>Pranav Sir's Teaching Method — Regular Batch</strong></div>
+    <div>CA Inter Advanced Accounting &nbsp;&middot;&nbsp; <span class="footer-orange">CA Pranav Learning</span> &nbsp;&middot;&nbsp; July – November 2026</div>
+    <div style="margin-top:6px;font-size:11px">First Edition &nbsp;&middot;&nbsp; June 2026 &nbsp;&middot;&nbsp; For Batch Planner, see <em>koncept.capranav.com</em></div>
+  </div>
+</footer>
+
+</body>
+</html>

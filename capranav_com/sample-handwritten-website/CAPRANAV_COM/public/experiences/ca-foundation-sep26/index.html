@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CA Foundation — Sep 2026 Strategy</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d0d1a;
+      color: #e8e8f0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .presentation {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    /* ---- SLIDES ---- */
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      padding: 52px 80px;
+      position: absolute;
+      top: 0; left: 0;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide.active { display: flex; }
+
+    /* ---- BEAT SYSTEM ---- */
+    .beat {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.38s ease, transform 0.38s ease;
+    }
+    .beat.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- TYPOGRAPHY ---- */
+    .slide-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #555577;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 60px;
+      font-weight: 800;
+      line-height: 1.05;
+      color: #ffffff;
+    }
+
+    h2 {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #ffffff;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: #6666aa;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    /* ---- COLORS ---- */
+    .hi-gold   { color: #f0b429; }
+    .hi-teal   { color: #4ecdc4; }
+    .hi-purple { color: #a78bfa; }
+    .hi-amber  { color: #fbbf24; }
+    .hi-green  { color: #34d399; }
+    .hi-red    { color: #ff6b6b; }
+
+    /* ---- DIVIDER ---- */
+    .divider {
+      width: 44px;
+      height: 3px;
+      background: #f0b429;
+      margin: 22px 0;
+      border-radius: 2px;
+    }
+
+    /* ---- PROGRESS + NAV ---- */
+    #progress {
+      position: fixed;
+      bottom: 0; left: 0;
+      height: 3px;
+      background: #f0b429;
+      transition: width 0.3s ease;
+      z-index: 200;
+    }
+    #slide-num {
+      position: fixed;
+      bottom: 18px; right: 28px;
+      font-size: 11px;
+      color: #333355;
+      z-index: 200;
+      letter-spacing: 1px;
+    }
+    #hint {
+      position: fixed;
+      bottom: 18px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      color: #222244;
+      z-index: 200;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       SLIDE 1 — TITLE
+    ============================================================ */
+    .title-slide {
+      justify-content: flex-end;
+      padding-bottom: 80px;
+    }
+
+    .tag-chip {
+      display: inline-block;
+      background: #f0b42918;
+      border: 1px solid #f0b42940;
+      color: #f0b429;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 22px;
+    }
+
+    .byline {
+      font-size: 13px;
+      color: #333355;
+      margin-top: 36px;
+      letter-spacing: 1px;
+    }
+
+    /* ============================================================
+       SLIDE 2 — SUBJECTS
+    ============================================================ */
+    .subject-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .subject-card {
+      background: #13132b;
+      border-radius: 12px;
+      padding: 18px 22px;
+      border-left: 4px solid;
+      position: relative;
+      overflow: hidden;
+    }
+    .subject-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 56px; height: 56px;
+      border-radius: 0 12px 0 56px;
+      opacity: 0.07;
+    }
+    .subject-card.accounts  { border-color: #4ecdc4; }
+    .subject-card.accounts::after  { background: #4ecdc4; }
+    .subject-card.law       { border-color: #a78bfa; }
+    .subject-card.law::after       { background: #a78bfa; }
+    .subject-card.qa        { border-color: #fbbf24; }
+    .subject-card.qa::after        { background: #fbbf24; }
+    .subject-card.be        { border-color: #34d399; }
+    .subject-card.be::after        { background: #34d399; }
+
+    .card-date  { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #444466; margin-bottom: 4px; }
+    .card-title { font-size: 16px; font-weight: 700; margin-bottom: 7px; }
+    .card-detail{ font-size: 12px; color: #777799; line-height: 1.6; }
+
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 8px;
+    }
+    .badge-desc { background: #4ecdc420; color: #4ecdc4; }
+    .badge-mcq  { background: #fbbf2420; color: #fbbf24; }
+    .badge-neg  { background: #ff6b6b20; color: #ff6b6b; margin-left: 6px; }
+
+    .callout {
+      background: #ff6b6b0e;
+      border: 1px solid #ff6b6b38;
+      border-radius: 10px;
+      padding: 13px 18px;
+      margin-top: 14px;
+      font-size: 13px;
+      color: #ff9999;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.6;
+    }
+    .callout-gold {
+      background: #f0b4290e;
+      border: 1px solid #f0b42938;
+      color: #f0b429;
+    }
+    .callout-icon { flex-shrink: 0; font-style: normal; }
+
+    /* ============================================================
+       SLIDE 3 — TIMELINE
+    ============================================================ */
+    .timeline {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-top: 30px;
+    }
+
+    .tl-phase { flex: 1; }
+
+    .tl-bar {
+      height: 6px;
+      border-radius: 3px;
+      margin-bottom: 16px;
+    }
+
+    .tl-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #444466;
+      margin-bottom: 6px;
+    }
+
+    .tl-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .tl-detail {
+      font-size: 12px;
+      color: #666688;
+      line-height: 1.65;
+    }
+
+    .tl-sep {
+      width: 1px;
+      background: #1e1e3a;
+      margin: 6px 14px 0;
+      align-self: stretch;
+      flex-shrink: 0;
+    }
+
+    .rule-box {
+      background: #0e1526;
+      border-left: 3px solid #f0b429;
+      padding: 14px 18px;
+      border-radius: 0 10px 10px 0;
+      font-size: 13px;
+      color: #aaaacc;
+      line-height: 1.7;
+      margin-top: 22px;
+    }
+
+    /* ============================================================
+       SLIDE 4 — SANJEEVANI BOOTIS
+    ============================================================ */
+    .sb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .sb-card {
+      background: #13132b;
+      border-radius: 14px;
+      padding: 22px 20px;
+      border-top: 3px solid;
+    }
+    .sb-card.sb1 { border-color: #4ecdc4; }
+    .sb-card.sb2 { border-color: #ff6b6b; }
+    .sb-card.sb3 { border-color: #a78bfa; }
+
+    .sb-num {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #444466;
+      margin-bottom: 8px;
+    }
+
+    .sb-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+
+    .sb-items { list-style: none; }
+
+    .sb-items li {
+      font-size: 12px;
+      color: #777799;
+      padding: 4px 0;
+      line-height: 1.55;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .sb-items li::before {
+      content: '→';
+      color: #333355;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       SLIDE 5 — MOCK PHASE
+    ============================================================ */
+    .mock-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .mock-card {
+      background: #13132b;
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+
+    .mock-card-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #f0b429;
+      margin-bottom: 12px;
+    }
+
+    .mock-list { list-style: none; }
+
+    .mock-list li {
+      font-size: 12px;
+      color: #888899;
+      padding: 4px 0;
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      line-height: 1.55;
+    }
+    .mock-list li::before {
+      content: '·';
+      color: #f0b429;
+      font-size: 18px;
+      line-height: 0.9;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       SLIDE 6 — NORTH STAR
+    ============================================================ */
+    .north-star-box {
+      background: #13132b;
+      border: 2px solid #f0b42938;
+      border-radius: 16px;
+      padding: 36px 44px;
+      margin-top: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+    .north-star-box::before {
+      content: '★';
+      position: absolute;
+      right: 36px; top: 20px;
+      font-size: 90px;
+      opacity: 0.04;
+      color: #f0b429;
+    }
+
+    .north-star-q {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f0b429;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .north-star-sub {
+      font-size: 14px;
+      color: #666688;
+      line-height: 1.7;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 20px;
+    }
+
+    .strat-list { list-style: none; }
+
+    .strat-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid #1a1a2e;
+      font-size: 13px;
+      color: #aaaacc;
+      line-height: 1.55;
+    }
+    .strat-list li:last-child { border-bottom: none; }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ============================================================
+       SLIDE 7 — Q&A
+    ============================================================ */
+    .qa-slide {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .qa-big {
+      font-size: 100px;
+      font-weight: 900;
+      color: #13132b;
+      text-shadow:
+        2px 2px 0 #f0b429,
+        5px 5px 0 #f0b42944;
+      letter-spacing: -4px;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+
+    .qa-sub {
+      font-size: 18px;
+      color: #555577;
+      line-height: 1.7;
+      font-weight: 400;
+      max-width: 560px;
+    }
+
+    .qa-footer {
+      margin-top: 48px;
+      font-size: 12px;
+      color: #282840;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+<div class="presentation">
+
+  <!-- =================== SLIDE 1: TITLE =================== -->
+  <div class="slide title-slide active" id="slide-1">
+    <div class="beat"><span class="tag-chip">CA Pranav &nbsp;·&nbsp; CA Foundation &nbsp;·&nbsp; Sep 2026</span></div>
+    <div class="beat">
+      <h1>The 30-Day<br><span class="hi-gold">Battle Plan.</span></h1>
+    </div>
+    <div class="beat subtitle">4 subjects. One shot. Here's exactly how we play it.</div>
+    <div class="beat divider"></div>
+    <div class="beat byline">CA Pranav P Tulshyan &nbsp;·&nbsp; AIR 1 CPT &nbsp;·&nbsp; AIR 1 IPCC</div>
+  </div>
+
+  <!-- =================== SLIDE 2: SUBJECTS =================== -->
+  <div class="slide" id="slide-2">
+    <div class="beat slide-label">Know Your Battlefield</div>
+    <div class="beat"><h2>4 Papers. <span class="hi-gold">2 Types. Different Rules for Each.</span></h2></div>
+
+    <div class="subject-grid">
+      <div class="subject-card accounts beat">
+        <div class="card-date">Sep 2 · Wednesday · 3 hrs</div>
+        <div class="card-title"><span class="hi-teal">Paper 1 — Accounting</span></div>
+        <div class="card-detail">100 marks &nbsp;·&nbsp; Fully descriptive<br>Every mark is a written answer. Format + working notes matter.</div>
+        <span class="badge badge-desc">Descriptive</span>
+      </div>
+
+      <div class="subject-card law beat">
+        <div class="card-date">Sep 5 · Saturday · 3 hrs</div>
+        <div class="card-title"><span class="hi-purple">Paper 2 — Business Laws</span></div>
+        <div class="card-detail">100 marks &nbsp;·&nbsp; Fully descriptive<br>Provisions + section numbers + presentation = marks.</div>
+        <span class="badge badge-desc">Descriptive</span>
+      </div>
+
+      <div class="subject-card qa beat">
+        <div class="card-date">Sep 7 · Monday · 2 hrs</div>
+        <div class="card-title"><span class="hi-amber">Paper 3 — Quantitative Aptitude</span></div>
+        <div class="card-detail">100 marks &nbsp;·&nbsp; Fully MCQ<br>2 hours only. Speed + accuracy. Calculate first, then match.</div>
+        <span class="badge badge-mcq">MCQ</span><span class="badge badge-neg">−0.5 Negative</span>
+      </div>
+
+      <div class="subject-card be beat">
+        <div class="card-date">Sep 9 · Wednesday · 2 hrs</div>
+        <div class="card-title"><span class="hi-green">Paper 4 — Business Economics</span></div>
+        <div class="card-detail">100 marks &nbsp;·&nbsp; Fully MCQ<br>2 hours only. Elimination skill. Concept clarity wins.</div>
+        <span class="badge badge-mcq">MCQ</span><span class="badge badge-neg">−0.5 Negative</span>
+      </div>
+    </div>
+
+    <div class="beat callout" style="margin-top: 16px;">
+      <span class="callout-icon">⚠</span>
+      <span><strong>Negative marking rule (QA &amp; BE):</strong> −0.5 for every wrong answer. A guess you're less than 60% sure about costs you more than it gives you. Eliminate first. If two options remain and you're not sure — skip. Never guess blind.</span>
+    </div>
+  </div>
+
+  <!-- =================== SLIDE 3: TIMELINE =================== -->
+  <div class="slide" id="slide-3">
+    <div class="beat slide-label">The Map</div>
+    <div class="beat"><h2>~47 Days. <span class="hi-gold">Two Phases. One Checkpoint.</span></h2></div>
+
+    <div class="timeline">
+      <div class="tl-phase beat">
+        <div class="tl-label">Now → 14 July</div>
+        <div class="tl-bar" style="background: #1e1e3a;"></div>
+        <div class="tl-title" style="color: #444466;">Classes Running</div>
+        <div class="tl-detail">Every class matters. Understand concepts. Start thinking about what goes in your boundary.</div>
+      </div>
+
+      <div class="tl-sep"></div>
+
+      <div class="tl-phase beat">
+        <div class="tl-label">15 July → 31 July</div>
+        <div class="tl-bar" style="background: linear-gradient(90deg, #4ecdc4, #a78bfa);"></div>
+        <div class="tl-title"><span class="hi-teal">Phase 1 — Build the Weapons</span></div>
+        <div class="tl-detail">Fix boundary. Build the <strong style="color:#f0b429;">3 Sanjeevani Bootis.</strong><br>Classes + revision together. Know what you'll read from where.</div>
+      </div>
+
+      <div class="tl-sep"></div>
+
+      <div class="tl-phase beat">
+        <div class="tl-label">1 Aug → 31 Aug</div>
+        <div class="tl-bar" style="background: linear-gradient(90deg, #f0b429, #ff6b6b);"></div>
+        <div class="tl-title"><span class="hi-gold">Phase 2 — Fight the Mocks</span></div>
+        <div class="tl-detail">RTP · MTP · PYQ practice.<br>Full mock tests. Analysis. Repeat.<br>Sharpen every gap before it becomes a loss.</div>
+      </div>
+
+      <div class="tl-sep"></div>
+
+      <div class="tl-phase beat">
+        <div class="tl-label">2–9 Sep</div>
+        <div class="tl-bar" style="background: #f0b429;"></div>
+        <div class="tl-title"><span class="hi-gold">Exams 🎯</span></div>
+        <div class="tl-detail">Execute. Nothing new.<br>Only what you prepared,<br>written perfectly.</div>
+      </div>
+    </div>
+
+    <div class="beat rule-box">
+      <strong style="color:#f0b429;">31 July Checkpoint — non-negotiable:</strong> By end of July, your boundary is locked, faculty revision notes (Layer 2) are in hand, and all 3 Sanjeevani Bootis are built. If this isn't done by August 1st, the mock phase has nothing to work with.
+    </div>
+  </div>
+
+  <!-- =================== SLIDE 4: SANJEEVANI BOOTIS =================== -->
+  <div class="slide" id="slide-4">
+    <div class="beat slide-label">Phase 1 · 15–31 July</div>
+    <div class="beat"><h2>The <span class="hi-gold">3 Sanjeevani Bootis.</span> Build These in 15 Days.</h2></div>
+    <div class="beat subtitle" style="margin-bottom: 2px;">Your faculty's revision notes = Layer 2. Already available. These 3 are what <em>you</em> build on top.</div>
+
+    <div class="sb-grid">
+      <div class="sb-card sb1 beat">
+        <div class="sb-num">Sanjeevani Booti 1</div>
+        <div class="sb-title"><span class="hi-teal">Important Concepts Register</span></div>
+        <ul class="sb-items">
+          <li>The concept in your own words — Hindi/Hinglish ok</li>
+          <li>Where to find it (book + page or faculty note)</li>
+          <li>"What is usually asked from this?" — one line</li>
+          <li>One chapter = one page max</li>
+          <li>Accounts: key treatments &amp; journal entry format</li>
+          <li>Law: key provisions, remember what applies where</li>
+        </ul>
+      </div>
+
+      <div class="sb-card sb2 beat">
+        <div class="sb-num">Sanjeevani Booti 2</div>
+        <div class="sb-title"><span class="hi-red">Error Register</span></div>
+        <ul class="sb-items">
+          <li>Every question you got wrong — write it</li>
+          <li>"Lucky right" = got it right but can't explain why → write it</li>
+          <li>What went wrong + what to do instead — one line each</li>
+          <li>MCQ papers: also note WHY each wrong option was wrong</li>
+          <li>Read this BEFORE every revision session — not after</li>
+          <li>Most of your marks are hidden in this register</li>
+        </ul>
+      </div>
+
+      <div class="sb-card sb3 beat">
+        <div class="sb-num">Sanjeevani Booti 3</div>
+        <div class="sb-title"><span class="hi-purple">Visual Vault</span></div>
+        <ul class="sb-items">
+          <li>Anything you can't remember → make it visual</li>
+          <li>Law: section numbers, penalties, time limits — tabular</li>
+          <li>Accounts: B/S format, P&amp;L format, cash flow skeletons</li>
+          <li>QA: formulas with visual cues &amp; colour-coding</li>
+          <li>One concept per sheet — fast to flip, easy to recall</li>
+          <li>This is what you carry to the exam centre</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="beat callout callout-gold" style="margin-top: 14px;">
+      <span class="callout-icon">★</span>
+      <span>End of 15 days test: for every chapter, you should be able to say — "I will read <em>this</em>, from <em>here</em>, in this order." If you can say that for every subject — Phase 1 is done.</span>
+    </div>
+  </div>
+
+  <!-- =================== SLIDE 5: MOCK PHASE =================== -->
+  <div class="slide" id="slide-5">
+    <div class="beat slide-label">Phase 2 · 1 Aug – 31 Aug</div>
+    <div class="beat"><h2>The Mock Phase — <span class="hi-gold">This Is Where Marks Are Made.</span></h2></div>
+
+    <div class="mock-grid">
+      <div class="mock-card beat">
+        <div class="mock-card-title">🗓 What You Practice</div>
+        <ul class="mock-list">
+          <li>ICAI RTPs — read, attempt, check</li>
+          <li>ICAI MTPs — full paper, exam conditions</li>
+          <li>PYQs — last 5 years: chapter-wise first, then full papers</li>
+          <li>QA &amp; BE: 30 MCQs per chapter minimum before exam day</li>
+          <li>Accounts &amp; Law: 2 full past questions per chapter minimum</li>
+        </ul>
+      </div>
+
+      <div class="mock-card beat">
+        <div class="mock-card-title">⏱ How to Sit a Mock</div>
+        <ul class="mock-list">
+          <li>Same time as actual exam — <strong style="color:#f0b429;">2:00 PM sharp</strong></li>
+          <li>Accounts &amp; Law: 3 hrs · QA &amp; BE: 2 hrs exactly</li>
+          <li>No phone, no break, no pausing — exam conditions only</li>
+          <li>After mock: 1 hr analysis immediately, same day</li>
+          <li>Findings go straight into your Error Register</li>
+          <li>Minimum 2 full mocks per subject before Sep 2</li>
+        </ul>
+      </div>
+
+      <div class="mock-card beat">
+        <div class="mock-card-title">📊 After Every Mock — 4 Questions</div>
+        <ul class="mock-list">
+          <li>Where did I lose marks?</li>
+          <li>Was it concept, calculation, or presentation?</li>
+          <li>For MCQs: was it a wrong guess or a concept gap?</li>
+          <li>What exactly do I fix before the next mock?</li>
+        </ul>
+      </div>
+
+      <div class="mock-card beat">
+        <div class="mock-card-title">🎯 MCQ Strategy (QA &amp; BE Only)</div>
+        <ul class="mock-list">
+          <li>Negative marking = never blank-guess. <strong style="color:#fbbf24;">Eliminate first.</strong></li>
+          <li>60%+ confident → attempt &nbsp;·&nbsp; Less than 60% → skip</li>
+          <li>QA: calculate first, then match to options. Never reverse.</li>
+          <li>Mark → skip → return is a skill. Build it in mocks.</li>
+          <li>No single MCQ should take more than 90 seconds</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="beat rule-box">
+      <strong style="color:#f0b429;">Mock order rule:</strong> Sit mocks in the same order as the actual papers — Accounts first, Law, then QA, then BE. Your mind and body need to be sharp at 2 PM for exactly these subjects in exactly this sequence.
+    </div>
+  </div>
+
+  <!-- =================== SLIDE 6: NORTH STAR =================== -->
+  <div class="slide" id="slide-6">
+    <div class="beat slide-label">The One Question That Organises Everything</div>
+
+    <div class="beat">
+      <div class="north-star-box">
+        <div class="north-star-q">"What will I read in the <span class="hi-gold">21 hours</span> before each exam?"</div>
+        <div class="north-star-sub">
+          For every subject. For every chapter. From which exact source. In which order.<br>
+          Build this plan before mocks start. Update after every mock. By exam week — you open your Sanjeevani Bootis and you know exactly what you're doing. No confusion. No panic.
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <ul class="strat-list">
+        <li class="beat">
+          <span class="dot" style="background:#4ecdc4;"></span>
+          <span><strong style="color:#4ecdc4;">Accounts (Sep 2):</strong> Sep 1 full day + Sep 2 morning. Layer 2 notes + SB2 error register. Which chapters? Which formats? Written in advance.</span>
+        </li>
+        <li class="beat">
+          <span class="dot" style="background:#a78bfa;"></span>
+          <span><strong style="color:#a78bfa;">Law (Sep 5):</strong> Sep 3–4 + Sep 5 morning. Visual Vault for section numbers. Which provisions need one final read?</span>
+        </li>
+      </ul>
+
+      <ul class="strat-list">
+        <li class="beat">
+          <span class="dot" style="background:#fbbf24;"></span>
+          <span><strong style="color:#fbbf24;">QA (Sep 7):</strong> Sep 6 + Sep 7 morning. Error register. Which question types tripped you in mocks? Those topics first.</span>
+        </li>
+        <li class="beat">
+          <span class="dot" style="background:#34d399;"></span>
+          <span><strong style="color:#34d399;">BE (Sep 9):</strong> Sep 8 + Sep 9 morning. Visual Vault + error register. Concepts you keep confusing — one last look before you walk in.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- =================== SLIDE 7: Q&A =================== -->
+  <div class="slide qa-slide" id="slide-7">
+    <div class="beat"><div class="qa-big">Q&amp;A</div></div>
+    <div class="beat">
+      <p class="qa-sub">No question is a silly question.<br>This is the last safe space before Sep 2.</p>
+    </div>
+    <div class="beat qa-footer">CA Pranav P Tulshyan &nbsp;·&nbsp; CA Pranav &nbsp;·&nbsp; Sep 2026</div>
+  </div>
+
+</div>
+
+<!-- ---- UI ---- -->
+<div id="progress"></div>
+<div id="slide-num">1 / 7</div>
+<div id="hint">Click or → to advance</div>
+
+<script>
+  const TOTAL = 7;
+  let cur = 1;
+  let beat = 0;
+
+  function slide(n) { return document.getElementById('slide-' + n); }
+  function beats(el) { return Array.from(el.querySelectorAll('.beat')); }
+
+  function updateUI() {
+    document.getElementById('progress').style.width =
+      ((cur - 1) / (TOTAL - 1) * 100) + '%';
+    document.getElementById('slide-num').textContent = cur + ' / ' + TOTAL;
+  }
+
+  function goTo(n) {
+    for (let i = 1; i <= TOTAL; i++) {
+      const s = slide(i);
+      if (!s) continue;
+      s.classList.remove('active');
+      beats(s).forEach(b => b.classList.remove('visible'));
+    }
+    const s = slide(n);
+    if (s) s.classList.add('active');
+    cur = n;
+    beat = 0;
+    updateUI();
+  }
+
+  function next() {
+    const s = slide(cur);
+    if (!s) return;
+    const bs = beats(s);
+    if (beat < bs.length) {
+      bs[beat].classList.add('visible');
+      beat++;
+    } else if (cur < TOTAL) {
+      goTo(cur + 1);
+    }
+  }
+
+  function prev() {
+    if (cur > 1) goTo(cur - 1);
+  }
+
+  document.addEventListener('click', next);
+
+  document.addEventListener('keydown', e => {
+    if ([' ', 'ArrowRight', 'ArrowDown'].includes(e.key)) { e.preventDefault(); next(); }
+    if (['ArrowLeft', 'ArrowUp'].includes(e.key))          { e.preventDefault(); prev(); }
+    const n = parseInt(e.key);
+    if (n >= 1 && n <= TOTAL) goTo(n);
+  });
+
+  updateUI();
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CA Inter Gr.1 Advanced Accounting — the complete course, or buy any single chapter (AS 2, AS 10, AS 13 and more) on its own.">
+  <meta name="theme-color" content="#111827">
+  <title>Courses | CA Pranav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/store.css">
+</head>
+<body>
+  <header class="store-header">
+    <a class="store-brand" href="index.html">
+      <span>P</span>
+      <div><strong>CA PRANAV</strong><small>Advanced Accounting</small></div>
+    </a>
+    <nav aria-label="Store navigation">
+      <a href="index.html">Home</a>
+      <a class="is-current" href="courses.html">Courses</a>
+      <a href="books.html">Books</a>
+      <a href="notes.html">Free Notes</a>
+      <a href="https://1lavya.com/" target="_blank" rel="noopener">Exam Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="store-hero">
+      <p class="eyebrow">CA Inter · Advanced Accounting</p>
+      <h1>Learn it whole,<br>or one <em>chapter</em> at a time.</h1>
+      <p>Enrol in the complete course, or buy any single chapter on its own — useful for a quick revision pass, or for filling one specific gap before the exam.</p>
+    </section>
+
+    <section class="store-section" id="full-course">
+      <div class="store-section-head">
+        <h2>The complete course</h2>
+        <p>Every chapter of the syllabus, taught the same way this website's free resources are built around — Kahaani (the story), Koncept (the theory) and Karma (the practice).</p>
+      </div>
+
+      <article class="course-feature">
+        <div class="course-feature-copy">
+          <p class="eyebrow">CA Inter Gr.1</p>
+          <h3 id="full-course-title">CA Inter Gr.1 Advanced Accounting</h3>
+          <p id="full-course-desc">Every chapter of CA Inter Advanced Accounting, end to end.</p>
+          <div class="course-batches" id="full-course-batches"></div>
+          <button type="button" class="button button-primary" id="full-course-buy">Enrol now</button>
+        </div>
+        <div class="course-feature-price">
+          <span class="price-label">Course fee</span>
+          <span class="price-value" id="full-course-price">—</span>
+          <span class="price-note">Taught by CA Pranav Pratik Tulshyan — AIR 1 Foundation, AIR 1 Intermediate, AIR 5 CA Final, 91 marks in Advanced Accounting.</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="store-section" id="chapters">
+      <div class="store-section-head">
+        <h2>Buy a single chapter</h2>
+        <p>All 36 chapters of the syllabus, in teaching order. A priced chapter is ready today; the rest are marked Coming Soon and will open the same way as they're finished.</p>
+      </div>
+      <div class="chapter-grid" id="chapter-grid"></div>
+    </section>
+  </main>
+
+  <footer style="padding:40px clamp(22px,7vw,110px) 60px; border-top:1px solid var(--line); text-align:center; color:var(--muted); font-size:12px;">
+    <a href="policies.html" style="color:inherit;">About · Contact · Privacy · Terms · Refunds</a>
+  </footer>
+
+  <script src="assets/catalogue-data.js"></script>
+  <script src="assets/store-config.js"></script>
+  <script src="assets/checkout.js"></script>
+  <script>
+    const CAT = window.CATALOGUE;
+
+    // ---- full course -----------------------------------------------
+    const fc = CAT.fullCourse;
+    document.getElementById("full-course-title").textContent = fc.title;
+    document.getElementById("full-course-desc").textContent = fc.description;
+    document.getElementById("full-course-batches").innerHTML =
+      fc.batches.map((b) => `<span>${b}</span>`).join("");
+    document.getElementById("full-course-price").textContent =
+      fc.price ? "₹" + fc.price.toLocaleString("en-IN") : "Price TBC";
+    document.getElementById("full-course-buy").addEventListener("click", () => {
+      window.Store.buy({
+        type: "course",
+        title: fc.title,
+        amountRupees: fc.price,
+        notesExtra: { batches: fc.batches.join(" / ") },
+      });
+    });
+
+    // ---- chapter grid -------------------------------------------------
+    const grid = document.getElementById("chapter-grid");
+    grid.innerHTML = CAT.chapters.map((ch, i) => {
+      const label = ch.as ? ch.as : "Chapter " + ch.seq;
+      const foot = ch.price
+        ? `<span class="chapter-price">₹${ch.price.toLocaleString("en-IN")}</span>
+           <button type="button" class="chapter-buy" data-chapter-index="${i}">Buy</button>`
+        : `<span class="chapter-soon">Coming soon</span>`;
+      return `
+        <article class="chapter-card">
+          <div class="chapter-card-top">
+            <span class="chapter-as">${label}</span>
+            <span class="chapter-seq">Ch. ${ch.seq}</span>
+          </div>
+          <h4>${ch.title}</h4>
+          <div class="chapter-card-foot">${foot}</div>
+        </article>`;
+    }).join("");
+
+    grid.addEventListener("click", (event) => {
+      const btn = event.target.closest("[data-chapter-index]");
+      if (!btn) return;
+      const ch = CAT.chapters[Number(btn.dataset.chapterIndex)];
+      window.Store.buy({
+        type: "chapter",
+        title: (ch.as ? ch.as + " — " : "") + ch.title,
+        amountRupees: ch.price,
+        notesExtra: { chapter_id: ch.id, chapter_seq: ch.seq },
+      });
+    });
+  </script>
+</body>
+</html>

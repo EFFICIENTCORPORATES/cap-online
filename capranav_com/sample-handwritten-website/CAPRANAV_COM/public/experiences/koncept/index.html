@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept Book // Layer 2 Revision | Advanced Accounting | CA Pranav</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:         #1a1a2e;
+      --navy-light:   #2a2a4e;
+      --orange:       #e8813a;
+      --orange-dark:  #c96d25;
+      --orange-light: #fff4ed;
+      --green:        #2d8653;
+      --gray-100:     #f8f9fa;
+      --gray-200:     #e9ecef;
+      --gray-300:     #dee2e6;
+      --gray-600:     #6c757d;
+      --text:         #2c2c2c;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #0f0f1a;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      background: linear-gradient(150deg, #12122a 0%, #2a2a5a 55%, #1a1a3a 100%);
+      padding: 72px 24px 96px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .site-header::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(232,129,58,0.14) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .site-header::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(45,134,83,0.08) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .header-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+    .header-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(30px, 5.5vw, 52px);
+      font-weight: 900;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .header-title .slash {
+      color: var(--orange);
+      opacity: 0.7;
+      font-weight: 400;
+      padding: 0 6px;
+    }
+    .header-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .header-sub span {
+      color: rgba(255,255,255,0.25);
+      margin: 0 8px;
+    }
+
+    /* ===== NAV CARDS ===== */
+    .nav-cards-section {
+      max-width: 880px;
+      margin: -56px auto 0;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      position: relative;
+      z-index: 10;
+    }
+    .nav-card {
+      background: white;
+      border-radius: 16px;
+      padding: 34px 22px 28px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      border: 2px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .nav-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 56px rgba(0,0,0,0.55);
+      border-color: var(--orange);
+    }
+    .nav-card-icon {
+      font-size: 38px;
+      margin-bottom: 14px;
+      line-height: 1;
+    }
+    .nav-card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 7px;
+    }
+    .nav-card-desc {
+      font-size: 11.5px;
+      color: var(--gray-600);
+      line-height: 1.55;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .nav-card-badge {
+      display: inline-block;
+      background: var(--navy);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+    .nav-card:hover .nav-card-badge {
+      background: var(--orange);
+    }
+
+    /* ===== TOC SECTION ===== */
+    .toc-section {
+      max-width: 880px;
+      margin: 80px auto 100px;
+      padding: 0 24px;
+    }
+    .toc-section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .toc-section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .toc-section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      color: white;
+    }
+    .toc-section-sub {
+      margin-top: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ===== PHASE BLOCK ===== */
+    .phase-block {
+      margin-bottom: 44px;
+    }
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .phase-pill {
+      background: var(--orange);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .phase-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      white-space: nowrap;
+    }
+    .phase-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+    .phase-range {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ===== CHAPTER ROWS ===== */
+    .chapter-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .chapter-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 13px 16px;
+      transition: all 0.18s ease;
+    }
+    a.chapter-row {
+      text-decoration: none;
+      cursor: pointer;
+    }
+    a.chapter-row:hover {
+      background: rgba(232,129,58,0.1);
+      border-color: rgba(232,129,58,0.35);
+      transform: translateX(5px);
+    }
+    .chapter-row.locked {
+      opacity: 0.38;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .seq-badge {
+      font-family: 'Poppins', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--orange);
+      background: rgba(232,129,58,0.1);
+      border: 1px solid rgba(232,129,58,0.22);
+      border-radius: 6px;
+      padding: 3px 9px;
+      min-width: 46px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .chapter-row.locked .seq-badge {
+      color: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.08);
+    }
+    .chapter-name {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.4;
+    }
+    .chapter-row.locked .chapter-name {
+      color: rgba(255,255,255,0.32);
+    }
+    .status-ready {
+      font-size: 10px;
+      color: var(--green);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: rgba(45,134,83,0.12);
+      border: 1px solid rgba(45,134,83,0.22);
+      padding: 3px 9px;
+      border-radius: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .status-lock {
+      font-size: 13px;
+      color: rgba(255,255,255,0.18);
+      flex-shrink: 0;
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      text-align: center;
+      padding: 36px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      line-height: 1.8;
+    }
+    .site-footer strong {
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-orange {
+      color: var(--orange);
+      font-weight: 700;
+      opacity: 0.7;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .nav-cards-section {
+        grid-template-columns: 1fr;
+        margin-top: -36px;
+        gap: 14px;
+      }
+      .nav-card { padding: 26px 20px 22px; }
+      .phase-title { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== SITE HEADER ===== -->
+<header class="site-header">
+  <p class="header-label">CA Inter &middot; Advanced Accounting &middot; CA Pranav &middot; Noida</p>
+  <h1 class="header-title">Concept Book <span class="slash">//</span> Layer 2 Revision</h1>
+  <p class="header-sub">
+    CA Pranav Pratik Tulshyan
+    <span>&middot;</span>
+    July &ndash; November 2026 Batch
+    <span>&middot;</span>
+    34 Sequences
+  </p>
+</header>
+
+<!-- ===== NAV CARDS ===== -->
+<section class="nav-cards-section">
+  <a class="nav-card" href="index.html#toc">
+    <div class="nav-card-icon">📚</div>
+    <div class="nav-card-title">Table of Contents</div>
+    <div class="nav-card-desc">Browse all 34 sequences, grouped by phase</div>
+    <span class="nav-card-badge">34 Chapters</span>
+  </a>
+  <a class="nav-card" href="planner.html">
+    <div class="nav-card-icon">📅</div>
+    <div class="nav-card-title">Batch Planner</div>
+    <div class="nav-card-desc">Day-wise schedule &middot; Jul 13 &ndash; Nov 5, 2026</div>
+    <span class="nav-card-badge">84 Teaching Days</span>
+  </a>
+  <a class="nav-card" href="index.html#toc">
+    <div class="nav-card-icon">📖</div>
+    <div class="nav-card-title">Concept Book</div>
+    <div class="nav-card-desc">Layer 2 chapter-wise revision notes</div>
+    <span class="nav-card-badge">1 Chapter Ready</span>
+  </a>
+</section>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<section class="toc-section" id="toc">
+  <div class="toc-section-header">
+    <p class="toc-section-label">Full Syllabus</p>
+    <h2 class="toc-section-title">Table of Contents</h2>
+    <p class="toc-section-sub">Click a chapter to open its Layer 2 revision notes &mdash; greyed chapters are coming soon</p>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-pill">Phase 1</span>
+      <span class="phase-title">Theory Foundation</span>
+      <div class="phase-line"></div>
+      <span class="phase-range">Seq 1–3</span>
+    </div>
+    <div class="chapter-list">
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 1</span>
+        <span class="chapter-name">Introduction to Accounting Standards</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 2</span>
+        <span class="chapter-name">Applicability of Accounting Standards</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 3</span>
+        <span class="chapter-name">Framework for Preparation &amp; Presentation of Financial Statements</span>
+        <span class="status-lock">🔒</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-pill">Phase 2</span>
+      <span class="phase-title">Asset-Based Accounting Standards</span>
+      <div class="phase-line"></div>
+      <span class="phase-range">Seq 4–10</span>
+    </div>
+    <div class="chapter-list">
+      <a class="chapter-row" href="chapters/seq04-as02-valuation-of-inventories.html">
+        <span class="seq-badge">Seq 4</span>
+        <span class="chapter-name">AS 2 &mdash; Valuation of Inventories</span>
+        <span class="status-ready">&#10003; Ready</span>
+      </a>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 5</span>
+        <span class="chapter-name">AS 10 &mdash; Property, Plant &amp; Equipment</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 6</span>
+        <span class="chapter-name">AS 26 &mdash; Intangible Assets</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 7</span>
+        <span class="chapter-name">AS 16 &mdash; Borrowing Costs</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 8</span>
+        <span class="chapter-name">AS 19 &mdash; Leases</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 9</span>
+        <span class="chapter-name">AS 28 &mdash; Impairment of Assets</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 10</span>
+        <span class="chapter-name">AS 13 &mdash; Accounting for Investments</span>
+        <span class="status-lock">🔒</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-pill">Phase 3</span>
+      <span class="phase-title">Liabilities, P&amp;L &amp; Revenue AS</span>
+      <div class="phase-line"></div>
+      <span class="phase-range">Seq 11–21</span>
+    </div>
+    <div class="chapter-list">
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 11</span>
+        <span class="chapter-name">AS 29 &mdash; Provisions, Contingent Liabilities &amp; Assets</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 12</span>
+        <span class="chapter-name">AS 15 &mdash; Employee Benefits</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 13</span>
+        <span class="chapter-name">AS 4 &mdash; Events After the Balance Sheet Date</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 14</span>
+        <span class="chapter-name">AS 5 &mdash; Net Profit or Loss, Prior Period Items &amp; Changes in Accounting Policies</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 15</span>
+        <span class="chapter-name">AS 11 &mdash; Effects of Changes in Foreign Exchange Rates</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 16</span>
+        <span class="chapter-name">AS 9 &mdash; Revenue Recognition</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 17</span>
+        <span class="chapter-name">AS 7 &mdash; Construction Contracts</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 18</span>
+        <span class="chapter-name">AS 12 &mdash; Accounting for Government Grants</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 19</span>
+        <span class="chapter-name">AS 22 &mdash; Accounting for Taxes on Income (Deferred Tax)</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 20</span>
+        <span class="chapter-name">AS 20 &mdash; Earnings Per Share</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 21</span>
+        <span class="chapter-name">AS 1 &mdash; Disclosure of Accounting Policies</span>
+        <span class="status-lock">🔒</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-pill">Phase 4</span>
+      <span class="phase-title">Financial Statements &amp; Disclosures</span>
+      <div class="phase-line"></div>
+      <span class="phase-range">Seq 22–26</span>
+    </div>
+    <div class="chapter-list">
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 22</span>
+        <span class="chapter-name">Preparation of Financial Statements — Schedule III</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 23</span>
+        <span class="chapter-name">AS 3 &mdash; Cash Flow Statements</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 24</span>
+        <span class="chapter-name">AS 17 &mdash; Segment Reporting</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 25</span>
+        <span class="chapter-name">AS 18 &mdash; Related Party Disclosures</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 26</span>
+        <span class="chapter-name">AS 24 &mdash; Discontinuing Operations</span>
+        <span class="status-lock">🔒</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-pill">Phase 5</span>
+      <span class="phase-title">Consolidation Group</span>
+      <div class="phase-line"></div>
+      <span class="phase-range">Seq 27–31</span>
+    </div>
+    <div class="chapter-list">
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 27</span>
+        <span class="chapter-name">AS 21 &mdash; Consolidated Financial Statements</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 28</span>
+        <span class="chapter-name">AS 23 &mdash; Accounting for Investments in Associates</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 29</span>
+        <span class="chapter-name">AS 27 &mdash; Financial Reporting of Interests in Joint Ventures</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 30</span>
+        <span class="chapter-name">AS 14 &mdash; Accounting for Amalgamations</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 31</span>
+        <span class="chapter-name">AS 25 &mdash; Interim Financial Reporting</span>
+        <span class="status-lock">🔒</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6 -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-pill">Phase 6</span>
+      <span class="phase-title">Capital Restructuring &amp; Branches</span>
+      <div class="phase-line"></div>
+      <span class="phase-range">Seq 32–34</span>
+    </div>
+    <div class="chapter-list">
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 32</span>
+        <span class="chapter-name">Buyback of Shares</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 33</span>
+        <span class="chapter-name">Internal Reconstruction</span>
+        <span class="status-lock">🔒</span>
+      </div>
+      <div class="chapter-row locked">
+        <span class="seq-badge">Seq 34</span>
+        <span class="chapter-name">Branch Accounting — Dependent, Independent &amp; Foreign Branches</span>
+        <span class="status-lock">🔒</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div><strong>Concept Book // Layer 2 Revision</strong></div>
+  <div>CA Inter Advanced Accounting &nbsp;&middot;&nbsp; <span class="footer-orange">CA Pranav Learning</span> &nbsp;&middot;&nbsp; CA Pranav Pratik Tulshyan</div>
+  <div style="margin-top:6px">Hosted at <strong>koncept.capranav.com</strong></div>
+</footer>
+
+</body>
+</html>

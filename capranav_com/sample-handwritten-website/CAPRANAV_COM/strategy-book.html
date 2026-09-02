@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="The CA Inter Strategy Book transformed into a chapter-wise, interactive learning journey by CA Pranav Pratik Tulshyan." name="description"/>
+<meta content="#fbfcfd" name="theme-color"/>
+<title>CA Inter Strategy Book | CA Pranav</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="assets/strategy-book.css?v=20260801a" rel="stylesheet"/>
+<link href="assets/whiteboard-theme.css?v=20260812" rel="stylesheet"/><link href="assets/favicon-whiteboard.svg" rel="icon" type="image/svg+xml"/></head>
+<body>
+<a class="skip" href="#chapterContent">Skip to chapter</a>
+<header class="book-header" id="top">
+<a class="book-brand" href="index.html"><span>P</span><strong>CA PRANAV</strong></a>
+<nav aria-label="Strategy Book navigation">
+<a href="index.html">Home</a>
+<a href="student-learning.html">Learning Hub</a>
+<a href="notes.html">Notes</a>
+<a href="knowledge.html">Library</a>
+</nav>
+</header>
+<main>
+<section class="book-hero">
+<div>
+<p class="eyebrow">CA Intermediate · Interactive Strategy Book</p>
+<h1>One journey.<br/><em>Every chapter.</em></h1>
+<p>Do not read everything at once. Identify your present stage, open only the chapter you need, apply its next action and record your progress.</p>
+<div class="hero-actions">
+<button class="primary" id="startRoute" type="button">Find my starting chapter</button>
+<a class="secondary" href="#chapters">Explore all chapters</a>
+</div>
+</div>
+<aside aria-label="Your book progress" class="progress-card">
+<span>Your progress</span>
+<strong id="progressPercent">0%</strong>
+<div class="progress-track"><i id="progressBar"></i></div>
+<p id="progressCopy">Start with Routing. Complete one useful chapter at a time.</p>
+</aside>
+</section>
+<section class="route-panel" hidden="" id="routePanel">
+<div>
+<p class="eyebrow">Quick routing</p>
+<h2>Where are you now?</h2>
+<p>Choose the statement that is closest to your present position.</p>
+</div>
+<div class="route-options" id="routeOptions"></div>
+</section>
+<section class="framework" id="framework">
+<div class="framework-intro">
+<p class="eyebrow">The 5×5 Preparation Grid</p>
+<h2>Five planning decisions.<br/>Five execution outputs.</h2>
+<p>The labels are deliberately explained. M1 and M2 mean ICAI Module 1 and Module 2—not preparation phases. Your attempt and group decide the calendar; your module, stage and boundary decide today’s work.</p>
+</div>
+<div aria-label="Five by five preparation framework" class="five-grid">
+<div class="grid-head"><span>Decide first</span><span>Create next</span></div>
+<article><b>1</b><strong>Attempt</strong><p>Month and year you will write</p><i>Attempt calendar</i></article>
+<article><b>2</b><strong>Group</strong><p>Group 1, Group 2 or both</p><i>Paper sequence</i></article>
+<article><b>3</b><strong>Module</strong><p>M1 / M2 within the subject material</p><i>Material boundary</i></article>
+<article><b>4</b><strong>Stage</strong><p>Classes, revision, final 45 days or exam</p><i>Chapter route</i></article>
+<article><b>5</b><strong>Progress</strong><p>Not started, learning, tested or exam-ready</p><i>Next measurable target</i></article>
+</div>
+<div class="framework-use">
+<strong>How to apply it today</strong>
+<p>Write one line: <em>“September 2026 · Group 1 · Advanced Accounting M1 · Revision · 60% tested.”</em> Then open the suggested chapter and complete one measurable action.</p>
+</div>
+</section>
+<section class="chapters" id="chapters">
+<div class="chapters-head">
+<div><p class="eyebrow">Chapter map</p><h2>Choose only what you need now.</h2></div>
+<div aria-label="Filter chapters" class="chapter-filters" role="group">
+<button class="active" data-filter="all" type="button">All</button>
+<button data-filter="prepare" type="button">Prepare</button>
+<button data-filter="revise" type="button">Revise</button>
+<button data-filter="exam" type="button">Exam</button>
+<button data-filter="saved" type="button">Saved</button>
+</div>
+</div>
+<div class="chapter-grid" id="chapterGrid"></div>
+</section>
+<section class="reader" hidden="" id="reader">
+<aside class="reader-side">
+<button class="close-reader" id="closeReader" type="button">← All chapters</button>
+<p class="eyebrow" id="readerBucket"></p>
+<h2 id="readerTitle"></h2>
+<div class="reader-meta"><span id="readerTime"></span><span id="readerState"></span></div>
+<div class="reader-actions">
+<button id="completeChapter" type="button">Mark as completed</button>
+<button id="saveChapter" type="button">Save for later</button>
+</div>
+<div class="toc" id="readerToc"></div>
+</aside>
+<article class="reader-content" id="chapterContent" tabindex="-1"></article>
+<nav aria-label="Previous and next chapter" class="reader-nav">
+<button id="prevChapter" type="button">← Previous</button>
+<button id="nextChapter" type="button">Next →</button>
+</nav>
+</section>
+</main>
+<div class="mobile-bar"><a href="student-learning.html">Learn</a><a href="notes.html">Notes</a><a href="https://1lavya.com/" rel="noopener" target="_blank">Test</a><a href="#chapters">Chapters</a></div>
+<footer><span>CA Pranav · CA Inter Strategy Book</span><a href="policies.html">About · Contact · Privacy · Terms</a><a href="#top">Back to top ↑</a></footer>
+<script src="assets/strategy-book.js?v=20260801a"></script>
+<script src="assets/whiteboard-theme.js?v=20260812"></script></body>
+</html>

@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="assets/store.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -29,15 +30,12 @@
     </button>
 
     <nav id="primary-nav" aria-label="Primary navigation">
+      <a href="courses.html">Courses</a>
+      <a href="books.html">Books</a>
+      <a href="knowledge.html">Free Resources</a>
       <a href="#profile">Profile</a>
       <a href="#journey">Journey</a>
-      <a href="#student-tools">Exam Strategy</a>
-      <a href="#student-learning">Student Learning</a>
-      <a href="strategy-book.html">Strategy Book</a>
-      <a href="knowledge.html">Knowledge Library</a>
       <a href="#icai-updates">ICAI Updates</a>
-      <a href="#teaching">Teaching System</a>
-      <a href="notes.html">Notes</a>
     </nav>
   </header>
 
@@ -77,6 +75,34 @@
       </div>
     </section>
 
+    <section class="shop-strip" id="shop">
+      <div class="shop-strip-head">
+        <p class="eyebrow">Enrol · Practise · Own the book</p>
+        <h2>Everything you can buy, in one place.</h2>
+        <p>The complete course, any single chapter on its own, or the printed books — delivered to your door.</p>
+      </div>
+      <div class="shop-cards">
+        <a class="shop-card" href="courses.html#full-course">
+          <span class="tag">01 · Full course</span>
+          <strong>CA Inter Gr.1 Advanced Accounting</strong>
+          <p>Live + recorded, complete syllabus. Jan'27 &amp; May'27 batch.</p>
+          <em id="shop-course-price">→</em>
+        </a>
+        <a class="shop-card" href="courses.html#chapters">
+          <span class="tag">02 · Chapter-wise</span>
+          <strong>Buy one chapter at a time</strong>
+          <p>AS 2, AS 10, AS 13 and more — priced individually for a focused revision pass.</p>
+          <em id="shop-chapter-price">→</em>
+        </a>
+        <a class="shop-card" href="books.html">
+          <span class="tag">03 · Printed books</span>
+          <strong>Books, delivered to your door</strong>
+          <p>The Question Bank Book and the Exam Strategy Book, shipped to your address.</p>
+          <em>See the books →</em>
+        </a>
+      </div>
+    </section>
+
     <section class="book-preview-section" id="strategy-book">
       <div class="book-preview-copy">
         <p class="eyebrow">The CA Inter Strategy Book · Rebuilt for the web</p>
@@ -86,6 +112,7 @@
           <a class="button button-primary" href="strategy-book.html">Open interactive book</a>
           <a class="text-link" href="strategy-book.html#framework">Understand the 5×5 framework →</a>
         </div>
+        <a class="text-link" href="books.html" style="margin-top:14px;">Prefer print? Order the physical book →</a>
       </div>
       <div class="book-phases" aria-label="Strategy Book learning phases">
         <article class="book-phase"><span>01</span><strong>Plan</strong><p>Fix the attempt, group, material boundary and chapter calendar.</p></article>
@@ -424,7 +451,7 @@
     </section>
   </main>
 
-  <div class="mobile-action-bar"><a href="student-learning.html">Learn</a><a href="notes.html">Notes</a><a href="https://1lavya.com/" target="_blank" rel="noopener">Test</a><a href="#student-tools">Strategy</a></div>
+  <div class="mobile-action-bar"><a href="courses.html">Courses</a><a href="books.html">Books</a><a href="notes.html">Notes</a><a href="https://1lavya.com/" target="_blank" rel="noopener">Test</a></div>
 
   <footer>
     <a class="brand footer-brand" href="#top">
@@ -436,5 +463,25 @@
   </footer>
 
   <script src="assets/app.js?v=20260801a"></script>
+  <script src="assets/catalogue-data.js"></script>
+  <script>
+    (function () {
+      const cat = window.CATALOGUE;
+      if (!cat) return;
+      const coursePrice = document.getElementById("shop-course-price");
+      const chapterPrice = document.getElementById("shop-chapter-price");
+      if (coursePrice) {
+        coursePrice.textContent = cat.fullCourse.price
+          ? "From ₹" + cat.fullCourse.price.toLocaleString("en-IN") + " →"
+          : "Enrol →";
+      }
+      if (chapterPrice) {
+        const priced = cat.chapters.filter((c) => c.price).map((c) => c.price);
+        chapterPrice.textContent = priced.length
+          ? "From ₹" + Math.min(...priced).toLocaleString("en-IN") + " →"
+          : "See chapters →";
+      }
+    })();
+  </script>
 </body>
 </html>

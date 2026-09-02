@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animations — CA Pranav</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;background:#0d0d14;font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',sans-serif;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:32px 20px;}
+
+  .eyebrow{font-size:13px;letter-spacing:.2em;color:#E8813A;font-weight:700;text-transform:uppercase;margin-bottom:14px;}
+  h1{font-size:38px;font-weight:800;line-height:1.1;text-align:center;margin-bottom:6px;}
+  .subtitle{font-size:16px;color:rgba(255,255,255,.5);margin-bottom:48px;text-align:center;}
+
+  .grid{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;max-width:960px;}
+
+  .card{
+    background:rgba(255,255,255,.04);
+    border:1.5px solid rgba(255,255,255,.1);
+    border-radius:16px;
+    padding:32px 28px;
+    width:280px;
+    text-decoration:none;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    transition:transform .2s ease, border-color .2s ease, background .2s ease;
+    cursor:pointer;
+  }
+  .card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(232,129,58,.5);
+    background:rgba(232,129,58,.07);
+  }
+  .card-icon{font-size:36px;margin-bottom:4px;}
+  .card-tag{font-size:11px;font-weight:700;letter-spacing:.14em;color:#E8813A;text-transform:uppercase;}
+  .card-title{font-size:20px;font-weight:800;line-height:1.2;}
+  .card-desc{font-size:14px;color:rgba(255,255,255,.55);line-height:1.5;}
+  .card-arrow{margin-top:auto;padding-top:16px;font-size:13px;font-weight:700;color:#F0A500;letter-spacing:.04em;}
+
+  .footer{margin-top:52px;font-size:12px;color:rgba(255,255,255,.3);text-align:center;letter-spacing:.04em;line-height:1.8;}
+</style>
+</head>
+<body>
+
+<div class="eyebrow">CA Inter · Advanced Accounting</div>
+<h1>Concept Book Animations</h1>
+<div class="subtitle">CA Pranav Learning &nbsp;·&nbsp; CA Pranav Pratik Tulshyan</div>
+
+<div class="grid">
+
+  <a class="card" href="universe-intro.dc.html">
+    <div class="card-icon">🌌</div>
+    <div class="card-tag">Intro</div>
+    <div class="card-title">Universe Intro</div>
+    <div class="card-desc">Meet the world of the Concept Book — characters, setting, and the story behind the stories.</div>
+    <div class="card-arrow">Open &rsaquo;</div>
+  </a>
+
+  <a class="card" href="Character%20Universe.dc.html">
+    <div class="card-icon">🎭</div>
+    <div class="card-tag">Characters</div>
+    <div class="card-title">Character Universe</div>
+    <div class="card-desc">Rolly, Pranav, Sethji, Diya — who they are and how they connect to every chapter.</div>
+    <div class="card-arrow">Open &rsaquo;</div>
+  </a>
+
+  <a class="card" href="accounting-story.html?standard=2&amp;v=20260731h">
+    <div class="card-icon">📦</div>
+    <div class="card-tag">AS 02</div>
+    <div class="card-title">Godown Ka Hisaab</div>
+    <div class="card-desc">Valuation of Inventories — LCNRV, FIFO, Weighted Average, and Conservatism in one story.</div>
+    <div class="card-arrow">Open &rsaquo;</div>
+  </a>
+
+</div>
+
+<div class="footer">
+  #pranavBhaiya &nbsp;·&nbsp; #NewtonofAccounts<br>
+  Click any card to open the animation
+</div>
+
+</body>
+</html>

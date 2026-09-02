@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Order CA Pranav's printed books — the Question Bank Book and the Exam Strategy Book — delivered to your address.">
+  <meta name="theme-color" content="#111827">
+  <title>Books | CA Pranav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/store.css">
+</head>
+<body>
+  <header class="store-header">
+    <a class="store-brand" href="index.html">
+      <span>P</span>
+      <div><strong>CA PRANAV</strong><small>Advanced Accounting</small></div>
+    </a>
+    <nav aria-label="Store navigation">
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a class="is-current" href="books.html">Books</a>
+      <a href="notes.html">Free Notes</a>
+      <a href="https://1lavya.com/" target="_blank" rel="noopener">Exam Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="store-hero">
+      <p class="eyebrow">Printed Books</p>
+      <h1>Books, delivered<br>to your <em>door.</em></h1>
+      <p>Order the printed edition and it ships straight to your address — packed and dispatched through our own warehouse and courier partner.</p>
+    </section>
+
+    <section class="store-section">
+      <div class="book-grid" id="book-grid"></div>
+      <p class="book-shipping-note" id="shipping-note" style="margin-top:20px;"></p>
+    </section>
+  </main>
+
+  <footer style="padding:40px clamp(22px,7vw,110px) 60px; border-top:1px solid var(--line); text-align:center; color:var(--muted); font-size:12px;">
+    <a href="policies.html" style="color:inherit;">About · Contact · Privacy · Terms · Refunds</a>
+  </footer>
+
+  <script src="assets/catalogue-data.js"></script>
+  <script src="assets/store-config.js"></script>
+  <script src="assets/checkout.js"></script>
+  <script>
+    const CAT = window.CATALOGUE;
+    const shipping = CAT.books.flatShippingRupees;
+
+    document.getElementById("shipping-note").textContent = shipping
+      ? `Flat shipping: ₹${shipping.toLocaleString("en-IN")} across India, added at checkout.`
+      : "Shipping charges will be added at checkout once finalised.";
+
+    const grid = document.getElementById("book-grid");
+    grid.innerHTML = CAT.books.items.map((book, i) => {
+      const priceBlock = book.price
+        ? `<span class="book-price">₹${book.price.toLocaleString("en-IN")}<small>+ shipping</small></span>
+           <button type="button" class="button button-primary" data-book-index="${i}">Order</button>`
+        : `<span class="chapter-soon">Price coming soon</span>`;
+      return `
+        <article class="book-card">
+          <p class="eyebrow">${book.subtitle}</p>
+          <h3>${book.title}</h3>
+          <p>${book.description}</p>
+          <div class="book-card-foot">${priceBlock}</div>
+        </article>`;
+    }).join("");
+
+    grid.addEventListener("click", (event) => {
+      const btn = event.target.closest("[data-book-index]");
+      if (!btn) return;
+      const book = CAT.books.items[Number(btn.dataset.bookIndex)];
+      window.Store.buy({
+        type: "book",
+        title: book.title,
+        amountRupees: book.price,
+        shippingRupees: shipping || 0,
+        notesExtra: { book_id: book.id },
+      });
+    });
+  </script>
+</body>
+</html>

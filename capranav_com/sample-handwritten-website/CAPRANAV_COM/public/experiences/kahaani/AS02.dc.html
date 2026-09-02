@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="react.min.js"></script>
+<script src="react-dom.min.js"></script>
+<script src="support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;background:#0d0d14;font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',sans-serif;overflow:hidden;}
+  @keyframes asFade{from{opacity:0}to{opacity:1}}
+  @keyframes asFadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes asBub{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes asPop{0%{opacity:0;transform:scale(.82)}60%{transform:scale(1.04)}100%{opacity:1;transform:scale(1)}}
+  @keyframes asGlow{0%,100%{box-shadow:0 0 0 0 rgba(45,134,83,0)}50%{box-shadow:0 0 30px 7px rgba(45,134,83,.5)}}
+  @keyframes asCross{from{opacity:0;transform:scale(1.7) rotate(-14deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+  @keyframes asFlow{0%{opacity:0;transform:translateX(-30px)}100%{opacity:1;transform:translateX(0)}}
+  @keyframes asWalk{0%,100%{transform:translateX(0)}50%{transform:translateX(120px)}}
+  @keyframes asEnter{from{opacity:0;transform:translateX(280px)}to{opacity:1;transform:translateX(0)}}
+</style>
+</helmet>
+<template id="__bundler_thumbnail"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#1A1A2E"/><rect x="70" y="70" width="60" height="48" rx="6" fill="#E8813A"/><text x="100" y="150" font-size="46" fill="#F0A500" text-anchor="middle" font-family="Segoe UI,sans-serif">₹</text></svg></template>
+{{ app }}
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { i: 0, scale: 1, portrait: false, menuOpen: false, autoPlay:false, voiceLang:'en-IN', voiceGender:'auto', voiceReady:false };
+
+  // ---- palette ----
+  C = { navy:'#1A1A2E', orange:'#E8813A', gold:'#F0A500', purple:'#6B3FA0', green:'#2D8653', red:'#C0392B',
+        bg:'#FDF8F3', skin:'#E7B189', hairD:'#2E2422', grey:'#B0ABA4', shirt:'#EFE9DD', ink:'#1A1A2E' };
+
+  meta = {
+    rolly:  { name:'ROLLY',  color:'#E8813A' },
+    pranav: { name:'PRANAV', color:'#1A1A2E' },
+    sethji: { name:'SETHJI', color:'#F0A500' },
+    diya:   { name:'DIYA',   color:'#6B3FA0' },
+  };
+
+  componentDidMount(){
+    this._key = (e)=>{
+      if(e.key==='Escape'){ this.setState({ menuOpen:false }); return; }
+      if(this.state.menuOpen) return;
+      if(e.key==='Enter'||e.key===' '||e.key==='ArrowRight'){ e.preventDefault(); this.next(); }
+      else if(e.key==='ArrowLeft'){ e.preventDefault(); this.back(); }
+    };
+    this._rz = ()=> this.measure();
+    window.addEventListener('keydown', this._key);
+    window.addEventListener('resize', this._rz);
+    this._voicesChanged=()=>{ this._voices=window.speechSynthesis?window.speechSynthesis.getVoices():[]; this.setState({voiceReady:true}); };
+    if(window.speechSynthesis){ window.speechSynthesis.addEventListener('voiceschanged',this._voicesChanged); this._voicesChanged(); }
+    this.measure();
+    // deep-link restore
+    let start = 0;
+    const m = (location.hash||'').match(/step-(\d+)/);
+    if(m){ start = Math.max(0, Math.min(this.beats.length-1, parseInt(m[1],10)-1)); }
+    else { const s = +(localStorage.getItem('as02_step')||0); if(s) start = Math.max(0, Math.min(this.beats.length-1, s)); }
+    if(start) this.setState({ i:start });
+  }
+  componentWillUnmount(){
+    window.removeEventListener('keydown', this._key);
+    window.removeEventListener('resize', this._rz);
+    if(window.speechSynthesis){ window.speechSynthesis.cancel(); window.speechSynthesis.removeEventListener('voiceschanged',this._voicesChanged); }
+  }
+  componentDidUpdate(prevProps,prevState){
+    if(prevState.i!==this.state.i && this.state.autoPlay) this.speakCurrent();
+  }
+  measure(){
+    const vw=window.innerWidth, vh=window.innerHeight;
+    const scale=Math.min(vw/1280, vh/720)*0.97;
+    const portrait = vh>vw && vw<760;
+    this.setState({ scale, portrait });
+  }
+  setI(n){
+    const i=Math.max(0, Math.min(this.beats.length-1, n));
+    try{ localStorage.setItem('as02_step', i); history.replaceState(null,'', '#step-'+(i+1)); }catch(e){}
+    this.setState({ i });
+  }
+  next(){ const last=this.beats.length-1; if(this.state.i>=last) this.setI(0); else this.setI(this.state.i+1); }
+  back(){ this.setI(this.state.i-1); }
+
+  narrationFor(b){
+    const out=[];
+    const add=(v)=>{ if(typeof v==='string' && v.trim()) out.push(v.trim()); };
+    if(b.card){ add(b.card.eyebrow);add(b.card.n);add(b.card.title);add(b.card.subtitle);add(b.card.sub); }
+    add(b.narrator);
+    if(b.bubble){ add((this.meta[b.bubble.who]||{}).name);add(b.bubble.text); }
+    if(b.caption){ add((this.meta[b.caption.who]||{}).name);add(b.caption.text); }
+    const walk=(v,key)=>{
+      if(v==null)return;
+      if(typeof v==='string'){ if(!['type','kind','color','accent','tag'].includes(key))add(v); return; }
+      if(Array.isArray(v)){ v.forEach(x=>walk(x,key)); return; }
+      if(typeof v==='object') Object.keys(v).forEach(k=>walk(v[k],k));
+    };
+    if(b.panel)walk(b.panel,'panel');
+    if(!out.length)add('Observe the accounting point shown on screen before moving to the next scene.');
+    return out.join('. ').replace(/\.+/g,'.').slice(0,900);
+  }
+  selectedVoice(){
+    const voices=this._voices||[];
+    const lang=this.state.voiceLang.toLowerCase();
+    let pool=voices.filter(v=>(v.lang||'').toLowerCase()===lang);
+    if(!pool.length)pool=voices.filter(v=>(v.lang||'').toLowerCase().startsWith(lang.slice(0,2)));
+    if(!pool.length)pool=voices;
+    const female=/female|woman|heera|kalpana|neerja|swara|zira|aria|susan|hazel|veena/i;
+    const male=/male|man|ravi|hemant|madhur|david|mark|guy|george|prabhat/i;
+    if(this.state.voiceGender==='female') return pool.find(v=>female.test(v.name))||pool[0]||null;
+    if(this.state.voiceGender==='male') return pool.find(v=>male.test(v.name))||pool[0]||null;
+    return pool[0]||null;
+  }
+  speakCurrent(){
+    if(!window.speechSynthesis)return;
+    window.speechSynthesis.cancel();window.speechSynthesis.resume();
+    const u=new SpeechSynthesisUtterance(this.narrationFor(this.beats[this.state.i]));
+    const voice=this.selectedVoice();if(voice)u.voice=voice;
+    u.lang=this.state.voiceLang;u.rate=this.state.voiceLang==='hi-IN'?.9:.92;u.pitch=1;
+    u.onend=()=>{ if(this.state.autoPlay)this.next(); };
+    window.speechSynthesis.speak(u);
+  }
+  playVoice(e){
+    if(e)e.stopPropagation();
+    if(window.speechSynthesis&&window.speechSynthesis.paused){ this.setState({autoPlay:true});window.speechSynthesis.resume();return; }
+    this.setState({autoPlay:true},()=>this.speakCurrent());
+  }
+  pauseVoice(e){ if(e)e.stopPropagation();this.setState({autoPlay:false});if(window.speechSynthesis)window.speechSynthesis.pause(); }
+  replayVoice(e){
+    if(e)e.stopPropagation();if(window.speechSynthesis){window.speechSynthesis.cancel();window.speechSynthesis.resume();}
+    try{localStorage.setItem('as02_step',0);history.replaceState(null,'','#step-1');}catch(x){}
+    this.setState({i:0,autoPlay:true},()=>this.speakCurrent());
+  }
+  renderVoiceControls(isCard){
+    const h=React.createElement, voice=this.selectedVoice(), fg=isCard?'#fff':'#1A1A2E';
+    const selectStyle={height:30,borderRadius:7,border:'1px solid rgba(128,128,128,.35)',background:isCard?'#28283d':'#fff',color:fg,fontSize:11,padding:'0 7px'};
+    const buttonStyle={height:30,borderRadius:7,border:'1px solid rgba(128,128,128,.35)',background:'#E8813A',color:'#fff',fontSize:11,fontWeight:800,padding:'0 10px',cursor:'pointer'};
+    return h('div',{key:'voice',onClick:e=>e.stopPropagation(),style:{position:'absolute',zIndex:18,top:44,right:18,display:'flex',alignItems:'center',gap:6,padding:7,borderRadius:10,background:isCard?'rgba(13,13,20,.82)':'rgba(255,255,255,.9)',boxShadow:'0 6px 20px rgba(0,0,0,.12)'}},
+      h('select',{value:this.state.voiceLang,'aria-label':'Narration language',style:selectStyle,onChange:e=>{if(window.speechSynthesis){window.speechSynthesis.cancel();window.speechSynthesis.resume();}this.setState({voiceLang:e.target.value,autoPlay:false});}},
+        h('option',{value:'en-IN'},'English · India'),h('option',{value:'hi-IN'},'Hindi · India'),h('option',{value:'en-GB'},'English · UK')),
+      h('select',{value:this.state.voiceGender,'aria-label':'Voice preference',style:selectStyle,onChange:e=>{if(window.speechSynthesis){window.speechSynthesis.cancel();window.speechSynthesis.resume();}this.setState({voiceGender:e.target.value,autoPlay:false});}},
+        h('option',{value:'auto'},'Best available'),h('option',{value:'male'},'Male voice'),h('option',{value:'female'},'Female voice')),
+      h('button',{type:'button',style:buttonStyle,onClick:e=>this.playVoice(e)},'Play'),
+      h('button',{type:'button',style:buttonStyle,onClick:e=>this.pauseVoice(e)},'Pause'),
+      h('button',{type:'button',style:buttonStyle,onClick:e=>this.replayVoice(e)},'Replay'),
+      h('span',{style:{maxWidth:120,color:fg,fontSize:9,lineHeight:1.25}},voice?voice.name:'Captions only')
+    );
+  }
+
+  // ---------- character vector art ----------
+  svgFor(who){
+    const S=this.C;
+    const head=(extra='')=>`<rect x="90" y="98" width="20" height="26" fill="${S.skin}"/><circle cx="100" cy="70" r="40" fill="${S.skin}"/><circle cx="86" cy="72" r="3.4" fill="#3a2c22"/><circle cx="114" cy="72" r="3.4" fill="#3a2c22"/>${extra}`;
+    if(who==='rolly'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="80" y="226" width="18" height="68" rx="8" fill="#2a3450"/><rect x="102" y="226" width="18" height="68" rx="8" fill="#2a3450"/>
+        <rect x="44" y="132" width="17" height="78" rx="8.5" fill="${S.navy}"/><rect x="139" y="132" width="17" height="78" rx="8.5" fill="${S.navy}"/>
+        <circle cx="52" cy="208" r="10" fill="${S.skin}"/><circle cx="148" cy="208" r="10" fill="${S.skin}"/>
+        <rect x="56" y="122" width="88" height="112" rx="22" fill="${S.navy}"/>
+        <path d="M62 126 L122 232 L100 234 L52 138 Z" fill="${S.orange}"/>
+        ${head(`<path d="M60 70 a40 40 0 0 1 80 0 q-40 -30 -80 0 Z" fill="${S.hairD}"/><circle cx="100" cy="28" r="13" fill="${S.hairD}"/><path d="M91 88 q9 7 18 0" stroke="#b5704a" stroke-width="3" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    if(who==='pranav'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="80" y="226" width="18" height="68" rx="8" fill="#2a2e44"/><rect x="102" y="226" width="18" height="68" rx="8" fill="#2a2e44"/>
+        <rect x="46" y="132" width="16" height="80" rx="8" fill="#D8E4F2"/><rect x="138" y="132" width="16" height="80" rx="8" fill="#D8E4F2"/>
+        <circle cx="54" cy="210" r="9.5" fill="${S.skin}"/><circle cx="146" cy="210" r="9.5" fill="${S.skin}"/>
+        <rect x="56" y="124" width="88" height="112" rx="16" fill="#D8E4F2"/>
+        <path d="M100 124 L89 124 L97 139 Z" fill="#ffffff"/><path d="M100 124 L111 124 L103 139 Z" fill="#ffffff"/>
+        <path d="M100 130 L105 139 L103 180 L97 180 L95 139 Z" fill="${S.navy}"/>
+        <circle cx="100" cy="194" r="2.4" fill="#b9c6d8"/><circle cx="100" cy="210" r="2.4" fill="#b9c6d8"/>
+        ${head(`<path d="M58 74 q-8 -52 42 -52 q50 0 42 52 q-5 -17 -16 -13 q-4 -15 -26 -15 q-23 0 -27 17 q-11 -3 -15 11 Z" fill="#241b18"/><path d="M72 50 q20 12 46 3 q-7 15 -25 15 q-17 0 -21 -18 Z" fill="#2e221d"/><g stroke="${S.navy}" stroke-width="2.4" fill="none"><circle cx="86" cy="73" r="8.5"/><circle cx="114" cy="73" r="8.5"/><path d="M94.5 73 h11"/></g><path d="M91 90 q9 5 18 0" stroke="#b5704a" stroke-width="3" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    if(who==='sethji'){
+      return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="78" y="232" width="20" height="62" rx="8" fill="#cdbfa0"/><rect x="102" y="232" width="20" height="62" rx="8" fill="#cdbfa0"/>
+        <rect x="44" y="140" width="18" height="74" rx="9" fill="${S.shirt}"/><rect x="138" y="140" width="18" height="74" rx="9" fill="${S.shirt}"/>
+        <circle cx="53" cy="212" r="10" fill="${S.skin}"/><circle cx="147" cy="212" r="10" fill="${S.skin}"/>
+        <rect x="50" y="130" width="100" height="108" rx="22" fill="${S.shirt}"/>
+        <path d="M58 132 q-2 60 26 104 l16 -6 q-26 -46 -24 -100 Z" fill="#dcc79e"/>
+        <rect x="98" y="130" width="4" height="60" fill="#c9b88f"/><circle cx="100" cy="148" r="2.6" fill="#b9a679"/><circle cx="100" cy="166" r="2.6" fill="#b9a679"/>
+        ${head(`<path d="M60 66 a40 40 0 0 1 80 0 q-40 -24 -80 0 Z" fill="${S.grey}"/><path d="M84 90 q16 8 32 0" stroke="#7a6a5a" stroke-width="4" fill="none" stroke-linecap="round"/>`)}
+      </svg>`;
+    }
+    // diya
+    return `<svg viewBox="0 0 200 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <rect x="80" y="226" width="18" height="68" rx="8" fill="#4a3a5a"/><rect x="102" y="226" width="18" height="68" rx="8" fill="#4a3a5a"/>
+      <rect x="44" y="120" width="17" height="64" rx="8.5" fill="${S.purple}"/>
+      <rect x="139" y="96" width="17" height="80" rx="8.5" fill="${S.purple}" transform="rotate(18 147 130)"/>
+      <circle cx="52" cy="182" r="10" fill="${S.skin}"/><circle cx="168" cy="92" r="10" fill="${S.skin}"/>
+      <rect x="56" y="120" width="88" height="114" rx="22" fill="${S.purple}"/>
+      <path d="M62 128 L120 232 L100 234 L52 140 Z" fill="#8a5cc4"/>
+      ${head(`<path d="M58 74 q4 -44 42 -44 q38 0 42 44 q-10 -10 -16 2 q-8 -14 -26 -14 q-18 0 -26 14 q-6 -12 -16 -2 Z" fill="${S.hairD}"/><path d="M91 88 q9 7 18 0" stroke="#b5704a" stroke-width="3" fill="none" stroke-linecap="round"/>`)}
+    </svg>`;
+  }
+
+  renderCharacter(c, active){
+    const h=React.createElement, m=this.meta[c.who];
+    const dim = (active!=null && !active) ? 0.55 : 1;
+    return h('div',{ key:c.who+c.x, style:{ position:'absolute', left:c.x, bottom:34, width:200, height:300,
+        display:'flex', flexDirection:'column', alignItems:'center', zIndex:2, opacity:dim, transition:'opacity .3s ease',
+        animation: c.pose==='walk' ? 'asWalk 1.4s ease-in-out 1' : c.pose==='enter' ? 'asEnter .7s ease both' : 'asFadeUp .4s ease both' } },
+      h('div',{ style:{ position:'relative', width:200, height:268 } },
+        h('div',{ style:{ width:'100%', height:'100%', filter:'drop-shadow(0 8px 10px rgba(26,26,46,.12))' }, dangerouslySetInnerHTML:{ __html:this.svgFor(c.who) } }),
+        c.emoji ? h('div',{ style:{ position:'absolute', top:8, right:34, width:46, height:46, borderRadius:'50%', background:'#fff',
+            boxShadow:'0 3px 10px rgba(26,26,46,.18)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:26,
+            animation:'asPop .35s ease both' } }, c.emoji) : null
+      ),
+      h('div',{ style:{ marginTop:2, padding:'3px 14px', borderRadius:20, background:m.color, color:'#fff',
+          fontSize:14, fontWeight:700, letterSpacing:'.06em', boxShadow:'0 2px 6px rgba(26,26,46,.2)' } }, m.name)
+    );
+  }
+
+  // ---------- bubbles ----------
+  renderBubble(bu, speakerX){
+    const h=React.createElement, m=this.meta[bu.who], thought=bu.kind==='thought';
+    const center = speakerX!=null ? speakerX+100 : 640;
+    const W=540, left=Math.max(60, Math.min(1280-60-W, center-W/2));
+    return h('div',{ key:'bub', style:{ position:'absolute', top:118, left, width:W, zIndex:5, animation:'asBub .28s ease both' } },
+      h('div',{ style:{ fontSize:13, fontWeight:700, color:m.color, letterSpacing:'.05em', marginBottom:6, marginLeft:6 } }, m.name),
+      h('div',{ style:{ position:'relative', background:'#fff', borderRadius:thought?28:18, padding:'18px 22px',
+          fontSize:22, lineHeight:1.4, color:this.C.ink, boxShadow:'0 8px 24px rgba(26,26,46,.14)',
+          border: thought?'2px dashed '+m.color+'66':'none' } },
+        bu.text,
+        thought
+          ? h('div',{ style:{ position:'absolute', bottom:-26, left:48 } },
+              h('div',{ style:{ width:14, height:14, borderRadius:'50%', background:'#fff', border:'2px dashed '+m.color+'66', marginBottom:4 } }),
+              h('div',{ style:{ width:8, height:8, borderRadius:'50%', background:'#fff', border:'2px dashed '+m.color+'66' } }))
+          : h('div',{ style:{ position:'absolute', bottom:-11, left:Math.max(28, Math.min(W-48, center-left-12)),
+              width:24, height:24, background:'#fff', transform:'rotate(45deg)', boxShadow:'4px 4px 8px rgba(26,26,46,.06)' } })
+      )
+    );
+  }
+
+  // ---------- narrator ----------
+  renderNarrator(text){
+    const h=React.createElement;
+    return h('div',{ key:'narr', style:{ position:'absolute', left:0, right:0, bottom:90, display:'flex', justifyContent:'center', zIndex:5 } },
+      h('div',{ style:{ width:880, maxWidth:'90%', animation:'asFadeUp .3s ease', background:'rgba(26,26,46,.92)', color:'#fff', borderRadius:12, padding:'14px 26px',
+          fontSize:20, lineHeight:1.45, textAlign:'center', fontStyle:'italic', boxShadow:'0 8px 22px rgba(26,26,46,.2)' } }, text)
+    );
+  }
+
+  // ---------- panels ----------
+  panelBox(children, extra){
+    const h=React.createElement; extra=extra||{};
+    const inner={ animation:'asPop .34s ease', maxWidth:860 };
+    if(extra.width) inner.width=extra.width;
+    return h('div',{ key:'panel', style:{ position:'absolute', left:0, right:0, top:extra.top||104, display:'flex', justifyContent:'center', zIndex:4 } },
+      h('div',{ style:inner }, children));
+  }
+  tag(kind){
+    const h=React.createElement, S=this.C;
+    if(kind==='lower') return h('span',{ style:{ marginLeft:10, color:S.green, fontWeight:800, fontSize:14 } }, '◄ LOWER ✓');
+    if(kind==='loss')  return h('span',{ style:{ marginLeft:10, color:S.red, fontWeight:800, fontSize:14 } }, 'LOSS');
+    return null;
+  }
+  renderPanel(p){
+    const h=React.createElement, S=this.C, mono="'Consolas','SF Mono',Menlo,'Liberation Mono',monospace";
+
+    if(p.type==='table'){
+      return this.panelBox(h('div',{ style:{ background:'#fff', border:'2px solid '+S.navy, borderRadius:10,
+          overflow:'hidden', boxShadow:'0 12px 30px rgba(26,26,46,.16)', fontFamily:mono,
+          animation: p.glow?'asGlow 1.8s ease infinite':'none' } },
+        p.title? h('div',{ style:{ background:S.navy, color:'#fff', padding:'10px 18px', fontSize:16, fontWeight:700 } }, p.title):null,
+        h('table',{ style:{ borderCollapse:'collapse', width:'100%', fontSize:18 } },
+          p.head? h('thead',null, h('tr',null, p.head.map((c,k)=> h('th',{ key:k, style:{ textAlign:k===0?'left':'right',
+              padding:'9px 18px', background:'#f3eee6', color:S.navy, fontWeight:700, borderBottom:'2px solid '+S.navy } }, c)))):null,
+          h('tbody',null, p.rows.map((r,k)=> h('tr',{ key:k }, r.map((c,j)=> h('td',{ key:j, style:{ textAlign:j===0?'left':'right',
+              padding:'9px 18px', color:S.navy, borderBottom:'1px solid #e6ded2' } }, c)))))
+        ),
+        (p.foot||[]).map((f,k)=> h('div',{ key:k, style:{ padding:'11px 18px', fontSize:k===0&&p.glow?22:17,
+            fontWeight:800, color:p.glow?S.green:S.navy, background:p.glow?'#eef7f0':'#faf6ef', borderTop:'2px solid '+S.navy } }, f))
+      ), { width:640 });
+    }
+
+    if(p.type==='calc'){
+      const acc = p.accent==='green'?S.green : p.accent==='purple'?S.purple : S.navy;
+      return this.panelBox(h('div',{ style:{ background:'#fff', borderRadius:12, border:'2px solid '+acc,
+          boxShadow:'0 12px 30px rgba(26,26,46,.16)', overflow:'hidden', width:560, fontFamily:mono } },
+        h('div',{ style:{ background:acc, color:'#fff', padding:'11px 20px', fontSize:17, fontWeight:700 } }, p.title),
+        h('div',{ style:{ padding:'8px 20px 14px' } },
+          p.rows.map((r,k)=> h('div',{ key:k, style:{ display:'flex', justifyContent:'space-between', alignItems:'center',
+              padding:'9px 0', borderBottom:k<p.rows.length-1?'1px solid #eee3d4':'none',
+              fontSize: r.tag==='big'?22:18, fontWeight:r.tag==='big'?800:500,
+              color: r.tag==='loss'?S.red : r.tag==='big'?acc : S.navy } },
+            h('span',null, r.l),
+            h('span',{ style:{ display:'flex', alignItems:'center' } }, h('b',null, r.v), this.tag(r.tag))
+          )),
+          p.flow ? h('div',{ style:{ marginTop:12, display:'flex', alignItems:'center', gap:12, animation:'asFlow .5s ease both' } },
+            h('div',{ style:{ flex:1, textAlign:'center', padding:'8px', borderRadius:8, background:'#f3eee6', fontSize:14, fontWeight:700, color:S.navy } }, 'INVENTORY'),
+            h('div',{ style:{ color:S.red, fontWeight:800, fontSize:16 } }, '₹32 ►'),
+            h('div',{ style:{ flex:1, textAlign:'center', padding:'8px', borderRadius:8, background:'#fbeceb', fontSize:14, fontWeight:700, color:S.red, border:'1.5px solid '+S.red } }, 'P&L (loss)')
+          ):null
+        )
+      ));
+    }
+
+    if(p.type==='concept' || p.type==='highlight'){
+      const isC = p.type==='concept';
+      return this.panelBox(h('div',{ style:{ background:isC?S.navy:S.orange, color:'#fff', borderRadius:14,
+          padding:'26px 34px', width:660, textAlign:'center', boxShadow:'0 16px 38px rgba(26,26,46,.26)' } },
+        h('div',{ style:{ fontSize:15, fontWeight:800, letterSpacing:'.14em', opacity:.85, marginBottom:14 } }, p.heading),
+        p.body.map((l,k)=> h('div',{ key:k, style:{ fontSize: l===''?10:24, fontWeight:600, lineHeight:1.45 } }, l))
+      ));
+    }
+
+    if(p.type==='invoice'){
+      return this.panelBox(h('div',{ style:{ textAlign:'center' } },
+        p.label? h('div',{ style:{ fontSize:14, fontWeight:700, color:S.navy, opacity:.6, marginBottom:12, letterSpacing:'.08em' } }, p.label):null,
+        h('div',{ style:{ display:'flex', gap:16, justifyContent:'center' } },
+          p.chips.map((c,k)=> h('div',{ key:k, style:{ background:'#fff', border:'2px solid '+S.navy, borderRadius:10,
+              padding:'16px 26px', fontSize:26, fontWeight:800, color:S.navy, fontFamily:"'Consolas',monospace",
+              boxShadow:'0 8px 20px rgba(26,26,46,.12)', animation:'asPop .3s ease both', animationDelay:(k*0.08)+'s' } }, c)))
+      ));
+    }
+
+    if(p.type==='chip'){
+      const col = p.color || S.gold;
+      return this.panelBox(h('div',{ style:{ background:'#fff', border:'2px solid '+col, borderRadius:30,
+          padding:'12px 28px', fontSize:22, fontWeight:800, color:col, boxShadow:'0 10px 24px rgba(26,26,46,.12)' } }, p.text), { top:200 });
+    }
+
+    if(p.type==='contrast'){
+      return this.panelBox(h('div',{ style:{ display:'flex', alignItems:'center', gap:24 } },
+        [p.a,p.b].map((x,k)=> [
+          h('div',{ key:k, style:{ background:'#fff', border:'2.5px solid '+x.color, borderRadius:14, padding:'18px 26px',
+              textAlign:'center', minWidth:230, boxShadow:'0 10px 26px rgba(26,26,46,.14)' } },
+            h('div',{ style:{ fontSize:14, fontWeight:700, color:x.color, opacity:.85, marginBottom:8, letterSpacing:'.05em' } }, x.label),
+            h('div',{ style:{ fontSize:40, fontWeight:800, color:x.color, fontFamily:"'Consolas',monospace" } }, x.val)),
+          k===0? h('div',{ key:'vs', style:{ fontSize:22, fontWeight:800, color:S.navy, opacity:.5 } }, 'vs'):null
+        ])
+      ));
+    }
+
+    if(p.type==='cross'){
+      return this.panelBox(h('div',{ style:{ textAlign:'center' } },
+        h('div',{ style:{ position:'relative', display:'inline-block', padding:'18px 34px', background:'#fff',
+            borderRadius:14, border:'2px solid '+S.red, boxShadow:'0 10px 26px rgba(192,57,43,.18)' } },
+          h('div',{ style:{ fontSize:44, fontWeight:800, color:S.navy, fontFamily:"'Consolas',monospace" } }, p.val),
+          h('div',{ style:{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center',
+              fontSize:130, color:S.red, fontWeight:300, lineHeight:1, animation:'asCross .4s ease both' } }, '✕')),
+        h('div',{ style:{ marginTop:16, display:'inline-block', background:S.red, color:'#fff', borderRadius:8,
+            padding:'8px 20px', fontSize:18, fontWeight:700 } }, p.label)
+      ));
+    }
+
+    if(p.type==='compare'){
+      return this.panelBox(h('div',{ style:{ display:'flex', gap:30 } },
+        [p.a,p.b].map((x,k)=> h('div',{ key:k, style:{ background:'#fff', border:'2.5px solid '+x.color, borderRadius:16,
+            padding:'24px 36px', textAlign:'center', minWidth:250, boxShadow:'0 12px 30px rgba(26,26,46,.16)' } },
+          h('div',{ style:{ fontSize:16, fontWeight:800, color:x.color, letterSpacing:'.06em', marginBottom:12 } }, x.title),
+          h('div',{ style:{ fontSize:46, fontWeight:800, color:x.color, fontFamily:"'Consolas',monospace" } }, x.val)))
+      ));
+    }
+
+    if(p.type==='recap'){
+      return this.panelBox(h('div',{ style:{ display:'flex', flexDirection:'column', gap:16, width:620 } },
+        p.items.map((it,k)=> h('div',{ key:k, style:{ background:S.navy, color:'#fff', borderRadius:12, padding:'16px 24px',
+            display:'flex', gap:18, alignItems:'center', boxShadow:'0 10px 24px rgba(26,26,46,.22)',
+            animation:'asFadeUp .4s ease both', animationDelay:(k*0.18)+'s' } },
+          h('div',{ style:{ fontSize:30, fontWeight:800, color:S.orange, minWidth:34 } }, it.n),
+          h('div',null,
+            h('div',{ style:{ fontSize:21, fontWeight:800 } }, it.title),
+            h('div',{ style:{ fontSize:16, opacity:.82, marginTop:2 } }, it.body))))
+      ), { top:86 });
+    }
+    return null;
+  }
+
+  renderCaption(cap){
+    const h=React.createElement, m=this.meta[cap.who];
+    return h('div',{ key:'cap', style:{ position:'absolute', left:'50%', top:404, transform:'translateX(-50%)',
+        zIndex:5, animation:'asBub .3s ease both', maxWidth:720 } },
+      h('div',{ style:{ fontSize:12, fontWeight:700, color:m.color, letterSpacing:'.05em', marginBottom:5, marginLeft:6 } }, m.name),
+      h('div',{ style:{ background:'#fff', borderRadius:16, padding:'12px 20px', fontSize:19, lineHeight:1.4,
+          color:this.C.ink, boxShadow:'0 8px 22px rgba(26,26,46,.14)' } }, cap.text)
+    );
+  }
+
+  // ---------- backgrounds ----------
+  bgEl(kind){
+    const h=React.createElement, S=this.C;
+    const wrap=(bg,kids)=> h('div',{ key:'bg', style:{ position:'absolute', inset:0, zIndex:0, background:bg, overflow:'hidden' } }, kids);
+    const rect=(x,y,w,ht,c,o=1,r=2)=> h('div',{ key:x+'-'+y+'-'+c, style:{ position:'absolute', left:x, top:y, width:w, height:ht, background:c, opacity:o, borderRadius:r } });
+    if(kind==='godown'){
+      return wrap('linear-gradient(180deg,#e9eaf2,#dfe0ec)', [
+        rect(0,150,1280,7,'#b9bccd',1), rect(0,300,1280,7,'#b9bccd',1), rect(0,450,1280,7,'#b9bccd',1),
+        rect(70,86,90,64,'#d8c19a',.95,4), rect(170,90,90,60,'#d8c19a',.95,4), rect(280,92,80,58,'#cdb78f',.95,4),
+        rect(900,76,60,74,'#9db6d4',.95,8), rect(975,80,60,70,'#9db6d4',.95,8), rect(1050,84,60,66,'#8fa9c9',.95,8),
+        rect(120,236,80,64,'#e0d2b0',.9,4), rect(220,240,80,60,'#d6c8a6',.9,4), rect(960,232,150,68,'#cbb98e',.9,4),
+        rect(70,388,120,62,'#d8c19a',.85,4), rect(1000,384,120,66,'#9db6d4',.85,8),
+      ]);
+    }
+    if(kind==='office'){
+      return wrap('linear-gradient(180deg,#fdf8f3,#f6ede2)', [
+        rect(150,86,560,150,'#ffffff',1,8), h('div',{ key:'wbb', style:{ position:'absolute', left:150, top:86, width:560, height:150, border:'3px solid #d8cdbb', borderRadius:8 } }),
+        rect(0,560,1280,160,'#caa874',.55,0), rect(0,560,1280,6,'#a8835a',.6,0),
+      ]);
+    }
+    if(kind==='laptop'){
+      return wrap('linear-gradient(180deg,#f1ecf6,#e8e1f0)', [
+        rect(0,580,1280,140,'#d9cfe6',.6,0), rect(0,580,1280,5,'#bcaed6',.5,0),
+      ]);
+    }
+    if(kind==='shelf'){
+      return wrap('linear-gradient(180deg,#efe9e0,#e6dccd)', [
+        rect(0,160,1280,8,'#c3b59c',1), rect(0,330,1280,8,'#c3b59c',1), rect(0,500,1280,8,'#c3b59c',1),
+        ...[80,150,220,290,360].map((x,k)=> rect(x,96,46,64,'#bf7d4a',.9,6)),
+        ...[80,150,220,290,360].map((x,k)=> rect(x,266,46,64, k===2?'#c0392b':'#bf7d4a', k===2?.95:.85,6)),
+      ]);
+    }
+    if(kind==='door'){
+      return wrap('linear-gradient(180deg,#ece6dc,#e0d8cb)', [
+        rect(940,90,210,440,'#cbbfa8',.8,6), rect(960,110,170,400,'#d8cdba',.5,4), rect(0,560,1280,160,'#c2a577',.5,0),
+      ]);
+    }
+    if(kind==='navy'){ return wrap(S.navy, []); }
+    return wrap(S.bg, []);
+  }
+
+  // ---------- cards ----------
+  renderCard(card){
+    const h=React.createElement, S=this.C;
+    if(card.kind==='title'){
+      return h('div',{ key:'card', style:{ position:'absolute', inset:0, zIndex:8, background:S.navy, color:'#fff',
+          display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', animation:'asFade .35s ease both' } },
+        h('div',{ style:{ fontSize:18, letterSpacing:'.22em', color:S.orange, fontWeight:700, animation:'asFadeUp .4s ease both' } }, card.eyebrow),
+        h('div',{ style:{ fontSize:62, fontWeight:800, margin:'18px 0 8px', maxWidth:1000, lineHeight:1.08, animation:'asFadeUp .5s ease .08s both' } }, card.title),
+        h('div',{ style:{ fontSize:30, color:S.gold, fontWeight:600, animation:'asFadeUp .5s ease .18s both' } }, card.subtitle),
+        h('div',{ style:{ marginTop:48, fontSize:16, letterSpacing:'.1em', opacity:.7, animation:'asFade 1s ease .5s both' } }, card.foot)
+      );
+    }
+    if(card.kind==='closing'){
+      return h('div',{ key:'card', style:{ position:'absolute', inset:0, zIndex:8, background:S.navy, color:'#fff',
+          display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', animation:'asFade .35s ease both' } },
+        h('div',{ style:{ fontSize:40, fontWeight:800, animation:'asFadeUp .4s ease both' } }, 'AS 2 — Valuation of Inventories'),
+        h('div',{ style:{ fontSize:22, opacity:.8, marginTop:8 } }, 'CA Inter · Advanced Accounting'),
+        h('div',{ style:{ width:60, height:3, background:S.orange, margin:'28px 0' } }),
+        h('div',{ style:{ fontSize:19, opacity:.9 } }, 'CA Pranav Learning · CA Pranav Pratik Tulshyan'),
+        h('div',{ style:{ marginTop:14, fontSize:18, color:S.gold, fontWeight:700, letterSpacing:'.06em' } }, '#pranavBhaiya   #NewtonofAccounts')
+      );
+    }
+    // scene
+    return h('div',{ key:'card', style:{ position:'absolute', inset:0, zIndex:8, background:S.navy, color:'#fff',
+        display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', animation:'asFade .3s ease both' } },
+      h('div',{ style:{ display:'flex', alignItems:'center', gap:14, color:S.orange, fontSize:20, fontWeight:800, letterSpacing:'.14em', animation:'asFadeUp .4s ease both' } },
+        h('div',{ style:{ width:34, height:2, background:S.orange } }), card.n, h('div',{ style:{ width:34, height:2, background:S.orange } })),
+      h('div',{ style:{ fontSize:50, fontWeight:800, margin:'14px 0 10px', maxWidth:1000, lineHeight:1.12, animation:'asFadeUp .5s ease .08s both' } }, card.title),
+      card.sub? h('div',{ style:{ fontSize:22, opacity:.72, animation:'asFadeUp .5s ease .16s both' } }, card.sub):null
+    );
+  }
+
+  // ---------- stage ----------
+  renderStage(b){
+    const h=React.createElement;
+    if(b.type==='card') return [ this.bgEl('navy'), this.renderCard(b.card) ];
+    const layers=[ this.bgEl(b.bg) ];
+    const speaker = b.bubble ? b.bubble.who : null;
+    (b.chars||[]).forEach(c=> layers.push(this.renderCharacter(c, speaker? c.who===speaker : null)));
+    if(b.panel) layers.push(this.renderPanel(b.panel));
+    if(b.caption) layers.push(this.renderCaption(b.caption));
+    if(b.bubble){ const sc=(b.chars||[]).find(c=>c.who===b.bubble.who); layers.push(this.renderBubble(b.bubble, sc?sc.x:null)); }
+    return layers;
+  }
+
+  // ---------- data ----------
+  get beats(){
+    if(this._beats) return this._beats;
+    const c=(who,x,emoji,pose)=>({who,x,emoji,pose});
+    const L3=230, M3=545, R3=860, C1=545, L2=300, R2=760;
+    const G='#2D8653', P='#6B3FA0', O='#E8813A', N='#1A1A2E';
+    const B=[
+      { type:'card', card:{ kind:'title', eyebrow:'CA Inter · Advanced Accounting', title:'AS 2 — Valuation of Inventories', subtitle:'“Godown Ka Hisaab”', foot:'#pranavBhaiya  ·  #NewtonofAccounts' } },
+      { type:'card', scene:'Scene 1 · Setting the Stage', card:{ kind:'scene', n:'Scene 1', title:'Setting the Stage', sub:'BCPL Warehouse, Noida — last week of March.' } },
+      { type:'beat', scene:'Scene 1 · Setting the Stage', bg:'godown', chars:[c('rolly',C1)], narrator:'Last week of March. The financial year was closing.' },
+      { type:'beat', scene:'Scene 1 · Setting the Stage', bg:'godown', chars:[c('rolly',C1,null,'walk')], narrator:'Rolly had been at BCPL\u2019s Noida warehouse for two days — counting boxes, checking batches, making notes.' },
+      { type:'beat', scene:'Scene 1 · Setting the Stage', bg:'godown', chars:[c('rolly',C1,'🙂')], narrator:'Sethji\u2019s FMCG godown: coconut soap, cooking oil, shampoo sachets, biscuit cartons — stacked to the ceiling.' },
+
+      { type:'card', scene:'Scene 2 · Rolly\u2019s Valuation', card:{ kind:'scene', n:'Scene 2', title:'Rolly\u2019s Valuation', sub:'The number that looked too good.' } },
+      { type:'beat', scene:'Scene 2 · Rolly\u2019s Valuation', bg:'laptop', chars:[c('rolly',R2)], bubble:{ who:'rolly', kind:'thought', text:'Inventory is worth what you can sell it for. Market price. Simple.' } },
+      { type:'beat', scene:'Scene 2 · Rolly\u2019s Valuation', bg:'laptop', chars:[c('rolly',R2)], panel:{ type:'table',
+          head:['ITEM','QTY','ROLLY\u2019s VALUE'], rows:[['Coconut Soap','2,000 boxes','₹85 / box'],['Hair Oil','500 bottles','₹195 / bottle'],['Cooking Oil','300 litres','₹130 / litre']],
+          foot:['TOTAL INVENTORY  (full godown):   ₹1.24 crore'] } },
+      { type:'beat', scene:'Scene 2 · Rolly\u2019s Valuation', bg:'laptop', chars:[c('rolly',R2,'🙂')], panel:{ type:'table', glow:true,
+          head:['ITEM','QTY','ROLLY\u2019s VALUE'], rows:[['Coconut Soap','2,000 boxes','₹85 / box'],['Hair Oil','500 bottles','₹195 / bottle'],['Cooking Oil','300 litres','₹130 / litre']],
+          foot:['TOTAL INVENTORY  (full godown):   ₹1.24 crore','A very healthy number.'] } },
+
+      { type:'card', scene:'Scene 3 · Sethji Reviews', card:{ kind:'scene', n:'Scene 3', title:'Sethji Reviews' } },
+      { type:'beat', scene:'Scene 3 · Sethji Reviews', bg:'office', chars:[c('sethji',L2,'🙂'),c('rolly',R2)], bubble:{ who:'sethji', kind:'speech', text:'Rolly ji, bahut achha! Balance sheet strong dikhega. Bank wale khush ho jaayenge.' } },
+      { type:'beat', scene:'Scene 3 · Sethji Reviews', bg:'office', chars:[c('sethji',L2),c('rolly',R2)], panel:{ type:'chip', color:O, text:'₹5 crore expansion loan — next month' }, narrator:'He was applying for a ₹5 crore expansion loan next month. A strong balance sheet mattered.' },
+
+      { type:'card', scene:'Scene 4 · The Auditor Arrives', card:{ kind:'scene', n:'Scene 4', title:'The Auditor Arrives' } },
+      { type:'beat', scene:'Scene 4 · The Auditor Arrives', bg:'door', chars:[c('pranav',C1,null,'enter')], narrator:'Pranav arrived two days later for the statutory audit.' },
+      { type:'beat', scene:'Scene 4 · The Auditor Arrives', bg:'door', chars:[c('pranav',C1,'🤔')], panel:{ type:'invoice', label:'PURCHASE INVOICES · coconut soap, per box', chips:['₹58','₹60','₹62'] }, narrator:'He opened Rolly\u2019s working. Coconut soap: ₹85 per unit. He went to the purchase invoices.' },
+
+      { type:'card', scene:'Scene 5 · The Hair-Oil Discovery', card:{ kind:'scene', n:'Scene 5', title:'The Hair-Oil Discovery' } },
+      { type:'beat', scene:'Scene 5 · The Hair-Oil Discovery', bg:'shelf', chars:[c('pranav',L2)], panel:{ type:'chip', color:'#C0392B', text:'⚠  Expiry: May  ·  October batch, 200 bottles' }, narrator:'October batch — 200 bottles. Expiry date: May. Only two months to expiry.' },
+      { type:'beat', scene:'Scene 5 · The Hair-Oil Discovery', bg:'shelf', chars:[c('pranav',L2,'🤔')], panel:{ type:'calc', title:'Hair Oil — Net Realisable Value', rows:[
+          { l:'Current market selling price', v:'₹120' }, { l:'Less: 10% distributor commission', v:'− ₹12' },
+          { l:'Net Realisable Value (NRV)', v:'₹108' }, { l:'Cost of purchase', v:'₹140' } ] } },
+
+      { type:'card', scene:'Scene 6 · The Meeting', card:{ kind:'scene', n:'Scene 6', title:'The Meeting' } },
+      { type:'beat', scene:'Scene 6 · The Meeting', bg:'office', chars:[c('pranav',L3),c('rolly',M3),c('sethji',R3)],
+          panel:{ type:'contrast', a:{ label:'ROLLY\u2019s SHEET', val:'₹85', color:O }, b:{ label:'PURCHASE INVOICE', val:'₹60', color:N } },
+          caption:{ who:'pranav', text:'Rolly ji, yeh coconut soap ki valuation — ₹85 per unit. Purchase invoice ₹60 dikhata hai. Yeh ₹85 kahan se aaya?' } },
+      { type:'beat', scene:'Scene 6 · The Meeting', bg:'office', chars:[c('pranav',L3),c('rolly',M3),c('sethji',R3)], bubble:{ who:'rolly', kind:'speech', text:'Market price! That\u2019s what they\u2019re worth right now. If we sold them today, we\u2019d get ₹85.' } },
+      { type:'beat', scene:'Scene 6 · The Meeting', bg:'office', chars:[c('pranav',L3),c('rolly',M3),c('sethji',R3,'🙂')], bubble:{ who:'sethji', kind:'speech', text:'Toh phir kya problem hai, Pranav bhai? Agar bazar mein ₹85 mil raha hai, toh inventory ₹85 hi honi chahiye?' } },
+
+      { type:'card', scene:'Scene 7 · Why Not Market Price?', card:{ kind:'scene', n:'Scene 7', title:'Why Not Market Price?' } },
+      { type:'beat', scene:'Scene 7 · Why Not Market Price?', bg:'office', chars:[c('pranav',L3,'👉'),c('rolly',M3),c('sethji',R3)], bubble:{ who:'pranav', kind:'speech', text:'Sethji, sochiye aage. Agar ₹85 pe value ki — toh hum keh rahe hain ki ₹25 per box ka profit pehle hi kama liya…' } },
+      { type:'beat', scene:'Scene 7 · Why Not Market Price?', bg:'office', chars:[c('pranav',L3),c('rolly',M3),c('sethji',R3)], panel:{ type:'cross', val:'₹25 profit', label:'Unrealised Profit — Cannot Book Yet' }, caption:{ who:'pranav', text:'…jabki soap abhi godown mein hai. Bika nahi hai. Ek rupaya bhi nahi aaya. Toh profit kahan hua?' } },
+      { type:'beat', scene:'Scene 7 · Why Not Market Price?', bg:'office', chars:[c('pranav',L3),c('rolly',M3),c('sethji',R3)], panel:{ type:'highlight', heading:'AS 2 RULE', body:['Value inventory at','LOWER OF COST AND NET REALISABLE VALUE','(LCNRV)','Dono mein se jo kam ho.'] } },
+      { type:'beat', scene:'Scene 7 · Why Not Market Price?', bg:'office', chars:[c('pranav',L3),c('rolly',M3,'💡'),c('sethji',R3)], panel:{ type:'calc', title:'Coconut Soap', rows:[
+          { l:'Cost', v:'₹60', tag:'lower' }, { l:'NRV', v:'₹85' }, { l:'Value taken', v:'₹60  (not ₹85)', tag:'big' } ] } },
+
+      { type:'card', scene:'Scene 8 · Provide for the Loss — Now', card:{ kind:'scene', n:'Scene 8', title:'Provide for the Loss — Now' } },
+      { type:'beat', scene:'Scene 8 · Provide for the Loss — Now', bg:'office', chars:[c('pranav',L3,'👉'),c('rolly',M3),c('sethji',R3)], bubble:{ who:'pranav', kind:'speech', text:'October wali hair oil batch — cost ₹140. Ab sirf ₹108 mein bik sakti hai. NRV ₹108 hai.' } },
+      { type:'beat', scene:'Scene 8 · Provide for the Loss — Now', bg:'office', chars:[c('pranav',L3),c('rolly',M3),c('sethji',R3)], panel:{ type:'calc', title:'Hair Oil (October batch)', flow:true, rows:[
+          { l:'Cost', v:'₹140' }, { l:'NRV', v:'₹108', tag:'lower' }, { l:'Value taken', v:'₹108' }, { l:'Loss', v:'₹32 / bottle', tag:'loss' } ] } },
+      { type:'beat', scene:'Scene 8 · Provide for the Loss — Now', bg:'office', chars:[c('pranav',L3),c('rolly',M3),c('sethji',R3,'🙂')], bubble:{ who:'sethji', kind:'speech', text:'Loss hone wala hai, toh abhi book karo. Profit hone wala hai, toh ruko jab tak ho na jaye.' } },
+      { type:'beat', scene:'Scene 8 · Provide for the Loss — Now', bg:'office', chars:[c('pranav',L3),c('rolly',M3),c('sethji',R3)], panel:{ type:'concept', heading:'CONSERVATISM PRINCIPLE', body:['“Anticipate no profits.','Provide for all losses.”','','AS 2 isi principle pe khada hai.'] }, caption:{ who:'pranav', text:'Exactly, Sethji. Bilkul sahi.' } },
+
+      { type:'card', scene:'Scene 9 · FIFO vs Weighted Average', card:{ kind:'scene', n:'Scene 9', title:'Cooking Oil — FIFO vs Weighted Average' } },
+      { type:'beat', scene:'Scene 9 · FIFO vs Weighted Average', bg:'laptop', chars:[c('pranav',L2),c('rolly',R2)], bubble:{ who:'rolly', kind:'speech', text:'Pranav bhai, ek aur baat. Cooking oil — teen batches, teen alag rates.' } },
+      { type:'beat', scene:'Scene 9 · FIFO vs Weighted Average', bg:'laptop', chars:[c('pranav',L2),c('rolly',R2)], panel:{ type:'table', title:'Cooking Oil — Batches',
+          head:['BATCH','QTY','RATE'], rows:[['Batch 1 (July)','100 L','₹90 / L'],['Batch 2 (Nov)','150 L','₹95 / L'],['Batch 3 (Feb)','200 L','₹100 / L']],
+          foot:['Sold during year:  330 L','Closing stock:  120 L  —  value = ?'] } },
+      { type:'beat', scene:'Scene 9 · FIFO vs Weighted Average', bg:'laptop', chars:[c('pranav',L2),c('rolly',R2)], panel:{ type:'calc', accent:'green', title:'FIFO  (First In, First Out)', rows:[
+          { l:'Oldest sold first →', v:'' }, { l:'July 100 · Nov 150 · Feb 80', v:'= 330 L' }, { l:'Remaining: 120 L (Feb batch)', v:'' }, { l:'Value = 120 × ₹100', v:'₹12,000', tag:'big' } ] } },
+      { type:'beat', scene:'Scene 9 · FIFO vs Weighted Average', bg:'laptop', chars:[c('pranav',L2),c('rolly',R2)], panel:{ type:'calc', accent:'purple', title:'Weighted Average', rows:[
+          { l:'(100×90)+(150×95)+(200×100)', v:'₹43,250' }, { l:'Total quantity', v:'450 L' }, { l:'Average rate', v:'₹96.11 / L' }, { l:'Value = 120 × ₹96.11', v:'₹11,533', tag:'big' } ] } },
+
+      { type:'card', scene:'Scene 10 · Pick One. Stick to It.', card:{ kind:'scene', n:'Scene 10', title:'Pick One. Stick to It.' } },
+      { type:'beat', scene:'Scene 10 · Pick One. Stick to It.', bg:'laptop', chars:[c('pranav',L2),c('rolly',R2)], panel:{ type:'compare', a:{ title:'FIFO', val:'₹12,000', color:G }, b:{ title:'Weighted Avg', val:'₹11,533', color:P } }, caption:{ who:'rolly', text:'Both give different values!' } },
+      { type:'beat', scene:'Scene 10 · Pick One. Stick to It.', bg:'laptop', chars:[c('pranav',L2),c('rolly',R2)], bubble:{ who:'pranav', kind:'speech', text:'Haan. Aur AS 2 dono allow karta hai. Koi ek choose karo —' } },
+      { type:'beat', scene:'Scene 10 · Pick One. Stick to It.', bg:'laptop', chars:[c('pranav',L2),c('rolly',R2)], panel:{ type:'highlight', heading:'CONSISTENCY RULE', body:['Pick ONE method. Follow it every year.','Saal-saal switch nahi kar sakte.'] } },
+
+      { type:'card', scene:'Scene 11 · The Real Picture', card:{ kind:'scene', n:'Scene 11', title:'The Real Picture' } },
+      { type:'beat', scene:'Scene 11 · The Real Picture', bg:'office', chars:[c('sethji',C1,'🙂')], bubble:{ who:'sethji', kind:'speech', text:'Theek hai, Pranav bhai. Jo sach hai, wahi dikhana chahiye. Bank ko bhi toh asli tasveer chahiye.' } },
+      { type:'beat', scene:'Scene 11 · The Real Picture', bg:'office', chars:[c('rolly',L3,'🙂'),c('pranav',M3,'🙂'),c('sethji',R3,'😄')], bubble:{ who:'sethji', kind:'speech', text:'Waise — ab godown thoda kam bhaari lag raha hai!' } },
+
+      { type:'card', scene:'Scene 12 · The Three Takeaways', card:{ kind:'scene', n:'Scene 12', title:'The Three Takeaways' } },
+      { type:'beat', scene:'Scene 12 · The Three Takeaways', bg:'navy', chars:[], panel:{ type:'recap', items:[
+          { n:'1', title:'LCNRV Rule', body:'Lower of Cost and Net Realisable Value' },
+          { n:'2', title:'Conservatism', body:'Anticipate no profits. Provide for all losses.' },
+          { n:'3', title:'Cost Formulas', body:'FIFO or Weighted Average — consistently applied' } ] } },
+      { type:'card', card:{ kind:'closing' } },
+    ];
+    this._beats=B;
+    return B;
+  }
+
+  getSceneList(){
+    return this.beats.reduce((a,b,idx)=>{
+      if(b.type==='card'&&b.card&&b.card.kind==='scene') a.push({idx,title:b.card.title,n:b.card.n});
+      return a;
+    },[]);
+  }
+
+  renderSceneMenu(){
+    const h=React.createElement, S=this.C, cur=this.state.i;
+    const scenes=this.getSceneList();
+    return h('div',{ key:'smenu', onClick:(e)=>e.stopPropagation(),
+        style:{ position:'absolute',inset:0,zIndex:20,display:'flex',alignItems:'center',justifyContent:'center',
+            background:'rgba(13,13,20,.88)',animation:'asFade .18s ease both' } },
+      h('div',{ style:{ background:'#1e1e30',borderRadius:16,padding:'28px 32px',width:520,
+          boxShadow:'0 30px 90px rgba(0,0,0,.7)',border:'1px solid rgba(255,255,255,.08)' } },
+        h('div',{ style:{ fontSize:12,fontWeight:800,letterSpacing:'.2em',color:S.orange,marginBottom:20,textTransform:'uppercase' } },'Jump to Scene'),
+        scenes.map((s,k)=>{
+          const done=cur>s.idx, active=cur===s.idx;
+          return h('div',{ key:k, onClick:()=>{ this.setI(s.idx); this.setState({menuOpen:false}); },
+              style:{ display:'flex',alignItems:'center',gap:14,padding:'10px 14px',borderRadius:9,cursor:'pointer',
+                  marginBottom:5,transition:'background .15s',
+                  background:active?'rgba(232,129,58,.18)':done?'rgba(255,255,255,.04)':'transparent',
+                  border:active?'1px solid rgba(232,129,58,.4)':'1px solid rgba(255,255,255,.05)' } },
+            h('div',{ style:{ fontSize:12,fontWeight:800,minWidth:20,
+                color:done||active?S.orange:'rgba(255,255,255,.3)' } }, s.n.replace('Scene ','')),
+            h('div',{ style:{ fontSize:15,fontWeight:600,
+                color:active?'#fff':done?'rgba(255,255,255,.75)':'rgba(255,255,255,.4)' } }, s.title)
+          );
+        }),
+        h('div',{ style:{ marginTop:18,textAlign:'center',fontSize:11,color:'rgba(255,255,255,.3)',letterSpacing:'.06em' } },'ESC to close')
+      )
+    );
+  }
+
+  renderVals(){
+    const h=React.createElement, S=this.C;
+    const { i, scale, portrait, menuOpen } = this.state;
+    const beats=this.beats, total=beats.length, b=beats[i];
+    const isCard=b.type==='card', isClosing=isCard&&b.card.kind==='closing';
+    const stage = h('div',{ key:i, style:{ position:'absolute', inset:0 } }, this.renderStage(b));
+
+    const chrome = [
+      h('div',{ key:'pb', style:{ position:'absolute', top:0, left:0, right:0, height:5, background:'rgba(26,26,46,.1)', zIndex:12 } },
+        h('div',{ style:{ height:'100%', width:((i+1)/total*100)+'%', background:S.orange, transition:'width .3s ease' } })),
+      h('div',{ key:'ct', style:{ position:'absolute', top:14, right:20, fontSize:13, fontWeight:700, color:isCard?'rgba(255,255,255,.6)':'rgba(26,26,46,.55)', zIndex:12, letterSpacing:'.04em' } }, (i+1)+' / '+total),
+      this.renderVoiceControls(isCard),
+      h('div',{ key:'mn', onClick:(e)=>{ e.stopPropagation(); this.setState(s=>({ menuOpen:!s.menuOpen })); },
+          style:{ position:'absolute', top:9, left:14, zIndex:13, cursor:'pointer', padding:'6px 9px', borderRadius:7, lineHeight:1,
+              background:menuOpen?'rgba(232,129,58,.22)':'rgba(26,26,46,.07)',
+              color:isCard?'rgba(255,255,255,.65)':'rgba(26,26,46,.55)', fontSize:17,
+              transition:'background .15s ease' } }, '≡'),
+      b.scene? h('div',{ key:'sg', style:{ position:'absolute', top:14, left:56, fontSize:13, fontWeight:600, color:'rgba(26,26,46,.5)', zIndex:12, letterSpacing:'.03em' } }, b.scene):null,
+      (!isCard)? h('div',{ key:'ft', style:{ position:'absolute', bottom:9, left:0, right:0, textAlign:'center', fontSize:11, color:'rgba(26,26,46,.4)', zIndex:12, letterSpacing:'.04em' } }, 'CA Inter · Advanced Accounting    ·    #pranavBhaiya  #NewtonofAccounts    ·    CA Pranav Learning'):null,
+      h('div',{ key:'hn', style:{ position:'absolute', bottom:26, right:20, fontSize:12, fontWeight:600, color:isCard?'rgba(255,255,255,.55)':'rgba(26,26,46,.45)', zIndex:12 } }, isClosing? 'click to restart  ↻' : 'click  ·  ↵ Enter  ▶'),
+      i>0? h('div',{ key:'bk', onClick:(e)=>{ e.stopPropagation(); this.back(); }, style:{ position:'absolute', bottom:22, left:18, fontSize:12, fontWeight:600, color:isCard?'rgba(255,255,255,.5)':'rgba(26,26,46,.4)', zIndex:13, cursor:'pointer', padding:'4px 8px' } }, '‹ back'):null,
+    ];
+
+    const frame = h('div',{ style:{ width:1280, height:720, position:'relative', background:S.bg, borderRadius:16, overflow:'hidden', boxShadow:'0 30px 80px rgba(0,0,0,.5)', border:'1px solid rgba(255,255,255,.06)' } }, stage, chrome, menuOpen ? this.renderSceneMenu() : null);
+    const wrap = h('div',{ style:{ width:1280, height:720, flex:'none', transform:'scale('+scale+')', transformOrigin:'center center' } }, frame);
+
+    const rotate = portrait ? h('div',{ style:{ position:'absolute', inset:0, background:'rgba(13,13,20,.96)', color:'#fff', zIndex:50,
+        display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:30 } },
+        h('div',{ style:{ fontSize:54, marginBottom:18, animation:'asFade 1.4s ease infinite alternate' } }, '🔄'),
+        h('div',{ style:{ fontSize:20, fontWeight:700, maxWidth:300, lineHeight:1.4 } }, 'Rotate your device to landscape for the best view')) : null;
+
+    return { app: h('div',{ onClick:()=>{ if(!this.state.menuOpen) this.next(); }, style:{ position:'fixed', inset:0, background:'radial-gradient(circle at 50% 40%, #1a1a26, #0d0d14)',
+        display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', userSelect:'none', overflow:'hidden' } }, wrap, rotate) };
+  }
+}
+</script>
+</body>
+</html>

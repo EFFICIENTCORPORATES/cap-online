@@ -1,0 +1,286 @@
+/*
+  Shared styles for the commerce pages (courses.html, books.html) and the
+  homepage's "Shop" strip. Reuses the site's existing design tokens exactly
+  (see assets/styles.css :root) rather than inventing a new palette.
+*/
+:root {
+  --ink: #111827;
+  --paper: #f7f4ed;
+  --cream: #eee8dc;
+  --muted: #667085;
+  --yellow: #f5c451;
+  --orange: #e8733f;
+  --blue: #295bff;
+  --line: rgba(17, 24, 39, .13);
+}
+
+/* ---------- page header (internal pages) --------------------------- */
+.store-header {
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(22px, 6vw, 96px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(247, 244, 237, .92);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.store-brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: inherit; }
+.store-brand > span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font: 800 22px/1 Manrope, sans-serif;
+}
+.store-brand strong, .store-brand small { display: block; }
+.store-brand strong { font: 800 13px/1.1 Manrope, sans-serif; letter-spacing: .08em; }
+.store-brand small { margin-top: 4px; color: var(--muted); font-size: 10px; }
+.store-header nav { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.store-header nav a { font-size: 12px; font-weight: 700; text-decoration: none; color: inherit; }
+.store-header nav a.is-current { border-bottom: 1px solid currentColor; padding-bottom: 3px; }
+
+/* ---------- page hero ------------------------------------------------ */
+.store-hero {
+  padding: 88px clamp(22px, 7vw, 110px) 56px;
+  max-width: 840px;
+}
+.store-hero .eyebrow { color: var(--orange); }
+.store-hero h1 {
+  margin: 0 0 18px;
+  font: 700 clamp(46px, 6vw, 78px)/.98 Manrope, sans-serif;
+  letter-spacing: -.045em;
+}
+.store-hero h1 em { color: var(--orange); font-style: normal; }
+.store-hero p { margin: 0; max-width: 620px; color: var(--muted); font-size: 17px; line-height: 1.65; }
+
+/* ---------- shared section shell -------------------------------------- */
+.store-section { padding: 20px clamp(22px, 7vw, 110px) 72px; }
+.store-section-head { max-width: 680px; margin: 0 0 32px; }
+.store-section-head h2 {
+  margin: 0 0 10px;
+  font: 700 clamp(30px, 3.4vw, 42px)/1.05 Manrope, sans-serif;
+  letter-spacing: -.03em;
+}
+.store-section-head p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+
+/* ---------- full-course card ------------------------------------------ */
+.course-feature {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  overflow: hidden;
+  background: #fff;
+}
+.course-feature-copy { padding: 46px clamp(28px, 4vw, 54px); }
+.course-feature-copy .eyebrow { color: var(--orange); }
+.course-feature-copy h3 {
+  margin: 0 0 14px;
+  font: 700 clamp(28px, 3vw, 38px)/1.08 Manrope, sans-serif;
+  letter-spacing: -.03em;
+}
+.course-feature-copy p { margin: 0 0 24px; color: var(--muted); font-size: 15.5px; line-height: 1.65; max-width: 46ch; }
+.course-batches { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 26px; }
+.course-batches span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.course-feature-price {
+  background: var(--ink);
+  color: #fff;
+  padding: 46px clamp(28px, 4vw, 54px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+.course-feature-price .price-label { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: #cfd3db; }
+.course-feature-price .price-value { font: 800 52px/1 Manrope, sans-serif; letter-spacing: -.03em; }
+.course-feature-price .price-note { font-size: 12.5px; color: #b9bec9; line-height: 1.5; }
+
+/* ---------- chapter grid ---------------------------------------------- */
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  gap: 14px;
+}
+.chapter-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 168px;
+}
+.chapter-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.chapter-as {
+  font: 700 12px/1 Manrope, sans-serif;
+  letter-spacing: .04em;
+  color: var(--orange);
+}
+.chapter-seq { font-size: 11px; color: var(--muted); }
+.chapter-card h4 {
+  margin: 0;
+  font: 600 15.5px/1.35 Manrope, sans-serif;
+  letter-spacing: -.01em;
+}
+.chapter-card-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.chapter-price { font: 700 17px/1 Manrope, sans-serif; }
+.chapter-soon {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--cream);
+  border-radius: 999px;
+  padding: 5px 10px;
+}
+.chapter-buy {
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-size: 12.5px;
+  font-weight: 700;
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+}
+.chapter-buy:hover { background: var(--orange); }
+
+/* ---------- book cards -------------------------------------------------- */
+.book-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+.book-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 30px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.book-card .eyebrow { color: var(--orange); margin-bottom: 4px; }
+.book-card h3 { margin: 0; font: 700 24px/1.15 Manrope, sans-serif; letter-spacing: -.02em; }
+.book-card p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+.book-card-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+.book-price { font: 700 22px/1 Manrope, sans-serif; }
+.book-price small { display: block; margin-top: 4px; font: 400 11px/1.3 "DM Sans", sans-serif; color: var(--muted); }
+.book-shipping-note { font-size: 12px; color: var(--muted); }
+
+/* ---------- shared "button" fallback (pages without styles.css button) - */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 22px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.button-primary { background: var(--ink); color: #fff; }
+.button-primary:hover { background: var(--orange); }
+
+/* ---------- order modal ------------------------------------------------- */
+.store-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17, 24, 39, .55);
+  padding: 20px;
+}
+.store-modal.is-open { display: flex; }
+body.store-modal-lock { overflow: hidden; }
+.store-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 20px;
+  padding: 34px 30px;
+}
+.store-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--cream);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+.store-modal-eyebrow {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.store-modal-body h3 { margin: 0 0 6px; font: 700 22px/1.15 Manrope, sans-serif; letter-spacing: -.02em; }
+.store-modal-body > p { margin: 0 0 14px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.store-modal-price { font: 700 18px/1 Manrope, sans-serif !important; color: var(--ink) !important; margin-bottom: 20px !important; }
+.store-form { display: flex; flex-direction: column; gap: 12px; }
+.store-form label { display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.store-form input, .store-form textarea {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 13px;
+  font: 400 14px/1.4 "DM Sans", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+.store-form input:focus, .store-form textarea:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+.store-form button { margin-top: 8px; width: 100%; }
+
+/* ---------- homepage "Shop" strip -------------------------------------- */
+.shop-strip { padding: 0 clamp(24px, 7vw, 110px) 70px; }
+.shop-strip-head { max-width: 640px; margin: 0 0 28px; }
+.shop-strip-head h2 { margin: 0 0 10px; font: 700 clamp(32px, 3.6vw, 46px)/1.05 Manrope, sans-serif; letter-spacing: -.035em; }
+.shop-strip-head p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+.shop-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.shop-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px 26px;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color .2s, transform .2s;
+}
+.shop-card:hover { border-color: var(--ink); transform: translateY(-2px); }
+.shop-card span.tag { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--orange); }
+.shop-card strong { font: 700 20px/1.15 Manrope, sans-serif; letter-spacing: -.02em; }
+.shop-card p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+.shop-card em { margin-top: auto; font-style: normal; font-size: 12.5px; font-weight: 700; }
+
+@media (max-width: 860px) {
+  .course-feature { grid-template-columns: 1fr; }
+  .shop-cards { grid-template-columns: 1fr; }
+}
