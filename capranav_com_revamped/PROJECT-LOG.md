@@ -136,6 +136,40 @@ are baked into the build described below.
   `DATABASE-BACKUP.md`. Verified running unattended (not just once by
   hand) — the log shows real, automatic, on-schedule runs.
 
+### Phase C — handoff work, in gated phases (started 2026-09-03)
+
+Picked up via `HANDOFF-PROMPT.md`. Phase 0 (orientation) done: read this file +
+`DATABASE-BACKUP.md`, opened the live site for real (homepage, dashboard.html,
+reader.html — curl with a browser UA, since Cloudflare 403s the default
+WebFetch fetcher), summarized back to Pranav, he confirmed it was accurate.
+
+**Item 1 — the stale pending order — closed 2026-09-03.** Before asking
+Pranav what to do, checked whether the order was real: queried the D1 row
+directly (`razorpay_order_id = order_TXCIG4xR6iDOal`, no
+`razorpay_payment_id`), then called Razorpay's live API directly (using
+`.dev.vars`) for that order id — **Razorpay has no record of it at all**
+("the id provided does not exist"), and a full order listing for the hour
+around its `created_at` timestamp shows only 2 real orders in that window,
+both for a different product (`book-sb-pdf`, ₹99), neither this one. Sanity-
+checked the API path itself against a known-real, known-paid order
+(`order_TXCR6HjXTv2Vpx`) to confirm the credentials/call shape were correct —
+that one returned real data fine. Likely explanation: the Worker's
+Razorpay keys were rotated sometime on 2026-09-02 between this order's
+14:13:49 UTC creation and `.dev.vars` being last written (19:49 same day) —
+the order-create code only writes the D1 row after a real Razorpay order-create
+call succeeds, so a genuine order must have existed under whatever keys were
+live at that moment, just not the ones on file now.
+
+Reported this finding to Pranav (not just "what should I do with it") before
+asking for a decision, since it changed the picture from "possible real
+missed payment" to "no recoverable evidence a payment was ever possible."
+Gave him the option to supply the old key pair if he had it. He chose: mark
+it abandoned, don't grant access. Ran `UPDATE orders SET status='failed'
+WHERE id='f440abb8-02f1-441e-bec8-ee1f881fe514' AND status='pending'`
+directly against remote D1 (not deleted — kept as a real historical row),
+confirmed `changes: 1` in the response, then re-queried the row and confirmed
+`status` now reads `failed`.
+
 ---
 
 ## 3. Current architecture — the concrete map
@@ -241,14 +275,7 @@ Ranked roughly by how much it matters, not necessarily build order (a new
 agent picking this up should still gate each one separately — see the
 handoff prompt in `HANDOFF-PROMPT.md`).
 
-1. **A stale unpaid order is sitting in the database.**
-   `book-qb-pdf`, ₹199, buyer `pranavaiversion@gmail.com`, created
-   `2026-09-02 14:13:49`, still `status = 'pending'`. Never resolved —
-   nobody has confirmed whether this was a real abandoned purchase
-   attempt or leftover from testing. Needs a decision from Pranav, not a
-   guess.
-
-2. **No Razorpay webhook — payment confirmation depends entirely on the
+1. **No Razorpay webhook — payment confirmation depends entirely on the
    buyer's browser calling back.** If a payment succeeds on Razorpay's
    side but the browser closes/crashes/loses connection before
    `/api/orders/verify` runs, Razorpay will show the money received while
@@ -256,27 +283,27 @@ handoff prompt in `HANDOFF-PROMPT.md`).
    automatic access. Nothing currently reconciles that gap. This is the
    single most important functional item on this list.
 
-3. **No Privacy Policy / Terms / Refund / Shipping page** — only a
+2. **No Privacy Policy / Terms / Refund / Shipping page** — only a
    one-line footer disclaimer ("all purchases final"). The site now
    processes live payments; worth checking whether Razorpay or normal
    business practice expects more than a one-liner. Don't invent legal
    commitments (especially refund terms) without Pranav's explicit
    sign-off — this was true for Phase A too and still holds.
 
-4. **No admin visibility into orders/entitlements** beyond the
+3. **No admin visibility into orders/entitlements** beyond the
    order-notification email and querying D1 directly by hand. Fine for
    today's volume; won't scale to "check this manually" once there are
    more than a handful of orders a week.
 
-5. **No rate-limiting on `/api/otp/send`.** Anyone can request unlimited
+4. **No rate-limiting on `/api/otp/send`.** Anyone can request unlimited
    OTP codes for any email address, which is both an abuse vector (spam
    someone's inbox) and, at volume, an email-sending cost/reputation risk.
    Not yet exploited as far as is known — a real gap nonetheless.
 
-6. **No abuse protection on `/api/contact`.** Same shape of gap — nothing
+5. **No abuse protection on `/api/contact`.** Same shape of gap — nothing
    stops automated spam submissions.
 
-7. **Backup job failures are silent.** `tools/backup_d1_snapshot.py`
+6. **Backup job failures are silent.** `tools/backup_d1_snapshot.py`
    writes to a local log file nobody is watching. If it starts failing
    (Cloudflare auth expiring, disk full, etc.), nothing alerts anyone —
    contrast with the Telegram platform's own down/up watcher pattern
