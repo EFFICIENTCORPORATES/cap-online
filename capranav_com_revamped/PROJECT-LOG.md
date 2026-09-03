@@ -259,6 +259,30 @@ verified, and closed 2026-09-03.**
     delivery, or accept the verification already done — and he confirmed
     the existing verification is sufficient. **Item closed 2026-09-03.**
 
+**Item 3 — Privacy/Terms/Refund/Shipping page — built and deployed
+2026-09-03, wording drafted by this session at Pranav's explicit request,
+awaiting his review.** Asked first whether he wanted a dedicated page at
+all (per the handoff) — he said yes. Then asked for the actual
+substance (refund terms, shipping specifics, privacy commitments) per the
+handoff's "don't invent legal commitments yourself" instruction — he
+explicitly told this session to invent it, asking for something neutral
+and not biased. New `public/policies.html` (linked from the homepage
+footer, replacing the old one-line-only disclaimer with a link to the
+full page) covers four sections — Privacy Policy, Terms of Service,
+Refund & Cancellation Policy, Shipping Policy — kept deliberately close to
+what the site actually, technically does (no card data stored — Razorpay
+handles that; data lives in Cloudflare D1; OTP-only login; the locked-down
+PDF reader; no separate shipping charge since it's already folded into
+the printed price) rather than promising anything not actually true of
+the current build. Deployed with `wrangler deploy`; confirmed live at
+`https://capranav.com/policies.html` (307-redirects to `/policies` —
+confirmed this is pre-existing Workers Assets behavior, `dashboard.html`
+does the same, not something new). **Still needs Pranav's actual review**
+before being treated as the site's real, final policy — this is a
+first-draft placeholder he asked for, not something reviewed by him (or a
+lawyer) yet, and the handoff's own gate for this phase is his sign-off on
+the wording.
+
 ---
 
 ## 3. Current architecture — the concrete map
@@ -365,12 +389,12 @@ Ranked roughly by how much it matters, not necessarily build order (a new
 agent picking this up should still gate each one separately — see the
 handoff prompt in `HANDOFF-PROMPT.md`).
 
-1. **No Privacy Policy / Terms / Refund / Shipping page** — only a
-   one-line footer disclaimer ("all purchases final"). The site now
-   processes live payments; worth checking whether Razorpay or normal
-   business practice expects more than a one-liner. Don't invent legal
-   commitments (especially refund terms) without Pranav's explicit
-   sign-off — this was true for Phase A too and still holds.
+1. **Privacy/Terms/Refund/Shipping page — built and live (see §2 "Phase
+   C" for detail), but not yet reviewed by Pranav.** The wording was
+   drafted by this session at his explicit request, not written or
+   approved by him — treat it as a placeholder until he's actually read
+   it and confirmed the substance (refund terms especially) is what he
+   wants the business held to.
 
 2. **No admin visibility into orders/entitlements** beyond the
    order-notification email and querying D1 directly by hand. Fine for
