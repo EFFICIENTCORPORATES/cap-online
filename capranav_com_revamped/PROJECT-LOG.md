@@ -158,7 +158,9 @@ Razorpay keys were rotated sometime on 2026-09-02 between this order's
 14:13:49 UTC creation and `.dev.vars` being last written (19:49 same day) —
 the order-create code only writes the D1 row after a real Razorpay order-create
 call succeeds, so a genuine order must have existed under whatever keys were
-live at that moment, just not the ones on file now.
+live at that moment, just not the ones on file now. **Confirmed by Pranav
+2026-09-03**: yes, the live keys were rotated that day, deliberately, no
+issue — matches this session's own reconstruction exactly.
 
 Reported this finding to Pranav (not just "what should I do with it") before
 asking for a decision, since it changed the picture from "possible real
