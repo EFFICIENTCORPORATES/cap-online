@@ -170,6 +170,88 @@ directly against remote D1 (not deleted — kept as a real historical row),
 confirmed `changes: 1` in the response, then re-queried the row and confirmed
 `status` now reads `failed`.
 
+**Item 2 — Razorpay webhook (`POST /api/razorpay/webhook`) — built and
+deployed 2026-09-03, real end-to-end verification done, awaiting Pranav's
+own Razorpay-Dashboard-triggered test + confirmation.**
+
+- Pranav registered the webhook in the Razorpay Dashboard himself (Live
+  Mode) — URL `https://capranav.com/api/razorpay/webhook`, events
+  `order.paid` and `payment.failed`, and supplied the secret he set there.
+  Stored via `wrangler secret put RAZORPAY_WEBHOOK_SECRET` (confirmed via
+  `wrangler secret list` output showing the new name — value never
+  printed/logged/committed) and appended to `.dev.vars` (gitignored) for
+  local `wrangler dev --remote` testing.
+- Read Razorpay's actual webhook docs before writing any code, per the
+  handoff's explicit instruction not to assume it's the same construction
+  as the checkout signature: webhook signatures are HMAC-SHA256 of the
+  **raw** request body (not `orderId|paymentId`), header
+  `X-Razorpay-Signature`, keyed with the separate webhook secret — new
+  `verifyWebhookSignature()` in `worker/lib/razorpay.js`, reusing the
+  existing `hmacHex()` helper. Also confirmed via search that Razorpay
+  sends a `X-Razorpay-Event-Id` header, unique per delivery, meant for
+  dedup — used that for idempotency (see below).
+- **Idempotency, two layers**, both real, both tested:
+  1. New `webhook_events` table (`event_id` PRIMARY KEY) — a webhook
+     delivery is recorded there on first receipt; a re-delivery of the
+     same `X-Razorpay-Event-Id` hits a PK conflict and is acknowledged
+     (`200 {"ok":true,"duplicate":true}`) without touching anything else.
+  2. The actual order mutation itself is idempotent independent of the
+     table above: `markOrderPaid()` (new shared helper, factored out of
+     `handleOrderVerify` so both the webhook and the browser's own
+     `/api/orders/verify` call run the exact same logic) does
+     `UPDATE orders SET status='paid', ... WHERE id = ? AND status != 'paid'`
+     and only grants the entitlement / sends the notification email if
+     that UPDATE's own `changes` count is 1. This is what makes a genuine
+     race between the webhook and the browser's verify call safe — the
+     database's own atomic conditional write decides which of the two
+     "wins," not a read-then-act check beforehand, closing exactly the
+     double-grant/double-email risk the handoff flagged.
+  3. `payment.failed` is acknowledged (event recorded, 200 returned) but
+     deliberately makes no order-state change — a single failed attempt
+     doesn't mean the order is dead, since Razorpay allows retrying
+     payment against the same order, so leaving `status` alone means a
+     later successful attempt on that same order still completes
+     normally through the existing paths.
+- **Verified for real against the live production database and the live
+  Razorpay account** (not just structurally), before deploying:
+  - Ran `wrangler dev --remote` (bound to the real `capranav-platform` D1,
+    same as production) and created a genuine order via
+    `POST /api/orders/create` (`book-sb-physical`, no login needed),
+    getting back a real live-mode Razorpay order id.
+  - Sent a hand-crafted `order.paid` webhook payload matching Razorpay's
+    documented shape, signed with the real webhook secret exactly the way
+    Razorpay signs it (Node `crypto.createHmac('sha256', secret)` over the
+    raw JSON string) — confirmed the order flipped `pending → paid` in the
+    real D1 row, `razorpay_payment_id` and `paid_at` were set correctly.
+  - Confirmed a bad signature is rejected with 400 before touching the
+    database at all.
+  - Confirmed a **literal re-delivery of the same event id** is
+    acknowledged but not reprocessed (`duplicate: true`), and separately
+    confirmed the **race scenario** (a second, genuinely distinct event
+    for an already-paid order — modeling the webhook and the browser's
+    verify call both firing) leaves `paid_at`/`razorpay_payment_id`
+    unchanged from the first transition, proving the entitlement/email
+    side effects only ever run once.
+  - Confirmed a `payment.failed` event for an unrelated/unknown order is
+    acknowledged (200) and mutates nothing.
+  - This test order was a physical book, so the real "new order"
+    notification email genuinely fired to
+    `capranavpratiktulshyan@gmail.com` as a side effect of proving the
+    non-PDF branch works too — flagged to Pranav so a
+    "New order — Webhook Test" email in that inbox isn't a surprise.
+  - All test rows (the order, the 3 `webhook_events` test rows) deleted
+    afterward; re-queried and confirmed 0 residue.
+  - Deployed with `wrangler deploy`, then smoke-tested the real
+    `https://capranav.com/api/razorpay/webhook` (not the workers.dev
+    preview URL) with a garbage signature — got a real 400
+    `"Invalid signature."` back, confirming the route is live on the real
+    domain and actually verifying, not just returning success for
+    anything.
+  - **Not yet done**: Razorpay's own Dashboard "Test Webhook" button,
+    which the handoff explicitly calls for as the final proof (a delivery
+    genuinely initiated by Razorpay, not hand-signed by this session) —
+    asked Pranav to trigger it.
+
 ---
 
 ## 3. Current architecture — the concrete map
@@ -264,8 +346,9 @@ just locally, and test data was cleaned up afterward each time:
 One thing to know about the test data: some of it was created under
 `pranavaiversion@gmail.com` (this AI session's own linked account) while
 verifying the live flow. Test entitlements/orders/sessions were deleted
-after each check — **except** one real order that turned out to be
-genuine user activity, not test residue (see open item #1 below).
+after each check — **except** one order that sat unresolved for a day
+(§2's "Phase C" — investigated and closed 2026-09-03, turned out to have
+no real Razorpay-side record at all, marked `failed`).
 
 ---
 
@@ -275,13 +358,13 @@ Ranked roughly by how much it matters, not necessarily build order (a new
 agent picking this up should still gate each one separately — see the
 handoff prompt in `HANDOFF-PROMPT.md`).
 
-1. **No Razorpay webhook — payment confirmation depends entirely on the
-   buyer's browser calling back.** If a payment succeeds on Razorpay's
-   side but the browser closes/crashes/loses connection before
-   `/api/orders/verify` runs, Razorpay will show the money received while
-   this site's database still shows `pending` — and the buyer won't get
-   automatic access. Nothing currently reconciles that gap. This is the
-   single most important functional item on this list.
+1. **Razorpay webhook — built, deployed, and verified end-to-end against
+   real production data (see §2 "Phase C" for full detail) — but not
+   fully closed.** The one thing still missing is Pranav triggering a real
+   test delivery from the Razorpay Dashboard's own "Test Webhook" button
+   and confirming it, which is what the handoff prompt's gate for this
+   item explicitly calls for (a delivery genuinely initiated by Razorpay,
+   not hand-signed by this session).
 
 2. **No Privacy Policy / Terms / Refund / Shipping page** — only a
    one-line footer disclaimer ("all purchases final"). The site now

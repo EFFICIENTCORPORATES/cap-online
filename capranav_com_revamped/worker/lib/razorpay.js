@@ -44,3 +44,18 @@ export async function verifyRazorpaySignature(env, { orderId, paymentId, signatu
   const expected = await hmacHex(env.RAZORPAY_KEY_SECRET, `${orderId}|${paymentId}`);
   return expected === signature;
 }
+
+/*
+  Webhook signatures are a different construction from the checkout signature
+  above: HMAC-SHA256 of the *raw* request body (not orderId|paymentId), keyed
+  with the separate webhook secret configured in the Razorpay Dashboard —
+  confirmed against Razorpay's own webhook docs, not assumed. `rawBody` must
+  be the exact bytes/text as received, before any JSON.parse/stringify
+  round-trip, since re-serializing can change whitespace/key order and break
+  the signature.
+*/
+export async function verifyWebhookSignature(env, rawBody, signature) {
+  if (!rawBody || !signature) return false;
+  const expected = await hmacHex(env.RAZORPAY_WEBHOOK_SECRET, rawBody);
+  return expected === signature;
+}

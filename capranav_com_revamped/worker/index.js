@@ -9,7 +9,7 @@ import {
   isValidEmail,
 } from "./lib/session.js";
 import { sendEmail, otpEmailHtml } from "./lib/email.js";
-import { createRazorpayOrder, verifyRazorpaySignature } from "./lib/razorpay.js";
+import { createRazorpayOrder, verifyRazorpaySignature, verifyWebhookSignature } from "./lib/razorpay.js";
 
 const CONTACT_TO = "capranavpratiktulshyan@gmail.com";
 
@@ -152,6 +152,61 @@ async function handleOrderCreate(request, env) {
   });
 }
 
+/*
+  Marks an order paid exactly once, no matter how many times this gets
+  called for the same order — the browser's own /api/orders/verify call and
+  the Razorpay webhook can both legitimately fire for the same payment, and
+  can race each other. The idempotency guard is the UPDATE's WHERE clause
+  itself (an atomic conditional write), not a SELECT-then-decide beforehand
+  — that's what keeps this safe under a real race, not just a re-run. Only
+  the caller whose UPDATE actually changed a row goes on to grant the
+  entitlement / send the notification email; the other becomes a no-op.
+*/
+async function markOrderPaid(env, order, razorpayPaymentId) {
+  const result = await env.DB
+    .prepare(
+      "UPDATE orders SET status = 'paid', razorpay_payment_id = ?, paid_at = datetime('now') WHERE id = ? AND status != 'paid'"
+    )
+    .bind(razorpayPaymentId, order.id)
+    .run();
+  const didTransition = result.meta && result.meta.changes === 1;
+  if (!didTransition) return; // already marked paid via the other path — nothing more to do
+
+  if (order.product_type === "book_pdf") {
+    await env.DB
+      .prepare(
+        "INSERT OR REPLACE INTO entitlements (user_email, product_id, order_id) VALUES (?, ?, ?)"
+      )
+      .bind(order.buyer_email, order.product_id, order.id)
+      .run();
+  }
+
+  // Notify Pranav for anything needing manual follow-up (shipping, course enrolment).
+  if (order.product_type !== "book_pdf") {
+    const product = getProduct(order.product_id);
+    const shipping = order.shipping_json ? JSON.parse(order.shipping_json) : null;
+    const lines = [
+      `<p><strong>${product ? product.title : order.product_id}</strong> — ₹${order.amount_rupees}</p>`,
+      `<p>${order.buyer_name} · ${order.buyer_email} · ${order.buyer_phone}</p>`,
+    ];
+    if (shipping) {
+      lines.push(
+        `<p>Ship to: ${shipping.address1}${shipping.address2 ? ", " + shipping.address2 : ""}, ${shipping.city}, ${shipping.state} ${shipping.pincode}</p>`
+      );
+    }
+    try {
+      await sendEmail(env, {
+        to: CONTACT_TO,
+        subject: `New order — ${product ? product.title : order.product_id}`,
+        html: lines.join("\n"),
+        fromLocal: "orders",
+      });
+    } catch {
+      // Order is already recorded in D1 either way — email is a convenience, not the record of truth.
+    }
+  }
+}
+
 async function handleOrderVerify(request, env) {
   const body = await readJson(request);
   const { razorpayOrderId, razorpayPaymentId, razorpaySignature } = body;
@@ -169,48 +224,71 @@ async function handleOrderVerify(request, env) {
     .first();
   if (!order) return json({ error: "Order not found." }, { status: 404 });
 
-  if (order.status !== "paid") {
-    await env.DB
-      .prepare("UPDATE orders SET status = 'paid', razorpay_payment_id = ?, paid_at = datetime('now') WHERE id = ?")
-      .bind(razorpayPaymentId, order.id)
-      .run();
+  await markOrderPaid(env, order, razorpayPaymentId);
 
-    if (order.product_type === "book_pdf") {
+  return json({ ok: true, productType: order.product_type, productId: order.product_id });
+}
+
+/*
+  Razorpay calling us directly when a payment succeeds — independent of
+  whether the buyer's browser is still around to call /api/orders/verify.
+  This is what closes the gap where a payment succeeds on Razorpay's side
+  but the tab closes/crashes before the client-side verify call runs.
+*/
+async function handleRazorpayWebhook(request, env) {
+  // Read the raw body FIRST — the signature is computed over the exact bytes
+  // Razorpay sent, and re-serializing parsed JSON can change whitespace/key
+  // order and silently break verification.
+  const rawBody = await request.text();
+  const signature = request.headers.get("X-Razorpay-Signature") || "";
+  const valid = await verifyWebhookSignature(env, rawBody, signature);
+  if (!valid) return json({ error: "Invalid signature." }, { status: 400 });
+
+  let event;
+  try {
+    event = JSON.parse(rawBody);
+  } catch {
+    return json({ error: "Bad payload." }, { status: 400 });
+  }
+
+  // Idempotency: Razorpay can legitimately deliver the same event more than
+  // once. Its own X-Razorpay-Event-Id header is unique per event — recording
+  // it here (PK conflict = "already seen") means a re-delivery is acked and
+  // dropped before it can touch anything else.
+  const eventId = request.headers.get("X-Razorpay-Event-Id") || "";
+  if (eventId) {
+    try {
       await env.DB
-        .prepare(
-          "INSERT OR REPLACE INTO entitlements (user_email, product_id, order_id) VALUES (?, ?, ?)"
-        )
-        .bind(order.buyer_email, order.product_id, order.id)
+        .prepare("INSERT INTO webhook_events (event_id, event_type) VALUES (?, ?)")
+        .bind(eventId, event.event || "")
         .run();
-    }
-
-    // Notify Pranav for anything needing manual follow-up (shipping, course enrolment).
-    if (order.product_type !== "book_pdf") {
-      const product = getProduct(order.product_id);
-      const shipping = order.shipping_json ? JSON.parse(order.shipping_json) : null;
-      const lines = [
-        `<p><strong>${product ? product.title : order.product_id}</strong> — ₹${order.amount_rupees}</p>`,
-        `<p>${order.buyer_name} · ${order.buyer_email} · ${order.buyer_phone}</p>`,
-      ];
-      if (shipping) {
-        lines.push(
-          `<p>Ship to: ${shipping.address1}${shipping.address2 ? ", " + shipping.address2 : ""}, ${shipping.city}, ${shipping.state} ${shipping.pincode}</p>`
-        );
-      }
-      try {
-        await sendEmail(env, {
-          to: CONTACT_TO,
-          subject: `New order — ${product ? product.title : order.product_id}`,
-          html: lines.join("\n"),
-          fromLocal: "orders",
-        });
-      } catch {
-        // Order is already recorded in D1 either way — email is a convenience, not the record of truth.
-      }
+    } catch {
+      return json({ ok: true, duplicate: true });
     }
   }
 
-  return json({ ok: true, productType: order.product_type, productId: order.product_id });
+  if (event.event === "order.paid") {
+    const orderEntity = event.payload && event.payload.order && event.payload.order.entity;
+    const paymentEntity = event.payload && event.payload.payment && event.payload.payment.entity;
+    if (orderEntity && orderEntity.id) {
+      const order = await env.DB
+        .prepare("SELECT * FROM orders WHERE razorpay_order_id = ?")
+        .bind(orderEntity.id)
+        .first();
+      if (order) {
+        await markOrderPaid(env, order, paymentEntity ? paymentEntity.id : null);
+      }
+      // No matching order row is unexpected (every order we create is written
+      // to D1 before the buyer ever sees Razorpay Checkout) but not an error
+      // worth failing/retrying the webhook over — acknowledge and move on.
+    }
+  }
+  // payment.failed: acknowledged (recorded above for dedup/audit) but no
+  // order mutation. A single failed attempt doesn't mean the order is dead —
+  // Razorpay lets the buyer retry the same order — so leaving status as-is
+  // means a later successful attempt on the same order still works normally.
+
+  return json({ ok: true });
 }
 
 async function handleRead(request, env, url) {
@@ -273,6 +351,7 @@ export default {
         if (url.pathname === "/api/me" && request.method === "GET") return await handleMe(request, env);
         if (url.pathname === "/api/orders/create" && request.method === "POST") return await handleOrderCreate(request, env);
         if (url.pathname === "/api/orders/verify" && request.method === "POST") return await handleOrderVerify(request, env);
+        if (url.pathname === "/api/razorpay/webhook" && request.method === "POST") return await handleRazorpayWebhook(request, env);
         if (url.pathname === "/api/read" && request.method === "GET") return await handleRead(request, env, url);
         if (url.pathname === "/api/contact" && request.method === "POST") return await handleContact(request, env);
       } catch (err) {

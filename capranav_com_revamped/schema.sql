@@ -45,6 +45,15 @@ CREATE TABLE IF NOT EXISTS entitlements (
   PRIMARY KEY (user_email, product_id)
 );
 
+-- Dedupes Razorpay webhook deliveries. Razorpay can legitimately send the
+-- same event more than once; the primary key on event_id (from the
+-- X-Razorpay-Event-Id header) is what makes re-processing a no-op.
+CREATE TABLE IF NOT EXISTS webhook_events (
+  event_id   TEXT PRIMARY KEY,
+  event_type TEXT,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
 CREATE TABLE IF NOT EXISTS contact_messages (
   id         TEXT PRIMARY KEY,
   name       TEXT,
