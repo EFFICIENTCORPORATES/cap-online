@@ -172,9 +172,8 @@ directly against remote D1 (not deleted — kept as a real historical row),
 confirmed `changes: 1` in the response, then re-queried the row and confirmed
 `status` now reads `failed`.
 
-**Item 2 — Razorpay webhook (`POST /api/razorpay/webhook`) — built and
-deployed 2026-09-03, real end-to-end verification done, awaiting Pranav's
-own Razorpay-Dashboard-triggered test + confirmation.**
+**Item 2 — Razorpay webhook (`POST /api/razorpay/webhook`) — built, deployed,
+verified, and closed 2026-09-03.**
 
 - Pranav registered the webhook in the Razorpay Dashboard himself (Live
   Mode) — URL `https://capranav.com/api/razorpay/webhook`, events
@@ -249,10 +248,16 @@ own Razorpay-Dashboard-triggered test + confirmation.**
     `"Invalid signature."` back, confirming the route is live on the real
     domain and actually verifying, not just returning success for
     anything.
-  - **Not yet done**: Razorpay's own Dashboard "Test Webhook" button,
-    which the handoff explicitly calls for as the final proof (a delivery
-    genuinely initiated by Razorpay, not hand-signed by this session) —
-    asked Pranav to trigger it.
+  - **Razorpay does not actually offer a generic "send a sample event"
+    button for a live-mode webhook** (checked their docs directly after
+    initially assuming it did, and corrected that with Pranav rather than
+    quietly dropping it) — their documented test path is a *separate*
+    test-mode webhook + test-mode API keys + a test-card payment, which
+    this project doesn't have configured and would be new parallel setup
+    just to re-prove what was already proven above. Presented Pranav the
+    honest choice — a real tiny live purchase for a Razorpay-initiated
+    delivery, or accept the verification already done — and he confirmed
+    the existing verification is sufficient. **Item closed 2026-09-03.**
 
 ---
 
@@ -360,35 +365,27 @@ Ranked roughly by how much it matters, not necessarily build order (a new
 agent picking this up should still gate each one separately — see the
 handoff prompt in `HANDOFF-PROMPT.md`).
 
-1. **Razorpay webhook — built, deployed, and verified end-to-end against
-   real production data (see §2 "Phase C" for full detail) — but not
-   fully closed.** The one thing still missing is Pranav triggering a real
-   test delivery from the Razorpay Dashboard's own "Test Webhook" button
-   and confirming it, which is what the handoff prompt's gate for this
-   item explicitly calls for (a delivery genuinely initiated by Razorpay,
-   not hand-signed by this session).
-
-2. **No Privacy Policy / Terms / Refund / Shipping page** — only a
+1. **No Privacy Policy / Terms / Refund / Shipping page** — only a
    one-line footer disclaimer ("all purchases final"). The site now
    processes live payments; worth checking whether Razorpay or normal
    business practice expects more than a one-liner. Don't invent legal
    commitments (especially refund terms) without Pranav's explicit
    sign-off — this was true for Phase A too and still holds.
 
-3. **No admin visibility into orders/entitlements** beyond the
+2. **No admin visibility into orders/entitlements** beyond the
    order-notification email and querying D1 directly by hand. Fine for
    today's volume; won't scale to "check this manually" once there are
    more than a handful of orders a week.
 
-4. **No rate-limiting on `/api/otp/send`.** Anyone can request unlimited
+3. **No rate-limiting on `/api/otp/send`.** Anyone can request unlimited
    OTP codes for any email address, which is both an abuse vector (spam
    someone's inbox) and, at volume, an email-sending cost/reputation risk.
    Not yet exploited as far as is known — a real gap nonetheless.
 
-5. **No abuse protection on `/api/contact`.** Same shape of gap — nothing
+4. **No abuse protection on `/api/contact`.** Same shape of gap — nothing
    stops automated spam submissions.
 
-6. **Backup job failures are silent.** `tools/backup_d1_snapshot.py`
+5. **Backup job failures are silent.** `tools/backup_d1_snapshot.py`
    writes to a local log file nobody is watching. If it starts failing
    (Cloudflare auth expiring, disk full, etc.), nothing alerts anyone —
    contrast with the Telegram platform's own down/up watcher pattern
