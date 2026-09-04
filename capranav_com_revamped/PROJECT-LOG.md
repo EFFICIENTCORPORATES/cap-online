@@ -259,9 +259,9 @@ verified, and closed 2026-09-03.**
     delivery, or accept the verification already done — and he confirmed
     the existing verification is sufficient. **Item closed 2026-09-03.**
 
-**Item 3 — Privacy/Terms/Refund/Shipping page — built and deployed
-2026-09-03, wording drafted by this session at Pranav's explicit request,
-awaiting his review.** Asked first whether he wanted a dedicated page at
+**Item 3 — Privacy/Terms/Refund/Shipping page — built, deployed, and
+reviewed. Closed 2026-09-04.** Wording drafted by this session at Pranav's
+explicit request. Asked first whether he wanted a dedicated page at
 all (per the handoff) — he said yes. Then asked for the actual
 substance (refund terms, shipping specifics, privacy commitments) per the
 handoff's "don't invent legal commitments yourself" instruction — he
@@ -277,11 +277,114 @@ the printed price) rather than promising anything not actually true of
 the current build. Deployed with `wrangler deploy`; confirmed live at
 `https://capranav.com/policies.html` (307-redirects to `/policies` —
 confirmed this is pre-existing Workers Assets behavior, `dashboard.html`
-does the same, not something new). **Still needs Pranav's actual review**
-before being treated as the site's real, final policy — this is a
-first-draft placeholder he asked for, not something reviewed by him (or a
-lawyer) yet, and the handoff's own gate for this phase is his sign-off on
-the wording.
+does the same, not something new). Pranav reviewed the actual live page
+and confirmed 2026-09-04 the wording is correct — gate satisfied.
+
+**Item 4 — order-notification email made nicer — built, deployed, verified,
+closed 2026-09-04.** Asked Pranav to pick a scope for admin visibility (per
+the handoff's "ask before building" instruction); he chose the smallest
+option — improve the existing notification email, no new admin page/login.
+Two real gaps closed in the same change: the email previously fired only
+for courses/physical books, meaning **every PDF purchase sent zero
+notification at all** — now every paid order of every type emails
+Pranav, with a clear "no action needed, access already granted"
+vs. "action needed — ship/enrol" line so he can tell at a glance which
+need his attention. New `orderNotificationEmailHtml()` in
+`worker/lib/email.js` (order id, Razorpay payment id, amount, buyer
+contact, shipping address if physical, paid-at timestamp, in a proper
+table layout) replaces the old two-line HTML string. Along the way, fixed
+a real latent bug in `markOrderPaid()`: it read `paid_at`/
+`razorpay_payment_id` off the pre-UPDATE `order` snapshot for the email,
+which would have shown blank/stale values — now both are computed once in
+JS and passed into both the UPDATE and the email so they can never
+diverge. Also added a `console.error` on email-send failure (previously
+silently swallowed with no log at all), matching the pattern
+`handleOtpSend` already used.
+- **Verified for real**: created a genuine order via `wrangler dev
+  --remote` (bound to production D1), sent it a real signed `order.paid`
+  webhook, confirmed the order row updated with the JS-computed
+  `paid_at`/payment id (not blank/stale), and confirmed no
+  `order notification email failed` line appeared in the Worker log —
+  i.e. the real Cloudflare Email API call succeeded. Test order and
+  webhook-event row deleted afterward, confirmed gone. Also unit-tested
+  `orderNotificationEmailHtml()` directly in Node for both the PDF
+  (no-shipping) and physical-book (with-shipping) cases before touching
+  the live path, to catch a template bug cheaply if there was one.
+- Deployed with `wrangler deploy`.
+
+**Item 5 — rate-limiting on `/api/otp/send` and `/api/contact` — built,
+deployed, verified, closed 2026-09-04.** No scope question needed here
+(the handoff doesn't gate this phase on a business decision, just asks for
+"reasonable limits" — an engineering call). Both endpoints now cap at
+**5 per hour** — OTP by email address (counted directly off the existing
+`otp_codes` table, no new table needed), contact by submitter IP
+(`CF-Connecting-IP`, new `ip` column on `contact_messages`). The counting
+query for both is a windowed `COUNT(*) ... created_at > datetime('now',
+'-60 minutes')` — no new infrastructure, reuses D1. Contact also got a
+hidden honeypot field (`name="website"`, invisible to real visitors) — a
+bot that fills every field gets a fake `{"ok":true}` with nothing saved or
+emailed, no signal back that it was caught.
+- **Verified for the exact boundary, not just "a limit exists"**: sent 6
+  rapid OTP requests for one test email — the first 5 were correctly
+  allowed through the rate gate (confirmed 5 real rows in `otp_codes`
+  after), the 6th was rejected with 429 before touching the email-send
+  path at all. Separately confirmed a real Cloudflare Email suppression on
+  the `pranavaiversion@gmail.com` mailbox and every `+alias` of it
+  (unrelated pre-existing condition, confirmed via a direct raw API call
+  bypassing this session's code entirely — not a bug introduced here;
+  worth Pranav knowing this test account can't currently receive
+  Cloudflare-sent mail, likely from bounce/complaint volume during past
+  testing) — then re-verified the OTP path really does send successfully
+  end-to-end using a different, unsuppressed real address
+  (`capranavpratiktulshyan@gmail.com`, one single request, confirmed 200).
+  Did the same 6-rapid-requests boundary test for `/api/contact` (5
+  allowed, 6th blocked with 429 — all 5 real notification emails clearly
+  labeled "RATE LIMIT TEST (please delete)" in the subject/body so
+  they're unambiguous in Pranav's inbox), and separately confirmed the
+  honeypot path returns success but creates zero DB row. All test
+  `otp_codes`/`contact_messages` rows deleted afterward, re-queried and
+  confirmed 0 residue.
+- Live D1 migration applied directly (`ALTER TABLE contact_messages ADD
+  COLUMN ip TEXT` + a new index) — checked `PRAGMA table_info` first to
+  confirm the column didn't already exist, since SQLite/D1 has no `ADD
+  COLUMN IF NOT EXISTS`. `schema.sql` updated to match for any future
+  fresh install.
+- Deployed with `wrangler deploy`; smoke-tested the honeypot path on the
+  real `capranav.com` domain post-deploy (200, no row created) to confirm
+  the deploy actually took.
+
+**Item 6 — backup-failure email alert — built, verified, closed
+2026-09-04.** Per Pranav's choice, reused the existing
+`CF_EMAIL_API_TOKEN`/`CF_EMAIL_ACCOUNT_ID` pattern rather than the
+Telegram platform's watcher. `tools/backup_d1_snapshot.py` now sends a
+failure-alert email (via a plain `urllib` call to the same Cloudflare
+Email Sending API `worker/lib/email.js` uses — Python, so no access to the
+Worker's own module, reads the same `.dev.vars` file directly instead) to
+`capranavpratiktulshyan@gmail.com` whenever `run_export()` fails, with the
+real error tail in the email body. New `--database` CLI flag (defaults to
+the real `capranav-platform`) exists specifically so this could be tested
+by deliberately pointing at a nonexistent name, per the handoff's own
+instruction, without needing to hand-edit the script.
+- **A real, pre-existing bug was found and fixed while testing this**:
+  `log()`'s plain `print(line)` crashed with `UnicodeEncodeError` on
+  Windows' default console codepage the moment wrangler's own error output
+  contained an emoji — which is exactly what a real failure's error text
+  contains. Uncaught, this would have crashed the script **before ever
+  reaching the new alert code**, silently defeating the entire point of
+  this phase on a genuine production failure. Fixed with a
+  try/except fallback to an ASCII-safe console print (the UTF-8 log file
+  write, unaffected either way, still keeps the undamaged original text).
+- **Verified by actually causing a failure**, per the handoff's explicit
+  instruction: ran `python tools/backup_d1_snapshot.py --database
+  capranav-platform-DOES-NOT-EXIST-test` — confirmed it detected the
+  export failure, logged it, and the failure-alert email API call
+  returned `success: true` (real send, verified via the API's own
+  response — same standard of verification used throughout this project
+  when direct inbox access isn't available). Exit code 1, as expected.
+  Then ran the script normally (real database) immediately after —
+  confirmed a real, valid snapshot was written and the run stayed
+  completely silent, no alert email attempted. That real snapshot file is
+  legitimate backup data, not test residue, and was left in place.
 
 ---
 
@@ -383,37 +486,30 @@ no real Razorpay-side record at all, marked `failed`).
 
 ---
 
-## 6. Open items — nothing below this line is done
+## 6. Open items
 
-Ranked roughly by how much it matters, not necessarily build order (a new
-agent picking this up should still gate each one separately — see the
-handoff prompt in `HANDOFF-PROMPT.md`).
+All six phases from `HANDOFF-PROMPT.md` are closed as of 2026-09-04 (see
+§2 for each one's full detail and verification). Nothing on the original
+gated list remains open. One new item was found along the way and is
+recorded here rather than quietly worked around:
 
-1. **Privacy/Terms/Refund/Shipping page — built and live (see §2 "Phase
-   C" for detail), but not yet reviewed by Pranav.** The wording was
-   drafted by this session at his explicit request, not written or
-   approved by him — treat it as a placeholder until he's actually read
-   it and confirmed the substance (refund terms especially) is what he
-   wants the business held to.
-
-2. **No admin visibility into orders/entitlements** beyond the
-   order-notification email and querying D1 directly by hand. Fine for
-   today's volume; won't scale to "check this manually" once there are
-   more than a handful of orders a week.
-
-3. **No rate-limiting on `/api/otp/send`.** Anyone can request unlimited
-   OTP codes for any email address, which is both an abuse vector (spam
-   someone's inbox) and, at volume, an email-sending cost/reputation risk.
-   Not yet exploited as far as is known — a real gap nonetheless.
-
-4. **No abuse protection on `/api/contact`.** Same shape of gap — nothing
-   stops automated spam submissions.
-
-5. **Backup job failures are silent.** `tools/backup_d1_snapshot.py`
-   writes to a local log file nobody is watching. If it starts failing
-   (Cloudflare auth expiring, disk full, etc.), nothing alerts anyone —
-   contrast with the Telegram platform's own down/up watcher pattern
-   elsewhere in this account, which this doesn't have.
+1. **`pranavaiversion@gmail.com` (and every `+alias` of it) appears to be
+   on Cloudflare Email Sending's suppression list.** Found while testing
+   Phase 5's OTP rate limit: a direct, raw call to the Cloudflare Email
+   API (bypassing this project's code entirely) returned
+   `email.sending.error.email.sending_disabled` for that address and a
+   `+alias` variant, while the identical call to
+   `capranavpratiktulshyan@gmail.com` succeeded normally — so this isn't
+   an account-wide outage, just that one mailbox. Cloudflare auto-adds a
+   recipient to this list after a hard bounce, repeated soft bounces, or a
+   spam complaint — plausible given how much test OTP volume this address
+   received across this project's history. Not fixed here (it's
+   Cloudflare's own anti-abuse mechanism working as intended, and this
+   session doesn't have a documented way to remove a specific address from
+   it) — flagging so Pranav knows this specific test account can't
+   currently receive Cloudflare-sent mail, in case it comes up again
+   during future testing. Every real order/OTP/backup-alert email path
+   itself was independently confirmed working, using other real addresses.
 
 ---
 

@@ -8,10 +8,16 @@ import {
   getSessionEmail,
   isValidEmail,
 } from "./lib/session.js";
-import { sendEmail, otpEmailHtml } from "./lib/email.js";
+import { sendEmail, otpEmailHtml, orderNotificationEmailHtml } from "./lib/email.js";
 import { createRazorpayOrder, verifyRazorpaySignature, verifyWebhookSignature } from "./lib/razorpay.js";
 
 const CONTACT_TO = "capranavpratiktulshyan@gmail.com";
+
+// Rate limits — simple, D1-backed, windowed counts. Reasonable enough to
+// stop unlimited automated abuse without getting in the way of a real
+// person occasionally re-requesting a code or re-sending a message.
+const OTP_MAX_PER_HOUR = 5;
+const CONTACT_MAX_PER_HOUR = 5;
 
 function json(data, init = {}) {
   return new Response(JSON.stringify(data), {
@@ -32,6 +38,17 @@ async function handleOtpSend(request, env) {
   const { email } = await readJson(request);
   if (!isValidEmail(email)) return json({ error: "Enter a valid email address." }, { status: 400 });
   const clean = email.trim().toLowerCase();
+
+  // otp_codes already logs every request with a timestamp — reuse it as the
+  // rate-limit counter rather than adding a new table.
+  const recent = await env.DB
+    .prepare("SELECT COUNT(*) AS c FROM otp_codes WHERE email = ? AND created_at > datetime('now', '-60 minutes')")
+    .bind(clean)
+    .first();
+  if (recent && recent.c >= OTP_MAX_PER_HOUR) {
+    return json({ error: "Too many codes requested for this email. Please wait a while and try again." }, { status: 429 });
+  }
+
   const code = randomOtpCode();
   await env.DB
     .prepare("INSERT INTO otp_codes (email, code, expires_at) VALUES (?, ?, ?)")
@@ -163,11 +180,16 @@ async function handleOrderCreate(request, env) {
   entitlement / send the notification email; the other becomes a no-op.
 */
 async function markOrderPaid(env, order, razorpayPaymentId) {
+  // Computed here (not left to SQLite's datetime('now')) so the exact same
+  // value can go into both the UPDATE and the notification email below —
+  // `order` is a pre-update snapshot, so re-reading paid_at/payment_id off
+  // it would show stale/null values otherwise.
+  const paidAt = new Date().toISOString().slice(0, 19).replace("T", " ");
   const result = await env.DB
     .prepare(
-      "UPDATE orders SET status = 'paid', razorpay_payment_id = ?, paid_at = datetime('now') WHERE id = ? AND status != 'paid'"
+      "UPDATE orders SET status = 'paid', razorpay_payment_id = ?, paid_at = ? WHERE id = ? AND status != 'paid'"
     )
-    .bind(razorpayPaymentId, order.id)
+    .bind(razorpayPaymentId, paidAt, order.id)
     .run();
   const didTransition = result.meta && result.meta.changes === 1;
   if (!didTransition) return; // already marked paid via the other path — nothing more to do
@@ -181,29 +203,22 @@ async function markOrderPaid(env, order, razorpayPaymentId) {
       .run();
   }
 
-  // Notify Pranav for anything needing manual follow-up (shipping, course enrolment).
-  if (order.product_type !== "book_pdf") {
-    const product = getProduct(order.product_id);
-    const shipping = order.shipping_json ? JSON.parse(order.shipping_json) : null;
-    const lines = [
-      `<p><strong>${product ? product.title : order.product_id}</strong> — ₹${order.amount_rupees}</p>`,
-      `<p>${order.buyer_name} · ${order.buyer_email} · ${order.buyer_phone}</p>`,
-    ];
-    if (shipping) {
-      lines.push(
-        `<p>Ship to: ${shipping.address1}${shipping.address2 ? ", " + shipping.address2 : ""}, ${shipping.city}, ${shipping.state} ${shipping.pincode}</p>`
-      );
-    }
-    try {
-      await sendEmail(env, {
-        to: CONTACT_TO,
-        subject: `New order — ${product ? product.title : order.product_id}`,
-        html: lines.join("\n"),
-        fromLocal: "orders",
-      });
-    } catch {
-      // Order is already recorded in D1 either way — email is a convenience, not the record of truth.
-    }
+  // Notify Pranav on every paid order, whatever the type — PDF purchases used
+  // to send nothing at all here, leaving zero visibility into them beyond
+  // querying D1 by hand.
+  const product = getProduct(order.product_id);
+  const shipping = order.shipping_json ? JSON.parse(order.shipping_json) : null;
+  const orderForEmail = { ...order, razorpay_payment_id: razorpayPaymentId, paid_at: paidAt };
+  try {
+    await sendEmail(env, {
+      to: CONTACT_TO,
+      subject: `New order — ${product ? product.title : order.product_id} (₹${order.amount_rupees})`,
+      html: orderNotificationEmailHtml(orderForEmail, product, shipping),
+      fromLocal: "orders",
+    });
+  } catch (err) {
+    console.error("order notification email failed:", err && err.message);
+    // Order is already recorded in D1 either way — email is a convenience, not the record of truth.
   }
 }
 
@@ -318,13 +333,30 @@ async function handleRead(request, env, url) {
 }
 
 async function handleContact(request, env) {
-  const { name, email, message } = await readJson(request);
+  const body = await readJson(request);
+  const { name, email, message } = body;
+
+  // Honeypot: a hidden field real visitors never see or fill, but a bot
+  // filling every field in the form does. Ack as success without saving or
+  // emailing anything — no signal back to the bot that it was caught.
+  if (body.website) return json({ ok: true });
+
   if (!name || !isValidEmail(email) || !message) {
     return json({ error: "Please fill in your name, a valid email and a message." }, { status: 400 });
   }
+
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  const recent = await env.DB
+    .prepare("SELECT COUNT(*) AS c FROM contact_messages WHERE ip = ? AND created_at > datetime('now', '-60 minutes')")
+    .bind(ip)
+    .first();
+  if (recent && recent.c >= CONTACT_MAX_PER_HOUR) {
+    return json({ error: "Too many messages sent recently. Please try again later." }, { status: 429 });
+  }
+
   await env.DB
-    .prepare("INSERT INTO contact_messages (id, name, email, message) VALUES (?, ?, ?, ?)")
-    .bind(crypto.randomUUID(), name, email, message)
+    .prepare("INSERT INTO contact_messages (id, name, email, message, ip) VALUES (?, ?, ?, ?, ?)")
+    .bind(crypto.randomUUID(), name, email, message, ip)
     .run();
   try {
     await sendEmail(env, {

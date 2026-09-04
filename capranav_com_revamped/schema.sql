@@ -59,5 +59,7 @@ CREATE TABLE IF NOT EXISTS contact_messages (
   name       TEXT,
   email      TEXT,
   message    TEXT,
+  ip         TEXT,  -- CF-Connecting-IP at submission time; used for rate-limiting only
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
+CREATE INDEX IF NOT EXISTS idx_contact_ip ON contact_messages(ip);
