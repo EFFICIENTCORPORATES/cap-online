@@ -306,6 +306,29 @@ async function handleRazorpayWebhook(request, env) {
   return json({ ok: true });
 }
 
+/*
+  Parses a standard HTTP "bytes=..." Range header into an R2Range. Returns
+  null for anything malformed or multi-range (multi-range responses are a
+  real HTTP feature this doesn't support — PDF.js never sends one, so this
+  intentionally falls back to a full 200 response rather than guessing).
+*/
+function parseRangeHeader(header, totalSize) {
+  if (!header || !header.startsWith("bytes=")) return null;
+  const spec = header.slice("bytes=".length).trim();
+  if (spec.includes(",")) return null; // multi-range — not supported
+
+  const suffixMatch = /^-(\d+)$/.exec(spec);
+  if (suffixMatch) return { suffix: Math.min(Number(suffixMatch[1]), totalSize) };
+
+  const rangeMatch = /^(\d+)-(\d*)$/.exec(spec);
+  if (!rangeMatch) return null;
+  const start = Number(rangeMatch[1]);
+  if (start >= totalSize) return null;
+  if (rangeMatch[2] === "") return { offset: start }; // "start-" = start through end of file
+  const end = Number(rangeMatch[2]);
+  return { offset: start, length: Math.min(end, totalSize - 1) - start + 1 };
+}
+
 async function handleRead(request, env, url) {
   const productId = url.searchParams.get("product");
   const product = productId && getProduct(productId);
@@ -320,15 +343,39 @@ async function handleRead(request, env, url) {
     .first();
   if (!entitled) return json({ error: "You don't have access to this book." }, { status: 403 });
 
-  const object = await env.VAULT.get(product.fileKey);
+  // PDF.js streams the file page-by-page via HTTP Range requests instead of
+  // downloading the whole PDF up front — that only works if this endpoint
+  // actually honors Range, not just returns the full body every time.
+  const totalMeta = await env.VAULT.head(product.fileKey);
+  if (!totalMeta) return json({ error: "File missing — contact support." }, { status: 500 });
+
+  const range = parseRangeHeader(request.headers.get("Range"), totalMeta.size);
+  const object = range ? await env.VAULT.get(product.fileKey, { range }) : await env.VAULT.get(product.fileKey);
   if (!object) return json({ error: "File missing — contact support." }, { status: 500 });
 
+  const baseHeaders = {
+    "Content-Type": "application/pdf",
+    "Cache-Control": "no-store",
+    "X-Content-Type-Options": "nosniff",
+    "Accept-Ranges": "bytes",
+  };
+
+  if (range && object.range) {
+    const start = object.range.offset ?? totalMeta.size - object.range.length;
+    const length = object.range.length ?? totalMeta.size - object.range.offset;
+    const end = start + length - 1;
+    return new Response(object.body, {
+      status: 206,
+      headers: {
+        ...baseHeaders,
+        "Content-Range": `bytes ${start}-${end}/${totalMeta.size}`,
+        "Content-Length": String(length),
+      },
+    });
+  }
+
   return new Response(object.body, {
-    headers: {
-      "Content-Type": "application/pdf",
-      "Cache-Control": "no-store",
-      "X-Content-Type-Options": "nosniff",
-    },
+    headers: { ...baseHeaders, "Content-Length": String(totalMeta.size) },
   });
 }
 

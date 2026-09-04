@@ -386,6 +386,109 @@ instruction, without needing to hand-edit the script.
   completely silent, no alert email attempted. That real snapshot file is
   legitimate backup data, not test residue, and was left in place.
 
+### Reader upgrade: page-wise streaming, jump-to-page, Table of Contents; homepage photo re-cropped (2026-09-04)
+
+Pranav asked for three reader improvements — real HTTP Range-based
+streaming instead of downloading the whole PDF up front, a jump-to-page
+control, and a Table of Contents — plus a homepage photo re-crop (bottom
+20% removed, so nothing below the arms shows).
+
+**Streaming**: `/api/read` now honors `Range` requests (new
+`parseRangeHeader()`, R2's `bucket.get(key, { range })`, proper 206
+responses with `Content-Range`/`Content-Length`, still auth/entitlement-
+gated before touching R2 either way). `reader.js` switched from
+`fetch().arrayBuffer()` (whole file into memory, then render) to
+`pdfjsLib.getDocument({ url, withCredentials: true, rangeChunkSize: 512KB })`
+— PDF.js now fetches only the byte ranges it actually needs per page.
+
+**Verified for real, several independent ways, against the actual live
+production D1/R2** (not just structurally):
+- Byte-exact correctness: pulled a real range from the live endpoint and
+  diffed it byte-for-byte against the same slice of the real 19,137,968-
+  byte Question Bank Book PDF (`Buffer.compare` — exact match), for a
+  normal range, an offset-only range, a suffix range (`bytes=-500`), and a
+  range that overshoots EOF (correctly clamped, not an error).
+- Auth still enforced on ranged requests: a `Range` request with no
+  session cookie got 401 with zero PDF bytes leaked; an unknown product id
+  got 404 before ever touching R2.
+- Definitive proof the streaming savings are real, not just
+  structurally-plausible: fetched the full file two ways over the same
+  channel — reading it to completion took 3,572ms, while reading only the
+  first chunk and then calling `reader.cancel()` returned in 373ms (~10×
+  faster) — proving the server/R2 genuinely stops sending once the client
+  stops reading, which is the actual mechanism PDF.js's per-page fetching
+  depends on.
+- Real browser verification: installed `puppeteer-core` temporarily
+  (removed after, not committed), pointed it at the existing Edge install
+  (`headless-Edge`, this repo's own established verification method — see
+  §7 of `CLAUDE.md` in the parent repo), minted a real test session token
+  + a temporary `book-qb-pdf` entitlement directly in D1 (OTP email login
+  wasn't usable for this — see the suppression finding below), and drove
+  the actual `reader.html` against the real 679-page book: initial render
+  showed "Page 1 of 679" (matches the real PDF), jump-to-65 correctly
+  showed "Page 65 of 679" with real rendered content, and the whole
+  session (2 page navigations + opening the TOC) made only 3 total
+  `/api/read` HTTP requests, the range ones a modest 524KB and 263,600
+  bytes — not repeated full downloads. Screenshots confirmed correct
+  visual rendering, including the TOC panel. Test session/entitlement
+  deleted afterward, confirmed gone; the real `book-sb-pdf` entitlement
+  for that account was left untouched.
+
+**Jump-to-page**: a page-number input + "Go" button in the reader bar,
+clamped to `[1, numPages]`, wired directly to the same `renderPage()` used
+by Prev/Next/TOC clicks — verified above via the real jump-to-65 test.
+
+**Table of Contents**: new `public/assets/book-toc.js`, one entry per
+product. **Checked both real PDFs for an honest source before building
+anything** — neither has a usable embedded PDF outline (Question Bank Book
+has none at all; the Strategy Book's is auto-generated noise: fragments
+like "2026", "1.", a repeated header line, not real chapters). The
+Question Bank Book DOES have a real, printed Table of Contents on its own
+pages 8–9 — extracted its full text directly (`pymupdf`) and transcribed
+all **34 real chapters with their real page numbers** verbatim, not
+invented. **The Strategy Book got no TOC entry, on purpose** — checked
+every page's largest text across all 112 pages and found it's a visual
+slide-deck with almost no chapter-title text at all (just page numbers and
+a hashtag line, until a narrative section starting page 95) — there's
+nothing honest to extract a chapter list from. The reader UI handles this
+gracefully (Contents button disabled with a tooltip, panel shows "No table
+of contents available for this book yet" instead of pretending one
+exists). **Flagged to Pranav, not silently decided**: if he wants a Strategy
+Book TOC, it needs either his own section breakdown or this session doing
+a full manual page-by-page review for his sign-off — not something to
+invent from the PDF alone.
+
+**Homepage photo**: `public/assets/ca-pranav-professional.png` — confirmed
+real dimensions first (1086×1448, RGBA, genuinely transparent background,
+not opaque black), cropped to the top 80% (1086×1158, bottom 290px
+removed) via Pillow, visually reviewed before deploying (ends right at the
+crossed arms, no awkward cut). Verified live afterward by downloading the
+actual production image and checking its real dimensions match
+(1086×1158, not the old 1448).
+
+**Housekeeping**: `puppeteer-core` (and the `package.json`/
+`package-lock.json`/`node_modules` npm bootstrapped in passing) were
+removed after testing — this project has never needed a `package.json`
+(Wrangler bundles `worker/index.js` directly, no npm dependencies in the
+Worker code), so nothing about this testing pass is left in the repo.
+
+**One temporary diagnostic, since removed**: while chasing exact
+byte-transfer proof, briefly added a byte-counting `TransformStream`
+wrapper + `console.log` to `handleRead` — `wrangler dev --remote`'s
+"remote preview" mode turned out not to stream Worker `console.log` back
+to the local terminal (a real, if minor, tooling gap worth knowing for any
+future session trying the same thing), so this avenue was abandoned in
+favor of the early-cancel timing test above, and the diagnostic code was
+fully removed before the final deploy — confirmed via `grep` for
+"TEMP-DIAG"/"counted" returning nothing.
+
+Deployed with `wrangler deploy`; live content on `capranav.com` confirmed
+directly (not just trusting Wrangler's own "no updated asset files" message,
+which turned out to be a reporting quirk — this deploy, like others this
+session, silently did take effect; `reader.html`/`reader.js`/`book-toc.js`/
+the cropped photo were all independently curled from the real domain and
+matched the new local content exactly).
+
 ---
 
 ## 3. Current architecture — the concrete map
@@ -420,7 +523,11 @@ instruction, without needing to hand-edit the script.
 - `public/dashboard.html` — OTP login, then the logged-in student's library
   (entitled PDFs → "Read now"; not-yet-bought PDFs → buy button).
 - `public/reader.html` — the locked-down PDF.js reader, one product at a
-  time via `?product=`.
+  time via `?product=`. Streams via HTTP Range requests (not a full
+  download), with jump-to-page and a Table of Contents panel
+  (`public/assets/book-toc.js` — real, per-book chapter/page data,
+  currently only populated for `book-qb-pdf`; see §2's 2026-09-04 entry
+  for why the Strategy Book has none).
 - `worker/index.js` — all `/api/*` routes; anything else falls through to
   `env.ASSETS.fetch(request)` (the static files above).
 

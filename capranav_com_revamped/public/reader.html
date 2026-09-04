@@ -7,19 +7,55 @@
 <title>Reading | CA Pranav</title>
 <link rel="stylesheet" href="assets/site.css">
 <link rel="icon" href="assets/favicon-whiteboard.svg" type="image/svg+xml">
-<style>body{background:#6b7280;}</style>
+<style>
+  body{background:#6b7280;}
+  .toc-toggle{border:1.5px solid #fff;background:transparent;color:#fff;border-radius:8px;padding:6px 12px;cursor:pointer;}
+  .toc-toggle:disabled{opacity:.4;cursor:default;}
+  .jump-form{display:flex;align-items:center;gap:6px;}
+  .jump-form input{width:56px;border:1.5px solid #fff;background:transparent;color:#fff;border-radius:6px;padding:5px 6px;text-align:center;}
+  .jump-form input::placeholder{color:rgba(255,255,255,.6);}
+  .jump-form button{border:1.5px solid #fff;background:transparent;color:#fff;border-radius:6px;padding:5px 10px;cursor:pointer;}
+  .toc-panel{position:fixed;top:0;left:0;bottom:0;width:min(340px,86vw);background:#fff;z-index:40;transform:translateX(-100%);transition:transform .18s ease;box-shadow:2px 0 24px rgba(0,0,0,.3);display:flex;flex-direction:column;}
+  .toc-panel.is-open{transform:translateX(0);}
+  .toc-panel-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #e5e7eb;}
+  .toc-panel-head h2{font-size:16px;margin:0;}
+  .toc-panel-close{border:0;background:transparent;font-size:20px;cursor:pointer;line-height:1;padding:2px 6px;}
+  .toc-list{list-style:none;margin:0;padding:8px;overflow-y:auto;flex:1;}
+  .toc-list li{margin:0;}
+  .toc-list button{width:100%;text-align:left;border:0;background:transparent;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:13.5px;display:flex;gap:8px;}
+  .toc-list button:hover{background:#f2f2f2;}
+  .toc-list .toc-num{color:#667085;min-width:20px;}
+  .toc-list .toc-page{margin-left:auto;color:#667085;font-size:12px;}
+  .toc-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:35;display:none;}
+  .toc-backdrop.is-open{display:block;}
+  .toc-empty{padding:16px;color:#667085;font-size:13.5px;line-height:1.6;}
+</style>
 </head>
 <body>
   <div class="reader-bar">
     <span class="title" id="reader-title">Loading…</span>
     <div class="nav-buttons">
+      <button type="button" class="toc-toggle" id="toc-toggle" disabled>☰ Contents</button>
       <button type="button" id="prev-page" disabled>‹ Prev</button>
       <span class="reader-page-num" id="page-num"></span>
       <button type="button" id="next-page" disabled>Next ›</button>
+      <form class="jump-form" id="jump-form">
+        <input type="number" id="jump-input" min="1" placeholder="Page" disabled>
+        <button type="submit" id="jump-go" disabled>Go</button>
+      </form>
       <a href="dashboard.html" style="color:#fff;font-size:13px;margin-left:10px;">Dashboard</a>
     </div>
   </div>
   <div class="reader-wrap" id="reader-wrap"><div class="reader-msg">Loading…</div></div>
+
+  <div class="toc-backdrop" id="toc-backdrop"></div>
+  <nav class="toc-panel" id="toc-panel" aria-label="Table of contents">
+    <div class="toc-panel-head">
+      <h2>Table of Contents</h2>
+      <button type="button" class="toc-panel-close" id="toc-close" aria-label="Close">✕</button>
+    </div>
+    <ul class="toc-list" id="toc-list"></ul>
+  </nav>
 
   <script type="module" src="assets/reader.js"></script>
 </body>
