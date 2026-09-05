@@ -699,6 +699,14 @@ recorded here rather than quietly worked around:
    during future testing. Every real order/OTP/backup-alert email path
    itself was independently confirmed working, using other real addresses.
 
+2. **The Strategy Book has no Table of Contents in the reader** (the
+   Question Bank Book does — see §2's 2026-09-04 reader-upgrade entry).
+   Checked every page of the real PDF first — it's a visual slide-deck with
+   almost no chapter-title text to honestly extract, so nothing was
+   invented. Needs either Pranav's own section breakdown, or his sign-off
+   for this session to do a full manual page-by-page review and propose
+   one — not something to build unprompted.
+
 ---
 
 *Keep this file current. When an open item above gets closed, move it into
