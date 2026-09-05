@@ -102,6 +102,70 @@ async function handleMe(request, env) {
   return json({ loggedIn: true, email, entitlements });
 }
 
+async function handleProfileGet(request, env) {
+  const email = await getSessionEmail(env.DB, request);
+  if (!email) return json({ error: "Please log in." }, { status: 401 });
+
+  const profile = await env.DB
+    .prepare("SELECT name, phone FROM student_profiles WHERE email = ?")
+    .bind(email)
+    .first();
+  if (profile) return json({ email, name: profile.name, phone: profile.phone });
+
+  // No saved profile yet — fall back to the most recent order's buyer
+  // details as a sensible default, so the form isn't blank for someone
+  // who's already bought something. Nothing is written until they Save.
+  const lastOrder = await env.DB
+    .prepare("SELECT buyer_name, buyer_phone FROM orders WHERE buyer_email = ? ORDER BY created_at DESC LIMIT 1")
+    .bind(email)
+    .first();
+  return json({ email, name: lastOrder ? lastOrder.buyer_name : "", phone: lastOrder ? lastOrder.buyer_phone : "" });
+}
+
+async function handleProfileUpdate(request, env) {
+  const email = await getSessionEmail(env.DB, request);
+  if (!email) return json({ error: "Please log in." }, { status: 401 });
+
+  const { name, phone } = await readJson(request);
+  if (!name || !phone) return json({ error: "Name and phone are required." }, { status: 400 });
+
+  await env.DB
+    .prepare(
+      `INSERT INTO student_profiles (email, name, phone, updated_at) VALUES (?, ?, ?, datetime('now'))
+       ON CONFLICT(email) DO UPDATE SET name = excluded.name, phone = excluded.phone, updated_at = excluded.updated_at`
+    )
+    .bind(email, name, phone)
+    .run();
+  return json({ ok: true, name, phone });
+}
+
+async function handleOrdersMine(request, env) {
+  const email = await getSessionEmail(env.DB, request);
+  if (!email) return json({ error: "Please log in." }, { status: 401 });
+
+  const rows = await env.DB
+    .prepare(
+      "SELECT id, product_id, product_type, amount_rupees, status, created_at, paid_at FROM orders WHERE buyer_email = ? ORDER BY created_at DESC"
+    )
+    .bind(email)
+    .all();
+
+  const orders = (rows.results || []).map((o) => {
+    const product = getProduct(o.product_id);
+    return {
+      id: o.id,
+      productId: o.product_id,
+      productTitle: product ? product.title : o.product_id,
+      productType: o.product_type,
+      amountRupees: o.amount_rupees,
+      status: o.status,
+      createdAt: o.created_at,
+      paidAt: o.paid_at,
+    };
+  });
+  return json({ orders });
+}
+
 async function handleOrderCreate(request, env) {
   const body = await readJson(request);
   const product = getProduct(body.productId);
@@ -428,6 +492,9 @@ export default {
         if (url.pathname === "/api/otp/verify" && request.method === "POST") return await handleOtpVerify(request, env);
         if (url.pathname === "/api/logout" && request.method === "POST") return await handleLogout(request, env);
         if (url.pathname === "/api/me" && request.method === "GET") return await handleMe(request, env);
+        if (url.pathname === "/api/profile" && request.method === "GET") return await handleProfileGet(request, env);
+        if (url.pathname === "/api/profile/update" && request.method === "POST") return await handleProfileUpdate(request, env);
+        if (url.pathname === "/api/orders/mine" && request.method === "GET") return await handleOrdersMine(request, env);
         if (url.pathname === "/api/orders/create" && request.method === "POST") return await handleOrderCreate(request, env);
         if (url.pathname === "/api/orders/verify" && request.method === "POST") return await handleOrderVerify(request, env);
         if (url.pathname === "/api/razorpay/webhook" && request.method === "POST") return await handleRazorpayWebhook(request, env);

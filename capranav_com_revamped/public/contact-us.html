@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Contact CA Pranav — capranav.com.">
+<meta name="theme-color" content="#111827">
+<title>Contact Us | CA Pranav</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Patrick+Hand&family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/whiteboard-theme.css">
+<link rel="icon" href="assets/favicon-whiteboard.svg" type="image/svg+xml">
+<style>
+  .policy-page { max-width: 760px; margin: 0 auto; padding: 40px 0 80px; }
+  .policy-updated { color: var(--muted); font-size: 13px; margin: 0 0 28px; }
+  .policy-jump { display: flex; flex-wrap: wrap; gap: 8px 16px; list-style: none; margin: 0 0 40px; padding: 14px 18px; border: 1.5px solid var(--line); border-radius: 12px; background: #fff; }
+  .policy-jump a { font-size: 13px; font-weight: 700; text-decoration: none; }
+  .policy-section h2 { font-size: 22px; margin: 0 0 6px; }
+  .policy-section h3 { font-size: 15px; margin: 20px 0 6px; }
+  .policy-section p, .policy-section li { color: var(--muted); font-size: 14.5px; line-height: 1.7; }
+  .seller-card { border: 1.5px solid var(--ink); border-radius: 14px; padding: 22px 24px; background: var(--cream); margin: 8px 0 32px; }
+  .seller-card h3 { font-size: 14px; text-transform: uppercase; letter-spacing: .06em; margin: 0 0 12px; }
+  .seller-card p { color: var(--ink); font-size: 14.5px; line-height: 1.7; margin: 0 0 4px; }
+  .seller-card .gstin { font-weight: 700; }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-brand" href="index.html"><span class="mark">P</span><strong>CA PRANAV</strong></a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">My Dashboard</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="policy-page">
+      <p class="eyebrow">Get in touch</p>
+      <h1 style="font-size:clamp(28px,4vw,40px); margin:0 0 10px;">Contact Us</h1>
+      <p class="policy-updated">Questions about an order, a book, or the course? Reach out here.</p>
+
+      <ul class="policy-jump">
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms and Conditions</a></li>
+        <li><a href="cancellation-and-refund.html">Cancellation and Refund</a></li>
+        <li><a href="shipping-and-exchange.html">Shipping and Exchange</a></li>
+        <li><a href="contact-us.html">Contact Us</a></li>
+      </ul>
+
+      <div class="seller-card">
+        <h3>Registered Seller Details</h3>
+        <p><strong>PRANAV PRATIK TULSHYAN</strong></p>
+        <p>Ground Floor, Room No A102, Sikandarpur Road</p>
+        <p>(Opposite Choudhary Store), Sikandarpur</p>
+        <p>Muzaffarpur, Muzaffarpur District, Bihar — 842001</p>
+        <p class="gstin">GSTIN: 10AXBPT7695J1Z1</p>
+      </div>
+
+      <section class="policy-section">
+        <h3>Email</h3>
+        <p><a href="mailto:capranavpratiktulshyan@gmail.com">capranavpratiktulshyan@gmail.com</a></p>
+
+        <h3>Elsewhere</h3>
+        <p>
+          <a href="https://www.instagram.com/capranavptulshyan/" target="_blank" rel="noopener">Instagram ↗</a><br>
+          <a href="https://www.linkedin.com/in/capranavptulshyan/" target="_blank" rel="noopener">LinkedIn ↗</a><br>
+          <a href="https://t.me/CAPranavExamBot" target="_blank" rel="noopener">Telegram (MCQ bot) ↗</a>
+        </p>
+
+        <h3>Send a message</h3>
+        <form class="contact-form" id="contact-form" style="max-width:480px;">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Your email" required>
+          <textarea name="message" placeholder="Your message" required></textarea>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+          <button type="submit" class="button button-primary">Send message</button>
+          <p class="form-note" id="contact-status"></p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms and Conditions</a> · <a href="cancellation-and-refund.html">Cancellation and Refund</a> · <a href="shipping-and-exchange.html">Shipping and Exchange</a> · <a href="contact-us.html">Contact Us</a></p>
+    <p>CA Pranav Pratik Tulshyan (Pranav Pratik Tulshyan) · GSTIN: 10AXBPT7695J1Z1</p>
+  </footer>
+
+  <script>
+    document.getElementById("contact-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form).entries());
+      const btn = form.querySelector("button[type=submit]");
+      btn.disabled = true;
+      btn.textContent = "Sending…";
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.error || "Could not send your message.");
+        form.reset();
+        document.getElementById("contact-status").textContent = "Thanks — your message has been sent.";
+      } catch (err) {
+        document.getElementById("contact-status").textContent = err.message;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Send message";
+      }
+    });
+  </script>
+  <script src="assets/whiteboard-theme.js"></script>
+</body>
+</html>

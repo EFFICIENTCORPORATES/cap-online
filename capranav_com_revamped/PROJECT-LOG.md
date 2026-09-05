@@ -489,6 +489,79 @@ session, silently did take effect; `reader.html`/`reader.js`/`book-toc.js`/
 the cropped photo were all independently curled from the real domain and
 matched the new local content exactly).
 
+### Five named compliance pages + GSTIN/registered-address, and a real dashboard (profile + order history) (2026-09-04)
+
+Pranav asked to confirm five specifically-named pages exist — **Terms and
+Conditions, Privacy Policy, Cancellation and Refund, Shipping and Exchange,
+Contact Us** (this exact five-item wording is Razorpay's own standard
+website-policy checklist for live merchant accounts, not a coincidence) —
+with GSTIN and registered-address details displayed properly, plus a real
+student dashboard showing past orders/payments and letting a student
+maintain a profile.
+
+**Compliance pages**: the already-approved `policies.html` content (Pranav
+signed off on this wording 2026-09-04, see above) was real and correct, but
+lived only as anchored sections on one combined page — split it into five
+genuinely standalone pages, same approved text verbatim, no new legal
+wording invented: `public/privacy.html`, `terms.html`,
+`cancellation-and-refund.html`, `shipping-and-exchange.html` (all reusing
+the exact already-approved sentences), plus a new `contact-us.html` (email,
+socials, the same contact form/`/api/contact` endpoint, wired with its own
+small inline script rather than reusing `assets/app.js` wholesale — that
+file assumes homepage-only elements like the course-attempt picker and
+would throw before ever reaching the contact-form wiring on a page that
+doesn't have them). `policies.html` itself kept live too (not deleted —
+still a valid combined reference) and updated to cross-link to all five.
+
+**GSTIN + registered address** — supplied directly by Pranav, used
+verbatim, not reformatted or guessed at: **GSTIN 10AXBPT7695J1Z1**,
+registered address "Ground Floor, Room No A102, Sikandarpur Road,
+(Opposite Choudhary Store), Sikandarpur, Muzaffarpur, Bihar — 842001",
+seller name "PRANAV PRATIK TULSHYAN". Shown two ways: a prominent
+"Registered Seller Details" card on `contact-us.html` (and on
+`policies.html`), and a compact line in the footer of **every** page on the
+site (homepage + all five policy pages) so it's visible site-wide, not
+just on one page a crawler might miss.
+
+**Dashboard: order history + profile** — new `student_profiles` table
+(`email` PK, `name`, `phone`, `updated_at`) — independent of any one order,
+so "maintain your profile" is a real, persistent thing now, not just
+whatever was typed at a past checkout. Three new endpoints:
+`GET /api/profile` (returns the saved profile, or falls back to the most
+recent order's buyer name/phone as a sensible default if nothing's been
+saved yet — nothing is written until the student explicitly saves),
+`POST /api/profile/update` (upsert via `ON CONFLICT(email) DO UPDATE`),
+`GET /api/orders/mine` (every past order for the logged-in email, any
+status, newest first — product title resolved through the same
+`getProduct()` catalogue everything else uses, so it can never drift from
+the real product list). `dashboard.js` rewritten to show three stacked
+sections — Profile (editable name/phone), Your Library (unchanged), Order
+History (status badges: green Paid / amber Pending / red Failed) — and the
+PDF-purchase modal now pre-fills name/phone from the saved profile instead
+of asking blank every time.
+
+**Verified for real against live production D1** (not just structurally):
+ran the whole flow through `wrangler dev --remote` with a real minted test
+session — confirmed `/api/profile` correctly falls back to a genuine past
+order's buyer details (`"AI PRANAV"` / a real phone number) before any
+profile is saved; confirmed a save + a second save both work and land as
+exactly **one row** (`SELECT COUNT(*)` = 1 — the upsert doesn't create
+duplicates); confirmed `/api/orders/mine` returns this account's real order
+history, including the exact stale order investigated and marked `failed`
+in Phase 1 above, correctly labeled; confirmed both endpoints 401 without a
+session. Visually verified via headless-Edge screenshot — profile form,
+library, and order history (correct green/red status badges) all render
+correctly — and separately screenshotted all five new policy pages plus
+`contact-us.html`, confirming real title tags, real body content, and the
+GSTIN string present on every one. All test session/profile rows deleted
+afterward, confirmed zero residue.
+
+Deployed with `wrangler deploy`; independently re-curled all five new pages
+plus the homepage footer and the two new `/api/profile`/`/api/orders/mine`
+routes directly from `capranav.com` post-deploy to confirm they're actually
+live (this deploy, like the ones before it, showed Wrangler's "no updated
+asset files" message despite genuinely taking effect).
+
 ---
 
 ## 3. Current architecture — the concrete map
@@ -499,7 +572,7 @@ matched the new local content exactly).
 | Cloudflare account | `Efficientcorporates@gmail.com's Account`, id `68e19e5bed11326478a23d6e2ad31453` |
 | Deployed code | `D:\EffCorp_Projects\cap-online\capranav_com_revamped\` |
 | Superseded code (kept, not deployed) | `D:\EffCorp_Projects\cap-online\capranav_com\capranav-website\` |
-| D1 database | `capranav-platform`, id `03830ea8-b539-480b-b106-0743aeda1b1f` — tables: `otp_codes`, `sessions`, `orders`, `entitlements`, `contact_messages` (see `schema.sql`) |
+| D1 database | `capranav-platform`, id `03830ea8-b539-480b-b106-0743aeda1b1f` — tables: `otp_codes`, `sessions`, `orders`, `entitlements`, `webhook_events`, `contact_messages`, `student_profiles` (see `schema.sql`) |
 | R2 bucket | `capranav-vault` (private) — `question-bank-book.pdf`, `strategy-book.pdf` |
 | Worker secrets (never in code/git) | `RAZORPAY_KEY_ID` (live), `RAZORPAY_KEY_SECRET` (live), `CF_EMAIL_ACCOUNT_ID`, `CF_EMAIL_API_TOKEN` — set via `wrangler secret put`, listable via `wrangler secret list` |
 | Local dev secrets | `capranav_com_revamped/.dev.vars` (gitignored, mirrors the Worker secrets for `wrangler dev --remote`) |
@@ -520,8 +593,16 @@ matched the new local content exactly).
 ### Page/route map
 
 - `public/index.html` — everything: intro, course, books, practice, contact.
-- `public/dashboard.html` — OTP login, then the logged-in student's library
-  (entitled PDFs → "Read now"; not-yet-bought PDFs → buy button).
+- `public/dashboard.html` — OTP login, then three sections: Profile
+  (editable name/phone, `student_profiles` table), Your Library (entitled
+  PDFs → "Read now"; not-yet-bought PDFs → buy button), Order History
+  (every past order, any status).
+- `public/privacy.html`, `terms.html`, `cancellation-and-refund.html`,
+  `shipping-and-exchange.html`, `contact-us.html` — the five standalone
+  compliance pages (Razorpay's standard checklist naming), each also
+  carrying the GSTIN/registered-address block in its footer.
+  `public/policies.html` — the older combined reference, kept live,
+  cross-linking to all five.
 - `public/reader.html` — the locked-down PDF.js reader, one product at a
   time via `?product=`. Streams via HTTP Range requests (not a full
   download), with jump-to-page and a Table of Contents panel

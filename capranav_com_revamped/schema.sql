@@ -36,6 +36,17 @@ CREATE TABLE IF NOT EXISTS orders (
   paid_at              TEXT
 );
 
+-- A student's persistent profile — independent of any one order, so it's
+-- there before/after any purchase, viewable/editable from the dashboard.
+-- Falls back to the most recent order's buyer_name/buyer_phone when no row
+-- exists yet (handled in worker code, not here).
+CREATE TABLE IF NOT EXISTS student_profiles (
+  email      TEXT PRIMARY KEY,
+  name       TEXT,
+  phone      TEXT,
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
 -- Who can open the locked-down reader for which PDF product.
 CREATE TABLE IF NOT EXISTS entitlements (
   user_email TEXT NOT NULL,

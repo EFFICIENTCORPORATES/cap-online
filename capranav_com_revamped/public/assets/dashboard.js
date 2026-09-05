@@ -3,6 +3,8 @@ const PDF_PRODUCTS = [
   { id: "book-sb-pdf", title: "The Exam Strategy Book — PDF access", price: 99 },
 ];
 
+const STATUS_LABELS = { paid: "Paid", pending: "Pending", failed: "Failed" };
+
 const params = new URLSearchParams(location.search);
 const pendingBuy = params.get("buy");
 
@@ -11,6 +13,19 @@ const box = document.getElementById("dash-box");
 async function getMe() {
   const res = await fetch("/api/me", { credentials: "include" });
   return res.json();
+}
+
+async function getProfile() {
+  const res = await fetch("/api/profile", { credentials: "include" });
+  if (!res.ok) return { name: "", phone: "" };
+  return res.json();
+}
+
+async function getMyOrders() {
+  const res = await fetch("/api/orders/mine", { credentials: "include" });
+  if (!res.ok) return [];
+  const data = await res.json();
+  return data.orders || [];
 }
 
 function renderLogin(prefillEmail) {
@@ -73,13 +88,13 @@ function renderLogin(prefillEmail) {
   });
 }
 
-function askNamePhoneThenBuy(product) {
+function askNamePhoneThenBuy(product, profile) {
   window.openModal(`
     <h3>${product.title}</h3>
     <p class="note">₹${product.price}</p>
     <form class="modal-form" id="pdf-buy-form">
-      <label>Full name<input name="name" required></label>
-      <label>Phone / WhatsApp<input type="tel" name="phone" required></label>
+      <label>Full name<input name="name" required value="${(profile && profile.name) || ""}"></label>
+      <label>Phone / WhatsApp<input type="tel" name="phone" required value="${(profile && profile.phone) || ""}"></label>
       <button type="submit" class="button button-primary">Proceed to pay</button>
     </form>
   `);
@@ -95,9 +110,62 @@ function askNamePhoneThenBuy(product) {
   });
 }
 
-function renderDashboard(me) {
+function formatDate(iso) {
+  if (!iso) return "";
+  // D1 stores UTC "YYYY-MM-DD HH:MM:SS" — make it parseable, then show a
+  // plain readable date (no need for exact time-of-day here).
+  const d = new Date(iso.replace(" ", "T") + "Z");
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "numeric" });
+}
+
+function renderOrderHistory(orders) {
+  if (!orders.length) {
+    return `<p class="note">No orders yet.</p>`;
+  }
+  return `<ul class="order-list">${orders
+    .map((o) => {
+      const badgeClass = `status-${o.status}`;
+      const label = STATUS_LABELS[o.status] || o.status;
+      return `<li class="order-item">
+        <div class="order-top">
+          <span class="order-title">${o.productTitle}</span>
+          <span class="order-badge ${badgeClass}">${label}</span>
+        </div>
+        <div class="order-meta">₹${o.amountRupees} · Ordered ${formatDate(o.createdAt)}${o.paidAt ? " · Paid " + formatDate(o.paidAt) : ""}</div>
+      </li>`;
+    })
+    .join("")}</ul>`;
+}
+
+function wireProfileForm(profile) {
+  const form = document.getElementById("profile-form");
+  const note = document.getElementById("profile-saved-note");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    note.textContent = "Saving…";
+    try {
+      const res = await fetch("/api/profile/update", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: data.name, phone: data.phone }),
+      });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || "Could not save.");
+      note.textContent = "Saved.";
+    } catch (err) {
+      note.textContent = err.message;
+    }
+  });
+}
+
+async function renderDashboard(me) {
+  const [profile, orders] = await Promise.all([getProfile(), getMyOrders()]);
+
   const owned = new Set(me.entitlements || []);
-  const rows = PDF_PRODUCTS.map((p) => {
+  const libraryRows = PDF_PRODUCTS.map((p) => {
     if (owned.has(p.id)) {
       return `<li class="entitlement-item"><span>${p.title}</span>
         <a class="button button-primary" href="reader.html?product=${encodeURIComponent(p.id)}">Read now</a></li>`;
@@ -107,22 +175,48 @@ function renderDashboard(me) {
   }).join("");
 
   box.innerHTML = `
-    <h2>Your library</h2>
+    <h2>Your dashboard</h2>
     <p class="note">Logged in as ${me.email}</p>
-    <ul class="entitlement-list">${rows}</ul>
-    <p style="margin-top:20px;"><button type="button" class="button" id="logout-btn" style="background:transparent;border:1.5px solid var(--ink);">Log out</button></p>
+
+    <div class="dash-section">
+      <h3>Profile</h3>
+      <form class="profile-form" id="profile-form">
+        <label>Full name<input name="name" required value="${profile.name || ""}"></label>
+        <label>Phone / WhatsApp<input type="tel" name="phone" required value="${profile.phone || ""}"></label>
+        <button type="submit" class="button button-primary">Save</button>
+      </form>
+      <p class="profile-saved-note" id="profile-saved-note"></p>
+    </div>
+
+    <div class="dash-section">
+      <h3>Your library</h3>
+      <ul class="entitlement-list">${libraryRows}</ul>
+    </div>
+
+    <div class="dash-section">
+      <h3>Order history</h3>
+      ${renderOrderHistory(orders)}
+    </div>
+
+    <div class="dash-section">
+      <button type="button" class="button" id="logout-btn" style="background:transparent;border:1.5px solid var(--ink);">Log out</button>
+    </div>
   `;
+
+  wireProfileForm(profile);
 
   box.querySelectorAll("[data-buy]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const product = PDF_PRODUCTS.find((p) => p.id === btn.dataset.buy);
-      askNamePhoneThenBuy(product);
+      askNamePhoneThenBuy(product, profile);
     });
   });
   document.getElementById("logout-btn").addEventListener("click", async () => {
     await fetch("/api/logout", { method: "POST", credentials: "include" });
     boot();
   });
+
+  return profile;
 }
 
 async function boot() {
@@ -131,11 +225,11 @@ async function boot() {
     renderLogin();
     return;
   }
-  renderDashboard(me);
+  const profile = await renderDashboard(me);
   if (pendingBuy) {
     const product = PDF_PRODUCTS.find((p) => p.id === pendingBuy);
     if (product && !(me.entitlements || []).includes(product.id)) {
-      askNamePhoneThenBuy(product);
+      askNamePhoneThenBuy(product, profile);
     }
     history.replaceState(null, "", "dashboard.html");
   }
