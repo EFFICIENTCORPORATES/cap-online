@@ -8,8 +8,17 @@ import {
   getSessionEmail,
   isValidEmail,
 } from "./lib/session.js";
-import { sendEmail, otpEmailHtml, orderNotificationEmailHtml } from "./lib/email.js";
+import { sendEmail, otpEmailHtml, orderNotificationEmailHtml, buyerConfirmationEmailHtml } from "./lib/email.js";
 import { createRazorpayOrder, verifyRazorpaySignature, verifyWebhookSignature } from "./lib/razorpay.js";
+import {
+  verifyAdminLogin,
+  createAdminSession,
+  adminCookieHeader,
+  clearAdminCookieHeader,
+  getAdminUsername,
+  isLoginRateLimited,
+  recordFailedLogin,
+} from "./lib/admin.js";
 
 const CONTACT_TO = "capranavpratiktulshyan@gmail.com";
 
@@ -284,6 +293,22 @@ async function markOrderPaid(env, order, razorpayPaymentId) {
     console.error("order notification email failed:", err && err.message);
     // Order is already recorded in D1 either way — email is a convenience, not the record of truth.
   }
+
+  // Also confirm the order to the buyer themselves — previously the only
+  // thing they ever saw was an in-browser "Thank you" message that vanished
+  // the moment the tab closed, no record of their own afterward.
+  if (order.buyer_email) {
+    try {
+      await sendEmail(env, {
+        to: order.buyer_email,
+        subject: `Order confirmed — ${product ? product.title : order.product_id}`,
+        html: buyerConfirmationEmailHtml(orderForEmail, product),
+        fromLocal: "orders",
+      });
+    } catch (err) {
+      console.error("buyer confirmation email failed:", err && err.message);
+    }
+  }
 }
 
 async function handleOrderVerify(request, env) {
@@ -482,6 +507,111 @@ async function handleContact(request, env) {
   return json({ ok: true });
 }
 
+async function handleAdminLogin(request, env) {
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (await isLoginRateLimited(env.DB, ip)) {
+    return json({ error: "Too many failed attempts. Please wait a while and try again." }, { status: 429 });
+  }
+
+  const { username, password } = await readJson(request);
+  const ok = await verifyAdminLogin(env.DB, username, password);
+  if (!ok) {
+    await recordFailedLogin(env.DB, ip);
+    return json({ error: "Invalid username or password." }, { status: 401 });
+  }
+
+  const { token, expires } = await createAdminSession(env.DB, username);
+  return json({ ok: true }, { headers: { "Set-Cookie": adminCookieHeader(token, expires) } });
+}
+
+async function handleAdminLogout(request, env) {
+  return json({ ok: true }, { headers: { "Set-Cookie": clearAdminCookieHeader() } });
+}
+
+async function handleAdminMe(request, env) {
+  const username = await getAdminUsername(env.DB, request);
+  return json({ loggedIn: !!username, username: username || null });
+}
+
+/*
+  Read-only preview of what a deletion would touch, shown before the admin
+  confirms — same "show what will be affected before an irreversible
+  action" discipline used for destructive actions elsewhere.
+*/
+async function handleAdminLookup(request, env) {
+  const username = await getAdminUsername(env.DB, request);
+  if (!username) return json({ error: "Please log in." }, { status: 401 });
+
+  const { email } = await readJson(request);
+  if (!isValidEmail(email)) return json({ error: "Enter a valid email address." }, { status: 400 });
+  const clean = email.trim().toLowerCase();
+
+  const [orders, profile, entitlements, sessionsRow, contactRow, otpRow] = await Promise.all([
+    env.DB.prepare("SELECT COUNT(*) AS c FROM orders WHERE buyer_email = ?").bind(clean).first(),
+    env.DB.prepare("SELECT 1 FROM student_profiles WHERE email = ?").bind(clean).first(),
+    env.DB.prepare("SELECT COUNT(*) AS c FROM entitlements WHERE user_email = ?").bind(clean).first(),
+    env.DB.prepare("SELECT COUNT(*) AS c FROM sessions WHERE user_email = ?").bind(clean).first(),
+    env.DB.prepare("SELECT COUNT(*) AS c FROM contact_messages WHERE email = ?").bind(clean).first(),
+    env.DB.prepare("SELECT COUNT(*) AS c FROM otp_codes WHERE email = ?").bind(clean).first(),
+  ]);
+
+  return json({
+    email: clean,
+    orders: orders.c,
+    hasProfile: !!profile,
+    entitlements: entitlements.c,
+    sessions: sessionsRow.c,
+    contactMessages: contactRow.c,
+    otpCodes: otpRow.c,
+  });
+}
+
+/*
+  The actual privacy-policy deletion action: orders are ANONYMIZED (name/
+  email/phone/shipping replaced, but the row itself — amount, product,
+  date, status — is kept for accounting/GST record-keeping, matching what
+  the privacy policy already promises), everything else tied to this
+  email is deleted outright. Logged to deletion_log either way.
+*/
+async function handleAdminDeleteStudent(request, env) {
+  const username = await getAdminUsername(env.DB, request);
+  if (!username) return json({ error: "Please log in." }, { status: 401 });
+
+  const { email } = await readJson(request);
+  if (!isValidEmail(email)) return json({ error: "Enter a valid email address." }, { status: 400 });
+  const clean = email.trim().toLowerCase();
+
+  const [ordersResult, profileResult, entitlementsResult, sessionsResult, contactResult, otpResult] = await Promise.all([
+    env.DB
+      .prepare(
+        "UPDATE orders SET buyer_name = '[deleted]', buyer_email = '[deleted]', buyer_phone = '[deleted]', shipping_json = NULL WHERE buyer_email = ?"
+      )
+      .bind(clean)
+      .run(),
+    env.DB.prepare("DELETE FROM student_profiles WHERE email = ?").bind(clean).run(),
+    env.DB.prepare("DELETE FROM entitlements WHERE user_email = ?").bind(clean).run(),
+    env.DB.prepare("DELETE FROM sessions WHERE user_email = ?").bind(clean).run(),
+    env.DB.prepare("DELETE FROM contact_messages WHERE email = ?").bind(clean).run(),
+    env.DB.prepare("DELETE FROM otp_codes WHERE email = ?").bind(clean).run(),
+  ]);
+
+  const details = {
+    ordersAnonymized: ordersResult.meta.changes,
+    profileDeleted: profileResult.meta.changes,
+    entitlementsDeleted: entitlementsResult.meta.changes,
+    sessionsDeleted: sessionsResult.meta.changes,
+    contactMessagesDeleted: contactResult.meta.changes,
+    otpCodesDeleted: otpResult.meta.changes,
+  };
+
+  await env.DB
+    .prepare("INSERT INTO deletion_log (id, student_email, admin_username, details_json) VALUES (?, ?, ?, ?)")
+    .bind(crypto.randomUUID(), clean, username, JSON.stringify(details))
+    .run();
+
+  return json({ ok: true, ...details });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -500,6 +630,11 @@ export default {
         if (url.pathname === "/api/razorpay/webhook" && request.method === "POST") return await handleRazorpayWebhook(request, env);
         if (url.pathname === "/api/read" && request.method === "GET") return await handleRead(request, env, url);
         if (url.pathname === "/api/contact" && request.method === "POST") return await handleContact(request, env);
+        if (url.pathname === "/api/admin/login" && request.method === "POST") return await handleAdminLogin(request, env);
+        if (url.pathname === "/api/admin/logout" && request.method === "POST") return await handleAdminLogout(request, env);
+        if (url.pathname === "/api/admin/me" && request.method === "GET") return await handleAdminMe(request, env);
+        if (url.pathname === "/api/admin/lookup" && request.method === "POST") return await handleAdminLookup(request, env);
+        if (url.pathname === "/api/admin/delete-student" && request.method === "POST") return await handleAdminDeleteStudent(request, env);
       } catch (err) {
         return json({ error: "Something went wrong. Please try again." }, { status: 500 });
       }

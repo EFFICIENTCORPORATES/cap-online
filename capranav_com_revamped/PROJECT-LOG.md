@@ -572,7 +572,7 @@ asset files" message despite genuinely taking effect).
 | Cloudflare account | `Efficientcorporates@gmail.com's Account`, id `68e19e5bed11326478a23d6e2ad31453` |
 | Deployed code | `D:\EffCorp_Projects\cap-online\capranav_com_revamped\` |
 | Superseded code (kept, not deployed) | `D:\EffCorp_Projects\cap-online\capranav_com\capranav-website\` |
-| D1 database | `capranav-platform`, id `03830ea8-b539-480b-b106-0743aeda1b1f` — tables: `otp_codes`, `sessions`, `orders`, `entitlements`, `webhook_events`, `contact_messages`, `student_profiles` (see `schema.sql`) |
+| D1 database | `capranav-platform`, id `03830ea8-b539-480b-b106-0743aeda1b1f` — tables: `otp_codes`, `sessions`, `orders`, `entitlements`, `webhook_events`, `contact_messages`, `student_profiles`, `admin_users`, `admin_sessions`, `admin_login_attempts`, `deletion_log` (see `schema.sql`) |
 | R2 bucket | `capranav-vault` (private) — `question-bank-book.pdf`, `strategy-book.pdf` |
 | Worker secrets (never in code/git) | `RAZORPAY_KEY_ID` (live), `RAZORPAY_KEY_SECRET` (live), `CF_EMAIL_ACCOUNT_ID`, `CF_EMAIL_API_TOKEN` — set via `wrangler secret put`, listable via `wrangler secret list` |
 | Local dev secrets | `capranav_com_revamped/.dev.vars` (gitignored, mirrors the Worker secrets for `wrangler dev --remote`) |
@@ -598,11 +598,15 @@ asset files" message despite genuinely taking effect).
   PDFs → "Read now"; not-yet-bought PDFs → buy button), Order History
   (every past order, any status).
 - `public/privacy.html`, `terms.html`, `cancellation-and-refund.html`,
-  `shipping-and-exchange.html`, `contact-us.html` — the five standalone
-  compliance pages (Razorpay's standard checklist naming), each also
-  carrying the GSTIN/registered-address block in its footer.
-  `public/policies.html` — the older combined reference, kept live,
-  cross-linking to all five.
+  `shipping-and-exchange.html`, `contact-us.html`, `about-us.html`,
+  `pricing-details.html` — the seven standalone compliance pages
+  (Razorpay's real merchant-activation checklist, confirmed against their
+  own docs), each carrying the GSTIN/registered-address block in its
+  footer. `public/policies.html` — the older combined reference, kept
+  live, cross-linking to all seven.
+- `public/admin.html` — single-admin login (separate from student OTP
+  login), gating one action: look up and delete/anonymize a student's
+  data per the privacy policy's deletion promise. `noindex, nofollow`.
 - `public/reader.html` — the locked-down PDF.js reader, one product at a
   time via `?product=`. Streams via HTTP Range requests (not a full
   download), with jump-to-page and a Table of Contents panel
@@ -671,6 +675,116 @@ verifying the live flow. Test entitlements/orders/sessions were deleted
 after each check — **except** one order that sat unresolved for a day
 (§2's "Phase C" — investigated and closed 2026-09-03, turned out to have
 no real Razorpay-side record at all, marked `failed`).
+
+### Buyer confirmation emails, a single-admin data-deletion tool, and two more Razorpay-checklist pages (2026-09-05)
+
+Pranav asked for three more things: (1) buyer-facing order-confirmation
+emails (previously only he got notified — the buyer saw just an
+in-browser "Thank you" message with no record afterward); (2) a real,
+working mechanism behind the privacy policy's data-deletion promise,
+gated behind an admin login; (3) checked whether the site actually covers
+Razorpay's full merchant-activation checklist, not just the five pages
+built 2026-09-04.
+
+**Razorpay checklist, verified against Razorpay's own docs (not
+assumed)**: the real checklist is Terms & Conditions, Privacy Policy,
+**About Us**, Contact Us, **Pricing Details**, Refunds/Cancellation,
+Shipping — two items (About Us, Pricing Details) beyond what was built the
+day before. Built both: `public/about-us.html` (reuses the same
+already-public bio/credentials text from the homepage, plus the
+GSTIN/address block) and `public/pricing-details.html` (every real price
+from `worker/lib/products.js`, in one place — course batches, both books
+both ways, the free Telegram bot). All seven pages now cross-link to each
+other in both their nav strip and footer, and the homepage/`policies.html`
+footers were updated to match.
+
+**Buyer confirmation email**: new `buyerConfirmationEmailHtml()` in
+`worker/lib/email.js`, sent from `markOrderPaid()` to `order.buyer_email`
+(alongside the existing owner-facing notification, not instead of it) —
+different next-step line per product type (PDF: link to the dashboard;
+physical: dispatch timing; course: "we'll reach out within 24 hours",
+matching the existing in-browser copy verbatim so the two never
+contradict each other). Unit-tested all three variants directly in Node
+before touching the live path, then verified via a real order + real
+signed webhook against production D1/Cloudflare Email — confirmed no
+`buyer confirmation email failed` line in the Worker log (the real
+send succeeded). Used `capranavpratiktulshyan@gmail.com` as the test
+buyer address rather than the usual `pranavaiversion@gmail.com` test
+account, since that account (and its `+alias`es) is the one already known
+to be Cloudflare-suppressed (§6 below) — didn't want a suppressed address
+to produce a false negative.
+
+**Admin login + data-deletion tool**: entirely separate from the student
+OTP-login system (`worker/lib/admin.js`, new `cp_admin_session` cookie,
+new `admin_users`/`admin_sessions` tables) and scoped to exactly one
+action, per how narrowly Pranav asked for it — no broader admin panel.
+New `public/admin.html` + `assets/admin.js`: log in, type a student email,
+see a real preview of what deleting it would touch (order count, whether
+a profile exists, entitlement/session/contact-message/OTP-code counts —
+each pulled live from its own table, not guessed), then confirm. The
+actual deletion **anonymizes order rows** (`buyer_name`/`buyer_email`/
+`buyer_phone`/`shipping_json` replaced with `'[deleted]'`/`NULL`, but
+`amount_rupees`/`product_id`/`status`/`created_at` kept) rather than
+deleting them outright — Pranav's own explicit choice, matching what the
+privacy policy already promises about accounting/GST record-keeping —
+while `student_profiles`, `entitlements`, `sessions`, `contact_messages`,
+and `otp_codes` rows for that email are deleted outright. Every deletion
+writes to a new `deletion_log` table (student email, admin username,
+exact counts, timestamp) — a real audit trail, not just a silent action.
+A brute-force guard (new `admin_login_attempts` table, 5 failed attempts
+per IP per 15 minutes) sits in front of the login itself.
+
+**A real security tradeoff, flagged and consciously accepted, not silently
+built**: Pranav asked for the admin password to be stored in **plain
+text**. Before building it, this was flagged back to him plainly — a
+hashed password costs nothing extra in his own day-to-day login
+experience, and only changes what's readable if the database (or one of
+its local `.sql` backups, which already get written to disk every 6
+hours) is ever exposed — and he confirmed he wants plain text anyway.
+Built exactly that (`admin_users.password` compared directly, no
+hashing), with a code comment on the table pointing back to this decision
+so a future session doesn't "fix" it without asking again first.
+
+**Verified for real against production D1** (not just structurally),
+using a temporary test admin account (`test_admin_temp`) and a fully
+synthetic student (`admin-delete-test@example.com`) with a real row
+seeded in **every** affected table:
+- Confirmed a bad password gets 401, and — separately — 6 rapid bad
+  attempts correctly got the 6th (really the 5th distinct failure,
+  since one earlier bad-login test had already logged one) blocked with
+  429; confirmed exactly 5 rows landed in `admin_login_attempts`, not more
+  or fewer.
+- Confirmed a correct login succeeds and sets a working session
+  (`/api/admin/me` correctly flips to `loggedIn:true`).
+- Confirmed the lookup step reports the exact real per-table counts (1
+  across every table for the seeded synthetic student, then re-checked
+  showing 0/1 correctly on a second synthetic student that only had 2 of
+  the 6 tables populated — proving the counts are genuinely live, not
+  hardcoded).
+- Confirmed the actual deletion left the order row **anonymized but
+  present** (`buyer_name`/`email`/`phone` = `'[deleted]'`, `amount_rupees`/
+  `status`/`product_id` untouched) and every other table's row for that
+  email **genuinely gone** (`SELECT COUNT(*)` = 0 across all five), and
+  confirmed a `deletion_log` row was written with the correct admin
+  username and exact per-table counts.
+- Confirmed unauthenticated calls to `/api/admin/lookup` and
+  `/api/admin/delete-student` both 401 before touching anything.
+- Visually verified via headless-Edge screenshot: the login form, and the
+  logged-in tool correctly rendering real per-table counts pulled from
+  production D1.
+- All test rows (order, profile, entitlement, session, contact message,
+  OTP code, the temp admin account/session, the login-attempt rows, the
+  deletion-log row) deleted afterward; re-queried and confirmed 0 residue
+  across every one of the new tables.
+
+Deployed with `wrangler deploy`; independently re-curled `about-us.html`,
+`pricing-details.html`, `admin.html`, and `/api/admin/me` directly from
+`capranav.com` post-deploy to confirm they're actually live.
+
+**Not yet done**: no real admin account exists in production yet — the
+test account above was deleted after verification, on purpose, since
+Pranav hadn't given a real username/password to seed it with. Asked him
+for the actual credentials to create the real one.
 
 ---
 

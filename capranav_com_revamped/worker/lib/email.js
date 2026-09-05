@@ -68,3 +68,28 @@ export function orderNotificationEmailHtml(order, product, shipping) {
       <p style="margin:18px 0 0;padding:12px 14px;border-radius:8px;background:${meta.bg};color:${meta.color};font-size:13px;font-weight:600;">${meta.action}</p>
     </div>`;
 }
+
+const BUYER_NEXT_STEP = {
+  book_pdf: `Your book is ready to read — head to <a href="https://capranav.com/dashboard.html">your dashboard</a> and click "Read now".`,
+  book_physical: "Your book ships prepaid — we'll dispatch it within a few business days and reach out on the phone/email you shared with delivery details.",
+  course: "We'll reach out on the email/phone you shared within 24 hours with your batch details.",
+};
+
+/*
+  Sent to the BUYER (not Pranav) once an order is marked paid — previously
+  the only confirmation a buyer ever saw was an in-browser "Thank you"
+  message that vanished the moment they closed the tab.
+*/
+export function buyerConfirmationEmailHtml(order, product) {
+  const nextStep = BUYER_NEXT_STEP[order.product_type] || "";
+  return `
+    <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;">
+      <p style="font-size:13px;color:#667085;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px;">Order confirmed</p>
+      <h2 style="margin:0 0 4px;font-size:22px;">${product ? product.title : order.product_id}</h2>
+      <p style="margin:0 0 18px;font-size:20px;font-weight:800;">₹${order.amount_rupees}</p>
+      <p style="font-size:14px;color:#475467;line-height:1.6;">Thanks for your order — payment has been received and confirmed.</p>
+      <p style="font-size:14px;color:#475467;line-height:1.6;">${nextStep}</p>
+      <p style="font-size:12px;color:#98a2b3;margin-top:24px;">Order ID: ${order.id}${order.razorpay_payment_id ? " · Payment ID: " + order.razorpay_payment_id : ""}</p>
+      <p style="font-size:12px;color:#98a2b3;">Questions? Reply to this email or write to capranavpratiktulshyan@gmail.com.</p>
+    </div>`;
+}

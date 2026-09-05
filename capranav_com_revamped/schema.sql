@@ -74,3 +74,40 @@ CREATE TABLE IF NOT EXISTS contact_messages (
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 CREATE INDEX IF NOT EXISTS idx_contact_ip ON contact_messages(ip);
+
+-- Single-admin login, gating exactly one narrow action: processing a
+-- privacy-policy data-deletion request (see handleAdminDeleteStudent in
+-- worker/index.js). Password is stored in PLAIN TEXT — a deliberate,
+-- informed choice by Pranav (2026-09-04): hashing was explained and
+-- offered at no extra cost to his own login experience, and he chose
+-- plain text anyway. Don't "fix" this without asking him again first.
+CREATE TABLE IF NOT EXISTS admin_users (
+  username   TEXT PRIMARY KEY,
+  password   TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS admin_sessions (
+  token      TEXT PRIMARY KEY,
+  username   TEXT NOT NULL,
+  expires_at TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Brute-force guard on /api/admin/login — counts recent FAILED attempts by
+-- IP (the credential itself being unhashed makes this worth having).
+CREATE TABLE IF NOT EXISTS admin_login_attempts (
+  ip         TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_admin_attempts_ip ON admin_login_attempts(ip);
+
+-- Audit trail for the data-deletion tool: what was anonymized/deleted, by
+-- which admin, when — so a real deletion always leaves a record of itself.
+CREATE TABLE IF NOT EXISTS deletion_log (
+  id             TEXT PRIMARY KEY,
+  student_email  TEXT NOT NULL,
+  admin_username TEXT NOT NULL,
+  details_json   TEXT,
+  created_at     TEXT NOT NULL DEFAULT (datetime('now'))
+);
