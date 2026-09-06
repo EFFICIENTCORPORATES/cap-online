@@ -786,6 +786,40 @@ test account above was deleted after verification, on purpose, since
 Pranav hadn't given a real username/password to seed it with. Asked him
 for the actual credentials to create the real one.
 
+### Course enrolment temporarily redirects to VC Gurukul; books unchanged (2026-09-06)
+
+Pranav asked for course "Enrol now" to redirect to VC Gurukul's own
+product page instead of this site's Razorpay checkout — explicitly
+temporary, explicitly not to delete the in-site Razorpay course flow.
+Books (`data-buy-physical`/`data-buy-pdf`) are untouched — still buy
+directly on this site exactly as before; `worker/lib/razorpay.js` and the
+whole `/api/orders/*` backend are untouched too (courses could come back
+to using them the moment the button's own handler is restored).
+
+Changed only `public/assets/app.js`'s `enrol-button` click handler: it now
+does `window.location.href = COURSE_EXTERNAL_CHECKOUT_URL` (the exact URL
+Pranav gave). The original handler (`openGuestForm` → `window.buyProduct`
+→ Razorpay) is left directly below it, commented out rather than deleted,
+with a comment explaining it's the revert path — restoring in-site course
+checkout later is delete-the-redirect-line-uncomment-the-block, not a
+rebuild.
+
+**Verified for real**: ran this through `wrangler dev --remote` and a
+real headless-Edge session — clicking a physical book's buy button still
+opens the guest-checkout modal (confirming books are genuinely
+untouched), and clicking "Enrol now" was confirmed (via a request-
+interception check, so the test didn't actually hit vcgurukul.com)
+to navigate to exactly the URL Pranav gave, byte-for-byte. Deployed with
+`wrangler deploy`; independently re-curled the live `app.js` from
+`capranav.com` afterward and confirmed the URL is really there.
+
+(Also hit a real, unrelated environment issue while testing this: 4 stale
+`wrangler dev` processes from earlier in this session were still holding
+port 8787, making new dev-server instances flakily unreachable. Killed
+them by PID and switched to a fresh port — worth knowing if a future
+session sees `wrangler dev` claim "Ready" but the port doesn't actually
+respond.)
+
 ---
 
 ## 6. Open items

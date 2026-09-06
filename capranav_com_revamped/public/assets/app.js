@@ -51,6 +51,23 @@ function showResultModal(message) {
   window.openModal(`<h3>Thank you</h3><p class="note">${message}</p>`);
 }
 
+// TEMPORARY (Pranav, 2026-09-06): course enrolment redirects to VC
+// Gurukul's own product page instead of this site's Razorpay checkout.
+// Books are UNCHANGED — still buy directly on this site (see the
+// data-buy-physical/data-buy-pdf handlers below, and dashboard.js for
+// PDF purchases). Explicitly framed as temporary, not a removal — the
+// original in-site course-checkout flow is kept right below, commented
+// out rather than deleted, so restoring it later is: delete the redirect
+// line, uncomment the block.
+const COURSE_EXTERNAL_CHECKOUT_URL =
+  "https://www.vcgurukul.com/product/ca-intermediated-gr1-advanced-accounting-ca-pranav-pratik-tulshyan-jan27-may27?variant=Q1344Q0CJUI2W4J82W7FAGXVUVD9L3F8&src=product_list&variantId=Q1344Q0CJUI2W4J82W7FAGXVUVD9L3F8";
+
+document.getElementById("enrol-button").addEventListener("click", () => {
+  window.location.href = COURSE_EXTERNAL_CHECKOUT_URL;
+});
+
+/* Original in-site Razorpay course checkout — restore by deleting the
+   redirect handler above and uncommenting this block.
 document.getElementById("enrol-button").addEventListener("click", () => {
   openGuestForm({
     title: "CA Inter Gr.1 Advanced Accounting — " + selectedCourseBatch.label,
@@ -66,6 +83,7 @@ document.getElementById("enrol-button").addEventListener("click", () => {
     },
   });
 });
+*/
 
 document.querySelectorAll("[data-buy-physical]").forEach((btn) => {
   btn.addEventListener("click", () => {
