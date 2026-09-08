@@ -1,0 +1,8 @@
+# Requirements for convert_tests_to_pdf.py (chapter test PDF generator)
+# Install with:  python -m pip install -r requirements.txt
+# (generate_pdfs.bat does this automatically - you don't need to run this by hand)
+
+markdown>=3.5
+xhtml2pdf>=0.2.13
+reportlab>=4.0
+pypdf>=4.0
