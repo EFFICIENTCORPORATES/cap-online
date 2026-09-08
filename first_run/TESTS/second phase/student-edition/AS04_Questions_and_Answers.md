@@ -1,21 +1,19 @@
-# AS 4 — Contingencies and Events Occurring After the Balance Sheet Date — Chapter Test (Second Phase)
+# AS 4 - Contingencies and Events Occurring After the Balance Sheet Date
 
-**CA Inter · Paper 1: Advanced Accounting**
-**Chapter Reference:** `M2-C7-U1`
+**CA Inter | Paper 1: Advanced Accounting**
 
-**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 31 &nbsp;|&nbsp; **Section A (MCQ):** 10 marks, 7 questions (32%) &nbsp;|&nbsp; **Section B (Descriptive):** 21 marks, 3 questions (68%)
+**Maximum Marks: 31**
+**Time Allowed: 56 minutes**
 
-**Suggested Time:** ~56 minutes
-
-> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material chapter's own "Test Your Knowledge" section (`books/concept-book/raw_icai_study_materials/`, extracted by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks are estimated from answer length and every such question/answer is explicitly tagged "estimated from answer length, not an official mark" wherever it appears below. Nothing is invented — every question and every answer is copied from one of these two real sources.
->
-> **Content note — target not fully met (pool too small):** the tagged question pool currently available for AS 4 in this corpus totals only **31 marks** (10 MCQ + 21 Descriptive) after de-duplication — short of the 50-mark target. All available real content has been included below (**31 of 50 marks**); no question was invented or borrowed from another chapter to pad the total. More MTP/RTP/PYQ sittings would need to be sourced and tagged for this chapter to reach a full 50-mark paper.
->
-> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (0 MCQ + 2 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
+**Instructions:**
+1. All questions are compulsory unless stated otherwise.
+2. Marks for each question are shown alongside it.
+3. Show full working notes wherever applicable.
+4. Answer as per the Accounting Standards applicable for CA Inter.
 
 ---
 
-## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 10 Marks
+## Section A: Multiple Choice Questions (10 Marks)
 
 **1.** <p>A Ltd. sold its building for ₹ 50 lakhs to B Ltd. and has also given the possession to B Ltd. The book value of the building is ₹ 30 lakhs. As on 31st March, 20X1, the documentation and legal formalities are pending. For the financial year ended 31st March, 20X1</p>
 
@@ -24,7 +22,7 @@
 - **(C)** Both (a) and (b).
 - **(D)** The company should disclose the profit of ₹ 20 lakhs in notes to accounts.
 
-*(1 Marks · Topic: M2-C7-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #4)*
+*[1 Marks | Topic: M2-C7-U1 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
 
 **2.** <p>AS 4 does not apply to</p>
 
@@ -33,7 +31,7 @@
 - **(C)** liabilities of life assurance and general insurance enterprises arising from policies issued
 - **(D)** All of the above.
 
-*(1 Marks · Topic: M2-C7-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #3)*
+*[1 Marks | Topic: M2-C7-U1 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
 
 **3.** <p>As per Accounting Standards, events occurring after the balance sheet date are</p>
 
@@ -42,7 +40,7 @@
 - **(C)** Those significant events, both favourable and unfavourable, that occur between the balance sheet date and the date on which the financial statements are approved by the Board of directors.
 - **(D)** Those significant events, both favourable and unfavourable, that occur between the balance sheet date and the date on which the financial statements are not approved by the Board of directors. a
 
-*(1 Marks · Topic: M2-C7-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #2)*
+*[1 Marks | Topic: M2-C7-U1 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
 
 **4.** <p>Cash amounting to ₹ 4 lakhs, stolen by the cashier in the month of March 20X1, was detected in April, 20X1. The financial statements for the year ended 31st March, 20X1 were approved by the Board of Directors on 15th May, 20X1. As per Accounting Standards, this is _____ for the financial statements year ended on 31st March, 20X1.</p>
 
@@ -51,10 +49,7 @@
 - **(C)** Contingency.
 - **(D)** Provision
 
-*(1 Marks · Topic: M2-C7-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #1)*
-
-
-*Case Facts (Case CS-2):*
+*[1 Marks | Topic: M2-C7-U1 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
 
 <p>Kay Ltd. sold goods of ₹22,00,000 to Mr. Ravi Kumar on 1st February, 2024 but at the request of the buyer, these goods were delivered on 10th April 2024.</p>
 <p>Kay Ltd. also sold ₹2,00,000 goods on approval basis on 1st January, 2024 to Sheetal Enterprises. The period of approval is 3 months after which they were considered sold. Buyer sent disapproval for 25% of goods and approval for 50% of goods till 31 March, 2024.</p>
@@ -70,7 +65,28 @@
 - **(C)** A Non-adjusting event, no provision is required to be made as Sheetal Enterprises became bankrupt in April, 2024.
 - **(D)** A Non-adjusting event, only disclosure is required in the Final Accounts for the year ended 31st March, 2024.
 
-*(2 Marks · Topic: AS 4 (1.4): Adjusting event - post-year-end insolvency confirming a condition (impaired receivable) that existed at the balance sheet date · Source: PYQ 2024 Q7)*
+*[2 Marks | Topic: AS 4 (1.4): Adjusting event - post-year-end insolvency confirming a condition (impaired receivable) that existed at the balance sheet date | Source: PYQ 2024 Q7]*
+
+<p>RTS Ltd, ("RTS" or the "Company"), is engaged in the business of manufacturing of urea, has set up its business in a designated backward area which entitles the company to receive from the Government of India a subsidy of 20% of the cost of investment of manufacturing of equipments/components. The Company has a contract with the Indian Railways for a brake component which is structured such that:</p>
+<ul>
+<li>The Company’s obligation is to deliver the component to the Railways’ stockyard, while the delivery terms are ex-works, the Company is responsible for engaging a transporter for delivery.</li>
+<li>Railways sends an order for a defined quantity.</li>
+<li>The Company manufactures the required quantity and informs Railways for carrying out the inspection.</li>
+<li>Railways representatives visit the Company’s factory and inspect the components, and mark each component with a quality check sticker.</li>
+<li>Goods once inspected by Railways, are marked with a hologram sticker to earmark for delivery identification by the customer when they are delivered to the customer’s location.</li>
+<li>The Company raises an invoice once it dispatches the goods.</li>
+</ul>
+<p>The management of RTS is under discussion with the auditors of the Company in respect of accounting of a critical matter as regards its accounting with respect subsequent events i.e. events after the reporting period. They have been checking as to which one of the following events after the reporting period provide evidence of conditions that existed at the end of the reporting period?</p>
+<ol type="i">
+<li>Nationalisation or privatization by government</li>
+<li>Out of court settlement of a legal claim</li>
+<li>Rights issue of equity shares</li>
+<li>Strike by workforce</li>
+<li>Announcing a plan to discontinue an operation</li>
+</ol>
+<p>The Company has received a grant of ₹8 crores from the Government for setting up a factory in a backward area. Out of this grant, the Company distributed ₹2 crores as dividend. The Company also received land, free of cost, from the State Government but it has not recorded this at all in the books as no money has been spent.</p>
+<p>RTS has a subsidiary, LPP Media &amp; Creations Ltd (LPP), an advertising agency which prepares and publishes advertisement in newspapers on behalf of its clients. LPP invoices its clients for the commission they are entitled to as well as the media space payable to the newspaper.</p>
+<p>Based on the above information, answer the following questions.</p>
 
 **6.** <p>Please guide the management of RTS Ltd as to which one of the events mentioned above (i to v) after the reporting period provide evidence of conditions that existed at the end of the reporting period?</p>
 
@@ -79,7 +95,13 @@
 - **(C)** v.
 - **(D)** i, iii and iv.
 
-*(2 Marks · Topic: AS 4 (1.4): Adjusting events - provide additional evidence of conditions existing at the balance sheet date · Source: MTP 2025 Set 1 Q7)*
+*[2 Marks | Topic: AS 4 (1.4): Adjusting events - provide additional evidence of conditions existing at the balance sheet date | Source: MTP 2025 Set 1 Q7]*
+
+<p>Unicorn Limited manufactures building material. It took a loan of ₹60 Lakhs @10% p.a. on 1st August, 2025 to purchase raw material, and on the same day purchased 40,000 units of raw material @ ₹125 per unit (2 units of raw material per unit of finished goods). On 31st March, 2026: (i) 10,000 units of finished goods produced; (ii) NRV of finished goods ₹300/unit; (iii) Net replacement value of raw material ₹100/unit; (iv) Labour and variable overheads ₹10,00,000 for 10,000 units; (v) all finished goods produced remained in stock; (vi) no opening stock of raw material or finished goods.</p>
+<p>Unicorn Limited used 15,000 units of raw material to construct an asset (Qualifying Asset). Labour and other overhead charges for construction ₹9,00,000. Paid ₹1,50,000 to install the asset at factory premises.</p>
+<p>Unicorn Limited used the balance loan proceeds of ₹10,00,000 to invest in Equity shares of Royal Limited: 90,000 equity shares (Face value ₹10 each) for ₹10,00,000 on 25th March, 2026. Royal Limited declared and paid dividend @20% on 30th March 2026 for the year 2024-25.</p>
+<p>A fraud of ₹2,80,000 done by the cashier of Unicorn Limited in January, 2026 was detected in April, 2026. The financial statements for the year ended 31st March, 2026 were approved by the Board of Directors on 1st May, 2026.</p>
+<p>Based on the information given in the above case scenario, answer Question Nos. 6-9.</p>
 
 **7.** <p>How the loss due to fraud by cashier will be recognized in the books of Unicorn Limited?</p>
 
@@ -88,16 +110,16 @@
 - **(C)** Loss of ₹1,40,000 recognized in the P&amp;L for the year ended 31 March, 2026.
 - **(D)** Loss of ₹2,10,000 recognized in the P&amp;L for 31 March, 2026 and balance ₹70,000 for 31 March, 2027.
 
-*(2 Marks · Topic: AS 4 (1.4): Adjusting event - fraud relating to the period, discovered before approval of financial statements · Source: PYQ 2026 Q9)*
+*[2 Marks | Topic: AS 4 (1.4): Adjusting event - fraud relating to the period, discovered before approval of financial statements | Source: PYQ 2026 Q9]*
 
 
 ---
 
-## Section B — Descriptive Questions *(Illustrations style)* — 21 Marks
+## Section B: Descriptive Questions (21 Marks)
 
 **Q1.** <p>A Ltd. has sold its building for ₹ 50 lakhs to B Ltd. and has also given the possession to B Ltd. The book value of the building is ₹ 30 lakhs. As on 31st March, 20X1, the documentation and legal formalities are pending. The company has not recorded the sale and has shown the amount received as advance. Do you agree with this treatment? During the year 20X1-20X2, Raj Ltd. was sued by a competitor for ₹ 15 lakhs for infringement of a trademark. Based on the advice of the company's legal counsel, Raj Ltd. provided for a sum of ₹ 10 lakhs in its financial statements for the year ended 31st March, 20X2. On 18th May, 20X2, the Court decided in favour of the party alleging infringement of the trademark and ordered Raj Ltd. to pay the aggrieved party a sum of ₹ 14 lakhs. The financial statements were prepared by the company's management on 30th April, 20X2, and approved by the board on 30th May, 20X2. a</p>
 
-*(7 Marks — estimated from answer length, not an official mark · Topic: M2-C7-U1 — ICAI Study Material · Source: Study Material TYK — Scenario based Questions #6)*
+*[7 Marks | Topic: AS 4 | Source: ICAI Study Material]*
 
 **Q2.** <p>The financial statements of PQ Ltd. for the year 2024-25 approved by the Board of Directors on 15th July, 2025. The following information was provided:</p>
 <ol type="i">
@@ -109,7 +131,7 @@
 </ol>
 <p>With reference to AS-4 "Contingencies and events occurring after the balance sheet date", state whether the above mentioned events will be treated as contingencies, adjusting events or non-adjusting events occurring after the balance sheet date.</p>
 
-*(7 Marks · Topic: AS 4 (1.4-1.5) · Source: MTP 2025 Set 2 Q1b)*
+*[7 Marks | Topic: AS 4 (1.4-1.5) | Source: MTP 2025 Set 2 Q1b]*
 
 **Q3.** <p>State with reasons, how the following events would be dealt with in the financial statements of Hari Ltd. for the year ended 31st March, 2024 (accounts were approved on 25th July, 2024):</p>
 <ol>
@@ -120,45 +142,45 @@
 <li>Cheques dated 31st March, 2024 collected in the month of April, 2024. All cheques are presented to the bank in the month of April, 2024 and are also realized in the same month in the normal course after deposit in the bank.</li>
 </ol>
 
-*(7 Marks · Topic: AS 4 (1.4); AS 5 (2.2) · Source: MTP 2025 Set 2 Q1a)*
+*[7 Marks | Topic: AS 4 (1.4); AS 5 (2.2) | Source: MTP 2025 Set 2 Q1a]*
 
 
 ---
 
 ## Answers
 
-### Section A — MCQ Answer Key & Explanations
+### Section A: Multiple Choice Questions
 
-**1.** Correct Option: **(C)**
+**1.** Correct Answer: **(C)**
 
 <p><strong>Answer:</strong> (C) Both (a) and (b).</p>
 
-**2.** Correct Option: **(D)**
+**2.** Correct Answer: **(D)**
 
 <p><strong>Answer:</strong> (D) All of the above.</p>
 
-**3.** Correct Option: **(C)**
+**3.** Correct Answer: **(C)**
 
 <p><strong>Answer:</strong> (C) Those significant events, both favourable and unfavourable, that occur between the balance sheet date and the date on which the financial statements are approved by the Board of directors.</p>
 
-**4.** Correct Option: **(A)**
+**4.** Correct Answer: **(A)**
 
 <p><strong>Answer:</strong> (A) An Adjusting event.</p>
 
-**5.** Correct Option: **(A)**
+**5.** Correct Answer: **(A)**
 
-<p><strong>Answer:</strong> (A) Adjusting event, full ₹75,000 provision — the earthquake that caused Sheetal Enterprises' loss occurred on 30th March 2024, before the balance sheet date, and the bankruptcy confirmed in April 2024 provides additional evidence of a condition (the customer's impaired ability to pay) that already existed at 31st March 2024. Per AS 4 this is an adjusting event, and since the debtor is now known to be bankrupt, the entire ₹75,000 balance — not just the standard 5% doubtful-debts rate — must be provided for.</p>
+<p><strong>Answer:</strong> (A) Adjusting event, full ₹75,000 provision - the earthquake that caused Sheetal Enterprises' loss occurred on 30th March 2024, before the balance sheet date, and the bankruptcy confirmed in April 2024 provides additional evidence of a condition (the customer's impaired ability to pay) that already existed at 31st March 2024. Per AS 4 this is an adjusting event, and since the debtor is now known to be bankrupt, the entire ₹75,000 balance - not just the standard 5% doubtful-debts rate - must be provided for.</p>
 
-**6.** Correct Option: **(B)**
+**6.** Correct Answer: **(B)**
 
-<p><strong>Answer:</strong> (B) ii only — the out-of-court settlement of a legal claim (ii) confirms/quantifies a condition (the dispute and its likely outcome) that already existed at the balance sheet date, so it is an adjusting event under AS 4. Nationalisation/privatisation (i), a rights issue (iii), a strike (iv), and announcing a plan to discontinue an operation (v) are all new conditions arising after the balance sheet date — non-adjusting events.</p>
+<p><strong>Answer:</strong> (B) ii only - the out-of-court settlement of a legal claim (ii) confirms/quantifies a condition (the dispute and its likely outcome) that already existed at the balance sheet date, so it is an adjusting event under AS 4. Nationalisation/privatisation (i), a rights issue (iii), a strike (iv), and announcing a plan to discontinue an operation (v) are all new conditions arising after the balance sheet date - non-adjusting events.</p>
 
-**7.** Correct Option: **(B)**
+**7.** Correct Answer: **(B)**
 
-<p><strong>Answer:</strong> (B) — the fraud occurred in January 2026 (within the year under audit) and was discovered before the financial statements were approved (1st May, 2026), so it is an adjusting event requiring recognition of the full loss in FY 2025-26.</p>
+<p><strong>Answer:</strong> (B) - the fraud occurred in January 2026 (within the year under audit) and was discovered before the financial statements were approved (1st May, 2026), so it is an adjusting event requiring recognition of the full loss in FY 2025-26.</p>
 
 
-### Section B — Descriptive Solutions
+### Section B: Descriptive Questions
 
 **Q1.**
 
@@ -174,7 +196,7 @@
 <p>(v) The condition of fire occurrence was not existing on the balance sheet date. Only the disclosure regarding event of fire and loss being completely insured may be given in the report of approving authority.</p>
 </div>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error across items like this is applying a single blanket rule (e.g. "always adjust" or "always disclose") to every post-balance-sheet event, rather than checking each fact pattern individually against whether it provides evidence of conditions existing at the balance sheet date (adjusting) or relates only to conditions arising afterwards (non-adjusting or no treatment, as with the theft detected after approval).
+> **Common Mistake to Avoid:** A common error across items like this is applying a single blanket rule (e.g. "always adjust" or "always disclose") to every post-balance-sheet event, rather than checking each fact pattern individually against whether it provides evidence of conditions existing at the balance sheet date (adjusting) or relates only to conditions arising afterwards (non-adjusting or no treatment, as with the theft detected after approval).
 
 **Q3.**
 
@@ -188,11 +210,7 @@
 </ol>
 </div>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error is treating all five items uniformly as either "always adjust" or "always disclose only", rather than separately testing each event against AS 4's adjusting-versus-non-adjusting distinction on its own facts — in particular, confusing the Court's post-year-end decision (an adjusting event, since it relates to a liability that already existed and was already provided for at the balance sheet date) with the cashier's embezzlement discovered after the accounts were approved (a subsequent-period item under AS 5, not an adjustment to the year already closed).
+> **Common Mistake to Avoid:** A common error is treating all five items uniformly as either "always adjust" or "always disclose only", rather than separately testing each event against AS 4's adjusting-versus-non-adjusting distinction on its own facts - in particular, confusing the Court's post-year-end decision (an adjusting event, since it relates to a liability that already existed and was already provided for at the balance sheet date) with the cashier's embezzlement discovered after the accounts were approved (a subsequent-period item under AS 5, not an adjustment to the year already closed).
 
 
----
-
-**Provenance note:** boxes marked *Examiner's Comment (ICAI)* reproduce/paraphrase a real ICAI Examiner's Comment on that exact question. Boxes marked *Author's Note (Synthesized)* are written in ICAI's voice per this platform's `examiner-comments-writing-skill.md` style guide but are **not** ICAI-sourced, and may not apply in every case.
-
-*Generated: 2026-09-08 · First edition — please report any error to Pranav.*
+*End of Answer Key*

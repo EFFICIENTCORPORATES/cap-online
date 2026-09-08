@@ -47,6 +47,7 @@ DESC_PATH = REPO_ROOT / "first_run" / "output" / "generated-from-script" / "ques
 MCQ_PATH = Path(r"D:\EffCorp_Products\Main1Lavya\Main1lavyaAIAgents\examstudyhub\assets\exam_bot\mcq_questions_extracted.json")
 STUDY_TYK_PATH = REPO_ROOT / "first_run" / "output" / "generated-from-script" / "study_material_tyk.json"
 OUT_DIR = REPO_ROOT / "first_run" / "TESTS" / "second phase"
+STUDENT_DIR = OUT_DIR / "student-edition"
 
 TARGET_TOTAL = 50
 TARGET_MCQ_FRACTION = 0.30
@@ -290,38 +291,49 @@ def source_label_desc(d):
     return " ".join(b for b in bits if b).strip()
 
 
-def topics_label(d):
+def topics_label(d, as_name):
     if d.get("source_kind") == "study_material":
-        return f"{d.get('unitcode_label', '—')} — ICAI Study Material"
+        return as_name
     topics = d.get("topics") or []
     labels = [t.get("label") for t in topics if t.get("label")]
-    return "; ".join(labels) if labels else "—"
+    return "; ".join(labels) if labels else as_name
 
 
-def marks_tag(row):
-    """'(N Marks)' normally, '(N Marks — estimated from answer length)' for
-    study-material items with no official mark in the source."""
-    marks = row.get("marks", "?")
-    if row.get("estimated_marks"):
-        return f"{marks} Marks — estimated from answer length, not an official mark"
-    return f"{marks} Marks"
+def source_note(row):
+    """A short, natural source citation - no internal IDs, no pipeline
+    references. Study-material items just say where they're from; exam
+    items cite the real paper."""
+    if row.get("source_kind") == "study_material":
+        return "ICAI Study Material"
+    if "exam_type" in row:
+        return source_label_mcq(row)
+    return source_label_desc(row)
 
 
-def render_mcq_section(selected_mcqs):
+DASH_RE = re.compile(r"[–—]")  # en dash, em dash
+
+
+def clean_typography(text):
+    """Plain hyphens instead of en/em dashes, throughout - applied as a
+    final pass over the whole rendered document (heading text, question
+    text, answer text, everything), not just the scaffolding this script
+    writes itself."""
+    return DASH_RE.sub("-", text)
+
+
+def render_mcqs(selected_mcqs, as_name, with_marks_line=True):
     out = []
-    shown_cases = set()
     for i, m in enumerate(selected_mcqs, 1):
-        case_ref = m.get("case_ref")
-        if case_ref and m.get("case_facts_html") and case_ref not in shown_cases:
-            out.append(f"\n*Case Facts (Case {case_ref}):*\n")
+        if m.get("case_facts_html"):
             out.append(m["case_facts_html"])
             out.append("")
-            shown_cases.add(case_ref)
         out.append(f"**{i}.** {m.get('question_html', '')}")
         out.append("")
         out.append(build_options_md(m.get("options", {})))
-        out.append("")
-        out.append(f"*({marks_tag(m)} · Topic: {m.get('topic_text', '—')} · Source: {source_label_mcq(m)})*")
+        if with_marks_line:
+            topic = m.get("topic_text") or as_name
+            out.append("")
+            out.append(f"*[{m.get('marks', '?')} Marks | Topic: {topic} | Source: {source_note(m)}]*")
         out.append("")
     return "\n".join(out)
 
@@ -329,23 +341,24 @@ def render_mcq_section(selected_mcqs):
 def render_mcq_answers(selected_mcqs):
     out = []
     for i, m in enumerate(selected_mcqs, 1):
-        out.append(f"**{i}.** Correct Option: **({m.get('correct_option', '?')})**")
+        out.append(f"**{i}.** Correct Answer: **({m.get('correct_option', '?')})**")
         out.append("")
         out.append(m.get("answer_html", ""))
         out.append("")
     return "\n".join(out)
 
 
-def render_desc_section(selected_desc):
+def render_desc(selected_desc, as_name, with_marks_line=True):
     out = []
     for i, d in enumerate(selected_desc, 1):
         if d.get("case_facts_html"):
-            out.append(f"\n*Case Facts:*\n")
             out.append(d["case_facts_html"])
             out.append("")
         out.append(f"**Q{i}.** {d.get('question_html', '')}")
-        out.append("")
-        out.append(f"*({marks_tag(d)} · Topic: {topics_label(d)} · Source: {source_label_desc(d)})*")
+        if with_marks_line:
+            topic = topics_label(d, as_name)
+            out.append("")
+            out.append(f"*[{d.get('marks', '?')} Marks | Topic: {topic} | Source: {source_note(d)}]*")
         out.append("")
     return "\n".join(out)
 
@@ -360,7 +373,7 @@ def render_desc_answers(selected_desc):
         ec = d.get("examiner_comment")
         if ec and ec.get("text"):
             src = ec.get("comment_source")
-            label = "Examiner's Comment (ICAI)" if src == "icai" else "Author's Note (Synthesized — not ICAI-sourced)"
+            label = "Examiner's Comment" if src == "icai" else "Common Mistake to Avoid"
             out.append(f"> **{label}:** {ec['text']}")
             out.append("")
     return "\n".join(out)
@@ -472,123 +485,88 @@ def build_test(as_key, mcq_pool_all, desc_pool_all):
     return result
 
 
-def render_md(test, generated_on):
-    as_key = test["as_key"]
-    shortfall = test["achieved_total"] < TARGET_TOTAL
-    mcq_pct = round(100 * test["mcq_marks"] / test["achieved_total"]) if test["achieved_total"] else 0
-    desc_pct = 100 - mcq_pct if test["achieved_total"] else 0
+def as_short_name(full_name):
+    return re.split(r"[–—]", full_name)[0].strip()
 
+
+def render_header(test):
+    minutes = round(test["achieved_total"] * 1.8)
     lines = []
-    lines.append(f"# {test['name']} — Chapter Test (Second Phase)")
+    lines.append(f"# {test['name']}")
     lines.append("")
-    lines.append("**CA Inter · Paper 1: Advanced Accounting**")
-    lines.append(f"**Chapter Reference:** `{test['unitcode']}`")
+    lines.append("**CA Inter | Paper 1: Advanced Accounting**")
     lines.append("")
-    lines.append(
-        f"**Maximum Marks (target):** {TARGET_TOTAL} &nbsp;|&nbsp; **Marks Achieved:** {test['achieved_total']} "
-        f"&nbsp;|&nbsp; **Section A (MCQ):** {test['mcq_marks']} marks, {test['mcq_count']} questions ({mcq_pct}%) "
-        f"&nbsp;|&nbsp; **Section B (Descriptive):** {test['desc_marks']} marks, {test['desc_count']} questions ({desc_pct}%)"
-    )
+    lines.append(f"**Maximum Marks: {test['achieved_total']}**")
+    lines.append(f"**Time Allowed: {minutes} minutes**")
     lines.append("")
-    suggested_minutes = round(test["achieved_total"] * 1.8)
-    lines.append(f"**Suggested Time:** ~{suggested_minutes} minutes")
-    lines.append("")
-    lines.append(
-        "> This test paper is compiled in the style of ICAI's own **\"Test Your Knowledge\"** (MCQ) and "
-        "**\"Illustrations\"** (descriptive) sections — questions grouped together, solutions given together "
-        "at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers "
-        "already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, "
-        "`mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material "
-        "chapter's own \"Test Your Knowledge\" section (`books/concept-book/raw_icai_study_materials/`, extracted "
-        "by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks "
-        "are estimated from answer length and every such question/answer is explicitly tagged \"estimated from "
-        "answer length, not an official mark\" wherever it appears below. Nothing is invented — every question and "
-        "every answer is copied from one of these two real sources."
-    )
-    lines.append(">")
-    if shortfall:
-        chapter_short_name = test["name"].split(chr(8212))[0].strip()
-        if test["max_total_available"] < TARGET_TOTAL:
-            lines.append(
-                f"> **Content note — target not fully met (pool too small):** the tagged question pool currently "
-                f"available for {chapter_short_name} in this corpus totals only **{test['max_total_available']} marks** "
-                f"({test['max_mcq_available']} MCQ + {test['max_desc_available']} Descriptive) after de-duplication — short "
-                f"of the 50-mark target. All available real content has been included below (**{test['achieved_total']} of "
-                f"50 marks**); no question was invented or borrowed from another chapter to pad the total. More MTP/RTP/PYQ "
-                f"sittings would need to be sourced and tagged for this chapter to reach a full 50-mark paper."
-            )
-        else:
-            lines.append(
-                f"> **Content note — target not fully met (mark-denomination gap, not a content shortage):** "
-                f"{chapter_short_name}'s tagged pool has **{test['max_total_available']} marks** available in total "
-                f"({test['max_mcq_available']} MCQ + {test['max_desc_available']} Descriptive) — enough to reach 50 — but no "
-                f"combination of real question marks (MCQs mostly in fixed 2-mark units, descriptive in "
-                f"2/4/5/7/&hellip;-mark units) sums to exactly 50 while keeping a reasonable MCQ:Descriptive split. The "
-                f"closest achievable exact total was selected instead: **{test['achieved_total']} of 50 marks**. No question "
-                f"was invented to force an exact 50."
-            )
-        lines.append(">")
-    lines.append(
-        "> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one "
-        "sitting) was removed before selection "
-        f"({test['mcq_dupes_removed']} MCQ + {test['desc_dupes_removed']} Descriptive duplicate(s) skipped for this chapter). "
-        "This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) "
-        "detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) "
-        "may still appear."
-    )
+    lines.append("**Instructions:**")
+    lines.append("1. All questions are compulsory unless stated otherwise.")
+    lines.append("2. Marks for each question are shown alongside it.")
+    lines.append("3. Show full working notes wherever applicable.")
+    lines.append("4. Answer as per the Accounting Standards applicable for CA Inter.")
     lines.append("")
     lines.append("---")
     lines.append("")
-    lines.append(f"## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — {test['mcq_marks']} Marks")
+    return lines
+
+
+def render_questions_md(test):
+    as_name = as_short_name(test["name"])
+    lines = render_header(test)
+    lines.append(f"## Section A: Multiple Choice Questions ({test['mcq_marks']} Marks)")
     lines.append("")
     if test["selected_mcqs"]:
-        lines.append(render_mcq_section(test["selected_mcqs"]))
-    else:
-        lines.append("*No MCQs were available in the tagged pool for this chapter.*")
+        lines.append(render_mcqs(test["selected_mcqs"], as_name))
     lines.append("")
     lines.append("---")
     lines.append("")
-    lines.append(f"## Section B — Descriptive Questions *(Illustrations style)* — {test['desc_marks']} Marks")
+    lines.append(f"## Section B: Descriptive Questions ({test['desc_marks']} Marks)")
     lines.append("")
     if test["selected_desc"]:
-        lines.append(render_desc_section(test["selected_desc"]))
-    else:
-        lines.append("*No descriptive questions were available in the tagged pool for this chapter.*")
+        lines.append(render_desc(test["selected_desc"], as_name))
+    lines.append("")
+    lines.append("*End of Question Paper*")
+    lines.append("")
+    return clean_typography("\n".join(lines))
+
+
+def render_answers_md(test):
+    as_name = as_short_name(test["name"])
+    lines = render_header(test)
+    lines.append(f"## Section A: Multiple Choice Questions ({test['mcq_marks']} Marks)")
+    lines.append("")
+    if test["selected_mcqs"]:
+        lines.append(render_mcqs(test["selected_mcqs"], as_name))
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    lines.append(f"## Section B: Descriptive Questions ({test['desc_marks']} Marks)")
+    lines.append("")
+    if test["selected_desc"]:
+        lines.append(render_desc(test["selected_desc"], as_name))
     lines.append("")
     lines.append("---")
     lines.append("")
     lines.append("## Answers")
     lines.append("")
-    lines.append("### Section A — MCQ Answer Key & Explanations")
+    lines.append("### Section A: Multiple Choice Questions")
     lines.append("")
     if test["selected_mcqs"]:
         lines.append(render_mcq_answers(test["selected_mcqs"]))
-    else:
-        lines.append("*N/A*")
     lines.append("")
-    lines.append("### Section B — Descriptive Solutions")
+    lines.append("### Section B: Descriptive Questions")
     lines.append("")
     if test["selected_desc"]:
         lines.append(render_desc_answers(test["selected_desc"]))
-    else:
-        lines.append("*N/A*")
     lines.append("")
-    lines.append("---")
+    lines.append("*End of Answer Key*")
     lines.append("")
-    lines.append(
-        "**Provenance note:** boxes marked *Examiner's Comment (ICAI)* reproduce/paraphrase a real ICAI Examiner's "
-        "Comment on that exact question. Boxes marked *Author's Note (Synthesized)* are written in ICAI's voice per "
-        "this platform's `examiner-comments-writing-skill.md` style guide but are **not** ICAI-sourced, and may not "
-        "apply in every case."
-    )
-    lines.append("")
-    lines.append(f"*Generated: {generated_on} · First edition — please report any error to Pranav.*")
-    lines.append("")
-    return "\n".join(lines)
+    return clean_typography("\n".join(lines))
 
 
 def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+    STUDENT_DIR.mkdir(parents=True, exist_ok=True)
     mcq_pool_all = load_json(MCQ_PATH)
     desc_pool_all = load_json(DESC_PATH)
 
@@ -597,10 +575,12 @@ def main():
 
     for as_key in AS_LIST:
         test = build_test(as_key, mcq_pool_all, desc_pool_all)
-        md = render_md(test, generated_on)
-        out_path = OUT_DIR / f"{as_key.upper()}_Test.md"
-        with open(out_path, "w", encoding="utf-8") as f:
-            f.write(md)
+
+        questions_md = render_questions_md(test)
+        answers_md = render_answers_md(test)
+        (STUDENT_DIR / f"{as_key.upper()}_Questions.md").write_text(questions_md, encoding="utf-8")
+        (STUDENT_DIR / f"{as_key.upper()}_Questions_and_Answers.md").write_text(answers_md, encoding="utf-8")
+
         summary_rows.append(test)
         print(
             f"{as_key.upper():6} -> {test['achieved_total']:3}/{TARGET_TOTAL} marks "

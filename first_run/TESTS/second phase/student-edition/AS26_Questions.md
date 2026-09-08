@@ -1,0 +1,145 @@
+# AS 26 - Intangible Assets
+
+**CA Inter | Paper 1: Advanced Accounting**
+
+**Maximum Marks: 50**
+**Time Allowed: 90 minutes**
+
+**Instructions:**
+1. All questions are compulsory unless stated otherwise.
+2. Marks for each question are shown alongside it.
+3. Show full working notes wherever applicable.
+4. Answer as per the Accounting Standards applicable for CA Inter.
+
+---
+
+## Section A: Multiple Choice Questions (12 Marks)
+
+**1.** <p>Hexa Ltd developed a technology to enhance the battery life of mobile devices. Hexa has capitalised development expenditure of ₹ 5,00,000. Hexa estimates the life of the technology developed to be 3 years but the company has forecasted that 50% of sales will be in year 1, 35% in year 2 and 15% in year 3. What should be the amortisation charge in the second year of the product’s life?</p>
+
+- **(A)** ₹ 2,50,000
+- **(B)** ₹ 1,75,000
+- **(C)** ₹ 1,66,667
+- **(D)** ₹ 1,85,000
+
+*[1 Marks | Topic: M2-C5-U6 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+**2.** <p>Sun Limited has purchased a computer with various additional software. These are integral part of the computer. Which of the following are true in the context of AS 26:</p>
+
+- **(A)** Recognise Computer and software as tangible asset
+- **(B)** Recognise tangible and intangible separately
+- **(C)** Recognise computer and software as intangible asset
+- **(D)** Does not recognize the software as an asset.
+
+*[1 Marks | Topic: M2-C5-U6 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+**3.** <p>Intangible asset is recognised if it:</p>
+
+- **(A)** meets the definition of an intangible asset
+- **(B)** is probable that future economic benefits will flow
+- **(C)** the cost can be measured reliably
+- **(D)** meets all of the above parameters
+
+*[1 Marks | Topic: M2-C5-U6 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+**4.** <p>Which of the following is not covered within the scope of AS 26?</p>
+
+- **(A)** Intangible assets held-for-sale in the ordinary course of business
+- **(B)** Assets arising from employee benefits
+- **(C)** (a) & (b) both
+- **(D)** Research and development activities
+
+*[1 Marks | Topic: M2-C5-U6 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+<p>On April 1, 2022, Hello Limited approached a software company for implementation of SAP ERP at its organisation. The cost of implementation of SAP ERP is ₹25,00,000 and the time required is 15 months. The company was also required to pay ₹1,00,000 annually after implementation for maintenance and normal updation of ERP. The implementation work started in June, 2022 and could not be finished in 15 months. The ERP was implemented on May 2024. Due to delay in implementation the vendor refunded ₹2,00,000. The Company recognised the intangible asset ‘SAP ERP’ on September 2023 (15 months from June 2022). After two years, the Company has got the SAP ERP more upgraded with latest version and additional features and functions which also increased its speed and usage to Hello Limited for ₹7,00,000.</p>
+<p>Answer the following questions based on above.</p>
+
+**5.** <p>On which date the Intangible asset should be recognised:</p>
+
+- **(A)** April 2022 (When it was decided that SAP ERP is to be implemented)
+- **(B)** June 2022 (When the implementation work started)
+- **(C)** September 2023 (When the implementation work should have completed as per agreed terms)
+- **(D)** May 2024 (When the SAP actually got implemented)
+
+*[2 Marks | Topic: AS 26 (6.19-6.23): Intangible asset recognised on actual readiness for intended use, not a decision or target date | Source: MTP 2024 Set 2 Q9]*
+
+<p>Digitex limited acquired an intellectual property at the cost of ₹70,00,000 (at the beginning of the year) and it meets the definition of intangible asset as per AS 26. As per the calculations made by the Company, the benefit from this intellectual property will accrue for next 5 years wherein for first year will be 30%, for next two years it will be 25% each and 10% for the next 2 years.</p>
+<p><strong>Year 2:</strong> The Company incurred development cost for its new product and incurred ₹25,00,000 (at the beginning of the year) and was of the view that it will get the benefits for the next 5 years.</p>
+<p><strong>Year 3:</strong> During the year, it was found that due to change in government policies, no further benefits will be available to the Company from development cost.</p>
+<p><strong>Year 4:</strong> At beginning of year 4 it was found that the remaining 20% benefit from intellectual property will flow to the Company in this year itself.</p>
+<p>Answer the following questions on the basis of above information.</p>
+
+**6.** <p>At the end of year 2, what will be the value of Intangible Asset of the Company in the financial statements:</p>
+
+- **(A)** ₹95,00,000
+- **(B)** ₹74,00,000
+- **(C)** ₹56,50,000
+- **(D)** ₹51,50,000
+
+*[2 Marks | Topic: AS 26 - Intangible Assets (6.19-6.23): Amortisation of two concurrently-held intangible assets, each on its own disclosed benefit/useful-life pattern | Source: MTP 2025 Set 2 Q1(a)]*
+
+**7.** <p>ABC Ltd. is in the business of creating contents for various OTT platforms. The company has developed a technical know-how (the asset) by incurring expenditure of ₹25 lakhs. The company started using the asset from 1st April 2019. The management of the company is of the view that the asset has infinite lifetime and therefore has not amortized the asset till date. What should be the total amortization amount (including current as well as the previous years amortization) to be charged to Profit and loss account for the year ended March 31st 2024, with reference to AS 26?</p>
+
+- **(A)** Nil, as per the management the know how has infinite life and the management is correct.
+- **(B)** ₹25 lakhs as the know how is an intangible asset as per AS 26.
+- **(C)** ₹12.5 lakhs (including current year's amortization of ₹2.5 lakhs) to be charged to Profit and loss Account.
+- **(D)** ₹15 lakhs (including current year's amortization of ₹2.5 lakhs) to be charged to Profit and Loss account.
+
+*[2 Marks | Topic: AS 26 (6.19-6.23): Rebuttable presumption that an intangible asset's useful life cannot exceed ten years from the date it becomes available for use | Source: PYQ 2025 Q5]*
+
+<p>On 3rd April 2022, ZYX Limited received a State Government grant of ₹150 lakhs for setting up a Manufacturing Unit in a notified backward area. A bank loan of ₹50 lakhs was also obtained on 1st April 2024. Utilisation: Factory building 100.00 (60 grant, 30 loan, remaining 10 unfunded/other); Machinery 50.00 (40 grant, 20 loan - figures as printed, totals per source); Advance for loading vehicle 30.00 (30 grant); Working capital 20.00 (20 grant). Construction and machinery installation completed 31.03.2025; loading vehicle not delivered. Total interest charged by bank for the year 31.03.2025: ₹5,50,000. The grant was credited to a Deferred Grant Account. ₹30 lakhs of the grant (used for machinery) was refunded in March 2025 due to non-compliance. Estimated machinery life 4 years, nil residual value. During 2024-25, the company also received a ₹8 lakh Central Government subsidy for setting up a unit in a notified backward area, in the nature of promoters' contribution. During 2024-25, the company incurred ₹18 lakhs on publicity and research for a new consumer product, marketed the same year but a failure. Answer Question Nos. 5-8.</p>
+
+**8.** <p>As per AS-26, what is the correct accounting treatment for ₹18 lakhs spent on publicity and research expenses during 2024-2025?</p>
+
+- **(A)** ₹18 lakhs is treated as an intangible asset and amortised equally over 5 years.
+- **(B)** ₹18 lakhs is treated as an intangible asset and amortised equally over 10 years.
+- **(C)** ₹18 lakhs is treated as goodwill and appears as an asset in the Balance Sheet.
+- **(D)** ₹18 lakhs is charged as an expense in the Statement of Profit and Loss.
+
+*[2 Marks | Topic: AS 26 (6.5): Publicity/research expenditure with no resulting future benefit is expensed, never capitalised | Source: PYQ 2025 Q8]*
+
+
+---
+
+## Section B: Descriptive Questions (38 Marks)
+
+**Q1.** <p>Advise the complete accounting treatment for Research and development phase as per AS 26.</p>
+
+*[4 Marks | Topic: AS 26 | Source: ICAI Study Material]*
+
+**Q2.** <p>What is the measurement criteria at the time of initial recognition of Intangible assets acquired through separate acquisition?</p>
+
+*[5 Marks | Topic: AS 26 | Source: ICAI Study Material]*
+
+**Q3.** <p>What is meant by Intangible Assets and what are the important factors to consider the recognition of item as an Intangible asset? What is the recognition criteria in accordance with the provisions of AS 26?</p>
+
+*[5 Marks | Topic: AS 26 | Source: ICAI Study Material]*
+
+**Q4.** <p>In the following cases, record Journal Entries for amortization in the books of Huge Ltd. for the year ended 31st March, 2024 with reference to AS-26:</p>
+<p>(i) The company had acquired Patent Rights for ₹340 lakhs on 01.04.2022. The estimated product life is 4 years. Amortization was decided in the ratio of estimated future cash flows which are as under: 1st Year ₹140 Lakhs, 2nd Year ₹350 Lakhs, 3rd Year ₹280 Lakhs, 4th Year ₹420 Lakhs.</p>
+<p>(ii) The company had developed know-how by incurring expenditure of ₹80 lakhs. The know-how has been used by the company since 01.04.2018. Its useful life is 8 years from the year of commencement of its use. The company has not amortised the asset until 31.03.2024.</p>
+
+*[4 Marks | Topic: AS 26 (6.19-6.23) | Source: PYQ 2024 Q1a]*
+
+**Q5.** <p>K Ltd. launched a project for producing product X in October, 2023. The Company incurred
+  ₹40 lakhs towards Research and Development expenses upto 31st March, 2024. Due to prevailing market
+  conditions, the Management came to conclusion that the product cannot be manufactured and sold in the market for
+  the next 10 years. The Management hence wants to defer the expenditure write off to future years. Advise the
+  Company as per the applicable Accounting Standard.</p>
+
+*[5 Marks | Topic: AS 26 (6.17) | Source: MTP 2024 Set 2 Q1a]*
+
+**Q6.** <p>As per provisions of AS-26, how would you deal to the following situations: (1) ₹23,00,000 paid by a manufacturing company to the legal advisor for defending the patent of a product is treated as a capital expenditure. (2) During the year 2023-24, a company spent ₹7,00,000 for publicity and research expenses on one of its new consumer products which was marketed in the same accounting year but proved to be a failure. (3) A company spent ₹25,00,000 in the past three years to develop a product, these expenses were charged to profit and loss account since they did not meet AS-26 criteria for capitalization. In the current year approval of the concerned authority has been received. The company wishes to capitalize ₹25,00,000 by disclosing it as a prior period item. (4) A company with a turnover of ₹200 crores and an annual advertising budget of ₹50,00,000 had taken up for the marketing of a new product by a company. It was estimated that the company would have a turnover of ₹20 crore from the new product. The company had debited to its Profit &amp; Loss Account the total expenditure of ₹50,00,000 incurred on extensive special initial advertisement campaign for the new product.</p>
+
+*[5 Marks | Topic: AS 26 (6.17) | Source: MTP 2025 Set 1 Q1b]*
+
+**Q7.** <p>Record Journal Entries for amortization in the books of Huge Ltd. for the year ended 31st March, 2025 with reference to AS-26: Patent Rights acquired for ₹340 lakhs on 01.04.2023, estimated product life 4 years, amortization decided in the ratio of estimated future cash flows: Year 1 ₹140 lakhs, Year 2 ₹350 lakhs, Year 3 ₹280 lakhs, Year 4 ₹420 lakhs.</p>
+
+*[5 Marks | Topic: AS 26 (6.7) | Source: MTP 2026 Set 2 Q6b]*
+
+**Q8.** <p>As per provisions of AS-26, how would you deal with the following situations: (1) ₹23,00,000 paid by a manufacturing company to the legal advisor for defending the patent of a product, treated as capital expenditure. (2) During 2024-2025, a company spent ₹7,00,000 on publicity and research expenses on a new consumer product, marketed the same year but proved a failure. (3) A company spent ₹25,00,000 over three years to develop a product, charged to P&amp;L since AS-26 capitalization criteria were not met; in the current year approval was received and the company wishes to capitalize ₹25,00,000 as a prior period item. (4) A company (turnover ₹200 crores, annual advertising budget ₹50,00,000) debited ₹50,00,000 to P&amp;L for an extensive special initial advertisement campaign for a new product expected to generate ₹20 crore turnover.</p>
+
+*[5 Marks | Topic: AS 26 (6.5) | Source: MTP 2026 Set 2 Q1b]*
+
+
+*End of Question Paper*

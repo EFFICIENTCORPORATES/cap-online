@@ -1,0 +1,158 @@
+# AS 7 - Construction Contracts
+
+**CA Inter | Paper 1: Advanced Accounting**
+
+**Maximum Marks: 26**
+**Time Allowed: 47 minutes**
+
+**Instructions:**
+1. All questions are compulsory unless stated otherwise.
+2. Marks for each question are shown alongside it.
+3. Show full working notes wherever applicable.
+4. Answer as per the Accounting Standards applicable for CA Inter.
+
+---
+
+## Section A: Multiple Choice Questions (14 Marks)
+
+**1.** <p>LP Contractors undertakes a fixed price contract of ₹ 200 lakh. Transactions related to the contract include: Material purchased: ₹ 80 lakh Unused material: ₹ 30 lakh Labour charges: ₹ 60 lakh Machine used for 3 years for the contract. Original cost of the machine is ₹ 100 lakh. Expected useful life is 15 years. Estimated future costs to be incurred to complete the contract: ₹ 80 lakh. Loss on contract to be recognised is:</p>
+
+- **(A)** ₹ 40 lakh
+- **(B)** ₹ 10 lakh
+- **(C)** ₹ 90 lakh
+- **(D)** ₹ 50 lakh
+
+*[1 Marks | Topic: M2-C8-U1 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+**2.** <p>Revenue to be recognised by M/s AV is</p>
+
+- **(A)** ₹ 320 lakh
+- **(B)** ₹ 370 lakh
+- **(C)** ₹ 360 lakh
+- **(D)** ₹ 400 lakh
+
+*[1 Marks | Topic: M2-C8-U1 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+**3.** <p>Total expense to be recognised in Year 1 is</p>
+
+- **(A)** ₹ 30 lakh
+- **(B)** ₹ 120 lakh
+- **(C)** ₹ 38 lakh
+- **(D)** ₹ 36 lakh
+
+*[1 Marks | Topic: M2-C8-U1 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+**4.** <p>Revenue to be recognized by XY Ltd. for the year ended 31st March 20X2 is</p>
+
+- **(A)** ₹ 28 lakh
+- **(B)** ₹ 42 lakh
+- **(C)** ₹ 30 lakh
+- **(D)** ₹ 32 lakh
+
+*[1 Marks | Topic: M2-C8-U1 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+<p>Gray Ltd. is engaged in the business of constructing towers since 15 years. Alpha Ltd gave a contract to Gray Ltd. for construction of 2 towers.</p>
+<p>Contract price for 2 towers is agreed at ₹160 crore. (each tower has contract price of ₹80 crore)</p>
+<p>At the time of contract, Gray Ltd has estimated that the contract cost will be ₹141 crore. It is assumed that construction will be completed in 3 years.</p>
+<p>At the end of year 1, Gray Ltd has revised the construction cost to ₹150 crore.</p>
+<p>At the beginning of year 2, the customer has requested for a variation in the contract. Customer now wants construction of 3 towers instead of 2 towers. The term of the contract will not change, construction of all the towers will be completed simultaneously.</p>
+<p>As a result of this variation, contract price will increase by ₹80 crore and contract costs will increase by ₹75 crore.</p>
+<p>Gray Ltd has decided to measure the stage of completion on the basis of the proportion of contract costs incurred to the total estimated contract costs.</p>
+<p>Contract costs incurred at the end of each year is: Year 1: ₹35.25 crore. Year 2: ₹148.5 crore (including unused material of ₹2.25 crore) Year 3: Total Revised contract costs.</p>
+<p>Based on the information given in above Case Scenario, answer the following Question 1 - 3.</p>
+
+**5.** <p>What is the stage of completion of contract on the basis of proportion of contract costs incurred to the total estimated contract costs at the end of year 1 and Year 2 respectively?</p>
+
+- **(A)** Year 1: 23.5% and Year 2: 66%
+- **(B)** Year 1: 23.5% and Year 2: 65%
+- **(C)** Year 1: 25% and Year 2: 66%
+- **(D)** Year 1: 25% and Year 2: 65%
+
+*[2 Marks | Topic: AS 7 (1.9): Stage of completion under the cost-proportion method, excluding costs relating to future activity (e.g. unused material) from the numerator | Source: PYQ 2025 Q1]*
+
+<p>Gray Ltd. is engaged in the business of constructing towers since 15 years. Alpha Ltd gave a contract to Gray Ltd. for construction of 2 towers.</p>
+<p>Contract price for 2 towers is agreed at ₹160 crore. (each tower has contract price of ₹80 crore)</p>
+<p>At the time of contract, Gray Ltd has estimated that the contract cost will be ₹141 crore. It is assumed that construction will be completed in 3 years.</p>
+<p>At the end of year 1, Gray Ltd has revised the construction cost to ₹150 crore.</p>
+<p>At the beginning of year 2, the customer has requested for a variation in the contract. Customer now wants construction of 3 towers instead of 2 towers. The term of the contract will not change, construction of all the towers will be completed simultaneously.</p>
+<p>As a result of this variation, contract price will increase by ₹80 crore and contract costs will increase by ₹75 crore.</p>
+<p>Gray Ltd has decided to measure the stage of completion on the basis of the proportion of contract costs incurred to the total estimated contract costs.</p>
+<p>Contract costs incurred at the end of each year is: Year 1: ₹35.25 crore. Year 2: ₹148.5 crore (including unused material of ₹2.25 crore) Year 3: Total Revised contract costs.</p>
+<p>Based on the information given in above Case Scenario, answer the following Question 1 - 3.</p>
+
+**6.** <p>What is the amount of the profit to be recognized at the end of Year 1?</p>
+
+- **(A)** ₹2.35 crore
+- **(B)** ₹44.75 crore
+- **(C)** ₹4.75 crore
+- **(D)** ₹21 crore
+
+*[2 Marks | Topic: AS 7 (1.6): Percentage of completion method - revenue and profit recognised in proportion to stage of completion, matched against actual costs incurred | Source: PYQ 2025 Q2]*
+
+**7.** <p>AB Contractors undertakes a fixed price contract of ₹350 Lakhs. Information related to contract is given as under: Material purchased ₹125 lakhs. Labour charges ₹95 lakhs. Unused material ₹22 lakhs. Estimated future costs to be incurred to complete the contract ₹115 Lakhs. Payment received as part payment of contract ₹50 Lakhs. Machinery used for 4 years for the contract. Original cost of the machine is ₹210 Lakhs. Expected life of machinery is 20 years. What will be the Profit/Loss on the contract?</p>
+
+- **(A)** Loss on contract ₹5 lakhs
+- **(B)** Loss on contract ₹49 Lakhs
+- **(C)** Profit on contract ₹45 Lakhs
+- **(D)** Profit on contract ₹26.5 Lakhs
+
+*[2 Marks | Topic: AS 7 (1.6): Percentage of Completion Method - immediate recognition of the entire foreseeable loss when total estimated cost exceeds contract price | Source: PYQ 2025 Q9]*
+
+<p>Road Builders Corp. is a publicly traded infrastructure and commercial real estate development company. On 1st April, 2025, it: (1) acquired 200 acres of land at ₹35,000 per acre for a new equipment yard and fabrication facility; (2) purchased machinery costing ₹320 Lakhs for a construction project in a backward area, immediately receiving a Government Grant of ₹80 Lakhs (company policy: deduct grant from cost of asset); estimated useful life 10 years, salvage value ₹6 Lakhs, straight line depreciation.</p>
+<p>Road Builders Corp. acquired equity stakes in GeoSurvey Limited: 1st April, 2025 - 10% stake for ₹40,00,000; 1st October, 2025 - a further 15% stake for ₹58,00,000, reaching 25% total and gaining significant influence. GeoSurvey's net assets (book value): ₹3,40,00,000 on 1st April, 2025; ₹4,00,00,000 on 1st October, 2025.</p>
+<p>On 1st April, 2025, Road Builders Corp. undertook a contract to construct an underpass. For the year ended 31st March, 2026: Total Contract Price ₹1,02,00,000; Cost Incurred till 31st March, 2026 ₹77,98,800; Prudent estimate of additional cost for completion ₹38,41,200.</p>
+<p>Road Builders Corp. is also developing a shopping mall (expected complete end of March 2026, inauguration planned 1st April 2026), within which a Multiplex theatre was completed earlier, on 1st February, 2026. The company had a 'soft opening' of the theatre: tickets sold at 50% discount, theatre operating at 70% capacity; management claims this soft opening is a trial run necessary to check operational capability and system integration for the entire mall complex.</p>
+<p>Based on the information given in the above case scenario, answer Question Nos. 1-4.</p>
+
+**8.** <p>What amount should be recognized as revenue for the contract to construct underpass for the year ended 31 March, 2026 as per the provisions of Accounting Standard 7 (Revised)?</p>
+
+- **(A)** ₹77,98,800
+- **(B)** ₹68,34,000
+- **(C)** ₹9,64,800
+- **(D)** Revenue will be recognized only on completion of the contract.
+
+*[2 Marks | Topic: AS 7 (1.6): Percentage of completion method - revenue recognised in proportion to costs incurred against total estimated cost | Source: PYQ 2026 Q3]*
+
+<p>V Limited contracted to construct a hostel for MR College at ₹224 lakhs on 1st October, 2024 (expected completion 18 months). Cost incurred to 31st March, 2025: ₹60 lakhs. Prudent estimate of additional cost for completion: ₹180 lakhs. Billed to MR College: ₹84 lakhs.</p>
+<p>On 1st June, 2024, V Limited acquired 30% of M Limited for ₹20,00,000, gaining significant influence. On 14th August, 2024, M Limited declared a dividend of ₹5,00,000 out of its FY2023-24 profit of ₹8,00,000. M Limited earned ₹30,00,000 for FY2024-25 (profits accrue evenly) and declared a dividend of ₹6,00,000 on 15th June, 2025.</p>
+<p>V Limited's pre-tax profit: Q1 FY2024-25 ₹7,00,000, Q2 ₹8,00,000, expected Q3 ₹4,00,000, Q4 ₹6,00,000. Corporate tax slab: 30% on first ₹5,00,000, 40% on additional earnings.</p>
+<p>Deferred tax information as at 31st March, 2025: Depreciation per accounting records ₹4,00,000; Depreciation allowable under Section 32 of the Income Tax Act ₹10,00,000; Unamortized Preliminary Expenses per tax records ₹30,000; GST penalty imposed 30th March, 2025, payable 30th April, 2025, ₹1,25,000.</p>
+<p>Based on the information given above, answer Question Nos. 6-9.</p>
+
+**9.** <p>What amount should be recognized by V Limited as Revenue and Total Expenses in respect of the hostel building contract in its Statement of Profit and Loss for the year ended 31st March, 2025 as per provisions of Accounting Standard 7 (Revised)?</p>
+
+- **(A)** Revenue of 84 lakhs, Total Expense of ₹60 lakhs.
+- **(B)** Revenue of 56 lakhs, Total Expense of ₹60 lakhs.
+- **(C)** Revenue of 56 lakhs, Total Expense of ₹76 lakhs.
+- **(D)** Revenue of 60 lakhs, Total Expense of ₹60 lakhs.
+
+*[2 Marks | Topic: AS 7 (1.6): Percentage of completion revenue plus immediate recognition of the entire foreseeable loss on a loss-making contract | Source: PYQ 2026 Q6]*
+
+
+---
+
+## Section B: Descriptive Questions (12 Marks)
+
+**Q1.** <p>It is argued that profit on construction contracts should not be recognised until the contract is completed. Please explain whether you believe that this suggestion would improve the quality of financial reporting for long-term construction contracts.</p>
+
+*[5 Marks | Topic: AS 7 | Source: ICAI Study Material]*
+
+**Q2.** <p>Constructions Limited is engaged in the business of constructing Flyovers and Railway
+  over bridges. It obtained a contract from Railway Authorities to construct a railway over bridge for
+  ₹400 crores. The construction of the railway over bridge is expected to be completed in 4 years.</p>
+<p>At the outset of the contract, it was estimated that the total costs to be incurred will be ₹370
+    crores but by the end of year 1, this estimate stands revised to ₹375 crores.</p>
+<p>During year 3, the Construction Limited has requested for a variation in the contract which is approved
+    by Railway Authorities and accordingly the total contract value will increase by ₹10 crores and costs
+    will increase by ₹7 crores.</p>
+<p>The Constructions Limited decided to measure the stage of completion on the basis of the proportion of
+    contract costs incurred to the total estimated contract costs. Contract costs incurred at the end of each
+    year is: Year 1 ₹98.8 crores; Year 2 ₹202.4 crores; Year 3 ₹310 crores (including unused
+    material of 3 crores); Year 4 ₹382 crores.</p>
+<p>You are required to: (1) Calculate stage of completion of contract for each year; (2) Profit to be
+    recognised for each year.</p>
+
+*[7 Marks | Topic: AS 7 - Construction Contracts (1.6/1.9/1.10) | Source: MTP 2025 Set 1 Q3a]*
+
+
+*End of Question Paper*

@@ -1,19 +1,19 @@
-# AS 2 — Valuation of Inventories — Chapter Test (Second Phase)
+# AS 2 - Valuation of Inventories
 
-**CA Inter · Paper 1: Advanced Accounting**
-**Chapter Reference:** `M2-C5-U1`
+**CA Inter | Paper 1: Advanced Accounting**
 
-**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 50 &nbsp;|&nbsp; **Section A (MCQ):** 14 marks, 7 questions (28%) &nbsp;|&nbsp; **Section B (Descriptive):** 36 marks, 7 questions (72%)
+**Maximum Marks: 50**
+**Time Allowed: 90 minutes**
 
-**Suggested Time:** ~90 minutes
-
-> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material chapter's own "Test Your Knowledge" section (`books/concept-book/raw_icai_study_materials/`, extracted by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks are estimated from answer length and every such question/answer is explicitly tagged "estimated from answer length, not an official mark" wherever it appears below. Nothing is invented — every question and every answer is copied from one of these two real sources.
->
-> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (13 MCQ + 3 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
+**Instructions:**
+1. All questions are compulsory unless stated otherwise.
+2. Marks for each question are shown alongside it.
+3. Show full working notes wherever applicable.
+4. Answer as per the Accounting Standards applicable for CA Inter.
 
 ---
 
-## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 14 Marks
+## Section A: Multiple Choice Questions (14 Marks)
 
 **1.** <p>All of the following costs are excluded while computing value of inventories except?</p>
 
@@ -22,7 +22,7 @@
 - **(C)** Abnormal wastage.
 - **(D)** Storage costs (which is necessary part of the production process).
 
-*(2 Marks · Topic: AS 2 (1.6): Fixed production overhead absorbed systematically over normal capacity - includable in cost of conversion · Source: MTP 2024 Set 1 Q4)*
+*[2 Marks | Topic: AS 2 (1.6): Fixed production overhead absorbed systematically over normal capacity - includable in cost of conversion | Source: MTP 2024 Set 1 Q4]*
 
 **2.** <p>In determining the cost of inventories, it is appropriate to exclude certain costs and recognise them as expenses in the period in which they are incurred. Which of the following is not an example of such costs:</p>
 
@@ -31,10 +31,7 @@
 - **(C)** Raw Material cost
 - **(D)** Selling and distribution costs.
 
-*(2 Marks · Topic: AS 2 (1.9): Exclusions from the cost of inventories – abnormal waste, unnecessary storage, selling/distribution costs · Source: MTP 2024 Set 1 Q6)*
-
-
-*Case Facts (Case CS-1):*
+*[2 Marks | Topic: AS 2 (1.9): Exclusions from the cost of inventories - abnormal waste, unnecessary storage, selling/distribution costs | Source: MTP 2024 Set 1 Q6]*
 
 <p>Excellence Ltd. is a Real Estate Company which constructs residential and commercial
     projects for selling. The Company has commenced a new project and the expenses incurred
@@ -62,7 +59,7 @@
 - **(C)** Property, Plant and Equipment
 - **(D)** Intangible Asset
 
-*(2 Marks · Topic: AS 2 (1.2): Inventories held for sale in the ordinary course of business - self-constructed real estate for sale is inventory, not PPE · Source: MTP 2025 Set 2 Q1)*
+*[2 Marks | Topic: AS 2 (1.2): Inventories held for sale in the ordinary course of business - self-constructed real estate for sale is inventory, not PPE | Source: MTP 2025 Set 2 Q1]*
 
 **4.** <p>On 31st March 2024, Sri Radhey shyam Enterprise finds that the cost of a partly finished unit on that date is ₹530. The unit can be finished in 2024-25 by an additional expenditure of ₹310. The finished unit can be sold for ₹750 subject to payment of 8% brokerage on the selling price. Sri Radhey shyam Enterprise seeks your advice regarding the amount at which the unfinished unit should be valued as at 31st March, 2024 for preparation of final accounts. The partly finished unit cannot be sold in semi-finished form and its NRV is zero without processing it further.</p>
 
@@ -71,7 +68,7 @@
 - **(C)** ₹500
 - **(D)** ₹440
 
-*(2 Marks · Topic: AS 2 (1.3): Worked NRV example for a partly finished unit that cannot be sold in semi-finished form · Source: MTP 2025 Set 2 Q15)*
+*[2 Marks | Topic: AS 2 (1.3): Worked NRV example for a partly finished unit that cannot be sold in semi-finished form | Source: MTP 2025 Set 2 Q15]*
 
 **5.** <p>As per AS 2, Inventories include materials awaiting use in production process, what should be included in Inventories from the following:</p>
 
@@ -80,7 +77,7 @@
 - **(C)** Primary packing material which is essential to bring an item of inventory to its saleable condition, for example, bottles, cans etc., in case of food and beverages industry.
 - **(D)** Publicity material
 
-*(2 Marks · Topic: AS 2 (1.2): Primary packing material essential to saleable condition is inventory; secondary packing, standby equipment and publicity material are not · Source: MTP 2025 Set 2 Q4)*
+*[2 Marks | Topic: AS 2 (1.2): Primary packing material essential to saleable condition is inventory; secondary packing, standby equipment and publicity material are not | Source: MTP 2025 Set 2 Q4]*
 
 **6.** <p>The cost of inventories of items that are not ordinarily interchangeable and goods or services produced and segregated for specific projects should be assigned using the following cost formula:</p>
 
@@ -89,10 +86,7 @@
 - **(C)** Weighted average cost formula
 - **(D)** The formula used should reflect the fairest possible approximation to the cost incurred in bringing the items of inventory to their present location and condition.
 
-*(2 Marks · Topic: AS 2 (1.7): Specific identification for non-interchangeable items and project-specific goods · Source: MTP 2026 Set 2 Q14)*
-
-
-*Case Facts (Case CS-2):*
+*[2 Marks | Topic: AS 2 (1.7): Specific identification for non-interchangeable items and project-specific goods | Source: MTP 2026 Set 2 Q14]*
 
 <p>Anshul manufacturers purchased 20,000 Kg. of raw material at ₹170 per Kg. Direct transit cost incurred ₹5,00,000 and normal transit loss is 3%. Anshul manufacturers actually received 19,000 kg of raw material. During the year it consumed 17,600 kg of raw material.</p>
 <p>Further information: (i) The purchase price includes ₹15 per kg as GST in respect of which full credit is allowed and will be availed by Anshul manufacturers. (ii) Assume that there is no opening stock.</p>
@@ -105,17 +99,17 @@
 - **(C)** ₹39,00,000
 - **(D)** ₹31,00,000
 
-*(2 Marks · Topic: AS 2 (1.4): Cost of purchase excludes recoverable GST, includes directly attributable acquisition costs · Source: MTP 2026 Set 2 Q5)*
+*[2 Marks | Topic: AS 2 (1.4): Cost of purchase excludes recoverable GST, includes directly attributable acquisition costs | Source: MTP 2026 Set 2 Q5]*
 
 
 ---
 
-## Section B — Descriptive Questions *(Illustrations style)* — 36 Marks
+## Section B: Descriptive Questions (36 Marks)
 
 **Q1.** <p>(i) “In determining the cost of inventories, it is appropriate to exclude certain costs and recognize them as expenses in the period in which they are incurred”. Provide examples of such costs as per AS 2 ‘Valuation of Inventories’.</p>
 <p>(ii) X Limited purchased goods at the cost of ₹40 lakhs in October, 2022. Till March, 2023, 75% of the stocks were sold. The company wants to disclose closing stock at ₹10 lakhs. The expected sale value is ₹11 lakhs and a commission at 10% on sale is payable to the agent. Advise, what is the correct value of closing stock to be disclosed as at 31.3.2023.</p>
 
-*(5 Marks · Topic: AS 2 — Valuation of Inventories (1.3/1.9) · Source: MTP 2023 Set 2 Q1a)*
+*[5 Marks | Topic: AS 2 - Valuation of Inventories (1.3/1.9) | Source: MTP 2023 Set 2 Q1a]*
 
 **Q2.** <p>Mr. Jatin gives the following information relating to the items forming part of the inventory as on 31.03.2023. His enterprise produces product P using Raw Material X.</p>
 <ol type="i">
@@ -126,11 +120,11 @@
 <p>Expected selling price of product P is ₹280 per unit, subject to a payment of 5% brokerage on selling price.</p>
 <p>Determine how each item of inventory will be valued as on 31.03.2023. Also calculate the value of total Inventory as on 31.03.2023.</p>
 
-*(5 Marks · Topic: AS 2 — Valuation of Inventories (1.13/1.14) · Source: MTP 2023 Set 1 Q1b)*
+*[5 Marks | Topic: AS 2 - Valuation of Inventories (1.13/1.14) | Source: MTP 2023 Set 1 Q1b]*
 
 **Q3.** <p>In a production process, normal waste is 5% of input. 5,000 MT of input were put in process resulting in wastage of 300 MT. Cost per MT of input is ₹1,000. The entire quantity of waste and finished output is in stock at the year end. State with reference to Accounting Standard, how will you value the inventories in this case? What will be treatment for normal and abnormal waste?</p>
 
-*(5 Marks · Topic: AS 2 (1.9) · Source: MTP 2023 Set 2 Q1d)*
+*[5 Marks | Topic: AS 2 (1.9) | Source: MTP 2023 Set 2 Q1d]*
 
 **Q4.** <table>
 <thead><tr><th>Particulars</th><th></th><th>Kg.</th><th>₹</th></tr></thead>
@@ -147,7 +141,7 @@
 </table>
 <p>The expected production for the year was 15,000 kg of the finished product. Due to fall in market demand the sales price for the finished goods was ₹20 per kg and the replacement cost for the raw material was ₹9.50 per kg on the closing day. You are required to calculate the closing inventory as on that date. (5 Marks)</p>
 
-*(5 Marks · Topic: Valuation of Inventories (1.6/1.13) · Source: MTP 2023 Set 1 Q1c)*
+*[5 Marks | Topic: Valuation of Inventories (1.6/1.13) | Source: MTP 2023 Set 1 Q1c]*
 
 **Q5.** <p>Wooden Plywood Limited has a normal wastage of 5% in the production process. During the
   year 2023-24, the Company used 16,000 MT of Raw material costing ₹190 per MT. At the end of the year, 950 MT
@@ -155,53 +149,53 @@
   required to: (1) Calculate the amount of abnormal loss. (2) Explain the treatment of normal loss and abnormal loss
   in the context of AS-2.</p>
 
-*(5 Marks · Topic: AS 2 (1.9) · Source: MTP 2024 Set 2 Q1b)*
+*[5 Marks | Topic: AS 2 (1.9) | Source: MTP 2024 Set 2 Q1b]*
 
 **Q6.** <p>"In determining the cost of inventories, it is appropriate to exclude certain costs and recognise them as expenses in the period in which they are incurred." Provide examples of such costs as per AS 2 (Revised) 'Valuation of Inventories'.</p>
 
-*(4 Marks · Topic: AS 2 (1.9) · Source: MTP 2026 Set 2 Q6a)*
+*[4 Marks | Topic: AS 2 (1.9) | Source: MTP 2026 Set 2 Q6a]*
 
 **Q7.** <p>Happy Limited is a Textile Manufacturing Company producing Polyester (P) and Nylon (N); a by-product Fiber (F) is also produced. Cost of production: Raw material for 30,000 units ₹3,50,000; Wages ₹1,60,000; Fixed overheads ₹1,20,000; Variable overheads ₹60,000. Output: Polyester 12,500 units, Nylon 10,000 units, Fiber 3,200 units. Closing inventory: Polyester 1,600 units, Nylon 400 units. Average market price: Polyester ₹100/unit, Nylon ₹60/unit; by-product Fiber sold @₹40/unit, profit of ₹8,000 on sale of by-product after separate processing expenses ₹10,000 and packing charges ₹9,000. ₹5,000 realized from sale of scrap. Compute the value of closing inventory of Polyester and Nylon.</p>
 
-*(7 Marks · Topic: AS 2 (1.10) · Source: MTP 2026 Set 1 Q2a)*
+*[7 Marks | Topic: AS 2 (1.10) | Source: MTP 2026 Set 1 Q2a]*
 
 
 ---
 
 ## Answers
 
-### Section A — MCQ Answer Key & Explanations
+### Section A: Multiple Choice Questions
 
-**1.** Correct Option: **(B)**
+**1.** Correct Answer: **(B)**
 
-<p><strong>Answer:</strong> (B) Allocated fixed production overheads based on normal capacity — per AS 2, fixed production overhead systematically allocated on the basis of normal capacity is a genuine, includable cost of conversion, not excluded from inventory value. Selling/distribution costs and abnormal wastage are always expensed, never inventoried.</p>
+<p><strong>Answer:</strong> (B) Allocated fixed production overheads based on normal capacity - per AS 2, fixed production overhead systematically allocated on the basis of normal capacity is a genuine, includable cost of conversion, not excluded from inventory value. Selling/distribution costs and abnormal wastage are always expensed, never inventoried.</p>
 
-**2.** Correct Option: **(C)**
+**2.** Correct Answer: **(C)**
 
-<p><strong>Answer:</strong> (C) Raw Material cost — per AS 2, abnormal wastage, unnecessary storage costs, and selling/distribution costs are all specifically excluded from the cost of inventories and expensed as incurred. Raw material cost, by contrast, is a normal, properly includible component of inventory cost – it is the one item among the four that is <em>not</em> an example of a cost to be excluded.</p>
+<p><strong>Answer:</strong> (C) Raw Material cost - per AS 2, abnormal wastage, unnecessary storage costs, and selling/distribution costs are all specifically excluded from the cost of inventories and expensed as incurred. Raw material cost, by contrast, is a normal, properly includible component of inventory cost - it is the one item among the four that is <em>not</em> an example of a cost to be excluded.</p>
 
-**3.** Correct Option: **(A)**
+**3.** Correct Answer: **(A)**
 
-<p><strong>Answer:</strong> (A) Inventory — Excellence Ltd. is constructing the building to sell, not for own use; while that intention holds, AS 2 governs and the asset is inventory (a completed unit held for sale in the ordinary course of business), regardless of its capital value.</p>
+<p><strong>Answer:</strong> (A) Inventory - Excellence Ltd. is constructing the building to sell, not for own use; while that intention holds, AS 2 governs and the asset is inventory (a completed unit held for sale in the ordinary course of business), regardless of its capital value.</p>
 
-**4.** Correct Option: **(B)**
+**4.** Correct Answer: **(B)**
 
-<p><strong>Answer:</strong> (B) ₹380 — estimated selling price when finished ₹750, less further cost to complete ₹310, less 8% brokerage on selling price (8% × ₹750 = ₹60) = Net Realisable Value ₹380. Since the partly finished unit cannot be sold in its semi-finished state (its own NRV is zero without further processing), it is valued with reference to the finished good's NRV net of the cost still to be incurred: ₹750 − ₹310 − ₹60 = ₹380, lower than the ₹530 cost incurred so far, so the unit is valued at ₹380 per AS 2's lower-of-cost-and-NRV rule.</p>
+<p><strong>Answer:</strong> (B) ₹380 - estimated selling price when finished ₹750, less further cost to complete ₹310, less 8% brokerage on selling price (8% × ₹750 = ₹60) = Net Realisable Value ₹380. Since the partly finished unit cannot be sold in its semi-finished state (its own NRV is zero without further processing), it is valued with reference to the finished good's NRV net of the cost still to be incurred: ₹750 − ₹310 − ₹60 = ₹380, lower than the ₹530 cost incurred so far, so the unit is valued at ₹380 per AS 2's lower-of-cost-and-NRV rule.</p>
 
-**5.** Correct Option: **(C)**
+**5.** Correct Answer: **(C)**
 
-<p><strong>Answer:</strong> (iii) — primary packing material essential to bring an item to its saleable condition (e.g. bottles/cans for food and beverages) is directly attributable to bringing inventory to its present condition and so is includible in inventory cost. Secondary packing (transport/forwarding) is a distribution cost, spare parts/servicing/standby equipment are ordinarily property, plant and equipment rather than inventory, and publicity material is a selling cost – none of these three are inventory.</p>
+<p><strong>Answer:</strong> (iii) - primary packing material essential to bring an item to its saleable condition (e.g. bottles/cans for food and beverages) is directly attributable to bringing inventory to its present condition and so is includible in inventory cost. Secondary packing (transport/forwarding) is a distribution cost, spare parts/servicing/standby equipment are ordinarily property, plant and equipment rather than inventory, and publicity material is a selling cost - none of these three are inventory.</p>
 
-**6.** Correct Option: **(A)**
+**6.** Correct Answer: **(A)**
 
-<p><strong>Answer:</strong> (A) — AS 2 requires specific identification of individual costs for items that are not ordinarily interchangeable, or goods/services produced and segregated for specific projects; FIFO/weighted-average apply only to ordinarily-interchangeable inventory items.</p>
+<p><strong>Answer:</strong> (A) - AS 2 requires specific identification of individual costs for items that are not ordinarily interchangeable, or goods/services produced and segregated for specific projects; FIFO/weighted-average apply only to ordinarily-interchangeable inventory items.</p>
 
-**7.** Correct Option: **(A)**
+**7.** Correct Answer: **(A)**
 
 <p><strong>Answer:</strong> (a) ₹36,00,000 = 20,000 kg × (₹170−₹15 GST credit) ₹155/kg = ₹31,00,000 + direct transit cost ₹5,00,000.</p>
 
 
-### Section B — Descriptive Solutions
+### Section B: Descriptive Questions
 
 **Q1.**
 
@@ -214,7 +208,7 @@
 </ol>
 <p>(ii) As per AS 2 “Valuation of Inventories”, the inventories are to be valued at lower of cost or net realizable value. In this case, the cost of inventory is ₹10 lakhs. The net realizable value is ₹11,00,000 × 90% = ₹9,90,000. So, the stock should be valued at ₹9,90,000.</p>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error is treating storage costs as always excludable rather than only when unnecessary to a further production stage in part (i); and in part (ii), comparing the disclosed cost of ₹10 lakhs against the gross expected sale value of ₹11 lakhs instead of first deducting the 10% agent's commission, which changes the net realizable value from ₹11,00,000 to ₹9,90,000 and hence which figure actually governs.
+> **Common Mistake to Avoid:** A common error is treating storage costs as always excludable rather than only when unnecessary to a further production stage in part (i); and in part (ii), comparing the disclosed cost of ₹10 lakhs against the gross expected sale value of ₹11 lakhs instead of first deducting the 10% agent's commission, which changes the net realizable value from ₹11,00,000 to ₹9,90,000 and hence which figure actually governs.
 
 **Q2.**
 
@@ -236,7 +230,7 @@
 </tbody>
 </table>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error is comparing raw material's own cost against its own replacement cost in isolation, instead of first checking whether the finished product it converts into (Product P) will sell below its own total cost – AS 2 only permits marking raw material down to replacement cost when that downstream test fails. It is also easy to compute net selling price by forgetting the 5% brokerage deduction, which changes both the partly-finished-goods NRV and the finished-goods valuation.
+> **Common Mistake to Avoid:** A common error is comparing raw material's own cost against its own replacement cost in isolation, instead of first checking whether the finished product it converts into (Product P) will sell below its own total cost - AS 2 only permits marking raw material down to replacement cost when that downstream test fails. It is also easy to compute net selling price by forgetting the 5% brokerage deduction, which changes both the partly-finished-goods NRV and the finished-goods valuation.
 
 **Q3.**
 
@@ -247,7 +241,7 @@
 <p>Total value of inventory = 4,700 MT × ₹1,052.6315 = <strong>₹49,47,368</strong>.</p>
 </div>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error is spreading the abnormal loss quantity into the cost-per-unit computation along with the normal loss, understating the abnormal loss charged to the profit and loss statement and correspondingly overstating closing inventory.
+> **Common Mistake to Avoid:** A common error is spreading the abnormal loss quantity into the cost-per-unit computation along with the normal loss, understating the abnormal loss charged to the profit and loss statement and correspondingly overstating closing inventory.
 
 **Q4.**
 
@@ -266,7 +260,7 @@
 <p>Since net realisable value is less than cost, closing inventory will be valued at ₹20. As NRV of the finished goods is less than its cost, relevant raw materials will be valued at replacement cost i.e. ₹9.50.</p>
 <p>Therefore, value of closing inventory: Finished Goods (1,200 × 20) ₹24,000; Raw Materials (900 × 9.50) ₹8,550; <strong>Total ₹32,550</strong>.</p>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error is absorbing fixed overhead over actual production (10,200 kg used) instead of the expected/normal capacity of 15,000 kg when computing cost of production, or valuing raw material at replacement cost regardless of whether the related finished goods sell below cost – AS 2 only permits marking raw material down to replacement cost when the finished product it converts into cannot recover its own cost.
+> **Common Mistake to Avoid:** A common error is absorbing fixed overhead over actual production (10,200 kg used) instead of the expected/normal capacity of 15,000 kg when computing cost of production, or valuing raw material at replacement cost regardless of whether the related finished goods sell below cost - AS 2 only permits marking raw material down to replacement cost when the finished product it converts into cannot recover its own cost.
 
 **Q5.**
 
@@ -282,7 +276,7 @@
     to the Profit and Loss statement.</p>
 </div>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error here is
+> **Common Mistake to Avoid:** A common error here is
   computing the abnormal loss quantity against the gross 16,000 MT used rather than against the 800 MT normal-loss
   benchmark, or valuing the abnormal loss at the original ₹190/MT purchase rate instead of the higher
   ₹200/MT rate that results once the normal loss is absorbed into the remaining good units.
@@ -293,14 +287,14 @@
 <p>Examples of costs excluded from inventory cost and expensed as incurred: (a) abnormal amounts of wasted materials, labour, or other production costs; (b) storage costs, unless required by the production process itself; (c) administrative overheads that do not contribute to bringing the inventories to their present location and condition; (d) selling and distribution costs.</p>
 </div>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** Some examinees included all administrative overheads as excluded costs, without distinguishing those that do (production-related) vs. do not (general admin) contribute to bringing inventory to its present location and condition.
+> **Common Mistake to Avoid:** Some examinees included all administrative overheads as excluded costs, without distinguishing those that do (production-related) vs. do not (general admin) contribute to bringing inventory to its present location and condition.
 
 **Q7.**
 
 <div>
 <p>As per AS 2 'Valuation of Inventories', most by-products, being immaterial, are measured at net realizable value, deducted from the cost of the main product.</p>
-<p><strong>W.N.1 — NRV of by-product Fiber:</strong> Selling price (3,200 × ₹40) 1,28,000 − separate processing charges 10,000 − packing charges 9,000 = ₹1,09,000.</p>
-<p><strong>W.N.2 — Joint cost allocation:</strong> Raw material 3,50,000 + Wages 1,60,000 + Fixed OH 1,20,000 + Variable OH 60,000 = 6,90,000; less NRV of Fiber (1,09,000) and scrap sale value (5,000) = <strong>Joint cost to allocate: 5,76,000</strong>.</p>
+<p><strong>W.N.1 - NRV of by-product Fiber:</strong> Selling price (3,200 × ₹40) 1,28,000 − separate processing charges 10,000 − packing charges 9,000 = ₹1,09,000.</p>
+<p><strong>W.N.2 - Joint cost allocation:</strong> Raw material 3,50,000 + Wages 1,60,000 + Fixed OH 1,20,000 + Variable OH 60,000 = 6,90,000; less NRV of Fiber (1,09,000) and scrap sale value (5,000) = <strong>Joint cost to allocate: 5,76,000</strong>.</p>
 <table><thead><tr><th>Particulars</th><th>Polyester</th><th>Nylon</th></tr></thead>
 <tbody>
 <tr><td>Output (units)</td><td>12,500</td><td>10,000</td></tr>
@@ -313,11 +307,7 @@
 </tbody></table>
 </div>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** Some examinees allocated the full 6,90,000 cost between Polyester and Nylon without first deducting the by-product's net realizable value and the scrap sale proceeds, overstating the joint cost base for allocation.
+> **Common Mistake to Avoid:** Some examinees allocated the full 6,90,000 cost between Polyester and Nylon without first deducting the by-product's net realizable value and the scrap sale proceeds, overstating the joint cost base for allocation.
 
 
----
-
-**Provenance note:** boxes marked *Examiner's Comment (ICAI)* reproduce/paraphrase a real ICAI Examiner's Comment on that exact question. Boxes marked *Author's Note (Synthesized)* are written in ICAI's voice per this platform's `examiner-comments-writing-skill.md` style guide but are **not** ICAI-sourced, and may not apply in every case.
-
-*Generated: 2026-09-08 · First edition — please report any error to Pranav.*
+*End of Answer Key*

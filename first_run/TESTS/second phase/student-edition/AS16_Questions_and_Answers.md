@@ -1,22 +1,19 @@
-# AS 16 — Borrowing Costs — Chapter Test (Second Phase)
+# AS 16 - Borrowing Costs
 
-**CA Inter · Paper 1: Advanced Accounting**
-**Chapter Reference:** `M2-C5-U4`
+**CA Inter | Paper 1: Advanced Accounting**
 
-**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 50 &nbsp;|&nbsp; **Section A (MCQ):** 14 marks, 7 questions (28%) &nbsp;|&nbsp; **Section B (Descriptive):** 36 marks, 7 questions (72%)
+**Maximum Marks: 50**
+**Time Allowed: 90 minutes**
 
-**Suggested Time:** ~90 minutes
-
-> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material chapter's own "Test Your Knowledge" section (`books/concept-book/raw_icai_study_materials/`, extracted by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks are estimated from answer length and every such question/answer is explicitly tagged "estimated from answer length, not an official mark" wherever it appears below. Nothing is invented — every question and every answer is copied from one of these two real sources.
->
-> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (11 MCQ + 3 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
+**Instructions:**
+1. All questions are compulsory unless stated otherwise.
+2. Marks for each question are shown alongside it.
+3. Show full working notes wherever applicable.
+4. Answer as per the Accounting Standards applicable for CA Inter.
 
 ---
 
-## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 14 Marks
-
-
-*Case Facts (Case CS-1):*
+## Section A: Multiple Choice Questions (14 Marks)
 
 <p>Mars Ltd. is a manufacturing enterprise which is starting a new manufacturing plant at X Village. It has
     commenced construction of the plant on April 1, 2023 and has incurred following expenses: It has acquired land
@@ -40,10 +37,7 @@
 - **(C)** ₹7,00,000
 - **(D)** ₹6,00,000
 
-*(2 Marks · Topic: AS 16 (4.10): Suspension of capitalisation during an extended interruption to active development · Source: MTP 2024 Set 2 Q2)*
-
-
-*Case Facts (Case CS-2):*
+*[2 Marks | Topic: AS 16 (4.10): Suspension of capitalisation during an extended interruption to active development | Source: MTP 2024 Set 2 Q2]*
 
 <p>On 1st April, 2022, Shubham Limited purchased some land for ₹30 lakhs for the purpose of constructing a new factory. This cost of ₹30 lakhs included legal cost of ₹2 lakhs incurred for the purpose of acquisition of this land. Construction work could start on 1st May, 2022 and Shubham Limited provides the following details of the costs incurred in relation to its construction:</p>
 <table><thead><tr><th>Particulars</th><th>₹</th></tr></thead>
@@ -67,7 +61,7 @@
 - **(C)** ₹1,44,000
 - **(D)** ₹1,64,000
 
-*(2 Marks · Topic: AS 16 (4.5): Specific-borrowing cost capitalisation net of temporary-investment income earned on unutilised proceeds · Source: MTP 2024 Set 1 Q2(iii))*
+*[2 Marks | Topic: AS 16 (4.5): Specific-borrowing cost capitalisation net of temporary-investment income earned on unutilised proceeds | Source: MTP 2024 Set 1 Q2(iii)]*
 
 **3.** <p>Gyan Ltd. borrowed ₹10 crore for construction of a plant at the rate of 10% per annum (interest paid annually ₹1 crore). The construction was being carried on and out of the borrowings, ₹4 crore was temporarily placed in a fixed deposit at the rate of 6% per annum (interest earned ₹24 lakh). At the year end, how much cost of borrowing Gyan Limited will capitalise?</p>
 
@@ -76,7 +70,21 @@
 - **(C)** Interest paid less income on temporary investment i.e. ₹76 lakh
 - **(D)** Nothing will be capitalised.
 
-*(2 Marks · Topic: AS 16 (4.5): Borrowing cost capitalised net of income on temporary investment of surplus specific-borrowing funds · Source: MTP 2024 Set 1 Q4)*
+*[2 Marks | Topic: AS 16 (4.5): Borrowing cost capitalised net of income on temporary investment of surplus specific-borrowing funds | Source: MTP 2024 Set 1 Q4]*
+
+<p>ADI Ltd (the Company), engaged in the business of manufacturing of urea, has set up its business in a designated backward area which entitles the company to receive from the Government of India a subsidy of 20% of the cost of investment.</p>
+<p>Having fulfilled all the conditions under the scheme, the Company on its overall investment of ₹50 crores received ₹10 crores from the Government in January 2024 (financial year being 2023-24). The Company wants to treat this receipt as an item of revenue and thereby reduce the losses on profit and loss account for the year ended 31 March 2024.</p>
+<p>ADI Ltd holds 51% in SHA Ltd. SHA Ltd is a joint venture of ADI Ltd due to a contractual agreement. ADI Ltd is engaged in the manufacturing business and it entered into a joint venture to get synergies in the same business. ADI Ltd and SHA Ltd hold 10% and 30% respectively in SHB Ltd.</p>
+<p>As per the requirements of SEBI, ADI Ltd prepared results/accounts for the quarter ended 30 June 2024 and took following positions in respect of following accounting matters:</p>
+<ol type="i">
+<li>Training expenses incurred during the quarter ended 30 June 2024 were allocated equally over the four quarters because the benefit was spread over the entire year and similarly some training expenses expected to be incurred in the last quarter have been estimated and equally allocated over the four quarters.</li>
+<li>Provision made for donation of ₹5 million expected to be made in the second quarter.</li>
+<li>Since historically there has been an immaterial variance between budgets and actuals, depreciation charge for the quarter was determined by the budgeted figure.</li>
+<li>Incentives were provided to the customers if they purchase 1 million kgs of urea on an annual basis. It was expected that at least 50 customers would be able to achieve this target before the end of third quarter. No provision was made for this incentive during the quarter ended 30 June 2024 since ADI Ltd believed that the provision was not yet fructified.</li>
+</ol>
+<p>ADI Ltd owns 60% holding in ANI Ltd, an unquoted entity. The government has recently announced an increase in interest rates. The increase will cause a fall in value of equity holdings. This is due to the fact that risk free investments offer a higher return making them relatively more attractive. The market value of equity will adjust downwards to improve the return available on this sort of investment.</p>
+<p>SHB Ltd took a loan of USD 10,000 on 1 April 2023 for a specific project at an interest rate of 5% p.a. payable annually. On 1 April 2023, the exchange rate between the currency was ₹81 per USD. The exchange rate as at 31 March 2024 was ₹82 per USD. The corresponding amount could have been borrowed by SHB Ltd in local currency at an interest rate of 11% per annum as on 1 April 2023.</p>
+<p>ADI Ltd follows April to March as the financial year.</p>
 
 **4.** <p>Compute the borrowing cost which can be capitalized in the books of SHA Ltd as per the above mentioned fact pattern.</p>
 
@@ -85,7 +93,7 @@
 - **(C)** ₹89,100
 - **(D)** ₹51,000
 
-*(2 Marks · Topic: AS 16 (4.3): Exchange difference on foreign-currency borrowing capitalised as an interest adjustment only via the AS 11 election; absent that, only the plain interest is a borrowing cost · Source: MTP 2025 Set 2 Q5)*
+*[2 Marks | Topic: AS 16 (4.3): Exchange difference on foreign-currency borrowing capitalised as an interest adjustment only via the AS 11 election; absent that, only the plain interest is a borrowing cost | Source: MTP 2025 Set 2 Q5]*
 
 **5.** <p>Akash Ltd. is constructing a housing society and for this purpose, it has taken loan from a
     bank. The housing society consists of 50 units, each of which can be used individually. 20 units have been
@@ -99,7 +107,11 @@
 - **(C)** The entire borrowing cost should be capitalised at the end of the project.
 - **(D)** The Borrowing cost will not be capitalised at all.
 
-*(2 Marks · Topic: AS 16 — Borrowing Costs (4.11): Cessation of capitalisation for independently usable completed parts of a qualifying asset · Source: MTP 2025 Set 1 Q6)*
+*[2 Marks | Topic: AS 16 - Borrowing Costs (4.11): Cessation of capitalisation for independently usable completed parts of a qualifying asset | Source: MTP 2025 Set 1 Q6]*
+
+<p>Gases Ltd. is installing a 2000 kms long gas pipeline for distribution of gasses (Project is a qualifying asset as per AS 16). For this purpose it borrowed funds for ₹700 Lakhs at subsidised rates and has to pay annually an interest of ₹70 Lakhs. The Company has also invested unused funds and is earning an income of ₹7 Lakhs annually. During the next year the Company used all funds and no income is now being earned.</p>
+<p>During the year 5, the Company has completed 1 stretch of 100 kms which is operational between two points and is capable of intended use.</p>
+<p>Based on the information given in above Case Scenario, answer Question Nos. 1-4.</p>
 
 **6.** <p>For the year 1, how much borrowing cost should be capitalised to the project:</p>
 
@@ -108,7 +120,7 @@
 - **(C)** ₹63 Lakhs
 - **(D)** ₹60 Lakhs
 
-*(2 Marks · Topic: AS 16 (4.4): Eligible borrowing cost net of temporary-investment income · Source: MTP 2026 Set 2 Q1)*
+*[2 Marks | Topic: AS 16 (4.4): Eligible borrowing cost net of temporary-investment income | Source: MTP 2026 Set 2 Q1]*
 
 **7.** <p>Vijay Ltd. borrowed ₹30 lakh at interest rate of 5% per annum and purchased plant and machinery for ₹60 lakh (using borrowed funds) and started production. It took 1 year time for Vijay Ltd. to create optimum market for the goods manufactured and generate revenue. How much borrowing cost can be capitalised with cost of plant and machinery:</p>
 
@@ -117,12 +129,12 @@
 - **(C)** Nil
 - **(D)** ₹5 Lakh
 
-*(2 Marks · Topic: AS 16 (4.1): Not a qualifying asset merely because time is needed to build a market for the output · Source: MTP 2026 Set 2 Q13)*
+*[2 Marks | Topic: AS 16 (4.1): Not a qualifying asset merely because time is needed to build a market for the output | Source: MTP 2026 Set 2 Q13]*
 
 
 ---
 
-## Section B — Descriptive Questions *(Illustrations style)* — 36 Marks
+## Section B: Descriptive Questions (36 Marks)
 
 **Q1.** <p>On 15th April, 2022 RBM Ltd. obtained a Term Loan from the Bank for ₹320 lakhs to be utilized as under:</p>
 <table>
@@ -139,23 +151,23 @@
 <p>In March, 2023 construction of shed was completed and machinery was installed. Total interest charged by the bank for the year ending 31st March, 2023 was ₹40 lakhs.</p>
 <p>In the context of provisions of AS 16 ‘Borrowing Costs’, show the treatment of interest and also explain the nature of Assets.</p>
 
-*(5 Marks · Topic: AS 16 — Borrowing Costs (4.4) · Source: MTP 2023 Set 1 Q1c)*
+*[5 Marks | Topic: AS 16 - Borrowing Costs (4.4) | Source: MTP 2023 Set 1 Q1c]*
 
 **Q2.** <p>ABC Limited has started construction of an asset on 1st December, 2021, which continues till 31st March, 2022 (and is expected to go beyond a year). The entity has not taken any specific borrowings to finance the construction of the asset but has incurred finance costs on its general borrowings during the construction period. The directly attributable expenditure at the beginning of the month on this asset was ₹10 lakh in December 2021 and ₹4 lakh in each of the months of January to March 2022. At the beginning of the year, the entity had taken Inter Corporate Deposits of ₹20 lakh at 9% rate of interest and had an overdraft of ₹4 lakh, which increased to ₹8 lakh on 1st March, 2022. Interest was paid on the overdraft at 10% until 1st January, 2022 and then the rate was increased to 12%. You are required to calculate the annual capitalization rate for computation of borrowing cost in accordance with AS 16 'Borrowing Costs'.</p>
 
-*(5 Marks · Topic: AS 16 (4.7) · Source: MTP 2023 Set 2 Q1a)*
+*[5 Marks | Topic: AS 16 (4.7) | Source: MTP 2023 Set 2 Q1a]*
 
 **Q3.** <p>Vital Limited borrowed an amount of ₹150 crores on 1.4.2021 for construction of boiler plant @ 10% p.a. The plant is expected to be completed in 4 years. Since the weighted average cost of capital is 13% p.a., the accountant of Vital Ltd. capitalized ₹19.50 crores for the accounting period ending on 31.3.2022. Due to surplus fund out of ₹150 crores, an income of ₹1.50 crores was earned and credited to profit and loss account. Comment on the above treatment of accountant with reference to relevant accounting standard. (5 Marks)</p>
 
-*(5 Marks · Topic: Borrowing Costs (4.4/4.6) · Source: MTP 2023 Set 1 Q6c)*
+*[5 Marks | Topic: Borrowing Costs (4.4/4.6) | Source: MTP 2023 Set 1 Q6c]*
 
 **Q4.** <p>When capitalisation of borrowing cost should cease as per Accounting Standard 16? Explain in brief.</p>
 
-*(4 Marks · Topic: AS 16 (4.11) · Source: MTP 2025 Set 1 Q6a)*
+*[4 Marks | Topic: AS 16 (4.11) | Source: MTP 2025 Set 1 Q6a]*
 
 **Q5.** <p>How will interest be capitalised when qualifying assets are funded by borrowings in the nature of bonds that are issued at a discount?</p>
 
-*(5 Marks · Topic: AS 16 (4.4) · Source: MTP 2025 Set 2 Q6a)*
+*[5 Marks | Topic: AS 16 (4.4) | Source: MTP 2025 Set 2 Q6a]*
 
 **Q6.** <p>Glen Ltd. began construction of a new building on 1st January, 2025. On 1st April, 2025, following two loans were obtained to fund the construction cost:
     <br/>(i) Loan of ₹60,00,000 from Data Bank Ltd. was taken at interest rate of 8% per annum. This loan was fully utilized for construction of the new building.
@@ -165,58 +177,58 @@
     <br/>Out of loan from Data Bank Ltd., surplus funds were temporarily invested for the short period of time. This temporary investment earned interest of ₹30,000.
     <br/>You are required to calculate the amount of interest (a) to be capitalized, (b) to be charged to profit and loss account from the total interest incurred as borrowing cost during the year 2025-26 (as per AS-16). (5 Marks)</p>
 
-*(5 Marks · Topic: AS 16 — Borrowing Costs (4.4/4.6/4.7) · Source: MTP 2026 Set 1 Q1a)*
+*[5 Marks | Topic: AS 16 - Borrowing Costs (4.4/4.6/4.7) | Source: MTP 2026 Set 1 Q1a]*
 
 **Q7.** <p>On 1st April, 2024, A Limited started the construction of an Office Building (qualifying asset; land is a separate asset, not part of the qualifying asset). For construction, the company raised a specific loan of ₹14 lakhs from a Bank at 12% p.a. Interest income of ₹15,000 was earned on this loan while held in anticipation of payments. The company's other outstanding loans on 1st April, 2024: ₹20,00,000 at 15%; ₹30,00,000 at 8%. Construction started 1st April, 2024, completed 31st January, 2025 (ready for intended use). Payments to the contractor: 1st April 2024 ₹4,00,000; 1st August 2024 ₹10,00,000; 1st December 2024 ₹25,00,000; 31st January 2025 ₹5,00,000. Life of building 20 years, straight line depreciation. Required: (i) borrowing cost to be capitalized; (ii) initial journal entry (interest paid at year end); (iii) depreciation for the year ending 31st March, 2025; (iv) carrying value of building as on 31st March, 2025.</p>
 
-*(7 Marks · Topic: AS 16 (4.5) · Source: MTP 2026 Set 1 Q1b)*
+*[7 Marks | Topic: AS 16 (4.5) | Source: MTP 2026 Set 1 Q1b]*
 
 
 ---
 
 ## Answers
 
-### Section A — MCQ Answer Key & Explanations
+### Section A: Multiple Choice Questions
 
-**1.** Correct Option: **(B)**
+**1.** Correct Answer: **(B)**
 
-<p><strong>Answer:</strong> (B) ₹2,00,000 — full-year borrowing
+<p><strong>Answer:</strong> (B) ₹2,00,000 - full-year borrowing
   cost = ₹25,00,000 × 12% = ₹3,00,000. AS 16 requires capitalisation to be suspended during an
   extended period in which active development is interrupted (the environmental-agitation halt is not a routine,
   necessary part of the construction process, so it is a genuine suspension, not merely a temporary delay). Treating
   the suspension as running from 1 November, 2023 to 28 February, 2024 (4 months, per the resumption date actually
-  given), the eligible capitalisation period is the remaining 8 months (April–October, 7 months, plus March,
+  given), the eligible capitalisation period is the remaining 8 months (April-October, 7 months, plus March,
   1 month): ₹3,00,000 × 8/12 = <strong>₹2,00,000</strong>.</p>
 
-**2.** Correct Option: **(D)**
+**2.** Correct Answer: **(D)**
 
-<p><strong>Answer:</strong> (D) ₹1,64,000 — borrowing cost on the ₹28,00,000 specific loan for the instructed 9-month capitalisation period: ₹28,00,000 × 9% × 9/12 = ₹1,89,000, less the ₹25,000 investment income earned on the temporary investment of the unutilised loan proceeds (netted per AS 16) = ₹1,64,000.</p>
+<p><strong>Answer:</strong> (D) ₹1,64,000 - borrowing cost on the ₹28,00,000 specific loan for the instructed 9-month capitalisation period: ₹28,00,000 × 9% × 9/12 = ₹1,89,000, less the ₹25,000 investment income earned on the temporary investment of the unutilised loan proceeds (netted per AS 16) = ₹1,64,000.</p>
 
-**3.** Correct Option: **(C)**
+**3.** Correct Answer: **(C)**
 
-<p><strong>Answer:</strong> (C) ₹76 lakh — per AS 16, borrowing costs eligible for capitalisation are the actual borrowing costs incurred on the specific borrowing, reduced by any income earned on the temporary investment of those funds pending expenditure on the qualifying asset: ₹1,00,00,000 − ₹24,00,000 = ₹76,00,000.</p>
+<p><strong>Answer:</strong> (C) ₹76 lakh - per AS 16, borrowing costs eligible for capitalisation are the actual borrowing costs incurred on the specific borrowing, reduced by any income earned on the temporary investment of those funds pending expenditure on the qualifying asset: ₹1,00,00,000 − ₹24,00,000 = ₹76,00,000.</p>
 
-**4.** Correct Option: **(A)**
+**4.** Correct Answer: **(A)**
 
-<p><strong>Answer:</strong> (A) ₹41,000 — the only fact pattern in this case scenario giving loan/interest-rate figures is the USD 10,000 loan taken by SHB Ltd at 5% p.a. (question stem literally says "books of SHA Ltd," see the note below). Plain interest cost = USD 10,000 × 5% = USD 500, converted at the closing/payment-date rate of ₹82/USD = ₹41,000. The exchange-difference-as-interest-cost-adjustment mechanism (which would add the ₹10,000 exchange loss, or cap the total at the ₹89,100 local-currency-equivalent interest) is an <em>optional</em> accounting policy election under AS 11's long-term-monetary-item provisions, not the automatic default — since nothing in the facts states the company elected that treatment, only the plain interest (₹41,000) is the borrowing cost eligible for capitalisation.</p>
+<p><strong>Answer:</strong> (A) ₹41,000 - the only fact pattern in this case scenario giving loan/interest-rate figures is the USD 10,000 loan taken by SHB Ltd at 5% p.a. (question stem literally says "books of SHA Ltd," see the note below). Plain interest cost = USD 10,000 × 5% = USD 500, converted at the closing/payment-date rate of ₹82/USD = ₹41,000. The exchange-difference-as-interest-cost-adjustment mechanism (which would add the ₹10,000 exchange loss, or cap the total at the ₹89,100 local-currency-equivalent interest) is an <em>optional</em> accounting policy election under AS 11's long-term-monetary-item provisions, not the automatic default - since nothing in the facts states the company elected that treatment, only the plain interest (₹41,000) is the borrowing cost eligible for capitalisation.</p>
 
-**5.** Correct Option: **(B)**
+**5.** Correct Answer: **(B)**
 
-<p><strong>Answer:</strong> (B) — per AS 16, when parts of a
+<p><strong>Answer:</strong> (B) - per AS 16, when parts of a
   qualifying asset are capable of being used independently while construction continues on other parts (here,
   each housing unit can be used individually), capitalisation ceases for the parts substantially complete and
   ready for use (the 20 units) and continues only for the parts still under construction (the 30 units).</p>
 
-**6.** Correct Option: **(C)**
+**6.** Correct Answer: **(C)**
 
 <p><strong>Answer:</strong> (c) ₹63 Lakhs = ₹70 Lakhs interest − ₹7 Lakhs temporary-investment income.</p>
 
-**7.** Correct Option: **(C)**
+**7.** Correct Answer: **(C)**
 
-<p><strong>Answer:</strong> (C) Nil — the plant was ready for use and production started immediately; it is not a qualifying asset merely because it took time to build a market for the output, so no borrowing cost is capitalised.</p>
+<p><strong>Answer:</strong> (C) Nil - the plant was ready for use and production started immediately; it is not a qualifying asset merely because it took time to build a market for the output, so no borrowing cost is capitalised.</p>
 
 
-### Section B — Descriptive Solutions
+### Section B: Descriptive Questions
 
 **Q1.**
 
@@ -227,7 +239,7 @@
     Interest to be debited to Profit or Loss account: ₹(40 − 30) = ₹10 lakhs.</p>
 <p><em>Note: Assumed that construction of factory shed completed on 31st March, 2023.</em></p>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error is capitalising interest on the entire ₹320 lakh loan, or on the machinery/vehicle/technical-know-how portions as well, instead of identifying the factory shed as the only qualifying asset and apportioning the ₹40 lakh interest strictly in the ratio of that asset's own utilisation (240/320) to the total borrowing.
+> **Common Mistake to Avoid:** A common error is capitalising interest on the entire ₹320 lakh loan, or on the machinery/vehicle/technical-know-how portions as well, instead of identifying the factory shed as the only qualifying asset and apportioning the ₹40 lakh interest strictly in the ratio of that asset's own utilisation (240/320) to the total borrowing.
 
 **Q2.**
 
@@ -249,7 +261,7 @@
 <p><strong>Capitalisation rate</strong> = [(Weighted average amount of interest / Weighted average of general borrowings) × 100] = [(2,26,000 / 24,33,334) × 100] = <strong>9.29% p.a.</strong></p>
 </div>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error is applying the overdraft's changed interest rate or increased balance retroactively across the full year rather than time-weighting each rate/balance segment separately, or omitting the fixed-rate borrowing from the weighted-average pool entirely.
+> **Common Mistake to Avoid:** A common error is applying the overdraft's changed interest rate or increased balance retroactively across the full year rather than time-weighting each rate/balance segment separately, or omitting the fixed-rate borrowing from the weighted-average pool entirely.
 
 **Q3.**
 
@@ -263,7 +275,7 @@
 </tbody>
 </table>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error is applying the enterprise's weighted average cost of capital (or the general-borrowings capitalisation rate) to a loan that was specifically raised for the qualifying asset, instead of using the actual interest rate on that specific borrowing net of any temporary-investment income earned on the surplus funds.
+> **Common Mistake to Avoid:** A common error is applying the enterprise's weighted average cost of capital (or the general-borrowings capitalisation rate) to a loan that was specifically raised for the qualifying asset, instead of using the actual interest rate on that specific borrowing net of any temporary-investment income earned on the surplus funds.
 
 **Q4.**
 
@@ -271,7 +283,7 @@
 <p>Capitalization of borrowing costs should cease when substantially all the activities necessary to prepare the qualifying asset for its intended use or sale are complete. An asset is normally ready for its intended use or sale when its physical construction or production is complete even though routine administrative work might still continue. If minor modifications such as the decoration of a property to the user's specification, are all that are outstanding, this indicates that substantially all the activities are complete. When the construction of a qualifying asset is completed in parts and a completed part is capable of being used while construction continues for the other parts, capitalization of borrowing costs in relation to a part should cease when substantially all the activities necessary to prepare that part for its intended use or sale are complete.</p>
 </div>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error is assuming capitalisation continues until the asset is actually put into use or sold, rather than ceasing once the asset is merely ready for its intended use, even if routine administrative work or minor finishing touches remain outstanding.
+> **Common Mistake to Avoid:** A common error is assuming capitalisation continues until the asset is actually put into use or sold, rather than ceasing once the asset is merely ready for its intended use, even if routine administrative work or minor finishing touches remain outstanding.
 
 **Q5.**
 
@@ -280,7 +292,7 @@
 <p>Paragraph 6 of the Statement states that "Borrowing costs that are directly attributable to the acquisition, construction or production of a qualifying asset should be capitalised as part of the cost of that asset." Paragraph 19 further states that "Capitalisation of borrowing costs should cease when substantially all the activities necessary to prepare the qualifying asset for its intended use or sale are complete." Thus, only that portion of the amortised discount should be capitalised as part of the cost of a qualifying asset which relates to the period during which acquisition, construction or production of the asset takes place.</p>
 </div>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error here is treating only the coupon interest as the borrowing cost and overlooking that the periodic amortisation of a bond's issue discount is itself an explicit component of borrowing cost under AS 16.
+> **Common Mistake to Avoid:** A common error here is treating only the coupon interest as the borrowing cost and overlooking that the periodic amortisation of a bond's issue discount is itself an explicit component of borrowing cost under AS 16.
 
 **Q6.**
 
@@ -302,7 +314,7 @@
 </table>
 <p><em>Note:</em> Loan from Satya bank is considered to be specific borrowings.</p>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** Many examinees capitalised the full interest on the Data Bank loan without deducting the ₹30,000 temporary-investment income as required under AS 16, and several also failed to apportion the Satya Bank interest between the qualifying-asset and working-capital portions, treating the entire ₹1,92,000 as eligible for capitalisation.
+> **Common Mistake to Avoid:** Many examinees capitalised the full interest on the Data Bank loan without deducting the ₹30,000 temporary-investment income as required under AS 16, and several also failed to apportion the Satya Bank interest between the qualifying-asset and working-capital portions, treating the entire ₹1,92,000 as eligible for capitalisation.
 
 **Q7.**
 
@@ -318,17 +330,13 @@
 <tr><td colspan="4">Less: interest income on specific borrowing</td><td>(15,000)</td></tr>
 <tr><td colspan="4"><strong>Total borrowing cost to be capitalized</strong></td><td><strong>1,70,000</strong></td></tr>
 </tbody></table>
-<p><em>Working note — weighted average rate on general borrowings: (20,00,000×15%=3,00,000) + (30,00,000×8%=2,40,000) = 5,40,000 on 50,00,000 = 10.8%.</em></p>
+<p><em>Working note - weighted average rate on general borrowings: (20,00,000×15%=3,00,000) + (30,00,000×8%=2,40,000) = 5,40,000 on 50,00,000 = 10.8%.</em></p>
 <p><strong>(ii) Journal entry (31.1.2025):</strong> Building A/c Dr. 45,70,000; To Bank A/c 44,00,000; To Interest Payable A/c (borrowing cost) 1,70,000. (Cost of building = 44,00,000 payments + 1,70,000 capitalised interest.)</p>
-<p><strong>(iii) Depreciation for year ended 31.3.2025</strong> = 45,70,000 / 20 years × 2/12 (Feb–Mar, post-completion) = ₹38,083.33.</p>
+<p><strong>(iii) Depreciation for year ended 31.3.2025</strong> = 45,70,000 / 20 years × 2/12 (Feb-Mar, post-completion) = ₹38,083.33.</p>
 <p><strong>(iv) Carrying value as on 31.3.2025</strong> = 45,70,000 − 38,083.33 = ₹45,31,917 (approx).</p>
 </div>
 
-> **Author's Note (Synthesized — not ICAI-sourced):** Common errors: forgetting to net off the ₹15,000 temporary-investment interest income against capitalised borrowing cost, misclassifying the 1st December payment as specific-loan funded once the specific loan is fully drawn, or depreciating from the payment date rather than the date the asset was ready for use (31st January).
+> **Common Mistake to Avoid:** Common errors: forgetting to net off the ₹15,000 temporary-investment interest income against capitalised borrowing cost, misclassifying the 1st December payment as specific-loan funded once the specific loan is fully drawn, or depreciating from the payment date rather than the date the asset was ready for use (31st January).
 
 
----
-
-**Provenance note:** boxes marked *Examiner's Comment (ICAI)* reproduce/paraphrase a real ICAI Examiner's Comment on that exact question. Boxes marked *Author's Note (Synthesized)* are written in ICAI's voice per this platform's `examiner-comments-writing-skill.md` style guide but are **not** ICAI-sourced, and may not apply in every case.
-
-*Generated: 2026-09-08 · First edition — please report any error to Pranav.*
+*End of Answer Key*
