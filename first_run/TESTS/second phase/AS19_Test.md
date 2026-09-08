@@ -3,13 +3,15 @@
 **CA Inter · Paper 1: Advanced Accounting**
 **Chapter Reference:** `M2-C5-U5`
 
-**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 50 &nbsp;|&nbsp; **Section A (MCQ):** 14 marks, 7 questions (28%) &nbsp;|&nbsp; **Section B (Descriptive):** 36 marks, 7 questions (72%)
+**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 47 &nbsp;|&nbsp; **Section A (MCQ):** 14 marks, 7 questions (30%) &nbsp;|&nbsp; **Section B (Descriptive):** 33 marks, 7 questions (70%)
 
-**Suggested Time:** ~90 minutes
+**Suggested Time:** ~85 minutes
 
-> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is a real, previously chapter-tagged MTP / RTP / PYQ question drawn from the platform's question bank (`first_run/output/generated-from-script/questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ). Nothing is invented.
+> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material chapter's own "Test Your Knowledge" section (`books/concept-book/raw_icai_study_materials/`, extracted by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks are estimated from answer length and every such question/answer is explicitly tagged "estimated from answer length, not an official mark" wherever it appears below. Nothing is invented — every question and every answer is copied from one of these two real sources.
 >
-> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (0 MCQ + 0 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
+> **Content note — target not fully met (pool too small):** the tagged question pool currently available for AS 19 in this corpus totals only **47 marks** (14 MCQ + 33 Descriptive) after de-duplication — short of the 50-mark target. All available real content has been included below (**47 of 50 marks**); no question was invented or borrowed from another chapter to pad the total. More MTP/RTP/PYQ sittings would need to be sourced and tagged for this chapter to reach a full 50-mark paper.
+>
+> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (2 MCQ + 1 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
 
 ---
 
@@ -26,7 +28,16 @@
 
 *(2 Marks · Topic: AS 19 (5.8): Lessor's gross investment less net investment equals unearned finance income · Source: MTP 2024 Set 2 Q15)*
 
-**2.** <p>Accounting Standard 19, Lease is applicable on following Leases:</p>
+**2.** <p>A Machinery was given on 3 years lease by a dealer of the machinery for equal annual lease rentals to yield 20% profit margin on cost of the machinery, which is Rs. 3,00,000. Economic life of the machinery is 5 years, and estimated output from the machinery in 5 years is as follows: Year I 50,000 units; Year II 60,000 units; Year III 40,000 units; Year IV 65,000 units; Year V 85,000 units. Compute Annual Lease Rent.</p>
+
+- **(A)** ₹30,000
+- **(B)** ₹60,000
+- **(C)** ₹50,000
+- **(D)** ₹36,000
+
+*(2 Marks · Topic: AS 19 (5.8): Manufacturer/dealer lessor selling profit; lease rental recovery apportioned by output consumed during a lease term shorter than total economic life · Source: PYQ 2024 Q9)*
+
+**3.** <p>Accounting Standard 19, Lease is applicable on following Leases:</p>
 
 - **(A)** Lease agreements to explore for or use of natural resources, such as oil, gas, timber metals and other mineral rights.
 - **(B)** Legal owner of an asset conveys to another party in return for a payment or series of periodic payments, the right to use an asset for an agreed period of time.
@@ -34,15 +45,6 @@
 - **(D)** lease agreements to use lands
 
 *(2 Marks · Topic: AS 19 (5.2): Definition of a lease versus AS 19's explicit scope exclusions · Source: MTP 2025 Set 2 Q13)*
-
-**3.** <p>A Machinery was giver on 3 years lease by a dealer of the machinery for equal annual lease rentals to yield 20% profit margin on cost of the machinery, which is ₹3,00,000. Economic life of the machinery is 5 years, and estimated output from the machinery in 5 years is as follows: Year I 50,000 units, Year II 60,000 units, Year III 40,000 units, Year IV 65,000 units, Year V 85,000 units. Compute Annual Lease Rent.</p>
-
-- **(A)** ₹30,000
-- **(B)** ₹60,000
-- **(C)** ₹50,000
-- **(D)** ₹36,000
-
-*(2 Marks · Topic: AS 19 (5.2): Operating lessor's target rental recovery apportioned by the leased asset's output consumed during the lease term, out of its full economic-life output · Source: MTP 2025 Set 1 Q14)*
 
 **4.** <p>As per AS 19, unearned finance income is:</p>
 
@@ -87,16 +89,30 @@
 
 ---
 
-## Section B — Descriptive Questions *(Illustrations style)* — 36 Marks
+## Section B — Descriptive Questions *(Illustrations style)* — 33 Marks
 
-**Q1.** <p>Lessee Ltd. took a machine on lease from Lessor Ltd., the fair value being ₹7,00,000. The economic life of machine as well as the lease term is 3 years. At the end of each year Lessee Ltd. pays ₹3,00,000. The Lessee has guaranteed a residual value of ₹22,000 on expiry of the lease to the Lessor. However, Lessor Ltd., estimates that the residual value of the machinery will be only ₹15,000. The implicit rate of return is 15% p.a. and present value factors at 15% are 0.869, 0.756 and 0.657 at the end of first, second and third years respectively.</p>
+**Q1.** <p>Colour Limited leased a Machine to Red Limited on 1 April, 2021 on the following:</p>
+<table>
+<thead><tr><th>Particulars</th><th></th></tr></thead>
+<tbody>
+<tr><td>Cost of the machine</td><td>₹18,00,000</td></tr>
+<tr><td>Lease term</td><td>3 Years</td></tr>
+<tr><td>Fair market value of the machine</td><td>₹18,00,000</td></tr>
+<tr><td>Unguaranteed residual value as on 31.3.2024</td><td>₹2,00,000</td></tr>
+<tr><td>Internal rate of return</td><td>12%</td></tr>
+</tbody>
+</table>
+<p>Other information: The expected useful life of the machine is 5 years. The machine will revert to Colour Limited on termination of the lease. The lease payment is to be made at the end of each year in 3 equal parts.</p>
+<p>The present value of ₹1 due at the end of 3rd year at 12% rate of interest is ₹0.7118. The present value of annuity of ₹1 due at the end of 3rd year at 12% IRR is ₹2.4018.</p>
+<p>You are required to analyze whether lease constitutes finance lease. Also calculate unearned finance income, if any.</p>
+<p><em>OR (alternative to the AS 20 EPS question below)</em></p>
+
+*(4 Marks · Topic: AS 19 (5.5-5.7/5.8) · Source: PYQ 2024 Q6a)*
+
+**Q2.** <p>Lessee Ltd. took a machine on lease from Lessor Ltd., the fair value being ₹7,00,000. The economic life of machine as well as the lease term is 3 years. At the end of each year Lessee Ltd. pays ₹3,00,000. The Lessee has guaranteed a residual value of ₹22,000 on expiry of the lease to the Lessor. However, Lessor Ltd., estimates that the residual value of the machinery will be only ₹15,000. The implicit rate of return is 15% p.a. and present value factors at 15% are 0.869, 0.756 and 0.657 at the end of first, second and third years respectively.</p>
 <p>Calculate the value of machinery to be considered by Lessee Ltd. and the finance charges in each year.</p>
 
 *(5 Marks · Topic: AS 19 (5.8) · Source: MTP 2024 Set 1 Q1b)*
-
-**Q2.** <p>You are required to give the necessary journal entry at the inception of lease to record the asset taken on finance lease in books of lessee from the following information: Lease period = 5 years; Annual lease rents = ₹50,000 at the end of each year; Guaranteed residual value = ₹25,000; Fair Value at the inception (beginning) of lease = ₹2,00,000; Interest rate implicit on lease = 12.6% (discount factors for year 1 to 5: 0.890, 0.790, 0.700, 0.622 and 0.552 respectively).</p>
-
-*(7 Marks · Topic: AS 19 (5.8) · Source: MTP 2024 Set 2 Q3a)*
 
 **Q3.** <p>A Ltd. sold JCB having WDV of ₹20 lakhs to B Ltd. for ₹24 lakhs and the same JCB was leased back by B Ltd. to A Ltd. The lease is operating lease. In context of Accounting Standard 19 "Leases" explain the accounting treatment of profit or loss in the books of A Ltd. if: (i) Sale price of ₹24 lakhs is equal to fair value. (ii) Fair value is ₹20 lakhs and sale price is ₹24 lakhs. (iii) Fair value is ₹22 lakhs and sale price is ₹25 lakhs. (iv) Fair value is ₹25 lakhs and sale price is ₹18 lakhs. (v) Fair value is ₹18 lakhs and sale price is ₹19 lakhs.</p>
 
@@ -137,11 +153,11 @@
 
 **2.** Correct Option: **(B)**
 
-<p><strong>Answer:</strong> (B) — AS 19 defines a lease as the conveyance, by the legal owner of an asset, of the right to use that asset to another party for an agreed period in return for a payment or series of payments; this is the definition itself. Options (A), (C) and (D) are all activities/agreements AS 19 explicitly excludes from its scope (natural-resource exploration/use rights, licensing agreements for films/patents/copyrights, and land lease agreements).</p>
+<p><strong>Answer:</strong> (B) ₹60,000 — as a dealer/manufacturer lessor, the fair value (normal selling price) built into the lease is cost plus the stated profit margin: ₹3,00,000 × 1.20 = ₹3,60,000. The 3-year lease covers only part of the machine's 5-year economic life, so only the portion of that value corresponding to the output actually consumed during the lease term is recoverable through rent: output in Years 1-3 (50,000+60,000+40,000 = 1,50,000 units) is exactly half of the machine's total 5-year output (50,000+60,000+40,000+65,000+85,000 = 3,00,000 units). Value to be recovered over the 3-year lease = 50% × ₹3,60,000 = ₹1,80,000, and equal annual rentals = ₹1,80,000 / 3 = ₹60,000.</p>
 
 **3.** Correct Option: **(B)**
 
-<p><strong>Answer:</strong> (B) ₹60,000. This is an <strong>operating</strong> lease (the machine returns to the dealer after the 3-year term, with 2 years of economic life remaining). Total amount the dealer targets recovering over the machine's full economic life = cost + 20% margin = ₹3,00,000 × 1.20 = ₹3,60,000, recovered progressively in proportion to how much of the machine's total lifetime output is consumed during each period of use. Output during the lease (Years I–III): 50,000+60,000+40,000 = 1,50,000 units, exactly 50% of the machine's total 5-year output (3,00,000 units). The dealer therefore targets recovering 50% of ₹3,60,000 = ₹1,80,000 during this lease, as equal annual rentals: ₹1,80,000 / 3 = <strong>₹60,000/year</strong>.</p>
+<p><strong>Answer:</strong> (B) — AS 19 defines a lease as the conveyance, by the legal owner of an asset, of the right to use that asset to another party for an agreed period in return for a payment or series of payments; this is the definition itself. Options (A), (C) and (D) are all activities/agreements AS 19 explicitly excludes from its scope (natural-resource exploration/use rights, licensing agreements for films/patents/copyrights, and land lease agreements).</p>
 
 **4.** Correct Option: **(A)**
 
@@ -167,6 +183,37 @@
 
 **Q1.**
 
+<p><strong>Computation of Annual Lease Payment</strong></p>
+<table>
+<thead><tr><th>Particulars</th><th>Amount</th></tr></thead>
+<tbody>
+<tr><td>Cost of Equipment</td><td>18,00,000</td></tr>
+<tr><td>Unguaranteed Residual Value</td><td>2,00,000</td></tr>
+<tr><td>Present Value of unguaranteed residual value (₹2,00,000 x 0.7118)</td><td>1,42,360</td></tr>
+<tr><td>Present Value of Lease Payments (₹18,00,000 − ₹1,42,360)</td><td>16,57,640</td></tr>
+<tr><td>Present Value of Annuity for three years is 2.4018 – Annual Lease Payment (16,57,640 / 2.4018)</td><td>6,90,165.71</td></tr>
+</tbody>
+</table>
+<p><strong>Classification of Lease:</strong></p>
+<p><strong>Parameter 1:</strong> The present value of lease payment i.e. ₹16,57,640 which equals 92.09% of the fair market value i.e., ₹18,00,000. The present value of minimum lease payments substantially covers the fair value of the leased asset.</p>
+<p><strong>Parameter 2:</strong> The lease term (i.e. 3 years) covers the major part of the life of the asset (i.e. 5 years).</p>
+<p>Therefore, it constitutes a finance lease.</p>
+<p><strong>Computation of unearned Finance Income:</strong></p>
+<table>
+<thead><tr><th>Particulars</th><th>Amount</th></tr></thead>
+<tbody>
+<tr><td>Total Lease Payments (₹6,90,165 x 3)</td><td>₹20,70,495</td></tr>
+<tr><td>Add: Unguaranteed residual value</td><td>₹2,00,000</td></tr>
+<tr><td></td><td>₹22,70,495</td></tr>
+<tr><td>Less: Present value of lease payments and residual value i.e. Net investment (1,42,360+16,57,640)</td><td>₹18,00,000</td></tr>
+<tr><td><strong>Unearned Finance Income</strong></td><td><strong>₹4,70,495</strong></td></tr>
+</tbody>
+</table>
+
+> **Examiner's Comment (ICAI):** A few examinees made errors in classifying leases as either finance or operating leases based on the given parameters. They also miscalculated the annual lease payment and unearned finance income. Additionally, many examinees forgot to include the unguaranteed residual value in the total lease amount.
+
+**Q2.**
+
 <div>
 <p>As per AS 19 "Leases", the lessee should recognize the lease as an asset and a liability at the inception of a finance lease. Such recognition should be at an amount equal to the fair value of the leased asset at the inception of lease. However, if the fair value of the leased asset exceeds the present value of minimum lease payment from the standpoint of the lessee, the amount recorded as an asset and liability should be the present value of minimum lease payments from the standpoint of the lessee.</p>
 <p><strong>Computation of Value of machinery:</strong> Present value of minimum lease payment = ₹6,99,054 (see working note below). Fair value of leased asset = ₹7,00,000. Therefore, the recognition will be at the lower of the two, i.e. ₹6,99,054.</p>
@@ -182,33 +229,6 @@
 </div>
 
 > **Author's Note (Synthesized — not ICAI-sourced):** A common error is recognising the asset at the full fair value (₹7,00,000) without first comparing it to the present value of minimum lease payments and taking the lower of the two, or omitting the guaranteed residual value from the minimum lease payments computation.
-
-**Q2.**
-
-<p><strong>Present value of minimum lease payment:</strong></p>
-<table>
-<thead><tr><th>Year</th><th>MLP (₹)</th><th>DF (12.6%)</th><th>PV (₹)</th></tr></thead>
-<tbody>
-<tr><td>1</td><td>50,000</td><td>0.890</td><td>44,500</td></tr>
-<tr><td>2</td><td>50,000</td><td>0.790</td><td>39,500</td></tr>
-<tr><td>3</td><td>50,000</td><td>0.700</td><td>35,000</td></tr>
-<tr><td>4</td><td>50,000</td><td>0.622</td><td>31,100</td></tr>
-<tr><td>5</td><td>50,000</td><td>0.552</td><td>27,600</td></tr>
-<tr><td>5 (residual)</td><td>25,000</td><td>0.552</td><td>13,800</td></tr>
-<tr><td><strong>Total PV</strong></td><td></td><td></td><td><strong>1,91,500</strong></td></tr>
-</tbody>
-</table>
-<p>Present value of minimum lease payment = ₹1,91,500. Fair value of leased asset = ₹2,00,000. As per AS 19, on the date of inception of lease, the lessee should recognise the asset and corresponding liability at the <strong>lower</strong> of fair value at inception and present value of minimum lease payments — here, ₹1,91,500.</p>
-<table>
-<thead><tr><th>Account</th><th>Dr (₹)</th><th>Cr (₹)</th></tr></thead>
-<tbody>
-<tr><td>Asset A/c Dr.</td><td>1,91,500</td><td></td></tr>
-<tr><td>  To Lessor (Lease Liability) A/c</td><td></td><td>1,91,500</td></tr>
-<tr><td colspan="3"><em>(Being recognition of finance lease as asset and liability)</em></td></tr>
-</tbody>
-</table>
-
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error here is recording the asset at the fair value of ₹2,00,000 without first comparing it against the present value of minimum lease payments and taking the lower of the two.
 
 **Q3.**
 

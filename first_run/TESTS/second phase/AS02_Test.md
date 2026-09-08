@@ -7,13 +7,31 @@
 
 **Suggested Time:** ~90 minutes
 
-> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is a real, previously chapter-tagged MTP / RTP / PYQ question drawn from the platform's question bank (`first_run/output/generated-from-script/questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ). Nothing is invented.
+> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material chapter's own "Test Your Knowledge" section (`books/concept-book/raw_icai_study_materials/`, extracted by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks are estimated from answer length and every such question/answer is explicitly tagged "estimated from answer length, not an official mark" wherever it appears below. Nothing is invented — every question and every answer is copied from one of these two real sources.
 >
-> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (8 MCQ + 2 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
+> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (13 MCQ + 3 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
 
 ---
 
 ## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 14 Marks
+
+**1.** <p>All of the following costs are excluded while computing value of inventories except?</p>
+
+- **(A)** Selling and Distribution costs.
+- **(B)** Allocated fixed production overheads based on normal capacity.
+- **(C)** Abnormal wastage.
+- **(D)** Storage costs (which is necessary part of the production process).
+
+*(2 Marks · Topic: AS 2 (1.6): Fixed production overhead absorbed systematically over normal capacity - includable in cost of conversion · Source: MTP 2024 Set 1 Q4)*
+
+**2.** <p>In determining the cost of inventories, it is appropriate to exclude certain costs and recognise them as expenses in the period in which they are incurred. Which of the following is not an example of such costs:</p>
+
+- **(A)** Abnormal amounts of wasted materials, labour, or other production costs;
+- **(B)** Storage costs, unless the production process requires such storage;
+- **(C)** Raw Material cost
+- **(D)** Selling and distribution costs.
+
+*(2 Marks · Topic: AS 2 (1.9): Exclusions from the cost of inventories – abnormal waste, unnecessary storage, selling/distribution costs · Source: MTP 2024 Set 1 Q6)*
 
 
 *Case Facts (Case CS-1):*
@@ -37,7 +55,7 @@
 </ul>
 <p>In view of above information, answer the following issues:</p>
 
-**1.** <p>At the end of Year 1, how the building should be classified:</p>
+**3.** <p>At the end of Year 1, how the building should be classified:</p>
 
 - **(A)** Inventory
 - **(B)** Investments
@@ -46,7 +64,7 @@
 
 *(2 Marks · Topic: AS 2 (1.2): Inventories held for sale in the ordinary course of business - self-constructed real estate for sale is inventory, not PPE · Source: MTP 2025 Set 2 Q1)*
 
-**2.** <p>On 31st March 2024, Sri Radhey shyam Enterprise finds that the cost of a partly finished unit on that date is ₹530. The unit can be finished in 2024-25 by an additional expenditure of ₹310. The finished unit can be sold for ₹750 subject to payment of 8% brokerage on the selling price. Sri Radhey shyam Enterprise seeks your advice regarding the amount at which the unfinished unit should be valued as at 31st March, 2024 for preparation of final accounts. The partly finished unit cannot be sold in semi-finished form and its NRV is zero without processing it further.</p>
+**4.** <p>On 31st March 2024, Sri Radhey shyam Enterprise finds that the cost of a partly finished unit on that date is ₹530. The unit can be finished in 2024-25 by an additional expenditure of ₹310. The finished unit can be sold for ₹750 subject to payment of 8% brokerage on the selling price. Sri Radhey shyam Enterprise seeks your advice regarding the amount at which the unfinished unit should be valued as at 31st March, 2024 for preparation of final accounts. The partly finished unit cannot be sold in semi-finished form and its NRV is zero without processing it further.</p>
 
 - **(A)** ₹470
 - **(B)** ₹380
@@ -55,14 +73,23 @@
 
 *(2 Marks · Topic: AS 2 (1.3): Worked NRV example for a partly finished unit that cannot be sold in semi-finished form · Source: MTP 2025 Set 2 Q15)*
 
-**3.** <p>At the end of Year 1, at value Project should be recognised:</p>
+**5.** <p>As per AS 2, Inventories include materials awaiting use in production process, what should be included in Inventories from the following:</p>
 
-- **(A)** ₹40 Crore
-- **(B)** ₹35 Crore
-- **(C)** ₹35.10 Crore
-- **(D)** ₹25 Crore
+- **(A)** Secondary Packing material required for transporting and forwarding the material.
+- **(B)** Spare parts, servicing equipment and standby equipment
+- **(C)** Primary packing material which is essential to bring an item of inventory to its saleable condition, for example, bottles, cans etc., in case of food and beverages industry.
+- **(D)** Publicity material
 
-*(2 Marks · Topic: AS 2 (1.9): Administrative overheads not contributing to location/condition excluded from inventory cost · Source: MTP 2025 Set 2 Q2)*
+*(2 Marks · Topic: AS 2 (1.2): Primary packing material essential to saleable condition is inventory; secondary packing, standby equipment and publicity material are not · Source: MTP 2025 Set 2 Q4)*
+
+**6.** <p>The cost of inventories of items that are not ordinarily interchangeable and goods or services produced and segregated for specific projects should be assigned using the following cost formula:</p>
+
+- **(A)** By specific identification of their individual costs
+- **(B)** First-in, First-out (FIFO) Method
+- **(C)** Weighted average cost formula
+- **(D)** The formula used should reflect the fairest possible approximation to the cost incurred in bringing the items of inventory to their present location and condition.
+
+*(2 Marks · Topic: AS 2 (1.7): Specific identification for non-interchangeable items and project-specific goods · Source: MTP 2026 Set 2 Q14)*
 
 
 *Case Facts (Case CS-2):*
@@ -71,7 +98,7 @@
 <p>Further information: (i) The purchase price includes ₹15 per kg as GST in respect of which full credit is allowed and will be availed by Anshul manufacturers. (ii) Assume that there is no opening stock.</p>
 <p>Answer the following questions based on the above.</p>
 
-**4.** <p>What will be the cost of material:</p>
+**7.** <p>What will be the cost of material:</p>
 
 - **(A)** ₹36,00,000
 - **(B)** ₹34,00,000
@@ -79,33 +106,6 @@
 - **(D)** ₹31,00,000
 
 *(2 Marks · Topic: AS 2 (1.4): Cost of purchase excludes recoverable GST, includes directly attributable acquisition costs · Source: MTP 2026 Set 2 Q5)*
-
-**5.** <p>What will be the value of the closing stock:</p>
-
-- **(A)** ₹1,70,000
-- **(B)** ₹1,85,500
-- **(C)** ₹2,38,000
-- **(D)** ₹2,59,700
-
-*(2 Marks · Topic: AS 2 (1.4): Closing stock valued at cost per kg derived after normal loss absorption · Source: MTP 2026 Set 2 Q6)*
-
-**6.** <p>What will be the cost per Kg of raw material:</p>
-
-- **(A)** ₹180
-- **(B)** ₹183.6
-- **(C)** ₹185.5
-- **(D)** ₹189.4
-
-*(2 Marks · Topic: AS 2 (1.4): Normal loss absorbed into the cost of remaining good units, abnormal loss excluded · Source: MTP 2026 Set 2 Q7)*
-
-**7.** <p>How much amount as abnormal loss will be debited in P&amp;L:</p>
-
-- **(A)** ₹72,000 approx
-- **(B)** ₹73,440 approx
-- **(C)** ₹74,200 approx
-- **(D)** ₹75,760 approx
-
-*(2 Marks · Topic: AS 2 (1.9): Abnormal waste excluded from inventory cost, expensed to P&L · Source: MTP 2026 Set 2 Q8)*
 
 
 ---
@@ -172,33 +172,33 @@
 
 ### Section A — MCQ Answer Key & Explanations
 
-**1.** Correct Option: **(A)**
+**1.** Correct Option: **(B)**
+
+<p><strong>Answer:</strong> (B) Allocated fixed production overheads based on normal capacity — per AS 2, fixed production overhead systematically allocated on the basis of normal capacity is a genuine, includable cost of conversion, not excluded from inventory value. Selling/distribution costs and abnormal wastage are always expensed, never inventoried.</p>
+
+**2.** Correct Option: **(C)**
+
+<p><strong>Answer:</strong> (C) Raw Material cost — per AS 2, abnormal wastage, unnecessary storage costs, and selling/distribution costs are all specifically excluded from the cost of inventories and expensed as incurred. Raw material cost, by contrast, is a normal, properly includible component of inventory cost – it is the one item among the four that is <em>not</em> an example of a cost to be excluded.</p>
+
+**3.** Correct Option: **(A)**
 
 <p><strong>Answer:</strong> (A) Inventory — Excellence Ltd. is constructing the building to sell, not for own use; while that intention holds, AS 2 governs and the asset is inventory (a completed unit held for sale in the ordinary course of business), regardless of its capital value.</p>
 
-**2.** Correct Option: **(B)**
+**4.** Correct Option: **(B)**
 
 <p><strong>Answer:</strong> (B) ₹380 — estimated selling price when finished ₹750, less further cost to complete ₹310, less 8% brokerage on selling price (8% × ₹750 = ₹60) = Net Realisable Value ₹380. Since the partly finished unit cannot be sold in its semi-finished state (its own NRV is zero without further processing), it is valued with reference to the finished good's NRV net of the cost still to be incurred: ₹750 − ₹310 − ₹60 = ₹380, lower than the ₹530 cost incurred so far, so the unit is valued at ₹380 per AS 2's lower-of-cost-and-NRV rule.</p>
 
-**3.** Correct Option: **(B)**
+**5.** Correct Option: **(C)**
 
-<p><strong>Answer:</strong> (B) ₹35 Crore — cost = land ₹10 crore + construction ₹25 crore = ₹35 crore; the ₹10 lacs administrative-meeting cost is a general administrative overhead not directly attributable to bringing the inventory to its present condition, so AS 2 excludes it from cost. NRV was ₹40 crore. Inventory is valued at the lower of cost and NRV = ₹35 crore.</p>
+<p><strong>Answer:</strong> (iii) — primary packing material essential to bring an item to its saleable condition (e.g. bottles/cans for food and beverages) is directly attributable to bringing inventory to its present condition and so is includible in inventory cost. Secondary packing (transport/forwarding) is a distribution cost, spare parts/servicing/standby equipment are ordinarily property, plant and equipment rather than inventory, and publicity material is a selling cost – none of these three are inventory.</p>
 
-**4.** Correct Option: **(A)**
+**6.** Correct Option: **(A)**
+
+<p><strong>Answer:</strong> (A) — AS 2 requires specific identification of individual costs for items that are not ordinarily interchangeable, or goods/services produced and segregated for specific projects; FIFO/weighted-average apply only to ordinarily-interchangeable inventory items.</p>
+
+**7.** Correct Option: **(A)**
 
 <p><strong>Answer:</strong> (a) ₹36,00,000 = 20,000 kg × (₹170−₹15 GST credit) ₹155/kg = ₹31,00,000 + direct transit cost ₹5,00,000.</p>
-
-**5.** Correct Option: **(D)**
-
-<p><strong>Answer:</strong> (d) ₹2,59,700 = (19,000−17,600) 1,400 kg × ₹185.5/kg cost per kg (derived after absorbing normal transit loss into the cost of remaining good units — see Q7).</p>
-
-**6.** Correct Option: **(C)**
-
-<p><strong>Answer:</strong> (c) ₹185.5 = ₹36,00,000 / 19,400 kg (normal expected receipt after 3% normal transit loss on 20,000 kg).</p>
-
-**7.** Correct Option: **(C)**
-
-<p><strong>Answer:</strong> (c) ₹74,200 approx = (19,400−19,000) 400 kg abnormal loss × ₹185.5/kg.</p>
 
 
 ### Section B — Descriptive Solutions

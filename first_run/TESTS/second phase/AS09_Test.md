@@ -3,17 +3,62 @@
 **CA Inter · Paper 1: Advanced Accounting**
 **Chapter Reference:** `M2-C8-U2`
 
-**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 50 &nbsp;|&nbsp; **Section A (MCQ):** 24 marks, 12 questions (48%) &nbsp;|&nbsp; **Section B (Descriptive):** 26 marks, 26 questions (52%)
+**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 50 &nbsp;|&nbsp; **Section A (MCQ):** 15 marks, 10 questions (30%) &nbsp;|&nbsp; **Section B (Descriptive):** 35 marks, 10 questions (70%)
 
 **Suggested Time:** ~90 minutes
 
-> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is a real, previously chapter-tagged MTP / RTP / PYQ question drawn from the platform's question bank (`first_run/output/generated-from-script/questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ). Nothing is invented.
+> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material chapter's own "Test Your Knowledge" section (`books/concept-book/raw_icai_study_materials/`, extracted by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks are estimated from answer length and every such question/answer is explicitly tagged "estimated from answer length, not an official mark" wherever it appears below. Nothing is invented — every question and every answer is copied from one of these two real sources.
 >
-> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (1 MCQ + 0 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
+> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (5 MCQ + 1 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
 
 ---
 
-## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 24 Marks
+## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 15 Marks
+
+**1.** <p>FlixNet International offers a subscription fee model to allow the paid subscribers an annual viewing of movies, sports events and other content. It allows users to register for free and have access to limited content for one month without any charges. The customer has a right to cancel the subscription within a month’s time but is required to pay for 1 year subscription fee after the free period. XY has subscribed for free viewing on 1st March 20X1. After 1 month, he has agreed to pay the annual membership and has paid ₹ 1,200 on 31st March 20X1 for the subscription that is valid up to 31st of March 20X2. Revenue that can be recognized by FlixNet for the year ended 31st March 20X2 is</p>
+
+- **(A)** ₹ 100
+- **(B)** ₹ 1,200
+- **(C)** Nil
+- **(D)** ₹ 1,100
+
+*(1 Marks · Topic: M2-C8-U2 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #5)*
+
+**2.** <p>The Accounting Club has 100 members who are required to pay an annual membership fee of ₹ 5,000 each. During the current year, all members have paid the fee. However, 5 members have paid an amount of ₹ 10,000 each. Of these, 3 members paid the current year’s fee and also the previous year’s dues. Remaining 2 members have paid next years’ fee of ₹ 5,000 in advance. Revenue from membership fee for the current year to be recognised will be:</p>
+
+- **(A)** ₹ 5,25,000
+- **(B)** ₹ 5,10,000
+- **(C)** ₹ 5,00,000
+- **(D)** ₹ 5,15,000
+
+*(1 Marks · Topic: M2-C8-U2 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #4)*
+
+**3.** <p>Which of the following transactions qualify as revenue for M/s AB Enterprises?</p>
+
+- **(A)** Sales of ₹ 20 lakhs made under consignment sales.
+- **(B)** Sale of an old machine amounting ₹ 5 lakhs
+- **(C)** Services provided to the customer in the normal course of business. Sales recorded is ₹ 50,000.
+- **(D)** Sales of ₹ 25 lakhs made under consignment sales
+
+*(1 Marks · Topic: M2-C8-U2 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #3)*
+
+**4.** <p>Consignment inventory is an arrangement whereby inventory is held by one party but owned by another party. Which of the following indicates that the inventory in question is a consignment inventory?</p>
+
+- **(A)** Manufacturer cannot require the dealer to return the inventory
+- **(B)** Dealer has the right to return the inventory
+- **(C)** Manufacture is responsible for the pricing of goods and any changes in the pricing can only be approved by the manufacturer .
+- **(D)** Manufacture is responsible for the holding the goods and any changes in the pricing can only be approved by the dealer
+
+*(1 Marks · Topic: M2-C8-U2 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #2)*
+
+**5.** <p>Which of the conditions mentioned below must be met to recognize revenue from the sale of goods? (i) the entity selling does not retain any continuing influence or control over the goods; (ii) when the goods are dispatched to the buyer; (iii) revenue can be measured reliably; (iv) the supplier is paid for the goods; (v) it is reasonably certain that the buyer will pay for the goods; (vi) the buyer has paid for the goods.</p>
+
+- **(A)** (i), (ii) and (v)
+- **(B)** (ii), (iii) and (iv)
+- **(C)** (i), (iii) and (v)
+- **(D)** (i), (iv) and (v)
+
+*(1 Marks · Topic: M2-C8-U2 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #1)*
 
 
 *Case Facts (Case CS-1):*
@@ -24,7 +69,7 @@
 <p>The Company is evaluating below mentioned schemes: (i) Introduction of a formal retirement gratuity scheme by an employer in place of ad hoc ex-gratia payments to employees on retirement. (ii) Management decided to pay pension to those employees who have retired after completing 5 years of service in the organization. Such employees will get pension of ₹20,000 per month. Earlier there was no such scheme of pension in the organization.</p>
 <p>SEAS Ltd. has a subsidiary, ADI Ltd., which is in the business of construction having turnover of ₹200 crores. SEAS Ltd. and ADI Ltd. hold 9% and 23% respectively in an associate company, ASOC Ltd. Both SEAS Ltd. and ADI Ltd. prepare consolidated financial statements as per Accounting Standards notified under the Companies (Accounting Standards) Rules, 2021.</p>
 
-**1.** <p>What would be the basis of revenue recognition for SEAS Ltd. as per the requirements of Accounting Standards?</p>
+**6.** <p>What would be the basis of revenue recognition for SEAS Ltd. as per the requirements of Accounting Standards?</p>
 
 - **(A)** Gross basis.
 - **(B)** Net basis.
@@ -36,23 +81,28 @@
 
 *Case Facts (Case CS-2):*
 
-<p>Kay Ltd. sold goods of ₹22,00,000 to Mr. Ravi Kumar on 1st February, 2024 but at the request of the buyer, these goods were delivered on 10th April 2024.</p>
-<p>Kay Ltd. also sold ₹2,00,000 goods on approval basis on 1st January, 2024 to Sheetal Enterprises. The period of approval is 3 months after which they were considered sold. Buyer sent disapproval for 25% of goods and approval for 50% of goods till 31 March, 2024.</p>
-<p>Mr. Ravi Kumar has commenced legal action against Kay Ltd. for supply of faulty goods to claim damages. The lawyers of Kay Ltd. have advised that it is not remote yet that resources may be required to settle the claim. Legal cost to be incurred irrespective of the outcome of the case is ₹45,000. Settlement amount if the claim is required to be paid ₹5,00,000.</p>
-<p>Sheetal Enterprises, a trade receivable of Kay Ltd. suffered a heavy loss due to an earthquake that occurred on 30th March, 2024. The loss was not covered by any insurance policy. In April, 2024, Sheetal Enterprises became bankrupt. The Balance due from Sheetal Enterprises as on 31 March, 2024 is ₹75,000.</p>
-<p>Kay Ltd. makes provision for doubtful debts @ 5%.</p>
-<p>Based on the information given in above Case Scenario, answer the following Question No. 5-7</p>
+<p>RTS Ltd, ("RTS" or the "Company"), is engaged in the business of manufacturing of urea, has set up its business in a designated backward area which entitles the company to receive from the Government of India a subsidy of 20% of the cost of investment of manufacturing of equipments/components. The Company has a contract with the Indian Railways for a brake component which is structured such that:</p>
+<ul>
+<li>The Company’s obligation is to deliver the component to the Railways’ stockyard, while the delivery terms are ex-works, the Company is responsible for engaging a transporter for delivery.</li>
+<li>Railways sends an order for a defined quantity.</li>
+<li>The Company manufactures the required quantity and informs Railways for carrying out the inspection.</li>
+<li>Railways representatives visit the Company’s factory and inspect the components, and mark each component with a quality check sticker.</li>
+<li>Goods once inspected by Railways, are marked with a hologram sticker to earmark for delivery identification by the customer when they are delivered to the customer’s location.</li>
+<li>The Company raises an invoice once it dispatches the goods.</li>
+</ul>
+<p>The management of RTS is under discussion with the auditors of the Company in respect of accounting of a critical matter as regards its accounting with respect subsequent events i.e. events after the reporting period. They have been checking as to which one of the following events after the reporting period provide evidence of conditions that existed at the end of the reporting period?</p>
+<ol type="i">
+<li>Nationalisation or privatization by government</li>
+<li>Out of court settlement of a legal claim</li>
+<li>Rights issue of equity shares</li>
+<li>Strike by workforce</li>
+<li>Announcing a plan to discontinue an operation</li>
+</ol>
+<p>The Company has received a grant of ₹8 crores from the Government for setting up a factory in a backward area. Out of this grant, the Company distributed ₹2 crores as dividend. The Company also received land, free of cost, from the State Government but it has not recorded this at all in the books as no money has been spent.</p>
+<p>RTS has a subsidiary, LPP Media &amp; Creations Ltd (LPP), an advertising agency which prepares and publishes advertisement in newspapers on behalf of its clients. LPP invoices its clients for the commission they are entitled to as well as the media space payable to the newspaper.</p>
+<p>Based on the above information, answer the following questions.</p>
 
-**2.** <p>What is the amount to be recognized as Revenue as per AS 9 in the books of Kay Ltd. as on 31 March, 2024?</p>
-
-- **(A)** ₹23,50,000
-- **(B)** ₹1,50,000
-- **(C)** ₹23,00,000
-- **(D)** ₹1,00,000
-
-*(2 Marks · Topic: AS 9 (2.8): Bill-and-hold sale at buyer's request, and sale-on-approval revenue on formal acceptance or expiry of the rejection period · Source: PYQ 2024 Q5)*
-
-**3.** <p>When should RTS Ltd recognize revenue as per the Accounting Standards notified under the Companies (Accounting Standards) Rules. Would your answer be different if inspection is normally known to lead to no quality rejections?</p>
+**7.** <p>When should RTS Ltd recognize revenue as per the Accounting Standards notified under the Companies (Accounting Standards) Rules. Would your answer be different if inspection is normally known to lead to no quality rejections?</p>
 
 - **(A)** Revenue should be recognized on dispatch of components. The assessment would not change even in case where inspection is normally known to lead to no quality rejections.
 - **(B)** Revenue should be recognized on completion of inspection of components. The assessment would not change even in case where inspection is normally known to lead to no quality rejections.
@@ -61,7 +111,7 @@
 
 *(2 Marks · Topic: AS 9 (2.8): Goods subject to a substantive buyer inspection/acceptance procedure - revenue recognised on completion of inspection, not dispatch · Source: MTP 2025 Set 1 Q5)*
 
-**4.** <p>In respect of LPP, how should the revenue be recognized as per Accounting Standards?</p>
+**8.** <p>In respect of LPP, how should the revenue be recognized as per Accounting Standards?</p>
 
 - **(A)** LPP should record net amount of commission earned by it.
 - **(B)** LPP should record net amount of commission earned by it and disclose the information about gross income from advertisement through media and preparation of advertisement material as well as payments to media and expenditure incurred for creation of an advertisement in the notes to accounts.
@@ -70,16 +120,7 @@
 
 *(2 Marks · Topic: AS 9 (2.3): Agency relationship - principal-vs-agent determined by who bears risks and rewards, not merely by invoicing pass-through wording · Source: MTP 2025 Set 1 Q6)*
 
-**5.** <p>How should the above mentioned transaction in relation to ADK Ltd be accounted for as per Accounting Standards notified under the Companies (Accounting Standards) Rules?</p>
-
-- **(A)** Reimbursement should be recorded as revenue.
-- **(B)** Reimbursement should be taken to other income.
-- **(C)** Reimbursement should be netted from income tax provision.
-- **(D)** Reimbursement can be netted from appropriate expense head like rates &amp; taxes.
-
-*(2 Marks · Topic: AS 9 (2.7): Tariff-linked income-tax reimbursement received as part of the regulated power-tariff mechanism is revenue, not a tax-provision offset · Source: MTP 2025 Set 2 Q8)*
-
-**6.** <p>How much revenue should be recognised by the Company as on March 31, 2024:</p>
+**9.** <p>How much revenue should be recognised by the Company as on March 31, 2024:</p>
 
 - **(A)** ₹ 2,25,000
 - **(B)** ₹ 2,17,500
@@ -87,33 +128,6 @@
 - **(D)** ₹ 2,30,000
 
 *(2 Marks · Topic: AS 9 — Revenue Recognition (2.8): Sale of goods subject to installation - revenue deferred until installation complete · Source: MTP 2026 Set 1 Q1)*
-
-**7.** <p>How much revenue should be recognised by the Company in the financial year 2024-25:</p>
-
-- **(A)** ₹ 5000
-- **(B)** ₹ 2,20,000
-- **(C)** ₹ 10,000
-- **(D)** ₹ 2,40,000
-
-*(2 Marks · Topic: AS 9 — Revenue Recognition (2.8): Sale of goods subject to installation - revenue deferred until installation complete · Source: MTP 2026 Set 1 Q2)*
-
-**8.** <p>What will be the accounting for trade discount:</p>
-
-- **(A)** The same will be recognised separately in the profit and loss.
-- **(B)** The trade discounts are deducted in determining the revenue.
-- **(C)** Trade discount will be recognised after one year, when the warranty will be over.
-- **(D)** Trade discount will be recognised after installation is complete.
-
-*(2 Marks · Topic: AS 9 — Revenue Recognition (2.8): Trade discounts and volume rebates excluded from revenue · Source: MTP 2026 Set 1 Q3)*
-
-**9.** <p>How the recognition of revenue from sales of medicine to Dee Limited will be done by HIL under AS 9 and what would be the treatment of unrealized amount for the year ended 31st March, 2024?</p>
-
-- **(A)** Revenue will be recognised for ₹ 50 Lakhs, subsequently unrealized amount ₹ 50 lakhs will be debited to bad debts A/c.
-- **(B)** Revenue will be recognised for ₹ 40 Lakhs, subsequently unrealized amount ₹ 40 lakhs will be debited to bad debts A/c.
-- **(C)** Revenue will be recognised for ₹ 50 Lakhs, subsequently unrealized amount ₹ 40 lakhs will be debited to bad debts A/c.
-- **(D)** Revenue will be recognised for ₹ 40 Lakhs, unrealised amount of ₹ 40 lakhs will be shown in Sundry Debtors list.
-
-*(2 Marks · Topic: AS 9 — Revenue Recognition (2.9): Effect of uncertainties on revenue recognition - post-sale collectability uncertainty · Source: MTP 2026 Set 1 Q6)*
 
 **10.** <p>How much revenue should be recognised by the Company as on March 31, 2025:</p>
 
@@ -124,132 +138,50 @@
 
 *(2 Marks · Topic: AS 9 (1.4): Revenue split between goods delivered and services not yet rendered (installation) · Source: MTP 2026 Set 1 Q6)*
 
-**11.** <p>How much revenue should be recognised by the Company in the financial year 2025-26:</p>
-
-- **(A)** ₹5000
-- **(B)** ₹2,20,000
-- **(C)** ₹10,000
-- **(D)** ₹2,40,000
-
-*(2 Marks · Topic: AS 9 (1.4): Deferred installation-service revenue recognised on completion · Source: MTP 2026 Set 1 Q7)*
-
-**12.** <p>What will be the accounting for trade discount:</p>
-
-- **(A)** The same will be recognised separately in the profit and loss.
-- **(B)** The trade discounts are deducted in determining the revenue.
-- **(C)** Trade discount will be recognised after one year, when the warranty will be over.
-- **(D)** Trade discount will be recognised after installation is complete.
-
-*(2 Marks · Topic: AS 9 (1.4): Trade discounts deducted from gross revenue, not recognised separately · Source: MTP 2026 Set 1 Q8)*
-
 
 ---
 
-## Section B — Descriptive Questions *(Illustrations style)* — 26 Marks
+## Section B — Descriptive Questions *(Illustrations style)* — 35 Marks
 
-**Q1.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
+**Q1.** <p>GH manufactures and sells televisions. The televisions are shipped to the customer by sea. In order to transfer risk related to the shipment of the televisions, GH also gets an insurance coverage for the goods while they are in transit from the factory to customer’s location. The insurance policy will reimburse GH for the value of the goods in the event of loss or damage arising anytime up to these goods reaching customer’s location. The legal title passes when the goods arrive at the customer’s premises one month later. When should Entity GH recognize revenue in its books?</p>
 
-*(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
+*(4 Marks — estimated from answer length, not an official mark · Topic: M2-C8-U2 — ICAI Study Material · Source: Study Material TYK — Scenario based Questions #6)*
 
-**Q2.** <p>XY Limited sold goods of ₹1,50,000 on approval basis on 15th December 2024; approval period 3 months, after which goods are considered sold. Buyer approved 60% of goods by 31st January 2025; no approval/disapproval received for the remainder by 31st March 2025. The accountant recognised ₹1,50,000 as revenue on 15th December, 2024. Comment.</p>
+**Q2.** <p>For the year ended 31st March 20X1, KY Enterprises has entered into the following transactions. On 31 March 20X1, KY supplied two machines to its customer ST. Both machines were accepted by ST on 31 March 20X1. Machine 1 was a machine that was routinely supplied by KY to many customers and the installation process was very simple. Machine 1 was installed on 2 April 20X1 by ST’s employees. Machine 2 being more specialised in nature requires an installation process which is more complicated, requiring significant assistance from KY. Machine 2 was installed between 2 and 5 April 20X1. Details of costs and sales prices are as follows: Machine 1 Machine 2 Sale Price 3,20,000 3,00,000 Cost of production 1,60,000 1,50,000 Installation fee nil 10,000 How should above transactions be recognized by KY Enterprises for the year ended 31st March 20X1?</p>
 
-*(1 Marks · Topic: AS 9 (1.6) · Source: PYQ 2025 Q1c-iii)*
+*(7 Marks — estimated from answer length, not an official mark · Topic: M2-C8-U2 — ICAI Study Material · Source: Study Material TYK — Scenario based Questions #8)*
 
-**Q3.** <p>XY Limited recognized dividend income of ₹10 lakhs on accrual basis on securities of face value ₹100 lakhs held at 31st March 2025. The dividend (10%) was declared on 30th April 2025, having been proposed on 30th March 2025. Comment.</p>
+**Q3.** <p>The following information of Meghna Ltd. is provided: (i) Goods of ₹ 60,000 were sold on 20-3-20X2 but at the request of the buyer these were delivered on 10-4-20X2. (ii) On 15-1-20X2 goods of ₹ 1,50,000 were sent on consignment basis of which 20% of the goods unsold are lying with the consignee as on (iii) ₹ 1,20,000 worth of goods were sold on approval basis on 1-12-20X1. The period of approval was 3 months after which they were considered sold. Buyer sent approval for 75% goods up to 31-1-20X2 and no approval or disapproval received for the remaining goods till 31-3- (iv) Apart from the above, the company has made cash sales of ₹ 7,80,000 (gross). Trade discount of 5% was allowed on the cash sales. You are required to advise the accountant of Meghna Ltd., with valid reasons, the amount to be recognized as revenue in above cases in the context of AS 9.</p>
 
-*(1 Marks · Topic: AS 9 (1.5) · Source: PYQ 2025 Q1c-ii)*
+*(8 Marks — estimated from answer length, not an official mark · Topic: M2-C8-U2 — ICAI Study Material · Source: Study Material TYK — Scenario based Questions #7)*
 
-**Q4.** <p>AB Limited purchased goods on credit from XY Limited for ₹150 lakhs for export. The export order was cancelled; AB Limited decided to sell the same goods locally with a price discount. XY Limited agreed to a 12% price discount requested by AB Limited. XY's chief accountant wants to adjust the sales figure to the extent of the discount. Discuss whether this treatment is as per the relevant Accounting Standard.</p>
+**Q4.** <p>Y Ltd. used certain resources of X Ltd. In return X Ltd. received ₹10 lakhs and ₹15 lakhs as interest and royalties respectively from Y Ltd. during the year 2022-23. You are required to state whether and on what basis these revenues can be recognized by X Ltd.</p>
 
-*(1 Marks · Topic: AS 9 (1.4) · Source: PYQ 2025 Q1c-i)*
+*(4 Marks · Topic: AS 9 (2.7) · Source: MTP 2024 Set 1 Q3a)*
 
 **Q5.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
 
 *(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
 
-**Q6.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
-
-**Q7.** <p>XY Limited sold goods of ₹1,50,000 on approval basis on 15th December 2024; approval period 3 months, after which goods are considered sold. Buyer approved 60% of goods by 31st January 2025; no approval/disapproval received for the remainder by 31st March 2025. The accountant recognised ₹1,50,000 as revenue on 15th December, 2024. Comment.</p>
+**Q6.** <p>XY Limited sold goods of ₹1,50,000 on approval basis on 15th December 2024; approval period 3 months, after which goods are considered sold. Buyer approved 60% of goods by 31st January 2025; no approval/disapproval received for the remainder by 31st March 2025. The accountant recognised ₹1,50,000 as revenue on 15th December, 2024. Comment.</p>
 
 *(1 Marks · Topic: AS 9 (1.6) · Source: PYQ 2025 Q1c-iii)*
 
-**Q8.** <p>XY Limited recognized dividend income of ₹10 lakhs on accrual basis on securities of face value ₹100 lakhs held at 31st March 2025. The dividend (10%) was declared on 30th April 2025, having been proposed on 30th March 2025. Comment.</p>
+**Q7.** <p>XY Limited recognized dividend income of ₹10 lakhs on accrual basis on securities of face value ₹100 lakhs held at 31st March 2025. The dividend (10%) was declared on 30th April 2025, having been proposed on 30th March 2025. Comment.</p>
 
 *(1 Marks · Topic: AS 9 (1.5) · Source: PYQ 2025 Q1c-ii)*
 
-**Q9.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
-
-**Q10.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
-
-**Q11.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
-
-**Q12.** <p>XY Limited sold goods of ₹1,50,000 on approval basis on 15th December 2024; approval period 3 months, after which goods are considered sold. Buyer approved 60% of goods by 31st January 2025; no approval/disapproval received for the remainder by 31st March 2025. The accountant recognised ₹1,50,000 as revenue on 15th December, 2024. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.6) · Source: PYQ 2025 Q1c-iii)*
-
-**Q13.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
-
-**Q14.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
-
-**Q15.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
-
-**Q16.** <p>XY Limited sold goods of ₹1,50,000 on approval basis on 15th December 2024; approval period 3 months, after which goods are considered sold. Buyer approved 60% of goods by 31st January 2025; no approval/disapproval received for the remainder by 31st March 2025. The accountant recognised ₹1,50,000 as revenue on 15th December, 2024. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.6) · Source: PYQ 2025 Q1c-iii)*
-
-**Q17.** <p>XY Limited recognized dividend income of ₹10 lakhs on accrual basis on securities of face value ₹100 lakhs held at 31st March 2025. The dividend (10%) was declared on 30th April 2025, having been proposed on 30th March 2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.5) · Source: PYQ 2025 Q1c-ii)*
-
-**Q18.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
-
-**Q19.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
-
-**Q20.** <p>XY Limited sold goods of ₹1,50,000 on approval basis on 15th December 2024; approval period 3 months, after which goods are considered sold. Buyer approved 60% of goods by 31st January 2025; no approval/disapproval received for the remainder by 31st March 2025. The accountant recognised ₹1,50,000 as revenue on 15th December, 2024. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.6) · Source: PYQ 2025 Q1c-iii)*
-
-**Q21.** <p>XY Limited recognized dividend income of ₹10 lakhs on accrual basis on securities of face value ₹100 lakhs held at 31st March 2025. The dividend (10%) was declared on 30th April 2025, having been proposed on 30th March 2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.5) · Source: PYQ 2025 Q1c-ii)*
-
-**Q22.** <p>AB Limited purchased goods on credit from XY Limited for ₹150 lakhs for export. The export order was cancelled; AB Limited decided to sell the same goods locally with a price discount. XY Limited agreed to a 12% price discount requested by AB Limited. XY's chief accountant wants to adjust the sales figure to the extent of the discount. Discuss whether this treatment is as per the relevant Accounting Standard.</p>
+**Q8.** <p>AB Limited purchased goods on credit from XY Limited for ₹150 lakhs for export. The export order was cancelled; AB Limited decided to sell the same goods locally with a price discount. XY Limited agreed to a 12% price discount requested by AB Limited. XY's chief accountant wants to adjust the sales figure to the extent of the discount. Discuss whether this treatment is as per the relevant Accounting Standard.</p>
 
 *(1 Marks · Topic: AS 9 (1.4) · Source: PYQ 2025 Q1c-i)*
 
-**Q23.** <p>In 2024-2025, XY Limited supplied goods worth ₹80,000 on consignment basis to ABC (a retail outlet). ABC sold goods worth ₹60,000 during the year; the rest remains in its store. XY recognizes ₹60,000 revenue in its books for 2024-2025. Comment.</p>
+**Q9.** <p>Given the following information of Rainbow Ltd., you are required to advise, with valid reasons, the amount to be recognized as revenue under the provisions of AS-9: (i) On 15th November, goods worth ₹5,00,000 were sold on approval basis. The period of approval was 4 months after which they were considered sold. Buyer sent approval for 75% goods sold upto 31st January and no approval or disapproval received for the remaining goods till 31st March. (ii) On 31st March, goods worth ₹2,40,000 were sold to Bright Ltd. but due to refurnishing of their show-room being underway, on their request, goods were delivered on 10th April. (iii) Rainbow Ltd. supplied goods worth ₹6,00,000 to Shyam Ltd. and concurrently agrees to re-purchase the same goods on 14th April. (iv) Dew Ltd, used certain assets of Rainbow Ltd. Rainbow Ltd. received ₹7.5 lakhs and ₹12 as interest and royalties respectively from Dew Ltd. during the year 2023-24. (v) On 25th December, goods of ₹4,00,000 were sent on consignment basis of which 40% of the goods unsold are lying with the consignee at the year-end on 31st March.</p>
 
-*(1 Marks · Topic: AS 9 (1.7) · Source: PYQ 2025 Q1c-iv)*
+*(4 Marks · Topic: AS 9 (2.8) · Source: MTP 2025 Set 2 Q3a)*
 
-**Q24.** <p>XY Limited sold goods of ₹1,50,000 on approval basis on 15th December 2024; approval period 3 months, after which goods are considered sold. Buyer approved 60% of goods by 31st January 2025; no approval/disapproval received for the remainder by 31st March 2025. The accountant recognised ₹1,50,000 as revenue on 15th December, 2024. Comment.</p>
+**Q10.** <p>Indicate in each case whether revenue can be recognized and when, as per AS-9: (i) Delivery is delayed at buyer's request but buyer takes title and accepts billing. (ii) Instalment Sales. (iii) Trade discounts and volume rebates. (iv) Insurance agency commission for rendering services. (v) Advertising commission.</p>
 
-*(1 Marks · Topic: AS 9 (1.6) · Source: PYQ 2025 Q1c-iii)*
-
-**Q25.** <p>XY Limited recognized dividend income of ₹10 lakhs on accrual basis on securities of face value ₹100 lakhs held at 31st March 2025. The dividend (10%) was declared on 30th April 2025, having been proposed on 30th March 2025. Comment.</p>
-
-*(1 Marks · Topic: AS 9 (1.5) · Source: PYQ 2025 Q1c-ii)*
-
-**Q26.** <p>AB Limited purchased goods on credit from XY Limited for ₹150 lakhs for export. The export order was cancelled; AB Limited decided to sell the same goods locally with a price discount. XY Limited agreed to a 12% price discount requested by AB Limited. XY's chief accountant wants to adjust the sales figure to the extent of the discount. Discuss whether this treatment is as per the relevant Accounting Standard.</p>
-
-*(1 Marks · Topic: AS 9 (1.4) · Source: PYQ 2025 Q1c-i)*
+*(4 Marks · Topic: AS 9 (1.6) · Source: MTP 2026 Set 2 Q6a)*
 
 
 ---
@@ -258,80 +190,68 @@
 
 ### Section A — MCQ Answer Key & Explanations
 
-**1.** Correct Option: **(A)**
+**1.** Correct Option: **(B)**
 
-<p><strong>Answer:</strong> (A) Gross basis — per AS 9, whether revenue is recognised gross or net (as a mere commission) turns on who bears the risks and rewards of the transaction. SEAS Ltd. commits upfront to buy a fixed number of tickets and must pay for them regardless of resale, i.e. it bears the inventory/resale risk itself rather than merely arranging a sale on the airline's behalf, so it is a principal, not an agent, and recognises the full amount charged to the customer as revenue.</p>
+<p><strong>Answer:</strong> (B) ₹ 1,200</p>
 
-**2.** Correct Option: **(A)**
+**2.** Correct Option: **(C)**
 
-<p><strong>Answer:</strong> (A) ₹23,50,000 — the sale to Mr. Ravi Kumar (₹22,00,000) qualifies as a "bill and hold" sale: delivery was deferred only at the buyer's own request, the goods were identified and ready for delivery, so revenue is recognised in full despite the delayed handover. On the approval sale to Sheetal Enterprises (₹2,00,000), the 3-month approval period runs from 1st January to 31st March, i.e. it has elapsed by the year end: the 50% (₹1,00,000) explicitly approved is revenue, the 25% (₹50,000) explicitly disapproved is not, and per AS 9 the remaining 25% (₹50,000) on which the buyer never responded is also recognised as revenue because the time period allowed for rejection has expired without rejection. Total revenue = ₹22,00,000 + ₹1,00,000 + ₹50,000 = ₹23,50,000.</p>
+<p><strong>Answer:</strong> (C) ₹ 5,00,000</p>
 
-**3.** Correct Option: **(B)**
+**3.** Correct Option: **(C)**
 
-<p><strong>Answer:</strong> (B) — Railways’ inspection here is a substantive acceptance gate (physical quality-check sticker plus a separate hologram identification marking applied only after inspection), not a mere pricing formality, so revenue is recognised only on completion of inspection; a historically low/nil rejection rate does not change this, because the inspection remains a real contractual precondition of the buyer’s acceptance, unlike AS 9’s narrow exception for inspections performed solely to fix a contract price.</p>
+<p><strong>Answer:</strong> (C) Services provided to the customer in the normal course of business. Sales recorded is ₹ 50,000.</p>
 
 **4.** Correct Option: **(C)**
 
-<p><strong>Answer:</strong> (C) — LPP is not a pure facilitating agent: it prepares/creates the advertisement material itself (a value-added service) and invoices clients for the full amount (commission plus media space payable), taking on primary billing/collection responsibility to the client while separately owing the newspaper for media space. Per AS 9’s agency-relationship principle (only a true agent's commission, not the gross proceeds, is revenue — determined by who bears the risks and rewards), LPP's role here indicates it is acting as principal, so gross income and gross media/production costs are both recorded.</p>
+<p><strong>Answer:</strong> (C) Manufacture is responsible for the pricing of goods and any changes in the pricing can only be approved by the manufacturer .</p>
 
 **5.** Correct Option: **(A)**
 
-<p><strong>Answer:</strong> (A) — under the Tariff Regulatory Authority's own tariff agreement, the reimbursement of income-tax cost is a contractually built-in part of the price ADK Ltd is entitled to charge the Electricity Boards for the power it supplies. Being an integral, assured component of the regulated tariff for services rendered, it is recognised as revenue, not netted against the unrelated tax-provision or expense line items.</p>
+<p><strong>Answer:</strong> (A) (i), (ii) and (v)</p>
 
-**6.** Correct Option: **(B)**
+**6.** Correct Option: **(A)**
+
+<p><strong>Answer:</strong> (A) Gross basis — per AS 9, whether revenue is recognised gross or net (as a mere commission) turns on who bears the risks and rewards of the transaction. SEAS Ltd. commits upfront to buy a fixed number of tickets and must pay for them regardless of resale, i.e. it bears the inventory/resale risk itself rather than merely arranging a sale on the airline's behalf, so it is a principal, not an agent, and recognises the full amount charged to the customer as revenue.</p>
+
+**7.** Correct Option: **(B)**
+
+<p><strong>Answer:</strong> (B) — Railways’ inspection here is a substantive acceptance gate (physical quality-check sticker plus a separate hologram identification marking applied only after inspection), not a mere pricing formality, so revenue is recognised only on completion of inspection; a historically low/nil rejection rate does not change this, because the inspection remains a real contractual precondition of the buyer’s acceptance, unlike AS 9’s narrow exception for inspections performed solely to fix a contract price.</p>
+
+**8.** Correct Option: **(C)**
+
+<p><strong>Answer:</strong> (C) — LPP is not a pure facilitating agent: it prepares/creates the advertisement material itself (a value-added service) and invoices clients for the full amount (commission plus media space payable), taking on primary billing/collection responsibility to the client while separately owing the newspaper for media space. Per AS 9’s agency-relationship principle (only a true agent's commission, not the gross proceeds, is revenue — determined by who bears the risks and rewards), LPP's role here indicates it is acting as principal, so gross income and gross media/production costs are both recorded.</p>
+
+**9.** Correct Option: **(B)**
 
 <p><strong>Answer:</strong> (B)</p>
-
-**7.** Correct Option: **(A)**
-
-<p><strong>Answer:</strong> (A)</p>
-
-**8.** Correct Option: **(B)**
-
-<p><strong>Answer:</strong> (B)</p>
-
-**9.** Correct Option: **(C)**
-
-<p><strong>Answer:</strong> (C)</p>
 
 **10.** Correct Option: **(B)**
 
 <p><strong>Answer:</strong> (B) ₹2,17,500 — sale value net of trade discount: 5 × (₹45,000 − ₹500) = ₹2,22,500, less the installation-fee portion (5 × ₹1,000 = ₹5,000) not yet earned as installation was not complete by 31st March — ₹2,22,500 − ₹5,000 = ₹2,17,500.</p>
-
-**11.** Correct Option: **(A)**
-
-<p><strong>Answer:</strong> (A) ₹5,000 — the installation-fee portion (5 × ₹1,000) deferred from FY2024-25 is recognised in FY2025-26, once installation is completed on 5th April, 2025.</p>
-
-**12.** Correct Option: **(B)**
-
-<p><strong>Answer:</strong> (B) — trade discounts are deducted directly in arriving at the revenue figure, per AS 9; they are never recognised as a separate P&amp;L item or deferred to a later period.</p>
 
 
 ### Section B — Descriptive Solutions
 
 **Q1.**
 
-<div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
+<p>GH should recognize revenue for the sale when the goods arrive at the customer’s premises. GH has not transferred the televisions’ significant risks and rewards of ownership to the customer when the goods depart from the factory. This is evidenced by the fact that any insurance proceeds received from the goods’ damage or destruction will be repaid to GH. Further, the legal title does not pass until the goods arrive at the customer’s premises.</p>
 
 **Q2.**
 
-<div><p>Incorrect as recognised. For goods sold on approval, revenue should not be recognised until formal acceptance, an act adopting the transaction, or expiry of the rejection period. Revenue for ₹90,000 (60%) should be recognised on 31st January, 2025 (date of approval); the remaining ₹60,000 should be recognised on 15th March, 2025, when the 3-month approval period lapsed without response (deemed acceptance) — not the full ₹1,50,000 on 15th December, 2024 as the accountant did.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
+<p>Machine 1: As the installation process is simple, revenue from Machine 1 will be recognized on 31 March 20X1. Revenue (Machine 1) ₹ 3,20,000 Cost of Goods Sold ₹ 1,60,000 Profit during the period ₹ 1,60,000 Since the question specifies that the machine is already accepted by ST on 31 March 20X1, the revenue arising from sale of the machine needs to be recognized for the year ending 31 March 20X1. This is because acceptance of the machine indicates that the risks and rewards pursuant to the ownership are transferred to ST. Machine 2: Installation process for Machine 2 is more complicated, requiring significant assistance from KY Ltd. However, question specifies that the machine is already accepted by ST on 31 March 20X1. Assuming that there is no further approval/acceptance required from the buyer for the Machine sold, revenue from sale of Machine 2 can be recognized for the year ending 31 March 20X1. Revenue (Machine 2) ₹ 3,00,000 Cost of Goods Sold ₹ 1,50,000 Profit during the period ₹ 1,50,000 However, installation fee which is for rendering installation services cannot be recognized until the installation is complete. Since the machine is pending installation, the revenue in respect of installation charges ₹10,000 needs to be recognized on 5 April 20X1 once the installation process gets completed.</p>
 
 **Q3.**
 
-<div><p>Incorrect. Dividends from investments in securities are not recognised in the Statement of Profit and Loss until the right to receive payment is established. Here, the dividend is proposed 30th March 2025 but declared only 30th April 2025 — the right to receive payment is established only on 30th April 2025. Recognising ₹10 lakhs on accrual basis at 31st March 2025 is <strong>not correct</strong> as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
+<p>As per AS 9 “Revenue Recognition”, in a transaction involving the sale of goods, performance should be regarded as being achieved when the following conditions are fulfilled: (i) the seller of goods has transferred to the buyer the property in the goods for a price or all significant risks and rewards of ownership have been transferred to the buyer and the seller retains no effective control of the goods transferred to a degree usually associated with ownership; and (ii) no significant uncertainty exists regarding the amount of the consideration that will be derived from the sale of the goods. Case (i) The sale is complete but delivery has been postponed at buyer’s request. The entity should recognize the entire sale of ₹ 60,000 for the year ended 31st March, 20X2. Case (ii) 20% goods lying unsold with consignee should be treated as closing inventory and sales should be recognized for ₹ 1,20,000 (80% of ₹ 1,50,000). In case of consignment sale revenue should not be recognized until the goods are sold to a third party. Case (iii) In case of goods sold on approval basis, revenue should not be recognized until the goods have been formally accepted by the buyer or the buyer has done an act adopting the transaction or the time period for rejection has elapsed or where no time has been fixed, a reasonable time has elapsed. Therefore, revenue should be recognized for the ₹ 90,000 upon receipt of approval on 31-02-20X1 and for the balance ₹ 30,000 on 01-03- 20X1 as the time period for rejecting the goods had expired. Case (iv) Trade discounts given should be deducted in determining revenue. Thus ₹ 39,000 should be deducted from the amount of turnover of ₹ 7,80,000 for the purpose of recognition of revenue. Thus, revenue should be ₹ 7,41,000.</p>
 
 **Q4.**
 
-<div><p>Correct. Per AS 9, trade discounts given should be deducted in determining revenue. The 12% discount should be deducted from the turnover figure for revenue recognition purposes — XY Limited's adjustment of the sales figure to the extent of the discount is correct as per AS 9.</p></div>
+<div>
+<p>As per AS 9 on Revenue Recognition, revenue arising from the use by others of enterprise resources yielding interest and royalties should only be recognized when no significant uncertainty as to measurability or collectability exists. These revenues are recognized on the following bases: (i) Interest: on a time proportion basis taking into account the amount outstanding and the rate applicable. Therefore X Ltd. should recognize interest revenue of ₹10 Lakhs. (ii) Royalties: on an accrual basis in accordance with the terms of the relevant agreement. X Ltd. therefore should recognize royalty revenue of ₹15 Lakhs.</p>
+</div>
 
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
+> **Author's Note (Synthesized — not ICAI-sourced):** A common error is applying the same recognition basis to both interest and royalty income, when AS 9 prescribes two distinct bases — time-proportion for interest, accrual per the agreement's terms for royalties.
 
 **Q5.**
 
@@ -341,129 +261,47 @@
 
 **Q6.**
 
-<div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div>
+<div><p>Incorrect as recognised. For goods sold on approval, revenue should not be recognised until formal acceptance, an act adopting the transaction, or expiry of the rejection period. Revenue for ₹90,000 (60%) should be recognised on 31st January, 2025 (date of approval); the remaining ₹60,000 should be recognised on 15th March, 2025, when the 3-month approval period lapsed without response (deemed acceptance) — not the full ₹1,50,000 on 15th December, 2024 as the accountant did.</p></div>
 
 > **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
 
 **Q7.**
 
-<div><p>Incorrect as recognised. For goods sold on approval, revenue should not be recognised until formal acceptance, an act adopting the transaction, or expiry of the rejection period. Revenue for ₹90,000 (60%) should be recognised on 31st January, 2025 (date of approval); the remaining ₹60,000 should be recognised on 15th March, 2025, when the 3-month approval period lapsed without response (deemed acceptance) — not the full ₹1,50,000 on 15th December, 2024 as the accountant did.</p></div>
+<div><p>Incorrect. Dividends from investments in securities are not recognised in the Statement of Profit and Loss until the right to receive payment is established. Here, the dividend is proposed 30th March 2025 but declared only 30th April 2025 — the right to receive payment is established only on 30th April 2025. Recognising ₹10 lakhs on accrual basis at 31st March 2025 is <strong>not correct</strong> as per AS 9.</p></div>
 
 > **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
 
 **Q8.**
 
-<div><p>Incorrect. Dividends from investments in securities are not recognised in the Statement of Profit and Loss until the right to receive payment is established. Here, the dividend is proposed 30th March 2025 but declared only 30th April 2025 — the right to receive payment is established only on 30th April 2025. Recognising ₹10 lakhs on accrual basis at 31st March 2025 is <strong>not correct</strong> as per AS 9.</p></div>
+<div><p>Correct. Per AS 9, trade discounts given should be deducted in determining revenue. The 12% discount should be deducted from the turnover figure for revenue recognition purposes — XY Limited's adjustment of the sales figure to the extent of the discount is correct as per AS 9.</p></div>
 
 > **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
 
 **Q9.**
 
-<div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div>
+<div>
+<ol>
+<li>As per AS 9 "Revenue Recognition", in case of goods sold on approval basis, revenue should not be recognized until the goods have been formally accepted by the buyer or the buyer has done an act adopting the transaction or the time period for rejection has elapsed or where no time has been fixed, a reasonable time has elapsed. Therefore, revenue should be recognized for the total sales amounting ₹5,00,000 as the time period for rejecting the goods had expired.</li>
+<li>The sale is complete but delivery has been postponed at buyer's request. The entity should recognize the entire sale of ₹2,40,000 for the year ended 31st March.</li>
+<li>Sale/repurchase agreements i.e. where seller concurrently agrees to repurchase the same goods at a later date, such transactions that are in substance a financing agreement, the resulting cash inflow is not revenue as defined and should not be recognized as revenue. Hence no revenue to be recognized in the given case.</li>
+<li>Revenue arising from the use by others of enterprise resources yielding interest and royalty should be recognized when no significant uncertainty as to measurability or collectability exists. The interest should be recognized on time proportion basis taking into account the amount outstanding and rate applicable. The royalty should be recognized on accrual basis in accordance with the terms of relevant agreement.</li>
+<li>40% goods lying unsold with consignee should be treated as closing inventory and sales should be recognized for ₹2,40,000 (60% of ₹4,00,000). In case of consignment sale revenue should not be recognized until the goods are sold to a third party.</li>
+</ol>
+</div>
 
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
+> **Author's Note (Synthesized — not ICAI-sourced):** A common error is treating goods sold on approval as sold immediately at the point of delivery instead of waiting for buyer acceptance or expiry of the approval period, and separately, recognising revenue on a sale-and-repurchase arrangement instead of identifying it as a financing transaction outside the scope of AS 9 revenue.
 
 **Q10.**
 
-<div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div>
+<div>
+<p>(i) Revenue is recognised notwithstanding the delayed physical delivery, so long as delivery is expected and the goods are on hand, identified, and ready for delivery at the time of sale recognition (not merely an intention to acquire/manufacture in time).</p>
+<p>(ii) When consideration is receivable in instalments, revenue attributable to the sale price (excluding interest) is recognised at the date of sale; the interest element is recognised as revenue proportionately to the unpaid balance.</p>
+<p>(iii) Trade discounts and volume rebates received are not revenue (they reduce cost); those given are deducted in determining revenue.</p>
+<p>(iv) Insurance agency commissions are recognised on the effective commencement or renewal dates of the related policies.</p>
+<p>(v) Advertising commission is recognised when the service is completed — media commission when the advertisement appears before the public (with the agency's intimation received); production commission when the project is completed.</p>
+</div>
 
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q11.**
-
-<div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q12.**
-
-<div><p>Incorrect as recognised. For goods sold on approval, revenue should not be recognised until formal acceptance, an act adopting the transaction, or expiry of the rejection period. Revenue for ₹90,000 (60%) should be recognised on 31st January, 2025 (date of approval); the remaining ₹60,000 should be recognised on 15th March, 2025, when the 3-month approval period lapsed without response (deemed acceptance) — not the full ₹1,50,000 on 15th December, 2024 as the accountant did.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q13.**
-
-<div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q14.**
-
-<div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q15.**
-
-<div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q16.**
-
-<div><p>Incorrect as recognised. For goods sold on approval, revenue should not be recognised until formal acceptance, an act adopting the transaction, or expiry of the rejection period. Revenue for ₹90,000 (60%) should be recognised on 31st January, 2025 (date of approval); the remaining ₹60,000 should be recognised on 15th March, 2025, when the 3-month approval period lapsed without response (deemed acceptance) — not the full ₹1,50,000 on 15th December, 2024 as the accountant did.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q17.**
-
-<div><p>Incorrect. Dividends from investments in securities are not recognised in the Statement of Profit and Loss until the right to receive payment is established. Here, the dividend is proposed 30th March 2025 but declared only 30th April 2025 — the right to receive payment is established only on 30th April 2025. Recognising ₹10 lakhs on accrual basis at 31st March 2025 is <strong>not correct</strong> as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q18.**
-
-<div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q19.**
-
-<div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q20.**
-
-<div><p>Incorrect as recognised. For goods sold on approval, revenue should not be recognised until formal acceptance, an act adopting the transaction, or expiry of the rejection period. Revenue for ₹90,000 (60%) should be recognised on 31st January, 2025 (date of approval); the remaining ₹60,000 should be recognised on 15th March, 2025, when the 3-month approval period lapsed without response (deemed acceptance) — not the full ₹1,50,000 on 15th December, 2024 as the accountant did.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q21.**
-
-<div><p>Incorrect. Dividends from investments in securities are not recognised in the Statement of Profit and Loss until the right to receive payment is established. Here, the dividend is proposed 30th March 2025 but declared only 30th April 2025 — the right to receive payment is established only on 30th April 2025. Recognising ₹10 lakhs on accrual basis at 31st March 2025 is <strong>not correct</strong> as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q22.**
-
-<div><p>Correct. Per AS 9, trade discounts given should be deducted in determining revenue. The 12% discount should be deducted from the turnover figure for revenue recognition purposes — XY Limited's adjustment of the sales figure to the extent of the discount is correct as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q23.**
-
-<div><p>Correct. Unsold consignment goods (₹20,000) remain XY Limited's closing inventory; revenue on a consignment sale is recognised only when the goods are sold to a third party by the consignee. XY's recognition of ₹60,000 revenue is correct as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q24.**
-
-<div><p>Incorrect as recognised. For goods sold on approval, revenue should not be recognised until formal acceptance, an act adopting the transaction, or expiry of the rejection period. Revenue for ₹90,000 (60%) should be recognised on 31st January, 2025 (date of approval); the remaining ₹60,000 should be recognised on 15th March, 2025, when the 3-month approval period lapsed without response (deemed acceptance) — not the full ₹1,50,000 on 15th December, 2024 as the accountant did.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q25.**
-
-<div><p>Incorrect. Dividends from investments in securities are not recognised in the Statement of Profit and Loss until the right to receive payment is established. Here, the dividend is proposed 30th March 2025 but declared only 30th April 2025 — the right to receive payment is established only on 30th April 2025. Recognising ₹10 lakhs on accrual basis at 31st March 2025 is <strong>not correct</strong> as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
-
-**Q26.**
-
-<div><p>Correct. Per AS 9, trade discounts given should be deducted in determining revenue. The 12% discount should be deducted from the turnover figure for revenue recognition purposes — XY Limited's adjustment of the sales figure to the extent of the discount is correct as per AS 9.</p></div>
-
-> **Examiner's Comment (ICAI):** The responses of examinees to the requirements of AS 9 "Revenue Recognition" were unsatisfactory. Many were unable to correctly comment on the treatment of the four independent situations provided in the question, indicating inadequate conceptual clarity on timing and basis of revenue recognition.
+> **Author's Note (Synthesized — not ICAI-sourced):** Some examinees deferred revenue on the delayed-delivery sale entirely, missing that the goods being on-hand and ready is what matters, not the physical transfer date itself.
 
 
 ---

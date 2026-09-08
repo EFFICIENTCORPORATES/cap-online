@@ -3,19 +3,55 @@
 **CA Inter · Paper 1: Advanced Accounting**
 **Chapter Reference:** `M2-C8-U1`
 
-**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 19 &nbsp;|&nbsp; **Section A (MCQ):** 12 marks, 6 questions (63%) &nbsp;|&nbsp; **Section B (Descriptive):** 7 marks, 1 questions (37%)
+**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 26 &nbsp;|&nbsp; **Section A (MCQ):** 14 marks, 9 questions (54%) &nbsp;|&nbsp; **Section B (Descriptive):** 12 marks, 2 questions (46%)
 
-**Suggested Time:** ~34 minutes
+**Suggested Time:** ~47 minutes
 
-> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is a real, previously chapter-tagged MTP / RTP / PYQ question drawn from the platform's question bank (`first_run/output/generated-from-script/questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ). Nothing is invented.
+> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material chapter's own "Test Your Knowledge" section (`books/concept-book/raw_icai_study_materials/`, extracted by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks are estimated from answer length and every such question/answer is explicitly tagged "estimated from answer length, not an official mark" wherever it appears below. Nothing is invented — every question and every answer is copied from one of these two real sources.
 >
-> **Content note — target not fully met (pool too small):** the tagged question pool currently available for AS 7 in this corpus totals only **19 marks** (12 MCQ + 7 Descriptive) after de-duplication — short of the 50-mark target. All available real content has been included below (**19 of 50 marks**); no question was invented or borrowed from another chapter to pad the total. More MTP/RTP/PYQ sittings would need to be sourced and tagged for this chapter to reach a full 50-mark paper.
+> **Content note — target not fully met (pool too small):** the tagged question pool currently available for AS 7 in this corpus totals only **26 marks** (14 MCQ + 12 Descriptive) after de-duplication — short of the 50-mark target. All available real content has been included below (**26 of 50 marks**); no question was invented or borrowed from another chapter to pad the total. More MTP/RTP/PYQ sittings would need to be sourced and tagged for this chapter to reach a full 50-mark paper.
 >
-> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (0 MCQ + 1 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
+> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (2 MCQ + 1 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
 
 ---
 
-## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 12 Marks
+## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 14 Marks
+
+**1.** <p>LP Contractors undertakes a fixed price contract of ₹ 200 lakh. Transactions related to the contract include: Material purchased: ₹ 80 lakh Unused material: ₹ 30 lakh Labour charges: ₹ 60 lakh Machine used for 3 years for the contract. Original cost of the machine is ₹ 100 lakh. Expected useful life is 15 years. Estimated future costs to be incurred to complete the contract: ₹ 80 lakh. Loss on contract to be recognised is:</p>
+
+- **(A)** ₹ 40 lakh
+- **(B)** ₹ 10 lakh
+- **(C)** ₹ 90 lakh
+- **(D)** ₹ 50 lakh
+
+*(1 Marks · Topic: M2-C8-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #6)*
+
+**2.** <p>Revenue to be recognised by M/s AV is</p>
+
+- **(A)** ₹ 320 lakh
+- **(B)** ₹ 370 lakh
+- **(C)** ₹ 360 lakh
+- **(D)** ₹ 400 lakh
+
+*(1 Marks · Topic: M2-C8-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #4)*
+
+**3.** <p>Total expense to be recognised in Year 1 is</p>
+
+- **(A)** ₹ 30 lakh
+- **(B)** ₹ 120 lakh
+- **(C)** ₹ 38 lakh
+- **(D)** ₹ 36 lakh
+
+*(1 Marks · Topic: M2-C8-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #2)*
+
+**4.** <p>Revenue to be recognized by XY Ltd. for the year ended 31st March 20X2 is</p>
+
+- **(A)** ₹ 28 lakh
+- **(B)** ₹ 42 lakh
+- **(C)** ₹ 30 lakh
+- **(D)** ₹ 32 lakh
+
+*(1 Marks · Topic: M2-C8-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #1)*
 
 
 *Case Facts (Case CS-1):*
@@ -30,7 +66,7 @@
 <p>Contract costs incurred at the end of each year is: Year 1: ₹35.25 crore. Year 2: ₹148.5 crore (including unused material of ₹2.25 crore) Year 3: Total Revised contract costs.</p>
 <p>Based on the information given in above Case Scenario, answer the following Question 1 - 3.</p>
 
-**1.** <p>What is the stage of completion of contract on the basis of proportion of contract costs incurred to the total estimated contract costs at the end of year 1 and Year 2 respectively?</p>
+**5.** <p>What is the stage of completion of contract on the basis of proportion of contract costs incurred to the total estimated contract costs at the end of year 1 and Year 2 respectively?</p>
 
 - **(A)** Year 1: 23.5% and Year 2: 66%
 - **(B)** Year 1: 23.5% and Year 2: 65%
@@ -39,7 +75,7 @@
 
 *(2 Marks · Topic: AS 7 (1.9): Stage of completion under the cost-proportion method, excluding costs relating to future activity (e.g. unused material) from the numerator · Source: PYQ 2025 Q1)*
 
-**2.** <p>What is the amount of the profit to be recognized at the end of Year 1?</p>
+**6.** <p>What is the amount of the profit to be recognized at the end of Year 1?</p>
 
 - **(A)** ₹2.35 crore
 - **(B)** ₹44.75 crore
@@ -48,16 +84,7 @@
 
 *(2 Marks · Topic: AS 7 (1.6): Percentage of completion method - revenue and profit recognised in proportion to stage of completion, matched against actual costs incurred · Source: PYQ 2025 Q2)*
 
-**3.** <p>What is the amount of contract revenue recognized in each year of contract?</p>
-
-- **(A)** Year 1: ₹80 crore, Year 2: ₹80 crore and Year 3: ₹80 crore
-- **(B)** Year 1: ₹40 crore, Year 2: ₹116 crore and Year 3: ₹84 crore
-- **(C)** Year 1: ₹37.60 crore, Year 2: ₹118.40 crore and Year 3: ₹84 crore
-- **(D)** Year 1: ₹37.60 crore, Year 2: ₹120.80 crore and Year 3: ₹81.60 crore
-
-*(2 Marks · Topic: AS 7 (1.6): Cumulative revenue recognition across years, updating the total contract price for a customer-requested variation · Source: PYQ 2025 Q3)*
-
-**4.** <p>AB Contractors undertakes a fixed price contract of ₹350 Lakhs. Information related to contract is given as under: Material purchased ₹125 lakhs. Labour charges ₹95 lakhs. Unused material ₹22 lakhs. Estimated future costs to be incurred to complete the contract ₹115 Lakhs. Payment received as part payment of contract ₹50 Lakhs. Machinery used for 4 years for the contract. Original cost of the machine is ₹210 Lakhs. Expected life of machinery is 20 years. What will be the Profit/Loss on the contract?</p>
+**7.** <p>AB Contractors undertakes a fixed price contract of ₹350 Lakhs. Information related to contract is given as under: Material purchased ₹125 lakhs. Labour charges ₹95 lakhs. Unused material ₹22 lakhs. Estimated future costs to be incurred to complete the contract ₹115 Lakhs. Payment received as part payment of contract ₹50 Lakhs. Machinery used for 4 years for the contract. Original cost of the machine is ₹210 Lakhs. Expected life of machinery is 20 years. What will be the Profit/Loss on the contract?</p>
 
 - **(A)** Loss on contract ₹5 lakhs
 - **(B)** Loss on contract ₹49 Lakhs
@@ -66,7 +93,7 @@
 
 *(2 Marks · Topic: AS 7 (1.6): Percentage of Completion Method - immediate recognition of the entire foreseeable loss when total estimated cost exceeds contract price · Source: PYQ 2025 Q9)*
 
-**5.** <p>What amount should be recognized as revenue for the contract to construct underpass for the year ended 31 March, 2026 as per the provisions of Accounting Standard 7 (Revised)?</p>
+**8.** <p>What amount should be recognized as revenue for the contract to construct underpass for the year ended 31 March, 2026 as per the provisions of Accounting Standard 7 (Revised)?</p>
 
 - **(A)** ₹77,98,800
 - **(B)** ₹68,34,000
@@ -84,7 +111,7 @@
 <p>Deferred tax information as at 31st March, 2025: Depreciation per accounting records ₹4,00,000; Depreciation allowable under Section 32 of the Income Tax Act ₹10,00,000; Unamortized Preliminary Expenses per tax records ₹30,000; GST penalty imposed 30th March, 2025, payable 30th April, 2025, ₹1,25,000.</p>
 <p>Based on the information given above, answer Question Nos. 6–9.</p>
 
-**6.** <p>What amount should be recognized by V Limited as Revenue and Total Expenses in respect of the hostel building contract in its Statement of Profit and Loss for the year ended 31st March, 2025 as per provisions of Accounting Standard 7 (Revised)?</p>
+**9.** <p>What amount should be recognized by V Limited as Revenue and Total Expenses in respect of the hostel building contract in its Statement of Profit and Loss for the year ended 31st March, 2025 as per provisions of Accounting Standard 7 (Revised)?</p>
 
 - **(A)** Revenue of 84 lakhs, Total Expense of ₹60 lakhs.
 - **(B)** Revenue of 56 lakhs, Total Expense of ₹60 lakhs.
@@ -96,9 +123,13 @@
 
 ---
 
-## Section B — Descriptive Questions *(Illustrations style)* — 7 Marks
+## Section B — Descriptive Questions *(Illustrations style)* — 12 Marks
 
-**Q1.** <p>Constructions Limited is engaged in the business of constructing Flyovers and Railway
+**Q1.** <p>It is argued that profit on construction contracts should not be recognised until the contract is completed. Please explain whether you believe that this suggestion would improve the quality of financial reporting for long-term construction contracts.</p>
+
+*(5 Marks — estimated from answer length, not an official mark · Topic: M2-C8-U1 — ICAI Study Material · Source: Study Material TYK — Theoretical Questions #7)*
+
+**Q2.** <p>Constructions Limited is engaged in the business of constructing Flyovers and Railway
   over bridges. It obtained a contract from Railway Authorities to construct a railway over bridge for
   ₹400 crores. The construction of the railway over bridge is expected to be completed in 4 years.</p>
 <p>At the outset of the contract, it was estimated that the total costs to be incurred will be ₹370
@@ -124,25 +155,37 @@
 
 **1.** Correct Option: **(B)**
 
-<p><strong>Answer:</strong> (B) Year 1: 23.5% and Year 2: 65% — Year 1 stage of completion = costs incurred to date (₹35.25 crore) ÷ the revised total estimated cost available at that date (₹150 crore) = 23.5%. Year 2 stage of completion uses the cost incurred net of the unused material not yet consumed on site (₹148.5 crore − ₹2.25 crore = ₹146.25 crore, since AS 7 excludes costs relating to future contract activity when measuring stage of completion, even though the material remains part of total costs incurred) divided by the revised total contract cost for all 3 towers (₹150 crore + ₹75 crore for the added tower = ₹225 crore): ₹146.25 crore ÷ ₹225 crore = 65%.</p>
+<p><strong>Answer:</strong> (B) ₹ 10 lakh</p>
 
 **2.** Correct Option: **(A)**
 
-<p><strong>Answer:</strong> (A) ₹2.35 crore — revenue recognised in Year 1 = stage of completion (23.5%, per Q1) × the original 2-tower contract price of ₹160 crore = ₹37.60 crore. Cost recognised = the actual costs incurred to date, which is what the cost-proportion method matches against revenue = ₹35.25 crore. Profit = ₹37.60 crore − ₹35.25 crore = ₹2.35 crore.</p>
+<p><strong>Answer:</strong> (A) ₹ 320 lakh</p>
 
 **3.** Correct Option: **(C)**
 
-<p><strong>Answer:</strong> (C) Year 1: ₹37.60 crore, Year 2: ₹118.40 crore, Year 3: ₹84 crore. Year 1 revenue = 23.5% × ₹160 crore (original 2-tower price) = ₹37.60 crore. From Year 2, the contract price is revised for the added tower to ₹240 crore (₹160 crore + ₹80 crore); cumulative revenue at 65% stage of completion = ₹240 crore × 65% = ₹156 crore, so Year 2 revenue = ₹156 crore − ₹37.60 crore = ₹118.40 crore. Year 3 (contract completion) revenue = total contract price − cumulative revenue already recognised = ₹240 crore − ₹156 crore = ₹84 crore.</p>
+<p><strong>Answer:</strong> (C) ₹ 38 lakh</p>
 
 **4.** Correct Option: **(A)**
 
-<p><strong>Answer:</strong> (A) Loss on contract ₹5 lakhs. Cost incurred to date = Material purchased ₹125 lakhs − Unused material ₹22 lakhs (excluded, not yet consumed) + Labour ₹95 lakhs + Depreciation on machinery attributable to the contract (₹210 lakhs ÷ 20 years × 4 years used = ₹42 lakhs) = ₹240 lakhs. Total estimated contract cost = ₹240 lakhs (incurred) + ₹115 lakhs (future cost to complete) = ₹355 lakhs, against a contract price of ₹350 lakhs. Since total estimated cost exceeds the contract price, AS 7 requires the entire foreseeable loss to be recognised immediately: ₹355 lakhs − ₹350 lakhs = ₹5 lakhs loss.</p>
+<p><strong>Answer:</strong> (A) ₹ 28 lakh</p>
 
 **5.** Correct Option: **(B)**
 
+<p><strong>Answer:</strong> (B) Year 1: 23.5% and Year 2: 65% — Year 1 stage of completion = costs incurred to date (₹35.25 crore) ÷ the revised total estimated cost available at that date (₹150 crore) = 23.5%. Year 2 stage of completion uses the cost incurred net of the unused material not yet consumed on site (₹148.5 crore − ₹2.25 crore = ₹146.25 crore, since AS 7 excludes costs relating to future contract activity when measuring stage of completion, even though the material remains part of total costs incurred) divided by the revised total contract cost for all 3 towers (₹150 crore + ₹75 crore for the added tower = ₹225 crore): ₹146.25 crore ÷ ₹225 crore = 65%.</p>
+
+**6.** Correct Option: **(A)**
+
+<p><strong>Answer:</strong> (A) ₹2.35 crore — revenue recognised in Year 1 = stage of completion (23.5%, per Q1) × the original 2-tower contract price of ₹160 crore = ₹37.60 crore. Cost recognised = the actual costs incurred to date, which is what the cost-proportion method matches against revenue = ₹35.25 crore. Profit = ₹37.60 crore − ₹35.25 crore = ₹2.35 crore.</p>
+
+**7.** Correct Option: **(A)**
+
+<p><strong>Answer:</strong> (A) Loss on contract ₹5 lakhs. Cost incurred to date = Material purchased ₹125 lakhs − Unused material ₹22 lakhs (excluded, not yet consumed) + Labour ₹95 lakhs + Depreciation on machinery attributable to the contract (₹210 lakhs ÷ 20 years × 4 years used = ₹42 lakhs) = ₹240 lakhs. Total estimated contract cost = ₹240 lakhs (incurred) + ₹115 lakhs (future cost to complete) = ₹355 lakhs, against a contract price of ₹350 lakhs. Since total estimated cost exceeds the contract price, AS 7 requires the entire foreseeable loss to be recognised immediately: ₹355 lakhs − ₹350 lakhs = ₹5 lakhs loss.</p>
+
+**8.** Correct Option: **(B)**
+
 <p><strong>Answer:</strong> (B) ₹68,34,000 — total contract price × percentage of completion (cost incurred / total estimated cost).</p>
 
-**6.** Correct Option: **(C)**
+**9.** Correct Option: **(C)**
 
 <p><strong>Answer:</strong> (C) Revenue ₹56 lakhs (percentage of completion 60/(60+180)=25% × ₹224 lakhs) and Total Expense ₹76 lakhs — since total estimated cost (₹240 lakhs) exceeds the total contract price (₹224 lakhs), this is a loss-making contract and the entire foreseeable loss must be recognised immediately per AS 7, in addition to costs incurred to date.</p>
 
@@ -150,6 +193,10 @@
 ### Section B — Descriptive Solutions
 
 **Q1.**
+
+<p>Usually, construction contracts are long term nature i.e., the contracts are entered in one accounting period, however, the work performed will flow into more than one accounting year. If the profit on construction contracts is not recognised over the construction period, then the costs incurred during the earlier years of the contract would be recognised without any corresponding revenue. This will result in losses for initial years followed high profits in future years. The current treatment under AS 7 results in matching of revenue and associated costs as they are recognised during the same period. Also, the current accounting incorporates the prudence concept as any foreseeable losses are accounted for immediately. Therefore, AS 7 results in a fair representation of the underlying financial substance of the transaction.</p>
+
+**Q2.**
 
 <div>
 <p><strong>(i) Stage of completion = Costs incurred to date / Total estimated costs</strong></p>

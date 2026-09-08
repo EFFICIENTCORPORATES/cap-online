@@ -3,19 +3,37 @@
 **CA Inter · Paper 1: Advanced Accounting**
 **Chapter Reference:** `M2-C7-U2`
 
-**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 15 &nbsp;|&nbsp; **Section A (MCQ):** 2 marks, 1 questions (13%) &nbsp;|&nbsp; **Section B (Descriptive):** 13 marks, 3 questions (87%)
+**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 17 &nbsp;|&nbsp; **Section A (MCQ):** 4 marks, 3 questions (24%) &nbsp;|&nbsp; **Section B (Descriptive):** 13 marks, 3 questions (76%)
 
-**Suggested Time:** ~27 minutes
+**Suggested Time:** ~31 minutes
 
-> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is a real, previously chapter-tagged MTP / RTP / PYQ question drawn from the platform's question bank (`first_run/output/generated-from-script/questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ). Nothing is invented.
+> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material chapter's own "Test Your Knowledge" section (`books/concept-book/raw_icai_study_materials/`, extracted by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks are estimated from answer length and every such question/answer is explicitly tagged "estimated from answer length, not an official mark" wherever it appears below. Nothing is invented — every question and every answer is copied from one of these two real sources.
 >
-> **Content note — target not fully met (pool too small):** the tagged question pool currently available for AS 5 in this corpus totals only **15 marks** (2 MCQ + 13 Descriptive) after de-duplication — short of the 50-mark target. All available real content has been included below (**15 of 50 marks**); no question was invented or borrowed from another chapter to pad the total. More MTP/RTP/PYQ sittings would need to be sourced and tagged for this chapter to reach a full 50-mark paper.
+> **Content note — target not fully met (pool too small):** the tagged question pool currently available for AS 5 in this corpus totals only **17 marks** (4 MCQ + 13 Descriptive) after de-duplication — short of the 50-mark target. All available real content has been included below (**17 of 50 marks**); no question was invented or borrowed from another chapter to pad the total. More MTP/RTP/PYQ sittings would need to be sourced and tagged for this chapter to reach a full 50-mark paper.
 >
 > **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (0 MCQ + 0 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
 
 ---
 
-## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 2 Marks
+## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 4 Marks
+
+**1.** <p>Extraordinary items are income or expenses</p>
+
+- **(A)** That arise from events clearly distinct from the ordinary activities of the enterprise.
+- **(B)** That are not expected to recur frequently or regularly.
+- **(C)** Both (a) and (b).
+- **(D)** None of the three.
+
+*(1 Marks · Topic: M2-C7-U2 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #4)*
+
+**2.** <p>A change in the estimated life of the asset, which necessitates adjustment in the depreciation is an example of</p>
+
+- **(A)** Prior period item.
+- **(B)** Ordinary item.
+- **(C)** Extraordinary item.
+- **(D)** Change in accounting estimate.
+
+*(1 Marks · Topic: M2-C7-U2 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #1)*
 
 
 *Case Facts (Case CS-1):*
@@ -26,7 +44,7 @@
 <p>The Company is evaluating below mentioned schemes: (i) Introduction of a formal retirement gratuity scheme by an employer in place of ad hoc ex-gratia payments to employees on retirement. (ii) Management decided to pay pension to those employees who have retired after completing 5 years of service in the organization. Such employees will get pension of ₹20,000 per month. Earlier there was no such scheme of pension in the organization.</p>
 <p>SEAS Ltd. has a subsidiary, ADI Ltd., which is in the business of construction having turnover of ₹200 crores. SEAS Ltd. and ADI Ltd. hold 9% and 23% respectively in an associate company, ASOC Ltd. Both SEAS Ltd. and ADI Ltd. prepare consolidated financial statements as per Accounting Standards notified under the Companies (Accounting Standards) Rules, 2021.</p>
 
-**1.** <p>You are requested to advise the Company in respect of the accounting requirements of above schemes related to employee benefits as to which one of those schemes should be considered as a change in accounting policy during the year.</p>
+**3.** <p>You are requested to advise the Company in respect of the accounting requirements of above schemes related to employee benefits as to which one of those schemes should be considered as a change in accounting policy during the year.</p>
 
 - **(A)** 1 – Change in accounting policy. 2 – Change in accounting policy.
 - **(B)** 1 – Not a change in accounting policy. 2 – Change in accounting policy.
@@ -71,6 +89,14 @@
 ### Section A — MCQ Answer Key & Explanations
 
 **1.** Correct Option: **(C)**
+
+<p><strong>Answer:</strong> (C) Both (a) and (b).</p>
+
+**2.** Correct Option: **(D)**
+
+<p><strong>Answer:</strong> (D) Change in accounting estimate.</p>
+
+**3.** Correct Option: **(C)**
 
 <p><strong>Answer:</strong> (C) 1 – Not a change in accounting policy. 2 – Not a change in accounting policy. — per AS 5, the adoption of an accounting policy for a transaction/event that did not occur previously, or that previously did not exist, is not a change in accounting policy. Both scheme 1 (formalising ad hoc ex-gratia payments into a retirement gratuity scheme) and scheme 2 (introducing a pension scheme where none existed before) are first-time adoptions for a previously non-existent benefit, not a switch from one existing policy to another, so neither qualifies as a change in accounting policy.</p>
 

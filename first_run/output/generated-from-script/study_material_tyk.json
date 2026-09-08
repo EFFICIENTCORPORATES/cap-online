@@ -1,0 +1,1352 @@
+[
+  {
+    "as_key": "as02",
+    "unitcode": "M2-C5-U1",
+    "name": "AS 2 — Valuation of Inventories",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>Which item of inventory is under the scope of AS 2 (Revised)?</p>",
+        "options": {
+          "A": "WIP arising under construction contracts",
+          "B": "Raw materials",
+          "C": "Shares",
+          "D": "Debentures held as stock in trade."
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) Raw materials</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>All of the following costs are excluded while computing value of inventories except?</p>",
+        "options": {
+          "A": "Selling and Distribution costs",
+          "B": "Allocated fixed production overheads based on normal capacity.",
+          "C": "Abnormal wastage",
+          "D": "Storage costs (which is not necessary part of the production process)"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) Allocated fixed production overheads based on normal capacity.</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>Identify the statement(s) which is/are incorrect.</p>",
+        "options": {
+          "A": "Storage costs which is a necessary part of the production process is included in inventory valuation.",
+          "B": "Administration overheads are never included in inventory valuation.",
+          "C": "Full amount of variable production overheads incurred are included in inventory valuation.",
+          "D": "Administration overheads are always included in inventory valuation."
+        },
+        "correct_option": "D",
+        "answer_html": "<p><strong>Answer:</strong> (D) Administration overheads are always included in inventory valuation.</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 5,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>“In determining the cost of inventories, it is appropriate to exclude certain costs and recognise them as expenses in the period in which they are incurred”. Provide examples of such costs as per AS 2 (Revised) ‘Valuation of Inventories’. Scenario base Questions</p>",
+        "answer_html": "<p>As per AS 2 (Revised) ‘Valuation of Inventories’, certain costs are excluded from the cost of the inventories and are recognised as expenses in the period in which incurred. Examples of such costs are: (a) abnormal amount of wasted materials, labour, or other production costs; (b) storage costs, unless those costs are necessary in the production process prior to a further production stage; (c) administrative overheads that do not contribute to bringing the inventories to their present location and condition; and (d) selling and distribution costs. Answer to the Scenario base Questions</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 6,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Capital Cables Ltd., has a normal wastage of 4% in the production process. During the year 20X1-20X2 the Company used 12,000 MT of raw material costing ₹ 150 per MT. At the end of the year 630 MT of wastage was in stock. The accountant wants to know how this wastage is to be treated in the books. Explain in the context of AS 2 (Revised) the treatment of normal loss and abnormal loss and also find out the amount of abnormal loss, if any.</p>",
+        "answer_html": "<p>As per AS 2 (Revised) ‘Valuation of Inventories’, abnormal amounts of wasted materials, labour and other production costs are excluded from cost of inventories and such costs are recognised as expenses in the period in which they are incurred. The normal loss will be included in determining the cost of inventories (finished goods) at the year end. Amount of Abnormal Loss: Material used 12,000 MT @ ₹150 = ₹18,00,000 Normal Loss (4% of 12,000 MT) 480 MT Net quantity of material 11,520 MT Abnormal Loss in quantity 150 MT Abnormal Loss ₹ 23,437.50 [150 units @ ₹ 156.25 (₹ 18,00,000/11,520)] Amount ₹ 23,437.50 will be charged to the Statement of Profit and Loss.\n|     |     |     |     | 55.1. | 19  9         |\n| --- | --- | --- | --- | ----- | ------------- |\n|     |     |     |     | v   | v   |\n| --- | --- | --- | --- | --- | --- |</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 7,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Mr. Mehul gives the following information relating to items forming part of inventory as on 31-3-20X1. His factory produces Product X using Raw material A. (i) 600 units of Raw material A (purchased @ ₹ 120). Replacement cost of raw material A as on 31-3-20X1 is ₹ 90 per unit. (ii) 500 units of partly finished goods in the process of producing X and cost incurred till date ₹ 260 per unit. These units can be finished next year by incurring additional cost of ₹ 60 per unit. (iii) 1500 units of finished Product X and total cost incurred ₹ 320 per unit. Expected selling price of Product X is ₹ 300 per unit. Determine how each item of inventory will be valued as on 31-3-20X1. Also calculate the value of total inventory as on 31-3-20X1.</p>",
+        "answer_html": "<p>As per AS 2 (Revised) “Valuation of Inventories”, materials and other supplies held for use in the production of inventories are not written down below cost if the finished products in which they will be incorporated are expected to be sold at cost or above cost. However, when there has been a decline in the price of materials and it is estimated that the cost of the finished products will exceed net realisable value, the materials are written down to net realisable value. In such circumstances, the replacement cost of the materials may be the best available measure of their net realisable value. In the given case, selling price of product X is ₹ 300 and total cost per\n| unit for production is ₹ 320.   |     |     |     |     |     |\n| ------------------------------- | --- | --- | --- | --- | --- |\nHence the valuation will be done as under: (i) 600 units of raw material will be written down to replacement cost as market value of finished product is less than its cost, hence valued at ₹ 90 per unit. (ii) 500 units of partly finished goods will be valued at 240 per unit i.e. lower of cost (₹ 260) or Net realisable value ₹ 240 (Estimated selling price ₹ 300 per unit less additional cost of ₹ 60). (iii) 1,500 units of finished product X will be valued at NRV of ₹ 300 per unit since it is lower than cost ₹ 320 of product X. Valuation of Total Inventory as on 31.03.20X1:\n|     | Units  Cost  | NRV /        |     | Value = units x    |     |\n| --- | ------------ | ------------ | --- | ------------------ | --- |\n|     | (₹)          | Replacement  |     | cost or NRV        |     |\n|     |              | cost         |     | whichever is less  |     |\n(₹)\n| Raw material A         | 600  120    |     | 90   |     | 54,000    |\n| ---------------------- | ----------- | --- | ---- | --- | --------- |\n| Partly finished goods  | 500  260    |     | 240  |     | 1,20,000  |\n| Finished goods X       | 1,500  320  |     | 300  |     | 4,50,000  |\n| Value of Inventory     |             |     |      |     | 6,24,000  |</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 8,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>On 31st March 20X1, a business firm finds that cost of a partly finished unit on that date is ₹ 530. The unit can be finished in 20X1-X2 by an additional expenditure of ₹ 310. The finished unit can be sold for ₹ 750 subject to payment of 4% brokerage on selling price. The firm seeks your advice regarding the amount at which the unfinished unit should be valued as at 31st March, 20X1 for preparation of final accounts. Assume that the partly finished unit cannot be sold in semi-finished form and its NRV is zero without processing it further.</p>",
+        "answer_html": "<p>Valuation of unfinished unit ₹ Net selling price 750 Less: Estimated cost of completion (310) Less: Brokerage (4% of 750) (30) Net Realisable Value 410 Cost of inventory 530 Value of inventory (Lower of cost and net realisable value) 410</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 9,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Alpha Ltd. sells flavored milk to customers; some of the customers consume the milk in the shop run by Alpha Limited. While leaving the shop, the consumers leave the empty bottles in the shop and the company takes possession of these empty bottles. The company has laid down a detailed internal record procedure for accounting for these empty bottles which are sold by the company by calling for tenders. Keeping this in view: Decide whether the inventory of empty bottles is an asset of the company; If so, whether the inventory of empty bottles existing as on the date of Balance Sheet is to be considered as inventories of the company and valued as per AS 2 or to be treated as scrap and shown at realizable value with corresponding credit to ‘Other Income’?</p>",
+        "answer_html": "<p>As per the ‘Framework on Presentation and Preparation of Financial Statements’: Tangible objects or intangible rights carrying probable future benefits, owned by an enterprise are called assets. Alpha Ltd. sells these empty bottles by calling tenders. It means further benefits are accrued on its sale. Therefore, empty bottles are assets for the company. As per AS 2, inventories are assets held for sale in the ordinary course of business. Inventory of empty bottles existing on the Balance Sheet date is the inventory and Alpha Ltd. has detailed controlled recording and accounting procedure which duly signify its materiality. Thus, inventory of empty bottles cannot be considered as scrap and should be valued as inventory in accordance with AS 2.</p>",
+        "has_table": false
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [
+      2
+    ],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as04",
+    "unitcode": "M2-C7-U1",
+    "name": "AS 4 — Contingencies and Events Occurring After the Balance Sheet Date",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>Cash amounting to ₹ 4 lakhs, stolen by the cashier in the month of March 20X1, was detected in April, 20X1. The financial statements for the year ended 31st March, 20X1 were approved by the Board of Directors on 15th May, 20X1. As per Accounting Standards, this is _____ for the financial statements year ended on 31st March, 20X1.</p>",
+        "options": {
+          "A": "An Adjusting event.",
+          "B": "Non-adjusting event.",
+          "C": "Contingency.",
+          "D": "Provision"
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) An Adjusting event.</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>As per Accounting Standards, events occurring after the balance sheet date are</p>",
+        "options": {
+          "A": "Only favourable events that occur between the balance sheet date and the date when the financial statements are approved by the Board of directors.",
+          "B": "Only unfavourable events that occur between the balance sheet date and the date when the financial statements are approved by the Board of directors.",
+          "C": "Those significant events, both favourable and unfavourable, that occur between the balance sheet date and the date on which the financial statements are approved by the Board of directors.",
+          "D": "Those significant events, both favourable and unfavourable, that occur between the balance sheet date and the date on which the financial statements are not approved by the Board of directors. a"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Those significant events, both favourable and unfavourable, that occur between the balance sheet date and the date on which the financial statements are approved by the Board of directors.</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>AS 4 does not apply to</p>",
+        "options": {
+          "A": "Obligation under retirement benefit plans.",
+          "B": "Commitments arising from long term lease contracts.",
+          "C": "liabilities of life assurance and general insurance enterprises arising from policies issued",
+          "D": "All of the above."
+        },
+        "correct_option": "D",
+        "answer_html": "<p><strong>Answer:</strong> (D) All of the above.</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>A Ltd. sold its building for ₹ 50 lakhs to B Ltd. and has also given the possession to B Ltd. The book value of the building is ₹ 30 lakhs. As on 31st March, 20X1, the documentation and legal formalities are pending. For the financial year ended 31st March, 20X1</p>",
+        "options": {
+          "A": "The company should record the sale.",
+          "B": "The company should recognise the profit of ₹ 20 lakhs in its profit and loss account.",
+          "C": "Both (a) and (b).",
+          "D": "The company should disclose the profit of ₹ 20 lakhs in notes to accounts."
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Both (a) and (b).</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 6,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>A Ltd. has sold its building for ₹ 50 lakhs to B Ltd. and has also given the possession to B Ltd. The book value of the building is ₹ 30 lakhs. As on 31st March, 20X1, the documentation and legal formalities are pending. The company has not recorded the sale and has shown the amount received as advance. Do you agree with this treatment? During the year 20X1-20X2, Raj Ltd. was sued by a competitor for ₹ 15 lakhs for infringement of a trademark. Based on the advice of the company's legal counsel, Raj Ltd. provided for a sum of ₹ 10 lakhs in its financial statements for the year ended 31st March, 20X2. On 18th May, 20X2, the Court decided in favour of the party alleging infringement of the trademark and ordered Raj Ltd. to pay the aggrieved party a sum of ₹ 14 lakhs. The financial statements were prepared by the company's management on 30th April, 20X2, and approved by the board on 30th May, 20X2. a</p>",
+        "answer_html": "<p>The economic reality and substance of the transaction is that the rights and beneficial interest in the property has been transferred although legal title has not been transferred. A Ltd. should record the sale and recognise the gain of ₹ 20 lakhs in its profit and loss account. The building should be derecognized in the financial statements. As per AS 4 (Revised), adjustments to assets and liabilities are required for events occurring after the balance sheet date that provide additional information materially affecting the determination of the amounts relating to conditions existing at the balance sheet date. In the given case, since Raj Ltd. was sued by a competitor for infringement of a trademark during the year 20X1-X2 for which the provision was also made by it, the decision of the Court on 18th May, 20X2, for payment of the penalty will constitute as an adjusting event because it is an event occurred before approval of the financial statements. Therefore, Raj Ltd. should adjust the provision upward by ₹ 4 lakhs to reflect the award decreed by the Court to be paid by them to its competitor. Had the judgment of the Court been delivered on 1 st June, 20X2, it would be considered as an event occurring after the approval of the financial statements which is not covered by AS 4 (Revised). In that case, no adjustment in the financial statements of 20X1-X2 would have been required.</p>",
+        "has_table": false
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [
+      5
+    ],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as05",
+    "unitcode": "M2-C7-U2",
+    "name": "AS 5 — Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>A change in the estimated life of the asset, which necessitates adjustment in the depreciation is an example of</p>",
+        "options": {
+          "A": "Prior period item.",
+          "B": "Ordinary item.",
+          "C": "Extraordinary item.",
+          "D": "Change in accounting estimate."
+        },
+        "correct_option": "D",
+        "answer_html": "<p><strong>Answer:</strong> (D) Change in accounting estimate.</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>Extraordinary items are income or expenses</p>",
+        "options": {
+          "A": "That arise from events clearly distinct from the ordinary activities of the enterprise.",
+          "B": "That are not expected to recur frequently or regularly.",
+          "C": "Both (a) and (b).",
+          "D": "None of the three."
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Both (a) and (b).</p>"
+      }
+    ],
+    "descriptive": [],
+    "warnings": [],
+    "skipped_no_answer": [
+      2,
+      3,
+      5,
+      6
+    ],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as07",
+    "unitcode": "M2-C8-U1",
+    "name": "AS 7 — Construction Contracts",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>Revenue to be recognized by XY Ltd. for the year ended 31st March 20X2 is</p>",
+        "options": {
+          "A": "₹ 28 lakh",
+          "B": "₹ 42 lakh",
+          "C": "₹ 30 lakh",
+          "D": "₹ 32 lakh"
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) ₹ 28 lakh</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>Total expense to be recognised in Year 1 is</p>",
+        "options": {
+          "A": "₹ 30 lakh",
+          "B": "₹ 120 lakh",
+          "C": "₹ 38 lakh",
+          "D": "₹ 36 lakh"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) ₹ 38 lakh</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>Revenue to be recognised by M/s AV is</p>",
+        "options": {
+          "A": "₹ 320 lakh",
+          "B": "₹ 370 lakh",
+          "C": "₹ 360 lakh",
+          "D": "₹ 400 lakh"
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) ₹ 320 lakh</p>"
+      },
+      {
+        "source_num": 5,
+        "question_html": "<p>Total expense to be recognised by M/s AV is</p>",
+        "options": {
+          "A": "₹ 380 lakh",
+          "B": "₹ 400 lakh",
+          "C": "₹ 320 lakh",
+          "D": "₹ 360 lakh"
+        },
+        "correct_option": "D",
+        "answer_html": "<p><strong>Answer:</strong> (D) ₹ 360 lakh</p>"
+      },
+      {
+        "source_num": 6,
+        "question_html": "<p>LP Contractors undertakes a fixed price contract of ₹ 200 lakh. Transactions related to the contract include: Material purchased: ₹ 80 lakh Unused material: ₹ 30 lakh Labour charges: ₹ 60 lakh Machine used for 3 years for the contract. Original cost of the machine is ₹ 100 lakh. Expected useful life is 15 years. Estimated future costs to be incurred to complete the contract: ₹ 80 lakh. Loss on contract to be recognised is:</p>",
+        "options": {
+          "A": "₹ 40 lakh",
+          "B": "₹ 10 lakh",
+          "C": "₹ 90 lakh",
+          "D": "₹ 50 lakh"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) ₹ 10 lakh</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 7,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>It is argued that profit on construction contracts should not be recognised until the contract is completed. Please explain whether you believe that this suggestion would improve the quality of financial reporting for long-term construction contracts.</p>",
+        "answer_html": "<p>Usually, construction contracts are long term nature i.e., the contracts are entered in one accounting period, however, the work performed will flow into more than one accounting year. If the profit on construction contracts is not recognised over the construction period, then the costs incurred during the earlier years of the contract would be recognised without any corresponding revenue. This will result in losses for initial years followed high profits in future years. The current treatment under AS 7 results in matching of revenue and associated costs as they are recognised during the same period. Also, the current accounting incorporates the prudence concept as any foreseeable losses are accounted for immediately. Therefore, AS 7 results in a fair representation of the underlying financial substance of the transaction.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 8,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>A contractor has entered into a contract with a municipal body for construction of a flyover. As per the contract terms, the contractor will receive an additional ₹ 2 Crore as incentive if the construction of the flyover were to be finished within a period of two years from the start of the contract. The contractor wants to recognize this revenue since in the past he has been able to meet similar targets very easily. Explain whether the contractor’s view-point is correct?</p>",
+        "answer_html": "<p>The contractor’s view is not entirely correct in considering the variation as a part of contract revenue. There is an argument that he has been able to complete similar contracts within stipulated time. However, each contract needs to be assessed in isolation with respect to the specific challenges associated with the timing and uncertainty in completion.\n|     |                                     |     |     |     |     | 8.31  |     | a   |     |\n| --- | ----------------------------------- | --- | --- | --- | --- | ----- | --- | --- | --- |\n|     | REVENUE BASED ACCOUNTING STANDARDS  |     |     |     |     |       |     |     |     |\nAccordingly, the contractor needs to validate the assumptions with respect to the specific contract. Only after that assessment is done, the incentive of ₹ 2 crore may be included within the contract revenue.</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 9,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>A construction contractor has a fixed price contract for ₹ 9,000 lakhs to build a bridge in 3 years time frame. A summary of some of the financial data is as under: (Amount ₹ in lakhs) Year 1 Year 2 Year 3 Initial Amount for revenue agreed in 9,000 9,000 9,000 contract Variation in Revenue (+) - 200 200 Contracts costs incurred up to the reporting 2,093 6,168* 8,100** date Estimated profit for whole contract 950 1,000 1,000 *Includes ₹ 100 lakhs for standard materials stored at the site to be used in year 3 to complete the work. **Excludes ₹ 100 lakhs for standard material brought forward from year 2. The variation in cost and revenue in year 2 has been approved by customer. Compute year wise amount of revenue, expenses, contract cost to complete and profit or loss to be recognized in the Statement of Profit and Loss as per AS-7 (revised).</p>",
+        "answer_html": "<p>The amounts of revenue, expenses and profit recognized in the statement of profit and loss in three years are computed below: (Amount in ₹ lakhs)\n|     |     | Up to the   |     | Recognized in   |     | Recognized in  |               |     |     |\n| --- | --- | ----------- | --- | --------------- | --- | -------------- | ------------- | --- | --- |\n|     |     | reporting   |     | previous years  |     |                | current year  |     |     |\ndate\n|     | Year 1                   |     |        |     |            |      |     |        |     |\n| --- | ------------------------ | --- | ------ | --- | ---------- | ---- | --- | ------ | --- |\n|     | Revenue (9,000 x 26%)    |     | 2,340  |     |         -  |      |     | 2,340  |     |\n|     | Expenses (8,050 x 26%)   |     | 2,093  |     |         -  |      |     | 2,093  |     |\n|     | Profit                   |     | 247    |     |         -  |      |     | 247    |     |\n|     | Year 2                   |     |        |     |            |      |     |        |     |\n|     | Revenue (9,200 x 74%)    |     | 6,808  |     | 2,340      |      |     | 4,468  |     |\n|     | Expenses (8,200 x 74%)   |     | 6,068  |     | 2,093      |      |     | 3,975  |     |\n|     | Profit                   |     | 740    |     |            | 247  |     | 493    |     |\n|     | Year 3                   |     |        |     |            |      |     |        |     |\n|     | Revenue (9,200 x 100%)   |     | 9,200  |     | 6,808      |      |     | 2,392  |     |\n|     | Expenses (8,200 x 100%)  |     | 8,200  |     | 6,068      |      |     | 2,132  |     |\n|     | Profit                   |     | 1,000  |     |            | 740  |     | 260    |     |\nWorking Note:\n|     |                            |     | Year 1  |      | Year 2  |     |     | Year 3  |     |\n| --- | -------------------------- | --- | ------- | ---- | ------- | --- | --- | ------- | --- |\n|     | Revenue after considering  |     | 9,000   |      | 9,200   |     |     | 9,200   |     |\n|     | variations                 |     |         | 950  | 1,000   |     |     | 1,000   |     |\nLess: Estimated profit for whole contract\n|     | Estimated total cost of the  |     | 8,050  |     | 8,200  |     |     | 8,200  |     |\n| --- | ---------------------------- | --- | ------ | --- | ------ | --- | --- | ------ | --- |\ncontract (A)\n| a   | 8.32  | ADVANCED ACCOUNTING  |     |     |     |     |     |     |\n| --- | ----- | -------------------- | --- | --- | --- | --- | --- | --- |\n| Actual cost incurred upto the  |     |     |     | 2,093  | 6,068  |     |     | 8,200  |\n| ------------------------------ | --- | --- | --- | ------ | ------ | --- | --- | ------ |\nreporting date (B)\n|                             |     |     |     | (6,168-100)  |      |     | (8,100+100)  |     |\n| --------------------------- | --- | --- | --- | ------------ | ---- | --- | ------------ | --- |\n| Degree of completion (B/A)  |     |     |     | 26%          | 74%  |     | 100%         |     |</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 10,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Akar Ltd. Signed on 01/04/X1, a construction contract for ₹ 1,50,00,000. Following particulars are extracted in respect of contract, for the year ended - Materials used ₹ 71,00,000 - Labour charges paid ₹ 36,00,000 - Hire charges of plant ₹ 10,00,000 - Other contract cost incurred ₹ 15,00,000 - Labour charges of ₹ 2,00,000 are still outstanding on 31.3.X2. - It is estimated that by spending further ₹ 33,50,000 the work can be completed in all respect. You are required to compute profit/loss for the year to be taken to Profit & Loss Account and any provision for foreseeable loss to be recognized as per</p>",
+        "answer_html": "<p>Statement showing the amount of profit/loss to be taken to Profit and Loss Account and additional provision for the foreseeable loss as per AS 7\n|        | Cost of Construction       |     |     |     |            | ₹    |            | ₹    |\n| ------ | -------------------------- | --- | --- | --- | ---------- | ---- | ---------- | ---- |\n|        |                            |     |     |     |            |      |            |      |\n|        | Material used              |     |     |     |            |      | 71,00,000  |      |\n|        |                            |     |     |     |            |      |            |      |\n|        | Labour Charges paid        |     |     |     | 36,00,000  |      |            |      |\n| Add:   | Outstanding on 31.03.20X2  |     |     |     |            |      | 38,00,000  |      |\n2,00,000\n|     |                                |     |     |     |     |     |              |     |\n| --- | ------------------------------ | --- | --- | --- | --- | --- | ------------ | --- |\n|     |   Hire Charges of Plant        |     |     |     |     |     | 10,00,000    |     |\n|     | Other Contract cost incurred   |     |     |     |     |     |   15,00,000  |     |\n|     |                                |     |     |     |     |     |              |     |\n|     | Cost incurred upto 31.03.20X2  |     |     |     |     |     | 1,34,00,000  |     |\n| Add:   | Estimated future cost                 |     |     |     |     |     |   33,50,000  |     |\n| ------ | ------------------------------------- | --- | --- | --- | --- | --- | ------------ | --- |\n|        |                                       |     |     |     |     |     |              |     |\n|        | Total Estimated cost of construction  |     |     |     |     |     | 1,67,50,000  |     |\n|     | Degree of completion (1,34,00,000/1,67,50,000 x 100)  |     |     |     |     |     |     | 80%  |\n| --- | ----------------------------------------------------- | --- | --- | --- | --- | --- | --- | ---- |\n|     | Revenue recognized (80% of 1,50,00,000)  |     |     |     |     |     | 1,20,00,000  |     |\n| --- | ---------------------------------------- | --- | --- | --- | --- | --- | ------------ | --- |\nTotal foreseeable loss (1,67,50,000 - 1,50,00,000) 17,50,000 Less: Loss for the current year (1,34,00,000 - 1,20,00,000) 14,00,000\n|     |                          |     |     |     |     |     |           |     |\n| --- | ------------------------ | --- | --- | --- | --- | --- | --------- | --- |\n|     | Loss to be provided for  |     |     |     |     |     | 3,50,000  |     |</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 11,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>RT Enterprises has entered into a fixed price contract for construction of a tower with its customer. Initial tender price agreed is ₹ 220 crore. At the start of the contract, it is estimated that total costs to be incurred will be ₹ 200 crore. At the end of year 1, this estimate stands revised to ₹ 202 crore. Assume that the construction is expected to be completed in 3 years. During year 2, the customer has requested for a variation in the contract. As a result of that, the total contract value will increase by ₹ 5 crore and the costs will increase by ₹ 3 crore. RT has decided to measure the stage of completion on the basis of the proportion of contract costs incurred to the total estimated contract costs. Contract costs incurred at the end of each year is: Year 1: ₹ 52.52 crore Year 2: ₹ 154.20 crore (including unused material of 2.5 crore) Year 3: ₹ 205 crore. You are required to calculate: (a) Stage of completion for each year. (b) Profit to be recognised for each year.</p>",
+        "answer_html": "<p>(a) Stage of completion = Costs incurred to date / Total estimated costs Year 1: 52.52 crore / 202 crore = 26% Year 2: (154.20 crore – 2.50 crore) / 205 crore = 74% Year 3: 205 crore / 205 crore = 100% (b) Profit for the year\n|           |     | Year 1       | Year 2        |     | Year 3       |     |     |     |\n| --------- | --- | ------------ | ------------- | --- | ------------ | --- | --- | --- |\n| Contract  |     | 57.20 crore  | 109.30 crore  |     | 58.50 crore  |     |     |     |\nRevenue (1)\n|                                       |     |     | 8.33  |   a |     |\n| ------------------------------------- | --- | --- | ----- | --- | --- |\n|   REVENUE BASED ACCOUNTING STANDARDS  |     |     |       |     |     |\n(220 crore x 26%) (225 crore x 74% - (225 crore x 100% -\n|     |     | 57.20 crore)  | 109.30  | crore  | –   |\n| --- | --- | ------------- | ------- | ------ | --- |\n57.20 crore)\n| Contract  | 52.52 crore  | 99.18 crore  | 53.30 crore  |     |     |\n| --------- | ------------ | ------------ | ------------ | --- | --- |\nCost (2) (202 crore x 26%) (205 crore x 74% - (205 crore x 100% -\n|     |     | 52.52 crore)  | 99.18 crore – 52.52  |     |     |\n| --- | --- | ------------- | -------------------- | --- | --- |\ncrore)\n| Contract     | 4.68 crore  | 10.12 crore  | 5.20 crore  |     |     |\n| ------------ | ----------- | ------------ | ----------- | --- | --- |\n| Profit  (1)  | –           |              |             |     |     |\n(2)</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 12,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>On 1st December, 20X1, GR Construction Co. Ltd. undertook a contract to construct a building for ₹ 45 lakhs. On 31st March, 20X2, the company found that it had already spent ₹ 32.50 lakhs on the construction. Additional cost of completion is estimated at ₹ 15.10 lakhs. What amount should be charged to revenue in the final accounts for the year ended 31st March, 20X2 as per provisions of AS-7?</p>",
+        "answer_html": "<p>|                                           |     |     | ₹ in lakhs  |        |     |\n| ----------------------------------------- | --- | --- | ----------- | ------ | --- |\n| Cost of construction incurred till date   |     |     |             | 32.50  |     |\n| Add: Estimated future cost                |     |     |             | 15.10  |     |\n| Total estimated cost of construction      |     |     |             | 47.60  |     |\nPercentage of completion till date to total estimated cost of construction = (32.50/47.60)  100 = 68.28% Proportion of total contract value recognised as revenue for the year ended 31st March, 20X2 per AS 7 (Revised) = Contract price x percentage of completion = ₹ 45 lakh x 68.28% = ₹ 30.73 lakhs. (₹ in lakhs)\n| Total cost of construction   |     |     |          | 47.60  |     |\n| ---------------------------- | --- | --- | -------- | ------ | --- |\n| Less: Total contract price   |     |     | (45.00)  |        |     |\nTotal foreseeable loss to be recognized as expense 2.60 According to of AS 7, when it is probable that total contract costs will exceed total contract revenue, the expected loss should be recognized as an expense immediately.</p>",
+        "has_table": true
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [
+      3
+    ],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as09",
+    "unitcode": "M2-C8-U2",
+    "name": "AS 9 — Revenue Recognition",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>Which of the conditions mentioned below must be met to recognize revenue from the sale of goods? (i) the entity selling does not retain any continuing influence or control over the goods; (ii) when the goods are dispatched to the buyer; (iii) revenue can be measured reliably; (iv) the supplier is paid for the goods; (v) it is reasonably certain that the buyer will pay for the goods; (vi) the buyer has paid for the goods.</p>",
+        "options": {
+          "A": "(i), (ii) and (v)",
+          "B": "(ii), (iii) and (iv)",
+          "C": "(i), (iii) and (v)",
+          "D": "(i), (iv) and (v)"
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) (i), (ii) and (v)</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>Consignment inventory is an arrangement whereby inventory is held by one party but owned by another party. Which of the following indicates that the inventory in question is a consignment inventory?</p>",
+        "options": {
+          "A": "Manufacturer cannot require the dealer to return the inventory",
+          "B": "Dealer has the right to return the inventory",
+          "C": "Manufacture is responsible for the pricing of goods and any changes in the pricing can only be approved by the manufacturer .",
+          "D": "Manufacture is responsible for the holding the goods and any changes in the pricing can only be approved by the dealer"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Manufacture is responsible for the pricing of goods and any changes in the pricing can only be approved by the manufacturer .</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>Which of the following transactions qualify as revenue for M/s AB Enterprises?</p>",
+        "options": {
+          "A": "Sales of ₹ 20 lakhs made under consignment sales.",
+          "B": "Sale of an old machine amounting ₹ 5 lakhs",
+          "C": "Services provided to the customer in the normal course of business. Sales recorded is ₹ 50,000.",
+          "D": "Sales of ₹ 25 lakhs made under consignment sales"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Services provided to the customer in the normal course of business. Sales recorded is ₹ 50,000.</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>The Accounting Club has 100 members who are required to pay an annual membership fee of ₹ 5,000 each. During the current year, all members have paid the fee. However, 5 members have paid an amount of ₹ 10,000 each. Of these, 3 members paid the current year’s fee and also the previous year’s dues. Remaining 2 members have paid next years’ fee of ₹ 5,000 in advance. Revenue from membership fee for the current year to be recognised will be:</p>",
+        "options": {
+          "A": "₹ 5,25,000",
+          "B": "₹ 5,10,000",
+          "C": "₹ 5,00,000",
+          "D": "₹ 5,15,000"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) ₹ 5,00,000</p>"
+      },
+      {
+        "source_num": 5,
+        "question_html": "<p>FlixNet International offers a subscription fee model to allow the paid subscribers an annual viewing of movies, sports events and other content. It allows users to register for free and have access to limited content for one month without any charges. The customer has a right to cancel the subscription within a month’s time but is required to pay for 1 year subscription fee after the free period. XY has subscribed for free viewing on 1st March 20X1. After 1 month, he has agreed to pay the annual membership and has paid ₹ 1,200 on 31st March 20X1 for the subscription that is valid up to 31st of March 20X2. Revenue that can be recognized by FlixNet for the year ended 31st March 20X2 is</p>",
+        "options": {
+          "A": "₹ 100",
+          "B": "₹ 1,200",
+          "C": "Nil",
+          "D": "₹ 1,100"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) ₹ 1,200</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 6,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>GH manufactures and sells televisions. The televisions are shipped to the customer by sea. In order to transfer risk related to the shipment of the televisions, GH also gets an insurance coverage for the goods while they are in transit from the factory to customer’s location. The insurance policy will reimburse GH for the value of the goods in the event of loss or damage arising anytime up to these goods reaching customer’s location. The legal title passes when the goods arrive at the customer’s premises one month later. When should Entity GH recognize revenue in its books?</p>",
+        "answer_html": "<p>GH should recognize revenue for the sale when the goods arrive at the customer’s premises. GH has not transferred the televisions’ significant risks and rewards of ownership to the customer when the goods depart from the factory. This is evidenced by the fact that any insurance proceeds received from the goods’ damage or destruction will be repaid to GH. Further, the legal title does not pass until the goods arrive at the customer’s premises.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 7,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>The following information of Meghna Ltd. is provided: (i) Goods of ₹ 60,000 were sold on 20-3-20X2 but at the request of the buyer these were delivered on 10-4-20X2. (ii) On 15-1-20X2 goods of ₹ 1,50,000 were sent on consignment basis of which 20% of the goods unsold are lying with the consignee as on (iii) ₹ 1,20,000 worth of goods were sold on approval basis on 1-12-20X1. The period of approval was 3 months after which they were considered sold. Buyer sent approval for 75% goods up to 31-1-20X2 and no approval or disapproval received for the remaining goods till 31-3- (iv) Apart from the above, the company has made cash sales of ₹ 7,80,000 (gross). Trade discount of 5% was allowed on the cash sales. You are required to advise the accountant of Meghna Ltd., with valid reasons, the amount to be recognized as revenue in above cases in the context of AS 9.</p>",
+        "answer_html": "<p>As per AS 9 “Revenue Recognition”, in a transaction involving the sale of goods, performance should be regarded as being achieved when the following conditions are fulfilled: (i) the seller of goods has transferred to the buyer the property in the goods for a price or all significant risks and rewards of ownership have been transferred to the buyer and the seller retains no effective control of the goods transferred to a degree usually associated with ownership; and (ii) no significant uncertainty exists regarding the amount of the consideration that will be derived from the sale of the goods. Case (i) The sale is complete but delivery has been postponed at buyer’s request. The entity should recognize the entire sale of ₹ 60,000 for the year ended 31st March, 20X2. Case (ii) 20% goods lying unsold with consignee should be treated as closing inventory and sales should be recognized for ₹ 1,20,000 (80% of ₹ 1,50,000). In case of consignment sale revenue should not be recognized until the goods are sold to a third party. Case (iii) In case of goods sold on approval basis, revenue should not be recognized until the goods have been formally accepted by the buyer or the buyer has done an act adopting the transaction or the time period for rejection has elapsed or where no time has been fixed, a reasonable time has elapsed. Therefore, revenue should be recognized for the ₹ 90,000 upon receipt of approval on 31-02-20X1 and for the balance ₹ 30,000 on 01-03- 20X1 as the time period for rejecting the goods had expired. Case (iv) Trade discounts given should be deducted in determining revenue. Thus ₹ 39,000 should be deducted from the amount of turnover of ₹ 7,80,000 for the purpose of recognition of revenue. Thus, revenue should be ₹ 7,41,000.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 8,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>For the year ended 31st March 20X1, KY Enterprises has entered into the following transactions. On 31 March 20X1, KY supplied two machines to its customer ST. Both machines were accepted by ST on 31 March 20X1. Machine 1 was a machine that was routinely supplied by KY to many customers and the installation process was very simple. Machine 1 was installed on 2 April 20X1 by ST’s employees. Machine 2 being more specialised in nature requires an installation process which is more complicated, requiring significant assistance from KY. Machine 2 was installed between 2 and 5 April 20X1. Details of costs and sales prices are as follows: Machine 1 Machine 2 Sale Price 3,20,000 3,00,000 Cost of production 1,60,000 1,50,000 Installation fee nil 10,000 How should above transactions be recognized by KY Enterprises for the year ended 31st March 20X1?</p>",
+        "answer_html": "<p>Machine 1: As the installation process is simple, revenue from Machine 1 will be recognized on 31 March 20X1. Revenue (Machine 1) ₹ 3,20,000 Cost of Goods Sold ₹ 1,60,000 Profit during the period ₹ 1,60,000 Since the question specifies that the machine is already accepted by ST on 31 March 20X1, the revenue arising from sale of the machine needs to be recognized for the year ending 31 March 20X1. This is because acceptance of the machine indicates that the risks and rewards pursuant to the ownership are transferred to ST. Machine 2: Installation process for Machine 2 is more complicated, requiring significant assistance from KY Ltd. However, question specifies that the machine is already accepted by ST on 31 March 20X1. Assuming that there is no further approval/acceptance required from the buyer for the Machine sold, revenue from sale of Machine 2 can be recognized for the year ending 31 March 20X1. Revenue (Machine 2) ₹ 3,00,000 Cost of Goods Sold ₹ 1,50,000 Profit during the period ₹ 1,50,000 However, installation fee which is for rendering installation services cannot be recognized until the installation is complete. Since the machine is pending installation, the revenue in respect of installation charges ₹10,000 needs to be recognized on 5 April 20X1 once the installation process gets completed.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 9,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>PQR Ltd., sells agriculture products to dealers. One of the conditions of sale is that interest is at the rate of 2% p.m., for delayed payments. Percentage of interest recovery is only 10% on such overdue outstanding due to various reasons. During the year 20X1-X2 the company wants to recognize the entire interest receivable. Do you agree?</p>",
+        "answer_html": "<p>As per AS 9 ‘Revenue Recognition’, where the ability to assess the ultimate collection with reasonable certainty is lacking at the time of raising any claim, e.g. for escalation of price, export incentives, interest etc., revenue recognition is postponed to the extent of uncertainty involved. In such cases, it may be appropriate to recognise revenue only when it is reasonably certain that the ultimate collection will be made. Where there is no uncertainty as to ultimate collection, revenue is recognised at the time of sale or rendering of service even though payments are made by instalments. Thus, PQR Ltd. cannot recognise the interest amount unless the company actually receives it. 10% rate of recovery on overdue outstanding is also an estimate based on previous record and is not certain. Hence, the company is advised to recognise interest receivable only on receipt basis.</p>",
+        "has_table": false
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as10",
+    "unitcode": "M2-C5-U2",
+    "name": "AS 10 — Property, Plant and Equipment",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>As per AS 10 (Revised) ‘Property, plant and equipment’, which of the following costs is not included in the carrying amount of an item of PPE</p>",
+        "options": {
+          "A": "Costs of site preparation",
+          "B": "Costs of relocating",
+          "C": "Installation and assembly costs.",
+          "D": "initial delivery and handling costs"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) Costs of relocating</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>As per AS 10 (Revised) ‘Property, Plant and Equipment’, an enterprise holding investment properties should value Investment property</p>",
+        "options": {
+          "A": "as per fair value",
+          "B": "under discounted cash flow model.",
+          "C": "under cost model",
+          "D": "under cash flow model"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) under cost model</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>A plot of land with carrying amount of ₹ 1,00,000 was revalued to ₹ 1,50,000 at the end of Year 2. Subsequently, due to drop in market values, the land was determined to have a fair value of ₹ 1,30,000 at the end of Year 4. Assuming that the entity adopts Revaluation Model, what would be the accounting treatment of Revaluation?</p>",
+        "options": {
+          "A": "Initial upward valuation of ₹ 50,000 credited to Revaluation Reserve. Subsequent downward revaluation of ₹ 20,000 debited to P/L.",
+          "B": "Initial upward valuation of ₹ 50,000 credited to P/L. Subsequent downward revaluation of ₹ 20,000 debited to P/L.",
+          "C": "Initial upward valuation of ₹ 50,000 credited to Revaluation Reserve. Subsequent downward revaluation of ₹ 20,000 debited to Revaluation Reserve.",
+          "D": "Initial upward valuation of ₹ 50,000 debited to P/L. Subsequent downward revaluation of ₹ 20,000 credited to P/L."
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Initial upward valuation of ₹ 50,000 credited to Revaluation Reserve. Subsequent downward revaluation of ₹ 20,000 debited to Revaluation Reserve.</p>"
+      },
+      {
+        "source_num": 5,
+        "question_html": "<p>On sale of an asset which was revalued upwards, what would be the treatment of Revaluation Reserve?</p>",
+        "options": {
+          "A": "The Revaluation Reserve is credited to P/L since the profit on sale of such asset is now realized.",
+          "B": "The Revaluation Reserve is credited to Retained Earnings as a movement in reserves without impacting the P/L.",
+          "C": "No change in Revaluation Reserve since profit on sale of such asset is already impacting the P/L.",
+          "D": "The Revaluation Reserve is reduced from the asset value to compute profit or loss."
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) The Revaluation Reserve is credited to Retained Earnings as a movement in reserves without impacting the P/L.</p>"
+      },
+      {
+        "source_num": 6,
+        "question_html": "<p>A machinery was purchased having an invoice price ₹ 1,18,000 (including GST ₹ 18,000) on 1 April 20X1. The GST amount is available as input tax credit. The rate of depreciation is 10% on SLM basis. The depreciation for 20X2-X3 would be</p>",
+        "options": {
+          "A": "₹ 10,000.",
+          "B": "₹ 11,800.",
+          "C": "₹ 9,000.",
+          "D": "₹ 10,500."
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) ₹ 10,000.</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 7,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>A company changed its method of depreciation from SLM to WDV. How should the change be recognised?</p>",
+        "answer_html": "<p>As per AS 10, Property, Plant and Equipment, the depreciation method applied to an asset should be reviewed at least at each financial year-end and, if there has been a significant change in the expected pattern of consumption of the future economic benefits embodied in the asset, the method should be changed to reflect the changed pattern. Such a change should be accounted for as a change in an accounting estimate in accordance with Accordingly, the change in method of depreciation should be accounting for as a change in accounting estimate, prospectively.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 8,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>A company has debited the Building Account with the Cost of the Land on which the building stands and has provided depreciation on such total cost. Comment on the accounting treatment.</p>",
+        "answer_html": "<p>As per AS 10, Property, Plant and Equipment, each part of an item of property, plant and equipment with a cost that is significant in relation to the total cost of the item should be depreciated separately. Further, Land and buildings are separable assets and are accounted for separately, even when they are acquired together. With some exceptions, such as quarries and sites used for landfill, land has an unlimited useful life and therefore is not depreciated. Buildings have a limited useful life and therefore are depreciable assets. In the given case, land should not be depreciated unless it has a limited useful life. Accordingly, it is incorrect to debit the cost of land to the Building Account and provide depreciation on the aggregate cost.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 9,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>An entity is setting up a manufacturing plant. Construction of the plant is completed in August and the plant is ready for commercial production in November. However, the entity commences production in March. When should be company start charging depreciation.</p>",
+        "answer_html": "<p>As per AS 10, Property, Plant and Equipment, depreciation of an asset begins when it is available for use, i.e., when it is in the location and condition necessary for it to be capable of operating in the manner intended by management. In the given case, since the plant is ready for commercial production in November, depreciation shall commence from November. The date of commencement of commercial production is irrelevant for charging depreciation.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 10,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Which factors should be considered by a company while determining useful life?</p>",
+        "answer_html": "<p>All the following factors are considered in determining the useful life of an asset: (a) expected usage of the asset. Usage is assessed by reference to the expected capacity or physical output of the asset. (b) expected physical wear and tear, which depends on operational factors such as the number of shifts for which the asset is to be used and the repair and maintenance programme, and the care and maintenance of the asset while idle. (c) technical or commercial obsolescence arising from changes or improvements in production, or from a change in the market demand for the product or service output of the asset. Expected future reductions in the selling price of an item that was produced using an asset could indicate the expectation of technical or commercial obsolescence of the asset, which, in turn, might reflect a reduction of the future economic benefits embodied in the asset. (d) legal or similar limits on the use of the asset, such as the expiry dates of related leases.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 11,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>An entity gave the following Note in its Financial Statements: ‘The company chooses not to charge depreciation on Property, Plant and Equipment on account of: (a) Annual Maintenance Contracts being expensed thereby ensuring timely repairs of Plant and Machinery. (b) Depreciation being a non-cash expense has no impact on cash flows. Accordingly, it is not necessary to depreciate an asset when repairs and maintenance charges are expensed in the Statement of Profit and Loss. (c) The values of certain assets like Property increase with passage of time, and hence charging depreciation does not make sense. (d) At the end of the useful life, the asset is ultimately sold, and since the asset is at cost due to no depreciation, exact profit or loss on sale of the asset is stated.’ You are required to state the appropriateness of the above accounting policy in line with the relevant Accounting Standards.</p>",
+        "answer_html": "<p>Depreciation refers to writing off the value of the asset over its useful life. Such write-off is necessitated on account of normal wear-and-tear, usage, or obsolescence. Since items of Property, Plant and Equipment are generally used in generating revenue, the pro-rated write-off in value of such item should be recorded in the books against the income earned by such an asset. Providing depreciation is mandatory, in spite of the fact that repairs are expensed in the Statement of Profit and Loss, or the value of the Property is appreciating. Depreciation is a systematic allocation of cost of the asset against the income generated from the continued use of the asset. Further, the Companies Act, 2013 mandates depreciation to be charged in order to determine the correct profits. Thus, not charging depreciation would result in non-compliance with the Companies Act provisions as well. The argument laid down by the company and the reasons for the same being invalid are discussed below. (a) Annual Maintenance Contracts being expensed thereby ensuring timely repairs of Plant and Machinery: The fact that the company enters into Annual Maintenance Contracts for timely repairs can be regarded as a running cost. Such expense is incurred in order to ensure that the machine continues to run as intended. Thus, it implies that because the machine is being utilized, it will need regular repairs. In other words, continuous use is resulting in normal wear-and-tear which is the reason why depreciation should be charged by the company. By stating that the company incurs Annual Maintenance Expenses, the company is recording only the ’maintenance expenses’, but not the wear-and-tear requiring the maintenance in the first place. Hence, this argument put forth by the company is not valid. (b) Depreciation being a non-cash expense has no impact on cash flows. Accordingly, it is not necessary to depreciate an asset when repairs and maintenance charges are expensed in the Statement of Profit and Loss. When viewed from the prism of depreciation alone, it appears that the fact that depreciation is a non-cash item is correct. However, it must be noted that at the time of procurement of the asset, the company would have paid cash. Depreciation is after all writing off this amount over the life of the asset. Hence the argument that depreciation is a non-cash item is not valid. Depreciation is writing off the cost of the asset (which was already paid for) over the useful life of the asset, and hence is mandatory. (c) The values of certain assets like Property increase with passage of time, and hence charging depreciation does not make sense. Certain assets like immovable property do increase in value with the passage of time. However, such assets are ‘used for the purposes of business’ and are not ‘held for sale’ or held as investment property. Accordingly, since the asset is being used for carrying on business, providing depreciation will give a true and fair view of the results of the company, and hence the argument that the value of the property appreciates is not valid. If the company wants to show the fair market value of the PPE, then it has the option to apply Revaluation model. However, depreciation is mandatory to be charged in Revaluation model also. (d) At the end of the useful life, the asset is ultimately sold, and since the asset is at cost due to no depreciation, exact profit or loss on sale of the asset is stated.’ The value of any asset, after usage, will reduce. Accordingly, the argument that the ‘exact profit or loss on sale of the asset’ will be obtained is incorrect. Due to usage of the asset, the value of the asset would be lower than the cost. Charging depreciation would seek to bring the book value approximating to such reduced value. Thereafter, on sale of the asset, the true profit or loss would be available. Accordingly, this argument is also invalid. It may be pertinent to note that Accounting Standard 1, Disclosure of Accounting Policies states that Disclosure of accounting policies or of changes therein cannot remedy a wrong or inappropriate treatment of the item in the accounts. In other words, the company cannot be absolved of the fact that it has not complied with the relevant accounting standards merely by giving a disclosure of incorrect policies or practices being followed. Thus, the company’s stand of disclosing the incorrect policy as a remedy is not correct. The company is suggested to charge depreciation on a systematic basis over the useful life of the asset thereby complying with the Accounting Standards.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 12,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>With reference to AS-10 Revised, classify the items under the following heads: (i) Purchase Price of Property, plant and Equipment (PPE) (ii) Directly attributable cost of PPE or (iii) Cost not included in determining the carrying amount of an item of PPE. (1) Import duties and non-refundable purchase taxes. (2) Initial delivery and handling costs. (3) Initial operating losses, such as those incurred while demand for the output of an item builds up. (4) Costs incurred while an item capable of operating in the manner intended by management has yet to be brought into use or is operated at less than full capacity. (5) Trade discounts and rebates. (6) Costs of relocating or reorganizing part or all of the operations of an enterprise. (7) Installation and assembly costs. (8) Administration and other general overhead costs.</p>",
+        "answer_html": "<p>Heads (i) Purchase price of PPE (iii) Directly attributable cost of PPE (iii) Cost not included in determining the carrying amount of an item of PPE Items Classified under Head 1 Import duties and non-refundable purchase taxes (i) 2 Initial delivery and handling costs (ii) 3 Initial operating losses, such as those incurred while (iii) demand for the output of an item builds up 4 Costs incurred while an item capable of operating in (iii) the manner intended by management has yet to be brought into use or is operated at less than full capacity. 5 Trade discounts and rebates (deducted for computing (i) purchase price) 6 Costs of relocating or reorganizing part or all of the (iii) operations of an enterprise. 7 Installation and assembly costs (ii) 8 Administration and other general overhead costs (iii)</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 13,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>ABC Ltd. is installing a new plant at its production facility. It has incurred these costs: 1. Cost of the plant (cost per supplier’s invoice plus taxes) ₹ 25,00,000 2. Initial delivery and handling costs ₹ 2,00,000 3. Cost of site preparation ₹ 6,00,000 4. Consultants used for advice on the acquisition of the ₹ 7,00,000 plant 5. Interest charges paid to supplier of plant for deferred ₹ 2,00,000 credit 6. Estimated dismantling costs to be incurred after 7 ₹ 3,00,000 years 7. Operating losses before commercial production ₹ 4,00,000 Please advise ABC Ltd. on the costs that can be capitalised in accordance with AS 10 (Revised).</p>",
+        "answer_html": "<p>According to AS 10 (Revised), these costs can be capitalised: 1. Cost of the plant ₹ 25,00,000 2. Initial delivery and handling costs ₹ 2,00,000 3. Cost of site preparation ₹ 6,00,000 4. Consultants’ fees ₹ 7,00,000 5. Estimated dismantling costs to be incurred after 7 years ₹ 3,00,000 ₹ 43,00,000 Note: Interest charges paid on “Deferred credit terms” to the supplier of the plant (not a qualifying asset) of ₹ 2,00,000 and operating losses before commercial production amounting to ₹ 4,00,000 are not regarded as directly attributable costs and thus cannot be capitalised. They should be written off to the Statement of Profit and Loss in the period they are incurred.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 14,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Arka Ltd. purchased machinery for ₹ 3,000 lakhs. Depreciation was charged at 10% on SLM basis for a useful life of 10 years. At the end of Year 4, the machinery was revalued to ₹ 2,700 lakhs and the same was adopted. What will be the carrying amount of the asset at the end of Year 5 and Year 6? Assume no change in the useful life.</p>",
+        "answer_html": "<p>Particulars ₹ in lakhs Original Cost of the Asset 3,000.00 Less: Depreciation for 4 years (₹ 3,000 lakhs x 10% x 4 years) (1,200.00) Book Value at the end of Year 4 1,800.00 Add: Revaluation Surplus (balancing figure) 900.00 Revalued Amount as given (= revised depreciable value) 2,700.00 Less: Depreciation for Year 5 (₹ 2,700 lakhs ÷ 6 years) 450.00 Carrying Amount at the end of Year 5 2,250.00 Less: Depreciation for Year 6 (₹ 2,700 lakhs ÷ 6 years) 450.00 Carrying Amount at the end of Year 6 1,800.00</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 15,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Skanda Ltd. acquired a machinery for ₹ 2,50,00,000 five years ago. Depreciation was charged at 10% p.a. on SLM basis, useful life being 10 years. At the beginning of Year 3, the machinery was revalued to ₹ 3,00,00,000 with the surplus on revaluation being credited to Revaluation Reserve. Depreciation was provided on the revalued amount over the balance useful life of 8 years. The machinery was sold in the current year for ₹ 1,12,50,000. Give the accounting treatment for the above in the Company’s accounts. What will be the treatment if the machinery fetched only ₹ 42,50,000 now?</p>",
+        "answer_html": "<p>Particulars ₹ Original Cost of the Asset 2,50,00,000 Less: Depreciation for 2 years (₹ 2,50,00,000 x 10% x 2 years) 50,00,000 Book Value at the beginning of Year 3 2,00,00,000 Add: Revaluation Surplus (balancing figure) 1,00,00,000 Revalued Amount as given (= revised depreciable value) 3,00,00,000 Less: Depreciation for Years 3-5 (₹ 3,00,00,000 ÷ 8 yrs x 3 1,12,50,000 yrs) Carrying Amount at the end of Year 5 1,87,50,000 The treatment of Gain / Loss on Disposal / Revaluation is as below: Particulars Disposal Proceeds = Disposal Proceeds = ₹ 1,12,50,000 ₹ 42,50,000 Book Value Less ₹ 1,87,50,000 – ₹ 1,87,50,000 – Disposal Proceeds ₹ 1,12,50,000 = ₹ 42,50,000 = = Loss recognized ₹ 75,00,000 (Loss) ₹ 1,45,00,000 (Loss) in Profit or Loss Revaluation Surplus directly ₹ 1,00,00,000 ₹ 1,00,00,000 transferred to Retained Earnings</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 16,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Akshar Ltd. installed a new Plant (not a qualifying asset), at its production facility, and incurred the following costs: ▪ Cost of the Plant (as per supplier’s invoice): ₹ 30,00,000 ▪ Initial delivery and handling costs: ₹ 1,00,000 ▪ Cost of site preparation: ₹ 2,00,000 ▪ Consultant fee for advice on acquisition of Plant: ₹ 50,000 ▪ Interest charges paid to supplier against deferred credit: ₹ 1,00,000 ▪ Estimate of Dismantling and Site Restoration costs: ₹ 50,000 after 10 years (Present Value is ₹ 30,000) ▪ Operating losses before commercial production: ₹ 40,000 The company identified motors installed in the Plant as a separate component and a cost of ₹ 5,00,000 (Purchase Price) and other costs were allocated to them proportionately. The company estimates the useful life of the Plant and those of the Motors as 10 years and 6 years respectively and SLM method of Depreciation is used. At the end of Year 4, the company replaces the Motors installed in the Plant at a cost of ₹ 6,00,000 and estimated the useful life of new motors to be 5 years. Also, the company revalued its entire class of Fixed Assets at the end of Year 4. The revalued amount of Plant as a whole is ₹ 25,00,000. At the end of Year 8, the company decides to retire the Plant from active use and also disposed the Plant as a whole for ₹ 6,00,000. There is no change in the Dismantling and Site Restoration liability during the period of use. You are required to explain how the above transaction would be accounted in accordance with AS 10.</p>",
+        "answer_html": "<p>1. Cost at Initial Recognition: Particulars ₹ Cost of the Plant (as per Invoice) 30,00,000 Initial Delivery and Handling Costs 1,00,000 Cost of Site Preparation 2,00,000 Consultants’ Fees 50,000 Estimated Dismantling and Site Restoration Costs 30,000 Total Cost of Plant including Motors 33,80,000 Less: Cost of Motors identified as a separate component 5,63,333 (1/6)* Cost of the Plant (excluding Motors – balance 5/6) 28,16,667 * Purchase price of Motors = ₹ 5,00,000 out of ₹ 30,00,000 i.e., 1/6 of value of Plant Note: Since the asset is not a qualifying asset, payment of interest to the supplier is not capitalized. Further, operating losses of ₹ 40,000 incurred before commercial production is not a directly attributable cost, and hence excluded from cost of asset. These costs are expensed to the P/L as and when they are incurred. 2 Recognition of Motors Replacement Particulars ₹ Cost of Motors determined above 5,63,333 Less: Depreciation for 4 years (as per SLM) 3,75,555 5,63,333 ÷ 6 years x 4 years Carrying Amount of Motors at the end of Year 4 1,87,778 Accounting: The company should derecognize the existing Carrying Amount of Motors replaced of ₹ 1,87,778. Further, the acquisition cost of new motors of ₹ 6,00,000 would be capitalized as a separate component. This amount will be depreciated over the next 5 years at ₹ 6,00,000 ÷ 5 years = ₹ 1,20,000 p.a. 3. Revaluation Particulars ₹ Cost of the Plant at initial recognition [from (1) above] 28,16,667 Less: SLM Depreciation for 4 years: ₹ 28,16,667 ÷ 10 years 11,26,667 x 4 years Carrying Amount of Plant at the end of Year 4 16,90,000 Revalued Amount of Plant (Excluding Motors, since the 19,00,000 same is treated as a separate component: ₹ 25,00,000 – ₹ 6,00,000) Therefore, Gain on Revaluation credited to 2,10,000 Revaluation Reserve Revised Depreciation Charge p.a.: 19,00,000 ÷ 6 years 3,16,667 4. Derecognition Particulars Motors Plant (excluding Motors) Cost / Revalued Amount at end of 6,00,000 19,00,000 Year 4 Less: Depreciation for Years 5-8 1,20,000 x 4 3,16,667 x 4 = 4,80,000 =12,66,668 Carrying Amount before Disposal / 1,20,000 6,33,332 De-recognition Less: Disposal Proceeds ₹ 6,00,000 95,575 5,04,425 allocated in ratio of carrying amount Loss to be written off to P/L 24,425 1,28,907 Notes: (a) The Revaluation Surplus of ₹ 2,10,000 would be transferred directly to Retained Earnings. (b) The allocation of disposal proceeds of ₹ 6,00,000 for the plant as whole is apportioned based on carrying amount of motors and plant (excluding motors) Alternatively, it may be apportioned as 1/6 towards motors and 5/6 plant (excluding motors) based on the reasoning that the initially, motors amounted to 1/6 of the entire plant. This approach may not be preferable because there has been a revaluation of the plant (excluding motors) and a disposal and subsequent acquisition of the Motor, which is not in the initial proportion of 5/6 and 1/6 respectively.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 17,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Bharat Infrastructure Ltd. acquired a heavy machinery at a cost of ₹ 1,000 lakhs, the breakdown of its components is not provided. The estimated useful life of the machinery is 10 years. At the end of Year 6, the turbine, which is a major component of the machinery, needed replacement, as further usage and maintenance was uneconomical. The remainder of the machine is in good condition and is expected to last for the remaining 4 years. The cost of the new turbine is ₹ 450 lakhs. Give the accounting treatment for the new turbine, assuming SLM Depreciation and a discount rate of 8%.</p>",
+        "answer_html": "<p>As per AS 10, Property, Plant and Equipment, the derecognition of the carrying amount of components of an item of Property, Plant and Equipment occurs regardless of whether the cost of the previous part / inspection was identified in the transaction in which the item was acquired or constructed. If it is not practicable for an enterprise to determine the carrying amount of the replaced part/ inspection, it may use the cost of the replacement or the estimated cost of a future similar inspection as an indication of what the cost of the replaced part/ existing inspection component was when the item was acquired or constructed. In the given case, the new turbine will produce economic benefits to Bharat Infrastructure Ltd. and the cost is measurable. Since the recognition criteria is fulfilled, the same should be recognised as a separate item of Property, Plant and Equipment. However, since the initial breakup of the components is not available, the cost of the replacement of ₹ 450 lakhs can be used as an indication based on the guidance given above, discounted at 8% for the 6- year period lapsed. Thus, estimate of cost 6 years back = ₹ 450 lakhs ÷ 1.086 = ₹ 283.58 lakhs Current carrying amount of turbine (to be de-recognised) = Estimated cost ₹ 283.58 lakhs (–) SLM depreciation at 10% (useful life 10 years) for 6 years ₹ 170.15 lakhs= ₹ 113.43 lakhs. Hence revised carrying amount of the machinery will be as under: Particulars ₹ in lakhs Historical Cost [₹ 1,000 lakhs (–) SLM Depreciation at 10% 400.00 (10 year life) for 6 years] Add: Cost of new turbine 450.00 Less: Derecognition of current carrying amount of old turbine (113.43) New Carrying Amount of Machinery 736.57</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 18,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Preet Ltd. intends to set up a steel plant, for which it has acquired a dilapidated factor having an area of 5,000 acres at a cost of ₹ 60,000 per acre. Preet Ltd. has incurred ₹ 1.10 crores on demolishing the old Factory Building thereon. A sum of ₹ 63,00,000 (including 5% GST thereon) was realized from the sale of material salvaged from the site. Preet Ltd. incurred Stamp Duty and Registration Charges of 7% of land value, paid legal and consultancy charges ₹ 8,00,000 for land acquisition and incurred ₹ 1,25,000 on title guarantee insurance. Compute the value of the land acquired.</p>",
+        "answer_html": "<p>Particulars ₹ Purchase Price: 5,000 acres x ₹ 60,000 per acre 3,000.00 Stamp Duty and Registration Charges at 7% 210.00 Legal and Consultancy Fees 8.00 Title Guarantee Insurance 1.25 Demolition Expenses (Net of Salvage Income) 50.00 [₹ 110 lakhs (–)₹ 60 lakhs (₹ 63 lakhs x 100/105)] Cost of Land 3,269.25</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 19,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Star Limited purchased machinery for ₹ 6,80,000 (inclusive of GST of ₹ 40,000). Input credit is available for entire amount of GST paid. The company incurred the following other expense for installation. ₹ Cost of preparation of site for installation 21,200 Total Labour charges 56,000\n|     |     |     |     |   v  | v   |\n| --- | --- | --- | --- | ---- | --- |\n(200 out of the total of 500 men hours worked, were spent on installation of the machinery)\n| Spare parts and tools consumed in installation   |     |     |     |     | 5,000   |\n| ------------------------------------------------ | --- | --- | --- | --- | ------- |\n| Total salary of supervisor                       |     |     |     |     | 26,000  |\n(Time spent for installation was 25% of the total time worked)\n| Total technical expense  |     |     |     |     | 34,000  |\n| ------------------------ | --- | --- | --- | --- | ------- |\n(1/10 relates to the plant installation)\n| Test run and experimental production expenses      |     |     |     |     | 18,000  |\n| -------------------------------------------------- | --- | --- | --- | --- | ------- |\n| Consultancy charges to architect for plant set up  |     |     |     |     | 11,000  |\n| Depreciation on assets used for installation       |     |     |     |     | 12,000  |\nThe machine was ready for use on 15.01.20X1 but was used from 01.02.20X1. Due to this delay further expenses of ₹ 8,900 were incurred. Calculate the value at which the plant should be capitalized in the books of Star Limited.</p>",
+        "answer_html": "<p>Calculation of Cost of Plant\n|                             | Particulars  |     |                   | ₹         |\n| --------------------------- | ------------ | --- | ----------------- | --------- |\n| Purchase Price              |              |     | Given             | 6,80,000  |\n| Add: Site Preparation Cost  |              |     | Given             | 21,200    |\n|          Labour charges     |              |     | (56,000×200/500)  | 22,400    |\nGiven\n|         Spare parts          |           |               |                   | 5,000   |\n| ---------------------------- | --------- | ------------- | ----------------- | ------- |\n|         Supervisor’s Salary  |           |               | 25% of ₹ 26,000   | 6,500   |\n|         Technical costs      |           |               | 1/10 of ₹ 34,000  | 3,400   |\n|        Test                  | run  and  | experimental  | Given             | 18,000  |\nproduction charges\n|        Architect Fees for set up  |     |                    | Given  | 11,000  |\n| --------------------------------- | --- | ------------------ | ------ | ------- |\n|       Depreciation                | on  | assets  used  for  | Given  | 12,000  |\ninstallation\n| Total   Cost of Asset         |     |     |     | 7,79,500  |\n| ----------------------------- | --- | --- | --- | --------- |\n| Less:  GST credit receivable  |     |     |     | (40,000)  |\n| Value to be capitalized       |     |     |     | 7,39,500  |\nNote: Further Expenses of ₹ 8,900 from 15.1.20X1 to 1.2.20X1 to be charged to profit and loss A/c as plant was ready for production on 15.1.20X1.</p>",
+        "has_table": true
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [
+      4
+    ],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as12",
+    "unitcode": "M2-C9-U1",
+    "name": "AS 12 — Accounting for Government Grants",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>To encourage industrial promotion, IDCI offers subsidy worth ₹ 50 lakhs to all new industries set up in the specified industrial areas. This grant is in the nature of promoter’s contribution. How such subsidy should be accounted in the books?</p>",
+        "options": {
+          "A": "Credit it to capital reserve",
+          "B": "Credit it as ‘other income’ in the profit and loss account in the year of commencement of commercial operations",
+          "C": "Both (a) and (b) are permitted",
+          "D": "Credit it to general reserve"
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) Credit it to capital reserve</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>Government grants that are receivable as compensation for expenses or losses incurred in a previous accounting period or for the purpose of giving immediate financial support to the enterprise with no further related costs, should be</p>",
+        "options": {
+          "A": "recognised and disclosed in the Statement of Profit and Loss of the period in which they are receivable as an ordinary item.",
+          "B": "recognised and disclosed in the Statement of Profit and Loss of the period in which the losses or expenses were incurred.",
+          "C": "recognised and disclosed in the Statement of Profit and Loss of the period in which they are receivable, as an extraordinary item if appropriate as per AS 5.",
+          "D": "disclosed in the Statement of Profit and Loss of the period in which they are receivable, as an extraordinary item"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) recognised and disclosed in the Statement of Profit and Loss of the period in which they are receivable, as an extraordinary item if appropriate as per AS 5.</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>Which of the following is an acceptable method of accounting presentation for a government grant relating to an asset?</p>",
+        "options": {
+          "A": "Credit the grant immediately to Income statement",
+          "B": "Show the grant as part of Capital Reserve",
+          "C": "Reduce the grant from the cost of the asset or show it separately as a deferred income on the Liability side of the Balance Sheet.",
+          "D": "Show the grant as part of general Reserve"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Reduce the grant from the cost of the asset or show it separately as a deferred income on the Liability side of the Balance Sheet.</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>X Ltd. has received a grant of ₹ 20 crore for purchase of a qualified machine costing ₹ 80 crore. X Ltd has a policy to recognise the grant as a deduction from the cost of the asset. The expected remaining useful life of the machine is 10 years. Assume that there is no salvage value and the depreciation method is straight-line. The amount of annual depreciation to be charged as an expense in Profit and Loss Statement will be:</p>",
+        "options": {
+          "A": "₹ 10 crore",
+          "B": "₹ 6 crore",
+          "C": "₹ 2 crore",
+          "D": "₹ 8 crore"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) ₹ 6 crore</p>"
+      },
+      {
+        "source_num": 5,
+        "question_html": "<p>X Ltd has received a grant of ₹ 20 crore for purchase of a qualified machine costing ₹ 80 crore. X Ltd. has a policy to recognise the grant as deferred income. The expected remaining useful life of the machine is 10 years. Assume that there is no salvage value and the depreciation method is straight-line. The amount of other income to be to be recognised in Profit and Loss Statement will be:</p>",
+        "options": {
+          "A": "₹ 10 crore",
+          "B": "₹ 6 crore",
+          "C": "₹ 2 crore",
+          "D": "₹ 8 crore"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) ₹ 2 crore</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 6,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>AS 12 deals with recognition and measurement of government grants. Please elaborate the parameters which are required to be met before an entity can recognise government grants in its books?</p>",
+        "answer_html": "<p>A government grant is recognised when there is reasonable assurance that: • the enterprise will comply with the conditions attaching to it; and • the grant will be received. Receipt of a grant is not of itself conclusive evidence that the conditions attaching to the grant have been or will be fulfilled.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 7,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Supriya Ltd. received a grant of ₹ 2,500 lakhs during the accounting year 20X1- 20X2 from government for welfare activities to be carried on by the company for its employees. The grant prescribed conditions for its utilisation. However, during the year 20X2-20X3, it was found that the conditions of grants were not complied with and the grant had to be refunded to the government in full. Elucidate the current accounting treatment, with reference to the provisions of</p>",
+        "answer_html": "<p>As per AS 12 ‘Accounting for Government Grants’, Government grants sometimes become refundable because certain conditions are not fulfilled. A government grant that becomes refundable is treated as an extraordinary item as per AS 5. The amount refundable in respect of a government grant related to revenue is applied first against any unamortised deferred credit remaining in respect of the grant. To the extent that the amount refundable exceeds any such deferred credit, or where no deferred credit exists, the amount is charged immediately to profit and loss statement. In the present case, the amount of refund of government grant should be first adjusted against the unamortised deferred income in the books and the excess if any will be debited to profit & loss account of the company as an extraordinary item in the year 20X2-20X3.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 8,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Hygiene Ltd. had received a grant of ₹ 50 lakh in 2012 from a State Government towards installation of pollution control machinery on fulfilment of certain conditions. The company, however, failed to comply with the said conditions and consequently was required to refund the said amount in 2024. The company debited the said amount to its machinery account in 2024 on payment of the same. It also reworked the depreciation for the said machinery from the date of its purchase and passed necessary adjusting entries in the year 2024 to incorporate the retrospective impact of the same. State whether the treatment done by the company is correct or not.</p>",
+        "answer_html": "<p>As per the facts of the case, Hygiene Ltd. had received a grant of ₹ 50 lakh in 2012 from a State Government towards installation of pollution control machinery on fulfilment of certain conditions. However, the amount of grant has to be refunded since it failed to comply with the prescribed conditions. In such circumstances, AS 12, “Accounting for Government Grants”, requires that the amount refundable in respect of a government grant related to a specific fixed asset is recorded by increasing the book value of the asset or by reducing the capital reserve or the deferred income balance, as appropriate, by the amount refundable. The Standard further makes it clear that in the first alternative, i.e., where the book value of the asset is increased, depreciation on the revised book value should be provided prospectively over the residual useful life of the asset. Accordingly, the accounting treatment given by Hygiene Ltd. of increasing the value of the plant and machinery is quite proper. However, the accounting treatment in respect of depreciation given by the company of adjustment of depreciation with retrospective effect is improper and constitutes violation of AS 12.</p>",
+        "has_table": false
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as13",
+    "unitcode": "M2-C5-U3",
+    "name": "AS 13 — Accounting for Investments",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>The cost of Right shares is</p>",
+        "options": {
+          "A": "added to the cost of investments.",
+          "B": "subtracted from the cost of investments.",
+          "C": "no treatment is required.",
+          "D": "added to cost of investments at market value."
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) added to the cost of investments.</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>Long term investments are carried at</p>",
+        "options": {
+          "A": "fair value.",
+          "B": "cost less ‘other than temporary’ decline.",
+          "C": "Cost and market value whichever is less.",
+          "D": "Cost and market value whichever is higher."
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) cost less ‘other than temporary’ decline.</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>Current investments are carried at</p>",
+        "options": {
+          "A": "Fair value.",
+          "B": "cost.",
+          "C": "Cost and fair value, whichever is less.",
+          "D": "Cost and fair value, whichever is higher."
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Cost and fair value, whichever is less.</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>A Ltd. acquired 2,000 equity shares of Omega Ltd. on cum-right basis at ₹ 75 per share. Subsequently, omega Ltd. made a right issue of 1:1 at ₹ 60 per share, which was subscribed for by A. Total cost of investments at the year-end will be ₹</p>",
+        "options": {
+          "A": "2,70,000.",
+          "B": "1,50,000.",
+          "C": "1,20,000.",
+          "D": "1,70,000."
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) 2,70,000.</p>"
+      },
+      {
+        "source_num": 5,
+        "question_html": "<p>Cost of investment includes</p>",
+        "options": {
+          "A": "Purchase costs.",
+          "B": "Brokerage and Stamp duty paid.",
+          "C": "Both (a) and (b).",
+          "D": "none of the above."
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Both (a) and (b).</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 6,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Briefly explain disclosure requirements for Investments as per AS-13.</p>",
+        "answer_html": "<p>The disclosure requirements as per AS 13 (Revised) are as follows: (i) Accounting policies followed for the determination of carrying amount of investments. (ii) Classification of investment into current and long term. (iii) The amount included in profit and loss statements for (a) Interest, dividends and rentals for long term and current investments, disclosing therein gross income and tax deducted at source thereon; (b) Profits and losses on disposal of current investment and changes in carrying amount of such investments; (c) Profits and losses and disposal of long term investments and changes in carrying amount of investments. (iv) Aggregate amount of quoted and unquoted investments, giving the aggregate market value of quoted investments; (v) Any significant restrictions on investments like minimum holding period for sale/disposal, utilisation of sale proceeds or non-remittance of sale proceeds of investment held outside India. (vi) Other disclosures required by the relevant statute governing the enterprises</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 7,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>How will you classify the investments as per AS 13? Explain in Brief.</p>",
+        "answer_html": "<p>The investments are classified into two categories as per AS 13, viz., Current Investments and Long-term Investments. A current Investment is an investment that is by its nature readily realisable and is intended to be held for not more than one year from the date on which such investment is made. The carrying amount for current investments is the lower of cost and fair value. Any reduction to fair value and any reversals of such reductions are included in the statement of profit and loss. A long-term investment is an investment other than a current investment. Long term investments are usually carried at cost. However, when there is a decline, other than temporary, in the value of a long term investment, the carrying amount is reduced to recognise the decline. The reduction in carrying amount is charged to the statement of profit and loss.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 8,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Whether the accounting treatment 'at cost' under the head ‘Long Term Investments’ without providing for any diminution in value is correct and in accordance with the provisions of AS 13. If not, what should have been the accounting treatment in such a situation? Explain in brief.</p>",
+        "answer_html": "<p>The accounting treatment 'at cost' under the head 'Long Term Investment’ in the financial statements of the company without providing for any diminution in value is correct and is in accordance with the provisions of AS 13 provided that there is no decline, other than temporary, in the value of investment. If the decline in the value of investment is, other than temporary, compared to the time when the shares were purchased, provision is required to be made.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 9,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Mr. X acquires 200 shares of a company on cum-right basis for ₹ 70,000. He subsequently receives an offer of right to acquire fresh shares in the company in the proportion of 1:1 at ₹ 107 each. He does not subscribe but sells all the rights for ₹ 12,000. The market value of the shares after their becoming ex- rights has also gone down to ₹ 60,000. What should be the accounting treatment in this case?</p>",
+        "answer_html": "<p>As per AS 13, where the investments are acquired on cum-right basis and the market value of investments immediately after their becoming ex-right is lower than the cost for which they were acquired, it may be appropriate to apply the sale proceeds of rights to reduce the carrying amount of such investments to the market value. In this case, the amount of the ex-right market value of 200 shares bought by X immediately after the declaration of rights falls to ₹ 60,000. In this case, out of sale proceeds of ₹ 12,000, ₹ 10,000 may be applied to reduce the carrying amount to bring it to the market value and ₹ 2,000 would be credited to the profit and loss account.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 10,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>On 1st April, 20X1, XY Ltd. has 15,000 equity shares of ABC Ltd. at a book value of ₹ 15 per share (nominal value ₹ 10 per share). On 1st June, 20X1, XY Ltd. acquired 5,000 equity shares of ABC Ltd. for ₹ 1,00,000. ABC Ltd. announced a bonus and right issue. (1) Bonus was declared, at the rate of one equity share for every five shares held, on 1st July 20X1. (2) Right shares are to be issued to the existing shareholders on 1st September 20X1. The company will issue one right share for every 6 shares at 20% premium. No dividend was payable on these shares. (3) Dividend for the year ended 31.3.20X1 were declared by ABC Ltd. @ 20%, which was received by XY Ltd. on 31st October 20X1. XY Ltd. (i) Took up half the right issue. (ii) Sold the remaining rights for ₹ 8 per share. (iii) Sold half of its shareholdings on 1st January 20X2 at ₹ 16.50 per share. Brokerage being 1%. You are required to prepare Investment account of XY Ltd. for the year ended 31st March 20X2 assuming the shares are being valued at average cost.</p>",
+        "answer_html": "<p>In the books of XY Ltd. Investment in equity shares of ABC Ltd. for the year ended 31st March, 20X2 Date Particulars No. Dividend Amount Date Particulars No. Dividend Amount ₹ ₹ ₹ ₹ 20X1 April To Balance b/d 15,000 - 2,25,000 20X1 By Bank A/c - 30,000 10,000 1 Oct. 31 (W.N. 5) June 1 To Bank A/c 5,000 -- 1,00,000 20X2 By Bank A/c 13,000 - 2,12,355 Jan. 1 (W.N.4) July 1 To Bonus Issue 4,000 - - March By Balance c/d 13,000 - 1,69,500 Sept.1 To Bank A/c 2,000 - 24,000 20X2 To P & L A/c - - 42,855 Jan 1 (W.N. 4) “20X2 To P & L A/c - 30,000 - March 31 26,000 30,000 3,91,855 26,000 30,000 3,91,855\n|     |     |     |     |     |     |     |\n| --- | --- | --- | --- | --- | --- | --- |\nWorking Notes: 1. Calculation of no. of bonus shares issued 15,000 shares+5,000 shares\n|   Bonus Shares =  |     |     |     |     | x 1= 4,000 shares  |     |\n| ----------------- | --- | --- | --- | --- | ------------------ | --- |\n2. Calculation of right shares subscribed 15,000 shares+5,000 shares+4,000 shares\n|   Right Shares =  |     |     |     |     |     | = 4,000 shares  |\n| ----------------- | --- | --- | --- | --- | --- | --------------- |\n4,000\n|   Shares subscribed by XY Ltd. =  |     |     |     | = 2,000 shares   |     |     |\n| --------------------------------- | --- | --- | --- | ---------------- | --- | --- |\nValue of right shares subscribed = 2,000 shares @ ₹ 12 per share = ₹ 24,000 3. Calculation of sale of right entitlement 2,000 shares x ₹ 8 per share = ₹ 16,000 Amount received from sale of rights will be credited to statement of profit\n| and loss.  |     |     |     |     |     |     |\n| ---------- | --- | --- | --- | --- | --- | --- |\n4. Calculation of profit on sale of shares\n|   Total holding  |     | = 15,000 shares     |     | original      |     |     |\n| ---------------- | --- | ------------------- | --- | ------------- | --- | --- |\n|                  |     |       5,000 shares  |     | purchased     |     |     |\n|                  |     |     4,000 shares    |     | bonus         |     |     |\n|                  |     |     2,000 shares    |     | right shares  |     |     |\n|                  |     |   26,000 shares     |     |               |     |     |\n50% of the holdings were sold i.e. 13,000 shares (26,000 x1/2) were sold. Cost of total holdings of 26,000 shares (on average basis) = ₹ 2,25,000 + ₹ 1,00,000 + ₹ 24,000– ₹ 10,000 = ₹ 3,39,000 Average cost of 13,000 shares would be 3,39,000\n|     | =   | ×13,000 = ₹ 1,69,500  |     |     |     |     |\n| --- | --- | --------------------- | --- | --- | --- | --- |\n26,000\n|     |     |     |     |     |     |     |\n| --- | --- | --- | --- | --- | --- | --- |\n| --- | -------------------- | --- | --- | --- | --- |\n|     |     |     |     |     | ₹   |\n| --- | --- | --- | --- | --- | --- |\nSale proceeds of 13,000 shares (13,000 x ₹16.50) 2,14,500 Less: 1% Brokerage (2,145) 2,12,355 Less: Cost of 13,000 shares (1,69,500)\n|   Profit on sale  |     |     |     |    42,855  |     |\n| ----------------- | --- | --- | --- | ---------- | --- |\n5. Dividend received on investment held as on 1st April, 20X1 = 15,000 shares x ₹ 10 x 20% = ₹ 30,000 will be transferred to Profit and Loss A/c Dividend received on shares purchased on 1st June, 20X1 = 5,000 shares x ₹ 10 x 20% = ₹10,000 will be adjusted to Investment A/c Note: It is presumed that no dividend is received on bonus shares as bonus shares are declared on 1st July, 20X1 and dividend pertains to the year ended 31.3.20X1. 6. Calculation of closing value of shares (on average basis) as on 31st March, 20X2 3,39,000\n|   13,000× | = ₹ 1,69,500  |     |     |     |     |\n| --------- | ------------- | --- | --- | --- | --- |\n26,000</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 11,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>The following information is presented by Mr. Z (a stock broker), relating to his holding in 9% Central Government Bonds. Opening balance (nominal value) ₹ 1,20,000, Cost ₹ 1,18,000 (Nominal value of each unit is ₹ 100). 1.3.20X1 Purchased 200 units, ex-interest at ₹ 98. 1.7.20X1 Sold 500 units, ex-interest out of original holding at ₹ 100. 1.10.20X1 Purchased 150 units at ₹ 98, cum interest. 1.11.20X1 Sold 300 units, ex-interest at ₹ 99 out of original holdings. Interest dates are 30th September and 31st March. Mr. Z closes his books every 31st December. Show the investment account as it would appear in his books. Mr. Z follows FIFO method.</p>",
+        "answer_html": "<p>In the Books of Mr. Z 9% Central Government Bonds (Investment) Account Particulars Nominal Interest Principal Particulars Nominal Interest Principal\n|                      | Value  |                     | Value  |          |     |\n| -------------------- | ------ | ------------------- | ------ | -------- | --- |\n| 20X1                 | ₹  ₹   | ₹  20X1             |        | ₹  ₹  ₹  |     |\n| Jan.1  To  Balance   |        |  Mar.  By Bank A/c  |        |          |     |\nb/d 1,20,000 2,700 1,18,000 31 (W.N.3) - 6,300 -\n| Marc To Bank A/c  |     |  July 1 By Bank A/c  |     |     |     |\n| ----------------- | --- | -------------------- | --- | --- | --- |\nh 1 (W.N.2) 20,000 750 19,600 (W.N.4) 50,000 1,125 50,000\n| July 1 To P&L A/c  | -  -  | 833 Sept.  By Bank A/c  |     |           |     |\n| ------------------ | ----- | ----------------------- | --- | --------- | --- |\n|    (W.N.5)         |       | 30  (W.N.6)             |     | -  4,050  | -   |\n| Oct.  To Bank A/c  |       |  Nov.  By Bank A/c      |     |           |     |\n1 (150 x 98) 15,000 - 14,700 1 (W.N.7) 30,000 225 29,700\n| ASSETS BASED ACCOUNTING STANDARDS  |     |     |     |     |     |\n| ---------------------------------- | --- | --- | --- | --- | --- |\n|     |     |     |     |     |     |\n| --- | --- | --- | --- | --- | --- |\n| Nov.  To P&L A/c  | -  -  | 200 Dec.  By  | Balance   |     |     |\n| ----------------- | ----- | ------------- | --------- | --- | --- |\n| 1  (W.N.8)        |            | 31   c/d (W.N. 9  | 75,000  | 1,688  | 73,6v3 3  |\n| ----------------- | ---------- | ----------------- | ------- | ------ | --------- |\n|                   |            | & W.N.10)         |         |        |           |\n| Dec.  To P&L A/c  |            |                   |         |        |           |\n| 31  (b.f.)        |     9,938  |                   |         |        |           |\n(Transfer) 1,55,000 13,388 1,53,333 1,55,000 13,388 1,53,333 Working Note: 1. Interest element in opening balance of bonds = 1,20,000 x 9% x 3/12 = ₹ 2,700\n| 2.   Purchase of bonds on 1. 3.20X1  |     |     |     |     |     |\n| ------------------------------------ | --- | --- | --- | --- | --- |\nInterest element in purchase of bonds = 200 x 100 x 9% x 5/12 = ₹ 750 Investment element in purchase of bonds = 200 x 98 = ₹ 19,600 3. Interest for half-year ended 31 March = 1,400 x 100 x 9% x 6/12 = ₹ 6,300\n| 4.   Sale of bonds on 1.7.20X1                        |     |     |     |     |     |\n| ----------------------------------------------------- | --- | --- | --- | --- | --- |\n|   Interest element = 500 x 100 x 9% x 3/12 = ₹ 1,125  |     |     |     |     |     |\n|   Investment element = 500 x 100 = ₹ 50,000           |     |     |     |     |     |\n| 5.   Profit on sale of bonds on 1.7.20X1              |     |     |     |     |     |\n|   Cost of bonds = (1,18,000/ 1,200) x 500 = ₹ 49,167  |     |     |     |     |     |\n|   Sale proceeds = ₹ 50,000                            |     |     |     |     |     |\n|   Profit element = ₹ 833                              |     |     |     |     |     |\n| 6.   Interest for half-year ended 30 September        |     |     |     |     |     |\n|   = 900 x 100 x 9% x 6/12 = ₹ 4,050                   |     |     |     |     |     |\n| 7.   Sale of bonds on 1.11.20X1                       |     |     |     |     |     |\n|   Interest element = 300 x 100 x 9% x 1/12 = ₹ 225    |     |     |     |     |     |\n|   Investment element = 300 x 99 = ₹ 29,700            |     |     |     |     |     |\n| 8.   Profit on sale of bonds on 1.11.20X1             |     |     |     |     |     |\n|   Cost of bonds = (1,18,000/ 1,200) x 300 = ₹ 29,500  |     |     |     |     |     |\n|   Sale proceeds = ₹ 29,700                            |     |     |     |     |     |\n|   Profit element = ₹ 200                              |     |     |     |     |     |\n|     |     | ADVANCED ACCOUNTING  |     |     |     |     |\n| --- | --- | -------------------- | --- | --- | --- | --- |\n| 9.   | Closing value of investment  |     |     |     |     |     |\n| ---- | ---------------------------- | --- | --- | --- | --- | --- |\n|     | Calculation  | of                  | closing  Nominal  |     |     | ₹   |\n| --- | ------------ | ------------------- | ----------------- | --- | --- | --- |\n|     | balance:     |                     | value             |     |     |     |\n|     | Bonds        | in  hand  remained  | in                |     |     |     |\nhand at 31st December 20X1\n|     | From original holding   |     |     |   1,18,000 | 39,333  |     |\n| --- | ----------------------- | --- | --- | ---------- | ------- | --- |\n40,000 1,20,000\n|     | (1,20,000 – 50,000 – 30,000) =  |     | 40,000  |     |           |     |\n| --- | ------------------------------- | --- | ------- | --- | --------- | --- |\n|     | Purchased on 1st March          |     | 20,000  |     |   19,600  |     |\nPurchased on 1st October\n|     |     |     | 15,000  |     |   14,700  |     |\n| --- | --- | --- | ------- | --- | --------- | --- |\n|     |     |     | 75,000  |     |   73,633  |     |\n10. Interest element in closing balance of bonds = 750 x 100 x 9% x 3/12\n|     |  =  ₹ 1,688  |     |     |     |     |     |\n| --- | ------------ | --- | --- | --- | --- | --- |</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 12,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Mr. Purohit furnishes the following details relating to his holding in 8% Debentures (₹ 100 each) of P Ltd., held as Current assets: 1.4.20X1 Opening balance – Nominal value ₹ 1,20,000, Cost ₹ 1,18,000 1.7.20X1 100 Debentures purchased ex-interest at ₹ 98 1.10.20X1 Sold 200 Debentures ex-interest at ₹ 100 1.1.20X2 Purchased 50 Debentures at ₹ 98 ex-interest 1.2.20X2 Sold 200 Debentures ex-interest at ₹99 Due dates of interest are 30th September and 31st March. Mr. Purohit closes his books on 31.3.20X2. Brokerage at 1% is to be paid for each transaction (at ex-interest price). Show Investment account as it would appear in his books. Assume FIFO method. Market value of 8% Debentures of P Limited on 31.3.20X2 is ₹ 99.</p>",
+        "answer_html": "<p>Investment A/c of Mr. Purohit for the year ending on 31-3-20X2 (Scrip: 8% Debentures of P Limited) (Interest Payable on 30th September and 31st March) Date Particulars Nominal Interest Cost Date Particulars Nominal Interest Cost\n|     |     | Value  |        | Value  |       |     |\n| --- | --- | ------ | ------ | ------ | ----- | --- |\n|     |     |   ₹    | ₹      |        |   ₹   | ₹   |\n1.4.20X1 To Balance b/d 1,20,000 - 1,18,000 30.9.20X1 By Bank (1,300 x - 5,200 - 100 x 8% x 6/12) 1.7.20X1 To Bank (ex- 10,000 200 9,898 1.10.20X1 By Bank (W.N.4) 20,000 - 19,800 Interest) 1.10.20X1 To Profit & Loss 133 1.2.20X2 By Bank (ex- 20,000 533 19,602\n| A/c (W.N.4)  |     |     | Interest) (W.N.5)  |     |     |     |\n| ------------ | --- | --- | ------------------ | --- | --- | --- |\n|                                    |     |     |     | 55.1.10  | 099      |\n| ---------------------------------- | --- | --- | --- | -------- | -------- |\n| ASSETS BASED ACCOUNTING STANDARDS  |     |     |     |          |          |\n|     |     |     |     |     |     |\n| --- | --- | --- | --- | --- | --- |\n1.1.20X2 To Bank (ex- 5,000 100 4,949 1.2.20X2 By Profit & Loss 64\n| Interest)  |     |     | A/c (W.N.5)  |     |     |\n| ---------- | --- | --- | ------------ | --- | --- |\n31.3.20X2 To Profit & Loss - 9,233 31.3.20X2 By Bank (950 x - 3,800 -\n| A/c (Bal. fig.)  |     |     | 100 x 8% x 6/12)  |     |     |\n| ---------------- | --- | --- | ----------------- | --- | --- |\n31.3.20X2 By Balance c/d 95,000 - 93,514\n|     | 1,35,000  9,533  | 1,32,980   |     | 1,35,000  9,533  | 1,32,980  |\n| --- | ---------------- | ---------- | --- | ---------------- | --------- |\nWorking Notes: 1. Purchase of debentures on 1.7.20X1 Interest element = 100 x 100 x 8% x 3/12 = ₹ 200 Investment element = (100 x 98) + [1% (100 x 98)] = ₹ 9,898 2. Purchase of debentures on 1.1.20X2 Interest element = 50 x 100 x 8% x 3/12 = ₹ 100 Investment element = {(50 x 98) + [1%(50 x 98)]} = ₹ 4,949 3. Valuation of closing balance as on 31.3.20X2: Market value of 950 Debentures at ₹ 99 = ₹ 94,050 Cost of\n|                        |     | 1,18,000 |              |     |     |\n| ---------------------- | --- | --------- | ------------- | --- | --- |\n|   800 Debentures cost  |     | =         |  =    78,667  |     |     |\n|                        |     |          | x80,000      |     |     |\n1,20,000 \n|   100 Debentures cost  |     | =         | 9,898   |     |     |\n| ---------------------- | --- | --------- | ------- | --- | --- |\n|   50 Debentures cost   |     | =         | 4,949   |     |     |\n|                        |     |           | 93,514  |     |     |\nValue at the end = ₹ 93,514, i.e., whichever is less 4. Profit on sale of debentures as on 1.10.20X1\n|                                          |     |     |     |     | ₹       |\n| ---------------------------------------- | --- | --- | --- | --- | ------- |\n| Sales price of debentures (200 x ₹ 100)  |     |     |     |     | 20,000  |\n|     |     | ADVANCED ACCOUNTING  |     |     |     |     |\n| --- | --- | -------------------- | --- | --- | --- | --- |\n|     | Less: Brokerage @ 1%  |     |     |     |   (200)  |     |\n| --- | --------------------- | --- | --- | --- | -------- | --- |\n|     |                          |     |             |     | 19,800  |     |\n| --- | ------------------------ | --- | ----------- | --- | ------- | --- |\n|     |                          |     | 1,18,000   |    |         |     |\n|     | Less: Cost of Debentures |     |  x20,000= |     |         |     |\n(19,667)\n|     |                                            |     | 1,20,000    |    |             |     |\n| --- | ------------------------------------------ | --- | ------------ | --- | ----------- | --- |\n|     | Profit on sale                             |     |              |     |        133  |     |\n| 5.  | Loss on sale of debentures as on 1.2.20X2  |     |              |     |             |     |\n|     |                                            |     |              |     |             | ₹   |\n|     | Sales price of debentures (200 x ₹ 99)     |     |              |     | 19,800      |     |\n|     | Less: Brokerage @ 1%                       |     |              |     |   (198)     |     |\n|     |                                            |     |              |     | 19,602      |     |\n|     |                                            |     | 1,18,000    |    | (19,666     |     |\n|     | Less: Cost of Debentures                   |     |  x20,000=  |     |             |     |\n|     |                                            |     | 1,20,000    |    |             | )   |\n|     | Loss on sale                               |     |              |     |        64   |     |\nInterest element in sale of investment = 200 x 100 x 8% x 4/12 ₹ 533</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 13,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>On 1st April, 20X1, Mr. Vijay had 30,000 Equity shares in X Ltd. at a book value of ₹ 4,50,000 (Face Value ₹ 10 per share). On 22nd June, 20X1, he purchased another 5000 shares of the same company for ₹ 80,000. The Directors of X Ltd. announced a bonus of equity shares in the ratio of one share for seven shares held on 10th August, 20X1. On 31st August, 20X1 the Company made a right issue in the ratio of three shares for every eight shares held, on payment of ₹ 15 per share. Due date for the payment was 30th September, 20X1, Mr. Vijay subscribed to 2/3rd of the right shares and sold the remaining of his entitlement to Viru for a consideration of ₹ 2 per share. On 31st October, 20X1, Vijay received dividends from X Ltd. @ 20% for the year ended 31st March, 20X1. Dividend for the shares acquired by him on 22nd June, 20X1 to be adjusted against the cost of purchase. On 15th November, 20X1 Vijay sold 20,000 Equity shares at a premium of ₹ 5 per share. You are required to prepare Investment Account in the books of Mr. Vijay for the year ended 31st March, 20X2 assuming the shares are being valued at average cost.</p>",
+        "answer_html": "<p>Investment Account in Books of Vijay (Scrip: Equity Shares in X Ltd.)\n|     |     | No.  Amount   |       |     | No.  Amount  |      |\n| --- | --- | ------------- | ----- | --- | ------------ | ---- |\n|     |     |               | ₹     |     |              | ₹    |\n1.4.20X1 To Bal b/d 30,000 4,50,000 31.10.20X1 By Bank — 10,000\n|     |     |     |     | (dividend  |     |     |\n| --- | --- | --- | --- | ---------- | --- | --- |\n| 22.6.20X1  | To Bank  | 5,000  | 80,000  | on  shares  |     |     |\n| ---------- | -------- | ------ | ------- | ----------- | --- | --- |\nacquired on\n| 10.8.20X1  | To Bonus  | 5,000              | _   |     |     |     |\n| ---------- | --------- | ------------------ | --- | --- | --- | --- |\n| 30.9.20X1  | To Bank   | 10,000  1,50,000   |     |     |     |     |\n(Rights Shares)\n|     |     |     |     |     |     |\n| --- | --- | --- | --- | --- | --- |\n|     |     |     |     |     | v   |\n15.11.20X1 To P&L A/c 32,000 15.11.20X1 By Bank 20,000 3,00,000 (Profit\n|     | on  sale  | of                 |             | (Sale        | of                |\n| --- | --------- | ------------------ | ----------- | ------------ | ----------------- |\n|     | shares)   |                    |             | shares)      |                   |\n|     |           |                    |  31.3.20X2  | By Bal. c/d  | 30,000  4,02,000  |\n|     |           | 50,000  7,12,000   |             |              | 50,000  7,12,000  |\nWorking Notes:\n| (1)  | Bonus Shares = (30,000 + 5,000) / 7 = 5,000 shares  |     |     |     |     |\n| ---- | --------------------------------------------------- | --- | --- | --- | --- |\n(30,000+5,000+5,000)\n| (2)  | Right Shares = |     |     | 3 = 15,000 shares   |     |\n| ---- | -------------- | --- | --- | -------------------- | --- |\n| (3)  | Rights shares sold = 15,000×1/3 = 5,000 shares  |     |     |     |     |\n| ---- | ----------------------------------------------- | --- | --- | --- | --- |\n(4) Dividend received = 30,000×10×20% = ₹ 60,000 will be taken to P&L statement\n| (5)    | Dividend on shares purchased on 22.6.20X1  |     |     |     |     |\n| ------ | ------------------------------------------ | --- | --- | --- | --- |\n|        | = 5,000×10×20%                             |     |     |     |     |\n|        | = ₹ 10,000 is adjusted to Investment A/c   |     |     |     |     |\n| (6)    | Profit on sale of 20,000 shares            |     |     |     |     |\n|        | = Sales proceeds – Average cost            |     |     |     |     |\n|        | Sales proceeds = ₹ 3,00,000                |     |     |     |     |\n|        |                                            | (   |     | )   |     |\n4,50,000+80,000+1,50,000-10,000\n|     | Average cost = |     |     | ×20,000 = ₹ 2,68,000  |     |\n| --- | -------------- | --- | --- | --------------------- | --- |\n50,000\n|      | Profit = ₹ 3,00,000– ₹ 2,68,000= ₹ 32,000.  |     |     |     |     |\n| ---- | ------------------------------------------- | --- | --- | --- | --- |\n| (7)  | Cost of shares on 31.3.20X2                 |     |     |     |     |\n|      | (                                           |     | )   |     |     |\n4,50,000+80,000+1,50,000-10,000\n|     |     |     | ×30,000= ₹ 4,02,000  |     |     |\n| --- | --- | --- | -------------------- | --- | --- |\n50,000 (8) Sale of rights amounting ₹ 10,000 (₹ 2 x 5,000 shares) will not be shown in investment A/c but will directly be taken to P & L statement.</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 14,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Blue-chip Equity Investments Ltd., wants to re-classify its investments in accordance with AS 13 (Revised). State the values, at which the investments have to be reclassified in the following cases: (i) Long term investments in Company A, costing ₹ 8.5 lakhs are to be re- classified as current. The company had reduced the value of these investments to ₹ 6.5 lakhs to recognise ‘other than temporary’ decline in value. The fair value on date of transfer is ₹ 6.8 lakhs. (ii) Long term investments in Company B, costing ₹ 7 lakhs are to be re- classified as current. The fair value on date of transfer is ₹ 8 lakhs and book value is ₹ 7 lakhs. (iii) Current investment in Company C, costing ₹ 10 lakhs are to be re- classified as long term as the company wants to retain them. The market value on date of transfer is ₹ 12 lakhs.</p>",
+        "answer_html": "<p>As per AS 13 (Revised) ‘Accounting for Investments’, where long-term investments are reclassified as current investments, transfers are made at the lower of cost and carrying amount at the date of transfer. And where investments are reclassified from current to long term, transfers are made at lower of cost and fair value on the date of transfer. Accordingly, the re-classification will be done on the following basis: (i) In this case, carrying amount of investment on the date of transfer is less than the cost; hence this re-classified current investment should be carried at ₹ 6.5 lakhs in the books. (ii) The carrying / book value of the long term investment is same as cost i.e. ₹ 7 lakhs. Hence this long term investment will be reclassified as current investment at book value of ₹ 7 lakhs only. (iii) In this case, reclassification of current investment into long-term investments will be made at ₹ 10 lakhs as cost is less than its market value of ₹ 12 lakhs.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 15,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Gowtham Limited invested in shares of another company (with the intention to hold the shares for short-term period) on 30th November, 2021 at a cost of ₹ 4,25,000. It also earlier purchased Gold of ₹ 8,00,000 and Silver of ₹ 3,50,000 on 31st March, 20X1. Market values as on 31st March, 20X4, of the above investments are as follows: Shares ₹ 3,50,000 Gold ₹ 10,25,000 Silver ₹ 5,10,000 You are required to explain how will the above investments be shown (individually and in total) in the books of account of Gowtham Limited for the year ending 31st March, 20X4 as per the provisions of AS 13.</p>",
+        "answer_html": "<p>As per AS 13 (Revised) ‘Accounting for Investments’, for investment in shares - if the investment is purchased with an intention to hold for short-term period (less than one year), then it will be classified as current investment and to be carried at lower of cost and fair value, i.e., in case of shares, at lower of cost (₹ 4,25,000) and market value (₹ 3,50,000) as on 31 March 20X4, i.e., ₹ 3,50,000. Gold and silver are generally purchased with an intention to hold it for long term period (more than one year) until and unless given otherwise. Hence, the investment in Gold and Silver (purchased on 31stMarch, 20X1) should continue to be shown at cost (since there is no ‘other than temporary’ diminution) as on 31st March, 20X4, i.e., ₹ 8,00,000 and ₹3,50,000 respectively, though their market values have been increased. Thus the shares, gold and silver will be shown at ₹ 3,50,000, ₹ 8,00,000 and ₹ 3,50,000 respectively and hence, total investment will be valued at ₹ 15,00,000 for the year ending on 31st March, 20X4 as per AS 13.</p>",
+        "has_table": false
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as15",
+    "unitcode": "M2-C6-U1",
+    "name": "AS 15 — Employee Benefits",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>Gratuity and Pension would be examples of:</p>",
+        "options": {
+          "A": "Short-term employee benefits",
+          "B": "Long-term employee benefits",
+          "C": "Post-employment benefits.",
+          "D": "None of the above."
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Post-employment benefits.</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>Non-accumulating compensating absence is commonly referred to as:</p>",
+        "options": {
+          "A": "Earned Leave",
+          "B": "Sick Leave",
+          "C": "Casual leave",
+          "D": "All of the above"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Casual leave</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>The plans that are established by legislation to cover all enterprises and are operated by Governments include:</p>",
+        "options": {
+          "A": "Multi-Employer plans",
+          "B": "State plans",
+          "C": "Insured Benefits",
+          "D": "Employee benefit plan"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) State plans</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>Best estimates of the variable to determine the eventual cost of post- employment benefits is referred to as:</p>",
+        "options": {
+          "A": "Employer’s contribution",
+          "B": "Actuarial assumptions",
+          "C": "Cost to Company",
+          "D": "Employee’s contribution"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) Actuarial assumptions</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 7,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>A company has a scheme for payment of settlement allowance to retiring employees. Under the scheme, retiring employees are entitled to reimbursement of certain travel expenses for class they are entitled to as per company rule and to a lump-sum payment to cover expenses on food and stay during the travel. Alternatively, employees can claim a lump sum amount equal to one month pay last drawn. The company’s contentions in this matter are: (i) Settlement allowance does not depend upon the length of service of employee. It is restricted to employee’s eligibility under the Travel rule of the company or where option for lump-sum payment is exercised, equal to the last pay drawn. (ii) Since it is not related to the length of service of the employees, it is accounted for on claim basis. State whether the contentions of the company are correct as per relevant Accounting Standard. Give reasons in support of your answer.</p>",
+        "answer_html": "<p>The present case falls under the category of defined benefit scheme under Para 49 of AS 15 (Revised) “Employee Benefits”. The said para encompasses cases where payment promised to be made to an employee at or near retirement presents significant difficulties in the determination of periodic charge to the statement of profit and loss. The contention of the Company that the settlement allowance will be accounted for on claim basis is not correct even if company’s obligation under the scheme is uncertain and requires estimation. In estimating the obligation, assumptions may need to be made regarding future conditions and events, which are largely outside the company’s control. Thus,\n| --- | --- | -------------------- | --- | --- | --- |\n(1) Settlement allowance payable by the company is a defined retirement benefit, covered by AS 15 (Revised). (2) A provision should be made every year in the accounts for the accruing liability on account of settlement allowance. The amount of provision should be calculated according to actuarial valuation. (3) Where, however, the amount of provision so determined is not material, the company can follow some other method of accounting for settlement allowances.</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 8,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>The following data apply to ‘X’ Ltd. defined benefit pension plan for the year ended 31.03.20X2 calculate the actual return on plan assets: - Benefits paid 2,00,000 - Employer contribution 2,80,000 - Fair market value of plan assets on 31.03.20X2 11,40,000 - Fair market value of plan assets as on 31.03.20X1 8,00,000</p>",
+        "answer_html": "<p>₹\n| Fair value of plan assets on 31.3.20X1  |                        |     |     |            | 8,00,000    |\n| --------------------------------------- | ---------------------- | --- | --- | ---------- | ----------- |\n| Add:                                    | Employer contribution  |     |     |            | 2,80,000    |\n| Less: Benefits paid                     |                        |     |     |            | (2,00,000)  |\n|                                         |                        |     |     |       (A)  |   8,80,000  |\nFair market value of plan assets at 31.3.20X2 (B) 11,40,000\n| Actual return on plan assets    |     |     |     |    (B-A)  |   2,60,000  |\n| ------------------------------- | --- | --- | --- | --------- | ----------- |\nComputation of Expected Returns on Plan Assets as on 31st March, 20X2, as</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 9,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>The fair value of plan assets of Anupam Ltd. was ₹ 2,00,000 in respect of employee benefit pension plan as on 1st April, 20X1. On 30th September, 20X1 the plan paid out benefits of ₹ 25,000 and received inward contributions of ₹ 55,000. On 31st March, 20X2 the fair value of plan assets was ₹ 3,00,000. On 1st April, 20X1 the company made the following estimates, based on its market studies and prevailing prices. % Interest and dividend income (after tax) payable by fund 10.25 Realized gains on plan assets (after tax) 3.00 Fund administrative costs (3.00) Expected rate of return 10.25 Calculate the expected and actual returns on plan assets as on 31st March, 20X2, as per AS 15.</p>",
+        "answer_html": "<p>per AS 15\n|     |     |     |     |     |  ₹   |\n| --- | --- | --- | --- | --- | ---- |\nReturn on opening value of plan assets of ₹ 2,00,000 (held 20,500 for the year) @ 10.25% Add: Return on net gain of ₹ 30,000 (i.e. ₹ 55,000 – ₹ 25,000) during the year i.e. held for six months @ 5% 1,500\n| (equivalent  | to  10.25%  | annually,  | compounded  | every  six  |     |\n| ------------ | ----------- | ---------- | ----------- | ----------- | --- |\nmonths) Expected return on plan assets as on 31st March, 20X2 22,000\n|                                         |     |     |     |     |     |     | 6 .2  7 7 |       |     |\n| --------------------------------------- | --- | --- | --- | --- | --- | --- | --------- | ----- | --- |\n| LIABILITIES BASED ACCOUNTING STANDARDS  |     |     |     |     |     |     | 6 .2      |       |     |\n|     |     |     |     |     |     |     |     |     |     |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\nComputation of Actual Returns on Plan Assets as on 31st March, 20X2, as per AS 15\n|     |     |     |     |     |     |     |  ₹   |  ₹   |     |\n| --- | --- | --- | --- | --- | --- | --- | ---- | ---- | --- |\nFair value of Plan Assets as on 31st March, 20X2 3,00,000\n| Less:  Fair  | value  | of  Plan  | Assets  | as  | on   | (2,00,000)  |     |     |     |\n| ------------ | ------ | --------- | ------- | --- | ---- | ----------- | --- | --- | --- |\n1st April, 20X1\n| Add:  Contribution  |     | received  |     | as  | on   | 55,000  | (2,55,000)  |     |     |\n| ------------------- | --- | --------- | --- | --- | ---- | ------- | ----------- | --- | --- |\n30th September, 20X1\n|                                                 |          |           |         |     |      |     |   45,000  |     |     |\n| ----------------------------------------------- | -------- | --------- | ------- | --- | ---- | --- | --------- | --- | --- |\n| Add:  Benefits paid as on 30th September, 20X1  |          |           |         |     |      |     |   25,000  |     |     |\n| Actual                                          | returns  | on  Plan  | Assets  | as  | on   |     |   70,000  |     |     |\n31st March, 20X2</p>",
+        "has_table": true
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [
+      5,
+      6
+    ],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as16",
+    "unitcode": "M2-C5-U4",
+    "name": "AS 16 — Borrowing Costs",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>As per AS 16, all the following are qualifying assets except</p>",
+        "options": {
+          "A": "Manufacturing plants and Power generation facilities",
+          "B": "Inventories that require substantial period of time",
+          "C": "Assets those are ready for sale.",
+          "D": "None of the above"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Assets those are ready for sale.</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>Which of the following statement is correct:</p>",
+        "options": {
+          "A": "Entire exchange gain is reduced from the cost of the Qualifying asset.",
+          "B": "Entire exchange loss is added to the cost of a Qualifying asset.",
+          "C": "No adjustment is done for the exchange loss while computing cost of Qualifying asset.",
+          "D": "None of the above"
+        },
+        "correct_option": "D",
+        "answer_html": "<p><strong>Answer:</strong> (D) None of the above</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>Capitalisation rate considers:</p>",
+        "options": {
+          "A": "Borrowing costs on general borrowings only.",
+          "B": "Borrowing costs on general and specific borrowings both.",
+          "C": "Borrowing costs on specific borrowings only",
+          "D": "None of the above"
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) Borrowing costs on general borrowings only.</p>"
+      },
+      {
+        "source_num": 5,
+        "question_html": "<p>X Ltd is commencing a new construction project, which is to be financed by borrowing. The key dates are as follows: (i) 15th May, 20X1: Loan interest relating to the project starts to be incurred (ii) 2nd June, 20X1: Technical site planning commences (iii) 19th June, 20X1: Expenditure on the project started to be incurred (iv) 18th July, 20X1: Construction work commences Identify the commencement date for capitalisation under AS 16.</p>",
+        "options": {
+          "A": "15th May, 20X1.",
+          "B": "19th June, 20X1.",
+          "C": "18th July, 20X1.",
+          "D": "2nd June, 20X1"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) 19th June, 20X1.</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 6,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>When capitalization of borrowing cost should cease as per Accounting Standard 16? Explain the provision.</p>",
+        "answer_html": "<p>Capitalization of borrowing costs should cease when substantially all the activities necessary to prepare the qualifying asset for its intended use or sale are complete. An asset is normally ready for its intended use or sale when its physical construction or production is complete even though routine administrative work might still continue. If minor modifications such as the decoration of a property to the user’s specification, are all that are outstanding, this indicates that substantially all the activities are complete. When the construction of a qualifying asset is completed in parts and a completed part is capable of being used while construction continues for the other parts, capitalisation of borrowing costs in relation to a part should cease when substantially all the activities necessary to prepare that part for its intended use or sale are complete.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 7,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>H Ltd. incurs borrowing costs for the purpose of construction of a qualifying asset for its own use. The construction gets completed on May 31, 20X1. However, decoration work is under process which is expected to be completed by November 20X1 after which H Ltd. will be able to start using the said asset for its own use. H Ltd. wants to capitalize the eligible borrowing costs incurred up to November 20X1.</p>",
+        "answer_html": "<p>The capitalization of borrowing costs shall cease when substantially all the activities necessary to prepare the qualifying assets for its intended use or sale is completed. In the given case, H Ltd. should capitalize borrowing costs only up to May 31, 20X1. The borrowing cost incurred thereafter cannot be capitalized as the asset was ready for its intended use on May 31, 20X1. The fact that decoration work\n|  ASSETS BASED ACCOUNTING STANDARDS  |     |     |     |     |       |     |\n| ----------------------------------- | --- | --- | --- | --- | ----- | --- |\n|     |     |     |     |     |     |     |\n| --- | --- | --- | --- | --- | --- | --- |\nwas being carried out should not be considered as the asset was ready for its intended use on May 31, 20X1.</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 8,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>ABC Ltd. is in the process of getting an entertainment park constructed. For this purpose, it has taken loan from a bank. The said park consists of several rides and facilities, each of which can be used individually. Three fourth part of the park has been constructed and can be opened up for public, while construction on the remaining part is continuing. Whether the capitalization of borrowing cost should continue for the whole park until construction continues?</p>",
+        "answer_html": "<p>ABC Ltd. is in process of constructing an entertainment park which consists of several rides and facilities that can operate independently for their intended use. Even though the park as whole is not complete, the individual facilities are ready for their intended use. The cessation of capitalization depends upon the nature of the qualifying assets, particularly where the qualifying assets consists of various parts. There are qualifying assets where each part is capable of being used while the construction continues on other parts. There are qualifying assets where all parts have to be completed before any earlier completed part can be put to use. Since in the given scenario, the individual facilities are capable of operating independently and are ready for their intended use, therefore the borrowing costs shall cease to be capitalized for the three-fourth part of the project.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 9,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>On 1st April, 20X1, Amazing Construction Ltd. obtained a loan of ₹ 32 crores to be utilised as under: (i) Construction of sealink across two cities: (work was held up totally for a month during the : ₹ 25 crores year due to high water levels) (ii) Purchase of equipments and machineries : ₹ 3 crores (iii) Working capital : ₹ 2 crores (iv) Purchase of vehicles : ₹ 50,00,000 (v) Advance for tools/cranes etc. : ₹ 50,00,000 (vi) Purchase of technical know-how : ₹ 1 crores (vii) Total interest charged by the bank for the year : ₹ 80,00,000 ending 31st March, 20X2 Show the treatment of interest by Amazing Construction Ltd.</p>",
+        "answer_html": "<p>According to AS 16 ‘Borrowing costs’, qualifying asset is an asset that necessarily takes substantial period of time to get ready for its intended use. Borrowing costs that are directly attributable to the acquisition, construction or production of a qualifying asset should be capitalised as part of the cost of that asset. Other borrowing costs should be recognised as an expense in the period in which they are incurred. The treatment of interest by Amazing Construction Ltd. can be shown as:\n|               | Qualifying  | Interest to  | Interest to  |                        |     |     |\n| ------------- | ----------- | ------------ | ------------ | ---------------------- | --- | --- |\n|               | Asset       | be           | be charged   |                        |     |     |\n|               |             | capitalised  | to Profit &  |                        |     |     |\n|               |             | ₹            | Loss A/c ₹   |                        |     |     |\n| Construction  | Yes         | 62,50,000    |              |   [80,00,000x(25/32)]  |     |     |\nof sea-link\n| Purchase  | of  No  |     |   7,50,000  | [80,00,000x(3/32)]  |     |     |\n| --------- | ------- | --- | ----------- | ------------------- | --- | --- |\nequipment and mach ineries Working No 5,00,000 [80,00,000x(2/32)] capital Purchase of No 1,25,000 [80,00,000x(0.5/32)] vehicles Advance for No 1,25,000 [80,00,000x(0.5/32)] tools, cranes etc. Purchase of No 2,50,000 [80,00,000x(1/32)] technical know-how Total 62,50,000 17,50,000 *It is assumed that work held up for a month due to high water level is normal during the construction of sealink and capitalization of borrowing cost should not be suspended for necessary temporary delay.</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 10,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Rainbow Limited borrowed an amount of ₹ 150 crores on 1.4.20X1 for construction of boiler plant @ 11% p.a. The plant is expected to be completed in 4 years. Since the weighted average cost of capital is 13% p.a., the accountant of Rainbow Ltd. capitalized ₹ 19.50 crores for the accounting period ending on 31.3.20X2. Due to surplus fund out of ₹ 150 crores, income of ₹ 3.50 crores were earned and credited to profit and loss account. Comment on the above treatment of accountant with reference to relevant accounting standard.</p>",
+        "answer_html": "<p>Para 10 of AS 16 'Borrowing Costs' states \"To the extent that funds are borrowed specifically for the purpose of obtaining a qualifying asset, the amount of borrowing costs eligible for capitalization on that asset should be determined as the actual borrowing costs incurred on that borrowing during the period less any income on the temporary investment of those borrowings.\" The capitalization rate should be the weighted average of the borrowing costs applicable to the borrowings of the enterprise that are outstanding during the period, other than borrowings made specifically for the purpose of obtaining a qualifying asset. Thus, the treatment of accountant of Rainbow Ltd. is incorrect. Amount of borrowing costs capitalized should be calculated as follows: Particulars ₹ in crores Actual interest for 20X1-20X2 (11% of ₹ 150 crores) 16.50 Less: Income on temporary investment from specific (3.50) borrowings Borrowing costs to be capitalized during year 20X1-20X2 13.00</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 11,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Harish Construction Company is constructing a huge building project consisting of four phases. It is expected that the full building will be constructed over several years but Phase I and Phase II of the building will be started as soon as they are completed. Following is the detail of the work done on different phases of the building during the current year:\n|  ASSETS BASED ACCOUNTING STANDARDS  |     |     |     |     |     |       |     |\n| ----------------------------------- | --- | --- | --- | --- | --- | ----- | --- |\n|     |     |     |     |     |     |     |     |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n(₹ in lakhs)\n|                                  |         |          | Phase I  | Phase II  | Phase III  | Phase IV  |     |\n| -------------------------------- | ------- | -------- | -------- | --------- | ---------- | --------- | --- |\n|                                  |         |          | ₹        | ₹         | ₹          | ₹         |     |\n| Cash expenditure                 |         |          | 10       | 30        | 25         | 30        |     |\n| Building purchased               |         |          | 24       | 34        | 30         | 38        |     |\n| Total expenditure                |         |          | 34       | 64        | 55         | 68        |     |\n| Total expenditure of all phases  |         |          |          |           |            | 221       |     |\n| Loan  taken                      | @  15%  | at  the  |          |           |            | 200       |     |\nbeginning of the year During mid of the current year, Phase I and Phase II have become operational. Find out the total amount to be capitalized and to be expensed during the year.</p>",
+        "answer_html": "<p>Computation of amount to be capitalized No. Particulars ₹ 1. Interest expense on loan ₹ 2,00,00,000 at 15% 30,00,000 2. Total cost of Phases I and II (₹ 34,00,000 +64,00,000) 98,00,000 3. Total cost of Phases III and IV (₹ 55,00,000 + 1,23,00,000 ₹ 68,00,000) 4. Total cost of all 4 phases 2,21,00,000 5. Total loan 2,00,00,000 6. Interest on loan used for Phases I & II, based on 13,30,317 proportionate (approx.) 30,00,000 Loan amount = ×98,00,000 2,21,00,000 7. Interest on loan used for Phases III & IV, based on 16,69,683 30,00,000 (approx.) proportionate Loan amount= ×1,23,00,000 2,21,00,000 Accounting treatment For Phase I and Phase II Since Phase I and Phase II have become operational at the mid of the year, half of the interest amount of ₹ 6,65,158.50 (i.e. ₹ 13,30,317/2) relating to Phase I and Phase II should be capitalized (in the ratio of asset costs 34:64) and added to respective assets in Phase I and Phase II and remaining half of the interest amount of ₹ 6,65,158.50 (i.e. ₹ 13,30,317/2) relating to Phase I and Phase II should be expensed during the year. For Phase III and Phase IV Interest of ₹ 16,69,683 relating to Phase III and Phase IV should be held in Capital Work-in-Progress till assets construction work is completed, and thereafter capitalized in the ratio of cost of assets. No part of this interest amount should be charged/expensed off during the year since the work on these phases has not been completed yet.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 12,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Expert Limited issued 12% secured debentures of ₹ 100 lakhs on 01.06.20X1. Money raised from debentures to be utilized as under: Amount ₹ in Intended Purpose lakhs\n| Construction of factory building  |     |     |     |     | 40  |     |     |\n| --------------------------------- | --- | --- | --- | --- | --- | --- | --- |\n| Working Capital                   |     |     |     |     | 30  |     |     |\n| Purchase of Machinery             |     |     |     |     | 15  |     |     |\n| Purchase of Furniture             |     |     |     |     | 2   |     |     |\n| Purchase of truck                 |     |     |     |     | 13  |     |     |\nAdditional Information: (i) Interest on debentures for the Financial Year 20X1-20X2 was paid by the Company. (ii) During the year, the company invested idle fund of ₹ 5 lakhs (out of the money raised from debentures) in Bank's fixed deposit and earned interest of ₹ 50,000. (iii) In March, 20X2 construction of factory building was not completed (it is expected that it will take another 6 months). (iv) In March 20X2, Machinery was installed and ready for its intended use. (v) Furniture was put to use at the end of March 20X2. (vi) Truck is going to be received in April, 20X2. You are required to show the treatment of interest as per AS 16 in respect of borrowing cost for the year ended 31st March, 20X2 in the Books of Expert Limited.</p>",
+        "answer_html": "<p>According to AS 16 “Borrowing Costs”, a qualifying asset is an asset that necessarily takes a substantial period of time to get ready for its intended use. As per the Standard, borrowing costs that are directly attributable to the acquisition, construction or production of a qualifying asset should be capitalized as part of the cost of that asset. The amount of borrowing costs eligible for capitalization should be determined in accordance with this Standard. Other borrowing costs should be recognized as an expense in the period in which they are incurred. It also states that to the extent that funds are borrowed specifically for the purpose of obtaining a qualifying asset, the amount of borrowing costs eligible for capitalization on that asset should be determined as the actual borrowing costs incurred on that borrowing during the period less any income on the temporary investment of those borrowings. = ₹ 10,00,000 (100 lakhs x 12% x 10/12) – Thus, eligible borrowing cost ₹ 50,000 = ₹ 9,50,000 Particulars Nature of assets Interest to be Interest to be\n|     |     |     | capitalized  | charged to Profit  |     |\n| --- | --- | --- | ------------ | ------------------ | --- |\n(₹)\n|     |     |     |     | &  Loss  | Account  |\n| --- | --- | --- | --- | -------- | -------- |\n(₹)\n| Construction       | of  Qualifying Asset  |     | 9,50,000x40/1 |     | NIL  |\n| ------------------ | --------------------- | --- | ------------- | --- | ---- |\n| factory building   |                       |     |               | 00  |      |\n= ₹ 3,80,000\n| Purchase   | of  Not  | a  Qualifying  |     | NIL  9,50,000x15/100  |     |\n| ---------- | -------- | -------------- | --- | --------------------- | --- |\n| Machinery  | Asset    |                |     |                       |     |\n= 1,42,500\n| Purchase   | of  and  Not  | a  Qualifying  |     | NIL  9,50,000x2/100  |     |\n| ---------- | ------------- | -------------- | --- | -------------------- | --- |\n| furniture  | Asset         |                |     |                      |     |\n=19,000\n| Purchase of truck  | Not  | a  Qualifying  |     | NIL  9,50,000x13/100  |     |\n| ------------------ | ---- | -------------- | --- | --------------------- | --- |\nAsset = 1,23,500\n| Working Capital  | Not    | a  Qualifying  |             | NIL  9,50,000x30/100  |               |\n| ---------------- | ------ | -------------- | ----------- | --------------------- | ------------- |\n|                  | Asset  |                |             |                       | = ₹ 2,85,000  |\n|                  |        |                |             |                       |               |\n| Total            |        |                | ₹ 3,80,000  |                       | ₹ 5,70,000    |</p>",
+        "has_table": true
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [
+      4
+    ],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as19",
+    "unitcode": "M2-C5-U5",
+    "name": "AS 19 — Leases",
+    "mcq": [],
+    "descriptive": [],
+    "warnings": [],
+    "skipped_no_answer": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "has_answer_section": false
+  },
+  {
+    "as_key": "as26",
+    "unitcode": "M2-C5-U6",
+    "name": "AS 26 — Intangible Assets",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>Which of the following is not covered within the scope of AS 26?</p>",
+        "options": {
+          "A": "Intangible assets held-for-sale in the ordinary course of business",
+          "B": "Assets arising from employee benefits",
+          "C": "(a) & (b) both",
+          "D": "Research and development activities"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) (a) & (b) both</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>Intangible asset is recognised if it:</p>",
+        "options": {
+          "A": "meets the definition of an intangible asset",
+          "B": "is probable that future economic benefits will flow",
+          "C": "the cost can be measured reliably",
+          "D": "meets all of the above parameters"
+        },
+        "correct_option": "D",
+        "answer_html": "<p><strong>Answer:</strong> (D) meets all of the above parameters</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>Sun Limited has purchased a computer with various additional software. These are integral part of the computer. Which of the following are true in the context of AS 26:</p>",
+        "options": {
+          "A": "Recognise Computer and software as tangible asset",
+          "B": "Recognise tangible and intangible separately",
+          "C": "Recognise computer and software as intangible asset",
+          "D": "Does not recognize the software as an asset."
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) Recognise Computer and software as tangible asset</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>Hexa Ltd developed a technology to enhance the battery life of mobile devices. Hexa has capitalised development expenditure of ₹ 5,00,000. Hexa estimates the life of the technology developed to be 3 years but the company has forecasted that 50% of sales will be in year 1, 35% in year 2 and 15% in year 3. What should be the amortisation charge in the second year of the product’s life?</p>",
+        "options": {
+          "A": "₹ 2,50,000",
+          "B": "₹ 1,75,000",
+          "C": "₹ 1,66,667",
+          "D": "₹ 1,85,000"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) ₹ 1,75,000</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 5,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>What is meant by Intangible Assets and what are the important factors to consider the recognition of item as an Intangible asset? What is the recognition criteria in accordance with the provisions of AS 26?</p>",
+        "answer_html": "<p>An intangible asset is an identifiable non-monetary asset, without physical substance, held for use in the production or supply of goods or services, for rental to others, or for administrative purposes. Below are the 3 key ingredients to be satisfied to cover an item as an intangible asset under this standard: • identifiability, • control over a resource and • expectation (i.e. probable – 50% plus) of future economic benefits flowing to the enterprise. The recognition of an item as an intangible asset requires an enterprise to demonstrate that the item meets the definition of an intangible asset and recognition criteria set out as below: a. It is probable that the future economic benefits that are attributable to the asset will flow to the enterprise; and b. The cost of the asset can be measured reliably.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 6,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>What is the measurement criteria at the time of initial recognition of Intangible assets acquired through separate acquisition?</p>",
+        "answer_html": "<p>If an intangible asset is acquired separately, the cost of the intangible asset can usually be measured reliably. This is particularly so when the purchase consideration is in the form of cash or other monetary assets. The cost of an intangible asset comprises: • its purchase price, • any import duties and other taxes (other than those subsequently recoverable by the enterprise from the taxing authorities), and • any directly attributable expenditure on making the asset ready for its intended use. Directly attributable expenditure includes, for example, professional fees for legal services. • Any trade discounts and rebates are deducted in arriving at the cost.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 7,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>What is the criteria for recognition and measurement of Internally generated intangible assets. Describe which kind of cost is considered for capitalisation with respect to provisions of AS 26. Whether the same applies for internally generated goodwill also?</p>",
+        "answer_html": "<p>To assess whether an internally generated intangible asset meets the criteria for recognition, an enterprise classifies the generation of the asset into 2 phases: ➢ Research Phase & ➢ Development Phase Research Phase - The expenses related to Research phase is expensed off in statement of Profit and loss. Development Phase - Development is the application of research findings or other knowledge to a plan or design for the production of new or substantially improved materials, devices, products, processes, systems or services prior to the commencement of commercial production or use. An intangible asset arising from development (or from the development phase of an internal project) should be recognised if, and only if, an enterprise can demonstrate all of the conditions given in para 6.15. Cost of an Internally Generated Intangible Asset The cost of an internally generated intangible asset is the sum of expenditure incurred from the time when the intangible asset first meets the recognition criteria. Reinstatement of expenditure recognised as an expense in previous annual financial statements or interim financial reports is prohibited. The cost of an internally generated intangible asset comprises all expenditure that can be directly attributed, or allocated on a reasonable anvd consistent basis, to creating, producing and making the asset ready for its intended use from the time when the intangible asset first meets the recognition criteria. For details, refer para 6.16. Internally generated goodwill is not recognised as an asset because it is not an identifiable resource controlled by the enterprise that can be measured reliably at cost.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 8,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Advise the complete accounting treatment for Research and development phase as per AS 26.</p>",
+        "answer_html": "<p>Research phase means acquisition of knowledge and Development phase means application of knowledge. The expenditure related to Research phase is expensed off in statement of Profit and loss. However, the expenditure incurred in Development phase is capitalised as a cost of the internally generated intangible asset. If an enterprise cannot distinguish the research phase from the development phase of an internal project to create an intangible asset, the enterprise treats the expenditure on that project as if it were incurred in the research phase only.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 9,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>What is meant by Amortisation of an Intangible asset. What are the different methods for amortisation as per AS 26?</p>",
+        "answer_html": "<p>Amortisation is the systematic allocation of the depreciable amount of an intangible asset over its useful life. The amortisation method used should reflect the pattern in which the asset's economic benefits are consumed by the enterprise. If that pattern cannot be determined reliably, the straight-line method should be used. A variety of amortisation methods can be used to allocate the depreciable amount of an asset on a systematic basis over its useful life. These methods include • the straight-line method, • the diminishing balance method and • the unit of production method. The method used for an asset is selected based on the expected pattern of consumption of economic benefits and is consistently applied from period to period, unless there is a change in the expected pattern of consumption of economic benefits to be derived from that asset.\n| --- | --- | -------------------- | --- | --- |</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 10,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Swift Ltd. acquired a patent at a cost of ₹ 80,00,000 for a period of 5 years and the product life-cycle is also 5 years. The company capitalized the cost and started amortizing the asset at ₹ 10,00,000 per annum. The company had amortized the patent at 10,00,000 per annum in first two years on the basis of economic benefits derived from the product manufactured under the patent. After two years it was found that the product life-cycle may continue for another 5 years from then. The patent was renewable and Swift Ltd. got it renewed after expiry of five years. The net cash flows from the product during these 5 years were expected to be ₹ 36,00,000, ₹ 46,00,000, ₹ 44,00,000, ₹ 40,00,000 and ₹ 34,00,000. Find out the amortization cost of the patent for each of the years.</p>",
+        "answer_html": "<p>Swift Limited amortised ₹ 10,00,000 per annum for the first two years i.e. ₹ 20,00,000. The remaining carrying cost can be amortised during next 5 years on the basis of net cash flows arising from the sale of the product. The amortisation may be found as follows: S Net cash flows ₹ Amortisation Ratio Amortisation Amount ₹\n| ------ | ------------- | --- | ------ | ---------- |\n| Total  | 2,00,00,000   |     | 1.000  | 80,00,000  |\nIt may be seen from above that from third year onwards, the balance of carrying amount i.e., ₹ 60,00,000 has been amortised in the ratio of net cash flows arising from the product of Swift Ltd.</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 11,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>AB Ltd. launched a project for producing product X in October, 20X1. The Company incurred ₹ 20 lakhs towards Research. Due to prevailing market conditions, the Management came to conclusion that the product cannot be manufactured and sold in the market for the next 10 years. The Management hence wants to defer the expenditure write off to future years. Advise the Company as per the applicable Accounting Standard.</p>",
+        "answer_html": "<p>As per para 41 of AS 26 “Intangible Assets”, expenditure on research should be recognised as an expense when it is incurred. Hence, the expenses amounting ₹ 20 lakhs incurred on the research has to be charged to the statement of profit and loss in the current year ending 31st March, 20X2.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 12,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>During 20X1-X2, an enterprise incurred costs to develop and produce a routine low risk computer software product, as follows: Particular ₹ Completion of detailed program and design (Phase 1) 50,000 Coding and Testing (Phase 2) 40,000 Other coding costs (Phase 3 & 4) 63,000 Testing costs (Phase 3 & 4) 18,000 Product masters for training materials (Phase 5) 19,500 Packing the products (1,500 units) (Phase 6) 16,500 After completion of phase 2, it was established that the product is technically feasible for the market. You are required to state how the above referred cost to be recognized in the books of accounts.</p>",
+        "answer_html": "<p>As per AS 26, costs incurred in creating a computer software product should be charged to research and development expense when incurred until technological feasibility/asset recognition criteria has been established for the product. Technological feasibility/asset recognition criteria have been established upon completion of detailed program design, coding and testing. In this case, ₹ 90,000 would be recorded as an expense (₹ 50,000 for completion of detailed program design and ₹ 40,000 for coding and testing to establish technological feasibility/asset recognition criteria). Cost incurred from the point of technological feasibility/asset recognition criteria until the time when products costs are incurred are capitalized as software cost (63,000+ 18,000+ 19,500) = ₹ 1,00,500. Packing cost ₹ 16,500 should be recognized as expenses and charged to P & L A/c.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 13,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>As per provisions of AS-26, how would you deal to the following situations: (1) ₹ 23,00,000 paid by a manufacturing company to the legal advisor for defending the patent of a product is treated as a capital expenditure. (2) During the year 20X1-X2, a company spent ₹ 7,00,000 for publicity and research expenses on one of its new consumer product which was marketed in the same accounting year but proved to be a failure. (3) A company spent ₹ 25,00,000 in the past three years to develop a product, these expenses were charged to profit and loss account since they did not meet AS-26 criteria for capitalization. In the current year approval of the concerned authority has been received. The companvy wishes to capitalize ₹ 25,00,000 by disclosing it as a prior period itemv. (4) A company with a turnover of ₹ 200 crores and an annual advertising budget of ₹ 50,00,000 had taken up for the marketing of a new product by a company. It was estimated that the company would have a turnover of ₹ 20 crore from the new product. The company had debited to its Profit & Loss Account the total expenditure of ₹ 50,00,000 incurred on extensive special initial advertisement campaign for the new product.</p>",
+        "answer_html": "<p>As per AS 26 “Intangible Assets”, subsequent expenditure on an intangible asset after its purchase or its completion should be recognized as an expense when it is incurred unless (a) it is probable that the expenditure will enable the asset to generate future economic benefits in excess of its originally assessed standard of performance; and (b) expenditure can be measured and attributed to the asset reliably. If these conditions are met, the subsequent expenditure should be added to the cost of the intangible asset. (i) In the given case, the legal expenses to defend the patent of a product amounting ₹ 23,00,000 should not be capitalized and be charged to Profit and Loss Statement. (ii) The company is required to expense the entire amount of ₹ 7,00,000 in the Profit and Loss account for the year ended 31st March, 20X2 because no benefit will arise in the future. (iii) As per AS 26, expenditure on an intangible item that was initially recognized as an expense by a reporting enterprise in previous annual financial statements should not be recognized as part of the cost of an intangible asset at a later date. Thus the company cannot capitalize the amount of ₹ 25,00,000 and it should be recognized as expense (iv) Expenditure of ₹ 50,00,000 on advertising and promotional activities should always be charged to Profit and Loss Statement. Hence, the company has done the correct treatment by debiting the sum of 50 lakhs to Profit and Loss Account.</p>",
+        "has_table": false
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as28",
+    "unitcode": "M2-C5-U7",
+    "name": "AS 28 — Impairment of Assets",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>If there is indication that an asset may be impaired but the recoverable amount of the asset is more than the carrying amount of the asset, the following are true:</p>",
+        "options": {
+          "A": "No further action is required and the company can continue the asset in the books at the book value itself.",
+          "B": "The entity should review the remaining useful life, scrap value and method of depreciation and amortization for the purposes of AS 10.",
+          "C": "The entity can follow either (a) or (b).",
+          "D": "The entity should review the scrap value and method of depreciation and amortization for the purposes of AS 10."
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) The entity should review the remaining useful life, scrap value and method of depreciation and amortization for the purposes of AS 10.</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>In case Goodwill appears in the Balance Sheet of an entity, the following is true:</p>",
+        "options": {
+          "A": "Apply Bottom up test if goodwill cannot be allocated to CGU (cash generating unit) under review.",
+          "B": "Apply Top down test if goodwill cannot be allocated to CGU (cash generating unit) under review.",
+          "C": "Apply both Bottom up test and Top down test if goodwill cannot be allocated to CGU (cash generating unit) under review.",
+          "D": "Apply either Bottom up test or Top down test if goodwill cannot be allocated to CGU (cash generating unit) under review."
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Apply both Bottom up test and Top down test if goodwill cannot be allocated to CGU (cash generating unit) under review.</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>In case of Corporate assets in the Balance Sheet of an entity, the following is true:</p>",
+        "options": {
+          "A": "Apply Bottom up test if corporate assets cannot be allocated to CGU (cash generating unit) under review.",
+          "B": "Apply Top down test if corporate assets cannot be allocated to CGU (cash generating unit) under review.",
+          "C": "Apply both Bottom up test and Top down test if corporate assets cannot be allocated to CGU (cash generating unit) under review.",
+          "D": "Apply either Bottom up test or Top down test if corporate assets cannot be allocated to CGU (cash generating unit) under review."
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Apply both Bottom up test and Top down test if corporate assets cannot be allocated to CGU (cash generating unit) under review.</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>In case of reversal of impairment loss, which statement is true:</p>",
+        "options": {
+          "A": "Goodwill written off can never be reversed.",
+          "B": "Goodwill written off can be reversed without any conditions to be met.",
+          "C": "Goodwill written off can be reversed only if certain conditions are met.",
+          "D": "Goodwill written off can be reversed."
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Goodwill written off can be reversed only if certain conditions are met.</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 5,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Write short note on impairment of asset and its application to inventory.</p>",
+        "answer_html": "<p>The objective of AS 28 ‘Impairment of Assets’ is to prescribe the procedures that an enterprise applies to ensure that its assets are carried at no more than their recoverable amount. An asset is carried at more than its recoverable amount if its carrying amount exceeds the amount to be recovered through use or sale of the asset. If this is the case, the asset is described as impaired and this Standard requires the enterprise to recognize an impairment loss.  If carrying amount < = Recoverable amount : Asset is not impaired  If carrying amount > Recoverable amount : Asset is impaired Impairment Loss = Carrying Amount – Recoverable Amount Recoverable amount is the higher of net selling price and its value in use This standard should be applied in accounting for the impairment of all assets, other than (i) inventories (AS 2, Valuation of Inventories); (ii) assets arising from construction contracts (AS 7, Accounting for Construction Contracts); (iii) financial assets, including investments that are included in the scope of AS 13, Accounting for Investments; and (iv) deferred tax assets (AS 22, Accounting for Taxes on Income). AS 28 does not apply to inventories, assets arising from construction contracts, deferred tax assets or investments because other accounting standards applicable to these assets already contain specific requirements for recognizing and measuring the impairment related to these assets.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 6,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>A publisher owns 150 magazine titles of which 70 were purchased and 80 were self-created. The price paid for a purchased magazine title is recognized as an intangible asset. The costs of creating magazine titles and maintaining the existing titles are recognized as an expense when incurred. Cash inflows from direct sales and advertising are identifiable for each magazine title. Titles are managed by customer segments. The level of advertising income for a magazine title depends on the range of titles in the customer segment to which the magazine title relates. Management has a policy to abandon old titles before the end of their economic lives and replace them immediately with new titles for the same customer segment. What is the cash-generating unit for an individual magazine title?</p>",
+        "answer_html": "<p>It is likely that the recoverable amount of an individual magazine title can be assessed. Even though the level of advertising income for a title is influenced, to a certain extent, by the other titles in the customer segment, cash inflows from direct sales and advertising are identifiable for each title. In addition, although titles are managed by customer segments, decisions to abandon titles are made on an individual title basis. Therefore, it is likely that individual magazine titles generate cash inflows that are largely independent of each other and that each magazine title is a separate cash-generating unit.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 7,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>An asset does not meet the requirements of environment laws which have been recently enacted. The asset has to be destroyed as per the law. The asset is carried in the Balance Sheet at the year end at ₹ 6,00,000. The estimated cost of destroying the asset is ₹ 70,000. How is the asset to be accounted for?</p>",
+        "answer_html": "<p>As per AS 28 “Impairment of Assets”, impairment loss is the amount by which the carrying amount of an asset exceeds its recoverable amount, where recoverable amount is the higher of an asset’s net selling price and its value in use•. In the given case, recoverable amount will be nil [higher of value in use (nil) and net selling price (negative ₹ 70,000)]. Thus impairment loss will be calculated as ₹ 6,00,000 [carrying amount (₹ 6,00,000) – recoverable amount (nil)]. Therefore, asset is to be fully impaired and impairment loss of ₹ 6,00,000 has to be recognized as an expense immediately in the statement of Profit and Loss as per para 58 of AS 28. Further, as per para 60 of AS 28, When the amount estimated for an impairment loss is greater than the carrying amount of the asset to which it relates, an enterprise should recognise a liability if, and only if, that is required by another Accounting Standard. Hence, the entity should recognize liability for cost of disposal of ₹ 70,000 as per AS 10 & 29. Net selling price is the amount obtainable from the sale of an asset in an arm’s length transaction between knowledgeable, willing parties, less the costs of disposal. In the given case, Net Selling Price = Selling price – Cost of disposal = Nil – ₹ 70,000 = (₹ 70,000) •Value in use is the present value of estimated future cash flows expected to arise from the continuing use of an asset and from its disposal at the end of its useful life. In the given case, value in use is nil.\n|     |  ASSETS  BASED  ACCOUNTING STANDARDS  |     |     |     |     |     |     |     |\n| --- | ------------------------------------- | --- | --- | --- | --- | --- | --- | --- |\n|     |     |     |     |     |     |     |     |     |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|     |     |     |     |     |     | v   |     | v   |</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 8,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Venus Ltd. has a fixed asset, which is carried in the Balance Sheet on 31.3.20X1 at ₹ 500 lakhs. As at that date the value in use is ₹ 400 lakhs and the net selling price is ₹ 375 lakhs. From the above data: (i) Calculate impairment loss. (ii) Prepare journal entries for adjustment of impairment loss. (iii) Show, how impairment loss will be shown in the Balance Sheet.</p>",
+        "answer_html": "<p>(i) Recoverable amount is higher of value in use ₹ 400 lakhs and net\n|     |   selling price ₹ 375 lakhs.  |     |     |     |     |     |     |     |\n| --- | ----------------------------- | --- | --- | --- | --- | --- | --- | --- |\nRecoverable amount = ₹ 400 lakhs Impairment loss = Carried Amount – Recoverable amount = ₹ 500 lakhs – ₹ 400 lakhs = ₹ 100 lakhs.\n|     | (ii)  Journal Entries          |              |      |              |                |       |                |       |\n| --- | ------------------------------ | ------------ | ---- | ------------ | -------------- | ----- | -------------- | ----- |\n|     |                                |              |      |              |                | Dr.   |                | Cr.   |\n|     |                                | Particulars  |      |              | Amount         |       | Amount         |       |\n|     |                                |              |      |              | ( ₹ in lakhs)  |       | ( ₹ in lakhs)  |       |\n|     | (i)  Impairment loss account   |              |      |   Dr.        |                | 100   |                |       |\n|     |     To                         | Provision    | for  | Accumulated  |                |       |                | 100   |\nImpairment Loss Account\n|     |   (Being  | the  entry  | for  | accounting  |     |     |     |     |\n| --- | --------- | ----------- | ---- | ----------- | --- | --- | --- | --- |\nimpairment loss)\n|     | (ii)  Profit and loss account              |     |     |   Dr.  |     | 100  |     |      |\n| --- | ------------------------------------------ | --- | --- | ------ | --- | ---- | --- | ---- |\n|     |     To Impairment loss                     |     |     |        |     |      |     | 100  |\n|     |   (Being the entry to transfer impairment  |     |     |        |     |      |     |      |\nloss to profit and loss account)\n|     | (iii)                    |   Balance Sheet of Venus Ltd. as on 31.3.20X1  |     |     |     |     |                |      |\n| --- | ------------------------ | ---------------------------------------------- | --- | --- | --- | --- | -------------- | ---- |\n|     |                          |                                                |     |     |     |     | ( ₹ in lakhs)  |      |\n|     | Fixed Asset              |                                                |     |     |     |     |                |      |\n|     | Asset less depreciation  |                                                |     |     |     |     |                | 500  |\n|     | Less: Impairment loss    |                                                |     |     |     |     | (100)          |      |\n|     |                          |                                                |     |     |     |     |   400          |      |</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 9,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Good Drugs and Pharmaceuticals Ltd. acquired a sachet filling machine on 1st April, 20X1 for ₹ 60 lakhs. The machine was expected to have a productive life of 6 years. At the end of financial year 20X1-20X2 the carrying amount was ₹ 41 lakhs. A short circuit occurred in this financial year but luckily the machine did not get badly damaged and was still in working order at the close of the financial year. The machine was expected to fetch ₹ 36 lakhs, if sold in the market. The machine by itself is not capable of generating cash flows. However, the smallest group of assets comprising of this machine also, is capable of generating cash flows of ₹ 54 crore per annum and has a carrying amount of ₹ 3.46 crore. All such machines put together could fetch a sum of ₹ 4.44 crore if disposed. Discuss the applicability of Impairment loss.</p>",
+        "answer_html": "<p>As per provisions of AS 28 “Impairment of Assets”, impairment loss is not to be recognized for a given asset if its cash generating unit (CGU) is not impaired. In the given question, the related cash generating unit which is group of asset to which the damaged machine belongs is not impaired; and the recoverable amount is more than the carrying amount of group of assets. Hence there is no need to provide for impairment loss on the damaged sachet filling machine.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 10,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>From the following details of an asset (i) Find out impairment loss (ii) Treatment of impairment loss (iii) Current year depreciation Particulars of asset: Cost of asset ₹ 56 lakhs Useful life period 10 years Salvage value Nil Current carrying value ₹ 27.30 lakhs Useful life remaining 3 years Recoverable amount ₹ 12 lakhs Upward revaluation done in last year ₹ 14 lakhs</p>",
+        "answer_html": "<p>According to AS 28 “Impairment of Assets”, an impairment loss on a revalued asset is recognised as an expense in the statement of profit and loss. However, an impairment loss on a revalued asset is recognised directly against any revaluation surplus for the asset to the extent that the impairment loss does not exceed the amount held in the revaluation surplus for that same asset. Impairment Loss and its treatment ₹ Current carrying amount (including revaluation amount of 27,30,000 ₹ 14 lakhs) Less: Current recoverable amount (12,00,000) Impairment Loss 15,30,000 Impairment loss charged to revaluation reserve 14,00,000 Impairment loss charged to profit and loss account 1,30,000 After the recognition of an impairment loss, the depreciation (amortization) charge for the asset should be adjusted in future periods to allocate the asset’s revised carrying amount, less its residual value (if any), on a systematic basis over its remaining useful life. In the given case, the carrying amount of the asset will be reduced to ₹ 12,00,000 after impairment. This amount is required to be depreciated over remaining useful life of 3 years (including current year). Therefore, the depreciation for the current year will be ₹ 4,00,000.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 11,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>A plant was acquired 15 years ago at a cost of ₹ 5 crores. Its accumulated depreciation as at 31st March, 20X1 was ₹ 4.15 crores. Depreciation estimated for the financial year 20X1-20X2 is ₹ 25 lakhs. Estimated Net Selling Price as on 31st March, 20X1 was ₹ 30 lakhs, which is expected to decline by 20 per cent by the end of the next financial year. Its value in use has been computed at ₹ 35 lakhs as on 1st April, 20X1, which is expected to decrease by 30 per cent by the end of the financial year. (i) Assuming that other conditions for applicability of the impairment Accounting Standard are satisfied, what should be the carrying amount of this plant as at 31st March, 20X2? (ii) How much will be the amount of write off for the financial year ended 31st March, 20X2? (iii) If the plant had been revalued ten years ago and the current revaluation reserves against this plant were to be ₹ 12 lakhs, how would you answer to questions (i) and (ii) above? (iv) If the value in use was zero and the enterprise were required to incur a cost of ₹ 2 lakhs to dispose of the plant, what would be your response to questions (i) and (ii) above?</p>",
+        "answer_html": "<p>As per AS 28 “Impairment of Assets”, if the recoverable amount of an asset is less than its carrying amount, the carrying amount of the asset should be reduced to its recoverable amount and that reduction is an impairment loss. An impairment loss on a revalued asset is recognized as an expense in the statement of profit and loss. However, an impairment loss on a revalued asset is recognised directly against any revaluation surplus for the asset to the extent that the impairment loss does not exceed the amount held in the revaluation surplus for that same asset. Recoverable amount is the higher of an asset’s net selling price and its value in use.\n| ------------------------------------- | ----- | --- |\nIn the given case, recoverable amount (higher of asset’s net selling price and value in use) will be ₹ 24.5 lakhs on 31.3.20X2 according to the provisions of AS 28 [Refer working note]. (₹ in lakhs) (i) Carrying amount of plant (after impairment) as on 31st 24.50 March, 20X2 (ii) Amount of write off (impairment loss) for the financial 35.50 year ended 31st March, 20X2 [₹ 60 lakhs – ₹ 24.5 lakhs] (iii) If the plant had been revalued ten years ago\n|   Debit to revaluation reserve                |  12.00  |     |\n| --------------------------------------------- | ------- | --- |\n|   Amount charged to profit and loss account   |  23.50  |     |\n(₹ 35.50 lakhs – ₹ 12 lakhs)\n| (iv)  If Value in use is zero                 |          |     |\n| --------------------------------------------- | -------- | --- |\n|   Value in use (a)                            | Nil      |     |\n|   Net selling price (b)                       | (-)2.00  |     |\n|   Recoverable amount [higher of (a) and (b)]  | Nil      |     |\n|   Carrying amount (closing book value)        | Nil      |     |\nAmount of write off (impairment loss) (₹ 60 lakhs – Nil) 60.00\n|   Entire book value of plant will be written off and   |     |     |\n| ------------------------------------------------------ | --- | --- |\ncharged to profit and loss account. Working Note: Calculation of Closing Book Value, Estimated Net Selling Value and Estimated Value in Use of Plant at 31st March, 20X2\n|                                                   | (₹ in lakhs)  |     |\n| ------------------------------------------------- | ------------- | --- |\n| Opening book value as on 1.4.20X1 (₹ 500 lakhs –  | 85            |     |\n₹ 415 lakhs)\n| Less:  Depreciation for financial year 20X1–20X2  |   (25)  |     |\n| ------------------------------------------------- | ------- | --- |\n| Closing book value as on 31.3.20X2                |     60  |     |\nEstimated net selling price as on 1.4.20X1 30 Less: Estimated decrease during the year (20% of (6) ₹ 30 lakhs) Estimated net selling price as on 31.3.20X2 24 Estimated value in use as on 1.4.20X1 35.0 Less: Estimated decrease during the year (30% of (10.5) ₹ 35 lakhs) Estimated value in use as on 31.3.20X2 24.5</p>",
+        "has_table": true
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as29",
+    "unitcode": "M2-C6-U2",
+    "name": "AS 29 (Revised) — Provisions, Contingent Liabilities and Contingent Assets",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>Which of the following best describes a provision?</p>",
+        "options": {
+          "A": "A provision is a liability of uncertain timing or amount.",
+          "B": "A provision is a possible obligation of uncertain timing.",
+          "C": "A provision is a credit balance set up to offset a contingent asset so that the effect on the statement of financial position is nil.",
+          "D": "A provision is a possible obligation of uncertain amount."
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) A provision is a liability of uncertain timing or amount.</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>X Co is a business that sells second hand cars. If a car develops a fault within 30 days of the sale, X Co will repair it free of charge. At 1st March 20X1, X Co had made a provision for repairs of ₹ 25,000. At 31st March 20X1, X Co calculated that the provision should be ₹ 20,000. What entry should be made for the provision in X Co's income statement for the month 31st March 20X1?</p>",
+        "options": {
+          "A": "A charge of ₹ 5,000",
+          "B": "A credit of ₹ 5,000",
+          "C": "A charge of ₹ 20,000",
+          "D": "A credit of ₹ 25,000"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) A credit of ₹ 5,000</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>Which of the following item does the statement below describe? “A possible obligation that arises from past events and whose existence will be confirmed only by the occurrence or non-occurrence of one or more uncertain future events not wholly within the entity's control”</p>",
+        "options": {
+          "A": "A provision",
+          "B": "A current liability",
+          "C": "A contingent liability",
+          "D": "Deferred tax liability"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) A contingent liability</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>Z Ltd has commenced a legal action against Y Ltd claiming substantial damages for supply of a faulty product. The lawyers of Y Ltd have advised that the company is likely to lose the case, although the chances of paying the claim is not remote. The estimated potential liability estimated by the lawyers are: Legal cost (to be incurred irrespective of the outcome of the case) ₹ 50,000 Settlement if the claim is required to be paid ₹ 5,00,000 What is the appropriate accounting treatment in the books of Y Ltd.?</p>",
+        "options": {
+          "A": "Create a Provision of ₹ 5,50,000",
+          "B": "Make a Disclosure of a contingent liability of ₹ 5,50,000",
+          "C": "Create a Provision of ₹ 50,000 and make a disclosure of contingent liability of ₹ 5,00,000",
+          "D": "Create a Provision of ₹ 5,00,000"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Create a Provision of ₹ 50,000 and make a disclosure of contingent liability of ₹ 5,00,000</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 5,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>When should provision be recognized as per provisions of AS 29? Explain in brief.</p>",
+        "answer_html": "<p>A provision should be recognised only when: (a) An enterprise has a present obligation as a result of a past event; (b) It is probable that an outflow of resources embodying economic benefits will be required to settle the obligation; and (c) A reliable estimate can be made of the amount of the obligation.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 6,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Sun Ltd. has entered into a sale contract of ₹ 5 crores with X Ltd. during 20X1-20X2 financial year. The profit on this transaction is ₹ 1 crore. The delivery of goods to take place during the first month of 20X2-20X3 financial year. In case of failure of Sun Ltd. to deliver within the schedule, a compensation of ₹ 1.5 crores is to be paid to X Ltd. Sun Ltd. planned to manufacture the goods during the last month of 20X1-20X2 financial year. As on balance sheet date (31.3.20X2), the goods were not manufactured, and it was unlikely that Sun Ltd. will be able to meet the contractual obligation. (i) Should Sun Ltd. provide for contingency as per AS 29? (ii) Should provision be measured as the excess of compensation to be paid over the profit?</p>",
+        "answer_html": "<p>(i) AS 29 “Provisions, Contingent Liabilities and Contingent Assets” provides that when an enterprise has a present obligation, as a result of past events, that probably requires an outflow of resources and a reliable estimate can be made of the amount of obligation, a provision should be recognized. Sun Ltd. has the obligation to deliver the goods within the scheduled time as per the contract. It is probable that Sun Ltd. will fail to deliver the goods within the schedule and it is also possible to estimate the amount of compensation. Therefore, Sun Ltd. should provide for the contingency amounting ₹ 1.5 crores as per AS 29. (ii) vProvision should not be measured as the excess of compensation to be v paid over the profit. The goods were not manufactured before 31st March, 20X2 and no profit had accrued for the financial year 20X1-20X2. Therefore, provision should be made for the full amount of compensation amounting ₹ 1.50 crores.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 7,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>An oil company has been contaminating land for several years. It does not clean up because there is no legislation requiring cleaning up. At 31st March 20X1, it is virtually certain that a law requiring a clean-up of land already contaminated will be enacted shortly after the year end. Is provisioning presently necessary?</p>",
+        "answer_html": "<p>As per para 29 of AS 29 ‘Provisions, Contingent Liabilities and Contingent Assets’, a past event will lead to present obligation when the enterprise has no realistic alternative to settle the obligation created by the past event. However, when environmental damage is caused, there may be no obligation to remedy the consequences. The causing of the damage will become an obligating event when a new law requires the existing damage to be rectified. Where details of a proposed new law have yet to be finalised, an obligation arises only when the legislation is virtually certain to be enacted. In the given case it is virtually certain that law will be enacted requiring clean-up of a land already contaminated. Therefore, an oil company has to provide for such clean-up cost in the year in which the law is virtually certain to be enacted.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 8,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>A Ltd. provides after sales warranty for two years to its customers. Based on past experience, the company has the following policy for making provision for warranties on the invoice amount, on the remaining balance warranty period. Less than 1 year: 2% provision More than 1 year: 3% provision v The company has raised invoices as under : Invoice Date Amount (₹) 11th Feb, 20X0 60,000 25th Dec, 20X0 40,000 04th Oct, 20X1 1,35,000 Calculate the provision to be made for warranty under AS-29 as at 31st March, 20X1 and 31st March, 20X2. Also compute amount to be debited to P & L account for the year ended 31st March, 20X2.</p>",
+        "answer_html": "<p>Provision to be made for warranty under AS 29 ‘Provisions, Contingent Liabilities and Contingent Assets’ As at 31st March, 20X1 = ₹ 60,000 x .02 + ₹ 40,000 x .03 = ₹ 1,200 + ₹ 1,200 = ₹ 2,400 As at 31st March, 20X2 = ₹ 40,000 x .02 + ₹ 1,35,000 x .03 = ₹ 800 + ₹ 4,050 = ₹ 4,850 Amount debited to Profit and Loss Account for year ended 31st March, ₹ Balance of provision required as on 31.03.20X2 4,850 Less: Opening Balance as on 1.4.20X1 (2,400) Amount debited to profit and loss account 2,450 Note: No provision will be made on 31st March, 20X2 in respect of sales amounting ₹ 60,000 made on 11th February, 20X0 as the warranty period of 2 years has already expired.</p>",
+        "has_table": false
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [],
+    "has_answer_section": true
+  }
+]

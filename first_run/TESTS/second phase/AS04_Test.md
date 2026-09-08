@@ -3,19 +3,55 @@
 **CA Inter · Paper 1: Advanced Accounting**
 **Chapter Reference:** `M2-C7-U1`
 
-**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 27 &nbsp;|&nbsp; **Section A (MCQ):** 6 marks, 3 questions (22%) &nbsp;|&nbsp; **Section B (Descriptive):** 21 marks, 3 questions (78%)
+**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 31 &nbsp;|&nbsp; **Section A (MCQ):** 10 marks, 7 questions (32%) &nbsp;|&nbsp; **Section B (Descriptive):** 21 marks, 3 questions (68%)
 
-**Suggested Time:** ~49 minutes
+**Suggested Time:** ~56 minutes
 
-> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is a real, previously chapter-tagged MTP / RTP / PYQ question drawn from the platform's question bank (`first_run/output/generated-from-script/questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ). Nothing is invented.
+> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material chapter's own "Test Your Knowledge" section (`books/concept-book/raw_icai_study_materials/`, extracted by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks are estimated from answer length and every such question/answer is explicitly tagged "estimated from answer length, not an official mark" wherever it appears below. Nothing is invented — every question and every answer is copied from one of these two real sources.
 >
-> **Content note — target not fully met (pool too small):** the tagged question pool currently available for AS 4 in this corpus totals only **27 marks** (6 MCQ + 21 Descriptive) after de-duplication — short of the 50-mark target. All available real content has been included below (**27 of 50 marks**); no question was invented or borrowed from another chapter to pad the total. More MTP/RTP/PYQ sittings would need to be sourced and tagged for this chapter to reach a full 50-mark paper.
+> **Content note — target not fully met (pool too small):** the tagged question pool currently available for AS 4 in this corpus totals only **31 marks** (10 MCQ + 21 Descriptive) after de-duplication — short of the 50-mark target. All available real content has been included below (**31 of 50 marks**); no question was invented or borrowed from another chapter to pad the total. More MTP/RTP/PYQ sittings would need to be sourced and tagged for this chapter to reach a full 50-mark paper.
 >
-> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (0 MCQ + 1 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
+> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (0 MCQ + 2 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
 
 ---
 
-## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 6 Marks
+## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 10 Marks
+
+**1.** <p>A Ltd. sold its building for ₹ 50 lakhs to B Ltd. and has also given the possession to B Ltd. The book value of the building is ₹ 30 lakhs. As on 31st March, 20X1, the documentation and legal formalities are pending. For the financial year ended 31st March, 20X1</p>
+
+- **(A)** The company should record the sale.
+- **(B)** The company should recognise the profit of ₹ 20 lakhs in its profit and loss account.
+- **(C)** Both (a) and (b).
+- **(D)** The company should disclose the profit of ₹ 20 lakhs in notes to accounts.
+
+*(1 Marks · Topic: M2-C7-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #4)*
+
+**2.** <p>AS 4 does not apply to</p>
+
+- **(A)** Obligation under retirement benefit plans.
+- **(B)** Commitments arising from long term lease contracts.
+- **(C)** liabilities of life assurance and general insurance enterprises arising from policies issued
+- **(D)** All of the above.
+
+*(1 Marks · Topic: M2-C7-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #3)*
+
+**3.** <p>As per Accounting Standards, events occurring after the balance sheet date are</p>
+
+- **(A)** Only favourable events that occur between the balance sheet date and the date when the financial statements are approved by the Board of directors.
+- **(B)** Only unfavourable events that occur between the balance sheet date and the date when the financial statements are approved by the Board of directors.
+- **(C)** Those significant events, both favourable and unfavourable, that occur between the balance sheet date and the date on which the financial statements are approved by the Board of directors.
+- **(D)** Those significant events, both favourable and unfavourable, that occur between the balance sheet date and the date on which the financial statements are not approved by the Board of directors. a
+
+*(1 Marks · Topic: M2-C7-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #2)*
+
+**4.** <p>Cash amounting to ₹ 4 lakhs, stolen by the cashier in the month of March 20X1, was detected in April, 20X1. The financial statements for the year ended 31st March, 20X1 were approved by the Board of Directors on 15th May, 20X1. As per Accounting Standards, this is _____ for the financial statements year ended on 31st March, 20X1.</p>
+
+- **(A)** An Adjusting event.
+- **(B)** Non-adjusting event.
+- **(C)** Contingency.
+- **(D)** Provision
+
+*(1 Marks · Topic: M2-C7-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #1)*
 
 
 *Case Facts (Case CS-2):*
@@ -27,7 +63,7 @@
 <p>Kay Ltd. makes provision for doubtful debts @ 5%.</p>
 <p>Based on the information given in above Case Scenario, answer the following Question No. 5-7</p>
 
-**1.** <p>What is the treatment of insolvency of Sheetal Enterprises in the Books of Kay Ltd. as on 31st March, 2024 as per AS 4?</p>
+**5.** <p>What is the treatment of insolvency of Sheetal Enterprises in the Books of Kay Ltd. as on 31st March, 2024 as per AS 4?</p>
 
 - **(A)** An Adjusting Event, full provision of ₹75,000 should be made in the Final Accounts for the year ended 31 March, 2024.
 - **(B)** An Adjusting Event, provision of ₹3,750 should be made in the Final Accounts for the year ended 31 March, 2024.
@@ -36,7 +72,7 @@
 
 *(2 Marks · Topic: AS 4 (1.4): Adjusting event - post-year-end insolvency confirming a condition (impaired receivable) that existed at the balance sheet date · Source: PYQ 2024 Q7)*
 
-**2.** <p>Please guide the management of RTS Ltd as to which one of the events mentioned above (i to v) after the reporting period provide evidence of conditions that existed at the end of the reporting period?</p>
+**6.** <p>Please guide the management of RTS Ltd as to which one of the events mentioned above (i to v) after the reporting period provide evidence of conditions that existed at the end of the reporting period?</p>
 
 - **(A)** ii and v.
 - **(B)** ii.
@@ -45,7 +81,7 @@
 
 *(2 Marks · Topic: AS 4 (1.4): Adjusting events - provide additional evidence of conditions existing at the balance sheet date · Source: MTP 2025 Set 1 Q7)*
 
-**3.** <p>How the loss due to fraud by cashier will be recognized in the books of Unicorn Limited?</p>
+**7.** <p>How the loss due to fraud by cashier will be recognized in the books of Unicorn Limited?</p>
 
 - **(A)** Loss of ₹2,80,000 recognized in the P&amp;L for the year ended 31 March, 2027.
 - **(B)** Loss of ₹2,80,000 recognized in the P&amp;L for the year ended 31 March, 2026.
@@ -59,27 +95,9 @@
 
 ## Section B — Descriptive Questions *(Illustrations style)* — 21 Marks
 
-**Q1.** <p>The financial statements of Mehta Ltd. for the year 2024-25 approved by the Board of
-  Directors on 15th July, 2025. The following information was provided:</p>
-<ol type="i">
-<li>A suit against the company's advertisement was filed by a party on 20th April, 2025, claiming damages
-      of ₹25 lakhs.</li>
-<li>The terms and conditions for acquisition of business of another company have been decided by March,
-      2024. But the financial resources were arranged in April, 2025 and amount invested was ₹50
-      lakhs.</li>
-<li>Theft of cash of ₹5 lakhs by the cashier on 31st March, 2025 but was detected on 16th July,
-      2025.</li>
-<li>Company sent a proposal to sell an immovable property for ₹40 lakhs in March, 2025. The book
-      value of the property was ₹30 lakhs on 31st March, 2025. However, the deed was registered on 15th
-      April, 2025.</li>
-<li>A major fire has damaged the assets in a factory on 5th April, 2025. However, the assets are fully
-      insured.</li>
-</ol>
-<p>With reference to AS-4 "Contingencies and events occurring after the balance sheet date", state whether
-    the above mentioned events will be treated as contingencies, adjusting events or non-adjusting events
-    occurring after the balance sheet date.</p>
+**Q1.** <p>A Ltd. has sold its building for ₹ 50 lakhs to B Ltd. and has also given the possession to B Ltd. The book value of the building is ₹ 30 lakhs. As on 31st March, 20X1, the documentation and legal formalities are pending. The company has not recorded the sale and has shown the amount received as advance. Do you agree with this treatment? During the year 20X1-20X2, Raj Ltd. was sued by a competitor for ₹ 15 lakhs for infringement of a trademark. Based on the advice of the company's legal counsel, Raj Ltd. provided for a sum of ₹ 10 lakhs in its financial statements for the year ended 31st March, 20X2. On 18th May, 20X2, the Court decided in favour of the party alleging infringement of the trademark and ordered Raj Ltd. to pay the aggrieved party a sum of ₹ 14 lakhs. The financial statements were prepared by the company's management on 30th April, 20X2, and approved by the board on 30th May, 20X2. a</p>
 
-*(7 Marks · Topic: AS 4 — Contingencies and Events Occurring After the Balance Sheet Date (1.4/1.5) · Source: MTP 2025 Set 1 Q1a)*
+*(7 Marks — estimated from answer length, not an official mark · Topic: M2-C7-U1 — ICAI Study Material · Source: Study Material TYK — Scenario based Questions #6)*
 
 **Q2.** <p>The financial statements of PQ Ltd. for the year 2024-25 approved by the Board of Directors on 15th July, 2025. The following information was provided:</p>
 <ol type="i">
@@ -111,15 +129,31 @@
 
 ### Section A — MCQ Answer Key & Explanations
 
-**1.** Correct Option: **(A)**
+**1.** Correct Option: **(C)**
+
+<p><strong>Answer:</strong> (C) Both (a) and (b).</p>
+
+**2.** Correct Option: **(D)**
+
+<p><strong>Answer:</strong> (D) All of the above.</p>
+
+**3.** Correct Option: **(C)**
+
+<p><strong>Answer:</strong> (C) Those significant events, both favourable and unfavourable, that occur between the balance sheet date and the date on which the financial statements are approved by the Board of directors.</p>
+
+**4.** Correct Option: **(A)**
+
+<p><strong>Answer:</strong> (A) An Adjusting event.</p>
+
+**5.** Correct Option: **(A)**
 
 <p><strong>Answer:</strong> (A) Adjusting event, full ₹75,000 provision — the earthquake that caused Sheetal Enterprises' loss occurred on 30th March 2024, before the balance sheet date, and the bankruptcy confirmed in April 2024 provides additional evidence of a condition (the customer's impaired ability to pay) that already existed at 31st March 2024. Per AS 4 this is an adjusting event, and since the debtor is now known to be bankrupt, the entire ₹75,000 balance — not just the standard 5% doubtful-debts rate — must be provided for.</p>
 
-**2.** Correct Option: **(B)**
+**6.** Correct Option: **(B)**
 
 <p><strong>Answer:</strong> (B) ii only — the out-of-court settlement of a legal claim (ii) confirms/quantifies a condition (the dispute and its likely outcome) that already existed at the balance sheet date, so it is an adjusting event under AS 4. Nationalisation/privatisation (i), a rights issue (iii), a strike (iv), and announcing a plan to discontinue an operation (v) are all new conditions arising after the balance sheet date — non-adjusting events.</p>
 
-**3.** Correct Option: **(B)**
+**7.** Correct Option: **(B)**
 
 <p><strong>Answer:</strong> (B) — the fraud occurred in January 2026 (within the year under audit) and was discovered before the financial statements were approved (1st May, 2026), so it is an adjusting event requiring recognition of the full loss in FY 2025-26.</p>
 
@@ -128,36 +162,7 @@
 
 **Q1.**
 
-<div>
-<ol type="i">
-<li>Suit filed against the company is a contingent liability but it was not existing as on balance sheet
-      date as the suit was filed on 20th April after the balance sheet date. As per AS 4, 'Contingencies' used
-      in the Standard is restricted to conditions or situations at the balance sheet date, the financial effect
-      of which is to be determined by future events which may or may not occur. Hence, it will have no effect
-      on financial statements and will be a <strong>non-adjusting event</strong>.</li>
-<li>In the given case, terms and conditions for acquisition of business were finalised and carried out
-      before the closure of the books of accounts but transaction for payment of financial resources was
-      effected in April, 2024 (as printed in the source answer). This is clearly an event occurring after the
-      balance sheet date. Hence, necessary <strong>adjustment</strong> to assets and liabilities for acquisition
-      of business is necessary in the financial statements for the year ended 31st March, 2024 (as printed in
-      the source answer).</li>
-<li>Only those significant events which occur between the balance sheet date and the date on which the
-      financial statements are approved, may indicate the need for adjustment to assets and liabilities
-      existing on the balance sheet date or may require disclosure. In the given case, theft of cash was
-      detected on 16th July, 2024 (as printed in the source answer) after approval of financial statements by
-      the Board of Directors, hence <strong>no treatment is required</strong>.</li>
-<li>Adjustments to assets and liabilities are not appropriate for events occurring after the balance sheet
-      date, if such events do not relate to conditions existing at the balance sheet date. In the given case,
-      sale of immovable property was under proposal stage (negotiations also not started) on the balance sheet
-      date. Therefore, <strong>no adjustment</strong> to assets for sale of immovable property is required in
-      the financial statements for the year ended 31st March, 2024 (as printed in the source answer).</li>
-<li>The condition of fire occurrence was not existing on the balance sheet date. Only the
-      <strong>disclosure</strong> regarding event of fire and loss being completely insured may be given in the
-      report of approving authority.</li>
-</ol>
-</div>
-
-> **Author's Note (Synthesized — not ICAI-sourced):** A common error here is treating every event between the balance sheet date and the approval date alike, instead of separately testing each one against whether it provides evidence of a condition that already existed at the balance sheet date.
+<p>The economic reality and substance of the transaction is that the rights and beneficial interest in the property has been transferred although legal title has not been transferred. A Ltd. should record the sale and recognise the gain of ₹ 20 lakhs in its profit and loss account. The building should be derecognized in the financial statements. As per AS 4 (Revised), adjustments to assets and liabilities are required for events occurring after the balance sheet date that provide additional information materially affecting the determination of the amounts relating to conditions existing at the balance sheet date. In the given case, since Raj Ltd. was sued by a competitor for infringement of a trademark during the year 20X1-X2 for which the provision was also made by it, the decision of the Court on 18th May, 20X2, for payment of the penalty will constitute as an adjusting event because it is an event occurred before approval of the financial statements. Therefore, Raj Ltd. should adjust the provision upward by ₹ 4 lakhs to reflect the award decreed by the Court to be paid by them to its competitor. Had the judgment of the Court been delivered on 1 st June, 20X2, it would be considered as an event occurring after the approval of the financial statements which is not covered by AS 4 (Revised). In that case, no adjustment in the financial statements of 20X1-X2 would have been required.</p>
 
 **Q2.**
 

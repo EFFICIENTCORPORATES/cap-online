@@ -7,9 +7,9 @@
 
 **Suggested Time:** ~90 minutes
 
-> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is a real, previously chapter-tagged MTP / RTP / PYQ question drawn from the platform's question bank (`first_run/output/generated-from-script/questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ). Nothing is invented.
+> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material chapter's own "Test Your Knowledge" section (`books/concept-book/raw_icai_study_materials/`, extracted by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks are estimated from answer length and every such question/answer is explicitly tagged "estimated from answer length, not an official mark" wherever it appears below. Nothing is invented — every question and every answer is copied from one of these two real sources.
 >
-> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (0 MCQ + 0 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
+> **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (11 MCQ + 0 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
 
 ---
 
@@ -81,16 +81,7 @@
 
 *(2 Marks · Topic: AS 10 (2.6-2.7): Cost elements includable/excluded when self-constructing an asset · Source: MTP 2024 Set 1 Q2(i))*
 
-**4.** <p>What amount of employment cost of construction workers will be capitalized to the cost of factory building?</p>
-
-- **(A)** ₹2,90,000
-- **(B)** ₹3,48,000
-- **(C)** ₹2,32,000
-- **(D)** ₹29,000
-
-*(2 Marks · Topic: AS 10 (2.8): Self-constructed asset - direct construction-period costs capitalised on the same principles as an acquired asset · Source: MTP 2024 Set 1 Q2(ii))*
-
-**5.** <p>What will be the carrying amount (i.e. value after charging depreciation) of the factory in the Balance Sheet of Shubham Limited as at 31st March, 2023?</p>
+**4.** <p>What will be the carrying amount (i.e. value after charging depreciation) of the factory in the Balance Sheet of Shubham Limited as at 31st March, 2023?</p>
 
 - **(A)** ₹30,00,000
 - **(B)** ₹57,78,125
@@ -99,25 +90,22 @@
 
 *(2 Marks · Topic: AS 10 (2.8): Component depreciation (roof vs remaining structure) of a self-constructed asset from its ready-for-use date · Source: MTP 2024 Set 1 Q2(iv))*
 
-**6.** <p>The total cost of plant as on march 31, 2024 will be:</p>
 
-- **(A)** ₹85,00,000
-- **(B)** ₹98,00,000
-- **(C)** ₹93,00,000
-- **(D)** ₹95,00,000
+*Case Facts (Case CS-3):*
 
-*(2 Marks · Topic: AS 10 (2.6-2.7): Aggregating directly attributable costs, including capitalised borrowing cost, into total asset cost · Source: MTP 2024 Set 2 Q3)*
+<p>Axis limited is a manufacturing company. It purchased a machinery costing ₹10 Lakhs in April 2023. It paid ₹4 lakhs upfront and paid the remaining ₹6,00,000 as deferred payment by paying instalment of ₹1,05,000 for the next 6 months. During the year, the Company sold a land which was classified as its ‘property, plant and equipment’ for ₹25,00,000 and paid ₹1,00,000 as income tax as long term capital gain on such sale. During the year, the Company also received income tax refund along with interest.</p>
+<p>Answer the following questions based on the above information.</p>
 
-**7.** <p>The amount of depreciation to be charged for the year end March 31, 2024</p>
+**5.** <p>At what amount, the machinery should be recognised in the financial statements:</p>
 
-- **(A)** ₹4,30,000
-- **(B)** ₹9,30,000
-- **(C)** ₹9,80,000
-- **(D)** Nil
+- **(A)** ₹4,00,000
+- **(B)** ₹10,30,000
+- **(C)** ₹6,00,000
+- **(D)** ₹10,00,000
 
-*(2 Marks · Topic: AS 10 (Depreciation – commencement rules): Depreciation commences only once the asset is ready for its intended use · Source: MTP 2024 Set 2 Q4)*
+*(2 Marks · Topic: AS 10 (2.6-2.7): Asset acquired on deferred credit terms recognised at cash price equivalent, excess treated as interest · Source: MTP 2024 Set 1 Q3(b))*
 
-**8.** <p>At the end of Year 2, when the intention is to use the building as corporate office, it should be classified as:</p>
+**6.** <p>At the end of Year 2, when the intention is to use the building as corporate office, it should be classified as:</p>
 
 - **(A)** Inventory
 - **(B)** Investments
@@ -126,16 +114,25 @@
 
 *(2 Marks · Topic: AS 10 (2.3): Reclassification to PPE once the held-for-sale intention ends and own-use intention begins · Source: MTP 2025 Set 2 Q3)*
 
-**9.** <p>At the end of Year 2, the Project should be valued at:</p>
+**7.** <p>X Ltd. has entered into a binding agreement with Beta Ltd. to buy a custom-made machine for ₹2 lakhs. During the year 2024-25 X Ltd has to change its method of production due to changes in market trend. Before the delivery of the machine, X Ltd had already changed its method of production and the new method will not require the machine ordered. Now the company decides to scrap it after delivery. The expected scrap value is ₹25,000. Machine was received on 10th October, 2024 and was scrapped on 15th October, 2024. The correct accounting treatment for above machine in the year 2024-25 is -</p>
 
-- **(A)** ₹40 Crore
-- **(B)** ₹35.50 Crore
-- **(C)** ₹35.10 Crore
-- **(D)** ₹25 Crore
+- **(A)** Machine A/c to be debited with ₹2 lakhs and Bank A/c to be credited with ₹2 lakhs.
+- **(B)** Impairment A/c to be debited with ₹1.75 lakhs and Bank A/c to be credited with ₹1.75 lakhs.
+- **(C)** Profit and Loss A/c to be debited with ₹2 lakhs and Bank A/c to be credited with ₹2 lakhs.
+- **(D)** Profit and Loss A/c to be debited with ₹1.75 lakhs and Bank A/c to be credited with ₹1.75 lakhs.
 
-*(2 Marks · Topic: AS 10 (2.6-2.7): Cost on reclassification = carried-forward value plus directly attributable costs to ready the asset for its intended use · Source: MTP 2025 Set 2 Q4)*
+*(2 Marks · Topic: AS 10 (2.5): Recognition criteria - an asset known in advance to provide no future economic benefit is never capitalised as PPE · Source: PYQ 2025 Q4)*
 
-**10.** <p>At what value the plant and machinery acquired should be recognised as at 31st March 2024:</p>
+**8.** <p>In respect of abovementioned land in residential zone, what would be the accounting treatment under Indian GAAP?</p>
+
+- **(A)** The 'land in residential zone' appearing in property, plant and equipment would be credited by its carrying amount and inventory would be recognised equivalent to its fair value. Differential will be taken to profit or loss on conversion.
+- **(B)** The 'land in residential zone' appearing in property, plant and equipment would be credited by its gross amount and inventory would be recognised equivalent to carrying amount of reclassified property, plant and equipment. Differential will be taken to profit or loss on conversion.
+- **(C)** The 'land in residential zone' appearing in property, plant and equipment would be credited by its carrying amount and inventory would be recognised at the same amount.
+- **(D)** The 'land in residential zone' appearing in property, plant and equipment would be credited by its gross amount and inventory would be recognised at the same amount.
+
+*(2 Marks · Topic: AS 10 (2.3): Land held for sale as plotted development reclassified from PPE to inventory at carrying amount, with inventory recognised at the same amount · Source: MTP 2025 Set 2 Q6)*
+
+**9.** <p>At what value the plant and machinery acquired should be recognised as at 31st March 2024:</p>
 
 - **(A)** ₹11.10 Crore
 - **(B)** ₹11 Crore
@@ -144,7 +141,7 @@
 
 *(2 Marks · Topic: AS 10 (2.6-2.7): Cost of PPE = purchase price plus directly attributable costs; depreciation time-apportioned from the date ready for intended use · Source: MTP 2025 Set 2 Q6)*
 
-**11.** <p>Accounting Standard 10, Property, Plant and Equipment is applicable to:</p>
+**10.** <p>Accounting Standard 10, Property, Plant and Equipment is applicable to:</p>
 
 - **(A)** Biological Assets (other than Bearer Plants) related to agricultural activity
 - **(B)** Wasting Assets including Mineral rights, Expenditure on the exploration for and extraction of minerals, oil, natural gas and similar non-regenerative resources
@@ -153,47 +150,41 @@
 
 *(2 Marks · Topic: AS 10 (2.2): Scope of AS 10 - bearer plants included (produce excluded); biological assets and wasting assets excluded · Source: MTP 2025 Set 1 Q6)*
 
-**12.** <p>The revenue expenditure of ₹50 lacs should be recognised as:</p>
+**11.** <p>What should be the accounting treatment in the statement of profit and loss of RIMMI Ltd in year 1 in respect of property, plant and equipment?</p>
 
-- **(A)** Part of Plant and Machinery
-- **(B)** Part of Grant
-- **(C)** Revenue expenditure in the Profit and Loss
-- **(D)** Deducted from loan
+- **(A)** Overhauling costs of ₹5 crores and depreciation of ₹1 crore would be charged to the statement of profit and loss in year 1.
+- **(B)** Depreciation of ₹2 crores would be charged to the statement of profit and loss in year 1.
+- **(C)** Overhauling costs of ₹5 crores and depreciation of ₹75 lakhs would be charged to the statement of profit and loss in year 1.
+- **(D)** Depreciation of ₹1.75 crores would be charged to the statement of profit and loss in year 1.
 
-*(2 Marks · Topic: AS 10 (2.6-2.7): Nature of the expenditure, not its funding source, determines capitalisation versus expensing · Source: MTP 2025 Set 2 Q7)*
+*(2 Marks · Topic: AS 10 (2.10): Major inspection/overhaul cost capitalised as a separate component with its own depreciation period, not expensed when incurred · Source: MTP 2025 Set 2 Q9)*
 
-**13.** <p>Which of the following statement is true:</p>
+**12.** <p>Which of the following treatment is most appropriate for recording net operating costs/revenue of the Multiplex theatre for the period 1st February, 2026 to 31st March, 2026?</p>
 
-- **(A)** Plant and Machinery has been acquired out of Government Grant so the same should be disclosed at Nil value.
-- **(B)** Plant and Machinery belongs to Financial Institution
-- **(C)** Plant and Machinery belong to the Company and should be recognised as its Property, Plant and Equipment
-- **(D)** Plant and Machinery should not be disclosed in the financial statements of the Company at all
+- **(A)** Net operating costs/revenue should be capitalized as the entire shopping Mall complex has not officially started functioning.
+- **(B)** Net operating costs/revenue should not be capitalized but should be recognized in the statement of profit and loss account.
+- **(C)** 70% of net operating cost/revenue should be capitalized.
+- **(D)** 50% of net operating cost/revenue should be capitalized.
 
-*(2 Marks · Topic: AS 10 (2.3): Ownership and control, not the funding source, determine PPE recognition · Source: MTP 2025 Set 2 Q8)*
+*(2 Marks · Topic: AS 10 (2.6): Costs of testing whether an asset is functioning properly vs commercial operating activity - trial run distinction · Source: PYQ 2026 Q4)*
 
+**13.** <p>What would be the Cost of Self Constructed Asset as per AS 10?</p>
 
-*Case Facts (Case CS-3):*
+- **(A)** ₹29,25,000
+- **(B)** ₹27,75,000
+- **(C)** ₹30,50,000
+- **(D)** ₹29,00,000
 
-<p>Mars Ltd. is a manufacturing enterprise which is starting a new manufacturing plant at X Village. It has commenced construction of the plant on April 1, 2023 and has incurred following expenses:</p>
-<ul>
-<li>It has acquired land for installing Plant for ₹50,00,000</li>
-<li>It incurred ₹35,00,000 for material and direct labour cost for developing the Plant.</li>
-<li>The Company incurred ₹10,00,000 for head office expenses at New Delhi which included rent, employee cost and maintenance expenditure.</li>
-<li>The Company borrowed ₹25,00,000 for construction work of Plant @12% per annum on April 1, 2023. Director finance of the Company incurred travel and meeting expenses amounting to ₹5,00,000 during the year for arranging this loan.</li>
-<li>On November 1, 2023, the construction activities of the plant were interrupted as the local people alongwith the activists have raised issues relating to environmental impact of plant being constructed. Due to agitation the construction activities came to standstill for 3 months.</li>
-<li>With the help of Government and NGOs, the agitation was over by February 28, 2024 and the work resumed. However, to balance the impact on environment, government ordered the company to install certain devices for which the Company had to incur ₹6,00,000 in March 2024.</li>
-<li>The rate of depreciation on Plant is 10%.</li>
-</ul>
-<p>Based on the above information, answer the following questions.</p>
+*(2 Marks · Topic: AS 10 (2.8): Cost of a self-constructed asset - materials at cost, labour, installation, apportioned borrowing cost · Source: PYQ 2026 Q7)*
 
-**14.** <p>Which of the following expenses cannot be included in the cost of plant:</p>
+**14.** <p>The total cost of plant as on March 31, 2024 will be:</p>
 
-- **(A)** Cost of Land
-- **(B)** Construction material and labour cost
-- **(C)** Head office expenses
-- **(D)** Borrowing cost
+- **(A)** ₹85,00,000
+- **(B)** ₹98,00,000
+- **(C)** ₹93,00,000
+- **(D)** ₹95,00,000
 
-*(2 Marks · Topic: AS 10 (2.6-2.7): Cost of a self-constructed asset - directly attributable costs only, general/administrative overheads excluded · Source: MTP 2025 Set 1 Q9)*
+*(2 Marks · Topic: AS 10 (2.7): Directly attributable costs including regulatory-mandated modifications · Source: MTP 2026 Set 2 Q8)*
 
 
 ---
@@ -276,57 +267,49 @@
 
 <p><strong>Answer:</strong> (A) ₹2,00,000 incurred as legal cost, per the Ans.pdf's Division A answer key ("2. (i) (a)").</p>
 
-**4.** Correct Option: **(C)**
-
-<p><strong>Answer:</strong> (C) ₹2,32,000 — construction ran for 8 capitalisable months, 1st May 2022 to 31st December 2022 (completion). Employment cost of ₹29,000/month × 8 months = ₹2,32,000.</p>
-
-**5.** Correct Option: **(B)**
+**4.** Correct Option: **(B)**
 
 <p><strong>Answer:</strong> (B) ₹57,78,125 — "the factory" here reads as the whole project carrying value (land ₹30,00,000, not depreciated, plus the constructed building's carrying value after depreciation). Building gross cost (materials, levelling, capitalisable employment/overhead costs, and the ₹1,64,000 net borrowing cost from Q2(iii)) less a part-year depreciation charge computed on a component basis — the roof (25% of building cost) depreciated over its own 20-year life, the remainder over the full 40-year life, from the date the building was ready for use — reduces to a building carrying value of ₹27,78,125, so combined with land: ₹30,00,000 + ₹27,78,125 = ₹57,78,125, matching option (B). Option (C) ₹27,78,125 is the building-only figure (a distractor omitting land); option (A) ₹30,00,000 is land alone.</p>
 
+**5.** Correct Option: **(D)**
+
+<p><strong>Answer:</strong> (D) ₹10,00,000 — per AS 10, the cost of an asset acquired on deferred settlement terms is its cash price equivalent; any excess of the total payments over the cash price is a finance/interest charge, recognised as an expense over the credit period, not capitalised as part of the asset's cost.</p>
+
 **6.** Correct Option: **(C)**
-
-<p><strong>Answer:</strong> (C) ₹93,00,000 = Land ₹50,00,000
-  + Construction material and labour ₹35,00,000 + Borrowing cost capitalised (Q2) ₹2,00,000 +
-  Government-ordered environmental devices ₹6,00,000. Head office expenses (₹10,00,000) and the director
-  finance's travel/meeting expenses for arranging the loan (₹5,00,000, a cost of raising finance, not of
-  constructing the asset) are both excluded.</p>
-
-**7.** Correct Option: **(D)**
-
-<p><strong>Answer:</strong> (D) Nil — depreciation begins only once
-  an asset is ready for its intended use. The plant was still under construction as at 31 March, 2024 (the
-  government-ordered environmental devices were only installed in March 2024, with no indication the plant was
-  commissioned/put to use by the year end), so no depreciation is chargeable for the year ended 31 March, 2024
-  despite the stated 10% rate.</p>
-
-**8.** Correct Option: **(C)**
 
 <p><strong>Answer:</strong> (C) Property, Plant and Equipment — once the company decides (beginning of Year 2) to use the building as its own corporate office rather than sell it, the asset no longer meets AS 2's held-for-sale test and is reclassified as PPE under AS 10.</p>
 
-**9.** Correct Option: **(B)**
+**7.** Correct Option: **(D)**
 
-<p><strong>Answer:</strong> (B) ₹35.50 Crore — on reclassification, the building carries forward at its existing inventory carrying amount (₹35 crore, the lower-of-cost-and-NRV value struck at the end of Year 1), plus the further ₹50 lacs (₹0.50 crore) directly attributable cost incurred to bring it to its intended condition as a corporate office (structural changes mandated by government commercial-space norms). ₹35 crore + ₹0.50 crore = ₹35.50 crore.</p>
+<p><strong>Answer:</strong> (D) P&amp;L A/c debited with ₹1.75 lakhs, Bank A/c credited with ₹1.75 lakhs. Since X Ltd already knew, before the machine was even delivered, that it would never be used for its intended purpose, the machine provides no probable future economic benefit and therefore fails AS 10's recognition criteria for Property, Plant and Equipment — it is never capitalised as Machine A/c. The net cost actually borne by the company (₹2,00,000 acquisition cost less ₹25,000 realisable scrap value = ₹1,75,000) is recognised as a loss directly in the Profit and Loss Account.</p>
 
-**10.** Correct Option: **(C)**
+**8.** Correct Option: **(C)**
+
+<p><strong>Answer:</strong> (C) — once management's intention changes to selling the plotted land rather than using it operationally, it is reclassified from PPE to inventory. Reclassification itself is not a disposal or a remeasurement event, so no gain/loss is recognised at the point of transfer — the land leaves PPE at its existing carrying amount and enters inventory at that same amount; only on eventual sale is any profit recognised.</p>
+
+**9.** Correct Option: **(C)**
 
 <p><strong>Answer:</strong> (C) ₹10.54 Crore — cost of P&amp;M = purchase price ₹10 crore + installation/assembly ₹1 crore + professional fees necessary for installation/operation ₹10 lacs (₹0.10 crore) = ₹11.10 crore gross (the grant is presented as Capital Reserve, not deducted from the asset, so gross cost is unaffected by it). Ready for intended use 30th September 2023, so FY2023-24 depreciation runs 6 months: ₹11.10 crore × 10% × 6/12 = ₹0.555 crore. Net carrying value = ₹11.10 crore − ₹0.555 crore = ₹10.545 crore ≈ ₹10.54 crore.</p>
 
-**11.** Correct Option: **(D)**
+**10.** Correct Option: **(D)**
 
 <p><strong>Answer:</strong> (D) Bearer Plant (except produce on Bearer Plants) — AS 10 covers bearer plants themselves (the produce growing on them is outside AS 10's scope, covered elsewhere), while biological assets generally, wasting assets/mineral rights, and inventories are all excluded from AS 10's scope.</p>
 
-**12.** Correct Option: **(C)**
+**11.** Correct Option: **(D)**
 
-<p><strong>Answer:</strong> (C) Revenue expenditure in the Profit and Loss — the ₹50 lacs is explicitly revenue in nature; it does not meet AS 10's recognition criteria for capitalisation, and is expensed to the Statement of Profit and Loss regardless of having been funded out of grant proceeds.</p>
+<p><strong>Answer:</strong> (D) ₹1.75 crores — per AS 10's component approach, the anticipated first-overhaul cost of ₹5 crores is carved out as a separate component of the vessel with its own 5-year useful life (to the next overhaul), depreciated at ₹5cr ÷ 5 = ₹1 crore/year. The remaining vessel component (₹20cr − ₹5cr = ₹15cr) is depreciated over the full 20-year life at ₹15cr ÷ 20 = ₹0.75 crore/year. Total Year 1 depreciation = ₹1 crore + ₹0.75 crore = ₹1.75 crores; no ₹5 crore expense is charged in Year 1 since the actual overhaul has not yet occurred, only its component is being depreciated in advance.</p>
+
+**12.** Correct Option: **(B)**
+
+<p><strong>Answer:</strong> (B) — a discounted, 70%-capacity "soft opening" selling real tickets to the public is commercial operation, not a genuine trial run under AS 10, so its net result is expensed, not capitalised.</p>
 
 **13.** Correct Option: **(C)**
 
-<p><strong>Answer:</strong> (C) Plant and Machinery belong to the Company and should be recognised as its Property, Plant and Equipment — ownership and control rest with Supercool Ltd. regardless of the funding source; AS 12's treatment of the grant governs only the grant's own presentation (as Capital Reserve here), not the ownership/recognition of the asset it helped fund.</p>
+<p><strong>Answer:</strong> (C) ₹30,50,000 = 15,000 units raw material at cost (₹125) ₹18,75,000 + labour/overheads ₹9,00,000 + installation ₹1,50,000 + apportioned borrowing cost.</p>
 
 **14.** Correct Option: **(C)**
 
-<p><strong>Answer:</strong> (C) Head office expenses — general administrative overheads (rent, employee cost, maintenance at New Delhi head office) are not directly attributable to bringing this specific plant to its working condition, so AS 10 excludes them from cost, unlike land acquired for the plant site, direct construction material/labour, and eligible borrowing cost, all of which are directly attributable.</p>
+<p><strong>Answer:</strong> (c) ₹93,00,000 = Land ₹50,00,000 + material/labour ₹35,00,000 + capitalised borrowing cost ₹2,00,000 + government-mandated environmental devices ₹6,00,000 (head office expenses and loan-arrangement travel costs excluded).</p>
 
 
 ### Section B — Descriptive Solutions

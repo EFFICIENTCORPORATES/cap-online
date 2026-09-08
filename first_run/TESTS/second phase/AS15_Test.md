@@ -3,21 +3,57 @@
 **CA Inter · Paper 1: Advanced Accounting**
 **Chapter Reference:** `M2-C6-U1`
 
-**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 35 &nbsp;|&nbsp; **Section A (MCQ):** 2 marks, 1 questions (6%) &nbsp;|&nbsp; **Section B (Descriptive):** 33 marks, 7 questions (94%)
+**Maximum Marks (target):** 50 &nbsp;|&nbsp; **Marks Achieved:** 39 &nbsp;|&nbsp; **Section A (MCQ):** 6 marks, 5 questions (15%) &nbsp;|&nbsp; **Section B (Descriptive):** 33 marks, 7 questions (85%)
 
-**Suggested Time:** ~63 minutes
+**Suggested Time:** ~70 minutes
 
-> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is a real, previously chapter-tagged MTP / RTP / PYQ question drawn from the platform's question bank (`first_run/output/generated-from-script/questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ). Nothing is invented.
+> This test paper is compiled in the style of ICAI's own **"Test Your Knowledge"** (MCQ) and **"Illustrations"** (descriptive) sections — questions grouped together, solutions given together at the end. Every question below is real, drawn from one of two sources: past MTP/RTP/PYQ exam papers already chapter-tagged in the platform's question bank (`questions_index.json` for descriptive, `mcq_questions_extracted.json` for MCQ — these carry real, official marks), or the ICAI study-material chapter's own "Test Your Knowledge" section (`books/concept-book/raw_icai_study_materials/`, extracted by `extract_study_material_tyk.py`) — those carry **no official marks in the source**, so their marks are estimated from answer length and every such question/answer is explicitly tagged "estimated from answer length, not an official mark" wherever it appears below. Nothing is invented — every question and every answer is copied from one of these two real sources.
 >
-> **Content note — target not fully met (pool too small):** the tagged question pool currently available for AS 15 in this corpus totals only **35 marks** (2 MCQ + 33 Descriptive) after de-duplication — short of the 50-mark target. All available real content has been included below (**35 of 50 marks**); no question was invented or borrowed from another chapter to pad the total. More MTP/RTP/PYQ sittings would need to be sourced and tagged for this chapter to reach a full 50-mark paper.
+> **Content note — target not fully met (pool too small):** the tagged question pool currently available for AS 15 in this corpus totals only **39 marks** (6 MCQ + 33 Descriptive) after de-duplication — short of the 50-mark target. All available real content has been included below (**39 of 50 marks**); no question was invented or borrowed from another chapter to pad the total. More MTP/RTP/PYQ sittings would need to be sourced and tagged for this chapter to reach a full 50-mark paper.
 >
 > **Duplicate-check note:** exact-duplicate question text (the same question re-tagged from more than one sitting) was removed before selection (0 MCQ + 0 Descriptive duplicate(s) skipped for this chapter). This is a same-text guard only — the platform's fuller ≥90%-similarity Original/Practice-question (OP/PP) detection is still unbuilt (see CLAUDE.md §6), so near-duplicate variants (same structure, different figures) may still appear.
 
 ---
 
-## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 2 Marks
+## Section A — Multiple Choice Questions *(Test Your Knowledge style)* — 6 Marks
 
-**1.** <p>SRS Limited's defined benefit pension plan for the year ended 31st March 2025: Fair market value of plan assets 01.04.24 ₹10,00,000; 31.03.25 ₹14,25,000; Employer Contribution ₹3,50,000; Benefits paid ₹2,50,000. What is the actual return on plan assets per AS-15?</p>
+**1.** <p>Best estimates of the variable to determine the eventual cost of post- employment benefits is referred to as:</p>
+
+- **(A)** Employer’s contribution
+- **(B)** Actuarial assumptions
+- **(C)** Cost to Company
+- **(D)** Employee’s contribution
+
+*(1 Marks · Topic: M2-C6-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #4)*
+
+**2.** <p>The plans that are established by legislation to cover all enterprises and are operated by Governments include:</p>
+
+- **(A)** Multi-Employer plans
+- **(B)** State plans
+- **(C)** Insured Benefits
+- **(D)** Employee benefit plan
+
+*(1 Marks · Topic: M2-C6-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #3)*
+
+**3.** <p>Non-accumulating compensating absence is commonly referred to as:</p>
+
+- **(A)** Earned Leave
+- **(B)** Sick Leave
+- **(C)** Casual leave
+- **(D)** All of the above
+
+*(1 Marks · Topic: M2-C6-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #2)*
+
+**4.** <p>Gratuity and Pension would be examples of:</p>
+
+- **(A)** Short-term employee benefits
+- **(B)** Long-term employee benefits
+- **(C)** Post-employment benefits.
+- **(D)** None of the above.
+
+*(1 Marks · Topic: M2-C6-U1 — ICAI Study Material (Test Your Knowledge) · Source: Study Material TYK MCQ #1)*
+
+**5.** <p>SRS Limited's defined benefit pension plan for the year ended 31st March 2025: Fair market value of plan assets 01.04.24 ₹10,00,000; 31.03.25 ₹14,25,000; Employer Contribution ₹3,50,000; Benefits paid ₹2,50,000. What is the actual return on plan assets per AS-15?</p>
 
 - **(A)** ₹5,25,000
 - **(B)** ₹2,50,000
@@ -80,7 +116,23 @@
 
 ### Section A — MCQ Answer Key & Explanations
 
-**1.** Correct Option: **(C)**
+**1.** Correct Option: **(B)**
+
+<p><strong>Answer:</strong> (B) Actuarial assumptions</p>
+
+**2.** Correct Option: **(B)**
+
+<p><strong>Answer:</strong> (B) State plans</p>
+
+**3.** Correct Option: **(C)**
+
+<p><strong>Answer:</strong> (C) Casual leave</p>
+
+**4.** Correct Option: **(C)**
+
+<p><strong>Answer:</strong> (C) Post-employment benefits.</p>
+
+**5.** Correct Option: **(C)**
 
 <p><strong>Answer:</strong> (C) ₹3,25,000 = Closing fair value (14,25,000) − Opening fair value (10,00,000) − Employer contribution (3,50,000) + Benefits paid (2,50,000) = 3,25,000.</p>
 
