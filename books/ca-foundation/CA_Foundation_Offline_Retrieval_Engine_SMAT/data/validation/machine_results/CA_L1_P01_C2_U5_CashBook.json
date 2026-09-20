@@ -1,0 +1,28 @@
+{
+  "file": "CA_L1_P01_C2_U5_CashBook",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (65)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (23 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9986 min=0.9862",
+    "layout_representation PASS",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 20,
+    "blocks": 65,
+    "pair_keys": 23,
+    "mean_page_text_recall": 0.9985582097344186,
+    "min_page_text_recall": 0.9862068965517241,
+    "layout_pages": 19,
+    "warning_count": 0
+  },
+  "layout_reviewed": []
+}

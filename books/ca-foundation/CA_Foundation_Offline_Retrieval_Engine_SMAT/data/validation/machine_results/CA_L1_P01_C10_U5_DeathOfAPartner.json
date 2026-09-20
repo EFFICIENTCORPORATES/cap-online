@@ -1,0 +1,28 @@
+{
+  "file": "CA_L1_P01_C10_U5_DeathOfAPartner",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (71)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (24 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9966 min=0.9739",
+    "layout_representation PASS",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 30,
+    "blocks": 71,
+    "pair_keys": 24,
+    "mean_page_text_recall": 0.9966371149294441,
+    "min_page_text_recall": 0.9738805970149254,
+    "layout_pages": 28,
+    "warning_count": 0
+  },
+  "layout_reviewed": []
+}

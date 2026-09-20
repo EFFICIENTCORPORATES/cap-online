@@ -1,0 +1,36 @@
+{
+  "file": "CA_L1_P01_C1_U2_AccountingConceptsPrinciplesAnd",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (51)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (15 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9985 min=0.9880",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 30,
+    "blocks": 51,
+    "pair_keys": 15,
+    "mean_page_text_recall": 0.998522726810969,
+    "min_page_text_recall": 0.987987987987988,
+    "layout_pages": 24,
+    "warning_count": 0
+  },
+  "layout_reviewed": [
+    [
+      24,
+      "source-verified false-positive: prose/list/compact answer row"
+    ],
+    [
+      30,
+      "source-verified false-positive: prose/list/compact answer row"
+    ]
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "documents": 37,
+  "blocks": 2757,
+  "errors": 0,
+  "warnings": 0,
+  "issues": [],
+  "source_item_counts": {
+    "examples": 53,
+    "illustrations": 235,
+    "illustration_solutions": 235,
+    "mcqs": 269,
+    "theory_retrieval_blocks": 79,
+    "practical_questions": 79,
+    "true_false_statements": 307,
+    "scenario_questions": 0,
+    "safely_separable_example_questions": 18
+  }
+}

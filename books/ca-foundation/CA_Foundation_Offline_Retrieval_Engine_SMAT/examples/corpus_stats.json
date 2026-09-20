@@ -1,0 +1,72 @@
+{
+  "documents": 37,
+  "blocks": 2757,
+  "types": {
+    "corrigendum": 2,
+    "front_matter": 17,
+    "source_content": 34,
+    "learning_outcomes": 33,
+    "overview": 33,
+    "topic": 229,
+    "summary": 33,
+    "tyk_section": 33,
+    "tyk_category": 124,
+    "tyk_true_false_question": 307,
+    "tyk_mcq_question": 269,
+    "tyk_theory_question": 79,
+    "answers_section": 38,
+    "answers_category": 123,
+    "answer_true_false": 297,
+    "answer_mcq": 269,
+    "answer_theory": 79,
+    "illustration_question": 235,
+    "illustration_solution": 235,
+    "tyk_practical_question": 79,
+    "answer_practical": 80,
+    "annexure_content": 30,
+    "subtopic": 10,
+    "example": 53,
+    "example_question": 18,
+    "example_solution": 18
+  },
+  "source_item_counts": {
+    "examples": 53,
+    "illustrations": 235,
+    "illustration_solutions": 235,
+    "mcqs": 269,
+    "theory_retrieval_blocks": 79,
+    "practical_questions": 79,
+    "true_false_statements": 307,
+    "scenario_questions": 0,
+    "safely_separable_example_questions": 18
+  },
+  "example_registry": {
+    "loaded": true,
+    "version": "3.0",
+    "count": 53,
+    "virtual_blocks": 89,
+    "missing_documents": [],
+    "separable_examples": 18
+  },
+  "papers": [
+    1
+  ],
+  "modules": [
+    1,
+    2
+  ],
+  "chapters": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ]
+}

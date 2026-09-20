@@ -1,0 +1,25 @@
+CA FOUNDATION OFFLINE RETRIEVAL ENGINE — CORRECTED V2
+=====================================================
+
+1. Extract this ZIP to a normal folder.
+2. Windows GUI: double-click run_gui.bat
+3. Windows terminal menu: double-click run_tool.bat
+4. Direct command example:
+   python ca_retriever.py --query "Give me all Examples" -o outputs/all_examples.md
+5. Validation:
+   python ca_retriever.py --validate-data
+6. Tests:
+   run_tests.bat
+
+No internet, AI service, API key, or pip package is required.
+
+Important corrected source-item counts:
+- Examples: 53 source Examples
+- Illustrations: 235 questions + 235 solutions
+- MCQs: 269
+- Practical Questions: 79
+- Theory retrieval blocks: 79
+- True/False statements: 307
+
+All Source Examples are retrieved from data/semantic_registry/example_registry.json,
+a PDF-derived source-verified registry that replaces the incomplete/broad legacy Example blocks.

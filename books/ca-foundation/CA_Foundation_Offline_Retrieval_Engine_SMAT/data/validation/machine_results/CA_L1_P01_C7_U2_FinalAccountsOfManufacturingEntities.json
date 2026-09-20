@@ -1,0 +1,32 @@
+{
+  "file": "CA_L1_P01_C7_U2_FinalAccountsOfManufacturingEntities",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (58)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (20 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9988 min=0.9859",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 22,
+    "blocks": 58,
+    "pair_keys": 20,
+    "mean_page_text_recall": 0.9988235209656016,
+    "min_page_text_recall": 0.9859154929577465,
+    "layout_pages": 18,
+    "warning_count": 0
+  },
+  "layout_reviewed": [
+    [
+      17,
+      "source-verified false-positive: prose/list/compact answer row"
+    ]
+  ]
+}

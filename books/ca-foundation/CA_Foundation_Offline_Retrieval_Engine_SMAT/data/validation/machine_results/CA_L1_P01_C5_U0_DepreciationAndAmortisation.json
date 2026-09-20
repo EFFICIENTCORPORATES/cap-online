@@ -1,0 +1,48 @@
+{
+  "file": "CA_L1_P01_C5_U0_DepreciationAndAmortisation",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (146)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (61 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9795 min=0.0000",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 50,
+    "blocks": 146,
+    "pair_keys": 61,
+    "mean_page_text_recall": 0.9795468821347191,
+    "min_page_text_recall": 0.0,
+    "layout_pages": 41,
+    "warning_count": 0
+  },
+  "layout_reviewed": [
+    [
+      26,
+      "source-verified false-positive: prose/list/compact answer row"
+    ],
+    [
+      31,
+      "source-verified false-positive: prose/list/compact answer row"
+    ],
+    [
+      34,
+      "source-verified false-positive: prose/list/compact answer row"
+    ],
+    [
+      41,
+      "source-verified false-positive: prose/list/compact answer row"
+    ],
+    [
+      42,
+      "source-verified false-positive: prose/list/compact answer row"
+    ]
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "file": "CA_L1_P01_C1_U3_CapitalAndRevenueExpendituresAndReceipts",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (66)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (25 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9973 min=0.9722",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 13,
+    "blocks": 66,
+    "pair_keys": 25,
+    "mean_page_text_recall": 0.9972630589401437,
+    "min_page_text_recall": 0.9722222222222222,
+    "layout_pages": 11,
+    "warning_count": 0
+  },
+  "layout_reviewed": [
+    [
+      2,
+      "source-verified false-positive: prose/list/compact answer row"
+    ],
+    [
+      10,
+      "source-verified false-positive: prose/list/compact answer row"
+    ]
+  ]
+}

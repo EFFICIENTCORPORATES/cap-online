@@ -1,0 +1,32 @@
+{
+  "file": "CA_L1_P01_C2_U6_RectificationOfErrors",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (81)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (25 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9994 min=0.9919",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 41,
+    "blocks": 81,
+    "pair_keys": 25,
+    "mean_page_text_recall": 0.9993829304986439,
+    "min_page_text_recall": 0.9919137466307277,
+    "layout_pages": 36,
+    "warning_count": 0
+  },
+  "layout_reviewed": [
+    [
+      28,
+      "source-verified false-positive: prose/list/compact answer row"
+    ]
+  ]
+}

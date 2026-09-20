@@ -1,0 +1,40 @@
+{
+  "file": "CA_L1_P01_C10_U1_IntroductionToPartnershipAccounts",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (98)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (35 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9984 min=0.9867",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 40,
+    "blocks": 98,
+    "pair_keys": 35,
+    "mean_page_text_recall": 0.9984398544342135,
+    "min_page_text_recall": 0.9866666666666667,
+    "layout_pages": 36,
+    "warning_count": 0
+  },
+  "layout_reviewed": [
+    [
+      4,
+      "source-verified false-positive: prose/list/compact answer row"
+    ],
+    [
+      15,
+      "source-verified false-positive: prose/list/compact answer row"
+    ],
+    [
+      36,
+      "source-verified false-positive: prose/list/compact answer row"
+    ]
+  ]
+}

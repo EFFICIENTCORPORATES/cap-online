@@ -1,0 +1,28 @@
+{
+  "file": "CA_L1_P01_C2_U2_Ledgers",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (54)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (18 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9989 min=0.9915",
+    "layout_representation PASS",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 14,
+    "blocks": 54,
+    "pair_keys": 18,
+    "mean_page_text_recall": 0.9988590482239259,
+    "min_page_text_recall": 0.9914893617021276,
+    "layout_pages": 13,
+    "warning_count": 0
+  },
+  "layout_reviewed": []
+}

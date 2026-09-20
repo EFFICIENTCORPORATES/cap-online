@@ -1,0 +1,28 @@
+{
+  "file": "CA_L1_P01_C3_U0_BankReconciliationStatement",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (114)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (46 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9987 min=0.9780",
+    "layout_representation PASS",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 48,
+    "blocks": 114,
+    "pair_keys": 46,
+    "mean_page_text_recall": 0.9986610892444617,
+    "min_page_text_recall": 0.9779735682819384,
+    "layout_pages": 44,
+    "warning_count": 0
+  },
+  "layout_reviewed": []
+}

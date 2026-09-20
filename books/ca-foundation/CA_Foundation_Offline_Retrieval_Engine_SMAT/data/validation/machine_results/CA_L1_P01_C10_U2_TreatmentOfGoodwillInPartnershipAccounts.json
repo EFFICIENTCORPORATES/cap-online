@@ -1,0 +1,28 @@
+{
+  "file": "CA_L1_P01_C10_U2_TreatmentOfGoodwillInPartnershipAccounts",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (92)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (31 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9952 min=0.9711",
+    "layout_representation PASS",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 34,
+    "blocks": 92,
+    "pair_keys": 31,
+    "mean_page_text_recall": 0.995153597258269,
+    "min_page_text_recall": 0.9710743801652892,
+    "layout_pages": 33,
+    "warning_count": 0
+  },
+  "layout_reviewed": []
+}

@@ -2,6 +2,19 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-11 — CA Foundation Offline Retrieval Engine restored and launched
+
+Inspected `books/ca-foundation/CA_Foundation_Offline_Retrieval_Engine_SMAT`
+for Pranav and found that the supplied copy could not start because
+`ca_retrieval/engine.py` was missing, although the entry points, supporting
+modules, compiled cache, validation artifacts, and regression tests all expected
+it. Restored the engine module using those existing interfaces, preserving the
+Corrected V2 source-verified Example registry behavior. Validation now passes
+with 37 documents, 2,757 effective blocks, and zero errors/warnings; all 12
+regression tests pass. Completed a real Chapter 3 Example retrieval (8 source
+items), added computer-specific verified GUI instructions to `QUICK_START.md`,
+and launched the GUI successfully on this computer.
+
 ## 2026-08-24 — SECURITY.md Phases 1-3 built, verified, and deployed live
 
 Pranav asked to review `telegram/SECURITY.md` (written the same day, off the

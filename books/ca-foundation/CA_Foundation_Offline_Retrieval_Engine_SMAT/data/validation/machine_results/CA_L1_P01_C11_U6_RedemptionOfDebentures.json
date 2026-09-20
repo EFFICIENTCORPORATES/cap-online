@@ -1,0 +1,28 @@
+{
+  "file": "CA_L1_P01_C11_U6_RedemptionOfDebentures",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (52)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (17 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9971 min=0.9798",
+    "layout_representation PASS",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 23,
+    "blocks": 52,
+    "pair_keys": 17,
+    "mean_page_text_recall": 0.9970903370314701,
+    "min_page_text_recall": 0.9797979797979798,
+    "layout_pages": 21,
+    "warning_count": 0
+  },
+  "layout_reviewed": []
+}

@@ -1,0 +1,32 @@
+{
+  "file": "CA_L1_P01_C11_U1_IntroductionToCompanyAccounts",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    "unique_ids PASS (68)",
+    "page_ranges PASS",
+    "source_page_coverage PASS",
+    "pair_integrity PASS (25 paired keys)",
+    "numeric_reconciliation PASS",
+    "page_text_recall mean=0.9979 min=0.9615",
+    "artifact_scan PASS",
+    "fenced_blocks PASS",
+    "raw_md_pair PASS"
+  ],
+  "stats": {
+    "pdf_pages": 22,
+    "blocks": 68,
+    "pair_keys": 25,
+    "mean_page_text_recall": 0.997851991444461,
+    "min_page_text_recall": 0.9615384615384616,
+    "layout_pages": 15,
+    "warning_count": 0
+  },
+  "layout_reviewed": [
+    [
+      3,
+      "source-verified false-positive: prose/list/compact answer row"
+    ]
+  ]
+}

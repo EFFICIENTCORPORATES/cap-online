@@ -1,0 +1,17 @@
+test_all_examples_are_source_items (test_retriever.RetrievalTests.test_all_examples_are_source_items) ... ok
+test_all_illustrations_have_solution (test_retriever.RetrievalTests.test_all_illustrations_have_solution) ... ok
+test_brs_illustration_1_boundary (test_retriever.RetrievalTests.test_brs_illustration_1_boundary) ... ok
+test_chapter_filter (test_retriever.RetrievalTests.test_chapter_filter) ... ok
+test_corpus_loaded (test_retriever.RetrievalTests.test_corpus_loaded) ... ok
+test_illustration_questions (test_retriever.RetrievalTests.test_illustration_questions) ... ok
+test_mcq_count (test_retriever.RetrievalTests.test_mcq_count) ... ok
+test_previously_missed_example_units (test_retriever.RetrievalTests.test_previously_missed_example_units) ... ok
+test_rectification_theory_shared_source_answer_relation (test_retriever.RetrievalTests.test_rectification_theory_shared_source_answer_relation) ... ok
+test_render_has_source (test_retriever.RetrievalTests.test_render_has_source) ... ok
+test_source_item_counts (test_retriever.RetrievalTests.test_source_item_counts) ... ok
+test_validator (test_retriever.RetrievalTests.test_validator) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.088s
+
+OK
