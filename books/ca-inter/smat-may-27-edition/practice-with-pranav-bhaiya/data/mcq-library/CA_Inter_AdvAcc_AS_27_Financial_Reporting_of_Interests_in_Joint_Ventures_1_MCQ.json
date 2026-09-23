@@ -1,0 +1,30 @@
+[
+  {
+    "mcq_id": "CAI-P1-MTP-2025-09-S2-PI-Q7",
+    "course": "CA",
+    "level": "Inter",
+    "exam_type": "MTP",
+    "year": "2025",
+    "set": "2",
+    "qno_text": "Q7",
+    "marks": 2,
+    "difficulty": "Easy",
+    "qtype": "case-mcq",
+    "case_ref": "CS-2",
+    "case_facts_html": "<p>SBHA Ltd deals in business of manufacturing, purchase and sale of rice. The company has around 56 acres of land as part of its property, plant and equipment which is stated at cost in its financial statements. As per the new business model, 30 acres of land falls in the residential zone which the company is planning to develop residential area as a plotted development and would like to sell the plots after development.</p>\n<p>The company does not have intention of keeping the property development as a business on long-term basis, as the company does not have any objective to receive any income in the form of the capital appreciation or rent as per the proposed business plan and the company wants to sell the plots after development (irrespective of the construction of houses on land).</p>\n<p>SBHA Ltd has two equal joint venturers holding 50% each, KSJ one of them. The other company is from outside the KSJ Group. KSJ Group has three companies (one of them is KSJ Ltd and two more companies), each of which hold some equity shares in the joint venture which aggregates 50%.</p>\n<p>One of the KSJ Group of companies, ADK Ltd, is engaged in generation of power which is supplied to various Electricity Boards. One of the terms and conditions of the Tariff Regulatory Authority and the tariff agreement is that the income tax relating to the power generating schemes will be reimbursed by the Electricity Boards on quarterly basis before the payment of advance income tax.</p>\n<p>RIMMI Ltd, another KSJ Group company, is into shipping business and has an annual turnover of ₹1,000 crores. It is required by law to bring all its vessels into dry dock every five years for major overhaul. This cost is incurred to get the vessel back to its seaworthy condition. A vessel costs ₹20 crores with a useful life of 20 years and it requires major overhaul every 5 years. The estimated cost of first overhaul is ₹5 crores.</p>\n<p>In the previous year, RIMMI Ltd had impaired one of its Cash Generating Units (CGU) for a loss of ₹100 crores, with ₹50 crores allocated to goodwill and the balance allocated to Plant &amp; Machinery and Technical Knowhow for a loss of ₹26 crores and ₹24 crores respectively. Recoverable amount was not measurable. Carrying amounts at the end of current year after impairment of ₹100 crores recorded in previous year were ₹427 crores and ₹383 crores for Plant &amp; Machinery and Technical Knowhow respectively. Had there been no impairment in the previous year, the carrying amounts at the end of current year would have been ₹450 crores and ₹405 crores for Plant &amp; Machinery and Technical Knowhow respectively. During the current year, the impairment test proves that the CGU is no longer impaired.</p>",
+    "question_html": "<p>In the above mentioned situation, how would SBHA Ltd be accounted for by joint venturers as per Accounting Standards notified under the Companies (Accounting Standards) Rules?</p>",
+    "options": {
+      "A": "Joint venture will be proportionately consolidated by KSJ Ltd only and other venturer outside KSJ Group.",
+      "B": "Joint venture will be proportionately consolidated only by venturer outside KSJ Group.",
+      "C": "Joint venture will be proportionately consolidated by all the three companies of KSJ Group only, to the extent of their own holding.",
+      "D": "Joint venture will be proportionately consolidated by all the three companies of KSJ Group, to the extent of their own holding and other venturer outside KSJ Group (assuming each one has individual control)"
+    },
+    "correct_option": "D",
+    "answer_html": "<p><strong>Answer:</strong> (D) — the KSJ Group's collective 50% stake in the SBHA joint venture is actually split across three separate legal entities within KSJ Group, each individually a co-venturer holding its own slice. AS 27's proportionate-consolidation rule applies venturer by venturer, to each venturer's own individual interest — not the group's combined interest as a single block. So each of the three KSJ Group companies proportionately consolidates its own individual share into its own separate financial statements, and the outside venturer does the same for its 50%.</p>",
+    "chapter_slug": "as27",
+    "chapter_label": "AS 27: Financial Reporting of Interests in Joint Ventures",
+    "unitcode": "M2-C10-U3",
+    "topic_text": "AS 27 (1): Proportionate consolidation applies venturer by venturer to each entity's own individual interest, not to a group's combined interest as one block",
+    "human_id": "CA_L2_P01_C10_U3_00202"
+  }
+]

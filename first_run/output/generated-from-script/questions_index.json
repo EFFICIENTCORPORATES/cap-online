@@ -30722,7 +30722,7 @@
     "subpart": "a",
     "alt_group": null,
     "alt": null,
-    "marks": 4,
+    "marks": 10,
     "compulsory": false,
     "qtype": "practical",
     "answer_letter": null,
@@ -30754,7 +30754,7 @@
       "text": "Many examinees eliminated the full ₹5,00,000 inter-company sale from revenue but forgot to also eliminate the unrealised profit on the 50% of that stock still held by Glamour Ltd. at year end, overstating consolidated changes-in-inventory."
     },
     "author_comment_empty": true,
-    "extraction_note": "Verbatim from CAInter-AdvAcc-PYQ-May2026-Ans.pdf, cross-checked against the original PDF. Split out of the original printed Q5(a), independent of Q5(b).Marks flagged:the source PDF's extracted text does not show an explicit mark value for part (a) (only part (b) prints \"(10 Marks)\"); since every other optional question in this paper totals 14 marks, 4 is the arithmetically implied value, but this is inferred, not read directly off the page (possibly lost across a page break in the source PDF) – flagged with data-issue=\"marks-mismatch\" rather than stated as a confirmed fact. Confidence: high on content, medium on marks."
+    "extraction_note": "Question and answer text from CAInter-AdvAcc-PYQ-May2026-Ans.pdf.Marks flagged:Pranav's photograph of the printed question paper shows 4 marks beside Q5(b), whereas the Suggested Answers PDF prints 10 there. Part (a) has no visible mark value in the Suggested Answers extract; 10 is inferred from the 14-mark Q5 total after accepting the question-paper value of 4 for part (b). Part (a) remains provisional until its question-paper mark is directly checked. Split out of printed Q5(a), independent of Q5(b)."
   },
   {
     "id": "CAI-P1-PYQ-2026-05-PII-Q5-b",
@@ -30775,17 +30775,17 @@
     "subpart": "b",
     "alt_group": null,
     "alt": null,
-    "marks": 10,
+    "marks": 4,
     "compulsory": false,
     "qtype": "theory",
     "answer_letter": null,
     "final_chapter": "M1-C4-U6",
     "confidence": "high",
-    "review_status": "verified",
-    "issue": null,
+    "review_status": "flagged",
+    "issue": "source-conflict",
     "case_ref": null,
     "case_facts_html": null,
-    "question_html": "<p>Oasis Limited runs a famous chain of super markets and restaurants. Restaurant division constitutes 35% of total group revenue. The management of the company decides to close the business of restaurants as the company has been experiencing declining profitability due to increased competition. On 1st April, 2025, the management announced its intention to discontinue the restaurant business and concentrate on Super market segment only. The decision was made through strategic review and the management started actively seeking buyers for the restaurant division. During the year 2025-26, the company has sold 5 restaurants out of 12 restaurants so far as part of the sale.</p>\n<p>Comment, whether it will be considered as discontinuing operation or not as per the provisions of AS-24? (10 Marks)</p>",
+    "question_html": "<p>Oasis Limited runs a famous chain of super markets and restaurants. Restaurant division constitutes 35% of total group revenue. The management of the company decides to close the business of restaurants as the company has been experiencing declining profitability due to increased competition. On 1st April, 2025, the management announced its intention to discontinue the restaurant business and concentrate on Super market segment only. The decision was made through strategic review and the management started actively seeking buyers for the restaurant division. During the year 2025-26, the company has sold 5 restaurants out of 12 restaurants so far as part of the sale.</p>\n<p>Comment, whether it will be considered as discontinuing operation or not as per the provisions of AS-24? (4 Marks)</p>",
     "answer_html": "<p>As per AS 24, a discontinuing operation is a component of an enterprise: that the enterprise, pursuant to a single plan, is disposing of substantially in its entirety, or disposing of piecemeal, or terminating through abandonment; and which represents a separate major line of business or geographical area of operations.</p>\n<p>Hence the restaurant division's closure by Oasis Limited will be considered a discontinuing operation as per the provisions of AS 24. This is due to the fact that the assets are sold off as part of a single plan, and that the business represents a separate major line of business, and can be distinguished both operationally and for financial reporting purposes.</p>",
     "topics": [
       {
@@ -30807,7 +30807,7 @@
       "text": "Some examinees concluded this was not a discontinuing operation because the disposal was piecemeal (5 of 12 restaurants sold rather than the whole division at once), not recognising that AS 24 explicitly includes piecemeal disposal pursuant to a single plan within its definition."
     },
     "author_comment_empty": true,
-    "extraction_note": "Verbatim from CAInter-AdvAcc-PYQ-May2026-Ans.pdf, cross-checked against the original PDF. Split out of the original printed Q5(b), independent of Q5(a). Confidence: high."
+    "extraction_note": "Question and answer text from CAInter-AdvAcc-PYQ-May2026-Ans.pdf; the marks were corrected to 4 from Pranav's photograph of the printed question paper (page 28), which conflicts with the Suggested Answers PDF's 10-mark label. Split out of printed Q5(b), independent of Q5(a)."
   },
   {
     "id": "CAI-P1-PYQ-2026-05-PII-Q6-a-alt1",

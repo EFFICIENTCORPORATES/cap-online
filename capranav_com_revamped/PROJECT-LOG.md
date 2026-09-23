@@ -7,6 +7,20 @@ continues — don't let it go stale.
 
 ---
 
+### Anatomy rankings, explorer controls and R2 PDF library — published 2026-09-22
+
+Added overall rank and priority band to all 400 syllabus topics (Top 50, Next
+50, and Beyond Top 100). Expanded the live explorer with sortable columns,
+direction arrows, a priority-band filter, universal topic-ID/page/name search,
+and a full reset control. Uploaded 36 unit study-material PDFs plus 62 available
+PYQ/MTP/RTP question, answer and examiner-comment documents to the existing R2
+bucket under `anatomy/`; registered all 98 documents in D1 through foreign-keyed
+unit/sitting junctions; and added separate Open PDF and Download actions. Took a
+fresh D1 snapshot before migration, passed local and remote foreign-key checks,
+deployed Worker version `5d8e5598-2163-4a5e-b76f-274613fa97f8`, and verified
+topic-ID search, page search, the exact 50-row priority filter, Range/inline PDF
+delivery, attachment download, `/api/me`, and the dashboard on production.
+
 ## 1. Background
 
 **Who**: CA Pranav Pratik Tulshyan — AIR 1 (CA Foundation), AIR 1 (CA
@@ -31,6 +45,43 @@ does not itself collect course payments."*
 ---
 
 ## 2. What was built, in order
+
+### Practice with Pranav Bhaiya Day 1 decks — published 2026-09-22
+
+Published the three confirmed canonical HTML presentations at
+`/practice-with-pranav-bhaiya/`: Day 1 Opening, Advanced Accounts Syllabus
+Flow, and Marks Split/AS 2 Transition. The source files remain under the book
+workspace. `tools/sync_practice_slides.py` copies them into Worker Assets so
+future deck edits have one explicit release step and the sources do not drift.
+
+Verified source and published-copy hashes match for all three files. Wrangler
+dry-run passed. After deployment, the hub and each deck returned HTTP 200 on
+`capranav.com`; all three live HTML files contain working Enter, Right Arrow,
+Space, mouse-click, previous/next-button, and fullscreen handlers. The Anatomy
+page links to the new hub, and the existing login API remained healthy.
+
+### The Anatomy of Advanced Accounts — first release (2026-09-22)
+
+Added a public, read-only syllabus and descriptive-question explorer at
+`/anatomy/`, linked from the homepage Practice section. It uses the existing
+Worker and existing `DB` binding only. The new additive `aa_*` schema contains
+3 modules, 15 chapters, 36 units, 400 topics, 35 sittings, 509 descriptive
+questions through the September 2026 PYQ, 649 many-to-many question-topic
+links, 62 study-material items, and 133 PYQ-to-study-material match rows.
+
+The import is reproducible through `tools/build_anatomy_seed.py`; generated SQL
+is local-only. A fresh live D1 export was taken before applying the migration.
+Remote counts were queried after import, `PRAGMA foreign_key_check` returned no
+rows, and the September 2026 sitting reconciles to 84 offered descriptive
+marks. Three older/source totals remain explicitly visible for review rather
+than silently altered: PYQ September 2024 (86 vs 84), MTP November 2023 Set 1
+(125 vs 120), and PYQ May 2023 (125 vs 120).
+
+Wrangler dry-run passed. Production smoke tests confirmed `/anatomy/`, its
+overview/hierarchy/topics/questions APIs, the homepage link, `/api/me`, the
+dashboard, and the protected-reader unauthenticated 401 boundary. No charting
+was included in this release; heatmaps and pivot-style analysis follow only
+after the database review.
 
 ### Phase A — `capranav_com/capranav-website/` (superseded, not deployed anymore)
 

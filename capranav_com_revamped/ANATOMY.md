@@ -1,0 +1,69 @@
+# The Anatomy of Advanced Accounts
+
+The first release is live at `https://capranav.com/anatomy/`. It extends the
+existing `capranav` Worker and uses the existing `DB` D1 binding. No additional
+Worker, D1 database, R2 bucket, or domain route is required.
+
+Interactive Practice with Pranav Bhaiya slide decks are published at
+`https://capranav.com/practice-with-pranav-bhaiya/`. Canonical deck files stay
+under the book workspace; run `python tools/sync_practice_slides.py` after any
+deck edit to refresh their Worker Assets copies before deployment.
+
+## Data flow
+
+1. `first_run/scripts/build_sheet_jsons.py` rebuilds the 400-topic and base
+   descriptive-question flat JSON files.
+2. `first_run/scripts/build_descriptive_topic_priority.py` adds reviewed topic
+   overrides and the September 2026 PYQ.
+3. `tools/build_anatomy_seed.py` normalizes those sources into an idempotent D1
+   seed at `tools/generated/anatomy-seed.sql`.
+4. `migrations/0001_anatomy.sql` owns the base `aa_*` schema and read-only
+   validation views. `migrations/0002_anatomy_priority_documents.sql` adds
+   topic ranks/priority bands and the PDF document junction tables.
+5. `tools/sync_anatomy_pdfs.py` builds the document manifest, links each unit
+   and sitting to its available source PDF, and can upload those files under
+   the isolated `anatomy/` prefix in the existing R2 bucket.
+
+The generated SQL is local-only and gitignored. The scripts and source JSON are
+the reproducible source of truth; Excel is an export, not the database.
+
+## Refresh locally
+
+```powershell
+python ..\first_run\scripts\build_sheet_jsons.py
+python ..\first_run\scripts\build_descriptive_topic_priority.py
+python tools\build_anatomy_seed.py
+npx wrangler d1 execute capranav-platform --local --file=migrations/0001_anatomy.sql
+npx wrangler d1 execute capranav-platform --local --file=migrations/0002_anatomy_priority_documents.sql
+npx wrangler d1 execute capranav-platform --local --file=tools/generated/anatomy-seed.sql
+python tools\sync_anatomy_pdfs.py
+npx wrangler d1 execute capranav-platform --local --file=tools/generated/anatomy-documents.sql
+```
+
+Validate counts and foreign keys before any remote import:
+
+```powershell
+npx wrangler d1 execute capranav-platform --local --command="SELECT COUNT(*) FROM aa_topics; SELECT COUNT(*) FROM aa_questions; PRAGMA foreign_key_check;"
+```
+
+## Production discipline
+
+1. Run `python tools/backup_d1_snapshot.py` and confirm a non-empty backup.
+2. Run the local refresh and validation above.
+3. Apply reviewed migrations to remote D1.
+4. Import the generated seed into remote D1.
+5. Run `python tools/sync_anatomy_pdfs.py --upload`, then import the generated
+   document metadata SQL into remote D1.
+6. Run `npx wrangler deploy --dry-run` and then deploy.
+7. Smoke-test `/anatomy/`, all `/api/anatomy/*` routes, `/api/me`, the dashboard,
+   and the protected-reader login boundary.
+
+The public explorer supports universal topic/ID/page/unit/chapter search,
+priority-band filtering, client-side ascending/descending sorting, and a reset
+control. PDF delivery is mediated by `/api/anatomy/document`; the R2 bucket is
+not listed publicly. Open actions use inline PDF delivery in a new tab, while
+download actions set attachment disposition. Missing source documents are
+shown as unavailable instead of being guessed.
+
+The current release intentionally has no charts. The database validation comes
+first; heatmaps and pivot-style analysis are the next phase.

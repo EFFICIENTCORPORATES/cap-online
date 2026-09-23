@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Practice with Pranav Bhaiya | Day 1 Opening</title>
+<style>
+  :root {
+    --ink:#10233f;
+    --paper:#f7f2e8;
+    --red:#e5484d;
+    --gold:#f2b84b;
+    --green:#0f8a70;
+    --blue:#1f62d0;
+    --muted:#687487;
+    --white:#fffdf8;
+  }
+  * { box-sizing:border-box; }
+  html, body { width:100%; height:100%; margin:0; overflow:hidden; background:#091426; font-family:"Aptos","Segoe UI",Arial,sans-serif; color:var(--ink); }
+  body { display:grid; place-items:center; }
+  #deck { position:relative; width:min(100vw,177.777vh); height:min(56.25vw,100vh); background:var(--paper); overflow:hidden; box-shadow:0 24px 80px rgba(0,0,0,.42); }
+  .slide { position:absolute; inset:0; display:none; padding:5.2% 6.4%; background:
+      radial-gradient(circle at 90% 8%, rgba(242,184,75,.20), transparent 24%),
+      linear-gradient(135deg, #fffdf8 0%, #f7f2e8 72%, #efe5d2 100%); }
+  .slide.active { display:block; animation:enter .42s ease-out both; }
+  @keyframes enter { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+  .eyebrow { margin:0 0 1.2%; color:var(--red); font-size:1.35vw; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+  h1 { margin:0; max-width:90%; font-size:4.35vw; line-height:1.02; letter-spacing:-.045em; }
+  h2 { margin:0; font-size:3.25vw; line-height:1.06; letter-spacing:-.035em; }
+  .accent { color:var(--red); }
+  .gold { color:#a56600; }
+  .questions { margin-top:3.6%; display:grid; gap:1.25vh; width:78%; }
+  .question { position:relative; padding:.62em 0 .62em 2.2em; font-size:2.15vw; font-weight:750; line-height:1.05; border-bottom:1px solid rgba(16,35,63,.14); }
+  .question::before { content:"?"; position:absolute; left:.15em; top:.36em; width:1.25em; height:1.25em; display:grid; place-items:center; border-radius:50%; background:var(--ink); color:var(--white); font-size:.7em; }
+  .question.reveal, .problem.reveal, .point.reveal, .stat.reveal { opacity:0; transform:translateY(15px); transition:.35s ease; }
+  .question.reveal.show, .problem.reveal.show, .point.reveal.show, .stat.reveal.show { opacity:1; transform:none; }
+  .strike-list { margin-top:2.8%; width:64%; display:grid; gap:.7vh; }
+  .strike-item { position:relative; color:#6e7784; font-size:1.85vw; font-weight:700; padding:.35em .1em; }
+  .strike-item::after { content:""; position:absolute; left:-.5%; right:100.5%; top:52%; height:.18em; background:var(--red); transform:rotate(-1deg); transition:right .42s ease; }
+  .strike-item.show::after { right:-.5%; }
+  .strike-item.show { opacity:.55; }
+  .answer { position:absolute; right:6.4%; top:26%; width:34%; padding:1.3em 1.2em 1.25em; background:var(--ink); color:var(--white); box-shadow:12px 12px 0 var(--gold); transform:rotate(-1deg); }
+  .answer small { display:block; color:#ffd982; font-size:1.18vw; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:.65em; }
+  .answer strong { display:block; font-size:3.05vw; line-height:1.05; }
+  .problems { margin-top:3.4%; display:grid; gap:1.25vh; }
+  .problem { display:grid; grid-template-columns:4.5vw 1fr; align-items:start; max-width:91%; }
+  .problem b { color:var(--red); font-size:1.35vw; padding-top:.26em; }
+  .problem span { font-size:1.72vw; font-weight:720; line-height:1.22; }
+  .stat-stage { margin-top:4.8%; display:grid; grid-template-columns:1fr 1fr; gap:6%; align-items:center; }
+  .stat { padding-left:1.25em; border-left:.45em solid var(--red); }
+  .stat .exam { font-size:1.4vw; font-weight:800; color:var(--muted); }
+  .stat .rate { margin-top:.08em; font-size:4.45vw; font-weight:900; letter-spacing:-.055em; }
+  .rank-line { margin-top:5%; padding-top:3%; border-top:2px solid rgba(16,35,63,.14); font-size:2.2vw; font-weight:850; }
+  .rank-line strong { color:var(--red); font-size:3.1vw; }
+  .secret { position:absolute; right:6.4%; bottom:6.5%; width:42%; color:var(--muted); font-size:1.2vw; line-height:1.25; text-align:right; }
+  .prep-layout { margin-top:4.5%; display:grid; grid-template-columns:.9fr 1.25fr; gap:7%; align-items:center; }
+  .quake { padding:1.2em 1.25em; background:var(--ink); color:var(--white); box-shadow:10px 10px 0 var(--gold); }
+  .quake .days { font-size:4.25vw; font-weight:900; color:#ffd982; line-height:1; }
+  .quake p { margin:.55em 0 0; font-size:1.3vw; line-height:1.25; }
+  .principle { font-size:2.15vw; line-height:1.22; font-weight:760; }
+  .principle strong { display:block; margin-top:.65em; color:var(--red); font-size:2.75vw; }
+  .goldmine { margin-top:3.8%; display:grid; gap:1.55vh; }
+  .point { display:grid; grid-template-columns:4.2vw 1fr auto; align-items:center; border-bottom:1px solid rgba(16,35,63,.14); padding-bottom:1.15vh; }
+  .point .n { font-size:1.25vw; color:var(--red); font-weight:900; }
+  .point .txt { font-size:1.62vw; font-weight:750; line-height:1.14; }
+  .point .proof { color:var(--blue); font-weight:900; font-size:1.45vw; text-align:right; }
+  .shock { margin-top:2.7%; display:inline-block; padding:.6em .8em; background:var(--red); color:white; font-size:1.55vw; font-weight:850; transform:rotate(-.6deg); }
+  .footnote { position:absolute; left:6.4%; bottom:3.1%; color:var(--muted); font-size:.86vw; }
+  .brand { position:absolute; right:6.4%; top:5.2%; color:var(--muted); font-size:1vw; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+  #controls { position:absolute; right:2.1%; bottom:2.2%; z-index:20; display:flex; gap:.6vw; align-items:center; }
+  #controls button { width:2.7vw; height:2.7vw; min-width:34px; min-height:34px; border:0; border-radius:50%; background:rgba(16,35,63,.9); color:white; font-size:1.25vw; cursor:pointer; }
+  #counter { color:var(--muted); font-size:.95vw; font-weight:800; min-width:4.5em; text-align:center; }
+  .progress { position:absolute; left:0; bottom:0; height:.5%; background:var(--red); transition:width .3s ease; z-index:30; }
+  @media (max-aspect-ratio:4/3) {
+    .question { font-size:2.45vw; }
+    .problem span { font-size:1.95vw; }
+  }
+</style>
+</head>
+<body>
+<main id="deck" aria-label="Practice with Pranav Bhaiya Day 1 opening slides">
+  <section class="slide active" data-title="Why this series">
+    <p class="eyebrow">Practice with Pranav Bhaiya</p>
+    <h1>Why This Series?</h1>
+    <div class="brand">CA Inter Advanced Accounts</div>
+    <div class="questions">
+      <div class="question reveal">Is this a Marathon Video?</div>
+      <div class="question reveal">Is this a Revision Video?</div>
+      <div class="question reveal">Is this a One Shot?</div>
+      <div class="question reveal">Is this a Question Solving Live?</div>
+      <div class="question reveal">Is this All of These Combined?</div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="Three hours">
+    <p class="eyebrow">The answer</p>
+    <h2>What are we actually preparing for?</h2>
+    <div class="strike-list">
+      <div class="strike-item reveal">Marathon Video</div>
+      <div class="strike-item reveal">Revision Video</div>
+      <div class="strike-item reveal">One Shot</div>
+      <div class="strike-item reveal">Question Solving Live</div>
+      <div class="strike-item reveal">All of These Combined</div>
+    </div>
+    <div class="answer reveal">
+      <small>This series prepares you for</small>
+      <strong>The 3 Hours<br>of the Exam</strong>
+    </div>
+  </section>
+
+  <section class="slide" data-title="Problems">
+    <p class="eyebrow">The real problem</p>
+    <h2>This Series Solves These Exam-Hall Problems</h2>
+    <div class="problems">
+      <div class="problem reveal"><b>01</b><span>“Question paper dekhte hi I go blank and panic.”</span></div>
+      <div class="problem reveal"><b>02</b><span>“Exam se pehle jo padha, paper mein wahi nahi aaya.”</span></div>
+      <div class="problem reveal"><b>03</b><span>“Question practise kiya tha, but exam mein clearly write nahi kar paya.”</span></div>
+      <div class="problem reveal"><b>04</b><span>“Answers aate the, but paper lengthy tha and 3 hours mein complete nahi hua.”</span></div>
+      <div class="problem reveal"><b>05</b><span>“Presentation weak thi and mere marks deduct ho gaye.”</span></div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="Why Pranav Bhaiya">
+    <p class="eyebrow">Why Pranav Bhaiya’s Series?</p>
+    <h2>Performance Under Pressure</h2>
+    <div class="stat-stage">
+      <div class="stat reveal">
+        <div class="exam">CA Foundation · Dec 2014</div>
+        <div class="rate">14.73%</div>
+        <div class="exam">pass percentage</div>
+      </div>
+      <div class="stat reveal">
+        <div class="exam">CA Intermediate · Nov 2015</div>
+        <div class="rate">4.14%</div>
+        <div class="exam">pass percentage</div>
+      </div>
+    </div>
+    <div class="rank-line reveal"><strong>AIR 1</strong> in both attempts</div>
+    <div class="secret reveal">The examination can be hard. The question is whether your process still works inside those three hours.</div>
+  </section>
+
+  <section class="slide" data-title="Preparation">
+    <p class="eyebrow">The central belief</p>
+    <h1>CA Is a Game of <span class="accent">Preparation</span>, Not Talent</h1>
+    <div class="prep-layout">
+      <div class="quake reveal">
+        <div class="days">30–40 days</div>
+        <p>My preparation was disturbed after the Nepal earthquake in April and May 2015.</p>
+      </div>
+      <div class="principle reveal">
+        Hard work mattered.<br>Efficiency decided where that work went.
+        <strong>I will show you the preparation process that survived the disruption.</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="Gold mine">
+    <p class="eyebrow">Your anchor subject</p>
+    <h1>Why Advanced Accounts Is Your <span class="gold">Gold Mine</span></h1>
+    <div class="goldmine">
+      <div class="point reveal"><div class="n">01</div><div class="txt">One of your strongest opportunities to score 80+</div><div class="proof">High upside</div></div>
+      <div class="point reveal"><div class="n">02</div><div class="txt">The first paper usually gives you 2–3 days of preparation time</div><div class="proof">Extra runway</div></div>
+      <div class="point reveal"><div class="n">03</div><div class="txt">90 in Accounts and 42 in each of the other five subjects</div><div class="proof">90 + 210 = 300</div></div>
+      <div class="point reveal"><div class="n">04</div><div class="txt">Advanced Accounts questions follow a visible Study Material boundary</div><div class="proof">More predictable</div></div>
+    </div>
+    <div class="shock reveal">Exam kitna bhi hard aa jaaye, Accounts will be your anchor subject.</div>
+    <div class="footnote">Both-groups aggregate illustration assumes the minimum passing mark is met in every individual paper.</div>
+  </section>
+
+  <nav id="controls" aria-label="Slide controls">
+    <button id="prev" type="button" aria-label="Previous">‹</button>
+    <span id="counter">1 / 6</span>
+    <button id="next" type="button" aria-label="Next">›</button>
+  </nav>
+  <div class="progress" id="progress"></div>
+</main>
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  let index = 0;
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+
+  function currentReveals() { return [...slides[index].querySelectorAll('.reveal')]; }
+  function update() {
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+    counter.textContent = `${index + 1} / ${slides.length}`;
+    progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+  }
+  function forward() {
+    const hidden = currentReveals().find(el => !el.classList.contains('show'));
+    if (hidden) { hidden.classList.add('show'); return; }
+    if (index < slides.length - 1) { index += 1; update(); }
+  }
+  function backward() {
+    const shown = currentReveals().filter(el => el.classList.contains('show'));
+    if (shown.length) { shown[shown.length - 1].classList.remove('show'); return; }
+    if (index > 0) { index -= 1; update(); }
+  }
+  document.getElementById('next').addEventListener('click', forward);
+  document.getElementById('prev').addEventListener('click', backward);
+  document.addEventListener('keydown', event => {
+    if (['ArrowRight','PageDown',' ','Enter'].includes(event.key)) { event.preventDefault(); forward(); }
+    if (['ArrowLeft','PageUp','Backspace'].includes(event.key)) { event.preventDefault(); backward(); }
+    if (event.key.toLowerCase() === 'f') document.documentElement.requestFullscreen?.();
+  });
+  document.getElementById('deck').addEventListener('click', event => {
+    if (!event.target.closest('button')) forward();
+  });
+  update();
+})();
+</script>
+</body>
+</html>

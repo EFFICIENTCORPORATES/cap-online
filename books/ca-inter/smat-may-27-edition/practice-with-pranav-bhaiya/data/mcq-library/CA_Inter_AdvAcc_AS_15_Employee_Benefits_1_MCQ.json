@@ -1,0 +1,30 @@
+[
+  {
+    "mcq_id": "CAI-P1-PYQ-2025-09-PI-Q10",
+    "course": "CA",
+    "level": "Inter",
+    "exam_type": "PYQ",
+    "year": "2025",
+    "set": null,
+    "qno_text": "Q10",
+    "marks": 2,
+    "difficulty": "Easy",
+    "qtype": "mcq",
+    "case_ref": null,
+    "case_facts_html": null,
+    "question_html": "<p>SRS Limited's defined benefit pension plan for the year ended 31st March 2025: Fair market value of plan assets 01.04.24 ₹10,00,000; 31.03.25 ₹14,25,000; Employer Contribution ₹3,50,000; Benefits paid ₹2,50,000. What is the actual return on plan assets per AS-15?</p>",
+    "options": {
+      "A": "₹5,25,000",
+      "B": "₹2,50,000",
+      "C": "₹3,25,000",
+      "D": "₹3,50,000"
+    },
+    "correct_option": "C",
+    "answer_html": "<p><strong>Answer:</strong> (C) ₹3,25,000 = Closing fair value (14,25,000) − Opening fair value (10,00,000) − Employer contribution (3,50,000) + Benefits paid (2,50,000) = 3,25,000.</p>",
+    "chapter_slug": "as15",
+    "chapter_label": "AS 15: Employee Benefits",
+    "unitcode": "M2-C6-U1",
+    "topic_text": "AS 15 (1.9): Actual return on plan assets - closing less opening fair value, adjusted for contributions in and benefits out",
+    "human_id": "CA_L2_P01_C6_U1_00294"
+  }
+]

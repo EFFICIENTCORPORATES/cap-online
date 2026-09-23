@@ -1,0 +1,44 @@
+[
+  {
+    "book_id": "M1C4U7-001",
+    "flagged": false,
+    "src_text": "PYQ May 2025",
+    "qno_text": "Q3(b)",
+    "marks_text": "Marks: 7",
+    "approx_time_text": "Approx Time: 13 minutes (approx.)",
+    "topic_text": "Topic 7.10: Seasonal/occasional revenue and costs are not deferred to a later interim period; change of estimate applied prospectively",
+    "badges": [],
+    "question_html": "<p>XY Limited reported a Profit Before Tax (PBT) of ₹18 lakhs for the third quarter ending 31st December 2024. Following observations are noted: (i) Dividend income of ₹8 lakhs received during the quarter has been recognized to the extent of ₹2 lakh only. (ii) Sales promotion expenses ₹15 lakhs incurred in the third quarter, 70% has been deferred to the fourth quarter as the sales in the last quarter is high. (iii) In the third quarter, the company changed depreciation method from WDV to SLM, which resulted in excess depreciation of ₹4 lakhs. The entire amount has been debited in the third quarter, though the share of the third quarter is only ₹1 lakhs. (iv) ₹3 lakhs extra-ordinary gain received in third quarter was allocated equally to the third and fourth quarter. (v) Cumulative loss resulting from change in method of inventory valuation was recognized in the third quarter of ₹5 lakhs. Out of this loss ₹2 lakhs relates to previous quarters. (vi) Sale of investment in the first quarter resulted in a gain of ₹30 lakhs. The company had apportioned this equally to the four quarters.</p>\n<p>Calculate the result of the third quarter as per AS 25 and also comment on the company's view on each observation. (7 Marks)</p>",
+    "answer_html": "<p>As per para 36 of AS 25 \"Interim Financial Reporting\", seasonal or occasional revenue and cost within a financial year should not be deferred as of interim date until it is appropriate to defer at the end of the enterprise's financial year.</p>\n<p><strong>Comments on observations:</strong> (i) Dividend income received during 3rd quarter should be recognised in the 3rd quarter only. (ii) Sales promotion expenses cannot be deferred on the basis that fourth quarter has more sales; recognised in 3rd quarter only. (iii) As per AS 10, a change in depreciation method is a change in accounting estimate per AS 5, applied prospectively – no adjustment would be required for this observation. (iv) Extra-ordinary gain of ₹3 lakhs should be wholly recognized in 3rd quarter only. (v) Loss of ₹2 lakhs belongs to previous quarters, not 3rd quarter, so it should not be deducted from the profit of 3rd quarter. (vi) Gain on sale of investment is an occasional gain, so it cannot be deferred; the ₹7.5 lakhs considered as income of the 1st quarter will be reversed from the profit of the 3rd quarter.</p>\n<p><strong>Statement showing Adjusted Profit Before Tax for the third quarter:</strong></p>\n<table>\n<tbody>\n<tr><td>Profit before tax (as reported)</td><td>18,00,000</td></tr>\n<tr><td>Add: Dividend income (8,00,000 − 2,00,000)</td><td>6,00,000</td></tr>\n<tr><td>Excess depreciation charged in 3rd quarter due to change in method</td><td>—</td></tr>\n<tr><td>Extra ordinary gain (3,00,000 − 1,50,000)</td><td>1,50,000</td></tr>\n<tr><td>Cumulative loss due to change in inventory valuation method, applied retrospectively (5,00,000−3,00,000)</td><td>2,00,000</td></tr>\n<tr><td>Subtotal</td><td>27,50,000</td></tr>\n<tr><td>Less: Sales promotion expenses (70% of 15 lakhs)</td><td>(10,50,000)</td></tr>\n<tr><td>Less: Gain on sale of investment (occasional gain should not be deferred)</td><td>(7,50,000)</td></tr>\n<tr><td><strong>Adjusted Profit before tax for the third quarter</strong></td><td><strong>9,50,000</strong></td></tr>\n</tbody>\n</table>",
+    "answer_letter": null,
+    "mistake_type": "icai",
+    "mistake_text": "Examiner’s Comment: Most examinees exhibited inadequate knowledge of AS 25 \"Interim Financial Reporting.\" They failed to calculate the Adjusted Profit Before Tax for the third quarter accurately. Even among those who arrived at the correct figure, very few provided appropriate observations with sound reasoning.",
+    "chapter_slug": "as25",
+    "unitcode": "M1-C4-U7",
+    "chapter_label": "AS 25: Interim Financial Reporting",
+    "section": "descriptive",
+    "human_id": "CA_L2_P01_C4_U7_00400"
+  },
+  {
+    "book_id": "M1C4U7-002",
+    "flagged": false,
+    "src_text": "PYQ May 2026",
+    "qno_text": "Q1(c)",
+    "marks_text": "Marks: 4",
+    "approx_time_text": "Approx Time: 8 minutes (approx.)",
+    "topic_text": "Topic 7.9: Income tax recognised per interim period using the estimated weighted average annual tax rate, with separately-taxed items (capital gains) taxed at their own specific rate",
+    "badges": [
+      "Compulsory"
+    ],
+    "question_html": "<p>The following information is provided in respect of Vardhman Ltd. for the financial year 2025-26: Estimated total annual income ₹5,00,000 (inclusive of estimated capital gains earned in 2nd quarter ₹1,00,000). Tax rates for FY 2025-26: On capital gains 20%; On other incomes – first ₹2,00,000 at 35%, balance income at 40%. Assuming no difference between estimated taxable income and estimated accounting income, you are required: (i) To compute total tax expenses for the year 2025-26; (ii) To calculate tax expenses for each quarter, when the estimated income of each quarter is ₹1,25,000 and income for 2nd quarter includes capital gain of ₹1,00,000. (4 Marks)</p>",
+    "answer_html": "<p>(i) Computation of Total tax expense: As per para 29 of AS 25 'Interim Financial Reporting', income tax expense is recognised in each interim period based on the best estimate of the weighted average annual income tax rate expected for the full financial year.</p>\n<table>\n<tbody>\n<tr><td>Capital Gain</td><td>1,00,000</td></tr>\n<tr><td>Other Income</td><td>4,00,000</td></tr>\n<tr><td><strong>Estimated total Annual Income (A)</strong></td><td><strong>5,00,000</strong></td></tr>\n<tr><td>20% on ₹1,00,000 (capital gain)</td><td>20,000</td></tr>\n<tr><td>35% on First ₹2,00,000</td><td>70,000</td></tr>\n<tr><td>40% on the remaining ₹2,00,000</td><td>80,000</td></tr>\n<tr><td><strong>Total Tax expense (B)</strong></td><td><strong>1,70,000</strong></td></tr>\n</tbody>\n</table>\n<p>Weighted average annual income tax rate (excluding the separately-taxed capital gain) = 1,50,000/4,00,000 = 37.5%. Income Tax Rate on Capital Gain = 20%.</p>\n<table>\n<thead><tr><th>Quarter</th><th>Total Income</th><th>Capital Gain</th><th>Quarterly Tax Calculation</th><th>Quarterly Tax expense</th></tr></thead>\n<tbody>\n<tr><td>Q1</td><td>1,25,000</td><td>Nil</td><td>1,25,000 × 37.5%</td><td>46,875</td></tr>\n<tr><td>Q2</td><td>1,25,000</td><td>1,00,000</td><td>Tax on Capital Gains = 1,00,000×20% = 20,000; Tax on remaining income = 25,000×37.5% = 9,375</td><td>29,375</td></tr>\n<tr><td>Q3</td><td>1,25,000</td><td>Nil</td><td>1,25,000 × 37.5%</td><td>46,875</td></tr>\n<tr><td>Q4</td><td>1,25,000</td><td>Nil</td><td>1,25,000 × 37.5%</td><td>46,875</td></tr>\n</tbody>\n</table>",
+    "answer_letter": null,
+    "mistake_type": "synth",
+    "mistake_text": "Author’s Note: Some examinees applied the single blended 37.5% rate to the capital gain quarter as well, instead of taxing the capital-gain component at its own specific 20% rate and only the balance of that quarter's income at the weighted average rate.",
+    "chapter_slug": "as25",
+    "unitcode": "M1-C4-U7",
+    "chapter_label": "AS 25: Interim Financial Reporting",
+    "section": "descriptive",
+    "human_id": "CA_L2_P01_C4_U7_00401"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "book_id": "M2C10U3-001",
+    "flagged": false,
+    "src_text": "MTP January 2026 Set 2",
+    "qno_text": "Q3",
+    "marks_text": "Marks: 14",
+    "approx_time_text": "Approx Time: 26 minutes (approx.)",
+    "topic_text": "Topic 1.4: Jointly controlled asset - each venturer records its own share of assets, liabilities, and expenses directly",
+    "badges": [],
+    "question_html": "<p>Hari Ltd., OM Ltd. and Bhakti Ltd. jointly constructed a pipeline to transport gas manufactured by them (a jointly controlled asset under AS 27). Expenditure incurred: Buildings ₹18,00,000 (depreciate @5% p.a.); Pipeline ₹90,00,000 (@15% p.a.); Computers &amp; electronics ₹4,50,000 (@40% p.a.); Vehicles ₹13,50,000 (@20% p.a.). They equally bear pipeline maintenance expenditure of ₹9,00,000 each year. Show the extract of the consolidated balance sheet and the extract of Statement of Profit &amp; Loss and Balance Sheet for each venturer.</p>",
+    "answer_html": "<div>\n<p>Each venturer records its own <strong>one-third share</strong> of each jointly-controlled asset directly in its own books, per AS 27's proportionate-consolidation treatment for a jointly controlled asset (no separate joint entity exists).</p>\n<p><strong>Per-venturer figures</strong> (identical for each of Hari/OM/Bhakti, one-third share each): Land &amp; Building 6,00,000, less depreciation @5% (30,000) = 5,70,000. Plant &amp; Machinery (Pipeline) 30,00,000, less depreciation @15% (4,50,000) = 25,50,000. Computers 1,50,000, less depreciation @40% (60,000) = 90,000. Vehicles 4,50,000, less depreciation @20% (90,000) = 3,60,000. <strong>Total PPE per venturer: ₹35,70,000.</strong> Depreciation and amortisation expense per venturer: 30,000+4,50,000+60,000+90,000 = ₹6,30,000. Other operating expenses (pipeline maintenance, one-third share) ₹3,00,000.</p>\n<p><strong>Consolidated (all three venturers combined) extract:</strong> PPE — Land &amp; Building 3×5,70,000=17,10,000; Plant &amp; Machinery 3×25,50,000=76,50,000; Computers 3×90,000=2,70,000; Vehicles 3×3,60,000=10,80,000; <strong>Total Consolidated PPE: ₹1,07,10,000.</strong></p>\n</div>",
+    "answer_letter": null,
+    "mistake_type": "synth",
+    "mistake_text": "Author’s Note: Some examinees treated this as a jointly controlled entity requiring proportionate consolidation of a separate set of books, rather than recognising that a jointly controlled asset (no separate entity) means each venturer simply records its own share directly in its own books.",
+    "chapter_slug": "as27",
+    "unitcode": "M2-C10-U3",
+    "chapter_label": "AS 27: Financial Reporting of Interests in Joint Ventures",
+    "section": "descriptive",
+    "human_id": "CA_L2_P01_C10_U3_00372"
+  },
+  {
+    "book_id": "M2C10U3-002",
+    "flagged": false,
+    "src_text": "RTP January 2026",
+    "qno_text": "Q18",
+    "marks_text": "Marks:Not stated in source",
+    "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+    "topic_text": "Topic 1.2: Three forms of joint venture - operations, assets, entities",
+    "badges": [],
+    "question_html": "<p>Briefly explain the scope and forms of Joint Venture as per AS 27.</p>",
+    "answer_html": "<div>\n<p><strong>Scope:</strong> AS 27 applies to accounting for interests in joint ventures and reporting joint venture assets, liabilities, income, and expenses in the financial statements of venturers and investors, regardless of the structure/form under which the joint venture activities take place. Its consolidated-financial-statements provisions apply only when the venturer prepares and presents CFS.</p>\n<p><strong>Forms of Joint Venture:</strong> (i) <strong>Jointly controlled operations</strong> — no separate entity created; venturers use their own resources, raise their own funds, incur expenses, and realise sales individually, using shared assets/employees alongside their own business, with no separate books maintained for the joint venture. (ii) <strong>Jointly controlled assets</strong> — no separate legal entity, but the venturers jointly own assets used to generate economic benefit for each of them, taking up related expenses/liabilities per the contractual agreement. (iii) <strong>Jointly controlled entities</strong> — a new entity is created, pooling the venturers' resources; the entity purchases its own assets, incurs its own liabilities/expenses, and makes its own sales; the net result is shared per the contractual agreement, which also determines joint control; a separate set of books is maintained.</p>\n</div>",
+    "answer_letter": null,
+    "mistake_type": "synth",
+    "mistake_text": "Author’s Note: Some examinees conflated jointly controlled assets with jointly controlled entities, missing that the defining distinction is the absence vs. presence of a separate legal entity and separate books.",
+    "chapter_slug": "as27",
+    "unitcode": "M2-C10-U3",
+    "chapter_label": "AS 27: Financial Reporting of Interests in Joint Ventures",
+    "section": "descriptive",
+    "human_id": "CA_L2_P01_C10_U3_00373"
+  }
+]

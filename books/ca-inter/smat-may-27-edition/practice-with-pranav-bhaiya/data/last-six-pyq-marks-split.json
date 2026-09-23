@@ -1,0 +1,388 @@
+{
+  "attempts": [
+    "PYQ January 2025",
+    "PYQ May 2025",
+    "PYQ September 2025",
+    "PYQ January 2026",
+    "PYQ May 2026",
+    "PYQ September 2026"
+  ],
+  "method": "Descriptive internal OR alternatives split equally; all externally offered descriptive questions counted. MCQ and descriptive shown separately. Raw printed average can exceed 100 because of external choice.",
+  "rows": [
+    {
+      "chapter": "01 Foundations",
+      "desc_avg": 1.0,
+      "mcq_avg": 0.0,
+      "total_avg": 1.0,
+      "min": 0.0,
+      "max": 2.0,
+      "presence": 3,
+      "desc_by_attempt": [
+        0.0,
+        2.0,
+        2.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "mcq_by_attempt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "chapter": "02 AS 2 Inventories",
+      "desc_avg": 0.8333333333333334,
+      "mcq_avg": 1.0,
+      "total_avg": 1.8333333333333333,
+      "min": 0.0,
+      "max": 5.0,
+      "presence": 4,
+      "desc_by_attempt": [
+        0.0,
+        0.0,
+        5.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mcq_by_attempt": [
+        0.0,
+        0.0,
+        0.0,
+        2.0,
+        2.0,
+        2.0
+      ]
+    },
+    {
+      "chapter": "03 AS 10 PPE",
+      "desc_avg": 2.0,
+      "mcq_avg": 1.3333333333333333,
+      "total_avg": 3.3333333333333335,
+      "min": 0.0,
+      "max": 9.0,
+      "presence": 4,
+      "desc_by_attempt": [
+        0.0,
+        7.0,
+        0.0,
+        0.0,
+        0.0,
+        5.0
+      ],
+      "mcq_by_attempt": [
+        0.0,
+        2.0,
+        2.0,
+        0.0,
+        4.0,
+        0.0
+      ]
+    },
+    {
+      "chapter": "04 Other Asset AS",
+      "desc_avg": 8.166666666666666,
+      "mcq_avg": 4.0,
+      "total_avg": 12.166666666666666,
+      "min": 7.0,
+      "max": 16.0,
+      "presence": 6,
+      "desc_by_attempt": [
+        5.0,
+        9.0,
+        7.0,
+        14.0,
+        5.0,
+        9.0
+      ],
+      "mcq_by_attempt": [
+        4.0,
+        6.0,
+        4.0,
+        2.0,
+        2.0,
+        6.0
+      ]
+    },
+    {
+      "chapter": "05 Liability AS",
+      "desc_avg": 3.3333333333333335,
+      "mcq_avg": 1.6666666666666667,
+      "total_avg": 5.0,
+      "min": 0.0,
+      "max": 11.0,
+      "presence": 5,
+      "desc_by_attempt": [
+        11.0,
+        0.0,
+        0.0,
+        4.0,
+        5.0,
+        0.0
+      ],
+      "mcq_by_attempt": [
+        0.0,
+        0.0,
+        2.0,
+        2.0,
+        0.0,
+        6.0
+      ]
+    },
+    {
+      "chapter": "06 Events, Forex & Tax",
+      "desc_avg": 2.1666666666666665,
+      "mcq_avg": 3.0,
+      "total_avg": 5.166666666666667,
+      "min": 2.0,
+      "max": 8.0,
+      "presence": 6,
+      "desc_by_attempt": [
+        0.0,
+        0.0,
+        7.0,
+        0.0,
+        6.0,
+        0.0
+      ],
+      "mcq_by_attempt": [
+        8.0,
+        2.0,
+        0.0,
+        4.0,
+        2.0,
+        2.0
+      ]
+    },
+    {
+      "chapter": "07 Revenue & Grants",
+      "desc_avg": 1.0,
+      "mcq_avg": 4.333333333333333,
+      "total_avg": 5.333333333333333,
+      "min": 2.0,
+      "max": 8.0,
+      "presence": 6,
+      "desc_by_attempt": [
+        0.0,
+        0.0,
+        4.0,
+        0.0,
+        0.0,
+        2.0
+      ],
+      "mcq_by_attempt": [
+        6.0,
+        8.0,
+        4.0,
+        2.0,
+        4.0,
+        2.0
+      ]
+    },
+    {
+      "chapter": "08 Presentation AS",
+      "desc_avg": 6.166666666666667,
+      "mcq_avg": 3.0,
+      "total_avg": 9.166666666666666,
+      "min": 6.0,
+      "max": 12.0,
+      "presence": 6,
+      "desc_by_attempt": [
+        9.0,
+        7.0,
+        0.0,
+        7.0,
+        8.0,
+        6.0
+      ],
+      "mcq_by_attempt": [
+        0.0,
+        2.0,
+        8.0,
+        4.0,
+        4.0,
+        0.0
+      ]
+    },
+    {
+      "chapter": "09 Financial Statements",
+      "desc_avg": 16.166666666666668,
+      "mcq_avg": 1.3333333333333333,
+      "total_avg": 17.5,
+      "min": 4.0,
+      "max": 27.0,
+      "presence": 6,
+      "desc_by_attempt": [
+        7.0,
+        25.0,
+        21.0,
+        4.0,
+        20.0,
+        20.0
+      ],
+      "mcq_by_attempt": [
+        2.0,
+        2.0,
+        2.0,
+        0.0,
+        0.0,
+        2.0
+      ]
+    },
+    {
+      "chapter": "10 Cash Flow",
+      "desc_avg": 0.0,
+      "mcq_avg": 3.0,
+      "total_avg": 3.0,
+      "min": 0.0,
+      "max": 8.0,
+      "presence": 3,
+      "desc_by_attempt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mcq_by_attempt": [
+        8.0,
+        0.0,
+        0.0,
+        8.0,
+        2.0,
+        0.0
+      ]
+    },
+    {
+      "chapter": "11 Amalgamation",
+      "desc_avg": 14.666666666666666,
+      "mcq_avg": 0.6666666666666666,
+      "total_avg": 15.333333333333334,
+      "min": 14.0,
+      "max": 18.0,
+      "presence": 6,
+      "desc_by_attempt": [
+        14.0,
+        14.0,
+        14.0,
+        14.0,
+        14.0,
+        18.0
+      ],
+      "mcq_by_attempt": [
+        0.0,
+        0.0,
+        0.0,
+        2.0,
+        2.0,
+        0.0
+      ]
+    },
+    {
+      "chapter": "12 Consolidation",
+      "desc_avg": 13.333333333333334,
+      "mcq_avg": 1.0,
+      "total_avg": 14.333333333333334,
+      "min": 12.0,
+      "max": 18.0,
+      "presence": 6,
+      "desc_by_attempt": [
+        14.0,
+        14.0,
+        14.0,
+        14.0,
+        10.0,
+        14.0
+      ],
+      "mcq_by_attempt": [
+        0.0,
+        0.0,
+        0.0,
+        4.0,
+        2.0,
+        0.0
+      ]
+    },
+    {
+      "chapter": "13 Buy-back",
+      "desc_avg": 1.8333333333333333,
+      "mcq_avg": 4.666666666666667,
+      "total_avg": 6.5,
+      "min": 4.0,
+      "max": 10.0,
+      "presence": 6,
+      "desc_by_attempt": [
+        4.0,
+        0.0,
+        0.0,
+        7.0,
+        0.0,
+        0.0
+      ],
+      "mcq_by_attempt": [
+        0.0,
+        6.0,
+        8.0,
+        0.0,
+        4.0,
+        10.0
+      ]
+    },
+    {
+      "chapter": "14 Internal Reconstruction",
+      "desc_avg": 7.333333333333333,
+      "mcq_avg": 0.6666666666666666,
+      "total_avg": 8.0,
+      "min": 2.0,
+      "max": 14.0,
+      "presence": 6,
+      "desc_by_attempt": [
+        14.0,
+        0.0,
+        4.0,
+        14.0,
+        8.0,
+        4.0
+      ],
+      "mcq_by_attempt": [
+        0.0,
+        2.0,
+        0.0,
+        0.0,
+        2.0,
+        0.0
+      ]
+    },
+    {
+      "chapter": "15 Branch Accounts",
+      "desc_avg": 6.0,
+      "mcq_avg": 0.0,
+      "total_avg": 6.0,
+      "min": 6.0,
+      "max": 6.0,
+      "presence": 6,
+      "desc_by_attempt": [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ],
+      "mcq_by_attempt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

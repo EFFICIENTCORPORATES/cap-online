@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Advanced Accounts Syllabus Flow</title>
+<style>
+  :root {
+    --ink:#10233f;
+    --paper:#faf6ed;
+    --red:#e5484d;
+    --gold:#efb443;
+    --green:#13856d;
+    --blue:#2867d4;
+    --purple:#7155c5;
+    --muted:#687487;
+    --line:#d9d0c1;
+    --white:#fffdf8;
+  }
+  * { box-sizing:border-box; }
+  html,body { width:100%; height:100%; margin:0; overflow:hidden; background:#081426; font-family:"Aptos","Segoe UI",Arial,sans-serif; color:var(--ink); }
+  body { display:grid; place-items:center; }
+  #deck { position:relative; width:min(100vw,177.777vh); height:min(56.25vw,100vh); overflow:hidden; background:
+      radial-gradient(circle at 92% 8%,rgba(239,180,67,.22),transparent 24%),
+      linear-gradient(135deg,#fffdf8 0%,#f8f1e5 72%,#efe3d0 100%); box-shadow:0 25px 85px rgba(0,0,0,.46); }
+
+  header { position:absolute; left:5.2%; right:5.2%; top:4.4%; display:flex; align-items:flex-start; justify-content:space-between; z-index:5; }
+  .eyebrow { margin:0 0 .45em; color:var(--red); font-size:1.02vw; font-weight:850; letter-spacing:.13em; text-transform:uppercase; }
+  h1 { margin:0; font-size:2.7vw; line-height:1; letter-spacing:-.04em; }
+  .same-flow { max-width:31%; color:var(--muted); font-size:1.05vw; line-height:1.25; text-align:right; font-weight:720; }
+
+  .revision-track { position:absolute; left:5.2%; right:5.2%; top:15%; height:6.5%; display:grid; grid-template-columns:repeat(5,1fr); align-items:center; z-index:5; }
+  .revision-track::before { content:""; position:absolute; left:8%; right:8%; top:50%; height:2px; background:var(--line); }
+  .rev { position:relative; display:flex; flex-direction:column; align-items:center; gap:.35em; color:var(--muted); font-size:.82vw; font-weight:800; }
+  .rev-dot { width:1.2vw; height:1.2vw; border-radius:50%; background:var(--white); border:.24vw solid var(--ink); z-index:2; }
+  .rev.active { color:var(--ink); }
+  .rev.active .rev-dot { background:var(--red); border-color:var(--red); box-shadow:0 0 0 .32vw rgba(229,72,77,.15); }
+
+  #stage { position:absolute; left:5.2%; right:5.2%; top:23%; bottom:10%; }
+  #phase-title { display:flex; align-items:baseline; gap:1.2vw; height:9%; }
+  #part-number { color:var(--red); font-weight:900; font-size:1.02vw; letter-spacing:.09em; text-transform:uppercase; }
+  #part-name { font-size:2.15vw; font-weight:900; letter-spacing:-.03em; }
+  #part-purpose { margin-left:auto; color:var(--muted); font-size:1.02vw; font-weight:700; }
+
+  #workspace { position:absolute; left:0; right:0; top:10%; bottom:0; transition:.55s cubic-bezier(.2,.8,.2,1); transform-origin:90% 0; }
+  #workspace.compressing { opacity:0; transform:scale(.15) translate(180%, -120%); }
+  .phase { position:absolute; inset:0; display:none; }
+  .phase.active { display:block; animation:phaseIn .45s ease both; }
+  @keyframes phaseIn { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+
+  .rules-grid { height:100%; display:grid; grid-template-columns:repeat(5,1fr); gap:1.25vw; }
+  .rule-column { position:relative; padding-top:2.9vw; border-top:.42vw solid var(--column-color); }
+  .rule-column h3 { position:absolute; top:.3vw; left:0; margin:0; font-size:1.08vw; color:var(--column-color); }
+  .chapter { opacity:0; transform:translateY(10px) scale(.97); margin-bottom:.62vw; padding:.58vw .65vw; min-height:2.65vw; display:flex; align-items:center; background:rgba(255,253,248,.78); border-left:.34vw solid var(--column-color); box-shadow:0 .24vw .75vw rgba(16,35,63,.08); font-size:.89vw; line-height:1.08; font-weight:760; transition:.34s ease; }
+  .chapter.show { opacity:1; transform:none; }
+  .chapter strong { margin-right:.42em; color:var(--column-color); white-space:nowrap; }
+
+  .swim-layout { height:100%; display:grid; grid-template-columns:1.05fr 1.2fr; gap:3.2vw; align-items:center; }
+  .statement { height:82%; position:relative; padding:3.2vw 1.6vw 1.3vw; background:var(--white); box-shadow:0 1vw 2.8vw rgba(16,35,63,.13); border-top:.55vw solid var(--blue); }
+  .statement::before { content:"COMPANY FINANCIAL STATEMENTS"; position:absolute; top:1.1vw; left:1.6vw; font-size:.78vw; font-weight:900; color:var(--blue); letter-spacing:.08em; }
+  .statement-grid { height:100%; display:grid; grid-template-columns:1fr 1fr; gap:1vw; }
+  .statement-side { border-top:1px solid var(--line); padding-top:.8vw; }
+  .statement-side b { font-size:1vw; }
+  .statement-side span { display:block; height:.35vw; margin:.78vw 0; background:#e8e1d4; }
+  .swim-items { display:grid; grid-template-columns:1fr 1fr; gap:.75vw; }
+  .swim-card { opacity:0; transform:translateX(18px); padding:.9vw 1vw; min-height:4vw; display:flex; align-items:center; background:rgba(255,253,248,.74); border-bottom:.28vw solid var(--blue); box-shadow:0 .25vw .8vw rgba(16,35,63,.08); font-size:.98vw; font-weight:790; transition:.34s ease; }
+  .swim-card.show { opacity:1; transform:none; }
+
+  .group-scene { height:100%; display:grid; grid-template-columns:1fr 1.1fr; gap:4vw; align-items:center; }
+  .companies { display:grid; grid-template-columns:1fr 1fr; gap:1vw; }
+  .company { opacity:0; transform:scale(.85); position:relative; min-height:7vw; padding:2.5vw 1vw .9vw; background:var(--white); border-top:.42vw solid var(--purple); box-shadow:0 .5vw 1.2vw rgba(16,35,63,.1); text-align:center; font-weight:820; font-size:1vw; transition:.38s ease; }
+  .company::before { content:""; position:absolute; left:1vw; right:1vw; top:1.15vw; height:.7vw; background:linear-gradient(90deg,var(--purple) 28%,transparent 28% 36%,var(--purple) 36% 64%,transparent 64% 72%,var(--purple) 72%); opacity:.25; }
+  .company.show { opacity:1; transform:none; }
+  .consolidated { opacity:0; transform:translateX(24px) scale(.92); position:relative; min-height:17vw; padding:5.2vw 2vw 2vw; background:var(--ink); color:var(--white); box-shadow:1vw 1vw 0 rgba(113,85,197,.35); text-align:center; transition:.55s ease; }
+  .consolidated::before { content:"GROUP"; position:absolute; left:0; right:0; top:2.1vw; font-size:3vw; font-weight:950; color:#b8a8f2; letter-spacing:.08em; }
+  .consolidated strong { display:block; font-size:1.75vw; margin-bottom:.6vw; }
+  .consolidated span { color:#d9d1f6; font-size:1.05vw; }
+  .consolidated.show { opacity:1; transform:none; }
+
+  .other-layout { height:100%; display:grid; grid-template-columns:repeat(3,1fr); gap:2vw; align-items:center; }
+  .other { opacity:0; transform:translateY(20px); position:relative; min-height:15vw; padding:3.2vw 1.6vw 1.5vw; background:var(--white); border-top:.55vw solid var(--green); box-shadow:0 .7vw 2vw rgba(16,35,63,.12); transition:.38s ease; }
+  .other.show { opacity:1; transform:none; }
+  .other .num { position:absolute; top:1.1vw; left:1.5vw; color:var(--green); font-size:1vw; font-weight:900; }
+  .other strong { display:block; font-size:1.65vw; line-height:1.05; margin-top:1.8vw; }
+  .other p { color:var(--muted); font-size:1vw; line-height:1.25; }
+
+  #completed { position:absolute; right:5.2%; top:4.2%; display:flex; gap:.55vw; z-index:9; }
+  .mini { opacity:0; transform:scale(.3); width:6.7vw; min-height:3.25vw; padding:.55vw .6vw; color:var(--white); box-shadow:0 .35vw .9vw rgba(16,35,63,.16); transition:.5s cubic-bezier(.2,.9,.2,1); }
+  .mini.show { opacity:1; transform:none; }
+  .mini b { display:block; font-size:.76vw; text-transform:uppercase; letter-spacing:.06em; }
+  .mini span { display:block; margin-top:.22em; font-size:.65vw; opacity:.82; }
+  .mini[data-part="0"] { background:var(--red); }
+  .mini[data-part="1"] { background:var(--blue); }
+  .mini[data-part="2"] { background:var(--purple); }
+  .mini[data-part="3"] { background:var(--green); }
+
+  #finale { position:absolute; inset:0; display:none; padding:5% 6%; background:
+      radial-gradient(circle at 50% 45%,rgba(239,180,67,.30),transparent 30%),
+      linear-gradient(135deg,#fffdf8,#f3e9d8); z-index:12; }
+  #finale.show { display:block; animation:phaseIn .55s ease both; }
+  .final-title { text-align:center; }
+  .final-title p { margin:0 0 .5vw; color:var(--red); font-size:1.05vw; font-weight:900; letter-spacing:.12em; text-transform:uppercase; }
+  .final-title h2 { margin:0; font-size:3.1vw; letter-spacing:-.04em; }
+  .whole { position:relative; height:67%; margin-top:2.5%; }
+  .core { position:absolute; left:37%; right:37%; top:30%; bottom:24%; display:grid; place-items:center; padding:1vw; background:var(--ink); color:var(--white); box-shadow:.8vw .8vw 0 var(--gold); text-align:center; font-size:1.75vw; font-weight:900; line-height:1.05; }
+  .part-block { position:absolute; width:25%; min-height:21%; padding:1.1vw 1.2vw; color:var(--white); box-shadow:0 .55vw 1.2vw rgba(16,35,63,.15); }
+  .part-block b { display:block; font-size:1.18vw; margin-bottom:.25vw; }
+  .part-block span { font-size:.87vw; opacity:.9; line-height:1.2; }
+  .p1 { left:3%; top:4%; background:var(--red); }
+  .p2 { right:3%; top:4%; background:var(--blue); }
+  .p3 { left:3%; bottom:3%; background:var(--purple); }
+  .p4 { right:3%; bottom:3%; background:var(--green); }
+  .connector { position:absolute; background:var(--line); }
+  .c1,.c2 { top:27%; width:18%; height:2px; }
+  .c1 { left:27%; transform:rotate(18deg); }
+  .c2 { right:27%; transform:rotate(-18deg); }
+  .c3,.c4 { bottom:25%; width:18%; height:2px; }
+  .c3 { left:27%; transform:rotate(-18deg); }
+  .c4 { right:27%; transform:rotate(18deg); }
+  .repeat { position:absolute; left:20%; right:20%; bottom:0; display:flex; justify-content:space-between; color:var(--muted); font-size:.82vw; font-weight:850; }
+  .repeat span { position:relative; padding-top:1.2vw; }
+  .repeat span::before { content:""; position:absolute; top:.3vw; left:50%; width:.7vw; height:.7vw; border-radius:50%; background:var(--red); transform:translateX(-50%); }
+
+  #controls { position:absolute; right:2%; bottom:2.2%; display:flex; align-items:center; gap:.55vw; z-index:30; }
+  #controls button { border:0; width:2.65vw; height:2.65vw; min-width:34px; min-height:34px; border-radius:50%; background:rgba(16,35,63,.92); color:white; font-size:1.25vw; cursor:pointer; }
+  #step-count { min-width:8vw; text-align:center; color:var(--muted); font-size:.82vw; font-weight:850; }
+  #progress { position:absolute; left:0; bottom:0; height:.5%; background:var(--red); transition:width .3s ease; z-index:32; }
+  #hint { position:absolute; left:2.4%; bottom:2.55%; color:var(--muted); font-size:.72vw; z-index:30; }
+</style>
+</head>
+<body>
+<main id="deck" aria-label="Advanced Accounts syllabus flow presentation">
+  <header>
+    <div>
+      <p class="eyebrow">The Advanced Accounts Route</p>
+      <h1>One Flow. Every Revision. Exam Day.</h1>
+    </div>
+    <div class="same-flow">The chapter order remains the same when you learn, revise and prepare during the final day.</div>
+  </header>
+
+  <div class="revision-track" aria-label="Learning and revision stages">
+    <div class="rev active"><span class="rev-dot"></span><span>First Learning</span></div>
+    <div class="rev"><span class="rev-dot"></span><span>Revision 1</span></div>
+    <div class="rev"><span class="rev-dot"></span><span>Revision 2</span></div>
+    <div class="rev"><span class="rev-dot"></span><span>Revision 3</span></div>
+    <div class="rev"><span class="rev-dot"></span><span>Exam Day</span></div>
+  </div>
+
+  <div id="completed" aria-label="Completed syllabus parts">
+    <div class="mini" data-part="0"><b>Part 1</b><span>Rules of the Game</span></div>
+    <div class="mini" data-part="1"><b>Part 2</b><span>Actual Swimming</span></div>
+    <div class="mini" data-part="2"><b>Part 3</b><span>Group Accounting</span></div>
+    <div class="mini" data-part="3"><b>Part 4</b><span>Other Chapters</span></div>
+  </div>
+
+  <section id="stage">
+    <div id="phase-title">
+      <span id="part-number">Part 1</span>
+      <span id="part-name">Rules of the Game</span>
+      <span id="part-purpose">Learn how each financial statement number is measured</span>
+    </div>
+    <div id="workspace">
+      <div class="phase active" data-phase="0">
+        <div class="rules-grid">
+          <div class="rule-column" style="--column-color:#d3464b"><h3>Foundation</h3>
+            <div class="chapter"><strong>01</strong>Introduction to AS</div>
+            <div class="chapter"><strong>02</strong>Framework</div>
+            <div class="chapter"><strong>03</strong>Applicability of AS</div>
+          </div>
+          <div class="rule-column" style="--column-color:#c98317"><h3>Assets</h3>
+            <div class="chapter"><strong>AS 2</strong>Inventories</div>
+            <div class="chapter"><strong>AS 10</strong>PPE</div>
+            <div class="chapter"><strong>AS 26</strong>Intangibles</div>
+            <div class="chapter"><strong>AS 16</strong>Borrowing Costs</div>
+            <div class="chapter"><strong>AS 28</strong>Impairment</div>
+            <div class="chapter"><strong>AS 19</strong>Leases</div>
+            <div class="chapter"><strong>AS 13</strong>Investments</div>
+          </div>
+          <div class="rule-column" style="--column-color:#16836c"><h3>Liabilities and Bridge</h3>
+            <div class="chapter"><strong>AS 29</strong>Provisions and Contingencies</div>
+            <div class="chapter"><strong>AS 15</strong>Employee Benefits</div>
+            <div class="chapter"><strong>AS 4</strong>Events After Balance Sheet Date</div>
+            <div class="chapter"><strong>AS 5</strong>Prior Period and Policy Changes</div>
+          </div>
+          <div class="rule-column" style="--column-color:#2867d4"><h3>Income and Expenses</h3>
+            <div class="chapter"><strong>AS 9</strong>Revenue Recognition</div>
+            <div class="chapter"><strong>AS 7</strong>Construction Contracts</div>
+            <div class="chapter"><strong>AS 12</strong>Government Grants</div>
+            <div class="chapter"><strong>AS 11</strong>Foreign Exchange</div>
+            <div class="chapter"><strong>AS 22</strong>Taxes on Income</div>
+          </div>
+          <div class="rule-column" style="--column-color:#7155c5"><h3>Performance</h3>
+            <div class="chapter"><strong>AS 20</strong>Earnings Per Share</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase" data-phase="1">
+        <div class="swim-layout">
+          <div class="statement">
+            <div class="statement-grid">
+              <div class="statement-side"><b>Balance Sheet</b><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="statement-side"><b>Statement of P&amp;L</b><span></span><span></span><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          <div class="swim-items">
+            <div class="swim-card"><strong>AS 1&nbsp;</strong> Accounting Policies</div>
+            <div class="swim-card">Company Financial Statements</div>
+            <div class="swim-card"><strong>AS 3&nbsp;</strong> Cash Flow Statement</div>
+            <div class="swim-card"><strong>AS 17&nbsp;</strong> Segment Reporting</div>
+            <div class="swim-card"><strong>AS 18&nbsp;</strong> Related Parties</div>
+            <div class="swim-card"><strong>AS 24&nbsp;</strong> Discontinuing Operations</div>
+            <div class="swim-card"><strong>AS 25&nbsp;</strong> Interim Reporting</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase" data-phase="2">
+        <div class="group-scene">
+          <div class="companies">
+            <div class="company">Amalgamation<br><small>AS 14</small></div>
+            <div class="company">Subsidiary<br><small>AS 21</small></div>
+            <div class="company">Associate<br><small>AS 23</small></div>
+            <div class="company">Joint Venture<br><small>AS 27</small></div>
+          </div>
+          <div class="consolidated"><strong>Consolidated Financial Statements</strong><span>Several entities. One group report.</span></div>
+        </div>
+      </div>
+
+      <div class="phase" data-phase="3">
+        <div class="other-layout">
+          <div class="other"><span class="num">01</span><strong>Buyback of Securities</strong><p>Accounting when a company buys back its own shares.</p></div>
+          <div class="other"><span class="num">02</span><strong>Internal Reconstruction</strong><p>Restructuring the balance sheet without closing the company.</p></div>
+          <div class="other"><span class="num">03</span><strong>Branch Accounts</strong><p>Recording and reconciling operations across branches.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="finale">
+    <div class="final-title"><p>The complete route</p><h2>Advanced Accounts as One Connected Syllabus</h2></div>
+    <div class="whole">
+      <div class="part-block p1"><b>Part 1 · Rules of the Game</b><span>Measurement rules for assets, liabilities, income, expenses and performance.</span></div>
+      <div class="part-block p2"><b>Part 2 · Actual Swimming</b><span>Prepare, present and explain the financial statements.</span></div>
+      <div class="part-block p3"><b>Part 3 · Group Accounting</b><span>Combine companies and report the group as one.</span></div>
+      <div class="part-block p4"><b>Part 4 · Other Chapters</b><span>Buyback, reconstruction and branch accounting.</span></div>
+      <span class="connector c1"></span><span class="connector c2"></span><span class="connector c3"></span><span class="connector c4"></span>
+      <div class="core">ADVANCED<br>ACCOUNTS</div>
+      <div class="repeat"><span>First Learning</span><span>Revision 1</span><span>Revision 2</span><span>Revision 3</span><span>Exam Day</span></div>
+    </div>
+  </section>
+
+  <div id="hint">Click, Space or Right Arrow to continue · F for fullscreen</div>
+  <nav id="controls" aria-label="Presentation controls">
+    <button id="prev" type="button" aria-label="Previous step">‹</button>
+    <span id="step-count">Part 1 · 0 / 20</span>
+    <button id="next" type="button" aria-label="Next step">›</button>
+  </nav>
+  <div id="progress"></div>
+</main>
+<script>
+(() => {
+  const phaseMeta = [
+    { number:'Part 1', name:'Rules of the Game', purpose:'Learn how each financial statement number is measured' },
+    { number:'Part 2', name:'Actual Swimming', purpose:'Use the rules to prepare and explain financial statements' },
+    { number:'Part 3', name:'Group Accounting', purpose:'Combine several companies into one group report' },
+    { number:'Part 4', name:'Other Chapters', purpose:'Complete the independent company-accounting chapters' }
+  ];
+  const selectors = ['.chapter','.swim-card','.company','.other'];
+  const phases = [...document.querySelectorAll('.phase')];
+  const minis = [...document.querySelectorAll('.mini')];
+  const workspace = document.getElementById('workspace');
+  const finale = document.getElementById('finale');
+  const partNumber = document.getElementById('part-number');
+  const partName = document.getElementById('part-name');
+  const partPurpose = document.getElementById('part-purpose');
+  const stepCount = document.getElementById('step-count');
+  const progress = document.getElementById('progress');
+  const revs = [...document.querySelectorAll('.rev')];
+  let phase = 0;
+  let shown = 0;
+  let final = false;
+  let busy = false;
+
+  function items(p = phase) { return [...phases[p].querySelectorAll(selectors[p])]; }
+  function totalSteps() { return phases.reduce((sum,_,p) => sum + items(p).length + 1, 1); }
+  function completedSteps() {
+    let n = 0;
+    for (let p=0; p<phase; p++) n += items(p).length + 1;
+    return n + shown + (final ? 1 : 0);
+  }
+  function sync() {
+    phases.forEach((el,i) => el.classList.toggle('active', i === phase && !final));
+    const meta = phaseMeta[phase];
+    partNumber.textContent = meta.number;
+    partName.textContent = meta.name;
+    partPurpose.textContent = meta.purpose;
+    stepCount.textContent = final ? 'Complete syllabus' : `${meta.number} · ${shown} / ${items().length}`;
+    progress.style.width = `${Math.min(100, completedSteps() / totalSteps() * 100)}%`;
+  }
+  function reveal() {
+    if (busy || final) return;
+    const list = items();
+    if (shown < list.length) {
+      list[shown].classList.add('show');
+      shown += 1;
+      if (phase === 2 && shown === list.length) document.querySelector('.consolidated').classList.add('show');
+      sync();
+      return;
+    }
+    busy = true;
+    workspace.classList.add('compressing');
+    setTimeout(() => {
+      minis[phase].classList.add('show');
+      if (phase < phases.length - 1) {
+        phase += 1;
+        shown = 0;
+        workspace.classList.remove('compressing');
+        sync();
+      } else {
+        final = true;
+        document.getElementById('stage').style.display = 'none';
+        document.querySelector('header').style.display = 'none';
+        document.querySelector('.revision-track').style.display = 'none';
+        document.getElementById('completed').style.display = 'none';
+        finale.classList.add('show');
+        sync();
+      }
+      busy = false;
+    }, 470);
+  }
+  function back() {
+    if (busy) return;
+    if (final) {
+      final = false;
+      finale.classList.remove('show');
+      document.getElementById('stage').style.display = '';
+      document.querySelector('header').style.display = '';
+      document.querySelector('.revision-track').style.display = '';
+      document.getElementById('completed').style.display = '';
+      shown = items().length;
+      sync();
+      return;
+    }
+    if (shown > 0) {
+      shown -= 1;
+      items()[shown].classList.remove('show');
+      if (phase === 2) document.querySelector('.consolidated').classList.remove('show');
+      sync();
+      return;
+    }
+    if (phase > 0) {
+      minis[phase - 1].classList.remove('show');
+      phase -= 1;
+      shown = items().length;
+      workspace.classList.remove('compressing');
+      sync();
+    }
+  }
+  document.getElementById('next').addEventListener('click', e => { e.stopPropagation(); reveal(); });
+  document.getElementById('prev').addEventListener('click', e => { e.stopPropagation(); back(); });
+  document.getElementById('deck').addEventListener('click', e => { if (!e.target.closest('button')) reveal(); });
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight','PageDown',' ','Enter'].includes(e.key)) { e.preventDefault(); reveal(); }
+    if (['ArrowLeft','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); back(); }
+    if (e.key.toLowerCase() === 'f') document.documentElement.requestFullscreen?.();
+    if (e.key === 'Home') location.reload();
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

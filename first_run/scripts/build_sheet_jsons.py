@@ -62,11 +62,14 @@ MORD = {"01":1,"05":5,"09":9,"11":11}
 TYPE_ORD = {"RTP":0,"MTP":1,"PYQ":2}
 MON = {"01":"January","05":"May","09":"September","11":"November"}
 rows = [r for r in json.load(open(Q, encoding="utf-8")) if r["part"] == "II"]
+match_path = ROOT/"first_run/output/generated-from-script/pyq_study_matches.json"
+matches = {m["question_id"]: m for m in json.load(open(match_path, encoding="utf-8"))} if match_path.exists() else {}
 def key(r):
     return (int(r["exam_year"]), TYPE_ORD[r["paper_type"]], int(r["exam_month"]), int(r.get("set") or 0),
             int(re.sub(r"\D","",str(r["qno"] or r["parent_qno"])) or 0), str(r.get("subpart") or ""), str(r.get("alt") or ""))
 rows.sort(key=key)
 out = []
+seen_or_groups = set()
 for r in rows:
     ids, names, chs = [], [], []
     for tp in r["topics"]:
@@ -80,6 +83,15 @@ for r in rows:
         else:
             unresolved.append((uc, ref))
     fc = r["final_chapter"]
+    or_key = (r["source_file"], r.get("alt_group")) if r.get("alt_group") else None
+    count_in_offered_total = 0 if or_key and or_key in seen_or_groups else 1
+    if or_key: seen_or_groups.add(or_key)
+    match = matches.get(r["id"], {}) if r["paper_type"] == "PYQ" else {}
+    last_topic_only = len(ids) == 1 and any(
+        ids[0] == lookup[(uc, order[uc][-1])]["unique_topic_id"]
+        and "disclosure" in lookup[(uc, order[uc][-1])]["topic_name"].lower()
+        for uc in chs if uc in order and order[uc] and (uc, order[uc][-1]) in lookup
+    )
     out.append({
         "exam_year": int(r["exam_year"]),
         "paper_type": r["paper_type"],
@@ -89,7 +101,10 @@ for r in rows:
         "question_no": str(r["qno"] or r["parent_qno"]),
         "sub_part": r.get("subpart"),
         "or_alternative": r.get("alt"),
+        "or_group": r.get("alt_group"),
         "marks": r["marks"],
+        "count_in_offered_total": count_in_offered_total,
+        "marks_issue": r.get("issue"),
         "question_type": r["qtype"],
         "final_chapter_id": fc,
         "final_chapter_name": chap_name[fc]["chapter_name"] if fc in chap_name else None,
@@ -99,6 +114,14 @@ for r in rows:
         "chapter_ids": chs,
         "source_file": r["source_file"],
         "question_id": r["id"],
+        "topic_mapping_review": "Last disclosure topic only; verify by concept, not page position" if last_topic_only else None,
+        "study_match_status": match.get("match_status"),
+        "concept_similarity_percent": match.get("similarity_percent"),
+        "study_item_type": match.get("study_item_type"),
+        "study_item_no": match.get("study_item_no"),
+        "study_source_file": match.get("study_source_file"),
+        "study_question_excerpt": match.get("study_question_excerpt"),
+        "study_match_note": match.get("match_note"),
     })
 json.dump(out, open(OUT/"question_bank_descriptive_flat.json","w",encoding="utf-8"), ensure_ascii=False, indent=1)
 print("topics:", len(topics), "| questions:", len(out), "| unresolved topic refs:", len(unresolved))

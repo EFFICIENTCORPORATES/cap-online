@@ -612,6 +612,156 @@ async function handleAdminDeleteStudent(request, env) {
   return json({ ok: true, ...details });
 }
 
+async function handleAnatomyOverview(env) {
+  const [counts, coverage, latestImport, sittingValidation] = await Promise.all([
+    env.DB.prepare(`
+      SELECT
+        (SELECT COUNT(*) FROM aa_modules) AS modules,
+        (SELECT COUNT(*) FROM aa_chapters) AS chapters,
+        (SELECT COUNT(*) FROM aa_units) AS units,
+        (SELECT COUNT(*) FROM aa_topics) AS topics,
+        (SELECT COUNT(*) FROM aa_sittings) AS sittings,
+        (SELECT COUNT(*) FROM aa_questions) AS questions,
+        (SELECT COUNT(*) FROM aa_question_topics) AS question_topic_links,
+        (SELECT COUNT(*) FROM aa_study_items) AS study_items,
+        (SELECT COUNT(*) FROM aa_pyq_study_matches WHERE similarity_percent IS NOT NULL) AS verified_similarity_rows
+    `).first(),
+    env.DB.prepare(`
+      SELECT
+        SUM(CASE WHEN EXISTS (SELECT 1 FROM aa_question_topics qt WHERE qt.question_id = q.question_id) THEN 1 ELSE 0 END) AS mapped_questions,
+        SUM(CASE WHEN NOT EXISTS (SELECT 1 FROM aa_question_topics qt WHERE qt.question_id = q.question_id) THEN 1 ELSE 0 END) AS unmapped_questions,
+        SUM(CASE WHEN q.marks IS NULL AND s.paper_type <> 'RTP' THEN 1 ELSE 0 END) AS questions_missing_marks
+      FROM aa_questions q
+      JOIN aa_sittings s ON s.sitting_id = q.sitting_id
+    `).first(),
+    env.DB.prepare("SELECT * FROM aa_import_runs ORDER BY imported_at DESC, rowid DESC LIMIT 1").first(),
+    env.DB.prepare("SELECT * FROM aa_v_sitting_validation ORDER BY exam_year DESC, attempt_month_no DESC, paper_type, set_no").all(),
+  ]);
+  return json({ counts, coverage, latestImport, sittingValidation: sittingValidation.results || [] });
+}
+
+async function handleAnatomyHierarchy(env) {
+  const [modules, chapters, units] = await Promise.all([
+    env.DB.prepare("SELECT module_id, module_no, name, display_order FROM aa_modules ORDER BY display_order").all(),
+    env.DB.prepare(`
+      SELECT c.chapter_id, c.module_id, c.chapter_no, c.name, c.short_name, c.display_order,
+             COUNT(DISTINCT u.unit_id) AS unit_count, COUNT(DISTINCT t.topic_id) AS topic_count
+      FROM aa_chapters c
+      LEFT JOIN aa_units u ON u.chapter_id = c.chapter_id
+      LEFT JOIN aa_topics t ON t.unit_id = u.unit_id
+      GROUP BY c.chapter_id ORDER BY c.display_order
+    `).all(),
+    env.DB.prepare(`
+      SELECT u.unit_id, u.chapter_id, u.unit_no, u.name, u.accounting_standard, u.teaching_sequence,
+             COUNT(DISTINCT t.topic_id) AS topic_count,
+             COUNT(DISTINCT qu.question_id) AS question_count
+      FROM aa_units u
+      LEFT JOIN aa_topics t ON t.unit_id = u.unit_id
+      LEFT JOIN aa_question_units qu ON qu.unit_id = u.unit_id
+      GROUP BY u.unit_id ORDER BY u.display_order
+    `).all(),
+  ]);
+  return json({ modules: modules.results || [], chapters: chapters.results || [], units: units.results || [] });
+}
+
+async function handleAnatomyTopics(env, url) {
+  const clauses = [];
+  const values = [];
+  for (const [column, parameter] of [["m.module_id", "module"], ["c.chapter_id", "chapter"], ["u.unit_id", "unit"]]) {
+    const value = url.searchParams.get(parameter);
+    if (value) { clauses.push(`${column} = ?`); values.push(value); }
+  }
+  const search = (url.searchParams.get("q") || "").trim();
+  if (search) {
+    clauses.push("(t.topic_id LIKE ? OR t.name LIKE ? OR t.page_number LIKE ? OR u.name LIKE ? OR c.name LIKE ? OR t.priority_band LIKE ?)");
+    const pattern = `%${search}%`;
+    values.push(pattern, pattern, pattern, pattern, pattern, pattern);
+  }
+  const priorityBand = url.searchParams.get("priorityBand");
+  if (priorityBand) { clauses.push("t.priority_band = ?"); values.push(priorityBand); }
+  const where = clauses.length ? `WHERE ${clauses.join(" AND ")}` : "";
+  const rows = await env.DB.prepare(`
+    SELECT t.topic_id, t.topic_no, t.name, t.short_name, t.page_number, t.overall_rank, t.priority_band,
+           u.unit_id, u.name AS unit_name, u.accounting_standard,
+           c.chapter_id, c.name AS chapter_name, m.module_id, m.name AS module_name,
+           COUNT(DISTINCT qt.question_id) AS question_count,
+           COUNT(DISTINCT q.sitting_id) AS sitting_count,
+           ROUND(SUM(COALESCE(q.marks, 0)), 2) AS linked_marks,
+           (SELECT d.document_id FROM aa_unit_documents ud JOIN aa_documents d ON d.document_id = ud.document_id WHERE ud.unit_id = u.unit_id AND d.document_type = 'study_material' AND d.published = 1 LIMIT 1) AS study_document_id
+    FROM aa_topics t
+    JOIN aa_units u ON u.unit_id = t.unit_id
+    JOIN aa_chapters c ON c.chapter_id = u.chapter_id
+    JOIN aa_modules m ON m.module_id = c.module_id
+    LEFT JOIN aa_question_topics qt ON qt.topic_id = t.topic_id
+    LEFT JOIN aa_questions q ON q.question_id = qt.question_id
+    ${where}
+    GROUP BY t.topic_id
+    ORDER BY t.display_order LIMIT 500
+  `).bind(...values).all();
+  return json({ topics: rows.results || [] });
+}
+
+async function handleAnatomyQuestions(env, url) {
+  const clauses = [];
+  const values = [];
+  for (const [column, parameter] of [["q.sitting_id", "sitting"], ["s.paper_type", "paperType"], ["qu.unit_id", "unit"], ["qt.topic_id", "topic"]]) {
+    const value = url.searchParams.get(parameter);
+    if (value) { clauses.push(`${column} = ?`); values.push(value); }
+  }
+  const limit = Math.min(Math.max(Number(url.searchParams.get("limit")) || 100, 1), 200);
+  const where = clauses.length ? `WHERE ${clauses.join(" AND ")}` : "";
+  const rows = await env.DB.prepare(`
+    SELECT DISTINCT q.question_id, q.question_no, q.sub_part, q.alternative_code, q.marks,
+           q.question_type, q.source_file, q.topic_mapping_review,
+           s.sitting_id, s.label AS sitting_label, s.paper_type, s.exam_year, s.attempt_month,
+           u.unit_id AS final_unit_id, u.name AS final_unit_name,
+           pm.match_status, pm.similarity_percent, pm.review_status,
+           (SELECT d.document_id FROM aa_sitting_documents sd JOIN aa_documents d ON d.document_id = sd.document_id WHERE sd.sitting_id = s.sitting_id AND d.document_type = 'question_paper' AND d.published = 1 LIMIT 1) AS question_document_id,
+           (SELECT d.document_id FROM aa_sitting_documents sd JOIN aa_documents d ON d.document_id = sd.document_id WHERE sd.sitting_id = s.sitting_id AND d.document_type = 'answer' AND d.published = 1 LIMIT 1) AS answer_document_id,
+           (SELECT d.document_id FROM aa_sitting_documents sd JOIN aa_documents d ON d.document_id = sd.document_id WHERE sd.sitting_id = s.sitting_id AND d.document_type = 'examiner_comments' AND d.published = 1 LIMIT 1) AS comments_document_id
+    FROM aa_questions q
+    JOIN aa_sittings s ON s.sitting_id = q.sitting_id
+    LEFT JOIN aa_units u ON u.unit_id = q.final_unit_id
+    LEFT JOIN aa_question_units qu ON qu.question_id = q.question_id
+    LEFT JOIN aa_question_topics qt ON qt.question_id = q.question_id
+    LEFT JOIN aa_pyq_study_matches pm ON pm.question_id = q.question_id
+    ${where}
+    ORDER BY s.exam_year DESC, s.attempt_month_no DESC, s.paper_type, s.set_no, q.question_no, q.sub_part
+    LIMIT ${limit}
+  `).bind(...values).all();
+  return json({ questions: rows.results || [], limit });
+}
+
+async function handleAnatomyDocument(request, env, url) {
+  const documentId = url.searchParams.get("doc");
+  if (!documentId) return json({ error: "Document not found." }, { status: 404 });
+  const document = await env.DB.prepare(
+    "SELECT title, r2_key, filename, byte_size, content_type FROM aa_documents WHERE document_id = ? AND published = 1"
+  ).bind(documentId).first();
+  if (!document) return json({ error: "Document not found." }, { status: 404 });
+
+  const metadata = await env.VAULT.head(document.r2_key);
+  if (!metadata) return json({ error: "Document file is unavailable." }, { status: 404 });
+  const range = parseRangeHeader(request.headers.get("Range"), metadata.size);
+  const object = range ? await env.VAULT.get(document.r2_key, { range }) : await env.VAULT.get(document.r2_key);
+  if (!object) return json({ error: "Document file is unavailable." }, { status: 404 });
+  const safeFilename = String(document.filename || "document.pdf").replace(/["\\\r\n]/g, "_");
+  const disposition = url.searchParams.get("download") === "1" ? "attachment" : "inline";
+  const baseHeaders = {
+    "Content-Type": document.content_type || "application/pdf",
+    "Content-Disposition": `${disposition}; filename="${safeFilename}"`,
+    "Cache-Control": "public, max-age=3600",
+    "X-Content-Type-Options": "nosniff",
+    "Accept-Ranges": "bytes",
+  };
+  if (range && object.range) {
+    const start = object.range.offset ?? metadata.size - object.range.length;
+    const length = object.range.length ?? metadata.size - object.range.offset;
+    return new Response(object.body, { status: 206, headers: { ...baseHeaders, "Content-Range": `bytes ${start}-${start + length - 1}/${metadata.size}`, "Content-Length": String(length) } });
+  }
+  return new Response(object.body, { headers: { ...baseHeaders, "Content-Length": String(metadata.size) } });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -635,6 +785,11 @@ export default {
         if (url.pathname === "/api/admin/me" && request.method === "GET") return await handleAdminMe(request, env);
         if (url.pathname === "/api/admin/lookup" && request.method === "POST") return await handleAdminLookup(request, env);
         if (url.pathname === "/api/admin/delete-student" && request.method === "POST") return await handleAdminDeleteStudent(request, env);
+        if (url.pathname === "/api/anatomy/overview" && request.method === "GET") return await handleAnatomyOverview(env);
+        if (url.pathname === "/api/anatomy/hierarchy" && request.method === "GET") return await handleAnatomyHierarchy(env);
+        if (url.pathname === "/api/anatomy/topics" && request.method === "GET") return await handleAnatomyTopics(env, url);
+        if (url.pathname === "/api/anatomy/questions" && request.method === "GET") return await handleAnatomyQuestions(env, url);
+        if (url.pathname === "/api/anatomy/document" && request.method === "GET") return await handleAnatomyDocument(request, env, url);
       } catch (err) {
         return json({ error: "Something went wrong. Please try again." }, { status: 500 });
       }

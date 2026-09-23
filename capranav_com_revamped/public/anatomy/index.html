@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Explore the complete CA Inter Advanced Accounting syllabus and descriptive question bank by module, chapter, unit and topic.">
+  <title>The Anatomy of Advanced Accounts · CA Pranav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/anatomy.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span>P</span> CA PRANAV</a>
+    <a class="back" href="/">Back to capranav.com</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="kicker">Practice with Pranav Bhaiya</p>
+      <h1>The Anatomy of <em>Advanced Accounts</em></h1>
+      <p class="intro">See the subject layer by layer—from modules and chapters to all study-material topics and the exam questions connected to them.</p>
+      <div class="stat-grid" id="stats" aria-live="polite">
+        <div class="stat"><strong>—</strong><span>Modules</span></div>
+        <div class="stat"><strong>—</strong><span>Units</span></div>
+        <div class="stat"><strong>—</strong><span>Topics</span></div>
+        <div class="stat"><strong>—</strong><span>Questions</span></div>
+      </div>
+    </section>
+
+    <section class="notice"><a href="/practice-with-pranav-bhaiya/"><strong>Day 1 interactive slides:</strong> Opening, Syllabus Flow and Marks Split →</a></section>
+
+    <section class="notice" id="data-note">Loading the syllabus database…</section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><p class="kicker">Layer 1</p><h2>Syllabus explorer</h2></div>
+        <p>Choose a module, chapter or unit. Search works across topic, unit and chapter names.</p>
+      </div>
+      <div class="filters topic-filters">
+        <label>Module<select id="module-filter"><option value="">All modules</option></select></label>
+        <label>Chapter<select id="chapter-filter"><option value="">All chapters</option></select></label>
+        <label>Unit<select id="unit-filter"><option value="">All units</option></select></label>
+        <label>Priority band<select id="priority-filter"><option value="">All priority bands</option><option>Top 50</option><option>Next 50</option><option>Beyond Top 100</option></select></label>
+        <label class="search-wide">Universal search<input id="topic-search" type="search" placeholder="Topic, ID, page, unit or chapter"></label>
+        <button id="reset-topics" class="reset-button" type="button">Reset filters &amp; sorting</button>
+      </div>
+      <p class="result-count" id="topic-count"></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th><button class="sort-heading" data-sort="name">Topic <span>↕</span></button></th>
+            <th><button class="sort-heading" data-sort="unit_name">Unit <span>↕</span></button></th>
+            <th><button class="sort-heading" data-sort="chapter_name">Chapter <span>↕</span></button></th>
+            <th><button class="sort-heading" data-sort="page_number">Page <span>↕</span></button></th>
+            <th><button class="sort-heading" data-sort="overall_rank">Overall rank <span>↕</span></button></th>
+            <th><button class="sort-heading" data-sort="priority_band">Priority band <span>↕</span></button></th>
+            <th><button class="sort-heading" data-sort="question_count">Questions <span>↕</span></button></th>
+            <th><button class="sort-heading" data-sort="linked_marks">Linked marks <span>↕</span></button></th>
+            <th>Study material</th>
+          </tr></thead>
+          <tbody id="topic-rows"><tr><td colspan="9">Loading topics…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><p class="kicker">Layer 2</p><h2>Question explorer</h2></div>
+        <p>Questions are connected through many-to-many topic mappings. A question can therefore appear under every concept it genuinely tests.</p>
+      </div>
+      <div class="filters question-filters">
+        <label>Paper type<select id="paper-filter"><option value="">PYQ, MTP and RTP</option><option>PYQ</option><option>MTP</option><option>RTP</option></select></label>
+        <button id="show-questions" type="button">Show latest questions</button>
+      </div>
+      <div class="question-list" id="question-list"><p>Select filters above, or open a topic from the syllabus table.</p></div>
+    </section>
+
+    <section class="coming-soon">
+      <p class="kicker">Next release</p>
+      <h2>Heatmaps, sitting comparisons and a pivot-style analysis builder</h2>
+      <p>The relational database is being established first. Charts will be added only after the marks and mapping validations are reviewed.</p>
+    </section>
+  </main>
+  <footer>CA Pranav Pratik Tulshyan · CA Inter Advanced Accounting</footer>
+  <script src="/assets/anatomy.js" defer></script>
+</body>
+</html>

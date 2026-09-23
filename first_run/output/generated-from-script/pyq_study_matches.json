@@ -1,0 +1,1202 @@
+[
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q1-a",
+    "match_status": "Reviewed partial concept",
+    "similarity_percent": 75,
+    "study_item_type": "Illustration",
+    "study_item_no": 6,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M1_C4_U5_ Accounting Standard 20 Earnings Per Share.md",
+    "study_question_excerpt": "Net profit for the year 20X1 ` 12,00,000 Weighted average number of equity shares outstanding 5,00,000 shares during the year 20X1 Average fair value of one equity share during the year 20X1 ` 20.00 Weighted average number of shares under option during the 1,00,000 shares year 20X1 Exercise price for shares under option during the year 20X1 ` 15.00",
+    "match_note": "PYQ also tests bonus shares and convertible debentures."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q1-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U5_ Accounting Standard 19 Leases.md",
+    "study_question_excerpt": "Prakash Limited leased a machine to Badal Limited on the following terms: (` In lakhs) (i) Fair value of the machine 28.3 (ii) Lease term 5 years (iii) Lease rental per annum 8.00 (iv) Guaranteed residual value 1.60 (v) Expected residual value 3.00 (vi) Internal rate of return 15% Discounted rates for 1st year to 5th year are 0.8696, 0.7561, 0.6575",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q1-c",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 8,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C6_U1_ Accounting Standard 15 Employee Benefits.md",
+    "study_question_excerpt": "The following data apply to ‘X’ Ltd. defined benefit pension plan for the year ended 31.03.20X2 calculate the actual return on plan assets: - Benefits paid 2,00,000 - Employer contribution 2,80,000 - Fair market value of plan assets on 31.03.20X2 11,40,000 - Fair market value of plan assets as on 31.03.20X1 8,00,000",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q2",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q3-a",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 8,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C6_U2_ AS 29 (Revised) Provisions, Contingent Liabilities and Contingent Assets.md",
+    "study_question_excerpt": "A Ltd. provides after sales warranty for two years to its customers. Based on past experience, the company has the following policy for making provision for warranties on the invoice amount, on the remaining balance warranty period. Less than 1 year: 2% provision More than 1 year: 3% provision v The company has raised invoices as under : Invoice Da",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q3-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 3,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U2_ Cash Flow Statement.md",
+    "study_question_excerpt": "From the following information, calculate cash flow from operating activities: for the year ended March 31, 20X1 | | Particulars | | ` | | Particulars | | ` | | | --------------- | ------------ | --------- | --- | ------------------ | ------------ | --- | --------- | --- | | To Balance b/d | | 1,00,000 | | By Cash Purchases | | | 1,20,000 | | | To ",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q4",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q5",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 12,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C10_U1_ Accounting Standard 21 Consolidated Financial Statements.md",
+    "study_question_excerpt": "From the Balance Sheets and information given below, prepare Consolidated Balance Sheet of Virat Ltd. and Anushka Ltd. as at 31st March. Virat Ltd. holds 80% of Equity Shares in Anushka Ltd. since its (Anushka Ltd.’s) incorporation. Balance Sheet of Virat Ltd. and Anushka Ltd. as at 31st March, 20X1 | Particulars | | | Note | Virat Ltd. | Anushka L",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q6-a-alt1",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 1,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M1_C4_U4_ Accounting Standard 18 Related Party Disclosures.md",
+    "study_question_excerpt": "Identify the related parties in the following case as per AS 18: A Ltd. holds 51% of B Ltd. B Ltd holds 51% of O Ltd. Z Ltd holds 49% of O Ltd.",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q6-a-alt2",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 3,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M1_C4_U1_ Accounting Standard 1 Disclosure of Accounting Policies.md",
+    "study_question_excerpt": "liquidity position, since most of the assets of the company are blocked in various claims/petitions in a Special Court. XYZ has accepted Inter-Corporate Deposits (ICDs) and it is making its best efforts to settle the dues. There were claims at varied rates of interest, from lenders, from the due date of ICDs to the date of repayment. The company ha",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q6-b",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-01-PII-Q6-c",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q1-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 12,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U4_ Accounting Standard 16 Borrowing Costs.md",
+    "study_question_excerpt": "Expert Limited issued 12% secured debentures of ₹ 100 lakhs on 01.06.20X1. Money raised from debentures to be utilized as under: Amount ₹ in Intended Purpose lakhs | Construction of factory building | | | | | 40 | | | | --------------------------------- | --- | --- | --- | --- | --- | --- | --- | | Working Capital | | | | | 30 | | | | Purchase of M",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q1-b",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 7,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C6_U1_ Accounting Standard 15 Employee Benefits.md",
+    "study_question_excerpt": "As on 1st April, 20X1 the fair value of plan assets was ` 1,00,000 in respect of a pension plan of Zeleous Ltd. On 30th September, 20X1 the plan paid out benefits of ` 19,000 and received inward contributions of ` 49,000. On 31st March, 20X2 the fair value of plan assets was` 1,50,000 and present value of the defined benefit obligation was ` 1,47,9",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q1-c",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 4,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M1_C4_U5_ Accounting Standard 20 Earnings Per Share.md",
+    "study_question_excerpt": "Net profit for the year 20X1 ` 11,00,000 Net profit for the year 20X2 ` 15,00,000 No. of shares outstanding prior to rights issue 5,00,000 shares Rights issue price ` 15.00 Last date to exercise rights 1st March 20X2 Rights issue is one new share for each five outstanding (i.e. 1,00,000 new shares) Fair value of one equity share immediately prior t",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q2",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q3-a",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q3-b",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 10,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U3_ Accounting Standard 13 Accounting for Investments.md",
+    "study_question_excerpt": "On 1st April, 20X1, XY Ltd. has 15,000 equity shares of ABC Ltd. at a book value of ₹ 15 per share (nominal value ₹ 10 per share). On 1st June, 20X1, XY Ltd. acquired 5,000 equity shares of ABC Ltd. for ₹ 1,00,000. ABC Ltd. announced a bonus and right issue. (1) Bonus was declared, at the rate of one equity share for every five shares held, on 1st ",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q4",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q5",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 12,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C10_U1_ Accounting Standard 21 Consolidated Financial Statements.md",
+    "study_question_excerpt": "From the Balance Sheets and information given below, prepare Consolidated Balance Sheet of Virat Ltd. and Anushka Ltd. as at 31st March. Virat Ltd. holds 80% of Equity Shares in Anushka Ltd. since its (Anushka Ltd.’s) incorporation. Balance Sheet of Virat Ltd. and Anushka Ltd. as at 31st March, 20X1 | Particulars | | | Note | Virat Ltd. | Anushka L",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q6-a-alt1",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q6-a-alt2",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 1,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U5_ Accounting Standard 19 Leases.md",
+    "study_question_excerpt": "S. Square Private Limited has taken machinery on finance lease from S.K. Ltd. The information is as under: Lease term = 4 years Fair value at inception of lease = ` 20,00,000 Lease rent = ` 6,25,000 p.a. at the end of year Guaranteed residual value = ` 1,25,000 Expected residual value = ` 3,75,000 Implicit interest rate = 15% Discounted rates for 1",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q6-b",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 1,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U1_ Preparation of Financial Statements.md",
+    "study_question_excerpt": "Due to inadequacy of profits during the year ended 31st March, 20X2, XYZ Ltd. proposes to declare 10% dividend out of general reserves. From the following particulars, ascertain the amount that can be utilised from general reserves, according to the Companies (Declaration of dividend out of Reserves) Rules, 2014: ` 17,500 9% Preference shares of ` ",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-01-PII-Q6-c",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q1-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 14,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U2_ Accounting Standard 10 Property, Plant and Equipment.md",
+    "study_question_excerpt": "Arka Ltd. purchased machinery for ₹ 3,000 lakhs. Depreciation was charged at 10% on SLM basis for a useful life of 10 years. At the end of Year 4, the machinery was revalued to ₹ 2,700 lakhs and the same was adopted. What will be the carrying amount of the asset at the end of Year 5 and Year 6? Assume no change in the useful life.",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q1-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C7_U3_ Accounting Standard 11 The Effects of Changes in Foreign Exchange Rates.md",
+    "study_question_excerpt": "Exchange Rate per $ Goods purchased on 1.1.20X1 for US $ 15,000 ` 75 Exchange rate on 31.3.20X1 ` 74 Date of actual payment 7.7.20X1 ` 73 You are required to ascertain the loss/gain to be recognized for financial years ended 31st March, 20X1 and 31st March, 20X2 as per AS 11.",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q1-c",
+    "match_status": "Reviewed partial concept",
+    "similarity_percent": 75,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C9_U1_ Accounting Standard 12 Accounting for Government Grants.md",
+    "study_question_excerpt": "Z Ltd. purchased a fixed asset for ` 50 lakhs, which has the estimated useful life of 5 years with the salvage value of ` 5,00,000. On purchase of the assets government granted it a grant for ` 10 lakhs. Pass the necessary journal entries in the books of the company for first two years if the grant is treated as deferred income. | OTHER ACCOUNTING ",
+    "match_note": "PYQ also tests grant refund and both presentation methods."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q1-d",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 12,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U4_ Accounting Standard 16 Borrowing Costs.md",
+    "study_question_excerpt": "Expert Limited issued 12% secured debentures of ₹ 100 lakhs on 01.06.20X1. Money raised from debentures to be utilized as under: Amount ₹ in Intended Purpose lakhs | Construction of factory building | | | | | 40 | | | | --------------------------------- | --- | --- | --- | --- | --- | --- | --- | | Working Capital | | | | | 30 | | | | Purchase of M",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q2-a",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q2-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 10,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U3_ Accounting Standard 13 Accounting for Investments.md",
+    "study_question_excerpt": "On 1st April, 20X1, XY Ltd. has 15,000 equity shares of ABC Ltd. at a book value of ₹ 15 per share (nominal value ₹ 10 per share). On 1st June, 20X1, XY Ltd. acquired 5,000 equity shares of ABC Ltd. for ₹ 1,00,000. ABC Ltd. announced a bonus and right issue. (1) Bonus was declared, at the rate of one equity share for every five shares held, on 1st ",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q3-a",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q3-b",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q4-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U1_ Preparation of Financial Statements.md",
+    "study_question_excerpt": "The following is the Trial Balance of Omega Limited as on 31.3.20X2: (Figures in ` ‘000) | | | | Debit | | | Credit | | ------------- | --- | --- | ------------ | ----------------- | --------- | ------- | | Land at cost | | | 220 Equity | Capital (Shares | of ` 10 | 300 | each) | Plant | & Machinery | at | 770 10% Debentures | | | 200 | | ------ | ",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q4-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 7,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U2_ Cash Flow Statement.md",
+    "study_question_excerpt": "The balance sheets of Sun Ltd. as at 31st March 20X1 and 20X0 were as: | | Particulars | | Notes | | 20X1 | 20X0 | | | ------------------------- | ------------ | --- | ------ | --- | ------- | ------- | --- | | | | | | | ` | | ` | | Equity and Liabilities | | | | | | | | | 1 Shareholder’s funds | | | | | | | | | (a) Share capital | | | 1 | | 60,000",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q5-a",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q5-b",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q5-c",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q6-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M1_C4_U1_ Accounting Standard 1 Disclosure of Accounting Policies.md",
+    "study_question_excerpt": "Jagannath Ltd. had made a rights issue of shares in 20X2. In the offer document to its members, it had projected a surplus of `40 crores during the accounting year to end on 31st March, 20X2. The draft results for the year, prepared on the hitherto showed a deficit of `10 crores. The board in consultation with the managing director, decided on the ",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q6-b",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q6-c",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q6-d",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-05-PII-Q6-e",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-05-PII-Q1-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U4_ Accounting Standard 16 Borrowing Costs.md",
+    "study_question_excerpt": "X Ltd. began construction of a new building on 1st January, 20X1. It obtained ` 1 lakh special loan to finance the construction of the building on 1st January, 20X1 at an interest rate of 10%. The company’s other outstanding two non-specific loans were: | | | ASSETS BASED ACCOUNTING STANDARDS | | | | | | | | | --- | --- | --------------------------",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-05-PII-Q1-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 7,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U1_ Accounting Standard 2 Valuation of Inventory.md",
+    "study_question_excerpt": "Mr. Mehul gives the following information relating to items forming part of inventory as on 31-3-20X1. His factory produces Product X using Raw material A. (i) 600 units of Raw material A (purchased @ ₹ 120). Replacement cost of raw material A as on 31-3-20X1 is ₹ 90 per unit. (ii) 500 units of partly finished goods in the process of producing X an",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-05-PII-Q2",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-05-PII-Q3-a",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 11,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C8_U1_ Accounting Standard 7 Construction Contracts.md",
+    "study_question_excerpt": "RT Enterprises has entered into a fixed price contract for construction of a tower with its customer. Initial tender price agreed is ₹ 220 crore. At the start of the contract, it is estimated that total costs to be incurred will be ₹ 200 crore. At the end of year 1, this estimate stands revised to ₹ 202 crore. Assume that the construction is expect",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-05-PII-Q3-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 7,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U2_ Cash Flow Statement.md",
+    "study_question_excerpt": "The balance sheets of Sun Ltd. as at 31st March 20X1 and 20X0 were as: | | Particulars | | Notes | | 20X1 | 20X0 | | | ------------------------- | ------------ | --- | ------ | --- | ------- | ------- | --- | | | | | | | ` | | ` | | Equity and Liabilities | | | | | | | | | 1 Shareholder’s funds | | | | | | | | | (a) Share capital | | | 1 | | 60,000",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-05-PII-Q4",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-05-PII-Q5",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 12,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C10_U1_ Accounting Standard 21 Consolidated Financial Statements.md",
+    "study_question_excerpt": "From the Balance Sheets and information given below, prepare Consolidated Balance Sheet of Virat Ltd. and Anushka Ltd. as at 31st March. Virat Ltd. holds 80% of Equity Shares in Anushka Ltd. since its (Anushka Ltd.’s) incorporation. Balance Sheet of Virat Ltd. and Anushka Ltd. as at 31st March, 20X1 | Particulars | | | Note | Virat Ltd. | Anushka L",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-05-PII-Q6-a-alt1",
+    "match_status": "Reviewed partial concept",
+    "similarity_percent": 75,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U5_ Accounting Standard 19 Leases.md",
+    "study_question_excerpt": "Prakash Limited leased a machine to Badal Limited on the following terms: (` In lakhs) (i) Fair value of the machine 28.3 (ii) Lease term 5 years (iii) Lease rental per annum 8.00 (iv) Guaranteed residual value 1.60 (v) Expected residual value 3.00 (vi) Internal rate of return 15% Discounted rates for 1st year to 5th year are 0.8696, 0.7561, 0.6575",
+    "match_note": "PYQ also asks for lease classification and lessor treatment."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-05-PII-Q6-a-alt2",
+    "match_status": "Reviewed partial concept",
+    "similarity_percent": 75,
+    "study_item_type": "Illustration",
+    "study_item_no": 5,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M1_C4_U5_ Accounting Standard 20 Earnings Per Share.md",
+    "study_question_excerpt": "Net profit for the current year ` 1,00,00,000 No. of equity shares outstanding 50,00,000 Basic earnings per share ` 2.00 No. of 12% convertible debentures of ` 100 each 1,00,000 Each debenture is convertible into 10 equity shares Interest expense for the current year ` 12,00,000 Tax relating to interest expense (30%) ` 3,60,000 Compute Diluted Earn",
+    "match_note": "PYQ includes basic EPS and partly paid shares, beyond convertible debentures."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-05-PII-Q6-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 1,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U1_ Preparation of Financial Statements.md",
+    "study_question_excerpt": "Due to inadequacy of profits during the year ended 31st March, 20X2, XYZ Ltd. proposes to declare 10% dividend out of general reserves. From the following particulars, ascertain the amount that can be utilised from general reserves, according to the Companies (Declaration of dividend out of Reserves) Rules, 2014: ` 17,500 9% Preference shares of ` ",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-05-PII-Q6-c",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q1-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U2_ Accounting Standard 10 Property, Plant and Equipment.md",
+    "study_question_excerpt": "Entity A has an existing freehold factory property, which it intends to knock down and redevelop. During the redevelopment period the company will move its production facilities to another (temporary) site. The following incremental costs will be incurred: 1. Setup costs of ` 5,00,000 to install machinery in the new location. 2. Rent of ` 15,00,000",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q1-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 13,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U3_ Accounting Standard 13 Accounting for Investments.md",
+    "study_question_excerpt": "On 1st April, 20X1, Mr. Vijay had 30,000 Equity shares in X Ltd. at a book value of ₹ 4,50,000 (Face Value ₹ 10 per share). On 22nd June, 20X1, he purchased another 5000 shares of the same company for ₹ 80,000. The Directors of X Ltd. announced a bonus of equity shares in the ratio of one share for seven shares held on 10th August, 20X1. On 31st Au",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q2",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 5,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U1_ Preparation of Financial Statements.md",
+    "study_question_excerpt": "From the following particulars furnished by Pioneer Ltd., prepare the Balance Sheet as at 31st March, 20X1 as required by Schedule III of the Companies Act. Give notes | | | | Debit | Credit | | | -------------------------------------- | --- | --- | --------- | ------------ | --- | | | | | | ` | ` | | | | | | | | | Equity Capital (Face value of ` 1",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q3-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 7,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U2_ Cash Flow Statement.md",
+    "study_question_excerpt": "The balance sheets of Sun Ltd. as at 31st March 20X1 and 20X0 were as: | | Particulars | | Notes | | 20X1 | 20X0 | | | ------------------------- | ------------ | --- | ------ | --- | ------- | ------- | --- | | | | | | | ` | | ` | | Equity and Liabilities | | | | | | | | | 1 Shareholder’s funds | | | | | | | | | (a) Share capital | | | 1 | | 60,000",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q3-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 3,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M1_C4_U7_ Accounting Standard 25 Interim Financial Reporting.md",
+    "study_question_excerpt": "Accountants of Poornima Ltd. showed a net profit of ` 7,20,000 for the third quarter of 20X1 after incorporating the following: (i) Bad debts of ` 40,000 incurred during the quarter. 50% of the bad debts have been deferred to the next quarter. (ii) Extra ordinary loss of ` 35,000 incurred during the quarter has been fully recognized in this quarter",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q4",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q5-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 15,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C10_U1_ Accounting Standard 21 Consolidated Financial Statements.md",
+    "study_question_excerpt": "31st March, 20X3: | | | H Ltd. | S Ltd. | | --------------------------------------------- | --- | ------------ | ------------ | | | | (` in lacs) | (` in lacs) | | Sales and other income | | 5,000 | 1,000 | | Increase in Inventory (closing less opening) | | 1,000 | 200 | | Raw material consumed | | 800 | 200 | | Wages and Salaries | | 800 | 150 | |",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q5-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C10_U1_ Accounting Standard 21 Consolidated Financial Statements.md",
+    "study_question_excerpt": "XYZ Ltd. purchased 80% shares of ABC Ltd. on 1st January, 20X1 for ` 1,40,000. The issued capital of ABC Ltd., on 1st January, 20X1 was ` 1,00,000 and the balance in the Profit & Loss Account was ` 60,000. During the year ended 31st December, 20X1, ABC Ltd. earned a profit of ` 20,000 and at year end, declared and paid a dividend of ` 15,000. Show ",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q6-a-alt1",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q6-a-alt2",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 3,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U7_ Accounting Standard 28 Impairment of Assets.md",
+    "study_question_excerpt": "G Ltd., acquired a machine on 1st April, 20X0 for ` 7 crore that had an estimated useful life of 7 years. The machine is depreciated on straight line basis and does not carry any residual value. On 1st April, 20X4, the carrying value of the machine was reassessed at ` 5.10 crore and the surplus arising out of the revaluation being credited to reval",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q6-b",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 1,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U1_ Preparation of Financial Statements.md",
+    "study_question_excerpt": "Due to inadequacy of profits during the year ended 31st March, 20X2, XYZ Ltd. proposes to declare 10% dividend out of general reserves. From the following particulars, ascertain the amount that can be utilised from general reserves, according to the Companies (Declaration of dividend out of Reserves) Rules, 2014: ` 17,500 9% Preference shares of ` ",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-05-PII-Q6-c",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q1-a",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 9,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C6_U1_ Accounting Standard 15 Employee Benefits.md",
+    "study_question_excerpt": "An employee Roshan has joined a company XYZ Ltd. in the year 20X1. The annual emoluments of Roshan as decided is ` 14,90,210. The company also has a policy of giving a lump sum payment of 25% of the last drawn annual salary of the completing minimum 5 years of service. The salary of the Roshan is expected to grow @ 10% per annum. that he will compl",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q1-b",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 19,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U2_ Accounting Standard 10 Property, Plant and Equipment.md",
+    "study_question_excerpt": "Star Limited purchased machinery for ₹ 6,80,000 (inclusive of GST of ₹ 40,000). Input credit is available for entire amount of GST paid. The company incurred the following other expense for installation. ₹ Cost of preparation of site for installation 21,200 Total Labour charges 56,000 | | | | | v | v | | --- | --- | --- | --- | ---- | --- | (200 ou",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q1-c",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M1_C4_U7_ Accounting Standard 25 Interim Financial Reporting.md",
+    "study_question_excerpt": "The accounting year of X Ltd. ends on 30th September, 20X1 and it makes its reports quarterly. However for the purpose of tax, year ends on 31st March every year. For the Accounting year from 1-10-20X0 to 30-9-20X1, the quarterly income is as under: 1st quarter ending on 31st December, 20X0 ` 200 crores 2nd quarter ending on 31st March, 20X1 ` 200 ",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q2",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 6,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U1_ Preparation of Financial Statements.md",
+    "study_question_excerpt": "Following is the trial balance of Delta limited as on 31.3.20X2. (Figures in ` ‘000) | Particulars | | Debit Particulars | | | | Credit | | ------------- | --- | ------------------- | ------ | -------- | --- | ------- | | Land at cost | | 800 Equity | share | capital | | 500 | (shares of ` 10 each) | Calls in arrears | | 5 10% Debentures | | | | 30",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q3-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 5,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U2_ Cash Flow Statement.md",
+    "study_question_excerpt": "Prepare cash flow statement of M/s MNT Ltd. for the year ended 31st March, 20X1 with the help of the following information: (1) Company sold goods for cash only. Gross Profit Ratio was 30% for the year, gross profit amounts to ` 3,82,500. (2) (3) Opening inventory was lesser than closing inventory by ` 35,000. (4) Wages paid during the year ` 4,92,",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q3-b",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q4",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q5-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 15,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C10_U1_ Accounting Standard 21 Consolidated Financial Statements.md",
+    "study_question_excerpt": "31st March, 20X3: | | | H Ltd. | S Ltd. | | --------------------------------------------- | --- | ------------ | ------------ | | | | (` in lacs) | (` in lacs) | | Sales and other income | | 5,000 | 1,000 | | Increase in Inventory (closing less opening) | | 1,000 | 200 | | Raw material consumed | | 800 | 200 | | Wages and Salaries | | 800 | 150 | |",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q5-b",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q6-a-alt1",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q6-a-alt2",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 9,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C7_U3_ Accounting Standard 11 The Effects of Changes in Foreign Exchange Rates.md",
+    "study_question_excerpt": "A Ltd. has borrowed USD 10,000 in foreign currency on April 1, 20X1 at 5% p.a. annual interest and acquired a depreciable asset. The exchange rates are as under: 01/04/20X1 1 US$ = ` 48.00 31/03/20X2 1 US$ = ` 51.00 You are required to pass the journal entries in the following cases: (i) Option under Para 46A is not availed. (ii) Option under Para ",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q6-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 4,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C7_U2_ Accounting Standard 5 Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies.md",
+    "study_question_excerpt": "as per AS 5. (i) of ad hoc ex-gratia payments to employees on retirement. (ii) Management decided to pay pension to those employees who have retired after completing 5 years of service in the organisation. Such employees will get pension of ` 20,000 per month. Earlier there was no such scheme of pension in the organisation. 7.24",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2026-05-PII-Q6-c",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q1-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U4_ Accounting Standard 16 Borrowing Costs.md",
+    "study_question_excerpt": "X Ltd. began construction of a new building on 1st January, 20X1. It obtained ` 1 lakh special loan to finance the construction of the building on 1st January, 20X1 at an interest rate of 10%. The company’s other outstanding two non-specific loans were: | | | ASSETS BASED ACCOUNTING STANDARDS | | | | | | | | | --- | --- | --------------------------",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q1-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 3,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C7_U3_ Accounting Standard 11 The Effects of Changes in Foreign Exchange Rates.md",
+    "study_question_excerpt": "Kalim Ltd. borrowed US$ 4,50,000 on 01/01/20X1, which will be repaid as on 31/07/20X1. Kalim Ltd. prepares financial statement ending on 31/03/20X1. Rate of exchange between reporting currency (INR) and foreign currency (USD) on different dates are as under: | 01/01/20X1 | 1 US$ = ` 48.00 | | | | | | | ----------- | ---------------- | --- | --- | -",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q1-c",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 1,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U1_ Accounting Standard 2 Valuation of Inventory.md",
+    "study_question_excerpt": "The company deals in three products, A, B and C, which are neither similar nor interchangeable. At the time of closing of its account for the year 20X1-X2, the determined as follows: Items Historical Cost (` in lakhs) Net Realisable Value (` in lakhs) A 40 28 B 32 32 C 16 24 What will be the value of closing stock? 55.1. 13 3",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q1-d",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 8,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C9_U1_ Accounting Standard 12 Accounting for Government Grants.md",
+    "study_question_excerpt": "A fixed asset is purchased for ` 20 lakhs. Government grant received towards it is ` 8 lakhs. Residual Value is ` 4 lakhs and useful life is 4 years. Assume depreciation on the basis of Straight Line method. Asset is shown in the balance sheet net of grant. After 1 year, grant becomes refundable to the extent of ` 5 lakhs due to non- compliance wit",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q2-a",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q2-b",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q3-a",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 11,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U3_ Accounting Standard 13 Accounting for Investments.md",
+    "study_question_excerpt": "The following information is presented by Mr. Z (a stock broker), relating to his holding in 9% Central Government Bonds. Opening balance (nominal value) ₹ 1,20,000, Cost ₹ 1,18,000 (Nominal value of each unit is ₹ 100). 1.3.20X1 Purchased 200 units, ex-interest at ₹ 98. 1.7.20X1 Sold 500 units, ex-interest out of original holding at ₹ 100. 1.10.20",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q3-b",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q4",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 5,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U1_ Preparation of Financial Statements.md",
+    "study_question_excerpt": "From the following particulars furnished by Pioneer Ltd., prepare the Balance Sheet as at 31st March, 20X1 as required by Schedule III of the Companies Act. Give notes | | | | Debit | Credit | | | -------------------------------------- | --- | --- | --------- | ------------ | --- | | | | | | ` | ` | | | | | | | | | Equity Capital (Face value of ` 1",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q5-a",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q5-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 1,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M1_C4_U1_ Accounting Standard 1 Disclosure of Accounting Policies.md",
+    "study_question_excerpt": "4.9 In the books of M/s Prashant Ltd., closing inventory as at 31.03.20X2 amounts to ` 1,63,000 (on the basis of FIFO method). ascertaining the cost of inventory from the year 20X1-X2. On the basis of weighted average method, closing inventory as on 31.03.20X2 amounts to ` 1,47,000. Realisable value of the inventory as on 31.03.20X2 amounts to ` 1,",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q6-a",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q6-b-alt1",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q6-b-alt2",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 1,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U1_ Preparation of Financial Statements.md",
+    "study_question_excerpt": "Due to inadequacy of profits during the year ended 31st March, 20X2, XYZ Ltd. proposes to declare 10% dividend out of general reserves. From the following particulars, ascertain the amount that can be utilised from general reserves, according to the Companies (Declaration of dividend out of Reserves) Rules, 2014: ` 17,500 9% Preference shares of ` ",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2023-11-PII-Q6-c",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q1-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 1,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U6_ Accounting Standard 26 Intangible Assets.md",
+    "study_question_excerpt": "v ABC Ltd. developed know-how by incurring expenditure of ` 20 lakhs, The know-how was used by the company from 1.4.20X1. The useful life of the asset is 10 years from the year of commencement of its use. The company has not amortised the asset till 31.3.20X8. Pass Journal entry to give effect to the value of know-how as per Accounting Standard-26 ",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q1-b",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 9,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C6_U1_ Accounting Standard 15 Employee Benefits.md",
+    "study_question_excerpt": "The fair value of plan assets of Anupam Ltd. was ₹ 2,00,000 in respect of employee benefit pension plan as on 1st April, 20X1. On 30th September, 20X1 the plan paid out benefits of ₹ 25,000 and received inward contributions of ₹ 55,000. On 31st March, 20X2 the fair value of plan assets was ₹ 3,00,000. On 1st April, 20X1 the company made the followi",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q1-c",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 4,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C7_U4_ Accounting Standard 22 Accounting for Taxes on Income.md",
+    "study_question_excerpt": "within 3 years period. It recognises revenue from these contracts on percentage of completion method for financial statements during 20X0-20X1, 20X1-20X2 and 20X2-20X3 for ` 11,00,000, ` 16,00,000 and ` 21,00,000 respectively. However, for Income-tax purpose, it has adopted the completed contract method under which it has recognised revenue of ` 7,",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q2",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U1_ Preparation of Financial Statements.md",
+    "study_question_excerpt": "The following is the Trial Balance of Omega Limited as on 31.3.20X2: (Figures in ` ‘000) | | | | Debit | | | Credit | | ------------- | --- | --- | ------------ | ----------------- | --------- | ------- | | Land at cost | | | 220 Equity | Capital (Shares | of ` 10 | 300 | each) | Plant | & Machinery | at | 770 10% Debentures | | | 200 | | ------ | ",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q3-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 11,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U2_ Cash Flow Statement.md",
+    "study_question_excerpt": "Prepare Cash flow for Gamma Ltd., for the year ending 31.3.20X1 from the following information: (1) Sales for the year amounted to ` 135 crores out of which 60% was cash sales. (2) Purchases for the year amounted to ` 55 crores out of which credit purchase was 80%. (3) Administrative and selling expenses amounted to ` 18 crores and salary paid amou",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q3-b",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q4",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q5",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 11,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C10_U1_ Accounting Standard 21 Consolidated Financial Statements.md",
+    "study_question_excerpt": "H Ltd. and S Ltd. provide the following information as at 31st March,20X2: | | H Ltd. | S Ltd. | | --- | -------- | ------- | | | | ` ` | | PPE | 1,00,000 | 1,30,000 | | -------------------------------------------- | --------- | --------- | | Investments (8,000 equity shares of S Ltd.) | 1,26,000 | | | Current Assets | 74,000 | 70,000 | Share capit",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q6-a-alt1",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 8,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U3_ Accounting Standard 13 Accounting for Investments.md",
+    "study_question_excerpt": "v On 1st April, 20X1, Rajat has 50,000 equity shares of P Ltd. at a book value of ` 15 per share (nominal value ` 10 each). He provides you the further information: (1) On 20th June, 20X1 he purchased another 10,000 shares of P Ltd. at ` 16 per share. (2) On 1st August, 20X1, P Ltd. issued one equity bonus share for every six shares held by the sha",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q6-a-alt2",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 5,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U1_ Accounting Standard 2 Valuation of Inventory.md",
+    "study_question_excerpt": "“In determining the cost of inventories, it is appropriate to exclude certain costs and recognise them as expenses in the period in which they are incurred”. Provide examples of such costs as per AS 2 (Revised) ‘Valuation of Inventories’. Scenario base Questions",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q6-b",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2024-09-PII-Q6-c",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q1-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C7_U4_ Accounting Standard 22 Accounting for Taxes on Income.md",
+    "study_question_excerpt": "From the following details of A Ltd. for the year ended 31-03-20X1, calculate the deferred tax asset/ liability as per AS 22 and amount of tax to be debited to the Profit and Loss Account for the year. | Particulars | | | | | | | ` | | ----------------------------- | --- | --- | --- | --- | --- | --------- | ---- | | Accounting Profit | | | | | | 6",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q1-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 7,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U1_ Accounting Standard 2 Valuation of Inventory.md",
+    "study_question_excerpt": "Mr. Mehul gives the following information relating to items forming part of inventory as on 31-3-20X1. His factory produces Product X using Raw material A. (i) 600 units of Raw material A (purchased @ ₹ 120). Replacement cost of raw material A as on 31-3-20X1 is ₹ 90 per unit. (ii) 500 units of partly finished goods in the process of producing X an",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q1-c-i",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 7,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C8_U2_ Accounting Standard 9 Revenue Recognition.md",
+    "study_question_excerpt": "The following information of Meghna Ltd. is provided: (i) Goods of ₹ 60,000 were sold on 20-3-20X2 but at the request of the buyer these were delivered on 10-4-20X2. (ii) On 15-1-20X2 goods of ₹ 1,50,000 were sent on consignment basis of which 20% of the goods unsold are lying with the consignee as on (iii) ₹ 1,20,000 worth of goods were sold on ap",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q1-c-ii",
+    "match_status": "Verified same concept",
+    "similarity_percent": 100,
+    "study_item_type": "Illustration",
+    "study_item_no": 4,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C8_U2_ Accounting Standard 9 Revenue Recognition.md",
+    "study_question_excerpt": "During the year ended 31st March 20X1, ZX Enterprises has recognized ` 100 lakhs on accrual basis income from dividend on units of mutual funds held by it. The dividends on mutual funds were declared on 15th June, 20X1. The dividend was proposed on 10th April, 20X1. Whether the above treatment is as per the relevant Accounting Standard?",
+    "match_note": "Same accounting task; names, years and amounts ignored."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q1-c-iii",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 7,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C8_U2_ Accounting Standard 9 Revenue Recognition.md",
+    "study_question_excerpt": "The following information of Meghna Ltd. is provided: (i) Goods of ₹ 60,000 were sold on 20-3-20X2 but at the request of the buyer these were delivered on 10-4-20X2. (ii) On 15-1-20X2 goods of ₹ 1,50,000 were sent on consignment basis of which 20% of the goods unsold are lying with the consignee as on (iii) ₹ 1,20,000 worth of goods were sold on ap",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q1-c-iv",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Test Your Knowledge",
+    "study_item_no": 7,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C8_U2_ Accounting Standard 9 Revenue Recognition.md",
+    "study_question_excerpt": "The following information of Meghna Ltd. is provided: (i) Goods of ₹ 60,000 were sold on 20-3-20X2 but at the request of the buyer these were delivered on 10-4-20X2. (ii) On 15-1-20X2 goods of ₹ 1,50,000 were sent on consignment basis of which 20% of the goods unsold are lying with the consignee as on (iii) ₹ 1,20,000 worth of goods were sold on ap",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q2",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 5,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U1_ Preparation of Financial Statements.md",
+    "study_question_excerpt": "From the following particulars furnished by Pioneer Ltd., prepare the Balance Sheet as at 31st March, 20X1 as required by Schedule III of the Companies Act. Give notes | | | | Debit | Credit | | | -------------------------------------- | --- | --- | --------- | ------------ | --- | | | | | | ` | ` | | | | | | | | | Equity Capital (Face value of ` 1",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q3-a",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 10,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M3_C11_U2_ Cash Flow Statement.md",
+    "study_question_excerpt": "Profit and Loss of ABC Ltd. along with additional information: | | | Particulars | | Notes | 31.3.20X1 | | 31.3.20X0 | | | | ------ | ----------------------- | -------------------------- | --- | ------------- | ---------- | --- | ------------- | ---- | --- | | | | | | (` in lakhs) | | | (` in lakhs) | | | | | Equity and Liabilities | | | | | | | | ",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q3-b",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 2,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C5_U7_ Accounting Standard 28 Impairment of Assets.md",
+    "study_question_excerpt": "X Ltd. is having a plant (asset) carrying amount of which is ` 100 lakhs on 31.3.20X1. Its balance useful life is 5 years and residual value at the end of 5 years is ` 5 lakhs. Estimated future cash flow from using the plant in next 5 years are: | For the year ended on | | | Estimated cash flow (` in lakhs) | | | | ----------------------- | -------",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q4",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q5",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 10,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C10_U1_ Accounting Standard 21 Consolidated Financial Statements.md",
+    "study_question_excerpt": "Prepare consolidated balance sheet of H Ltd. and its subsidiary as at 31 March, 20X1 from the following information: | | | | | | | | H Ltd. | | S Ltd. | | | --- | --- | --- | --- | --- | --- | --- | ------- | --- | ------- | --- | | | | | | | | | | ` | | ` | | PPE | | | | | | | 5,00,000 | | 3,00,000 | | | --------------------------------- | --- | -",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q6-a-alt1",
+    "match_status": "Candidate needs concept review",
+    "similarity_percent": null,
+    "study_item_type": "Illustration",
+    "study_item_no": 1,
+    "study_source_file": "books/ca-inter/concept-book/raw_icai_study_materials/M2_C7_U2_ Accounting Standard 5 Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies.md",
+    "study_question_excerpt": "Fuel surcharge is billed by the State Electricity Board at provisional rates. Final bill for fuel surcharge of ` 5.30 lakhs for the period October, 20X1 to September, 20X7 has been received and paid in February, 20X8. However, the same was accounted in the year 20X8-X9. Comment on the accounting treatment done in the said case.",
+    "match_note": "Candidate only; percentage withheld until concept is reviewed."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q6-a-alt2",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q6-b",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  },
+  {
+    "question_id": "CAI-P1-PYQ-2025-09-PII-Q6-c",
+    "match_status": "No study question in mapped unit",
+    "similarity_percent": null,
+    "study_item_type": null,
+    "study_item_no": null,
+    "study_source_file": null,
+    "study_question_excerpt": null,
+    "match_note": "No study-material question found in the mapped unit; topic link may still exist."
+  }
+]

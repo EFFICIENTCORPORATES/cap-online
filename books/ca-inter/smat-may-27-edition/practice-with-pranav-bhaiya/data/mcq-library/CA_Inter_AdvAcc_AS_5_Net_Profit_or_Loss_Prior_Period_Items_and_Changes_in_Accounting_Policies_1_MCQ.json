@@ -1,0 +1,30 @@
+[
+  {
+    "mcq_id": "CAI-P1-MTP-2024-05-S1-PI-Q1-iii",
+    "course": "CA",
+    "level": "Inter",
+    "exam_type": "MTP",
+    "year": "2024",
+    "set": "1",
+    "qno_text": "Q1(iii)",
+    "marks": 2,
+    "difficulty": "Easy",
+    "qtype": "case-mcq",
+    "case_ref": "CS-1",
+    "case_facts_html": "<p>SEAS Ltd., the \"Company\", is in the business of tours and travels. It sells holiday packages to the customers. The Company negotiates upfront with the Airlines for specified number of seats in flight. The Company agrees to buy a specific number of tickets and pay for those tickets regardless of whether it is able to resell all of those in package.</p>\n<p>The rate paid by the Company for each ticket purchased is negotiated and agreed in advance. The Company also assists the customers in resolving complaints with the service provided by airlines. However, each airline is responsible for fulfilling obligations associated with the ticket, including remedies to a customer for dissatisfaction with the service.</p>\n<p>The Company bought a forward contract for three months of US$ 1,00,000 on 1 March 2024 at 1 US$ = INR 83.10 when exchange rate was US$ 1 = INR 83.02. On 31 March 2024, when the Company closed its books, exchange rate was US$ 1 = INR 83.15. On 1 April 2024, the Company decided for premature settlement of the contract due to some exceptional circumstances.</p>\n<p>The Company is evaluating below mentioned schemes: (i) Introduction of a formal retirement gratuity scheme by an employer in place of ad hoc ex-gratia payments to employees on retirement. (ii) Management decided to pay pension to those employees who have retired after completing 5 years of service in the organization. Such employees will get pension of ₹20,000 per month. Earlier there was no such scheme of pension in the organization.</p>\n<p>SEAS Ltd. has a subsidiary, ADI Ltd., which is in the business of construction having turnover of ₹200 crores. SEAS Ltd. and ADI Ltd. hold 9% and 23% respectively in an associate company, ASOC Ltd. Both SEAS Ltd. and ADI Ltd. prepare consolidated financial statements as per Accounting Standards notified under the Companies (Accounting Standards) Rules, 2021.</p>",
+    "question_html": "<p>You are requested to advise the Company in respect of the accounting requirements of above schemes related to employee benefits as to which one of those schemes should be considered as a change in accounting policy during the year.</p>",
+    "options": {
+      "A": "1 – Change in accounting policy. 2 – Change in accounting policy.",
+      "B": "1 – Not a change in accounting policy. 2 – Change in accounting policy.",
+      "C": "1 – Not a change in accounting policy. 2 – Not a change in accounting policy.",
+      "D": "1 – Change in accounting policy. 2 – Not a change in accounting policy."
+    },
+    "correct_option": "C",
+    "answer_html": "<p><strong>Answer:</strong> (C) 1 – Not a change in accounting policy. 2 – Not a change in accounting policy. — per AS 5, the adoption of an accounting policy for a transaction/event that did not occur previously, or that previously did not exist, is not a change in accounting policy. Both scheme 1 (formalising ad hoc ex-gratia payments into a retirement gratuity scheme) and scheme 2 (introducing a pension scheme where none existed before) are first-time adoptions for a previously non-existent benefit, not a switch from one existing policy to another, so neither qualifies as a change in accounting policy.</p>",
+    "chapter_slug": "as05",
+    "chapter_label": "AS 5: Net Profit or Loss, Prior Period Items and Changes in Accounting Policies",
+    "unitcode": "M2-C7-U2",
+    "topic_text": "AS 5 (2.5): Changes in Accounting Policies - first-time adoption for a previously non-existent item is not a policy change",
+    "human_id": "CA_L2_P01_C7_U2_00063"
+  }
+]

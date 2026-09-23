@@ -1,0 +1,58 @@
+[
+  {
+    "mcq_id": "CAI-P1-PYQ-2026-01-PI-Q15",
+    "course": "CA",
+    "level": "Inter",
+    "exam_type": "PYQ",
+    "year": "2026",
+    "set": null,
+    "qno_text": "Q15",
+    "marks": 2,
+    "difficulty": "Easy",
+    "qtype": "mcq",
+    "case_ref": null,
+    "case_facts_html": null,
+    "question_html": "<p>AAR Ltd. is formed to take over the assets and liabilities of ABC Ltd., which is then dissolved. This is an example of:</p>",
+    "options": {
+      "A": "Internal reconstruction",
+      "B": "Merger",
+      "C": "External reconstruction",
+      "D": "Absorption"
+    },
+    "correct_option": "C",
+    "answer_html": "<p><strong>Answer:</strong> (C) External reconstruction — a new company (AAR Ltd.) is formed specifically to take over a single existing company (ABC Ltd.), which is dissolved; this is distinct from Absorption (an existing company takes over another) and from Amalgamation (two or more existing companies combine).</p>",
+    "chapter_slug": "as14",
+    "chapter_label": "AS 14: Amalgamation of Companies",
+    "unitcode": "M3-C13-U0",
+    "topic_text": "Amalgamation of Companies (2): External reconstruction vs. absorption vs. amalgamation - distinguishing definitions",
+    "human_id": "CA_L2_P01_C13_U0_00239"
+  },
+  {
+    "mcq_id": "CAI-P1-PYQ-2026-05-PI-Q15",
+    "course": "CA",
+    "level": "Inter",
+    "exam_type": "PYQ",
+    "year": "2026",
+    "set": null,
+    "qno_text": "Q15",
+    "marks": 2,
+    "difficulty": "Easy",
+    "qtype": "mcq",
+    "case_ref": null,
+    "case_facts_html": null,
+    "question_html": "<p>Amalgamation adjustment reserve is opened in the books of the amalgamated company to incorporate:</p>",
+    "options": {
+      "A": "Non-current assets of the amalgamating company",
+      "B": "Non-Statutory reserves of the amalgamating company",
+      "C": "Statutory reserves of the amalgamating company",
+      "D": "General reserves of the amalgamating company"
+    },
+    "correct_option": "C",
+    "answer_html": "<p><strong>Answer:</strong> (C) Statutory reserves of the amalgamating company.</p>",
+    "chapter_slug": "as14",
+    "chapter_label": "AS 14: Amalgamation of Companies",
+    "unitcode": "M3-C13-U0",
+    "topic_text": "Amalgamation of Companies (5): Amalgamation Adjustment Reserve - preserving statutory reserves under the Purchase Method",
+    "human_id": "CA_L2_P01_C13_U0_00269"
+  }
+]

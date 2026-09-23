@@ -147,6 +147,7 @@ telegram/creds.txt
 # orders, shipping addresses), never committed. See
 # capranav_com_revamped/DATABASE-BACKUP.md.
 capranav_com_revamped/database-backups/
+capranav_com_revamped/tools/generated/
 # 2026-08-24: found untracked-but-not-ignored -- telegram/comparator/sales-agent/
 # secrets.txt held a live BotFather token in plaintext with no gitignore coverage
 # at all (unlike creds.txt/*.env above). Covered generically so this class of
