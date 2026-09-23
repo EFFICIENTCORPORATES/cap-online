@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="The must-practice descriptive questions for CA Inter Advanced Accounting, chosen from every MTP, RTP and PYQ and ranked by how likely the topic is to be set again.">
+  <title>Must Practice Questions · Practice with Pranav Bhaiya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/anatomy.css">
+  <link rel="stylesheet" href="/assets/must-practice.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span>P</span> CA PRANAV</a>
+    <a class="back" href="/practice-with-pranav-bhaiya/">Practice with Pranav Bhaiya</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="kicker">Jan / May 2027 attempt</p>
+      <h1>Must Practice <em>Questions</em></h1>
+      <p class="intro">Every descriptive question ever set in an MTP, RTP or PYQ is mapped to its exact chapter, unit and topic. These are the ones worth your time first &mdash; ranked by how heavily the topic has been examined across the last ten sittings.</p>
+    </section>
+
+    <section class="picker" aria-label="Choose a unit">
+      <div class="picker-field">
+        <label for="module-select">Module</label>
+        <select id="module-select"></select>
+      </div>
+      <div class="picker-field">
+        <label for="chapter-select">Chapter</label>
+        <select id="chapter-select"></select>
+      </div>
+      <div class="picker-field">
+        <label for="unit-select">Unit / Standard</label>
+        <select id="unit-select"></select>
+      </div>
+    </section>
+
+    <section id="unit-panel" hidden>
+      <div class="unit-head">
+        <div>
+          <h2 id="unit-title"></h2>
+          <p id="unit-sub" class="unit-sub"></p>
+        </div>
+        <div class="unit-stat"><strong id="unit-count">0</strong><span>must-practice questions</span></div>
+      </div>
+
+      <p class="legend">Tap any row to open the question. The answer stays hidden until you ask for it &mdash; attempt it on paper first.</p>
+
+      <table class="q-table">
+        <thead>
+          <tr>
+            <th class="col-no">#</th>
+            <th>Question &amp; topic</th>
+            <th class="col-src">Appeared in</th>
+            <th class="col-marks">Marks</th>
+            <th class="col-page">Book pg.</th>
+          </tr>
+        </thead>
+        <tbody id="q-body"></tbody>
+      </table>
+
+      <p class="book-note" id="book-note"></p>
+    </section>
+
+    <section id="soon-panel" class="soon" hidden>
+      <h2>Coming soon</h2>
+      <p>This unit&rsquo;s must-practice set is not published yet. AS 2 &mdash; Valuation of Inventories is live now; the remaining chapters follow in the same format.</p>
+    </section>
+  </main>
+
+  <footer>CA Pranav Pratik Tulshyan &middot; CA Inter Advanced Accounting</footer>
+  <script src="/assets/must-practice.js"></script>
+</body>
+</html>

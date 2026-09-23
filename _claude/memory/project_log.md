@@ -1,6 +1,15 @@
 # Project Log — cap-online
 
 A running status note. Newest entries at the top. One short block per session.
+
+## 2026-09-23 — AS 2 Must Practice question page published on capranav.com
+
+Identified the 10 must-practice AS 2 descriptive questions for the Jan/May 2027 attempt from `books/ca-inter/smat-may-27-edition/practice-with-pranav-bhaiya/`, ranked on Top-100 topic weight, ICAI Study Material match percentage, paper type/recency and marks, then adjusted for coverage so all six Top-100 AS 2 topics appear rather than five near-identical exclusions-from-cost questions. Noted for the class pitch: AS 2 has scored zero marks in the last three PYQs after a 5/7/4/5 run.
+
+Built and deployed a new public page at `/practice-with-pranav-bhaiya/must-practice/` — Module → Chapter → Unit picker across all 36 units, ranked question table, row expands to the verbatim question, answer behind a Show answer button, with the Author's Note/Examiner's Comment carried through. `capranav_com_revamped/tools/build_must_practice_data.py` generates the static JSON; Question Bank page numbers are resolved by matching each question's own printed header line against the distributed V1 PDF's text layer (all 10 resolved to exactly one page, 46–61; an ambiguous header would render "not traced", never a guess). The unit tree is derived from the canonical topic ranking so the picker cannot drift from the syllabus.
+
+Confirmed this session that wrangler is authenticated on this machine (OAuth, efficientcorporates@gmail.com, workers/d1/pages write scopes) so deploys can be run directly from here. Verified with local and live headless-Edge screenshots, `wrangler deploy --dry-run`, and post-deploy 200s on the page, both JSON files, both assets and the untouched `/`, `/anatomy/` and practice hub. Deployed version `6d9bf497-f03f-47ac-9c0a-589e6e8d8363`. Only AS 2 is published; adding a unit is one entry in the script's `UNITS` table plus a re-run.
+
 ## 2026-09-22 — Anatomy sortable explorer and R2 PDF library published
 
 Enhanced the live `/anatomy/` syllabus explorer with Overall Rank and Priority Band columns, click-to-sort direction arrows on every data column, Top 50/Next 50/Beyond Top 100 filtering, universal search across topic ID/name/page/unit/chapter, and a reset control. Added foreign-keyed document tables to the existing D1 database and uploaded 98 PDFs to the existing R2 bucket under `anatomy/`: 36 unit study-material PDFs and 62 available exam question/answer/comment documents. Added secure Worker-mediated inline Open PDF and attachment Download actions without exposing bucket listing. A fresh production D1 snapshot was taken before migration; local/remote counts and foreign keys passed; live topic-ID/page searches, 50-row priority result, PDF Range delivery, download disposition, login API and dashboard were smoke-tested after deployment.

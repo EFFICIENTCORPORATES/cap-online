@@ -7,6 +7,48 @@ continues — don't let it go stale.
 
 ---
 
+### Must Practice Questions page, AS 2 live — published 2026-09-23
+
+New public page at `/practice-with-pranav-bhaiya/must-practice/`: a Module →
+Chapter → Unit picker over all 36 units, a ranked table of the must-practice
+descriptive questions for the chosen unit, each row expanding to the verbatim
+question with the answer kept behind a Show answer button. AS 2 (Valuation of
+Inventories) is the first unit published — 10 questions shortlisted from the
+17 descriptive AS 2 questions in the corpus.
+
+The shortlist is ranked on Top-100 topic weight, closeness to an ICAI Study
+Material question (the strongest repeat signal), paper type and recency, and
+marks, then adjusted so all six Top-100 AS 2 topics are covered rather than
+five near-identical questions on exclusions from cost. Worth knowing for the
+pitch: AS 2 has drawn zero marks across the last three PYQs (Jan 2026, May
+2026, Sep 2026) after a 5/7/4/5 run, so it is overdue.
+
+`tools/build_must_practice_data.py` generates everything served by the page.
+It reads the reviewed question/answer HTML from the practice library under
+`books/ca-inter/smat-may-27-edition/`, the topic ranks from
+`descriptive_topic_priority.json`, and — the part worth calling out — resolves
+each question's printed Question Bank page number by matching its own printed
+header line (`MTP May 2024 Set 2 · Q1(b) · Marks: 5`) against the text layer of
+the distributed `..._V1.pdf`. Every one of the 10 resolved to exactly one page,
+in monotonic order (pages 46–61). A header that does not resolve to exactly one
+page yields `null` and the page renders "not traced" rather than a guess. The
+Module/Chapter/Unit tree is likewise derived from the canonical topic ranking
+into `data/index.json`, so the picker cannot drift from the real syllabus.
+
+Verified before and after deploying: local headless-Edge screenshots of the
+table, an expanded question, the revealed answer with its accounting tables and
+the Author's Note; `wrangler deploy --dry-run`; then on production, HTTP 200 on
+the page, both JSON files, both assets and the unchanged `/`, `/anatomy/` and
+practice hub, a live screenshot, and a check that the served JSON carries all
+10 questions with their page numbers. Deployed version
+`6d9bf497-f03f-47ac-9c0a-589e6e8d8363`.
+
+Open: only AS 2 is published. Adding a unit means adding one entry to `UNITS`
+in the build script and re-running it — no page or JS change. Every other unit
+lists honestly as "coming soon".
+
+---
+
 ### Anatomy rankings, explorer controls and R2 PDF library — published 2026-09-22
 
 Added overall rank and priority band to all 400 syllabus topics (Top 50, Next
