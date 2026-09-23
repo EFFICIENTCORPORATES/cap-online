@@ -2,6 +2,31 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-23 — Repo hygiene cleared, and QB e-book checkout moved to VC Gurukul
+
+Cleared all three standing repo-hygiene issues; `health_check.py` now reports
+**0 problems, down from 26**. (1) Nine `books/ca-inter/bridge-course/base-studymaterials/*.md`
+files were UTF-16 LE, not corrupt — converted to UTF-8 with a round-trip check and
+verified character-identical against git HEAD. (2) `health_check.py`'s `EXPECTED_DIRS`
+still pointed at pre-move book paths and the deleted `question-bank/{pyq,mtp,rtp,solutions}`
+v1 layout — repointed at the real `books/ca-inter/...` locations; 46/46 now resolve.
+(3) CLAUDE.md's folder map was corrected to the post-move paths, five undocumented
+folders were added (`books/ca-foundation/`, `books/ca-inter/smat-may-27-edition/`,
+`capranav_com_revamped/`, `capranav_com/`, `mentorship/`), and a dated path note warns
+that sections 6+ are a historical log still quoting old paths.
+
+Separately, moved the ₹199 Question Bank e-book off this site's Razorpay checkout to
+VC Gurukul's product page, following the 2026-09-06 course-redirect precedent (guarded
+and commented, not deleted). Guarded server-side too, so no hand-crafted request can
+create the order. Existing entitlement holders are unaffected. Deployed and verified
+live. Full detail: `capranav_com_revamped/PROJECT-LOG.md`.
+
+Also found, not acted on: the entire Telegram platform is offline — all 10 bots' heartbeats
+~20 days stale, all seven 1LAVYA scheduled tasks Disabled, and the startup shortcut renamed
+`.lnk.disabled`. That looks deliberate rather than a crash, so nothing was restarted; it
+needs Pranav's confirmation either way. No platform backup has run since 3 September.
+
+
 ## 2026-09-23 — AS 2 Must Practice question page published on capranav.com
 
 Identified the 10 must-practice AS 2 descriptive questions for the Jan/May 2027 attempt from `books/ca-inter/smat-may-27-edition/practice-with-pranav-bhaiya/`, ranked on Top-100 topic weight, ICAI Study Material match percentage, paper type/recency and marks, then adjusted for coverage so all six Top-100 AS 2 topics appear rather than five near-identical exclusions-from-cost questions. Noted for the class pitch: AS 2 has scored zero marks in the last three PYQs after a 5/7/4/5 run.

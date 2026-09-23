@@ -1,5 +1,16 @@
+// TEMPORARY (Pranav, 2026-09-23): the Question Bank e-book is sold on VC
+// Gurukul's own store, so it has externalUrl instead of a price and never
+// enters this site's Razorpay flow. The product stays listed because students
+// who already bought it hold the entitlement and must still see "Read now".
+// Restoring in-site checkout is: swap externalUrl back for `price: 199` here,
+// and in worker/lib/products.js and app.js.
 const PDF_PRODUCTS = [
-  { id: "book-qb-pdf", title: "The Question Bank Book — PDF access", price: 199 },
+  {
+    id: "book-qb-pdf",
+    title: "The Question Bank Book — PDF access",
+    externalUrl:
+      "https://www.vcgurukul.com/product/advanced-accounting-question-bank-e-book-ca-pranav-p-tulshyan",
+  },
   { id: "book-sb-pdf", title: "The Exam Strategy Book — PDF access", price: 99 },
 ];
 
@@ -170,6 +181,10 @@ async function renderDashboard(me) {
       return `<li class="entitlement-item"><span>${p.title}</span>
         <a class="button button-primary" href="reader.html?product=${encodeURIComponent(p.id)}">Read now</a></li>`;
     }
+    if (p.externalUrl) {
+      return `<li class="entitlement-item"><span>${p.title}</span>
+        <a class="button button-primary" href="${p.externalUrl}" target="_blank" rel="noopener">Buy on VC Gurukul</a></li>`;
+    }
     return `<li class="entitlement-item"><span>${p.title} — ₹${p.price}</span>
       <button type="button" class="button button-primary" data-buy="${p.id}">Buy PDF access</button></li>`;
   }).join("");
@@ -229,6 +244,10 @@ async function boot() {
   if (pendingBuy) {
     const product = PDF_PRODUCTS.find((p) => p.id === pendingBuy);
     if (product && !(me.entitlements || []).includes(product.id)) {
+      if (product.externalUrl) {
+        window.location.href = product.externalUrl;
+        return;
+      }
       askNamePhoneThenBuy(product, profile);
     }
     history.replaceState(null, "", "dashboard.html");

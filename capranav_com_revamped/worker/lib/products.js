@@ -28,7 +28,22 @@ export const PRODUCTS = {
   "book-qb-pdf": {
     type: "book_pdf",
     title: "The Question Bank Book — PDF access",
-    amountRupees: 199,
+    // TEMPORARY (Pranav, 2026-09-23): the ₹199 Question Bank e-book is now
+    // sold on VC Gurukul's own store instead of through this site's Razorpay
+    // checkout — same arrangement already in place for course enrolment (see
+    // app.js, 2026-09-06). externalCheckoutUrl is what turns the in-site
+    // checkout off: handleOrderCreate refuses to open a Razorpay order for
+    // any product carrying it, so no new ₹199 order can be created here even
+    // by a hand-crafted request.
+    //
+    // The entry itself is deliberately KEPT (not deleted) because students
+    // who already bought PDF access hold a `book-qb-pdf` entitlement and need
+    // `fileKey` to keep reading via /api/read. amountRupees is kept, commented
+    // out, so restoring in-site checkout is: delete externalCheckoutUrl and
+    // uncomment amountRupees.
+    // amountRupees: 199,
+    externalCheckoutUrl:
+      "https://www.vcgurukul.com/product/advanced-accounting-question-bank-e-book-ca-pranav-p-tulshyan",
     fileKey: "question-bank-book.pdf",
   },
   "book-sb-pdf": {

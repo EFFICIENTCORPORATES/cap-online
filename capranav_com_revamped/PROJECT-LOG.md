@@ -7,6 +7,49 @@ continues — don't let it go stale.
 
 ---
 
+### Question Bank e-book moved to VC Gurukul checkout — published 2026-09-23
+
+The ₹199 Question Bank e-book is no longer sold through this site's Razorpay
+checkout. It now links to
+`https://www.vcgurukul.com/product/advanced-accounting-question-bank-e-book-ca-pranav-p-tulshyan`,
+the same arrangement already made for course enrolment on 2026-09-06, and
+written the same way: the in-site path is commented/guarded rather than
+deleted, so restoring it is a small, documented reversal.
+
+Changed in four places, front and back: `worker/lib/products.js` gives
+`book-qb-pdf` an `externalCheckoutUrl` and comments out `amountRupees`;
+`worker/index.js`'s `handleOrderCreate` refuses to open a Razorpay order for
+any product carrying that field; `public/assets/app.js` redirects that one
+product's button; `public/assets/dashboard.js` renders a "Buy on VC Gurukul"
+link instead of the buy modal and redirects the `?buy=book-qb-pdf` deep link.
+The server-side guard is the part that matters — without it a hand-crafted
+POST could still have created a ₹199 order.
+
+**The product entry is deliberately kept, not deleted**: students who already
+bought PDF access hold a `book-qb-pdf` entitlement and still need `fileKey` to
+read via `/api/read`. Existing entitlements are untouched; only new in-site
+purchases are refused, and the dashboard still shows "Read now" for owners.
+
+Prices are no longer asserted for this product anywhere on the site (the home
+card shows "Buy ↗", the pricing table links to "See price on VC Gurukul") —
+VC Gurukul sets that price and this site cannot see it. The books section's
+intro copy was also corrected: it promised "PDF access you can read right here
+after logging in" for both books, which is no longer true for the Question Bank.
+
+Verified against a local `wrangler dev` and then again live: `book-qb-pdf`
+returns 409 with the external URL, `book-sb-pdf` still returns 401 (in-site
+flow intact), `book-qb-physical` still returns its normal 400 address error.
+Screenshots of the live home card and pricing table confirmed. Deployed
+version `c857701b-63fb-46d3-b116-3098ccf57e9c`.
+
+**Open for Pranav**: a VC Gurukul purchase does not create an entitlement on
+capranav.com, so those buyers cannot read the book in the on-site reader —
+VC Gurukul must deliver the file itself. If on-site reading is still wanted for
+them, that needs a deliberate fulfilment step (manual entitlement grant, or an
+integration) that does not exist today.
+
+---
+
 ### Must Practice Questions page, AS 2 live — published 2026-09-23
 
 New public page at `/practice-with-pranav-bhaiya/must-practice/`: a Module →

@@ -22,13 +22,25 @@ ROOT = Path(__file__).resolve().parents[1]
 
 EXPECTED_DIRS = [
     "_claude/memory", "_claude/artifacts", "_claude/skills",
-    "books/strategy-book/drafts", "books/strategy-book/working", "books/strategy-book/final",
-    "books/concept-book/chapter-zero", "books/concept-book/characters",
-    "books/concept-book/chapters", "books/concept-book/story-vignettes",
-    "books/concept-book/revision-material",
+    # The books were reorganised under books/ca-inter/ (and books/ca-foundation/);
+    # these paths were still the pre-move ones and produced permanent
+    # false-positive MISSING failures until 2026-09-23.
+    "books/ca-inter/strategy-book/drafts", "books/ca-inter/strategy-book/working",
+    "books/ca-inter/strategy-book/final",
+    "books/ca-inter/concept-book/chapter-zero", "books/ca-inter/concept-book/characters",
+    "books/ca-inter/concept-book/chapters", "books/ca-inter/concept-book/story-vignettes",
+    "books/ca-inter/concept-book/revision-material",
     "books/about-author",
-    "syllabus-engine/data", "syllabus-engine/scripts", "syllabus-engine/html-source",
-    "question-bank/pyq", "question-bank/mtp", "question-bank/rtp", "question-bank/solutions",
+    # The working syllabus-engine pipeline is nested under the concept book; only
+    # its data/ folder sits at the repo root.
+    "syllabus-engine/data",
+    "books/ca-inter/concept-book/syllabus-engine/scripts",
+    "books/ca-inter/concept-book/syllabus-engine/html-source",
+    # question-bank/{pyq,mtp,rtp,solutions} was an abandoned v1 layout that no
+    # longer exists; the real content lives in these three folders instead.
+    "books/ca-inter/question-bank/Raw_PDF_Question_Bank_CA_Inter_Accounts",
+    "books/ca-inter/question-bank/Parsed_PDF_Question_Bank_CA_Inter_Accounts",
+    "books/ca-inter/question-bank/metadata-index",
     "mcq-platform/question-generation", "mcq-platform/database", "mcq-platform/cloudflare-app",
     "vc-gurukul/management-discussions", "vc-gurukul/events", "vc-gurukul/batch-july-2025",
     "vc-gurukul/contracts",

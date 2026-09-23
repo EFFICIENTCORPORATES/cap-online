@@ -113,10 +113,28 @@ document.querySelectorAll("[data-buy-physical]").forEach((btn) => {
   });
 });
 
-// PDF-access buttons always go through the dashboard (login required).
+// TEMPORARY (Pranav, 2026-09-23): the Question Bank e-book is bought on VC
+// Gurukul's own store, not through this site's Razorpay checkout — the same
+// arrangement made for course enrolment on 2026-09-06 above. Only this one
+// product is redirected; the Strategy Book PDF still buys in-site, and the
+// in-site path below is kept intact rather than deleted, so restoring it is:
+// remove this product's entry from PDF_EXTERNAL_CHECKOUT_URLS (and from
+// products.js).
+const PDF_EXTERNAL_CHECKOUT_URLS = {
+  "book-qb-pdf":
+    "https://www.vcgurukul.com/product/advanced-accounting-question-bank-e-book-ca-pranav-p-tulshyan",
+};
+
+// PDF-access buttons otherwise go through the dashboard (login required).
 document.querySelectorAll("[data-buy-pdf]").forEach((btn) => {
   btn.addEventListener("click", () => {
-    window.location.href = "dashboard.html?buy=" + encodeURIComponent(btn.dataset.buyPdf);
+    const productId = btn.dataset.buyPdf;
+    const external = PDF_EXTERNAL_CHECKOUT_URLS[productId];
+    if (external) {
+      window.location.href = external;
+      return;
+    }
+    window.location.href = "dashboard.html?buy=" + encodeURIComponent(productId);
   });
 });
 

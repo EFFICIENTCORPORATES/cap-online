@@ -180,6 +180,16 @@ async function handleOrderCreate(request, env) {
   const product = getProduct(body.productId);
   if (!product) return json({ error: "Unknown product." }, { status: 400 });
 
+  // Sold on an external store (see products.js) — never open a Razorpay order
+  // for it here. Existing entitlements for such a product are untouched; only
+  // NEW in-site purchases are refused.
+  if (product.externalCheckoutUrl) {
+    return json(
+      { error: "This book is now sold on VC Gurukul.", externalCheckoutUrl: product.externalCheckoutUrl },
+      { status: 409 }
+    );
+  }
+
   const buyer = body.buyer || {};
   let buyerEmail = (buyer.email || "").trim().toLowerCase();
 
