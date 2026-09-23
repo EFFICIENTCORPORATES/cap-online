@@ -48,7 +48,10 @@ EXPECTED_DIRS = [
     "content/assets", "content/assets/raw-footage",
     "content/social/personal", "content/social/vc-gurukul",
     "content/calendar", "content/scripts",
-    "telegram/bots", "telegram/source-docs",
+    # The Telegram bot platform migrated to its own repo on 2026-09-03 (see
+    # telegram/MIGRATED.md); bots/ and source-docs/ went with it. What remains
+    # here is the preserved CA/CMA/CS accounts content.
+    "telegram/assets",
     "obs-setup", "obs-setup/assets", "obs-setup/recordings",
     "photo-gallery/originals",
     "materials/icai-source", "materials/reference",
