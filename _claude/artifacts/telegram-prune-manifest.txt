@@ -1,7 +1,7 @@
-# telegram/ prune manifest (dry run)
+# telegram/ prune manifest (executed)
 # migrated repo: D:\EffCorp_Products\Main1Lavya\Main1lavyaAIAgents\examstudyhub
 #
-# WOULD DELETE: 2183 files, 4.09 GB
+# DELETED: 2183 files, 4.09 GB
 
         4,710  .env  || same path in migrated repo holds a newer version
         6,582  .env.example  || same path in migrated repo holds a newer version

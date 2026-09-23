@@ -1,6 +1,0 @@
-{
-  "$comment": "telegram/bots/watcher_bot.py's config (added 2026-08-10). admin_chat_ids is EMPTY by design -- Pranav must fill it in with real Telegram chat ID(s) before any down/up DM can actually be sent (the watcher runs fine with this empty, it just logs a warning and skips sending instead of DMing nobody). HOW TO GET YOUR OWN CHAT ID: message @Official1LavyaMyFilesBot at least once (required anyway -- see watcher_bot.py's docstring, a bot can only DM a chat that has already started a conversation with it), then message @userinfobot (a public, unrelated utility bot) and it will reply with your numeric chat_id. Add every admin who should get alerts as a separate entry in the list below -- 'may be more than 1' per the original ask.",
-  "admin_chat_ids": [5777734732, 6357621862],
-  "check_interval_seconds": 60,
-  "heartbeat_stale_after_seconds": 360
-}
