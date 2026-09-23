@@ -2,6 +2,32 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-23 — Telegram platform migration confirmed; duplicate content audited for removal
+
+Verified the migration rather than assuming it. The platform repo holds 6,228 files against this
+repo's 2,351, and is well ahead (CA Final AFM MCQs, faculty OTP login, live question bank, wallet
+work). Checked every file here by content hash against it.
+
+Found six files that existed ONLY in cap-online and copied them into the platform repo first,
+hash-verified: `bots/myfiles_hub_bot.py` (the MyFiles Hub bot itself), `myfiles_activity_report.py`,
+`README_Bot3_MyFilesHub.md`, the archived sales-agent note, a CMA Final Law MCQ set and
+csarunchouhan's `mcq_questions_extracted.json`. Worth knowing: that repo's `bots.json` still lists
+`1lavya-myfileshub` as active and carries its data and PID file, but its source was missing there
+until this copy — whether that bot is still in service needs confirming.
+
+The 1.22 GB `Study Materials.zip` looked unique until checked properly: all 1,091 entries exist in
+the platform repo by content, renamed to the `CA_L3_P02_C1_U0_…` human-id convention, so a filename
+comparison had made them look absent.
+
+Built `tools/prune_migrated_telegram.py` (dry-run default, `--execute` to apply, full manifest,
+per-file twin re-verified at the moment of deletion) and `telegram/MIGRATED.md`. Accounts papers for
+CA/CMA/CS are preserved here — scope taken from the platform's own `course_catalog` subject names,
+accounting papers only, Cost/FM excluded. Old runtime logs are kept too, since by nature they have
+no twin. Dry run: 2,183 files / 4.09 GB removable, 298 accounts files and 38 runtime files kept.
+**Not executed** — the bulk delete needs Pranav to run it, since most of that tree is untracked and
+deletion is permanent. CLAUDE.md's Pillar 6 row and sections 8–11 are now marked historical.
+
+
 ## 2026-09-23 — Repo hygiene cleared, and QB e-book checkout moved to VC Gurukul
 
 Cleared all three standing repo-hygiene issues; `health_check.py` now reports
@@ -21,10 +47,11 @@ and commented, not deleted). Guarded server-side too, so no hand-crafted request
 create the order. Existing entitlement holders are unaffected. Deployed and verified
 live. Full detail: `capranav_com_revamped/PROJECT-LOG.md`.
 
-Also found, not acted on: the entire Telegram platform is offline — all 10 bots' heartbeats
-~20 days stale, all seven 1LAVYA scheduled tasks Disabled, and the startup shortcut renamed
-`.lnk.disabled`. That looks deliberate rather than a crash, so nothing was restarted; it
-needs Pranav's confirmation either way. No platform backup has run since 3 September.
+CORRECTION (same session): an earlier version of this entry said the Telegram platform was
+"offline". That was wrong. Pranav confirmed the platform was MIGRATED on 2026-09-03 to its own
+repo (`EFFICIENTCORPORATES/Main1lavyaAIAgents`, folder `examstudyhub/`) and now runs on a Contabo
+server. The stale heartbeats, the disabled scheduled tasks and the renamed startup shortcut on
+this PC are the correct end state of that migration, not an outage. See `telegram/MIGRATED.md`.
 
 
 ## 2026-09-23 — AS 2 Must Practice question page published on capranav.com
