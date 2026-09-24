@@ -112,6 +112,15 @@ path exists before relying on it rather than trusting a quoted path in this file
 
 ## 6. Question Bank Book — current focus (chronological log, 2026-07-22 through 2026-08-08 — read to the end for current state)
 
+**Standing rule — log book defects immediately (added 2026-09-24).** The first
+edition is printed and distributed; nothing in a student's copy can be quietly
+corrected. **Anything found wrong with or missing from the book goes into
+`first_run/SECOND-EDITION-CHANGE-REQUESTS.md` the moment it is found — before
+fixing it, and whether or not it gets fixed now.** That includes defects you fix
+in the pipeline, because the source being right does not make the distributed PDF
+right. Rule and entry format: `_claude/skills/SKILL-question-bank-change-log.md`.
+
+
 Pranav has shifted full focus onto **Pillar 4, `books/question-bank/`**. The core task: converge past-exam questions (PYQ/MTP/RTP) with the syllabus chapter/topic taxonomy so every question is tagged to a chapter/topic — this is the main gap, not raw content collection. This session built the tagging schema and machine-tagged 4 sittings end-to-end (see below) — read `books/question-bank/metadata-index/TAGGING-SCHEMA.md` before adding more.
 
 ### Where the real content is

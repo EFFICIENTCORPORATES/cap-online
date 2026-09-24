@@ -2,6 +2,31 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-24 — Second Edition change register + standing "log it immediately" rule
+
+Pranav asked for a change-request file for the Question Bank Book's second edition, plus a
+rule that any such finding is logged immediately rather than at the end of a session.
+
+`first_run/SECOND-EDITION-CHANGE-REQUESTS.md` — seeded with 7 real entries, not an empty
+template: OP/PP tags and short chapter names (both promised in the book's own front matter
+and still unbuilt), the distributed V1 PDFs still carrying the pre-2026-08-07 Cash Flow
+study-reference defect, the excluded LEGACY pre-syllabus topics, the descriptive answers
+never having had the independent re-derivation the MCQs got, reader-reported errors having
+had no intake path, and questions printed twice via the Integrated section. Each carries
+severity S1-S4, a status (OPEN / FIXED-IN-SOURCE / DONE-E2 / WONTFIX), where in the book,
+and what E2 should do.
+
+`_claude/skills/SKILL-question-bank-change-log.md` — the standing rule: log the moment it
+is found, before fixing, including defects fixed in the pipeline, since the source being
+right does not make the distributed PDF right. Justified with three real failures from this
+repo's own history rather than stated as policy. Wired into three entry points so a session
+cannot miss it: CLAUDE.md §6, the top of HOW-TO-BUILD-THE-BOOK.md, and the skills index.
+
+Worth noting what prompted the strongest entry: every chapter of the printed book prints an
+email address promising errors "will be corrected in the next edition" — a live promise to
+students that until now had nothing behind it.
+
+
 ## 2026-09-24 — Must Practice rules written + encoded; AS 10 built locally
 
 Found that the Must Practice selection logic was never written down — the AS 2 list was

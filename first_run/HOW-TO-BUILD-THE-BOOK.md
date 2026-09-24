@@ -1,5 +1,12 @@
 # How to Build the Question Bank Book — End to End
 
+> **Found something wrong with the book? Log it first.**
+> `first_run/SECOND-EDITION-CHANGE-REQUESTS.md` is the register of every defect,
+> gap and improvement destined for the second edition. The first edition is printed
+> and distributed, so a defect that is noticed but not written down ships again.
+> Add the entry *before* fixing anything — the rule and the entry format are in
+> `_claude/skills/SKILL-question-bank-change-log.md`.
+
 > **What this is:** the single master runbook for turning tagged sitting HTML into the
 > final, print-ready `QUESTION-BANK-BOOK.html` — every script, in the exact order they
 > must run, with what each one does, how to validate it, and the gotchas that have

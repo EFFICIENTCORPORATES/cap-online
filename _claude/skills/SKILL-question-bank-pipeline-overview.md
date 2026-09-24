@@ -128,6 +128,7 @@ that might need recomputing lives in code.
 
 | Skill | Covers |
 |---|---|
+| `SKILL-question-bank-change-log.md` | **Standing rule:** every defect or gap found in the *book* is logged in `first_run/SECOND-EDITION-CHANGE-REQUESTS.md` the moment it is found, before fixing it. The first edition is printed — a defect noticed and not written down ships again. Read this before fixing anything in the book. |
 | `SKILL-question-bank-html-schema.md` | The exact sitting-HTML structure: paper-level facets, case scenarios, qblocks, MCQ options, marks, IDs, review-flag attributes. Read this before authoring or reviewing any sitting HTML file. |
 | `SKILL-question-bank-topic-tagging.md` | Which taxonomy file is the join-key source of truth, how to tag a question, `data-topic-rank`, and how "Final Chapter" placement is computed from `teaching_sequence`. |
 | `SKILL-question-bank-question-splitting.md` | The independent-vs-connected sub-part rule: when a multi-part question becomes multiple separate Question Bank records vs. stays one. |
