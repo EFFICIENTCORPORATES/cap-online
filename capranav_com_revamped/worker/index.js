@@ -26,6 +26,9 @@ const CONTACT_TO = "capranavpratiktulshyan@gmail.com";
 // stop unlimited automated abuse without getting in the way of a real
 // person occasionally re-requesting a code or re-sending a message.
 const OTP_MAX_PER_HOUR = 5;
+// Per-IP ceiling across ALL emails — the per-email cap alone lets one bot request
+// codes for unlimited different addresses (email-bombing third parties).
+const OTP_MAX_PER_IP_PER_HOUR = 10;
 const CONTACT_MAX_PER_HOUR = 5;
 
 function json(data, init = {}) {
@@ -58,10 +61,19 @@ async function handleOtpSend(request, env) {
     return json({ error: "Too many codes requested for this email. Please wait a while and try again." }, { status: 429 });
   }
 
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  const recentFromIp = await env.DB
+    .prepare("SELECT COUNT(*) AS c FROM otp_codes WHERE ip = ? AND created_at > datetime('now', '-60 minutes')")
+    .bind(ip)
+    .first();
+  if (recentFromIp && recentFromIp.c >= OTP_MAX_PER_IP_PER_HOUR) {
+    return json({ error: "Too many codes requested from this network. Please wait a while and try again." }, { status: 429 });
+  }
+
   const code = randomOtpCode();
   await env.DB
-    .prepare("INSERT INTO otp_codes (email, code, expires_at) VALUES (?, ?, ?)")
-    .bind(clean, code, otpExpiry())
+    .prepare("INSERT INTO otp_codes (email, code, expires_at, ip) VALUES (?, ?, ?, ?)")
+    .bind(clean, code, otpExpiry(), ip)
     .run();
   try {
     await sendEmail(env, {
@@ -772,8 +784,35 @@ async function handleAnatomyDocument(request, env, url) {
   return new Response(object.body, { headers: { ...baseHeaders, "Content-Length": String(metadata.size) } });
 }
 
+// Baseline security headers, applied to every response the Worker produces
+// (static assets get the same set from public/_headers). The CSP here is
+// deliberately limited to directives that cannot break the site's inline
+// scripts/styles, Razorpay checkout or the pdf.js CDN import — a full
+// script-src policy is a documented follow-up in SECURITY.md.
+const SECURITY_HEADERS = {
+  "Strict-Transport-Security": "max-age=31536000",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "SAMEORIGIN",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), usb=(), interest-cohort=()",
+  "Content-Security-Policy": "frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'",
+};
+
+function withSecurityHeaders(response) {
+  const out = new Response(response.body, response);
+  for (const [k, v] of Object.entries(SECURITY_HEADERS)) {
+    if (!out.headers.has(k)) out.headers.set(k, v);
+  }
+  return out;
+}
+
 export default {
   async fetch(request, env) {
+    return withSecurityHeaders(await handleRequest(request, env));
+  },
+};
+
+async function handleRequest(request, env) {
     const url = new URL(request.url);
 
     if (url.pathname.startsWith("/api/")) {
@@ -807,5 +846,4 @@ export default {
     }
 
     return env.ASSETS.fetch(request);
-  },
-};
+}

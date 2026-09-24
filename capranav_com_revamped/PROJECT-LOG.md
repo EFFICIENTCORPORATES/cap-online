@@ -26,10 +26,11 @@ continues — don't let it go stale.
    (or pre-generate per sheet into R2 and serve via `aa_documents`). No
    "MTP-wise topic list" sheet exists by that name — Topic Attempts carries MTP
    marks/sittings; a dedicated MTP view would need building. Decide with Pranav.
-3. **Security hardening vs `Main1lavyaAIAgents/SECURITY-LEVEL3-RECOMMENDATIONS.md`**
-   — see the audit below/in chat: Turnstile on OTP/contact/admin login, per-IP
-   OTP limit, Cloudflare rate-limiting rule + Bot Fight Mode, Cloudflare Access on
-   `/admin`, security headers (HSTS/CSP/X-Frame-Options).
+3. **Security hardening** — audited 2026-09-24; see `SECURITY.md`. Code fixes
+   written + tested locally, **not deployed** (run migration 0003 first, then
+   `wrangler deploy`). Still open: Always Use HTTPS, Cloudflare Access on
+   `/admin`, Bot Fight Mode + a rate-limit rule (dashboard); Turnstile (needs
+   keys); report-only script CSP (code).
 
 ---
 

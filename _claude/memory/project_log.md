@@ -2,6 +2,16 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-24 — capranav.com security audit + first hardening pass (not deployed)
+
+Audited the site against `Main1lavyaAIAgents/SECURITY-LEVEL3-RECOMMENDATIONS.md` (repo check + live probes +
+Cloudflare MCP). Fixed in code: per-IP OTP limit (migration 0003 adds `otp_codes.ip`), security headers on every
+Worker response + `public/_headers`, robots.txt, security.txt. Tested locally only. **Deploy order: run migration
+0003 on remote D1 first, then `wrangler deploy`.** Still open (dashboard): Always Use HTTPS, Cloudflare Access on
+/admin, Bot Fight Mode/rate-limit rule; Turnstile needs keys. Full table: `capranav_com_revamped/SECURITY.md`.
+Also queued in that folder's PROJECT-LOG TODO: YouTube/Shorts viewer (videos.json), Excel downloads of the
+priority workbook sheets.
+
 ## 2026-09-24 — Second Edition change register + standing "log it immediately" rule
 
 Pranav asked for a change-request file for the Question Bank Book's second edition, plus a

@@ -6,9 +6,11 @@ CREATE TABLE IF NOT EXISTS otp_codes (
   code       TEXT NOT NULL,
   expires_at TEXT NOT NULL,
   consumed   INTEGER NOT NULL DEFAULT 0,
-  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  ip         TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_otp_email ON otp_codes(email);
+CREATE INDEX IF NOT EXISTS idx_otp_ip ON otp_codes(ip);
 
 CREATE TABLE IF NOT EXISTS sessions (
   token      TEXT PRIMARY KEY,
