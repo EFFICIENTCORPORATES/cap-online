@@ -7,6 +7,32 @@ continues — don't let it go stale.
 
 ---
 
+## Open TODO list (added 2026-09-24 — keep this current)
+
+1. **YouTube player + Shorts viewer** (`/videos/`). Official `youtube-nocookie.com`
+   embed, IFrame Player API. Data in one `videos.json` for now (long videos +
+   Shorts: id, title, type, group, order); **document the later move to a D1
+   `videos` table + admin page**. Shorts viewer: custom vertical scroll-snap feed,
+   auto-advance on end (toggle), loop, mute, speed, group chips, deep links.
+   Public, no login (may change later). Groups decided from the *nature* of the
+   videos once Pranav sends the links (check each link: `/shorts/` = Short; title
+   via YouTube oEmbed). Autoplay starts muted (browser rule). Not deployed yet.
+2. **Downloadable Excel tables.** Buttons such as "Top 100 topic list" that download
+   sheets of `books/ca-inter/smat-may-27-edition/practice-with-pranav-bhaiya/data/
+   ca_inter_descriptive_topic_priority_v1.xlsx`: Top 100 PYQ, Chapter Priority,
+   Topic Attempts (has PYQ/MTP/RTP marks + sittings), Question Topic Map,
+   A-B-C-D Questions, Study Topics. Most data is already in D1 (`aa_*` tables) —
+   confirm per sheet what is missing, then generate .xlsx server-side per request
+   (or pre-generate per sheet into R2 and serve via `aa_documents`). No
+   "MTP-wise topic list" sheet exists by that name — Topic Attempts carries MTP
+   marks/sittings; a dedicated MTP view would need building. Decide with Pranav.
+3. **Security hardening vs `Main1lavyaAIAgents/SECURITY-LEVEL3-RECOMMENDATIONS.md`**
+   — see the audit below/in chat: Turnstile on OTP/contact/admin login, per-IP
+   OTP limit, Cloudflare rate-limiting rule + Bot Fight Mode, Cloudflare Access on
+   `/admin`, security headers (HSTS/CSP/X-Frame-Options).
+
+---
+
 ### Must Practice surfaced on the homepage — 2026-09-24
 
 Checked how a student actually reaches the Must Practice page and found they
