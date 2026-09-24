@@ -33,6 +33,43 @@ continues — don't let it go stale.
 
 ---
 
+### Mobile layout fixed; Must Practice repeats removed — 2026-09-24
+
+**Mobile.** Pranav reported that reading a question on a phone meant scrolling
+sideways. Reproduced with headless Edge (Playwright, `channel="msedge"`) at
+320/360/390/600/768/1024/1440px across 17 pages, measuring `scrollWidth` against
+the viewport. Root cause: the shared `assets/anatomy.css` had two **bare**
+`table { min-width: ... }` rules (840px, then 1180px) written for the Anatomy
+explorer's one wide table, and the Must Practice page loads the same file — so
+*every* table on it, including the accounting tables inside a question or answer,
+was forced 1180px wide, even on a desktop window of 1024px. Scoped both rules to
+`.table-wrap table` (the scroll box the explorer already had). Also fixed:
+Must Practice's mobile row layout (table cells now really stack), accounting
+tables inside questions scroll in their own box, reader toolbar wraps at phone
+width, pricing table at 360px, homepage book cards at 320px, and
+`img/svg/video/iframe/canvas { max-width: 100% }` site-wide.
+Result: 0 overflowing pages at all seven widths. Before: reader (525px wide on a
+390 phone), pricing (360), Must Practice (1190 at every width).
+Not changed: the Anatomy topic table still scrolls inside its own box on a phone
+(it is a wide data table by design).
+Re-run the check any time: `/tmp`-style script is not kept in the repo — measure
+`document.documentElement.scrollWidth <= clientWidth` per page and width.
+
+**Must Practice repeats.** AS 2's ten contained the same question twice (`-002`
+MTP Jan 2026 and `-012` PYQ Sep 2024, 100% identical text) and near-repeats
+(`-006`/`-005` Wooden Plywood, only the year changed; `-004` the same idea again),
+six of ten on one topic. The formula had no duplicate or diversity check — see
+`MUST-PRACTICE-RULES.md`, new section "Duplicates and diversity". The build
+script now drops repeats at >=90% text similarity (numbers stripped) and caps
+two questions per topic; it prints each repeat it drops. AS 2 republished:
+`-008, -002, -015, -006, -016, -010, -007, -001, -014, -017`.
+Known cost: the cap pulls three lower-scoring questions from thin topics
+(`-001`, `-014`, `-017`, topic ranks 220-224) in place of stronger ones on the
+crowded topic; raise `MAX_PER_TOPIC` or `force_include` with a reason if that
+list is judged too weak. AS 10 remains unpublished.
+
+---
+
 ### Must Practice surfaced on the homepage — 2026-09-24
 
 Checked how a student actually reaches the Must Practice page and found they

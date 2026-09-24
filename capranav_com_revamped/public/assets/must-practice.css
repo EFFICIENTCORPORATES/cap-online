@@ -36,7 +36,12 @@
 .detail h3{margin:0 0 4px;font-size:.74rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--green)}
 .detail .why{margin:0 0 16px;color:var(--muted)}
 .qtext,.atext{font-size:.97rem;line-height:1.62}
+.qtext,.atext,.q-title,.q-topic,.why{overflow-wrap:anywhere}
 .qtext table,.atext table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem}
+/* Accounting tables inside a question or answer keep their real shape and scroll
+   inside their own box, so the page itself never scrolls sideways. */
+.qtext table,.atext table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.qtext img,.atext img{max-width:100%;height:auto}
 .qtext th,.qtext td,.atext th,.atext td{padding:7px 9px;border:1px solid var(--line);text-align:left}
 .qtext thead th,.atext thead th{background:#f2f1ea}
 .show-answer{margin-top:18px;padding:12px 22px;border:0;border-radius:10px;background:var(--green);color:#fff;font:700 .95rem Inter,sans-serif;cursor:pointer}
@@ -55,11 +60,18 @@
   .picker{grid-template-columns:1fr}
   .unit-head{flex-direction:column;align-items:flex-start}
   .unit-stat{text-align:left}
+  .q-table,.q-table tbody{display:block;width:100%}
   .q-table thead{display:none}
-  .q-row{display:grid;grid-template-columns:44px 1fr;gap:0 10px;padding:12px 0}
+  .q-row{display:grid;grid-template-columns:44px minmax(0,1fr);gap:0 10px;padding:12px 0}
+  .detail-row{display:block}
+  .detail-row>td{display:block;width:100%}
   .q-row>td{padding:2px 0;border:0}
   .q-row>td:nth-child(1){grid-row:span 4}
   .q-row .col-src,.q-row .col-marks,.q-row .col-page{font-size:.86rem}
   .detail-row>td{padding:0 0 18px}
   .detail{padding:18px}
+}
+@media(max-width:480px){
+  .detail{padding:14px}
+  .answer{padding:14px}
 }

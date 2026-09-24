@@ -18,6 +18,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; }
+img, svg, video, iframe, canvas { max-width: 100%; }
+canvas { height: auto; }
 button, input, textarea, select { font: inherit; }
 h1, h2, h3 { font-family: Manrope, sans-serif; margin: 0; }
 .eyebrow { margin: 0 0 12px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--orange); }
@@ -71,7 +73,7 @@ h1, h2, h3 { font-family: Manrope, sans-serif; margin: 0; }
 .price-line { font-size: 28px; font-weight: 800; margin: 0 0 16px; }
 
 /* books */
-.book-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+.book-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 18px; }
 .book-card { border: 2px solid var(--ink); border-radius: 18px; padding: 26px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
 .book-card h3 { font-size: 21px; }
 .book-card p.desc { color: var(--muted); font-size: 13.5px; line-height: 1.6; margin: 0; }
@@ -148,7 +150,7 @@ body.modal-lock { overflow: hidden; }
 /* reader */
 .reader-bar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--ink); color: #fff; }
 .reader-bar .title { font-size: 14px; font-weight: 700; }
-.reader-bar .nav-buttons { display: flex; align-items: center; gap: 10px; }
+.reader-bar .nav-buttons { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .reader-bar button { border: 1.5px solid #fff; background: transparent; color: #fff; border-radius: 8px; padding: 6px 12px; cursor: pointer; }
 .reader-page-num { font-size: 13px; }
 .reader-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 24px 12px 60px; background: #6b7280; min-height: 100vh; user-select: none; }
@@ -156,6 +158,8 @@ body.modal-lock { overflow: hidden; }
 .reader-msg { color: #fff; font-size: 14px; text-align: center; padding: 60px 20px; }
 
 @media (max-width: 780px) {
+  .reader-bar { flex-wrap: wrap; gap: 8px; }
+  .reader-bar .title { flex: 1 1 100%; }
   .hero { grid-template-columns: 1fr; }
   .hero-photo { max-width: 260px; }
   .contact-grid { grid-template-columns: 1fr; }

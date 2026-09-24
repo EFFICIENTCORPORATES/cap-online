@@ -23,6 +23,10 @@
   .price-table th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
   .price-table td.amt { font-weight: 700; white-space: nowrap; }
   .price-table td.amt s { font-weight: 400; color: var(--muted); margin-right: 6px; }
+  @media (max-width: 520px) {
+    .price-table th, .price-table td { padding: 8px 6px; font-size: 13px; overflow-wrap: anywhere; }
+    .price-table td.amt { white-space: normal; }
+  }
 </style>
 </head>
 <body>

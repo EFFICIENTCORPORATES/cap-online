@@ -73,17 +73,41 @@ So after ranking:
 Every question in the final set still had to score well on its own; coverage
 only decides *which* of several strong candidates makes it.
 
-On AS 2 this swaps out `M2C5U1-016` and `-013` — each redundant, their topics
-already carried by higher-scoring questions — for `-010` (Joint and By-Products,
+On AS 2 (before the diversity rules above) this swapped out `M2C5U1-016` and `-013` for `-010` (Joint and By-Products,
 the only question covering it, and the largest at 7 marks) and `-007` (retail
-method and NRV estimation). That is the published list.
+method and NRV estimation). That was the published list until the diversity rules above replaced it.
 
-**A known limitation, stated plainly.** The coverage pass guarantees no Top-100
-topic is *missed*; it does not cap how many questions may share one topic. On
-AS 2 the result is six of ten on exclusions from cost of inventories. Those six
-genuinely are the highest-scoring questions in the chapter, so the formula is
-behaving as written — but if a session wants more spread, the fix is a per-topic
-cap in the coverage pass, not a hand edit to the list.
+## Duplicates and diversity (added 2026-09-24)
+
+**Why this exists.** AS 2 was first published with `-002` (MTP Jan 2026) and `-012`
+(PYQ Sep 2024) — the *same question word for word* — both in the ten, and with
+`-006` and `-005` (the Wooden Plywood wastage problem, only the year changed) both in
+as well. Six of the ten were on one topic. The formula had no way to notice: a
+repeat scores as high as its twin, so both climb together. The earlier
+"known limitation" note named the topic clustering but not literal repeats, and
+nothing checked for either. A student's ten practice slots were being spent on
+five or six distinct questions.
+
+Applied to the score-ranked list, before the coverage pass:
+
+1. **Repeats are removed.** Question text with numbers, currency and tags stripped
+   is compared pairwise; **90% or more similar = the same question**, and only
+   the higher-scoring one may appear (`DUPLICATE_THRESHOLD`). This is the same
+   90% rule as the OP/PP design, used here only to stop a repeat taking a second slot.
+2. **At most two questions per topic** (a question's best-ranked topic,
+   `MAX_PER_TOPIC`). Extras are held back and used only if the list would
+   otherwise fall short of ten.
+
+The build prints every repeat it drops and which twin it kept.
+
+**What this cannot catch.** Text similarity finds repeats, not *the same idea in
+a different story* — two different companies facing the same normal-versus-abnormal
+loss trap read as different questions. The per-topic cap is the guard against
+that. It costs something real: on a chapter where one topic holds most of the
+strongest questions (AS 2's exclusions from cost), the cap pushes in questions
+from thinner topics with lower scores. That is the intended trade — wider
+practice over a stronger-but-repetitive list. If a chapter's list looks too weak,
+raise `MAX_PER_TOPIC` for a reason stated here, or `force_include` with a reason.
 
 ## What is deliberately not in the formula
 

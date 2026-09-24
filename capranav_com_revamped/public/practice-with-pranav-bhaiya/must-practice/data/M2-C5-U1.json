@@ -143,130 +143,34 @@
   },
   {
    "position": 5,
-   "book_id": "M2C5U1-004",
-   "source_label": "MTP May 2023 Set 2",
-   "paper_type": "MTP",
-   "question_no": "Q1(d)",
-   "marks_text": "Marks: 5",
-   "approx_time_text": "Approx Time: 9 minutes (approx.)",
-   "topic_text": "Topic 1.9: Abnormal waste excluded from inventory cost and expensed to P&L; normal waste absorbed into remaining good units' cost",
+   "book_id": "M2C5U1-016",
+   "source_label": "RTP September 2024",
+   "paper_type": "RTP",
+   "question_no": "Q3",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 1.6: Fixed production overheads absorbed on normal capacity, excluding interest, for standard-cost/closing-stock valuation",
    "topics": [
     {
-     "topic_id": "M2-C5-U1-T1.9",
-     "topic_name": "Exclusions from the cost of inventories",
-     "overall_rank": 55,
-     "priority_band": "Next 50"
-    }
-   ],
-   "badges": [
-    "Compulsory"
-   ],
-   "study_match_category": "A",
-   "study_match_percent": 93.5,
-   "why": "Category A: 93.5% identical to a Study Material question on excluded costs.",
-   "score": 0.7671,
-   "book_page": 48,
-   "question_html": "<p>In a production process, normal waste is 5% of input. 5,000 MT of input were put in process resulting in wastage of 300 MT. Cost per MT of input is ₹1,000. The entire quantity of waste and finished output is in stock at the year end. State with reference to Accounting Standard, how will you value the inventories in this case? What will be treatment for normal and abnormal waste?</p>",
-   "answer_html": "<div>\n<p>As per para 13 of AS 2 (Revised), abnormal amounts of wasted materials, labour and other production costs are excluded from cost of inventories and such costs are recognized as expenses in the period in which they are incurred.</p>\n<p>In this case, normal waste is 250 MT and abnormal waste is 50 MT. The cost of 250 MT will be included in determining the cost of inventories (finished goods) at the year end. The cost of abnormal waste (50 MT × 1,052.6315 = ₹52,632) will be charged to the profit and loss statement.</p>\n<p>Cost per MT (Normal Quantity of 4,750 MT) = 50,00,000 / 4,750 = ₹1,052.6315</p>\n<p>Total value of inventory = 4,700 MT × ₹1,052.6315 = <strong>₹49,47,368</strong>.</p>\n</div>",
-   "mistake_type": "synth",
-   "mistake_text": "Author’s Note: A common error is spreading the abnormal loss quantity into the cost-per-unit computation along with the normal loss, understating the abnormal loss charged to the profit and loss statement and correspondingly overstating closing inventory."
-  },
-  {
-   "position": 6,
-   "book_id": "M2C5U1-012",
-   "source_label": "PYQ September 2024",
-   "paper_type": "PYQ",
-   "question_no": "Q6(a) [OR-alt 2]",
-   "marks_text": "Marks: 4",
-   "approx_time_text": "Approx Time: 8 minutes (approx.)",
-   "topic_text": "Topic 1.9: Costs excluded from inventory valuation and expensed as incurred - abnormal waste, avoidable storage, non-contributing admin overheads, selling/distribution costs",
-   "topics": [
-    {
-     "topic_id": "M2-C5-U1-T1.9",
-     "topic_name": "Exclusions from the cost of inventories",
-     "overall_rank": 55,
+     "topic_id": "M2-C5-U1-T1.6",
+     "topic_name": "Costs of Conversion",
+     "overall_rank": 66,
      "priority_band": "Next 50"
     }
    ],
    "badges": [],
-   "study_match_category": "A",
-   "study_match_percent": 100.0,
-   "why": "ICAI lifted this one from the Study Material verbatim (100% match) once already.",
-   "score": 0.7464,
-   "book_page": 56,
-   "question_html": "<p>\"In determining the cost of inventories, it is appropriate to exclude certain costs and recognise them as expenses in the period in which they are incurred.\" Provide examples of such costs as per AS 2 (Revised) 'Valuation of Inventories'.</p>",
-   "answer_html": "<p>In determining the cost of inventories, it is appropriate to exclude certain costs and recognise them as expenses in the period in which they are incurred. Examples of such costs are:</p>\n<p>(a) Abnormal amounts of wasted materials, labour, or other production costs;</p>\n<p>(b) Storage costs, unless the production process requires such storage.</p>\n<p>(c) Administrative overheads that do not contribute to bringing the inventories to their present location and condition.</p>\n<p>(d) Selling and distribution costs.</p>",
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 66 topic (Costs of Conversion); RTP September 2024.",
+   "score": 0.5843,
+   "book_page": 60,
+   "question_html": "<p>Kirti Ltd. is in the business of manufacturing computers. During the year ended 31<sup>st</sup> March, 2024, the company manufactured 550 computers. It has the policy of valuing finished stock of goods at a standard cost of ₹1.8 lakh per computer. The details of the costs are as under:</p>\n<table><thead><tr><th></th><th>(₹ in lakh)</th></tr></thead>\n<tbody>\n<tr><td>Raw material consumed</td><td>400</td></tr>\n<tr><td>Direct Labour</td><td>250</td></tr>\n<tr><td>Variable production overheads</td><td>150</td></tr>\n<tr><td>Fixed production overheads (including interest of ₹100 lakh)</td><td>290</td></tr>\n</tbody></table>\n<p>Compute the value cost per computer for the purpose of closing stock.</p>",
+   "answer_html": "<div>\n<p>As per para 9 of AS 2 ‘Valuation of Inventories’, for inclusion in the cost of inventory, allocation of fixed production overheads is based on the normal capacity of the production facilities.</p>\n<p>In this case, finished stock has been valued at a standard cost of ₹1.8 lakh per computer which incidentally synchronizes with the value computed on the basis of absorption costing as under:</p>\n<table><thead><tr><th colspan=\"2\"></th><th>(₹ in lakh)</th></tr></thead>\n<tbody>\n<tr><td colspan=\"2\">Materials</td><td>400</td></tr>\n<tr><td colspan=\"2\">Direct Labour</td><td>250</td></tr>\n<tr><td colspan=\"2\">Variable production overheads</td><td>150</td></tr>\n<tr><td>Fixed production overheads</td><td>290</td><td></td></tr>\n<tr><td>Less: Interest</td><td>(100)</td><td>190</td></tr>\n<tr><td colspan=\"2\"><strong>Total cost</strong></td><td><strong>990</strong></td></tr>\n</tbody></table>\n<p>Number of computers produced = 550 computers (Assumed to be normal production).</p>\n<p>Cost per computer ₹990 lakh / 550 computers = <strong>₹1.80 lakh</strong>.</p>\n</div>",
    "mistake_type": "synth",
-   "mistake_text": "Author’s Note: Some examinees who selected this theory alternative listed only one or two of the four categories of cost excluded from inventory valuation under AS 2, most often omitting the distinction between avoidable and production-necessary storage costs."
+   "mistake_text": "Author’s Note: A common error is including the ₹100 lakh interest component within fixed production overheads when arriving at the cost of inventory, instead of excluding financing costs that are not part of bringing the inventory to its present location and condition."
   },
   {
-   "position": 7,
-   "book_id": "M2C5U1-005",
-   "source_label": "MTP May 2024 Set 2",
-   "paper_type": "MTP",
-   "question_no": "Q1(b)",
-   "marks_text": "Marks: 5",
-   "approx_time_text": "Approx Time: 9 minutes (approx.)",
-   "topic_text": "Topic 1.9: Abnormal waste excluded from inventory cost and expensed; normal loss absorbed into remaining good units' cost",
-   "topics": [
-    {
-     "topic_id": "M2-C5-U1-T1.9",
-     "topic_name": "Exclusions from the cost of inventories",
-     "overall_rank": 55,
-     "priority_band": "Next 50"
-    }
-   ],
-   "badges": [
-    "Compulsory"
-   ],
-   "study_match_category": "B",
-   "study_match_percent": 80.3,
-   "why": "The abnormal-waste computation in its most examined form, 80% Study Material match.",
-   "score": 0.7423,
-   "book_page": 49,
-   "question_html": "<p>Wooden Plywood Limited has a normal wastage of 5% in the production process. During the\n  year 2023-24, the Company used 16,000 MT of Raw material costing ₹190 per MT. At the end of the year, 950 MT\n  of wastage was in stock. The accountant wants to know how this wastage is to be treated in the books. You are\n  required to: (1) Calculate the amount of abnormal loss. (2) Explain the treatment of normal loss and abnormal loss\n  in the context of AS-2.</p>",
-   "answer_html": "<div>\n<p>(i) As per AS 2 'Valuation of Inventories', abnormal amounts of wasted materials, labour and other production\n    costs are excluded from cost of inventories and such costs are recognised as expenses in the period in which\n    they are incurred. The normal loss will be included in determining the cost of inventories (finished goods) at\n    the year end.</p>\n<p>(ii) Material used 16,000 MT @ ₹190 = <strong>₹30,40,000</strong>. Normal Loss (5% of 16,000 MT) =\n    800 MT (included in calculation of cost of inventories). Net quantity of material = 15,200 MT.</p>\n<p>(iii) Abnormal Loss in quantity (950 − 800) = 150 MT. Abnormal Loss = <strong>₹30,000</strong>\n    [150 units @ ₹200 (₹30,40,000/15,200)]. The amount of ₹30,000 (Abnormal loss) will be charged\n    to the Profit and Loss statement.</p>\n</div>",
-   "mistake_type": "synth",
-   "mistake_text": "Author’s Note: A common error here is computing the abnormal loss quantity against the gross 16,000 MT used rather than against the 800 MT normal-loss benchmark, or valuing the abnormal loss at the original ₹190/MT purchase rate instead of the higher ₹200/MT rate that results once the normal loss is absorbed into the remaining good units."
-  },
-  {
-   "position": 8,
-   "book_id": "M2C5U1-009",
-   "source_label": "MTP November 2023 Set 2",
-   "paper_type": "MTP",
-   "question_no": "Q1(a)",
-   "marks_text": "Marks: 5",
-   "approx_time_text": "Approx Time: 9 minutes (approx.)",
-   "topic_text": "Topic 1.3/1.9: Costs excluded from cost of inventories and expensed as incurred (abnormal waste, unnecessary storage, non-contributing admin overheads, selling/distribution costs); lower-of-cost-and-NRV valuation with the agent's selling commission deducted from expected sale value",
-   "topics": [
-    {
-     "topic_id": "M2-C5-U1-T1.9",
-     "topic_name": "Exclusions from the cost of inventories",
-     "overall_rank": 55,
-     "priority_band": "Next 50"
-    },
-    {
-     "topic_id": "M2-C5-U1-T1.3",
-     "topic_name": "Measurement of Inventories",
-     "overall_rank": 224,
-     "priority_band": "Beyond Top 100"
-    }
-   ],
-   "badges": [
-    "Compulsory"
-   ],
-   "study_match_category": "B",
-   "study_match_percent": 80.4,
-   "why": "Costs excluded from inventory cost, at an 80% match to an ICAI Study Material question.",
-   "score": 0.7304,
-   "book_page": 53,
-   "question_html": "<p>(i) “In determining the cost of inventories, it is appropriate to exclude certain costs and recognize them as expenses in the period in which they are incurred”. Provide examples of such costs as per AS 2 ‘Valuation of Inventories’.</p>\n<p>(ii) X Limited purchased goods at the cost of ₹40 lakhs in October, 2022. Till March, 2023, 75% of the stocks were sold. The company wants to disclose closing stock at ₹10 lakhs. The expected sale value is ₹11 lakhs and a commission at 10% on sale is payable to the agent. Advise, what is the correct value of closing stock to be disclosed as at 31.3.2023.</p>",
-   "answer_html": "<p>(i) As per AS 2 ‘Valuation of Inventories’, certain costs are excluded from the cost of the inventories and are recognized as expenses in the period in which incurred. Examples of such costs are:</p>\n<ol type=\"a\">\n<li>abnormal amount of wasted materials, labour, or other production costs;</li>\n<li>storage costs, unless those costs are necessary in the production process prior to a further production stage;</li>\n<li>administrative overheads that do not contribute to bringing the inventories to their present location and condition; and</li>\n<li>selling and distribution costs.</li>\n</ol>\n<p>(ii) As per AS 2 “Valuation of Inventories”, the inventories are to be valued at lower of cost or net realizable value. In this case, the cost of inventory is ₹10 lakhs. The net realizable value is ₹11,00,000 × 90% = ₹9,90,000. So, the stock should be valued at ₹9,90,000.</p>",
-   "mistake_type": "synth",
-   "mistake_text": "Author’s Note: A common error is treating storage costs as always excludable rather than only when unnecessary to a further production stage in part (i); and in part (ii), comparing the disclosed cost of ₹10 lakhs against the gross expected sale value of ₹11 lakhs instead of first deducting the 10% agent's commission, which changes the net realizable value from ₹11,00,000 to ₹9,90,000 and hence which figure actually governs."
-  },
-  {
-   "position": 9,
+   "position": 6,
    "book_id": "M2C5U1-010",
    "source_label": "PYQ May 2024",
    "paper_type": "PYQ",
@@ -302,7 +206,7 @@
    "mistake_text": "Examiner’s Comment: Most examinees correctly calculated the cost of conversion for allocation between joint products, Polyester and Nylon, but made errors in deducting the NRV of the by-product fiber and sale value of scrap. Additionally, some deducted profit when calculating the net realizable value of the by-product fiber, leading to incorrect answers."
   },
   {
-   "position": 10,
+   "position": 7,
    "book_id": "M2C5U1-007",
    "source_label": "MTP May 2026 Set 1",
    "paper_type": "MTP",
@@ -336,6 +240,90 @@
    "answer_html": "<p>(i) Cost of closing inventory is shown below:</p>\n<table>\n<tbody>\n<tr><td>Sale value of opening stock and purchases (₹20,000 + ₹1,47,000) x 1.10</td><td>1,83,700</td></tr>\n<tr><td>Sales</td><td>(1,54,000)</td></tr>\n<tr><td>Sale value of unsold stock</td><td>29,700</td></tr>\n<tr><td>Less: Gross Margin (₹29,700/1.10) x 0.10</td><td>(2,700)</td></tr>\n<tr><td><strong>Cost of closing inventory</strong></td><td><strong>27,000</strong></td></tr>\n</tbody>\n</table>\n<p><em>Alternative presentation</em></p>\n<table>\n<tbody>\n<tr><td>Opening stock and purchases (₹20,000 + ₹1,47,000)</td><td>1,67,000</td></tr>\n<tr><td>Less: cost of goods sold</td><td>(1,40,000)</td></tr>\n<tr><td><strong>Cost of closing inventory</strong></td><td><strong>27,000</strong></td></tr>\n</tbody>\n</table>\n<p>Calculation of cost of goods sold:</p>\n<table>\n<tbody>\n<tr><td>Goods sold</td><td>1,54,000</td></tr>\n<tr><td>Less: gross margin (1,54,000 x 10/110)</td><td>(14,000)</td></tr>\n<tr><td><strong>Cost of goods sold</strong></td><td><strong>1,40,000</strong></td></tr>\n</tbody>\n</table>\n<p>(ii)</p>\n<table>\n<tbody>\n<tr><td>Closing stock at cost (250 x ₹300) (i)</td><td>75,000</td></tr>\n<tr><td>Net Realizable value of closing stock (₹280* x 250) (ii)</td><td>70,000</td></tr>\n<tr><td><strong>Value of closing stock [lower of (i) and (ii)]</strong></td><td><strong>70,000</strong></td></tr>\n</tbody>\n</table>\n<p><em>*₹280 = 70% of ₹400 selling price.</em></p>",
    "mistake_type": "synth",
    "mistake_text": "Author’s Note: Several examinees applied the gross margin percentage directly to sales value instead of grossing up cost through the margin percentage, producing an incorrect closing stock figure in part (i) under AS 2; in part (ii), some compared cost against the normal selling price instead of the defect-adjusted net realisable value."
+  },
+  {
+   "position": 8,
+   "book_id": "M2C5U1-001",
+   "source_label": "MTP January 2026 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q2(a)",
+   "marks_text": "Marks: 7",
+   "approx_time_text": "Approx Time: 13 minutes (approx.)",
+   "topic_text": "Topic 1.10: Joint products and by-products - by-product NRV deducted from joint cost, remainder allocated by relative sales value",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U1-T1.10",
+     "topic_name": "Cost Formula",
+     "overall_rank": 220,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 220 topic (Cost Formula); MTP January 2026 Set 1.",
+   "score": 0.4006,
+   "book_page": 46,
+   "question_html": "<p>Happy Limited is a Textile Manufacturing Company producing Polyester (P) and Nylon (N); a by-product Fiber (F) is also produced. Cost of production: Raw material for 30,000 units ₹3,50,000; Wages ₹1,60,000; Fixed overheads ₹1,20,000; Variable overheads ₹60,000. Output: Polyester 12,500 units, Nylon 10,000 units, Fiber 3,200 units. Closing inventory: Polyester 1,600 units, Nylon 400 units. Average market price: Polyester ₹100/unit, Nylon ₹60/unit; by-product Fiber sold @₹40/unit, profit of ₹8,000 on sale of by-product after separate processing expenses ₹10,000 and packing charges ₹9,000. ₹5,000 realized from sale of scrap. Compute the value of closing inventory of Polyester and Nylon.</p>",
+   "answer_html": "<div>\n<p>As per AS 2 'Valuation of Inventories', most by-products, being immaterial, are measured at net realizable value, deducted from the cost of the main product.</p>\n<p><strong>W.N.1 — NRV of by-product Fiber:</strong> Selling price (3,200 × ₹40) 1,28,000 − separate processing charges 10,000 − packing charges 9,000 = ₹1,09,000.</p>\n<p><strong>W.N.2 — Joint cost allocation:</strong> Raw material 3,50,000 + Wages 1,60,000 + Fixed OH 1,20,000 + Variable OH 60,000 = 6,90,000; less NRV of Fiber (1,09,000) and scrap sale value (5,000) = <strong>Joint cost to allocate: 5,76,000</strong>.</p>\n<table><thead><tr><th>Particulars</th><th>Polyester</th><th>Nylon</th></tr></thead>\n<tbody>\n<tr><td>Output (units)</td><td>12,500</td><td>10,000</td></tr>\n<tr><td>Sales price/unit</td><td>₹100</td><td>₹60</td></tr>\n<tr><td>Sales value</td><td>12,50,000</td><td>6,00,000</td></tr>\n<tr><td>Joint cost 5,76,000 allocated in ratio 12,50,000:6,00,000</td><td>3,89,189</td><td>1,86,811</td></tr>\n<tr><td>Cost per unit</td><td>₹31.14</td><td>₹18.68</td></tr>\n<tr><td>Closing inventory (units)</td><td>1,600</td><td>400</td></tr>\n<tr><td><strong>Value of closing inventory</strong></td><td><strong>₹49,824</strong></td><td><strong>₹7,472</strong></td></tr>\n</tbody></table>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees allocated the full 6,90,000 cost between Polyester and Nylon without first deducting the by-product's net realizable value and the scrap sale proceeds, overstating the joint cost base for allocation."
+  },
+  {
+   "position": 9,
+   "book_id": "M2C5U1-014",
+   "source_label": "RTP January 2026",
+   "paper_type": "RTP",
+   "question_no": "Q3",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 1.3: Lower of cost and NRV - the NRV-only exception is limited to specific industries, not general manufacturing",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U1-T1.3",
+     "topic_name": "Measurement of Inventories",
+     "overall_rank": 224,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 224 topic (Measurement of Inventories); RTP January 2026.",
+   "score": 0.3532,
+   "book_page": 58,
+   "question_html": "<p>A private limited company manufacturing fancy terry towels had valued its closing inventory of finished goods at realisable value, inclusive of profit and export cash incentives. Firm contracts had been received and goods were packed for export, but ownership had not been transferred to the foreign buyers. Comment on the valuation of the inventories by the company.</p>",
+   "answer_html": "<div><p>AS 2 requires inventories to be valued at the lower of historical cost and net realisable value. AS 9 permits valuing goods at net realisable value only in specific industries where performance is substantially complete prior to the transaction generating revenue — e.g. harvested agricultural crops or extracted mineral ores, where a sale is assured under forward contract/government guarantee or a ready market exists with negligible risk of failure to sell.</p>\n<p>Fancy terry towels do not fall into the agricultural-crop or mineral-ore category. Since ownership had not transferred to the foreign buyers, the sale was not yet complete. The closing inventory should therefore have been valued at the lower of cost and net realisable value, <strong>not</strong> at net realisable value. Further, export cash incentives are recognised only in the year the export sale actually takes place, not accrued into inventory valuation ahead of the sale. The company's valuation policy is therefore <strong>not correct</strong>.</p></div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees accepted the NRV-inclusive-of-profit valuation on the basis of firm export contracts alone, not recognising that the AS 9 exception is limited to specific industries (agricultural/mineral) and does not extend to manufactured goods merely because a sale contract exists."
+  },
+  {
+   "position": 10,
+   "book_id": "M2C5U1-017",
+   "source_label": "RTP September 2025",
+   "paper_type": "RTP",
+   "question_no": "Q6",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 1.10: Joint products and by-products - by-product/scrap NRV deducted from joint cost; raw material stays at cost when finished goods sell above cost",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U1-T1.10",
+     "topic_name": "Cost Formula",
+     "overall_rank": 220,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 220 topic (Cost Formula); RTP September 2025.",
+   "score": 0.341,
+   "book_page": 61,
+   "question_html": "<p>Zing Ltd., 2024-25: Raw Material closing stock 700 units, cost ₹35/unit, replacement cost ₹20/unit. Finished products FP1/FP2: Production 3,000/1,600 units; Closing stock 500/300 units. Material consumed ₹3,20,000; Direct labour ₹1,60,000; Direct expenses ₹78,000 (these three cost figures pertain to combined joint production). Fixed overhead ₹95,000, including ₹15,000 godown rent (for storing finished products, not a production cost). 1,000 units of by-product BY also emerged, sold @₹12/unit after ₹2,500 expense; ₹4,800 realized from scrap sale. Average market price: FP1 ₹160/unit, FP2 ₹100/unit. Calculate the value of closing stock per AS 2.</p>",
+   "answer_html": "<div>\n<p>Per AS 2, most by-products/scrap are measured at NRV, deducted from the cost of the main product.</p>\n<p><strong>NRV of by-product BY:</strong> Selling price (1,000×₹12) 12,000, less separate processing charges 2,500 = <strong>₹9,500.</strong></p>\n<p><strong>Joint cost to allocate:</strong> Raw material 3,20,000 + Labour 1,60,000 + Direct expenses 78,000 + Fixed overhead (95,000−15,000 godown rent, excluded as unrelated to production) 80,000 = 6,38,000; less NRV of BY (9,500) and scrap sale value (4,800) = <strong>₹6,23,700 to allocate between FP1 and FP2.</strong></p>\n<table><thead><tr><th></th><th>FP1</th><th>FP2</th></tr></thead>\n<tbody>\n<tr><td>Output (units)</td><td>3,000</td><td>1,600</td></tr>\n<tr><td>Sales price/unit</td><td>₹160</td><td>₹100</td></tr>\n<tr><td>Sales value</td><td>4,80,000</td><td>1,60,000</td></tr>\n<tr><td>Allocation ratio</td><td>3</td><td>1</td></tr>\n<tr><td>Joint cost allocated (3:1)</td><td>4,67,775</td><td>1,55,925</td></tr>\n<tr><td>Cost per unit</td><td>₹155.93</td><td>₹97.45</td></tr>\n</tbody></table>\n<p>Since both FP1 (₹155.93 cost vs ₹160 selling price) and FP2 (₹97.45 vs ₹100) sell above cost, both finished goods are valued at cost, and the raw material feeding them is valued at its own cost (₹35/unit, not written down to the ₹20 replacement cost).</p>\n<p><strong>Closing inventory:</strong> FP1 (500×₹155.93) = ₹77,965. FP2 (300×₹97.45) = ₹29,235. Raw material (700×₹35) = ₹24,500. <strong>Total closing inventory = ₹77,965 + ₹29,235 + ₹24,500 = ₹1,31,700.</strong></p>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees included the godown rent (storage cost unrelated to production, per AS 2's general exclusion of storage costs) in the joint cost pool, or wrote raw material down to replacement cost despite both finished goods selling above their allocated cost."
   }
  ]
 }

@@ -20,6 +20,7 @@ Run after any change to the sources, then deploy::
 
 from __future__ import annotations
 
+import difflib
 import json
 import re
 import unicodedata
@@ -66,6 +67,18 @@ SITTING_ORDER = [
 ]
 
 SHORTLIST_SIZE = 10
+
+# Diversity rules, applied before the coverage pass (see the rules document's
+# "Duplicates and diversity"). Added 2026-09-24 after AS 2 shipped with the same
+# question twice and the same idea five times.
+# Two questions whose text, with numbers stripped, is this similar are the same
+# question: the same 90% test the OP/PP design uses. Only the higher-scoring
+# one may appear.
+DUPLICATE_THRESHOLD = 0.90
+# At most this many questions per topic (a question's best-ranked topic). A
+# question over the cap is held back and used only if the list would otherwise
+# fall short of SHORTLIST_SIZE.
+MAX_PER_TOPIC = 2
 
 # One entry per unit. The shortlist is COMPUTED from SCORING above — never typed
 # by hand. ``published`` false keeps a unit out of the live page while it is
@@ -137,6 +150,42 @@ def score_question(rows: list[dict], ranks: dict, marks: int) -> tuple[float, di
     }
     total = sum(SCORING[k] * v for k, v in parts.items())
     return total, parts
+
+
+def similarity_text(html_text: str) -> str:
+    """Question text reduced to its wording: tags, digits and currency gone, so
+    a repeat with new figures or a renamed company still compares as the same."""
+    text = re.sub(r"<[^>]+>", " ", html_text)
+    text = re.sub(r"&[a-z#0-9]+;", " ", text.lower())
+    text = re.sub(r"[\d,.₹%]+", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def diversify(ranked: list[dict]) -> tuple[list[dict], list[tuple[dict, dict, float]]]:
+    """Order candidates for selection: drop repeats of the same question, and
+    push questions beyond the per-topic cap to the back. ``ranked`` must already
+    be best-first. Returns (candidates, [(dropped, kept_twin, similarity)])."""
+    kept: list[dict] = []
+    deferred: list[dict] = []
+    dropped: list[tuple[dict, dict, float]] = []
+    per_topic: dict[str, int] = {}
+    for q in ranked:
+        twin = None
+        for other in kept + deferred:
+            ratio = difflib.SequenceMatcher(None, q["sim_text"], other["sim_text"]).ratio()
+            if ratio >= DUPLICATE_THRESHOLD:
+                twin = (other, ratio)
+                break
+        if twin:
+            dropped.append((q, twin[0], twin[1]))
+            continue
+        primary = q["topic_ids"][0] if q["topic_ids"] else None
+        if primary is not None and per_topic.get(primary, 0) >= MAX_PER_TOPIC:
+            deferred.append(q)
+            continue
+        per_topic[primary] = per_topic.get(primary, 0) + 1
+        kept.append(q)
+    return kept + deferred, dropped
 
 
 def apply_coverage(ranked: list[dict], top100: set[str], size: int) -> list[dict]:
@@ -292,6 +341,7 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
                 "topic_ids": [t["topic_id"] for t in topics],
                 "score": score,
                 "score_parts": parts,
+                "sim_text": similarity_text(source["question_html"]),
                 "source_label": source["src_text"],
                 "paper_type": first.get("paper_type") or source["src_text"].split()[0],
                 "study_match_category": first.get("category"),
@@ -306,6 +356,7 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
     forced_in = [q for q in ranked if q["book_id"] in spec.get("force_include", {})]
     remaining = [q for q in ranked if q["book_id"] not in spec.get("force_include", {})]
 
+    remaining, dropped_repeats = diversify(remaining)
     chosen = forced_in + apply_coverage(
         remaining, top100, max(SHORTLIST_SIZE - len(forced_in), 0)
     )
@@ -317,6 +368,10 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
         mark = "*" if q in chosen else " "
         print(f"  {mark} {i:>2}. {q['score']:.3f}  {q['book_id']:<12} {q['source_label']:<24} "
               f"cat {str(q['study_match_category']):<4} rank {q['topics'][0]['overall_rank'] if q['topics'] else '-'}")
+
+    for dropped, twin, ratio in dropped_repeats:
+        print(f"    repeat dropped: {dropped['book_id']} ({dropped['source_label']}) "
+              f"is {ratio:.0%} the same as {twin['book_id']} ({twin['source_label']})")
 
     questions = []
     for position, q in enumerate(chosen, start=1):

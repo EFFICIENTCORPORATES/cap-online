@@ -2,6 +2,13 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-24 — capranav.com mobile fix + Must Practice de-duplication (deployed)
+
+Mobile: leaked bare `table{min-width:1180px}` in shared anatomy.css forced every table (incl. question tables) wide;
+scoped it; plus reader/pricing/book-card fixes; 0 overflow at 7 widths x 17 pages. Must Practice: AS 2 shipped with an
+identical question twice + 6/10 on one topic; build script now drops >=90%-similar repeats and caps 2 per topic
+(rules doc updated, AS 2 republished). Details: `capranav_com_revamped/PROJECT-LOG.md`.
+
 ## 2026-09-24 — capranav.com security audit + first hardening pass (not deployed)
 
 Audited the site against `Main1lavyaAIAgents/SECURITY-LEVEL3-RECOMMENDATIONS.md` (repo check + live probes +
