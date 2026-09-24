@@ -207,6 +207,42 @@
   },
   {
    "position": 7,
+   "book_id": "M2C5U1-003",
+   "source_label": "MTP May 2023 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q1(c)",
+   "marks_text": "Marks: 5",
+   "approx_time_text": "Approx Time: 9 minutes (approx.)",
+   "topic_text": "Topic 1.6/1.13: Fixed overhead absorption over normal capacity plus item-by-item comparison of cost and net realisable value",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U1-T1.6",
+     "topic_name": "Costs of Conversion",
+     "overall_rank": 66,
+     "priority_band": "Next 50"
+    },
+    {
+     "topic_id": "M2-C5-U1-T1.13",
+     "topic_name": "Comparison of Cost and Net Realisable Value",
+     "overall_rank": 221,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [
+    "Compulsory"
+   ],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Hand-picked by Pranav: a closing-inventory computation where the selling price falls and the raw material's replacement cost is below its cost.",
+   "score": 0.5521,
+   "book_page": 47,
+   "question_html": "<table>\n<thead><tr><th>Particulars</th><th></th><th>Kg.</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td rowspan=\"2\">Opening Inventory:</td><td>Finished Goods</td><td>1,000</td><td>25,000</td></tr>\n<tr><td>Raw Materials</td><td>1,100</td><td>11,000</td></tr>\n<tr><td>Purchases</td><td></td><td>10,000</td><td>1,00,000</td></tr>\n<tr><td>Labour</td><td></td><td></td><td>76,500</td></tr>\n<tr><td>Overheads (Fixed)</td><td></td><td></td><td>75,000</td></tr>\n<tr><td>Sales</td><td></td><td>10,000</td><td>2,80,000</td></tr>\n<tr><td rowspan=\"2\">Closing Inventory:</td><td>Raw Materials</td><td>900</td><td></td></tr>\n<tr><td>Finished Goods</td><td>1,200</td><td></td></tr>\n</tbody>\n</table>\n<p>The expected production for the year was 15,000 kg of the finished product. Due to fall in market demand the sales price for the finished goods was ₹20 per kg and the replacement cost for the raw material was ₹9.50 per kg on the closing day. You are required to calculate the closing inventory as on that date. (5 Marks)</p>",
+   "answer_html": "<p><strong>Calculation of cost for closing inventory</strong></p>\n<table>\n<thead><tr><th>Particulars</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>Cost of Purchase (10,200 × 10)</td><td>1,02,000</td></tr>\n<tr><td>Direct Labour</td><td>76,500</td></tr>\n<tr><td>Fixed Overhead (75,000 × 10,200/15,000)</td><td>51,000</td></tr>\n<tr><td><strong>Cost of Production</strong></td><td><strong>2,29,500</strong></td></tr>\n<tr><td>Cost of closing inventory per unit (2,29,500/10,200)</td><td>₹22.50</td></tr>\n<tr><td>Net Realisable Value per unit</td><td>₹20.00</td></tr>\n</tbody>\n</table>\n<p>Since net realisable value is less than cost, closing inventory will be valued at ₹20. As NRV of the finished goods is less than its cost, relevant raw materials will be valued at replacement cost i.e. ₹9.50.</p>\n<p>Therefore, value of closing inventory: Finished Goods (1,200 × 20) ₹24,000; Raw Materials (900 × 9.50) ₹8,550; <strong>Total ₹32,550</strong>.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is absorbing fixed overhead over actual production (10,200 kg used) instead of the expected/normal capacity of 15,000 kg when computing cost of production, or valuing raw material at replacement cost regardless of whether the related finished goods sell below cost – AS 2 only permits marking raw material down to replacement cost when the finished product it converts into cannot recover its own cost."
+  },
+  {
+   "position": 8,
    "book_id": "M2C5U1-007",
    "source_label": "MTP May 2026 Set 1",
    "paper_type": "MTP",
@@ -242,34 +278,6 @@
    "mistake_text": "Author’s Note: Several examinees applied the gross margin percentage directly to sales value instead of grossing up cost through the margin percentage, producing an incorrect closing stock figure in part (i) under AS 2; in part (ii), some compared cost against the normal selling price instead of the defect-adjusted net realisable value."
   },
   {
-   "position": 8,
-   "book_id": "M2C5U1-001",
-   "source_label": "MTP January 2026 Set 1",
-   "paper_type": "MTP",
-   "question_no": "Q2(a)",
-   "marks_text": "Marks: 7",
-   "approx_time_text": "Approx Time: 13 minutes (approx.)",
-   "topic_text": "Topic 1.10: Joint products and by-products - by-product NRV deducted from joint cost, remainder allocated by relative sales value",
-   "topics": [
-    {
-     "topic_id": "M2-C5-U1-T1.10",
-     "topic_name": "Cost Formula",
-     "overall_rank": 220,
-     "priority_band": "Beyond Top 100"
-    }
-   ],
-   "badges": [],
-   "study_match_category": "C",
-   "study_match_percent": null,
-   "why": "Rank 220 topic (Cost Formula); MTP January 2026 Set 1.",
-   "score": 0.4006,
-   "book_page": 46,
-   "question_html": "<p>Happy Limited is a Textile Manufacturing Company producing Polyester (P) and Nylon (N); a by-product Fiber (F) is also produced. Cost of production: Raw material for 30,000 units ₹3,50,000; Wages ₹1,60,000; Fixed overheads ₹1,20,000; Variable overheads ₹60,000. Output: Polyester 12,500 units, Nylon 10,000 units, Fiber 3,200 units. Closing inventory: Polyester 1,600 units, Nylon 400 units. Average market price: Polyester ₹100/unit, Nylon ₹60/unit; by-product Fiber sold @₹40/unit, profit of ₹8,000 on sale of by-product after separate processing expenses ₹10,000 and packing charges ₹9,000. ₹5,000 realized from sale of scrap. Compute the value of closing inventory of Polyester and Nylon.</p>",
-   "answer_html": "<div>\n<p>As per AS 2 'Valuation of Inventories', most by-products, being immaterial, are measured at net realizable value, deducted from the cost of the main product.</p>\n<p><strong>W.N.1 — NRV of by-product Fiber:</strong> Selling price (3,200 × ₹40) 1,28,000 − separate processing charges 10,000 − packing charges 9,000 = ₹1,09,000.</p>\n<p><strong>W.N.2 — Joint cost allocation:</strong> Raw material 3,50,000 + Wages 1,60,000 + Fixed OH 1,20,000 + Variable OH 60,000 = 6,90,000; less NRV of Fiber (1,09,000) and scrap sale value (5,000) = <strong>Joint cost to allocate: 5,76,000</strong>.</p>\n<table><thead><tr><th>Particulars</th><th>Polyester</th><th>Nylon</th></tr></thead>\n<tbody>\n<tr><td>Output (units)</td><td>12,500</td><td>10,000</td></tr>\n<tr><td>Sales price/unit</td><td>₹100</td><td>₹60</td></tr>\n<tr><td>Sales value</td><td>12,50,000</td><td>6,00,000</td></tr>\n<tr><td>Joint cost 5,76,000 allocated in ratio 12,50,000:6,00,000</td><td>3,89,189</td><td>1,86,811</td></tr>\n<tr><td>Cost per unit</td><td>₹31.14</td><td>₹18.68</td></tr>\n<tr><td>Closing inventory (units)</td><td>1,600</td><td>400</td></tr>\n<tr><td><strong>Value of closing inventory</strong></td><td><strong>₹49,824</strong></td><td><strong>₹7,472</strong></td></tr>\n</tbody></table>\n</div>",
-   "mistake_type": "synth",
-   "mistake_text": "Author’s Note: Some examinees allocated the full 6,90,000 cost between Polyester and Nylon without first deducting the by-product's net realizable value and the scrap sale proceeds, overstating the joint cost base for allocation."
-  },
-  {
    "position": 9,
    "book_id": "M2C5U1-014",
    "source_label": "RTP January 2026",
@@ -296,34 +304,6 @@
    "answer_html": "<div><p>AS 2 requires inventories to be valued at the lower of historical cost and net realisable value. AS 9 permits valuing goods at net realisable value only in specific industries where performance is substantially complete prior to the transaction generating revenue — e.g. harvested agricultural crops or extracted mineral ores, where a sale is assured under forward contract/government guarantee or a ready market exists with negligible risk of failure to sell.</p>\n<p>Fancy terry towels do not fall into the agricultural-crop or mineral-ore category. Since ownership had not transferred to the foreign buyers, the sale was not yet complete. The closing inventory should therefore have been valued at the lower of cost and net realisable value, <strong>not</strong> at net realisable value. Further, export cash incentives are recognised only in the year the export sale actually takes place, not accrued into inventory valuation ahead of the sale. The company's valuation policy is therefore <strong>not correct</strong>.</p></div>",
    "mistake_type": "synth",
    "mistake_text": "Author’s Note: Some examinees accepted the NRV-inclusive-of-profit valuation on the basis of firm export contracts alone, not recognising that the AS 9 exception is limited to specific industries (agricultural/mineral) and does not extend to manufactured goods merely because a sale contract exists."
-  },
-  {
-   "position": 10,
-   "book_id": "M2C5U1-017",
-   "source_label": "RTP September 2025",
-   "paper_type": "RTP",
-   "question_no": "Q6",
-   "marks_text": "Marks:Not stated in source",
-   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
-   "topic_text": "Topic 1.10: Joint products and by-products - by-product/scrap NRV deducted from joint cost; raw material stays at cost when finished goods sell above cost",
-   "topics": [
-    {
-     "topic_id": "M2-C5-U1-T1.10",
-     "topic_name": "Cost Formula",
-     "overall_rank": 220,
-     "priority_band": "Beyond Top 100"
-    }
-   ],
-   "badges": [],
-   "study_match_category": "C",
-   "study_match_percent": null,
-   "why": "Rank 220 topic (Cost Formula); RTP September 2025.",
-   "score": 0.341,
-   "book_page": 61,
-   "question_html": "<p>Zing Ltd., 2024-25: Raw Material closing stock 700 units, cost ₹35/unit, replacement cost ₹20/unit. Finished products FP1/FP2: Production 3,000/1,600 units; Closing stock 500/300 units. Material consumed ₹3,20,000; Direct labour ₹1,60,000; Direct expenses ₹78,000 (these three cost figures pertain to combined joint production). Fixed overhead ₹95,000, including ₹15,000 godown rent (for storing finished products, not a production cost). 1,000 units of by-product BY also emerged, sold @₹12/unit after ₹2,500 expense; ₹4,800 realized from scrap sale. Average market price: FP1 ₹160/unit, FP2 ₹100/unit. Calculate the value of closing stock per AS 2.</p>",
-   "answer_html": "<div>\n<p>Per AS 2, most by-products/scrap are measured at NRV, deducted from the cost of the main product.</p>\n<p><strong>NRV of by-product BY:</strong> Selling price (1,000×₹12) 12,000, less separate processing charges 2,500 = <strong>₹9,500.</strong></p>\n<p><strong>Joint cost to allocate:</strong> Raw material 3,20,000 + Labour 1,60,000 + Direct expenses 78,000 + Fixed overhead (95,000−15,000 godown rent, excluded as unrelated to production) 80,000 = 6,38,000; less NRV of BY (9,500) and scrap sale value (4,800) = <strong>₹6,23,700 to allocate between FP1 and FP2.</strong></p>\n<table><thead><tr><th></th><th>FP1</th><th>FP2</th></tr></thead>\n<tbody>\n<tr><td>Output (units)</td><td>3,000</td><td>1,600</td></tr>\n<tr><td>Sales price/unit</td><td>₹160</td><td>₹100</td></tr>\n<tr><td>Sales value</td><td>4,80,000</td><td>1,60,000</td></tr>\n<tr><td>Allocation ratio</td><td>3</td><td>1</td></tr>\n<tr><td>Joint cost allocated (3:1)</td><td>4,67,775</td><td>1,55,925</td></tr>\n<tr><td>Cost per unit</td><td>₹155.93</td><td>₹97.45</td></tr>\n</tbody></table>\n<p>Since both FP1 (₹155.93 cost vs ₹160 selling price) and FP2 (₹97.45 vs ₹100) sell above cost, both finished goods are valued at cost, and the raw material feeding them is valued at its own cost (₹35/unit, not written down to the ₹20 replacement cost).</p>\n<p><strong>Closing inventory:</strong> FP1 (500×₹155.93) = ₹77,965. FP2 (300×₹97.45) = ₹29,235. Raw material (700×₹35) = ₹24,500. <strong>Total closing inventory = ₹77,965 + ₹29,235 + ₹24,500 = ₹1,31,700.</strong></p>\n</div>",
-   "mistake_type": "synth",
-   "mistake_text": "Author’s Note: Some examinees included the godown rent (storage cost unrelated to production, per AS 2's general exclusion of storage costs) in the joint cost pool, or wrote raw material down to replacement cost despite both finished goods selling above their allocated cost."
   }
  ]
 }

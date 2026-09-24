@@ -75,6 +75,14 @@ SHORTLIST_SIZE = 10
 # question: the same 90% test the OP/PP design uses. Only the higher-scoring
 # one may appear.
 DUPLICATE_THRESHOLD = 0.90
+# Text similarity misses a repeat that was reworded (MTP Jan 2026 Set 1 Q2(a) is
+# PYQ May 2024 Q1(b) with a new company name and a shortened stem: 58% text
+# match, yet 13 of its 14 figures identical). So two questions ALSO count as the
+# same problem when they share at least this many distinct figures and this
+# share of the smaller question's figures. The minimum count keeps two
+# unrelated questions that happen to reuse round numbers apart.
+SHARED_FIGURES_MIN = 5
+SHARED_FIGURES_RATIO = 0.60
 # At most this many questions per topic (a question's best-ranked topic). A
 # question over the cap is held back and used only if the list would otherwise
 # fall short of SHORTLIST_SIZE.
@@ -92,6 +100,20 @@ UNITS = {
         "module": "MODULE 2",
         "chapter": "Assets Based Accounting Standards",
         "published": True,
+        # Hand-picked by Pranav, 2026-09-24 ("actually good"): the formula ranks it 12th
+        # because its topic (rank 66) is thinner, but it is a clean closing-inventory
+        # computation combining a fall in selling price with a raw-material
+        # replacement cost.
+        "force_include": {
+            "M2C5U1-003": "Pranav's editorial pick, 2026-09-24 — a good question the formula under-ranks.",
+        },
+        # Same joint-product / by-product closing-stock problem as PYQ May 2024
+        # Q1(b) (M2C5U1-010) with new figures. Its mapped topic is "Cost
+        # Formula", so neither the similarity test nor the per-topic cap can see
+        # the overlap — a human call, flagged by Pranav 2026-09-24.
+        "force_exclude": {
+            "M2C5U1-017": "Same joint/by-product closing-stock problem as M2C5U1-010, mapped to an unrelated topic.",
+        },
         # Hand-written card wording, kept so all ten read in one voice rather
         # than mixing reviewed prose with generated lines.
         "why_overrides": {
@@ -105,6 +127,7 @@ UNITS = {
             "M2C5U1-009": "Costs excluded from inventory cost, at an 80% match to an ICAI Study Material question.",
             "M2C5U1-010": "The only question covering Joint and By-Products, and the largest at 7 marks.",
             "M2C5U1-007": "Latest MTP, and the only recent hit on the retail method and NRV estimation.",
+            "M2C5U1-003": "Hand-picked by Pranav: a closing-inventory computation where the selling price falls and the raw material's replacement cost is below its cost.",
         },
     },
     "M2-C5-U2": {
@@ -161,20 +184,44 @@ def similarity_text(html_text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def diversify(ranked: list[dict]) -> tuple[list[dict], list[tuple[dict, dict, float]]]:
-    """Order candidates for selection: drop repeats of the same question, and
-    push questions beyond the per-topic cap to the back. ``ranked`` must already
-    be best-first. Returns (candidates, [(dropped, kept_twin, similarity)])."""
+def figures(html_text: str) -> set[str]:
+    """The distinct figures (3+ digits, commas ignored) a question is built on."""
+    text = re.sub(r"<[^>]+>", " ", html_text)
+    return {n.replace(",", "") for n in re.findall(r"\d[\d,]*\.?\d*", text) if len(n.replace(",", "")) >= 3}
+
+
+def same_problem(a: dict, b: dict) -> float | None:
+    """Similarity (0-1) if the two questions are the same problem, else None."""
+    ratio = difflib.SequenceMatcher(None, a["sim_text"], b["sim_text"]).ratio()
+    if ratio >= DUPLICATE_THRESHOLD:
+        return ratio
+    shared = a["figures"] & b["figures"]
+    smaller = min(len(a["figures"]), len(b["figures"]))
+    if smaller and len(shared) >= SHARED_FIGURES_MIN and len(shared) / smaller >= SHARED_FIGURES_RATIO:
+        return len(shared) / smaller
+    return None
+
+
+def diversify(ranked: list[dict], seed: list[dict]) -> tuple[list[dict], list[dict], list[tuple[dict, dict, float]]]:
+    """Order candidates for selection: drop repeats of the same problem, and
+    set aside questions beyond the per-topic cap. ``ranked`` must already
+    be best-first. ``seed`` is anything already certain to appear (force-included
+    questions): candidates are checked against it and count toward the topic cap.
+    Returns (kept, over_cap, [(dropped, kept_twin, similarity)]). ``over_cap`` is
+    only ever used by the coverage pass, never to pad the list."""
     kept: list[dict] = []
     deferred: list[dict] = []
     dropped: list[tuple[dict, dict, float]] = []
     per_topic: dict[str, int] = {}
+    for q in seed:
+        primary = q["topic_ids"][0] if q["topic_ids"] else None
+        per_topic[primary] = per_topic.get(primary, 0) + 1
     for q in ranked:
         twin = None
-        for other in kept + deferred:
-            ratio = difflib.SequenceMatcher(None, q["sim_text"], other["sim_text"]).ratio()
-            if ratio >= DUPLICATE_THRESHOLD:
-                twin = (other, ratio)
+        for other in seed + kept + deferred:
+            sim = same_problem(q, other)
+            if sim is not None:
+                twin = (other, sim)
                 break
         if twin:
             dropped.append((q, twin[0], twin[1]))
@@ -185,15 +232,17 @@ def diversify(ranked: list[dict]) -> tuple[list[dict], list[tuple[dict, dict, fl
             continue
         per_topic[primary] = per_topic.get(primary, 0) + 1
         kept.append(q)
-    return kept + deferred, dropped
+    return kept, deferred, dropped
 
 
-def apply_coverage(ranked: list[dict], top100: set[str], size: int) -> list[dict]:
+def apply_coverage(ranked: list[dict], reserve: list[dict], top100: set[str], size: int) -> list[dict]:
     """Take the best `size` by score, then make sure every Top-100 topic of the
-    chapter is represented — swapping only redundant questions out. See the
-    rules document's "coverage pass"."""
+    chapter is represented. ``reserve`` (questions held back by the per-topic
+    cap) is drawn on only to cover a Top-100 topic nobody else covers — it never
+    pads the list, so a chapter short of distinct questions yields fewer than
+    `size` rather than a repeat. See the rules document's "coverage pass"."""
     chosen = ranked[:size]
-    rest = ranked[size:]
+    rest = ranked[size:] + reserve
 
     def covered(sel):
         return {t for q in sel for t in q["topic_ids"] if t in top100}
@@ -202,7 +251,12 @@ def apply_coverage(ranked: list[dict], top100: set[str], size: int) -> list[dict
         candidate = next((q for q in rest if topic in q["topic_ids"]), None)
         if candidate is None:
             continue
-        # Drop the lowest-scoring question that is not the sole carrier of any topic.
+        if len(chosen) < size:
+            chosen = chosen + [candidate]
+            rest = [q for q in rest if q is not candidate]
+            chosen.sort(key=lambda q: -q["score"])
+            continue
+        # Full: drop the lowest-scoring question that is not the sole carrier of any topic.
         counts = {}
         for q in chosen:
             for t in q["topic_ids"]:
@@ -342,6 +396,7 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
                 "score": score,
                 "score_parts": parts,
                 "sim_text": similarity_text(source["question_html"]),
+                "figures": figures(source["question_html"]),
                 "source_label": source["src_text"],
                 "paper_type": first.get("paper_type") or source["src_text"].split()[0],
                 "study_match_category": first.get("category"),
@@ -356,9 +411,9 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
     forced_in = [q for q in ranked if q["book_id"] in spec.get("force_include", {})]
     remaining = [q for q in ranked if q["book_id"] not in spec.get("force_include", {})]
 
-    remaining, dropped_repeats = diversify(remaining)
+    remaining, over_cap, dropped_repeats = diversify(remaining, forced_in)
     chosen = forced_in + apply_coverage(
-        remaining, top100, max(SHORTLIST_SIZE - len(forced_in), 0)
+        remaining, over_cap, top100, max(SHORTLIST_SIZE - len(forced_in), 0)
     )
     chosen.sort(key=lambda q: -q["score"])
 

@@ -94,14 +94,19 @@ Applied to the score-ranked list, before the coverage pass:
    is compared pairwise; **90% or more similar = the same question**, and only
    the higher-scoring one may appear (`DUPLICATE_THRESHOLD`). This is the same
    90% rule as the OP/PP design, used here only to stop a repeat taking a second slot.
-2. **At most two questions per topic** (a question's best-ranked topic,
-   `MAX_PER_TOPIC`). Extras are held back and used only if the list would
-   otherwise fall short of ten.
+2. **A reworded repeat is caught by its figures.** Two questions that share
+   at least 5 distinct figures, covering 60% or more of the smaller question's
+   figures, are the same problem (`SHARED_FIGURES_*`). Text similarity alone missed
+   AS 2's `-001` (MTP Jan 2026 Set 1), which is PYQ May 2024 Q1(b) with a new
+   company name and a shortened stem: 58% text match, 13 of 14 figures identical.
+3. **At most two questions per topic** (a question's best-ranked topic,
+   `MAX_PER_TOPIC`). Extras are held back and used **only** to cover a Top-100 topic nothing else covers — never to pad the list. A chapter with too few
+   distinct questions therefore yields fewer than ten, not a repeat.
 
 The build prints every repeat it drops and which twin it kept.
 
-**What this cannot catch.** Text similarity finds repeats, not *the same idea in
-a different story* — two different companies facing the same normal-versus-abnormal
+**What this cannot catch.** Similarity finds repeats and reworded repeats, not *the same idea in
+a different story*. AS 2's `-017` (Zing Ltd.) is the joint/by-product closing-stock problem again with new figures, but is mapped to an unrelated topic, so nothing mechanical sees it — it is excluded by hand with a written reason (`force_exclude`), and `M2C5U1-013` is the same template as the hand-picked `-003`, so it stays out for the same reason. Likewise two different companies facing the same normal-versus-abnormal
 loss trap read as different questions. The per-topic cap is the guard against
 that. It costs something real: on a chapter where one topic holds most of the
 strongest questions (AS 2's exclusions from cost), the cap pushes in questions

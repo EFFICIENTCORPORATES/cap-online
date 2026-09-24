@@ -55,6 +55,20 @@ Not changed: the Anatomy topic table still scrolls inside its own box on a phone
 Re-run the check any time: `/tmp`-style script is not kept in the repo — measure
 `document.documentElement.scrollWidth <= clientWidth` per page and width.
 
+**Must Practice follow-up (same day).** Pranav found two more repeats the first
+rule missed. `-001` (MTP Jan 2026 Set 1) is `-010` (PYQ May 2024) with a new
+company name and a shortened stem: only 58% text match, yet 13 of 14 figures
+identical. Added a second test: two questions sharing >=5 distinct figures
+covering >=60% of the smaller one's figures are the same problem. `-017`
+(Zing Ltd.) is the same joint/by-product problem again but mapped to an
+unrelated topic ("Cost Formula"), so nothing mechanical sees it: excluded by hand
+with a written reason. `-003` (MTP May 2023 Set 1 Q1(c)) added at Pranav's request via
+`force_include`. Held-back over-cap questions no longer pad the list (that
+had let the earlier `-004`/`-006` pair back in), so **AS 2 now has 9 questions,
+not 10** — deliberate: the ten-th would have been a repeat. Live version
+58f89b5b-b9ab-4ab4-97da-0f0de4ec385d.
+AS 2 list: 008, 002, 015, 006, 016, 010, 003, 007, 014.
+
 **Must Practice repeats.** AS 2's ten contained the same question twice (`-002`
 MTP Jan 2026 and `-012` PYQ Sep 2024, 100% identical text) and near-repeats
 (`-006`/`-005` Wooden Plywood, only the year changed; `-004` the same idea again),
