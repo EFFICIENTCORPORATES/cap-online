@@ -27,8 +27,7 @@ continues — don't let it go stale.
    "MTP-wise topic list" sheet exists by that name — Topic Attempts carries MTP
    marks/sittings; a dedicated MTP view would need building. Decide with Pranav.
 3. **Security hardening** — audited 2026-09-24; see `SECURITY.md`. Code fixes
-   written + tested locally, **not deployed** (run migration 0003 first, then
-   `wrangler deploy`). Still open: Always Use HTTPS, Cloudflare Access on
+   deployed 2026-09-24 (version 0c84998d, migration 0003 applied). Still open: Always Use HTTPS, Cloudflare Access on
    `/admin`, Bot Fight Mode + a rate-limit rule (dashboard); Turnstile (needs
    keys); report-only script CSP (code).
 

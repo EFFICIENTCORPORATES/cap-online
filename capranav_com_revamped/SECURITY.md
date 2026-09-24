@@ -43,7 +43,7 @@ Status legend: **FIXED** (in code, see "Deploy" below), **OPEN — dashboard**
 3. **Data:** D1 with bound parameters; R2 private behind the Worker; nightly D1
    backup tooling (`DATABASE-BACKUP.md`).
 
-## 4. Deploy order (code written and tested locally, NOT yet deployed)
+## 4. Deploy order — done; DEPLOYED 2026-09-24 (version 0c84998d-2c6f-44a7-9084-3bdbecc9b520; migration 0003 applied to remote D1))
 
 1. `npx wrangler d1 execute capranav-platform --remote --file=migrations/0003_otp_ip_rate_limit.sql`
    — **first**. The new Worker reads/writes `otp_codes.ip`; without the column,
