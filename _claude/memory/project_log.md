@@ -2,6 +2,28 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-24 — Must Practice rules written + encoded; AS 10 built locally
+
+Found that the Must Practice selection logic was never written down — the AS 2 list was
+hand-typed into the build script and only the reasoning, not the formula, survived. Wrote
+`MUST-PRACTICE-RULES.md` (the four weighted signals, why each, the coverage pass, the
+override policy) and encoded it as `SCORING` in `build_must_practice_data.py`, which now
+computes the shortlist and prints every score instead of rendering a fixed list.
+
+Encoding it reproduced 9 of AS 2's 10; it ranks `-009` above `-013`. Flagged the conflict
+rather than quietly matching the old list; Pranav chose the formula, so AS 2 was
+republished (version `34e43885`). Also flagged, and written into the rules: the coverage
+pass caps nothing, so AS 2's computed ten include six on one sub-topic.
+
+AS 10 built at `M2-C5-U2.json` with `published: false` — 10 of 16, all five Top-100 topics
+covered, pages 65–78. Note the JSON sits in the deploy folder, so it is fetchable by URL
+even though the page does not render it.
+
+Page resolver upgraded: questions printed twice in the book (home chapter + another
+chapter's Integrated section) previously resolved to None; now anchored by the median page
+of the unit's unambiguous questions. Still never guesses.
+
+
 ## 2026-09-23 — Telegram platform migration confirmed; duplicate content audited for removal
 
 Verified the migration rather than assuming it. The platform repo holds 6,228 files against this

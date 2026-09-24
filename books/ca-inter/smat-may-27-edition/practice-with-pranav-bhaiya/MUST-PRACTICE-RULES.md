@@ -1,0 +1,132 @@
+# Must Practice — how a question earns its place
+
+The rule this file states is the whole reason the shortlist is defensible. A
+student should be able to ask "why these ten?" and get the same answer every
+time, for every chapter.
+
+Until 2026-09-24 this logic lived only in one session's working notes: the AS 2
+list was computed, reviewed and published, but the formula behind it was never
+written down and the build script only *rendered* a hand-typed list of ten ids.
+That is fixed — `capranav_com_revamped/tools/build_must_practice_data.py` now
+computes the shortlist from the rules below.
+
+Encoding the formula reproduced nine of the ten questions in the AS 2 list that
+had already been published by hand. It differed on one: the hand-picked list
+kept `M2C5U1-013` (PYQ September 2025 — the most recent question actually set in
+a real exam on the chapter's top-ranked topic) while the formula ranks
+`M2C5U1-009` above it. Pranav's call, 2026-09-24: **the formula stands, and AS 2
+was republished to match it.** The rule is worth more than any one hand pick.
+
+## What the question is
+
+**"Which questions has ICAI most likely to set again in the next attempt?"** —
+not "which are hardest", not "which are most interesting to teach". Everything
+below follows from that one question.
+
+## The four signals, and why each is weighted as it is
+
+Every descriptive question in a unit is scored out of 1.0.
+
+| Signal | Weight | What it measures |
+|---|---:|---|
+| Topic weight | **40%** | How heavily that question's topic has actually been examined, from the 400-topic ranking built over the last ten PYQ sittings. Uses the topic's total allocated PYQ marks, capped at 5. |
+| Study Material match | **25%** | How close the question is to a question in ICAI's own Study Material. A = 1.0, B = its measured similarity %, C = 0.30, D = 0. |
+| Source and recency | **20%** | `0.45 × paper-type + 0.55 × recency`. MTP = 1.0, RTP = 0.95, **PYQ = 0.6**. Recency is the sitting's position across the ten-sitting window. |
+| Marks | **15%** | The question's marks, capped at 7. |
+
+Three of these deserve their reasoning stated, because they are the ones a
+reader would otherwise argue with:
+
+**Study Material match is the strongest single repeat signal.** ICAI visibly
+re-uses its own Study Material illustrations. A Category A question is one it
+has already lifted near-verbatim once; that it might do so again is the most
+concrete evidence available. It is not weighted higher than topic weight only
+because a perfect match on a topic that is never examined is still not worth a
+student's evening.
+
+**A PYQ scores *lower* than an MTP or RTP (0.6 vs 1.0/0.95).** This looks
+backwards and is deliberate. A question already set in a past exam has, in that
+exact form, just been used. MTPs and RTPs are ICAI *signalling what it is
+thinking about* for the sitting ahead, so they are the better predictor of the
+next paper. A PYQ still scores well when its topic is heavy — it simply does
+not get a bonus for having already appeared.
+
+**Recency is a gradient, not a cutoff.** Nothing is excluded for being old; a
+2023 MTP on a heavily examined topic can still outrank a recent one on a thin
+topic.
+
+## The coverage pass
+
+Raw score alone clusters. On AS 2, six of the top ten by raw score are
+near-identical questions on exclusions from cost of inventories, and three
+Top-100 topics went untouched entirely.
+
+So after ranking:
+
+1. Take the top N by score (N = 10).
+2. Find any Top-100 topic of that chapter with no question in the set.
+3. For each, add the highest-scoring question that covers it.
+4. To stay at N, drop the lowest-scoring question whose every topic is still
+   covered by at least one other question in the set — never one that is the
+   sole carrier of a topic.
+
+Every question in the final set still had to score well on its own; coverage
+only decides *which* of several strong candidates makes it.
+
+On AS 2 this swaps out `M2C5U1-016` and `-013` — each redundant, their topics
+already carried by higher-scoring questions — for `-010` (Joint and By-Products,
+the only question covering it, and the largest at 7 marks) and `-007` (retail
+method and NRV estimation). That is the published list.
+
+**A known limitation, stated plainly.** The coverage pass guarantees no Top-100
+topic is *missed*; it does not cap how many questions may share one topic. On
+AS 2 the result is six of ten on exclusions from cost of inventories. Those six
+genuinely are the highest-scoring questions in the chapter, so the formula is
+behaving as written — but if a session wants more spread, the fix is a per-topic
+cap in the coverage pass, not a hand edit to the list.
+
+## What is deliberately not in the formula
+
+- **Difficulty.** Not a predictor of what gets set, and the corpus has no
+  trustworthy difficulty field.
+- **Teaching order.** A chapter's natural teaching sequence is a different
+  concern from exam probability; ordering the printed list by it would hide the
+  ranking that justifies the list.
+- **Anything hand-tuned per question.** A thumb on the scale for a question
+  someone likes defeats the point. Overrides exist (below) but must be stated.
+
+## Overrides
+
+`build_must_practice_data.py`'s `UNITS` table accepts, per unit:
+
+- `force_include` / `force_exclude` — ids that must or must not appear,
+  **each with a written reason**, applied after scoring and before coverage.
+- `why_overrides` — replaces the auto-generated "Why this one" line on a card
+  with hand-written wording.
+
+Overrides are for real editorial judgement the formula cannot see — not for
+nudging a ranking. If a unit needs several, the formula is wrong and should be
+fixed instead.
+
+AS 2's ten carry `why_overrides` so every card reads in one voice rather than
+mixing reviewed prose with generated lines. They change the wording only —
+never which questions are chosen.
+
+## Inputs
+
+All already reviewed; nothing here is re-typed or re-derived:
+
+| Input | File |
+|---|---|
+| Topic ranks, priority bands, per-question topic mapping, Study Material match category and % | `data/descriptive_topic_priority.json` |
+| Verbatim question and answer HTML, marks, source label, badges, Author's Note | `data/mcq-library/*_Descriptive.json` |
+| Printed page number in the Question Bank | the distributed `..._V1.pdf`, matched on each question's own printed header line |
+
+## Changing the rules
+
+Change the weights in one place — `SCORING` in
+`build_must_practice_data.py` — then re-run. The script prints each unit's full
+ranking with the score breakdown, so the effect on every published unit is
+visible before anything is deployed. Update this file in the same commit: a
+weight that is in the code but not described here is exactly the situation this
+document exists to prevent.

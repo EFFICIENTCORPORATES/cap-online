@@ -7,6 +7,49 @@ continues — don't let it go stale.
 
 ---
 
+### Must Practice selection rules written down and encoded; AS 10 built locally — 2026-09-24
+
+The AS 2 shortlist was published on 2026-09-23 as a hand-typed list of ten ids:
+the reasoning existed, the formula behind it did not. `build_must_practice_data.py`
+only rendered what a session had picked, so a second unit would have been a fresh
+judgement call with nothing to hold it to.
+
+New `books/ca-inter/smat-may-27-edition/practice-with-pranav-bhaiya/MUST-PRACTICE-RULES.md`
+states the rule and the reasoning behind each weight — including the two a reader
+would argue with: why Study-Material match is weighted so heavily, and why a PYQ
+scores *lower* than an MTP/RTP (an MTP/RTP signals the paper ahead; a PYQ in that
+exact form has just been used). `SCORING` in the build script is now the single
+place the weights live, and the script computes the shortlist and prints every
+question's score.
+
+**Encoding the formula changed AS 2 by one question.** It reproduced nine of the
+ten; it ranks `M2C5U1-009` above `M2C5U1-013`, where the hand pick had kept -013
+as the most recent question actually set in a real exam. Pranav's call: the
+formula stands, and AS 2 was republished to match. Deployed version
+`34e43885-87cd-4822-91a2-cfa8b43d573f`.
+
+A limitation is stated in the rules rather than hidden: the coverage pass
+guarantees no Top-100 topic is missed but does not cap duplication, so AS 2's
+computed ten include six on exclusions from cost of inventories. The fix, if
+wanted, is a per-topic cap in the coverage pass — not a hand edit.
+
+**AS 10 (`M2-C5-U2`) built locally**, `published: false`, so the live picker still
+shows only AS 2. Ten questions from a library of 16, all five Top-100 topics of
+the chapter covered, pages 65–78.
+
+The page resolver was upgraded along the way: two AS 10 questions are printed
+twice in the book (home chapter plus another chapter's Integrated section), so
+their header matched two pages and the old resolver returned None. It now
+resolves the unambiguous questions first, uses their median page to locate the
+chapter, and picks whichever hit sits nearest — still returning None, never a
+guess, when nothing anchors the chapter. AS 2's page numbers are unchanged.
+
+Open: two AS 10 questions (`-007`, `-008`) tie at exactly 0.487 with two others
+from the same RTP, so which two make the cut is currently sort order rather than
+a real distinction.
+
+---
+
 ### Question Bank e-book moved to VC Gurukul checkout — published 2026-09-23
 
 The ₹199 Question Bank e-book is no longer sold through this site's Razorpay
