@@ -2,6 +2,12 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-24 — capranav.com Videos & Shorts page (deployed)
+
+`/videos/` with Videos + Shorts tabs, auto-scroll feed, settings; data in `public/videos/videos.json`, D1 move
+documented in `capranav_com_revamped/VIDEOS.md`. Also: Must Practice AS 2 + AS 10 both live at ten questions each.
+Still queued: Excel downloads of the priority workbook sheets.
+
 ## 2026-09-24 — capranav.com mobile fix + Must Practice de-duplication (deployed)
 
 Mobile: leaked bare `table{min-width:1180px}` in shared anatomy.css forced every table (incl. question tables) wide;

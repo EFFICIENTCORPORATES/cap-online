@@ -1,0 +1,24 @@
+{
+  "_readme": "Source of truth for /videos/. Edit this file, then run `npx wrangler deploy`. Planned: move to a D1 `videos` table + admin page (see ../../VIDEOS.md). `id` is the 11-character YouTube video id (works for Shorts too). `important: true` shows the Important badge and includes the video in the Important filter and the homepage strip. `type` is \"video\" or \"short\". Array order is display order within a group.",
+  "updated": "2026-09-24",
+  "groups": [
+    { "id": "study-plan", "type": "video", "title": "Strategy & study plan", "blurb": "How to plan, what to study, and how to use the time you have left." },
+    { "id": "as-revision", "type": "video", "title": "Advanced Accounting revision", "blurb": "Chapter-wise revision with the questions that matter." },
+    { "id": "exam-technique", "type": "short", "title": "Exam technique", "blurb": "Short, sharp tips for the exam hall." },
+    { "id": "mindset", "type": "short", "title": "Motivation & mindset", "blurb": "For the days the preparation feels heavy." }
+  ],
+  "videos": [
+    { "id": "nNrcAZEIk_k", "type": "video", "group": "study-plan", "important": true, "title": "Daily Study Routine", "youtube_title": "The Perfect Study Timetable to Score Higher" },
+    { "id": "2edMZYIWsxI", "type": "video", "group": "study-plan", "important": true, "title": "90 days before the exam — Sep 26 preparation strategy", "youtube_title": "Every CA Inter Sep 2026 Student Is Making These Mistakes | Fix It Now" },
+    { "id": "DUzd3cd4_S0", "type": "video", "group": "study-plan", "important": true, "title": "CA Inter Accounting: all important chapters, topics & questions", "youtube_title": "CA Inter Accounting All Important Chapters, Topics & Questions | Sep 2026" },
+    { "id": "ryHRuGAQVPo", "type": "video", "group": "as-revision", "important": true, "title": "AS 2 — Inventories: complete revision", "youtube_title": "AS 02 Inventories Complete Revision | CA Inter Advanced Accounting" },
+    { "id": "Wd-EaLhZGgQ", "type": "video", "group": "as-revision", "important": true, "title": "AS 10 — Property, Plant and Equipment: revision", "youtube_title": "CA Inter AS 10 PPE Revision | Concepts With All Important Questions" },
+    { "id": "qhVNATqDLtY", "type": "video", "group": "as-revision", "important": true, "title": "AS 13 — Accounting for Investments", "youtube_title": "AS 13: Accounting for Investments | CA Inter Advanced Accounting" },
+    { "id": "MSp0F52M6c0", "type": "video", "group": "as-revision", "important": true, "title": "AS 16 — Borrowing Costs: concepts with important questions", "youtube_title": "CA Inter AS 16 Borrowing Costs | Concepts With All Important Questions" },
+
+    { "id": "0G3eN7OGzj8", "type": "short", "group": "exam-technique", "important": true, "title": "Best 3 ninja techniques to crack the CA exam", "youtube_title": "Best 3 Ninja Technique to Crack CA Exam" },
+    { "id": "jUzJAZrPCwE", "type": "short", "group": "exam-technique", "important": true, "title": "Become a problem solver, then accounting gets fun", "youtube_title": "Problem Solver Bano, Tab Maja Ayega" },
+    { "id": "BAnBpU0o4Nc", "type": "short", "group": "mindset", "important": true, "title": "A story that can change how you see your preparation", "youtube_title": "Yai Story Aapko Puri Tarah Change Kar Degi" },
+    { "id": "Q1AryOeDKw0", "type": "short", "group": "mindset", "important": true, "title": "How Byju's fell — and what it teaches a student", "youtube_title": "Byju's Kaise Barbad Hua?" }
+  ]
+}

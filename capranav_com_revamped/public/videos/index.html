@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Watch CA Pranav's strategy videos, Advanced Accounting revision lectures and Shorts right here — no need to leave the site.">
+  <title>Videos &amp; Shorts · CA Pranav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/anatomy.css">
+  <link rel="stylesheet" href="/assets/videos.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span>P</span> CA PRANAV</a>
+    <a class="back" href="/">Home</a>
+  </header>
+
+  <main>
+    <section class="hero vhero">
+      <p class="kicker">Watch here</p>
+      <h1>Videos <em>&amp; Shorts</em></h1>
+      <p class="intro">Strategy, revision and quick tips &mdash; all playable on this page.</p>
+    </section>
+
+    <div class="tabs" role="tablist" aria-label="Video type">
+      <button type="button" role="tab" id="tab-video" aria-selected="true" data-tab="video">Videos</button>
+      <button type="button" role="tab" id="tab-short" aria-selected="false" data-tab="short">Shorts</button>
+    </div>
+
+    <section id="pane-video" class="pane" role="tabpanel" aria-labelledby="tab-video">
+      <div class="chips" id="chips-video" aria-label="Filter videos"></div>
+      <div class="player-wrap" id="player-wrap" hidden>
+        <div class="player-frame"><div id="player-host"></div></div>
+        <div class="player-meta">
+          <h2 id="player-title"></h2>
+          <a id="player-yt" class="yt-link" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+        </div>
+      </div>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <section id="pane-short" class="pane" role="tabpanel" aria-labelledby="tab-short" hidden>
+      <div class="chips" id="chips-short" aria-label="Filter Shorts"></div>
+      <div class="reel-layout" id="reel-layout">
+        <div class="reel-col">
+          <div class="reel-frame" id="reel-frame">
+            <div class="reel" id="reel" tabindex="0" aria-label="Shorts feed. Use the arrow keys to move between Shorts."></div>
+            <div class="reel-nav">
+              <button type="button" id="reel-up" aria-label="Previous Short">▲</button>
+              <button type="button" id="reel-down" aria-label="Next Short">▼</button>
+            </div>
+          </div>
+        </div>
+        <aside class="reel-settings" aria-label="Shorts settings">
+          <h3>Settings</h3>
+          <label class="switch"><input type="checkbox" id="opt-auto" checked> <span>Auto-scroll to the next Short</span></label>
+          <label class="switch"><input type="checkbox" id="opt-loop"> <span>Loop this Short</span></label>
+          <label class="switch"><input type="checkbox" id="opt-mute" checked> <span>Sound off</span></label>
+          <label class="field">Speed
+            <select id="opt-speed">
+              <option value="0.75">0.75×</option><option value="1" selected>1×</option>
+              <option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option>
+            </select>
+          </label>
+          <label class="field">Size
+            <select id="opt-size">
+              <option value="compact">Compact</option><option value="comfort" selected>Comfortable</option><option value="large">Large</option>
+            </select>
+          </label>
+          <p class="hint" id="reel-status" aria-live="polite"></p>
+          <p class="hint">Keys: ↑ ↓ or J / K to move, Space to play or pause.</p>
+        </aside>
+      </div>
+    </section>
+
+    <p class="notice" id="empty" hidden>Nothing here yet.</p>
+  </main>
+
+  <footer>CA Pranav Pratik Tulshyan &middot; CA Inter Advanced Accounting</footer>
+  <script src="/assets/videos.js"></script>
+</body>
+</html>

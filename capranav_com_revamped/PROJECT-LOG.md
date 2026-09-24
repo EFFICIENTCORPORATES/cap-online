@@ -9,14 +9,11 @@ continues — don't let it go stale.
 
 ## Open TODO list (added 2026-09-24 — keep this current)
 
-1. **YouTube player + Shorts viewer** (`/videos/`). Official `youtube-nocookie.com`
-   embed, IFrame Player API. Data in one `videos.json` for now (long videos +
-   Shorts: id, title, type, group, order); **document the later move to a D1
-   `videos` table + admin page**. Shorts viewer: custom vertical scroll-snap feed,
-   auto-advance on end (toggle), loop, mute, speed, group chips, deep links.
-   Public, no login (may change later). Groups decided from the *nature* of the
-   videos once Pranav sends the links (check each link: `/shorts/` = Short; title
-   via YouTube oEmbed). Autoplay starts muted (browser rule). Not deployed yet.
+1. **YouTube player + Shorts viewer** — BUILT and live 2026-09-24 at `/videos/`
+   (version 328ecf4c). See `VIDEOS.md` (design, `videos.json` schema, D1 migration
+   plan). Demo list: 7 videos + 4 Shorts. Open: Pranav to review the 4 Shorts (picked
+   from titles/hashtags, not watched) and send more links; a D1 table + admin form
+   is the planned next step.
 2. **Downloadable Excel tables.** Buttons such as "Top 100 topic list" that download
    sheets of `books/ca-inter/smat-may-27-edition/practice-with-pranav-bhaiya/data/
    ca_inter_descriptive_topic_priority_v1.xlsx`: Top 100 PYQ, Chapter Priority,
@@ -30,6 +27,24 @@ continues — don't let it go stale.
    deployed 2026-09-24 (version 0c84998d, migration 0003 applied). Still open: Always Use HTTPS, Cloudflare Access on
    `/admin`, Bot Fight Mode + a rate-limit rule (dashboard); Turnstile (needs
    keys); report-only script CSP (code).
+
+---
+
+### Videos & Shorts page — 2026-09-24
+
+New public page `/videos/` (no login): Videos tab (grouped cards + one player) and a
+Shorts tab (vertical scroll-snap feed, one live player at a time). Settings: auto-scroll
+on end (default on), loop, sound, speed 0.75-2x, size; keyboard/swipe/buttons; deep links.
+Data is `public/videos/videos.json`; the later move to D1 is documented in `VIDEOS.md`.
+Verified in headless Edge on localhost and live: all 11 embeds mount with no player
+error; ArrowDown moves to the next Short and updates the URL hash; **auto-scroll**
+advanced after a real Short ended (at 2x speed); **loop** held the same Short past
+its end; no horizontal overflow at 320/390/768/1440px. Layout fills a phone screen.
+Found on the channel and deliberately not listed: other faculty's lectures (Subham
+Singh, Shrey Rathi, Gurpreet Singh, Jyoti Deshwal). Homepage got a nav link and a
+"Watch" section; the practice card now says AS 2 and AS 10 are live.
+Not tested: real phone hardware, or sound-on autoplay (headless runs with the
+autoplay flag); the muted-first fallback and "Tap for sound" button are in place.
 
 ---
 
