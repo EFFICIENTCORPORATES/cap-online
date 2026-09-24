@@ -7,6 +7,31 @@ continues — don't let it go stale.
 
 ---
 
+### Must Practice surfaced on the homepage — 2026-09-24
+
+Checked how a student actually reaches the Must Practice page and found they
+effectively could not: the homepage had no link to it, or to the practice hub at
+all. The only route was capranav.com → `/anatomy/` → the practice hub → the card,
+three clicks deep behind a link titled "The Anatomy of Advanced Accounts", which
+gives no hint that practice questions sit behind it.
+
+The near-miss worth recording: the homepage already had a section headed
+**"Practice"** containing only the Telegram MCQ bot and the Anatomy explorer — a
+practice section that did not mention the practice questions.
+
+Added a card to that existing section, placed first, and reworded the heading
+from "Free MCQ practice." to "Practice, free." — the old heading would have
+misdescribed the section the moment a descriptive-question card sat under it.
+Deployed version `8f622617-0465-4a1c-8165-d00f2285093c`, verified live: the
+homepage carries the link, the heading changed, and the target returns 200.
+
+One self-inflicted thing caught and fixed in the same pass: a temporary `__p.html`
+iframe harness used to screenshot the section was deployed to production to take
+the shot. Removed and redeployed; confirmed it now 404s. Screenshot harnesses
+belong on the local dev server, not on the live site.
+
+---
+
 ### Must Practice selection rules written down and encoded; AS 10 built locally — 2026-09-24
 
 The AS 2 shortlist was published on 2026-09-23 as a hand-typed list of ten ids:
