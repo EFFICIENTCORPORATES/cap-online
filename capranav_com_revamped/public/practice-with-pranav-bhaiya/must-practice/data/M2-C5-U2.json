@@ -7,7 +7,7 @@
  "book_edition": "CA Inter Advanced Accounts — The Complete Question Bank, First Edition (V1)",
  "generated_on": "2026-09-24",
  "library_total": 16,
- "published": false,
+ "published": true,
  "questions": [
   {
    "position": 1,
@@ -121,6 +121,42 @@
   },
   {
    "position": 4,
+   "book_id": "M2C5U2-005",
+   "source_label": "PYQ May 2025",
+   "paper_type": "PYQ",
+   "question_no": "Q1(a)",
+   "marks_text": "Marks: 7",
+   "approx_time_text": "Approx Time: 13 minutes (approx.)",
+   "topic_text": "Topic 2.6-2.7: Costs of relocating/reorganising operations excluded from the cost of an asset; computing the directly attributable acquisition cost of land net of recoverable GST on salvage proceeds",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U2-T2.6",
+     "topic_name": "Measurement of PPE",
+     "overall_rank": 68,
+     "priority_band": "Next 50"
+    },
+    {
+     "topic_id": "M2-C5-U2-T2.7",
+     "topic_name": "Initial Recognition",
+     "overall_rank": 69,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [
+    "Compulsory"
+   ],
+   "study_match_category": "B",
+   "study_match_percent": 55.4,
+   "why": "Rank 68 topic (Measurement of PPE); 55% match to an ICAI Study Material question; PYQ May 2025; covers 2 mapped topics.",
+   "score": 0.6836,
+   "book_page": 70,
+   "question_html": "<p>Hardy Ltd. intends to extend the factory set up on the adjacent plot with disintegrated old premises. It acquired the land having an area of 250 hectares at a cost of ₹25,000 per hectare.</p>\n<p>Hardy Ltd. incurred Stamp duty and registration charges of 5% of land value. Legal fees were paid ₹4,75,000 for land acquisition.</p>\n<p>Hardy Ltd. incurred ₹37,85,000 for demolishing old premises thereon. A sum of ₹12,60,000 (including 5% GST thereon) was realized from the sale of material salvaged from the site.</p>\n<p>Till the new site with extended factory premises is ready, the company needs to move the present production facilities to another (temporary) site. The following incremental costs will be incurred.</p>\n<p>(1) Set up costs of ₹7,50,000 to install machinery in the new location. (2) Rent of ₹12,00,000. (3) Removal costs of ₹2,50,000 to transport the machinery from the old location to the temporary location.</p>\n<p>(i) Management is of the opinion that the cost of moving the production facilities to another temporary location can be capitalised. You are required to advise. (ii) You are also required to compute the cost of land acquired. (7 Marks)</p>",
+   "answer_html": "<p><strong>(i)</strong> Constructing or acquiring a new asset may result in incremental costs that would have been avoided if the asset had not been constructed or acquired. These costs are not to be included in the cost of the asset if they are not directly attributable to bringing the asset to the location and condition necessary for it to be capable of operating in the manner intended by management. The costs to be incurred by the company are in the nature of costs of relocating or reorganising operations of the company and do not meet the requirement of AS 10 (Revised). Therefore, these costs cannot be capitalized.</p>\n<p><strong>(ii) Computation of cost of land:</strong></p>\n<table>\n<thead><tr><th>Particulars</th><th></th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>Purchase Price</td><td>250 hectares × ₹25,000 per hectare</td><td>62,50,000</td></tr>\n<tr><td>Stamp Duty and Registration Charges</td><td>5% of ₹62,50,000</td><td>3,12,500</td></tr>\n<tr><td>Legal and Consultancy Fees</td><td></td><td>4,75,000</td></tr>\n<tr><td>Demolition Expenses (Net of Salvage Income)</td><td>₹37,85,000 − ₹12,60,000 × (100/105) [i.e. ₹37,85,000 − ₹12,00,000]</td><td>25,85,000</td></tr>\n<tr><td><strong>Cost of Land</strong></td><td></td><td><strong>96,22,500</strong></td></tr>\n</tbody>\n</table>",
+   "mistake_type": "icai",
+   "mistake_text": "Examiner’s Comment: A significant number of examinees displayed a lack of understanding of the provisions of AS 10 \"Property, Plant and Equipment.\" Instead of applying the correct provisions, many examinees incorrectly based their responses on AS 16 — Borrowing Costs, especially while commenting on the capitalisation of expenses related to the relocation of production facilities. Additionally, several examinees were unable to accurately compute the cost of land."
+  },
+  {
+   "position": 5,
    "book_id": "M2C5U2-015",
    "source_label": "PYQ May 2026",
    "paper_type": "PYQ",
@@ -150,7 +186,7 @@
    "mistake_text": "Author’s Note: Many examinees debited the entire ₹3,50,000 impairment loss to the profit and loss account, not applying AS 28's requirement (para 58) to first set off an impairment loss on a revalued asset against the remaining balance in that asset's revaluation reserve before charging the balance to P&L. Several also capitalised the ₹10,800 delay-related expenses instead of expensing them, since the asset was already ready for use on 1st October, 2022."
   },
   {
-   "position": 5,
+   "position": 6,
    "book_id": "M2C5U2-004",
    "source_label": "PYQ May 2023",
    "paper_type": "PYQ",
@@ -180,7 +216,7 @@
    "mistake_text": "Author’s Note: Many examinees computed depreciation for the exchanged machine only up to the date of disposal without also computing a full 9-month depreciation charge on the new machine's cost from the date of exchange, understating the year's total depreciation figure. Some examinees also used the exchange value (₹8,25,000) directly as the sale proceeds without first reducing the old machine's book value to its 30th June written-down value, misstating the loss transferred on exchange."
   },
   {
-   "position": 6,
+   "position": 7,
    "book_id": "M2C5U2-016",
    "source_label": "RTP May 2026",
    "paper_type": "RTP",
@@ -208,63 +244,7 @@
    "mistake_text": "Author’s Note: Many examinees included the relocation cost and the inauguration-function cost in the capitalised cost of the factory, failing to apply AS 10's distinction between costs necessary to bring an asset to its working condition and costs merely associated with commissioning it. Several also capitalised the gross interest of ₹3,78,000 without netting the ₹50,000 temporary-investment income against it, as AS 16 requires."
   },
   {
-   "position": 7,
-   "book_id": "M2C5U2-007",
-   "source_label": "RTP January 2026",
-   "paper_type": "RTP",
-   "question_no": "Q9(i)",
-   "marks_text": "Marks:Not stated in source",
-   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
-   "topic_text": "Topic 2.5: Nil depreciable amount when residual value equals cost",
-   "topics": [
-    {
-     "topic_id": "M2-C5-U2-T2.5",
-     "topic_name": "Recognition Criteria for PPE",
-     "overall_rank": 92,
-     "priority_band": "Next 50"
-    }
-   ],
-   "badges": [],
-   "study_match_category": "C",
-   "study_match_percent": null,
-   "why": "Rank 92 topic (Recognition Criteria for PPE); RTP January 2026.",
-   "score": 0.4868,
-   "book_page": 72,
-   "question_html": "<p>Machinery purchased 1st April, 2020 for ₹10 lakhs, useful life 5 years, residual value (at 2020 prices) ₹10 lakhs. Calculate depreciation for the year ended 31st March, 2025 per AS 10 (Revised).</p>",
-   "answer_html": "<div><p><strong>Nil.</strong> Since the residual value (₹10 lakhs) equals the cost (₹10 lakhs), the depreciable amount is nil; depreciation is correctly zero throughout the asset's life.</p></div>",
-   "mistake_type": "synth",
-   "mistake_text": "Author’s Note: Some examinees computed depreciation on the full cost, ignoring the stated residual value entirely."
-  },
-  {
    "position": 8,
-   "book_id": "M2C5U2-008",
-   "source_label": "RTP January 2026",
-   "paper_type": "RTP",
-   "question_no": "Q9(ii)",
-   "marks_text": "Marks:Not stated in source",
-   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
-   "topic_text": "Topic 2.5: Freehold land is not depreciated - unlimited useful life",
-   "topics": [
-    {
-     "topic_id": "M2-C5-U2-T2.5",
-     "topic_name": "Recognition Criteria for PPE",
-     "overall_rank": 92,
-     "priority_band": "Next 50"
-    }
-   ],
-   "badges": [],
-   "study_match_category": "C",
-   "study_match_percent": null,
-   "why": "Rank 92 topic (Recognition Criteria for PPE); RTP January 2026.",
-   "score": 0.4868,
-   "book_page": 72,
-   "question_html": "<p>The company owns a piece of land acquired for ₹50 lakhs, held for use in its factory operations. Calculate depreciation for the year ended 31st March, 2025.</p>",
-   "answer_html": "<div><p><strong>Nil.</strong> Land has an unlimited useful life (unless it is a wasting asset such as a quarry) and is therefore not depreciated.</p></div>",
-   "mistake_type": "synth",
-   "mistake_text": "Author’s Note: A basic but recurring error is depreciating land alongside buildings without separating the two components."
-  },
-  {
-   "position": 9,
    "book_id": "M2C5U2-006",
    "source_label": "RTP January 2025",
    "paper_type": "RTP",
@@ -292,7 +272,7 @@
    "mistake_text": "Author’s Note: A common error is expensing the replacement turbine's cost entirely, or recognising it without first derecognising the estimated carrying amount of the original turbine component being replaced, resulting in double-counting of the turbine's net book value under AS 10's component approach."
   },
   {
-   "position": 10,
+   "position": 9,
    "book_id": "M2C5U2-012",
    "source_label": "RTP September 2025",
    "paper_type": "RTP",
@@ -318,6 +298,34 @@
    "answer_html": "<div>\n<table><tbody>\n<tr><td>Purchase Price</td><td>12,00,000</td></tr>\n<tr><td>Freight &amp; Insurance</td><td>60,000</td></tr>\n<tr><td>Erection Charges</td><td>40,000</td></tr>\n<tr><td>Net Cost of Testing (25,000+10,000−8,000 sale proceeds)</td><td>27,000</td></tr>\n<tr><td><strong>Cost of Machinery</strong></td><td><strong>13,27,000</strong></td></tr>\n</tbody></table>\n</div>",
    "mistake_type": "synth",
    "mistake_text": "Author’s Note: Some examinees capitalised the gross testing cost (35,000) without netting off the ₹8,000 proceeds from sale of test-run output."
+  },
+  {
+   "position": 10,
+   "book_id": "M2C5U2-014",
+   "source_label": "RTP September 2025",
+   "paper_type": "RTP",
+   "question_no": "Q12(iii)",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.4: Relocation/reorganisation costs are never capitalised, regardless of connection to a specific asset",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U2-T2.4",
+     "topic_name": "Other Definitions",
+     "overall_rank": 232,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 232 topic (Other Definitions); RTP September 2025.",
+   "score": 0.341,
+   "book_page": 76,
+   "question_html": "<p>On 15th March 2025, Precision Tools Ltd. shifted a machine from one factory to another, incurring: Dismantling cost ₹12,000; Transport and installation ₹18,000; Loss due to damage in transit ₹6,000. Calculate the amount to be capitalized.</p>",
+   "answer_html": "<div><p><strong>Nil is capitalised</strong> — costs of relocating or reorganising part or all of an enterprise's operations are not included in the carrying amount of PPE under AS 10. The entire ₹36,000 (12,000+18,000+6,000) is charged off to the Profit and Loss Account.</p></div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees capitalised the transport and installation cost, reasoning it was directly attributable to the machine, missing AS 10's specific exclusion of relocation costs regardless of their connection to a particular asset."
   }
  ]
 }

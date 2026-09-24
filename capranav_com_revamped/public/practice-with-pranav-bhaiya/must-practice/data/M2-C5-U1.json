@@ -143,6 +143,42 @@
   },
   {
    "position": 5,
+   "book_id": "M2C5U1-009",
+   "source_label": "MTP November 2023 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q1(a)",
+   "marks_text": "Marks: 5",
+   "approx_time_text": "Approx Time: 9 minutes (approx.)",
+   "topic_text": "Topic 1.3/1.9: Costs excluded from cost of inventories and expensed as incurred (abnormal waste, unnecessary storage, non-contributing admin overheads, selling/distribution costs); lower-of-cost-and-NRV valuation with the agent's selling commission deducted from expected sale value",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U1-T1.9",
+     "topic_name": "Exclusions from the cost of inventories",
+     "overall_rank": 55,
+     "priority_band": "Next 50"
+    },
+    {
+     "topic_id": "M2-C5-U1-T1.3",
+     "topic_name": "Measurement of Inventories",
+     "overall_rank": 224,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [
+    "Compulsory"
+   ],
+   "study_match_category": "B",
+   "study_match_percent": 80.4,
+   "why": "Costs excluded from inventory cost, at an 80% match to an ICAI Study Material question.",
+   "score": 0.7304,
+   "book_page": 53,
+   "question_html": "<p>(i) “In determining the cost of inventories, it is appropriate to exclude certain costs and recognize them as expenses in the period in which they are incurred”. Provide examples of such costs as per AS 2 ‘Valuation of Inventories’.</p>\n<p>(ii) X Limited purchased goods at the cost of ₹40 lakhs in October, 2022. Till March, 2023, 75% of the stocks were sold. The company wants to disclose closing stock at ₹10 lakhs. The expected sale value is ₹11 lakhs and a commission at 10% on sale is payable to the agent. Advise, what is the correct value of closing stock to be disclosed as at 31.3.2023.</p>",
+   "answer_html": "<p>(i) As per AS 2 ‘Valuation of Inventories’, certain costs are excluded from the cost of the inventories and are recognized as expenses in the period in which incurred. Examples of such costs are:</p>\n<ol type=\"a\">\n<li>abnormal amount of wasted materials, labour, or other production costs;</li>\n<li>storage costs, unless those costs are necessary in the production process prior to a further production stage;</li>\n<li>administrative overheads that do not contribute to bringing the inventories to their present location and condition; and</li>\n<li>selling and distribution costs.</li>\n</ol>\n<p>(ii) As per AS 2 “Valuation of Inventories”, the inventories are to be valued at lower of cost or net realizable value. In this case, the cost of inventory is ₹10 lakhs. The net realizable value is ₹11,00,000 × 90% = ₹9,90,000. So, the stock should be valued at ₹9,90,000.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is treating storage costs as always excludable rather than only when unnecessary to a further production stage in part (i); and in part (ii), comparing the disclosed cost of ₹10 lakhs against the gross expected sale value of ₹11 lakhs instead of first deducting the 10% agent's commission, which changes the net realizable value from ₹11,00,000 to ₹9,90,000 and hence which figure actually governs."
+  },
+  {
+   "position": 6,
    "book_id": "M2C5U1-016",
    "source_label": "RTP September 2024",
    "paper_type": "RTP",
@@ -170,7 +206,7 @@
    "mistake_text": "Author’s Note: A common error is including the ₹100 lakh interest component within fixed production overheads when arriving at the cost of inventory, instead of excluding financing costs that are not part of bringing the inventory to its present location and condition."
   },
   {
-   "position": 6,
+   "position": 7,
    "book_id": "M2C5U1-010",
    "source_label": "PYQ May 2024",
    "paper_type": "PYQ",
@@ -206,7 +242,7 @@
    "mistake_text": "Examiner’s Comment: Most examinees correctly calculated the cost of conversion for allocation between joint products, Polyester and Nylon, but made errors in deducting the NRV of the by-product fiber and sale value of scrap. Additionally, some deducted profit when calculating the net realizable value of the by-product fiber, leading to incorrect answers."
   },
   {
-   "position": 7,
+   "position": 8,
    "book_id": "M2C5U1-003",
    "source_label": "MTP May 2023 Set 1",
    "paper_type": "MTP",
@@ -242,7 +278,7 @@
    "mistake_text": "Author’s Note: A common error is absorbing fixed overhead over actual production (10,200 kg used) instead of the expected/normal capacity of 15,000 kg when computing cost of production, or valuing raw material at replacement cost regardless of whether the related finished goods sell below cost – AS 2 only permits marking raw material down to replacement cost when the finished product it converts into cannot recover its own cost."
   },
   {
-   "position": 8,
+   "position": 9,
    "book_id": "M2C5U1-007",
    "source_label": "MTP May 2026 Set 1",
    "paper_type": "MTP",
@@ -278,7 +314,7 @@
    "mistake_text": "Author’s Note: Several examinees applied the gross margin percentage directly to sales value instead of grossing up cost through the margin percentage, producing an incorrect closing stock figure in part (i) under AS 2; in part (ii), some compared cost against the normal selling price instead of the defect-adjusted net realisable value."
   },
   {
-   "position": 9,
+   "position": 10,
    "book_id": "M2C5U1-014",
    "source_label": "RTP January 2026",
    "paper_type": "RTP",

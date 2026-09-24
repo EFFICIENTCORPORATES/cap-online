@@ -55,6 +55,19 @@ Not changed: the Anatomy topic table still scrolls inside its own box on a phone
 Re-run the check any time: `/tmp`-style script is not kept in the repo — measure
 `document.documentElement.scrollWidth <= clientWidth` per page and width.
 
+**Must Practice: back to ten, AS 10 live (same day).** Pranav's ruling: the list is
+always ten and the rules apply to every unit. The "never pad" change was reversed:
+over-cap questions now cover a Top-100 topic first, then pad to ten by score.
+AS 2 (10): 008, 002, 015, 006, 009, 016, 010, 003, 007, 014 (`-004` hand-excluded:
+same idea as `-006`). AS 10 published (10): 002, 011, 001, 005, 015, 004, 016, 006,
+012, 014. AS 10 hand exclusions: `-007`..`-010` (the four parts of `-002`, each
+reissued alone in RTP Jan 2026 — too few figures for the repeat test) and `-013`
+(replaced-component idea of `-006`). All hand exclusions and the one soft spot (AS 2
+`-009` half-repeats `-002`'s theory) are tabulated in `MUST-PRACTICE-RULES.md`.
+Live version 39076892-8127-446b-8a02-08fe8e93685d; picker shows AS 10, 10 rows,
+no horizontal overflow at 390 or 1280px. Known gap: the page still says AS 13, 16,
+19, 26, 28 are "coming soon"; the remaining units need the same review before publishing.
+
 **Must Practice follow-up (same day).** Pranav found two more repeats the first
 rule missed. `-001` (MTP Jan 2026 Set 1) is `-010` (PYQ May 2024) with a new
 company name and a shortened stem: only 58% text match, yet 13 of 14 figures

@@ -113,6 +113,7 @@ UNITS = {
         # the overlap — a human call, flagged by Pranav 2026-09-24.
         "force_exclude": {
             "M2C5U1-017": "Same joint/by-product closing-stock problem as M2C5U1-010, mapped to an unrelated topic.",
+            "M2C5U1-004": "Same normal-versus-abnormal-loss idea as M2C5U1-006 (flagged by Pranav as too similar) — the pair would spend two slots on one concept.",
         },
         # Hand-written card wording, kept so all ten read in one voice rather
         # than mixing reviewed prose with generated lines.
@@ -136,7 +137,18 @@ UNITS = {
         "unit_title": "Property, Plant and Equipment",
         "module": "MODULE 2",
         "chapter": "Assets Based Accounting Standards",
-        "published": False,   # local-only until reviewed
+        "published": True,
+        # All four are the four parts of M2C5U2-002 (MTP Nov 2023 Set 1), reissued as
+        # separate RTP January 2026 questions: -007 machinery/residual value, -008
+        # land, -009 self-constructed machine, -010 changed useful life. Too few figures for the repeat test to see; the
+        # full question is already in the list. Reviewed with Pranav 2026-09-24.
+        "force_exclude": {
+            "M2C5U2-007": "The machinery-depreciation part of M2C5U2-002, reissued on its own.",
+            "M2C5U2-008": "The land-depreciation part of M2C5U2-002, reissued on its own.",
+            "M2C5U2-009": "The self-constructed-machine part of M2C5U2-002, reissued on its own.",
+            "M2C5U2-010": "The revised-useful-life part of M2C5U2-002, reissued on its own.",
+            "M2C5U2-013": "Replacing a component of a machine — the same subsequent-cost idea as M2C5U2-006, mapped to an unrelated topic.",
+        },
     },
 }
 
@@ -208,7 +220,7 @@ def diversify(ranked: list[dict], seed: list[dict]) -> tuple[list[dict], list[di
     be best-first. ``seed`` is anything already certain to appear (force-included
     questions): candidates are checked against it and count toward the topic cap.
     Returns (kept, over_cap, [(dropped, kept_twin, similarity)]). ``over_cap`` is
-    only ever used by the coverage pass, never to pad the list."""
+    only ever used by the coverage pass (to cover a Top-100 topic, then to pad to size)."""
     kept: list[dict] = []
     deferred: list[dict] = []
     dropped: list[tuple[dict, dict, float]] = []
@@ -238,9 +250,9 @@ def diversify(ranked: list[dict], seed: list[dict]) -> tuple[list[dict], list[di
 def apply_coverage(ranked: list[dict], reserve: list[dict], top100: set[str], size: int) -> list[dict]:
     """Take the best `size` by score, then make sure every Top-100 topic of the
     chapter is represented. ``reserve`` (questions held back by the per-topic
-    cap) is drawn on only to cover a Top-100 topic nobody else covers — it never
-    pads the list, so a chapter short of distinct questions yields fewer than
-    `size` rather than a repeat. See the rules document's "coverage pass"."""
+    cap) is drawn on first to cover a Top-100 topic nobody else covers, and then,
+    only if the list is still short, to pad it to `size` in score order. See the
+    rules document's "coverage pass" and "Duplicates and diversity"."""
     chosen = ranked[:size]
     rest = ranked[size:] + reserve
 
@@ -272,6 +284,13 @@ def apply_coverage(ranked: list[dict], reserve: list[dict], top100: set[str], si
         chosen = [q for q in chosen if q is not drop] + [candidate]
         rest = [q for q in rest if q is not candidate] + [drop]
         chosen.sort(key=lambda q: -q["score"])
+    # Still short of `size`: the list is ten questions, so pad with the best of
+    # the questions the per-topic cap held back (repeats are already gone).
+    for candidate in sorted(rest, key=lambda q: -q["score"]):
+        if len(chosen) >= size:
+            break
+        chosen.append(candidate)
+    chosen.sort(key=lambda q: -q["score"])
     return chosen
 
 

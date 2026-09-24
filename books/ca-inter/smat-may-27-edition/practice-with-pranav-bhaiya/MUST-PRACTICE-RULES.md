@@ -100,8 +100,11 @@ Applied to the score-ranked list, before the coverage pass:
    AS 2's `-001` (MTP Jan 2026 Set 1), which is PYQ May 2024 Q1(b) with a new
    company name and a shortened stem: 58% text match, 13 of 14 figures identical.
 3. **At most two questions per topic** (a question's best-ranked topic,
-   `MAX_PER_TOPIC`). Extras are held back and used **only** to cover a Top-100 topic nothing else covers — never to pad the list. A chapter with too few
-   distinct questions therefore yields fewer than ten, not a repeat.
+   `MAX_PER_TOPIC`). Extras are held back, then used in this order: first to
+   cover a Top-100 topic nothing else covers, then — **the list is always
+   ten** — to pad it, best score first. The cap therefore shapes the list without
+   ever shortening it. (Pranav, 2026-09-24: keep it at ten; a first version
+   that stopped short produced nine on AS 2.)
 
 The build prints every repeat it drops and which twin it kept.
 
@@ -159,3 +162,22 @@ ranking with the score breakdown, so the effect on every published unit is
 visible before anything is deployed. Update this file in the same commit: a
 weight that is in the code but not described here is exactly the situation this
 document exists to prevent.
+
+## Hand exclusions made under these rules (2026-09-24)
+
+Each is a `force_exclude` in `UNITS` with its reason beside it. They exist
+because a question can be a repeat that no similarity measure sees: a *part* of
+a larger question reissued alone, or the same idea under an unrelated topic tag.
+
+| Unit | Excluded | Why |
+|---|---|---|
+| AS 2 | `-017` | Joint/by-product closing-stock problem again (same as `-010`), mapped to an unrelated topic. |
+| AS 2 | `-004` | Same normal-versus-abnormal-loss idea as `-006`; Pranav flagged the pair as too similar. |
+| AS 10 | `-007`, `-008`, `-009`, `-010` | The four parts of `-002` (MTP Nov 2023 Set 1), each reissued alone in RTP Jan 2026. |
+| AS 10 | `-013` | Replacing a machine component — the subsequent-cost idea of `-006`, mapped elsewhere. |
+
+Known remaining softness: AS 2's tenth slot is `-009`, whose part (i) is the same
+"costs excluded from inventory cost" theory as `-002`; its part (ii) is a distinct
+NRV-with-commission problem, which is why it was taken over the alternatives
+(`-013` is the same template as the hand-picked `-003`). Swap it with a written
+reason if you would rather.
