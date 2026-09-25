@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Find the most important CA Inter Advanced Accounting topics. Filter by exam type, year, module, chapter and unit, sort any way you like, and download the list as Excel.">
+  <title>Important Topics · CA Pranav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/anatomy.css">
+  <link rel="stylesheet" href="/assets/topics.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span>P</span> CA PRANAV</a>
+    <a class="back" href="/practice-with-pranav-bhaiya/">Practice with Pranav Bhaiya</a>
+  </header>
+
+  <main>
+    <section class="hero thero">
+      <p class="kicker">CA Inter &middot; Advanced Accounting</p>
+      <h1>Important <em>Topics</em></h1>
+      <p class="intro">Which topics does ICAI ask most? Choose what you want to see below &mdash; the list re-orders itself. Nothing to learn first: every choice is explained in plain words.</p>
+    </section>
+
+    <div class="notice" id="status" role="status">Loading the topic list&hellip;</div>
+
+    <section class="panel" aria-labelledby="h-start">
+      <h2 id="h-start">1 &middot; Start with a ready-made view</h2>
+      <p class="help">Tap one. You can still change anything afterwards.</p>
+      <div class="presets" id="presets" role="group" aria-label="Ready-made views"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-filter">
+      <h2 id="h-filter">2 &middot; Fine-tune it <button type="button" class="link-btn" id="reset">Reset everything</button></h2>
+
+      <div class="fgrid">
+        <fieldset class="fset">
+          <legend>Which papers?</legend>
+          <p class="help">PYQ = real past exams &middot; MTP = mock tests &middot; RTP = revision tests</p>
+          <div class="chips" id="f-papers"></div>
+        </fieldset>
+        <fieldset class="fset">
+          <legend>Which year?</legend>
+          <p class="help">None ticked = all years.</p>
+          <div class="chips" id="f-years"></div>
+        </fieldset>
+        <fieldset class="fset">
+          <legend>Which attempt?</legend>
+          <p class="help">None ticked = every attempt.</p>
+          <div class="chips" id="f-months"></div>
+        </fieldset>
+      </div>
+
+      <div class="sel-grid">
+        <label>Module<select id="f-module"></select></label>
+        <label>Chapter<select id="f-chapter"></select></label>
+        <label>Unit<select id="f-unit"></select></label>
+        <label class="wide">Search<input id="f-search" type="search" placeholder="A topic name, or an ID like M2-C5-U2-T2.6" autocomplete="off"></label>
+      </div>
+
+      <div class="sel-grid sort-grid">
+        <label>Sort by
+          <select id="f-sort">
+            <option value="measure">Most asked first (marks)</option>
+            <option value="count">Number of times asked</option>
+            <option value="last">Most recently asked</option>
+            <option value="syllabus">Syllabus order (as taught)</option>
+            <option value="name">Topic name (A to Z)</option>
+            <option value="page">Study Material page</option>
+          </select>
+        </label>
+        <label>Show
+          <select id="f-limit">
+            <option value="10">10 topics</option><option value="25">25 topics</option><option value="50">50 topics</option>
+            <option value="100">100 topics</option><option value="0">All matching topics</option>
+          </select>
+        </label>
+        <button type="button" class="rev-btn" id="reverse" aria-pressed="false">&#8645; Reverse the order</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-list">
+      <h2 id="h-list">3 &middot; Your list</h2>
+      <p class="summary" id="summary" aria-live="polite"></p>
+      <p class="help" id="rtp-note" hidden>RTP questions have no marks printed on them, so RTP lists are ranked by how many times a topic was asked.</p>
+      <table class="t-table" id="t-table">
+        <thead>
+          <tr>
+            <th class="c-rank">Rank</th>
+            <th><button type="button" data-sort="name">Topic</button></th>
+            <th class="c-marks"><button type="button" data-sort="measure" id="th-measure">Marks</button></th>
+            <th class="c-times"><button type="button" data-sort="count">Times asked</button></th>
+            <th class="c-last"><button type="button" data-sort="last">Last asked</button></th>
+            <th class="c-page"><button type="button" data-sort="page">Book page</button></th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p class="help">Tap a topic to see exactly where it was asked. Column headings sort the list; tap again to reverse.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="h-dl">
+      <h2 id="h-dl">4 &middot; Take it with you (Excel)</h2>
+      <p class="help">Excel opens on any phone or computer. The first button saves exactly what you see above.</p>
+      <div class="dl-row">
+        <button type="button" class="btn primary" id="dl-view-xlsx">&#11015; This list &middot; Excel</button>
+        <button type="button" class="btn" id="dl-view-csv">This list &middot; CSV</button>
+      </div>
+      <h3>Ready-made lists</h3>
+      <div class="dl-grid" id="dl-grid"></div>
+      <p class="hint" id="dl-msg" role="status"></p>
+    </section>
+
+    <section class="panel" aria-labelledby="h-id">
+      <h2 id="h-id">How to read a topic ID</h2>
+      <p class="help">Every topic has a short code. It is a postal address: module, then chapter, then unit, then the topic itself.</p>
+      <div class="idx" id="id-example" aria-label="Worked example"></div>
+      <ul class="id-notes">
+        <li><b>M</b> = Module (ICAI splits the subject into 3 modules). <b>C</b> = Chapter <em>number</em> as printed in the Study Material. <b>U</b> = Unit &mdash; in the Accounting Standards chapters, one unit per Standard.</li>
+        <li><b>T2.6</b> = topic 6 inside Unit 2. In chapters with several units the first number repeats the unit, so a wrong ID is easy to spot. In a one-unit chapter the topic is just <b>T</b> and a number (for example <code>M3-C13-U0-T4</code>).</li>
+        <li><b>U0</b> means the chapter has only one unit, so there is nothing to split.</li>
+        <li>A <b>page number like 5.27</b> means chapter 5, page 27 of that chapter in the ICAI Study Material (each chapter restarts at page 1).</li>
+        <li>You may see the code with hyphens (<code>M2-C5-U2-T2.6</code>) or underscores (<code>M2_C5_U2_T2.6</code>) &mdash; same thing. The underscores come from ICAI file names.</li>
+      </ul>
+      <label class="decoder">Try your own &mdash; paste any topic ID
+        <input id="decode-in" type="text" placeholder="e.g. M2_C5_U2_T2.6" autocomplete="off" spellcheck="false">
+      </label>
+      <div class="decoded" id="decode-out" aria-live="polite"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-words">
+      <h2 id="h-words">Words used on this page</h2>
+      <dl class="words">
+        <dt>Marks</dt><dd>A question&rsquo;s marks are split equally across the topics it tests. A 14-mark question on two topics gives each 7. Both alternatives of an &ldquo;OR&rdquo; question are counted, because a student may need either.</dd>
+        <dt>Times asked</dt><dd>How many question parts tested the topic in the papers you selected.</dd>
+        <dt>Must know</dt><dd>Rank 1&ndash;50 for the papers you selected. <b>Important</b> is rank 51&ndash;100. <b>Good to know</b> is anything else that has been asked. <b>Not asked yet</b> has never appeared in those papers.</dd>
+        <dt>Rank</dt><dd>Position among all 400 topics for the papers and years you picked &mdash; it does not change when you narrow to one chapter, so a topic can still show &ldquo;#7&rdquo; inside a small list.</dd>
+        <dt>What is counted</dt><dd id="scope"></dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer>CA Pranav Pratik Tulshyan &middot; CA Inter Advanced Accounting</footer>
+  <script src="/assets/topics.js"></script>
+</body>
+</html>

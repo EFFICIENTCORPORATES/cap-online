@@ -14,19 +14,33 @@ continues — don't let it go stale.
    plan). Demo list: 7 videos + 4 Shorts. Open: Pranav to review the 4 Shorts (picked
    from titles/hashtags, not watched) and send more links; a D1 table + admin form
    is the planned next step.
-2. **Downloadable Excel tables.** Buttons such as "Top 100 topic list" that download
-   sheets of `books/ca-inter/smat-may-27-edition/practice-with-pranav-bhaiya/data/
-   ca_inter_descriptive_topic_priority_v1.xlsx`: Top 100 PYQ, Chapter Priority,
-   Topic Attempts (has PYQ/MTP/RTP marks + sittings), Question Topic Map,
-   A-B-C-D Questions, Study Topics. Most data is already in D1 (`aa_*` tables) —
-   confirm per sheet what is missing, then generate .xlsx server-side per request
-   (or pre-generate per sheet into R2 and serve via `aa_documents`). No
-   "MTP-wise topic list" sheet exists by that name — Topic Attempts carries MTP
-   marks/sittings; a dedicated MTP view would need building. Decide with Pranav.
+2. **Downloadable Excel tables** — BUILT 2026-09-25 as part of the Important Topics
+   explorer at `/topics/` (see `TOPICS-EXPLORER.md`): all six workbook sheets plus new
+   MTP-wise / RTP-wise / PYQ-wise lists and "download this view" (Excel/CSV).
 3. **Security hardening** — audited 2026-09-24; see `SECURITY.md`. Code fixes
    deployed 2026-09-24 (version 0c84998d, migration 0003 applied). Still open: Always Use HTTPS, Cloudflare Access on
    `/admin`, Bot Fight Mode + a rate-limit rule (dashboard); Turnstile (needs
    keys); report-only script CSP (code).
+
+---
+
+### Important Topics explorer — 2026-09-25
+
+New public page `/topics/`: presets ("Top 100", mock tests, RTP, everything, most recent,
+never asked), then filters for paper type, year, attempt month, module, chapter, unit and
+search; sort (marks, times asked, most recent, syllabus order, name, page) with a Reverse
+button and clickable column headings; tap a topic to see every paper/question that asked it;
+download the view as Excel or CSV, plus ready-made lists (the workbook's six sheets verbatim,
+plus new MTP-wise, RTP-wise and PYQ-wise lists). A worked example and a live decoder explain
+topic IDs (`M2-C5-U2-T2.6` = Module 2, Chapter 5, Unit 2, topic 2.6, Measurement of PPE, page
+5.27). Data: `tools/build_topics_explorer_data.py` -> `public/topics/data/`.
+Verified: the browser re-ranking reproduces the workbook's rank for all 104 PYQ-marked topics
+exactly (found and fixed two real mismatches on the way: tie order needs the workbook's own
+rank as tie-break, and float noise like 2.3333333333333335 vs 2.333333333333333 must be
+rounded to 2 places). Downloads tested live (CSV, Top 100, MTP-wise, Question Topic Map).
+No horizontal overflow at 320-1440px. Note found in the data: RTP questions carry no marks,
+so RTP views rank by times asked. The user's example ID `M1_C5_U2_T2.6` does not exist
+(Module 1 has chapters 1-4); the decoder says so and points to M2-C5. Live version e2033380.
 
 ---
 

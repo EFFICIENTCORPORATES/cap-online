@@ -1,0 +1,44 @@
+[
+ {
+  "slug": "top-100-pyq",
+  "title": "Top 100 PYQ",
+  "use": "The Top 50 plus next 50 topics, ranked by marks in Past Year Questions.",
+  "rows": 100,
+  "columns": 21
+ },
+ {
+  "slug": "chapter-priority",
+  "title": "Chapter Priority",
+  "use": "All 400 topics with an overall rank and a rank within their chapter.",
+  "rows": 400,
+  "columns": 12
+ },
+ {
+  "slug": "topic-attempts",
+  "title": "Topic Attempts",
+  "use": "One row per topic: PYQ, MTP and RTP marks and the list of papers it appeared in.",
+  "rows": 187,
+  "columns": 13
+ },
+ {
+  "slug": "question-topic-map",
+  "title": "Question Topic Map",
+  "use": "One row per question and topic it tests, ready for pivot tables.",
+  "rows": 701,
+  "columns": 22
+ },
+ {
+  "slug": "abcd-questions",
+  "title": "A-B-C-D Questions",
+  "use": "Every question classed A/B/C/D by how closely it matches an ICAI Study Material question.",
+  "rows": 509,
+  "columns": 14
+ },
+ {
+  "slug": "study-topics",
+  "title": "Study Topics",
+  "use": "The full topic catalogue with ranking fields.",
+  "rows": 400,
+  "columns": 11
+ }
+]

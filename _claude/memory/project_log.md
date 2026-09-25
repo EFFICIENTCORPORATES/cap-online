@@ -2,6 +2,12 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-25 — capranav.com Important Topics explorer (deployed)
+
+`/topics/`: filter/sort/reverse topic explorer over PYQ/MTP/RTP, year, month, module/chapter/unit; Excel/CSV
+downloads (workbook's 6 sheets + MTP/RTP/PYQ-wise lists); topic-ID decoder. Ranks reproduce the workbook exactly.
+Docs: `capranav_com_revamped/TOPICS-EXPLORER.md`. Data built by `tools/build_topics_explorer_data.py`.
+
 ## 2026-09-24 — capranav.com Videos & Shorts page (deployed)
 
 `/videos/` with Videos + Shorts tabs, auto-scroll feed, settings; data in `public/videos/videos.json`, D1 move
