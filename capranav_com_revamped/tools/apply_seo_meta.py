@@ -11,8 +11,8 @@ and any earlier block between the ``seo:start`` / ``seo:end`` markers with:
 * ``robots noindex`` for private pages (admin, dashboard, reader)
 
 Idempotent: safe to re-run after editing PAGES. Claims in the JSON-LD are limited to
-facts already stated on the live site or confirmed by Pranav. Employer names and
-other unconfirmed profile details are deliberately NOT here.
+facts already stated on the live site or confirmed by Pranav (career dates confirmed 2026-09-25).
+Clients are never named, only described (Fortune 500, a top metals and mining group).
 
 Run from capranav_com_revamped::
 
@@ -49,9 +49,9 @@ PAGES = [
      "Learn CA Inter Advanced Accounting from CA Pranav Tulshyan: AIR 1 in CA Foundation and Intermediate, AIR 5 in CA Final. "
      "Courses, books, important topics and free practice.", "home"),
     ("about-us.html", "/about-us",
-     "About CA Pranav Pratik Tulshyan | AIR 1 CA, Advanced Accounting Faculty",
-     "CA Pranav Pratik Tulshyan: AIR 1 in CA Foundation and CA Intermediate, AIR 5 in CA Final, all three CA levels cleared "
-     "in the first attempt, and 4+ years teaching Advanced Accounting.", ""),
+     "About CA Pranav Pratik Tulshyan | EY, Indian Oil, Ministry of Petroleum | AIR 1 CA",
+     "CA Pranav Pratik Tulshyan: AIR 1 in CA Foundation and Intermediate, AIR 5 in CA Final. Audit at EY, 5 years at Indian Oil "
+     "(SAP, Ind AS 115 and 116), a year at the Ministry of Petroleum and Natural Gas, and 4+ years teaching Advanced Accounting.", ""),
     ("pricing-details.html", "/pricing-details",
      "Courses and Books: Pricing | CA Pranav Tulshyan",
      "Prices for CA Inter Advanced Accounting courses (Jan'27 and May'27 batches) and books by CA Pranav Tulshyan, "
@@ -120,18 +120,26 @@ def person_ld() -> dict:
         "alternateName": ["CA Pranav Tulshyan", "CA Pranav Bhaiya"],
         "url": f"{SITE}/",
         "image": OG_IMAGE,
-        "jobTitle": "CA Inter Advanced Accounting faculty",
+        "jobTitle": "Chartered Accountant and CA Inter Advanced Accounting faculty",
         "description": (
-            "Chartered Accountant and CA Inter Advanced Accounting faculty. All India Rank 1 in CA Foundation (CPT) and "
-            "CA Intermediate (IPC), All India Rank 5 in CA Final, 91 marks in Advanced Accounting, all three levels cleared in the first attempt."
+            "Practising Chartered Accountant and CA Inter Advanced Accounting faculty. All India Rank 1 in CA Foundation (CPT) and "
+            "CA Intermediate (IPC), All India Rank 5 in CA Final, all three levels cleared in the first attempt, 91 marks in Advanced "
+            "Accounting. Three years of audit at EY, five years at Indian Oil (SAP accounting, quarterly closing, Ind AS 115 and 116), "
+            "one year at the Ministry of Petroleum and Natural Gas (PPAC), then virtual CFO work for D2C startups and AI implementations."
         ),
-        "hasCredential": {"@type": "EducationalOccupationalCredential", "name": "Chartered Accountant (ICAI)"},
+        "hasCredential": {"@type": "EducationalOccupationalCredential", "name": "Chartered Accountant (ICAI), qualified November 2018 attempt"},
+        "memberOf": {"@type": "Organization", "name": "The Institute of Chartered Accountants of India (ICAI)"},
+        "alumniOf": {"@type": "CollegeOrUniversity", "name": "University of Delhi, School of Open Learning (B.Com Hons.)"},
+        "affiliation": {"@type": "Organization", "name": "VC Gurukul, Noida"},
         "award": [
             "All India Rank 1, CA Foundation (CPT)",
             "All India Rank 1, CA Intermediate (IPC)",
             "All India Rank 5, CA Final",
+            "All India Rank 3, B.Com (Hons.), DU-SOL",
         ],
-        "knowsAbout": ["Advanced Accounting", "CA Intermediate", "Accounting Standards", "Financial Reporting", "CA exam preparation"],
+        "knowsAbout": ["Advanced Accounting", "CA Intermediate", "Accounting Standards", "Ind AS", "Ind AS 115", "Ind AS 116",
+                       "Financial Reporting", "Consolidation of accounts", "Audit", "SAP accounting", "GST", "Virtual CFO services",
+                       "CA exam preparation"],
         "sameAs": SAME_AS,
     }
 

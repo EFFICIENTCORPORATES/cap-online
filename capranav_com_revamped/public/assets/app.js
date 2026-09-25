@@ -134,7 +134,7 @@ document.querySelectorAll("[data-buy-pdf]").forEach((btn) => {
       window.location.href = external;
       return;
     }
-    window.location.href = "dashboard.html?buy=" + encodeURIComponent(productId);
+    window.location.href = "/dashboard?buy=" + encodeURIComponent(productId);
   });
 });
 

@@ -179,7 +179,7 @@ async function renderDashboard(me) {
   const libraryRows = PDF_PRODUCTS.map((p) => {
     if (owned.has(p.id)) {
       return `<li class="entitlement-item"><span>${p.title}</span>
-        <a class="button button-primary" href="reader.html?product=${encodeURIComponent(p.id)}">Read now</a></li>`;
+        <a class="button button-primary" href="/reader?product=${encodeURIComponent(p.id)}">Read now</a></li>`;
     }
     if (p.externalUrl) {
       return `<li class="entitlement-item"><span>${p.title}</span>
@@ -250,7 +250,7 @@ async function boot() {
       }
       askNamePhoneThenBuy(product, profile);
     }
-    history.replaceState(null, "", "dashboard.html");
+    history.replaceState(null, "", "/dashboard");
   }
 }
 

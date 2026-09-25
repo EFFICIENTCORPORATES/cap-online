@@ -56,7 +56,7 @@ if (!productId || !TITLES[productId]) {
 async function boot() {
   const me = await fetch("/api/me", { credentials: "include" }).then((r) => r.json());
   if (!me.loggedIn) {
-    location.href = "dashboard.html?buy=" + encodeURIComponent(productId);
+    location.href = "/dashboard?buy=" + encodeURIComponent(productId);
     return;
   }
   if (!(me.entitlements || []).includes(productId)) {

@@ -31,17 +31,18 @@ npx wrangler deploy
 Add any new public page to `PAGES` in `apply_seo_meta.py` (it will get its head block and
 a sitemap entry). New analytical pages also need the "Powered by 1LAVYA" footer.
 
-## Cloudflare is blocking the AI training crawlers (found 2026-09-25, not fixed: dashboard setting)
+## Cloudflare and the AI crawlers (2026-09-25)
 
-Tested with each crawler's user-agent against the live site: **GPTBot, ClaudeBot, anthropic-ai, Amazonbot,
-cohere-ai, CCBot and Bytespider get `403 Your request was blocked.`** from Cloudflare's edge, whatever
-robots.txt says. Allowed (200): OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User, PerplexityBot,
-Perplexity-User, Googlebot, Google-Extended, Bingbot, Applebot(-Extended), DuckDuckBot, meta-externalagent,
-YouBot. This is Cloudflare's "Block AI bots / AI training crawlers" setting (on by default for newer zones).
-To let the training crawlers in: Cloudflare dashboard > the capranav.com zone > Security > Settings (or
-AI Crawl Control) > set the AI crawlers you want (GPTBot, ClaudeBot) to Allow. Keep CCBot, Bytespider and
-Amazonbot blocked if the aim is to make bulk copying harder. UA tests are spoofable; Cloudflare verifies real
-crawlers by IP, so re-test after changing it.
+Earlier the same day, a test with each crawler's user-agent returned `403 Your request was blocked.` for GPTBot,
+ClaudeBot, anthropic-ai, Amazonbot, cohere-ai, CCBot and Bytespider (search/user bots such as OAI-SearchBot,
+Claude-SearchBot and Perplexity were allowed). Pranav then confirmed he had not set a block deliberately and
+applied Cloudflare's "allow" list; a retest an hour later returned 200 for every crawler user-agent. Note that
+these tests use the crawler's *name*, not its real IP: Cloudflare identifies real crawlers by IP, so a test from
+another machine only shows how the *claimed* name is treated. Any remaining failed GPT requests in the Cloudflare
+dashboard are most likely (a) requests from before the change, (b) our own test requests, which carried those
+names, (c) impostors using GPTBot's name, or (d) real GPTBot hitting missing URLs. Check in the dashboard with
+User Agent contains GPTBot, grouped by status code, path and "verified bot". A Python-urllib user-agent still gets
+403 (Cloudflare's browser integrity check); curl, wget and python-requests get 200.
 
 ## Public vs gated (plan, not yet built)
 

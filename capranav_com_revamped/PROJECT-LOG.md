@@ -24,6 +24,26 @@ continues — don't let it go stale.
 
 ---
 
+### Profile page, career facts, redirect clean-up — 2026-09-25 (later)
+
+Pranav gave the career facts: EY articleship Mar 2016-Mar 2019 (audit for Fortune 500 and top metals and
+mining groups; consolidation of 32 trial balances; 2016 AS to Ind AS transition), qualified in the Nov 2018
+attempt, Indian Oil May 2019-May 2024 (SAP accounting, quarterly closing, Ind AS 115 and 116), Ministry of
+Petroleum and Natural Gas May 2024-May 2025 (Assistant Director, Finance, PPAC, from his own bio text), then
+virtual CFO for D2C startups and AI implementations, practising CA firm (COP) since June 2026, teaching through
+VC Gurukul and accounting/GST to professionals through Newton of Accounts. **Clients are never named**, only
+described. `/about-us` is now the full profile (ranks, timeline, teaching; policy links and seller details kept),
+the homepage has a "Real-world experience" strip, Person JSON-LD and llms.txt carry the same facts.
+Reconciliation flagged to Pranav: his earlier bio said "5 years finance and accounts experience"; the dates give
+5 years at Indian Oil plus 1 at the Ministry (plus 3 articleship), so the site states the dates, not a total.
+ICAI advertising rules apply now that he holds a COP: content is factual, no superlatives, no solicitation.
+Also fixed: ~150 internal links pointed at `x.html`, which 307-redirects to `/x`; they now point at the clean URLs
+(a crawl of the live site finds 14 internal pages, all 200, no redirects). Retested AI crawler user-agents: all now
+get 200 (GPTBot, ClaudeBot, CCBot, Bytespider, Amazonbot too), so Cloudflare's earlier 403 block was lifted
+between tests. Live version 50c23e85.
+
+---
+
 ### SEO / AI-readability pass — 2026-09-25
 
 Audit found thin titles/descriptions, no canonical/OG/JSON-LD/sitemap/llms.txt, and JS-only content on

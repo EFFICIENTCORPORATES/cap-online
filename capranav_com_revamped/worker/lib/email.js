@@ -70,7 +70,7 @@ export function orderNotificationEmailHtml(order, product, shipping) {
 }
 
 const BUYER_NEXT_STEP = {
-  book_pdf: `Your book is ready to read — head to <a href="https://capranav.com/dashboard.html">your dashboard</a> and click "Read now".`,
+  book_pdf: `Your book is ready to read — head to <a href="https://capranav.com/dashboard">your dashboard</a> and click "Read now".`,
   book_physical: "Your book ships prepaid — we'll dispatch it within a few business days and reach out on the phone/email you shared with delivery details.",
   course: "We'll reach out on the email/phone you shared within 24 hours with your batch details.",
 };

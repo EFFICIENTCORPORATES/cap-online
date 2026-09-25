@@ -170,3 +170,7 @@ body.modal-lock { overflow: hidden; }
   .contact-grid { grid-template-columns: 1fr; }
   .feature-list { grid-template-columns: 1fr; }
 }
+
+.career-strip { margin: 16px 0 0; font-size: 14px; line-height: 1.6; color: var(--muted); }
+.career-strip strong { color: var(--ink); }
+.career-strip a { font-weight: 700; }
