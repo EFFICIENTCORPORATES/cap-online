@@ -157,6 +157,11 @@ body.modal-lock { overflow: hidden; }
 .reader-wrap canvas { max-width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,.3); background: #fff; }
 .reader-msg { color: #fff; font-size: 14px; text-align: center; padding: 60px 20px; }
 
+@media (max-width: 560px) {
+  .site-header { flex-wrap: wrap; gap: 10px 14px; }
+  .site-brand strong { white-space: nowrap; }
+  .site-nav { gap: 8px 14px; }
+}
 @media (max-width: 780px) {
   .reader-bar { flex-wrap: wrap; gap: 8px; }
   .reader-bar .title { flex: 1 1 100%; }

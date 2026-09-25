@@ -1,5 +1,166 @@
+# capranav.com — CA Pranav Pratik Tulshyan, CA Inter Advanced Accounting faculty.
+# Search and AI crawlers are welcome: please read, index and cite the public pages.
+# Private pages (admin, student dashboard, book reader) and the /api/ endpoints are off limits to everyone.
+# Site map: https://capranav.com/sitemap.xml   Guide for AI systems: https://capranav.com/llms.txt
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: Applebot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+User-agent: YouBot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
 User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /admin.html
 Disallow: /api/
+Disallow: /dashboard
+Disallow: /reader
+
+Sitemap: https://capranav.com/sitemap.xml

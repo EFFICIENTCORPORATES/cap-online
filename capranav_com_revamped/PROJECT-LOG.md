@@ -24,6 +24,21 @@ continues — don't let it go stale.
 
 ---
 
+### SEO / AI-readability pass — 2026-09-25
+
+Audit found thin titles/descriptions, no canonical/OG/JSON-LD/sitemap/llms.txt, and JS-only content on
+Topics, Videos and Must Practice. Fixed (see `SEO.md`): head blocks on all 20 pages
+(`tools/apply_seo_meta.py`), sitemap.xml (17 URLs, all 200), robots.txt with explicit allow for search and AI
+crawlers, llms.txt, crawler-readable HTML on the three JS pages (`tools/build_seo_static.py`; topics 0 -> 18k
+characters without JS, Must Practice ~1k -> 17k, answers deliberately omitted), homepage hero now states the
+ranks plainly (AIR 1 / AIR 1 / AIR 5, all levels first attempt, 91 marks, AIR 3 B.Com), UTM parameters on the
+"Powered by 1LAVYA" links, mobile nav no longer squeezes the brand. Live version 96ecd9e5.
+**Found: Cloudflare returns 403 to GPTBot, ClaudeBot, anthropic-ai, Amazonbot, cohere-ai, CCBot, Bytespider**
+(its AI-bot block; needs a dashboard change, see `SEO.md`). The profile/About page is waiting on Pranav's
+answers about career facts; nothing about employers was published.
+
+---
+
 ### "Powered by 1LAVYA" and tick-many filters — 2026-09-25
 
 Pranav asked for (1) "Powered by 1LAVYA" on all analytical pages, since the data comes

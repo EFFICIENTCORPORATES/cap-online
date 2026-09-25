@@ -426,7 +426,7 @@
       var about = X.utils.aoa_to_sheet([
         ["Powered by 1LAVYA"],
         ["This analysis is built from the 1LAVYA data repository."],
-        ["Source page: https://capranav.com/topics/  ·  https://1lavya.com"],
+        ["Source page: https://capranav.com/topics/  ·  https://1lavya.com/?utm_source=capranav&utm_medium=referral&utm_campaign=powered_by&utm_content=excel_download"],
         ["Generated on " + new Date().toISOString().slice(0, 10)],
         ["Marks: a question's marks are split equally across the topics it tests. RTP questions carry no printed marks."]
       ]);

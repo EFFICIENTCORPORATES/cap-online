@@ -2,6 +2,12 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-25 — capranav.com SEO / AI-readability pass (deployed) + AI-crawler block found
+
+Head blocks, JSON-LD, sitemap, robots, llms.txt, crawler-readable HTML for JS pages, hero facts. Cloudflare blocks
+GPTBot/ClaudeBot/anthropic-ai/CCBot etc. with 403 (dashboard setting). About/profile page pending Pranav's answers.
+Docs: `capranav_com_revamped/SEO.md`.
+
 ## 2026-09-25 — capranav.com Important Topics explorer (deployed)
 
 `/topics/`: filter/sort/reverse topic explorer over PYQ/MTP/RTP, year, month, module/chapter/unit; Excel/CSV
