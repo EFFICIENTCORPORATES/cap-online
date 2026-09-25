@@ -6,6 +6,9 @@ compatibility_date = "2026-09-02"
 directory = "public"
 binding = "ASSETS"
 not_found_handling = "404-page"
+# The bulk data files go through the Worker first so they can be guarded (same-site check + rate limit).
+# See worker/lib/guard.js and BOT-PROTECTION.md.
+run_worker_first = ["/topics/data/*", "/practice-with-pranav-bhaiya/must-practice/data/*"]
 
 [[d1_databases]]
 binding = "DB"
@@ -15,6 +18,30 @@ database_id = "03830ea8-b539-480b-b106-0743aeda1b1f"
 [[r2_buckets]]
 binding = "VAULT"
 bucket_name = "capranav-vault"
+
+# Nightly backup target (D1 critical tables + a mirror of VAULT). See BACKUPS.md.
+[[r2_buckets]]
+binding = "BACKUP"
+bucket_name = "capranav-backups"
+
+# Per-IP rate limits (Workers Rate Limiting). Limits are per Cloudflare location, per key.
+[[ratelimits]]
+name = "RL_DATA"       # bulk JSON data files
+namespace_id = "7101"
+simple = { limit = 40, period = 60 }
+
+[[ratelimits]]
+name = "RL_API"        # /api/anatomy/* JSON
+namespace_id = "7102"
+simple = { limit = 120, period = 60 }
+
+[[ratelimits]]
+name = "RL_DOC"        # /api/anatomy/document downloads
+namespace_id = "7103"
+simple = { limit = 12, period = 60 }
+
+[triggers]
+crons = ["30 21 * * *"]   # nightly backup, 03:00 IST (21:30 UTC). See BACKUPS.md
 
 # Secrets (RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET, CF_EMAIL_ACCOUNT_ID,
 # CF_EMAIL_API_TOKEN) are set via `wrangler secret put <NAME>`, never here.

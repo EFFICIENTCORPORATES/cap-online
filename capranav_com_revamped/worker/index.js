@@ -1,4 +1,6 @@
 import { getProduct } from "./lib/products.js";
+import { isDataPath, isSameSiteRequest, limited, deny } from "./lib/guard.js";
+import { runBackup } from "./lib/backup.js";
 import {
   randomOtpCode,
   otpExpiry,
@@ -806,14 +808,53 @@ function withSecurityHeaders(response) {
   return out;
 }
 
+async function runScheduled(env) {
+  const status = await runBackup(env);
+  if (!status.ok) {
+    try {
+      await sendEmail(env, {
+        to: CONTACT_TO,
+        subject: "capranav.com nightly backup FAILED",
+        html: `<p>The nightly backup did not complete cleanly.</p><pre>${String(status.error || "unknown error").replace(/[<&]/g, "")}</pre><p>Details: R2 bucket capranav-backups, status.json. Time: ${status.at}</p>`,
+        fromLocal: "alerts",
+      });
+    } catch (e) {
+      console.error("backup alert email failed:", e && e.message);
+    }
+  }
+}
+
 export default {
   async fetch(request, env) {
     return withSecurityHeaders(await handleRequest(request, env));
+  },
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(runScheduled(env));
   },
 };
 
 async function handleRequest(request, env) {
     const url = new URL(request.url);
+
+    // Bulk data files: same-site pages only, and rate limited per IP (see lib/guard.js).
+    if (request.method === "GET" && isDataPath(url.pathname)) {
+      if (!isSameSiteRequest(request)) return deny(403, "This file is only available from capranav.com pages.");
+      if (await limited(env.RL_DATA, request, "data")) return deny(429, "Too many requests. Please slow down.", { "Retry-After": "60" });
+      const res = await env.ASSETS.fetch(request);
+      const out = new Response(res.body, res);
+      out.headers.set("X-Robots-Tag", "noindex");
+      out.headers.set("Cache-Control", "private, max-age=300");
+      return out;
+    }
+
+    if (url.pathname.startsWith("/api/anatomy/")) {
+      const isDoc = url.pathname === "/api/anatomy/document";
+      // Documents are opened by direct link, so no same-site test there, but a much lower rate limit.
+      if (!isDoc && !isSameSiteRequest(request)) return deny(403, "This endpoint is only available from capranav.com pages.");
+      if (await limited(isDoc ? env.RL_DOC : env.RL_API, request, isDoc ? "doc" : "anatomy")) {
+        return deny(429, "Too many requests. Please slow down.", { "Retry-After": "60" });
+      }
+    }
 
     if (url.pathname.startsWith("/api/")) {
       try {

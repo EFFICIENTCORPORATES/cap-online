@@ -31,6 +31,9 @@ RETENTION_DAYS = 30  # older snapshots are pruned automatically
 # every run; that download hit a locked file (EBUSY) and silently failed the 6-hourly backup from
 # 2026-09-24 20:38 until this fix. The pinned version is already cached, so no download is attempted.
 WRANGLER = "wrangler@4.137.0"
+# Off-machine copy: the newest export is also uploaded to this R2 bucket (see BACKUPS.md). One object per
+# calendar day (later runs the same day overwrite it), expired by a lifecycle rule after 90 days.
+OFFSITE_BUCKET = "capranav-backups"
 
 # Where failure alerts go — same inbox the Worker's own order-notification
 # emails already use (see CONTACT_TO in worker/index.js).
@@ -145,7 +148,24 @@ def run_export(database_name: str) -> bool:
         return False
 
     log(f"OK: snapshot written to {out_file.name} ({out_file.stat().st_size:,} bytes)")
+    upload_offsite(out_file, database_name)
     return True
+
+
+def upload_offsite(out_file: Path, database_name: str) -> None:
+    """Copy the snapshot to R2 so it survives the loss of this PC. Never fails the run: the local snapshot
+    already exists, so an upload problem is logged and reported by the next health check instead."""
+    key = f"d1/full/{datetime.datetime.now():%Y%m%d}.sql"
+    cmd = f'npx --yes {WRANGLER} r2 object put "{OFFSITE_BUCKET}/{key}" --file="{out_file}" --content-type="application/sql" --remote'
+    try:
+        result = subprocess.run(cmd, cwd=str(ROOT), shell=True, capture_output=True, text=True,
+                                encoding="utf-8", errors="replace", timeout=300)
+        if result.returncode == 0:
+            log(f"OK: off-machine copy uploaded to r2://{OFFSITE_BUCKET}/{key}")
+        else:
+            log(f"WARNING: off-machine upload failed (exit {result.returncode}): {(result.stderr or result.stdout).strip()[-300:]}")
+    except Exception as e:
+        log(f"WARNING: off-machine upload failed: {e}")
 
 
 def prune_old_snapshots() -> None:

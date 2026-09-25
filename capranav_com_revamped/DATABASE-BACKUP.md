@@ -1,5 +1,7 @@
 # Database backups — capranav.com
 
+> **All backup layers (D1, the vault, secrets, DNS, restore steps) are described in BACKUPS.md.** This file covers the local 6-hourly snapshot job in detail.
+
 The live site's database (accounts, sessions, orders, entitlements, contact
 messages) lives entirely in **Cloudflare D1** — there is no local database
 file for the running site (see the note at the bottom for how that was

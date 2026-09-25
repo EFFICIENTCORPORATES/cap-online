@@ -44,6 +44,33 @@ names, (c) impostors using GPTBot's name, or (d) real GPTBot hitting missing URL
 User Agent contains GPTBot, grouped by status code, path and "verified bot". A Python-urllib user-agent still gets
 403 (Cloudflare's browser integrity check); curl, wget and python-requests get 200.
 
+## Ranking for "accounts faculty for CA" and similar (added 2026-09-25)
+
+What is done on the site (everything the repo controls):
+
+* Keyword-bearing title, description, heading and copy: homepage title "CA Pranav Tulshyan | Accounts Faculty for CA Inter |
+  AIR 1 CA", description "Advanced Accounting faculty for CA Inter ...", hero and About text using the natural phrases
+  "Advanced Accounting faculty", "Accounts", "CA Inter". No "best faculty" claim (unverifiable, and ICAI advertising rules
+  apply to a member holding a Certificate of Practice); the FAQ answers "Is CA Pranav a good Accounts faculty?" with
+  verifiable facts instead.
+* `/faq/`: 24 questions students ask (exam pattern, syllabus, most important chapters and topics, PYQ/MTP/RTP, how often ICAI
+  follows its Study Material, how to prepare, where to practise, the faculty's ranks and career), answered in plain HTML
+  with FAQPage structured data. The numbers are computed from the same data as /topics/ (`tools/build_faq.py`).
+* Structured data: WebSite and a detailed Person on the homepage; FAQPage on /faq/; WebPage on every page.
+* Discovery files: `robots.txt` (named search and AI crawlers allowed), `sitemap.xml` and `sitemap.txt` (18 URLs),
+  `llms.txt` (short guide), `llms-full.txt` (facts, ranked topics and every FAQ), `humans.txt`, `security.txt`.
+* IndexNow key file and `tools/indexnow_ping.py`: tells Bing (whose index feeds several AI assistants) about every public
+  URL. Run after each content change.
+
+What cannot be promised: nobody can guarantee "top indexed" for a keyword. Ranking also depends on links from other
+sites, age, and competition; a new site competes with established coaching sites. The strongest remaining levers are
+outside the repo (PENDING.md): submit the sitemap in Google Search Console and Bing Webmaster Tools, link to capranav.com
+from the VC Gurukul site, every YouTube video description, LinkedIn and Instagram, and keep adding real pages (one per
+topic, planned).
+
+Rebuild after changes: `python tools/build_faq.py`, `python tools/apply_seo_meta.py`, `python tools/build_discovery_files.py`,
+then deploy and `python tools/indexnow_ping.py`.
+
 ## Public vs gated (plan, not yet built)
 
 Public and crawlable: topic names, ranks, marks, question text, source, "why practise".

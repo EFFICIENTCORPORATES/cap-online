@@ -1,0 +1,8 @@
+/* TEAM */
+Faculty: CA Pranav Pratik Tulshyan
+Site: https://capranav.com
+Data and analysis: 1LAVYA (https://1lavya.com)
+
+/* SITE */
+Subject: CA Inter Advanced Accounting
+Standards: HTML, CSS, JavaScript on Cloudflare Workers

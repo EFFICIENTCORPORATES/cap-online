@@ -24,6 +24,29 @@ continues — don't let it go stale.
 
 ---
 
+### Backups end to end, bot protection, FAQ and discovery files — 2026-09-25 (evening)
+
+**Backups** (`BACKUPS.md`): new R2 bucket `capranav-backups`. The Worker's Cron Trigger (03:00 IST) dumps the
+critical D1 tables (gzipped) and incrementally mirrors the vault (100 objects, 157 MB; second run skipped all 100),
+writes `status.json`, prunes dumps after 90 days, emails the owner on failure (alert path not yet exercised). The
+6-hourly PC export now also uploads the newest snapshot to `d1/full/` (90-day lifecycle rule). Restore drill passed:
+the R2 dump loaded into a fresh `schema.sql` database with correct row counts. DNS snapshot recorded; full zone export
+and secrets copies are Pranav's actions.
+
+**Bot protection** (`BOT-PROTECTION.md`): bulk data files (topic data, Excel sheets, Must Practice JSON) now go
+through the Worker (`run_worker_first`): bare wget/curl get 403, same-site pages work, 40 requests/min/IP; anatomy API
+same-site + 120/min; PDF downloads 12/min. Verified live and in a real browser (pages, downloads still work; all
+crawler user-agents still get 200 on the HTML). Dashboard rules (Bot Fight Mode, rate-limit rule with verified-bot
+exemption, spoofed-crawler challenge, Access on /admin, Turnstile) are written up for Pranav to apply.
+
+**AI ranking and discovery** (`SEO.md`): keyword-bearing homepage title/description/copy ("Accounts Faculty for CA
+Inter"), a `/faq/` page with 24 data-driven questions and FAQPage markup (`tools/build_faq.py`), `sitemap.txt`,
+`llms-full.txt`, `humans.txt`, IndexNow key + ping (Bing accepted 18 URLs, HTTP 202), robots.txt updated.
+No "best faculty" claim (ICAI advertising rules for a COP holder). Ranking cannot be guaranteed; off-site steps are in
+`PENDING.md`, which lists everything still open. Live version 5b7c1fd3.
+
+---
+
 ### D1 backup was failing; fixed — 2026-09-25
 
 While answering "is everything backed up?" found the 6-hourly D1 snapshot job had failed since 2026-09-24

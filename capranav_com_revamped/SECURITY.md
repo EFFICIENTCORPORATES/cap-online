@@ -8,6 +8,8 @@ Status legend: **FIXED** (in code, see "Deploy" below), **OPEN — dashboard**
 (a Cloudflare zone setting, not something the repo can change), **OPEN — code**
 (planned, not built).
 
+> Bot protection, throttling and rate limits (added 2026-09-25) are in **BOT-PROTECTION.md**. Backups and recovery are in **BACKUPS.md**. Open items are in **PENDING.md**.
+
 ## 1. What was wrong, and what changed
 
 | # | Vulnerability found | Risk | Mitigation | Status |

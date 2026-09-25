@@ -45,9 +45,13 @@ SAME_AS = [
 # extra: "noindex" for private pages, "home" for the homepage's structured data.
 PAGES = [
     ("index.html", "/",
-     "CA Pranav Tulshyan | AIR 1 CA Inter Advanced Accounting Faculty",
-     "Learn CA Inter Advanced Accounting from CA Pranav Tulshyan: AIR 1 in CA Foundation and Intermediate, AIR 5 in CA Final. "
-     "Courses, books, important topics and free practice.", "home"),
+     "CA Pranav Tulshyan | Accounts Faculty for CA Inter | AIR 1 CA",
+     "Advanced Accounting faculty for CA Inter: CA Pranav Tulshyan, AIR 1 (Foundation, Inter), AIR 5 (Final). "
+     "Courses, books, important topics, must-practice questions, videos.", "home"),
+    ("faq/index.html", "/faq/",
+     "CA Inter Advanced Accounting FAQs: Exam Pattern, Important Topics, Faculty | CA Pranav",
+     "Answers to what CA Inter students ask: Advanced Accounting exam pattern, most important chapters and topics, how to prepare, "
+     "and who CA Pranav Tulshyan is. Figures from 35 ICAI papers.", ""),
     ("about-us.html", "/about-us",
      "About CA Pranav Pratik Tulshyan | EY, Indian Oil, Ministry of Petroleum | AIR 1 CA",
      "CA Pranav Pratik Tulshyan: AIR 1 in CA Foundation and Intermediate, AIR 5 in CA Final. Audit at EY, 5 years at Indian Oil "
@@ -215,7 +219,7 @@ def apply(file: str, path: str, title: str, desc: str, extra: str) -> None:
     p.write_text(s, encoding="utf-8")
 
 
-PRIORITY = {"/": "1.0", "/topics/": "0.9", "/practice-with-pranav-bhaiya/must-practice/": "0.9", "/videos/": "0.8",
+PRIORITY = {"/": "1.0", "/faq/": "0.9", "/topics/": "0.9", "/practice-with-pranav-bhaiya/must-practice/": "0.9", "/videos/": "0.8",
             "/about-us": "0.8", "/anatomy/": "0.7", "/pricing-details": "0.6"}
 
 

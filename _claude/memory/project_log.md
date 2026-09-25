@@ -2,6 +2,12 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-25 (evening) — capranav.com backups, bot guards, FAQ, discovery files (deployed)
+
+R2 `capranav-backups` + nightly Worker cron (critical D1 dump + vault mirror) + PC export uploaded off-machine; restore
+drill passed. Data files and anatomy API guarded (same-site + rate limits). `/faq/`, sitemap.txt, llms-full.txt,
+IndexNow. Docs: `capranav_com_revamped/BACKUPS.md`, `BOT-PROTECTION.md`, `SEO.md`, `PENDING.md`.
+
 ## 2026-09-25 — capranav.com SEO / AI-readability pass (deployed) + AI-crawler block found
 
 Head blocks, JSON-LD, sitemap, robots, llms.txt, crawler-readable HTML for JS pages, hero facts. Cloudflare blocks
