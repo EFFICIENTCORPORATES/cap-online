@@ -24,6 +24,13 @@ continues — don't let it go stale.
 
 ---
 
+### Videos page footer — 2026-09-25
+
+Pranav asked for "Powered by MERA BRAND" at the bottom of the Videos & Shorts page, plain text with no link.
+Added to the `/videos/` footer (`.powered` style). Live version 9feee0f2.
+
+---
+
 ### Profile page, career facts, redirect clean-up — 2026-09-25 (later)
 
 Pranav gave the career facts: EY articleship Mar 2016-Mar 2019 (audit for Fortune 500 and top metals and
