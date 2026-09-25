@@ -19,6 +19,8 @@ per-topic documents named in each line.
 | 10 | What you meant by "1% at all levels"; whether to publish school marks; a link to proof (rank certificates, LinkedIn) | Not answered yet | SEO.md |
 | 11 | Where the 1lavya.com site's repo lives, so its "Did you like this? Student or faculty?" landing can be built | Not in this workspace | SEO.md |
 | 12 | Real-phone check of Videos, Topics and Must Practice | I tested with browser emulation only | PROJECT-LOG.md |
+| 13 | Confirm the data contact address: I published **admin@1lavya.com** (your message said "admin@1lavya.oc", which is not a valid domain) | Wording lives in `tools/site_notices.py`; change it there and re-run the builds | tools/site_notices.py |
+| 14 | When the September batch opens: add the product to `worker/lib/products.js` and the pricing page, and the course picker on the homepage. The FAQ, llms files and search descriptions no longer name attempts, so they need no change | The two current batch names (Jan'27, May'27) are real product names tied to orders, so they stay in the course picker and pricing table | PROJECT-LOG.md |
 
 ## Next builds (I can do these once you say go)
 

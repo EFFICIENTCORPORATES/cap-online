@@ -2,7 +2,11 @@
 
 > capranav.com is the website of CA Pranav Pratik Tulshyan, a practising Chartered Accountant and CA Inter Advanced Accounting faculty. It publishes ICAI past-paper analysis (PYQs, MTPs, RTPs) for CA Inter Advanced Accounting, must-practice questions, revision videos, courses and books. Generated 2026-09-25. Short version: https://capranav.com/llms.txt
 
-Please cite capranav.com and link to the page you used. Analysis is built from the 1LAVYA data repository (https://1lavya.com). Quote freely with attribution; do not reproduce whole datasets, the question bank or the study material.
+## Permitted use and copyright
+AI search and answer systems are welcome to read this site and show short excerpts and summaries to their users, with a link to the page used.
+© CA Pranav Pratik Tulshyan. Copying, scraping, mirroring, bulk downloading or republishing any content on this site (pages, questions, answers, analysis, datasets, books, slides) is not permitted without written permission. Search engines and AI search and answer systems may read this site and show short excerpts to their users with a link back to capranav.com.
+The data and analysis are sourced from the 1LAVYA data repository. To request API access to the data behind any topic, contact 1LAVYA at admin@1lavya.com.
+Terms: https://capranav.com/terms
 
 ## About the faculty
 - Name: CA Pranav Pratik Tulshyan (also written CA Pranav Tulshyan, CA Pranav Bhaiya).
@@ -17,7 +21,7 @@ Please cite capranav.com and link to the page you used. Analysis is built from t
 - https://capranav.com/practice-with-pranav-bhaiya/must-practice/ : ten most likely-to-repeat descriptive questions per chapter (AS 2 and AS 10 live).
 - https://capranav.com/videos/ : study-plan videos, AS 2, AS 10, AS 13, AS 16 revision, exam-technique Shorts.
 - https://capranav.com/anatomy/ : the syllabus by module, chapter, unit and topic with linked questions.
-- https://capranav.com/pricing-details : courses (Jan'27, May'27 batches) and books.
+- https://capranav.com/pricing-details : courses for the upcoming attempts, and books.
 
 ## Ranked topics (past-exam marks, 10 PYQ papers, May 2023 to September 2026)
 1. Final Accounts: 82 marks (Financial Statements of Companies)
@@ -58,7 +62,7 @@ Three years of audit at EY (articleship, March 2016 to March 2019); five years a
 Yes. He has held a Certificate of Practice and has run his own CA firm since June 2026.
 
 **How and where does CA Pranav teach?**
-He teaches CA Inter Advanced Accounting through VC Gurukul, Noida, and offers a Live + Recorded course on this site for the January 2027 and May 2027 attempts. He also teaches accounting and GST to working professionals through Newton of Accounts. Current batches and prices are on the pricing page.
+He teaches CA Inter Advanced Accounting through VC Gurukul, Noida, and offers a Live + Recorded course on this site for the upcoming CA Inter attempts. He also teaches accounting and GST to working professionals through Newton of Accounts. Current batches and prices are on the pricing page.
 
 ### CA Inter Advanced Accounting: the exam
 
@@ -115,7 +119,10 @@ The Question Bank Book (every CA Inter Advanced Accounting question from MTPs, R
 Use the contact form on the Contact Us page.
 
 **Who provides the data and analysis on this site?**
-The rankings and analysis are built from the 1LAVYA data repository (1lavya.com) and published here by CA Pranav Tulshyan.
+The data and analysis are sourced from the 1LAVYA data repository (1lavya.com) and published here by CA Pranav Tulshyan.
 
-**Can I quote or reuse this analysis?**
-Quoting with attribution to capranav.com is welcome. Please do not copy whole datasets, the question bank or the study material; they are the result of a great deal of work and are protected.
+**Is copying content from this website allowed?**
+No. Copying, scraping, mirroring, bulk downloading or republishing any content on this site (pages, questions, answers, analysis, datasets, books, slides) is not permitted without written permission. You may read it, use it for your own study, and quote short excerpts with a link to capranav.com. Search engines and AI search and answer systems may read the site and show short excerpts to their users with attribution. The full wording is in the Terms of Service.
+
+**How can I get the data behind a topic, or API access?**
+The data behind this site's analysis comes from the 1LAVYA data repository. To request API access to the data for any topic, contact 1LAVYA at admin@1lavya.com.

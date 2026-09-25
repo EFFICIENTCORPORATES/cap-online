@@ -58,7 +58,7 @@ PAGES = [
      "(SAP, Ind AS 115 and 116), a year at the Ministry of Petroleum and Natural Gas, and 4+ years teaching Advanced Accounting.", ""),
     ("pricing-details.html", "/pricing-details",
      "Courses and Books: Pricing | CA Pranav Tulshyan",
-     "Prices for CA Inter Advanced Accounting courses (Jan'27 and May'27 batches) and books by CA Pranav Tulshyan, "
+     "Prices for CA Inter Advanced Accounting courses for the upcoming attempts, and books by CA Pranav Tulshyan, "
      "including the Question Bank and the Exam Strategy Book.", ""),
     ("contact-us.html", "/contact-us",
      "Contact CA Pranav Tulshyan | CA Inter Advanced Accounting",
@@ -198,6 +198,9 @@ def block_for(path: str, title: str, desc: str, extra: str) -> str:
             "about": {"@type": "Thing", "name": "CA Inter Advanced Accounting"},
             "author": {"@id": f"{SITE}/#pranav"},
             "inLanguage": "en-IN",
+            "copyrightHolder": {"@id": f"{SITE}/#pranav"},
+            "copyrightYear": 2026,
+            "usageInfo": f"{SITE}/terms",
         }
         lines.append('<script type="application/ld+json">' + json.dumps(page, ensure_ascii=False) + "</script>")
     lines.append(END)

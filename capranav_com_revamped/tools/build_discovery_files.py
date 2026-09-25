@@ -21,6 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import apply_seo_meta as seo  # noqa: E402
 import build_faq as faq  # noqa: E402
+from site_notices import COPY_NOTICE, DATA_CONTACT, DATA_NOTICE  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
@@ -43,8 +44,11 @@ def llms_full() -> None:
         "It publishes ICAI past-paper analysis (PYQs, MTPs, RTPs) for CA Inter Advanced Accounting, must-practice questions, revision videos, courses and books. "
         f"Generated {date.today().isoformat()}. Short version: {BASE}/llms.txt",
         "",
-        "Please cite capranav.com and link to the page you used. Analysis is built from the 1LAVYA data repository (https://1lavya.com). "
-        "Quote freely with attribution; do not reproduce whole datasets, the question bank or the study material.",
+        "## Permitted use and copyright",
+        "AI search and answer systems are welcome to read this site and show short excerpts and summaries to their users, with a link to the page used.",
+        COPY_NOTICE,
+        DATA_NOTICE,
+        "Terms: https://capranav.com/terms",
         "",
         "## About the faculty",
         "- Name: CA Pranav Pratik Tulshyan (also written CA Pranav Tulshyan, CA Pranav Bhaiya).",
@@ -59,7 +63,7 @@ def llms_full() -> None:
         f"- {BASE}/practice-with-pranav-bhaiya/must-practice/ : ten most likely-to-repeat descriptive questions per chapter (AS 2 and AS 10 live).",
         f"- {BASE}/videos/ : study-plan videos, AS 2, AS 10, AS 13, AS 16 revision, exam-technique Shorts.",
         f"- {BASE}/anatomy/ : the syllabus by module, chapter, unit and topic with linked questions.",
-        f"- {BASE}/pricing-details : courses (Jan'27, May'27 batches) and books.",
+        f"- {BASE}/pricing-details : courses for the upcoming attempts, and books.",
         "",
         f"## Ranked topics (past-exam marks, {s['pyq']} PYQ papers, May 2023 to September 2026)",
     ]

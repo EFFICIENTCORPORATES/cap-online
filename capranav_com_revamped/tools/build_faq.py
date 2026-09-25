@@ -18,8 +18,12 @@ from __future__ import annotations
 import collections
 import html
 import json
+import sys
 from datetime import date
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from site_notices import COPY_NOTICE, DATA_CONTACT, DATA_NOTICE  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 SITE = ROOT / "capranav_com_revamped"
@@ -69,7 +73,7 @@ def faqs(s: dict) -> list[tuple[str, list[tuple[str, str]]]]:
             ("Is CA Pranav a practising Chartered Accountant?",
              "Yes. He has held a Certificate of Practice and has run his own CA firm since June 2026."),
             ("How and where does CA Pranav teach?",
-             "He teaches CA Inter Advanced Accounting through VC Gurukul, Noida, and offers a Live + Recorded course on this site for the January 2027 and May 2027 attempts. He also teaches accounting and GST to working professionals through Newton of Accounts. Current batches and prices are on the pricing page."),
+             "He teaches CA Inter Advanced Accounting through VC Gurukul, Noida, and offers a Live + Recorded course on this site for the upcoming CA Inter attempts. He also teaches accounting and GST to working professionals through Newton of Accounts. Current batches and prices are on the pricing page."),
         ]),
         ("CA Inter Advanced Accounting: the exam", [
             ("What is the exam pattern of CA Inter Advanced Accounting?",
@@ -109,9 +113,11 @@ def faqs(s: dict) -> list[tuple[str, list[tuple[str, str]]]]:
             ("How can I contact CA Pranav?",
              "Use the contact form on the Contact Us page."),
             ("Who provides the data and analysis on this site?",
-             "The rankings and analysis are built from the 1LAVYA data repository (1lavya.com) and published here by CA Pranav Tulshyan."),
-            ("Can I quote or reuse this analysis?",
-             "Quoting with attribution to capranav.com is welcome. Please do not copy whole datasets, the question bank or the study material; they are the result of a great deal of work and are protected."),
+             "The data and analysis are sourced from the 1LAVYA data repository (1lavya.com) and published here by CA Pranav Tulshyan."),
+            ("Is copying content from this website allowed?",
+             "No. Copying, scraping, mirroring, bulk downloading or republishing any content on this site (pages, questions, answers, analysis, datasets, books, slides) is not permitted without written permission. You may read it, use it for your own study, and quote short excerpts with a link to capranav.com. Search engines and AI search and answer systems may read the site and show short excerpts to their users with attribution. The full wording is in the Terms of Service."),
+            ("How can I get the data behind a topic, or API access?",
+             f"The data behind this site's analysis comes from the 1LAVYA data repository. To request API access to the data for any topic, contact 1LAVYA at {DATA_CONTACT}."),
         ]),
     ]
 
@@ -166,6 +172,7 @@ def build() -> None:
       <h1>Questions students ask <em>about CA Inter Accounts</em></h1>
       <p class="intro">Straight answers about the Advanced Accounting paper, the most important topics, how to practise, and about CA Pranav Tulshyan, the faculty behind this site. Figures come from the analysis of {s['pyq']} PYQ papers, {s['mtp']} MTP sets and {s['rtp']} RTP papers.</p>
       <p class="faq-meta">Last updated {today}.</p>
+      <p class="faq-meta">{e(COPY_NOTICE)} <a href="/terms">Terms</a></p>
     </section>
     <ul class="faq-toc">{"".join(toc)}</ul>
     {"".join(body)}
@@ -173,7 +180,7 @@ def build() -> None:
       <p><a href="/topics/">Important Topics (filter and download)</a> &middot; <a href="/practice-with-pranav-bhaiya/must-practice/">Must Practice Questions</a> &middot; <a href="/videos/">Videos and Shorts</a> &middot; <a href="/about-us">About CA Pranav</a> &middot; <a href="/pricing-details">Courses and books</a> &middot; <a href="/contact-us">Contact</a></p>
     </div>
   </main>
-  <footer>CA Pranav Pratik Tulshyan &middot; CA Inter Advanced Accounting<p class="powered">Powered by <a href="https://1lavya.com/?utm_source=capranav&amp;utm_medium=referral&amp;utm_campaign=powered_by&amp;utm_content=faq" target="_blank" rel="noopener">1LAVYA</a> &middot; this analysis is built from the 1LAVYA data repository</p></footer>
+  <footer>CA Pranav Pratik Tulshyan &middot; CA Inter Advanced Accounting<p class="powered">Powered by <a href="https://1lavya.com/?utm_source=capranav&amp;utm_medium=referral&amp;utm_campaign=powered_by&amp;utm_content=faq" target="_blank" rel="noopener">1LAVYA</a> &middot; this analysis is built from the 1LAVYA data repository</p><p class="legal">{e(DATA_NOTICE)}</p></footer>
 </body>
 </html>
 """

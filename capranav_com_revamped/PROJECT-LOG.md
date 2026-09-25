@@ -24,6 +24,21 @@ continues — don't let it go stale.
 
 ---
 
+### No exact attempt names; copyright and data-source notices — 2026-09-25 (night)
+
+Pranav: do not name exact attempts in descriptive text (a September batch is coming), state clearly that copying is
+not allowed, and say the data comes from the 1LAVYA repository with API requests going to 1LAVYA's admin address.
+Done: the FAQ, llms.txt, llms-full.txt, search descriptions and the Must Practice kicker now say "upcoming attempts"
+(the two real course product names, Jan'27 and May'27, remain in the pricing table and course picker because they are
+tied to orders). New wording in one file, `tools/site_notices.py`, applied by `tools/apply_legal_notice.py` to the footers
+of Topics, Anatomy, Videos, the practice hub and Must Practice, added as a new "Intellectual property and permitted use"
+clause in the Terms page, added to the FAQ (two new questions: is copying allowed; how to get data or API access), to
+llms.txt, llms-full.txt, the robots.txt header, the Excel download's "Powered by 1LAVYA" sheet, and to the pages' structured
+data (copyrightHolder, usageInfo). AI search and answer systems are explicitly welcomed to show short excerpts with a link.
+Contact used: **admin@1lavya.com** (Pranav wrote ".oc"; flagged for confirmation). Live version 527f91c0; IndexNow re-pinged.
+
+---
+
 ### Backups end to end, bot protection, FAQ and discovery files — 2026-09-25 (evening)
 
 **Backups** (`BACKUPS.md`): new R2 bucket `capranav-backups`. The Worker's Cron Trigger (03:00 IST) dumps the

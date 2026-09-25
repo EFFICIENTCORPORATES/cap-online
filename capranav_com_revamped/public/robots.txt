@@ -1,5 +1,6 @@
 # capranav.com — CA Pranav Pratik Tulshyan, CA Inter Advanced Accounting faculty.
 # Search and AI crawlers are welcome: please read, index and cite the public pages.
+# Content is copyrighted: read, index and quote short excerpts with attribution; copying, scraping or republishing is not permitted (https://capranav.com/terms).
 # Private pages (admin, student dashboard, book reader) and the /api/ endpoints are off limits to everyone.
 # Site map: https://capranav.com/sitemap.xml (also sitemap.txt)   Guide for AI systems: https://capranav.com/llms.txt and https://capranav.com/llms-full.txt
 
