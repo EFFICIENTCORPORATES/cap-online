@@ -24,6 +24,15 @@ continues — don't let it go stale.
 
 ---
 
+### D1 backup was failing; fixed — 2026-09-25
+
+While answering "is everything backed up?" found the 6-hourly D1 snapshot job had failed since 2026-09-24
+14:38 (unpinned `npx wrangler` hit an EBUSY on the npx cache). Pinned `wrangler@4.137.0` in
+`tools/backup_d1_snapshot.py`; a manual run wrote a fresh 628 KB snapshot. Still true: snapshots exist only on
+this PC (no off-machine copy), and R2 `capranav-vault` has no separate backup.
+
+---
+
 ### Videos page footer — 2026-09-25
 
 Pranav asked for "Powered by MERA BRAND" at the bottom of the Videos & Shorts page, plain text with no link.

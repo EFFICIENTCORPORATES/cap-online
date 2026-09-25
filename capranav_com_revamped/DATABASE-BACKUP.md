@@ -37,6 +37,15 @@ real student data — email addresses, phone numbers, order and shipping
 details. It must never be committed, copied into a public place, or shared
 outside what you'd normally treat as private customer records.
 
+## Incident: backups silently failed for ~24 hours (2026-09-24 to 2026-09-25)
+
+The 6-hourly job failed four times in a row (20:38, 02:38, 08:38, 14:38). Cause: the script called an
+unpinned `npx wrangler`, which tried to download the newest wrangler into the npx cache and hit a locked
+file (`EBUSY`). The failure alert email did send. Fix: the script now pins `wrangler@4.137.0`
+(`WRANGLER` at the top of `tools/backup_d1_snapshot.py`), which is already cached. A manual run on
+2026-09-25 19:43 succeeded (628 KB). When upgrading wrangler, change that one constant and run the
+script by hand once.
+
 ## Retention
 
 Snapshots older than **30 days** are deleted automatically on every run.

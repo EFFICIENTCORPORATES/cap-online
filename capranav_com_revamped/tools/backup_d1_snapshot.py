@@ -27,6 +27,10 @@ BACKUP_DIR = ROOT / "database-backups"
 LOG_FILE = BACKUP_DIR / "backup.log"
 DATABASE_NAME = "capranav-platform"
 RETENTION_DAYS = 30  # older snapshots are pruned automatically
+# Pinned on purpose. An unpinned `npx wrangler` tries to download the newest release into the npx cache on
+# every run; that download hit a locked file (EBUSY) and silently failed the 6-hourly backup from
+# 2026-09-24 20:38 until this fix. The pinned version is already cached, so no download is attempted.
+WRANGLER = "wrangler@4.137.0"
 
 # Where failure alerts go — same inbox the Worker's own order-notification
 # emails already use (see CONTACT_TO in worker/index.js).
@@ -115,7 +119,7 @@ def run_export(database_name: str) -> bool:
     stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     out_file = BACKUP_DIR / f"{database_name}_{stamp}.sql"
 
-    cmd = f'npx --yes wrangler d1 export {database_name} --remote --output="{out_file}"'
+    cmd = f'npx --yes {WRANGLER} d1 export {database_name} --remote --output="{out_file}"'
     try:
         result = subprocess.run(
             cmd,
