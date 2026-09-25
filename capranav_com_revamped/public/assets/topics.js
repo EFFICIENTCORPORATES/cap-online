@@ -23,7 +23,7 @@
   var PAPER_TEXT = { PYQ: "PYQ (past exams)", MTP: "MTP (mock tests)", RTP: "RTP (revision tests)" };
 
   var DEFAULTS = {
-    papers: ["PYQ"], years: [], months: [], module: "", chapter: "", unit: "", q: "",
+    papers: ["PYQ"], years: [], months: [], modules: [], chapters: [], units: [], q: "",
     sort: "measure", reverse: false, limit: 100, zero: false, preset: "top100"
   };
   var state = JSON.parse(JSON.stringify(DEFAULTS));
@@ -109,9 +109,9 @@
     var qid = q.replace(/_/g, "-");
     var list = res.agg.filter(function (a) {
       var u = D.units[a.t.unit];
-      if (state.module && String(u.module) !== state.module) return false;
-      if (state.chapter && (u.module + "-" + u.chapterNo) !== state.chapter) return false;
-      if (state.unit && u.id !== state.unit) return false;
+      if (state.modules.length && state.modules.indexOf(String(u.module)) < 0) return false;
+      if (state.chapters.length && state.chapters.indexOf(u.module + "-" + u.chapterNo) < 0) return false;
+      if (state.units.length && state.units.indexOf(u.id) < 0) return false;
       if (state.zero && a.count > 0) return false;
       if (q) {
         var hay = (a.t.name + " " + u.chapter + " " + u.unit + " " + a.t.id).toLowerCase();
@@ -144,9 +144,12 @@
     var y = state.years.length ? state.years.slice().sort().join(", ") : "all years";
     var m = state.months.length ? state.months.join(", ") + " attempts" : "all attempts";
     var where = "the whole syllabus";
-    if (state.unit) where = unitById[state.unit].unit;
-    else if (state.chapter) { var c = chapters.filter(function (x) { return x.key === state.chapter; })[0]; where = c ? "Chapter " + c.no + " (" + c.name + ")" : where; }
-    else if (state.module) where = "Module " + state.module;
+    var names = function (n, one, many) { return n + " " + (n === 1 ? one : many); };
+    if (state.units.length) where = state.units.length === 1 ? unitById[state.units[0]].unit : names(state.units.length, "unit", "units") + " selected";
+    else if (state.chapters.length) {
+      var picked = chapters.filter(function (x) { return state.chapters.indexOf(x.key) >= 0; });
+      where = picked.length === 1 ? "Chapter " + picked[0].no + " (" + picked[0].name + ")" : names(picked.length, "chapter", "chapters") + " selected";
+    } else if (state.modules.length) where = state.modules.length === 1 ? "Module " + state.modules[0] : "Modules " + state.modules.slice().sort().join(", ");
     return { p: p, y: y, m: m, where: where };
   }
 
@@ -253,9 +256,9 @@
   function latestYear() { return Math.max.apply(null, D.sittings.map(function (s) { return s.year; })); }
 
   function applyPreset(p) {
-    var keep = { module: state.module, chapter: state.chapter, unit: state.unit, q: state.q };
+    var keep = { modules: state.modules, chapters: state.chapters, units: state.units, q: state.q };
     state = JSON.parse(JSON.stringify(DEFAULTS));
-    state.module = keep.module; state.chapter = keep.chapter; state.unit = keep.unit; state.q = keep.q;
+    state.modules = keep.modules; state.chapters = keep.chapters; state.units = keep.units; state.q = keep.q;
     Object.keys(p.set).forEach(function (k) { if (k !== "latestYear") state[k] = JSON.parse(JSON.stringify(p.set[k])); });
     if (p.set.latestYear) state.years = [String(latestYear())];
     state.preset = p.id;
@@ -278,26 +281,92 @@
     });
   }
 
-  function fillSelect(sel, items, current, allText) {
-    sel.textContent = "";
-    var o = el("option", null, allText); o.value = ""; sel.appendChild(o);
-    items.forEach(function (it) { var op = el("option", null, it[1]); op.value = it[0]; sel.appendChild(op); });
-    sel.value = current;
+  // ---- tick-many pickers for Module / Chapter / Unit ------------------------------
+  function unitLabel(u) {
+    return u.single ? u.chapter + " (whole chapter)" : (u.standard ? u.standard + " — " + u.unit.replace(/^Accounting Standard \d+\s*/i, "") : u.unit);
   }
 
-  function buildSelects() {
-    var mods = Array.from(new Set(D.units.map(function (u) { return u.module; }))).sort();
-    fillSelect($("f-module"), mods.map(function (m) { return [String(m), "Module " + m]; }), state.module, "All modules");
-    var ch = chapters.filter(function (c) { return !state.module || String(c.module) === state.module; });
-    fillSelect($("f-chapter"), ch.map(function (c) { return [c.key, c.no + ". " + c.name]; }), state.chapter, "All chapters");
-    var us = D.units.filter(function (u) {
-      return (!state.module || String(u.module) === state.module) && (!state.chapter || (u.module + "-" + u.chapterNo) === state.chapter);
+  function multiItem(value, text, checked, onChange) {
+    var lab = el("label", "ms-item"), cb = el("input"); cb.type = "checkbox"; cb.value = value; cb.checked = checked;
+    cb.addEventListener("change", function () { onChange(value, cb.checked); });
+    lab.appendChild(cb); lab.appendChild(el("span", null, text)); return lab;
+  }
+
+  function toggleValue(arr, v, on) { var i = arr.indexOf(v); if (on && i < 0) arr.push(v); if (!on && i >= 0) arr.splice(i, 1); }
+
+  function visibleChapters() {
+    return chapters.filter(function (c) { return !state.modules.length || state.modules.indexOf(String(c.module)) >= 0; });
+  }
+  function visibleUnits() {
+    return D.units.filter(function (u) {
+      var chapterKey = u.module + "-" + u.chapterNo;
+      if (state.chapters.length) return state.chapters.indexOf(chapterKey) >= 0;
+      return !state.modules.length || state.modules.indexOf(String(u.module)) >= 0;
     });
-    fillSelect($("f-unit"), us.map(function (u) { return [u.id, u.single ? u.chapter + " (whole chapter)" : (u.standard ? u.standard + " — " + u.unit.replace(/^Accounting Standard \d+\s*/i, "") : u.unit)]; }), state.unit, "All units");
+  }
+
+  function summaryText(n, all, one, many) { return n ? n + " " + (n === 1 ? one : many) + " ticked" : all; }
+
+  function buildMulti() {
+    // Drop ticks that are no longer offered (e.g. a chapter whose module was just unticked).
+    var chKeys = visibleChapters().map(function (c) { return c.key; });
+    state.chapters = state.chapters.filter(function (k) { return chKeys.indexOf(k) >= 0; });
+    var unitIds = visibleUnits().map(function (u) { return u.id; });
+    state.units = state.units.filter(function (k) { return unitIds.indexOf(k) >= 0; });
+
+    var mods = Array.from(new Set(D.units.map(function (u) { return u.module; }))).sort();
+    var lm = $("l-module"); lm.textContent = "";
+    mods.forEach(function (m) {
+      lm.appendChild(multiItem(String(m), "Module " + m, state.modules.indexOf(String(m)) >= 0, function (v, on) { toggleValue(state.modules, v, on); afterPick(true); }));
+    });
+    var lc = $("l-chapter"); lc.textContent = "";
+    visibleChapters().forEach(function (c) {
+      lc.appendChild(multiItem(c.key, c.no + ". " + c.name, state.chapters.indexOf(c.key) >= 0, function (v, on) { toggleValue(state.chapters, v, on); afterPick(true); }));
+    });
+    var lu = $("l-unit"); lu.textContent = "";
+    var lastChapter = null;
+    visibleUnits().forEach(function (u) {
+      var key = u.module + "-" + u.chapterNo;
+      if (key !== lastChapter) { lu.appendChild(el("div", "ms-group", "Chapter " + u.chapterNo + " · " + u.chapter)); lastChapter = key; }
+      lu.appendChild(multiItem(u.id, unitLabel(u), state.units.indexOf(u.id) >= 0, function (v, on) { toggleValue(state.units, v, on); afterPick(false); }));
+    });
+    updateSummaries();
+  }
+
+  function updateSummaries() {
+    $("ms-module").textContent = state.modules.length ? "Module " + state.modules.slice().sort().join(", ") + " ticked" : "All modules";
+    $("ms-chapter").textContent = summaryText(state.chapters.length, "All chapters", "chapter", "chapters");
+    $("ms-unit").textContent = summaryText(state.units.length, "All units", "unit", "units");
+  }
+
+  // A tick in a parent list changes which children are offered, so rebuild; a unit tick only re-renders.
+  function afterPick(rebuild) {
+    if (rebuild) {
+      var lists = ["l-module", "l-chapter", "l-unit"], tops = lists.map(function (id) { return $(id).scrollTop; });
+      buildMulti();
+      lists.forEach(function (id, i) { $(id).scrollTop = tops[i]; });
+    } else {
+      updateSummaries();
+    }
+    render();
+  }
+
+  function wireMulti() {
+    [["module", "modules", function () { return D.units.map(function (u) { return String(u.module); }); }],
+     ["chapter", "chapters", function () { return visibleChapters().map(function (c) { return c.key; }); }],
+     ["unit", "units", function () { return visibleUnits().map(function (u) { return u.id; }); }]].forEach(function (cfg) {
+      $("m-" + cfg[0]).addEventListener("click", function (e) {
+        var act = e.target && e.target.dataset && e.target.dataset.act;
+        if (!act) return;
+        e.preventDefault();
+        state[cfg[1]] = act === "all" ? Array.from(new Set(cfg[2]())) : [];
+        afterPick(true);
+      });
+    });
   }
 
   function syncControls() {
-    buildPresets(); buildFilters(); buildSelects();
+    buildPresets(); buildFilters(); buildMulti();
     $("f-search").value = state.q;
     $("f-sort").value = state.sort;
     $("f-limit").value = String(state.limit);
@@ -307,9 +376,7 @@
   function changed() { state.preset = ""; buildPresets(); buildFilters(); render(); }
 
   function wire() {
-    $("f-module").addEventListener("change", function (e) { state.module = e.target.value; state.chapter = ""; state.unit = ""; buildSelects(); changedKeepZero(); });
-    $("f-chapter").addEventListener("change", function (e) { state.chapter = e.target.value; state.unit = ""; buildSelects(); changedKeepZero(); });
-    $("f-unit").addEventListener("change", function (e) { state.unit = e.target.value; changedKeepZero(); });
+    wireMulti();
     $("f-search").addEventListener("input", function (e) { state.q = e.target.value; render(); });
     $("f-sort").addEventListener("change", function (e) { state.sort = e.target.value; state.reverse = false; $("reverse").setAttribute("aria-pressed", "false"); render(); });
     $("f-limit").addEventListener("change", function (e) { state.limit = Number(e.target.value); render(); });
@@ -324,7 +391,6 @@
     });
   }
   // Choosing where to look (module/chapter/unit) narrows the current view; it does not turn a preset off.
-  function changedKeepZero() { render(); }
 
   // ------------------------------------------------------------------ downloads
   var xlsxPromise = null;
@@ -356,6 +422,16 @@
       ws["!cols"] = widths;
       var wb = X.utils.book_new();
       X.utils.book_append_sheet(wb, ws, sheetName.slice(0, 31));
+      // Every workbook carries its provenance on a second sheet, leaving the data sheet untouched.
+      var about = X.utils.aoa_to_sheet([
+        ["Powered by 1LAVYA"],
+        ["This analysis is built from the 1LAVYA data repository."],
+        ["Source page: https://capranav.com/topics/  ·  https://1lavya.com"],
+        ["Generated on " + new Date().toISOString().slice(0, 10)],
+        ["Marks: a question's marks are split equally across the topics it tests. RTP questions carry no printed marks."]
+      ]);
+      about["!cols"] = [{ wch: 90 }];
+      X.utils.book_append_sheet(wb, about, "Powered by 1LAVYA");
       X.writeFile(wb, filename);
     });
   }
@@ -540,7 +616,8 @@
     var q = new URLSearchParams(location.search), p = q.get("view");
     var preset = PRESETS.filter(function (x) { return x.id === p; })[0];
     if (preset) applyPreset(preset);
-    if (q.get("unit") && unitById[q.get("unit")]) { state.unit = q.get("unit"); var u = unitById[state.unit]; state.module = String(u.module); state.chapter = u.module + "-" + u.chapterNo; syncControls(); }
+    var wanted = (q.get("unit") || "").split(",").filter(function (id) { return unitById[id]; });
+    if (wanted.length) { state.units = wanted; syncControls(); }
   }
 
   init();

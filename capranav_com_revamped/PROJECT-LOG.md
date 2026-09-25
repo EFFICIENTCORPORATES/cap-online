@@ -24,6 +24,21 @@ continues — don't let it go stale.
 
 ---
 
+### "Powered by 1LAVYA" and tick-many filters — 2026-09-25
+
+Pranav asked for (1) "Powered by 1LAVYA" on all analytical pages, since the data comes
+from 1LAVYA's repository, and (2) checkboxes so a student can pick several units or chapters.
+(1) Footer line linking to 1lavya.com on `/topics/`, `/anatomy/`, the practice hub and Must
+Practice (shared `.powered` style in `anatomy.css`); every Excel download also gets a second
+sheet "Powered by 1LAVYA". Not on `/videos/` (not analytical). (2) `/topics/` Module, Chapter
+and Unit are now checkbox lists with Tick all / Clear, cascading (module ticks narrow chapters,
+chapter ticks narrow units, stale ticks dropped). Verified in headless Edge: 2 modules -> 11
+chapters offered; 2 chapters -> 9 units; 2 units -> 25 topics from AS 2 and AS 10 only;
+un-ticking a module drops its chapter; deep link `?unit=A,B` works; no overflow at 390px.
+`/anatomy/` filters stay single-select (server-side API) — say if that should change too.
+
+---
+
 ### Important Topics explorer — 2026-09-25
 
 New public page `/topics/`: presets ("Top 100", mock tests, RTP, everything, most recent,

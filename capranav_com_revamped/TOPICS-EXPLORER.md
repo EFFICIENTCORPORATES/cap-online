@@ -53,7 +53,19 @@ workbook's Chapter Priority, Topic Attempts, Question Topic Map, A-B-C-D
 Questions and Study Topics sheets. There is no "MTP-wise" sheet in the workbook;
 that list is new.
 
-Deep links: `/topics/?view=top100|mtp|rtp|all|recent|never` and `/topics/?unit=M2-C5-U2`.
+**Tick-many pickers (2026-09-25).** Module, Chapter and Unit are checkbox lists, not
+single dropdowns: tick any number of each; nothing ticked = the whole syllabus. Ticking a
+module narrows the chapters offered, ticking chapters narrows the units, and ticks that
+are no longer offered are dropped. The Anatomy explorer (`/anatomy/`) still uses
+single-select dropdowns (its filters run server-side in `handleAnatomyTopics`).
+
+**"Powered by 1LAVYA".** Every analytical page (`/topics/`, `/anatomy/`, the practice hub and
+Must Practice) carries "Powered by 1LAVYA" in its footer, linking to https://1lavya.com,
+and every Excel download has a second sheet "Powered by 1LAVYA" (data sheet untouched;
+CSV has no place for it). Style: `.powered` in `anatomy.css`. Any new analytical page
+should add the same footer line.
+
+Deep links: `/topics/?view=top100|mtp|rtp|all|recent|never` and `/topics/?unit=M2-C5-U1,M2-C5-U2` (comma-separated units).
 
 ## Reading a topic ID
 

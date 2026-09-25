@@ -53,10 +53,16 @@
         </fieldset>
       </div>
 
-      <div class="sel-grid">
-        <label>Module<select id="f-module"></select></label>
-        <label>Chapter<select id="f-chapter"></select></label>
-        <label>Unit<select id="f-unit"></select></label>
+      <p class="help where-help">Where to look? Tick as many modules, chapters or units as you like. Nothing ticked = the whole syllabus.</p>
+      <div class="multi-grid">
+        <details class="multi" id="m-module"><summary><span class="ms-label">Module</span><span class="ms-val" id="ms-module">All modules</span></summary>
+          <div class="ms-body"><div class="ms-tools"><button type="button" data-act="all">Tick all</button><button type="button" data-act="none">Clear</button></div><div class="ms-list" id="l-module"></div></div></details>
+        <details class="multi" id="m-chapter"><summary><span class="ms-label">Chapter</span><span class="ms-val" id="ms-chapter">All chapters</span></summary>
+          <div class="ms-body"><div class="ms-tools"><button type="button" data-act="all">Tick all</button><button type="button" data-act="none">Clear</button></div><div class="ms-list" id="l-chapter"></div></div></details>
+        <details class="multi" id="m-unit"><summary><span class="ms-label">Unit</span><span class="ms-val" id="ms-unit">All units</span></summary>
+          <div class="ms-body"><div class="ms-tools"><button type="button" data-act="all">Tick all</button><button type="button" data-act="none">Clear</button></div><div class="ms-list" id="l-unit"></div></div></details>
+      </div>
+      <div class="sel-grid one">
         <label class="wide">Search<input id="f-search" type="search" placeholder="A topic name, or an ID like M2-C5-U2-T2.6" autocomplete="off"></label>
       </div>
 
@@ -142,7 +148,7 @@
     </section>
   </main>
 
-  <footer>CA Pranav Pratik Tulshyan &middot; CA Inter Advanced Accounting</footer>
+  <footer>CA Pranav Pratik Tulshyan &middot; CA Inter Advanced Accounting<p class="powered">Powered by <a href="https://1lavya.com" target="_blank" rel="noopener">1LAVYA</a> &middot; this analysis is built from the 1LAVYA data repository</p></footer>
   <script src="/assets/topics.js"></script>
 </body>
 </html>
