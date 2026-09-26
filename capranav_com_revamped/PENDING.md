@@ -1,5 +1,7 @@
 # Pending work: capranav.com
 
+> **Superseded for agent work by `AGENT-HANDOFF.md`** (2026-09-26): self-contained, with rules, file paths, commands and acceptance tests. This file stays as the short owner-facing list.
+
 Updated 2026-09-25. Grouped by who has to act. Finished work is in PROJECT-LOG.md; design detail is in the
 per-topic documents named in each line.
 

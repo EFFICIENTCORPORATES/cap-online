@@ -24,6 +24,16 @@ continues — don't let it go stale.
 
 ---
 
+### Agent handoff written — 2026-09-26
+
+Pranav asked for every pending item in one Markdown file for another agent: `capranav_com_revamped/AGENT-HANDOFF.md`
+(read order, locked decisions, generators, pending work split into "blocked on Pranav" and "buildable now" with
+acceptance tests, gotchas, file map). Also added `tools/qa_smoke.py` (post-deploy test: crawlers, data guard, sitemap,
+redirect-free crawl, optional no-sideways-scroll browser check); it passed against the live site. First nightly backup
+run confirmed at 2026-09-25 21:30 UTC (ok, 100 vault objects skipped as unchanged).
+
+---
+
 ### No exact attempt names; copyright and data-source notices — 2026-09-25 (night)
 
 Pranav: do not name exact attempts in descriptive text (a September batch is coming), state clearly that copying is
