@@ -104,11 +104,15 @@
     <p>CA Pranav Pratik Tulshyan (Pranav Pratik Tulshyan) · GSTIN: 10AXBPT7695J1Z1</p>
   </footer>
 
+  <script src="assets/turnstile.js"></script>
   <script>
+    TS.mount(document.getElementById("contact-form"));
     document.getElementById("contact-form").addEventListener("submit", async (e) => {
       e.preventDefault();
       const form = e.target;
       const data = Object.fromEntries(new FormData(form).entries());
+      data.turnstileToken = TS.token(form);
+      TS.reset(form);
       const btn = form.querySelector("button[type=submit]");
       btn.disabled = true;
       btn.textContent = "Sending…";

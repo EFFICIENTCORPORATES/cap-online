@@ -103,9 +103,7 @@ uploaded off-machine; first nightly run verified at 2026-09-25 21:30 UTC); copyr
 
 | # | Item | What you can do meanwhile |
 |---|---|---|
-| A1 | **Cloudflare dashboard settings**: Bot Fight Mode; Always Use HTTPS; one site-wide rate-limit rule (120 requests/min/IP, `not cf.client.bot`); a WAF rule challenging spoofed crawlers; Cloudflare Access on `/admin*` and `/api/admin/*`; confirm the Workers plan (Free vs Paid) | Exact rules are in `BOT-PROTECTION.md`. **Try the `ectpl-creds` skill/agent** (listed in your skills): it issues scoped Cloudflare tokens so these can be applied by API instead of by hand. Never ask Pranav to paste a secret |
-| A0 | **Credential agent access**: `1lavya-agent` may only issue tokens for project `1lavya`; `principal` changes need Pranav's admin identity. Pranav approved (2026-09-27) adding project `capranav`; he must run: `python D:/EffCorp_Products/TeamManagement/credential-agent/ectpl_creds.py --as pranav principal 1lavya-agent --projects 1lavya,capranav` | Unblocks A1 and A2 |
-| A2 | **Turnstile** site key and secret for the login-code, contact and admin-login forms | Same: request a Turnstile-scoped token through `ectpl-creds`; then task B5 |
+| A1 | **Done 2026-09-27 by API**: HTTPS, Bot Fight Mode, spoofed-crawler rule, rate limit (plan is Free: 100 req/10 s/IP; 20 blocked normal page loads). **Still open:** Cloudflare Access on `/admin*` and `/api/admin/*` (needs the email Pranav wants to allow); token `ectpl-capranav-prod-bot-protection` via `ectpl-creds --as 1lavya-agent` (load the key from the User env var) | See PROJECT-LOG 2026-09-27 |
 | A3 | Submit `sitemap.xml` in **Google Search Console** and **Bing Webmaster Tools**; verify the domain | Needs his Google/Microsoft accounts. IndexNow (Bing) is already pinged |
 | A4 | **Backlinks**: capranav.com from the VC Gurukul site, every YouTube video description and channel About, LinkedIn, Instagram, Telegram | Draft the exact link text and description lines for him to paste |
 | A5 | Copy the Razorpay and email-token secrets to a password manager; download a DNS zone export (dashboard, DNS, Records, Export) and keep it | See `BACKUPS.md` |
@@ -148,7 +146,7 @@ Book page numbers are read from `first_run/output/final_deliverable/CA Inter Adv
 **B4. Canary entries and per-account watermarks.** Add a few fake but plausible topics or questions that appear nowhere else, recorded in a private file (not in git), and invisible per-account marks
 (zero-width or spacing patterns) in gated downloads, so a copy can be traced and proven. Depends on B1 for accounts.
 
-**B5. Turnstile** on `POST /api/otp/send`, `/api/contact`, `/api/admin/login` (server-side token check with the secret; widget on `index.html`, `contact-us.html`, `admin.html`, dashboard login). Needs A2.
+**B5. Turnstile**: done 2026-09-27 (see PROJECT-LOG). Ask Pranav to send one real contact-form message and request one login code to confirm humans pass.
 
 **B6. Videos: data in D1 and an admin form** (design and SQL are in `VIDEOS.md`); record an upload date per video so `VideoObject` markup is valid; add transcripts or summaries as visible text on `/videos/` (helps AI understanding).
 The page reads `/videos/videos.json`; change that one fetch to `/api/videos` and keep `videos.json` as fallback for a release.

@@ -7,6 +7,14 @@ continues — don't let it go stale.
 
 ---
 
+## 2026-09-27: Cloudflare protections applied by API, Turnstile live on three forms
+
+Credential agent: Pranav granted `1lavya-agent` project `capranav` (this rotated the agent's client key; he updated the env var and his vault). Issued token `ectpl-capranav-prod-bot-protection` (id 293e8acd..., 7 days, Bitwarden). Applied to zone capranav.com (plan: **Free Website**): Always Use HTTPS on; Bot Fight Mode on; WAF custom rule "capranav: challenge spoofed crawlers" (managed challenge, BOT-PROTECTION.md rule 4); rate-limit rule "capranav: 100 req per 10s per IP" (`not cf.client.bot`, block 10 s; the Free plan allows only a 10 s period and 10 s block). A first setting of 20/10 s returned 429 to qa_smoke within one page load (each page pulls many assets), so it was raised to 100 the same hour. qa_smoke: faked GPTBot/ClaudeBot/Googlebot/PerplexityBot from this PC now get 403 (the WAF rule working; real crawlers are IP-verified), and the script expects that; its browser waits for `load`, not `networkidle` (Turnstile keeps the network busy). Turnstile widget uses compact size on forms under 310 px (320 px phones scrolled sideways). Rules are tagged `capranav:` so re-runs replace only ours.
+
+Turnstile: widget "capranav.com" (managed, sitekey `0x4AAAAAAFFFJsKBEWIqBbA_`), secret stored only as Worker secret `TURNSTILE_SECRET` (agent may not `store`; if lost, rotate the widget secret). New `worker/lib/turnstile.js` (siteverify, fails closed, skipped when the secret is absent so local dev works) called from `handleOtpSend`, `handleContact`, `handleAdminLogin`; new `public/assets/turnstile.js` (explicit render, `TS.mount/token/reset`) on the homepage and Contact Us contact forms, the dashboard login-code form and the admin login. Verified live (final version 7f75df78): tokenless POSTs to all three endpoints get 400; the widget renders "Verify you are human" on all four pages; qa_smoke --browser ALL PASSED. Automated browsers cannot pass the check, so a real submit test needs a human.
+
+Not done: Cloudflare Access on `/admin*` (needs the email to allow); AI Crawl Control choices (A6).
+
 ## 2026-09-27: site contacts split (me@capranav.com vs admin@1lavya.com)
 
 Pranav: site, syllabus and course enquiries go to me@capranav.com; admin@1lavya.com only for faculty white-labelling. Updated `tools/site_notices.py` (new SITE_CONTACT), `apply_legal_notice.py` (links both), `build_faq.py` (contact answer, retitled the data question), `public/assets/topics.js` Excel sheet, hand-written `public/llms.txt`; rebuilt FAQ, notices, discovery files. Deployed version 5de7d7b1; qa_smoke --browser ALL PASSED; no 'API access' wording left. Credential agent: 1lavya-agent lacks project capranav, needs Pranav to grant (AGENT-HANDOFF A0).

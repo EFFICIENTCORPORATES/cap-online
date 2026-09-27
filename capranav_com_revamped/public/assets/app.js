@@ -139,10 +139,13 @@ document.querySelectorAll("[data-buy-pdf]").forEach((btn) => {
 });
 
 // Contact form
+TS.mount(document.getElementById("contact-form"));
 document.getElementById("contact-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const form = e.target;
   const data = Object.fromEntries(new FormData(form).entries());
+  data.turnstileToken = TS.token(form);
+  TS.reset(form);
   const btn = form.querySelector("button[type=submit]");
   btn.disabled = true;
   btn.textContent = "Sending…";

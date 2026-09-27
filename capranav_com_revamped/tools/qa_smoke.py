@@ -6,7 +6,8 @@
                                                    # (needs: pip install playwright, and Microsoft Edge installed)
 
 What it checks (each line prints PASS or FAIL; the exit code is 1 if anything failed):
-  * Search and AI crawler user-agents get 200 on the public pages (nobody is blocked by mistake).
+  * Search and AI crawler user-agents get 200 on the public pages (nobody is blocked by mistake); the five the WAF
+    spoofed-crawler rule names may get 403 here, because from this PC they are unverified.
   * The bulk data files and the anatomy API are refused to a bare request (403) and served to a same-site
     request (200). Uses a cache-busting query string, because Cloudflare may serve an old cached copy.
   * Every URL in sitemap.xml returns 200, and robots.txt, llms.txt, llms-full.txt, sitemap.txt exist.
@@ -29,6 +30,7 @@ import urllib.request
 BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 CRAWLERS = ["GPTBot/1.2", "OAI-SearchBot/1.0", "ChatGPT-User/1.0", "ClaudeBot/1.0", "Claude-SearchBot", "Claude-User",
             "PerplexityBot/1.0", "Googlebot/2.1", "Bingbot/2.0", "Applebot/0.1", "DuckDuckBot/1.1"]
+SPOOF_CHALLENGED = ["GPTBot", "ClaudeBot", "Googlebot", "bingbot", "PerplexityBot"]
 PAGES = ["/", "/faq/", "/topics/", "/videos/", "/about-us", "/practice-with-pranav-bhaiya/must-practice/", "/llms.txt"]
 DATA_FILES = ["/topics/data/topics.json", "/practice-with-pranav-bhaiya/must-practice/data/M2-C5-U1.json"]
 FILES = ["/robots.txt", "/sitemap.xml", "/sitemap.txt", "/llms.txt", "/llms-full.txt", "/humans.txt"]
@@ -69,9 +71,14 @@ def main() -> int:
     base = a.base.rstrip("/")
 
     print("== crawlers get the public pages")
+    # The zone's WAF rule challenges GPTBot, ClaudeBot, Googlebot, bingbot and PerplexityBot user-agents that Cloudflare
+    # has not verified by IP. From this PC they are impostors, so 403 (the challenge) is the right answer for those;
+    # real crawlers from their own IP ranges get 200. Every other crawler user-agent must still get 200.
     for ua in CRAWLERS:
         codes = {fetch(base + p, ua)[0] for p in PAGES}
-        check(codes == {200}, f"{ua}: {sorted(codes)}")
+        spoof_rule = any(k in ua for k in SPOOF_CHALLENGED)
+        check(codes <= ({200, 403} if spoof_rule else {200}),
+              f"{ua}: {sorted(codes)}" + (" (unverified copy challenged by WAF rule, expected)" if spoof_rule and 403 in codes else ""))
 
     print("== data guard")
     for f in DATA_FILES:
@@ -113,7 +120,7 @@ def main() -> int:
                 ctx = b.new_context(viewport={"width": w, "height": 800}, is_mobile=w < 700)
                 page = ctx.new_page()
                 for path in sorted(seen):
-                    page.goto(base + path, wait_until="networkidle", timeout=30000)
+                    page.goto(base + path, wait_until="load", timeout=30000)  # not networkidle: Turnstile keeps the network busy
                     page.wait_for_timeout(300)
                     sw, vw = page.evaluate("[document.documentElement.scrollWidth, document.documentElement.clientWidth]")
                     check(sw <= vw + 1, f"{w}px {path} (scrollWidth {sw}, viewport {vw})")

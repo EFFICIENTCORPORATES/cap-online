@@ -57,6 +57,7 @@ function renderLogin(prefillEmail) {
   `;
 
   let emailSent = "";
+  TS.mount(document.getElementById("email-form"));
   document.getElementById("email-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = new FormData(e.target).get("email");
@@ -66,8 +67,9 @@ function renderLogin(prefillEmail) {
       const res = await fetch("/api/otp/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, turnstileToken: TS.token(document.getElementById("email-form")) }),
       });
+      TS.reset(document.getElementById("email-form"));
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Could not send the code.");
       emailSent = email;

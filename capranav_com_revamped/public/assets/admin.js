@@ -16,9 +16,12 @@ function renderLogin(errorMsg) {
     </form>
     <p class="status-line" id="admin-login-status">${errorMsg || ""}</p>
   `;
+  TS.mount(document.getElementById("admin-login-form"));
   document.getElementById("admin-login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target).entries());
+    data.turnstileToken = TS.token(e.target);
+    TS.reset(e.target);
     const status = document.getElementById("admin-login-status");
     status.textContent = "Logging in…";
     try {

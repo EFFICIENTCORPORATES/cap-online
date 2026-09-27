@@ -1,6 +1,7 @@
 import { getProduct } from "./lib/products.js";
 import { isDataPath, isSameSiteRequest, limited, deny } from "./lib/guard.js";
 import { runBackup } from "./lib/backup.js";
+import { checkTurnstile } from "./lib/turnstile.js";
 import {
   randomOtpCode,
   otpExpiry,
@@ -49,7 +50,9 @@ async function readJson(request) {
 }
 
 async function handleOtpSend(request, env) {
-  const { email } = await readJson(request);
+  const { email, turnstileToken } = await readJson(request);
+  const tsBlock = await checkTurnstile(request, env, turnstileToken, json);
+  if (tsBlock) return tsBlock;
   if (!isValidEmail(email)) return json({ error: "Enter a valid email address." }, { status: 400 });
   const clean = email.trim().toLowerCase();
 
@@ -500,6 +503,8 @@ async function handleContact(request, env) {
   // filling every field in the form does. Ack as success without saving or
   // emailing anything — no signal back to the bot that it was caught.
   if (body.website) return json({ ok: true });
+  const tsBlock = await checkTurnstile(request, env, body.turnstileToken, json);
+  if (tsBlock) return tsBlock;
 
   if (!name || !isValidEmail(email) || !message) {
     return json({ error: "Please fill in your name, a valid email and a message." }, { status: 400 });
@@ -537,7 +542,9 @@ async function handleAdminLogin(request, env) {
     return json({ error: "Too many failed attempts. Please wait a while and try again." }, { status: 429 });
   }
 
-  const { username, password } = await readJson(request);
+  const { username, password, turnstileToken } = await readJson(request);
+  const tsBlock = await checkTurnstile(request, env, turnstileToken, json);
+  if (tsBlock) return tsBlock;
   const ok = await verifyAdminLogin(env.DB, username, password);
   if (!ok) {
     await recordFailedLogin(env.DB, ip);

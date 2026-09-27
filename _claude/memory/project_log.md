@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-27 capranav.com Cloudflare protections
+ectpl-creds token issued for project capranav; applied HTTPS, Bot Fight Mode, spoofed-crawler WAF rule, rate limit (100/10s, Free plan; 20 blocked page loads), Turnstile on OTP/contact/admin forms. Access on /admin pending allowed email.
+
 ## 2026-09-27 capranav.com contacts
 Split site contact (me@capranav.com) from 1LAVYA white-label contact (admin@1lavya.com); deployed, QA passed. ectpl-creds blocked: 1lavya-agent not allowed project capranav.
 
