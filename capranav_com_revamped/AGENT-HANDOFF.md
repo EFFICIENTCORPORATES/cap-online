@@ -74,7 +74,7 @@ Decisions Pranav has made:
   The exact wording is in `tools/site_notices.py` and is on the Terms page, footers, FAQ, `llms.txt`, `llms-full.txt`, `robots.txt` and the Excel export.
 * **"Powered by 1LAVYA"** on every analytical page (Topics, Anatomy, practice hub, Must Practice, FAQ) and in the Excel export, linking to `1lavya.com` with UTM
   parameters. **The Videos page says "Powered by MERA BRAND" as plain text, no link.**
-* Data and API requests go to **admin@1lavya.com**. Pranav typed `admin@1lavya.oc`; I assumed `.com`. **Confirm this.**
+* **Two contacts (confirmed 2026-09-27):** `me@capranav.com` for anything about the site, the CA Inter Advanced Accounting syllabus, courses and enquiries (incoming capranav.com mail forwards to Pranav's Gmail); `admin@1lavya.com` only for faculty or institutes wanting to white-label the important-question lists and syllabus mappings. Both live in `tools/site_notices.py`. Outgoing mail already uses capranav.com senders (`login@`, `orders@`, `contact@`, `alerts@`).
 * **Never name clients** (audit clients). Describe them: "Fortune 500", "one of India's largest metals and mining groups".
 * **No "best faculty" style claims.** Pranav now holds a Certificate of Practice (since June 2026), so ICAI advertising rules apply. State verifiable
   facts (ranks, dates, employers). No offers of services, prices for practice work, or solicitation.
@@ -104,6 +104,7 @@ uploaded off-machine; first nightly run verified at 2026-09-25 21:30 UTC); copyr
 | # | Item | What you can do meanwhile |
 |---|---|---|
 | A1 | **Cloudflare dashboard settings**: Bot Fight Mode; Always Use HTTPS; one site-wide rate-limit rule (120 requests/min/IP, `not cf.client.bot`); a WAF rule challenging spoofed crawlers; Cloudflare Access on `/admin*` and `/api/admin/*`; confirm the Workers plan (Free vs Paid) | Exact rules are in `BOT-PROTECTION.md`. **Try the `ectpl-creds` skill/agent** (listed in your skills): it issues scoped Cloudflare tokens so these can be applied by API instead of by hand. Never ask Pranav to paste a secret |
+| A0 | **Credential agent access**: `1lavya-agent` may only issue tokens for project `1lavya`; `principal` changes need Pranav's admin identity. Pranav approved (2026-09-27) adding project `capranav`; he must run: `python D:/EffCorp_Products/TeamManagement/credential-agent/ectpl_creds.py --as pranav principal 1lavya-agent --projects 1lavya,capranav` | Unblocks A1 and A2 |
 | A2 | **Turnstile** site key and secret for the login-code, contact and admin-login forms | Same: request a Turnstile-scoped token through `ectpl-creds`; then task B5 |
 | A3 | Submit `sitemap.xml` in **Google Search Console** and **Bing Webmaster Tools**; verify the domain | Needs his Google/Microsoft accounts. IndexNow (Bing) is already pinged |
 | A4 | **Backlinks**: capranav.com from the VC Gurukul site, every YouTube video description and channel About, LinkedIn, Instagram, Telegram | Draft the exact link text and description lines for him to paste |
@@ -114,7 +115,7 @@ uploaded off-machine; first nightly run verified at 2026-09-25 21:30 UTC); copyr
 | A9 | Question Bank **e-book checkout**: bring it back to this site or keep VC Gurukul's store (temporary since 2026-09-23) | The switch is described in a comment in `pricing-details.html` and `worker/lib/products.js` |
 | A10 | Unanswered profile questions: what "1% at all levels" meant; whether to publish school marks (85.6, 82.0, 86.2 percent); a link to proof (rank certificates, LinkedIn); the public URL for Newton of Accounts | Leave them out until answered |
 | A11 | Where the `1lavya.com` site's repo lives (for B9) | The Workers list shows `main1lavya-web` and `main1lavya-web-in`, which may be it; confirm before touching |
-| A12 | Confirm `admin@1lavya.com` (see section 2) and read the new Terms clause once (it is a legal document) | Wording is in `tools/site_notices.py` |
+| A12 | Read the Terms clause once (it is a legal document) | Wording is in `tools/site_notices.py`; contacts settled 2026-09-27 |
 | A13 | **Real-phone check** of Videos, Topics, Must Practice, FAQ (all testing so far used Edge emulation) | Give him a short checklist |
 | A14 | **September batch**: when it opens, add the product and price | Edit `worker/lib/products.js`, `public/pricing-details.html`, the picker in `public/assets/app.js`. FAQ, llms files and meta text need no change |
 

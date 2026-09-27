@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from site_notices import COPY_NOTICE, DATA_CONTACT, DATA_NOTICE, TERMS_TEXT  # noqa: E402
+from site_notices import COPY_NOTICE, DATA_CONTACT, DATA_NOTICE, SITE_CONTACT, TERMS_TEXT  # noqa: E402
 
 PUBLIC = Path(__file__).resolve().parents[1] / "public"
 START, END = "<!-- legal:start -->", "<!-- legal:end -->"
@@ -28,10 +28,15 @@ PAGES = [
 ]
 
 
+def linked_notice() -> str:
+    out = html.escape(DATA_NOTICE)
+    for addr in (SITE_CONTACT, DATA_CONTACT):
+        out = out.replace(addr, f'<a href="mailto:{addr}">{addr}</a>')
+    return out
+
+
 def notice_html() -> str:
-    data = html.escape(DATA_NOTICE).replace(
-        DATA_CONTACT, f'<a href="mailto:{DATA_CONTACT}">{DATA_CONTACT}</a>'
-    )
+    data = linked_notice()
     return f'{START}<p class="legal">{html.escape(COPY_NOTICE)} <a href="/terms">Terms</a></p><p class="legal">{data}</p>{END}'
 
 
@@ -52,7 +57,7 @@ def apply_terms() -> None:
     block = (
         f"{START}<h3>Intellectual property and permitted use</h3>"
         f"<p>{html.escape(TERMS_TEXT)}</p>"
-        f'<p>{html.escape(DATA_NOTICE).replace(DATA_CONTACT, f"<a href=\'mailto:{DATA_CONTACT}\'>{DATA_CONTACT}</a>")}</p>{END}\n\n        '
+        f"<p>{linked_notice()}</p>{END}\n\n        "
     )
     s = re.sub(re.escape(START) + r".*?" + re.escape(END) + r"\s*", "", s, flags=re.S)
     anchor = "<h3>No guaranteed outcome</h3>"

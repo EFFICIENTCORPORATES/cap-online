@@ -430,7 +430,7 @@
         ["Generated on " + new Date().toISOString().slice(0, 10)],
         ["Marks: a question's marks are split equally across the topics it tests. RTP questions carry no printed marks."],
         ["Copyright: copying, scraping, mirroring, bulk downloading or republishing this data is not permitted without written permission. Terms: https://capranav.com/terms"],
-        ["The data and analysis are sourced from the 1LAVYA data repository. To request API access to the data behind any topic, contact 1LAVYA at admin@1lavya.com."]
+        ["The data and analysis are sourced from the 1LAVYA data repository. Questions about this site, the syllabus or courses: me@capranav.com. Faculty or institutes wanting to white-label these important-question lists and syllabus mappings on their own website: contact 1LAVYA at admin@1lavya.com."]
       ]);
       about["!cols"] = [{ wch: 90 }];
       X.utils.book_append_sheet(wb, about, "Powered by 1LAVYA");

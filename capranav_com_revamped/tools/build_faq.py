@@ -23,7 +23,7 @@ from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from site_notices import COPY_NOTICE, DATA_CONTACT, DATA_NOTICE  # noqa: E402
+from site_notices import COPY_NOTICE, DATA_CONTACT, DATA_NOTICE, SITE_CONTACT  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 SITE = ROOT / "capranav_com_revamped"
@@ -111,13 +111,13 @@ def faqs(s: dict) -> list[tuple[str, list[tuple[str, str]]]]:
             ("Which books has CA Pranav written?",
              "The Question Bank Book (every CA Inter Advanced Accounting question from MTPs, RTPs and PYQs, organised chapter by chapter with topic tags) and the Exam Strategy Book. Printed copies are on the pricing page; the Question Bank e-book is sold through VC Gurukul's store."),
             ("How can I contact CA Pranav?",
-             "Use the contact form on the Contact Us page."),
+             f"Email {SITE_CONTACT} or use the contact form on the Contact Us page, for anything about this site, the CA Inter Advanced Accounting syllabus or the courses."),
             ("Who provides the data and analysis on this site?",
              "The data and analysis are sourced from the 1LAVYA data repository (1lavya.com) and published here by CA Pranav Tulshyan."),
             ("Is copying content from this website allowed?",
              "No. Copying, scraping, mirroring, bulk downloading or republishing any content on this site (pages, questions, answers, analysis, datasets, books, slides) is not permitted without written permission. You may read it, use it for your own study, and quote short excerpts with a link to capranav.com. Search engines and AI search and answer systems may read the site and show short excerpts to their users with attribution. The full wording is in the Terms of Service."),
-            ("How can I get the data behind a topic, or API access?",
-             f"The data behind this site's analysis comes from the 1LAVYA data repository. To request API access to the data for any topic, contact 1LAVYA at {DATA_CONTACT}."),
+            ("Can faculty or institutes use these lists and mappings on their own website?",
+             f"The data behind this site's analysis comes from the 1LAVYA data repository. Faculty or institutes who want these important-question lists and syllabus mappings white-labelled on their own website can contact 1LAVYA at {DATA_CONTACT}."),
         ]),
     ]
 

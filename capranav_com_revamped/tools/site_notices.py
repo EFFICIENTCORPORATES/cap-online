@@ -3,9 +3,12 @@
 Used by build_faq.py, build_discovery_files.py and apply_legal_notice.py so the pages, the FAQ, llms.txt and the
 Excel exports always say the same thing. Change the text here, re-run the build scripts, deploy.
 
-The data contact is 1LAVYA's admin address. Confirm it before publishing changes to it.
+Two contacts (Pranav, 2026-09-27): SITE_CONTACT for anything about this website, the CA Inter Advanced Accounting
+syllabus, courses and enquiries; DATA_CONTACT (1LAVYA) only for faculty or institutes wanting to white-label the
+important-questions lists and syllabus mapping on their own website.
 """
 
+SITE_CONTACT = "me@capranav.com"
 DATA_CONTACT = "admin@1lavya.com"
 
 COPY_NOTICE = (
@@ -16,7 +19,9 @@ COPY_NOTICE = (
 
 DATA_NOTICE = (
     "The data and analysis are sourced from the 1LAVYA data repository. "
-    f"To request API access to the data behind any topic, contact 1LAVYA at {DATA_CONTACT}."
+    f"Questions about this site, the syllabus or courses: {SITE_CONTACT}. "
+    f"Faculty or institutes wanting to white-label these important-question lists and syllabus mappings on their own website: "
+    f"contact 1LAVYA at {DATA_CONTACT}."
 )
 
 # Longer wording for the Terms page.

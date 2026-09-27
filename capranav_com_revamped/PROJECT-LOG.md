@@ -7,6 +7,10 @@ continues — don't let it go stale.
 
 ---
 
+## 2026-09-27: site contacts split (me@capranav.com vs admin@1lavya.com)
+
+Pranav: site, syllabus and course enquiries go to me@capranav.com; admin@1lavya.com only for faculty white-labelling. Updated `tools/site_notices.py` (new SITE_CONTACT), `apply_legal_notice.py` (links both), `build_faq.py` (contact answer, retitled the data question), `public/assets/topics.js` Excel sheet, hand-written `public/llms.txt`; rebuilt FAQ, notices, discovery files. Deployed version 5de7d7b1; qa_smoke --browser ALL PASSED; no 'API access' wording left. Credential agent: 1lavya-agent lacks project capranav, needs Pranav to grant (AGENT-HANDOFF A0).
+
 ## Open TODO list (added 2026-09-24 — keep this current)
 
 1. **YouTube player + Shorts viewer** — BUILT and live 2026-09-24 at `/videos/`

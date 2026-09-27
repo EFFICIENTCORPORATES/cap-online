@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-09-27 capranav.com contacts
+Split site contact (me@capranav.com) from 1LAVYA white-label contact (admin@1lavya.com); deployed, QA passed. ectpl-creds blocked: 1lavya-agent not allowed project capranav.
+
 ## 2026-09-25 (evening) — capranav.com backups, bot guards, FAQ, discovery files (deployed)
 
 R2 `capranav-backups` + nightly Worker cron (critical D1 dump + vault mirror) + PC export uploaded off-machine; restore
