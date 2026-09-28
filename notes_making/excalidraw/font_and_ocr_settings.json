@@ -1,0 +1,28 @@
+{
+  "font": {
+    "family": "Virgil",
+    "size": 20,
+    "editable": true,
+    "note": "Excalidraw default-style text/font settings; the original handwriting itself is preserved as freedraw vectors."
+  },
+  "ocr": {
+    "engine": "Tesseract (diagnostic OCR)",
+    "mode": "sparse text (PSM 11)",
+    "language": "eng",
+    "note": "Handwriting OCR is approximate and is not treated as authoritative."
+  },
+  "pageSize": {
+    "width": 1050,
+    "height": 1485
+  },
+  "structure": {
+    "tables_preserved": "yes, by original vector geometry",
+    "source_strokes": "preserved",
+    "blank_pages": [
+      18,
+      19,
+      20,
+      21
+    ]
+  }
+}

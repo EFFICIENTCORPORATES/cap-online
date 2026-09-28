@@ -1,0 +1,618 @@
+{
+  "languageCodeBCP47": "en-IN",
+  "segments": [
+    {
+      "substringRange": [
+        0,
+        5
+      ],
+      "duration": 0.9900000000000002,
+      "substring": "Okay,",
+      "timestamp": 1.29
+    },
+    {
+      "substringRange": [
+        6,
+        2
+      ],
+      "duration": 0.3299999999999996,
+      "substring": "so",
+      "timestamp": 2.2800000000000002
+    },
+    {
+      "substringRange": [
+        9,
+        2
+      ],
+      "duration": 0.18000000000000016,
+      "substring": "if",
+      "timestamp": 2.61
+    },
+    {
+      "substringRange": [
+        12,
+        3
+      ],
+      "duration": 0.08999999999999986,
+      "substring": "you",
+      "timestamp": 2.79
+    },
+    {
+      "substringRange": [
+        16,
+        4
+      ],
+      "duration": 0.48,
+      "substring": "see,",
+      "timestamp": 2.88
+    },
+    {
+      "substringRange": [
+        21,
+        2
+      ],
+      "duration": 0.27,
+      "substring": "we",
+      "timestamp": 3.36
+    },
+    {
+      "substringRange": [
+        24,
+        3
+      ],
+      "duration": 0.0900000000000003,
+      "substring": "are",
+      "timestamp": 3.63
+    },
+    {
+      "substringRange": [
+        28,
+        10
+      ],
+      "duration": 0.5100000000000002,
+      "substring": "discussing",
+      "timestamp": 3.72
+    },
+    {
+      "substringRange": [
+        39,
+        5
+      ],
+      "duration": 0.5699999999999994,
+      "substring": "about",
+      "timestamp": 4.23
+    },
+    {
+      "substringRange": [
+        45,
+        1
+      ],
+      "duration": 0.3600000000000003,
+      "substring": "D",
+      "timestamp": 4.8
+    },
+    {
+      "substringRange": [
+        46,
+        1
+      ],
+      "duration": 0.17999999999999972,
+      "substring": "P",
+      "timestamp": 5.16
+    },
+    {
+      "substringRange": [
+        47,
+        1
+      ],
+      "duration": 0.1800000000000006,
+      "substring": "D",
+      "timestamp": 5.34
+    },
+    {
+      "substringRange": [
+        48,
+        1
+      ],
+      "duration": 0.23999999999999932,
+      "substring": "P",
+      "timestamp": 5.5200000000000005
+    },
+    {
+      "substringRange": [
+        50,
+        3
+      ],
+      "duration": 0.3600000000000003,
+      "substring": "act",
+      "timestamp": 5.76
+    },
+    {
+      "substringRange": [
+        54,
+        4
+      ],
+      "duration": 0.27,
+      "substring": "This",
+      "timestamp": 8.91
+    },
+    {
+      "substringRange": [
+        59,
+        3
+      ],
+      "duration": 0.3899999999999999,
+      "substring": "act",
+      "timestamp": 9.18
+    },
+    {
+      "substringRange": [
+        63,
+        2
+      ],
+      "duration": 0.24,
+      "substring": "is",
+      "timestamp": 9.57
+    },
+    {
+      "substringRange": [
+        66,
+        3
+      ],
+      "duration": 0.33000000000000007,
+      "substring": "all",
+      "timestamp": 9.81
+    },
+    {
+      "substringRange": [
+        70,
+        5
+      ],
+      "duration": 0.51,
+      "substring": "about",
+      "timestamp": 10.14
+    },
+    {
+      "substringRange": [
+        76,
+        3
+      ],
+      "duration": 0.6299999999999999,
+      "substring": "how",
+      "timestamp": 10.92
+    },
+    {
+      "substringRange": [
+        80,
+        2
+      ],
+      "duration": 0.6000000000000001,
+      "substring": "we",
+      "timestamp": 11.73
+    },
+    {
+      "substringRange": [
+        83,
+        7
+      ],
+      "duration": 0.5700000000000003,
+      "substring": "protect",
+      "timestamp": 13.440000000000001
+    },
+    {
+      "substringRange": [
+        91,
+        3
+      ],
+      "duration": 0.33000000000000007,
+      "substring": "our",
+      "timestamp": 14.010000000000002
+    },
+    {
+      "substringRange": [
+        95,
+        7
+      ],
+      "duration": 0.4500000000000002,
+      "substring": "digital",
+      "timestamp": 14.34
+    },
+    {
+      "substringRange": [
+        103,
+        4
+      ],
+      "duration": 0.4499999999999993,
+      "substring": "data",
+      "timestamp": 14.790000000000001
+    },
+    {
+      "substringRange": [
+        108,
+        4
+      ],
+      "duration": 0.51,
+      "substring": "That",
+      "timestamp": 23.700000000000003
+    },
+    {
+      "substringRange": [
+        113,
+        4
+      ],
+      "duration": 0.6599999999999999,
+      "substring": "data",
+      "timestamp": 24.540000000000003
+    },
+    {
+      "substringRange": [
+        118,
+        5
+      ],
+      "duration": 0.3899999999999997,
+      "substring": "which",
+      "timestamp": 25.290000000000003
+    },
+    {
+      "substringRange": [
+        124,
+        8
+      ],
+      "duration": 0.6300000000000003,
+      "substring": "pertains",
+      "timestamp": 25.68
+    },
+    {
+      "substringRange": [
+        133,
+        2
+      ],
+      "duration": 0.3899999999999997,
+      "substring": "to",
+      "timestamp": 26.310000000000002
+    },
+    {
+      "substringRange": [
+        136,
+        10
+      ],
+      "duration": 1.08,
+      "substring": "personally",
+      "timestamp": 28.560000000000002
+    },
+    {
+      "substringRange": [
+        147,
+        12
+      ],
+      "duration": 1.08,
+      "substring": "identifiable",
+      "timestamp": 29.64
+    },
+    {
+      "substringRange": [
+        160,
+        6
+      ],
+      "duration": 0.6299999999999999,
+      "substring": "people",
+      "timestamp": 30.720000000000002
+    },
+    {
+      "substringRange": [
+        167,
+        2
+      ],
+      "duration": 0.06,
+      "substring": "So",
+      "timestamp": 51.120000000000005
+    },
+    {
+      "substringRange": [
+        170,
+        4
+      ],
+      "duration": 0.39,
+      "substring": "what",
+      "timestamp": 51.18000000000001
+    },
+    {
+      "substringRange": [
+        175,
+        4
+      ],
+      "duration": 0.14999999999999997,
+      "substring": "does",
+      "timestamp": 51.57000000000001
+    },
+    {
+      "substringRange": [
+        180,
+        2
+      ],
+      "duration": 0.18000000000000005,
+      "substring": "it",
+      "timestamp": 51.720000000000006
+    },
+    {
+      "substringRange": [
+        183,
+        8
+      ],
+      "duration": 2.8200000000000003,
+      "substring": "exclude?",
+      "timestamp": 51.900000000000006
+    },
+    {
+      "substringRange": [
+        192,
+        3
+      ],
+      "duration": 0.7199999999999998,
+      "substring": "All",
+      "timestamp": 59.76
+    },
+    {
+      "substringRange": [
+        196,
+        12
+      ],
+      "duration": 1.7999999999999998,
+      "substring": "Digital data",
+      "timestamp": 61.8
+    },
+    {
+      "substringRange": [
+        209,
+        2
+      ],
+      "duration": 0.51,
+      "substring": "Of",
+      "timestamp": 66.24000000000001
+    },
+    {
+      "substringRange": [
+        212,
+        4
+      ],
+      "duration": 0.6299999999999999,
+      "substring": "non-",
+      "timestamp": 67.68
+    },
+    {
+      "substringRange": [
+        216,
+        11
+      ],
+      "duration": 1.0800000000000005,
+      "substring": "individuals",
+      "timestamp": 68.31
+    },
+    {
+      "substringRange": [
+        228,
+        4
+      ],
+      "duration": 0.3299999999999992,
+      "substring": "that",
+      "timestamp": 70.35000000000001
+    },
+    {
+      "substringRange": [
+        233,
+        2
+      ],
+      "duration": 0.15000000000000036,
+      "substring": "is",
+      "timestamp": 70.68
+    },
+    {
+      "substringRange": [
+        236,
+        3
+      ],
+      "duration": 0.3899999999999997,
+      "substring": "not",
+      "timestamp": 70.83000000000001
+    },
+    {
+      "substringRange": [
+        240,
+        7
+      ],
+      "duration": 0.3600000000000003,
+      "substring": "covered",
+      "timestamp": 71.22
+    },
+    {
+      "substringRange": [
+        248,
+        4
+      ],
+      "duration": 0.3600000000000003,
+      "substring": "here",
+      "timestamp": 71.58000000000001
+    },
+    {
+      "substringRange": [
+        253,
+        3
+      ],
+      "duration": 0.27,
+      "substring": "All",
+      "timestamp": 75.69
+    },
+    {
+      "substringRange": [
+        257,
+        7
+      ],
+      "duration": 0.69,
+      "substring": "digital",
+      "timestamp": 76.56
+    },
+    {
+      "substringRange": [
+        265,
+        4
+      ],
+      "duration": 0.5699999999999998,
+      "substring": "data",
+      "timestamp": 77.25
+    },
+    {
+      "substringRange": [
+        270,
+        2
+      ],
+      "duration": 0.33000000000000007,
+      "substring": "of",
+      "timestamp": 79.62
+    },
+    {
+      "substringRange": [
+        273,
+        9
+      ],
+      "duration": 0.8700000000000001,
+      "substring": "companies",
+      "timestamp": 79.95
+    },
+    {
+      "substringRange": [
+        283,
+        7
+      ],
+      "duration": 0.69,
+      "substring": "Digital",
+      "timestamp": 85.92
+    },
+    {
+      "substringRange": [
+        291,
+        4
+      ],
+      "duration": 0.3000000000000007,
+      "substring": "data",
+      "timestamp": 86.61
+    },
+    {
+      "substringRange": [
+        296,
+        8
+      ],
+      "duration": 0.6299999999999999,
+      "substring": "includes",
+      "timestamp": 86.91
+    },
+    {
+      "substringRange": [
+        305,
+        14
+      ],
+      "duration": 0.96,
+      "substring": "Mobile numbers",
+      "timestamp": 93.60000000000001
+    },
+    {
+      "substringRange": [
+        320,
+        6
+      ],
+      "duration": 0.75,
+      "substring": "Emails",
+      "timestamp": 99.36
+    },
+    {
+      "substringRange": [
+        327,
+        16
+      ],
+      "duration": 3.45,
+      "substring": "Name photographs",
+      "timestamp": 103.74
+    },
+    {
+      "substringRange": [
+        344,
+        11
+      ],
+      "duration": 0.9299999999999997,
+      "substring": "Any digital",
+      "timestamp": 112.11
+    },
+    {
+      "substringRange": [
+        356,
+        4
+      ],
+      "duration": 0.6000000000000005,
+      "substring": "data",
+      "timestamp": 113.04
+    },
+    {
+      "substringRange": [
+        361,
+        4
+      ],
+      "duration": 0.3900000000000001,
+      "substring": "That",
+      "timestamp": 117.15
+    },
+    {
+      "substringRange": [
+        366,
+        4
+      ],
+      "duration": 0.41999999999999993,
+      "substring": "will",
+      "timestamp": 117.54
+    },
+    {
+      "substringRange": [
+        371,
+        4
+      ],
+      "duration": 0.43200000000000216,
+      "substring": "Help",
+      "timestamp": 122.16
+    },
+    {
+      "substringRange": [
+        376,
+        2
+      ],
+      "duration": 0.43200000000000216,
+      "substring": "to",
+      "timestamp": 122.592
+    },
+    {
+      "substringRange": [
+        379,
+        8
+      ],
+      "duration": 0.43200000000000216,
+      "substring": "identify",
+      "timestamp": 123.024
+    },
+    {
+      "substringRange": [
+        388,
+        4
+      ],
+      "duration": 0.43200000000000216,
+      "substring": "that",
+      "timestamp": 123.456
+    },
+    {
+      "substringRange": [
+        393,
+        10
+      ],
+      "duration": 0.43200000000000216,
+      "substring": "individual",
+      "timestamp": 123.888
+    }
+  ],
+  "formattedString": "Okay, so if you see, we are discussing about DPDP act This act is all about how we protect our digital data That data which pertains to personally identifiable people So what does it exclude? All Digital data Of non-individuals that is not covered here All digital data of companies Digital data includes Mobile numbers Emails Name photographs Any digital data That will Help to identify that individual"
+}

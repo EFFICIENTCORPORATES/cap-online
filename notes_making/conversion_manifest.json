@@ -1,0 +1,185 @@
+{
+  "package": "P01-NB-01B CONCEPT BOOK conversion",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 13255,
+      "sha256": "6c57b4b753ba175aa6d01bcadf68dcebd4e94fc7641866c4b9b2b9eced825226"
+    },
+    {
+      "path": "ocr/raw_tesseract_output.txt",
+      "bytes": 9493,
+      "sha256": "23bbd2b771a75172f2f70435f4cd8f5fe989b32cf94dac613ceaa2fca4401143"
+    },
+    {
+      "path": "audio/02_CollaNote_Transcript.json",
+      "bytes": 11520,
+      "sha256": "2757d030e3eab77380ce4832ec3d703ff8ba8033d04b5c8ba8bd94e06bf4ed0b"
+    },
+    {
+      "path": "audio/01_Original_Audio.mp3",
+      "bytes": 689246,
+      "sha256": "88132c1f0ed88773757f7ae1f2e94ca1995e2e45e99939b44c1bf64580b6bae8"
+    },
+    {
+      "path": "audio/01_Original_Audio.m4a",
+      "bytes": 424316,
+      "sha256": "125fd9b888179b0b82d03e9a38a1e3240914798dd80ab1acda08a37f0590222a"
+    },
+    {
+      "path": "audio/03_Transcript_Timestamped.md",
+      "bytes": 2066,
+      "sha256": "728c7f9729e7a01198662dcc79d914f685c9d1041ad7928c1977f71440f06a82"
+    },
+    {
+      "path": "source/P01-NB-01B CONCEPT BOOK.cnote",
+      "bytes": 7494967,
+      "sha256": "3eefd8e01b6d51396afcdb4d0c2058b39df5507455f6b4080b1ec6dd0c437fc6"
+    },
+    {
+      "path": "source/conversion_metadata.json",
+      "bytes": 241,
+      "sha256": "7dc02cdbcb7236fefa55455bf6aa5496b085e403f388d3a7c3a1df8a74e40200"
+    },
+    {
+      "path": "pdf/02_Easy_Read_Notes.pdf",
+      "bytes": 17910,
+      "sha256": "f185fa49b95f83f4cbd66bd9fc6c90b9d9d5f06062710023554f70abe80e3bdd"
+    },
+    {
+      "path": "pdf/01_Original_Handwritten.pdf",
+      "bytes": 795221,
+      "sha256": "82232c3f4c4d9f9dff02acd195e4add8178a6076ca8b6052143ff18599f3b553"
+    },
+    {
+      "path": "excalidraw/page-05.excalidraw.json",
+      "bytes": 1820136,
+      "sha256": "ceb0044fc58a715cef05560966a165bbc14ba33ac13818ef156b0fc6adf064c6"
+    },
+    {
+      "path": "excalidraw/page-19.excalidraw.json",
+      "bytes": 240,
+      "sha256": "02ecf21de863298990107c2c7660a02432cc872eafce24817e844f1180d73db9"
+    },
+    {
+      "path": "excalidraw/page-07.excalidraw.json",
+      "bytes": 989132,
+      "sha256": "2dcdfd3b5bb14541a70df2ddf73aa12e2faa1f5c0e0ac6d06cd32dca789a9a91"
+    },
+    {
+      "path": "excalidraw/page-03.excalidraw.json",
+      "bytes": 999685,
+      "sha256": "d3a030c05318325242d9b9e03209f4151eb1633ae3483fdc012a27aedfcda5a6"
+    },
+    {
+      "path": "excalidraw/page-17.excalidraw.json",
+      "bytes": 539548,
+      "sha256": "07e37049ba2efaa990dcfd88af4d85429dd4e7e03c26c579b6dd91d99d2772d1"
+    },
+    {
+      "path": "excalidraw/font_and_ocr_settings.json",
+      "bytes": 649,
+      "sha256": "517905c3a0d5c0d3afb413cefa5a94286dfdbd14778fc8d656a851259caa3170"
+    },
+    {
+      "path": "excalidraw/notebook_all_pages.excalidraw.json",
+      "bytes": 18288316,
+      "sha256": "5bf59c68e045982ef739850c4f77411efb5d82f45f636d1907739dad6bbf4fcf"
+    },
+    {
+      "path": "excalidraw/page-16.excalidraw.json",
+      "bytes": 849518,
+      "sha256": "51e14cea16e28da79c50e5e3fd5aa515dbe4b488a4aceb9251d24cd111fd35d8"
+    },
+    {
+      "path": "excalidraw/page-06.excalidraw.json",
+      "bytes": 891451,
+      "sha256": "05a8237b80b0b305817eadaa5051924a7001fa8bcc1d02edfeb3b146f8dac83d"
+    },
+    {
+      "path": "excalidraw/notebook_editable_source.json",
+      "bytes": 16883725,
+      "sha256": "5e3b26650ad3899f97bc0a81867a031049ada2845b05811bb80c3634283b00da"
+    },
+    {
+      "path": "excalidraw/page-10.excalidraw.json",
+      "bytes": 999567,
+      "sha256": "725629b5ec2162d3face18c3548214345764e87ff416ab49d217e8bfc79ae9d1"
+    },
+    {
+      "path": "excalidraw/page-21.excalidraw.json",
+      "bytes": 240,
+      "sha256": "eacbdf32c299c53fe65f77991d14de4d5662ae285902646ae81cc277736ebe06"
+    },
+    {
+      "path": "excalidraw/page-13.excalidraw.json",
+      "bytes": 1213126,
+      "sha256": "4feef10b79ced26f30b845f8a10530b032714c604d504e7c3f2c3abd54511bae"
+    },
+    {
+      "path": "excalidraw/page-04.excalidraw.json",
+      "bytes": 1665216,
+      "sha256": "9103c255153dbcf07731f73f5ef550fddbb54fa6a4e95c1f40d0d28cbb8e7e45"
+    },
+    {
+      "path": "excalidraw/page-14.excalidraw.json",
+      "bytes": 1220610,
+      "sha256": "0f02a5dedc9248be37b9d8568338edb8838f23810c93c4123b861470140bd949"
+    },
+    {
+      "path": "excalidraw/page-01.excalidraw.json",
+      "bytes": 1843312,
+      "sha256": "a658a87f7e37344328ac835771648e09dbd8b72dc64b70c54eafb0d32937ef89"
+    },
+    {
+      "path": "excalidraw/page-08.excalidraw.json",
+      "bytes": 606353,
+      "sha256": "6dc910736cf671c32a2fee6b6e9ceda14edd786c3e6135fa088c9d5cca2be0b8"
+    },
+    {
+      "path": "excalidraw/page-12.excalidraw.json",
+      "bytes": 1083159,
+      "sha256": "03dbc5add17a552ce1039f9f0174b5c256eea8b6dd1cd8f18ce6b31952559cb2"
+    },
+    {
+      "path": "excalidraw/page-20.excalidraw.json",
+      "bytes": 240,
+      "sha256": "d6a649e0b6d9af236b1540fd95020422e33d510f1512877ccb1435b4e3c6d38e"
+    },
+    {
+      "path": "excalidraw/page-18.excalidraw.json",
+      "bytes": 240,
+      "sha256": "edcade6cade1a559251e6884c655407ddbbf7be0c61b72b7cc378edc914d5658"
+    },
+    {
+      "path": "excalidraw/page-02.excalidraw.json",
+      "bytes": 1349347,
+      "sha256": "1e3d57034b0ca5b4ce4d7d4e5d1ccdbc6bc1ce385670f98e0fba340a7e091761"
+    },
+    {
+      "path": "excalidraw/page-11.excalidraw.json",
+      "bytes": 874575,
+      "sha256": "503db8b59ac5942b9ff975c38c855006bd27bd90bf96dd6f7b78967d9fb17544"
+    },
+    {
+      "path": "excalidraw/page-15.excalidraw.json",
+      "bytes": 1086847,
+      "sha256": "7f4fd438a835b3d0e39823d0dc6a76bff9b760429fdc2d8fd35c88ffafda449d"
+    },
+    {
+      "path": "excalidraw/page-09.excalidraw.json",
+      "bytes": 260640,
+      "sha256": "ad565dbefae8946cc538daef5e5619305655bc8f8d5ae15d7880ed21364957f4"
+    },
+    {
+      "path": "video/03_Karaoke_Synced_Page_17.mp4",
+      "bytes": 1949025,
+      "sha256": "eee46a1f3578b88dbb10e78b9ed28b5916a0e461b430f3435f31c4efb944a0ef"
+    },
+    {
+      "path": "video/karaoke.ass",
+      "bytes": 2149,
+      "sha256": "f9b25a9d2c4e34ff9c83815c88904747f1151eb39c153129822290d6711336dc"
+    }
+  ]
+}
