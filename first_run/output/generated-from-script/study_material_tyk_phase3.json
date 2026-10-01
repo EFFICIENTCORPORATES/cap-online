@@ -1,0 +1,236 @@
+[
+  {
+    "as_key": "as11",
+    "unitcode": "M2-C7-U3",
+    "name": "AS 11 — The Effects of Changes in Foreign Exchange Rates",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>As per AS 11 assets and liabilities of non-integral foreign operations should be converted at __________ rate.</p>",
+        "options": {
+          "A": "Opening",
+          "B": "Average",
+          "C": "Closing",
+          "D": "Transaction"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Closing</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>The debit or credit balance of “Foreign Currency Monetary Item Translation Difference Account”</p>",
+        "options": {
+          "A": "Is shown as “Miscellaneous Expenditure” in the Balance Sheet",
+          "B": "Is shown under “Reserves and Surplus” as a separate line item",
+          "C": "Is shown as “Other Non-current” in the Balance Sheet",
+          "D": "Is shown as “Current Assets” in the Balance Sheet"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) Is shown under “Reserves and Surplus” as a separate line item</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>If asset of an integral foreign operation is carried at cost, cost and depreciation of tangible fixed asset is translated at</p>",
+        "options": {
+          "A": "Average exchange rate",
+          "B": "Closing exchange rate",
+          "C": "Exchange rate at the date of purchase of asset",
+          "D": "Opening exchange rate"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Exchange rate at the date of purchase of asset</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>Which of the following can be classified as an integral foreign operation?</p>",
+        "options": {
+          "A": "Branch office serving as an extension of the head office in terms of operations",
+          "B": "Independent subsidiary of the parent company",
+          "C": "Branch office independent of the head office in terms of operational decisions",
+          "D": "None of the above"
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) Branch office serving as an extension of the head office in terms of operations</p>"
+      },
+      {
+        "source_num": 5,
+        "question_html": "<p>Which of the following items should be converted to closing rate for the purposes of financial reporting?</p>",
+        "options": {
+          "A": "Items of Property, Plant and Equipment",
+          "B": "Inventory",
+          "C": "Trade Payables, Trade Receivables and Foreign Currency Borrowings",
+          "D": "All of the above"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Trade Payables, Trade Receivables and Foreign Currency Borrowings</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 6,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Explain “monetary item” as per Accounting Standard 11. How are foreign currency monetary items to be recognized at each Balance Sheet date?</p>",
+        "answer_html": "<p>As per AS 11 ‘The Effects of Changes in Foreign Exchange Rates’, Monetary items are money held and assets and liabilities to be received or paid in fixed or determinable amounts of money. Foreign currency monetary items should be reported using the closing rate at each balance sheet date. However, in certain circumstances, the closing rate may not reflect with reasonable accuracy the amount in reporting currency that is likely to be realized from, or required to disburse, a foreign currency monetary item at the balance sheet date. In such circumstances, the relevant monetary item should be reported in the reporting currency at the amount which is likely to be realized from or required to disburse, such item at the balance sheet date.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 7,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Distinguish Non-Integral Foreign Operation (NFO) with Integral Foreign Operation (IFO) as per AS 11.</p>",
+        "answer_html": "<p>As per AS 11, Integral foreign operation (IFO) is a foreign operation, the activities of which are an integral part of those of the reporting enterprise. A foreign operation that is integral to the operations of the reporting enterprise carries on its business as if it were an extension of the reporting enterprise's operations. In contrast, a non-integral foreign operation (NFO) is a foreign operation that is not an integral operation. For details, refer para 2.5 of chapter.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 8,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Explain briefly the accounting treatment needed in the following cases as per AS 11 as on 31.3. 20X1. Trade receivables include amount receivable from Umesh ₹ 5,00,000 recorded at the prevailing exchange rate on the date of sales, transaction recorded at Long term loan taken from a U.S. Company, amounting to ₹ 60,00,000. It was recorded at US $ 1 = ₹ 55.60, taking exchange rate prevailing at the date of transaction. US $ 1 = ₹61.20 was on 31.3. 20X1.</p>",
+        "answer_html": "<p>As per AS 11 “The Effects of Changes in Foreign Exchange Rates”, exchange differences arising on the settlement of monetary items or on reporting an enterprise’s monetary items at rates different from those at which they were initially recorded during the period, or reported in previous financial statements, should be recognised as income or as expenses in the period in which they arise. However, at the option of an entity, exchange differences arising on reporting of long-term foreign currency monetary items at rates different from those at which they were initially recorded during the period, or\n| --- | --- | ----------- | --- | --- |\nreported in previous financial statements, in so far as they relate to the acquisition of a depreciable capital asset can be added to or deducted from the cost of the asset and should be depreciated over the balance life of the asset, and in other cases, can be accumulated in a “Foreign Currency Monetary Item Translation Difference Account” in the enterprise’s financial statements and amortised over the balance period of such long-term asset/ liability, by recognition as income or expense in each of such periods.\n|     | Trade receivables  |     |     | ₹   |\n| --- | ------------------ | --- | --- | --- |\nForeign Currency Rate Initial recognition US $8,547 1 US $ = ₹ 58.50 5,00,000 (5,00,000/58.50)\n| Rate on Balance sheet date  |     |     | 1 US $ = ₹ 61.20  |     |\n| --------------------------- | --- | --- | ----------------- | --- |\n| Exchange Difference Gain US $ 8,547 X   |     |     |     | 23,077  |\n| --------------------------------------- | --- | --- | --- | ------- |\n(61.20-58.50)\n| Treatment: Credit Profit and Loss A/c by   |     |     |     |     |\n| ------------------------------------------ | --- | --- | --- | --- |\n₹ 23,077\n| Long term Loan  |     |     |     |     |\n| --------------- | --- | --- | --- | --- |\n| Initial  recognition  | US  | $  1,07,913.67  |     | 60,00,000  |\n| --------------------- | --- | --------------- | --- | ---------- |\n(60,00,000/55.60)\n| Rate on Balance sheet date  |     |     | 1 US $ = ₹ 61.20  |     |\n| --------------------------- | --- | --- | ----------------- | --- |\n| Exchange  | Difference  | Loss  US  | $    | 6,04,317  |\n| --------- | ----------- | --------- | ---- | --------- |\nTreatment: Credit Loan A/c And Debit FCMITD A/C or Profit and Loss A/c by ₹ 6,04,317 Thus Exchange Difference on Long term loan amounting ₹ 6,04,317 may either be charged to Profit and Loss A/c or to Foreign Currency Monetary Item Translation Difference Account but exchange difference on debtors amounting ₹ 23,077 is required to be transferred to Profit and Loss A/c.</p>",
+        "has_table": true
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as22",
+    "unitcode": "M2-C7-U4",
+    "name": "AS 22 — Accounting for Taxes on Income",
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>As per AS 22 on ‘Accounting for Taxes on Income’, tax expense is:</p>",
+        "options": {
+          "A": "Current tax + deferred tax charged to profit and loss account",
+          "B": "Current tax-deferred tax credited to profit and loss account",
+          "C": "Either (a) or (b)",
+          "D": "Deferred tax charged to profit and loss account"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Either (a) or (b)</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>G Ltd. has provided the following information: Depreciation as per accounting records = ₹ 2,00,000 Depreciation as per tax records = ₹ 5,00,000 There is adequate evidence of future profit sufficiency. How much deferred tax asset/liability should be recognized as transition adjustment when the tax rate is 45%?</p>",
+        "options": {
+          "A": "Deferred Tax asset = ₹ 2,70,000.",
+          "B": "Deferred Tax asset = ₹ 1,35,000.",
+          "C": "Deferred Tax Liability = ₹ 2,70,000",
+          "D": "Deferred Tax Liability = ₹ 1,35,000."
+        },
+        "correct_option": "D",
+        "answer_html": "<p><strong>Answer:</strong> (D) Deferred Tax Liability = ₹ 1,35,000.</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>State which of the followings statements are correct: (1) There are no pre-conditions required to recognize deferred tax liability, (2) Deferred tax asset under all circumstances can only be created if and only if there is reasonable certainty that future taxable income will arise.</p>",
+        "options": {
+          "A": "Both are correct.",
+          "B": "Only (1) is correct.",
+          "C": "Only (2) is correct.",
+          "D": "None of the statements are correct."
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) Both are correct.</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>Which of the following statement are incorrect:</p>",
+        "options": {
+          "A": "Only timing differences result in creation of deferred tax.",
+          "B": "Permanent differences do not result in recognition of deferred tax.",
+          "C": "The tax rate used for measurement of deferred tax is substantively enacted tax rate.",
+          "D": "The entity has to recognize deferred tax liability/asset arising out of timing difference. There are no conditions which are required to evaluated for their recognition."
+        },
+        "correct_option": "D",
+        "answer_html": "<p><strong>Answer:</strong> (D) The entity has to recognize deferred tax liability/asset arising out of timing difference. There are no conditions which are required to evaluated for their recognition.</p>"
+      }
+    ],
+    "descriptive": [
+      {
+        "source_num": 5,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Write short note on Timing differences and Permanent differences as per AS</p>",
+        "answer_html": "<p>In current practices, companies, in general, prepare books of accounts as per Companies Act, 2013 generating Accounting Profit/Loss and Income-tax Act, 1961 generating Taxable Profit/Loss. Accounting income and taxable income for a period are seldom the same. Permanent differences are those which arise in one period and do not reverse subsequently. For e.g., an income exempt from tax or an expense that is not allowable as a deduction for tax purposes. Timing differences are those which arise in one period and are capable of reversal in one or more subsequent periods. For e.g., Depreciation etc.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 6,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Y Ltd. is a full tax free enterprise for the first ten years of its existence and is in the second year of its operation. Depreciation timing difference is INR 200 lakhs and INR 400 lakhs respectively which will result in a tax liability in year 1 and 2. From the third year it is expected that the timing difference would reverse each year by INR 10 lakhs. Assuming tax rate of 40%, find out the deferred tax liability at the end of the second year and any charge to the Profit and Loss account.</p>",
+        "answer_html": "<p>As per AS 22, ‘Accounting for Taxes on Income’, deferred tax in respect of timing differences which originate during the tax holiday period and reverse during the tax holiday period, should not be recognised to the extent deduction from the total income of an enterprise is allowed during the tax holiday period as per the provisions of sections 10A and 10B of the Income- tax Act. Deferred tax in respect of timing differences which originate during the tax holiday period but reverse after the tax holiday period should be recognised in the year in which the timing differences originate. However, recognition of deferred tax assets should be subject to the consideration of prudence. For this purpose, the timing differences which originate first should be considered to reverse first. Out of 200 lakhs timing difference due to depreciation, difference amounting 80 lakhs (10 lakhs x 8 years) will reverse in the tax holiday period and therefore, should not be recognised. However, for 120 lakhs (200 lakhs – ₹ 80 lakhs), deferred tax liability will be recognised for 48 lakhs (40% of 120 lakhs) in first year. In the second year, the entire amount of timing difference of ₹ 400 lakhs will reverse only after tax holiday period and hence, will be recognised in full. Deferred tax liability amounting 160 lakhs (40% of 400 lakhs) will be created by charging it to profit and loss account and the total balance of deferred tax liability account at the end of second year will be 208 lakhs (48 lakhs + 160 lakhs).</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 7,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Ultra Ltd. has provided the following information: Depreciation as per accounting records =INR 4,00,000 Depreciation as per tax records =INR 10,00,000 Unamortized preliminary expenses as per tax record = INR 30,000 There is adequate evidence of future profit sufficiency. How much deferred tax asset/liability should be recognized as transition adjustment when the tax rate is 50%?</p>",
+        "answer_html": "<p>Calculation of difference between taxable income and accounting income Particulars Amount (₹ ) Excess depreciation as per tax ₹ (10,00,000 – 4,00,000) 6,00,000 Less: Expenses unamortized in tax records (30,000) Timing difference 5,70,000 Tax expense is more than the current tax due to timing difference. Therefore deferred tax liability = 50% x 5,70,000 = 2,85,000</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 8,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Saras Ltd. closes its books as on 31st March 20X2. They have accrued ₹ 5,00,000 towards GST Liability for the month of March 20X2 by debiting their Profit and loss statement which is expected to be paid off by 21st April 20X2 . As per the provisions of Section 43B of the Income Tax Act, 1961 – Any expenditure of the nature mentioned in section 43B (e.g. taxes, duty, cess, fees, etc.) accrued in the statement of profit and loss on mercantile basis will be allowed for tax purposes in subsequent years on payment basis only. Assuming a Tax rate of 30% determine the Deferred Tax Asset/Liability as at 31st March 20X2.</p>",
+        "answer_html": "<p>Calculation of difference between taxable income and accounting income Particulars Amount (₹) GST Liability debited in books 5,00,000 Less: GST Liability allowed under Income Tax Act (Section 43B) Nil Timing difference 5,00,000 Tax expense is less than the current tax due to timing difference. Therefore, deferred tax Asset = 30% x 5,00,000 = 1,50,000</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 9,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>ABC Company limited had an investment in Venture Capital amounting ₹ 10 Crores. Venture capital in turn had invested in the below portfolio companies (New Start- ups) on behalf of ABC Limited: Amount of investment Portfolio Companies (₹ in Crores) Oscar Limited 2 Zee Limited 3 Star Limited 4 Sony Limited 1 Total 10 During the FY 2019-2020, Venture Capital had sold their investment in Star Limited and realised an amount of ₹ 8 Crores on sale of shares of star Limited and entire proceeds of ₹ 8 Crores have been transferred by Venture Capital to ABC Company Limited. The accounts manager has received the following additional information from venture capital on 31.03.2020: (1) 8 Crores has been deducted from the cost of investment and carrying amount of investment as at year end is 2 Crores. (2) Company had to pay a capital gain tax @ 20% on the net sale consideration of ₹ 4 Crores. (3) Due to COVID-19, the remaining start- ups (i.e. Oscar Limited, Zee Limited, and Sony Limited) are not performing well and will soon wind up their operations. Venture capital is monitoring the situation and if required they will provide an impairment loss in June 2020 Quarter. You need to suggest the accounts manager what should be the correct accounting treatment as per AS 22 “Accounting for Taxes on Income”.</p>",
+        "answer_html": "<p>As company had to pay capital gain tax @ 20% on the net sale consideration as per income tax laws, the company has to recognise a current tax liability of 0.8 Crores computed as under: Particulars Amount (₹ in Crores) Sales Consideration 8 Cost of Investment 4 Net gain on Sale 4 Tax @ 20% 0.8\n| AS BASED ON ITEMS IMPACTING FINANCIAL  |     |     | 7.6 9   |     |\n| -------------------------------------- | --- | --- | ------- | --- |\n| --- | ----------- | --- | --- | --- |\nAs per AS 22, Timing differences are those differences between taxable income and accounting income for a period that originate in one period and are capable of reversal in one or more subsequent periods. Amount (₹ in Crores)\n| Particulars        |      |                              | Rationale  |           |\n| ------------------ | ---- | ---------------------------- | ---------- | --------- |\n| Taxable Income     | 4    | As per income tax laws       |            |           |\n| Accounting         | Nil  | As  the                      | same  is   | deducted  |\n| Income             |      | from the cost of investment  |            |           |\n| Timing Difference  | 4    |                              |            |           |\nAs per AS 22, deferred tax assets should be recognised and carried forward only to the extent that there is a reasonable certainty that sufficient future taxable income will be available against which such deferred tax assets can be realised. Since in current scenario, due to Covid 19 the portfolio companies are not performing well, thus the company may not have sufficient future taxable income which will reverse deferred tax assets. Therefore, the company should not recognise DTA of ₹ 0.8 Crores and company should recognise only current tax liability of ₹ 0.8 Crores.</p>",
+        "has_table": true
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [],
+    "has_answer_section": true
+  },
+  {
+    "as_key": "as20",
+    "unitcode": "M1-C4-U5",
+    "name": "AS 20 — Earnings Per Share",
+    "mcq": [],
+    "descriptive": [],
+    "warnings": [],
+    "skipped_no_answer": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "has_answer_section": false
+  },
+  {
+    "as_key": "framework",
+    "unitcode": "M1-C2-U0",
+    "name": "Framework for Preparation and Presentation of Financial Statements",
+    "mcq": [],
+    "descriptive": [],
+    "warnings": [],
+    "skipped_no_answer": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "has_answer_section": false
+  }
+]

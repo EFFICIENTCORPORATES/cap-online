@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-01 Third-phase chapter tests (AS 11, AS 22, AS 20, Framework)
+Built `first_run/scripts/build_third_phase_tests.py` (re-points the phase-2 builder; no fabricated questions). Output `first_run/TESTS/third phase/` (MD for self + README) and `student-edition/` (watermarked PDFs, Questions and Answers separately). Results: AS 11 50/50, AS 22 40/50, AS 20 33/50, Framework 47/50 (0 MCQs; none in bank). Short tests accepted per Pranav. AS 20 and Framework study-material TYK has no answer key in source, so no top-up. Financial Statements of Companies deliberately excluded (class in progress).
+
 ## 2026-09-27 capranav.com Cloudflare protections
 ectpl-creds token issued for project capranav; applied HTTPS, Bot Fight Mode, spoofed-crawler WAF rule, rate limit (100/10s, Free plan; 20 blocked page loads), Turnstile on OTP/contact/admin forms. Access on /admin pending allowed email.
 
