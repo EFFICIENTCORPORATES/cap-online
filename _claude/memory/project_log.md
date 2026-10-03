@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-04 — R2 audio archive workflow
+Added `.github/workflows/r2-build-audio-archive.yml` for resumable R2 source-video to MP3 generation. It mirrors folder paths under `audio/`, skips existing valid MP3s, validates outputs, and writes audio archive manifests. No transcription is included.
+
 ## 2026-10-03 — CA lecture Google Drive → R2 full archive workflow
 
 Added `.github/workflows/google-drive-r2-full-archive.yml` as a manual, archive-only workflow for the CA Inter lecture Drive root. It recursively copies the complete Drive tree to R2 under `source-videos/` with `rclone copy` (never `sync`, so source deletion cannot delete the archive), preserves relative paths, is safe to rerun, verifies every current Drive file by relative path + byte size, refuses to mark completion if Drive changes during the run, and writes timestamped + latest JSON/CSV verification manifests to R2 plus a 30-day GitHub Actions artifact. No transcription/audio extraction is performed by this workflow. Existing GitHub Drive/R2 secrets are reused; no new secret is required.
