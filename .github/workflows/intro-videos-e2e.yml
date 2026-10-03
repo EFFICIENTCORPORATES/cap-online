@@ -22,12 +22,13 @@ jobs:
       RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
       RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
       RCLONE_CONFIG_R2_ACL: private
+      RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
       R2_BUCKET: ${{ secrets.R2_BUCKET_NAME }}
       INTRO_FOLDER_ID: 1hSJed3nJt86Jl9XJspx8kcQbyfudvZjB
       OUTPUT_ROOT: books/ca-inter/concept-book/notes_making/lecture_transcripts/01-intro
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - name: Validate required secrets
