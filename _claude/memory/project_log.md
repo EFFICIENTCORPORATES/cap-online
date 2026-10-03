@@ -2,6 +2,10 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-03 — CA lecture Google Drive → R2 full archive workflow
+
+Added `.github/workflows/google-drive-r2-full-archive.yml` as a manual, archive-only workflow for the CA Inter lecture Drive root. It recursively copies the complete Drive tree to R2 under `source-videos/` with `rclone copy` (never `sync`, so source deletion cannot delete the archive), preserves relative paths, is safe to rerun, verifies every current Drive file by relative path + byte size, refuses to mark completion if Drive changes during the run, and writes timestamped + latest JSON/CSV verification manifests to R2 plus a 30-day GitHub Actions artifact. No transcription/audio extraction is performed by this workflow. Existing GitHub Drive/R2 secrets are reused; no new secret is required.
+
 ## 2026-10-01 Third-phase chapter tests (AS 11, AS 22, AS 20, Framework)
 Built `first_run/scripts/build_third_phase_tests.py` (re-points the phase-2 builder; no fabricated questions). Output `first_run/TESTS/third phase/` (MD for self + README) and `student-edition/` (watermarked PDFs, Questions and Answers separately). Results: AS 11 50/50, AS 22 40/50, AS 20 33/50, Framework 47/50 (0 MCQs; none in bank). Short tests accepted per Pranav. AS 20 and Framework study-material TYK has no answer key in source, so no top-up. Financial Statements of Companies deliberately excluded (class in progress).
 
