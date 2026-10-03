@@ -1,0 +1,56 @@
+name: Google Drive Smoke Test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/google-drive-smoke-test.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  drive-smoke-test:
+    runs-on: ubuntu-latest
+    env:
+      RCLONE_CONFIG_LECTUREDRIVE_TYPE: drive
+      RCLONE_CONFIG_LECTUREDRIVE_CLIENT_ID: ${{ secrets.GOOGLE_DRIVE_CLIENT_ID }}
+      RCLONE_CONFIG_LECTUREDRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      RCLONE_CONFIG_LECTUREDRIVE_SCOPE: drive.readonly
+      RCLONE_CONFIG_LECTUREDRIVE_TOKEN: ${{ secrets.GOOGLE_DRIVE_TOKEN }}
+      DRIVE_ROOT_FOLDER_ID: 1oJ6kKpAdQrgcPEJsDSLspCaQ71S3x1Hz
+      INTRO_FOLDER_ID: 1hSJed3nJt86Jl9XJspx8kcQbyfudvZjB
+    steps:
+      - name: Install rclone
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo -v
+          curl -fsSL https://rclone.org/install.sh | sudo bash
+          rclone version
+
+      - name: Validate Google Drive secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in RCLONE_CONFIG_LECTUREDRIVE_CLIENT_ID RCLONE_CONFIG_LECTUREDRIVE_CLIENT_SECRET RCLONE_CONFIG_LECTUREDRIVE_TOKEN; do
+            if [ -z "${!name:-}" ]; then
+              echo "::error::Missing required Google Drive secret for $name"
+              exit 1
+            fi
+          done
+
+      - name: Verify lecture root and intro videos
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Checking lecture root..."
+          rclone lsf "lecturedrive:" --drive-root-folder-id "$DRIVE_ROOT_FOLDER_ID" --dirs-only | tee /tmp/root.txt
+          grep -Fxq "1. Intro /" /tmp/root.txt || grep -Fxq "1. Intro/" /tmp/root.txt
+
+          echo "Checking Intro folder..."
+          rclone lsf "lecturedrive:" --drive-root-folder-id "$INTRO_FOLDER_ID" --files-only | tee /tmp/intro.txt
+          grep -Fxq "Lec-1 Intro.mp4" /tmp/intro.txt
+          grep -Fxq "Lec-2 Intro.mp4" /tmp/intro.txt
+
+          echo "GOOGLE_DRIVE_SMOKE_TEST_OK"
