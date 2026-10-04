@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-04 — 5-minute transcription QA workflow
+Added `tools/test_transcription_clip.py` and `.github/workflows/test-transcription-5min.yml`. The manual workflow defaults to AS-10 Lecture 4, downloads the already-built R2 MP3, extracts the exact middle 5 minutes, produces a playable `test-clip.mp3`, transcribes with faster-whisper small using auto language detection, creates 5-second raw and Roman-script transcript files, writes JSON metadata, uploads the package both to R2 under `testing/transcription-tests/` and as a downloadable GitHub Actions artifact. This is QA-only and does not touch source videos or bulk transcripts.
+
 ## 2026-10-04 — R2 audio archive workflow
 Added `.github/workflows/r2-build-audio-archive.yml` for resumable R2 source-video to MP3 generation. It mirrors folder paths under `audio/`, skips existing valid MP3s, validates outputs, and writes audio archive manifests. No transcription is included.
 
