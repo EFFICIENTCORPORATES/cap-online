@@ -30,7 +30,7 @@ per-topic documents named in each line.
 |---|---|---|
 | 1 | **Login without personal data (passkeys)**, then move full answers, bulk downloads and the Excel sheets behind it | You said you would describe this next. The biggest remaining copy-protection step |
 | 2 | Per-topic and per-question public pages (about 400 topic pages, plus question pages without answers), added to the sitemap | The strongest search and AI visibility gain still available |
-| 3 | Remaining Must Practice units: AS 13, 16, 19, 26, 28, then the other chapters | Each unit needs the same duplicate and diversity review |
+| 3 | Remaining Must Practice units: AS 13, 19, 26, 28, then the other chapters (AS 16 is live but only formula-reviewed) | Each unit needs the same duplicate and diversity review |
 | 4 | Canary entries and per-account watermarks | Lets a copy be proven |
 | 5 | Turnstile wired into login, contact and admin forms | Needs item 2 above |
 | 6 | Videos in D1 with an admin form; upload dates for video markup; transcripts | Design is in VIDEOS.md |

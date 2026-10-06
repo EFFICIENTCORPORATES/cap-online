@@ -163,6 +163,10 @@ visible before anything is deployed. Update this file in the same commit: a
 weight that is in the code but not described here is exactly the situation this
 document exists to prevent.
 
+## Published units
+
+AS 2 and AS 10 (hand-reviewed, exclusions below). AS 16 (2026-10-06): formula only, no hand exclusions yet, manual same-idea review still outstanding (see `capranav_com_revamped/PROJECT-LOG.md`).
+
 ## Hand exclusions made under these rules (2026-09-24)
 
 Each is a `force_exclude` in `UNITS` with its reason beside it. They exist
