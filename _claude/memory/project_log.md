@@ -8,6 +8,16 @@ New `capranav_com_revamped/MUST-PRACTICE.md` (corpus-to-live runbook, add-a-unit
 ## 2026-10-06 Must Practice: AS 16 published
 Added `M2-C5-U4` (AS 16 Borrowing Costs) to `UNITS` in `build_must_practice_data.py` with no overrides (pure formula; 22 of 23 library questions scoreable, 5 repeats auto-dropped). Re-ran `build_seo_static.py` for the crawler block. Deployed; verified live in headless Edge: 10 rows, all answers reveal, pages traced, no console/network errors, no mobile overflow; AS 2 and AS 10 unchanged. Not committed. Note: the ten has no PYQ because PYQ Nov 2023 is a 100% repeat of MTP May 2026 Set 1 and the others are repeats or over the per-topic cap.
 
+## 2026-10-04 — 5-minute transcription QA workflow
+Added `tools/test_transcription_clip.py` and `.github/workflows/test-transcription-5min.yml`. The manual workflow defaults to AS-10 Lecture 4, downloads the already-built R2 MP3, extracts the exact middle 5 minutes, produces a playable `test-clip.mp3`, transcribes with faster-whisper small using auto language detection, creates 5-second raw and Roman-script transcript files, writes JSON metadata, uploads the package both to R2 under `testing/transcription-tests/` and as a downloadable GitHub Actions artifact. This is QA-only and does not touch source videos or bulk transcripts.
+
+## 2026-10-04 — R2 audio archive workflow
+Added `.github/workflows/r2-build-audio-archive.yml` for resumable R2 source-video to MP3 generation. It mirrors folder paths under `audio/`, skips existing valid MP3s, validates outputs, and writes audio archive manifests. No transcription is included.
+
+## 2026-10-03 — CA lecture Google Drive → R2 full archive workflow
+
+Added `.github/workflows/google-drive-r2-full-archive.yml` as a manual, archive-only workflow for the CA Inter lecture Drive root. It recursively copies the complete Drive tree to R2 under `source-videos/` with `rclone copy` (never `sync`, so source deletion cannot delete the archive), preserves relative paths, is safe to rerun, verifies every current Drive file by relative path + byte size, refuses to mark completion if Drive changes during the run, and writes timestamped + latest JSON/CSV verification manifests to R2 plus a 30-day GitHub Actions artifact. No transcription/audio extraction is performed by this workflow. Existing GitHub Drive/R2 secrets are reused; no new secret is required.
+
 ## 2026-10-01 Third-phase chapter tests (AS 11, AS 22, AS 20, Framework)
 Built `first_run/scripts/build_third_phase_tests.py` (re-points the phase-2 builder; no fabricated questions). Output `first_run/TESTS/third phase/` (MD for self + README) and `student-edition/` (watermarked PDFs, Questions and Answers separately). Results: AS 11 50/50, AS 22 40/50, AS 20 33/50, Framework 47/50 (0 MCQs; none in bank). Short tests accepted per Pranav. AS 20 and Framework study-material TYK has no answer key in source, so no top-up. Financial Statements of Companies deliberately excluded (class in progress).
 

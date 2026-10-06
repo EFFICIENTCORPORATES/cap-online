@@ -1,0 +1,298 @@
+name: Build R2 Audio Archive
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ca-r2-audio-archive
+  cancel-in-progress: false
+
+jobs:
+  build-audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      RCLONE_CONFIG_R2_TYPE: s3
+      RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+      RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      RCLONE_CONFIG_R2_ACL: private
+      RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
+      R2_BUCKET: ${{ secrets.R2_BUCKET_NAME }}
+      SOURCE_PREFIX: source-videos
+      AUDIO_PREFIX: audio
+
+    steps:
+      - name: Validate required secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            RCLONE_CONFIG_R2_ACCESS_KEY_ID
+            RCLONE_CONFIG_R2_SECRET_ACCESS_KEY
+            RCLONE_CONFIG_R2_ENDPOINT
+            R2_BUCKET
+          )
+          for name in "${required[@]}"; do
+            if [ -z "${!name:-}" ]; then
+              echo "::error::Missing required value: $name"
+              exit 1
+            fi
+          done
+
+      - name: Install ffmpeg and rclone
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          curl -fsSL https://rclone.org/install.sh | sudo bash
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+          rclone version | head -n 1
+
+      - name: Inventory source videos
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/ca-audio-archive/input /tmp/ca-audio-archive/output /tmp/ca-audio-archive/meta
+          rclone lsjson "r2:$R2_BUCKET/$SOURCE_PREFIX"             --recursive             --files-only             > /tmp/ca-audio-archive/meta/source.json
+
+          python - <<'PY'
+          import json, pathlib
+          src=json.load(open("/tmp/ca-audio-archive/meta/source.json",encoding="utf-8"))
+          exts={".mp4",".mkv",".mov",".m4v",".webm"}
+          rows=[x for x in src if pathlib.PurePosixPath(x["Path"]).suffix.lower() in exts]
+          rows.sort(key=lambda x:x["Path"])
+          with open("/tmp/ca-audio-archive/meta/videos.json","w",encoding="utf-8") as f:
+              json.dump(rows,f,ensure_ascii=False,indent=2)
+          with open("/tmp/ca-audio-archive/meta/videos.txt","w",encoding="utf-8") as f:
+              for x in rows: f.write(x["Path"]+"\n")
+          print(f"Source video files: {len(rows)}")
+          print(f"Source video bytes: {sum(int(x.get('Size',0)) for x in rows)}")
+          if not rows:
+              raise SystemExit("No source video files found.")
+          PY
+
+      - name: Build missing MP3 audio files one video at a time
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, shlex, subprocess, sys, time
+
+          bucket=os.environ["R2_BUCKET"]
+          source_prefix=os.environ["SOURCE_PREFIX"]
+          audio_prefix=os.environ["AUDIO_PREFIX"]
+          rows=json.load(open("/tmp/ca-audio-archive/meta/videos.json",encoding="utf-8"))
+
+          def run(args, **kw):
+              print("+", " ".join(shlex.quote(str(x)) for x in args), flush=True)
+              return subprocess.run(args, check=True, **kw)
+
+          completed=0
+          skipped=0
+          failed=[]
+
+          for idx,item in enumerate(rows,1):
+              rel=item["Path"]
+              p=pathlib.PurePosixPath(rel)
+              audio_rel=str(p.with_suffix(".mp3"))
+              remote_audio=f"r2:{bucket}/{audio_prefix}/{audio_rel}"
+              remote_video=f"r2:{bucket}/{source_prefix}/{rel}"
+
+              # Rerun-safe: preserve any already-built non-empty audio object.
+              probe=subprocess.run(
+                  ["rclone","lsjson",remote_audio],
+                  text=True,capture_output=True
+              )
+              if probe.returncode == 0:
+                  try:
+                      existing=json.loads(probe.stdout)
+                      if existing and int(existing[0].get("Size",0)) > 0:
+                          print(f"[{idx}/{len(rows)}] SKIP existing: {audio_rel} ({existing[0]['Size']} bytes)", flush=True)
+                          skipped+=1
+                          continue
+                  except Exception:
+                      pass
+
+              local_video="/tmp/ca-audio-archive/input/source"+p.suffix.lower()
+              local_audio="/tmp/ca-audio-archive/output/audio.mp3"
+              for local in (local_video,local_audio):
+                  try: os.remove(local)
+                  except FileNotFoundError: pass
+
+              print(f"[{idx}/{len(rows)}] PROCESS {rel}", flush=True)
+              try:
+                  run([
+                      "rclone","copyto",remote_video,local_video,
+                      "--retries","8","--low-level-retries","20",
+                      "--retries-sleep","10s","--timeout","10m",
+                      "--contimeout","60s","--stats","30s","--stats-one-line"
+                  ])
+
+                  run([
+                      "ffmpeg","-hide_banner","-loglevel","error","-y",
+                      "-i",local_video,
+                      "-vn","-map","0:a:0",
+                      "-ac","1","-ar","16000",
+                      "-c:a","libmp3lame","-b:a","64k",
+                      local_audio
+                  ])
+
+                  # Validate the generated file before it is uploaded.
+                  size=os.path.getsize(local_audio)
+                  if size < 1024:
+                      raise RuntimeError(f"Generated audio is unexpectedly small: {size} bytes")
+
+                  duration=subprocess.check_output([
+                      "ffprobe","-v","error",
+                      "-show_entries","format=duration",
+                      "-of","default=noprint_wrappers=1:nokey=1",
+                      local_audio
+                  ],text=True).strip()
+                  if not duration or float(duration) <= 0:
+                      raise RuntimeError("ffprobe did not report a positive audio duration")
+
+                  run([
+                      "rclone","copyto",local_audio,remote_audio,
+                      "--retries","8","--low-level-retries","20",
+                      "--retries-sleep","10s","--stats","30s","--stats-one-line"
+                  ])
+
+                  uploaded=json.loads(subprocess.check_output(
+                      ["rclone","lsjson",remote_audio],text=True
+                  ))[0]
+                  if int(uploaded.get("Size",0)) != size:
+                      raise RuntimeError(
+                          f"Uploaded size mismatch: local={size}, R2={uploaded.get('Size')}"
+                      )
+
+                  print(f"    OK {audio_rel} | {duration}s | {size} bytes", flush=True)
+                  completed+=1
+
+              except Exception as exc:
+                  failed.append({"source":rel,"audio":audio_rel,"error":str(exc)})
+                  print(f"::error::FAILED {rel}: {exc}", flush=True)
+                  # Do not keep a possibly incomplete destination object.
+                  subprocess.run(["rclone","deletefile",remote_audio],check=False)
+                  # Continue with later lectures; final verification will make the job fail.
+              finally:
+                  for local in (local_video,local_audio):
+                      try: os.remove(local)
+                      except FileNotFoundError: pass
+
+          summary={
+              "source_videos":len(rows),
+              "created_this_run":completed,
+              "skipped_existing":skipped,
+              "processing_failures":failed,
+          }
+          with open("/tmp/ca-audio-archive/meta/build-summary.json","w",encoding="utf-8") as f:
+              json.dump(summary,f,ensure_ascii=False,indent=2)
+              f.write("\n")
+          print(json.dumps(summary,indent=2),flush=True)
+
+          if failed:
+              print("Some files failed. The workflow can be rerun safely; completed audio will be skipped.", flush=True)
+          PY
+
+      - name: Verify complete audio archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          rclone lsjson "r2:$R2_BUCKET/$AUDIO_PREFIX"             --recursive             --files-only             > /tmp/ca-audio-archive/meta/audio.json
+
+          python - <<'PY'
+          import json, os, pathlib
+          from datetime import datetime, timezone
+
+          root="/tmp/ca-audio-archive/meta"
+          videos=json.load(open(f"{root}/videos.json",encoding="utf-8"))
+          audio=json.load(open(f"{root}/audio.json",encoding="utf-8"))
+          audio_map={x["Path"]:int(x.get("Size",0)) for x in audio}
+
+          expected=[]
+          missing=[]
+          empty=[]
+          verified=[]
+
+          for x in videos:
+              rel=x["Path"]
+              audio_rel=str(pathlib.PurePosixPath(rel).with_suffix(".mp3"))
+              expected.append(audio_rel)
+              if audio_rel not in audio_map:
+                  missing.append(audio_rel)
+              elif audio_map[audio_rel] <= 0:
+                  empty.append(audio_rel)
+              else:
+                  verified.append({"path":audio_rel,"size":audio_map[audio_rel]})
+
+          manifest={
+              "schema_version":1,
+              "generated_at":datetime.now(timezone.utc).isoformat(),
+              "r2_bucket":os.environ["R2_BUCKET"],
+              "source_prefix":os.environ["SOURCE_PREFIX"],
+              "audio_prefix":os.environ["AUDIO_PREFIX"],
+              "audio_format":{
+                  "container":"mp3",
+                  "codec":"libmp3lame",
+                  "channels":1,
+                  "sample_rate_hz":16000,
+                  "bitrate":"64k"
+              },
+              "source_video_count":len(videos),
+              "expected_audio_count":len(expected),
+              "verified_audio_count":len(verified),
+              "missing_audio_count":len(missing),
+              "empty_audio_count":len(empty),
+              "complete":not missing and not empty,
+              "missing_audio":missing,
+              "empty_audio":empty,
+              "verified_audio":verified,
+          }
+
+          with open(f"{root}/audio-archive-manifest.json","w",encoding="utf-8") as f:
+              json.dump(manifest,f,ensure_ascii=False,indent=2)
+              f.write("\n")
+
+          print(json.dumps({k:manifest[k] for k in [
+              "source_video_count","expected_audio_count","verified_audio_count",
+              "missing_audio_count","empty_audio_count","complete"
+          ]},indent=2))
+
+          if missing or empty:
+              raise SystemExit(
+                  "Audio archive is not complete yet. Re-run the workflow; existing valid MP3 files are skipped."
+              )
+          PY
+
+      - name: Upload audio manifest to R2
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -s /tmp/ca-audio-archive/meta/audio-archive-manifest.json ]; then
+            stamp="$(date -u +'%Y%m%dT%H%M%SZ')"
+            rclone copyto /tmp/ca-audio-archive/meta/audio-archive-manifest.json               "r2:$R2_BUCKET/manifests/audio-archive-$stamp.json" --retries 5
+            rclone copyto /tmp/ca-audio-archive/meta/audio-archive-manifest.json               "r2:$R2_BUCKET/manifests/audio-archive-latest.json" --retries 5
+          fi
+          if [ -s /tmp/ca-audio-archive/meta/build-summary.json ]; then
+            stamp="$(date -u +'%Y%m%dT%H%M%SZ')"
+            rclone copyto /tmp/ca-audio-archive/meta/build-summary.json               "r2:$R2_BUCKET/manifests/audio-build-$stamp.json" --retries 5
+          fi
+
+      - name: Upload manifests as GitHub Actions artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ca-r2-audio-archive-manifests
+          path: |
+            /tmp/ca-audio-archive/meta/build-summary.json
+            /tmp/ca-audio-archive/meta/audio-archive-manifest.json
+          if-no-files-found: ignore
+          retention-days: 30

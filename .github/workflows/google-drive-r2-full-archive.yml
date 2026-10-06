@@ -1,0 +1,196 @@
+name: Google Drive to R2 Full Archive
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ca-drive-r2-full-archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      RCLONE_CONFIG_LECTUREDRIVE_TYPE: drive
+      RCLONE_CONFIG_LECTUREDRIVE_CLIENT_ID: ${{ secrets.GOOGLE_DRIVE_CLIENT_ID }}
+      RCLONE_CONFIG_LECTUREDRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      RCLONE_CONFIG_LECTUREDRIVE_SCOPE: drive.readonly
+      RCLONE_CONFIG_LECTUREDRIVE_TOKEN: ${{ secrets.GOOGLE_DRIVE_TOKEN }}
+
+      RCLONE_CONFIG_R2_TYPE: s3
+      RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+      RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      RCLONE_CONFIG_R2_ACL: private
+      RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
+
+      R2_BUCKET: ${{ secrets.R2_BUCKET_NAME }}
+      DRIVE_ROOT_FOLDER_ID: 1oJ6kKpAdQrgcPEJsDSLspCaQ71S3x1Hz
+      R2_ARCHIVE_PREFIX: source-videos
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Validate required secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            RCLONE_CONFIG_LECTUREDRIVE_CLIENT_ID
+            RCLONE_CONFIG_LECTUREDRIVE_CLIENT_SECRET
+            RCLONE_CONFIG_LECTUREDRIVE_TOKEN
+            RCLONE_CONFIG_R2_ACCESS_KEY_ID
+            RCLONE_CONFIG_R2_SECRET_ACCESS_KEY
+            RCLONE_CONFIG_R2_ENDPOINT
+            R2_BUCKET
+          )
+          for name in "${required[@]}"; do
+            if [ -z "${!name:-}" ]; then
+              echo "::error::Missing required value: $name"
+              exit 1
+            fi
+          done
+
+      - name: Install rclone
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://rclone.org/install.sh | sudo bash
+          rclone version | head -n 1
+
+      - name: Inventory Google Drive before copy
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/ca-drive-archive
+          rclone lsjson "lecturedrive:"             --drive-root-folder-id "$DRIVE_ROOT_FOLDER_ID"             --recursive             --files-only             > /tmp/ca-drive-archive/drive-before.json
+
+          python - <<'PY'
+          import json
+          p="/tmp/ca-drive-archive/drive-before.json"
+          rows=json.load(open(p, encoding="utf-8"))
+          print(f"Drive files before copy: {len(rows)}")
+          print(f"Drive bytes before copy: {sum(int(x.get('Size',0)) for x in rows)}")
+          if not rows:
+              raise SystemExit("Drive inventory is empty; refusing to run archive copy.")
+          PY
+
+      - name: Copy complete Drive tree to R2 without deleting anything
+        shell: bash
+        run: |
+          set -euo pipefail
+          rclone copy "lecturedrive:" "r2:$R2_BUCKET/$R2_ARCHIVE_PREFIX"             --drive-root-folder-id "$DRIVE_ROOT_FOLDER_ID"             --size-only             --transfers 2             --checkers 8             --retries 8             --low-level-retries 20             --retries-sleep 10s             --timeout 10m             --contimeout 60s             --stats 30s             --stats-one-line             --progress
+
+      - name: Inventory both sides after copy
+        shell: bash
+        run: |
+          set -euo pipefail
+          rclone lsjson "lecturedrive:"             --drive-root-folder-id "$DRIVE_ROOT_FOLDER_ID"             --recursive             --files-only             > /tmp/ca-drive-archive/drive-after.json
+
+          rclone lsjson "r2:$R2_BUCKET/$R2_ARCHIVE_PREFIX"             --recursive             --files-only             > /tmp/ca-drive-archive/r2-after.json
+
+      - name: Verify every Drive file exists in R2 with the same size
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, json, os
+          from datetime import datetime, timezone
+
+          root="/tmp/ca-drive-archive"
+          drive_before=json.load(open(f"{root}/drive-before.json", encoding="utf-8"))
+          drive_after=json.load(open(f"{root}/drive-after.json", encoding="utf-8"))
+          r2=json.load(open(f"{root}/r2-after.json", encoding="utf-8"))
+
+          def table(rows):
+              return {x["Path"]: int(x.get("Size",0)) for x in rows}
+
+          before=table(drive_before)
+          after=table(drive_after)
+          dest=table(r2)
+
+          # Refuse to call the archive complete if Drive changed while copying.
+          changed_source = before != after
+          missing=[]
+          mismatched=[]
+          verified=[]
+
+          for path,size in sorted(after.items()):
+              if path not in dest:
+                  missing.append({"path":path,"drive_size":size})
+              elif dest[path] != size:
+                  mismatched.append({"path":path,"drive_size":size,"r2_size":dest[path]})
+              else:
+                  verified.append({"path":path,"size":size})
+
+          manifest={
+              "schema_version": 1,
+              "generated_at": datetime.now(timezone.utc).isoformat(),
+              "drive_root_folder_id": os.environ["DRIVE_ROOT_FOLDER_ID"],
+              "r2_bucket": os.environ["R2_BUCKET"],
+              "r2_prefix": os.environ["R2_ARCHIVE_PREFIX"],
+              "verification": "relative_path_and_size",
+              "drive_changed_during_copy": changed_source,
+              "drive_file_count": len(after),
+              "drive_total_bytes": sum(after.values()),
+              "r2_total_file_count_under_prefix": len(dest),
+              "verified_file_count": len(verified),
+              "missing_file_count": len(missing),
+              "size_mismatch_count": len(mismatched),
+              "complete": (not changed_source and not missing and not mismatched),
+              "missing": missing,
+              "size_mismatches": mismatched,
+              "verified_files": verified,
+          }
+
+          with open(f"{root}/archive-manifest.json","w",encoding="utf-8") as f:
+              json.dump(manifest,f,ensure_ascii=False,indent=2)
+              f.write("\n")
+
+          with open(f"{root}/archive-manifest.csv","w",encoding="utf-8",newline="") as f:
+              w=csv.writer(f)
+              w.writerow(["path","size_bytes","status"])
+              for x in verified: w.writerow([x["path"],x["size"],"VERIFIED"])
+              for x in missing: w.writerow([x["path"],x["drive_size"],"MISSING_IN_R2"])
+              for x in mismatched: w.writerow([x["path"],x["drive_size"],f"SIZE_MISMATCH_R2_{x['r2_size']}"])
+
+          print(json.dumps({k:manifest[k] for k in [
+              "drive_changed_during_copy","drive_file_count","drive_total_bytes",
+              "verified_file_count","missing_file_count","size_mismatch_count","complete"
+          ]}, indent=2))
+
+          if changed_source:
+              raise SystemExit("Drive changed while the archive was running. Re-run to obtain a stable verified snapshot.")
+          if missing or mismatched:
+              raise SystemExit("Archive is not yet complete. Re-run this workflow; rclone copy is restart-safe and never deletes R2 objects.")
+          PY
+
+      - name: Upload verification manifests to R2
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -s /tmp/ca-drive-archive/archive-manifest.json ]; then
+            stamp="$(date -u +'%Y%m%dT%H%M%SZ')"
+            rclone copyto /tmp/ca-drive-archive/archive-manifest.json               "r2:$R2_BUCKET/manifests/drive-archive-$stamp.json"               --retries 5
+            rclone copyto /tmp/ca-drive-archive/archive-manifest.csv               "r2:$R2_BUCKET/manifests/drive-archive-$stamp.csv"               --retries 5
+            rclone copyto /tmp/ca-drive-archive/archive-manifest.json               "r2:$R2_BUCKET/manifests/drive-archive-latest.json"               --retries 5
+            rclone copyto /tmp/ca-drive-archive/archive-manifest.csv               "r2:$R2_BUCKET/manifests/drive-archive-latest.csv"               --retries 5
+          fi
+
+      - name: Upload manifest as GitHub Actions artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ca-drive-r2-archive-manifest
+          path: |
+            /tmp/ca-drive-archive/archive-manifest.json
+            /tmp/ca-drive-archive/archive-manifest.csv
+          if-no-files-found: ignore
+          retention-days: 30

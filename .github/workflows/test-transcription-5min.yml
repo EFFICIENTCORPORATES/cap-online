@@ -1,0 +1,129 @@
+name: Test 5-Minute Transcription Clip
+
+on:
+  workflow_dispatch:
+    inputs:
+      audio_path:
+        description: "R2 path under audio/ to test"
+        required: true
+        default: "3. AS-10/Lecture 4-AS 10 Property Plant and Equipment.mp3"
+      clip_minutes:
+        description: "Clip length in minutes"
+        required: true
+        default: "5"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ca-transcription-test
+  cancel-in-progress: false
+
+jobs:
+  test-transcription:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      RCLONE_CONFIG_R2_TYPE: s3
+      RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+      RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      RCLONE_CONFIG_R2_ACL: private
+      RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
+      R2_BUCKET: ${{ secrets.R2_BUCKET_NAME }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Install tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          curl -fsSL https://rclone.org/install.sh | sudo bash
+          python -m pip install --upgrade pip
+          python -m pip install "faster-whisper==1.2.0" "av==16.0.1" "indic-transliteration>=2.3,<3"
+
+      - name: Download selected R2 audio
+        shell: bash
+        env:
+          AUDIO_PATH: ${{ inputs.audio_path }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/transcription-test/source /tmp/transcription-test/output
+          rclone copyto "r2:$R2_BUCKET/audio/$AUDIO_PATH" /tmp/transcription-test/source/full.mp3             --retries 8 --low-level-retries 20 --timeout 10m --stats 30s
+
+      - name: Extract exact middle clip
+        shell: bash
+        env:
+          CLIP_MINUTES: ${{ inputs.clip_minutes }}
+        run: |
+          set -euo pipefail
+          duration="$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /tmp/transcription-test/source/full.mp3)"
+          python - "$duration" "$CLIP_MINUTES" > /tmp/transcription-test/clip.env <<'PY'
+          import sys
+          duration=float(sys.argv[1])
+          clip=float(sys.argv[2])*60.0
+          if duration < clip:
+              raise SystemExit(f"Audio is only {duration:.1f}s; requested clip is {clip:.1f}s")
+          start=max(0.0,(duration-clip)/2.0)
+          print(f"DURATION={duration:.3f}")
+          print(f"CLIP_SECONDS={clip:.3f}")
+          print(f"START={start:.3f}")
+          PY
+          cat /tmp/transcription-test/clip.env
+          source /tmp/transcription-test/clip.env
+          ffmpeg -hide_banner -loglevel error -y             -ss "$START" -i /tmp/transcription-test/source/full.mp3             -t "$CLIP_SECONDS" -ac 1 -ar 16000 -c:a libmp3lame -b:a 64k             /tmp/transcription-test/output/test-clip.mp3
+          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1             /tmp/transcription-test/output/test-clip.mp3
+
+      - name: Transcribe and romanize
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/test_transcription_clip.py             /tmp/transcription-test/output/test-clip.mp3             /tmp/transcription-test/output             --model small             --window-seconds 5
+
+      - name: Add test metadata
+        shell: bash
+        env:
+          AUDIO_PATH: ${{ inputs.audio_path }}
+        run: |
+          set -euo pipefail
+          source /tmp/transcription-test/clip.env
+          python - "$AUDIO_PATH" "$START" "$CLIP_SECONDS" "$DURATION" <<'PY'
+          import json, pathlib, sys
+          p=pathlib.Path("/tmp/transcription-test/output/test-info.json")
+          p.write_text(json.dumps({
+            "source_r2_audio_path": sys.argv[1],
+            "selection": "middle_of_audio",
+            "source_duration_seconds": float(sys.argv[4]),
+            "clip_start_seconds": float(sys.argv[2]),
+            "clip_duration_seconds": float(sys.argv[3]),
+            "clip_file": "test-clip.mp3",
+            "raw_transcript": "transcript-raw.md",
+            "romanized_transcript": "transcript-romanized.md",
+          }, indent=2)+"\n", encoding="utf-8")
+          PY
+
+      - name: Upload test package to R2
+        shell: bash
+        run: |
+          set -euo pipefail
+          stamp="$(date -u +'%Y%m%dT%H%M%SZ')"
+          rclone copy /tmp/transcription-test/output             "r2:$R2_BUCKET/testing/transcription-tests/$stamp/"             --retries 5
+          echo "R2 test package: testing/transcription-tests/$stamp/"
+
+      - name: Upload downloadable test package
+        uses: actions/upload-artifact@v4
+        with:
+          name: transcription-test-5min
+          path: /tmp/transcription-test/output/
+          retention-days: 30
+
+      - name: Repository health check
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/health_check.py

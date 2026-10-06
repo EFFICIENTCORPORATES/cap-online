@@ -1,0 +1,177 @@
+name: Intro Videos End-to-End Pipeline
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: intro-video-e2e
+  cancel-in-progress: false
+jobs:
+  backup-transcribe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      RCLONE_CONFIG_LECTUREDRIVE_TYPE: drive
+      RCLONE_CONFIG_LECTUREDRIVE_CLIENT_ID: ${{ secrets.GOOGLE_DRIVE_CLIENT_ID }}
+      RCLONE_CONFIG_LECTUREDRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      RCLONE_CONFIG_LECTUREDRIVE_SCOPE: drive.readonly
+      RCLONE_CONFIG_LECTUREDRIVE_TOKEN: ${{ secrets.GOOGLE_DRIVE_TOKEN }}
+      RCLONE_CONFIG_R2_TYPE: s3
+      RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+      RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      RCLONE_CONFIG_R2_ACL: private
+      RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
+      R2_BUCKET: ${{ secrets.R2_BUCKET_NAME }}
+      INTRO_FOLDER_ID: 1hSJed3nJt86Jl9XJspx8kcQbyfudvZjB
+      OUTPUT_ROOT: books/ca-inter/concept-book/notes_making/lecture_transcripts/01-intro
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Validate required secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(RCLONE_CONFIG_LECTUREDRIVE_CLIENT_ID RCLONE_CONFIG_LECTUREDRIVE_CLIENT_SECRET RCLONE_CONFIG_LECTUREDRIVE_TOKEN RCLONE_CONFIG_R2_ACCESS_KEY_ID RCLONE_CONFIG_R2_SECRET_ACCESS_KEY RCLONE_CONFIG_R2_ENDPOINT R2_BUCKET)
+          for name in "${required[@]}"; do
+            if [ -z "${!name:-}" ]; then echo "::error::Missing required value: $name"; exit 1; fi
+          done
+      - name: Install media and transfer tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          curl -fsSL https://rclone.org/install.sh | sudo bash
+          python -m pip install --upgrade pip
+          python -m pip install "faster-whisper==1.2.0" "av==16.0.1"
+          ffmpeg -version | head -n 1
+          rclone version | head -n 1
+      - name: Verify source files
+        shell: bash
+        run: |
+          set -euo pipefail
+          rclone lsf "lecturedrive:" --drive-root-folder-id "$INTRO_FOLDER_ID" --files-only | tee /tmp/intro-files.txt
+          grep -Fxq "Lec-1 Intro.mp4" /tmp/intro-files.txt
+          grep -Fxq "Lec-2 Intro.mp4" /tmp/intro-files.txt
+      - name: Back up original MP4s to R2
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in "Lec-1 Intro.mp4" "Lec-2 Intro.mp4"; do
+            echo "Backing up: $file"
+            rclone copyto "lecturedrive:$file" "r2:$R2_BUCKET/source-videos/1. Intro/$file" --drive-root-folder-id "$INTRO_FOLDER_ID" --progress --stats 30s --retries 5 --low-level-retries 10
+          done
+          python - <<'PY'
+          import json, os, subprocess
+          folder=os.environ["INTRO_FOLDER_ID"]; bucket=os.environ["R2_BUCKET"]
+          for name in ["Lec-1 Intro.mp4","Lec-2 Intro.mp4"]:
+              src=json.loads(subprocess.check_output(["rclone","lsjson",f"lecturedrive:{name}","--drive-root-folder-id",folder],text=True))[0]
+              dst=json.loads(subprocess.check_output(["rclone","lsjson",f"r2:{bucket}/source-videos/1. Intro/{name}"],text=True))[0]
+              print(f"{name}: Drive={src['Size']} R2={dst['Size']}")
+              if src["Size"] != dst["Size"]: raise SystemExit(f"SIZE MISMATCH: {name}")
+          print("BACKUP_SIZE_VERIFICATION_OK")
+          PY
+      - name: Download verified R2 copies and extract audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/lecture-pipeline/video /tmp/lecture-pipeline/audio
+          for stem in "Lec-1 Intro" "Lec-2 Intro"; do
+            rclone copyto "r2:$R2_BUCKET/source-videos/1. Intro/$stem.mp4" "/tmp/lecture-pipeline/video/$stem.mp4" --progress --stats 30s --retries 5
+            ffmpeg -hide_banner -loglevel error -y -i "/tmp/lecture-pipeline/video/$stem.mp4" -vn -ac 1 -ar 16000 -c:a libmp3lame -b:a 64k "/tmp/lecture-pipeline/audio/$stem.mp3"
+            rclone copyto "/tmp/lecture-pipeline/audio/$stem.mp3" "r2:$R2_BUCKET/audio/1. Intro/$stem.mp3" --progress --stats 30s --retries 5
+            rm -f "/tmp/lecture-pipeline/video/$stem.mp4"
+          done
+      - name: Transcribe Hindi/Hinglish with word timestamps
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$OUTPUT_ROOT"
+          cat > /tmp/transcribe_intro.py <<'PY'
+          import json, math, os, pathlib, subprocess
+          from datetime import datetime, timezone
+          from faster_whisper import WhisperModel
+          AUDIO=pathlib.Path("/tmp/lecture-pipeline/audio"); OUT=pathlib.Path(os.environ["OUTPUT_ROOT"])
+          BUCKET=os.environ["R2_BUCKET"]; FOLDER_ID=os.environ["INTRO_FOLDER_ID"]
+          FILES=["Lec-1 Intro","Lec-2 Intro"]
+          model=WhisperModel("small",device="cpu",compute_type="int8",cpu_threads=4)
+          def ts(sec,srt=False):
+              ms=max(0,round(sec*1000)); h,rem=divmod(ms,3600000); m,rem=divmod(rem,60000); s,milli=divmod(rem,1000)
+              return f"{h:02d}:{m:02d}:{s:02d}{',' if srt else '.'}{milli:03d}"
+          def compact(words):
+              text=""
+              for w in words:
+                  token=w["word"]
+                  if not text: text=token.strip()
+                  elif token.startswith(("'","’",",",".","?","!",":",";",")","]")): text+=token
+                  else: text+=" "+token.strip()
+              return " ".join(text.split())
+          for stem in FILES:
+              audio=AUDIO/f"{stem}.mp3"; dest=OUT/stem.replace(" ","-"); dest.mkdir(parents=True,exist_ok=True)
+              segments,info=model.transcribe(str(audio),language=None,beam_size=5,vad_filter=True,word_timestamps=True,condition_on_previous_text=True,initial_prompt="CA Intermediate Advanced Accounting lecture. Hindi and English Hinglish. Accounting terminology, Accounting Standards, ICAI, AS, inventory, financial statements.")
+              words=[]; raw_segments=[]
+              for seg in segments:
+                  seg_words=[]
+                  for w in (seg.words or []):
+                      if w.start is None or w.end is None: continue
+                      item={"start":round(float(w.start),3),"end":round(float(w.end),3),"word":w.word,"probability":round(float(w.probability),5)}
+                      words.append(item); seg_words.append(item)
+                  raw_segments.append({"start":round(float(seg.start),3),"end":round(float(seg.end),3),"text":seg.text.strip(),"words":seg_words})
+              duration=max([w["end"] for w in words],default=0.0); windows=[]
+              for i in range(int(math.ceil(duration/5.0))):
+                  start,end=i*5.0,(i+1)*5.0; selected=[w for w in words if start<=w["start"]<end]
+                  windows.append({"start":start,"end":end,"text":compact(selected)})
+              plain="\n".join(w["text"] for w in windows if w["text"]).strip()+"\n"
+              md=[f"# {stem} — 5-second transcript","",f"- Detected language: {info.language} (probability {info.language_probability:.4f})","- Source: Google Drive read-only → verified Cloudflare R2 backup → R2-derived audio","- Pilot transcription model: faster-whisper small, CPU int8","- Windowing: words are assigned to 5-second buckets by word start time","","## Transcript",""]
+              for w in windows:
+                  if w["text"]: md += [f"**[{ts(w['start'])} – {ts(w['end'])}]** {w['text']}",""]
+              payload={"schema_version":1,"title":stem,"source_google_drive_folder_id":FOLDER_ID,"source_google_drive_filename":f"{stem}.mp4","r2_source_key":f"source-videos/1. Intro/{stem}.mp4","r2_audio_key":f"audio/1. Intro/{stem}.mp3","generated_at":datetime.now(timezone.utc).isoformat(),"transcription":{"engine":"faster-whisper","model":"small","detected_language":info.language,"language_probability":info.language_probability},"windows_seconds":5,"windows":windows,"segments":raw_segments}
+              (dest/"transcript.md").write_text("\n".join(md)+"\n",encoding="utf-8")
+              (dest/"transcript.txt").write_text(plain,encoding="utf-8")
+              (dest/"transcript.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+              nonempty=[w for w in windows if w["text"]]; srt_lines=[]; vtt_lines=["WEBVTT",""]
+              for idx,w in enumerate(nonempty,1):
+                  srt_lines += [str(idx),f"{ts(w['start'],True)} --> {ts(w['end'],True)}",w["text"],""]
+                  vtt_lines += [f"{ts(w['start'])} --> {ts(w['end'])}",w["text"],""]
+              (dest/"transcript.srt").write_text("\n".join(srt_lines),encoding="utf-8")
+              (dest/"transcript.vtt").write_text("\n".join(vtt_lines),encoding="utf-8")
+              r2_mp4=json.loads(subprocess.check_output(["rclone","lsjson",f"r2:{BUCKET}/source-videos/1. Intro/{stem}.mp4"],text=True))[0]
+              r2_audio=json.loads(subprocess.check_output(["rclone","lsjson",f"r2:{BUCKET}/audio/1. Intro/{stem}.mp3"],text=True))[0]
+              manifest={"google_drive_folder_id":FOLDER_ID,"source_filename":f"{stem}.mp4","r2_source_key":f"source-videos/1. Intro/{stem}.mp4","r2_source_size":r2_mp4["Size"],"r2_audio_key":f"audio/1. Intro/{stem}.mp3","r2_audio_size":r2_audio["Size"],"backup_status":"verified_by_size_against_drive","audio_status":"complete","transcription_status":"complete","pipeline":"intro-videos-e2e-v1","processed_at":datetime.now(timezone.utc).isoformat()}
+              (dest/"manifest.json").write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8")
+              print(f"Completed {stem}: {len(words)} words, {len(windows)} windows")
+          PY
+          python /tmp/transcribe_intro.py
+      - name: Verify R2 outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          for stem in "Lec-1 Intro" "Lec-2 Intro"; do
+            rclone size "r2:$R2_BUCKET/source-videos/1. Intro/$stem.mp4"
+            rclone size "r2:$R2_BUCKET/audio/1. Intro/$stem.mp3"
+          done
+          test -s "$OUTPUT_ROOT/Lec-1-Intro/transcript.json"
+          test -s "$OUTPUT_ROOT/Lec-2-Intro/transcript.json"
+      - name: Repository health checks and index
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/health_check.py
+          python tools/file_index.py
+          python tools/health_check.py
+      - name: Commit text outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$OUTPUT_ROOT" _claude/artifacts/file-index.md
+          if git diff --cached --quiet; then echo "No transcript changes to commit."; else git commit -m "pipeline: add intro lecture transcripts"; git push origin HEAD:main; fi
+      - name: Remove temporary media
+        if: always()
+        shell: bash
+        run: rm -rf /tmp/lecture-pipeline /tmp/transcribe_intro.py
