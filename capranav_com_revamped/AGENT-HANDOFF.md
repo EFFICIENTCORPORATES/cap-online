@@ -13,7 +13,7 @@ remote `EFFICIENTCORPORATES/cap-online`, branch `main`).
    history from section 6 onward is mostly about other pillars (books, Telegram); this site is the `capranav_com_revamped/` folder.
 2. This file.
 3. `PROJECT-LOG.md` (newest entry first; read the top five entries), then `PENDING.md` (the older, shorter list this file supersedes).
-4. Only when the task needs it: `SEO.md`, `BOT-PROTECTION.md`, `BACKUPS.md`, `SECURITY.md`, `TOPICS-EXPLORER.md`, `VIDEOS.md`,
+4. Only when the task needs it: `MUST-PRACTICE.md` (Must Practice runbook, start here for any question-list work), `SEO.md`, `BOT-PROTECTION.md`, `BACKUPS.md`, `SECURITY.md`, `TOPICS-EXPLORER.md`, `VIDEOS.md`,
    `ANATOMY.md`, `DATABASE-BACKUP.md`.
 
 **Owner:** CA Pranav Pratik Tulshyan (faculty). He decides scope and wording. When unsure about anything about his profile, career,
@@ -45,6 +45,7 @@ by the scripts in `tools/`. **Pages are generated; edit the generators, not the 
 |---|---|---|
 | `tools/build_topics_explorer_data.py` | `public/topics/data/*.json` | topic ranking or workbook data changes |
 | `tools/build_must_practice_data.py` | `public/practice-with-pranav-bhaiya/must-practice/data/*.json` | a unit's list, weights or hand exclusions change |
+| `tools/verify_must_practice_live.py` | (no output; opens the live page in Edge and checks every unit) | after any Must Practice deploy; see `MUST-PRACTICE.md` |
 | `tools/build_seo_static.py` | crawler-readable HTML blocks in Topics, Videos, Must Practice | after either data build |
 | `tools/build_faq.py` | `public/faq/index.html` | data or profile facts change |
 | `tools/apply_seo_meta.py` | `<head>` blocks (title, description, canonical, share tags, JSON-LD) on every page and `sitemap.xml` | any page added or retitled: edit its `PAGES` table |

@@ -19,9 +19,14 @@ The series is **not** a marathon, one-shot, revision lecture, or substitute for 
 | `sources/pyq-september-2026-question-paper.html` | Supplied September 2026 ICAI question paper | Source for the newly added workbook rows |
 | `sources/study-material-validation-summary.md` | Corpus completeness and block-count validation | May 2027 Study Material corpus |
 | `google-drive-links.md` | Shareable Drive-link register for files mentioned during live classes | Awaiting links from Pranav |
+| `MUST-PRACTICE-RULES.md` | The formula that picks the ten Must Practice questions per unit, with every hand exclusion | AS 2, AS 10, AS 16 published on capranav.com |
 | `slides/day-01-opening.html` | Opening sequence for Day 1 | Interactive HTML presentation |
 | `slides/day-01-syllabus-flow.html` | Four-part syllabus build and consolidation animation | Interactive HTML presentation |
 | `slides/day-01-marks-split.html` | Four-part and 15-chapter PYQ footprint, followed by the AS 2 transition | Interactive HTML presentation |
+
+## How this data reaches capranav.com
+
+`descriptive_topic_priority.json` and `mcq-library/` here are the inputs to `capranav_com_revamped/tools/build_must_practice_data.py`, which writes the static JSON behind the live Must Practice page. The whole chain, how to add a unit and how to verify it live: `capranav_com_revamped/MUST-PRACTICE.md`. Do not edit the generated JSON under `capranav_com_revamped/public/`; edit the inputs here or the generator, and re-run.
 
 ## September 2026 status
 

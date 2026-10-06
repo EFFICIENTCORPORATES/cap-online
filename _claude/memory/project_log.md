@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-06 Must Practice documentation
+New `capranav_com_revamped/MUST-PRACTICE.md` (corpus-to-live runbook, add-a-unit steps, gotchas) and `tools/verify_must_practice_live.py` (Playwright/Edge check of every published unit, passes for AS 2/10/16). Pointers added in CLAUDE.md, AGENT-HANDOFF.md, ANATOMY.md, the practice hub README and MUST-PRACTICE-RULES.md; stale AS 16 'pending' lines fixed.
+
 ## 2026-10-06 Must Practice: AS 16 published
 Added `M2-C5-U4` (AS 16 Borrowing Costs) to `UNITS` in `build_must_practice_data.py` with no overrides (pure formula; 22 of 23 library questions scoreable, 5 repeats auto-dropped). Re-ran `build_seo_static.py` for the crawler block. Deployed; verified live in headless Edge: 10 rows, all answers reveal, pages traced, no console/network errors, no mobile overflow; AS 2 and AS 10 unchanged. Not committed. Note: the ten has no PYQ because PYQ Nov 2023 is a 100% repeat of MTP May 2026 Set 1 and the others are repeats or over the per-topic cap.
 
