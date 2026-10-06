@@ -150,6 +150,14 @@ UNITS = {
             "M2C5U2-013": "Replacing a component of a machine — the same subsequent-cost idea as M2C5U2-006, mapped to an unrelated topic.",
         },
     },
+    "M2-C5-U4": {
+        "library_file": "CA_Inter_AdvAcc_AS_16_Borrowing_Costs_23_Descriptive.json",
+        "standard": "AS 16",
+        "unit_title": "Borrowing Costs",
+        "module": "MODULE 2",
+        "chapter": "Assets Based Accounting Standards",
+        "published": True,
+    },
 }
 
 

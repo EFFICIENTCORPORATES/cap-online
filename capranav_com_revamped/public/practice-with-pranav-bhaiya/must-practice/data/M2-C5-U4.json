@@ -1,0 +1,327 @@
+{
+ "unit_id": "M2-C5-U4",
+ "standard": "AS 16",
+ "unit_title": "Borrowing Costs",
+ "module": "MODULE 2",
+ "chapter": "Assets Based Accounting Standards",
+ "book_edition": "CA Inter Advanced Accounts — The Complete Question Bank, First Edition (V1)",
+ "generated_on": "2026-10-06",
+ "library_total": 23,
+ "published": true,
+ "questions": [
+  {
+   "position": 1,
+   "book_id": "M2C5U4-002",
+   "source_label": "MTP May 2023 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q6(c)",
+   "marks_text": "Marks: 5",
+   "approx_time_text": "Approx Time: 9 minutes (approx.)",
+   "topic_text": "Topic 4.4/4.6: Borrowing costs eligible for capitalisation on a specific borrowing - actual interest incurred less income earned on temporary investment of the surplus, not the weighted-average general-borrowing rate",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U4-T4.6",
+     "topic_name": "Specific borrowings",
+     "overall_rank": 22,
+     "priority_band": "Top 50"
+    },
+    {
+     "topic_id": "M2-C5-U4-T4.4",
+     "topic_name": "Borrowing Costs Eligible for Capitalisation",
+     "overall_rank": 245,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "A",
+   "study_match_percent": 94.7,
+   "why": "Rank 22 topic (Specific borrowings); Category A — 95% identical to an ICAI Study Material question; MTP May 2023 Set 1; covers 2 mapped topics.",
+   "score": 0.8471,
+   "book_page": 95,
+   "question_html": "<p>Vital Limited borrowed an amount of ₹150 crores on 1.4.2021 for construction of boiler plant @ 10% p.a. The plant is expected to be completed in 4 years. Since the weighted average cost of capital is 13% p.a., the accountant of Vital Ltd. capitalized ₹19.50 crores for the accounting period ending on 31.3.2022. Due to surplus fund out of ₹150 crores, an income of ₹1.50 crores was earned and credited to profit and loss account. Comment on the above treatment of accountant with reference to relevant accounting standard. (5 Marks)</p>",
+   "answer_html": "<p>Para 10 of AS 16 'Borrowing Costs' states that to the extent the funds are borrowed specifically for the purpose of obtaining a qualifying asset, the amount of borrowing costs eligible for capitalization on that asset should be determined as the actual borrowing costs incurred on that borrowing during the period less any income on the temporary investment of those borrowings. The capitalization rate should be the weighted average of the borrowing costs applicable to the borrowings of the enterprise that are outstanding during the period, other than borrowings made specifically for the purpose of obtaining a qualifying asset. Hence, in the above case, treatment of accountant of Vital Ltd. is incorrect. The amount of borrowing costs capitalized for the financial year 2021-22 should be calculated as follows:</p>\n<table>\n<thead><tr><th>Particulars</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>Actual interest for 2021-22 (10% of ₹150 crores)</td><td>15.00 crores</td></tr>\n<tr><td>Less: Income on temporary investment from specific borrowings</td><td>(1.50 crores)</td></tr>\n<tr><td><strong>Borrowing costs to be capitalized during year 2021-22</strong></td><td><strong>13.50 crores</strong></td></tr>\n</tbody>\n</table>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is applying the enterprise's weighted average cost of capital (or the general-borrowings capitalisation rate) to a loan that was specifically raised for the qualifying asset, instead of using the actual interest rate on that specific borrowing net of any temporary-investment income earned on the surplus funds."
+  },
+  {
+   "position": 2,
+   "book_id": "M2C5U4-005",
+   "source_label": "MTP May 2026 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q1(a)",
+   "marks_text": "Marks: 5",
+   "approx_time_text": "Approx Time: 9 minutes (approx.)",
+   "topic_text": "Topic 4.4/4.6/4.7: Eligible borrowing cost - specific vs general borrowings, netting temporary investment income",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U4-T4.7",
+     "topic_name": "General borrowings",
+     "overall_rank": 19,
+     "priority_band": "Top 50"
+    },
+    {
+     "topic_id": "M2-C5-U4-T4.6",
+     "topic_name": "Specific borrowings",
+     "overall_rank": 22,
+     "priority_band": "Top 50"
+    },
+    {
+     "topic_id": "M2-C5-U4-T4.4",
+     "topic_name": "Borrowing Costs Eligible for Capitalisation",
+     "overall_rank": 245,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [
+    "Compulsory"
+   ],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 19 topic (General borrowings); MTP May 2026 Set 1; covers 3 mapped topics.",
+   "score": 0.7699,
+   "book_page": 97,
+   "question_html": "<p>Glen Ltd. began construction of a new building on 1st January, 2025. On 1st April, 2025, following two loans were obtained to fund the construction cost:\n    <br/>(i) Loan of ₹60,00,000 from Data Bank Ltd. was taken at interest rate of 8% per annum. This loan was fully utilized for construction of the new building.\n    <br/>(ii) Loan of ₹20,00,000 from Satya Bank Ltd. Out of this, loan amount of ₹6,00,000 was utilized for working capital purpose. Total interest of ₹1,92,000 were paid to Satya Bank Ltd. for the financial year 2025-26.\n    <br/>Construction of the new building was completed on 31st January, 2026 and was ready for its intended use on the same date.\n    <br/>None of the loan was repaid during the year. The building is a qualifying asset for the purpose of AS-16.\n    <br/>Out of loan from Data Bank Ltd., surplus funds were temporarily invested for the short period of time. This temporary investment earned interest of ₹30,000.\n    <br/>You are required to calculate the amount of interest (a) to be capitalized, (b) to be charged to profit and loss account from the total interest incurred as borrowing cost during the year 2025-26 (as per AS-16). (5 Marks)</p>",
+   "answer_html": "<p>According to AS 16 “Borrowing Costs”, borrowing costs that are directly attributable to the acquisition, construction or production of a qualifying asset should be capitalized as part of the cost of that asset. The amount of borrowing costs eligible for capitalization should be determined in accordance with this Standard. Other borrowing costs should be recognised as an expense in the period in which they are incurred.</p>\n<p>The standard also states that to the extent that funds are borrowed specifically for the purpose of obtaining a qualifying asset, the amount of borrowing costs eligible for capitalization on that asset should be determined as the actual borrowing costs incurred on that borrowing during the period less any income on the temporary investment of those borrowings.</p>\n<p>Thus, eligible borrowing cost on Loan of data bank to be capitalized:\n    <br/>= ₹(60,00,000 x 8%) x 10/12 − ₹30,000\n    <br/>= ₹(4,80,000 x 10/12) = ₹4,00,000\n    <br/>= ₹4,00,000 − ₹30,000\n    <br/>= ₹3,70,000</p>\n<table>\n<thead><tr><th>Loan</th><th>Particulars</th><th>Nature of assets</th><th>Interest to be Capitalized (₹)</th><th>Interest to be charged to Profit &amp; Loss Account (₹)</th></tr></thead>\n<tbody>\n<tr><td>Data bank</td><td>Construction of factory building</td><td>Qualifying Asset</td><td>3,70,000</td><td>(4,80,000 − 4,00,000) = 80,000</td></tr>\n<tr><td>Satya Bank</td><td>Construction of factory building</td><td>Qualifying Asset</td><td>(1,92,000 x 14/20) x 10/12 = 1,12,000</td><td>(1,92,000 x 14/20) x 2/12 = 22,400</td></tr>\n<tr><td>Satya Bank</td><td>Working Capital</td><td>Not a Qualifying Asset</td><td>NIL</td><td>(1,92,000 x 6/20) = ₹57,600</td></tr>\n<tr><td colspan=\"3\"><strong>Total</strong></td><td><strong>₹4,82,000</strong></td><td><strong>₹1,60,000</strong></td></tr>\n</tbody>\n</table>\n<p><em>Note:</em> Loan from Satya bank is considered to be specific borrowings.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Many examinees capitalised the full interest on the Data Bank loan without deducting the ₹30,000 temporary-investment income as required under AS 16, and several also failed to apportion the Satya Bank interest between the qualifying-asset and working-capital portions, treating the entire ₹1,92,000 as eligible for capitalisation."
+  },
+  {
+   "position": 3,
+   "book_id": "M2C5U4-017",
+   "source_label": "RTP May 2024",
+   "paper_type": "RTP",
+   "question_no": "Q10",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 4.6/4.7: Interest to be capitalised = specific borrowing's actual interest + non-specific borrowings' weighted-average rate applied to average accumulated expenditure not funded by the specific loan",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U4-T4.7",
+     "topic_name": "General borrowings",
+     "overall_rank": 19,
+     "priority_band": "Top 50"
+    },
+    {
+     "topic_id": "M2-C5-U4-T4.6",
+     "topic_name": "Specific borrowings",
+     "overall_rank": 22,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 60.8,
+   "why": "Rank 19 topic (General borrowings); 61% match to an ICAI Study Material question; RTP May 2024; covers 2 mapped topics.",
+   "score": 0.7691,
+   "book_page": 111,
+   "question_html": "<p>H Ltd. began the construction of a new building on 1<sup>st</sup> April 2022. It obtained a special loan of ₹6,00,000 on 1<sup>st</sup> April 2022 at an interest of 12% to finance the construction of the building.</p>\n<p>The company's other outstanding two non-specific loans on 1<sup>st</sup> April, 2022 were as follows:</p>\n<table>\n<thead><tr><th>Amount in ₹</th><th>Rate of Interest</th></tr></thead>\n<tbody><tr><td>30,00,000</td><td>14%</td></tr><tr><td>54,00,000</td><td>16%</td></tr></tbody>\n</table>\n<p>The expenditure incurred on the building project was as per detail given below:</p>\n<table>\n<thead><tr><th></th><th>Amount in ₹</th></tr></thead>\n<tbody>\n<tr><td>1st May, 2022</td><td>12,00,000</td></tr>\n<tr><td>1st July, 2022</td><td>15,00,000</td></tr>\n<tr><td>1st October, 2022</td><td>27,00,000</td></tr>\n<tr><td>1st March, 2023</td><td>7,20,000</td></tr>\n</tbody>\n</table>\n<p>The building was completed by 31<sup>st</sup> March 2023. Following the provisions of Accounting Standard 16, you are required to calculate the amount of interest to be capitalized and also give one Journal Entry for capitalizing the cost and borrowing cost in respect of the building.</p>",
+   "answer_html": "<p><strong>Interest amount to be capitalized</strong></p>\n<table>\n<tbody>\n<tr><td>Specific borrowings (₹6,00,000 x 12%)</td><td>=</td><td>72,000</td></tr>\n<tr><td>Non-specific borrowings [₹30,35,000 (₹36,35,000 − ₹6,00,000) x 15.29%*]</td><td>=</td><td>4,64,052</td></tr>\n<tr><td><strong>Amount of interest to be capitalized</strong></td><td>=</td><td><strong>5,36,052</strong></td></tr>\n</tbody>\n</table>\n<p><strong>Journal Entry for capitalizing cost and borrowing cost</strong></p>\n<table>\n<thead><tr><th>Date</th><th>Particulars</th><th></th><th>Dr. (₹)</th><th>Cr. (₹)</th></tr></thead>\n<tbody>\n<tr><td>31.3.2023</td><td>Building account (Cost of building ₹61,20,000 + borrowing cost ₹5,36,052)<br/>   To Bank account<br/>(Being amount of cost of building and borrowing cost thereon capitalized)</td><td>Dr.</td><td>66,56,052</td><td>66,56,052</td></tr>\n</tbody>\n</table>\n<p><strong>Working notes:</strong></p>\n<p><strong>(i) Computation of average accumulated expenses</strong></p>\n<table>\n<tbody>\n<tr><td>₹12,00,000 x 11/12</td><td>=</td><td>11,00,000</td></tr>\n<tr><td>₹15,00,000 x 9/12</td><td>=</td><td>11,25,000</td></tr>\n<tr><td>₹27,00,000 x 6/12</td><td>=</td><td>13,50,000</td></tr>\n<tr><td>₹7,20,000 x 1/12</td><td>=</td><td>60,000</td></tr>\n<tr><td><strong>61,20,000</strong></td><td></td><td><strong>36,35,000</strong></td></tr>\n</tbody>\n</table>\n<p><strong>(ii) Calculation of average interest rate other than for specific borrowings</strong></p>\n<table>\n<thead><tr><th>Amount of loan (₹)</th><th>Rate of interest</th><th></th><th>Amount of interest (₹)</th></tr></thead>\n<tbody>\n<tr><td>30,00,000</td><td>14%</td><td>=</td><td>4,20,000</td></tr>\n<tr><td>54,00,000</td><td>16%</td><td>=</td><td>8,64,000</td></tr>\n<tr><td>84,00,000</td><td></td><td></td><td>12,84,000</td></tr>\n<tr><td>Weighted average rate of interest (12,84,000/84,00,000 × 100)</td><td></td><td>=</td><td>15.29%* (Rounded off)</td></tr>\n</tbody>\n</table>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error here is applying the weighted-average non-specific borrowing rate to the full average accumulated expenditure instead of only the portion not already covered by the specific loan, effectively double-capitalising interest on the ₹6,00,000 special loan amount."
+  },
+  {
+   "position": 4,
+   "book_id": "M2C5U4-006",
+   "source_label": "MTP May 2026 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q6(a) [OR-alt 2]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 4.11: Cessation of capitalisation, including the part-completion case",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U4-T4.11",
+     "topic_name": "Cessation of Capitalisation",
+     "overall_rank": 242,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 87.9,
+   "why": "Rank 242 topic (Cessation of Capitalisation); 88% match to an ICAI Study Material question; MTP May 2026 Set 2.",
+   "score": 0.4932,
+   "book_page": 98,
+   "question_html": "<p>When capitalisation of borrowing cost should cease as per Accounting Standard 16? Explain in brief. (4 Marks)</p>",
+   "answer_html": "<p>Capitalization of borrowing costs should cease when substantially all the activities necessary to prepare the qualifying asset for its intended use or sale are complete. An asset is normally ready for its intended use or sale when its physical construction or production is complete even though routine administrative work might still continue. If minor modifications such as the decoration of a property to the user's specification, are all that are outstanding, this indicates that substantially all the activities are complete. When the construction of a qualifying asset is completed in parts and a completed part is capable of being used while construction continues for the other parts, capitalization of borrowing costs in relation to a part should cease when substantially all the activities necessary to prepare that part for its intended use or sale are complete.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Several examinees described only the overall-completion cessation rule and omitted the part-completion exception, despite this being the same principle tested numerically elsewhere in this paper's Case Scenario I."
+  },
+  {
+   "position": 5,
+   "book_id": "M2C5U4-021",
+   "source_label": "RTP September 2025",
+   "paper_type": "RTP",
+   "question_no": "Q16",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 4.3: Borrowing costs on an incidental, already-ready asset are still capitalised into the main qualifying asset when necessary for its construction",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U4-T4.3",
+     "topic_name": "Exchange Differences on Foreign Currency Borrowings",
+     "overall_rank": 94,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 94 topic (Exchange Differences on Foreign Currency Borrowings); RTP September 2025.",
+   "score": 0.4746,
+   "book_page": 116,
+   "question_html": "<p>Is it permissible to capitalise borrowing costs incurred on assets necessary for the construction of qualifying assets? A company constructing a large manufacturing plant in a backward area also purchased a residential building (funded by a long-term loan) to house workers engaged in the plant's construction, intending to dispose of the building once construction completes. If the manufacturing plant is a qualifying asset, are the borrowing costs on the residential-building loan eligible for capitalisation?</p>",
+   "answer_html": "<div><p>Per AS 16 para 3, a qualifying asset \"necessarily takes a substantial period of time to get ready for its intended use or sale\"; para 5 clarifies that assets ready for use when acquired are <strong>not</strong> qualifying assets. Prima facie, the residential building appears ready for use on acquisition, suggesting no capitalisation.</p>\n<p>However, since providing housing is <strong>necessary</strong> for the construction of the plant, the borrowing costs on the building loan are, in substance, directly attributable to the construction of the manufacturing plant. The company should therefore <strong>capitalise</strong> these borrowing costs as part of the cost of the manufacturing plant, up to the period the plant is ready for its intended use.</p></div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees stopped at the observation that the residential building is itself \"ready for use\" and concluded no capitalisation applies, missing the substance-over-form link to the main construction project's necessity."
+  },
+  {
+   "position": 6,
+   "book_id": "M2C5U4-018",
+   "source_label": "RTP May 2025",
+   "paper_type": "RTP",
+   "question_no": "Q16",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 4.4: Apportionment of interest on a mixed-purpose loan between qualifying-asset capitalisation and expense, by proportion of funds actually used for each purpose",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U4-T4.4",
+     "topic_name": "Borrowing Costs Eligible for Capitalisation",
+     "overall_rank": 245,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 66.4,
+   "why": "Rank 245 topic (Borrowing Costs Eligible for Capitalisation); 66% match to an ICAI Study Material question; RTP May 2025.",
+   "score": 0.4198,
+   "book_page": 112,
+   "question_html": "<p>U Limited has obtained a term loan of ₹620 lacs for a complete renovation and modernisation of its Factory on 1st April, 2023. Plant and Machinery was acquired under the modernisation scheme and installation was completed on 30th April, 2024. An expenditure of ₹510 lacs was incurred on installation of Plant and Machinery, ₹54 lacs has been advanced to suppliers for additional assets which were also received and installed before 30th April, 2024 (additional asset has taken substantial period of time in its installation), and the balance loan of ₹56 lacs has been used for working capital purposes.</p>\n<p>The company has paid total interest of ₹68.20 lacs during financial year 2023-2024 on the above loan. The accountant seeks your advice how to account for the interest paid in the books of accounts.</p>",
+   "answer_html": "<div>\n<p>As per AS 16 'Borrowing Costs', borrowing costs directly attributable to the acquisition, construction or production of a qualifying asset should be capitalized as part of the cost of that asset; other borrowing costs should be recognized as an expense in the period in which they are incurred.</p>\n<p><strong>Qualifying Asset:</strong> an asset that necessarily takes a substantial period of time (ordinarily 12 months, unless a shorter or longer period is justified by the facts) to get ready for its intended use or sale.</p>\n<p>Since construction of the asset completed only on 30th April, 2024 (after the year end), the treatment for the total borrowing cost of ₹68.20 lacs is:</p>\n<table><thead><tr><th>Purpose</th><th>Nature</th><th>Interest to be capitalised (₹ lacs)</th><th>Interest to be charged to P&amp;L (₹ lacs)</th></tr></thead><tbody>\n<tr><td>Modernisation and renovation of plant and machinery</td><td>Qualifying asset</td><td>68.20 × (510/620) = 56.10</td><td>—</td></tr>\n<tr><td>Advance to suppliers for additional assets</td><td>Assumed as qualifying asset (took substantial time to install)</td><td>68.20 × (54/620) = 5.94</td><td>—</td></tr>\n<tr><td>Working Capital</td><td>Not a qualifying asset</td><td>—</td><td>68.20 × (56/620) = 6.16</td></tr>\n<tr><td><strong>Total</strong></td><td></td><td><strong>62.04</strong></td><td><strong>6.16</strong></td></tr>\n</tbody></table>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is capitalising interest on the entire ₹620 lacs loan without apportioning it by actual fund usage, missing that the ₹56 lacs used for working capital is not a qualifying asset and its share of interest must be expensed, not capitalised."
+  },
+  {
+   "position": 7,
+   "book_id": "M2C5U4-023",
+   "source_label": "MTP November 2023 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q6(a)",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 4.3: Exchange differences on a foreign-currency borrowing treated as a borrowing cost only to the extent they approximate the interest-rate differential against an equivalent local-currency loan   +   Topic 3.5: Exchange difference on restatement of a foreign-currency monetary borrowing at the closing rate, with the AS 16-eligible portion carved out of the total exchange loss and the remainder recognised under AS 11",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U4-T4.3",
+     "topic_name": "Exchange Differences on Foreign Currency Borrowings",
+     "overall_rank": 94,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 94 topic (Exchange Differences on Foreign Currency Borrowings); MTP November 2023 Set 2.",
+   "score": 0.3965,
+   "book_page": 118,
+   "question_html": "<p>Omega Limited has borrowed a sum of US $10,00,000 at the beginning of Financial Year 2022-23 for its residential project at 4%. The interest is payable at the end of the Financial Year. At the time of availment of loan exchange rate was ₹56 per US $ and the rate as on 31st March, 2023 was ₹62 per US $. If Omega Limited had borrowed the loan in India in Indian Rupee equivalent, the pricing of loan would have been 10.50%.</p>\n<p>You are required to compute Borrowing Cost and exchange difference for the year ending 31st March, 2023 as per applicable Accounting Standards.</p>",
+   "answer_html": "<ol type=\"i\">\n<li>Interest for the period 2022-23 = US $10 lakhs × 4% × ₹62 per US$ = ₹24.80 lakhs</li>\n<li>Increase in the liability towards the principal amount = US $10 lakhs × ₹(62 − 56) = ₹60 lakhs</li>\n<li>Interest that would have resulted if the loan was taken in Indian currency = US $10 lakhs × ₹56 × 10.5% = ₹58.80 lakhs</li>\n<li>Difference between interest on local currency borrowing and foreign currency borrowing = ₹58.80 lakhs − ₹24.80 lakhs = ₹34 lakhs.</li>\n</ol>\n<p>Therefore, out of ₹60 lakhs increase in the liability towards principal amount, only ₹34 lakhs will be considered as the borrowing cost. Thus, total borrowing cost would be ₹58.80 lakhs being the aggregate of interest of ₹24.80 lakhs on foreign currency borrowings plus the exchange difference to the extent of difference between interest on local currency borrowing and interest on foreign currency borrowing of ₹34 lakhs.</p>\n<p>Hence, ₹58.80 lakhs would be considered as the borrowing cost to be accounted for as per AS 16 and the remaining ₹26 lakhs (60 − 34) would be considered as the exchange difference to be accounted for as per AS 11.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is treating the entire ₹60 lakh increase in the rupee liability as either wholly a borrowing cost under AS 16 or wholly an exchange difference under AS 11, instead of splitting it at the interest-rate-differential figure of ₹34 lakhs."
+  },
+  {
+   "position": 8,
+   "book_id": "M2C5U4-019",
+   "source_label": "RTP May 2026",
+   "paper_type": "RTP",
+   "question_no": "Q10",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.8: Cost of a self-constructed asset - directly attributable costs only, excluding relocation/inauguration   +   Topic 4.4/4.9: Eligible borrowing cost net of temporary-investment income, capitalisation period",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U4-T4.4",
+     "topic_name": "Borrowing Costs Eligible for Capitalisation",
+     "overall_rank": 245,
+     "priority_band": "Beyond Top 100"
+    },
+    {
+     "topic_id": "M2-C5-U4-T4.9",
+     "topic_name": "Commencement of Capitalisation",
+     "overall_rank": 248,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 245 topic (Borrowing Costs Eligible for Capitalisation); RTP May 2026; covers 2 mapped topics.",
+   "score": 0.3654,
+   "book_page": 113,
+   "question_html": "<p>On 1st April, 2024, Y Limited purchased an industrial plot of land for ₹50,00,000 for the purpose of constructing a new factory. This cost of ₹50,00,000 included legal cost of ₹2,50,000 incurred for the purpose of acquisition of this plot. The construction of the factory commenced on 1st May, 2024. Y Limited provides you with the following details of the costs incurred in relation to the above construction:</p>\n<table>\n<thead><tr><th>Particulars</th><th>Amount (₹)</th></tr></thead>\n<tbody>\n<tr><td>Preparation and levelling of the land</td><td>1,60,000</td></tr>\n<tr><td>Employment costs of construction workers (per month)</td><td>58,000</td></tr>\n<tr><td>Purchase of Raw materials for the construction</td><td>42,48,000</td></tr>\n<tr><td>Cost of relocating the workers to new factory for work</td><td>75,000</td></tr>\n<tr><td>Costs of inaugural function of the new factory on 1st January, 2025</td><td>95,000</td></tr>\n<tr><td>Overhead costs incurred directly on the construction of the factory (per month)</td><td>50,000</td></tr>\n</tbody>\n</table>\n<p>The construction of the factory was completed on 31st December, 2024 and production could commence on 1st February, 2025. The overall useful life of the factory building was estimated at 40 years from the date of completion. However, it was estimated that the roof would need to be replaced 20 years after the date of completion. The cost of replacing the roof at current prices would be 25% of the total cost of the building. The construction of the factory was partly financed by a loan of ₹56,00,000 raised from State Bank of India on 1st April, 2024 at an interest rate of 9% per annum. During the period when the loan proceeds had been fully utilized to finance the construction, Y Limited earned an income of ₹50,000 from the temporary investment of the proceeds. Assume that all of the net finance cost needs to be allocated to the cost of factory (excluding land) and interest cost to be capitalized based on eight months' period.</p>\n<p>You are required to compute the carrying amount (i.e. value after charging depreciation) of the Factory in the books of Y Limited as at 31 March, 2025 as per the provisions of the relevant Accounting Standard.</p>",
+   "answer_html": "<p>Cost of construction of the factory</p>\n<table>\n<tbody>\n<tr><td>Cost of Industrial Plot</td><td>50,00,000</td></tr>\n<tr><td>Preparation and levelling of the land</td><td>1,60,000</td></tr>\n<tr><td>Employment costs of construction workers (₹58,000 per month) for 8 months</td><td>4,64,000</td></tr>\n<tr><td>Purchase of Raw materials for the construction</td><td>42,48,000</td></tr>\n<tr><td>Overhead costs incurred directly on the construction of the factory (₹50,000 per month) for 8 months</td><td>4,00,000</td></tr>\n<tr><td>Interest on ₹56,00,000 for 9 months @ 9% = ₹3,78,000 less ₹50,000</td><td>3,28,000</td></tr>\n<tr><td><strong>Total Cost (A)</strong></td><td><strong>1,06,00,000</strong></td></tr>\n<tr><td>Depreciation (B) (W.N.)</td><td>43,750</td></tr>\n<tr><td><strong>Carrying amount of the factory (A−B)</strong></td><td><strong>1,05,56,250</strong></td></tr>\n</tbody>\n</table>\n<p><strong>Working Note: Calculation of Depreciation</strong></p>\n<p>On land of ₹50,00,000: Nil. On remaining cost of Building i.e. ₹1,06,00,000 − ₹50,00,000 = ₹56,00,000:</p>\n<ul>\n<li>On Building: ₹56,00,000 × 75% / 40 yrs × 3/12 = ₹26,250</li>\n<li>On roof: ₹56,00,000 × 25% / 20 yrs × 3/12 = ₹17,500</li>\n<li><strong>Total Depreciation charged = ₹43,750</strong></li>\n</ul>\n<p>Cost of relocating the workers to new factory for work and cost of inaugural function of the new factory is not directly attributable to construction cost, hence not considered.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Many examinees included the relocation cost and the inauguration-function cost in the capitalised cost of the factory, failing to apply AS 10's distinction between costs necessary to bring an asset to its working condition and costs merely associated with commissioning it. Several also capitalised the gross interest of ₹3,78,000 without netting the ₹50,000 temporary-investment income against it, as AS 16 requires."
+  },
+  {
+   "position": 9,
+   "book_id": "M2C5U4-016",
+   "source_label": "RTP January 2026",
+   "paper_type": "RTP",
+   "question_no": "Q12",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 4.2: Interest capitalised into inventory cost only for the exceptional qualifying-asset case (substantial maturation period)",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U4-T4.2",
+     "topic_name": "Definitions",
+     "overall_rank": 244,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 244 topic (Definitions); RTP January 2026.",
+   "score": 0.3532,
+   "book_page": 110,
+   "question_html": "<p>Can interest be included in the cost of inventories?</p>",
+   "answer_html": "<div><p>As a general rule, AS 2 (para 12) provides that interest and other borrowing costs are usually not related to bringing inventories to their present location and condition, and are therefore usually excluded from inventory cost.</p>\n<p>However, AS 16 (para 6) requires borrowing costs directly attributable to acquisition/construction/production of a <strong>qualifying asset</strong> to be capitalised, and para 5 specifically includes \"inventories that require a substantial period of time to bring them to a saleable condition\" as an example of a qualifying asset (e.g. liquor requiring 12+ months of maturation, per ASI 1). It is only in such exceptional cases — where time is a major factor in changing the condition of the inventory — that borrowing costs are included in inventory valuation. Routinely/repetitively manufactured inventory over a short period is never a qualifying asset, so its borrowing costs are never capitalised.</p></div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees answered with a flat \"no\", missing the exceptional qualifying-asset case (e.g. maturing liquor) where AS 16 does require capitalisation into inventory cost."
+  },
+  {
+   "position": 10,
+   "book_id": "M2C5U4-008",
+   "source_label": "MTP September 2024 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q1(b)",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 4.5: 12-month substantial-period presumption is rebuttable when a shorter period is genuinely, technically justified",
+   "topics": [
+    {
+     "topic_id": "M2-C5-U4-T4.5",
+     "topic_name": "Recognition criteria",
+     "overall_rank": 246,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [
+    "Compulsory"
+   ],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 246 topic (Recognition criteria); MTP September 2024 Set 2.",
+   "score": 0.2874,
+   "book_page": 100,
+   "question_html": "<p>A company incorporated in June 2023, has setup a factory within a period of 8 months with borrowed funds. The construction period of the assets had reduced drastically due to usage of technical innovations by the company and the company is able to justify the reasons for the same. Whether interest on borrowings for the period prior to the date of setting up the factory should be capitalized although it has taken less than 12 months for the assets to get ready for use. You are required to comment on the necessary treatment with reference to AS 16.</p>",
+   "answer_html": "<p>As per AS 16 ‘Borrowing Costs’, a qualifying asset is one that necessarily takes a substantial period of time to get ready for its intended use or sale. What constitutes a substantial period of time primarily depends on the facts and circumstances of each case; ordinarily a period of twelve months is considered substantial unless a shorter or longer period can be justified. In estimating the period, the time an asset takes, technologically and commercially, to get ready for its intended use or sale is considered — there is a rebuttable presumption that 12 months constitutes a substantial period.</p>\n<p>Under circumstances where the construction period has reduced drastically due to technical innovation, the 12-month period should be looked at as a benchmark, not a conclusive yardstick. An enterprise that completes the asset in 8 months should not be penalised for its efficiency by being denied interest capitalisation. The substantial-period criterion exists to ensure enterprises do not spend disproportionate time and effort capturing immaterial interest cost for capitalisation purposes.</p>\n<p><strong>Conclusion:</strong> since the factory was constructed in 8 months (a genuinely justified, technically-innovation-driven reduction), it is still considered a qualifying asset, and the interest on borrowings for the same shall be capitalised, although it took less than 12 months for the asset to get ready for use.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error here is treating the 12-month benchmark as a rigid, non-rebuttable rule and denying capitalisation outright once construction takes under 12 months, without weighing the facts-and-circumstances test AS 16 actually applies."
+  }
+ ]
+}

@@ -1,5 +1,5 @@
 {
- "generated_on": "2026-09-24",
+ "generated_on": "2026-10-06",
  "default_unit": "M2-C5-U1",
  "modules": [
   {
@@ -121,7 +121,7 @@
       {
        "unit_id": "M2-C5-U4",
        "label": "Accounting Standard 16 Borrowing Costs",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C5-U5",

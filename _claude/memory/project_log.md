@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-06 Must Practice: AS 16 published
+Added `M2-C5-U4` (AS 16 Borrowing Costs) to `UNITS` in `build_must_practice_data.py` with no overrides (pure formula; 22 of 23 library questions scoreable, 5 repeats auto-dropped). Re-ran `build_seo_static.py` for the crawler block. Deployed; verified live in headless Edge: 10 rows, all answers reveal, pages traced, no console/network errors, no mobile overflow; AS 2 and AS 10 unchanged. Not committed. Note: the ten has no PYQ because PYQ Nov 2023 is a 100% repeat of MTP May 2026 Set 1 and the others are repeats or over the per-topic cap.
+
 ## 2026-10-01 Third-phase chapter tests (AS 11, AS 22, AS 20, Framework)
 Built `first_run/scripts/build_third_phase_tests.py` (re-points the phase-2 builder; no fabricated questions). Output `first_run/TESTS/third phase/` (MD for self + README) and `student-edition/` (watermarked PDFs, Questions and Answers separately). Results: AS 11 50/50, AS 22 40/50, AS 20 33/50, Framework 47/50 (0 MCQs; none in bank). Short tests accepted per Pranav. AS 20 and Framework study-material TYK has no answer key in source, so no top-up. Financial Statements of Companies deliberately excluded (class in progress).
 
