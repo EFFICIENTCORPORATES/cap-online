@@ -102,6 +102,10 @@ def videos_block() -> str:
     return "\n".join(parts)
 
 
+def heading(d: dict) -> str:
+    return f"{d['standard']} — {d['unit_title']}" if d.get("standard") and d["standard"] != d["unit_title"] else d["unit_title"]
+
+
 def practice_block() -> str:
     parts = [START, '<section class="ssr" id="ssr-questions">']
     for f in sorted((PUBLIC / "practice-with-pranav-bhaiya/must-practice/data").glob("M*-C*-U*.json")):
@@ -109,9 +113,9 @@ def practice_block() -> str:
         if not d.get("published"):
             continue
         if d.get("pointer"):
-            parts.append(f"<h2>{e(d['standard'])} — {e(d['unit_title'])}</h2><p>{e(d['pointer']['text'])} ({e(d['pointer']['label'])})</p>")
+            parts.append(f"<h2>{e(heading(d))}</h2><p>{e(d['pointer']['text'])} ({e(d['pointer']['label'])})</p>")
             continue
-        parts.append(f"<h2>{e(d['standard'])} — {e(d['unit_title'])}: {len(d['questions'])} must-practice questions</h2>")
+        parts.append(f"<h2>{e(heading(d))}: {len(d['questions'])} must-practice questions</h2>")
         parts.append(f"<p>{e(d['chapter'])}, {e(d['module'].title())}. Chosen from every MTP, RTP and PYQ, ranked by how heavily the topic has been examined. Answers are on the interactive page.</p><ol>")
         for q in d["questions"]:
             topics = "; ".join(t["topic_name"] for t in q["topics"][:3])

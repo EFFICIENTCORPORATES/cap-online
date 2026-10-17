@@ -20,8 +20,11 @@ answer to show.
 
 | Piece | State (2026-10-18) |
 |---|---|
-| Standard units (10 or more usable questions) | Published for AS 2, AS 10, AS 16. AS 2 and AS 10 hand-reviewed for same-idea repeats; AS 16 formula-only, review outstanding. |
-| Short-unit rule (section 6) | **Live for AS 25** (pilot): 2 Question Bank questions + Study Material Illustration 1 = 3 questions. No other short unit done yet. |
+| **All 36 units live** (2026-10-18, 274 questions) | 20 standard units show ten questions; 14 short units show every unique Question Bank question (3 to 9 each, AS 27 only 2); AS 3 and AS 14 are pointer units. Every Question Bank row has a traced printed page. Verified live with `tools/verify_must_practice_live.py` (all 36 pass). |
+| Standard units: same-idea repeat review | **Only AS 2 and AS 10 are hand-reviewed.** Every other standard unit (AS 4, 5, 9, 11, 12, 13, 16, 19, 21, 29, Framework, Financial Statements of Companies, Cash Flow Statement, Amalgamation, Internal Reconstruction, Branch Accounting, and the others the build marks standard) is formula-only. The manual step in section 5 is outstanding for them. |
+| Short-unit rule (section 6) | Applied to all 14 short units. **Study Material items are added only for AS 25** (2 Question Bank + Illustration 1). The other 13 short units show Question Bank questions only until their Study Material items are read from the PDF and added (section 6.6); the pool script lists the candidates for each. |
+| Questions with no syllabus topic mapped | A short unit still lists them (unscored, last, "no syllabus topic is mapped to this question yet"). AS 1 has 6 of its 10. A standard unit cannot rank them and skips them. |
+| Question numbered "QNone" | PYQ November 2023 Q4 (`M3C11U1-024`, Financial Statements of Companies, 20 marks) was extracted with no question number and prints as "QNone" in the first-edition book. Logged as CR-008 in `first_run/SECOND-EDITION-CHANGE-REQUESTS.md`. The Must Practice build shows "Q4" through a documented `qno_overrides` entry; the ranking data stores its number as the string "None", so matching keeps the original. |
 | `first_run/scripts/build_study_material_pool.py` | Built. Finds Study Material items not already covered by the Question Bank. Output is an upper bound, see section 6.4. |
 | Study Material **answers** | Done by hand per item, from the ICAI PDF (never the markdown): `.../data/study-material-items/<unit_id>.json`. Only AS 25 Illustration 1 exists so far. |
 | Topic mapping for Study Material items | Done by hand per item (`topic_ids` in the same file, ids from the syllabus index); the ranking itself is unchanged and only covers the Question Bank. |

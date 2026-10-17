@@ -1,0 +1,185 @@
+{
+ "unit_id": "M1-C1-U0",
+ "standard": "Basics",
+ "unit_title": "Introduction to Accounting Standards",
+ "module": "MODULE 1",
+ "chapter": "Introduction to Accounting Standards",
+ "book_edition": "CA Inter Advanced Accounts — The Complete Question Bank, First Edition (V1)",
+ "generated_on": "2026-10-18",
+ "library_total": 8,
+ "published": true,
+ "questions": [
+  {
+   "position": 1,
+   "book_id": "M1C1U0-006",
+   "source_label": "PYQ May 2026",
+   "paper_type": "PYQ",
+   "question_no": "Q6(a) [OR-alt 1]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 5: Need Conv. towa. Global Stds",
+   "topics": [
+    {
+     "topic_id": "M1-C1-U0-T5",
+     "topic_name": "Need for Convergence towards Global Standards",
+     "overall_rank": 49,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 49 topic (Need for Convergence towards Global Standards); PYQ May 2026.",
+   "score": 0.6325,
+   "book_page": 22,
+   "question_html": "<p>Explain the key aspects which required the need for convergence towards global standards of financial reporting. (4 Marks)</p>",
+   "answer_html": "<p>A few key aspects which required the need for convergence are as under:</p>\n<p>1. Raising funds from international markets: Each country has its own set of rules and regulations for accounting and financial reporting. Therefore, when an enterprise decides to raise capital from markets other than the country in which it is located, the rules and regulations of that other country will apply, requiring the enterprise to understand the differences between the rules governing financial reporting in the foreign country as compared to its own.</p>\n<p>2. Comparability of Financial Statements: International analysts and investors would like to compare financial statements based on similar ASs, leading to a growing need for an internationally accepted set of ASs for cross-border filings, raising investor confidence generally.</p>\n<p>3. Uniformity, Comparability, Transparency etc.: A strong need was felt to bring about uniformity, rationalisation, comparability, transparency and adaptability in financial statements. A multiplicity of AS systems worldwide produces different reported numbers for the same events, creating confusion and encouraging error or fraud. The cure is a single set of global standards, of the highest quality, set in the public interest.</p>\n<p>4. Global Investment: Convergence contributes to the free flow of global investment, improves investors' ability to compare investments globally (lowering risk of errors of judgment), facilitates accounting/reporting for companies with global operations, eliminates costly requirements like reinstatement of financial statements, creates a new standard of accountability and transparency, and reduces operational challenges for accounting firms.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Several examinees listed only one or two convergence drivers instead of the full range (fund-raising, comparability, uniformity, global investment), losing marks for an incomplete answer to a theory question that explicitly asks for \"key aspects\" in the plural."
+  },
+  {
+   "position": 2,
+   "book_id": "M1C1U0-004",
+   "source_label": "MTP September 2024 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q6(a) [OR-alt 1]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 1: Introduction",
+   "topics": [
+    {
+     "topic_id": "M1-C1-U0-T1",
+     "topic_name": "Introduction",
+     "overall_rank": 48,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 48 topic (Introduction); MTP September 2024 Set 2.",
+   "score": 0.6074,
+   "book_page": 20,
+   "question_html": "<p>“Accounting Standards standardize diverse accounting policies with a view to eliminate the non-comparability of financial statements and improve the reliability of financial statements.” Discuss and explain the benefits of Accounting Standards.</p>",
+   "answer_html": "<p>Accounting Standards standardize diverse accounting policies with a view to eliminating non-comparability of financial statements and improving the reliability of financial statements. They provide a set of standard accounting policies, valuation norms, and disclosure requirements, aiming at improving the quality of financial reporting by promoting comparability, consistency, and transparency in the interests of users of financial statements.</p>\n<p><strong>Benefits of Accounting Standards:</strong></p>\n<p>(i) <strong>Standardization of alternative accounting treatments:</strong> Accounting Standards reduce, to a reasonable extent, confusing variations in the accounting treatment used to prepare financial statements.</p>\n<p>(ii) <strong>Requirements for additional disclosures:</strong> there are certain areas where important information is not statutorily required to be disclosed; Standards may call for disclosure beyond that required by law.</p>\n<p>(iii) <strong>Comparability of financial statements:</strong> applying accounting standards facilitates comparison of financial statements of different companies situated in India, and to a limited extent, of companies situated in different parts of the world — though differences in institutions, traditions, and legal systems from one country to another still give rise to differences in the Accounting Standards adopted in different countries.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error here is listing only one or two benefits instead of covering the full range (standardisation, additional disclosure, comparability), or omitting the caveat that cross-country comparability remains limited by differing legal/institutional environments."
+  },
+  {
+   "position": 3,
+   "book_id": "M1C1U0-005",
+   "source_label": "PYQ May 2025",
+   "paper_type": "PYQ",
+   "question_no": "Q6(a) [OR-alt 1]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 1: Introduction",
+   "topics": [
+    {
+     "topic_id": "M1-C1-U0-T1",
+     "topic_name": "Introduction",
+     "overall_rank": 48,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 48 topic (Introduction); PYQ May 2025.",
+   "score": 0.5958,
+   "book_page": 21,
+   "question_html": "<p>What are Accounting Standards? Explain the objectives of \"Accounting Standards\" in brief, also state the advantages of setting Accounting Standards. (4 Marks)</p>",
+   "answer_html": "<p>Accounting Standards are the written policy documents issued by Government relating to various aspects of measurement, treatment, presentation and disclosure of accounting transactions and events.</p>\n<p><strong>Objectives of Accounting Standards:</strong> (a) Accounting Standards harmonize the diverse accounting policies and practices followed by different companies in India. (b) Accounting Standards facilitate the preparation of financial statements and make them comparable. (c) Accounting Standards give a sense of faith and reliability to the users.</p>\n<p><strong>Advantages of setting Accounting Standards:</strong> (a) Accounting Standards make the financial statements of different companies comparable, which helps investors in decision making. (b) Accounting Standards prevent any misleading accounting treatment. (c) Accounting Standards prevent manipulation of data by the management.</p>",
+   "mistake_type": "icai",
+   "mistake_text": "Examiner’s Comment: A few examinees could not clearly explain objectives of \"Accounting Standards\" and advantages of setting the Accounting Standards."
+  },
+  {
+   "position": 4,
+   "book_id": "M1C1U0-003",
+   "source_label": "MTP May 2024 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q6(a) [OR-alt 2]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 1: Introduction",
+   "topics": [
+    {
+     "topic_id": "M1-C1-U0-T1",
+     "topic_name": "Introduction",
+     "overall_rank": 48,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 48 topic (Introduction); MTP May 2024 Set 1.",
+   "score": 0.5952,
+   "book_page": 20,
+   "question_html": "<p>What are the issues, with which Accounting Standards deal?</p>",
+   "answer_html": "<div>\n<p>Accounting Standards deal with the issues of (i) Recognition of events and transactions in the financial statements, (ii) Measurement of these transactions and events, (iii) Presentation of these transactions and events in the financial statements in a manner that is meaningful and understandable to the reader, and (iv) Disclosure requirements.</p>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is listing only two or three of the four issues (recognition, measurement, presentation, disclosure), or substituting a generic description of \"what Accounting Standards are\" for this specific four-part enumeration the question asks for."
+  },
+  {
+   "position": 5,
+   "book_id": "M1C1U0-008",
+   "source_label": "RTP May 2026",
+   "paper_type": "RTP",
+   "question_no": "Q5",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 6: International Acct Std Board",
+   "topics": [
+    {
+     "topic_id": "M1-C1-U0-T6",
+     "topic_name": "International Accounting Standard Board",
+     "overall_rank": 113,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 113 topic (International Accounting Standard Board); RTP May 2026.",
+   "score": 0.3654,
+   "book_page": 23,
+   "question_html": "<p>Write a short note on International Accounting Standard Board (IASB).</p>",
+   "answer_html": "<p>With a view of achieving the objective of setting global standards, the London based group namely the International Accounting Standards Committee (IASC), responsible for developing International Accounting Standards (IAS), was established in June, 1973.</p>\n<ul>\n<li>It is presently known as International Accounting Standards Board (IASB).</li>\n<li>Between 1973 and 2001, the IASC released IASs. Between 1997 and 1999, the IASC restructured their organisation, which resulted in formation of IASB. These changes came into effect on 1st April, 2001. Subsequently, IASB issued statements about current and future standards.</li>\n<li>IASB publishes its Standards in a series of pronouncements called International Financial Reporting Standards (IFRS).</li>\n<li>The standards issued by IASC till 31.03.2001 are known as IASs and the standards issued by IASB since 01.04.2001 are known as IFRSs.</li>\n</ul>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees conflated the IASC and IASB timelines, or reversed which body issued IASs versus IFRSs, resulting in imprecise historical sequencing in their responses."
+  },
+  {
+   "position": 6,
+   "book_id": "M1C1U0-001",
+   "source_label": "MTP January 2025 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q6(a) [OR-alt 2]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 9: What are Carve Outs/Ins in Ind AS?",
+   "topics": [
+    {
+     "topic_id": "M1-C1-U0-T9",
+     "topic_name": "What are Carve Outs/Ins in Ind AS?",
+     "overall_rank": 116,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 116 topic (What are Carve Outs/Ins in Ind AS?); MTP January 2025 Set 2.",
+   "score": 0.2996,
+   "book_page": 19,
+   "question_html": "<p>What do you mean by Carve outs/ins in Ind AS? Explain.</p>",
+   "answer_html": "<div>\n<p>Certain changes have been made in Ind AS considering the economic environment of the country, which is different as compared to the economic environment presumed to be in existence by IFRS. These differences are due to differences in economic conditions prevailing in India. These differences which are in deviation to the accounting principles and practices stated in IFRS, are commonly known as 'Carve-outs'. Additional guidance given in Ind AS over and above what is given in IFRS, is termed as 'Carve in'.</p>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is treating every difference between Ind AS and IFRS as a \"carve-out\", without recognising that removal of an option available under IFRS is explicitly not treated as a carve-out under the Ind AS framework."
+  }
+ ],
+ "short_unit": true,
+ "bank_count": 6,
+ "study_material_count": 0,
+ "study_material_edition": null
+}

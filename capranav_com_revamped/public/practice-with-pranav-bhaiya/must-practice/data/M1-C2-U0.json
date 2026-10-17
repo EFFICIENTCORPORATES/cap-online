@@ -1,0 +1,323 @@
+{
+ "unit_id": "M1-C2-U0",
+ "standard": "Framework",
+ "unit_title": "Framework for Preparation & Presentation of Financial Statements",
+ "module": "MODULE 1",
+ "chapter": "Framework for Preparation and Presentation of Financial Statements",
+ "book_edition": "CA Inter Advanced Accounts — The Complete Question Bank, First Edition (V1)",
+ "generated_on": "2026-10-18",
+ "library_total": 16,
+ "published": true,
+ "questions": [
+  {
+   "position": 1,
+   "book_id": "M1C2U0-008",
+   "source_label": "MTP May 2026 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q6(a) [OR-alt 1]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 7/9/11: Qual. Char. Fin Stmts / Elements of Financial Statements / Capital Maintenance",
+   "topics": [
+    {
+     "topic_id": "M1-C2-U0-T11",
+     "topic_name": "Capital Maintenance",
+     "overall_rank": 37,
+     "priority_band": "Top 50"
+    },
+    {
+     "topic_id": "M1-C2-U0-T7",
+     "topic_name": "Qualitative Characteristics of Financial Statements",
+     "overall_rank": 123,
+     "priority_band": "Beyond Top 100"
+    },
+    {
+     "topic_id": "M1-C2-U0-T9",
+     "topic_name": "Elements of Financial Statements",
+     "overall_rank": 125,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 37 topic (Capital Maintenance); MTP May 2026 Set 2; covers 3 mapped topics.",
+   "score": 0.7485,
+   "book_page": 34,
+   "question_html": "<p>(i) With regard to financial statements, name any five qualitative characteristics and elements.</p>\n<p>(ii) Aman started a business on 1st April 2025 with ₹24,00,000 represented by 1,20,000 units of ₹20 each. During the financial year ending on 31st March, 2026, he sold the entire stock for ₹30 each. In order to maintain the capital intact, calculate the maximum amount, which can be withdrawn by Aman in the year 2025-26 if Financial Capital is maintained at historical cost. (4 Marks)</p>",
+   "answer_html": "<p>(i) Qualitative Characteristics of Financial Statements: Understandability, Relevance, Comparability, Reliability &amp; Faithful Representation. Elements of Financial Statements: Asset, Liability, Equity, Income/Gain and Expense/Loss.</p>\n<p>(ii)</p>\n<table>\n<tbody>\n<tr><th>Particulars</th><th>Financial Capital Maintenance at Historical Cost (₹)</th></tr>\n<tr><td>Closing equity (₹30 x 1,20,000 units)</td><td>36,00,000 represented by cash</td></tr>\n<tr><td>Opening equity</td><td>1,20,000 units x ₹20 = 24,00,000</td></tr>\n<tr><td><strong>Permissible drawings to keep Capital intact</strong></td><td><strong>12,00,000 (36,00,000−24,00,000)</strong></td></tr>\n</tbody>\n</table>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees computed permissible drawings as the full closing cash balance of ₹36,00,000 rather than the excess over opening equity needed to keep capital intact, overstating the withdrawable amount."
+  },
+  {
+   "position": 2,
+   "book_id": "M1C2U0-015",
+   "source_label": "RTP May 2024",
+   "paper_type": "RTP",
+   "question_no": "Q4",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 11: Capital Maintenance",
+   "topics": [
+    {
+     "topic_id": "M1-C2-U0-T11",
+     "topic_name": "Capital Maintenance",
+     "overall_rank": 37,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 37 topic (Capital Maintenance); RTP May 2024.",
+   "score": 0.6921,
+   "book_page": 40,
+   "question_html": "<p>Shiva started a business on 1<sup>st</sup> April 2022 with ₹15,00,000 represented by 80,000 units of ₹25 each. During the financial year ending on 31<sup>st</sup> March, 2023, he sold the entire stock for ₹35 each. In order to maintain the capital intact, calculate the maximum amount, which can be withdrawn by Shiva in the year 2022-23 if Financial Capital is maintained at historical cost.</p>",
+   "answer_html": "<table>\n<thead><tr><th>Particulars</th><th>Financial Capital Maintenance at Historical Cost (₹)</th></tr></thead>\n<tbody>\n<tr><td>Closing equity (₹35 x 80,000 units)</td><td>28,00,000 represented by cash</td></tr>\n<tr><td>Opening equity</td><td>80,000 units x ₹25 = 20,00,000</td></tr>\n<tr><td>Permissible drawings to keep Capital intact</td><td>8,00,000 (28,00,000 − 20,00,000)</td></tr>\n</tbody>\n</table>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error here is treating the entire sale proceeds (₹28,00,000) as available for withdrawal, rather than first restoring the opening financial capital (₹20,00,000) at historical cost and only then treating the balance as distributable."
+  },
+  {
+   "position": 3,
+   "book_id": "M1C2U0-014",
+   "source_label": "PYQ September 2025",
+   "paper_type": "PYQ",
+   "question_no": "Q6(a) [OR-alt 2]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 1.2: The five key elements - assets, liabilities, equity, income, expenses",
+   "topics": [
+    {
+     "topic_id": "M1-C2-U0-T1",
+     "topic_name": "Introduction",
+     "overall_rank": 50,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 50 topic (Introduction); PYQ September 2025.",
+   "score": 0.608,
+   "book_page": 39,
+   "question_html": "<p>What are the key elements of financial statements? Explain.</p>",
+   "answer_html": "<div>\n<ol>\n<li><strong>Assets:</strong> a resource controlled by the enterprise from past events, expected to bring future economic benefits (e.g. plant, patents, receivables).</li>\n<li><strong>Liabilities:</strong> a present obligation arising from past events, settlement of which is expected to result in an outflow of economic benefits (e.g. borrowings, provisions).</li>\n<li><strong>Equity:</strong> the residual interest in assets after deducting all liabilities — owners' claim (capital, reserves), distinct from liabilities (claims of parties other than owners); changes through contributions/distributions or income/expenses.</li>\n<li><strong>Income/Gain:</strong> increases in economic benefits through inflow of assets or reduction of liabilities, increasing equity (includes revenue and gains).</li>\n<li><strong>Expenses/Loss:</strong> decreases in economic benefits through outflows/depletion of assets or incurrence of liabilities, decreasing equity (other than distributions to owners) — expenses arise in the ordinary course (e.g. wages); losses may or may not (e.g. loss on PPE disposal), and are shown separately to aid performance assessment.</li>\n</ol>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A direct theory recall question; common gaps include omitting the equity definition's distinction from liabilities, or failing to note that losses (unlike ordinary expenses) may fall outside the enterprise's normal activities."
+  },
+  {
+   "position": 4,
+   "book_id": "M1C2U0-016",
+   "source_label": "RTP May 2026",
+   "paper_type": "RTP",
+   "question_no": "Q6",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 9: Elements of Financial Statements",
+   "topics": [
+    {
+     "topic_id": "M1-C2-U0-T9",
+     "topic_name": "Elements of Financial Statements",
+     "overall_rank": 125,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 125 topic (Elements of Financial Statements); RTP May 2026.",
+   "score": 0.3654,
+   "book_page": 40,
+   "question_html": "<p>Giant Ltd. has entered into a binding agreement with Tiny Ltd. to buy a custom-made machine of ₹1,00,000 at the end of 2024-25, before delivery of the machine, Giant Ltd. had to change its method of production. The new method will not require the machine ordered and it will be scrapped after delivery. The expected scrap value is nil.</p>\n<p>You are required to advise the accounting treatment and give necessary journal entry in the year 2024-25.</p>",
+   "answer_html": "<p>A liability is recognized when outflow of economic resources in settlement of a present obligation can be anticipated and the value of outflow can be reliably measured.</p>\n<p>When flow of economic benefit to the enterprise beyond the current accounting period is considered improbable, the expenditure incurred is recognised as an expense rather than as an asset.</p>\n<p>In the given case, Giant Ltd. should recognise a liability of ₹1,00,000 to Tiny Ltd.</p>\n<p>Also, the flow of future economic benefit from the machine to the enterprise is improbable.</p>\n<p>Thus, the entire amount of purchase price of the machine should be recognised as an expense.</p>\n<p><strong>Journal Entries</strong></p>\n<table>\n<thead><tr><th>Particulars</th><th>Dr. (₹)</th><th>Cr. (₹)</th></tr></thead>\n<tbody>\n<tr><td>Loss on Change in Production Method A/c Dr.</td><td>1,00,000</td><td></td></tr>\n<tr><td>  To Tiny Ltd.</td><td></td><td>1,00,000</td></tr>\n<tr><td colspan=\"3\"><em>(Being loss due to change in production method)</em></td></tr>\n<tr><td>Profit &amp; Loss A/c Dr.</td><td>1,00,000</td><td></td></tr>\n<tr><td>  To Loss on Change in Production Method</td><td></td><td>1,00,000</td></tr>\n<tr><td colspan=\"3\"><em>(Being loss transferred to P&amp;L)</em></td></tr>\n</tbody>\n</table>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Many examinees treated the non-deliverable bespoke machine as a contingent liability requiring only disclosure, rather than recognising a present obligation to pay Tiny Ltd. as a liability, leading to an understatement of expenses for 2024-25."
+  },
+  {
+   "position": 5,
+   "book_id": "M1C2U0-012",
+   "source_label": "MTP September 2025 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q6(a) [OR-alt 1]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 9: Elements of Financial Statements",
+   "topics": [
+    {
+     "topic_id": "M1-C2-U0-T9",
+     "topic_name": "Elements of Financial Statements",
+     "overall_rank": 125,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 125 topic (Elements of Financial Statements); MTP September 2025 Set 1.",
+   "score": 0.324,
+   "book_page": 38,
+   "question_html": "<p>Briefly explain the elements of financial statements.</p>",
+   "answer_html": "<div>\n<table><thead><tr><th>Element</th><th>Definition</th></tr></thead>\n<tbody>\n<tr><td>Asset</td><td>Resource controlled by the enterprise as a result of past events from which future\n    economic benefits are expected to flow to the enterprise.</td></tr>\n<tr><td>Liability</td><td>Present obligation of the enterprise arising from past events, the settlement of\n    which is expected to result in an outflow of a resource embodying economic benefits.</td></tr>\n<tr><td>Equity</td><td>Residual interest in the assets of an enterprise after deducting all its\n    liabilities.</td></tr>\n<tr><td>Income/gain</td><td>Increase in economic benefits during the accounting period in the form of\n    inflows or enhancement of assets or decreases in liabilities that result in increase in equity other than\n    those relating to contributions from equity participants.</td></tr>\n<tr><td>Expense/loss</td><td>Decrease in economic benefits during the accounting period in the form of\n    outflows or depletions of assets or incurrence of liabilities that result in decrease in equity other than\n    those relating to distributions to equity participants.</td></tr>\n</tbody></table>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error here is describing the five elements in generic terms instead of reproducing the Framework's precise formal definitions, particularly the distinction between an asset's control (not necessarily ownership) and its expected future economic benefit."
+  },
+  {
+   "position": 6,
+   "book_id": "M1C2U0-002",
+   "source_label": "MTP January 2025 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q6(a) [OR-alt 1]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 7: Qual. Char. Fin Stmts",
+   "topics": [
+    {
+     "topic_id": "M1-C2-U0-T7",
+     "topic_name": "Qualitative Characteristics of Financial Statements",
+     "overall_rank": 123,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 123 topic (Qualitative Characteristics of Financial Statements); MTP January 2025 Set 2.",
+   "score": 0.2996,
+   "book_page": 30,
+   "question_html": "<p>\"One of the characteristics of financial statements is neutrality\"— Do you agree with this statement?</p>",
+   "answer_html": "<div>\n<p>Yes, one of the characteristics of financial statements is neutrality. To be reliable, the information contained in financial statement must be neutral, that is free from bias. Financial Statements are not neutral if by the selection or presentation of information, the focus of analysis could shift from one area of business to another thereby arriving at a totally different conclusion on the business results.</p>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is confusing neutrality with conservatism/prudence, treating a deliberately cautious understatement of results as still \"neutral\" when it is in fact a form of bias in the opposite direction."
+  },
+  {
+   "position": 7,
+   "book_id": "M1C2U0-011",
+   "source_label": "MTP September 2024 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q6(a) [OR-alt 2]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 6: Fundamental Accounting Assumptions",
+   "topics": [
+    {
+     "topic_id": "M1-C2-U0-T6",
+     "topic_name": "Fundamental Accounting Assumptions",
+     "overall_rank": 122,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 122 topic (Fundamental Accounting Assumptions); MTP September 2024 Set 1.",
+   "score": 0.2874,
+   "book_page": 37,
+   "question_html": "<p>Summarised Balance Sheet of Cloth Trader as on 31.03.2023: Liabilities – Proprietor's Capital 3,00,000; Profit &amp; Loss Account 1,25,000; 10% Loan Account 2,10,000; Sundry Creditors 50,000; Total 6,85,000. Assets – Fixed Assets 3,60,000; Closing Stock 1,50,000; Sundry Debtors 1,00,000; Deferred Expenses 50,000; Cash &amp; Bank 25,000; Total 6,85,000. Additional Information: (1) The remaining life of fixed assets is 8 years, pattern of use even; net realisable value of fixed assets on 31.03.2024 was ₹3,25,000. (2) Purchases and Sales in 2023-24 amounted to ₹22,50,000 and ₹27,50,000 respectively. (3) Cost and net realizable value of stock on 31.03.2024 were ₹2,00,000 and ₹2,50,000 respectively. (4) Expenses for the year amounted to ₹78,000. (5) Deferred Expenses are amortized equally over 5 years. (6) Sundry Debtors on 31.03.2024 are ₹1,50,000 of which ₹5,000 is doubtful; collection of another ₹25,000 depends on successful re-installation of certain product supplied. (7) Closing Sundry Creditors are ₹75,000, likely to be settled at 10% discount. (8) Cash balance as on 31.03.2024 is ₹4,22,000. (9) There is an early repayment penalty for the loan of ₹25,000. Required: Prepare Profit &amp; Loss Account for the year 2023-24 (not assuming going concern).</p>",
+   "answer_html": "<div>\n<p><strong>Profit and Loss Account for the year ended 2023-24 (not assuming going concern):</strong></p>\n<table><thead><tr><th>Particulars</th><th>₹</th><th>Particulars</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>To Opening Stock</td><td>1,50,000</td><td>By Sales</td><td>27,50,000</td></tr>\n<tr><td>To Purchases</td><td>22,50,000</td><td>By Closing Stock</td><td>2,50,000</td></tr>\n<tr><td>To Expenses</td><td>78,000</td><td>By Trade payables (discount on settlement)</td><td>7,500</td></tr>\n<tr><td>To Depreciation</td><td>35,000</td><td></td><td></td></tr>\n<tr><td>To Provision for doubtful debts</td><td>30,000</td><td></td><td></td></tr>\n<tr><td>To Deferred cost (written off, not assuming going concern)</td><td>50,000</td><td></td><td></td></tr>\n<tr><td>To Loan penalty</td><td>25,000</td><td></td><td></td></tr>\n<tr><td>To Net Profit (balancing figure)</td><td>3,89,500</td><td></td><td></td></tr>\n<tr><td><strong>Total</strong></td><td><strong>30,07,500</strong></td><td><strong>Total</strong></td><td><strong>30,07,500</strong></td></tr>\n</tbody></table>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is continuing to amortise the deferred expenses over their normal 5-year period and depreciate fixed assets on the usual straight-line basis, instead of writing off the deferred expenses immediately and depreciating fixed assets down to their net realisable value once the going concern assumption is dropped."
+  },
+  {
+   "position": 8,
+   "book_id": "M1C2U0-004",
+   "source_label": "MTP May 2024 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q6(a) [OR-alt 1]",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 7: Qual. Char. Fin Stmts",
+   "topics": [
+    {
+     "topic_id": "M1-C2-U0-T7",
+     "topic_name": "Qualitative Characteristics of Financial Statements",
+     "overall_rank": 123,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 123 topic (Qualitative Characteristics of Financial Statements); MTP May 2024 Set 1.",
+   "score": 0.2752,
+   "book_page": 32,
+   "question_html": "<p>What are the qualitative characteristics of the financial statements which improve the usefulness of the information furnished therein?</p>",
+   "answer_html": "<div>\n<p>The qualitative characteristics are attributes that improve the usefulness of information provided in financial statements. Understandability; Relevance; Reliability; Comparability are the qualitative characteristics of financial statements.</p>\n<p><strong>Understandability</strong> – Information presented in financial statements should be readily understandable by the users with reasonable knowledge of business and economic activities.</p>\n<p><strong>Relevance</strong> – Financial statements should contain relevant information only. Information, which is likely to influence the economic decisions of the users is called relevant.</p>\n<p><strong>Reliability</strong> – Information must be reliable; that is to say, they must be free from material error and bias.</p>\n<p><strong>Comparability</strong> – Financial statements should provide both inter-firm and intra-firm comparison.</p>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is naming only two or three of the four characteristics, or confusing \"Reliability\" (freedom from material error/bias) with \"Relevance\" (capacity to influence economic decisions) – the two are frequently swapped in a rushed answer."
+  },
+  {
+   "position": 9,
+   "book_id": "M1C2U0-003",
+   "source_label": "MTP May 2023 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q6(d)",
+   "marks_text": "Marks: 5",
+   "approx_time_text": "Approx Time: 9 minutes (approx.)",
+   "topic_text": "Topic 5: Objectives & Users of Fin Stmts   +   Topic 6: Fundamental Accounting Assumptions   +   Topic 7: Qual. Char. Fin Stmts   +   Topic 9: Elements of Financial Statements",
+   "topics": [
+    {
+     "topic_id": "M1-C2-U0-T5",
+     "topic_name": "Objectives and Users of Financial Statements",
+     "overall_rank": 121,
+     "priority_band": "Beyond Top 100"
+    },
+    {
+     "topic_id": "M1-C2-U0-T6",
+     "topic_name": "Fundamental Accounting Assumptions",
+     "overall_rank": 122,
+     "priority_band": "Beyond Top 100"
+    },
+    {
+     "topic_id": "M1-C2-U0-T7",
+     "topic_name": "Qualitative Characteristics of Financial Statements",
+     "overall_rank": 123,
+     "priority_band": "Beyond Top 100"
+    },
+    {
+     "topic_id": "M1-C2-U0-T9",
+     "topic_name": "Elements of Financial Statements",
+     "overall_rank": 125,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 121 topic (Objectives and Users of Financial Statements); MTP May 2023 Set 1; covers 4 mapped topics.",
+   "score": 0.2721,
+   "book_page": 31,
+   "question_html": "<p>(i) With regard to financial statements name any four: (1) Users; (2) Qualitative characteristics; (3) Elements.<br/>\n    (ii) What are fundamental accounting assumptions? (5 Marks)</p>",
+   "answer_html": "<p>(i) (1) Users of financial statements: Investors, Employees, Lenders, Suppliers/Creditors, Customers, Government &amp; Public.<br/>\n    (2) Qualitative Characteristics of Financial Statements: Understandability, Relevance, Comparability, Reliability &amp; Faithful Representation.<br/>\n    (3) Elements of Financial Statements: Asset, Liability, Equity, Income/Gain and Expense/Loss.</p>\n<p>(ii) Fundamental Accounting Assumptions: Accrual, Going Concern and Consistency.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is confusing the four qualitative characteristics (Understandability, Relevance, Reliability, Comparability) with the three fundamental accounting assumptions (Going Concern, Accrual, Consistency), or listing \"Materiality\"/\"Prudence\" as standalone qualitative characteristics rather than as components nested within Relevance and Reliability respectively."
+  },
+  {
+   "position": 10,
+   "book_id": "M1C2U0-010",
+   "source_label": "MTP November 2023 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q6(d)",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 10: Meas of Elements of Fin Stmts",
+   "topics": [
+    {
+     "topic_id": "M1-C2-U0-T10",
+     "topic_name": "Measurement of Elements of Financial Statements",
+     "overall_rank": 117,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 117 topic (Measurement of Elements of Financial Statements); MTP November 2023 Set 2.",
+   "score": 0.2629,
+   "book_page": 36,
+   "question_html": "<p>Explain in brief, the alternative measurement bases, for determining the value at which an element can be recognized in the Balance Sheet or Statement of Profit and Loss.</p>",
+   "answer_html": "<p>The Framework for Recognition and Presentation of Financial statements recognizes four alternative measurement bases for the purpose of determining the value at which an element can be recognized in the balance sheet or statement of profit and loss. These bases are: (i) Historical Cost; (ii) Current cost (iii) Realizable (Settlement) Value and (iv) Present Value.</p>\n<p>A brief explanation of each measurement basis is as follows:</p>\n<ol type=\"1\">\n<li><strong>Historical Cost:</strong> Historical cost means acquisition price. According to this, assets are recorded at an amount of cash or cash equivalent paid or the fair value of the asset at the time of acquisition. Liabilities are generally recorded at the amount of proceeds received in exchange for the obligation.</li>\n<li><strong>Current Cost:</strong> Current cost gives an alternative measurement basis. Assets are carried out at the amount of cash or cash equivalent that would have to be paid if the same or an equivalent asset was acquired currently. Liabilities are carried at the undiscounted amount of cash or cash equivalents that would be required to settle the obligation currently.</li>\n<li><strong>Realisable (Settlement) Value:</strong> As per realizable value, assets are carried at the amount of cash or cash equivalents that could currently be obtained by selling the assets in an orderly disposal. Liabilities are carried at their settlement values; i.e. the undiscounted amount of cash or cash equivalents paid to satisfy the liabilities in the normal course of business.</li>\n<li><strong>Present Value:</strong> Under present value convention, assets are carried at present value of future net cash flows generated by the concerned assets in the normal course of business. Liabilities under this convention are carried at present value of future net cash flows that are expected to be required to settle the liability in the normal course of business.</li>\n</ol>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is confusing Current Cost with Realisable Value – both involve a “current” amount, but Current Cost is the cost to acquire an equivalent asset today while Realisable Value is the amount obtainable by selling the existing asset today, a distinction the Framework treats as two genuinely separate bases."
+  }
+ ]
+}

@@ -1,0 +1,317 @@
+{
+ "unit_id": "M2-C8-U2",
+ "standard": "AS 9",
+ "unit_title": "Revenue Recognition",
+ "module": "MODULE 2",
+ "chapter": "Revenue Based Accounting Standards",
+ "book_edition": "CA Inter Advanced Accounts — The Complete Question Bank, First Edition (V1)",
+ "generated_on": "2026-10-18",
+ "library_total": 20,
+ "published": true,
+ "questions": [
+  {
+   "position": 1,
+   "book_id": "M2C8U2-016",
+   "source_label": "RTP May 2025",
+   "paper_type": "RTP",
+   "question_no": "Q10",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.8: Revenue-recognition timing across delayed delivery, consignment sale, and sale-on-approval scenarios",
+   "topics": [
+    {
+     "topic_id": "M2-C8-U2-T2.8",
+     "topic_name": "Conditions for Sale of Goods",
+     "overall_rank": 79,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 76.0,
+   "why": "Rank 79 topic (Conditions for Sale of Goods); 76% match to an ICAI Study Material question; RTP May 2025.",
+   "score": 0.6302,
+   "book_page": 256,
+   "question_html": "<p>Given below are the following information of B.S. Ltd.:</p>\n<ol type=\"i\">\n<li>Goods of ₹50,000 were sold on 18-03-2024 but at the request of the buyer these were delivered on 15-04-2024.</li>\n<li>On 13-01-2024 goods of ₹1,25,000 are sent on consignment basis, of which 20% of the goods unsold are lying with the consignee as on 31-03-2024.</li>\n<li>₹1,00,000 worth of goods were sold on approval basis on 01-12-2023. The period of approval was 3 months after which they were considered sold. Buyer sent approval for 75% goods up to 31-01-2024 and no approval or disapproval received for the remaining goods till 31-03-2024.</li>\n</ol>\n<p>You are required to advise the accountant of B.S. Ltd., with valid reasons, the amount to be recognized as revenue for the year ended 31st March, 2024 in the above cases in the context of AS-9.</p>",
+   "answer_html": "<div>\n<p>As per AS 9 'Revenue Recognition', in a transaction involving the sale of goods, performance should be regarded as being achieved when: (a) the seller has transferred to the buyer the property in the goods for a price, or all significant risks and rewards of ownership have been transferred and the seller retains no effective control of the goods to a degree usually associated with ownership; and (b) no significant uncertainty exists regarding the amount of consideration to be derived from the sale.</p>\n<p><strong>Case (i):</strong> The sale is complete but delivery has been postponed at the buyer's request. B.S. Ltd. should recognize the entire sale of <strong>₹50,000</strong> for the year ended 31st March, 2024.</p>\n<p><strong>Case (ii):</strong> In case of a consignment sale, revenue should not be recognized until the goods are sold by the consignee to a third party. The 20% of goods lying unsold with the consignee should be treated as closing inventory, and sales should be recognized for <strong>₹1,00,000</strong> (80% of ₹1,25,000).</p>\n<p><strong>Case (iii):</strong> In case of goods sold on approval basis, revenue should not be recognized until the goods have been formally accepted by the buyer, or the buyer has done an act adopting the transaction, or the time period for rejection has elapsed (or, where no time has been fixed, a reasonable time has elapsed). Since the 3-month approval period had already expired by 31st March, 2024, revenue should be recognized for the <strong>full ₹1,00,000</strong> (including the portion neither approved nor disapproved, since the approval window itself had lapsed).</p>\n<p>Thus, total revenue amounting to <strong>₹2,50,000</strong> (50,000 + 1,00,000 + 1,00,000) will be recognized for the year ended 31st March, 2024 in the books of B.S. Ltd.</p>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error in case (iii) is withholding revenue recognition on the un-responded-to 25% of goods on the reasoning that no explicit acceptance was received, missing that AS 9 treats the mere expiry of the stated rejection period as itself sufficient for revenue recognition, with no separate acceptance needed."
+  },
+  {
+   "position": 2,
+   "book_id": "M2C8U2-002",
+   "source_label": "MTP January 2025 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q3(a)",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 2.8: Revenue recognition timing across five distinct transaction types - approval-basis sale, delayed delivery, sale-repurchase, interest/royalty, consignment",
+   "topics": [
+    {
+     "topic_id": "M2-C8-U2-T2.8",
+     "topic_name": "Conditions for Sale of Goods",
+     "overall_rank": 79,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 57.9,
+   "why": "Rank 79 topic (Conditions for Sale of Goods); 58% match to an ICAI Study Material question; MTP January 2025 Set 2.",
+   "score": 0.5558,
+   "book_page": 247,
+   "question_html": "<p>Given the following information of Rainbow Ltd., you are required to advise, with valid reasons, the amount to be recognized as revenue under the provisions of AS-9: (i) On 15th November, goods worth ₹5,00,000 were sold on approval basis. The period of approval was 4 months after which they were considered sold. Buyer sent approval for 75% goods sold upto 31st January and no approval or disapproval received for the remaining goods till 31st March. (ii) On 31st March, goods worth ₹2,40,000 were sold to Bright Ltd. but due to refurnishing of their show-room being underway, on their request, goods were delivered on 10th April. (iii) Rainbow Ltd. supplied goods worth ₹6,00,000 to Shyam Ltd. and concurrently agrees to re-purchase the same goods on 14th April. (iv) Dew Ltd, used certain assets of Rainbow Ltd. Rainbow Ltd. received ₹7.5 lakhs and ₹12 as interest and royalties respectively from Dew Ltd. during the year 2023-24. (v) On 25th December, goods of ₹4,00,000 were sent on consignment basis of which 40% of the goods unsold are lying with the consignee at the year-end on 31st March.</p>",
+   "answer_html": "<div>\n<ol>\n<li>As per AS 9 \"Revenue Recognition\", in case of goods sold on approval basis, revenue should not be recognized until the goods have been formally accepted by the buyer or the buyer has done an act adopting the transaction or the time period for rejection has elapsed or where no time has been fixed, a reasonable time has elapsed. Therefore, revenue should be recognized for the total sales amounting ₹5,00,000 as the time period for rejecting the goods had expired.</li>\n<li>The sale is complete but delivery has been postponed at buyer's request. The entity should recognize the entire sale of ₹2,40,000 for the year ended 31st March.</li>\n<li>Sale/repurchase agreements i.e. where seller concurrently agrees to repurchase the same goods at a later date, such transactions that are in substance a financing agreement, the resulting cash inflow is not revenue as defined and should not be recognized as revenue. Hence no revenue to be recognized in the given case.</li>\n<li>Revenue arising from the use by others of enterprise resources yielding interest and royalty should be recognized when no significant uncertainty as to measurability or collectability exists. The interest should be recognized on time proportion basis taking into account the amount outstanding and rate applicable. The royalty should be recognized on accrual basis in accordance with the terms of relevant agreement.</li>\n<li>40% goods lying unsold with consignee should be treated as closing inventory and sales should be recognized for ₹2,40,000 (60% of ₹4,00,000). In case of consignment sale revenue should not be recognized until the goods are sold to a third party.</li>\n</ol>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is treating goods sold on approval as sold immediately at the point of delivery instead of waiting for buyer acceptance or expiry of the approval period, and separately, recognising revenue on a sale-and-repurchase arrangement instead of identifying it as a financing transaction outside the scope of AS 9 revenue."
+  },
+  {
+   "position": 3,
+   "book_id": "M2C8U2-012",
+   "source_label": "RTP May 2024",
+   "paper_type": "RTP",
+   "question_no": "Q16(i)",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.8: Revenue recognised where the sale is complete and only physical delivery is postponed at the buyer's own request, buyer having accepted billing",
+   "topics": [
+    {
+     "topic_id": "M2-C8-U2-T2.8",
+     "topic_name": "Conditions for Sale of Goods",
+     "overall_rank": 79,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 59.8,
+   "why": "Rank 79 topic (Conditions for Sale of Goods); 60% match to an ICAI Study Material question; RTP May 2024.",
+   "score": 0.553,
+   "book_page": 254,
+   "question_html": "<p>Goods of ₹2,00,000 sold to Den Ltd. on 20-03-2023 but at the request of the buyer these were delivered on 10-04-2023. You are required to advise the accountant of BS Products Ltd., with valid reasons, the amount to be recognized as revenue in this case in the context of AS 9.</p>",
+   "answer_html": "<p>The sale is complete, but delivery has been postponed at buyer's request. BS Products Ltd. should recognize the entire sale of ₹2,00,000 for the year ended 31<sup>st</sup> March, 2023.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error here is deferring revenue recognition to the actual delivery date, missing that the sale itself was already complete and delivery was postponed purely at the buyer's own request."
+  },
+  {
+   "position": 4,
+   "book_id": "M2C8U2-013",
+   "source_label": "RTP May 2024",
+   "paper_type": "RTP",
+   "question_no": "Q16(ii)",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.8: Consignment sale - revenue recognised only on sale by the consignee to a third party; unsold consignment goods remain closing inventory",
+   "topics": [
+    {
+     "topic_id": "M2-C8-U2-T2.8",
+     "topic_name": "Conditions for Sale of Goods",
+     "overall_rank": 79,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 59.8,
+   "why": "Rank 79 topic (Conditions for Sale of Goods); 60% match to an ICAI Study Material question; RTP May 2024.",
+   "score": 0.553,
+   "book_page": 254,
+   "question_html": "<p>On 15-01-2023 goods of ₹3,00,000 were sent on consignment basis, of which 20% of the goods unsold are lying with the consignee as on 31-03-2023. You are required to advise the accountant of BS Products Ltd., with valid reasons, the amount to be recognized as revenue in this case in the context of AS 9.</p>",
+   "answer_html": "<p>20% goods lying unsold with consignee should be treated as closing inventory and sales should be recognized for ₹2,40,000 (80% of ₹3,00,000). In the case of consignment sale revenue should not be recognized until the goods are sold to a third party.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error here is recognising the full ₹3,00,000 as revenue on the date goods are sent on consignment, treating dispatch to the consignee as equivalent to a sale to the end customer."
+  },
+  {
+   "position": 5,
+   "book_id": "M2C8U2-014",
+   "source_label": "RTP May 2024",
+   "paper_type": "RTP",
+   "question_no": "Q16(iii)",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.8: Sale on approval basis - revenue recognised once formally accepted, an adopting act occurs, or the approval/rejection period has elapsed, whichever governs",
+   "topics": [
+    {
+     "topic_id": "M2-C8-U2-T2.8",
+     "topic_name": "Conditions for Sale of Goods",
+     "overall_rank": 79,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 59.8,
+   "why": "Rank 79 topic (Conditions for Sale of Goods); 60% match to an ICAI Study Material question; RTP May 2024.",
+   "score": 0.553,
+   "book_page": 255,
+   "question_html": "<p>₹4,00,000 worth of goods were sold on approval basis on 01-12-2022. The period of approval was 3 months after which they were considered as sold. Buyer sent approval for 75% goods upto 31-01-2023 and no approval or disapproval received for the remaining goods till 31-03-2023. You are required to advise the accountant of BS Products Ltd., with valid reasons, the amount to be recognized as revenue in this case in the context of AS 9.</p>",
+   "answer_html": "<p>In case of goods sold on approval basis, revenue should not be recognized until the goods have been formally accepted by the buyer or the buyer has done an act adopting the transaction or the time period for rejection has elapsed or where no time has been fixed, a reasonable time has elapsed. Therefore, revenue should be recognized for the total sales amounting to ₹4,00,000 as the time period for rejecting the goods had expired.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error here is recognising revenue only for the 75% expressly approved by the buyer and continuing to treat the remaining 25% as unsold, missing that the stated 3-month approval period had already lapsed for that portion by the year end, which itself triggers recognition."
+  },
+  {
+   "position": 6,
+   "book_id": "M2C8U2-015",
+   "source_label": "RTP May 2024",
+   "paper_type": "RTP",
+   "question_no": "Q16(iv)",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.9: Effect of collection uncertainty on revenue recognition - recognised only to the extent collection is reasonably certain, based on past collection experience",
+   "topics": [
+    {
+     "topic_id": "M2-C8-U2-T2.8",
+     "topic_name": "Conditions for Sale of Goods",
+     "overall_rank": 79,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 59.8,
+   "why": "Rank 79 topic (Conditions for Sale of Goods); 60% match to an ICAI Study Material question; RTP May 2024.",
+   "score": 0.553,
+   "book_page": 255,
+   "question_html": "<p>Apart from the above, BS Products Ltd. sells goods to dealers also. One of the conditions of sale is that interest is payable @ 2% p.m. for delayed payments by dealers. The percentage of interest recovery is only 10% i.e. ₹50,000 on such overdue outstanding due to various reasons. During the year 2022-23, the company wants to recognize the entire interest receivable of ₹60,000. You are required to advise the accountant of BS Products Ltd., with valid reasons, the amount to be recognized as revenue in this case in the context of AS 9, and also determine the total revenue to be recognized for the year ending 31-03-2023.</p>",
+   "answer_html": "<p>As per the standard, \"where the ability to assess the ultimate collection with reasonable certainty is lacking at the time of raising any claim, the revenue recognition is postponed to the extent of uncertainty involved. In such cases, the revenue is recognized only when it is reasonably certain that the ultimate collection will be made\". In this case, interest should be recognized only if the ultimate collection is certain and the company expects to realize interest for the delayed payments for ₹50,000 only. Hence, based on the past experience, the realization of interest for the delayed payments by the agent is certain only to the extent of this amount and not ₹60,000. Therefore, the interest income of ₹50,000 should be recognized in the books for the year ended 31<sup>st</sup> March, 2023.</p>\n<p>Thus, total revenue amounting ₹8,90,000 (2,00,000 + 2,40,000 + 4,00,000 + 50,000) will be recognized for the year ended 31<sup>st</sup> March, 2023 in the books of BS Products Ltd.</p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error here is recognising the full contractually-computed interest of ₹60,000 rather than limiting recognition to the ₹50,000 actually supported by past collection experience, and separately failing to aggregate all four cases into the single total revenue figure the question asks for."
+  },
+  {
+   "position": 7,
+   "book_id": "M2C8U2-011",
+   "source_label": "RTP January 2026",
+   "paper_type": "RTP",
+   "question_no": "Q8",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 1.2: Property sale by a real-estate dealer is ordinary-activity revenue, not extraordinary, even at unusual scale",
+   "topics": [
+    {
+     "topic_id": "M2-C8-U2-T2.4",
+     "topic_name": "Sale of Goods",
+     "overall_rank": 77,
+     "priority_band": "Next 50"
+    },
+    {
+     "topic_id": "M2-C8-U2-T2.5",
+     "topic_name": "Timing of Recognition of Revenue from Sale of Goods",
+     "overall_rank": 78,
+     "priority_band": "Next 50"
+    },
+    {
+     "topic_id": "M2-C8-U2-T2.8",
+     "topic_name": "Conditions for Sale of Goods",
+     "overall_rank": 79,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 77 topic (Sale of Goods); RTP January 2026; covers 3 mapped topics.",
+   "score": 0.5396,
+   "book_page": 253,
+   "question_html": "<p>Class Ltd., a real-estate developer, purchased land for ₹225 crore in FY2025 intending a residential complex, then sold it a few months later for ₹360 crore due to a strategic reallocation and favourable market conditions. All legal formalities completed. Advise on revenue recognition for the year ended 31st March, 2025.</p>",
+   "answer_html": "<div><p>AS 9 recognises revenue when earned with reasonable certainty of collection, arising from the enterprise's ordinary activities. Class Ltd. is in the business of buying and selling properties; the land forms part of its inventory. The ₹360 crore sale is therefore a transaction arising from ordinary activities, and revenue is recognised when the sale is completed and collection is reasonably certain.</p>\n<p>Per AS 5, this is <strong>not</strong> an extraordinary item, since it arises in the ordinary course of business — though given its size, its nature and amount should be separately disclosed if relevant to explaining the enterprise's performance. The ₹360 crore is recognised as revenue in the year the sale is completed.</p></div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees treated the large, unusual sale as an extraordinary item given its size and the company's stated change in strategy, missing that dealing in land is Class Ltd.'s core ordinary business, so scale alone does not make a transaction extraordinary."
+  },
+  {
+   "position": 8,
+   "book_id": "M2C8U2-018",
+   "source_label": "RTP September 2025",
+   "paper_type": "RTP",
+   "question_no": "Q11(i)",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 1.7: Consignment sales - revenue recognised only on the consignee's actual sale to a third party",
+   "topics": [
+    {
+     "topic_id": "M2-C8-U2-T2.4",
+     "topic_name": "Sale of Goods",
+     "overall_rank": 77,
+     "priority_band": "Next 50"
+    },
+    {
+     "topic_id": "M2-C8-U2-T2.5",
+     "topic_name": "Timing of Recognition of Revenue from Sale of Goods",
+     "overall_rank": 78,
+     "priority_band": "Next 50"
+    },
+    {
+     "topic_id": "M2-C8-U2-T2.8",
+     "topic_name": "Conditions for Sale of Goods",
+     "overall_rank": 79,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 77 topic (Sale of Goods); RTP September 2025; covers 3 mapped topics.",
+   "score": 0.5274,
+   "book_page": 258,
+   "question_html": "<p>Tonk Tanners (leather shoes): On 31st December, 2024, shoes worth ₹3,20,000 were sent to Mohan Shoes for sale on consignment; 25% remained unsold with Mohan Shoes as on 31st March, 2025. Advise when revenue is recognised in 2024-25 per AS 9.</p>",
+   "answer_html": "<div><p>Mohan Shoes is a consignee (agent), not a buyer — risk and reward remain with Tonk Tanners until Mohan Shoes sells to a third party. Revenue is recognised only for the goods actually sold by the consignee: ₹3,20,000 × 75% = <strong>₹2,40,000</strong> recognised as revenue in 2024-25; the remaining 25% (unsold) stays as Tonk Tanners' closing inventory.</p></div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees recognised the full ₹3,20,000 upon dispatch to the consignee, treating the consignment shipment itself as a completed sale."
+  },
+  {
+   "position": 9,
+   "book_id": "M2C8U2-004",
+   "source_label": "MTP May 2024 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q3(a)",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 2.7: Income from other sources - interest on a time-proportion basis, royalties on an accrual basis per the agreement",
+   "topics": [
+    {
+     "topic_id": "M2-C8-U2-T2.7",
+     "topic_name": "Income from other sources - Interest, Royalties and Dividends",
+     "overall_rank": 359,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 77.5,
+   "why": "Rank 359 topic (Income from other sources - Interest, Royalties and Dividends); 78% match to an ICAI Study Material question; MTP May 2024 Set 1.",
+   "score": 0.3939,
+   "book_page": 249,
+   "question_html": "<p>Y Ltd. used certain resources of X Ltd. In return X Ltd. received ₹10 lakhs and ₹15 lakhs as interest and royalties respectively from Y Ltd. during the year 2022-23. You are required to state whether and on what basis these revenues can be recognized by X Ltd.</p>",
+   "answer_html": "<div>\n<p>As per AS 9 on Revenue Recognition, revenue arising from the use by others of enterprise resources yielding interest and royalties should only be recognized when no significant uncertainty as to measurability or collectability exists. These revenues are recognized on the following bases: (i) Interest: on a time proportion basis taking into account the amount outstanding and the rate applicable. Therefore X Ltd. should recognize interest revenue of ₹10 Lakhs. (ii) Royalties: on an accrual basis in accordance with the terms of the relevant agreement. X Ltd. therefore should recognize royalty revenue of ₹15 Lakhs.</p>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is applying the same recognition basis to both interest and royalty income, when AS 9 prescribes two distinct bases — time-proportion for interest, accrual per the agreement's terms for royalties."
+  },
+  {
+   "position": 10,
+   "book_id": "M2C8U2-017",
+   "source_label": "RTP September 2024",
+   "paper_type": "RTP",
+   "question_no": "Q8",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.2: No revenue recognized on inter-divisional transfers since risks/rewards remain within the enterprise and there is no external consideration",
+   "topics": [
+    {
+     "topic_id": "M2-C8-U2-T2.2",
+     "topic_name": "Definition of Revenue",
+     "overall_rank": 356,
+     "priority_band": "Beyond Top 100"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 356 topic (Definition of Revenue); RTP September 2024.",
+   "score": 0.3043,
+   "book_page": 257,
+   "question_html": "<p>When will the revenue be recognized in the case of inter divisional transfers?</p>",
+   "answer_html": "<div><p>The Accounting Standard Board of ICAI has come up with an announcement in the earlier years wherein it clarified that the inter-divisional transfers/sales are not revenue as per AS 9 \"Revenue Recognition\". According to it, in case of inter-divisional transfers, risks and rewards remain within the enterprise and also there is no consideration from the point of view of the enterprise as a whole. Therefore, the recognition criteria for revenue recognition are also not fulfilled in respect of inter-divisional transfers. Hence, no revenue is recognized in the case of inter-divisional transfers.</p></div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is treating an inter-divisional transfer priced at a notional transfer price as genuine revenue, without recognising that the enterprise as a whole has not transacted with any outside party."
+  }
+ ]
+}

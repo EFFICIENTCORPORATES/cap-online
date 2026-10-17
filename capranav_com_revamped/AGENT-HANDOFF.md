@@ -92,7 +92,7 @@ Decisions Pranav has made:
 ## 3. State at handoff (what is done)
 
 Details are in `PROJECT-LOG.md`. In short: security headers and per-IP OTP limit; mobile layout fixed (a leaked global `table{min-width}` in `anatomy.css` was the root cause);
-Must Practice for AS 2, AS 10 and AS 16 (ten questions each, duplicate and diversity rules; AS 16 added 2026-10-06, formula-only, see PROJECT-LOG); `/videos/` (7 videos, 4 Shorts, auto-scroll feed, data in `public/videos/videos.json`);
+Must Practice for all 36 units (ten questions each for standard units, fewer for short units, pointers for AS 3 and AS 14; duplicate and diversity rules; only AS 2 and AS 10 hand-reviewed; see `MUST-PRACTICE.md`); `/videos/` (7 videos, 4 Shorts, auto-scroll feed, data in `public/videos/videos.json`);
 `/topics/` explorer (filters, tick-many Module/Chapter/Unit, sort and reverse, Excel and CSV, ID decoder; ranks reproduce the workbook for all 104 PYQ-marked topics);
 SEO (head blocks, JSON-LD, sitemap.xml and sitemap.txt, robots.txt naming crawlers, llms.txt, llms-full.txt, humans.txt, IndexNow, a 25-question `/faq/`);
 the profile on `/about-us`; bot guards (bulk data files and anatomy API same-site only plus rate limits); backups (nightly Worker cron to `capranav-backups`, 6-hourly PC export
@@ -138,11 +138,7 @@ Each topic page: name, chapter and unit, marks and rank by paper type, which pap
 Must Practice list, breadcrumb markup. Keep the copyright and 1LAVYA footers. Watch the Worker Assets file-count limit (20,000 files free plan) and the `run_worker_first` list in `wrangler.toml`
 (do not put these pages under the guarded data paths). Acceptance: `qa_smoke.py` crawl finds them all with no redirects; each has a unique title.
 
-**B3. Publish more Must Practice units.** AS 13, AS 19, AS 26, AS 28 first (all visible as "coming soon" in the picker; AS 2, AS 10 and AS 16 are published), then the other chapters (36 units in the catalogue; `UNITS` in
-`tools/build_must_practice_data.py` holds only the published ones, three so far). AS 16 is the worked example of the minimum: one `UNITS` entry (`library_file`, `standard`, `unit_title`, `module`, `chapter`, `published: True`), no overrides. Its manual repeat review (below) is still outstanding. Per unit: add the library file entry, run the build, **review the printed ranking for repeats** (the 90 percent text test,
-the shared-figures test, the two-per-topic cap), look for parts of one question reissued alone and same-idea repeats under unrelated topic tags, add hand exclusions with a written reason in
-`UNITS`, keep the list at ten, and document the exclusions in the table at the bottom of `MUST-PRACTICE-RULES.md`. Then `build_seo_static.py`, deploy, verify the picker and the rows in a browser.
-Book page numbers are read from `first_run/output/final_deliverable/CA Inter Advanced Accounts_ The Complete Question Bank_V1.pdf` (a distributed, gitignored file; never regenerate or overwrite it).
+**B3. Must Practice follow-ups.** All 36 units are published (2026-10-18). Remaining work, in order: (1) the manual same-idea repeat review for every standard unit except AS 2 and AS 10 (see `MUST-PRACTICE.md` step 4: parts of one question reissued alone, the same idea under unrelated topic tags; add `force_exclude` with a reason); (2) add Study Material items to the 13 short units that have none yet (`_claude/skills/SKILL-must-practice-questions.md` section 6.6; AS 25 is the worked example); (3) map the six AS 1 questions that have no syllabus topic. Run `tools/verify_must_practice_live.py` after every deploy.
 
 **B4. Canary entries and per-account watermarks.** Add a few fake but plausible topics or questions that appear nowhere else, recorded in a private file (not in git), and invisible per-account marks
 (zero-width or spacing patterns) in gated downloads, so a copy can be traced and proven. Depends on B1 for accounts.

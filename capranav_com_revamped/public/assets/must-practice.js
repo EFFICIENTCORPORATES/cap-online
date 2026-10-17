@@ -169,6 +169,10 @@ function renderQuestions(data) {
   });
 }
 
+function unitHeading(data) {
+  return data.standard && data.standard !== data.unit_title ? `${data.standard} — ${data.unit_title}` : data.unit_title;
+}
+
 function goToUnit(unitId) {
   for (const mod of CATALOGUE) {
     for (const chapter of mod.chapters) {
@@ -188,7 +192,7 @@ function goToUnit(unitId) {
 }
 
 function renderPointer(data) {
-  document.getElementById("pointer-title").textContent = `${data.standard} — ${data.unit_title}`;
+  document.getElementById("pointer-title").textContent = unitHeading(data);
   document.getElementById("pointer-text").textContent = data.pointer.text;
   const button = document.getElementById("pointer-go");
   button.textContent = `Go to ${data.pointer.label}`;
@@ -204,7 +208,7 @@ function renderUnit(data) {
     renderPointer(data);
     return;
   }
-  document.getElementById("unit-title").textContent = `${data.standard} — ${data.unit_title}`;
+  document.getElementById("unit-title").textContent = unitHeading(data);
   document.getElementById("unit-sub").textContent = data.short_unit
     ? `${data.module} · ${data.chapter} · this unit has fewer than ten distinct questions, so every one is listed: ${data.bank_count} from the MTPs, RTPs and PYQs (2023 onwards)` +
       (data.study_material_count ? ` and ${data.study_material_count} from the ICAI Study Material.` : ".")

@@ -1,0 +1,295 @@
+{
+ "unit_id": "M3-C11-U2",
+ "standard": "Financial Statements of Companies",
+ "unit_title": "Cash Flow Statement",
+ "module": "MODULE 3",
+ "chapter": "Financial Statements of Companies",
+ "book_edition": "CA Inter Advanced Accounts — The Complete Question Bank, First Edition (V1)",
+ "generated_on": "2026-10-18",
+ "library_total": 27,
+ "published": true,
+ "questions": [
+  {
+   "position": 1,
+   "book_id": "M3C11U2-011",
+   "source_label": "MTP September 2024 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q3(a)",
+   "marks_text": "Marks: 10",
+   "approx_time_text": "Approx Time: 18 minutes (approx.)",
+   "topic_text": "Topic 2.4.1/2.4.2: Cash flow statement by both direct and indirect method, same underlying facts",
+   "topics": [
+    {
+     "topic_id": "M3-C11-U2-T2.4",
+     "topic_name": "Calculation of Cash Flows from Operating Activities",
+     "overall_rank": 4,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 78.0,
+   "why": "Rank 4 topic (Calculation of Cash Flows from Operating Activities); 78% match to an ICAI Study Material question; MTP September 2024 Set 1.",
+   "score": 0.8717,
+   "book_page": 408,
+   "question_html": "<p>The following information was provided by PQR Ltd. for the year ended 31st March, 2024: (1) Gross Profit Ratio was 25% for the year, which amounts to ₹3,75,000. (2) Company sold goods for cash only. (3) Opening inventory was lesser than closing inventory by ₹25,000. (4) Wages paid during the year ₹5,55,000. (5) Office expenses paid during the year ₹35,000. (6) Selling expenses paid during the year ₹15,000. (7) Dividend paid during the year ₹40,000. (8) Bank Loan repaid during the year ₹2,05,000 (included interest ₹5,000). (9) Trade Payables on 31st March, 2023 were ₹50,000 and on 31st March, 2024 were ₹35,000. (10) Amount paid to Trade payables during the year ₹6,10,000. (11) Income Tax paid during the year amounts to ₹55,000 (Provision for taxation as on 31st March, 2024 ₹30,000). (12) Investments of ₹8,20,000 sold during the year at a profit of ₹20,000. (13) Depreciation on furniture amounts to ₹40,000. (14) Depreciation on other PPE amounts to ₹20,000. (15) Plant and Machinery purchased on 15th November, 2023 for ₹3,50,000. (16) On 31st March, 2024 ₹2,00,000, 7% Debentures were issued at face value in an exchange for a plant. (17) Cash and Cash equivalents on 31st March, 2023 ₹2,25,000. Required: (i) Prepare cash flow statement for the year ended 31st March, 2024, using direct method. (ii) Calculate cash flow from operating activities, using indirect method.</p>",
+   "answer_html": "<div>\n<p><strong>(i) PQR Ltd. – Cash Flow Statement for the year ended 31st March, 2024 (direct method)</strong></p>\n<table><tbody>\n<tr><td>Cash sales (₹3,75,000/25%)</td><td>15,00,000</td></tr>\n<tr><td>Less: Cash payments for trade payables</td><td>(6,10,000)</td></tr>\n<tr><td>Less: Wages Paid</td><td>(5,55,000)</td></tr>\n<tr><td>Less: Office and selling expenses (35,000+15,000)</td><td>(50,000)</td></tr>\n<tr><td><strong>Cash generated from operations before taxes</strong></td><td><strong>2,85,000</strong></td></tr>\n<tr><td>Income tax paid</td><td>(55,000)</td></tr>\n<tr><td><strong>Net cash generated from operating activities (A)</strong></td><td><strong>2,30,000</strong></td></tr>\n<tr><td>Sale of investments (8,20,000+20,000)</td><td>8,40,000</td></tr>\n<tr><td>Payments for purchase of Plant &amp; machinery</td><td>(3,50,000)</td></tr>\n<tr><td><strong>Net cash used in investing activities (B)</strong></td><td><strong>4,90,000</strong></td></tr>\n<tr><td>Bank loan repayment (including interest)</td><td>(2,05,000)</td></tr>\n<tr><td>Dividend paid</td><td>(40,000)</td></tr>\n<tr><td><strong>Net cash used in financing activities (C)</strong></td><td><strong>(2,45,000)</strong></td></tr>\n<tr><td><strong>Net increase in cash (A+B+C)</strong></td><td><strong>4,75,000</strong></td></tr>\n<tr><td>Cash and cash equivalents at beginning of the period</td><td>2,25,000</td></tr>\n<tr><td><strong>Cash and cash equivalents at end of the period</strong></td><td><strong>7,00,000</strong></td></tr>\n</tbody></table>\n<p><strong>(ii) Cash Flow from Operating Activities – indirect method</strong></p>\n<table><tbody>\n<tr><td>Net Profit for the year before tax and extraordinary items</td><td>2,80,000</td></tr>\n<tr><td>Add: Depreciation</td><td>60,000</td></tr>\n<tr><td>Add: Interest Paid</td><td>5,000</td></tr>\n<tr><td>Less: Profit on Sale of Investments</td><td>(20,000)</td></tr>\n<tr><td><strong>Net Profit after Adjustment for Non-Cash Items</strong></td><td><strong>3,25,000</strong></td></tr>\n<tr><td>Less: Decrease in trade payables</td><td>15,000</td></tr>\n<tr><td>Less: Increase in inventory</td><td>25,000</td></tr>\n<tr><td><strong>Cash generated from operations before taxes</strong></td><td><strong>2,85,000</strong></td></tr>\n</tbody></table>\n<p><em>Working note – net profit before tax: Gross profit 3,75,000 − (Office/selling expenses 50,000 + Depreciation 60,000 + Interest paid 5,000 = 1,15,000) = 2,60,000; add profit on sale of investments 20,000 = <strong>2,80,000</strong>.</em></p>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is treating the ₹2,05,000 bank loan repayment as entirely a financing outflow without separating the ₹5,000 interest component, or forgetting that the debenture-for-plant exchange (a non-cash transaction) must be excluded entirely from the cash flow statement."
+  },
+  {
+   "position": 2,
+   "book_id": "M3C11U2-005",
+   "source_label": "MTP May 2024 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q6(b)",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 2.4.1: Direct method - gross operating cash receipts less gross operating cash payments",
+   "topics": [
+    {
+     "topic_id": "M3-C11-U2-T2.4",
+     "topic_name": "Calculation of Cash Flows from Operating Activities",
+     "overall_rank": 4,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "A",
+   "study_match_percent": 96.4,
+   "why": "Rank 4 topic (Calculation of Cash Flows from Operating Activities); Category A — 96% identical to an ICAI Study Material question; MTP May 2024 Set 1.",
+   "score": 0.8502,
+   "book_page": 397,
+   "question_html": "<p>From the following information, calculate cash flow from operating activities:</p>\n<p><strong>Summary of Cash Account for the year ended March 31, 2023</strong></p>\n<table><thead><tr><th>Particulars</th><th>₹</th><th>Particulars</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>To Balance b/d</td><td>1,00,000</td><td>By Cash Purchases</td><td>1,20,000</td></tr>\n<tr><td>To Cash sales</td><td>1,40,000</td><td>By Trade payables</td><td>1,57,000</td></tr>\n<tr><td>To Trade receivables</td><td>1,75,000</td><td>By Office &amp; Selling Expenses</td><td>75,000</td></tr>\n<tr><td>To Trade Commission</td><td>50,000</td><td>By Income Tax</td><td>30,000</td></tr>\n<tr><td>To Sale of Investment</td><td>30,000</td><td>By Investment</td><td>25,000</td></tr>\n<tr><td>To Loan from Bank</td><td>1,00,000</td><td>By Repayment of Loan</td><td>75,000</td></tr>\n<tr><td>To Interest &amp; Dividend</td><td>1,000</td><td>By Interest on loan</td><td>10,000</td></tr>\n<tr><td></td><td></td><td>By Balance c/d</td><td>1,04,000</td></tr>\n<tr><td><strong>Total</strong></td><td><strong>5,96,000</strong></td><td><strong>Total</strong></td><td><strong>5,96,000</strong></td></tr>\n</tbody></table>",
+   "answer_html": "<div>\n<p><strong>Cash Flow Statement (Direct Method) for the year ended March 31, 2023 – Operating Activities</strong></p>\n<table><tbody>\n<tr><td>Cash received from sale of goods</td><td>1,40,000</td><td></td></tr>\n<tr><td>Cash received from Trade receivables</td><td>1,75,000</td><td></td></tr>\n<tr><td>Trade Commission received</td><td>50,000</td><td>3,65,000</td></tr>\n<tr><td>Less: Payment for Cash Purchases</td><td>1,20,000</td><td></td></tr>\n<tr><td>     Payment to Trade payables</td><td>1,57,000</td><td></td></tr>\n<tr><td>     Office and Selling Expenses</td><td>75,000</td><td></td></tr>\n<tr><td>     Payment for Income Tax</td><td>30,000</td><td>(3,82,000)</td></tr>\n<tr><td><strong>Net Cash Flow used in Operating Activities</strong></td><td></td><td><strong>(17,000)</strong></td></tr>\n</tbody></table>\n<p><em>Note: Sale/purchase of Investment, Loan from Bank/Repayment of Loan, and Interest on loan are investing/financing items, excluded from operating activities under the direct method.</em></p>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is including the sale/purchase of investment, the bank loan drawdown/repayment, or the interest paid on the loan within operating activities, when these are investing and financing items under AS 3 and must be excluded from this section entirely."
+  },
+  {
+   "position": 3,
+   "book_id": "M3C11U2-013",
+   "source_label": "MTP September 2025 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q4",
+   "marks_text": "Marks: 14",
+   "approx_time_text": "Approx Time: 26 minutes (approx.)",
+   "topic_text": "Topic 2.4: Indirect-method operating cash flow with asset-disposal, debenture-redemption, and interim-dividend adjustments",
+   "topics": [
+    {
+     "topic_id": "M3-C11-U2-T2.4",
+     "topic_name": "Calculation of Cash Flows from Operating Activities",
+     "overall_rank": 4,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 54.4,
+   "why": "Rank 4 topic (Calculation of Cash Flows from Operating Activities); 54% match to an ICAI Study Material question; MTP September 2025 Set 2.",
+   "score": 0.8493,
+   "book_page": 410,
+   "question_html": "<p>The summarized Balance Sheet of Swan Limited for the year ended 31st March, 2024 and 31st March, 2025 are as below:</p>\n<table class=\"accounting-table\">\n<thead><tr><th>Assets</th><th>31.03.2025 (₹)</th><th>31.03.2024 (₹)</th></tr></thead>\n<tbody>\n<tr><td>Goodwill</td><td>37,500</td><td>70,000</td></tr>\n<tr><td>Land</td><td>14,37,500</td><td>15,00,000</td></tr>\n<tr><td>Furniture and Fixtures</td><td>1,20,000</td><td>1,10,000</td></tr>\n<tr><td>Vehicles</td><td>55,000</td><td>70,000</td></tr>\n<tr><td>Office Equipment</td><td>52,500</td><td>–</td></tr>\n<tr><td>Long-term Investments</td><td>1,50,000</td><td>2,75,000</td></tr>\n<tr><td>Stock-in-hand</td><td>2,40,000</td><td>2,20,000</td></tr>\n<tr><td>Bills Receivables</td><td>45,375</td><td>36,250</td></tr>\n<tr><td>Trade Receivables</td><td>1,15,000</td><td>1,30,000</td></tr>\n<tr><td>Cash and Bank Balances</td><td>3,24,625</td><td>86,250</td></tr>\n<tr><td><strong>Total</strong></td><td><strong>25,77,500</strong></td><td><strong>24,97,500</strong></td></tr>\n</tbody>\n</table>\n<table class=\"accounting-table\">\n<thead><tr><th>Liabilities</th><th>31.03.2025 (₹)</th><th>31.03.2024 (₹)</th></tr></thead>\n<tbody>\n<tr><td>Equity Share Capital</td><td>17,00,000</td><td>12,50,000</td></tr>\n<tr><td>General Reserves</td><td>2,25,000</td><td>1,50,000</td></tr>\n<tr><td>Profit and Loss Account</td><td>2,32,500</td><td>1,30,000</td></tr>\n<tr><td>Capital Reserve</td><td>1,87,500</td><td>–</td></tr>\n<tr><td>8% Debentures of ₹100 each</td><td>–</td><td>7,50,000</td></tr>\n<tr><td>Loan from Mr. Rajesh</td><td>–</td><td>37,500</td></tr>\n<tr><td>Bills Payables</td><td>27,500</td><td>32,500</td></tr>\n<tr><td>Trade Payables</td><td>1,22,500</td><td>1,12,500</td></tr>\n<tr><td>Creditors for Equipment</td><td>26,250</td><td>–</td></tr>\n<tr><td>Outstanding Expenses</td><td>11,250</td><td>7,500</td></tr>\n<tr><td>Provision for Taxation</td><td>45,000</td><td>27,500</td></tr>\n<tr><td><strong>Total</strong></td><td><strong>25,77,500</strong></td><td><strong>24,97,500</strong></td></tr>\n</tbody>\n</table>\n<p>Additional Information: (1) On 1st April, 2024, one of the vehicles was sold for ₹7,500. No new purchases were made during the year. (2) A part of the total land was sold for ₹3,12,500 (Cost ₹2,50,000) and the balance land was revalued. Capital reserve consists of profit on revaluation of balance land. No new purchases were made during the year. (3) Depreciation provided during the year: Furniture and Fixtures ₹12,500, Vehicles ₹5,500. (4) Interim dividend of ₹12,500 was paid during the year. (5) Provision for taxation for the year 2024-2025 was ₹40,000. (6) 8% Debentures were redeemed at par after half year interest payment on 30th September, 2024. (7) Part of the long-term investments were sold at a profit of ₹20,000. (8) Interest income received during the year on long-term investment was ₹16,250. You are required to prepare Cash Flow Statement from Operating Activities for the year ended 31st March, 2025 using indirect method. (All workings should form part of the answer)</p>",
+   "answer_html": "<div>\n<p><strong>Cash Flow from Operating Activities</strong></p>\n<table class=\"accounting-table\">\n<thead><tr><th>Particulars</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>Profit Before Tax (W.N.5)</td><td>2,30,000</td></tr>\n<tr><td>Add: Depreciation (12,500+5,500)</td><td>18,000</td></tr>\n<tr><td>Add: Interest on 8% Debentures</td><td>30,000</td></tr>\n<tr><td>Add: Loss on sale of Vehicle</td><td>2,000</td></tr>\n<tr><td>Add: Goodwill Write off</td><td>32,500</td></tr>\n<tr><td>Less: Profit on sale of Land (W.N.2)</td><td>(62,500)</td></tr>\n<tr><td>Less: Profit on sale of Long-term Investments</td><td>(20,000)</td></tr>\n<tr><td>Less: Interest Income Received</td><td>(16,250)</td></tr>\n<tr><td><strong>Operating Profit before Working Capital changes</strong></td><td><strong>2,13,750</strong></td></tr>\n<tr><td>Add: Increase in Outstanding Expenses</td><td>3,750</td></tr>\n<tr><td>Add: Increase in Trade Payable</td><td>10,000</td></tr>\n<tr><td>Add: Decrease in Trade Receivable</td><td>15,000</td></tr>\n<tr><td>Less: Decrease in Bills Payable</td><td>(5,000)</td></tr>\n<tr><td>Less: Increase in Stock</td><td>(20,000)</td></tr>\n<tr><td>Less: Increase in Bills Receivable</td><td>(9,125)</td></tr>\n<tr><td><strong>Operating profit before tax</strong></td><td><strong>2,08,375</strong></td></tr>\n<tr><td>Less: Income tax paid (W.N.4)</td><td>(22,500)</td></tr>\n<tr><td><strong>Net cash from Operating Activities</strong></td><td><strong>1,85,875</strong></td></tr>\n</tbody>\n</table>\n<p><strong>Working Notes (ledger accounts):</strong></p>\n<table class=\"accounting-table\">\n<caption>1. Vehicle Account</caption>\n<thead><tr><th>Debit</th><th>₹</th><th>Credit</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>To Balance b/d</td><td>70,000</td><td>By Bank A/c</td><td>7,500</td></tr>\n<tr><td></td><td></td><td>By Depreciation A/c</td><td>5,500</td></tr>\n<tr><td></td><td></td><td>By P&amp;L A/c (loss on sale)</td><td>2,000</td></tr>\n<tr><td></td><td></td><td>By Balance c/d</td><td>55,000</td></tr>\n<tr><td><strong>Total</strong></td><td><strong>70,000</strong></td><td><strong>Total</strong></td><td><strong>70,000</strong></td></tr>\n</tbody>\n</table>\n<table class=\"accounting-table\">\n<caption>2. Land Account</caption>\n<thead><tr><th>Debit</th><th>₹</th><th>Credit</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>To Balance b/d</td><td>15,00,000</td><td>By Bank A/c</td><td>3,12,500</td></tr>\n<tr><td>To P&amp;L A/c (profit on sale)</td><td>62,500</td><td>By Balance c/d</td><td>14,37,500</td></tr>\n<tr><td>To Capital Reserve</td><td>1,87,500</td><td></td><td></td></tr>\n<tr><td><strong>Total</strong></td><td><strong>17,50,000</strong></td><td><strong>Total</strong></td><td><strong>17,50,000</strong></td></tr>\n</tbody>\n</table>\n<table class=\"accounting-table\">\n<caption>3. Furniture / Fixture Account</caption>\n<thead><tr><th>Debit</th><th>₹</th><th>Credit</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>To Balance b/d</td><td>1,10,000</td><td>By Depreciation</td><td>12,500</td></tr>\n<tr><td>To Bank A/c</td><td>22,500</td><td>By Balance c/d</td><td>1,20,000</td></tr>\n<tr><td><strong>Total</strong></td><td><strong>1,32,500</strong></td><td><strong>Total</strong></td><td><strong>1,32,500</strong></td></tr>\n</tbody>\n</table>\n<table class=\"accounting-table\">\n<caption>4. Provision for Taxation Account</caption>\n<thead><tr><th>Debit</th><th>₹</th><th>Credit</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>To Bank A/c (tax paid)</td><td>22,500</td><td>By Balance b/d</td><td>27,500</td></tr>\n<tr><td>To Balance c/d</td><td>45,000</td><td>By P&amp;L A/c</td><td>40,000</td></tr>\n<tr><td><strong>Total</strong></td><td><strong>67,500</strong></td><td><strong>Total</strong></td><td><strong>67,500</strong></td></tr>\n</tbody>\n</table>\n<table class=\"accounting-table\">\n<caption>5. Calculation of Profit Before Tax</caption>\n<thead><tr><th>Particulars</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>Increase in P&amp;L A/c (2,32,500−1,30,000)</td><td>1,02,500</td></tr>\n<tr><td>Increase in General Reserve A/c (2,25,000−1,50,000)</td><td>75,000</td></tr>\n<tr><td>Add: Current Year Provision for Tax</td><td>40,000</td></tr>\n<tr><td>Add: Interim Dividend Paid</td><td>12,500</td></tr>\n<tr><td><strong>Profit before Tax</strong></td><td><strong>2,30,000</strong></td></tr>\n</tbody>\n</table>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error here is netting the profit on sale of land and long-term investments directly against the related working-capital lines instead of removing both non-operating gains at the top of the reconciliation, before working-capital adjustments are applied."
+  },
+  {
+   "position": 4,
+   "book_id": "M3C11U2-006",
+   "source_label": "MTP May 2025 Set 1",
+   "paper_type": "MTP",
+   "question_no": "Q1(b)",
+   "marks_text": "Marks: 7",
+   "approx_time_text": "Approx Time: 13 minutes (approx.)",
+   "topic_text": "Topic 2.4.2: Indirect method operating activities with an accounting-policy stock restatement adjustment, plus investing activities with a part-exchange asset purchase",
+   "topics": [
+    {
+     "topic_id": "M3-C11-U2-T2.4",
+     "topic_name": "Calculation of Cash Flows from Operating Activities",
+     "overall_rank": 4,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [
+    "Compulsory"
+   ],
+   "study_match_category": "B",
+   "study_match_percent": 52.8,
+   "why": "Rank 4 topic (Calculation of Cash Flows from Operating Activities); 53% match to an ICAI Study Material question; MTP May 2025 Set 1.",
+   "score": 0.8331,
+   "book_page": 398,
+   "question_html": "<p>Following information was extracted from the books of A Ltd. for the year ended 31st March, 2025:</p>\n<ol>\n<li>Net profit before taking into account income tax and after taking into account the following items was ₹60 lakhs: (a) Depreciation on Property, Plant &amp; Equipment ₹14,00,000. (b) Discount on issue of debentures written off ₹90,000. (c) Interest on debentures paid ₹8,70,000. (d) Investment of Book value ₹7,00,000 sold for ₹7,50,000. (e) Interest received on Investments ₹1,40,000.</li>\n<li>Income tax paid during the year ₹25,60,000.</li>\n<li>Company issued 1,20,000 Equity Shares of ₹10 each at a premium of 20% on 10th April, 2024.</li>\n<li>40,000, 9% Preference Shares of ₹100 each were redeemed on 31st March, 2025 at a premium of 5%.</li>\n<li>Dividend paid during the year amounted to ₹22 Lakhs (Incl. dividend distribution tax).</li>\n<li>A new Plant costing ₹14 Lakhs was purchased in part exchange of an old plant on 1st January, 2025. The book value of the old plant was ₹16 Lakhs but the vendor took over the old plant at a value of ₹12 Lakhs only. The balance amount was paid to vendor through cheque on 30th March, 2025.</li>\n<li>Company decided to value inventory at cost, whereas previously the practice was to value inventory at cost less 10%. The inventory according to books on 31.03.2025 was ₹29,52,000 (cost less 10%). The inventory on 31.03.2024 was correctly valued at ₹27,00,000.</li>\n<li>Current Assets and Current Liabilities in the beginning and at the end of year 2024-2025 were as: Inventory ₹27,00,000 (01.4.2024) / ₹29,52,000 (31.3.2025); Trade Receivables ₹6,54,000 / ₹6,26,400; Cash &amp; Bank Balances ₹4,81,400 / ₹7,41,000; Trade Payables ₹5,69,400 / ₹5,74,600; Outstanding Expenses ₹1,94,000 / ₹2,02,800.</li>\n</ol>\n<p>You are required to prepare a Cash Flow Statement for the operating &amp; investing activity year ended 31st March, 2025 as per AS 3 (revised) using the indirect method.</p>",
+   "answer_html": "<div>\n<p><strong>Cash Flow Statement (operating and investing activities only, as required)</strong></p>\n<table><thead><tr><th>Particulars</th><th>₹</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td colspan=\"3\"><strong>Cash Flow from Operating Activities</strong></td></tr>\n<tr><td>Net profit before tax</td><td></td><td>60,00,000</td></tr>\n<tr><td colspan=\"3\"><em>Adjustments:</em></td></tr>\n<tr><td>Depreciation on PPE</td><td>14,00,000</td><td></td></tr>\n<tr><td>Discount on issue of debenture written off</td><td>90,000</td><td></td></tr>\n<tr><td>Profit on sale of investment</td><td>(50,000)</td><td></td></tr>\n<tr><td>Interest income on investments</td><td>(1,40,000)</td><td></td></tr>\n<tr><td>Interest expense on debentures</td><td>8,70,000</td><td></td></tr>\n<tr><td>Stock valuation-policy adjustment (restating closing stock from cost-less-10% to cost: 29,52,000÷0.9 − 29,52,000)</td><td>3,28,000</td><td>25,98,000</td></tr>\n<tr><td><strong>Operating profit before working capital changes</strong></td><td></td><td><strong>84,98,000</strong></td></tr>\n<tr><td>Increase in inventory (restated closing 32,80,000 − opening 27,00,000)</td><td></td><td>(5,80,000)</td></tr>\n<tr><td>Decrease in trade receivables (6,54,000−6,26,400)</td><td></td><td>27,600</td></tr>\n<tr><td>Increase in trade payables (5,74,600−5,69,400)</td><td></td><td>5,200</td></tr>\n<tr><td>Increase in outstanding expenses (2,02,800−1,94,000)</td><td></td><td>8,800</td></tr>\n<tr><td><strong>Cash generated from operations</strong></td><td></td><td><strong>79,59,600</strong></td></tr>\n<tr><td>Less: Income tax paid</td><td></td><td>(25,60,000)</td></tr>\n<tr><td><strong>Net Cash generated from Operating Activities</strong></td><td></td><td><strong>53,99,600</strong></td></tr>\n<tr><td colspan=\"3\"><strong>Cash Flow from Investing Activities</strong></td></tr>\n<tr><td>Sale proceeds of investment</td><td>7,50,000</td><td></td></tr>\n<tr><td>Interest received on investments</td><td>1,40,000</td><td></td></tr>\n<tr><td>Payment for purchase of fixed asset (cash balance paid to vendor for new Plant, net of part-exchange)</td><td>(2,00,000)</td><td></td></tr>\n<tr><td><strong>Net Cash generated from Investing Activities</strong></td><td></td><td><strong>6,90,000</strong></td></tr>\n</tbody></table>\n<p><em>Working note — new Plant: cost ₹14,00,000; old plant taken over by vendor at ₹12,00,000 (non-cash part-exchange); balance ₹2,00,000 paid by cheque on 30.3.2025, the only actual cash outflow for investing activities.</em></p>\n<p><em>Note: the question restricts the requirement to operating and investing activities only; financing-activity items in the data (share issue, preference share redemption, dividend paid) are accordingly not part of the required statement.</em></p>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is treating the change in inventory valuation policy (cost-less-10% to cost) as an ordinary working-capital movement rather than first restating the closing figure to a comparable cost basis, and separately, showing the full ₹14,00,000 cost of the new Plant as a cash outflow instead of only the ₹2,00,000 actually paid by cheque (the ₹12,00,000 part-exchange being a non-cash transaction)."
+  },
+  {
+   "position": 5,
+   "book_id": "M3C11U2-024",
+   "source_label": "RTP May 2026",
+   "paper_type": "RTP",
+   "question_no": "Q8",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.4: Indirect method - operating, investing, financing activities",
+   "topics": [
+    {
+     "topic_id": "M3-C11-U2-T2.4",
+     "topic_name": "Calculation of Cash Flows from Operating Activities",
+     "overall_rank": 4,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 53.8,
+   "why": "Rank 4 topic (Calculation of Cash Flows from Operating Activities); 54% match to an ICAI Study Material question; RTP May 2026.",
+   "score": 0.8249,
+   "book_page": 429,
+   "question_html": "<p>The following are the summarised Balance Sheets of Dark Limited as at 31st March, 2025 and 31st March, 2024:</p>\n<table>\n<thead><tr><th>Particulars</th><th>31st March, 2025 (₹ in Lakhs)</th><th>31st March, 2024 (₹ in Lakhs)</th></tr></thead>\n<tbody>\n<tr><td>Equity and Liabilities</td><td></td><td></td></tr>\n<tr><td>Equity Share Capital</td><td>250.00</td><td>195.00</td></tr>\n<tr><td>Profit &amp; Loss Account</td><td>15.00</td><td>10.00</td></tr>\n<tr><td>8% Debentures</td><td>50.00</td><td>40.00</td></tr>\n<tr><td>Trade Payables</td><td>75.00</td><td>82.00</td></tr>\n<tr><td>Unpaid Interest on Debentures</td><td>2.00</td><td>—</td></tr>\n<tr><td>Provision for Taxation</td><td>8.00</td><td>5.00</td></tr>\n<tr><td><strong>Total</strong></td><td><strong>400.00</strong></td><td><strong>332.00</strong></td></tr>\n<tr><td>Assets</td><td></td><td></td></tr>\n<tr><td>Property, Plant &amp; Equipment</td><td>255.00</td><td>205.00</td></tr>\n<tr><td>Goodwill</td><td>6.00</td><td>8.00</td></tr>\n<tr><td>Inventories</td><td>28.00</td><td>42.00</td></tr>\n<tr><td>Trade Receivables</td><td>52.00</td><td>50.00</td></tr>\n<tr><td>Cash &amp; Cash Equivalents</td><td>59.00</td><td>27.00</td></tr>\n<tr><td><strong>Total</strong></td><td><strong>400.00</strong></td><td><strong>332.00</strong></td></tr>\n</tbody>\n</table>\n<p>Other Information: Dividend paid during the year 2024-25 is ₹3,00,000. Depreciation charged during the year 2024-25 is ₹20,00,000. Fresh debentures were issued on 1st April, 2024.</p>\n<p>You are required to prepare the Cash Flow Statement for the year ended 31st March, 2025 using Indirect Method.</p>",
+   "answer_html": "<p>Cash Flow statement of Dark Limited for the year ended 31st March, 2025</p>\n<table>\n<tbody>\n<tr><th colspan=\"2\">Net Cash Flow from Operating Activities</th><th>₹ in Lakhs</th></tr>\n<tr><td colspan=\"2\">Closing Net Profit</td><td>15.00</td></tr>\n<tr><td colspan=\"2\">Less: Opening Net Profit</td><td>(10.00)</td></tr>\n<tr><td colspan=\"2\">Add: Dividend Paid</td><td>3.00</td></tr>\n<tr><td colspan=\"2\">Provision for Tax</td><td>8.00</td></tr>\n<tr><td colspan=\"2\">Interest on Debentures</td><td>4.00</td></tr>\n<tr><td colspan=\"2\">Amortization of Goodwill</td><td>2.00</td></tr>\n<tr><td colspan=\"2\">Net Profit before Taxation and extraordinary items</td><td>22.00</td></tr>\n<tr><td colspan=\"2\">Depreciation</td><td>20.00</td></tr>\n<tr><td colspan=\"2\"><strong>Operating Profit before working capital changes</strong></td><td><strong>42.00</strong></td></tr>\n<tr><td colspan=\"2\">Decrease in Trade Payable</td><td>(7.00)</td></tr>\n<tr><td colspan=\"2\">Decrease in Inventories</td><td>14.00</td></tr>\n<tr><td colspan=\"2\">Increase in Trade Receivables</td><td>(2.00)</td></tr>\n<tr><td colspan=\"2\">Changes in working capital</td><td>5.00</td></tr>\n<tr><td colspan=\"2\"><strong>Cash generated from Operations</strong></td><td><strong>47.00</strong></td></tr>\n<tr><td colspan=\"2\">Less: Tax paid</td><td>(5.00)</td></tr>\n<tr><td colspan=\"2\"><strong>Net cash from Operating Activities</strong></td><td><strong>42.00</strong></td></tr>\n<tr><th colspan=\"3\">Cash Flow from Investing Activities</th></tr>\n<tr><td colspan=\"2\">Purchase of Fixed Assets</td><td>(70.00)</td></tr>\n<tr><td colspan=\"2\"><strong>Net Cash used in Investing Activities</strong></td><td><strong>(70.00)</strong></td></tr>\n<tr><th colspan=\"3\">Cash Flow from Financing Activities</th></tr>\n<tr><td colspan=\"2\">Issue of Shares</td><td>55.00</td></tr>\n<tr><td colspan=\"2\">Issue of Debentures</td><td>10.00</td></tr>\n<tr><td colspan=\"2\">Dividend Paid</td><td>(3.00)</td></tr>\n<tr><td colspan=\"2\">Interest Paid</td><td>(2.00)</td></tr>\n<tr><td colspan=\"2\"><strong>Net Cash from Financing Activities</strong></td><td><strong>60.00</strong></td></tr>\n<tr><td colspan=\"2\"><strong>Net Increase in Cash and Cash Equivalents</strong></td><td><strong>32.00</strong></td></tr>\n<tr><td colspan=\"2\">Cash and Cash Equivalents as on 31.03.2024</td><td>27.00</td></tr>\n<tr><td colspan=\"2\"><strong>Cash and Cash Equivalents as on 31.03.2025</strong></td><td><strong>59.00</strong></td></tr>\n</tbody>\n</table>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Many examinees omitted to add back non-cash items such as goodwill amortisation and debenture interest, or missed the working-capital adjustments for the movements in trade payables, inventories and receivables, resulting in an incorrect net cash from operations figure."
+  },
+  {
+   "position": 6,
+   "book_id": "M3C11U2-008",
+   "source_label": "MTP May 2026 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q4(b)",
+   "marks_text": "Marks: 7",
+   "approx_time_text": "Approx Time: 13 minutes (approx.)",
+   "topic_text": "Topic 2.4.1: Direct method - classifying an abstract of actual cash receipts/payments into operating, investing, financing activities",
+   "topics": [
+    {
+     "topic_id": "M3-C11-U2-T2.4",
+     "topic_name": "Calculation of Cash Flows from Operating Activities",
+     "overall_rank": 4,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 4 topic (Calculation of Cash Flows from Operating Activities); MTP May 2026 Set 2.",
+   "score": 0.8128,
+   "book_page": 403,
+   "question_html": "<p>Following is the cash flow abstract of Alpha Ltd. for the year ended 31st March, 2026:</p>\n<table>\n<thead><tr><th>Inflows</th><th>₹</th><th>Outflows</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>Opening cash and bank balance</td><td>80,000</td><td>Payment for Account Payables</td><td>90,000</td></tr>\n<tr><td>Share capital – shares issued</td><td>5,00,000</td><td>Salaries and wages</td><td>25,000</td></tr>\n<tr><td>Collection from Trade Receivables</td><td>3,50,000</td><td>Payment of overheads</td><td>15,000</td></tr>\n<tr><td>Debentures redeemed</td><td>4,00,000</td><td>Machinery acquired</td><td>50,000</td></tr>\n<tr><td>Sale of Machinery</td><td>70,000</td><td>Bank loan repaid</td><td>2,50,000</td></tr>\n<tr><td></td><td></td><td>Tax paid</td><td>1,55,000</td></tr>\n<tr><td></td><td></td><td>Closing cash and bank balance</td><td>15,000</td></tr>\n<tr><td><strong>Total</strong></td><td><strong>10,00,000</strong></td><td><strong>Total</strong></td><td><strong>10,00,000</strong></td></tr>\n</tbody>\n</table>\n<p>Prepare Cash Flow Statement for the year ended 31st March, 2026 in accordance with AS 3. (7 Marks)</p>",
+   "answer_html": "<p>Cash Flow Statement for the year ended 31.3.2026</p>\n<table>\n<tbody>\n<tr><th colspan=\"2\">Cash flow from operating activities</th><th>₹</th></tr>\n<tr><td colspan=\"2\">Cash received on account of trade receivables</td><td>3,50,000</td></tr>\n<tr><td colspan=\"2\">Cash paid on account of trade payables</td><td>(90,000)</td></tr>\n<tr><td colspan=\"2\">Cash paid to employees (salaries and wages)</td><td>(25,000)</td></tr>\n<tr><td colspan=\"2\">Other cash payments (overheads)</td><td>(15,000)</td></tr>\n<tr><td colspan=\"2\"><strong>Cash generated from operations</strong></td><td><strong>2,20,000</strong></td></tr>\n<tr><td colspan=\"2\">Income tax paid</td><td>(1,55,000)</td></tr>\n<tr><td colspan=\"2\"><strong>Net cash generated from operating activities</strong></td><td><strong>65,000</strong></td></tr>\n<tr><th colspan=\"3\">Cash flow from investing activities</th></tr>\n<tr><td colspan=\"2\">Payment for purchase of machinery</td><td>(4,00,000)</td></tr>\n<tr><td colspan=\"2\">Proceeds from sale of machinery</td><td>70,000</td></tr>\n<tr><td colspan=\"2\"><strong>Net cash used in investing activities</strong></td><td><strong>(3,30,000)</strong></td></tr>\n<tr><th colspan=\"3\">Cash flow from financing activities</th></tr>\n<tr><td colspan=\"2\">Proceeds from issue of share capital</td><td>5,00,000</td></tr>\n<tr><td colspan=\"2\">Bank loan repaid</td><td>(2,50,000)</td></tr>\n<tr><td colspan=\"2\">Debentures redeemed</td><td>(50,000)</td></tr>\n<tr><td colspan=\"2\"><strong>Net cash used in financing activities</strong></td><td><strong>2,00,000</strong></td></tr>\n<tr><td colspan=\"2\"><strong>Net decrease in cash and cash equivalents</strong></td><td><strong>(65,000)</strong></td></tr>\n<tr><td colspan=\"2\">Cash and cash equivalents at the beginning of the year</td><td>80,000</td></tr>\n<tr><td colspan=\"2\"><strong>Cash and cash equivalents at the end of the year</strong></td><td><strong>15,000</strong></td></tr>\n</tbody>\n</table>\n<p><em>Note: the source abstract's \"Debentures redeemed\" ₹4,00,000 inflow line and ₹50,000 within the outflow total both relate to the same debenture redemption; the answer key nets this to a ₹50,000 financing outflow, reproduced here exactly as the source presents it.</em></p>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees classified proceeds from the sale of machinery under operating activities instead of investing activities, and a few misclassified the debenture redemption cash effect, not distinguishing an asset-disposal cash inflow from an operating cash receipt."
+  },
+  {
+   "position": 7,
+   "book_id": "M3C11U2-027",
+   "source_label": "RTP September 2025",
+   "paper_type": "RTP",
+   "question_no": "Q8",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.6: Fixed asset acquisitions and disposals reported gross, not netted, in the cash flow statement",
+   "topics": [
+    {
+     "topic_id": "M3-C11-U2-T2.6",
+     "topic_name": "Calculation of Cash Flows from Financing Activities",
+     "overall_rank": 12,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 12 topic (Calculation of Cash Flows from Financing Activities); RTP September 2025.",
+   "score": 0.741,
+   "book_page": 433,
+   "question_html": "<p>Garden Ltd. acquired plant and machinery for ₹20 lakhs and sold furniture and fixtures for ₹5 lakhs in the same year. Can the company disclose net cash outflow towards purchase of fixed assets in the cash flow statement per AS 3?</p>",
+   "answer_html": "<div><p>No. Per AS 3 para 21, major classes of gross cash receipts and gross cash payments from investing and financing activities must be reported separately, except for the specific items permitted to be reported net under paras 22 and 24 — acquisition and disposal of fixed assets is not among those permitted items. The company <strong>cannot</strong> net the ₹20 lakh purchase against the ₹5 lakh disposal; both must be shown as separate gross cash flow lines.</p></div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: Some examinees assumed netting was acceptable since both items relate to fixed assets, not checking the specific, limited list of items AS 3 actually permits to be reported net."
+  },
+  {
+   "position": 8,
+   "book_id": "M3C11U2-010",
+   "source_label": "MTP November 2023 Set 2",
+   "paper_type": "MTP",
+   "question_no": "Q6(c)",
+   "marks_text": "Marks: 4",
+   "approx_time_text": "Approx Time: 8 minutes (approx.)",
+   "topic_text": "Topic 2.5: Investing-activities cash flow classification - netting TDS against gross interest received, treating a loss-making machinery disposal at its net cash proceeds, presenting an insurance claim for an asset lost in a natural calamity as an extraordinary item, and excluding non-cash and financing-classified items",
+   "topics": [
+    {
+     "topic_id": "M3-C11-U2-T2.5",
+     "topic_name": "Calculation of Cash Flows from Investing Activities",
+     "overall_rank": 34,
+     "priority_band": "Top 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 34 topic (Calculation of Cash Flows from Investing Activities); MTP November 2023 Set 2.",
+   "score": 0.6629,
+   "book_page": 406,
+   "question_html": "<p>Prepare cash flow from investing activities as per AS 3 of M/s Subham Creative Limited for year ended 31.3.2023.</p>\n<table>\n<thead><tr><th>Particulars</th><th>Amount (₹)</th></tr></thead>\n<tbody>\n<tr><td>Machinery acquired by issue of shares at face value</td><td>2,00,000</td></tr>\n<tr><td>Claim received for loss of machinery in earthquake</td><td>55,000</td></tr>\n<tr><td>Unsecured loans given to associates</td><td>5,00,000</td></tr>\n<tr><td>Interest on loan received from associate company</td><td>70,000</td></tr>\n<tr><td>Pre-acquisition dividend received on investment made</td><td>52,600</td></tr>\n<tr><td>Debenture interest paid</td><td>1,45,200</td></tr>\n<tr><td>Term loan repaid</td><td>4,50,000</td></tr>\n<tr><td>Interest received on investment (TDS of ₹8,200 was deducted on the above interest)</td><td>73,800</td></tr>\n<tr><td>Book value of plant &amp; machinery sold (loss incurred ₹9,600)</td><td>90,000</td></tr>\n</tbody>\n</table>",
+   "answer_html": "<p><strong>Cash Flow Statement from Investing Activities of Subham Creative Limited for year ended 31-03-2023</strong></p>\n<table>\n<thead><tr><th>Cash generated from investing activities</th><th>₹</th><th>₹</th></tr></thead>\n<tbody>\n<tr><td>Interest on loan received</td><td>70,000</td><td></td></tr>\n<tr><td>Pre-acquisition dividend received on investment made</td><td>52,600</td><td></td></tr>\n<tr><td>Unsecured loans given to subsidiaries</td><td>(5,00,000)</td><td></td></tr>\n<tr><td>Interest received on investments (gross value)</td><td>82,000</td><td></td></tr>\n<tr><td>TDS deducted on interest</td><td>(8,200)</td><td></td></tr>\n<tr><td>Sale of Plant &amp; Machinery ₹(90,000 − 9,600)</td><td>80,400</td><td></td></tr>\n<tr><td>Cash used in investing activities (before extra-ordinary item)</td><td></td><td>(2,23,200)</td></tr>\n<tr><td>Extraordinary claim received for loss of machinery</td><td></td><td>55,000</td></tr>\n<tr><td><strong>Net cash used in investing activities (after extra-ordinary item)</strong></td><td></td><td><strong>(1,68,200)</strong></td></tr>\n</tbody>\n</table>\n<p><strong>Note:</strong></p>\n<ol type=\"1\">\n<li>Debenture interest paid and Term Loan repaid are financing activities and therefore not considered for preparing cash flow from investing activities.</li>\n<li>Machinery acquired by issue of shares does not amount to cash outflow, hence also not considered in the above cash flow statement.</li>\n</ol>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is including Debenture interest paid and Term Loan repaid within investing activities instead of financing activities, and reporting the earthquake insurance claim as an ordinary investing inflow rather than separately as an extraordinary item."
+  },
+  {
+   "position": 9,
+   "book_id": "M3C11U2-025",
+   "source_label": "RTP September 2024",
+   "paper_type": "RTP",
+   "question_no": "Q4",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.3: Classification of cash flows across operating, investing and financing activities for loans/advances, investment/dividend and insurance-claim items",
+   "topics": [
+    {
+     "topic_id": "M3-C11-U2-T2.3",
+     "topic_name": "Classification of Cash Flow Activities",
+     "overall_rank": 91,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "B",
+   "study_match_percent": 77.4,
+   "why": "Rank 91 topic (Classification of Cash Flow Activities); 77% match to an ICAI Study Material question; RTP September 2024.",
+   "score": 0.5628,
+   "book_page": 431,
+   "question_html": "<p>Purse Ltd., a non financial company has the following entries in its Bank Account. It has sought your advice on the treatment of the same for preparing Cash Flow Statement.</p>\n<ol type=\"i\">\n<li>Loans and Advances given to the following and interest earned on them:\n        <ol type=\"1\"><li>to suppliers</li><li>to employees</li><li>to its subsidiaries companies</li></ol>\n</li>\n<li>Investment made in subsidiary Wallet Ltd. and dividend received</li>\n<li>Dividend paid for the year</li>\n<li>Insurance claim received against loss of property, plant and equipment by fire.</li>\n</ol>\n<p>Discuss in the context of AS 3 ‘Cash Flow Statement’.</p>",
+   "answer_html": "<div>\n<table><thead><tr><th>Item</th><th>Classification</th></tr></thead>\n<tbody>\n<tr><td>(i)(1) Loans/advances and interest — to suppliers</td><td>Cash flows from operating activities</td></tr>\n<tr><td>(i)(2) Loans/advances and interest — to employees</td><td>Cash flows from operating activities</td></tr>\n<tr><td>(i)(3) Loans/advances and interest — to its subsidiary companies</td><td>Cash flows from investing activities</td></tr>\n<tr><td>(ii) Investment made in subsidiary company and dividend received</td><td>Cash flows from investing activities</td></tr>\n<tr><td>(iii) Dividend paid for the year</td><td>Cash flows from financing activities</td></tr>\n<tr><td>(iv) Insurance claim received against loss of property, plant and equipment by fire</td><td><em>(no classification stated — see extraction note)</em></td></tr>\n</tbody></table>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is classifying loans/advances to subsidiaries the same way as loans to suppliers or employees (operating activity), without recognising that an inter-company loan of this kind is an investing activity from the lending company's perspective."
+  },
+  {
+   "position": 10,
+   "book_id": "M3C11U2-021",
+   "source_label": "RTP January 2025",
+   "paper_type": "RTP",
+   "question_no": "Q4",
+   "marks_text": "Marks:Not stated in source",
+   "approx_time_text": "Approx Time: 10–20 minutes (approx.)",
+   "topic_text": "Topic 2.3: Classification of cash flow activities - operating, investing, financing, and cash equivalents",
+   "topics": [
+    {
+     "topic_id": "M3-C11-U2-T2.3",
+     "topic_name": "Classification of Cash Flow Activities",
+     "overall_rank": 91,
+     "priority_band": "Next 50"
+    }
+   ],
+   "badges": [],
+   "study_match_category": "C",
+   "study_match_percent": null,
+   "why": "Rank 91 topic (Classification of Cash Flow Activities); RTP January 2025.",
+   "score": 0.4565,
+   "book_page": 425,
+   "question_html": "<p>Classify the following activities as (1) Operating Activities, (2) Investing Activities, (3) Financing Activities (4) Cash Equivalents.</p>\n<ol type=\"a\">\n<li>Proceeds from long-term borrowings.</li>\n<li>Proceeds from Trade receivables.</li>\n<li>Trading Commission received.</li>\n<li>Redemption of Preference Shares.</li>\n<li>Proceeds from sale of investment</li>\n<li>Interim Dividend paid on equity shares.</li>\n<li>Interest received on debentures held as investment.</li>\n<li>Dividend received on shares held as investments.</li>\n<li>Rent received on property held as investment.</li>\n<li>Dividend paid on Preference shares.</li>\n<li>Marketable Securities</li>\n</ol>",
+   "answer_html": "<div>\n<p><strong>Operating Activities:</strong> b, c.</p>\n<p><strong>Investing Activities:</strong> e, g, h, i.</p>\n<p><strong>Financing Activities:</strong> a, d, f, j.</p>\n<p><strong>Cash Equivalents:</strong> k</p>\n</div>",
+   "mistake_type": "synth",
+   "mistake_text": "Author’s Note: A common error is classifying interest and dividend received on investments as operating activities because they arise from routine treasury income, missing that AS 3 classifies these as investing activities from the recipient's perspective, reserving operating classification for the enterprise's principal revenue-generating activities."
+  }
+ ]
+}

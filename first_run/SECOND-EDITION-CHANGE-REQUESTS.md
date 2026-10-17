@@ -132,6 +132,24 @@ instead; a pipeline bug that did reach the printed page belongs in both.
   cross-reference ("see page N") instead of the full question, and measure the
   page saving before deciding.
 
+## CR-008 — PYQ November 2023 Q4 prints as "QNone"
+
+- **Severity** S2 · **Status** OPEN · **Logged** 2026-10-18 · **Source** Found while
+  building Must Practice units from the chapter-book library
+- **What** The Financial Statements of Companies chapter (`M3C11U1-024`) prints its
+  header as "PYQ November 2023 QNone Marks: 20". The question is PYQ November 2023
+  Q4 (the Falgun Ltd. trial-balance-to-Schedule III question, 20 marks). Its record
+  in `questions_index.json` (`CAI-P1-PYQ-2023-11-PII-Q4`) has `qno: null`, `parent_qno:
+  null` and `subpart: null`, so the generator printed the Python `None`. The sitting
+  HTML for that paper evidently lacks a question-number attribute on this one record.
+- **Why it matters** Cosmetic for the student (the question and answer are intact),
+  but the question cannot be cited by number, and anything that parses the header
+  (the Must Practice build did) fails on it.
+- **Second edition** Add the missing `data-qno` to the November 2023 sitting HTML,
+  re-extract, and make the generator refuse to print a header whose number is
+  `None`. The Must Practice build carries a documented `qno_overrides` entry for this
+  question until then.
+
 ---
 
 *Add new entries at the bottom, numbered in sequence. Never renumber or delete an

@@ -198,6 +198,268 @@ UNITS = {
             "text": "Questions on AS 14 are asked and listed under Module 3, in the Amalgamation of Companies unit.",
         },
     },
+    # --- Published 2026-10-18 in one pass so students can see every unit. Standard units are
+    # FORMULA-ONLY: the manual same-idea repeat review (MUST-PRACTICE.md, step 4) is still
+    # outstanding for every unit below. Short units list every unique Question Bank question;
+    # their Study Material items are added one unit at a time (SKILL-must-practice-questions.md s.6).
+
+    "M1-C1-U0": {
+        "library_file": "CA_Inter_AdvAcc_Intro_to_AS_8_Descriptive.json",
+        "standard": "Basics",
+        "unit_title": "Introduction to Accounting Standards",
+        "module": "MODULE 1",
+        "chapter": "Introduction to Accounting Standards",
+        "published": True,
+        "short_unit": True,
+    },
+    "M1-C2-U0": {
+        "library_file": "CA_Inter_AdvAcc_Framework_for_Preparation_and_Presentation_of_Financial_Statements_16_Descriptive.json",
+        "standard": "Framework",
+        "unit_title": "Framework for Preparation & Presentation of Financial Statements",
+        "module": "MODULE 1",
+        "chapter": "Framework for Preparation and Presentation of Financial Statements",
+        "published": True,
+    },
+    "M1-C3-U0": {
+        "library_file": "CA_Inter_AdvAcc_Applicability_of_AS_3_Descriptive.json",
+        "standard": "Applicability",
+        "unit_title": "Applicability of Accounting Standards",
+        "module": "MODULE 1",
+        "chapter": "Applicability of Accounting Standards",
+        "published": True,
+        "short_unit": True,
+    },
+    "M1-C4-U1": {
+        "library_file": "CA_Inter_AdvAcc_AS_1_Disclosure_of_Accounting_Policies_10_Descriptive.json",
+        "standard": "AS 1",
+        "unit_title": "Disclosure of Accounting Policies",
+        "module": "MODULE 1",
+        "chapter": "Presentation & Disclosures Based Accounting Standards",
+        "published": True,
+        "short_unit": True,
+    },
+    "M1-C4-U3": {
+        "library_file": "CA_Inter_AdvAcc_AS_17_Segment_Reporting_7_Descriptive.json",
+        "standard": "AS 17",
+        "unit_title": "Segment Reporting",
+        "module": "MODULE 1",
+        "chapter": "Presentation & Disclosures Based Accounting Standards",
+        "published": True,
+        "short_unit": True,
+    },
+    "M1-C4-U4": {
+        "library_file": "CA_Inter_AdvAcc_AS_18_Related_Party_Disclosures_8_Descriptive.json",
+        "standard": "AS 18",
+        "unit_title": "Related Party Disclosures",
+        "module": "MODULE 1",
+        "chapter": "Presentation & Disclosures Based Accounting Standards",
+        "published": True,
+        "short_unit": True,
+    },
+    "M1-C4-U5": {
+        "library_file": "CA_Inter_AdvAcc_AS_20_Earnings_Per_Share_11_Descriptive.json",
+        "standard": "AS 20",
+        "unit_title": "Earnings Per Share",
+        "module": "MODULE 1",
+        "chapter": "Presentation & Disclosures Based Accounting Standards",
+        "published": True,
+    },
+    "M1-C4-U6": {
+        "library_file": "CA_Inter_AdvAcc_AS_24_Discontinuing_Operations_9_Descriptive.json",
+        "standard": "AS 24",
+        "unit_title": "Discontinuing Operations",
+        "module": "MODULE 1",
+        "chapter": "Presentation & Disclosures Based Accounting Standards",
+        "published": True,
+        "short_unit": True,
+    },
+    "M2-C10-U1": {
+        "library_file": "CA_Inter_AdvAcc_AS_21_Consolidated_Financial_Statements_27_Descriptive.json",
+        "standard": "AS 21",
+        "unit_title": "Consolidated Financial Statements",
+        "module": "MODULE 2",
+        "chapter": "Accounting Standards for Consolidated Financial Statements",
+        "published": True,
+    },
+    "M2-C10-U2": {
+        "library_file": "CA_Inter_AdvAcc_AS_23_Accounting_for_Investments_in_Associates_in_CFS_4_Descriptive.json",
+        "standard": "AS 23",
+        "unit_title": "Accounting for Investments in Associates in Consolidated Financial Statements",
+        "module": "MODULE 2",
+        "chapter": "Accounting Standards for Consolidated Financial Statements",
+        "published": True,
+        "short_unit": True,
+    },
+    "M2-C10-U3": {
+        "library_file": "CA_Inter_AdvAcc_AS_27_Financial_Reporting_of_Interests_in_Joint_Ventures_2_Descriptive.json",
+        "standard": "AS 27",
+        "unit_title": "Financial Reporting of Interests in Joint Ventures",
+        "module": "MODULE 2",
+        "chapter": "Accounting Standards for Consolidated Financial Statements",
+        "published": True,
+        "short_unit": True,
+    },
+    "M2-C5-U3": {
+        "library_file": "CA_Inter_AdvAcc_AS_13_Accounting_for_Investments_25_Descriptive.json",
+        "standard": "AS 13",
+        "unit_title": "Accounting for Investments",
+        "module": "MODULE 2",
+        "chapter": "Assets Based Accounting Standards",
+        "published": True,
+    },
+    "M2-C5-U5": {
+        "library_file": "CA_Inter_AdvAcc_AS_19_Leases_14_Descriptive.json",
+        "standard": "AS 19",
+        "unit_title": "Leases",
+        "module": "MODULE 2",
+        "chapter": "Assets Based Accounting Standards",
+        "published": True,
+    },
+    "M2-C5-U6": {
+        "library_file": "CA_Inter_AdvAcc_AS_26_Intangible_Assets_9_Descriptive.json",
+        "standard": "AS 26",
+        "unit_title": "Intangible Assets",
+        "module": "MODULE 2",
+        "chapter": "Assets Based Accounting Standards",
+        "published": True,
+        "short_unit": True,
+    },
+    "M2-C5-U7": {
+        "library_file": "CA_Inter_AdvAcc_AS_28_Impairment_of_Assets_7_Descriptive.json",
+        "standard": "AS 28",
+        "unit_title": "Impairment of Assets",
+        "module": "MODULE 2",
+        "chapter": "Assets Based Accounting Standards",
+        "published": True,
+        "short_unit": True,
+    },
+    "M2-C6-U1": {
+        "library_file": "CA_Inter_AdvAcc_AS_15_Employee_Benefits_8_Descriptive.json",
+        "standard": "AS 15",
+        "unit_title": "Employee Benefits",
+        "module": "MODULE 2",
+        "chapter": "Liabilities Based Accounting Standards",
+        "published": True,
+        "short_unit": True,
+    },
+    "M2-C6-U2": {
+        "library_file": "CA_Inter_AdvAcc_AS_29_Provisions_Contingent_Liabilities_and_Contingent_Assets_10_Descriptive.json",
+        "standard": "AS 29",
+        "unit_title": "Provisions, Contingent Liabilities and Contingent Assets",
+        "module": "MODULE 2",
+        "chapter": "Liabilities Based Accounting Standards",
+        "published": True,
+    },
+    "M2-C7-U1": {
+        "library_file": "CA_Inter_AdvAcc_AS_4_Contingencies_and_Events_Occurring_After_the_Balance_Sheet_Date_12_Descriptive.json",
+        "standard": "AS 4",
+        "unit_title": "Contingencies and Events occurring after the Balance Sheet Date",
+        "module": "MODULE 2",
+        "chapter": "Accounting Standards based on items impacting Financial Statements",
+        "published": True,
+    },
+    "M2-C7-U2": {
+        "library_file": "CA_Inter_AdvAcc_AS_5_Net_Profit_or_Loss_Prior_Period_Items_and_Changes_in_Accounting_Policies_11_Descriptive.json",
+        "standard": "AS 5",
+        "unit_title": "Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies",
+        "module": "MODULE 2",
+        "chapter": "Accounting Standards based on items impacting Financial Statements",
+        "published": True,
+    },
+    "M2-C7-U3": {
+        "library_file": "CA_Inter_AdvAcc_AS_11_The_Effects_of_Changes_in_Foreign_Exchange_Rates_13_Descriptive.json",
+        "standard": "AS 11",
+        "unit_title": "The Effects of Changes in Foreign Exchange Rates",
+        "module": "MODULE 2",
+        "chapter": "Accounting Standards based on items impacting Financial Statements",
+        "published": True,
+    },
+    "M2-C7-U4": {
+        "library_file": "CA_Inter_AdvAcc_AS_22_Accounting_for_Taxes_on_Income_4_Descriptive.json",
+        "standard": "AS 22",
+        "unit_title": "Accounting for Taxes on Income",
+        "module": "MODULE 2",
+        "chapter": "Accounting Standards based on items impacting Financial Statements",
+        "published": True,
+        "short_unit": True,
+    },
+    "M2-C8-U1": {
+        "library_file": "CA_Inter_AdvAcc_AS_7_Construction_Contracts_9_Descriptive.json",
+        "standard": "AS 7",
+        "unit_title": "Construction Contracts",
+        "module": "MODULE 2",
+        "chapter": "Revenue Based Accounting Standards",
+        "published": True,
+        "short_unit": True,
+    },
+    "M2-C8-U2": {
+        "library_file": "CA_Inter_AdvAcc_AS_9_Revenue_Recognition_20_Descriptive.json",
+        "standard": "AS 9",
+        "unit_title": "Revenue Recognition",
+        "module": "MODULE 2",
+        "chapter": "Revenue Based Accounting Standards",
+        "published": True,
+    },
+    "M2-C9-U1": {
+        "library_file": "CA_Inter_AdvAcc_AS_12_Accounting_for_Government_Grants_13_Descriptive.json",
+        "standard": "AS 12",
+        "unit_title": "Accounting for Government Grants",
+        "module": "MODULE 2",
+        "chapter": "Other Accounting Standards",
+        "published": True,
+    },
+    "M3-C11-U1": {
+        "library_file": "CA_Inter_AdvAcc_Financial_Statements_of_Companies_Schedule_III_30_Descriptive.json",
+        "standard": "Financial Statements of Companies",
+        "unit_title": "Preparation of Financial Statements",
+        "module": "MODULE 3",
+        "chapter": "Financial Statements of Companies",
+        "published": True,
+        # PYQ November 2023 Q4 was extracted with no question number and prints as "QNone" (CR-008).
+        # Evidence for Q4: questions_index.json id CAI-P1-PYQ-2023-11-PII-Q4, same sitting, 20 marks.
+        "qno_overrides": {"M3C11U1-024": "Q4"},
+    },
+    "M3-C11-U2": {
+        "library_file": "CA_Inter_AdvAcc_Cash_Flow_Statement_AS_3_27_Descriptive.json",
+        "standard": "Financial Statements of Companies",
+        "unit_title": "Cash Flow Statement",
+        "module": "MODULE 3",
+        "chapter": "Financial Statements of Companies",
+        "published": True,
+    },
+    "M3-C12-U0": {
+        "library_file": "CA_Inter_AdvAcc_Buy_back_of_Securities_9_Descriptive.json",
+        "standard": "Buyback",
+        "unit_title": "Buyback of Securities",
+        "module": "MODULE 3",
+        "chapter": "Buy Back of Securities",
+        "published": True,
+        "short_unit": True,
+    },
+    "M3-C13-U0": {
+        "library_file": "CA_Inter_AdvAcc_AS_14_Amalgamation_of_Companies_26_Descriptive.json",
+        "standard": "Amalgamation",
+        "unit_title": "Amalgamation of Companies",
+        "module": "MODULE 3",
+        "chapter": "Amalgamation of Companies",
+        "published": True,
+    },
+    "M3-C14-U0": {
+        "library_file": "CA_Inter_AdvAcc_Internal_Reconstruction_18_Descriptive.json",
+        "standard": "Internal Reconstruction",
+        "unit_title": "Internal Reconstruction",
+        "module": "MODULE 3",
+        "chapter": "Accounting for Reconstruction of Companies",
+        "published": True,
+    },
+    "M3-C15-U0": {
+        "library_file": "CA_Inter_AdvAcc_Accounting_for_Branches_Including_Foreign_Branches_27_Descriptive.json",
+        "standard": "Branch Accounting",
+        "unit_title": "Accounting for Branches including Foreign Branches",
+        "module": "MODULE 3",
+        "chapter": "Accounting for Branches including Foreign Branches",
+        "published": True,
+    },
 }
 
 
@@ -355,6 +617,8 @@ def auto_why(q: dict, ranks: dict) -> str:
                     if pct else "Category A — lifted from an ICAI Study Material question")
     elif cat == "B" and pct:
         bits.append(f"{round(pct)}% match to an ICAI Study Material question")
+    if not q["topics"]:
+        bits.append("no syllabus topic is mapped to this question yet")
     bits.append(f"{q['source_label']}")
     if len(q["topics"]) > 1:
         bits.append(f"covers {len(q['topics'])} mapped topics")
@@ -409,8 +673,11 @@ def topic_lookup(priority: dict) -> tuple[dict, dict]:
     return ranks, by_question
 
 
-def question_key(question: dict) -> tuple[str, str, str | None]:
+def question_key(question: dict) -> tuple[str, str | None, str | None]:
     match = re.match(r"Q(\d+)\(?([a-z])?\)?", question["qno_text"])
+    if not match:
+        # "QNone" (CR-008): the ranking data stores that question's number as the string "None".
+        return question["src_text"], question["qno_text"].lstrip("Q") or None, None
     return question["src_text"], match.group(1), match.group(2)
 
 
@@ -489,6 +756,10 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
     if "pointer" in spec:
         return pointer_unit(unit_id, spec, priority)
     library = json.loads((LIBRARY / spec["library_file"]).read_text(encoding="utf-8"))
+    # Documented corrections to a question's printed number (each with its reason in UNITS).
+    for source in library:
+        if source["book_id"] in spec.get("qno_overrides", {}):
+            source["qno_display"] = spec["qno_overrides"][source["book_id"]]  # display only; matching keeps the original
     ranks, _ = topic_lookup(priority)
     short = bool(spec.get("short_unit"))
 
@@ -511,6 +782,26 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
     scored = []
     for source in library:
         mapped = rows_by_key.get(question_key(source), [])
+        if not mapped and short:
+            # A short unit lists every question, so one with no syllabus topic mapped yet is
+            # still shown (unscored, last). A standard unit cannot rank it, so it is skipped.
+            scored.append(
+                {
+                    "book_id": source["book_id"],
+                    "source": source,
+                    "topics": [],
+                    "topic_ids": [],
+                    "score": 0.0,
+                    "score_parts": {},
+                    "sim_text": similarity_text(source["question_html"]),
+                    "figures": figures(source["question_html"]),
+                    "source_label": source["src_text"],
+                    "paper_type": source["src_text"].split()[0],
+                    "study_match_category": None,
+                    "study_match_percent": None,
+                }
+            )
+            continue
         if not mapped:
             continue  # no topic mapping -> cannot be scored or justified
         topics = sorted(
@@ -584,7 +875,7 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
                 "book_id": q["book_id"],
                 "source_label": q["source_label"],
                 "paper_type": q["paper_type"],
-                "question_no": source["qno_text"],
+                "question_no": source.get("qno_display", source["qno_text"]),
                 "marks_text": source["marks_text"],
                 "approx_time_text": source["approx_time_text"],
                 "topic_text": source["topic_text"],
@@ -604,6 +895,10 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
 
     bank_count = len(questions)
     study_edition = None
+    if not short and bank_count < SHORTLIST_SIZE:
+        # A standard unit whose distinct questions run out below ten is a short unit in effect:
+        # say so on the page and let it take Study Material items.
+        short = True
     if short:
         extra, study_edition = study_material_questions(unit_id, ranks, len(questions) + 1)
         questions += extra

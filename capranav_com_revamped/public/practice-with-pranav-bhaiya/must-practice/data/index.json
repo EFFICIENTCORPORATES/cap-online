@@ -11,7 +11,7 @@
       {
        "unit_id": "M1-C1-U0",
        "label": "Introduction to Accounting Standards",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -21,7 +21,7 @@
       {
        "unit_id": "M1-C2-U0",
        "label": "Framework for Preparation & Presentation of Financial Statements",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -31,7 +31,7 @@
       {
        "unit_id": "M1-C3-U0",
        "label": "Applicability of Accounting Standards",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -41,7 +41,7 @@
       {
        "unit_id": "M1-C4-U1",
        "label": "Accounting Standard 1 Disclosure of Accounting Policies",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M1-C4-U2",
@@ -51,22 +51,22 @@
       {
        "unit_id": "M1-C4-U3",
        "label": "Accounting Standard 17 Segment Reporting",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M1-C4-U4",
        "label": "Accounting Standard 18 Related Party Disclosures",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M1-C4-U5",
        "label": "Accounting Standard 20 Earnings Per Share",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M1-C4-U6",
        "label": "Accounting Standard 24 Discontinuing Operations",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M1-C4-U7",
@@ -86,17 +86,17 @@
       {
        "unit_id": "M2-C10-U1",
        "label": "Accounting Standard 21 Consolidated Financial Statements",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C10-U2",
        "label": "Accounting Standard 23 Accounting for Investments in Associates in Consolidated Financial Statements",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C10-U3",
        "label": "Accounting Standard 27 Financial Reporting of Interests in Joint Ventures",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -116,7 +116,7 @@
       {
        "unit_id": "M2-C5-U3",
        "label": "Accounting Standard 13 Accounting for Investments",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C5-U4",
@@ -126,17 +126,17 @@
       {
        "unit_id": "M2-C5-U5",
        "label": "Accounting Standard 19 Leases",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C5-U6",
        "label": "Accounting Standard 26 Intangible Assets",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C5-U7",
        "label": "Accounting Standard 28 Impairment of Assets",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -146,12 +146,12 @@
       {
        "unit_id": "M2-C6-U1",
        "label": "Accounting Standard 15 Employee Benefits",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C6-U2",
        "label": "AS 29 (Revised) Provisions, Contingent Liabilities and Contingent Assets",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -161,22 +161,22 @@
       {
        "unit_id": "M2-C7-U1",
        "label": "Accounting Standard 4 Contingencies and Events occurring after the Balance Sheet Date",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C7-U2",
        "label": "Accounting Standard 5 Net Profit or Loss for the Period, Prior Period Items and Changes in Accounting Policies",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C7-U3",
        "label": "Accounting Standard 11 The Effects of Changes in Foreign Exchange Rates",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C7-U4",
        "label": "Accounting Standard 22 Accounting for Taxes on Income",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -186,12 +186,12 @@
       {
        "unit_id": "M2-C8-U1",
        "label": "Accounting Standard 7 Construction Contracts",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C8-U2",
        "label": "Accounting Standard 9 Revenue Recognition",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -201,7 +201,7 @@
       {
        "unit_id": "M2-C9-U1",
        "label": "Accounting Standard 12 Accounting for Government Grants",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M2-C9-U2",
@@ -221,12 +221,12 @@
       {
        "unit_id": "M3-C11-U1",
        "label": "Preparation of Financial Statements",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M3-C11-U2",
        "label": "Cash Flow Statement",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -236,7 +236,7 @@
       {
        "unit_id": "M3-C12-U0",
        "label": "Buyback of Securities",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -246,7 +246,7 @@
       {
        "unit_id": "M3-C13-U0",
        "label": "Amalgamation of Companies",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -256,7 +256,7 @@
       {
        "unit_id": "M3-C14-U0",
        "label": "Internal Reconstruction",
-       "published": false
+       "published": true
       }
      ]
     },
@@ -266,7 +266,7 @@
       {
        "unit_id": "M3-C15-U0",
        "label": "Accounting for Branches including Foreign Branches",
-       "published": false
+       "published": true
       }
      ]
     }

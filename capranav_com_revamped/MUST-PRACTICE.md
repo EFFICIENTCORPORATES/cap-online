@@ -4,7 +4,7 @@ Read this if the task is "publish / fix / explain a Must Practice list". It is t
 whole chain from raw exam papers to the page at
 `https://capranav.com/practice-with-pranav-bhaiya/must-practice/`.
 
-**Published units (2026-10-18):** AS 2 (`M2-C5-U1`), AS 10 (`M2-C5-U2`), AS 16 (`M2-C5-U4`); short unit AS 25 (`M1-C4-U7`, 3 questions); pointer units AS 3 (`M1-C4-U2`) and AS 14 (`M2-C9-U2`). The picker lists
+**Published units (2026-10-18): all 36**, 274 questions: 20 standard units of ten, 14 short units (AS 25 also has a Study Material item), and pointer units AS 3 (`M1-C4-U2`) and AS 14 (`M2-C9-U2`). Only AS 2 and AS 10 have had the manual same-idea repeat review; the rest are formula-only. Study Material items are still to be added to 13 short units. The picker lists
 every syllabus unit from the 400-topic ranking; unpublished ones show "coming soon". AS 2 and AS 10 were
 hand-reviewed for same-idea repeats; AS 16 is formula-only (review still outstanding, see `PROJECT-LOG.md`).
 
