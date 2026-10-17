@@ -103,6 +103,8 @@ cap-online/
 
 ## Where things are
 
+CA Foundation Paper 1: [download, naming, inventory and PDF-to-Markdown workflow](books/ca-foundation/README.md).
+
 | You want… | Look in |
 |---|---|
 | Exam strategy book | `books/strategy-book/` |

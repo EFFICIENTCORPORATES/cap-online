@@ -2,6 +2,10 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-18 — CA Foundation ICAI download workflow documentation
+
+Added books/ca-foundation/README.md, DOWNLOADER-SPEC.md, requirements-downloader.txt and text CSV snapshots of the live Google Sheet (331 rows, 330 enabled; original PDF-link checks 2026-10-04). Documented short filenames, shallow local folders, Excel export, download/resume/logging, manual Drive upload, known coverage gaps and optional use of tools/icai_pdf_to_md_converter.py. Existing downloader and converter preserved. Local download/upload of all inventory rows remains unconfirmed.
+
 ## 2026-10-06 Must Practice documentation
 New `capranav_com_revamped/MUST-PRACTICE.md` (corpus-to-live runbook, add-a-unit steps, gotchas) and `tools/verify_must_practice_live.py` (Playwright/Edge check of every published unit, passes for AS 2/10/16). Pointers added in CLAUDE.md, AGENT-HANDOFF.md, ANATOMY.md, the practice hub README and MUST-PRACTICE-RULES.md; stale AS 16 'pending' lines fixed.
 
