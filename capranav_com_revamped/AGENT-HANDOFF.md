@@ -13,7 +13,7 @@ remote `EFFICIENTCORPORATES/cap-online`, branch `main`).
    history from section 6 onward is mostly about other pillars (books, Telegram); this site is the `capranav_com_revamped/` folder.
 2. This file.
 3. `PROJECT-LOG.md` (newest entry first; read the top five entries), then `PENDING.md` (the older, shorter list this file supersedes).
-4. Only when the task needs it: `MUST-PRACTICE.md` (Must Practice runbook, start here for any question-list work), `SEO.md`, `BOT-PROTECTION.md`, `BACKUPS.md`, `SECURITY.md`, `TOPICS-EXPLORER.md`, `VIDEOS.md`,
+4. Only when the task needs it: `MUST-PRACTICE.md` (Must Practice runbook, start here for any question-list work) and `../_claude/skills/SKILL-must-practice-questions.md` (its method and data provenance), `SEO.md`, `BOT-PROTECTION.md`, `BACKUPS.md`, `SECURITY.md`, `TOPICS-EXPLORER.md`, `VIDEOS.md`,
    `ANATOMY.md`, `DATABASE-BACKUP.md`.
 
 **Owner:** CA Pranav Pratik Tulshyan (faculty). He decides scope and wording. When unsure about anything about his profile, career,

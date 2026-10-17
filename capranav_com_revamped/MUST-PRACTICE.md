@@ -80,8 +80,13 @@ at most two per topic, make sure every Top-100 topic of the chapter is covered, 
   Pushing is separate (see `CLAUDE.md` §2 "Pushing").
 - **PYQs score lower than MTP/RTP on purpose** and can be absent from a list entirely (AS 16 has none).
 
+## Units with fewer than ten questions
+
+Different rule (Pranav, 2026-10-18): combine the Question Bank with the Study Material's Illustrations and Test Your Knowledge questions, keep only the unique ones, and publish even if fewer than ten. Method, data provenance and what is still unbuilt: `_claude/skills/SKILL-must-practice-questions.md`. Analysis script: `first_run/scripts/build_study_material_pool.py`.
+
 ## Related docs
 
+`_claude/skills/SKILL-must-practice-questions.md` (the method and where every input came from) · 
 `AGENT-HANDOFF.md` (site-wide handoff, task B3 = more units) · `PROJECT-LOG.md` (history) · `SEO.md` ·
 `BOT-PROTECTION.md` · `ANATOMY.md` (the topic explorer, same data) ·
 `books/ca-inter/smat-may-27-edition/practice-with-pranav-bhaiya/README.md` (data hub) and `MUST-PRACTICE-RULES.md` (formula).

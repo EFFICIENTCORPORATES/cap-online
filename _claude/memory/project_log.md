@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-18 Must Practice: short-unit rule + method documented
+Pranav's rule for units with fewer than ten usable questions: combine the Question Bank with Study Material Illustrations/TYK, keep only unique questions, publish even if fewer than ten. Wrote `_claude/skills/SKILL-must-practice-questions.md` (method, status table, provenance of every input, short-unit steps) and `first_run/scripts/build_study_material_pool.py` (stdlib only; writes `data/study_material_descriptive_pool.json`). Calibration check found lexical similarity understates overlap (human-reviewed same-concept pairs scored ~0.28-0.52), so reviewed matches in `pyq_study_matches.json` are authoritative and the review threshold is 0.25; 'unique' = not obviously covered, not verified. Not built: PDF answer extraction for Study Material items, topic tagging for them, a source label on the site. Open decisions: AS 3/AS 14 duplicate codes, gating answers. No live unit changed.
+
 ## 2026-10-06 Must Practice documentation
 New `capranav_com_revamped/MUST-PRACTICE.md` (corpus-to-live runbook, add-a-unit steps, gotchas) and `tools/verify_must_practice_live.py` (Playwright/Edge check of every published unit, passes for AS 2/10/16). Pointers added in CLAUDE.md, AGENT-HANDOFF.md, ANATOMY.md, the practice hub README and MUST-PRACTICE-RULES.md; stale AS 16 'pending' lines fixed.
 
