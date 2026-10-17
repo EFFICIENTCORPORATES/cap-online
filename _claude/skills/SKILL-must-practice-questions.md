@@ -21,13 +21,22 @@ answer to show.
 | Piece | State (2026-10-18) |
 |---|---|
 | Standard units (10 or more usable questions) | Published for AS 2, AS 10, AS 16. AS 2 and AS 10 hand-reviewed for same-idea repeats; AS 16 formula-only, review outstanding. |
-| Short-unit rule (section 6) | **Decided by Pranav 2026-10-18; analysis script built; not yet applied to any live unit.** |
+| Short-unit rule (section 6) | **Live for AS 25** (pilot): 2 Question Bank questions + Study Material Illustration 1 = 3 questions. No other short unit done yet. |
 | `first_run/scripts/build_study_material_pool.py` | Built. Finds Study Material items not already covered by the Question Bank. Output is an upper bound, see section 6.4. |
-| Extracting Study Material **answers** from the ICAI PDFs | **Not built.** The markdown copy has scrambled tables, so answers cannot be copied from it. |
-| Topic ranking for Study Material items | **Not built.** The ranking only maps Question Bank questions. |
-| Page/source label for Study Material items on the site | **Not built.** The page currently shows only a Question Bank page number. `must-practice.js` and the unit JSON need a source-kind field first. |
-| Units AS 3 (`M1-C4-U2`) and AS 14 (`M2-C9-U2`) | **Open decision.** The question bank files this content under `M3-C11-U2` (Cash Flow) and `M3-C13-U0` (Amalgamation); the Module 1/2 units have no bank questions at all. |
-| Gating answers behind login | **Open decision** (see `capranav_com_revamped/AGENT-HANDOFF.md`). Today every answer is public static JSON. |
+| Study Material **answers** | Done by hand per item, from the ICAI PDF (never the markdown): `.../data/study-material-items/<unit_id>.json`. Only AS 25 Illustration 1 exists so far. |
+| Topic mapping for Study Material items | Done by hand per item (`topic_ids` in the same file, ids from the syllabus index); the ranking itself is unchanged and only covers the Question Bank. |
+| Label on the site | Done. Source column "ICAI / Study Material", title "AS 25 · Illustration 1", page column "p. 4.158 / Study Material", marks "—". Code: `must-practice.js` `pageCell()`, build script `study_material_questions()`. |
+| AS 3 (`M1-C4-U2`) and AS 14 (`M2-C9-U2`) | **Pointer units, live.** No questions; the page names where to look and has a button. AS 3 points to `M3-C11-U2` (Financial Statements of Companies, Cash Flow Statement), AS 14 to `M3-C13-U0` (Amalgamation of Companies). `pointer` in `UNITS`. |
+| Answers public | **Decided: yes, for now.** No login gating (Pranav, 2026-10-18). |
+
+### Decisions log (Pranav, 2026-10-18)
+
+- Short units: combine Question Bank + Study Material, keep unique questions only, publish even if fewer than ten.
+- AS 25: Illustrations 1 and 4 are the same problem with different figures; **keep Illustration 1 only**. Illustration 1 still counts as unique next to PYQ May 2025 Q3(b) (that question's part (ii) is the same idea, but it is one of five parts).
+- Study Material label: "ICAI Study Material, Illustration N, p. <printed page>".
+- Study Material edition cited: the May 2027 edition PDFs in `books/ca-inter/smat-may-27-edition/all-modules/` (the repo's `raw_icai_study_materials` corpus is documented as that edition).
+- AS 3 and AS 14 are pointer units (above). Pranav's message said "AS 23"; this was taken as AS 3 and he confirmed.
+- All questions and answers stay public; no gating.
 
 ## 3. Inputs: what each is, who made it, how, and how to remake it
 
@@ -123,15 +132,26 @@ up to 6), Applicability, Introduction to AS and AS 24 (no Study Material items, 
 3, 8 and 9). AS 18 reaches ten from the bank plus extras, AS 1 is already ten, and AS 17 reaches nine. AS 3 and AS 14 are
 the open duplicate-code decision in section 2.
 
-### 6.6 Steps for a short unit
+### 6.6 Steps for a short unit (this is what was done for AS 25)
 
 1. Run the pool script and read that unit's items in the JSON output.
 2. Judge every `review` and `unique` item against the bank questions of the unit.
-3. For each kept Study Material item, extract question and answer from the ICAI **PDF**, rebuild
-   its tables, and check the arithmetic. Tag it to the syllabus topic (from file 1 in section 3).
-4. Add a source-kind field to the unit JSON and update `must-practice.js` to label it. Do the
-   same for the SEO block in `build_seo_static.py`.
-5. Build, deploy, verify; log which items were dropped and why.
+3. For each kept Study Material item: find its pages (`pypdf` text search for "Illustration N"),
+   render them with PyMuPDF (`import fitz`; `get_pixmap(dpi=110).save(...)`) and READ the images,
+   take the wording from the PDF text layer, rebuild tables as HTML, and re-derive the arithmetic.
+   Write it into `.../data/study-material-items/<unit_id>.json` (schema: copy `M1-C4-U7.json`:
+   `item_type`, `item_no`, `printed_page`, `pdf_pages`, `topic_ids`, `why`, `verification`,
+   `question_html`, `answer_html`). Tag topics from the syllabus index.
+4. Add the unit to `UNITS` with `"short_unit": True` (the build then keeps every unique bank
+   question, no per-topic cap, no padding) and run `build_must_practice_data.py`.
+5. `build_seo_static.py`, deploy, then `tools/verify_must_practice_live.py <unit_id>`; look at a
+   screenshot of the unit with a Study Material row open. Log which items were dropped and why.
+
+Lessons from the AS 25 pilot: (a) the pool script cannot see that two illustrations are the same
+problem with different figures (it missed Illustrations 1 and 4), so read the items yourself;
+(b) a study item named in `pyq_study_matches.json` is already covered by a PYQ and is not listed;
+(c) PyMuPDF is in the repo `.venv`; `pdftoppm` is not installed, so the Read tool cannot render a
+PDF directly.
 
 ## 7. Rules that apply to every unit
 

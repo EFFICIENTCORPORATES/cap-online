@@ -108,12 +108,15 @@ def practice_block() -> str:
         d = json.loads(f.read_text(encoding="utf-8"))
         if not d.get("published"):
             continue
+        if d.get("pointer"):
+            parts.append(f"<h2>{e(d['standard'])} — {e(d['unit_title'])}</h2><p>{e(d['pointer']['text'])} ({e(d['pointer']['label'])})</p>")
+            continue
         parts.append(f"<h2>{e(d['standard'])} — {e(d['unit_title'])}: {len(d['questions'])} must-practice questions</h2>")
         parts.append(f"<p>{e(d['chapter'])}, {e(d['module'].title())}. Chosen from every MTP, RTP and PYQ, ranked by how heavily the topic has been examined. Answers are on the interactive page.</p><ol>")
         for q in d["questions"]:
             topics = "; ".join(t["topic_name"] for t in q["topics"][:3])
             parts.append(
-                f"<li><strong>{e(q['source_label'])}, {e(q['question_no'])}</strong> &middot; {e(q['marks_text'])} &middot; Topic: {e(topics)}."
+                f"<li><strong>{e(q['paper_type'] + ' ' + q['source_label'] if q.get('source_kind') == 'study_material' else q['source_label'])}, {e(q['question_no'])}</strong> &middot; {e(q['marks_text'] or 'marks not stated')} &middot; Topic: {e(topics)}."
                 f" Why practise it: {e(q['why'])}<br>{e(plain(q['question_html'], 650))}</li>"
             )
         parts.append("</ol>")

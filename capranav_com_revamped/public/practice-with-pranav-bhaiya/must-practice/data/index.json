@@ -1,5 +1,5 @@
 {
- "generated_on": "2026-10-06",
+ "generated_on": "2026-10-18",
  "default_unit": "M2-C5-U1",
  "modules": [
   {
@@ -46,7 +46,7 @@
       {
        "unit_id": "M1-C4-U2",
        "label": "Accounting Standard 3 Cash Flow Statement",
-       "published": false
+       "published": true
       },
       {
        "unit_id": "M1-C4-U3",
@@ -71,7 +71,7 @@
       {
        "unit_id": "M1-C4-U7",
        "label": "Accounting Standard 25 Interim Financial Reporting",
-       "published": false
+       "published": true
       }
      ]
     }
@@ -206,7 +206,7 @@
       {
        "unit_id": "M2-C9-U2",
        "label": "Accounting Standard 14 Accounting for Amalgamations",
-       "published": false
+       "published": true
       }
      ]
     }

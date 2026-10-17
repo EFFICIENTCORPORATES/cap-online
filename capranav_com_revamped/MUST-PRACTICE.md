@@ -4,7 +4,7 @@ Read this if the task is "publish / fix / explain a Must Practice list". It is t
 whole chain from raw exam papers to the page at
 `https://capranav.com/practice-with-pranav-bhaiya/must-practice/`.
 
-**Published units (2026-10-06):** AS 2 (`M2-C5-U1`), AS 10 (`M2-C5-U2`), AS 16 (`M2-C5-U4`). The picker lists
+**Published units (2026-10-18):** AS 2 (`M2-C5-U1`), AS 10 (`M2-C5-U2`), AS 16 (`M2-C5-U4`); short unit AS 25 (`M1-C4-U7`, 3 questions); pointer units AS 3 (`M1-C4-U2`) and AS 14 (`M2-C9-U2`). The picker lists
 every syllabus unit from the 400-topic ranking; unpublished ones show "coming soon". AS 2 and AS 10 were
 hand-reviewed for same-idea repeats; AS 16 is formula-only (review still outstanding, see `PROJECT-LOG.md`).
 
@@ -82,7 +82,7 @@ at most two per topic, make sure every Top-100 topic of the chapter is covered, 
 
 ## Units with fewer than ten questions
 
-Different rule (Pranav, 2026-10-18): combine the Question Bank with the Study Material's Illustrations and Test Your Knowledge questions, keep only the unique ones, and publish even if fewer than ten. Method, data provenance and what is still unbuilt: `_claude/skills/SKILL-must-practice-questions.md`. Analysis script: `first_run/scripts/build_study_material_pool.py`.
+Different rule (Pranav, 2026-10-18): combine the Question Bank with the Study Material's Illustrations and Test Your Knowledge questions, keep only the unique ones, and publish even if fewer than ten. In `UNITS` set `"short_unit": True`; Study Material items live in `.../data/study-material-items/<unit_id>.json` (AS 25 is the worked example). A standard that the Question Bank files under another unit (AS 3, AS 14) is a **pointer unit**: `"pointer": {...}` in `UNITS`, no questions, a button to the other unit. Method, data provenance and what is still unbuilt: `_claude/skills/SKILL-must-practice-questions.md`. Analysis script: `first_run/scripts/build_study_material_pool.py`.
 
 ## Related docs
 

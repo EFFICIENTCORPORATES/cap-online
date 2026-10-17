@@ -8,10 +8,13 @@ Needs ``pip install playwright`` and Microsoft Edge (same as ``qa_smoke.py --bro
 A real browser is required: bulk data files go through the Worker's bot protection
 (BOT-PROTECTION.md), so bare curl/wget get 403 by design and prove nothing.
 
-Per unit it checks: the unit is in the picker and not marked "coming soon"; it has exactly
-ten question rows; every row expands and its "Show answer" reveals a non-empty answer;
-every row has a traced Question Bank page; no console errors, no 4xx/5xx responses; no
-horizontal overflow at 1280 px or 390 px. Exits 1 on any failure.
+Per unit it checks: the unit is in the picker and not marked "coming soon"; it has exactly as
+many question rows as the unit's generated JSON (ten for a standard unit, fewer for a short
+unit); every row expands and its "Show answer" reveals a non-empty answer; every Question Bank
+row has a traced page and every Study Material row shows its printed page and the label
+"Study Material"; a pointer unit (AS 3, AS 14) shows its note and a working "Go to" button and
+no table rows; no console errors, no 4xx/5xx responses; no horizontal overflow at 1280 px or
+390 px. Exits 1 on any failure.
 """
 from __future__ import annotations
 
@@ -25,7 +28,6 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "public/practice-with-pranav-bhaiya/must-practice/data"
 PAGE = "/practice-with-pranav-bhaiya/must-practice/"
-EXPECTED = 10
 
 
 def published_units() -> list[str]:
@@ -56,13 +58,33 @@ def check_unit(pg, base: str, unit_id: str, errors: list, bad: list) -> list[str
     if "coming soon" in label.lower():
         problems.append(f"picker still says coming soon: {label!r}")
     pg.select_option("#unit-select", unit_id)
+    unit_json = json.loads((DATA / f"{unit_id}.json").read_text(encoding="utf-8"))
+    expected_rows = unit_json["questions"]
+
+    if unit_json.get("pointer"):
+        pg.wait_for_selector("#pointer-panel:not([hidden])", timeout=15000)
+        text = pg.locator("#pointer-panel").inner_text()
+        if unit_json["pointer"]["text"] not in text:
+            problems.append("pointer note text missing")
+        if pg.locator("#q-body tr.q-row").count() and pg.locator("#unit-panel").is_visible():
+            problems.append("pointer unit also shows question rows")
+        pg.locator("#pointer-go").click()
+        pg.wait_for_timeout(1200)
+        if pg.input_value("#unit-select") != unit_json["pointer"]["unit_id"]:
+            problems.append("pointer button did not select the target unit")
+        print(f"{unit_id}: pointer to {unit_json['pointer']['unit_id']}, {len(problems)} problem(s)")
+        return problems
+
     pg.wait_for_selector("#q-body tr.q-row", timeout=15000)
     pg.wait_for_timeout(800)
 
     rows = pg.locator("#q-body tr.q-row")
     n = rows.count()
-    if n != EXPECTED:
-        problems.append(f"{n} question rows, expected {EXPECTED}")
+    expected = len(expected_rows)
+    if n != expected:
+        problems.append(f"{n} question rows, expected {expected}")
+    if not unit_json.get("short_unit") and expected != 10:
+        problems.append(f"standard unit JSON has {expected} questions, expected 10")
     for i in range(n):
         rows.nth(i).click()  # the answer button lives in a detail row hidden until the row is clicked
         detail = pg.locator("#q-body tr.detail-row").nth(i)
@@ -74,7 +96,10 @@ def check_unit(pg, base: str, unit_id: str, errors: list, bad: list) -> list[str
             problems.append(f"row {i + 1}: answer missing or too short ({len(answer)} chars)")
         if len(question) < 20:
             problems.append(f"row {i + 1}: question missing or too short ({len(question)} chars)")
-        if "not traced" in page_cell:
+        if i < len(expected_rows) and expected_rows[i].get("source_kind") == "study_material":
+            if "Study Material" not in page_cell or not page_cell.strip().startswith("p."):
+                problems.append(f"row {i + 1}: Study Material row lacks its printed page ({page_cell!r})")
+        elif "not traced" in page_cell:
             problems.append(f"row {i + 1}: no Question Bank page number")
     for width in (1280, 390):
         pg.set_viewport_size({"width": width, "height": 800})

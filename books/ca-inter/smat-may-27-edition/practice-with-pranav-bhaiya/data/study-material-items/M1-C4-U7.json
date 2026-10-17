@@ -1,0 +1,25 @@
+{
+ "unit_id": "M1-C4-U7",
+ "edition": "ICAI Study Material, CA Intermediate Advanced Accounting, May 2027 edition",
+ "source_pdf": "books/ca-inter/smat-may-27-edition/all-modules/M1_C4_U7_ Accounting Standard 25 Interim Financial Reporting.pdf",
+ "provenance": "Question and answer transcribed from the PDF's text layer and checked against rendered page images (pypdf + PyMuPDF), 2026-10-18. The markdown copy in raw_icai_study_materials was NOT used for answers (scrambled tables). See _claude/skills/SKILL-must-practice-questions.md section 6.",
+ "items": [
+  {
+   "item_type": "Illustration",
+   "item_no": 1,
+   "printed_page": "4.158",
+   "pdf_pages": [
+    6,
+    7
+   ],
+   "topic_ids": [
+    "M1-C4-U7-T7.10",
+    "M1-C4-U7-T7.11"
+   ],
+   "why": "Not asked in this form in any MTP, RTP or PYQ. Tests seasonal income and evenly incurred costs (Rank 26 topic); Illustration 4 in the same chapter is this problem again with other figures, so only this one is listed.",
+   "verification": "Arithmetic re-derived: total (a) 80; costs 60 + (4+8) = 72; profit 80 - 72 = 8. Wording matches the PDF.",
+   "question_html": "<p>Sincere Corporation is dealing in seasonal product. Sales pattern of the product quarter-wise is as follows:</p><table><tbody><tr><td>1st quarter 30th June</td><td>10%</td></tr><tr><td>2nd quarter 30th September</td><td>10%</td></tr><tr><td>3rd quarter 31st December</td><td>60%</td></tr><tr><td>4th quarter 31st March</td><td>20%</td></tr></tbody></table><p>Information regarding the 1st quarter ended on 30th June, 20X1 is as follows:</p><table><tbody><tr><td>Sales</td><td>80 crores</td></tr><tr><td>Salary and other expenses</td><td>60 crores</td></tr><tr><td>Advertisement expenses (routine)</td><td>4 crores</td></tr><tr><td>Administrative and selling expenses</td><td>8 crores</td></tr></tbody></table><p>While preparing interim financial report for first quarter Sincere Corporation wants to defer ₹ 10 crores expenditure to third quarter on the argument that third quarter is having more sales, therefore, the third quarter should be debited by more expenditure. Considering the seasonal nature of business and the expenditures are uniform throughout all quarters, calculate the result of the first quarter as per AS 25. Also give a comment on the company’s view.</p>",
+   "answer_html": "<table><thead><tr><th>Particulars</th><th>(₹ In crores)</th></tr></thead><tbody><tr><td><strong>Result of first quarter ended 30th June, 20X1</strong></td><td></td></tr><tr><td>Turnover</td><td>80</td></tr><tr><td>Other Income</td><td>Nil</td></tr><tr><td><strong>Total (a)</strong></td><td><strong>80</strong></td></tr><tr><td><em>Less</em>: Changes in inventories</td><td>Nil</td></tr><tr><td>Salaries and other cost</td><td>60</td></tr><tr><td>Administrative and selling Expenses (4+8)</td><td>12</td></tr><tr><td><strong>Total (b)</strong></td><td><strong>72</strong></td></tr><tr><td><strong>Profit (a)-(b)</strong></td><td><strong>8</strong></td></tr></tbody></table><p>According to AS 25, the Income and Expense should be recognized when they are earned and incurred respectively. Therefore, seasonal incomes will be recognized when they occur. Thus, the company’s view is not as per AS 25.</p>"
+  }
+ ]
+}

@@ -11,6 +11,7 @@ const moduleSelect = document.getElementById("module-select");
 const chapterSelect = document.getElementById("chapter-select");
 const unitSelect = document.getElementById("unit-select");
 const unitPanel = document.getElementById("unit-panel");
+const pointerPanel = document.getElementById("pointer-panel");
 const soonPanel = document.getElementById("soon-panel");
 const qBody = document.getElementById("q-body");
 
@@ -81,6 +82,13 @@ function marksLabel(question) {
   return !raw || /not stated/i.test(raw) ? "&mdash;" : escapeHtml(raw);
 }
 
+function pageCell(question) {
+  if (question.source_kind === "study_material") {
+    return `p. ${escapeHtml(question.ref_page)}<small>Study Material</small>`;
+  }
+  return question.book_page ? `p. ${question.book_page}<small>Question Bank</small>` : "&mdash;<small>not traced</small>";
+}
+
 function topicTags(question) {
   const tags = question.topics.map((topic) => {
     const band = topic.priority_band === "Top 50" ? "top50" : topic.priority_band === "Next 50" ? "next50" : "";
@@ -114,7 +122,7 @@ function renderQuestions(data) {
       </td>
       <td class="col-src paper">${escapeHtml(question.paper_type)}<small>${escapeHtml(question.source_label)}</small></td>
       <td class="col-marks">${marksLabel(question)}</td>
-      <td class="col-page pg">${question.book_page ? "p. " + question.book_page : "&mdash;"}<small>${question.book_page ? "Question Bank" : "not traced"}</small></td>`;
+      <td class="col-page pg">${pageCell(question)}</td>`;
 
     const detailRow = document.createElement("tr");
     detailRow.hidden = true;
@@ -161,13 +169,52 @@ function renderQuestions(data) {
   });
 }
 
+function goToUnit(unitId) {
+  for (const mod of CATALOGUE) {
+    for (const chapter of mod.chapters) {
+      const unit = chapter.units.find((u) => u.unit_id === unitId);
+      if (!unit) continue;
+      moduleSelect.value = mod.module;
+      chapterSelect.replaceChildren(...mod.chapters.map((c) => option(c.chapter, c.chapter)));
+      chapterSelect.value = chapter.chapter;
+      unitSelect.replaceChildren(
+        ...chapter.units.map((u) => option(u.unit_id, u.published ? u.label : `${u.label} — coming soon`))
+      );
+      unitSelect.value = unitId;
+      loadUnit();
+      return;
+    }
+  }
+}
+
+function renderPointer(data) {
+  document.getElementById("pointer-title").textContent = `${data.standard} — ${data.unit_title}`;
+  document.getElementById("pointer-text").textContent = data.pointer.text;
+  const button = document.getElementById("pointer-go");
+  button.textContent = `Go to ${data.pointer.label}`;
+  button.onclick = () => goToUnit(data.pointer.unit_id);
+  unitPanel.hidden = true;
+  soonPanel.hidden = true;
+  pointerPanel.hidden = false;
+}
+
 function renderUnit(data) {
+  pointerPanel.hidden = true;
+  if (data.pointer) {
+    renderPointer(data);
+    return;
+  }
   document.getElementById("unit-title").textContent = `${data.standard} — ${data.unit_title}`;
-  document.getElementById("unit-sub").textContent =
-    `${data.module} · ${data.chapter} · shortlisted from ${data.library_total} descriptive questions across every MTP, RTP and PYQ from 2023 onwards.`;
+  document.getElementById("unit-sub").textContent = data.short_unit
+    ? `${data.module} · ${data.chapter} · this unit has fewer than ten distinct questions, so every one is listed: ${data.bank_count} from the MTPs, RTPs and PYQs (2023 onwards)` +
+      (data.study_material_count ? ` and ${data.study_material_count} from the ICAI Study Material.` : ".")
+    : `${data.module} · ${data.chapter} · shortlisted from ${data.library_total} descriptive questions across every MTP, RTP and PYQ from 2023 onwards.`;
   document.getElementById("unit-count").textContent = data.questions.length;
   document.getElementById("book-note").textContent =
-    `Page numbers refer to ${data.book_edition}. Every question and answer here is reproduced from that book.`;
+    `Question Bank page numbers refer to ${data.book_edition}. Every question and answer here is reproduced from that book.` +
+    (data.study_material_count
+      ? ` Study Material items are from the ${data.study_material_edition}; their page numbers are the printed Study Material pages.`
+      : "");
   renderQuestions(data);
   unitPanel.hidden = false;
   soonPanel.hidden = true;
@@ -177,6 +224,7 @@ async function loadUnit() {
   const unit = currentUnit();
   if (!unit || !unit.published) {
     unitPanel.hidden = true;
+    pointerPanel.hidden = true;
     soonPanel.hidden = false;
     return;
   }

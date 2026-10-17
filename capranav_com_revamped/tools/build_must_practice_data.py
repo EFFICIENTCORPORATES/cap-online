@@ -33,6 +33,9 @@ ROOT = Path(__file__).resolve().parents[2]
 PRACTICE = ROOT / "books/ca-inter/smat-may-27-edition/practice-with-pranav-bhaiya/data"
 LIBRARY = PRACTICE / "mcq-library"
 PRIORITY = PRACTICE / "descriptive_topic_priority.json"
+# Hand-checked Study Material questions + answers for short units, one file per unit.
+# See _claude/skills/SKILL-must-practice-questions.md section 6 for how they are made.
+STUDY_ITEMS = PRACTICE / "study-material-items"
 BOOK_PDF = (
     ROOT
     / "first_run/output/final_deliverable"
@@ -158,6 +161,43 @@ UNITS = {
         "chapter": "Assets Based Accounting Standards",
         "published": True,
     },
+    # --- Short units: fewer than ten usable questions. Rule (Pranav, 2026-10-18): list every unique
+    # Question Bank question plus the unique Study Material items, even if that is under ten.
+    # No per-topic cap and no padding; only exact repeats are dropped. A hand-checked
+    # study-material-items/<unit_id>.json supplies the Study Material questions and answers.
+    "M1-C4-U7": {
+        "library_file": "CA_Inter_AdvAcc_AS_25_Interim_Financial_Reporting_2_Descriptive.json",
+        "standard": "AS 25",
+        "unit_title": "Interim Financial Reporting",
+        "module": "MODULE 1",
+        "chapter": "Presentation & Disclosures Based Accounting Standards",
+        "published": True,
+        "short_unit": True,
+    },
+    # --- Pointer units: the Question Bank files this standard's questions under another unit.
+    # Nothing is listed here; the page tells the student where to look (Pranav, 2026-10-18).
+    "M1-C4-U2": {
+        "standard": "AS 3",
+        "unit_title": "Cash Flow Statement",
+        "module": "MODULE 1",
+        "chapter": "Presentation & Disclosures Based Accounting Standards",
+        "published": True,
+        "pointer": {
+            "unit_id": "M3-C11-U2",
+            "text": "Questions on AS 3 are asked and listed under Module 3, Financial Statements of Companies, in the Cash Flow Statement unit.",
+        },
+    },
+    "M2-C9-U2": {
+        "standard": "AS 14",
+        "unit_title": "Accounting for Amalgamations",
+        "module": "MODULE 2",
+        "chapter": "Other Accounting Standards",
+        "published": True,
+        "pointer": {
+            "unit_id": "M3-C13-U0",
+            "text": "Questions on AS 14 are asked and listed under Module 3, in the Amalgamation of Companies unit.",
+        },
+    },
 }
 
 
@@ -222,7 +262,7 @@ def same_problem(a: dict, b: dict) -> float | None:
     return None
 
 
-def diversify(ranked: list[dict], seed: list[dict]) -> tuple[list[dict], list[dict], list[tuple[dict, dict, float]]]:
+def diversify(ranked: list[dict], seed: list[dict], cap: int = MAX_PER_TOPIC) -> tuple[list[dict], list[dict], list[tuple[dict, dict, float]]]:
     """Order candidates for selection: drop repeats of the same problem, and
     set aside questions beyond the per-topic cap. ``ranked`` must already
     be best-first. ``seed`` is anything already certain to appear (force-included
@@ -247,7 +287,7 @@ def diversify(ranked: list[dict], seed: list[dict]) -> tuple[list[dict], list[di
             dropped.append((q, twin[0], twin[1]))
             continue
         primary = q["topic_ids"][0] if q["topic_ids"] else None
-        if primary is not None and per_topic.get(primary, 0) >= MAX_PER_TOPIC:
+        if primary is not None and per_topic.get(primary, 0) >= cap:
             deferred.append(q)
             continue
         per_topic[primary] = per_topic.get(primary, 0) + 1
@@ -374,9 +414,83 @@ def question_key(question: dict) -> tuple[str, str, str | None]:
     return question["src_text"], match.group(1), match.group(2)
 
 
+def pointer_unit(unit_id: str, spec: dict, priority: dict) -> dict:
+    """A published unit with no questions of its own, only a note saying where they are."""
+    target = spec["pointer"]["unit_id"]
+    topic = next(t for t in priority["topic_rankings"] if t["topic_id"].rsplit("-T", 1)[0] == target)
+    return {
+        "unit_id": unit_id,
+        "standard": spec["standard"],
+        "unit_title": spec["unit_title"],
+        "module": spec["module"],
+        "chapter": spec["chapter"],
+        "generated_on": date.today().isoformat(),
+        "library_total": 0,
+        "published": spec.get("published", True),
+        "pointer": {
+            "unit_id": target,
+            "label": f"{topic['module'].title()} \u00b7 {topic['chapter_name']} \u00b7 {topic['unit_name']}",
+            "text": spec["pointer"]["text"],
+        },
+        "questions": [],
+    }
+
+
+def study_material_questions(unit_id: str, ranks: dict, first_position: int) -> tuple[list[dict], str | None]:
+    """The hand-checked Study Material items for a short unit, shaped like Question Bank entries."""
+    path = STUDY_ITEMS / f"{unit_id}.json"
+    if not path.exists():
+        return [], None
+    data = json.loads(path.read_text(encoding="utf-8"))
+    out = []
+    for offset, item in enumerate(data["items"]):
+        topics = sorted(
+            (
+                {
+                    "topic_id": tid,
+                    "topic_name": ranks[tid]["topic_name"],
+                    "overall_rank": ranks[tid]["overall_rank"],
+                    "priority_band": ranks[tid]["priority_band"],
+                }
+                for tid in item["topic_ids"]
+            ),
+            key=lambda t: t["overall_rank"],
+        )
+        best = topics[0]
+        out.append(
+            {
+                "position": first_position + offset,
+                "book_id": f"{unit_id}-SM-{item['item_type'][:3].upper()}{item['item_no']}",
+                "source_kind": "study_material",
+                "source_label": "Study Material",
+                "paper_type": "ICAI",
+                "question_no": f"{item['item_type']} {item['item_no']}",
+                "marks_text": "",
+                "approx_time_text": "",
+                "topic_text": f"Topic {best['topic_id'].rsplit('-T', 1)[1]}: {best['topic_name']}",
+                "topics": topics,
+                "badges": [],
+                "study_match_category": None,
+                "study_match_percent": None,
+                "why": item["why"],
+                "score": None,
+                "book_page": None,
+                "ref_page": item["printed_page"],
+                "question_html": item["question_html"],
+                "answer_html": item["answer_html"],
+                "mistake_type": None,
+                "mistake_text": "",
+            }
+        )
+    return out, data["edition"]
+
+
 def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> dict:
+    if "pointer" in spec:
+        return pointer_unit(unit_id, spec, priority)
     library = json.loads((LIBRARY / spec["library_file"]).read_text(encoding="utf-8"))
     ranks, _ = topic_lookup(priority)
+    short = bool(spec.get("short_unit"))
 
     unit_rows = [r for r in priority["question_topic_rows"] if r["unit_id"] == unit_id]
     rows_by_key: dict = {}
@@ -438,10 +552,15 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
     forced_in = [q for q in ranked if q["book_id"] in spec.get("force_include", {})]
     remaining = [q for q in ranked if q["book_id"] not in spec.get("force_include", {})]
 
-    remaining, over_cap, dropped_repeats = diversify(remaining, forced_in)
-    chosen = forced_in + apply_coverage(
-        remaining, over_cap, top100, max(SHORTLIST_SIZE - len(forced_in), 0)
-    )
+    if short:
+        # Every unique question, no per-topic cap, no padding, no ten-question ceiling.
+        remaining, over_cap, dropped_repeats = diversify(remaining, forced_in, cap=10**6)
+        chosen = forced_in + remaining
+    else:
+        remaining, over_cap, dropped_repeats = diversify(remaining, forced_in)
+        chosen = forced_in + apply_coverage(
+            remaining, over_cap, top100, max(SHORTLIST_SIZE - len(forced_in), 0)
+        )
     chosen.sort(key=lambda q: -q["score"])
 
     print()
@@ -483,7 +602,14 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
             }
         )
 
-    return {
+    bank_count = len(questions)
+    study_edition = None
+    if short:
+        extra, study_edition = study_material_questions(unit_id, ranks, len(questions) + 1)
+        questions += extra
+        print(f"    short unit: {bank_count} Question Bank + {len(extra)} Study Material = {len(questions)}")
+
+    payload = {
         "unit_id": unit_id,
         "standard": spec["standard"],
         "unit_title": spec["unit_title"],
@@ -495,6 +621,12 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
         "published": spec.get("published", True),
         "questions": questions,
     }
+    if short:
+        payload["short_unit"] = True
+        payload["bank_count"] = bank_count
+        payload["study_material_count"] = len(questions) - bank_count
+        payload["study_material_edition"] = study_edition
+    return payload
 
 
 def build_catalogue(priority: dict) -> list[dict]:
@@ -553,7 +685,7 @@ def main() -> None:
         target.write_text(
             json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8"
         )
-        unresolved = [q["book_id"] for q in payload["questions"] if q["book_page"] is None]
+        unresolved = [q["book_id"] for q in payload["questions"] if q["book_page"] is None and q.get("source_kind") != "study_material"]
         print(f"Wrote {target.name}: {len(payload['questions'])} questions")
         if unresolved:
             print(f"  Page number unresolved for: {', '.join(unresolved)}")

@@ -46,6 +46,8 @@
 .qtext thead th,.atext thead th{background:#f2f1ea}
 .show-answer{margin-top:18px;padding:12px 22px;border:0;border-radius:10px;background:var(--green);color:#fff;font:700 .95rem Inter,sans-serif;cursor:pointer}
 .show-answer:hover{background:#174633}
+.pointer-go{padding:12px 22px;border:0;border-radius:10px;background:var(--green);color:#fff;font:700 .95rem Inter,sans-serif;cursor:pointer;text-align:left}
+.pointer-go:hover{background:#174633}
 .answer{margin-top:18px;padding:20px;border-radius:14px;background:#f1f7ef;border:1px solid #cfe0cd}
 .answer h3{color:#1f5a43}
 .note{margin-top:16px;padding:16px 18px;border-radius:12px;font-size:.92rem;line-height:1.6}
