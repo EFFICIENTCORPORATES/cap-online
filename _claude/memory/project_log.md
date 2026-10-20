@@ -2,6 +2,10 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-20 — Foundation concept-book topic master and agent handoff
+
+Re-read all five live Foundation topic Sheet tabs; preserved 229 numbered headings, 33 sections, 11 chapter summaries, 132 resource entries and README in books/ca-foundation/topic-master/ CSV/JSON snapshots. Added AGENT-HANDOFF.md with source/edition boundaries, completed-versus-pending work and proposed next-input schemas; TEACHING-PLAN.md and the 49-date / 41-lecture / 61.5-hour proposal. Importance and Foundation exam mapping remain unassessed; concept book/body-level expansion not yet drafted. New session note in docs/sessions/. Existing curated retrieval corpus left intact.
+
 ## 2026-10-20 R2 backup of large files and local-only files; agent instructions updated
 All large/binary files of this repo (61 review files + 2 others, ~2.7 GB, mostly CA Inter question banks and strategy-book PDFs) are now in private Cloudflare R2 bucket `ec-cap-online-assets`, each verified by size and sha256, and listed in `R2_MANIFEST.md`. 2,105 small ignored/untracked files are in one AES-256 encrypted archive in the same bucket (passphrase in Bitwarden `EC_BACKUP__PROD__ARCHIVE_PASSPHRASE`). AGENTS.md and CLAUDE.md now have section 2b with the exact download/upload commands (`ec-asset-index/tools/ec_assets.py`); the old rule "binaries live locally only" is corrected. Nothing was deleted locally.
 

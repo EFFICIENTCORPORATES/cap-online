@@ -110,7 +110,9 @@ cap-online/
 
 ## Where things are
 
-CA Foundation Paper 1: [download, naming, inventory and PDF-to-Markdown workflow](books/ca-foundation/README.md).
+CA Foundation Paper 1: [download, naming, inventory and PDF-to-Markdown workflow](books/ca-foundation/README.md). Agent continuation: [concept-book handoff and topic snapshots](books/ca-foundation/AGENT-HANDOFF.md).
+
+Session records: `docs/sessions/` stores goals, decisions, validation and pending work for human/agent handoffs.
 
 | You want… | Look in |
 |---|---|

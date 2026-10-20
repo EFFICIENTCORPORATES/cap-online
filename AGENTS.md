@@ -160,3 +160,7 @@ python ec-asset-index/tools/ec_assets.py --agent restore-local cap-online local-
 ## Imported Claude Cowork project instructions
 
 This project is created for finalizing the content around the bridge course and the Demo lecture on ind AS 02 - valuation of Inventories
+
+## Foundation continuation and session records
+
+`docs/sessions/` stores per-session handoff notes. For Foundation Paper 1 concept-book work, read `books/ca-foundation/AGENT-HANDOFF.md` and `books/ca-foundation/topic-master/README.md`; preserve the distinction between TOC headings, body concepts and exam-evidence mapping. The Foundation concept-book requirement is an explicitly requested extension beyond the older two-book description above.
