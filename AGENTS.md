@@ -13,6 +13,8 @@ Git root `D:\EffCorp_Projects\cap-online` · remote `EFFICIENTCORPORATES/cap-onl
 3. **content/README.md** — creative-studio rules (only if the task touches `content/`).
 4. **_claude/memory/** — `project_log.md` (newest entry first) and the memory files there.
 
+Large/binary files are in R2: see section 2b and `R2_MANIFEST.md` before concluding any file is missing.
+
 Then briefly confirm you understand the structure and rules, and wait for the task. Do not start work before this.
 
 ---
@@ -20,12 +22,45 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 ## 2. Working rules (non-negotiable)
 
 - **Markdown (`.md`) by default.** HTML for books and slides. **No SVGs/diagrams unless explicitly asked.**
-- **No binary files in git.** Audio, video, images, office docs, archives, executables are gitignored — they live locally only. Commit only text (md/py/html/json/csv...).
+- **No binary files in git.** Audio, video, images, office docs, archives, executables are gitignored — they live in private Cloudflare R2 (see section 2b and `R2_MANIFEST.md`), never only on one machine. Commit only text (md/py/html/json/csv...).
 - **UTF-8 only.** Never write NUL bytes or UTF-16. (Cross-mount edits have corrupted files before — `health_check.py` now catches this.)
 - **After ANY structural change** (add / move / rename / delete files or folders): run `python tools/health_check.py` and fix everything it flags, then run `python tools/file_index.py`. If you add a new top-level folder, also document it in this file and in `README.md` — `health_check.py` will fail until you do.
 - **End every session** by appending a short dated note to `_claude/memory/project_log.md` (newest on top).
 - **Ask first when stuck.** At the first genuine doubt or blocker, ASK Pranav — do not guess or spin on workarounds.
 - **Pushing needs Pranav's credentials.** The sandbox cannot push to GitHub. Commit locally; Pranav runs `git push origin main` from his own machine.
+
+---
+
+## 2b. Large and binary files live in Cloudflare R2 (do NOT say they are missing or "only on the old disk")
+
+Binary/large files (PDFs, videos, zips, installers...) are gitignored, **but they are not local-only**. Since 2026-10-20 every large file of this repo is stored in a private Cloudflare R2 bucket and indexed:
+
+- **Bucket:** `ec-cap-online-assets` (Cloudflare account `68e19e5bed11326478a23d6e2ad31453`), private.
+- **What is there:** 63 files, 2.68 GB (CA Inter question banks, strategy-book and study-material PDFs, b-roll video, zips...). The full list with R2 key, size and sha256 is in **`R2_MANIFEST.md`** (repo root).
+- **Local-only small files** (ignored/untracked, incl. local config) are in one AES-256-encrypted archive: `local-only-archives/2026-10-20-cap-online.tar.gz.enc` (2105 files). Passphrase: Bitwarden Secrets Manager `EC_BACKUP__PROD__ARCHIVE_PASSPHRASE` (readable via the ECTPL credential agent).
+- **Master index for all repos:** `EFFICIENTCORPORATES/ec-asset-index` (`ASSET_INDEX.json`, `tools/ec_assets.py`, `ASSET_WORKFLOW.md`).
+
+### How to get a file that is in `R2_MANIFEST.md` but not on this machine
+Do this yourself. Do not ask Pranav to find the file.
+```bash
+git clone https://github.com/EFFICIENTCORPORATES/ec-asset-index      # once, next to this repo
+pip install boto3
+# downloads every manifest file into place, verifying sha256 (use the parent folder of this repo as --dest):
+python ec-asset-index/tools/ec_assets.py --agent pull cap-online --dest <parent-folder-of-cap-online>
+```
+Credentials: `--agent` asks the ECTPL credential agent for a short-lived Cloudflare token, or set `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY`. **Never ask for keys in chat and never commit them.** To fetch one file only, use boto3 `download_file(bucket, key, path)` with the key from the manifest.
+
+Restore the encrypted local-only archive:
+```bash
+export EC_ARCHIVE_PASSPHRASE=...   # from Bitwarden, never printed or committed
+python ec-asset-index/tools/ec_assets.py --agent restore-local cap-online local-only-archives/2026-10-20-cap-online.tar.gz.enc --dest <parent-folder-of-cap-online>
+```
+
+### When you create or change a big file
+1. `python ec-asset-index/tools/ec_assets.py scan <path-to-cap-online>` lists big files not yet in R2.
+2. `python ec-asset-index/tools/ec_assets.py --agent push <path-to-cap-online> --all` uploads, verifies, updates the index and `R2_MANIFEST.md`.
+3. Keep the file gitignored; commit `R2_MANIFEST.md` and push (`ec-asset-index` gets `ASSET_INDEX.json` committed too). Install the guard once per clone: copy `ec-asset-index/tools/pre-push-large-files.sh` to `.git/hooks/pre-push`.
+4. Before ending a session, run `scan` (nothing should be listed) and `backup-local`. Full guide: `ec-asset-index/ASSET_WORKFLOW.md`.
 
 ---
 

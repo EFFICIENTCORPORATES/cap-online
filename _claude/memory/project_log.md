@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-20 R2 backup of large files and local-only files; agent instructions updated
+All large/binary files of this repo (61 review files + 2 others, ~2.7 GB, mostly CA Inter question banks and strategy-book PDFs) are now in private Cloudflare R2 bucket `ec-cap-online-assets`, each verified by size and sha256, and listed in `R2_MANIFEST.md`. 2,105 small ignored/untracked files are in one AES-256 encrypted archive in the same bucket (passphrase in Bitwarden `EC_BACKUP__PROD__ARCHIVE_PASSPHRASE`). AGENTS.md and CLAUDE.md now have section 2b with the exact download/upload commands (`ec-asset-index/tools/ec_assets.py`); the old rule "binaries live locally only" is corrected. Nothing was deleted locally.
+
 ## 2026-10-18 Must Practice: all 36 units published
 Pranav asked for every pending unit to be visible so students can check questions and answers. Added 30 `UNITS` entries to `build_must_practice_data.py` (20 standard units of ten, 14 short units listing every unique bank question, plus the earlier AS 25 and pointers AS 3/AS 14). 274 questions, every printed page traced. Deployed version `af48faf2-8a4a-443b-8b74-05735ba1744e`; `verify_must_practice_live.py` passes for all 36. Build changes: a standard unit that ends under ten is flagged short automatically; short units include questions with no topic mapping (AS 1: 6 of 10); `qno_overrides` for the "QNone" question (logged as CR-008); heading helper when standard equals title. **Formula-only:** only AS 2 and AS 10 have had the manual same-idea repeat review. **Still to do:** Study Material items for the 13 short units without them (AS 25 is done); AS 3/AS 14 questions live under the Module 3 units. The static page is now 224 KB because of the crawler-readable list.
 
