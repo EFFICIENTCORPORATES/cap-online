@@ -4,6 +4,10 @@ Download official ICAI Accounting PDFs into a shallow local archive, preserve th
 
 ## Start here
 
+- **Other agents: start with [AGENT-HANDOFF.md](AGENT-HANDOFF.md).** It records the concept-book goal, live sources, completed work, limits and next required inputs.
+- [Foundation topic master snapshots](topic-master/README.md): all five live Sheet tabs, topic/page IDs, CSV and typed JSON (read 2026-10-20).
+- [Teaching flow and time allocations](TEACHING-PLAN.md) and [date-wise proposal](teaching-plan.csv): 41 lectures / 61.5 hours; not a locked beginner-course promise.
+
 - [Live inventory and downloader plan](https://docs.google.com/spreadsheets/d/1FxNpBF5_CI2FVw2lQ7a3w8r8AchIFzcJdlVOB7Gjy7A/edit#gid=104001): download the **entire workbook** through File → Download → Microsoft Excel (.xlsx). Keep the tab named `Downloader Master` unchanged.
 - [Python downloader](download_icai_pdfs.py): Python 3.10+, with `openpyxl` as its only third-party dependency.
 - [Full downloader specification](DOWNLOADER-SPEC.md): naming, dates, languages, resume/logging behavior and instructions for future AI agents.

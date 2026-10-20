@@ -1,0 +1,50 @@
+date,day,lecture_no,accounts,chapter_no,hours,business_laws,status
+2026-11-02,Monday,1,"Foundations: business story, terminology, assets/liabilities/capital, accounting equation and double-entry logic",1,1.5,"Companies Act, 2013",Assistant proposal; not confirmed final
+2026-11-03,Tuesday,2,"Concepts/conventions, accrual, capital and revenue expenditure/receipts; classification",1,1.5,"Companies Act, 2013",Assistant proposal; not confirmed final
+2026-11-04,Wednesday,3,"Journal entries: capital, purchases, sales, expenses, drawings and credit transactions",2,1.5,"Companies Act, 2013",Assistant proposal; not confirmed final
+2026-11-05,Thursday,4,"Journal applications: discounts, returns, bad debts and introductory adjustments",2,1.5,"Companies Act, 2013",Assistant proposal; not confirmed final
+2026-11-06,Friday,5,Ledger posting/balancing and trial balance; small transaction cycle,2,1.5,"Companies Act, 2013",Assistant proposal; not confirmed final
+2026-11-07,Saturday,6,"Subsidiary books, cash book fundamentals and contra entries",2,1.5,"Companies Act, 2013",Assistant proposal; not confirmed final
+2026-11-08,Sunday,,No class,,0,No class,User supplied no-class date
+2026-11-09,Monday,,No class,,0,No class,User supplied no-class date
+2026-11-10,Tuesday,,No class,,0,No class,User supplied no-class date
+2026-11-11,Wednesday,,No class,,0,No class,User supplied no-class date
+2026-11-12,Thursday,7,"Cash book applications, petty cash and integrated bookkeeping",2,1.5,"Negotiable Instruments Act, 1881",Assistant proposal; not confirmed final
+2026-11-13,Friday,8,"BRS: cash book versus bank statement, timing differences, reconciliation and overdrafts",3,1.5,"Negotiable Instruments Act, 1881",Assistant proposal; not confirmed final
+2026-11-14,Saturday,9,"BRS: adjusted cash book, errors and mixed problems",3,1.5,"Negotiable Instruments Act, 1881",Assistant proposal; not confirmed final
+2026-11-15,Sunday,,No class,,0,No class,User supplied no-class date
+2026-11-16,Monday,10,"Inventory: cost versus NRV, cost components, principles and record systems",4,1.5,"Sale of Goods Act, 1930",Assistant proposal; not confirmed final
+2026-11-17,Tuesday,11,"Inventory: cost formulas, stock valuation and effect on profit",4,1.5,"Sale of Goods Act, 1930",Assistant proposal; not confirmed final
+2026-11-18,Wednesday,12,"Depreciation: depreciable amount, useful life, residual value, methods and entries",5,1.5,"Sale of Goods Act, 1930",Assistant proposal; not confirmed final
+2026-11-19,Thursday,13,"Depreciation: additions/disposals, changes, amortisation, policies and estimates",5,1.5,"Sale of Goods Act, 1930",Assistant proposal; not confirmed final
+2026-11-20,Friday,14,Final accounts: trading/P&L/balance sheet; basic non-manufacturing case,7,1.5,"Sale of Goods Act, 1930",Assistant proposal; not confirmed final
+2026-11-21,Saturday,15,Final accounts: closing adjustments and dual effects; integrated non-manufacturing case,7,1.5,"Sale of Goods Act, 1930",Assistant proposal; not confirmed final
+2026-11-22,Sunday,,No class,,0,No class,User supplied no-class date
+2026-11-23,Monday,16,"Manufacturing account, production costs, transfer to trading account and integrated case",7,1.5,"Sale of Goods Act, 1930",Assistant proposal; not confirmed final
+2026-11-24,Tuesday,17,"Rectification: errors, suspense, correcting entries and profit effects; pre/post-finalisation",2,1.5,"Sale of Goods Act, 1930",Assistant proposal; not confirmed final
+2026-11-25,Wednesday,18,"Bills: parties, acceptance, maturity, endorsement, discounting and collection; both parties books",6,1.5,"Indian Partnership Act, 1932",Assistant proposal; not confirmed final
+2026-11-26,Thursday,19,"Bills: dishonour, renewal, retirement, insolvency and accommodation",6,1.5,"Indian Partnership Act, 1932",Assistant proposal; not confirmed final
+2026-11-27,Friday,20,"Incomplete records: statement of affairs, capital comparison, drawings and additional capital",9,1.5,"Indian Partnership Act, 1932",Assistant proposal; not confirmed final
+2026-11-28,Saturday,21,Incomplete records: reconstruct cash/debtors/creditors/purchases/sales; final accounts,9,1.5,"Indian Partnership Act, 1932",Assistant proposal; not confirmed final
+2026-11-29,Sunday,,No class,,0,No class,User supplied no-class date
+2026-11-30,Monday,22,"NPO: receipts/payments versus income/expenditure, subscriptions and accrual adjustments",8,1.5,"Indian Partnership Act, 1932",Assistant proposal; not confirmed final
+2026-12-01,Tuesday,23,"NPO: special funds, donations, opening/closing balance sheets and integrated case",8,1.5,"Indian Partnership Act, 1932",Assistant proposal; not confirmed final
+2026-12-02,Wednesday,24,"Partnership/LLP: foundations, capitals, appropriation, interest, salary and guarantees",10,1.5,"LLP Act, 2008",Assistant proposal; not confirmed final
+2026-12-03,Thursday,25,"Goodwill valuation/treatment, sacrificing/gaining ratios and revaluation foundations",10,1.5,Indian Regulatory Framework,Assistant proposal; not confirmed final
+2026-12-04,Friday,26,"Admission: goodwill, revaluation, reserves and accumulated results",10,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-05,Saturday,27,Admission: capital adjustments and integrated problems,10,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-06,Sunday,28,"Retirement: gaining ratio, goodwill, revaluation and settlement",10,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-07,Monday,29,"Death: profit to date, executor account and settlement",10,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-08,Tuesday,30,"Dissolution: realisation, settlement, insolvency and applicable piecemeal distribution",10,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-09,Wednesday,31,"Company/share-capital foundations, issue of shares and basic entries",11,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-10,Thursday,32,"Oversubscription/pro-rata, calls in arrears/advance and adjustments",11,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-11,Friday,33,Forfeiture/reissue and integrated share-issue problems,11,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-12,Saturday,34,"Debenture issue: terms, consideration and applicable treatments",11,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-13,Sunday,35,"Bonus and rights issue: conditions, calculations and entries",11,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-14,Monday,36,"Preference redemption: funding, premium, CRR and integrated problems",11,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-15,Tuesday,37,"Debenture redemption: applicable methods, requirements and entries",11,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-16,Wednesday,38,Company mixed examination problems; capital versus reserves; weak-area repair,11,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-17,Thursday,39,"Theory consolidation: contingencies, policies/estimates, measurement/valuation, standards and remaining theory",1,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-18,Friday,40,"Integrated revision: accounting cycle, final accounts, errors, inventory, depreciation and exam mistakes",Mixed,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-19,Saturday,41,"Integrated revision/recovery: partnership/company doubts, mock discussion and unresolved concept checklist",Mixed,1.5,"Indian Contract Act, 1872",Assistant proposal; not confirmed final
+2026-12-20,Sunday,,No class,,0,No class,User supplied no-class date
