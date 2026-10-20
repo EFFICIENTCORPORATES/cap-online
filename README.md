@@ -115,7 +115,7 @@ CA Foundation Paper 1: [download, naming, inventory and PDF-to-Markdown workflow
 | You want… | Look in |
 |---|---|
 | Exam strategy book | `books/strategy-book/` |
-| Advanced Accounts concept book (Ch.0, characters, stories) | `books/concept-book/` |
+| Advanced Accounts concept book (Ch.0, characters, stories) | `books/concept-book/` — production runbook: `books/ca-inter/concept-book/CONCEPT_BOOK_NOTES_PIPELINE.md` |
 | Author profile & journey | `books/about-author/` |
 | Syllabus JSON / extraction scripts | `syllabus-engine/` |
 | PYQ / MTP / RTP question bank + solutions | `question-bank/` |

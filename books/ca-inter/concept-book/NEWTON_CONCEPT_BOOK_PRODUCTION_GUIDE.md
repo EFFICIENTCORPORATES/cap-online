@@ -7,7 +7,7 @@
 **Repository:** https://github.com/EFFICIENTCORPORATES/cap-online  
 **Home:** `books/ca-inter/concept-book/`
 
-> **Start here for every new concept-book assignment.** Also read the repository's root `AGENTS.md`, `README.md`, the relevant existing concept-book skills, and chapter files. This guide describes the requested Newton of Accounts production workflow. Never assume an older draft or an AI-produced PDF has been academically approved. If conflicting instructions exist, pause and raise the conflict rather than silently overriding repository rules.
+> **Start here for every new concept-book assignment.** Also read the repository's root `AGENTS.md`, `README.md`, the relevant existing concept-book skills, and chapter files. For the end-to-end source → transcript → handwriting/Excalidraw → structured content → HTML → PDF → full-book workflow, read **`CONCEPT_BOOK_NOTES_PIPELINE.md`** immediately after this guide. This guide describes the requested Newton of Accounts production workflow. Never assume an older draft or an AI-produced PDF has been academically approved. If conflicting instructions exist, pause and raise the conflict rather than silently overriding repository rules.
 
 ## 1. Product and non-negotiable teaching method
 
