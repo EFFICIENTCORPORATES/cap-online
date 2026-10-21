@@ -20,6 +20,7 @@ Run after any change to the sources, then deploy::
 
 from __future__ import annotations
 
+import csv
 import difflib
 import json
 import re
@@ -36,6 +37,10 @@ PRIORITY = PRACTICE / "descriptive_topic_priority.json"
 # Hand-checked Study Material questions + answers for short units, one file per unit.
 # See _claude/skills/SKILL-must-practice-questions.md section 6 for how they are made.
 STUDY_ITEMS = PRACTICE / "study-material-items"
+# Study Material topic -> Must Practice questions, for agents and humans. Generated here, committed.
+TOPICS_FLAT = PRACTICE / "study_material_topics_flat.json"
+TOPIC_MAP_JSON = PRACTICE / "must_practice_topic_map.json"
+TOPIC_MAP_CSV = PRACTICE / "must_practice_topic_map.csv"
 BOOK_PDF = (
     ROOT
     / "first_run/output/final_deliverable"
@@ -728,6 +733,7 @@ def study_material_questions(unit_id: str, ranks: dict, first_position: int) -> 
             {
                 "position": first_position + offset,
                 "book_id": f"{unit_id}-SM-{item['item_type'][:3].upper()}{item['item_no']}",
+                "_human_id": None,
                 "source_kind": "study_material",
                 "source_label": "Study Material",
                 "paper_type": "ICAI",
@@ -873,6 +879,7 @@ def build_unit(unit_id: str, spec: dict, pages: list[str], priority: dict) -> di
             {
                 "position": position,
                 "book_id": q["book_id"],
+                "_human_id": source.get("human_id"),  # private: goes to the topic map, stripped from the site JSON
                 "source_label": q["source_label"],
                 "paper_type": q["paper_type"],
                 "question_no": source.get("qno_display", source["qno_text"]),
@@ -956,6 +963,103 @@ def build_catalogue(priority: dict) -> list[dict]:
     return tree
 
 
+def write_topic_map(payloads: dict[str, dict], priority: dict) -> None:
+    """One committed file answering "which Must Practice questions test this Study Material topic?"
+
+    Covers all 400 syllabus topics (including the ones with no Must Practice question, so a gap is
+    visible rather than silent). A question that tests several topics is listed under each of them;
+    ``is_primary_topic`` marks the topic it is ranked under. Derived entirely from the same data the
+    site is built from, so it cannot drift from the live page."""
+    flat = {t["unique_topic_id"]: t for t in json.loads(TOPICS_FLAT.read_text(encoding="utf-8"))}
+    by_topic: dict[str, list[dict]] = {}
+    for unit_id, payload in payloads.items():
+        for q in payload["questions"]:
+            for rank_pos, topic in enumerate(q["topics"]):
+                by_topic.setdefault(topic["topic_id"], []).append(
+                    {
+                        "unit_id": unit_id,
+                        "standard": payload["standard"],
+                        "position_in_unit_list": q["position"],
+                        "book_id": q["book_id"],
+                        "human_id": q.get("_human_id"),
+                        "source_kind": q.get("source_kind", "question_bank"),
+                        "source_label": q["source_label"],
+                        "question_no": q["question_no"],
+                        "marks_text": q["marks_text"],
+                        "question_bank_page": q["book_page"],
+                        "study_material_page": q.get("ref_page"),
+                        "is_primary_topic": rank_pos == 0,
+                    }
+                )
+    topics = []
+    for t in priority["topic_rankings"]:
+        tid = t["topic_id"]
+        info = flat.get(tid, {})
+        questions = sorted(by_topic.get(tid, []), key=lambda x: (x["unit_id"], x["position_in_unit_list"]))
+        topics.append(
+            {
+                "topic_id": tid,
+                "topic_no": info.get("topic_no"),
+                "topic_name": t["topic_name"],
+                "study_material_page": info.get("page_number"),
+                "unit_id": tid.rsplit("-T", 1)[0],
+                "unit_name": t["unit_name"],
+                "chapter_name": t["chapter_name"],
+                "module": t["module"],
+                "overall_rank": t["overall_rank"],
+                "priority_band": t["priority_band"],
+                "pyq_allocated_marks": t["pyq_allocated_marks"],
+                "must_practice_question_count": len(questions),
+                "must_practice_questions": questions,
+            }
+        )
+    topics.sort(key=lambda x: (x["unit_id"], x["topic_id"]))
+    covered = sum(1 for t in topics if t["must_practice_question_count"])
+    TOPIC_MAP_JSON.write_text(
+        json.dumps(
+            {
+                "generated_on": date.today().isoformat(),
+                "generator": "capranav_com_revamped/tools/build_must_practice_data.py (write_topic_map)",
+                "what_this_is": "For every Study Material topic (400, canonical ids from the syllabus index), the Must Practice questions that test it. Do not edit by hand; re-run the generator.",
+                "how_to_use": "Look up a topic_id (format M<module>-C<chapter>-U<unit>-T<topic no>) and read must_practice_questions. book_id/human_id identify the question in mcq-library/*_Descriptive.json; question_bank_page is the printed page in the first-edition Question Bank; study_material_page is the printed page of that topic (or of the Study Material item) in ICAI's May 2027 Study Material.",
+                "topics_total": len(topics),
+                "topics_with_must_practice_questions": covered,
+                "caveats": [
+                    "Only questions on the live Must Practice lists are included (about ten per unit, fewer for short units); a topic with none may still have Question Bank questions.",
+                    "Six AS 1 questions have no syllabus topic mapped yet; they appear on the AS 1 list but under no topic here.",
+                    "AS 3 (M1-C4-U2) and AS 14 (M2-C9-U2) have no questions of their own; their questions are under M3-C11-U2 and M3-C13-U0.",
+                    "A question testing several topics appears under each; is_primary_topic marks the one it is ranked under.",
+                ],
+                "topics": topics,
+            },
+            ensure_ascii=False,
+            indent=1,
+        ),
+        encoding="utf-8",
+    )
+    columns = [
+        "topic_id", "topic_no", "topic_name", "study_material_page", "unit_id", "unit_name", "chapter_name",
+        "module", "overall_rank", "priority_band", "pyq_allocated_marks", "must_practice_question_count",
+        "book_id", "human_id", "source_kind", "source_label", "question_no", "marks_text",
+        "question_bank_page", "study_material_page_of_item", "is_primary_topic", "position_in_unit_list", "list_unit_id",
+    ]
+    with TOPIC_MAP_CSV.open("w", encoding="utf-8-sig", newline="") as fh:
+        writer = csv.writer(fh)
+        writer.writerow(columns)
+        for t in topics:
+            base = [t[c] for c in columns[:12]]
+            if not t["must_practice_questions"]:
+                writer.writerow(base + [""] * 11)
+            for q in t["must_practice_questions"]:
+                writer.writerow(
+                    base
+                    + [q["book_id"], q["human_id"] or "", q["source_kind"], q["source_label"], q["question_no"], q["marks_text"],
+                       q["question_bank_page"] or "", q["study_material_page"] or "", q["is_primary_topic"],
+                       q["position_in_unit_list"], q["unit_id"]]
+                )
+    print(f"Wrote {TOPIC_MAP_JSON.name} and {TOPIC_MAP_CSV.name}: {covered} of {len(topics)} topics have Must Practice questions")
+
+
 def main() -> None:
     priority = json.loads(PRIORITY.read_text(encoding="utf-8"))
     pages = book_page_index()
@@ -974,8 +1078,12 @@ def main() -> None:
     units_total = sum(len(c["units"]) for m in catalogue for c in m["chapters"])
     print(f"Wrote index.json: {len(catalogue)} modules, {units_total} units")
 
+    payloads: dict[str, dict] = {}
     for unit_id, spec in UNITS.items():
         payload = build_unit(unit_id, spec, pages, priority)
+        payloads[unit_id] = json.loads(json.dumps(payload))  # keep the private fields for the topic map
+        for q in payload["questions"]:
+            q.pop("_human_id", None)
         target = OUTPUT / f"{unit_id}.json"
         target.write_text(
             json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8"
@@ -984,6 +1092,8 @@ def main() -> None:
         print(f"Wrote {target.name}: {len(payload['questions'])} questions")
         if unresolved:
             print(f"  Page number unresolved for: {', '.join(unresolved)}")
+
+    write_topic_map(payloads, priority)
 
 
 if __name__ == "__main__":

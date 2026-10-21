@@ -41,6 +41,25 @@ answer to show.
 - AS 3 and AS 14 are pointer units (above). Pranav's message said "AS 23"; this was taken as AS 3 and he confirmed.
 - All questions and answers stay public; no gating.
 
+### Mapping a Study Material topic to its Must Practice questions
+
+Use **`books/ca-inter/smat-may-27-edition/practice-with-pranav-bhaiya/data/must_practice_topic_map.json`**
+(and the same data as `.csv`, one row per topic-question pair). It lists all 400 syllabus topics by
+canonical id (`M<module>-C<chapter>-U<unit>-T<topic no>`), with the Study Material page, the
+priority rank and band, and every Must Practice question that tests the topic (`book_id`,
+`human_id`, source, question number, marks, Question Bank page, Study Material page,
+`is_primary_topic`). A topic with no question is listed with an empty list, so gaps are visible
+(175 of 400 topics have at least one). It is **generated** by `write_topic_map()` in
+`capranav_com_revamped/tools/build_must_practice_data.py` on every build; never edit it by hand.
+The per-question topic ids come from `descriptive_topic_priority.json` (question to topic rows)
+and, for Study Material items, from the item file's `topic_ids`. Caveats are written inside the
+file (AS 1's six unmapped questions; AS 3 and AS 14 have none of their own; a question testing
+several topics appears under each).
+
+Questions are identified by `book_id` (for example `M2C5U1-008`) and `human_id` (for example
+`CA_L2_P01_C4_U7_00400`); both resolve in `mcq-library/*_Descriptive.json`. Study Material items
+use ids like `M1-C4-U7-SM-ILL1` and have no `human_id`.
+
 ## 3. Inputs: what each is, who made it, how, and how to remake it
 
 Nothing below is hand-typed on the live site. Pages are generated; fix the source or the

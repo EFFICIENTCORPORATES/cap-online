@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-21 Must Practice: Study Material topic to questions map
+Pranav asked whether the Must Practice questions and their Study Material topic links are in git so a new agent can map a topic to its questions. They were (36 unit JSONs, the ranking, the library) but spread over many files with no reverse list, and the Excel is gitignored. Added `write_topic_map()` to `build_must_practice_data.py`: writes `data/must_practice_topic_map.json` and `.csv` (all 400 topics, the Must Practice questions testing each, `book_id`/`human_id`, pages, primary-topic flag; 175 of 400 topics covered; checked that all 269 site questions with topics appear and every bank question has a `human_id`). Documented in `_claude/skills/SKILL-must-practice-questions.md`, `MUST-PRACTICE.md` and the practice hub README. The rebuild only changed `generated_on` in the 36 site JSON files, so no redeploy.
+
 ## 2026-10-20 R2 backup of large files and local-only files; agent instructions updated
 All large/binary files of this repo (61 review files + 2 others, ~2.7 GB, mostly CA Inter question banks and strategy-book PDFs) are now in private Cloudflare R2 bucket `ec-cap-online-assets`, each verified by size and sha256, and listed in `R2_MANIFEST.md`. 2,105 small ignored/untracked files are in one AES-256 encrypted archive in the same bucket (passphrase in Bitwarden `EC_BACKUP__PROD__ARCHIVE_PASSPHRASE`). AGENTS.md and CLAUDE.md now have section 2b with the exact download/upload commands (`ec-asset-index/tools/ec_assets.py`); the old rule "binaries live locally only" is corrected. Nothing was deleted locally.
 
