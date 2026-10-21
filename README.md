@@ -1,5 +1,12 @@
 # cap-online — CA Inter Teaching Journey (VC Gurukul)
 
+<!-- EC-STANDARD:START (managed by EFFICIENTCORPORATES/ec-asset-index tools/gen_docs.py - edit there, not here) -->
+## Working on this repo (humans and agents)
+
+See **AGENTS.md** / **CLAUDE.md** for the full guide: related repos, how to download big files from Cloudflare R2 (`ec-asset-index/tools/ec_assets.py --agent pull cap-online`), how secrets are issued (Bitwarden via the ECTPL credential agent; never in git) and how agents are expected to work. Registry: `EFFICIENTCORPORATES/ec-asset-index`.
+<!-- EC-STANDARD:END -->
+
+
 Master repository for **CA Pranav Pratik Tulshyan**'s CA Inter Advanced Accounting teaching ecosystem at VC Gurukul, Noida — books, syllabus engine, question bank, online practice platform, content, and recording setup.
 
 > **Git root:** `D:\EffCorp_Projects\cap-online` · **Remote:** `EFFICIENTCORPORATES/cap-online` · **Branch:** `main`
@@ -108,7 +115,7 @@ CA Foundation Paper 1: [download, naming, inventory and PDF-to-Markdown workflow
 | You want… | Look in |
 |---|---|
 | Exam strategy book | `books/strategy-book/` |
-| Advanced Accounts concept book (Ch.0, characters, stories) | `books/concept-book/` |
+| Advanced Accounts concept book (Ch.0, characters, stories) | `books/concept-book/` — production runbook: `books/ca-inter/concept-book/CONCEPT_BOOK_NOTES_PIPELINE.md` |
 | Author profile & journey | `books/about-author/` |
 | Syllabus JSON / extraction scripts | `syllabus-engine/` |
 | PYQ / MTP / RTP question bank + solutions | `question-bank/` |

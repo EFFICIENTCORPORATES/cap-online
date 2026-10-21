@@ -1,5 +1,56 @@
 # AGENTS.md — Operating Guide for the cap-online repo
 
+<!-- EC-STANDARD:START (managed by EFFICIENTCORPORATES/ec-asset-index tools/gen_docs.py - edit there, not here) -->
+## EC operating guide (read this before doing anything in this repo)
+
+_Generated 2026-10-20 from `EFFICIENTCORPORATES/ec-asset-index`. If anything here is wrong, fix `products.json` / the generator there, then re-run `tools/gen_docs.py`._
+
+### 1. What this repo is
+- **Repo:** `EFFICIENTCORPORATES/cap-online` (default branch `main`), private GitHub.
+- **Product:** `capranav` - CA Pranav - teaching persona
+- **Entity:** PRANAV PRATIK TULSHYAN (proprietorship)
+- **Domain list (Google Tasks):** 5 - CA Pranav - VCG & Advanced Accounts | **Manager designation:** `capranav-product-manager` (principal NOT created yet - ask Pranav to create it before you need credentials) | **Owner:** pranav (interim)
+- **Domains (Cloudflare):** `capranav.com`
+- **Detected stack:** Python (requirements.txt); static HTML
+- **Top-level layout:** `.claude/`, `.tmp_artifact/`, `AGENTS.md`, `CLAUDE.md`, `Claude_V2.md`, `R2_MANIFEST.md`, `README.md`, `TELEGRAM-TEST-MODE-SYSTEM.md`, `_claude/`, `books/`, `capranav_com/`, `capranav_com_revamped/`, `content/`, `final-deliverables/`, `first_run/`, `index.html`, `materials/`, `mcq-platform/`, `obs-setup/`, `planning/`, `preparations/`, `requirements.txt`, `scratch_new_batches.txt`, `student-toolkit/`, `telegram/`
+
+### 2. Other repos you may need (clone what the task touches)
+- Registry and tools (always useful): `gh repo clone EFFICIENTCORPORATES/ec-asset-index` -> `ASSET_INDEX.json` (repo -> R2), `products.json` (all products/entities), `ENTITIES.md`, `DOMAINS.md`, `GOVERNANCE.md`, `ASSET_WORKFLOW.md`, `tools/ec_assets.py`.
+- Tech shared services: `EFFICIENTCORPORATES/credential-agent` (tokens/secrets), `EFFICIENTCORPORATES/task-hub` (GitHub issues/delivery), `EFFICIENTCORPORATES/personal-assistant` (Google Tasks/Calendar, brand-entity map).
+- Other repos of this product (`capranav`):
+  - `EFFICIENTCORPORATES/CAPranav_Website`
+  - `EFFICIENTCORPORATES/cap-offline`
+- Clone everything of a product in one go: see `ec-asset-index/ASSET_WORKFLOW.md` (`ec_assets.py pull <repo>` clones a repo and downloads its R2 files).
+
+### 3. Large and binary files (Cloudflare R2) - do not say a file is "missing" before checking
+- Bucket **`ec-cap-online-assets`** (private; Cloudflare account `68e19e5bed11326478a23d6e2ad31453`): 63 indexed files, 2.68 GB, plus 1 AES-256 encrypted archive(s) of local-only small files.
+- Full list with key, size and sha256: **`R2_MANIFEST.md`** in this repo, and `ec-asset-index/ASSET_INDEX.json`.
+- Download everything for this repo, sha256-verified (from a clone of `ec-asset-index`):
+  ```bash
+  pip install boto3
+  python ec-asset-index/tools/ec_assets.py --agent pull cap-online --dest <this-repo-folder-or-its-parent>
+  ```
+  (`--agent` needs a principal allowed to issue Cloudflare tokens; otherwise set `R2_ACCESS_KEY_ID`/`R2_SECRET_ACCESS_KEY` issued for you by Pranav. Never paste keys into chat or commit them.)
+- New or changed file >= 5 MB: never commit it. `ec_assets.py scan <repo-path>` then `ec_assets.py --agent push <repo-path> --all`, commit the updated `R2_MANIFEST.md`. Install the guard once per clone: copy `ec-asset-index/tools/pre-push-large-files.sh` to `.git/hooks/pre-push`.
+- Local-only small files (ignored/untracked): `ec_assets.py --agent backup-local <repo-path>` / `restore-local`. Passphrase is in Bitwarden (`EC_BACKUP__PROD__ARCHIVE_PASSPHRASE`).
+
+### 4. Secrets - how you get them (never from chat, never into git)
+- Secrets live in **Bitwarden Secrets Manager**, named `<REPO>__<ENV>__<VARIABLE>` (this repo's prefix: `CAP_ONLINE__`, ENV = `PROD`/`DEV`/`LOCAL`/`SHARED`). Only secret **names** are in `ec-asset-index/secrets_map.csv`; values never are.
+- Known secrets for this repo (6): `CAP_ONLINE__LOCAL__CAPRANAV_COM_CAPRANAV_WEBSITE_RAZORPAY_KEY_ID`, `CAP_ONLINE__LOCAL__CAPRANAV_COM_CAPRANAV_WEBSITE_RAZORPAY_KEY_SECRET`, `CAP_ONLINE__DEV__CAPRANAV_COM_REVAMPED_RAZORPAY_KEY_ID`, `CAP_ONLINE__DEV__CAPRANAV_COM_REVAMPED_RAZORPAY_KEY_SECRET`, `CAP_ONLINE__DEV__CAPRANAV_COM_REVAMPED_CF_EMAIL_API_TOKEN`, `CAP_ONLINE__DEV__CAPRANAV_COM_REVAMPED_RAZORPAY_WEBHOOK_SECRET`
+- You receive a value only through the **ECTPL credential agent** (`EFFICIENTCORPORATES/credential-agent`, `python ectpl_creds.py ...`), using **your own principal** (the designation of your role, e.g. the product manager above once it exists; today only `cloudflare-manager`, `github-manager` and `1lavya-product-manager` exist besides Pranav's admin), never another agent's or Pranav's identity unless Pranav explicitly authorises it for that task. Pipe the value straight into the command that needs it, e.g. `X=$(python ectpl_creds.py --as <you> get static:<NAME>) command`. Do not print, log, echo or commit it.
+- If your principal cannot read a secret you need, **stop and ask Pranav** to grant it; do not look for it in `.env` files, chat history or other repos.
+- Create `.env` locally from the secret names (see `.env.example` if present); `.env` is always gitignored.
+
+### 5. How agents work here (agentic workflow)
+- **Identity and scope:** act only as your designated role (see `ec-asset-index/GOVERNANCE.md`): Platform Manager (one platform), Product Manager (this product), or Process Owner (an approved n8n process). Stay inside this repo and the repos/platforms your task names. Humans and agents have separate identities.
+- **Start of session:** read this file, `README.md`, the repo's own docs below, and the latest notes in `docs/sessions/` (if present). **End of session:** write `docs/sessions/YYYY-MM-DD-<topic>.md` (goal, decisions, commands run, files changed, open items, next step) and add anything lasting to `CONTEXT.md` / `docs/adr/` / `docs/runbooks/`. No secrets in notes.
+- **Git:** work on a branch, small commits, open a PR; never force-push or rewrite history, never delete branches/repos, never commit files >= 5 MB or secrets. Destructive or irreversible actions (delete, force-push, drop data, change permissions) need Pranav's explicit approval in the session.
+- **Ask, do not guess:** if ownership, a placement or a requirement is unclear, ask Pranav one concise question. Report outcomes faithfully (what ran, what failed).
+- **Cost discipline:** use the cheapest model tier that does the job (open-source/small models for checks and routine edits; top models only for planning/hard reasoning), keep context small, cap loops/retries, and stop at your budget.
+- **Commands:** run only commands needed for the task; project code, build scripts and git hooks are untrusted until reviewed. Do not install software or change system settings without approval.
+<!-- EC-STANDARD:END -->
+
+
 **Read this file first, every session. Then read the context in section 1 BEFORE executing any task.**
 This repo is CA **Pranav Pratik Tulshyan**'s CA Inter teaching ecosystem for **VC Gurukul, Noida**.
 Git root `D:\EffCorp_Projects\cap-online` · remote `EFFICIENTCORPORATES/cap-online` · branch `main`.
