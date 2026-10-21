@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-22 — CA lecture transcription learnings consolidated into reusable skill
+Created `_claude/skills/SKILL-ca-lecture-transcription.md` so a fresh agent can continue without chat history. It records the completed R2/audio state, all three early faster-whisper benchmarks (small+auto, medium+forced-hi, small+forced-hi), the conclusion to avoid forced Hindi for Hinglish, Roman-script-not-translation policy, raw+Roman dual-output design, 5-second timestamp convention, QA workflow/artifact method, RTX 3050/CUDA/PyAV setup lessons, safety/idempotency rules, production architecture, and the gate requiring teacher QA approval before bulk transcription. Linked it from `CONCEPT_BOOK_NOTES_PIPELINE.md`.
+
 ## 2026-10-21 Must Practice: Study Material topic to questions map
 Pranav asked whether the Must Practice questions and their Study Material topic links are in git so a new agent can map a topic to its questions. They were (36 unit JSONs, the ranking, the library) but spread over many files with no reverse list, and the Excel is gitignored. Added `write_topic_map()` to `build_must_practice_data.py`: writes `data/must_practice_topic_map.json` and `.csv` (all 400 topics, the Must Practice questions testing each, `book_id`/`human_id`, pages, primary-topic flag; 175 of 400 topics covered; checked that all 269 site questions with topics appear and every bank question has a `human_id`). Documented in `_claude/skills/SKILL-must-practice-questions.md`, `MUST-PRACTICE.md` and the practice hub README. The rebuild only changed `generated_on` in the 36 site JSON files, so no redeploy.
 
