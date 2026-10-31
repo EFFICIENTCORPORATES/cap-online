@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-10-31 Agent entry points, backlog and issue tooling
+Pranav asked that CLAUDE.md and AGENTS.md both exist, that everything done is documented, and that pending items can become GitHub issues so any new agent can start alone. Added `CONTEXT.md` (state, decisions, how the repo is worked, push recipe, gotchas), `docs/BACKLOG.md` (43 pending items, ids, owners, pointers) and `docs/sessions/2026-10-31-must-practice-and-agent-docs.md`; `tools/backlog_to_issues.py` (dry-run default, nothing created). Fixed `AGENTS.md` (it was an abridged stale fork: wrong push statement, thin read order, missing folders) and added a drift guard to `tools/health_check.py` (negative control verified). **Found:** the repo is public on GitHub although the guide says private (BL-R01); corrected my own 2026-10-18 unit counts to 18 standard / 16 short / 2 pointer (15 short units lack Study Material items). Issues deliberately not created: where they live is decision BL-R02.
+
 ## 2026-10-21 Must Practice: Study Material topic to questions map
 Pranav asked whether the Must Practice questions and their Study Material topic links are in git so a new agent can map a topic to its questions. They were (36 unit JSONs, the ranking, the library) but spread over many files with no reverse list, and the Excel is gitignored. Added `write_topic_map()` to `build_must_practice_data.py`: writes `data/must_practice_topic_map.json` and `.csv` (all 400 topics, the Must Practice questions testing each, `book_id`/`human_id`, pages, primary-topic flag; 175 of 400 topics covered; checked that all 269 site questions with topics appear and every bank question has a `human_id`). Documented in `_claude/skills/SKILL-must-practice-questions.md`, `MUST-PRACTICE.md` and the practice hub README. The rebuild only changed `generated_on` in the 36 site JSON files, so no redeploy.
 
