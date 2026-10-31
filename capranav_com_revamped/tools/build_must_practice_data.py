@@ -1026,7 +1026,7 @@ def write_topic_map(payloads: dict[str, dict], priority: dict) -> None:
                 "topics_with_must_practice_questions": covered,
                 "caveats": [
                     "Only questions on the live Must Practice lists are included (about ten per unit, fewer for short units); a topic with none may still have Question Bank questions.",
-                    "Six AS 1 questions have no syllabus topic mapped yet; they appear on the AS 1 list but under no topic here.",
+                    "Five AS 1 questions on the live list (six in the library) have no syllabus topic mapped yet; they appear on the AS 1 list but under no topic here.",
                     "AS 3 (M1-C4-U2) and AS 14 (M2-C9-U2) have no questions of their own; their questions are under M3-C11-U2 and M3-C13-U0.",
                     "A question testing several topics appears under each; is_primary_topic marks the one it is ranked under.",
                 ],

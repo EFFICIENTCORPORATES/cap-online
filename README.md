@@ -11,6 +11,8 @@ Master repository for **CA Pranav Pratik Tulshyan**'s CA Inter Advanced Accounti
 
 > **Git root:** `D:\EffCorp_Projects\cap-online` · **Remote:** `EFFICIENTCORPORATES/cap-online` · **Branch:** `main`
 
+> **Start here (humans and agents):** [CONTEXT.md](CONTEXT.md) for where things stand and how the repo is worked, then [docs/BACKLOG.md](docs/BACKLOG.md) for everything not done yet.
+
 ---
 
 ## What we're building
@@ -57,6 +59,8 @@ cap-online/
 │   ├── memory/                ← memory files + project_log.md (session history)
 │   ├── artifacts/             ← MD docs recovered from Claude projects
 │   └── skills/                ← writing/voice skill files worth preserving
+│
+├── docs/                      ← agent documentation: BACKLOG.md (pending work index) + sessions/ (one note per session)
 │
 ├── books/
 │   ├── strategy-book/         ← Pillar 1: exam strategy (drafts/ working/ final/)

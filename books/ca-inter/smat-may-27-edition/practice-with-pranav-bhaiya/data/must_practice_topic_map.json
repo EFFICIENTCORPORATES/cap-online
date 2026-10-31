@@ -1,5 +1,5 @@
 {
- "generated_on": "2026-10-21",
+ "generated_on": "2026-10-31",
  "generator": "capranav_com_revamped/tools/build_must_practice_data.py (write_topic_map)",
  "what_this_is": "For every Study Material topic (400, canonical ids from the syllabus index), the Must Practice questions that test it. Do not edit by hand; re-run the generator.",
  "how_to_use": "Look up a topic_id (format M<module>-C<chapter>-U<unit>-T<topic no>) and read must_practice_questions. book_id/human_id identify the question in mcq-library/*_Descriptive.json; question_bank_page is the printed page in the first-edition Question Bank; study_material_page is the printed page of that topic (or of the Study Material item) in ICAI's May 2027 Study Material.",
@@ -7,7 +7,7 @@
  "topics_with_must_practice_questions": 175,
  "caveats": [
   "Only questions on the live Must Practice lists are included (about ten per unit, fewer for short units); a topic with none may still have Question Bank questions.",
-  "Six AS 1 questions have no syllabus topic mapped yet; they appear on the AS 1 list but under no topic here.",
+  "Five AS 1 questions on the live list (six in the library) have no syllabus topic mapped yet; they appear on the AS 1 list but under no topic here.",
   "AS 3 (M1-C4-U2) and AS 14 (M2-C9-U2) have no questions of their own; their questions are under M3-C11-U2 and M3-C13-U0.",
   "A question testing several topics appears under each; is_primary_topic marks the one it is ranked under."
  ],

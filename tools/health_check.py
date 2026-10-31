@@ -6,6 +6,9 @@ Checks:
   2. Every relative link/path in README.md resolves.
   3. No tracked text file contains NUL bytes / invalid UTF-8.
   4. CLAUDE.md exists and is not stale (every live top-level folder is documented in it).
+  4b. AGENTS.md, CLAUDE.md, CONTEXT.md and docs/BACKLOG.md all exist, both entry docs document every live
+      top-level folder and point to CONTEXT.md and docs/BACKLOG.md (guard added 2026-10-31: AGENTS.md had
+      drifted into a stale copy because only CLAUDE.md was checked).
   5. Component index MD5 matches current MASTER.md (run generate_component_index.py if stale).
   6. Reports top-level folders not in the agreed structure (review items).
 
@@ -145,6 +148,29 @@ def check_claude_md():
     return problems
 
 
+def check_agent_entry_points():
+    """AGENTS.md and CLAUDE.md must not drift apart: both exist, both name every live top-level
+    folder, both point at CONTEXT.md and docs/BACKLOG.md, and those two files exist."""
+    problems = []
+    for name in ("CONTEXT.md", "docs/BACKLOG.md"):
+        if not (ROOT / name).exists():
+            problems.append("MISSING %s (agent entry point)" % name)
+    for doc in ("CLAUDE.md", "AGENTS.md"):
+        f = ROOT / doc
+        if not f.exists():
+            problems.append("MISSING " + doc)
+            continue
+        text = f.read_text(encoding="utf-8", errors="ignore")
+        for ref in ("CONTEXT.md", "docs/BACKLOG.md"):
+            if ref not in text:
+                problems.append("%s does not point to %s" % (doc, ref))
+        if doc == "AGENTS.md":  # CLAUDE.md is covered by check_claude_md()
+            for name in _live_top_level_dirs():
+                if name not in text:
+                    problems.append("AGENTS.md may be stale: top-level '%s/' is not documented" % name)
+    return problems
+
+
 def check_component_index_stale():
     """Component index MD5 must match current MASTER.md; if not, regenerate with generate_component_index.py."""
     master = ROOT / "books/strategy-book/working/CA-Inter-Strategy-Book-MASTER.md"
@@ -177,21 +203,23 @@ def main():
     lp = check_readme_links()
     ep = check_encoding()
     cp = check_claude_md()
+    ap = check_agent_entry_points()
     ip = check_component_index_stale()
     review = list_review()
     print("=== cap-online health check ===\n")
     print("Expected folders present: %d/%d" % (len(EXPECTED_DIRS) - len(dp), len(EXPECTED_DIRS)))
     print("Text files checked for NUL/UTF-8: %s" % ("FAIL" if ep else "clean"))
     print("CLAUDE.md up to date: %s" % ("FAIL" if cp else "yes"))
+    print("Agent entry points aligned (AGENTS.md, CONTEXT.md, BACKLOG): %s" % ("FAIL" if ap else "yes"))
     print("Component index in sync: %s" % ("FAIL" if ip else "yes"))
-    for prob in dp + lp + ep + cp + ip:
+    for prob in dp + lp + ep + cp + ap + ip:
         print("  [FAIL] " + prob)
     for r in review:
         print("  [warn] " + r)
-    if not dp and not lp and not ep and not cp and not ip:
+    if not dp and not lp and not ep and not cp and not ap and not ip:
         print("\nOK - structure valid, README links resolve, encodings clean, CLAUDE.md current, component index in sync.")
         return 0
-    print("\n%d problem(s) found." % (len(dp) + len(lp) + len(ep) + len(cp) + len(ip)))
+    print("\n%d problem(s) found." % (len(dp) + len(lp) + len(ep) + len(cp) + len(ap) + len(ip)))
     return 1
 
 

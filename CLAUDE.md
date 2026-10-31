@@ -59,11 +59,13 @@ Git root `D:\EffCorp_Projects\cap-online` · remote `EFFICIENTCORPORATES/cap-onl
 
 ## 1. Read order (do this first, every session)
 
-1. **CLAUDE.md** (this file) — repo-wide rules and context for every pillar.
-2. **README.md** — full repo map, the 6 pillars, and rules.
-3. **Claude_V2.md** — deep context for the Strategy Book (Pillar 1) only; read it if the task touches `books/strategy-book/`. It does not cover any other pillar and is never a substitute for this file.
-4. **content/README.md** — creative-studio rules (only if the task touches `content/`).
-5. **_claude/memory/** — `project_log.md` (newest entry first) and the memory files there.
+1. **CONTEXT.md** — where things stand now, decisions already made, how the repo is worked (concurrent sessions, push recipe), gotchas, end-of-session checklist. Short; read it fully.
+2. **docs/BACKLOG.md** — everything not done yet, with owner and detail pointers. Check it before starting, update it when you finish.
+3. **CLAUDE.md** (this file) — repo-wide rules and the full dated history (sections 6–11). `AGENTS.md` is an abridged copy for other agents; keep the two aligned.
+4. **README.md** — full repo map, the 6 pillars, and rules.
+5. **Claude_V2.md** — deep context for the Strategy Book (Pillar 1) only; read it if the task touches `books/strategy-book/`. It does not cover any other pillar and is never a substitute for this file.
+6. **content/README.md** — creative-studio rules (only if the task touches `content/`).
+7. **_claude/memory/** — `project_log.md` (newest entry first) and the memory files there.
 
 Large/binary files are in R2: see section 2b and `R2_MANIFEST.md` before concluding any file is missing.
 
@@ -165,6 +167,7 @@ python ec-asset-index/tools/ec_assets.py --agent restore-local cap-online local-
 | `mentorship/` | Mentorship material for other faculty/institutes: `caclarity/` (CA Inter Taxation and FR question banks, answer keys, weightage), `vcg/`. |
 | `tools/` | Admin/processing scripts (see section 5) |
 | `_claude/` | Claude's context: `memory/` (incl. `project_log.md`), `artifacts/`, `skills/` |
+| `docs/` | Cross-repo agent documentation: `BACKLOG.md` (everything not done yet, one index with owners and pointers) and `sessions/` (one note per working session, `YYYY-MM-DD-<topic>.md`). The agent entry point is `CONTEXT.md` at the repo root. |
 | `first_run/` | **Workspace proving the Question Bank Book pipeline end-to-end** (added 2026-07-23) before scaling to the full syllabus. **`HOW-TO-BUILD-THE-BOOK.md`** (new 2026-07-27) is the master runbook — read it before running any script below; it has the exact command order, prerequisites, and every fixed-incident gotcha. `source/` (PDFs only, never MD, for every in-scope sitting — see section 6 for why this is enforced structurally now). `schema/` (single-source-of-truth `book-style.json` + generated `book-style.css` + `HTML-SCHEMA.md`). `prompts/` (the 3 external-AI prompts for generating sitting HTML). `scripts/` — Layer 1→2→3 (`extract_questions.py`, `generate_chapter_book.py`, `generate_all_chapter_books.py`), coverage stats (`generate_book_stats.py`), whole-book assembly (`generate_qb_front_back_matter.py`, `generate_qb_toc.py`, `qb_merge.py`, `resolve_qb_toc_pages.py`, `qb_common.py` for shared print/pagination CSS — all built by a concurrent session, see section 2's multi-agent note), and QA round-trip tooling added 2026-08-07 (`extract_book_questions.py`, `diff_book_vs_index.py` — parse the *finished merged book* back into JSON and diff it against `questions_index.json`; see section 6's 2026-08-07 entry). `output/parsed-from-pdf/` (sitting HTML, Layer 1). `output/generated-from-script/` (`questions_index.json`, `book_stats.json`, every chapter book — Layers 2–3). `output/qa/` (added 2026-08-07 — `book_questions_extracted.json`, the finished book re-parsed into JSON, plus `book-vs-index-diff.json`/`.md`, the QA comparison report). `output/` root also holds `front-matter.html`, `table-of-contents.html`, `chapter-coverage-matrix.html`, `back-matter.html`, the final merged `QUESTION-BANK-BOOK.html`, `vendor/` (fonts + paged.js), `final_deliverable/` (already-built, named PDF releases — e.g. `..._V1.pdf`, watermarked `..._V1_protect.pdf` — treat as distributed/ready-to-distribute, never regenerate or overwrite without asking), and the student-facing `How-to-Read-this-Book.md`. See section 6 for full status. Not a permanent pillar — once validated, its lessons fold back into `books/question-bank/`. |
 
 **Path note (2026-09-23):** the books were reorganised under `books/ca-inter/`

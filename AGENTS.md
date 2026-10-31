@@ -59,10 +59,12 @@ Git root `D:\EffCorp_Projects\cap-online` · remote `EFFICIENTCORPORATES/cap-onl
 
 ## 1. Read order (do this first, every session)
 
-1. **AGENTS.md** (this file).
-2. **README.md** — full repo map, the 6 pillars, and rules.
-3. **content/README.md** — creative-studio rules (only if the task touches `content/`).
-4. **_claude/memory/** — `project_log.md` (newest entry first) and the memory files there.
+1. **CONTEXT.md** — where things stand now, decisions already made, how the repo is worked (concurrent sessions, push recipe), gotchas, end-of-session checklist. Short; read it fully.
+2. **docs/BACKLOG.md** — everything not done yet, with owner and detail pointers. Check it before starting, update it when you finish.
+3. **AGENTS.md** (this file). It is an abridged copy: `CLAUDE.md` holds the full dated history (sections 6–11). Where the two differ, `CONTEXT.md` and `CLAUDE.md` win; paths in the folder table below predate the 2026-09-23 reorganisation, so use `CLAUDE.md` §3.
+4. **README.md** — full repo map, the 6 pillars, and rules.
+5. **content/README.md** — creative-studio rules (only if the task touches `content/`).
+6. **_claude/memory/** — `project_log.md` (newest entry first) and the memory files there.
 
 Large/binary files are in R2: see section 2b and `R2_MANIFEST.md` before concluding any file is missing.
 
@@ -78,7 +80,7 @@ Then briefly confirm you understand the structure and rules, and wait for the ta
 - **After ANY structural change** (add / move / rename / delete files or folders): run `python tools/health_check.py` and fix everything it flags, then run `python tools/file_index.py`. If you add a new top-level folder, also document it in this file and in `README.md` — `health_check.py` will fail until you do.
 - **End every session** by appending a short dated note to `_claude/memory/project_log.md` (newest on top).
 - **Ask first when stuck.** At the first genuine doubt or blocker, ASK Pranav — do not guess or spin on workarounds.
-- **Pushing needs Pranav's credentials.** The sandbox cannot push to GitHub. Commit locally; Pranav runs `git push origin main` from his own machine.
+- **Pushing:** `git push origin main` has worked from this environment (confirmed repeatedly, most recently 2026-10-31), so the older note that "the sandbox cannot push" is wrong. Another session often pushes first, so expect a rejection and follow the fetch, merge and log-conflict recipe in `CONTEXT.md` §4. Never force-push. If a push genuinely fails, commit locally and tell Pranav.
 
 ---
 
@@ -137,6 +139,8 @@ python ec-asset-index/tools/ec_assets.py --agent restore-local cap-online local-
 | `final-deliverables/` | Print-ready teaching documents: teaching method (01), batch planner (02/02A), bridge course skeleton (03/03A), and future student-facing exports. MD only. |
 | `tools/` | Admin/processing scripts (see section 5) |
 | `_claude/` | Codex's context: `memory/` (incl. `project_log.md`), `artifacts/`, `skills/` |
+| `docs/` | Cross-repo agent documentation: `BACKLOG.md` (everything not done yet, one index) and `sessions/` (one note per working session, `YYYY-MM-DD-<topic>.md`). Entry point for agents is `CONTEXT.md` at the repo root. |
+| `mentorship/` | Mentorship material for other faculty/institutes: `caclarity/` (CA Inter Taxation and FR question banks, answer keys, weightage), `vcg/`. |
 
 **Only TWO self-drafted books:** the strategy book and the concept book (Advanced Accounts). Everything else is engine/platform/content/ops.
 

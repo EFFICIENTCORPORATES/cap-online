@@ -20,9 +20,9 @@ answer to show.
 
 | Piece | State (2026-10-18) |
 |---|---|
-| **All 36 units live** (2026-10-18, 274 questions) | 20 standard units show ten questions; 14 short units show every unique Question Bank question (3 to 9 each, AS 27 only 2); AS 3 and AS 14 are pointer units. Every Question Bank row has a traced printed page. Verified live with `tools/verify_must_practice_live.py` (all 36 pass). |
+| **All 36 units live** (2026-10-18, 274 questions) | 18 standard units show ten questions; 16 short units show every unique Question Bank question (2 to 9 each; AS 27 has only 2); AS 3 and AS 14 are pointer units. Every Question Bank row has a traced printed page. Verified live with `tools/verify_must_practice_live.py` (all 36 pass). |
 | Standard units: same-idea repeat review | **Only AS 2 and AS 10 are hand-reviewed.** Every other standard unit (AS 4, 5, 9, 11, 12, 13, 16, 19, 21, 29, Framework, Financial Statements of Companies, Cash Flow Statement, Amalgamation, Internal Reconstruction, Branch Accounting, and the others the build marks standard) is formula-only. The manual step in section 5 is outstanding for them. |
-| Short-unit rule (section 6) | Applied to all 14 short units. **Study Material items are added only for AS 25** (2 Question Bank + Illustration 1). The other 13 short units show Question Bank questions only until their Study Material items are read from the PDF and added (section 6.6); the pool script lists the candidates for each. |
+| Short-unit rule (section 6) | Applied to all 16 short units. **Study Material items are added only for AS 25** (2 Question Bank + Illustration 1). The other 15 short units show Question Bank questions only until their Study Material items are read from the PDF and added (section 6.6); the pool script lists the candidates for each. |
 | Questions with no syllabus topic mapped | A short unit still lists them (unscored, last, "no syllabus topic is mapped to this question yet"). AS 1 has 6 of its 10. A standard unit cannot rank them and skips them. |
 | Question numbered "QNone" | PYQ November 2023 Q4 (`M3C11U1-024`, Financial Statements of Companies, 20 marks) was extracted with no question number and prints as "QNone" in the first-edition book. Logged as CR-008 in `first_run/SECOND-EDITION-CHANGE-REQUESTS.md`. The Must Practice build shows "Q4" through a documented `qno_overrides` entry; the ranking data stores its number as the string "None", so matching keeps the original. |
 | `first_run/scripts/build_study_material_pool.py` | Built. Finds Study Material items not already covered by the Question Bank. Output is an upper bound, see section 6.4. |
@@ -53,7 +53,7 @@ priority rank and band, and every Must Practice question that tests the topic (`
 `capranav_com_revamped/tools/build_must_practice_data.py` on every build; never edit it by hand.
 The per-question topic ids come from `descriptive_topic_priority.json` (question to topic rows)
 and, for Study Material items, from the item file's `topic_ids`. Caveats are written inside the
-file (AS 1's six unmapped questions; AS 3 and AS 14 have none of their own; a question testing
+file (AS 1's unmapped questions: five on the live list, six in the library; AS 3 and AS 14 have none of their own; a question testing
 several topics appears under each).
 
 Questions are identified by `book_id` (for example `M2C5U1-008`) and `human_id` (for example
