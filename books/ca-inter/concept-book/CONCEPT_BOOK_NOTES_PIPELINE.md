@@ -123,6 +123,8 @@ Text manifests, Markdown, HTML, JSON and scripts belong in Git. Large media belo
 
 ## 4. Where lecture videos, audio and transcripts live
 
+> **Transcription agents:** before changing models, language settings, Romanization, GPU setup, or bulk-processing logic, read `_claude/skills/SKILL-ca-lecture-transcription.md`. It contains the tested settings, failed experiments, QA method, Roman Hinglish policy, local RTX 3050/CUDA learnings, and the current no-bulk-before-approval gate.
+
 There are three distinct layers.
 
 ### 4.1 Source video archive
