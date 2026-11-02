@@ -2,8 +2,8 @@
 
 **CA Inter | Paper 1: Advanced Accounting**
 
-**Maximum Marks: 33**
-**Time Allowed: 59 minutes**
+**Maximum Marks: 50**
+**Time Allowed: 90 minutes**
 
 **Instructions:**
 1. All questions are compulsory unless stated otherwise.
@@ -13,9 +13,54 @@
 
 ---
 
-## Section A: Multiple Choice Questions (6 Marks)
+## Section A: Multiple Choice Questions (11 Marks)
 
-**1.** <p>As per AS 20 an enterprise should present/disclose the following: (a) the amounts used as the numerators in calculating basic and diluted earnings per share, and a reconciliation of those amounts to the net profit or loss for the period. (b) the weighted average number of equity shares used as the denominator in calculating basic and diluted earnings per share, and a reconciliation of these denominators to each other. (c) basic and diluted earnings per share, even if the amounts disclosed are negative (a loss per share). (d) the nominal value of shares along with the earnings per share figures.</p>
+**1.** <p>Partly paid up equity shares are:</p>
+
+- **(A)** Always considered as a part of Basic EPS.
+- **(B)** Always considered as a part of Diluted EPS.
+- **(C)** Depending upon the entitlement of dividend to the shareholder, it will be considered as a part of Basic or Diluted EPS as the case may be.
+- **(D)** Considered as part of Basic/ Diluted EPS depending on the accounting policy of the company.
+
+*[1 Marks | Topic: M1-C4-U5 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+**2.** <p>In case potential equity shares have been cancelled during the year, they should be:</p>
+
+- **(A)** Ignored for computation of Diluted EPS.
+- **(B)** Considered from the beginning of the year till the date they are cancelled.
+- **(C)** The company needs to make an accounting policy and can folvlow the treatment in (a) or (b) as it decides. v
+- **(D)** Considered for computation of diluted EPS only if the impact of such potential equity shares would be material.
+
+*[1 Marks | Topic: M1-C4-U5 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+**3.** <p>As per AS 20, equity shares which are issuable upon the satisfaction of certain conditions resulting from contractual arrangements are</p>
+
+- **(A)** Dilutive potential equity shares
+- **(B)** Contingently issuable shares
+- **(C)** Contractual issued shares
+- **(D)** Potential equity shares
+
+*[1 Marks | Topic: M1-C4-U5 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+**4.** <p>As per AS 20, potential equity shares should be treated as dilutive when, and only when, their conversion to equity shares would</p>
+
+- **(A)** Decrease net profit per share from continuing ordinary operations.
+- **(B)** Increase net profit per share from continuing ordinary operations.
+- **(C)** Make no change in net profit per share from continuing ordinary operations.
+- **(D)** Decrease net loss per share from continuing ordinary operations.
+
+*[1 Marks | Topic: M1-C4-U5 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+**5.** <p>AB Company Ltd. had 1,00,000 shares of common stock outstanding on January 1. Additional 50,000 shares were issued on July 1, and 25,000 shares were re- acquired on September 1. The weighted average number of shares outstanding during the year on Dec. 31 is</p>
+
+- **(A)** 1,40,000 shares
+- **(B)** 1,25,000 shares
+- **(C)** 1,16,667 shares
+- **(D)** 1,20,000 shares
+
+*[1 Marks | Topic: M1-C4-U5 - ICAI Study Material (Test Your Knowledge) | Source: ICAI Study Material]*
+
+**6.** <p>As per AS 20 an enterprise should present/disclose the following: (a) the amounts used as the numerators in calculating basic and diluted earnings per share, and a reconciliation of those amounts to the net profit or loss for the period. (b) the weighted average number of equity shares used as the denominator in calculating basic and diluted earnings per share, and a reconciliation of these denominators to each other. (c) basic and diluted earnings per share, even if the amounts disclosed are negative (a loss per share). (d) the nominal value of shares along with the earnings per share figures.</p>
 
 - **(A)** All the statements are correct
 - **(B)** Statements (a), (b) and (c) are correct
@@ -24,7 +69,7 @@
 
 *[2 Marks | Topic: AS 20 (5.12): AS 20 mandatory disclosures, including the nominal value of shares alongside EPS figures | Source: MTP 2025 Set 1 Q5]*
 
-**2.** <p>A Ltd. had 1,50,000 shares of common stock outstanding on 1st April, 2024. Additional 50,000 shares were issued on 1st November, 2024 and 32,000 shares were bought back on 1st February, 2025. Calculate the weighted average number of shares outstanding at the year ended 31st March, 2025.</p>
+**7.** <p>A Ltd. had 1,50,000 shares of common stock outstanding on 1st April, 2024. Additional 50,000 shares were issued on 1st November, 2024 and 32,000 shares were bought back on 1st February, 2025. Calculate the weighted average number of shares outstanding at the year ended 31st March, 2025.</p>
 
 - **(A)** 1,34,500 shares
 - **(B)** 1,65,500 shares
@@ -33,7 +78,7 @@
 
 *[2 Marks | Topic: AS 20 (5.5): Weighted average shares with a mid-year fresh issue and buy-back | Source: MTP 2026 Set 2 Q15]*
 
-**3.** <p>On 1st April, 2025 Zed Limited had 5,00,000 equity shares of ₹10 each (5 paid up) and 45,000 10% Preference shares of ₹100 each fully paid up. On 1st July, 2025 the remaining ₹5 was called up on equity shareholders and paid by all shareholders except one shareholder having 30,000 shares. The net profit for the year ended 31st March, 2026 was ₹23,25,500 before considering dividend on preference shares of ₹4,50,000. What will be the basic Earnings Per Share for the year ended 31st March, 2026, as per Accounting Standard 20 "Earnings per share"?</p>
+**8.** <p>On 1st April, 2025 Zed Limited had 5,00,000 equity shares of ₹10 each (5 paid up) and 45,000 10% Preference shares of ₹100 each fully paid up. On 1st July, 2025 the remaining ₹5 was called up on equity shareholders and paid by all shareholders except one shareholder having 30,000 shares. The net profit for the year ended 31st March, 2026 was ₹23,25,500 before considering dividend on preference shares of ₹4,50,000. What will be the basic Earnings Per Share for the year ended 31st March, 2026, as per Accounting Standard 20 "Earnings per share"?</p>
 
 - **(A)** ₹3.75 per share
 - **(B)** ₹4.00 per share
@@ -45,9 +90,17 @@
 
 ---
 
-## Section B: Descriptive Questions (27 Marks)
+## Section B: Descriptive Questions (39 Marks)
 
-**Q1.** <p><em>OR</em></p>
+**Q1.** <p>Explain why the bonus issue of shares and the shares issue at full market price are treated differently in the calculation of the basic earnings per share?</p>
+
+*[5 Marks | Topic: AS 20 | Source: ICAI Study Material]*
+
+**Q2.** <p>Stock options have been granted by AB Limited to its employees and they vest equally over 5 years, i.e., 20 per cent at the end of each year from the date of grant. The options will vest only if the employee is still employed with the company at the end of the year. If the employee leaves the company during the vesting period, the options that have vested can be exercised, while the others would lapse. Currently, AB Limited includes only the vested options for calculating Diluted EPS. Should only completely vested options be included for computation of Diluted EPS? Is this in accordance with the provisions of AS 20? Explain.</p>
+
+*[7 Marks | Topic: AS 20 | Source: ICAI Study Material]*
+
+**Q3.** <p><em>OR</em></p>
 <p>On 1 April 2023, ABC Limited has given the following information:</p>
 <table>
 <thead><tr><th>Particulars</th><th>₹</th></tr></thead>
@@ -62,11 +115,11 @@
 
 *[4 Marks | Topic: AS 20 (5.3/5.4/5.6-5.8) | Source: PYQ 2024 Q6a]*
 
-**Q2.** <p>Following information is supplied by K Ltd.: Number of shares outstanding prior to right issue - 2,50,000 shares. Right issue - two new share for each 5 outstanding shares (i.e. 1,00,000 new shares). Right issue price - ₹98. Last date of exercising rights - 30-06-2023. Fair value of one equity share immediately prior to exercise of right on 30-06-2023 is ₹102. Net Profit to equity shareholders: 2022-2023 - ₹50,00,000; 2023-2024 - ₹75,00,000. You are required to calculate the basic earnings per share as per AS-20 Earnings per Share.</p>
+**Q4.** <p>Following information is supplied by K Ltd.: Number of shares outstanding prior to right issue - 2,50,000 shares. Right issue - two new share for each 5 outstanding shares (i.e. 1,00,000 new shares). Right issue price - ₹98. Last date of exercising rights - 30-06-2023. Fair value of one equity share immediately prior to exercise of right on 30-06-2023 is ₹102. Net Profit to equity shareholders: 2022-2023 - ₹50,00,000; 2023-2024 - ₹75,00,000. You are required to calculate the basic earnings per share as per AS-20 Earnings per Share.</p>
 
 *[4 Marks | Topic: AS 20 (5.5) | Source: MTP 2025 Set 1 Q3a]*
 
-**Q3.** <p>XYZ Limited has provided you the following information as on 31st March, 2024:</p>
+**Q5.** <p>XYZ Limited has provided you the following information as on 31st March, 2024:</p>
 <table>
 <thead><tr><th>Particulars</th><th>₹</th></tr></thead>
 <tbody>
@@ -84,7 +137,7 @@
 
 *[5 Marks | Topic: AS 20 (5.4/5.6-5.8) | Source: PYQ 2025 Q1a]*
 
-**Q4.** <p>In the following list of shares issued, for the purpose of calculation of weighted average number of shares, from which date, weight is to be considered:</p>
+**Q6.** <p>In the following list of shares issued, for the purpose of calculation of weighted average number of shares, from which date, weight is to be considered:</p>
 <ol type="i">
 <li>Equity Shares issued in exchange of cash,</li>
 <li>Equity Shares issued as a result of conversion of a debt instrument,</li>
@@ -96,11 +149,11 @@
 
 *[5 Marks | Topic: AS 20 (5.3) | Source: MTP 2025 Set 1 Q6c]*
 
-**Q5.** <p>On 1st April, 2025, ABC Limited: 50,000 equity shares of ₹100 each (₹80 paid up by all shareholders) ₹40,00,000; 2,00,000 8% Preference shares of ₹10 each ₹20,00,000; 10,000 12% Debentures of ₹100 each (each convertible into 3 equity shares of ₹100 each) ₹10,00,000. On 1st July 2025, remaining ₹20 called up and paid by all shareholders except one holding 10,000 equity shares. Profit after tax for 2025-26: ₹3,44,000. Tax rate 30%. Compute Basic and Diluted EPS.</p>
+**Q7.** <p>On 1st April, 2025, ABC Limited: 50,000 equity shares of ₹100 each (₹80 paid up by all shareholders) ₹40,00,000; 2,00,000 8% Preference shares of ₹10 each ₹20,00,000; 10,000 12% Debentures of ₹100 each (each convertible into 3 equity shares of ₹100 each) ₹10,00,000. On 1st July 2025, remaining ₹20 called up and paid by all shareholders except one holding 10,000 equity shares. Profit after tax for 2025-26: ₹3,44,000. Tax rate 30%. Compute Basic and Diluted EPS.</p>
 
 *[4 Marks | Topic: AS 20 (5.6) | Source: MTP 2026 Set 1 Q6a]*
 
-**Q6.** <p>From the financial records of P Limited: Profit before tax FY2023-24 ₹25,00,000; FY2024-25 ₹32,50,000. Number of Equity Shares (Face Value ₹5) outstanding as on 31st March, 2024: 12,00,000. Applicable Tax Rate for both years: 20%. On 1st June, 2024, Directors announced a rights issue: 1 share for every 6 held @ ₹20/share, exercisable to 30th June, 2024, fully subscribed. Fair value of one equity share immediately prior to exercise of right (30th June, 2024) was ₹25.</p>
+**Q8.** <p>From the financial records of P Limited: Profit before tax FY2023-24 ₹25,00,000; FY2024-25 ₹32,50,000. Number of Equity Shares (Face Value ₹5) outstanding as on 31st March, 2024: 12,00,000. Applicable Tax Rate for both years: 20%. On 1st June, 2024, Directors announced a rights issue: 1 share for every 6 held @ ₹20/share, exercisable to 30th June, 2024, fully subscribed. Fair value of one equity share immediately prior to exercise of right (30th June, 2024) was ₹25.</p>
 <p>You are required to calculate the Basic Earnings per Share to be reported in the financial statements of P Limited for the year ended 31st March, 2025, including the comparative figure for the year ended 31st March, 2024, in accordance with AS 20. (5 Marks)</p>
 
 *[5 Marks | Topic: AS 20 (5.5) | Source: PYQ 2026 Q1c]*
@@ -112,15 +165,35 @@
 
 ### Section A: Multiple Choice Questions
 
-**1.** Correct Answer: **(A)**
+**1.** Correct Answer: **(C)**
 
-<p><strong>Answer:</strong> (A) All the statements are correct - AS 20 requires disclosure of the numerator amounts and their reconciliation to net profit, the denominator (weighted average shares) and its reconciliation, both basic and diluted EPS even when negative, and the nominal value of shares alongside the EPS figures.</p>
+<p><strong>Answer:</strong> (C) Depending upon the entitlement of dividend to the shareholder, it will be considered as a part of Basic or Diluted EPS as the case may be.</p>
 
 **2.** Correct Answer: **(B)**
 
+<p><strong>Answer:</strong> (B) Considered from the beginning of the year till the date they are cancelled.</p>
+
+**3.** Correct Answer: **(B)**
+
+<p><strong>Answer:</strong> (B) Contingently issuable shares</p>
+
+**4.** Correct Answer: **(A)**
+
+<p><strong>Answer:</strong> (A) Decrease net profit per share from continuing ordinary operations.</p>
+
+**5.** Correct Answer: **(C)**
+
+<p><strong>Answer:</strong> (C) 1,16,667 shares</p>
+
+**6.** Correct Answer: **(A)**
+
+<p><strong>Answer:</strong> (A) All the statements are correct - AS 20 requires disclosure of the numerator amounts and their reconciliation to net profit, the denominator (weighted average shares) and its reconciliation, both basic and diluted EPS even when negative, and the nominal value of shares alongside the EPS figures.</p>
+
+**7.** Correct Answer: **(B)**
+
 <p><strong>Answer:</strong> (B) 1,65,500 shares = (1,50,000 × 12/12) + (50,000 × 5/12, Nov-Mar) − (32,000 × 2/12, Feb-Mar) = 1,50,000 + 20,833 − 5,333 = 1,65,500.</p>
 
-**3.** Correct Answer: **(C)**
+**8.** Correct Answer: **(C)**
 
 <p><strong>Answer:</strong> (C) ₹4.40 per share.</p>
 
@@ -128,6 +201,14 @@
 ### Section B: Descriptive Questions
 
 **Q1.**
+
+<p>In case of a bonus issue, equity shares are issued to existing shareholders for no additional consideration. Therefore, the number of equity shares outstanding is increased without an increase in resources. Since the bonus issue is an issue without consideration, the issue is treated as if it had occurred prior to the beginning of the earliest period reported. However, the share issued at full market price does not carry any bonus element and usually results in a proportionate change in the resources available to the enterprise. Therefore, it is taken into consideration from the time it has been issued i.e. the time- weighting factor is considered based on the specific shares outstanding as a proportion of the total number of days in the period.</p>
+
+**Q2.**
+
+<p>As per AS 20 “A potential equity share is a financial instrument or other contract that entitles, or may entitle, its holder to equity shares”. Options including employee stock option plans under which employees of an enterprise are entitled to receive equity shares as part of their remuneration and other similar plans are examples of potential equity shares. Further, for the purpose of calculating diluted earnings per share, the net profit or loss for the period attributable to equity shareholders and the weighted average number of shares outstanding during the period should be adjusted for the effects of all dilutive potential equity shares. The current method of calculating Diluted EPS adopted by AB limited is not in accordance with AS 20. The calculation of Diluted EPS should include all potential equity shares, i.e., all the stock options granted at the balance sheet date, which are dilutive in nature, irrespective of the vesting pattern. The options that have lapsed during the year should be included for the portion of the period the same were outstanding, pursuant to the requirement of the standard.</p>
+
+**Q3.**
 
 <p><strong>Basic Earnings per share (EPS)</strong> = Net profit attributable to equity shareholders / Weighted average number of equity shares outstanding during the year = 1,84,000 / 46,000 Shares (as per working note) = <strong>₹4 per share</strong>.</p>
 <p><strong>Diluted earnings per share</strong></p>
@@ -162,7 +243,7 @@
 
 > **Examiner's Comment:** In the AS 20 question, some examinees could not calculate the number of shares and also made mistake in calculating net profit.
 
-**Q2.**
+**Q4.**
 
 <div>
 <p>Theoretical ex-rights fair value per share = (Fair value of shares immediately prior to exercise of rights + Total amount received from exercise) / (Number of shares outstanding prior to exercise + Number of shares issued in the exercise) = (₹102 × 2,50,000 shares + ₹98 × 1,00,000 shares) / 3,50,000 shares = ₹100.86.</p>
@@ -177,7 +258,7 @@
 
 > **Common Mistake to Avoid:** A common error is using the raw share count and nominal rights-issue price directly, without first computing the theoretical ex-rights fair value and applying the resulting adjustment factor to the pre-rights weighted average.
 
-**Q3.**
+**Q5.**
 
 <p><strong>(a) Computation of Basic Earnings per Share</strong></p>
 <table>
@@ -229,7 +310,7 @@
 
 > **Examiner's Comment:** Most of the examinees failed to calculate the weighted average number of shares required for determining Basic EPS. As a result, they were unable to compute EPS accurately in accordance with AS 20, "Earnings per Share."
 
-**Q4.**
+**Q6.**
 
 <div>
 <p>The following dates should be considered for weights for the purpose of calculation of weighted average number of shares in the given situations:</p>
@@ -245,7 +326,7 @@
 
 > **Common Mistake to Avoid:** A common error is defaulting to "date of allotment" for every scenario, without distinguishing situations where AS 20 specifies a different effective date, e.g. shares issued in lieu of interest are weighted from when interest ceases to accrue, not the allotment date.
 
-**Q5.**
+**Q7.**
 
 <div>
 <p><strong>Basic EPS:</strong> Net profit attributable to equity = 3,44,000 − preference dividend (8% × 20,00,000 = 1,60,000) = 1,84,000. Weighted average equity shares: 1 Apr-30 Jun (50,000 shares × 80/100 paid × 3/12) = 10,000 + 1 Jul-31 Mar (40,000 fully-paid shares × 9/12) = 30,000 + (10,000 shares still ₹80-paid × 80/100 × 9/12) = 6,000; total = 46,000. Basic EPS = 1,84,000 / 46,000 = <strong>₹4 per share</strong>.</p>
@@ -254,7 +335,7 @@
 
 > **Common Mistake to Avoid:** Some examinees forgot to add back the after-tax interest saving on the convertible debentures to net profit when computing diluted EPS, or omitted weighting the partly-paid shares by the proportion actually paid up.
 
-**Q6.**
+**Q8.**
 
 <p>Computation of Basic Earnings Per Share (as per paragraphs 10 and 26 of AS 20):</p>
 <p>Working Note 1 - Net Profit after tax (NPAT): 2024 = 25,00,000 − 20% tax = ₹20,00,000. 2025 = 32,50,000 − 20% tax = ₹26,00,000.</p>

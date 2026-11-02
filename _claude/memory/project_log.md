@@ -51,6 +51,9 @@ Added `.github/workflows/google-drive-r2-full-archive.yml` as a manual, archive-
 ## 2026-10-01 Third-phase chapter tests (AS 11, AS 22, AS 20, Framework)
 Built `first_run/scripts/build_third_phase_tests.py` (re-points the phase-2 builder; no fabricated questions). Output `first_run/TESTS/third phase/` (MD for self + README) and `student-edition/` (watermarked PDFs, Questions and Answers separately). Results: AS 11 50/50, AS 22 40/50, AS 20 33/50, Framework 47/50 (0 MCQs; none in bank). Short tests accepted per Pranav. AS 20 and Framework study-material TYK has no answer key in source, so no top-up. Financial Statements of Companies deliberately excluded (class in progress).
 
+## 2026-11-02 Fourth-phase chapter tests
+`first_run/scripts/build_fourth_phase_tests.py` -> `first_run/TESTS/fourth phase/` (MD for self + `student-edition/` PDFs). FS of Companies 50/50, Cash Flow 50/50, Intro to AS 21, AS 1 28, AS 17 23, Applicability: no test (0 questions). Fixed `extract_study_material_tyk.py` to accept "ANSWERS/HINTS" and singular headings; re-running phase 3 as a result changed AS 20 from 33/50 to 50/50 (phase-3 AS20 files overwritten). AS 1 MCQ answer key (number-then-letter layout) still not parsed.
+
 ## 2026-09-27 capranav.com Cloudflare protections
 ectpl-creds token issued for project capranav; applied HTTPS, Bot Fight Mode, spoofed-crawler WAF rule, rate limit (100/10s, Free plan; 20 blocked page loads), Turnstile on OTP/contact/admin forms. Access on /admin pending allowed email.
 

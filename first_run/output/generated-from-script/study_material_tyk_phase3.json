@@ -191,25 +191,129 @@
     "as_key": "as20",
     "unitcode": "M1-C4-U5",
     "name": "AS 20 — Earnings Per Share",
-    "mcq": [],
-    "descriptive": [],
-    "warnings": [],
-    "skipped_no_answer": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13
+    "mcq": [
+      {
+        "source_num": 1,
+        "question_html": "<p>AB Company Ltd. had 1,00,000 shares of common stock outstanding on January 1. Additional 50,000 shares were issued on July 1, and 25,000 shares were re- acquired on September 1. The weighted average number of shares outstanding during the year on Dec. 31 is</p>",
+        "options": {
+          "A": "1,40,000 shares",
+          "B": "1,25,000 shares",
+          "C": "1,16,667 shares",
+          "D": "1,20,000 shares"
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) 1,16,667 shares</p>"
+      },
+      {
+        "source_num": 2,
+        "question_html": "<p>As per AS 20, potential equity shares should be treated as dilutive when, and only when, their conversion to equity shares would</p>",
+        "options": {
+          "A": "Decrease net profit per share from continuing ordinary operations.",
+          "B": "Increase net profit per share from continuing ordinary operations.",
+          "C": "Make no change in net profit per share from continuing ordinary operations.",
+          "D": "Decrease net loss per share from continuing ordinary operations."
+        },
+        "correct_option": "A",
+        "answer_html": "<p><strong>Answer:</strong> (A) Decrease net profit per share from continuing ordinary operations.</p>"
+      },
+      {
+        "source_num": 3,
+        "question_html": "<p>As per AS 20, equity shares which are issuable upon the satisfaction of certain conditions resulting from contractual arrangements are</p>",
+        "options": {
+          "A": "Dilutive potential equity shares",
+          "B": "Contingently issuable shares",
+          "C": "Contractual issued shares",
+          "D": "Potential equity shares"
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) Contingently issuable shares</p>"
+      },
+      {
+        "source_num": 4,
+        "question_html": "<p>In case potential equity shares have been cancelled during the year, they should be:</p>",
+        "options": {
+          "A": "Ignored for computation of Diluted EPS.",
+          "B": "Considered from the beginning of the year till the date they are cancelled.",
+          "C": "The company needs to make an accounting policy and can folvlow the treatment in (a) or (b) as it decides. v",
+          "D": "Considered for computation of diluted EPS only if the impact of such potential equity shares would be material."
+        },
+        "correct_option": "B",
+        "answer_html": "<p><strong>Answer:</strong> (B) Considered from the beginning of the year till the date they are cancelled.</p>"
+      },
+      {
+        "source_num": 5,
+        "question_html": "<p>Partly paid up equity shares are:</p>",
+        "options": {
+          "A": "Always considered as a part of Basic EPS.",
+          "B": "Always considered as a part of Diluted EPS.",
+          "C": "Depending upon the entitlement of dividend to the shareholder, it will be considered as a part of Basic or Diluted EPS as the case may be.",
+          "D": "Considered as part of Basic/ Diluted EPS depending on the accounting policy of the company."
+        },
+        "correct_option": "C",
+        "answer_html": "<p><strong>Answer:</strong> (C) Depending upon the entitlement of dividend to the shareholder, it will be considered as a part of Basic or Diluted EPS as the case may be.</p>"
+      }
     ],
-    "has_answer_section": false
+    "descriptive": [
+      {
+        "source_num": 6,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>In the following list of shares issued, for the purpose of calculation of weighted average number of shares, from which date weight is to be considered: (i) Equity Shares issued in exchange of cash, (ii) Equity Shares issued as a result of conversion of a debt instrument, (iii) Equity Shares issued in exchange for the settlement of a liability of the enterprise, (iv) Equity Shares issued for rendering of services to the enterprise, (v) Equity Shares issued in lieu of interest and/or principal of an other financial instrument, (vi) Equity Shares issued as consideration for the acquisition of an asset other than in cash. Also define Potential Equity Share.</p>",
+        "answer_html": "<p>The following dates should be considered for consideration of weights for the purpose of calculation of weighted average number of shares in the given cases: (i) Date of Cash receivable (ii) Date of conversion (iii) Date on which settlement becomes effective (iv) When the services are rendered (v) Date when interest ceases to accrue (vi) Date on which the acquisition is recognised. v A Potential Equity Share is a financial instrument or other contract that entitles or may entitle its holder to equity shares.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 7,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Stock options have been granted by AB Limited to its employees and they vest equally over 5 years, i.e., 20 per cent at the end of each year from the date of grant. The options will vest only if the employee is still employed with the company at the end of the year. If the employee leaves the company during the vesting period, the options that have vested can be exercised, while the others would lapse. Currently, AB Limited includes only the vested options for calculating Diluted EPS. Should only completely vested options be included for computation of Diluted EPS? Is this in accordance with the provisions of AS 20? Explain.</p>",
+        "answer_html": "<p>As per AS 20 “A potential equity share is a financial instrument or other contract that entitles, or may entitle, its holder to equity shares”. Options including employee stock option plans under which employees of an enterprise are entitled to receive equity shares as part of their remuneration and other similar plans are examples of potential equity shares. Further, for the purpose of calculating diluted earnings per share, the net profit or loss for the period attributable to equity shareholders and the weighted average number of shares outstanding during the period should be adjusted for the effects of all dilutive potential equity shares. The current method of calculating Diluted EPS adopted by AB limited is not in accordance with AS 20. The calculation of Diluted EPS should include all potential equity shares, i.e., all the stock options granted at the balance sheet date, which are dilutive in nature, irrespective of the vesting pattern. The options that have lapsed during the year should be included for the portion of the period the same were outstanding, pursuant to the requirement of the standard.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 8,
+        "qtype": "Theoretical Questions",
+        "question_html": "<p>Explain why the bonus issue of shares and the shares issue at full market price are treated differently in the calculation of the basic earnings per share?</p>",
+        "answer_html": "<p>In case of a bonus issue, equity shares are issued to existing shareholders for no additional consideration. Therefore, the number of equity shares outstanding is increased without an increase in resources. Since the bonus issue is an issue without consideration, the issue is treated as if it had occurred prior to the beginning of the earliest period reported. However, the share issued at full market price does not carry any bonus element and usually results in a proportionate change in the resources available to the enterprise. Therefore, it is taken into consideration from the time it has been issued i.e. the time- weighting factor is considered based on the specific shares outstanding as a proportion of the total number of days in the period.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 9,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>NAT, a listed entity, as on 1st April, 20X1 had the following capital structure: Particulars ₹ 10,00,000 Equity Shares having face value of ₹ 1 each 10,00,000 10,00,000 8% Preference Shares having face value of ₹ 10 each 1,00,00,000 During the year 20X1-20X2, the company had profit after tax of Rs. 90,00,000. On 1st January, 20X2, NAT made a bonus issue of one equity share for every 2 equity shares outstanding as at 31st December, 20X1. On 1st January, 20X2, NAT issued 2,00,000 equity shares of Rs. 1 each at their full market price of Rs. 7.60 per share. NAT's shares were trading at Rs. 8.05 per share on 31st March, 20X2. Further it has been provided that the basic earnings per share for the year ended 31st March, 20X1 was previously reported at Rs. 62.30. You are required to: (i) Calculate the basic earnings per share to be reported in the financial statements of NAT for the year ended 31st March, 20X2 including the comparative figure, in accordance with AS-20 Earnings Per Share. (ii) Explain why the bonus issue of shares and the shares issue at full market price are treated differently in the calculation of the basic earnings per share?</p>",
+        "answer_html": "<p>(i) Computation of Basic Earnings per share for the year ended 31st March, 20X2: (including the comparative figure) Working Note – I: Earnings for the year ended 31st March, 20X1: = EPS x Number of shares outstanding during 20X0-20X1 = ₹ 62.30 x 10,00,000 equity shares = ₹ 6,23,00,000 Adjusted/Restated Earnings per share for the year ended 31st March (after taking into consideration bonus issue) Adjusted/Restated Basic EPS: = Earnings for the year 20X0-20X1 / (Total outstanding shares +Bonus issue) = ₹ 6,23,00,000 / (10,00,000+ 5,00,000) = ₹ 6,23,00,000 / 15,00,000 = ₹ 41.53 per share Computation of Basic EPS for the year 20X1-20X2: Basic EPS = (Total Earnings – Preference Shares Dividend) / (Total shares outstanding at the beginning + Bonus issue + weighted average of the shares issued in January, 20X2) = (₹ 90,00,000 – ₹ (1,00,00,000 x 8%)) / (10,00,000 + 5,00,000 + (2,00,000 x 3/12)) = ₹ 82,00,000 / 15,50,000 shares = ₹ 5.29 per share (ii) In case of a bonus issue, equity shares are issued to existing shareholders for no additional consideration. Therefore, the number of equity shares outstanding is increased without an increase in resources. Since the bonus issue is an issue without consideration, the vissue is treated as if it had occurred prior to the beginning of the year 20v X1, the earliest period reported. However, the share issued at full market price does not carry any bonus element and usually results in a proportionate change in the resources available to the enterprise. Therefore, it is taken into consideration from the time it has been issued i.e. the time- weighting factor is considered based on the specific shares outstanding as a proportion of the total number of days in the period.</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 10,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>X Ltd. supplied the following information. You are required to compute the basic earnings per share: (Accounting year 1.1.20X1– 31.12.20X1) Net Profit : Year 20X1: ₹ 20,00,000 : Year 20X2: ₹ 30,00,000 No. of shares outstanding prior to : 10,00,000 shares Right Issue Right Issue : One new share for each four outstanding i.e., 2,50,000 shares. Right Issue price – ₹ 20 Last date of exercise rights– Fair rate of one Equity share : ₹ 25 immediately prior to exercise of rights on 31.3.20X2</p>",
+        "answer_html": "<p>Computation of Basic Earnings Per Share (as per paragraphs 10 and 26 of AS 20 on Earnings Per Share)\n|                                                | Year 20X1 Year 20X2  |      |      |\n| ---------------------------------------------- | -------------------- | ---- | ---- |\n|                                                |                      | ₹    | ₹    |\n| EPS for the year 20X1 as originally reported   |                      |      |      |\n𝑁𝑒𝑡 𝑝𝑟𝑜𝑓𝑖𝑡 𝑜𝑓 𝑡ℎ𝑒 𝑦𝑒𝑎𝑟 𝑎𝑡𝑡𝑟𝑖𝑏𝑢𝑡𝑎𝑏𝑙𝑒 𝑡𝑜 𝑒𝑞𝑢𝑖𝑡𝑦 𝑠ℎ𝑎𝑟𝑒ℎ𝑜𝑙𝑑𝑒𝑟𝑠 𝑊𝑒𝑖𝑔ℎ𝑡𝑒𝑑 𝑎𝑣𝑒𝑟𝑎𝑔𝑒 𝑛𝑢𝑚𝑏𝑒𝑟 𝑜𝑓 𝑒𝑞𝑢𝑖𝑡𝑦 𝑠ℎ𝑎𝑟𝑒𝑠 𝑜𝑢𝑡𝑠𝑡𝑎𝑛𝑑𝑖𝑛𝑔 𝑑𝑢𝑟𝑖𝑛𝑔 𝑡ℎ𝑒 𝑦𝑒𝑎𝑟\n|   = (₹  20,00,000 / 10,00,000 shares)             |     | 2.00  |     |\n| ------------------------------------------------- | --- | ----- | --- |\n| EPS for the year 20X1 restated for rights issue   |     |       |     |\n|   = [₹  20,00,000 / (10,00,000 shares  1.04)]   |     | 1.91  |     |\n(approx.)\n| EPS for the year 20X2 including effects of rights  |     |     |     |\n| -------------------------------------------------- | --- | --- | --- |\nissue\n|     | ₹  30,00,000 |     |     |\n| --- | ------------ | --- | --- |\n(10,00,000 shares  1.04  3/12) + (12,50,000 shares  9/12) ₹ 30,00,000\n|     |     |     | 2.51  |\n| --- | --- | --- | ----- |\n| 11,97,500 shares   |     | (approx.)  |     |\n| ------------------ | --- | ---------- | --- |\n|     |     |     |     |\n| --- | --- | --- | --- |\n Refer working note 2. Working Notes: 1. Computation of theoretical ex-rights fair value per share Fair value of all outstanding shares immediately prior to exercise of rights + Total amount received from exercise Number of shares outstanding prior to exercise+ Number of shares issued in the excercise (₹ 25 × 10,00,000 shares) + (₹ 20 × 2,50,000 shares) = 10,00,000 shares + 2,50,000 shares ₹ 3,00,00,000 = = ₹ 24 12,50,000 shares 2. Computation of adjustment factor Fair value per share prior to exercise of rights = Theoretical ex-rights value per share ₹ 25 = = 1.04 (approx.) ₹ 24 (Refer Working Note 1)</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 11,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>On 1st April, 20X1 a company had 6,00,000 equity shares of ₹ 10 each (₹ 5 paid up by all shareholders). On 1st September, 20X1 the remaining ₹ 5 was called up and paid by all shareholders except one shareholder having 60,000 equity shares. The net profit for the year ended 31st March, 20X2 was ₹ 21,96,000 after considering dividend on preference shares of ₹ 3,40,000. You are required to compute Basic EPS for the year ended 31st March, 20X2 as per Accounting Standard 20 \"Earnings Per Share\".</p>",
+        "answer_html": "<p>Basic Earnings per share (EPS) = Net profit attributable to equity shareholders Weighted average number of equity shares outstanding during the year 21,96,000 = ₹ 4.80 per share = 4,57,500 Shares (as per working note) Working Note: Calculation of weighted average number of equity shares As per AS 20 ‘Earnings Per Share’, partly paid equity shares are treated as a fraction of equity share to the extent that they were entitled to participate in dividend relative to a fully paid equity share during the reporting period. Assuming that the partly paid shares are entitled to participate in the dividend to the extent of amount paid, weighted average number of shares will be calculated as follows:\n|     |     |     |   v  | v   |\n| --- | --- | --- | ---- | --- |\n| Date  | No. of  | Amount  | Weighted average no. of equity  |     |\n| ----- | ------- | ------- | ------------------------------- | --- |\n|                                       | equity    | paid per  |                                    | shares    |\n| ------------------------------------- | --------- | --------- | ---------------------------------- | --------- |\n|                                       | shares    | share     |                                    |           |\n|                                       | ₹         | ₹         |                                    | ₹         |\n| 1.4.20X1                              | 6,00,000  | 5         | 6,00,000 х 5/10 х 5/12 = 1,25,000  |           |\n| 1.9.20X1                              | 5,40,000  | 10        | 5,40,000 х 7/12 = 3,15,000         |           |\n| 1.9.20X1                              | 60,000    | 5         | 60,000 х 5/10 х 7/12 = 17,500      |           |\n| Total weighted average equity shares  |           |           |                                    | 4,57,500  |</p>",
+        "has_table": true
+      },
+      {
+        "source_num": 12,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>No. of equity shares outstanding = 30,00,000 Basic earnings per share ₹ 5.00 No. of 12% convertible debentures of ₹ 100 each; 50,000 Each debenture is convertible into 10 equity shares Tax Rate 30% Compute Diluted Earnings per Share. Working notes should form part of the answer.</p>",
+        "answer_html": "<p>Earnings for the year: = No. of Shares x Basic EPS = 30,00,000 shares x ₹ 5 per share = ₹ 1,50,00,000 Computation of Adjusted Net Profit: = Earnings for the year + Interest on debentures net of tax = 1,50,00,000 + (6,00,000 - 1,80,000) = ₹ 1,54,20,000 Computation of Adjusted Denominator: No. of equity shares resulting from conversion of debentures: = 50,000 x 10 shares = 5,00,000 shares No. of equity shares for diluted EPS = 30,00,000 + 5,00,000 = 35,00,000 shares Computation of Diluted EPS: = ₹ 1,54,20,000/35,00,000 shares = ₹ 4.4 per share. Fair value of shares immediately prior to exercise of rights + Total amount received from exercise</p>",
+        "has_table": false
+      },
+      {
+        "source_num": 13,
+        "qtype": "Scenario based Questions",
+        "question_html": "<p>Following information is supplied by K Ltd.: Number of shares outstanding prior to right issue - 2,50,000 shares. Right issue - two new share for each 5 outstanding shares (i.e. 1,00,000 new shares) Right issue price - ₹ 98 Last date of exercising rights - 30-06-20X2. Fair value of one equity share immediately prior to exercise of right on 30-06-20X2 is ₹ 102. Net Profit to equity shareholders: You are required to calculate the basic earnings per share as per AS-20 Earnings per Share.</p>",
+        "answer_html": "<p>Number of shares outstanding prior to exercise + Number of shares issued in the exercise 102 x 2,50,000 Shares+₹ 98 x 1,00,000 shares 3,50,000 shares Theoretical ex-rights fair value per share = ₹ 100.86 Computation of adjustment factor: Fair value per share prior to exercise of rights = 102/100.86 = 1.01 Theoretical ex-rights value per share Computation of earnings per share: EPS for the year 20X1-X2 as originally reported: ₹ 50,00,000/2,50,000 shares = ₹ 20 EPS for the year 20X1-X2 restated for rights issue: =₹ 50,00,000/ (2,50,000 shares x 1.01) = ₹ 19.80 EPS for the year 20X2-X3 including effects of rights issue: * [(2,50,000 x 1.01 x 3/12) + (3,50,000 x 9/12)] =63,125 + 2,62,500 = 3,25,625 shares Note: Financial year (ended 31st March) is considered as accounting year while giving the above answer.</p>",
+        "has_table": false
+      }
+    ],
+    "warnings": [],
+    "skipped_no_answer": [],
+    "has_answer_section": true
   },
   {
     "as_key": "framework",

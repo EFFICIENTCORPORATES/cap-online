@@ -64,8 +64,17 @@ CHAPTERS = {
 }
 
 SUBSECTIONS = ["Multiple Choice Questions", "Theoretical Questions", "Scenario based Questions"]
-SUBSECTION_RE = re.compile(r"^(Multiple Choice Questions|Theoretical Questions|Scenario based Questions)\s*$", re.M)
-ANSWER_SUBSECTION_RE = re.compile(r"^Answer to (?:the )?(Multiple Choice Questions|Theoretical Questions|Scenario based Questions)\s*$", re.M)
+SUBSECTION_RE = re.compile(r"^(Multiple Choice Questions?|Theoretical Questions?|Scenario[- ]based Questions?)\s*$", re.M)
+ANSWER_SUBSECTION_RE = re.compile(r"^Answers? to (?:the )?(Multiple Choice Questions?|Theoretical Questions?|Scenario[- ]based Questions?)\s*$", re.M | re.I)
+
+
+def canon_kind(k):
+    k = k.lower()
+    if k.startswith("multiple"):
+        return "Multiple Choice Questions"
+    if k.startswith("theoretical"):
+        return "Theoretical Questions"
+    return "Scenario based Questions"
 STRAY_V_RE = re.compile(r"^(v\s*)+$")
 
 
@@ -250,7 +259,7 @@ def extract_chapter(as_key, filename, unitcode, name):
         return {"as_key": as_key, "error": "no TEST YOUR KNOWLEDGE section found", "mcq": [], "descriptive": []}
     tyk_text = text[tyk_match.end():]
 
-    ans_match = re.search(r"^ANSWERS/SOLUTIONS?\s*$", tyk_text, re.M)
+    ans_match = re.search(r"^ANSWERS/\s*(?:SOLUTIONS?|HINTS?)\s*$", tyk_text, re.M)
     if ans_match:
         q_text, a_text = tyk_text[: ans_match.start()], tyk_text[ans_match.start():]
     else:
@@ -261,6 +270,7 @@ def extract_chapter(as_key, filename, unitcode, name):
     q_segments = []  # (type, text)
     for i, (pos, kind) in enumerate(q_positions):
         seg_start = pos + len(kind)
+        kind = canon_kind(kind)
         seg_end = q_positions[i + 1][0] if i + 1 < len(q_positions) else len(q_text)
         q_segments.append((kind, q_text[seg_start:seg_end]))
 
@@ -282,7 +292,7 @@ def extract_chapter(as_key, filename, unitcode, name):
     # or the "Answer to the " prefix words bleed onto the previous item's
     # tail (real bug: found "...obligation. Answer to the</p>" leaking into
     # an AS 29 answer before this fix).
-    a_positions = [(m.start(), m.end(), m.group(1)) for m in ANSWER_SUBSECTION_RE.finditer(a_text)]
+    a_positions = [(m.start(), m.end(), canon_kind(m.group(1))) for m in ANSWER_SUBSECTION_RE.finditer(a_text)]
     a_segments = []
     for i, (full_start, content_start, kind) in enumerate(a_positions):
         seg_end = a_positions[i + 1][0] if i + 1 < len(a_positions) else len(a_text)

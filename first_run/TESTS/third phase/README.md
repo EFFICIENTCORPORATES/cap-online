@@ -8,7 +8,7 @@ AS 11, AS 22, AS 20 and Framework — the chapters completed in class after AS 1
 |---|---|---|---|---|---|
 | AS 11 — The Effects of Changes in Foreign Exchange Rates | 50/50 | 8 (4q) | 42 (8q) | No | OK — full 50 |
 | AS 22 — Accounting for Taxes on Income | 40/50 | 10 (7q) | 30 (6q) | Yes | **SHORT — 40/50** (pool max 40) |
-| AS 20 — Earnings Per Share | 33/50 | 6 (3q) | 27 (6q) | No | **SHORT — 33/50** (pool max 33) |
+| AS 20 — Earnings Per Share | 50/50 | 11 (8q) | 39 (8q) | Yes | OK — full 50 |
 | Framework for Preparation and Presentation of Financial Statements | 47/50 | 0 (0q) | 47 (11q) | No | **SHORT — 47/50** (pool max 47) |
 
-*Generated: 2026-10-01*
+*Generated: 2026-11-02*
