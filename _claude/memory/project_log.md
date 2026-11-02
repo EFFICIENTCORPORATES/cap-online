@@ -51,6 +51,9 @@ Added `.github/workflows/google-drive-r2-full-archive.yml` as a manual, archive-
 ## 2026-10-01 Third-phase chapter tests (AS 11, AS 22, AS 20, Framework)
 Built `first_run/scripts/build_third_phase_tests.py` (re-points the phase-2 builder; no fabricated questions). Output `first_run/TESTS/third phase/` (MD for self + README) and `student-edition/` (watermarked PDFs, Questions and Answers separately). Results: AS 11 50/50, AS 22 40/50, AS 20 33/50, Framework 47/50 (0 MCQs; none in bank). Short tests accepted per Pranav. AS 20 and Framework study-material TYK has no answer key in source, so no top-up. Financial Statements of Companies deliberately excluded (class in progress).
 
+## 2026-11-02 (cont'd) Phase 4 topped up to 50/50 with study-material questions
+Pranav approved writing questions of 5-15 marks from the ICAI study material for the 4 short Phase 4 tests, presented unlabelled in the student PDFs (his choice). Written in `first_run/scripts/phase4_authored_questions.py`, figures checked by `verify_phase4_authored.py`; in-house list kept in `first_run/TESTS/fourth phase/AUTHORED-REGISTER.md`. All 6 Phase 4 tests now 50/50 (Applicability, Intro to AS, AS 1, AS 17 topped up: 50, 29, 22, 27 marks). Applicability 8 MCQs are verbatim ICAI TYK, not authored.
+
 ## 2026-11-02 Fourth-phase chapter tests
 `first_run/scripts/build_fourth_phase_tests.py` -> `first_run/TESTS/fourth phase/` (MD for self + `student-edition/` PDFs). FS of Companies 50/50, Cash Flow 50/50, Intro to AS 21, AS 1 28, AS 17 23, Applicability: no test (0 questions). Fixed `extract_study_material_tyk.py` to accept "ANSWERS/HINTS" and singular headings; re-running phase 3 as a result changed AS 20 from 33/50 to 50/50 (phase-3 AS20 files overwritten). AS 1 MCQ answer key (number-then-letter layout) still not parsed.
 

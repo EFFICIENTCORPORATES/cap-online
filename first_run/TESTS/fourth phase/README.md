@@ -4,13 +4,13 @@ Financial Statements of Companies, Cash Flow Statement, Introduction to AS, Appl
 
 `*.md` here are for self. `student-edition/` holds the watermarked PDFs: Questions and Answers separately.
 
-| Chapter | Marks | MCQ | Descriptive | Study material | Status |
-|---|---|---|---|---|---|
-| Financial Statements of Companies | 50/50 | 12 (6q) | 38 (7q) | No | OK — full 50 |
-| Cash Flow Statement (AS 3) | 50/50 | 14 (7q) | 36 (6q) | No | OK — full 50 |
-| Introduction to Accounting Standards | 21/50 | 0 (0q) | 21 (5q) | No | **SHORT — 21/50** (pool max 21) |
-| Applicability of Accounting Standards | 0/50 | 0 (0q) | 0 (0q) | No | **NO TEST — no questions tagged to this chapter and no usable study-material answers** |
-| AS 1 — Disclosure of Accounting Policies | 28/50 | 0 (0q) | 28 (6q) | No | **SHORT — 28/50** (pool max 28) |
-| AS 17 — Segment Reporting | 23/50 | 4 (3q) | 19 (4q) | Yes | **SHORT — 23/50** (pool max 23) |
+| Chapter | Marks | MCQ | Descriptive | Study material | Written from study material | Status |
+|---|---|---|---|---|---|---|
+| Financial Statements of Companies | 50/50 | 12 (6q) | 38 (7q) | No | - | OK — full 50 |
+| Cash Flow Statement (AS 3) | 50/50 | 14 (7q) | 36 (6q) | No | - | OK — full 50 |
+| Introduction to Accounting Standards | 50/50 | 0 (0q) | 50 (8q) | No | 29 marks | OK — full 50 |
+| Applicability of Accounting Standards | 50/50 | 8 (8q) | 42 (4q) | No | 50 marks | OK — full 50 |
+| AS 1 — Disclosure of Accounting Policies | 50/50 | 0 (0q) | 50 (9q) | No | 22 marks | OK — full 50 |
+| AS 17 — Segment Reporting | 50/50 | 4 (3q) | 46 (7q) | Yes | 27 marks | OK — full 50 |
 
 *Generated: 2026-11-02*

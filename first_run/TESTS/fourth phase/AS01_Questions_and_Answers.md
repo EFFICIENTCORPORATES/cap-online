@@ -2,8 +2,8 @@
 
 **CA Inter | Paper 1: Advanced Accounting**
 
-**Maximum Marks: 28**
-**Time Allowed: 50 minutes**
+**Maximum Marks: 50**
+**Time Allowed: 90 minutes**
 
 **Instructions:**
 1. All questions are compulsory unless stated otherwise.
@@ -18,7 +18,7 @@
 
 ---
 
-## Section B: Descriptive Questions (28 Marks)
+## Section B: Descriptive Questions (50 Marks)
 
 **Q1.** <p>You are required to comment on the following cases as per the provisions of Accounting Standard-1 ‘Disclosure of Accounting Policies’:</p>
 <p>(1) Bee Limited has not complied with AS-2 "Valuation of inventories" and the same is disclosed in the Notes on Accounts. Management is of the view that the financial statements give a true and fair view as non-compliance with AS-2 is disclosed.</p>
@@ -71,6 +71,18 @@
     <br/>(iv) A Ltd. was providing for after sales expenses @ 2% of sales for covering expenses during the warranty period. Now A Ltd. observes that actual after sales expenses were much less as compared to provision because of better technology used in manufacturing of the products. Now, the Board of A Ltd. decides to account for these expenses as and when they occur. Sales during the period are ₹50 crores. (5 Marks)</p>
 
 *[5 Marks | Topic: AS 1 - Disclosure of Accounting Policies | Source: MTP 2026 Set 1 Q6b]*
+
+**Q7.** <p>Rangoli Traders purchased 800 units of an article at ₹25 per unit and sold 600 units at ₹40 per unit during the year. Compute the profit for the year if the net realisable value per unit of the unsold stock is (i) ₹32 and (ii) ₹20. Explain how the principle of prudence is reflected in your treatment. (5 Marks)</p>
+
+*[5 Marks | Topic: AS 1 | Source: ICAI Study Material]*
+
+**Q8.** <p>Zenith Ltd. valued its inventory on FIFO basis up to last year. In the current year it changed to the weighted average method, which better reflects the consumption pattern of inventory. The closing inventory is ₹5,00,000 under FIFO and ₹4,60,000 under the weighted average method; net realisable value of every item exceeds its cost. Explain, as per AS 1, how the change should be disclosed, and the effect on profit and inventory. State also the position if a change has no material effect in the current period. (7 Marks)</p>
+
+*[7 Marks | Topic: AS 1 | Source: ICAI Study Material]*
+
+**Q9.** <p>Write short notes, with examples, on: (a) Prudence as a consideration in the selection of accounting policies; and (b) Materiality, including the quantitative limits prescribed in Schedule III to the Companies Act, 2013. (5 + 5 = 10 Marks)</p>
+
+*[10 Marks | Topic: AS 1 | Source: ICAI Study Material]*
 
 
 ---
@@ -162,6 +174,18 @@
 <p><em>Note: So far, the company has been providing 2% of sales for meeting after sales expenses during the warranty period. Now the company has improved the quality of its products with better technology and has been observing that actual expenses are very less than the provision, Hence, the company has decided not to make provision for such expenses but to account for the same as and when expenses are incurred. Due to this change, the profit for the year is increased by ₹1 crore than would have been the case if the old policy were to continue.</em></p>
 
 > **Common Mistake to Avoid:** Several examinees agreed with the accountant's policy of capitalising repairs and maintenance merely because it had been disclosed as an accounting policy, not recognising that disclosure under AS 1 cannot cure a treatment that is otherwise incorrect.
+
+**Q7.**
+
+<p>Sales = 600 × ₹40 = ₹24,000; Purchases = 800 × ₹25 = ₹20,000. Closing stock is valued at the lower of cost and net realisable value.</p><table border='1' cellpadding='4'><tr><th>Particulars</th><th>(i) NRV ₹32</th><th>(ii) NRV ₹20</th></tr><tr><td>Sales</td><td>24,000</td><td>24,000</td></tr><tr><td>Closing stock (200 units)</td><td>5,000 (at cost ₹25)</td><td>4,000 (at NRV ₹20)</td></tr><tr><td>Cost of goods sold (20,000 - closing stock)</td><td>15,000</td><td>16,000</td></tr><tr><td><strong>Profit</strong></td><td><strong>9,000</strong></td><td><strong>8,000</strong></td></tr></table><p><strong>Prudence:</strong> in case (i) the expected profit of 200 × (₹32 - ₹25) = ₹1,400 on the unsold units is not anticipated; stock stays at cost. In case (ii) the expected loss of 200 × (₹25 - ₹20) = ₹1,000 is recognised by valuing stock at NRV. Profits are not anticipated but losses are provided for.</p>
+
+**Q8.**
+
+<p><strong>Effect:</strong> closing inventory falls from ₹5,00,000 to ₹4,60,000, a reduction of ₹40,000; profit for the year is therefore also reduced by ₹40,000.</p><p><strong>Disclosure:</strong> as per AS 1, any change in accounting policy which has a material effect in the current period, or is reasonably expected to have a material effect in a later period, should be disclosed. Where the change has a material effect in the current period, the amount by which any item in the financial statements is affected should also be disclosed to the extent ascertainable; where it is not ascertainable wholly or in part, that fact should be indicated. A bare statement that a policy has changed is of little use to a reader, so the effect should be given. A suitable note: <em>'The company values its inventory at lower of cost or net realisable value. In the present year the company has changed to the weighted average method, which better reflects the consumption pattern of inventory, for ascertaining inventory costs from the earlier practice of using FIFO. The change in policy has reduced profit for the year and value of inventory as at the year end by ₹40,000.'</em></p><p><strong>No material effect in the current period:</strong> if the change is reasonably expected to have a material effect in future periods, it must still be disclosed in the current period, even though it has no material effect now. This ensures that all important changes in accounting policies are actually disclosed.</p>
+
+**Q9.**
+
+<p><strong>(a) Prudence.</strong> Because of uncertainty about future events, profits are not anticipated but losses are provided for as a matter of conservatism. Provision should be made for all known liabilities and losses even though the amount cannot be determined with certainty and is only a best estimate on the information available. Exercising prudence ensures that (i) profits are not overstated, (ii) losses are not understated, (iii) assets are not overstated and (iv) liabilities are not understated. The common example is valuing inventory at the lower of cost and net realisable value. Prudence does not permit creation of hidden reserves by understating profits and assets or overstating liabilities and losses; for instance, for a pending damages suit no provision is charged to profit unless the probability of losing the suit is greater than the probability of not losing it.</p><p><strong>(b) Materiality.</strong> Financial statements should disclose all material items, i.e. items the knowledge of which might influence the decisions of the user. Materiality is not always a matter of relative size: for example, a small amount lost through fraud by certain employees may indicate a serious flaw in internal control that needs immediate attention. In certain cases quantitative limits are specified. Under Schedule III, a company should disclose by way of notes additional information on any item of income or expenditure which exceeds 1% of the revenue from operations or ₹1,00,000, whichever is higher; and should disclose in the Notes to Accounts the shares held by each shareholder holding more than 5% of the shares, specifying the number of shares held.</p>
 
 
 *End of Answer Key*

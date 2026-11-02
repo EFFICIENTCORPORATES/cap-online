@@ -2,8 +2,8 @@
 
 **CA Inter | Paper 1: Advanced Accounting**
 
-**Maximum Marks: 21**
-**Time Allowed: 38 minutes**
+**Maximum Marks: 50**
+**Time Allowed: 90 minutes**
 
 **Instructions:**
 1. All questions are compulsory unless stated otherwise.
@@ -18,7 +18,7 @@
 
 ---
 
-## Section B: Descriptive Questions (21 Marks)
+## Section B: Descriptive Questions (50 Marks)
 
 **Q1.** <p>"Accounting Standards standardize diverse accounting policies with a view to eliminate the non-comparability of financial statements and improve the reliability of financial statements." Discuss and explain the benefits of Accounting Standards.</p>
 
@@ -39,6 +39,18 @@
 **Q5.** <p>Explain the key aspects which required the need for convergence towards global standards of financial reporting. (4 Marks)</p>
 
 *[4 Marks | Topic: Introduction to Accounting Standards (5) | Source: PYQ 2026 Q6a]*
+
+**Q6.** <p>Explain the standard-setting process followed by the Accounting Standards Board (ASB) of the ICAI. What is the role of the NFRA and the Ministry of Corporate Affairs in respect of Accounting Standards for companies? (10 Marks)</p>
+
+*[10 Marks | Topic: Introduction to Accounting Standards | Source: ICAI Study Material]*
+
+**Q7.** <p>(a) Distinguish between 'adoption' and 'convergence' as techniques of becoming IFRS compliant. (3 Marks)</p><p>(b) India decided to converge with, and not adopt, IFRS. Explain what 'carve-outs' and 'carve-ins' in Ind AS mean and the factors on account of which Ind AS depart from IFRS. (4 Marks)</p><p>(c) State any four benefits of convergence with IFRS. (2 Marks) (9 Marks)</p>
+
+*[9 Marks | Topic: Introduction to Accounting Standards | Source: ICAI Study Material]*
+
+**Q8.** <p>(a) How many Accounting Standards are effectively in force in India at present? State which standards have been withdrawn and why. (4 Marks)</p><p>(b) Discuss the status of Accounting Standards in India: can they override law, and when are they mandatory? (3 Marks)</p><p>(c) Name the Accounting Standards that were revised to bring them in line with the corresponding Ind AS under the Companies (Accounting Standards) Rules, 2021. (3 Marks) (10 Marks)</p>
+
+*[10 Marks | Topic: Introduction to Accounting Standards | Source: ICAI Study Material]*
 
 
 *End of Question Paper*

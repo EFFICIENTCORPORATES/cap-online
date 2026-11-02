@@ -2,8 +2,8 @@
 
 **CA Inter | Paper 1: Advanced Accounting**
 
-**Maximum Marks: 23**
-**Time Allowed: 41 minutes**
+**Maximum Marks: 50**
+**Time Allowed: 90 minutes**
 
 **Instructions:**
 1. All questions are compulsory unless stated otherwise.
@@ -51,7 +51,7 @@
 
 ---
 
-## Section B: Descriptive Questions (19 Marks)
+## Section B: Descriptive Questions (46 Marks)
 
 **Q1.** <p>PK Ltd. has identified business segment as its primary reporting format. It has identified India, USA and UK as three geographical segments. It sells its products in the Indian market, which constitutes 70 percent of the Company’s sales. 25 per cent is sold in USA and the balance is sold in UK. v Is PK Ltd. as part of its geographical secondary segment information, required to disclose segment revenue from export sales, where such sales are not significant?</p>
 
@@ -80,6 +80,18 @@
 <p>How many reportable segments does Garnet Limited have as per the Revenue and Assets criteria given in AS 17? State Reasons for your answer. (4 Marks)</p>
 
 *[4 Marks | Topic: AS 17 - Segment Reporting (3.9) | Source: MTP 2026 Set 1 Q6c]*
+
+**Q5.** <p>The Chief Accountant of Delta Ltd. provides the following data about its five segments (₹ in lakhs). Revenue includes inter-segment revenue of ₹50 lakhs in Segment A and ₹10 lakhs in Segment B.</p><table border='1' cellpadding='4'><tr><th>Particulars</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>Total</th></tr><tr><td>Segment revenue</td><td>450</td><td>260</td><td>150</td><td>70</td><td>70</td><td>1,000</td></tr><tr><td>Segment result</td><td>70</td><td>(30)</td><td>20</td><td>6</td><td>(4)</td><td>62</td></tr><tr><td>Segment assets</td><td>320</td><td>190</td><td>110</td><td>45</td><td>35</td><td>700</td></tr></table><p>(a) Identify the reportable segments by applying the 10% tests laid down in AS 17. (7 Marks)</p><p>(b) Apply the 75% test and state whether any additional segment must be reported. (3 Marks) (10 Marks)</p>
+
+*[10 Marks | Topic: AS 17 | Source: ICAI Study Material]*
+
+**Q6.** <p>(a) Distinguish between the primary and secondary segment reporting formats under AS 17. (3 Marks)</p><p>(b) List the disclosures required for each reportable segment under the primary reporting format, and the reconciliations to be presented. (5 Marks) (8 Marks)</p>
+
+*[8 Marks | Topic: AS 17 | Source: ICAI Study Material]*
+
+**Q7.** <p>Kiran Ltd. has a business segment 'Appliances' (not primarily of a financial nature). The following information is available (₹ in lakhs):</p><ul><li>Sales to external customers 500; inter-segment sales (at the actual transfer price) 60; dividend income 10</li><li>Expenses directly attributable to the segment 380; common expenses allocable on a reasonable basis 40</li><li>Head-office administrative expenses 30; interest on bank loan 25; income tax expense 20; extraordinary loss 15</li><li>Fixed assets used in the segment 600; inventories 150; trade receivables 120 (gross) with provision for doubtful debts of 20 shown as a direct offset in the balance sheet; head-office building 90; deferred tax asset 25</li></ul><p>(a) Compute the segment revenue, segment expense and segment result. (6 Marks)</p><p>(b) Compute the segment assets. (3 Marks) (9 Marks)</p>
+
+*[9 Marks | Topic: AS 17 | Source: ICAI Study Material]*
 
 
 ---
@@ -130,6 +142,18 @@
 <p>On the basis of asset criteria, Fan and Light are reportable segments as their assets are more than 4,450 lakhs (10% of ₹44,500 lakhs).</p>
 
 > **Common Mistake to Avoid:** Many examinees applied only the 10% revenue or asset threshold test and omitted to check the 75% cumulative external-revenue test for identifying reportable segments under AS 17.
+
+**Q5.**
+
+<p><strong>(a) 10% tests</strong> (a segment is reportable if it meets any one test):</p><p><em>Revenue test:</em> 10% of total revenue (external + internal) of ₹1,000 lakhs = ₹100 lakhs. A (450), B (260) and C (150) meet it; D (70) and E (70) do not.</p><p><em>Result test:</em> profit of profitable segments = 70 + 20 + 6 = ₹96 lakhs; loss of loss-making segments = 30 + 4 = ₹34 lakhs. The greater in absolute amount is ₹96 lakhs; 10% = ₹9.6 lakhs. A (70), B (30) and C (20) meet it; D (6) and E (4) do not.</p><p><em>Asset test:</em> 10% of total segment assets of ₹700 lakhs = ₹70 lakhs. A (320), B (190) and C (110) meet it; D (45) and E (35) do not.</p><p>Segments <strong>A, B and C are reportable</strong>. D and E meet none of the tests; they may be designated reportable at the discretion of management, otherwise they form part of the unallocated reconciling item.</p><p><strong>(b) 75% test:</strong> total enterprise revenue (external) = 1,000 - inter-segment 60 = ₹940 lakhs. External revenue of the reportable segments = A (450 - 50) + B (260 - 10) + C 150 = 400 + 250 + 150 = ₹800 lakhs. 800 / 940 = 85.1%, which is not less than 75%. No additional segment needs to be identified as reportable.</p>
+
+**Q6.**
+
+<p><strong>(a)</strong> The dominant source and nature of the risks and returns of an enterprise governs which is its primary format. If the risks and returns are affected predominantly by differences in the products and services it produces, the <strong>primary format is business segments</strong> and the secondary information is reported geographically. If they are affected predominantly by the fact that it operates in different countries or geographical areas, the <strong>primary format is geographical segments</strong> and the secondary information is reported for groups of related products and services. The primary format calls for the fuller disclosure; the secondary format calls for a smaller set (revenue from external customers, carrying amount of segment assets and cost incurred to acquire segment assets) for segments meeting the 10% thresholds.</p><p><strong>(b)</strong> For each reportable segment under the primary format an enterprise should disclose: (i) segment revenue, classified into revenue from sales to external customers and revenue from transactions with other segments; (ii) segment result; (iii) total carrying amount of segment assets; (iv) total amount of segment liabilities; (v) total cost incurred during the period to acquire segment assets expected to be used for more than one period (tangible and intangible fixed assets); (vi) total expense included in the segment result for depreciation and amortisation of segment assets; and (vii) total amount of significant non-cash expenses, other than depreciation and amortisation, included in segment expense. An enterprise that reports cash flows from operating, investing and financing activities of a segment need not disclose (vi) and (vii).</p><p>The enterprise should also present a reconciliation between the segment information and the aggregated information in the enterprise financial statements: segment revenue to enterprise revenue; segment result to enterprise net profit or loss; segment assets to enterprise assets; and segment liabilities to enterprise liabilities.</p>
+
+**Q7.**
+
+<p><strong>(a)</strong></p><table border='1' cellpadding='4'><tr><th>Particulars</th><th>₹ lakhs</th></tr><tr><td>Segment revenue: external 500 + inter-segment 60</td><td>560</td></tr><tr><td>Segment expense: directly attributable 380 + allocable common 40</td><td>420</td></tr><tr><td><strong>Segment result</strong> (560 - 420)</td><td><strong>140</strong></td></tr></table><p>Segment revenue includes revenue from transactions with other segments, but excludes interest and dividend income (the segment is not primarily of a financial nature) and extraordinary items; so dividend income of ₹10 lakhs and the extraordinary loss are left out. Segment expense excludes extraordinary items, interest expense, income tax expense and general administrative / head-office expenses relating to the enterprise as a whole; so head-office expenses ₹30 lakhs, interest ₹25 lakhs, income tax ₹20 lakhs and the extraordinary loss ₹15 lakhs are not segment expenses.</p><p><strong>(b)</strong> Segment assets are the operating assets employed by the segment, determined after deducting related provisions reported as direct offsets in the balance sheet, and exclude income tax assets and assets used for general enterprise or head-office purposes.</p><table border='1' cellpadding='4'><tr><th>Particulars</th><th>₹ lakhs</th></tr><tr><td>Fixed assets</td><td>600</td></tr><tr><td>Inventories</td><td>150</td></tr><tr><td>Trade receivables (120 - 20 provision)</td><td>100</td></tr><tr><td><strong>Segment assets</strong></td><td><strong>850</strong></td></tr></table><p>The head-office building (₹90 lakhs) and the deferred tax asset (₹25 lakhs) are excluded.</p>
 
 
 *End of Answer Key*

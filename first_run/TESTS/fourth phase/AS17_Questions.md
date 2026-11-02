@@ -2,8 +2,8 @@
 
 **CA Inter | Paper 1: Advanced Accounting**
 
-**Maximum Marks: 23**
-**Time Allowed: 41 minutes**
+**Maximum Marks: 50**
+**Time Allowed: 90 minutes**
 
 **Instructions:**
 1. All questions are compulsory unless stated otherwise.
@@ -51,7 +51,7 @@
 
 ---
 
-## Section B: Descriptive Questions (19 Marks)
+## Section B: Descriptive Questions (46 Marks)
 
 **Q1.** <p>PK Ltd. has identified business segment as its primary reporting format. It has identified India, USA and UK as three geographical segments. It sells its products in the Indian market, which constitutes 70 percent of the Company’s sales. 25 per cent is sold in USA and the balance is sold in UK. v Is PK Ltd. as part of its geographical secondary segment information, required to disclose segment revenue from export sales, where such sales are not significant?</p>
 
@@ -80,6 +80,18 @@
 <p>How many reportable segments does Garnet Limited have as per the Revenue and Assets criteria given in AS 17? State Reasons for your answer. (4 Marks)</p>
 
 *[4 Marks | Topic: AS 17 - Segment Reporting (3.9) | Source: MTP 2026 Set 1 Q6c]*
+
+**Q5.** <p>The Chief Accountant of Delta Ltd. provides the following data about its five segments (₹ in lakhs). Revenue includes inter-segment revenue of ₹50 lakhs in Segment A and ₹10 lakhs in Segment B.</p><table border='1' cellpadding='4'><tr><th>Particulars</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>Total</th></tr><tr><td>Segment revenue</td><td>450</td><td>260</td><td>150</td><td>70</td><td>70</td><td>1,000</td></tr><tr><td>Segment result</td><td>70</td><td>(30)</td><td>20</td><td>6</td><td>(4)</td><td>62</td></tr><tr><td>Segment assets</td><td>320</td><td>190</td><td>110</td><td>45</td><td>35</td><td>700</td></tr></table><p>(a) Identify the reportable segments by applying the 10% tests laid down in AS 17. (7 Marks)</p><p>(b) Apply the 75% test and state whether any additional segment must be reported. (3 Marks) (10 Marks)</p>
+
+*[10 Marks | Topic: AS 17 | Source: ICAI Study Material]*
+
+**Q6.** <p>(a) Distinguish between the primary and secondary segment reporting formats under AS 17. (3 Marks)</p><p>(b) List the disclosures required for each reportable segment under the primary reporting format, and the reconciliations to be presented. (5 Marks) (8 Marks)</p>
+
+*[8 Marks | Topic: AS 17 | Source: ICAI Study Material]*
+
+**Q7.** <p>Kiran Ltd. has a business segment 'Appliances' (not primarily of a financial nature). The following information is available (₹ in lakhs):</p><ul><li>Sales to external customers 500; inter-segment sales (at the actual transfer price) 60; dividend income 10</li><li>Expenses directly attributable to the segment 380; common expenses allocable on a reasonable basis 40</li><li>Head-office administrative expenses 30; interest on bank loan 25; income tax expense 20; extraordinary loss 15</li><li>Fixed assets used in the segment 600; inventories 150; trade receivables 120 (gross) with provision for doubtful debts of 20 shown as a direct offset in the balance sheet; head-office building 90; deferred tax asset 25</li></ul><p>(a) Compute the segment revenue, segment expense and segment result. (6 Marks)</p><p>(b) Compute the segment assets. (3 Marks) (9 Marks)</p>
+
+*[9 Marks | Topic: AS 17 | Source: ICAI Study Material]*
 
 
 *End of Question Paper*

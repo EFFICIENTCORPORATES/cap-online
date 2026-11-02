@@ -2,8 +2,8 @@
 
 **CA Inter | Paper 1: Advanced Accounting**
 
-**Maximum Marks: 28**
-**Time Allowed: 50 minutes**
+**Maximum Marks: 50**
+**Time Allowed: 90 minutes**
 
 **Instructions:**
 1. All questions are compulsory unless stated otherwise.
@@ -18,7 +18,7 @@
 
 ---
 
-## Section B: Descriptive Questions (28 Marks)
+## Section B: Descriptive Questions (50 Marks)
 
 **Q1.** <p>You are required to comment on the following cases as per the provisions of Accounting Standard-1 ‘Disclosure of Accounting Policies’:</p>
 <p>(1) Bee Limited has not complied with AS-2 "Valuation of inventories" and the same is disclosed in the Notes on Accounts. Management is of the view that the financial statements give a true and fair view as non-compliance with AS-2 is disclosed.</p>
@@ -71,6 +71,18 @@
     <br/>(iv) A Ltd. was providing for after sales expenses @ 2% of sales for covering expenses during the warranty period. Now A Ltd. observes that actual after sales expenses were much less as compared to provision because of better technology used in manufacturing of the products. Now, the Board of A Ltd. decides to account for these expenses as and when they occur. Sales during the period are ₹50 crores. (5 Marks)</p>
 
 *[5 Marks | Topic: AS 1 - Disclosure of Accounting Policies | Source: MTP 2026 Set 1 Q6b]*
+
+**Q7.** <p>Rangoli Traders purchased 800 units of an article at ₹25 per unit and sold 600 units at ₹40 per unit during the year. Compute the profit for the year if the net realisable value per unit of the unsold stock is (i) ₹32 and (ii) ₹20. Explain how the principle of prudence is reflected in your treatment. (5 Marks)</p>
+
+*[5 Marks | Topic: AS 1 | Source: ICAI Study Material]*
+
+**Q8.** <p>Zenith Ltd. valued its inventory on FIFO basis up to last year. In the current year it changed to the weighted average method, which better reflects the consumption pattern of inventory. The closing inventory is ₹5,00,000 under FIFO and ₹4,60,000 under the weighted average method; net realisable value of every item exceeds its cost. Explain, as per AS 1, how the change should be disclosed, and the effect on profit and inventory. State also the position if a change has no material effect in the current period. (7 Marks)</p>
+
+*[7 Marks | Topic: AS 1 | Source: ICAI Study Material]*
+
+**Q9.** <p>Write short notes, with examples, on: (a) Prudence as a consideration in the selection of accounting policies; and (b) Materiality, including the quantitative limits prescribed in Schedule III to the Companies Act, 2013. (5 + 5 = 10 Marks)</p>
+
+*[10 Marks | Topic: AS 1 | Source: ICAI Study Material]*
 
 
 *End of Question Paper*
