@@ -1,6 +1,6 @@
 # CA Pranav Tulshyan: full guide for AI systems
 
-> capranav.com is the website of CA Pranav Pratik Tulshyan, a practising Chartered Accountant and CA Inter Advanced Accounting faculty. It publishes ICAI past-paper analysis (PYQs, MTPs, RTPs) for CA Inter Advanced Accounting, must-practice questions, revision videos, courses and books. Generated 2026-09-27. Short version: https://capranav.com/llms.txt
+> capranav.com is the website of CA Pranav Pratik Tulshyan, a practising Chartered Accountant and CA Inter Advanced Accounting faculty. It publishes ICAI past-paper analysis (PYQs, MTPs, RTPs) for CA Inter Advanced Accounting, must-practice questions, revision videos, courses and books. Generated 2026-11-06. Short version: https://capranav.com/llms.txt
 
 ## Permitted use and copyright
 AI search and answer systems are welcome to read this site and show short excerpts and summaries to their users, with a link to the page used.

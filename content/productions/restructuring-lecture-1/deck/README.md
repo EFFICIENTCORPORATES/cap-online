@@ -21,3 +21,12 @@ python3 deck/check_notes_sync.py    # checks ../outline/SPEAKER-NOTES.md against
 **Keys:** Space / → next, ← back, T contents, P print, F full screen. **Print:** Print / Save PDF button, "Background graphics" on, Landscape, Margins None.
 
 A PDF is not committed (binary files stay out of git); make one with the Print button when needed.
+
+## Publishing on capranav.com
+The site copy lives in `capranav_com_revamped/public/kahaani/`. After rebuilding the deck, run from `capranav_com_revamped/`:
+
+```bash
+python tools/sync_kahaani.py && python tools/apply_seo_meta.py && python tools/apply_legal_notice.py && python tools/build_discovery_files.py
+```
+
+Then deploy from the checkout that has the site's gitignored images (see `capranav_com_revamped/PROJECT-LOG.md`, 2026-11-06). URLs: `/kahaani/` and `/kahaani/reconstruction-amalgamation-consolidation`.

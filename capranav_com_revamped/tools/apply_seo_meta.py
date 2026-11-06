@@ -106,6 +106,13 @@ PAGES = [
     ("practice-with-pranav-bhaiya/slides/day-01-syllabus-flow.html", "/practice-with-pranav-bhaiya/slides/day-01-syllabus-flow",
      "Day 1: Syllabus Flow | Practice with Pranav Bhaiya",
      "Class slide from Practice with Pranav Bhaiya, Day 1: how the Advanced Accounting syllabus flows.", ""),
+    ("kahaani/index.html", "/kahaani/",
+     "Kahaani: Lecture Decks for CA Inter Advanced Accounting | CA Pranav",
+     "Click-through lecture decks for CA Inter Advanced Accounting by CA Pranav Tulshyan, connecting the concepts before the calculations.", ""),
+    ("kahaani/reconstruction-amalgamation-consolidation.html", "/kahaani/reconstruction-amalgamation-consolidation",
+     "Reconstruction, Amalgamation and Consolidation: The Map Before the Maths | Kahaani | CA Pranav",
+     "How internal reconstruction, amalgamation (AS 14) and consolidation (AS 21, AS 23, AS 27) connect, and what net assets, cost of control, "
+     "pre- and post-acquisition profits, statutory reserves and minority interest mean. CA Inter Advanced Accounting.", ""),
     ("admin.html", "/admin", "Admin | CA Pranav", "Private.", "noindex"),
     ("dashboard.html", "/dashboard", "My Dashboard | CA Pranav", "Private.", "noindex"),
     ("reader.html", "/reader", "Reader | CA Pranav", "Private.", "noindex"),

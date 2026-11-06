@@ -272,8 +272,14 @@ Style: prompts in your own voice, not a script. **Open** (first idea), **Points*
 ## Section 15 · The map and the word-bank
 
 ### [s15] The master map: where each word is born — 8 steps
-- **Open:** "Put each word where it is born." Left: **TARGET DIES, AS 14**. Right: **TARGET LIVES, AS 21 · 23 · 27**. Bottom strip: what sits at the bottom of every balance sheet.
-- **Step 1:** **Net assets** = assets − liabilities = equity. **Step 2:** **Net results of operations** = the profit that moves net assets. **Step 3:** **Acquisition**: buying a stake in a company that carries on. **Step 4:** **Control**: above 50% of votes, or the board. **Step 5:** **Cost of control**: paid minus share of net assets. **Step 6:** **Pre- and post-acquisition**: capital vs revenue. **Step 7:** **Statutory reserves** (on the dies side): matter in the purchase method. **Step 8:** **Minority interest**: outsiders' share, below 100%.
+- **Open:** "Put each word where it is born." Left: **TARGET DIES, AS 14**. Right: **TARGET LIVES, AS 21 · 23 · 27**. Bottom strip: what sits at the bottom of every balance sheet. From step 3 each word on the right gets its **counterpart on the left**, so the two columns fill together.
+- **Step 1:** **Net assets** = assets − liabilities = equity. **Step 2:** **Net results of operations** = the profit that moves net assets.
+- **Step 3:** **Acquisition** (right): buying a stake in a company that carries on. Counterpart (left): **merger or purchase?** Five conditions; pooling vs purchase method.
+- **Step 4:** **Control** (right): above 50% of votes, or the board. Counterpart: **the business moves, not the shares**; the target is wound up.
+- **Step 5:** **Cost of control** (right): paid minus share of net assets. Counterpart: **purchase consideration** vs net assets taken over: goodwill or capital reserve. "Same idea, different standard."
+- **Step 6:** **Pre- and post-acquisition** (right): capital vs revenue. Counterpart: **no pre/post split**: the target dies on one day.
+- **Step 7:** **Statutory reserves** (left): the Amalgamation Adjustment Reserve; they matter in the purchase method.
+- **Step 8:** **Minority interest** (right): outsiders' share, below 100%. Counterpart: **no minority interest** on the dies side.
 - **Close:** "Come back to 'which column are we in?' at the start of every later chapter."
 
 ### [s16] The eight words, in plain language — 3 steps
