@@ -1,0 +1,1111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kahaani: Reconstruction, Amalgamation and Consolidation | CA Pranav</title>
+<meta name="description" content="The map before the maths: how internal reconstruction, amalgamation and consolidation connect. CA Inter Advanced Accounting.">
+<style>
+.co{position:absolute;width:9cqw;height:5.6cqw;border:.15cqw solid var(--ink);background:var(--white);display:grid;place-items:center;font-weight:800;font-size:1.45cqw;text-align:center;line-height:1.1}
+.dots{position:absolute;display:flex;gap:.4cqw}
+.dots i{display:block;width:1.3cqw;height:1.3cqw;border-radius:50%;border:.1cqw solid var(--ink)}
+.dots i.d1{background:#f2b84b}.dots i.d2{background:#1f62d0}.dots i.d3{background:#0f8a70}.dots i.d4{background:#e8733f}
+#bhimpin[data-state="a"]{left:10%}#bhimpin[data-state="b"]{left:40%}#bhimpin[data-state="c"]{left:80%}
+#bhimpin{left:0}
+
+#beam{transition:transform .9s cubic-bezier(.3,.7,.2,1)}
+#beam[data-state="heavy"]{transform:rotate(-5deg)}#beam[data-state="light"]{transform:rotate(5deg)}
+#beam .pan{transition:transform .9s cubic-bezier(.3,.7,.2,1)}
+#beam[data-state="heavy"] .pan{transform:rotate(5deg)}#beam[data-state="light"] .pan{transform:rotate(-5deg)}
+.chip{padding:.8cqw 1cqw;border:.15cqw solid var(--ink);background:var(--white);font-weight:800;font-size:1.5cqw;text-align:center;transition:background .5s,opacity .5s,border-color .5s}
+.chip[data-state="keep"]{background:var(--green-t);border-color:var(--green)}
+.chip[data-state="gone"]{opacity:.4;background:var(--red-t);text-decoration:line-through}
+.chip[data-state="pre"]{background:var(--red-t)}
+.mo{flex:1;text-align:center;padding:1.1cqw 0;border:.1cqw solid var(--ink);font-weight:800;font-size:1.3cqw;background:var(--white);transition:background .6s}
+.mo.pc.on{background:var(--red-t)}.mo.qc.on{background:var(--green-t)}
+.seg{display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.8cqw;height:5cqw;border:.1cqw solid var(--ink);transition:flex-basis .8s,opacity .6s}
+.seg[data-state="zero"]{flex-basis:0 !important;opacity:0;border-width:0}
+.scol{transition:flex-basis .8s,opacity .6s;overflow:hidden}
+#stack #colA{flex:1 1 100%}#stack #colB{flex:0 0 0;opacity:0}
+#stack[data-state="split"] #colA{flex:0 0 78%}#stack[data-state="split"] #colB{flex:0 0 20%;opacity:1}
+#eqbar{height:18cqw;transition:height .8s cubic-bezier(.3,.7,.2,1)}
+#eqbar[data-state="b"]{height:21cqw}#eqbar[data-state="c"]{height:19.5cqw}
+.red{color:var(--red)}
+.tbl.xl td{font-size:2cqw;padding:1.1cqw 1.3cqw}.tbl.xl th{font-size:1.3cqw;padding:.8cqw 1.3cqw}
+.tbl.sm td{font-size:1.4cqw;padding:.6cqw 1cqw}.tbl.sm th{font-size:1.15cqw;padding:.5cqw 1cqw}
+.dim.soft.on{opacity:.6;filter:none}
+
+:root{
+  --ink:#10233f; --paper:#f7f2e8; --white:#fffdf8; --red:#e5484d; --gold:#f2b84b;
+  --green:#0f8a70; --blue:#1f62d0; --org:#e8733f; --muted:#687487; --line:rgba(16,35,63,.14);
+  --blue-t:#dfeaff; --org-t:#ffe7d9; --green-t:#d9f2ea; --red-t:#fde0e1; --gold-t:#fcefc9;
+}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#091426;font-family:"Aptos","Segoe UI",Arial,sans-serif;color:var(--ink)}
+body{display:grid;place-items:center}
+#deck{position:relative;width:min(100vw,177.777vh);height:min(56.25vw,100vh);background:var(--paper);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.42)}
+.slide{position:absolute;inset:0;display:none;container-type:size;
+  background:radial-gradient(circle at 90% 8%,rgba(242,184,75,.20),transparent 24%),linear-gradient(135deg,#fffdf8 0%,#f7f2e8 72%,#efe5d2 100%)}
+.slide.active{display:block;animation:enter .4s ease-out both}
+.pad{position:absolute;inset:0;display:flex;flex-direction:column;padding:4.4cqw 5.4cqw 4.2cqw}
+@keyframes enter{from{opacity:0;transform:translateY(1cqh)}to{opacity:1;transform:none}}
+.eyebrow{margin:0 0 .6cqw;color:var(--red);font-size:1.15cqw;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+h1{margin:0;font-size:4.6cqw;line-height:1.03;letter-spacing:-.04em}
+h2{margin:0;font-size:3.2cqw;line-height:1.08;letter-spacing:-.03em}
+h3{margin:0;font-size:2.1cqw;line-height:1.15}
+p{margin:0}
+.accent{color:var(--red)}.gold{color:#a56600}.green{color:var(--green)}.blue{color:var(--blue)}.org{color:var(--org)}.muted{color:var(--muted)}
+.brand{position:absolute;right:5.4cqw;top:2.4cqw;color:var(--muted);font-size:.9cqw;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.foot{position:absolute;left:5.4cqw;bottom:1.5cqw;color:var(--muted);font-size:1.05cqw;max-width:58%;line-height:1.25}
+.mark{position:absolute;right:27cqw;bottom:1.6cqw;color:var(--muted);font-size:.85cqw;font-weight:700;letter-spacing:.06em}
+.bd{position:relative;flex:1;min-height:0;margin-top:1.6cqw}
+.lead{font-size:2.15cqw;line-height:1.3;font-weight:650;max-width:62cqw}
+.small{font-size:1.35cqw;line-height:1.3}
+.t{font-size:1.8cqw;line-height:1.28}
+.b{font-weight:800}
+
+/* step engine */
+.rv{opacity:0;transform:translateY(1.2cqh);transition:opacity .4s ease,transform .4s ease;pointer-events:none}
+.rv.on{opacity:1;transform:none;pointer-events:auto}
+.out{transition:opacity .45s ease,transform .45s ease}.out.on{opacity:0;transform:scale(.9)}
+.dim{transition:opacity .45s ease,filter .45s}.dim.on{opacity:.28;filter:grayscale(.6)}
+.fly{opacity:0;transform:translate(var(--fx,-8cqw),var(--fy,0));transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.fly.on{opacity:1;transform:none}
+.mv{transition:transform .8s cubic-bezier(.3,.7,.2,1),opacity .5s ease,left .8s cubic-bezier(.3,.7,.2,1)}
+.mv.on{transform:translate(var(--dx,0),var(--dy,0))}
+.hl{transition:box-shadow .4s,background .4s,transform .4s}.hl.on{box-shadow:0 0 0 .3cqw var(--gold);background:var(--gold-t)}
+.val{transition:color .3s}
+
+/* components */
+.card{background:var(--ink);color:var(--white);padding:1.1cqw 1.3cqw;box-shadow:.7cqw .7cqw 0 var(--gold)}
+.card small{display:block;color:#ffd982;font-size:1.1cqw;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.45cqw}
+.card strong{display:block;font-size:2.4cqw;line-height:1.1}
+.box{background:var(--white);border:.12cqw solid var(--ink);padding:.9cqw 1.1cqw}
+.note{background:var(--white);border-left:.45cqw solid var(--blue);padding:1cqw 1.3cqw;box-shadow:0 .2cqw .8cqw rgba(16,35,63,.08)}
+.note.red{border-color:var(--red)}.note.green{border-color:var(--green)}.note.org{border-color:var(--org)}.note.gold{border-color:var(--gold)}
+.pill{display:inline-block;padding:.3cqw .9cqw;border-radius:2cqw;font-size:1.3cqw;font-weight:800;color:#fff;background:var(--ink)}
+.pill.blue{background:var(--blue);color:#fff}.pill.org{background:var(--org);color:#fff}.pill.green{background:var(--green);color:#fff}.pill.red{background:var(--red);color:#fff}.pill.gold{background:var(--gold);color:var(--ink)}
+.row{display:flex;gap:1.4cqw;align-items:stretch}.col{display:flex;flex-direction:column;gap:1cqw}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4cqw}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2cqw}
+.center{text-align:center}.abs{position:absolute}
+.tag{font-size:1.15cqw;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.eq{font-size:1.9cqw;font-weight:800}
+.stamp{display:inline-block;border:.3cqw solid var(--red);color:var(--red);font-weight:900;font-size:2cqw;padding:.4cqw 1cqw;transform:rotate(-6deg);background:rgba(255,253,248,.9);letter-spacing:.04em}
+
+/* tables */
+table{border-collapse:collapse;width:100%}
+.tbl th{background:var(--ink);color:#fff;text-align:left;font-size:1.2cqw;letter-spacing:.06em;text-transform:uppercase;padding:.55cqw .9cqw}
+.tbl td{padding:.85cqw 1.1cqw;border-bottom:1px solid var(--line);font-size:1.65cqw;line-height:1.25;vertical-align:top;background:rgba(255,253,248,.7)}
+.tbl td:first-child{font-weight:800}
+.tbl tr.rv.on{opacity:1}
+.tbl tr.rv{transform:none}
+
+/* T-format balance sheet: Equity & Liabilities LEFT, Assets RIGHT */
+.tbs{display:grid;grid-template-columns:1fr 1fr;border:.15cqw solid var(--ink);background:var(--white);font-size:1.6cqw}
+.tbs .h{background:var(--ink);color:#fff;padding:.5cqw .9cqw;font-weight:800;letter-spacing:.07em;text-transform:uppercase;font-size:1.15cqw}
+.tbs .c{display:flex;flex-direction:column}
+.tbs .c+.c{border-left:.15cqw solid var(--ink)}
+.tbs .r{display:flex;justify-content:space-between;gap:.6cqw;padding:.5cqw .9cqw;border-bottom:1px solid var(--line)}
+.tbs .r b{font-variant-numeric:tabular-nums}
+.tbs .r.sub{font-weight:800;background:var(--blue-t)}
+.tbs .r.neg b{color:var(--red)}
+.tbs .tot{margin-top:auto;font-weight:900;border-top:.15cqw solid var(--ink);background:var(--gold-t);display:flex;justify-content:space-between;padding:.55cqw .9cqw}
+.tbs .r.sm{font-size:1.25cqw;padding-left:1.8cqw;color:var(--muted)}
+
+/* stacks / bars */
+.blk{display:flex;align-items:center;justify-content:space-between;padding:0 .8cqw;font-weight:800;font-size:1.5cqw;border:.1cqw solid rgba(16,35,63,.4);transition:height .6s,flex-basis .6s,width .6s,opacity .4s,background .4s}
+.pre{background:var(--red-t)}.post{background:var(--green-t)}
+.pcol{background:var(--blue-t)}.mcol{background:var(--org-t)}
+
+/* controls / TOC */
+#controls{position:absolute;right:1.6cqw;bottom:1.3cqw;z-index:30;display:flex;gap:.5cqw;align-items:center}
+#controls button{min-width:34px;min-height:34px;width:2.6cqw;height:2.6cqw;border:0;border-radius:50%;background:rgba(16,35,63,.9);color:#fff;font-size:1.1cqw;cursor:pointer}
+#controls button.wide{border-radius:2cqw;width:auto;padding:0 1.1cqw;font-size:.95cqw;font-weight:800}
+#counter{color:var(--muted);font-size:.9cqw;font-weight:800;min-width:6.5em;text-align:center}
+#progress{position:absolute;left:0;bottom:0;height:.45cqw;background:var(--red);transition:width .3s;z-index:40}
+#toc{position:absolute;left:0;top:0;bottom:0;width:26cqw;z-index:50;background:var(--ink);color:#fff;transform:translateX(-102%);transition:transform .35s;padding:1.8cqw 1.4cqw;overflow:auto;box-shadow:.8cqw 0 2cqw rgba(0,0,0,.35)}
+#toc.open{transform:none}
+#toc .wm{font-weight:900;font-size:1.5cqw;letter-spacing:.02em}.wm span{color:var(--gold)}
+#toc .tg{color:#ffd982;font-size:.85cqw;font-weight:800;letter-spacing:.12em;margin:.2cqw 0 1.2cqw}
+#toc a{display:block;color:#e8eefc;text-decoration:none;font-size:1.05cqw;padding:.55cqw .7cqw;border-left:.25cqw solid transparent;cursor:pointer;line-height:1.2}
+#toc a:hover{background:rgba(255,255,255,.08)}#toc a.cur{border-color:var(--gold);background:rgba(242,184,75,.14);font-weight:800}
+#tocbtn{position:absolute;left:1.4cqw;top:1.4cqw;z-index:60;border:0;background:rgba(16,35,63,.9);color:#fff;border-radius:2cqw;padding:.45cqw 1cqw;font-size:.9cqw;font-weight:800;cursor:pointer}
+#toast{position:absolute;left:50%;bottom:5cqw;transform:translateX(-50%);background:var(--ink);color:#fff;padding:.8cqw 1.4cqw;border-radius:1cqw;font-size:1.05cqw;z-index:80;opacity:0;pointer-events:none;transition:opacity .3s;max-width:70%;text-align:center}
+#toast.on{opacity:1}
+
+@media (max-aspect-ratio:4/3){.t{font-size:1.7cqw}}
+
+/* print: one landscape page per slide, every step revealed, watermark */
+@page{size:297mm 210mm;margin:0}
+@media print{
+  html,body{width:297mm;height:auto;overflow:visible;background:#fff;display:block;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #deck{width:297mm;height:auto;overflow:visible;box-shadow:none;background:#fff}
+  .slide{display:block !important;position:relative;inset:auto;width:297mm;height:210mm;overflow:hidden;break-after:page;page-break-after:always;animation:none !important}
+  .slide:last-child{break-after:auto;page-break-after:auto}
+  .slide::after{content:"CApranav.com";position:absolute;inset:0;display:grid;place-items:center;font-size:13cqw;font-weight:900;letter-spacing:.02em;color:var(--ink);opacity:.08;transform:rotate(-24deg);pointer-events:none;z-index:99;white-space:nowrap}
+  #controls,#toc,#tocbtn,#progress,#toast{display:none !important}
+  .rv,.out,.fly,.mv,.dim,.hl{transition:none !important}
+}
+
+</style>
+</head>
+<body>
+<main id="deck" aria-label="Kahaani: Reconstruction, Amalgamation and Consolidation">
+<button id="tocbtn" title="Contents (T)">☰ Contents</button>
+<nav id="toc" aria-label="Contents"></nav>
+<!-- ============ TITLE ============ -->
+<section class="slide" id="s00" data-sec="Start" data-title="Kahaani: the map before the maths"><div class="pad">
+  <div class="eyebrow">Kahaani · CA Inter Advanced Accounts</div>
+  <h1>Reconstruction, Amalgamation<br>&amp; Consolidation</h1>
+  <h2 style="margin-top:1.2cqw" class="muted">The map before the maths</h2>
+  <p class="lead" style="margin-top:2cqw">Today there is no accounting. Only the map, and the eight words the exam keeps asking.</p>
+  <div class="bd">
+    <div class="g4" style="margin-top:1cqw">
+      <div class="card rv" data-at="1"><small>Word 1</small><strong>Net assets</strong></div>
+      <div class="card rv" data-at="2"><small>Word 2</small><strong>Net results of operations</strong></div>
+      <div class="card rv" data-at="3"><small>Word 3</small><strong>Acquisition</strong></div>
+      <div class="card rv" data-at="4"><small>Word 4</small><strong>Control</strong></div>
+      <div class="card rv" data-at="5" style="margin-top:1.4cqw"><small>Word 5</small><strong>Cost of control</strong></div>
+      <div class="card rv" data-at="6" style="margin-top:1.4cqw"><small>Word 6</small><strong>Pre- and post-acquisition</strong></div>
+      <div class="card rv" data-at="7" style="margin-top:1.4cqw"><small>Word 7</small><strong>Statutory reserves</strong></div>
+      <div class="card rv" data-at="8" style="margin-top:1.4cqw"><small>Word 8</small><strong>Minority interest</strong></div>
+    </div>
+  </div>
+  <div class="foot">CA Pranav Tulshyan · AIR 1 · AIR 1 · AIR 5</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 1. RESCUE BEFORE WINDING UP ============ -->
+<section class="slide" id="s01" data-sec="1 · Rescue before winding up" data-title="Rescue before winding up"><div class="pad">
+  <div class="eyebrow">Where we are</div>
+  <h2>A sick company should be <span class="accent">saved first</span></h2>
+  <div class="bd">
+    <div class="abs" style="left:0;right:0;top:0;height:3.2cqw;border-radius:2cqw;background:linear-gradient(90deg,#0f8a70,#f2b84b 55%,#e5484d)"></div>
+    <div class="abs tag green" style="left:.5cqw;top:3.8cqw">Healthy · cash-rich</div>
+    <div class="abs tag accent" style="right:.5cqw;top:3.8cqw">Dying</div>
+    <div class="g4" style="position:absolute;left:0;right:0;top:7.5cqw">
+      <div class="note green rv" data-at="1">
+        <div class="tag green">Healthy company</div>
+        <h3>Buyback · Sec 68</h3>
+        <p class="t" style="margin-top:.4cqw">Too much cash, so it is given back to shareholders. Real cash flows <b>out</b>. Normal business.</p>
+      </div>
+      <div class="note gold rv" data-at="3">
+        <div class="tag gold">Rescue 1</div>
+        <h3>Internal reconstruction</h3>
+        <p class="t" style="margin-top:.4cqw">Same company continues. Sacrifices, <b>no cash leaves</b>. Sec 61, 66 (Ch 14).</p>
+      </div>
+      <div class="note org rv" data-at="4">
+        <div class="tag org">Rescue 2</div>
+        <h3>External reconstruction</h3>
+        <p class="t" style="margin-top:.4cqw">The business moves to a <b>new</b> company; the old one closes (Ch 13).</p>
+      </div>
+      <div class="rv" data-at="2" style="position:relative">
+        <div class="card" data-st="5:last" id="windup"><small data-txt="2:Winding up · dissolution|5:The very last box">Winding up · dissolution</small><strong data-txt="2:WIND UP|5:Last resort">WIND UP</strong></div>
+        <div class="stamp rv abs" data-at="2" data-until="5" style="left:-2cqw;top:7.4cqw;white-space:nowrap">Not the first thing we try</div>
+      </div>
+    </div>
+    <div class="note red rv abs" data-at="6" style="left:0;right:0;bottom:1.8cqw;display:flex;gap:2cqw;align-items:center">
+      <div><div class="tag accent">The other direction</div><h3>Healthy companies <span class="green">grow</span></h3></div>
+      <div class="pill gold">Amalgamation</div><div class="pill gold">Absorption</div><div class="pill gold">Acquisition (subsidiary)</div>
+      <div class="t muted">The rest of this block.</div>
+    </div>
+  </div>
+  <div class="foot">Winding up is the <i>process</i>; dissolution is the <i>outcome</i> (Foundation). Everything in this block happens before, or instead of, that last box.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 2. INTERNAL RECONSTRUCTION ============ -->
+<section class="slide" id="s02" data-sec="2 · Internal reconstruction" data-title="Internal reconstruction"><div class="pad">
+  <div class="eyebrow">Rescue 1 · same company, no cash out</div>
+  <h2>One account collects every sacrifice</h2>
+  <div class="bd">
+    <div class="abs" style="left:0;top:0;width:44cqw">
+      <div class="tag muted" style="margin-bottom:.4cqw">Sick Ltd · before (₹ lakh, illustrative)</div>
+      <div class="tbs">
+        <div class="h">Equity &amp; Liabilities</div><div class="h">Assets</div>
+        <div class="c">
+          <div class="r"><span>Equity share capital</span><b data-txt="0:100|4:70">100</b></div>
+          <div class="r neg"><span>Reserves &amp; surplus (loss)</span><b data-txt="0:(40)|4:0">(40)</b></div>
+          <div class="r"><span>Debentures</span><b data-txt="0:30|4:20">30</b></div>
+          <div class="r"><span>Creditors</span><b data-txt="0:30|4:10">30</b></div>
+          <div class="tot"><span>Total</span><b data-txt="0:120|4:100">120</b></div>
+        </div>
+        <div class="c">
+          <div class="r hl" data-at="3" data-until="4"><span>Machinery (overvalued)</span><b data-txt="0:70|4:50">70</b></div>
+          <div class="r"><span>Inventory</span><b>30</b></div>
+          <div class="r"><span>Cash</span><b>20</b></div>
+          <div class="r" style="visibility:hidden"><span>.</span></div>
+          <div class="tot"><span>Total</span><b data-txt="0:120|4:100">120</b></div>
+        </div>
+      </div>
+      <div class="stamp rv" data-at="4" style="margin-top:1.4cqw;font-size:1.3cqw">Sick Ltd (and Reduced)</div>
+    </div>
+    <div class="abs" style="left:47cqw;top:0;width:42cqw">
+      <div class="tag muted" style="margin-bottom:.4cqw">Sacrifices</div>
+      <div class="col">
+        <div class="note rv fly" style="--fx:-6cqw" data-at="1"><b>Shareholders</b> accept a cut in capital <span class="pill blue" style="float:right">30</span></div>
+        <div class="note gold rv fly" style="--fx:-6cqw" data-at="1"><b>Debenture holders</b> waive part of their claim <span class="pill gold" style="float:right">10</span></div>
+        <div class="note org rv fly" style="--fx:-6cqw" data-at="1"><b>Creditors</b> accept less <span class="pill org" style="float:right">20</span></div>
+      </div>
+      <div class="card rv" data-at="2" style="margin-top:1.4cqw">
+        <small>All sacrifices flow into</small>
+        <strong>Capital Reduction Account · 60</strong>
+        <div class="small rv" data-at="3" style="margin-top:.6cqw;color:#ffd982">Writes off the loss <b>40</b> and the overvalued machinery <b>20</b>.</div>
+      </div>
+    </div>
+    <div class="abs note red rv" data-at="2" style="left:0;bottom:3cqw;width:44cqw"><h3>No new company. No cash leaves.</h3><p class="t">The sacrifices <b>are</b> the gain.</p></div>
+  </div>
+  <div class="foot">Mention only: alteration, variation of rights, reduction, compromise, surrender (Ch 14 topic 2, p14.4 – 14.12). Sec 61 and 66 (p14.3). Entries come in the Ch 14 lectures.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 3. THE BIG FORK ============ -->
+<section class="slide" id="s03a" data-sec="3 · The big fork" data-title="Does the target company die?"><div class="pad">
+  <div class="eyebrow">The spine of the whole block</div>
+  <h2>When two companies come together, <span class="accent">does one of them die?</span></h2>
+  <div class="bd">
+    <div class="card center rv" data-at="1" style="width:34cqw;margin:0 auto"><small>The one question</small><strong>Does the target company survive?</strong></div>
+    <div class="g2" style="margin-top:2.6cqw">
+      <div class="note red rv" data-at="2">
+        <div class="pill red">DIES</div>
+        <h3 style="margin-top:.7cqw">External reconstruction · Amalgamation · Absorption</h3>
+        <p class="t" style="margin-top:.5cqw">One-time event. One date. Everything settled that day.</p>
+        <p class="t" style="margin-top:.5cqw"><b>AS 14</b> · Ch 13 · Ch 9 Unit 2</p>
+      </div>
+      <div class="note green rv" data-at="3">
+        <div class="pill green">LIVES</div>
+        <h3 style="margin-top:.7cqw">Subsidiary · Associate · Joint venture</h3>
+        <p class="t" style="margin-top:.5cqw">An ongoing relationship. The target keeps trading and keeps earning.</p>
+        <p class="t" style="margin-top:.5cqw"><b>AS 21 · AS 23 · AS 27</b> · Ch 10</p>
+      </div>
+    </div>
+    <p class="lead rv" data-at="4" style="margin-top:2.4cqw;max-width:none">Everything else in these chapters follows from this one question. After every section we come back to this slide: <b>"which column are we in?"</b></p>
+  </div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<section class="slide" id="s03b" data-sec="3 · The big fork" data-title="Dies vs lives: the contrast"><div class="pad">
+  <div class="eyebrow">Same question, side by side</div>
+  <h2>What changes when the target survives</h2>
+  <div class="bd">
+    <table class="tbl xl">
+      <tr><th style="width:26%"></th><th style="width:37%" class="">Target dies · AS 14</th><th>Target lives · AS 21</th></tr>
+      <tr class="rv" data-at="1"><td>The target</td><td>Wound up</td><td>Continues as a separate legal entity</td></tr>
+      <tr class="rv" data-at="2"><td>The relationship</td><td>One-time event</td><td>Ongoing, year after year</td></tr>
+      <tr class="rv" data-at="3"><td>The relevant date</td><td>Date of amalgamation</td><td>Date of acquisition</td></tr>
+      <tr class="rv" data-at="4"><td>Pre / post split of reserves and profits</td><td><span class="accent b">No</span> (nothing happens "later")</td><td><span class="green b">Yes</span> (mandatory)</td></tr>
+      <tr class="rv" data-at="5"><td>Pre / post split of dividends</td><td><span class="accent b">No</span> (a wound-up company pays no later dividend)</td><td><span class="green b">Yes</span></td></tr>
+      <tr class="rv" data-at="6"><td>Minority interest</td><td><span class="accent b">No</span></td><td><span class="green b">Yes</span>, if not wholly owned</td></tr>
+    </table>
+  </div>
+  <div class="foot">Come back to this slide at the end of every section.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 4a. TARGET DIES: THREE FORMS ============ -->
+<section class="slide" id="s04a" data-sec="4 · Target dies" data-title="Three forms: what physically happens"><div class="pad">
+  <div class="eyebrow">Layer 1 · what physically happens</div>
+  <h2>Three ways a company can die into another</h2>
+  <div class="bd">
+    <div class="g3">
+      <!-- External reconstruction -->
+      <div class="note red" style="position:relative">
+        <h3>External reconstruction</h3>
+        <div style="position:relative;height:13cqw;margin-top:.8cqw">
+          <div class="co out" data-at="2" style="left:1cqw;top:1.4cqw;background:var(--red-t)">Sick Co</div>
+          <div class="co fly" data-at="1" style="--fx:-9cqw;right:1cqw;top:1.4cqw;background:var(--green-t)">New Co</div>
+          <div class="dots" style="left:1.4cqw;top:7.6cqw"><i class="d1"></i><i class="d2"></i><i class="d3"></i></div>
+          <div class="dots rv" data-at="1" style="right:1.4cqw;top:7.6cqw"><i class="d1"></i><i class="d2"></i><i class="d3"></i></div>
+          <div class="small abs rv b" data-at="1" style="left:9cqw;top:10.2cqw;white-space:nowrap">business moves →</div>
+        </div>
+        <p class="t"><b>A new company takes over the business</b> of an existing, often loss-making company. The same shareholders carry on.</p>
+        <p class="small muted" style="margin-top:.4cqw">Ch 13 p13.3 · Ch 14 p14.3</p>
+      </div>
+      <!-- Amalgamation -->
+      <div class="note gold" style="position:relative">
+        <h3>Amalgamation (A + B → C)</h3>
+        <div style="position:relative;height:13cqw;margin-top:.8cqw">
+          <div class="mv" data-at="3" style="--dx:4cqw;position:absolute;left:1cqw;top:1.4cqw"><div class="co out" data-at="4" style="position:relative;background:var(--gold-t)">Co A</div></div>
+          <div class="mv" data-at="3" style="--dx:-4cqw;position:absolute;right:1cqw;top:1.4cqw"><div class="co out" data-at="4" style="position:relative;background:var(--gold-t)">Co B</div></div>
+          <div class="co rv" data-at="3" style="left:calc(50% - 4.5cqw);top:7cqw;background:var(--green-t)">New Co C</div>
+        </div>
+        <p class="t"><b>Two or more companies are wound up</b>; a brand-new company takes over their business.</p>
+        <p class="small muted" style="margin-top:.4cqw">Ch 13 p13.3 – 13.5</p>
+      </div>
+      <!-- Absorption -->
+      <div class="note org" style="position:relative">
+        <h3>Absorption (A absorbs B)</h3>
+        <div style="position:relative;height:13cqw;margin-top:.8cqw">
+          <div class="co" style="left:1cqw;top:1.4cqw;background:var(--green-t)">Co A</div>
+          <div class="mv" data-at="5" style="--dx:-12cqw;position:absolute;right:1cqw;top:1.4cqw"><div class="co out" data-at="6" style="position:relative;background:var(--org-t)">Co B</div></div>
+          <div class="small abs rv" data-at="5" style="left:11cqw;top:7.4cqw">B's business goes into A</div>
+        </div>
+        <p class="t"><b>An existing company takes over the business</b> of an existing company. No new company; B is wound up.</p>
+        <p class="small muted" style="margin-top:.4cqw">Ch 13 p13.3 – 13.5</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot">In every case the target's business moves across and the target company is wound up. Buying <b>shares</b> is a different thing: that comes on the ownership ladder.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 4b. FIVE CONDITIONS ============ -->
+<section class="slide" id="s04b" data-sec="4 · Target dies" data-title="The five conditions of AS 14"><div class="pad">
+  <div class="eyebrow">Layer 2 · how we account for it (the exam test)</div>
+  <h2>The form does <span class="accent">not</span> decide the method. Five conditions do.</h2>
+  <div class="bd">
+    <div class="abs" style="left:0;top:0;width:52cqw">
+      <div class="note rv" data-at="1"><b>1</b> · All assets and liabilities of the transferor come over <span class="green b" style="float:right">✓</span></div>
+      <div class="note rv" data-at="2" style="margin-top:.7cqw"><b>2</b> · 90% or more of the transferor's equity shareholders (by face value) become shareholders of the transferee <span class="green b" style="float:right">✓</span></div>
+      <div class="note rv" data-at="3" style="margin-top:.7cqw"><b>3</b> · Consideration is <b>wholly in equity shares</b> (cash only for fractions) <span class="green b" style="float:right">✓</span></div>
+      <div class="note rv" data-at="4" style="margin-top:.7cqw"><b>4</b> · The business is intended to carry on <span class="green b" style="float:right">✓</span></div>
+      <div class="note rv" data-at="5" style="margin-top:.7cqw"><b>5</b> · <b>No adjustment</b> to book values (except to align accounting policies) <span class="green b" style="float:right">✓</span></div>
+    </div>
+    <div class="abs" style="left:56cqw;top:0;right:0">
+      <div class="card rv" data-at="6" style="background:var(--green);box-shadow:.7cqw .7cqw 0 var(--gold)"><small style="color:#d8fff3">All five pass</small><strong>Amalgamation in the nature of MERGER</strong><div class="t" style="margin-top:.5cqw">Accounted by the <b>pooling of interests</b> method</div></div>
+      <div class="card rv" data-at="7" style="margin-top:2.2cqw;background:var(--red)"><small style="color:#ffe6e6">Even one fails</small><strong>Amalgamation in the nature of PURCHASE</strong><div class="t" style="margin-top:.5cqw">Accounted by the <b>purchase method</b></div></div>
+    </div>
+    <div class="note gold rv abs" data-at="8" style="left:0;right:0;bottom:0">
+      <b>Two traps.</b> An absorption of your own subsidiary at book values can pass all five (a <b>merger</b>). An A + B → C where the new company <b>revalues</b> assets fails condition 5 (a <b>purchase</b>). Feelings (marriage vs swallowing) do not decide; the five conditions do. ICAI notes external reconstruction is essentially a merger (Ch 14 p14.3).
+    </div>
+  </div>
+  <div class="foot">AS 14 topic 2.3 p9.25 · merger conditions topic 2.4 p9.26 · purchase nature topic 2.5 p9.27 · methods topic 2.6 p9.27</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 4c. MERGER VS PURCHASE ============ -->
+<section class="slide" id="s04c" data-sec="4 · Target dies" data-title="Merger vs purchase, and the words"><div class="pad">
+  <div class="eyebrow">Layer 2 continued</div>
+  <h2>Merger vs purchase</h2>
+  <div class="bd">
+    <table class="tbl">
+      <tr><th style="width:24%"></th><th style="width:38%">Merger · pooling of interests</th><th>Purchase · purchase method</th></tr>
+      <tr class="rv" data-at="1"><td>Consideration</td><td>Wholly equity shares (cash only for fractions)</td><td>Cash, equity shares, preference shares or securities</td></tr>
+      <tr class="rv" data-at="2"><td>Nature</td><td>Share swap: pooling of interests</td><td>Outright buy-out</td></tr>
+      <tr class="rv" data-at="3"><td>Vendor's reserves</td><td>All preserved as they are</td><td>Revenue reserves <b>not</b> carried; only statutory reserves, through the Amalgamation Adjustment Reserve</td></tr>
+      <tr class="rv" data-at="4"><td>Net assets vs consideration</td><td>No goodwill or capital reserve recognised</td><td>Goodwill or capital reserve</td></tr>
+    </table>
+    <div class="g2 rv" data-at="5" style="margin-top:1.6cqw">
+      <div class="note"><div class="tag blue">The words</div><p class="t" style="margin-top:.3cqw;font-size:1.5cqw">AS 14 calls it <b>"consideration for the amalgamation"</b> (topic 2.7, p9.28). In a purchase we usually say <b>"purchase consideration"</b>.</p></div>
+      <div class="note gold"><div class="tag gold">Mention only · explained later</div><p class="t" style="margin-top:.3cqw;font-size:1.5cqw"><b>Realisation A/c</b> (Ch 13 topic 6, p13.21) · <b>4 purchase-consideration methods</b>: lump sum, net payment, net assets, intrinsic value / share exchange (topic 4, p13.7 – 13.8) · transferee's entries (topic 7, p13.29).</p></div>
+    </div>
+  </div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 5a. OWNERSHIP LADDER ============ -->
+<section class="slide" id="s05a" data-sec="5 · Target lives: the ladder" data-title="The ownership ladder"><div class="pad">
+  <div class="eyebrow">Target lives · how much does Bhim Ltd own of Arjun Ltd?</div>
+  <h2>Stranger · Friend · Father and son</h2>
+  <div class="bd">
+    <div class="abs" style="left:0;right:0;top:3cqw;height:3.4cqw;display:flex">
+      <div style="width:20%;background:var(--blue-t);border:.1cqw solid var(--ink);display:grid;place-items:center;font-weight:800;font-size:1.1cqw">below 20%</div>
+      <div style="width:30%;background:var(--gold-t);border:.1cqw solid var(--ink);border-left:0;display:grid;place-items:center;font-weight:800;font-size:1.1cqw">20% to 50%</div>
+      <div style="width:50%;background:var(--green-t);border:.1cqw solid var(--ink);border-left:0;display:grid;place-items:center;font-weight:800;font-size:1.1cqw">above 50% or control of the board</div>
+    </div>
+    <div class="abs tag muted" style="left:0;top:7.2cqw">0%</div><div class="abs tag muted" style="right:0;top:7.2cqw">100%</div>
+    <div class="abs mv" id="bhimpin" data-st="1:a|2:b|3:c" style="top:-1.8cqw;transition:left .9s cubic-bezier(.3,.7,.2,1)">
+      <div class="pill blue" style="white-space:nowrap;transform:translateX(-50%);display:block"><span data-txt="1:Bhim Ltd holds 10%|2:Bhim Ltd holds 40%|3:Bhim Ltd holds 80%">Bhim Ltd</span></div>
+    </div>
+    <div class="g3" style="position:absolute;left:0;right:0;top:9.6cqw">
+      <div class="note rv" data-at="1">
+        <div class="pill blue">The stranger</div>
+        <h3 style="margin-top:.6cqw">Passive investment · AS 13</h3>
+        <p class="t" style="margin-top:.4cqw">Just an investor. Shown <b>at cost</b> in Bhim's books.</p>
+        <p class="small muted" style="margin-top:.4cqw">AS 18: under 20% of voting power, no significant influence is presumed</p>
+      </div>
+      <div class="note gold rv" data-at="2">
+        <div class="pill gold">The friend</div>
+        <h3 style="margin-top:.6cqw">Associate · AS 23 · <span class="gold">equity method</span></h3>
+        <p class="t" style="margin-top:.4cqw">Can influence, cannot command. The investment <b>moves with</b> Arjun's results.</p>
+        <p class="small muted" style="margin-top:.4cqw">AS 18: 20% or more is presumed significant influence</p>
+      </div>
+      <div class="note green rv" data-at="3">
+        <div class="pill green">Father and son</div>
+        <h3 style="margin-top:.6cqw">Subsidiary · AS 21 · <span class="green">consolidation</span></h3>
+        <p class="t" style="margin-top:.4cqw">Control. Bhim reports Arjun's assets as if they were its own.</p>
+      </div>
+    </div>
+    <div class="note org rv abs" data-at="4" style="left:0;right:0;bottom:0;border-style:dashed;display:flex;gap:2cqw;align-items:center">
+      <div class="pill org">Business partners</div>
+      <div class="t"><b>Joint control</b> (shared by contract, not a percentage) · <b>AS 27</b> · JCO, JCA, JCE</div>
+      <div class="small muted" style="margin-left:auto">Standalone books always show cost; the equity method and consolidation appear only in the <b>consolidated</b> statements.</div>
+    </div>
+  </div>
+  <div class="foot">AS 18 definitions of associate, significant influence and joint control: ICAI SM, Presentation &amp; Disclosures Based Accounting Standards, topic 4.6, pp 4.82 – 4.84.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 5b. SHARES vs BUSINESS ============ -->
+<section class="slide" id="s05b" data-sec="5 · Target lives: the ladder" data-title="Buying shares vs buying the business"><div class="pad">
+  <div class="eyebrow">The one sentence that separates two worlds</div>
+  <h2>Buying <span class="green">shares</span> does not kill a company. Buying the <span class="accent">business</span> does.</h2>
+  <div class="bd">
+    <!-- row 1: buy shares -->
+    <div class="note green abs" style="left:0;right:0;top:0;height:15cqw">
+      <div class="tag green">Acquisition (hostile or friendly): the target survives</div>
+      <div class="abs" style="left:2cqw;top:4.6cqw"><div class="small b">Arjun Ltd's shareholders</div><div class="dots" style="position:relative;margin-top:.5cqw"><i class="d1"></i><i class="d2"></i><i class="d3"></i><i class="d4"></i></div></div>
+      <div class="abs mv" data-at="2" style="--dx:12cqw;left:17cqw;top:6.4cqw"><div class="pill gold">shares →</div></div>
+      <div class="abs rv" data-at="1" style="left:17cqw;top:10.4cqw"><div class="pill blue">Bhim pays cash</div></div>
+      <div class="co" style="left:40cqw;top:5.4cqw;width:12cqw;background:var(--blue-t)">Bhim Ltd</div>
+      <div class="co" style="left:70cqw;top:5.4cqw;width:12cqw;background:var(--green-t)">Arjun Ltd</div>
+      <div class="small b abs rv" data-at="3" style="left:54cqw;top:7.4cqw;white-space:nowrap">control →</div>
+      <div class="pill green abs rv" data-at="3" style="right:2cqw;top:11.2cqw">Arjun Ltd stays standing → subsidiary</div>
+    </div>
+    <!-- row 2: buy business -->
+    <div class="note red abs" style="left:0;right:0;top:16.6cqw;height:15cqw">
+      <div class="tag accent">Absorption: the business is bought, the target is wound up</div>
+      <div class="co" style="left:40cqw;top:5.4cqw;width:12cqw;background:var(--blue-t)">Bhim Ltd</div>
+      <div class="co out" data-at="5" style="left:70cqw;top:5.4cqw;width:12cqw;background:var(--org-t)">Arjun Ltd</div>
+      <div class="abs mv" data-at="4" style="--dx:-14cqw;left:58cqw;top:3.4cqw"><div class="pill gold">← its assets and business</div></div>
+      <div class="pill red abs rv" data-at="5" style="right:2cqw;top:11.2cqw">Arjun Ltd wound up → absorption (AS 14)</div>
+    </div>
+  </div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 6a. NET ASSETS: ARJUN ============ -->
+<section class="slide" id="s06a" data-sec="6 · Net assets" data-title="Arjun's company: what net assets really are"><div class="pad">
+  <div class="eyebrow">Net assets · Arjun's story (₹ thousand)</div>
+  <h2>What is a company worth, and <span class="accent">what changes it?</span></h2>
+  <div class="bd">
+    <div class="abs" style="left:0;top:0;width:54cqw">
+      <div class="tag muted" style="margin-bottom:.5cqw" data-txt="0:Arjun starts a company|1:Step 1 · Arjun starts with ₹50 of his own money|2:Step 2 · one year of business|3:Step 3 · Arjun borrows ₹10 lakh (= 1,000)">Arjun starts a company</div>
+      <div class="tbs" style="font-size:2cqw">
+        <div class="h">Equity &amp; Liabilities</div><div class="h">Assets</div>
+        <div class="c">
+          <div class="r rv" data-at="1"><span>Capital</span><b>50</b></div>
+          <div class="r rv" data-at="2"><span>Reserves &amp; surplus (profit for the year)</span><b>50</b></div>
+          <div class="r sub rv" data-at="2"><span>Equity</span><b>100</b></div>
+          <div class="r rv" data-at="2"><span>Trade payables</span><b>20</b></div>
+          <div class="r rv" data-at="3"><span>Loan</span><b>1,000</b></div>
+          <div class="tot"><span>Total</span><b data-txt="0:0|1:50|2:120|3:1,120">0</b></div>
+        </div>
+        <div class="c">
+          <div class="r rv" data-at="1"><span>Cash</span><b data-txt="1:5|2:10|3:510">5</b></div>
+          <div class="r rv" data-at="1"><span>Inventory</span><b data-txt="1:10|2:20">10</b></div>
+          <div class="r rv" data-at="2"><span>Trade receivables</span><b>20</b></div>
+          <div class="r rv" data-at="1"><span>Investment</span><b data-txt="1:15|2:30">15</b></div>
+          <div class="r rv" data-at="1"><span>PPE</span><b data-txt="1:20|2:40|3:540">20</b></div>
+          <div class="tot"><span>Total</span><b data-txt="0:0|1:50|2:120|3:1,120">0</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="abs" style="left:57.5cqw;top:0;width:32cqw">
+      <div class="card" style="margin-top:2cqw">
+        <small>Net assets = Assets − Liabilities</small>
+        <div class="eq" style="color:#fff;margin:.3cqw 0 .6cqw"><span data-txt="0:0|1:50|2:120|3:1,120">0</span> − <span data-txt="0:0|1:0|2:20|3:1,020">0</span></div>
+        <strong>= <span data-txt="0:0|1:50|2:100|3:100">0</span></strong>
+        <div class="small rv" data-at="2" style="margin-top:.5cqw;color:#ffd982">= Equity = capital + reserves</div>
+      </div>
+      <div style="position:relative;height:13cqw;margin-top:2.6cqw">
+        <div class="note gold rv" data-at="2" data-until="3" style="position:absolute;left:0;right:0;top:0"><div class="tag gold">Net results of operations</div><p class="t" style="margin-top:.3cqw">A profit of <b>50</b> was earned. Net assets rose by <b>50</b>.</p></div>
+        <div class="note red rv" data-at="3" data-until="4" style="position:absolute;left:0;right:0;top:0"><div class="tag accent">Assets and liabilities both +1,000</div><p class="t" style="margin-top:.3cqw">Net assets are <b>still 100</b>.</p></div>
+        <div class="note green rv" data-at="4" style="position:absolute;left:0;right:0;top:0"><div class="tag green">The lesson</div><p class="t" style="margin-top:.3cqw">Net assets rise only when <b>net worth</b> rises. Growing assets and liabilities together makes the balance sheet bigger, not the owners richer.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot">ICAI: equity is the "residual interest in the assets after deducting all its liabilities… the net worth" (AS 21 topic 1.11, p10.20).</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 6b. BHIM MEETS ARJUN ============ -->
+<section class="slide" id="s06b" data-sec="6 · Net assets" data-title="Bhim Ltd meets Arjun Ltd"><div class="pad">
+  <div class="eyebrow">From here on: Arjun Ltd is the target, Bhim Ltd is the investor (₹ thousand)</div>
+  <h2>Arjun Ltd, nine months into the next year</h2>
+  <div class="bd">
+    <div class="abs" style="left:0;top:0;width:55cqw">
+      <div class="tag muted" style="margin-bottom:.5cqw" data-txt="0:Arjun Ltd on 1 April · start of the year|2:Arjun Ltd on 1 January · the acquisition date">Arjun Ltd on 1 April · start of the year</div>
+      <div class="tbs">
+        <div class="h">Equity &amp; Liabilities</div><div class="h">Assets</div>
+        <div class="c">
+          <div class="r"><span>Capital</span><b>50</b></div>
+          <div class="r sm"><span>Statutory reserve</span><b>10</b></div>
+          <div class="r sm"><span>General reserve</span><b>15</b></div>
+          <div class="r sm"><span>Profit &amp; loss surplus</span><b data-txt="0:25|2:55">25</b></div>
+          <div class="r"><span>Trade payables</span><b>20</b></div>
+          <div class="tot"><span>Total</span><b data-txt="0:120|2:150">120</b></div>
+        </div>
+        <div class="c">
+          <div class="r"><span>Cash</span><b data-txt="0:10|2:15">10</b></div>
+          <div class="r"><span>Inventory</span><b data-txt="0:20|2:25">20</b></div>
+          <div class="r"><span>Trade receivables</span><b data-txt="0:20|2:25">20</b></div>
+          <div class="r"><span>Investments</span><b data-txt="0:30|2:35">30</b></div>
+          <div class="r"><span>PPE</span><b data-txt="0:40|2:50">40</b></div>
+          <div class="tot"><span>Total</span><b data-txt="0:120|2:150">120</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="abs" style="left:58.5cqw;top:0;width:31cqw">
+      <div class="card" style="margin-top:2cqw"><small>Net assets</small><strong>= <span data-txt="0:100|2:130">100</span></strong><div class="small" style="margin-top:.4cqw;color:#ffd982"><span data-txt="0:capital 50 + reserves 50|2:capital 50 + reserves 80">capital 50 + reserves 50</span></div></div>
+      <div class="note gold rv" data-at="1" style="margin-top:2.4cqw"><div class="tag gold">Year 2 profit</div><p class="t" style="margin-top:.3cqw">Arjun Ltd will earn <b>40</b> in the year, evenly.</p></div>
+      <div class="note rv" data-at="2" style="margin-top:1.2cqw"><p class="t"><b>9 months</b> (Apr – Dec): +30 earned. <b>3 months</b> (Jan – Mar): +10 still to come.</p></div>
+    </div>
+    <div class="abs rv" data-at="3" style="left:0;bottom:6cqw"><div class="stamp" style="font-size:2cqw">Bhim Ltd wants shares in Arjun Ltd, on 1 January</div></div>
+  </div>
+  <div class="foot">Always 9 : 3, so nobody confuses which side of the date is which. Profit is taken as accruing evenly (AS 21 p10.32: time basis "in the absence of information").</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 6c. BHIM'S PRICE LIST ============ -->
+<section class="slide" id="s06c" data-sec="6 · Net assets" data-title="Bhim's price list: stake, price, share of net assets"><div class="pad">
+  <div class="eyebrow">Bhim Ltd pays ₹1.5 for every 1% of Arjun Ltd's shares</div>
+  <h2>Price paid vs <span class="blue">share of net assets</span></h2>
+  <div class="bd">
+    <table class="tbl xl">
+      <tr><th>Bhim buys</th><th>Pays</th><th>Share of net assets (130)</th><th>Premium paid</th><th>Where we will meet it</th></tr>
+      <tr class="rv" data-at="1"><td>10%</td><td>15</td><td>13</td><td>2</td><td>Stranger · AS 13 · shown at cost</td></tr>
+      <tr class="rv" data-at="2"><td>40%</td><td>60</td><td>52</td><td class="green">8</td><td>Friend · AS 23 · goodwill sits inside the carrying amount</td></tr>
+      <tr class="rv" data-at="3"><td>80%</td><td>120</td><td>104</td><td class="green">16</td><td>Father and son · AS 21 · goodwill (cost of control) + minority interest</td></tr>
+      <tr class="rv" data-at="4"><td>100%</td><td>150</td><td>130</td><td class="green">20</td><td>Wholly owned · AS 21 · goodwill, no minority interest</td></tr>
+    </table>
+    <div class="note gold rv" data-at="5" style="margin-top:2cqw"><p class="lead" style="max-width:none">Same price per 1% in every row. What changes is <b>how much of Arjun Ltd Bhim controls</b>, and so <b>which standard</b> decides what Bhim's books show.</p></div>
+  </div>
+  <div class="foot">Numbers are illustrative, chosen to be clean; they are not from the ICAI text.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 7a. CONTROL SWITCH ============ -->
+<section class="slide" id="s07a" data-sec="7 · Control" data-title="Control switches five things on"><div class="pad">
+  <div class="eyebrow">Control · Bhim Ltd crosses the line</div>
+  <h2>Say the word <span class="accent">control</span> and five things switch on</h2>
+  <div class="bd">
+    <div class="abs" style="left:0;top:0;width:34cqw">
+      <div class="card" style="text-align:center">
+        <small>Bhim Ltd holds</small>
+        <strong style="font-size:4.2cqw" data-txt="0:0%|1:10%|2:40%|3:80%">0%</strong>
+        <div style="margin-top:.8cqw"><span class="pill" id="lamp" data-st="3:on" style="background:#44506a;font-size:1.5cqw" data-txt="0:CONTROL off|3:CONTROL ON">CONTROL off</span></div>
+      </div>
+      <p class="t" style="margin-top:1.2cqw" data-txt="1:The stranger: just an investor.|2:The friend: can influence, cannot command.|3:Father and son: Bhim now controls Arjun Ltd.">&nbsp;</p>
+    </div>
+    <div class="abs" style="left:37cqw;top:0;right:0">
+      <div class="note rv" data-at="4"><b>1 · Line by line.</b> "If I control it, I must report it": Arjun's assets and liabilities enter Bhim's statements.</div>
+      <div class="note green rv" data-at="5" style="margin-top:.9cqw"><b>2 · Cost of control.</b> Goodwill or capital reserve appears.</div>
+      <div class="note red rv" data-at="6" style="margin-top:.9cqw"><b>3 · Pre- and post-acquisition.</b> Profits and reserves are split at the acquisition date.</div>
+      <div class="note org rv" data-at="7" style="margin-top:.9cqw"><b>4 · Minority interest</b>, but only if Bhim owns less than 100%.</div>
+      <div class="note gold rv" data-at="8" style="margin-top:.9cqw"><b>5 · Intra-group adjustments.</b> Dealings inside the group are cancelled.</div>
+    </div>
+  </div>
+  <div class="foot">That is why the AS 21 chapter feels crowded: it is five ideas arriving together.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 7b. CONTROL: TWO DEFINITIONS ============ -->
+<section class="slide" id="s07b" data-sec="7 · Control" data-title="Control: AS 21 and the wider AS 18"><div class="pad">
+  <div class="eyebrow">Control · what exactly is control?</div>
+  <h2>AS 18's definition of control is <span class="accent">wider</span> than AS 21's</h2>
+  <div class="bd">
+    <div class="g2">
+      <div class="note rv" data-at="1">
+        <div class="pill blue">AS 21 · consolidated statements</div>
+        <p class="t" style="margin-top:.8cqw"><b>(a)</b> ownership, directly or indirectly, of <b>more than one-half</b> of the voting power; <b>or</b></p>
+        <p class="t" style="margin-top:.6cqw"><b>(b)</b> control of the composition of the board of directors <b>so as to obtain economic benefits</b> from its activities.</p>
+        <p class="small muted" style="margin-top:.6cqw">AS 21 topic 1.2 p10.6 · topic 1.6 p10.11</p>
+      </div>
+      <div class="note gold rv" data-at="2">
+        <div class="pill gold">AS 18 · related parties</div>
+        <p class="t" style="margin-top:.8cqw"><b>(a)</b> ownership of more than one-half of the voting power; <b>or</b></p>
+        <p class="t" style="margin-top:.6cqw"><b>(b)</b> control of the composition of the board; <b>or</b></p>
+        <p class="t hl" data-at="3" style="margin-top:.6cqw;padding:.4cqw .6cqw"><b>(c)</b> a <b>substantial interest in voting power</b> (20% or more) <b>and</b> the power to direct the financial and/or operating policies, by statute or agreement.</p>
+        <p class="small muted" style="margin-top:.6cqw">ICAI SM, Presentation &amp; Disclosures Based Accounting Standards, topic 4.6, p4.82 – 4.83</p>
+      </div>
+    </div>
+    <div class="g2 rv" data-at="4" style="margin-top:1.8cqw">
+      <div class="note red"><div class="tag accent">Exclusions from consolidation</div><p class="t" style="margin-top:.3cqw">Control intended to be <b>temporary</b>; or severe <b>long-term restrictions</b> on the subsidiary. (AS 21 topic 1.7, p10.12 – 10.13)</p></div>
+      <div class="note green"><div class="tag green">Syllabus limits for numericals</div><p class="t" style="margin-top:.3cqw">One subsidiary; no interest acquired at different dates, no cross-holding, no disposal, no foreign subsidiary. (AS 21 Note-1, p10.2)</p></div>
+    </div>
+  </div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 7c. LINE BY LINE ============ -->
+<section class="slide" id="s07c" data-sec="7 · Control" data-title="Line-by-line is not adding every item"><div class="pad">
+  <div class="eyebrow">Control triggers line-by-line consolidation (₹ thousand)</div>
+  <h2>Consolidation <span class="accent">replaces one line</span>. It does not add everything.</h2>
+  <div class="bd">
+    <div class="abs" style="left:0;top:0;width:27cqw">
+      <div class="tag blue">Bhim Ltd's own books</div>
+      <div class="box hl" data-at="1" style="margin-top:.5cqw;background:var(--blue-t);text-align:center;padding:1.6cqw .6cqw"><div class="small">Investment in Arjun Ltd</div><div class="out" data-at="2" style="font-size:3.4cqw;font-weight:900">120</div></div>
+      <div class="box" style="margin-top:.8cqw;text-align:center"><div class="small">Bhim's other assets and liabilities</div></div>
+      <div class="note rv" data-at="1" style="margin-top:1.1cqw"><p class="small">The 120 already <b>stands for</b> Bhim's 80% of Arjun's net assets (+ a premium).</p></div>
+    </div>
+    <div class="abs" style="left:30cqw;top:0;width:25cqw">
+      <div class="tag green">Arjun Ltd</div>
+      <div class="box" style="margin-top:.5cqw;background:var(--green-t);text-align:center"><div class="small">Assets</div><div style="font-size:2.6cqw;font-weight:900">150</div></div>
+      <div class="box" style="margin-top:.8cqw;background:var(--red-t);text-align:center"><div class="small">Liabilities</div><div style="font-size:2.6cqw;font-weight:900">(20)</div></div>
+      <div class="box" style="margin-top:.8cqw;text-align:center"><div class="small">Net assets</div><div style="font-size:2.6cqw;font-weight:900">130</div></div>
+    </div>
+    <div class="abs" style="left:58cqw;top:0;right:0">
+      <div class="tag" style="color:var(--ink)">Consolidated statements</div>
+      <div class="tbs" style="margin-top:.5cqw;grid-template-columns:1fr">
+        <div class="r fly" data-at="2" style="--fx:-14cqw"><span>Arjun's assets, line by line</span><b>150</b></div>
+        <div class="r fly" data-at="2" style="--fx:-14cqw"><span>Arjun's liabilities</span><b>(20)</b></div>
+        <div class="r rv" data-at="3"><span class="green b">Goodwill (cost of control)</span><b data-txt="3:16|5:20">16</b></div>
+        <div class="r rv" data-at="3"><span class="org b">Minority interest</span><b data-txt="3:26|5:nil">26</b></div>
+      </div>
+      <div class="note rv" data-at="3" style="margin-top:1.2cqw"><p class="t" data-txt="3:<b>Net assets 130 = Bhim's 104 + minority's 26.</b> Investment 120 = 104 + goodwill 16.|5:<b>100% bought for 150:</b> net assets 130 all belong to Bhim. 150 = 130 + goodwill 20. No minority."><b>Net assets 130 = Bhim's 104 + minority's 26.</b> Investment 120 = 104 + goodwill 16.</p></div>
+    </div>
+    <div class="abs rv" data-at="4" style="left:0;bottom:0"><span class="pill gold" style="font-size:1.5cqw" data-txt="4:Try it: what if Bhim bought 100% for 150?|5:Wholly owned: the minority slice disappears">Try it: what if Bhim bought 100% for 150?</span></div>
+  </div>
+  <div class="foot">Bhim's 80%: 80% × 130 = 104 (cancels the investment). The other 20%: 20% × 130 = 26 (minority interest). The only difference between wholly and partly owned is the minority interest.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 8a. COST OF CONTROL ============ -->
+<section class="slide" id="s08a" data-sec="8 · Cost of control" data-title="Cost of control: goodwill or capital reserve"><div class="pad">
+  <div class="eyebrow">Cost of control · did Bhim pay more or less than it received?</div>
+  <h2>Cost of investment vs <span class="blue">Bhim's share of net assets</span></h2>
+  <div class="bd">
+    <div class="abs" id="beam" data-st="2:heavy|3:light" style="left:2cqw;top:7cqw;width:58cqw;height:.9cqw;background:var(--ink)">
+      <div class="abs pan rv" data-at="1" style="left:-1cqw;top:.9cqw;width:20cqw"><div class="box center" style="background:var(--blue-t)"><div class="small">Cost of investment</div><div style="font-size:3cqw;font-weight:900" data-txt="1:120|3:90">120</div></div></div>
+      <div class="abs pan rv" data-at="1" style="right:-1cqw;top:.9cqw;width:20cqw"><div class="box center" style="background:var(--gold-t)"><div class="small">Bhim's 80% of net assets</div><div style="font-size:3cqw;font-weight:900">104</div></div></div>
+    </div>
+    <div class="abs" style="left:30.6cqw;top:7.9cqw;width:.7cqw;height:15cqw;background:var(--ink);opacity:.35"></div>
+    <div class="abs" style="left:63cqw;top:0;width:26cqw">
+      <div class="card rv" data-at="2" data-until="3" style="background:var(--green)"><small style="color:#d8fff3">120 − 104</small><strong>Goodwill 16</strong><div class="t" style="margin-top:.4cqw">An asset: the premium paid for control.</div></div>
+      <div class="card rv" data-at="3" style="background:var(--red);position:absolute;left:0;top:0;width:100%"><small style="color:#ffe6e6">104 − 90</small><strong>Capital reserve 14</strong><div class="t" style="margin-top:.4cqw">A reserve: a discount, often a distressed target.</div></div>
+    </div>
+    <div class="note rv abs" data-at="4" style="left:0;right:0;bottom:0"><p class="t">Cost of control arises for <b>every</b> subsidiary, wholly or partly owned. The same idea sits in an AS 14 purchase (consideration vs net assets taken over).</p></div>
+  </div>
+  <div class="foot">AS 21 topic 1.11 p10.20 – 10.21: goodwill = cost of investment − parent's share in the equity of the subsidiary on the date of investment; capital reserve is the opposite.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 8b. COST OF INVESTMENT vs COST OF CONTROL ============ -->
+<section class="slide" id="s08b" data-sec="8 · Cost of control" data-title="Cost of investment vs cost of control"><div class="pad">
+  <div class="eyebrow">Two similar words, two different things</div>
+  <h2>Cost of investment is the <span class="blue">gross input</span>. Cost of control is the <span class="green">net output</span>.</h2>
+  <div class="bd">
+    <table class="tbl xl">
+      <tr><th style="width:22%"></th><th style="width:39%">Cost of investment · AS 13</th><th>Cost of control · AS 21</th></tr>
+      <tr class="rv" data-at="1"><td>Appears in</td><td>Bhim's standalone statements</td><td>Consolidated statements</td></tr>
+      <tr class="rv" data-at="2"><td>What it is</td><td>Total price paid (120)</td><td>Price paid minus Bhim's share of net assets: 120 − 104 = 16</td></tr>
+      <tr class="rv" data-at="3"><td>In the consolidated statements</td><td>The investment line <b>disappears</b></td><td>Shown as <b>goodwill</b> or <b>capital reserve</b> in its place</td></tr>
+    </table>
+  </div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 9a. PRE / POST TIMELINE ============ -->
+<section class="slide" id="s09a" data-sec="9 · Pre- and post-acquisition" data-title="The cut-off line: 9 months before, 3 months after"><div class="pad">
+  <div class="eyebrow">Pre- and post-acquisition · Arjun Ltd's year, April to March</div>
+  <h2>Arjun Ltd was not born the day Bhim bought it</h2>
+  <div class="bd">
+    <div class="abs" style="left:0;right:0;top:6.4cqw;display:flex;gap:.3cqw">
+      <div class="mo pc" data-at="2">Apr</div><div class="mo pc" data-at="2">May</div><div class="mo pc" data-at="2">Jun</div>
+      <div class="mo pc" data-at="2">Jul</div><div class="mo pc" data-at="2">Aug</div><div class="mo pc" data-at="2">Sep</div>
+      <div class="mo pc" data-at="2">Oct</div><div class="mo pc" data-at="2">Nov</div><div class="mo pc" data-at="2">Dec</div>
+      <div class="mo qc" data-at="2" style="margin-left:1.4cqw">Jan</div><div class="mo qc" data-at="2">Feb</div><div class="mo qc" data-at="2">Mar</div>
+    </div>
+    <div class="abs rv" data-at="1" style="left:66cqw;top:2.6cqw;width:.6cqw;height:12.4cqw;background:var(--ink)"></div>
+    <div class="abs rv" data-at="1" style="left:53.5cqw;top:0"><span class="pill gold" style="white-space:nowrap">Acquisition date · 1 January</span></div>
+    <div class="abs rv" data-at="2" style="left:0;top:13.4cqw"><span class="pill red">PRE-acquisition · capital · 9 months</span></div>
+    <div class="abs rv" data-at="2" style="left:67.4cqw;top:13.4cqw"><span class="pill green">POST · revenue · 3 months</span></div>
+    <div class="abs rv" data-at="3" style="left:0;top:18cqw;width:62cqw"><div class="note red"><b>₹30</b> earned before the date. Bhim <b>paid for it</b> when it bought the shares: it was inside the price.</div></div>
+    <div class="abs rv" data-at="3" style="left:67.4cqw;top:18cqw;right:0"><div class="note green"><b>₹10</b> earned while Bhim owns Arjun Ltd.</div></div>
+    <div class="note gold rv abs" data-at="4" style="left:0;right:0;bottom:0"><span class="tag gold">Net results of operations</span> <span class="t">Arjun Ltd's profit for the year is <b>₹40</b>: ₹30 pre and ₹10 post, taken as evenly earned.</span></div>
+  </div>
+  <div class="foot">AS 21 topic 1.13 p10.26; the time-basis rule p10.32. In an amalgamation the target dies on one day, so there is no "after": no pre/post split.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 9b. THE RESERVES SPLIT ============ -->
+<section class="slide" id="s09b" data-sec="9 · Pre- and post-acquisition" data-title="The reserves split: who gets which slice"><div class="pad">
+  <div class="eyebrow">Arjun Ltd's equity at 31 March, Bhim holds 80% (₹ thousand)</div>
+  <h2>Cut by <span class="red accent">time</span>, then cut by <span class="blue">ownership</span></h2>
+  <div class="bd" style="margin-top:4.6cqw">
+    <!-- bracket gutter -->
+    <div class="abs rv" data-at="2" style="left:0;top:0;width:8cqw;height:20.2cqw;border-right:.4cqw solid var(--red);text-align:right;padding-right:.8cqw"><div class="pill red">PRE</div><div class="t" style="margin-top:.3cqw"><b>130</b></div><div class="small">capital</div></div>
+    <div class="abs rv" data-at="2" style="left:0;top:21cqw;width:8cqw;height:3.4cqw;border-right:.4cqw solid var(--green);text-align:right;padding-right:.8cqw"><div class="pill green">POST 10</div></div>
+    <!-- the stack: colA (Bhim 80%) + colB (minority 20%) -->
+    <div class="abs dim soft" data-at="4" style="left:9.5cqw;top:0;width:36cqw">
+      <div id="stack" data-st="3:split" style="display:flex;gap:.3cqw">
+        <div class="scol" id="colA">
+          <div class="blk pre" style="height:7cqw"><span>Capital</span><b data-txt="0:50|3:40">50</b></div>
+          <div class="blk pre" style="height:3.4cqw"><span>Statutory reserve</span><b data-txt="0:10|3:8">10</b></div>
+          <div class="blk pre" style="height:3.8cqw"><span>General reserve</span><b data-txt="0:15|3:12">15</b></div>
+          <div class="blk pre" style="height:6cqw"><span>P&amp;L: 25 + first 9 months 30</span><b data-txt="0:55|3:44">55</b></div>
+          <div class="blk post" style="height:3.4cqw;margin-top:.8cqw"><span>P&amp;L: last 3 months</span><b data-txt="0:10|3:8">10</b></div>
+        </div>
+        <div class="scol" id="colB">
+          <div class="blk mcol" style="height:7cqw;justify-content:center"><b>10</b></div>
+          <div class="blk mcol" style="height:3.4cqw;justify-content:center"><b>2</b></div>
+          <div class="blk mcol" style="height:3.8cqw;justify-content:center"><b>3</b></div>
+          <div class="blk mcol" style="height:6cqw;justify-content:center"><b>11</b></div>
+          <div class="blk mcol" style="height:3.4cqw;margin-top:.8cqw;justify-content:center"><b>2</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="abs rv" data-at="1" style="left:9.5cqw;top:-2.4cqw"><span class="small b">Equity 140 = capital 50 + reserves 90</span></div>
+    <div class="abs rv" data-at="2" style="left:9.5cqw;top:20.6cqw;width:36cqw;border-top:.3cqw dashed var(--ink)"></div>
+    <div class="abs rv" data-at="3" style="left:9.5cqw;top:-2.4cqw;width:36cqw;background:var(--paper)"><span class="pill blue" style="margin-right:.6cqw">Bhim 80%</span><span class="pill org">Minority 20%</span></div>
+    <!-- destinations -->
+    <div class="abs" style="left:50cqw;top:-2.8cqw;width:39cqw">
+      <div class="note fly rv" data-at="4" style="--fx:-10cqw"><div class="tag blue">Bhim's share of PRE · 104</div><p class="small" style="margin-top:.2cqw">Into the <b>cost-of-control</b> comparison (against the 120 paid → goodwill 16). Not shown as a reserve.</p></div>
+      <div class="note org fly rv" data-at="4" style="--fx:-10cqw;margin-top:.7cqw"><div class="tag org">Minority's share of PRE · 26</div><p class="small" style="margin-top:.2cqw">Goes to <b>minority interest</b>.</p></div>
+      <div class="note green fly rv" data-at="4" style="--fx:-10cqw;margin-top:.7cqw"><div class="tag green">Bhim's share of POST · 8</div><p class="small" style="margin-top:.2cqw">Joins the <b>consolidated reserves</b> (revenue).</p></div>
+      <div class="note org fly rv" data-at="4" style="--fx:-10cqw;margin-top:.7cqw"><div class="tag org">Minority's share of POST · 2</div><p class="small" style="margin-top:.2cqw">Goes to <b>minority interest</b>.</p></div>
+    </div>
+    <div class="note gold rv abs" data-at="5" style="left:9.5cqw;width:79cqw;bottom:1cqw"><p class="small"><b>Minority interest = 26 + 2 = 28</b> = 20% × 140.&nbsp; <b>Bhim = 104 + 8 = 112</b> = 80% × 140.</p></div>
+  </div>
+  <div class="foot">AS 21 topic 1.13 p10.26 – 10.27 and topic 1.14 section B p10.31 – 10.33: pre-acquisition profits are capital, post-acquisition profits are revenue.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 9c. DIVIDENDS, TIME BASIS, BONUS ============ -->
+<section class="slide" id="s09c" data-sec="9 · Pre- and post-acquisition" data-title="Three small rules that ride on the cut-off line"><div class="pad">
+  <div class="eyebrow">Mentions · the cut-off line decides all of these</div>
+  <h2>Three small rules ride on the same line</h2>
+  <div class="bd">
+    <div class="g3">
+      <div class="note red rv" data-at="1"><div class="pill red">Dividend rule</div><p class="t" style="margin-top:.6cqw">A dividend from <b>pre</b>-acquisition profit is a return of the investment: credit <b>Investment A/c</b>. From <b>post</b>-acquisition profit it is <b>income</b>.</p><p class="small muted" style="margin-top:.5cqw">AS 21 topic 1.14 B, p10.31 – 10.33 · AS 13 topic 3.5, p5.89</p></div>
+      <div class="note gold rv" data-at="2"><div class="pill gold">Time basis</div><p class="t" style="margin-top:.6cqw">If control is acquired during the year, profit for the year is split pre/post <b>on the basis of time</b>, unless told otherwise.</p><p class="small muted" style="margin-top:.5cqw">AS 21 p10.32</p></div>
+      <div class="note green rv" data-at="3"><div class="pill green">Bonus shares</div><p class="t" style="margin-top:.6cqw">If the subsidiary issues bonus shares, the <b>source</b> of the reserves used (pre or post) decides the effect.</p><p class="small muted" style="margin-top:.5cqw">AS 21 Note 5 p10.33 · example p10.49</p></div>
+    </div>
+    <div class="note rv" data-at="4" style="margin-top:2cqw"><p class="lead" style="max-width:none">Same idea behind all three: <b>profit earned before the date was paid for</b> (capital); <b>profit earned after</b> belongs to the group (revenue).</p></div>
+  </div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 10. MINORITY INTEREST ============ -->
+<section class="slide" id="s10" data-sec="10 · Minority interest" data-title="Minority interest: the outsiders' share"><div class="pad">
+  <div class="eyebrow">Minority interest · who owns the other 20%? (₹ thousand)</div>
+  <h2>Wholly owned or partly owned: <span class="org">only the minority slice differs</span></h2>
+  <div class="bd">
+    <div class="tag muted rv" data-at="1">Net assets on the acquisition date</div>
+    <div class="rv" data-at="1" style="display:flex;width:70cqw;margin-top:.4cqw"><div class="seg pcol" style="flex-basis:80%"><span data-txt="1:Bhim 104|5:Bhim 130">Bhim 104</span></div><div class="seg mcol" data-st="5:zero" style="flex-basis:20%"><span>26</span></div></div>
+    <div class="tag muted rv" data-at="2" style="margin-top:1.8cqw">Post-acquisition profit (last 3 months)</div>
+    <div class="rv" data-at="2" style="display:flex;width:70cqw;margin-top:.4cqw"><div class="seg pcol" style="flex-basis:80%"><span data-txt="2:Bhim 8|5:Bhim 10">Bhim 8</span></div><div class="seg mcol" data-st="5:zero" style="flex-basis:20%"><span>2</span></div></div>
+    <div class="card rv abs" data-at="3" style="right:0;top:0;width:15cqw;text-align:center;background:var(--org)"><small style="color:#fff">Minority interest</small><strong style="font-size:3.2cqw" data-txt="3:26 + 2 = 28|5:nil">28</strong></div>
+    <div class="note org rv" data-at="3" style="margin-top:2cqw;width:70cqw"><p class="t"><b>It is not a liability to be repaid.</b> It is the outsiders' share of Arjun's net assets and profit, which the group includes because it controls <b>100%</b> of Arjun's assets. Shown on its own line after shareholders' funds.</p></div>
+    <div class="note gold rv" data-at="4" style="margin-top:1.2cqw;width:70cqw"><p class="t"><b>Toggle:</b> what if Bhim had bought <b>100%</b> (for 150)?</p></div>
+    <div class="note green rv" data-at="5" style="margin-top:1.2cqw;width:70cqw"><p class="t">The orange slice vanishes. Nothing else changes: <b>cost of control still arises</b> (goodwill 20), but there is <b>no minority interest</b>.</p></div>
+  </div>
+  <div class="foot">AS 21 topic 1.3 p10.7 (wholly vs partly owned) · topic 1.12 p10.24 – 10.26. ICAI defines minority interest as the part of the <b>net results of operations</b> and of the <b>net assets</b> attributable to outsiders (p10.6, p10.26).</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 11. STATUTORY RESERVES ============ -->
+<section class="slide" id="s11" data-sec="11 · Statutory reserves" data-title="Statutory reserves: three fates"><div class="pad">
+  <div class="eyebrow">Statutory reserves · where this term bites (₹ thousand)</div>
+  <h2>The same reserves, <span class="accent">three fates</span></h2>
+  <div class="bd">
+    <div class="g3" style="grid-template-columns:22cqw 1fr 1fr 1fr;gap:1cqw;align-items:center">
+      <div></div><div class="tag center muted">Statutory reserve</div><div class="tag center muted">General reserve</div><div class="tag center muted">P&amp;L surplus</div>
+    </div>
+    <div class="g3 rv" data-at="1" style="grid-template-columns:22cqw 1fr 1fr 1fr;gap:1cqw;align-items:center;margin-top:.8cqw">
+      <div class="note green"><b>Merger</b> · pooling<div class="small muted">AS 14 topic 2.9, p9.29</div></div>
+      <div class="chip" data-st="1:keep">10</div><div class="chip" data-st="1:keep">15</div><div class="chip" data-st="1:keep">55</div>
+    </div>
+    <div class="small rv" data-at="1" style="margin:.4cqw 0 0 23cqw">All reserves carried over <b>as they are</b>.</div>
+    <div class="g3 rv" data-at="2" style="grid-template-columns:22cqw 1fr 1fr 1fr;gap:1cqw;align-items:center;margin-top:1.4cqw">
+      <div class="note red"><b>Purchase</b><div class="small muted">AS 14 topic 2.10, p9.30 – 9.31</div></div>
+      <div class="chip" data-st="2:keep">10</div><div class="chip" data-st="2:gone">15</div><div class="chip" data-st="2:gone">55</div>
+    </div>
+    <div class="small rv" data-at="2" style="margin:.4cqw 0 0 23cqw">Only <b>statutory</b> reserves are carried, through the <b>Amalgamation Adjustment Reserve</b>. The rest are not.</div>
+    <div class="g3 rv" data-at="3" style="grid-template-columns:22cqw 1fr 1fr 1fr;gap:1cqw;align-items:center;margin-top:1.4cqw">
+      <div class="note org"><b>Consolidation</b> · target survives<div class="small muted">AS 21 topic 1.13 – 1.14</div></div>
+      <div class="chip" data-st="3:pre">10</div><div class="chip" data-st="3:pre">15</div><div class="chip" data-st="3:pre">55</div>
+    </div>
+    <div class="small rv" data-at="3" style="margin:.4cqw 0 0 23cqw">All <b>pre-acquisition</b>: Bhim's share is used in the cost-of-control comparison; the minority's share becomes minority interest. Nothing is kept as a "statutory reserve".</div>
+    <div class="note gold rv" data-at="4" style="margin-top:1.4cqw"><p class="small"><b>Honest note:</b> the AS 21 chapter has <b>no specific rule</b> on statutory reserves. If a consolidation question includes one, follow the question and the pre/post logic. Statutory reserves matter in the <b>purchase method</b> of amalgamation.</p></div>
+  </div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 12. INTRA-GROUP ============ -->
+<section class="slide" id="s12" data-sec="12 · Intra-group adjustments" data-title="A group cannot make a profit by selling to itself"><div class="pad">
+  <div class="eyebrow">Intra-group adjustments · concept only</div>
+  <h2>A group cannot make a profit by <span class="accent">selling to itself</span></h2>
+  <div class="bd">
+    <div class="abs" style="left:0;top:0;width:62cqw;height:31cqw;border:.3cqw dashed var(--ink)"><div class="tag muted" style="margin:.6cqw 0 0 1cqw">The group</div></div>
+    <div class="co" style="left:3cqw;top:11cqw;width:13cqw;height:7cqw;background:var(--green-t)">Arjun Ltd</div>
+    <div class="co" style="left:46cqw;top:11cqw;width:13cqw;height:7cqw;background:var(--blue-t)">Bhim Ltd</div>
+    <div class="abs mv" data-at="2" style="--dx:23cqw;left:18cqw;top:12.2cqw"><span class="pill gold" style="font-size:1.5cqw">goods</span></div>
+    <div class="abs rv" data-at="1" style="left:3cqw;top:20cqw"><span class="small b">Arjun sells goods costing 80 to Bhim for 100</span></div>
+    <div class="abs rv" data-at="3" style="left:3cqw;top:5.6cqw"><span class="pill gold">profit 20 in Arjun's books</span></div>
+    <div class="abs rv" data-at="4" style="left:34cqw;top:20cqw"><span class="small b">Bhim still holds them at year end</span></div>
+    <div class="abs rv" data-at="5" style="left:8cqw;top:24.6cqw"><span class="stamp" style="font-size:1.7cqw">Unrealised: the group has not earned it</span></div>
+    <div class="abs rv" data-at="6" style="left:34cqw;top:5.6cqw"><span class="pill org">Mutual debts cancel</span></div>
+    <div class="abs" style="left:66cqw;top:0;right:0">
+      <div class="note"><div class="tag blue">Mentioned today, solved in the AS 21 lectures</div>
+        <p class="t" style="margin-top:.5cqw">· Unrealised profit in inventory<span class="small muted"> p10.68</span></p>
+        <p class="t">· Non-current asset transfers<span class="small muted"> p10.70</span></p>
+        <p class="t">· Mutual balances<span class="small muted"> p10.71</span></p></div>
+    </div>
+  </div>
+  <div class="foot">AS 21 topic 1.14 section C, Elimination of intra-group transactions, starts p10.67.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 13a. AS 13 vs EQUITY METHOD ============ -->
+<section class="slide" id="s13a" data-sec="13 · Associates and joint ventures" data-title="Same 40% stake, two treatments"><div class="pad">
+  <div class="eyebrow">Associate · Bhim Ltd buys 40% of Arjun Ltd for 60 (₹ thousand, bars not to scale)</div>
+  <h2>The investment is a <span class="gold">living number</span> under the equity method</h2>
+  <div class="bd">
+    <div class="g2">
+      <div>
+        <div class="tag muted">AS 13 · cost method</div>
+        <div style="position:relative;height:25cqw;margin-top:.5cqw;border-bottom:.2cqw solid var(--ink)">
+          <div class="abs" style="left:1cqw;bottom:0;width:15cqw;height:18cqw;background:var(--blue-t);border:.15cqw solid var(--ink);display:grid;place-items:center;font-weight:900;font-size:2.6cqw">60</div>
+          <div class="abs rv" data-at="2" style="left:18cqw;bottom:6cqw"><span class="stamp" style="font-size:1.35cqw">Profit of 10 ignored</span></div>
+          <div class="abs rv" data-at="3" style="left:18cqw;bottom:14cqw"><span class="pill green">+ dividend income 2</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="tag gold">AS 23 · equity method</div>
+        <div style="position:relative;height:25cqw;margin-top:.5cqw;border-bottom:.2cqw solid var(--ink)">
+          <div class="abs" id="eqbar" data-st="2:b|3:c" style="left:1cqw;bottom:0;width:15cqw;background:var(--gold-t);border:.15cqw solid var(--ink);display:grid;place-items:center;font-weight:900;font-size:2.6cqw"><span data-txt="1:60|2:64|3:62">60</span></div>
+          <div class="abs rv" data-at="2" data-until="3" style="left:18cqw;bottom:14cqw"><span class="pill green">+ 4 share of profit (40% × 10)</span></div>
+          <div class="abs rv" data-at="3" style="left:18cqw;bottom:14cqw"><span class="pill red">− 2 dividend received (40% × 5)</span></div>
+          <div class="abs rv" data-at="3" style="left:18cqw;bottom:8cqw"><span class="small b">A return of part of the investment, not income</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="note rv abs" data-at="1" style="left:0;right:0;bottom:1cqw"><p class="small" data-txt="1:Bhim pays 60 for 40%: share of net assets 52 + goodwill 8 (goodwill sits inside the carrying amount).|2:Arjun Ltd earns 10 after the date. Bhim's 40% = 4.|3:Arjun Ltd pays a dividend of 5 on 31 March. Bhim receives 2.|4:Closing: AS 13 shows 60 and dividend income 2. Equity method shows 62 (= 40% × 135 + goodwill 8) and no dividend income.">Bhim pays 60 for 40%.</p></div>
+  </div>
+  <div class="foot">AS 23 topic 2.4 p10.114 – 10.115 (ICAI's own illustration, 45%: cost 15,00,000 + share of profit 1,35,000 − share of dividend 45,000 = 15,90,000). AS 13: topics 3.5 – 3.6, p5.89 – 5.90.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 13b. COMPARISON TABLE ============ -->
+<section class="slide" id="s13b" data-sec="13 · Associates and joint ventures" data-title="AS 13 vs equity method: key differences"><div class="pad">
+  <div class="eyebrow">Key differences at a glance</div>
+  <h2>Cost method vs equity method</h2>
+  <div class="bd">
+    <table class="tbl" style="font-size:1.4cqw">
+      <tr><th style="width:17%"></th><th style="width:39%">AS 13 · cost / carrying value</th><th>AS 23 · equity method</th></tr>
+      <tr class="rv" data-at="1"><td>Typical holding</td><td>No significant influence (usually under 20%)</td><td>Significant influence (usually 20% to 50%)</td></tr>
+      <tr class="rv" data-at="2"><td>Initial recognition</td><td>Cost: price plus brokerage, stamp duty etc.</td><td>Cost, with goodwill / capital reserve identified at acquisition</td></tr>
+      <tr class="rv" data-at="3"><td>Later measurement</td><td>Long-term: cost, less any permanent fall. Current: lower of cost and fair value</td><td>Adjusted for the investor's share of the post-acquisition change in net assets</td></tr>
+      <tr class="rv" data-at="4"><td>Investee's profit or loss</td><td>Ignored</td><td>Share recognised; the carrying amount goes up or down</td></tr>
+      <tr class="rv" data-at="5"><td>Dividends</td><td>Income in P&amp;L (pre-acquisition dividends reduce cost)</td><td>Reduce the carrying amount; <b>not</b> income</td></tr>
+    </table>
+  </div>
+  <div class="foot">AS 23 topics 2.3 – 2.4, p10.111 – 10.115. AS 18: 20% or more of voting power is presumed to give significant influence (p4.83).</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 13c. JOINT VENTURES ============ -->
+<section class="slide" id="s13c" data-sec="13 · Associates and joint ventures" data-title="Joint ventures: JCO, JCA, JCE"><div class="pad">
+  <div class="eyebrow">Joint control · AS 27</div>
+  <h2>When control is <span class="org">shared by contract</span></h2>
+  <div class="bd">
+    <div class="g3">
+      <div class="note org rv" data-at="1"><div class="pill org">JCO</div><h3 style="margin-top:.6cqw">Jointly controlled operations</h3><p class="t" style="margin-top:.5cqw">Each partner uses its <b>own</b> assets and books its <b>own share</b> of revenue and expenses. No new entity.</p><p class="small muted" style="margin-top:.4cqw">AS 27 topic 3.6, p10.138</p></div>
+      <div class="note gold rv" data-at="2"><div class="pill gold">JCA</div><h3 style="margin-top:.6cqw">Jointly controlled assets</h3><p class="t" style="margin-top:.5cqw">An asset owned jointly. Each partner books <b>its share</b> of the asset and of the output.</p><p class="small muted" style="margin-top:.4cqw">AS 27 topic 3.7, p10.143</p></div>
+      <div class="note green rv" data-at="3"><div class="pill green">JCE</div><h3 style="margin-top:.6cqw">Jointly controlled entity</h3><p class="t" style="margin-top:.5cqw">A separate company under joint control. Each partner combines its <b>% of every line</b>: <b>proportionate consolidation</b>.</p><p class="small muted" style="margin-top:.4cqw">AS 27 topic 3.8, p10.149 · consolidation topic 3.9, p10.154</p></div>
+    </div>
+    <div class="note blue rv" data-at="4" style="margin-top:2cqw"><p class="lead" style="max-width:none"><b>Equity method</b> = one line that grows and shrinks. <b>Proportionate consolidation</b> = your percentage of every line. <b>Full consolidation</b> = every line, then give the outsiders their share.</p></div>
+  </div>
+  <div class="foot">AS 18: joint control is the contractually agreed sharing of power to govern the financial and operating policies; it does not depend on voting power (p4.84).</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 14a. ALSO IN THIS BLOCK (1) ============ -->
+<section class="slide" id="s14a" data-sec="14 · Also in this block" data-title="Also in this block: mention cards (1 of 2)"><div class="pad">
+  <div class="eyebrow">Mention only · what it is, where it sits, which page</div>
+  <h2>You will meet these. Today: <span class="accent">what</span> and <span class="accent">where</span>.</h2>
+  <div class="bd">
+    <table class="tbl sm">
+      <tr><th style="width:23%">Item</th><th style="width:44%">What it is</th><th>ICAI reference</th></tr>
+      <tr class="rv" data-at="1"><td>Realisation A/c</td><td>The vendor's closing account: assets out, consideration in, profit or loss on the sale of the business</td><td>Ch 13 topic 6, p13.21 (entries p13.24)</td></tr>
+      <tr class="rv" data-at="2"><td>4 purchase-consideration methods</td><td>Lump sum, net payment, net assets, intrinsic value / share exchange: four ways to arrive at the price</td><td>Ch 13 topic 4, p13.7 – 13.8</td></tr>
+      <tr class="rv" data-at="3"><td>Capital Reduction A/c</td><td>The account that collects every sacrifice in internal reconstruction</td><td>Ch 14 topic 2.3, p14.10; topic 3, p14.12</td></tr>
+      <tr class="rv" data-at="4"><td>Cross-holding</td><td>Only a <b>syllabus exclusion</b>. Sec 19: a subsidiary cannot ordinarily hold shares in its holding company (three exceptions)</td><td>AS 21 Note-1 p10.2; topic 1.1 p10.4</td></tr>
+      <tr class="rv" data-at="5"><td>Foreign subsidiary</td><td>Excluded from numericals</td><td>AS 21 Note-1, p10.2</td></tr>
+      <tr class="rv" data-at="6"><td>Disposal of a subsidiary</td><td>Consolidate to the date of disposal; <b>not examined at Intermediate</b></td><td>AS 21 topic 1.10, p10.19 – 10.20</td></tr>
+      <tr class="rv" data-at="7"><td>Mid-year acquisition</td><td>Profit for the year is split pre / post on a time basis</td><td>AS 21 topic 1.13 p10.26; rule p10.32</td></tr>
+    </table>
+  </div>
+  <div class="foot">Page numbers: ICAI CA Inter Advanced Accounting, July 2026 edition (printed pages).</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 14b. ALSO IN THIS BLOCK (2) ============ -->
+<section class="slide" id="s14b" data-sec="14 · Also in this block" data-title="Also in this block: mention cards (2 of 2)"><div class="pad">
+  <div class="eyebrow">Mention only · continued</div>
+  <h2>Prerequisites, presentation and the forms of reconstruction</h2>
+  <div class="bd">
+    <table class="tbl sm">
+      <tr><th style="width:23%">Item</th><th style="width:44%">What it is</th><th>ICAI reference</th></tr>
+      <tr class="rv" data-at="1"><td>Dividend from a subsidiary</td><td>Pre-acquisition dividend credits Investment A/c; post-acquisition is income</td><td>AS 21 topic 1.14 B, p10.31 – 10.33</td></tr>
+      <tr class="rv" data-at="2"><td>Bonus shares by the subsidiary</td><td>Capitalises reserves; the pre / post source matters</td><td>AS 21 Note 5, p10.33</td></tr>
+      <tr class="rv" data-at="3"><td>Revaluation on acquisition</td><td>Subsidiary's assets at fair value on the acquisition date</td><td>AS 21 topic 1.14 A, p10.27 – 10.31</td></tr>
+      <tr class="rv" data-at="4"><td>Uniform policies; same reporting date</td><td>Prerequisites for adding lines together</td><td>AS 21 topic 1.17 p10.77; topic 1.14 D p10.72</td></tr>
+      <tr class="rv" data-at="5"><td>Consolidated cash flow statement</td><td><b class="accent">Outside the syllabus.</b> The cash-flow counterpart of consolidation</td><td>AS 21 topic 1.16, p10.76</td></tr>
+      <tr class="rv" data-at="6"><td>Disclosure: Form AOC-1, Sec 129, Schedule III</td><td>The legal wrapper of consolidated statements</td><td>AS 21 topic 1.4, p10.9</td></tr>
+      <tr class="rv" data-at="7"><td>Reconstruction forms</td><td>Alteration, variation of rights, reduction, compromise, surrender</td><td>Ch 14 topic 2, p14.4 – 14.12</td></tr>
+    </table>
+  </div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 15. MASTER MAP ============ -->
+<section class="slide" id="s15" data-sec="15 · The map and the word-bank" data-title="The master map: where each word is born"><div class="pad">
+  <div class="eyebrow">Master map · put each word where it is born</div>
+  <h2>Everything on one screen</h2>
+  <div class="bd">
+    <div class="g2" style="gap:2cqw">
+      <div class="note red" style="min-height:25cqw">
+        <div class="pill red">TARGET DIES · AS 14</div>
+        <div class="col" style="margin-top:1cqw">
+          <div class="chip rv" data-at="7" style="text-align:left"><b>Statutory reserves</b><div class="small" style="font-weight:600">matter in the purchase method (Amalgamation Adjustment Reserve)</div></div>
+        </div>
+        <p class="small muted" style="margin-top:1cqw">Merger or purchase? Five conditions. One date. No pre/post, no minority interest.</p>
+      </div>
+      <div class="note green" style="min-height:25cqw">
+        <div class="pill green">TARGET LIVES · AS 21 · 23 · 27</div>
+        <div class="col" style="margin-top:1cqw;gap:.6cqw">
+          <div class="chip rv" data-at="3" style="text-align:left"><b>Acquisition</b> <span class="small" style="font-weight:600">· buying a stake in a company that carries on</span></div>
+          <div class="chip rv" data-at="4" style="text-align:left"><b>Control</b> <span class="small" style="font-weight:600">· above 50% of votes, or the board</span></div>
+          <div class="chip rv" data-at="5" style="text-align:left"><b>Cost of control</b> <span class="small" style="font-weight:600">· paid minus share of net assets</span></div>
+          <div class="chip rv" data-at="6" style="text-align:left"><b>Pre- and post-acquisition</b> <span class="small" style="font-weight:600">· capital vs revenue</span></div>
+          <div class="chip rv" data-at="8" style="text-align:left"><b>Minority interest</b> <span class="small" style="font-weight:600">· outsiders' share (below 100%)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="note gold abs" style="left:0;right:0;bottom:-.5cqw"><span class="tag gold">At the bottom of every balance sheet</span>
+      <span class="chip rv" data-at="1" style="display:inline-block;margin:0 1cqw"><b>Net assets</b> = assets − liabilities = equity</span>
+      <span class="chip rv" data-at="2" style="display:inline-block"><b>Net results of operations</b> = the profit that moves net assets</span></div>
+  </div>
+  <div class="foot">Come back to "which column are we in?" at the start of every later chapter.</div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<!-- ============ 16. WORD-BANK AND CLOSE ============ -->
+<section class="slide" id="s16" data-sec="15 · The map and the word-bank" data-title="The eight words, in plain language"><div class="pad">
+  <div class="eyebrow">Word-bank · the eight words in plain language</div>
+  <h2>If you remember only this page</h2>
+  <div class="bd">
+    <div class="g4" style="gap:1.2cqw">
+      <div class="note rv" data-at="1"><div class="tag blue">Net assets</div><p class="t" style="margin-top:.3cqw">What the owners own: assets minus liabilities, which is equity.</p></div>
+      <div class="note gold rv" data-at="1"><div class="tag gold">Net results of operations</div><p class="t" style="margin-top:.3cqw">The profit the business earns.</p></div>
+      <div class="note green rv" data-at="1"><div class="tag green">Acquisition</div><p class="t" style="margin-top:.3cqw">Buying a stake in a company that carries on.</p></div>
+      <div class="note red rv" data-at="1"><div class="tag accent">Control</div><p class="t" style="margin-top:.3cqw">More than half the votes, or the board.</p></div>
+      <div class="note org rv" data-at="2"><div class="tag org">Cost of control</div><p class="t" style="margin-top:.3cqw">What Bhim paid minus its share of net assets: goodwill or capital reserve.</p></div>
+      <div class="note rv" data-at="2"><div class="tag blue">Pre / post acquisition</div><p class="t" style="margin-top:.3cqw">Profit before the date was paid for (capital); after it is revenue.</p></div>
+      <div class="note gold rv" data-at="2"><div class="tag gold">Statutory reserves</div><p class="t" style="margin-top:.3cqw">Reserves the law says must stay; they matter in the purchase method.</p></div>
+      <div class="note green rv" data-at="2"><div class="tag green">Minority interest</div><p class="t" style="margin-top:.3cqw">The outsiders' share of net assets and profit.</p></div>
+    </div>
+    <div class="card center rv abs" data-at="3" style="left:0;right:0;bottom:0"><small>Next kahaani</small><strong>Internal reconstruction: you already know why it exists.</strong><div class="small" style="margin-top:.5cqw;color:#ffd982">AIR 1 · AIR 1 · AIR 5 &nbsp;·&nbsp; CApranav.com</div></div>
+  </div>
+</div><div class="brand">Kahaani · CA Inter Advanced Accounts</div><div class="mark">CApranav.com</div>
+</section>
+
+<div id="toast"></div>
+<div id="progress"></div>
+<div id="controls">
+  <button id="prev" title="Back" aria-label="Back">‹</button>
+  <span id="counter"></span>
+  <button id="next" title="Next" aria-label="Next">›</button>
+  <button id="printbtn" class="wide" title="Print or save as PDF (P)">Print / Save PDF</button>
+</div>
+</main>
+<script>
+(() => {
+  const deck = document.getElementById('deck');
+  const slides = [...document.querySelectorAll('.slide')];
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  const toc = document.getElementById('toc');
+  const toast = document.getElementById('toast');
+  let index = 0;
+  const steps = slides.map(() => 0);
+
+  // ---- parse step attributes once ----
+  const parseMap = s => s.split('|').map(p => { const i = p.indexOf(':'); return [parseInt(p.slice(0, i), 10), p.slice(i + 1)]; });
+  const pick = (map, step) => { let v = null; for (const [k, val] of map) if (k <= step) v = val; return v; };
+  slides.forEach(sl => {
+    sl._els = [...sl.querySelectorAll('[data-at],[data-st],[data-txt]')].map(el => ({
+      el,
+      at: el.hasAttribute('data-at') ? parseInt(el.dataset.at, 10) : null,
+      until: el.hasAttribute('data-until') ? parseInt(el.dataset.until, 10) : null,
+      st: el.dataset.st ? parseMap(el.dataset.st) : null,
+      txt: el.dataset.txt ? parseMap(el.dataset.txt) : null,
+    }));
+    let m = 0;
+    sl._els.forEach(o => {
+      if (o.at !== null) m = Math.max(m, o.at);
+      if (o.until !== null) m = Math.max(m, o.until);
+      (o.st || []).forEach(([k]) => { m = Math.max(m, k); });
+      (o.txt || []).forEach(([k]) => { m = Math.max(m, k); });
+    });
+    sl._max = m;
+  });
+
+  function apply(si, step) {
+    slides[si]._els.forEach(o => {
+      if (o.at !== null) o.el.classList.toggle('on', step >= o.at && (o.until === null || step < o.until));
+      if (o.st) { const v = pick(o.st, step); if (v === null) o.el.removeAttribute('data-state'); else o.el.setAttribute('data-state', v); }
+      if (o.txt) { const v = pick(o.txt, step); if (v !== null) o.el.innerHTML = v; }
+    });
+  }
+
+  function update() {
+    slides.forEach((s, i) => s.classList.toggle('active', i === index));
+    apply(index, steps[index]);
+    counter.textContent = `${index + 1} / ${slides.length}` + (slides[index]._max ? `  ·  step ${steps[index]}/${slides[index]._max}` : '');
+    progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+    toc.querySelectorAll('a').forEach(a => a.classList.toggle('cur', a.dataset.sec === slides[index].dataset.sec));
+    try { history.replaceState(null, '', '#' + (index + 1)); } catch (e) {}
+  }
+  function forward() {
+    if (steps[index] < slides[index]._max) steps[index]++;
+    else if (index < slides.length - 1) { index++; steps[index] = 0; }
+    update();
+  }
+  function backward() {
+    if (steps[index] > 0) steps[index]--;
+    else if (index > 0) { index--; steps[index] = slides[index]._max; }
+    update();
+  }
+  function goto(i, step = 0) { index = Math.max(0, Math.min(slides.length - 1, i)); steps[index] = step; update(); }
+
+  // ---- table of contents ----
+  const secs = [];
+  slides.forEach((s, i) => { if (!secs.find(x => x.sec === s.dataset.sec)) secs.push({ sec: s.dataset.sec, i }); });
+  toc.innerHTML = '<div class="wm"><span>P</span> CA PRANAV</div><div class="tg">AIR 1 · AIR 1 · AIR 5</div>' +
+    secs.map(s => `<a data-sec="${s.sec}" data-i="${s.i}">${s.sec}</a>`).join('');
+  toc.addEventListener('click', e => { const a = e.target.closest('a'); if (a) { goto(+a.dataset.i); toc.classList.remove('open'); } });
+  document.getElementById('tocbtn').addEventListener('click', e => { e.stopPropagation(); toc.classList.toggle('open'); });
+
+  // ---- print / save as PDF ----
+  function showToast(msg, ms = 6000) { toast.textContent = msg; toast.classList.add('on'); setTimeout(() => toast.classList.remove('on'), ms); }
+  function doPrint() {
+    showToast('In the print dialog: Destination "Save as PDF", Layout Landscape, Margins None, tick "Background graphics".');
+    setTimeout(() => window.print(), 250);
+  }
+  const prePrint = () => slides.forEach((s, i) => apply(i, s._max));
+  const postPrint = () => { slides.forEach((s, i) => apply(i, steps[i])); update(); };
+  window.addEventListener('beforeprint', prePrint);
+  window.addEventListener('afterprint', postPrint);
+  document.getElementById('printbtn').addEventListener('click', e => { e.stopPropagation(); doPrint(); });
+
+  // ---- controls ----
+  document.getElementById('next').addEventListener('click', e => { e.stopPropagation(); forward(); });
+  document.getElementById('prev').addEventListener('click', e => { e.stopPropagation(); backward(); });
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const k = e.key;
+    if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(k)) { e.preventDefault(); forward(); }
+    else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); backward(); }
+    else if (k === 'Home') goto(0);
+    else if (k === 'End') goto(slides.length - 1, slides[slides.length - 1]._max);
+    else if (k.toLowerCase() === 't') toc.classList.toggle('open');
+    else if (k.toLowerCase() === 'p') doPrint();
+    else if (k.toLowerCase() === 'f') document.documentElement.requestFullscreen?.();
+    else if (k === 'Escape') toc.classList.remove('open');
+  });
+  deck.addEventListener('click', e => { if (!e.target.closest('button,#toc')) { toc.classList.remove('open'); forward(); } });
+
+  // ---- start (deep link #n) ----
+  const h = parseInt((location.hash || '').slice(1), 10);
+  if (h >= 1 && h <= slides.length) index = h - 1;
+  window.__deck = { goto, slides, steps, apply, update, max: i => slides[i]._max };
+  update();
+})();
+
+</script>
+</body>
+</html>

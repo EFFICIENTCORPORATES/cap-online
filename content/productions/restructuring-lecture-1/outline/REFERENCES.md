@@ -6,7 +6,7 @@
 
 1. Every topic number and printed page below was read from the per-page markers (`ICAI_SOURCE_PAGE ... printed_page`) of the converted file, at the exact line where the text appears.
 2. Each reference was then compared with the **raw conversion** of the same chapter (`books/ca-inter/concept-book/raw_icai_study_materials/`), which has its own page headers. All bracket-checked as consistent (raw page header before and after falls either side of the converted page).
-3. **Not checked against the original PDFs.** The PDFs are not in this repository, and the R2 bucket needs credentials that this session does not have (see CLAUDE.md section 2b). Both conversions come from the same PDF, so a shared error is unlikely but possible. **Before any page number is shown on a slide, eyeball it in the PDF.** Items marked ⚠ need that most.
+3. **Page numbers confirmed by Pranav (2026-11-06)** against the PDFs. This session could not do that itself: the PDFs are not in the repository and the R2 bucket needs credentials this session does not have (CLAUDE.md section 2b).
 4. A page given as `p10.4` is the printed page `10.4`. Topic numbers are ICAI's own, as printed in the chapter.
 
 ---
@@ -26,7 +26,7 @@
 | 9 | **Bonus shares by the subsidiary** | AS 21 | Topic 1.14 B (Note 5); worked example later in 1.14 | Note p10.33; worked example p10.49 | |
 | 10 | **Revaluation on acquisition** | AS 21 | Topic 1.14 **section A**, *Revaluation of assets of subsidiary company* | pp 10.27 – 10.31 (section B starts p10.31) | |
 | 11 | **Uniform accounting policies; same reporting date** | AS 21 | Topic 1.17, *Uniform accounting policies*; Topic 1.14 **section D**, *Alignment of reporting dates* | Uniform policies p10.77; reporting dates **p10.72** | |
-| 12 | **Consolidated cash flow statement** | AS 21 | Topic 1.16, *Preparation of consolidated cash flow statement* | p10.76 | The Cash Flow chapter (M3_C11_U2) has nothing specific on consolidated statements. My earlier row ("AS 3 style") was imprecise. |
+| 12 | **Consolidated cash flow statement** | AS 21 | Topic 1.16, *Preparation of consolidated cash flow statement* | p10.76 | **Outside the syllabus** (per Pranav); shown as such on the deck. The Cash Flow chapter (M3_C11_U2) has nothing specific on consolidated statements. |
 | 13 | **Disclosure: Form AOC-1, Sec 129, Schedule III** | AS 21 | Topic 1.4, *Purpose of preparing the consolidated financial statements* | AOC-1, Sec 129 and Schedule III all on **p10.9** (topic runs p10.7 – 10.10) | |
 | 14 | **Reconstruction forms** | Ch 14 | Topic 2, *Methods of internal reconstruction*: 2.1 Alteration of share capital; 2.2 Variation of shareholders' rights; 2.3 Reduction of share capital; 2.4 Compromise / arrangements; 2.5 Surrender of shares | Chart p14.2; 2.1 p14.4 (sub-division and consolidation p14.4; conversion into stock p14.7); 2.2 and 2.3 p14.9; 2.4 p14.11; 2.5 p14.12 | |
 
@@ -54,7 +54,9 @@ Where "cross holding" appears: **only in the syllabus Note-1 on p10.2** ("the un
 | Net assets / equity ("residual interest… net worth") | AS 21 | 1.11 *Calculation of goodwill / capital reserve (cost of control)* | p10.20 |
 | Cost of control = goodwill or capital reserve (formula) | AS 21 | 1.11 | p10.20 |
 | Cost-of-control term and "differential only in purchase method" | AS 21 | 1.11 | p10.21 |
-| Control (voting power, board composition) | AS 21 | 1.2 (objectives, definition) and 1.6 *Control* | p10.6; p10.11 |
+| Control (voting power, board composition "so as to obtain economic benefits") | AS 21 | 1.2 (objectives, definition) and 1.6 *Control* | p10.6; p10.11 |
+| **AS 18 control** (adds clause (c): substantial interest in voting power **and** power to direct policies); substantial interest = 20% or more; associate and significant influence (20% presumption); joint control | AS 18, in the file Pranav supplied (ICAI SM *Presentation & Disclosures Based Accounting Standards*) | Topic 4.6 *Definitions of other terms used in AS 18* | p4.82 (control); p4.83 (substantial interest, associate, significant influence); p4.84 (joint venture, joint control) |
+| Exclusions from consolidation (temporary control; severe long-term restrictions) | AS 21 | 1.7 | p10.12 – 10.13 |
 | Holding / subsidiary definitions, Sec 2(46), Sec 2(87) | AS 21 | 1.1 | p10.3 |
 | Wholly owned vs partly owned | AS 21 | 1.3 | p10.7 |
 | Exclusion from consolidation | AS 21 | 1.7 | p10.12 |

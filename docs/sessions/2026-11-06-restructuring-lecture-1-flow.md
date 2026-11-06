@@ -19,3 +19,10 @@
 **Decisions:** brand follows the existing "Practice with Pranav Bhaiya" slides (tokens in FLOW.md 1.2); print view = one landscape page per slide, all steps revealed, diagonal "CApranav.com" watermark; T-format has Equity & Liabilities on the left and Assets on the right; Arjun story for net assets; 9:3 timing for pre/post.
 **Findings:** Sec 19 is at AS 21 topic 1.1 p10.4; cross-holding only a syllabus exclusion (p10.2). Roadmap AS 21 topic numbers 1.15-1.17 do not match ICAI's (items are inside topic 1.14).
 **Open items:** FLOW.md section 7 (9:3 interpretation, loan split, website placement, AS 18 text, PDF page check).
+
+## Update (deck built)
+**Added:** `deck/` (sources, `build_deck.py`, `check_notes_sync.py`, README, built `kahaani-restructuring-map.html`); rewrote `outline/SPEAKER-NOTES.md` (per slide, synced) and `outline/FLOW.md` (design record, generated slide map); updated `outline/REFERENCES.md`.
+**Decisions:** one Arjun Ltd / Bhim Ltd story throughout; 9:3 timing; consolidated cash flow statement outside the syllabus; AS 18 control definition included; website placement is a separate "Kahaani" lectures area (not yet created).
+**Commands run:** `python3 deck/build_deck.py`, `python3 deck/check_notes_sync.py`, headless Chromium screenshots and a print-to-PDF test.
+**Open items:** place the deck on the website's Kahaani area when it exists; verify real-world examples before filming.
+**Next step:** Pranav reviews the deck; then the next kahaani (Internal Reconstruction).
