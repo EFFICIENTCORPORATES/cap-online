@@ -1,6 +1,6 @@
 # Backlog — everything not done yet
 
-_Last updated 2026-10-31. This is an **index**: each item says what is pending, who has to act,
+_Last updated 2026-11-09. This is an **index**: each item says what is pending, who has to act,
 and where the detail lives. Do not copy detail here; point to it. Update this file in the same commit
 as the work._
 
@@ -8,7 +8,7 @@ as the work._
 
 - **Id** is stable. Never reuse or renumber one. Prefixes: `R` repo and governance, `M` Must Practice,
   `S` website (ids are the ones in `capranav_com_revamped/AGENT-HANDOFF.md` §4), `Q` Question Bank
-  Book second edition (ids are the `CR-` ids in the change register), `O` other workstreams.
+  Book second edition (ids are the `CR-` ids in the change register), `T` teaching material and Kahaani lectures (added 2026-11-09), `O` other workstreams.
 - **Who**: `Pranav` = needs his decision, account or action. `Agent` = an AI session can do it now.
   `Both` = an agent prepares, Pranav confirms.
 - **Priority**: `P1` act soon, `P2` normal, `P3` small or later.
@@ -87,6 +87,27 @@ The first edition is printed and distributed; nothing here changes a student's c
 | Q-CR-006 | Reader-reported errors have no intake path into the register | P2 | Both | Open |
 | Q-CR-007 | Some questions are printed twice (home chapter and Integrated section) | P3 | Both | Open |
 | Q-CR-008 | PYQ November 2023 Q4 prints as "QNone" | P2 | Agent | Open |
+
+## T. Teaching material, Kahaani lectures and chapter notes
+
+State (2026-11-09): Kahaani lecture 1 deck built and reviewed; website pages prepared but **not deployed**; two reusable skills written; chapter notes for Ch 14 done, Ch 11/12 partly done. All of it is on branch `claude/sweet-brahmagupta-5yu98q`, **not yet on `main`** (BL-T01). Full handover and standing preferences: `docs/sessions/2026-11-09-teaching-material-handover.md`. Notes: `books/ca-inter/teaching-notes/`.
+
+| Id | Item | Pri | Who | Status | Detail |
+|---|---|---|---|---|---|
+| BL-T00 | Tracking issue for this group (umbrella to-do list): **GitHub issue #4** (https://github.com/EFFICIENTCORPORATES/cap-online/issues/4), created by hand on Pranav's request, not by `tools/backlog_to_issues.py`; it is not recorded in `docs/backlog-issues.json`. | P2 | Agent | Open | `docs/sessions/2026-11-09-teaching-material-handover.md` §6 |
+| BL-T01 | Merge branch `claude/sweet-brahmagupta-5yu98q` into `main` so `CONTEXT.md`, skills, notes and the deck are visible to every new session. No pull request was opened (only on Pranav's request). | P1 | Pranav | Open | handover §6 |
+| BL-T02 | Deploy the Kahaani area (index + deck) to capranav.com from the checkout that has the site's gitignored images (never from a fresh clone), then `qa_smoke.py --browser` and `indexnow_ping.py`. | P1 | Pranav | Prepared, waiting | `capranav_com_revamped/PROJECT-LOG.md` (2026-11-06) |
+| BL-T03 | Decide whether the site navigation gets a Kahaani link (none was added). | P3 | Pranav | Decision needed | `capranav_com_revamped/public/kahaani/` |
+| BL-T04 | "What is new in TYK" lists for the **Chapter 12 TYK** and the dividend-related **Chapter 11 TYK** (MCQ 5, 8, 9; Q15 Z Ltd); append to the Ch 11/12 note. Use `/chapter-illustration-traps`. | P2 | Agent | Ready | `books/ca-inter/teaching-notes/ch11-12-dividend-vs-buyback.md` |
+| BL-T05 | Buyback and Dividend teaching deliverable. Ask Pranav which format: Kahaani-style deck (two calculations animated side by side), Markdown teaching note, or traps only. Content already written. | P1 | Both | Waiting on Pranav's choice | same note |
+| BL-T06 | AS 26 revision sheet: fix the revaluation error, add the missing items, improve layout; decide which Drive version is current. The sheet is unchanged. | P2 | Both | Waiting on Pranav's go-ahead | `_claude/skills/SKILL-chapter-review-skills.md` §4 |
+| BL-T07 | NB01/NB02 class notes are scanned (no text layer): Pranav to give the chapter order as a short list for any sheet whose teaching sequence must be checked. | P3 | Pranav | Open | `.claude/skills/concept-material-review/SKILL.md` §4 |
+| BL-T08 | Next Kahaani decks (e.g. Internal Reconstruction, Amalgamation) following the `content/productions/restructuring-lecture-1/` pattern. Ask which chapter first. | P2 | Agent | Waiting on Pranav's choice | that folder's `deck/README.md` |
+| BL-T09 | Verify every real-world example before use in a deck (Vistara merged into Air India Nov 2024; check Titan, SBI, Walmart-Flipkart, Tata Digital-BigBasket, Tata Motors-JLR). | P3 | Agent | Open | `content/productions/restructuring-lecture-1/outline/SPEAKER-NOTES.md` |
+| BL-T10 | In a fresh session confirm the two skills load (`/chapter-illustration-traps`, `/concept-material-review`). | P2 | Agent | Open | `.claude/skills/` |
+| BL-T11 | Source-material oddities (list in handover §5): register them if Pranav wants them tracked. | P3 | Agent | Open | handover §5 |
+| BL-T12 | Committed `capranav_com_revamped/public/faq/index.html` lacks the SEO head block; re-run `tools/apply_seo_meta.py` before the next deploy. | P3 | Agent | Open | `capranav_com_revamped/PROJECT-LOG.md` (2026-11-06) |
+| BL-T13 | Pranav's local branch `docs/concept-book-storylines` was not visible to cloud sessions; push or merge it if it holds concept-book work. | P2 | Pranav | Open | `CONTEXT.md` §1 |
 
 ## O. Other workstreams (owned by another session)
 

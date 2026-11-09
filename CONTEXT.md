@@ -1,6 +1,6 @@
 # CONTEXT.md — where things stand (read this first, any agent)
 
-_Last updated 2026-10-31. Keep this file short and current. The long dated history is in
+_Last updated 2026-11-09. Keep this file short and current. The long dated history is in
 `CLAUDE.md` §6–11 and `_claude/memory/project_log.md`; do not copy it here._
 
 This repo is CA **Pranav Pratik Tulshyan**'s CA Inter teaching ecosystem (books, the live website
@@ -18,6 +18,7 @@ rather than guess; he decides scope, wording and anything about his profile, mon
 | **Concept Book / revision notes** | In progress by another session | `books/ca-inter/concept-book/CONCEPT_BOOK_NOTES_PIPELINE.md`, `NEWTON_CONCEPT_BOOK_PRODUCTION_GUIDE.md` |
 | **CA Foundation ICAI downloader** | Documented by another session | `books/ca-foundation/README.md`, `DOWNLOADER-SPEC.md` |
 | **Telegram bot platform** | Migrated out 2026-09-03 to `EFFICIENTCORPORATES/Main1lavyaAIAgents`. Do not edit bot code here | `telegram/MIGRATED.md` |
+| **Teaching material for Pranav's lectures** (Kahaani decks, chapter illustration notes, two reusable skills) | In progress; **on branch `claude/sweet-brahmagupta-5yu98q`, not yet on `main`**. Kahaani website pages prepared, not deployed | `docs/sessions/2026-11-09-teaching-material-handover.md`, then `docs/BACKLOG.md` group T |
 | **Large and binary files** | In private Cloudflare R2, not "missing" | `R2_MANIFEST.md`, `CLAUDE.md` §2b |
 
 ## 2. Where pending work is recorded
@@ -48,6 +49,7 @@ is a dry-run that lists the issue each row would become (labels `priority:*`, `o
   first, before any fix.
 - **OP/PP duplicate tagging and short chapter names** are out of scope for edition one.
 - **Generated files are never edited by hand**: change the generator or its input and re-run.
+- **Teaching decks and notes (Pranav, 2026-11):** concept-level intro lectures (no solving); HTML click-through decks in the capranav.com style; **speaker notes only in a separate Markdown file**; balance sheet T-format with **Equity & Liabilities left, Assets right**; pre/post acquisition examples **always 9 : 3**; running story Arjun Ltd (target) and Bhim Ltd (investor); consolidated cash flow statement is **outside the syllabus**; for a chapter he teaches, give the main trap per illustration and only the **new** items in TYK; he deploys and decides on pull requests himself.
 
 ## 4. How the repo is worked (read before you commit or push)
 
