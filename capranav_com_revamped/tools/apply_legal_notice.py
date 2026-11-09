@@ -24,6 +24,7 @@ PAGES = [
     "anatomy/index.html",
     "videos/index.html",
     "practice-with-pranav-bhaiya/index.html",
+    "kahaani/index.html",
     "practice-with-pranav-bhaiya/must-practice/index.html",
 ]
 

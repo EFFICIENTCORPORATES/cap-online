@@ -1,0 +1,188 @@
+[
+ {
+  "id": "s00",
+  "section": "Start",
+  "title": "Kahaani: the map before the maths",
+  "steps": 8
+ },
+ {
+  "id": "s01",
+  "section": "1 \u00b7 Rescue before winding up",
+  "title": "Rescue before winding up",
+  "steps": 6
+ },
+ {
+  "id": "s02",
+  "section": "2 \u00b7 Internal reconstruction",
+  "title": "Internal reconstruction",
+  "steps": 4
+ },
+ {
+  "id": "s03a",
+  "section": "3 \u00b7 The big fork",
+  "title": "Does the target company die?",
+  "steps": 4
+ },
+ {
+  "id": "s03b",
+  "section": "3 \u00b7 The big fork",
+  "title": "Dies vs lives: the contrast",
+  "steps": 6
+ },
+ {
+  "id": "s04a",
+  "section": "4 \u00b7 Target dies",
+  "title": "Three forms: what physically happens",
+  "steps": 6
+ },
+ {
+  "id": "s04b",
+  "section": "4 \u00b7 Target dies",
+  "title": "The five conditions of AS 14",
+  "steps": 8
+ },
+ {
+  "id": "s04c",
+  "section": "4 \u00b7 Target dies",
+  "title": "Merger vs purchase, and the words",
+  "steps": 5
+ },
+ {
+  "id": "s05a",
+  "section": "5 \u00b7 Target lives: the ladder",
+  "title": "The ownership ladder",
+  "steps": 4
+ },
+ {
+  "id": "s05b",
+  "section": "5 \u00b7 Target lives: the ladder",
+  "title": "Buying shares vs buying the business",
+  "steps": 5
+ },
+ {
+  "id": "s06a",
+  "section": "6 \u00b7 Net assets",
+  "title": "Arjun's company: what net assets really are",
+  "steps": 4
+ },
+ {
+  "id": "s06b",
+  "section": "6 \u00b7 Net assets",
+  "title": "Bhim Ltd meets Arjun Ltd",
+  "steps": 3
+ },
+ {
+  "id": "s06c",
+  "section": "6 \u00b7 Net assets",
+  "title": "Bhim's price list: stake, price, share of net assets",
+  "steps": 5
+ },
+ {
+  "id": "s07a",
+  "section": "7 \u00b7 Control",
+  "title": "Control switches five things on",
+  "steps": 8
+ },
+ {
+  "id": "s07b",
+  "section": "7 \u00b7 Control",
+  "title": "Control: AS 21 and the wider AS 18",
+  "steps": 4
+ },
+ {
+  "id": "s07c",
+  "section": "7 \u00b7 Control",
+  "title": "Line-by-line is not adding every item",
+  "steps": 5
+ },
+ {
+  "id": "s08a",
+  "section": "8 \u00b7 Cost of control",
+  "title": "Cost of control: goodwill or capital reserve",
+  "steps": 4
+ },
+ {
+  "id": "s08b",
+  "section": "8 \u00b7 Cost of control",
+  "title": "Cost of investment vs cost of control",
+  "steps": 3
+ },
+ {
+  "id": "s09a",
+  "section": "9 \u00b7 Pre- and post-acquisition",
+  "title": "The cut-off line: 9 months before, 3 months after",
+  "steps": 4
+ },
+ {
+  "id": "s09b",
+  "section": "9 \u00b7 Pre- and post-acquisition",
+  "title": "The reserves split: who gets which slice",
+  "steps": 5
+ },
+ {
+  "id": "s09c",
+  "section": "9 \u00b7 Pre- and post-acquisition",
+  "title": "Three small rules that ride on the cut-off line",
+  "steps": 4
+ },
+ {
+  "id": "s10",
+  "section": "10 \u00b7 Minority interest",
+  "title": "Minority interest: the outsiders' share",
+  "steps": 5
+ },
+ {
+  "id": "s11",
+  "section": "11 \u00b7 Statutory reserves",
+  "title": "Statutory reserves: three fates",
+  "steps": 4
+ },
+ {
+  "id": "s12",
+  "section": "12 \u00b7 Intra-group adjustments",
+  "title": "A group cannot make a profit by selling to itself",
+  "steps": 6
+ },
+ {
+  "id": "s13a",
+  "section": "13 \u00b7 Associates and joint ventures",
+  "title": "Same 40% stake, two treatments",
+  "steps": 4
+ },
+ {
+  "id": "s13b",
+  "section": "13 \u00b7 Associates and joint ventures",
+  "title": "AS 13 vs equity method: key differences",
+  "steps": 5
+ },
+ {
+  "id": "s13c",
+  "section": "13 \u00b7 Associates and joint ventures",
+  "title": "Joint ventures: JCO, JCA, JCE",
+  "steps": 4
+ },
+ {
+  "id": "s14a",
+  "section": "14 \u00b7 Also in this block",
+  "title": "Also in this block: mention cards (1 of 2)",
+  "steps": 7
+ },
+ {
+  "id": "s14b",
+  "section": "14 \u00b7 Also in this block",
+  "title": "Also in this block: mention cards (2 of 2)",
+  "steps": 7
+ },
+ {
+  "id": "s15",
+  "section": "15 \u00b7 The map and the word-bank",
+  "title": "The master map: where each word is born",
+  "steps": 8
+ },
+ {
+  "id": "s16",
+  "section": "15 \u00b7 The map and the word-bank",
+  "title": "The eight words, in plain language",
+  "steps": 3
+ }
+]

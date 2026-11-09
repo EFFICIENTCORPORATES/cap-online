@@ -1,0 +1,22 @@
+# Concept clarifications answered for Pranav (2026-11 sessions)
+
+_Short answers he asked for while preparing the Reconstruction / Amalgamation / Consolidation block. Each is grounded in the ICAI July 2026 edition files under `books/ca-inter/smat-may-27-edition/all-modules/` and cites printed pages (converted-file markers; page numbers for the AS 14, AS 21, AS 23, AS 27, Ch 13 and Ch 14 references used in the Kahaani deck were confirmed by Pranav against the PDFs on 2026-11-06). Figures are ₹ thousand unless stated._
+
+## 1. Non-statutory reserves under the purchase method of amalgamation (AS 14 topic 2.10, p9.30; Ch 13 treatment of reserves)
+They **disappear**: the identity of reserves other than statutory reserves is not preserved, and the transferor's general reserve and P&L balance "are not recorded at all". The net assets taken over are compared with the purchase consideration; the difference is **goodwill** (consideration higher) or **capital reserve** (net assets higher). Only **statutory reserves** keep their identity, with a matching debit to **Amalgamation Adjustment Reserve**, shown as a separate negative line (p9.30 – 9.31). AS 14 topic 2.12 (p9.32): under the purchase method the transferor's P&L balance, debit or credit, loses its identity.
+
+## 2. Bonus shares issued by a subsidiary: "the source decides the effect" (AS 21 Note 5, p10.33; Illustration 9, pp 10.49 – 10.51)
+The holding company records no entry (only the share count rises). Consolidation effect depends on which reserve funded the bonus:
+- **Out of pre-acquisition (capital) reserves:** no effect on goodwill, minority interest or consolidated reserves.
+- **Out of post-acquisition (revenue) reserves:** the parent's share moves from consolidated reserves into capital; goodwill falls (or capital reserve rises) by that amount and consolidated reserves fall by the same amount; minority interest is unchanged in total (reshuffled).
+- Worked example in the Arjun Ltd / Bhim Ltd story (Bhim holds 80%, cost 120; Arjun equity 140 = capital 50 + pre reserves 80 + post 10; bonus of 10): pre-acquisition source -> goodwill 16, MI 28, consolidated reserves +8 unchanged; post-acquisition source -> goodwill 8, MI 28 (12 + 16 + 0), consolidated reserves +0.
+- ICAI's own numbers (Illustration 9, P holds 70%, bonus ₹7,50,000 out of post-acquisition general reserve): cost of control goodwill ₹87,000 -> capital reserve ₹4,38,000; consolidated P&L share ₹15,85,500 -> ₹10,60,500 (both move by ₹5,25,000); minority interest ₹11,56,500 unchanged.
+
+## 3. Cross-holding and Sec 19 (AS 21 Note-1 p10.2; topic 1.1 p10.4)
+"Cross holding" appears only as a **syllabus exclusion** (p10.2) and is never defined. Sec 19 (p10.4): a subsidiary cannot hold shares in its holding company, no holding company may allot or transfer its shares to a subsidiary (void), with three exceptions: legal representative of a deceased member, trustee, or a shareholder before it became a subsidiary. Voting only for shares held as legal representative or trustee.
+
+## 4. Ch 14 Illustration 3: where is the bank overdraft?
+See `ch14-internal-reconstruction-traps.md` (Illustration 3). The overdraft is in the question's balance sheet only; ICAI's solution has no entry and the after-balance sheet shows cash ₹35,000 with no overdraft. Netting is the only reading that reconciles; ICAI does not say it.
+
+## 5. AS 26 revision sheet review
+Full findings are in `_claude/skills/SKILL-chapter-review-skills.md` section 4. In short: one factual error (revaluation model, not in this edition's AS 26), a list of missing items ranked by exam relevance, and build problems (pages 58-74% filled, 794 px fixed width, font not shipped, no ICAI references). **Nothing in the file was changed.**

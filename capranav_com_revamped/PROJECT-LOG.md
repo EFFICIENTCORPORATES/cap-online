@@ -7,6 +7,14 @@ continues — don't let it go stale.
 
 ---
 
+## 2026-11-06: Kahaani area added (index plus the first deck), NOT YET DEPLOYED
+
+Pranav asked for a separate lectures area called **Kahaani** and the first deck hosted on the site. Added `public/kahaani/index.html` (cloned from the Practice hub page: same head styles, `anatomy.css`, topbar and deck-card grid) and `public/kahaani/reconstruction-amalgamation-consolidation.html` (the single-file deck, canonical copy generated under `content/productions/restructuring-lecture-1/deck/`). New `tools/sync_kahaani.py` copies the deck into `public/kahaani/` (run it before `apply_seo_meta.py`). Both pages are in `apply_seo_meta.py`'s `PAGES` (so they are in `sitemap.xml`, `sitemap.txt`), and the index is in `apply_legal_notice.py`'s `PAGES`. URLs: `/kahaani/` and `/kahaani/reconstruction-amalgamation-consolidation` (clean URL, no `.html`). Tested locally by serving `public/` with clean-URL mapping: both return 200, no sideways scroll at 320/390/768/1440 px, no script errors. The deck has no network dependencies and no "Powered by" line (it is not an analytical page). No nav link to Kahaani was added anywhere: that is Pranav's call.
+
+**Not deployed from the session that built it** (no Cloudflare credentials there). Deploy from the checkout that has the gitignored images: `npx wrangler@4.137.0 deploy`, then `python tools/qa_smoke.py --browser` and `python tools/indexnow_ping.py`. **Do not deploy from a fresh clone or worktree**: `**/*.png` and other binaries are gitignored, so a fresh checkout has no site images and Worker Assets would replace the live asset set without them. Also noticed: the committed `public/faq/index.html` has no `seo:start` block (applying `apply_seo_meta.py` adds one); left untouched.
+
+---
+
 ## 2026-10-06: Must Practice, AS 16 (Borrowing Costs) published
 
 Added unit `M2-C5-U4` to `UNITS` in `tools/build_must_practice_data.py` (library file `CA_Inter_AdvAcc_AS_16_Borrowing_Costs_23_Descriptive.json`), no `force_include`/`force_exclude`/`why_overrides`, so the ten are pure formula and each card's "Why this one" line is the auto-generated one. 22 of the 23 library questions scored (`M2C5U4-022`, MTP May 2026 Set 2 Q8, 2 marks, has no topic mapping). The build auto-dropped five repeats: -014 (100% same as -005), -004 (96% same as -006), -001, -009 and -020 (twins of -013). The ten: 002, 005, 017, 006, 021, 018, 023, 019, 016, 008; **no PYQ** made it (-014 is a repeat, -011/-013 lost to the two-per-topic cap on the rank-19 topic). Four are RTP, so marks show "Not stated in source". All ten resolved a Question Bank page (p. 95 to 118).
