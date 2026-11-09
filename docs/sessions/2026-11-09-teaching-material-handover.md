@@ -2,7 +2,7 @@
 
 **Read this first if you are a new AI agent asked to continue Pranav's teaching-material work.** Start at `CONTEXT.md`, then this file, then `docs/BACKLOG.md` group **T** (the to-do list with ids). The tracking issue is **GitHub issue #4** (https://github.com/EFFICIENTCORPORATES/cap-online/issues/4), also backlog row BL-T00.
 
-**All of this work is on the branch `claude/sweet-brahmagupta-5yu98q`, not yet merged into `main`.** If your checkout is `main`, run `git fetch origin claude/sweet-brahmagupta-5yu98q` and read the files from that branch (or ask Pranav to merge it: BL-T01).
+**All of this work is on `main`** (merged 2026-11-09 on Pranav's instruction; `main` is the single trunk and the other branches are being deleted). If a file is missing, `git pull origin main` first.
 
 ## 1. Who and what
 
@@ -76,4 +76,16 @@ Pranav (CA Pranav Pratik Tulshyan) teaches CA Inter Advanced Accounting. In this
 
 ## 7. First message to give a new agent
 
-> Read `CONTEXT.md`, then `docs/sessions/2026-11-09-teaching-material-handover.md`, then `docs/BACKLOG.md` group T. The work is on branch `claude/sweet-brahmagupta-5yu98q` if `main` does not have it yet. Ask me which item to do next; do not deploy or open a pull request unless I say so.
+> Read `CONTEXT.md`, then `docs/sessions/2026-11-09-teaching-material-handover.md`, then `docs/BACKLOG.md` group T. Everything is on `main`. Ask me which item to do next; do not deploy or open a pull request unless I say so.
+
+## 8. The single-trunk merge (2026-11-09)
+
+Pranav asked that everything go into `main` so he can delete every other branch. Result:
+
+| Branch | What it held | Outcome |
+|---|---|---|
+| `claude/sweet-brahmagupta-5yu98q` | Kahaani deck, website pages, skills, notes, handover (6 commits) | Merged into `main` |
+| `docs/foundation-topic-master-handoff-20261020` | CA Foundation topic-master workbook snapshot and agent handoff (18 files) | Merged into `main` (one conflict, `_claude/memory/project_log.md`: both sets of entries kept) |
+| `chore/r2-manifest-2026-10-18` | An early 10-line `R2_MANIFEST.md` | Recorded as merged but its content not taken: `main`'s `R2_MANIFEST.md` is newer and already lists both of its entries |
+| `docs/as26-revision-html`, `docs/concept-book-notes-pipeline` | Nothing beyond `main` (already merged) | Nothing to do |
+| **Pranav's LOCAL branch `docs/concept-book-storylines`** | Unknown. It was **never on GitHub**, so no agent could see or merge it | **Not merged.** Before deleting it, check `git log main..docs/concept-book-storylines` on his machine and push or merge anything it has (BL-T13) |

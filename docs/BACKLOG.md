@@ -90,12 +90,12 @@ The first edition is printed and distributed; nothing here changes a student's c
 
 ## T. Teaching material, Kahaani lectures and chapter notes
 
-State (2026-11-09): Kahaani lecture 1 deck built and reviewed; website pages prepared but **not deployed**; two reusable skills written; chapter notes for Ch 14 done, Ch 11/12 partly done. All of it is on branch `claude/sweet-brahmagupta-5yu98q`, **not yet on `main`** (BL-T01). Full handover and standing preferences: `docs/sessions/2026-11-09-teaching-material-handover.md`. Notes: `books/ca-inter/teaching-notes/`.
+State (2026-11-09): Kahaani lecture 1 deck built and reviewed; website pages prepared but **not deployed**; two reusable skills written; chapter notes for Ch 14 done, Ch 11/12 partly done. All of it was **merged into `main` on 2026-11-09** (BL-T01 done); the feature branch can be deleted. Full handover and standing preferences: `docs/sessions/2026-11-09-teaching-material-handover.md`. Notes: `books/ca-inter/teaching-notes/`.
 
 | Id | Item | Pri | Who | Status | Detail |
 |---|---|---|---|---|---|
 | BL-T00 | Tracking issue for this group (umbrella to-do list): **GitHub issue #4** (https://github.com/EFFICIENTCORPORATES/cap-online/issues/4), created by hand on Pranav's request, not by `tools/backlog_to_issues.py`; it is not recorded in `docs/backlog-issues.json`. | P2 | Agent | Open | `docs/sessions/2026-11-09-teaching-material-handover.md` §6 |
-| BL-T01 | Merge branch `claude/sweet-brahmagupta-5yu98q` into `main` so `CONTEXT.md`, skills, notes and the deck are visible to every new session. No pull request was opened (only on Pranav's request). | P1 | Pranav | Open | handover §6 |
+| BL-T01 | Merge branch `claude/sweet-brahmagupta-5yu98q` (and the two other unmerged remote branches) into `main`, one trunk, then delete the other branches. | P1 | Pranav | **Done 2026-11-09** (merged by an agent on Pranav's explicit instruction; branches not deleted by the agent) | handover §8 |
 | BL-T02 | Deploy the Kahaani area (index + deck) to capranav.com from the checkout that has the site's gitignored images (never from a fresh clone), then `qa_smoke.py --browser` and `indexnow_ping.py`. | P1 | Pranav | Prepared, waiting | `capranav_com_revamped/PROJECT-LOG.md` (2026-11-06) |
 | BL-T03 | Decide whether the site navigation gets a Kahaani link (none was added). | P3 | Pranav | Decision needed | `capranav_com_revamped/public/kahaani/` |
 | BL-T04 | "What is new in TYK" lists for the **Chapter 12 TYK** and the dividend-related **Chapter 11 TYK** (MCQ 5, 8, 9; Q15 Z Ltd); append to the Ch 11/12 note. Use `/chapter-illustration-traps`. | P2 | Agent | Ready | `books/ca-inter/teaching-notes/ch11-12-dividend-vs-buyback.md` |

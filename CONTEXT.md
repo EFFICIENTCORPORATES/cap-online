@@ -18,7 +18,7 @@ rather than guess; he decides scope, wording and anything about his profile, mon
 | **Concept Book / revision notes** | In progress by another session | `books/ca-inter/concept-book/CONCEPT_BOOK_NOTES_PIPELINE.md`, `NEWTON_CONCEPT_BOOK_PRODUCTION_GUIDE.md` |
 | **CA Foundation ICAI downloader** | Documented by another session | `books/ca-foundation/README.md`, `DOWNLOADER-SPEC.md` |
 | **Telegram bot platform** | Migrated out 2026-09-03 to `EFFICIENTCORPORATES/Main1lavyaAIAgents`. Do not edit bot code here | `telegram/MIGRATED.md` |
-| **Teaching material for Pranav's lectures** (Kahaani decks, chapter illustration notes, two reusable skills) | In progress; **on branch `claude/sweet-brahmagupta-5yu98q`, not yet on `main`**. Kahaani website pages prepared, not deployed | `docs/sessions/2026-11-09-teaching-material-handover.md`, then `docs/BACKLOG.md` group T |
+| **Teaching material for Pranav's lectures** (Kahaani decks, chapter illustration notes, two reusable skills) | In progress, **on `main` since 2026-11-09** (single trunk; other branches are to be deleted). Kahaani website pages prepared, not deployed | `docs/sessions/2026-11-09-teaching-material-handover.md`, then `docs/BACKLOG.md` group T |
 | **Large and binary files** | In private Cloudflare R2, not "missing" | `R2_MANIFEST.md`, `CLAUDE.md` §2b |
 
 ## 2. Where pending work is recorded
