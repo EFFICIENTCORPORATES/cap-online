@@ -1,0 +1,36 @@
+{
+  "snapshot_date": "2026-10-20",
+  "source_spreadsheet_id": "1a_faP38UZan5QSHDiZeRUnB4TxngHuPdwsAnGCbBMtE",
+  "files": [
+    {
+      "file": "chapters.csv",
+      "size_bytes": 1515,
+      "sha256": "3a3d00cd3cf05000cad537e23d4b035517afa56c4620d1f279383f6fecef0ffa"
+    },
+    {
+      "file": "resources.csv",
+      "size_bytes": 24393,
+      "sha256": "9fab1922618de535f2e72baa64cab2acae4a7224febbedf4dc65a5c70f308153"
+    },
+    {
+      "file": "sheet-readme.csv",
+      "size_bytes": 4448,
+      "sha256": "d3c3d8d1d64aaea8bef6307b3eb977aa3e432989855b24e3f7f5dcd07887469f"
+    },
+    {
+      "file": "topics.csv",
+      "size_bytes": 87916,
+      "sha256": "a2e4d9db651b5a3b6b9af86d53f0f771ba9a85891504e0e359b1ebaf709261f6"
+    },
+    {
+      "file": "units.csv",
+      "size_bytes": 6186,
+      "sha256": "c299853583a3b02eae2eafd4af7abb509a9a9c67d779b8f2e3d2260db0a47e55"
+    },
+    {
+      "file": "workbook-snapshot.json",
+      "size_bytes": 189238,
+      "sha256": "5e85d2079d195afc929fa2d016b4842dc4eb094a820ed245d4efbc4b89ef31f1"
+    }
+  ]
+}
