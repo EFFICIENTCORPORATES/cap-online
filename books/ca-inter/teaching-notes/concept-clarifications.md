@@ -20,3 +20,19 @@ See `ch14-internal-reconstruction-traps.md` (Illustration 3). The overdraft is i
 
 ## 5. AS 26 revision sheet review
 Full findings are in `_claude/skills/SKILL-chapter-review-skills.md` section 4. In short: one factual error (revaluation model, not in this edition's AS 26), a list of missing items ranked by exam relevance, and build problems (pages 58-74% filled, 794 px fixed width, font not shipped, no ICAI references). **Nothing in the file was changed.**
+
+## 6. Amalgamation: why does the net assets method differ between merger and purchase? (AS 14 topic 2.7, Note-2 chart, p9.28; added 2026-11-10)
+ICAI's chart: **merger** = Assets at book − Liabilities at book − Reserves and Surplus (= equity share capital + preference share capital); **purchase** = Assets at agreed value − Liabilities at agreed value, no reserves deducted.
+- The logic is one identity: **Assets − outside liabilities = Share capital + Reserves.** So "− Reserves" just gets back to share capital.
+- **Merger (pooling):** the businesses are treated as continuing together, so the transferor's shareholders carry their capital across. The shares issued are measured by that capital. The reserves come across separately in their own identity (2.8, p9.29), so including them in the consideration would count them twice. Any difference between shares issued and the transferor's share capital is adjusted in reserves (2.9).
+- **Purchase:** the transferee buys assets and liabilities, usually at agreed values. Reserves are not carried (other than statutory ones), so there is nothing to subtract; the whole net assets figure is what is paid for. The difference between price and net assets is goodwill or capital reserve (2.10).
+- Example (my numbers, not ICAI's): assets ₹100, liabilities ₹30, equity capital ₹40, preference capital ₹10, reserves ₹20. Merger: 100 − 30 − 20 = ₹50 = 40 + 10. Purchase with assets agreed at ₹120: 120 − 30 = ₹90, with the 20 of reserves and the 20 revaluation gain both inside it.
+- Note-2 says to compute consideration by the **net payment method first**; the net assets method is the fallback. The chart and this reasoning are the study material's clarification; AS 14 itself defines consideration only as shares, securities and cash paid (2.7), and ICAI does not spell the logic out.
+
+## 7. Amalgamation: why are statutory reserves not deducted from net assets in a purchase? (AS 14 topic 2.10, p9.30; Ch 13 Illustration 8; added 2026-11-10)
+The statutory reserve is carried with a **matching debit to Amalgamation Adjustment Reserve** (shown as a separate negative line, p9.31), so shareholders' funds do not change. It is a legal label, not extra value, and it is not an asset or a liability, so the net assets figure never contained it.
+- Ch 13 Illustration 8 (purchase): net assets 57,50, consideration 53,70, capital reserve **3,80** (ICAI's figure). Subtracting the 3,00 of statutory reserves from net assets would give 0,80, which is wrong and does not balance.
+- Entry: Amalgamation Adjustment Reserve Dr 3,00 to Export profit reserve 2,00 and Investment allowance reserve 1,00. When the legal period ends, both are reversed (2.10).
+
+## 8. Amalgamation: why is the Amalgamation Adjustment Reserve smaller than the statutory reserves shown? (Ch 13 Illustration 8; added 2026-11-10)
+The AAR matches **only the statutory reserves brought in from the transferor (Y Ltd)**, not the transferee's own. In the purchase balance sheet of Illustration 8 (₹ thousand): export profit reserve 500 = X's own 300 + Y's 200; investment allowance reserve 100 = Y's 100 (X had none); AAR (300) = 200 + 100 only. X's own 300 was already in X's books, backed by X's own equity, so it needs no offsetting debit. Earlier wording that the AAR "cancels the reserve" is true only for the part brought in from the transferor.

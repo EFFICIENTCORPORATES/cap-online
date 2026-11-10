@@ -2,6 +2,9 @@
 
 A running status note. Newest entries at the top. One short block per session.
 
+## 2026-11-10 Amalgamation traps, why-answers and the Concept Book design brief
+Wrote `books/ca-inter/teaching-notes/ch09u2-ch13-amalgamation-traps.md` (AS 14 and Ch 13: trap per illustration, new TYK points; 55 figures reconciled by script). Added amalgamation why-answers (net assets chart merger vs purchase, statutory reserves not deducted, AAR matches only transferor's reserves) to `concept-clarifications.md` sections 6-8. Wrote `CONCEPT-BOOK-DESIGN-BRIEF.md`: Pranav's design for the concept book (complementary, no Q&A, question references after each concept, Error Register Points, visuals, linkages such as AS 14 to AS 26 p5.197 and p5.203). Backlog BL-T14 added.
+
 ## 2026-11-10 Buy-back CRR formula, split-of-room concept and per-illustration points documented
 Pranav asked for the CRR formula x = y x FV / Price, the Illustration 3 and 6 explanations and a simple worked example to be added to `books/ca-inter/teaching-notes/ch11-12-dividend-vs-buyback.md` (new sections 6-10, including a per-illustration checklist for the agent that will build the concept book). Diagram HTML sources are in `books/ca-inter/teaching-notes/diagrams/` (PNGs are gitignored; render with headless Chromium). Next: Pranav is moving to Chapter 9 Unit 2 (AS 14) and Chapter 13 (Amalgamation of Companies) for the next lecture. BL-T04 (Chapter 12 / Chapter 11 TYK new items) still not done.
 
