@@ -44,7 +44,7 @@ _Written 2026-11-09 by an AI session for Pranav (teaching aid, not student-facin
 
 **Look-alike traps:** 10% means a cap on drawing from reserves (dividend) but the board-resolution threshold (buy-back). 25% appears twice in buy-back (amount; number of shares).
 
-**Same company, both calculations** (ICAI's own Ch 11 Ill. 1 data: equity ₹80,00,000, 9% preference ₹17,50,000, general reserve ₹25,00,000): base = ₹1,22,50,000. Dividend: 10% -> cap ₹12,25,000; actual draw ₹6,57,500. Buy-back (my application of the Ch 12 percentages to that data, **not in the book**): 25% -> amount cap ₹30,62,500; share cap 25% × 8,00,000 = 2,00,000 shares; debt test needs the company's debt.
+**Same company, both calculations** (ICAI's own Ch 11 Ill. 1 data: equity ₹80,00,000, 9% preference ₹17,50,000, general reserve ₹25,00,000): base = ₹1,22,50,000. Dividend: 10% -> cap ₹12,25,000; actual draw ₹6,57,500. Buy-back (my application of the Ch 12 percentages to that data, **not in the book**): amount cap 25% × ₹1,22,50,000 = ₹30,62,500 **if preference capital counts as paid-up capital**, or 25% × ₹1,05,00,000 (equity ₹80,00,000 + free reserves ₹25,00,000) = ₹26,25,000 if it does not (see section 5: the chapter does not say); share cap 25% × 8,00,000 = 2,00,000 shares (equity only); debt test needs the company's debt.
 
 ## 3. Main trap in each illustration
 
@@ -96,6 +96,8 @@ Sec 69 (p12.5) requires CRR when the buy-back is paid out of **free reserves or 
 - These two chapters give **no other exception**.
 
 ## 5. Things to check against the PDF
+
+- **Does "paid-up capital" in the buy-back tests include preference capital?** The Chapter 12 text and summary say "total paid-up capital and free reserves" for the resource and debt-equity tests, and "paid-up equity capital" for the board-resolution threshold and the shares-outstanding test. No Chapter 12 worked example that applies a test (Ill. 5, Ill. 6, TYK Q8, Q10) has preference capital on the balance sheet, so the book never shows the treatment. Chapter 11 Ill. 1 (dividend) does count preference capital as paid-up capital. Outside the chapter, the Companies Act wording "paid-up capital" is generally read as all classes of paid-up share capital: confirm before teaching, and tell students the chapter is silent.
 
 - Chapter 12 text p12.3 states the share-outstanding test as 25% of "total paid-up capital and free reserves"; the summary (p12.31) and the illustrations use 25% of the **number of shares outstanding** / paid-up equity capital. Teach the illustrations' version.
 - Chapter 12 says securities premium counts as free reserves for Sec 68 (Explanation II, p12.7). Chapter 11 does not say whether it counts for dividends; nothing in these chapters says it cannot be used for a dividend. Do not assert it.
