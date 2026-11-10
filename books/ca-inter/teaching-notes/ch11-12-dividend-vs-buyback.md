@@ -102,3 +102,87 @@ Sec 69 (p12.5) requires CRR when the buy-back is paid out of **free reserves or 
 - Chapter 12 text p12.3 states the share-outstanding test as 25% of "total paid-up capital and free reserves"; the summary (p12.31) and the illustrations use 25% of the **number of shares outstanding** / paid-up equity capital. Teach the illustrations' version.
 - Chapter 12 says securities premium counts as free reserves for Sec 68 (Explanation II, p12.7). Chapter 11 does not say whether it counts for dividends; nothing in these chapters says it cannot be used for a dividend. Do not assert it.
 - Chapter 11 TYK Q15 answer (p11.74): the alternative working prints "(12+14+10)/5 = 12%"; it should be /3. The question lists five years but only the last three count.
+
+---
+
+## 6. The CRR formula: x = y × (Face value ÷ Offer price) (added 2026-11-10)
+
+_Pranav asked for this to be explained and drawn. Diagram sources (HTML, render with headless Chromium): `diagrams/crr-formula-explained.html` and `diagrams/buyback-simple-ltd-example.html`. Figures recomputed by hand and checked against the book's own answers._
+
+**Meaning.** x = CRR transfer; y = total cash paid for the buy-back; Face value and Offer price are per share.
+
+**Why.** Shares bought back n = y ÷ Offer price. CRR x = n × Face value (nominal value cancelled, p12.5). So x = y × FV ÷ Price. At price ₹30 and FV ₹10, CRR is always one-third of the cash paid; the other two-thirds is premium, charged to securities premium or free reserves (no CRR on it).
+
+**Same rule in every Chapter 12 illustration**
+
+| Illustration | Shares | Price | FV | Cash paid (y) | CRR by formula | Note |
+|---|---|---|---|---|---|---|
+| 1 M Ltd (p12.7) | 60,000 | ₹15 | ₹10 | ₹9,00,000 | ₹6,00,000 | Plain case |
+| 2 Anu Ltd (p12.10) | 50 lakh | ₹50 | ₹10 | ₹25 cr | ₹5 cr | Book CRR ₹80 cr = 5 + 75 for redeemed preference shares |
+| 3 Dee Ltd (p12.14) | 50,000 | ₹50 | ₹10 | ₹25,00,000 | ₹5,00,000 | **Booked CRR ₹3,00,000**: ₹2,00,000 of preference shares were issued for the buy-back, so no CRR on that part (3 = 5 − 2 is my reconstruction; ICAI shows no working) |
+| 4 Extra Ltd (p12.18) | 3 lakh | ₹30 | ₹10 | ₹90 lakh | ₹30 lakh | Book CRR ₹50 lakh = 30 + 20 for preference shares |
+| 5 Pratham Ltd (p12.23) | 1,29,500 | ₹30 | ₹10 | ₹38,85,000 | ₹12,95,000 | y is the unknown, found from the debt-equity test |
+| 6 Perrotte Ltd (p12.25) | 3.75 cr | ₹30 | ₹10 | ₹112.5 cr | ₹37.5 cr | Loans ₹1,200 cr case only |
+
+## 7. Why the "room" must be split between cash and CRR (the main concept gap)
+
+The debt-equity test gives **room**: Present equity − Minimum equity (= Loans ÷ 2). Room is **not** the buy-back amount, because the CRR transfer also reduces equity (CRR is not a free reserve, Note-5, p12.29). Cash paid reduces equity by y; the CRR transfer moves x from free reserves into CRR and reduces equity by x again.
+
+- Equity lost = y + x = y × (1 + FV ÷ Price) = Room.
+- **Shortcut: y = (Present equity − Minimum equity) ÷ (1 + FV ÷ Price)**; shares = y ÷ Price; CRR = shares × FV.
+- Ill 5: y = 38,85,000, CRR 12,95,000, 1,29,500 shares (price = 3 × FV, so y + y/3 = room). Ill 6 (loans ₹1,200 cr): (750 − 600) ÷ (1 + 10/30) = 112.5 cr; CRR 37.5 cr; 3.75 cr shares.
+- Check line: 750 − 112.5 − 37.5 = 600, exactly the minimum.
+
+**Simple Ltd example (teaching aid, not in the book; ₹ lakh).** Share capital 40 (4 lakh shares of ₹10), free reserves 60, loans 152, price ₹20.
+1. Equity = 100.
+2. Resources test: 25% × 100 = 25; ÷ 20 = 1.25 lakh shares.
+3. Shares test: 25% × 4 lakh = 1 lakh shares.
+4. Debt-equity: minimum equity 152 ÷ 2 = 76; room 24.
+5. Split: y + y/2 = 24, y = 16, CRR 8, shares 0.8 lakh = 80,000.
+6. Least of the three = 80,000 (debt-equity decides).
+7. Entries: Buy-back A/c Dr 16 to Bank 16; Share capital Dr 8 + General reserve Dr 8 (premium) to Buy-back A/c 16; General reserve Dr 8 to CRR 8.
+8. Check: capital 32 + free reserves (60 − 8 − 8 = 44) = 76; 152 ÷ 76 = 2.00.
+Wrong way: buying back the full room (24 ÷ 20 = 1.2 lakh shares) leaves equity 100 − 24 − 12 = 64 and loans ÷ equity 2.4, which breaks 2 : 1.
+
+## 8. Illustration 6 (Perrotte Ltd): why loans of ₹1,800 cr or ₹1,500 cr give nil
+
+Present equity = 330 + 420 (free reserves; Infrastructure Development Reserve ₹180 cr excluded) = ₹750 cr. Minimum equity = Loans ÷ 2:
+
+| Loans | Minimum equity | Room |
+|---|---|---|
+| ₹1,800 cr | ₹900 cr | None: already 750 < 900 |
+| ₹1,500 cr | ₹750 cr | None: exactly at the minimum, any buy-back breaches it |
+| ₹1,200 cr | ₹600 cr | ₹150 cr, split as above: y = ₹112.5 cr |
+
+Nil buy-back means y = 0, so CRR = 0, and the book gives entries only for the ₹1,200 cr case. Other tests: shares outstanding 25% × 33 cr = 8.25 cr; resources 25% × 750 ÷ 30 = 6.25 cr. The least of the three is the debt-equity result (nil / 3.75 cr / nil). Note-5 (p12.29): the company does not qualify in situations 1 and 3.
+
+## 9. Illustration 3 (Dee Ltd): how the ₹25,00,000 arises (book figures are in ₹ thousand)
+
+- 20% × 2,50,000 equity shares = 50,000 shares; × ₹50 = **₹25,00,000** (the book's 2,500).
+- Per share ₹10 face value (50,000 × 10 = ₹5,00,000, the book's 500, to share capital) and ₹40 premium (₹20,00,000, the book's 2,000, against securities premium of ₹22,00,000).
+- **Coincidence trap:** total equity share capital is also ₹25,00,000 (2,50,000 × ₹10). The two figures are unrelated.
+- Cash: investments of book value ₹30,00,000 sold for ₹22,00,000, loss ₹8,00,000 to P&L; cash 8,00,000 + 22,00,000 = 30,00,000; after paying 25,00,000 cash is ₹5,00,000 (the book's 500).
+- CRR ₹3,00,000, not ₹5,00,000: the ₹2,00,000 preference issue (2,000 shares of ₹100) was made for the buy-back. Equity may be bought back from it because it is a different kind of share (Note-1, p12.2).
+
+## 10. Key points per illustration, for the agent building the concept book
+
+_Use this as a checklist of what a concept-book chapter on Buy-back must carry. Pages are printed pages from the converted Markdown (unchecked against the PDFs). "Not in the book" marks my additions._
+
+**Concepts that must be explained before any illustration**
+- Sec 68 sources of funds (free reserves, securities premium, proceeds of a fresh issue of a **different kind**); Sec 69 CRR; Sec 70 prohibitions.
+- Three tests: resources (25% of paid-up capital + free reserves, amount), shares outstanding (25% of equity shares, number), debt-equity (loans ≤ 2 × equity after buy-back).
+- Premium is charged to securities premium / free reserves, never to CRR. CRR is not a free reserve.
+- The split of room between cash and CRR (section 7 above). Whether preference capital counts as "paid-up capital" in the tests is not answered by the chapter (see section 5).
+
+| Illustration | The point to teach |
+|---|---|
+| 1 M Ltd (p12.7) | Basic entries: shares → nominal ₹6,00,000 and premium ₹3,00,000; loss on investments to P&L; CRR ₹6,00,000 from revenue reserve; tests not applied |
+| 2 Anu Ltd (p12.10) | Preference redemption and buy-back together: CRR ₹80 cr = 75 + 5; premium ₹20 cr against securities premium |
+| 3 Dee Ltd (p12.14) | CRR is not the full nominal value when part is funded by a fresh preference issue (₹3,00,000, not ₹5,00,000); the ₹25,00,000 working; the equal-figure coincidence |
+| 4 Extra Ltd (p12.18) | Many items together: preference premium, own debentures cancelled, ESOP; CRR ₹50 lakh = 20 + 30; ICAI leaves revenue reserve at (1.80), flagged not corrected |
+| 5 Pratham Ltd (p12.23) | Debt-equity test with simultaneous equations; revaluation reserve excluded; CRR transfer reduces equity; ICAI labels rupee figures "crores" |
+| 6 Perrotte Ltd (p12.25) | All three tests, three loan situations; least of the three; IDR excluded; nil cases and why (section 8) |
+
+**Dividend side (Chapter 11 Ill 1, p11.24):** the draw from reserves is net of the current year's profit after preference dividend; all three conditions are tested (rate vs 3-year average, draw ≤ 10%, reserves left ≥ 15% of paid-up capital).
+
+**Still not done:** "what is new in TYK" for Chapter 12 and the dividend-related Chapter 11 TYK (BL-T04).

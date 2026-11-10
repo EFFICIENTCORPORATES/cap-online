@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<style>
+:root{--ink:#10233f;--paper:#f7f2e8;--white:#fffdf8;--red:#e5484d;--gold:#f2b84b;--green:#0f8a70;--blue:#1f62d0;--org:#e8733f;--muted:#5d6b82;--line:rgba(16,35,63,.16)}
+*{box-sizing:border-box}
+body{margin:0;width:1600px;background:var(--paper);font-family:"Segoe UI","Aptos",Arial,sans-serif;color:var(--ink)}
+.wrap{padding:44px 56px 40px}
+.eyebrow{color:var(--red);font-weight:800;letter-spacing:.14em;font-size:17px;text-transform:uppercase}
+h1{margin:6px 0 0;font-size:44px;letter-spacing:-.02em}
+.sub{margin-top:8px;color:var(--muted);font-size:21px}
+.eq{margin:26px 0 8px;background:var(--ink);color:#fff;padding:26px 36px;display:flex;align-items:center;justify-content:center;gap:26px;box-shadow:12px 12px 0 var(--gold)}
+.eq .t{font-size:60px;font-weight:800;letter-spacing:.01em}
+.eq .x{color:#ffd982}.eq .y{color:#9bd0ff}.eq .fv{color:#9be3c8}.eq .p{color:#ffb3b5}
+.eq .frac{display:inline-flex;flex-direction:column;align-items:center;font-size:44px;line-height:1.15}
+.eq .frac span:first-child{border-bottom:4px solid #fff;padding:0 14px 4px}
+.legend{display:flex;gap:28px;justify-content:center;margin:22px 0 4px;font-size:20px}
+.legend div{display:flex;align-items:center;gap:10px}
+.dot{width:20px;height:20px;border-radius:50%}
+.cols{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:26px;margin-top:28px}
+.card{background:var(--white);border:2px solid var(--ink);padding:22px 24px;box-shadow:6px 6px 0 rgba(16,35,63,.12)}
+.card h3{margin:0 0 12px;font-size:23px}
+.card .no{display:inline-block;background:var(--red);color:#fff;font-weight:800;border-radius:50%;width:34px;height:34px;text-align:center;line-height:34px;margin-right:10px}
+.share{display:flex;height:84px;margin:14px 0 8px;border:2px solid var(--ink)}
+.share .a{width:33.33%;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:800;font-size:22px}
+.share .b{width:66.67%;background:var(--gold);display:grid;place-items:center;font-weight:800;font-size:22px}
+.small{font-size:18px;line-height:1.4;color:var(--ink)}
+.small b{font-weight:800}
+.step{font-size:22px;margin:10px 0;line-height:1.35}
+.k{font-weight:800;padding:2px 9px;border-radius:6px}
+.kx{background:#fdeec3}.ky{background:#dbeaff}.kfv{background:#d6f2e8}.kp{background:#fde0e1}.kn{background:#ece8f8}
+.ex{background:#eef5ff}
+.ex .big{font-size:21px;line-height:1.7}
+.hl{border-top:2px dashed var(--ink);margin-top:12px;padding-top:10px;font-size:24px;font-weight:800}
+h2{margin:30px 0 12px;font-size:26px}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:19px}
+th{background:var(--ink);color:#fff;text-align:left;padding:11px 12px;font-size:16px;letter-spacing:.06em;text-transform:uppercase}
+td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{font-weight:800;white-space:nowrap}
+td.x{background:#fdeec3;font-weight:800}
+tr.hi td{background:#fff7da}
+.foot{margin-top:18px;color:var(--muted);font-size:16px}
+</style></head><body><div class="wrap">
+<div class="eyebrow">Buy-back of securities · Sec 69 · Capital Redemption Reserve</div>
+<h1>How much goes to CRR? It is the <u>face-value part</u> of the cash paid</h1>
+<div class="sub">The same rule explains the CRR in every buy-back illustration of Chapter 12 (CA Inter Advanced Accounting).</div>
+
+<div class="eq">
+  <span class="t"><span class="x">x</span> =</span>
+  <span class="t y">y</span><span class="t">×</span>
+  <span class="frac"><span class="fv">Face value</span><span class="p">Offer price</span></span>
+</div>
+<div class="legend">
+  <div><span class="dot" style="background:#f2b84b"></span><b>x</b> = CRR transfer</div>
+  <div><span class="dot" style="background:#9bd0ff"></span><b>y</b> = total cash paid for the buy-back</div>
+  <div><span class="dot" style="background:#9be3c8"></span><b>Face value</b> = nominal value per share (e.g. ₹10)</div>
+  <div><span class="dot" style="background:#ffb3b5"></span><b>Offer price</b> = buy-back price per share (e.g. ₹30)</div>
+</div>
+
+<div class="cols">
+  <div class="card">
+    <h3><span class="no">1</span>Look at ONE share bought back at ₹30</h3>
+    <div class="share"><div class="a">₹10 face value</div><div class="b">₹20 premium</div></div>
+    <div class="small">
+      <b style="color:var(--blue)">₹10 face value:</b> the share is cancelled, so share capital falls by ₹10. ICAI requires an equal sum to be moved to <b>CRR</b> (when paid out of free reserves or securities premium).<br><br>
+      <b style="color:#a56600">₹20 premium:</b> charged to Securities Premium / free reserves. <b>No CRR on this part.</b><br><br>
+      So of every ₹30 paid, <b>₹10, i.e. 10/30 = one-third</b>, goes to CRR.
+    </div>
+  </div>
+  <div class="card">
+    <h3><span class="no">2</span>Build the formula in two lines</h3>
+    <div class="step">Shares bought back &nbsp;<span class="k kn">n</span> = <span class="k ky">y</span> ÷ <span class="k kp">Offer price</span></div>
+    <div class="step">CRR &nbsp;<span class="k kx">x</span> = <span class="k kn">n</span> × <span class="k kfv">Face value</span></div>
+    <div class="hl">So &nbsp;<span class="k kx">x</span> = <span class="k ky">y</span> × <span class="k kfv">Face value</span> ÷ <span class="k kp">Offer price</span></div>
+    <div class="small" style="margin-top:14px">Shortcut to remember: <b>CRR = cash paid × (face value ÷ price)</b>. At price ₹30 and face value ₹10 it is always <b>one-third</b> of the cash paid.</div>
+  </div>
+  <div class="card ex">
+    <h3><span class="no">3</span>Check with Illustration 5 (p12.23)</h3>
+    <div class="big">
+      Offer price ₹30, face value ₹10<br>
+      Maximum buy-back <span class="k ky">y</span> = ₹38,85,000<br>
+      Shares <span class="k kn">n</span> = 38,85,000 ÷ 30 = <b>1,29,500</b><br>
+      CRR <span class="k kx">x</span> = 1,29,500 × ₹10 = <b>₹12,95,000</b><br>
+      or <span class="k kx">x</span> = 38,85,000 × 10/30 = <b>₹12,95,000</b> ✓
+    </div>
+    <div class="small" style="margin-top:12px">This is the "x" in ICAI's second equation: <b>3x = y</b>, because 30 ÷ 10 = 3.</div>
+  </div>
+</div>
+
+<h2>The same rule in all six illustrations of Chapter 12</h2>
+<table>
+<tr><th>Illustration</th><th>Shares bought (n)</th><th>Offer price</th><th>Face value</th><th>Cash paid (y)</th><th>CRR x = y × FV ÷ price</th><th>What else to notice</th></tr>
+<tr><td>Illus. 1 · M Ltd (p12.7)</td><td>60,000</td><td>₹15</td><td>₹10</td><td>₹9,00,000</td><td class="x">₹6,00,000</td><td>Simple case: nominal value 60,000 × ₹10</td></tr>
+<tr><td>Illus. 2 · Anu Ltd (p12.10)</td><td>50 lakh</td><td>₹50</td><td>₹10</td><td>₹25 crore</td><td class="x">₹5 crore</td><td>Plus ₹75 crore for redeemed preference shares: CRR in the book = ₹80 crore</td></tr>
+<tr class="hi"><td>Illus. 3 · Dee Ltd (p12.14)</td><td>50,000</td><td>₹50</td><td>₹10</td><td>₹25,00,000</td><td class="x">₹5,00,000</td><td><b>Booked CRR is only ₹3,00,000:</b> ₹2,00,000 of the buy-back was funded by a fresh preference issue, so no CRR on that part</td></tr>
+<tr><td>Illus. 4 · Extra Ltd (p12.18)</td><td>3 lakh</td><td>₹30</td><td>₹10</td><td>₹90 lakh</td><td class="x">₹30 lakh</td><td>Plus ₹20 lakh for preference shares: CRR in the book = ₹50 lakh</td></tr>
+<tr><td>Illus. 5 · Pratham Ltd (p12.23)</td><td>1,29,500</td><td>₹30</td><td>₹10</td><td>₹38,85,000</td><td class="x">₹12,95,000</td><td>y is the unknown: solved with the debt-equity test (equation 1)</td></tr>
+<tr><td>Illus. 6 · Perrotte Ltd (p12.25)</td><td>3.75 crore</td><td>₹30</td><td>₹10</td><td>₹112.5 crore</td><td class="x">₹37.5 crore</td><td>Loans ₹1,200 crore case; with loans of ₹1,800 or ₹1,500 crore the answer is nil</td></tr>
+</table>
+<div class="foot">Source: ICAI CA Inter Advanced Accounting, Chapter 12 Buy-back of Securities (Sec 69, p12.5; Note-5, p12.29). Page numbers are from the converted study-material file. CRR applies to the part paid out of free reserves or securities premium; the premium itself is adjusted against those reserves, not CRR.</div>
+</div></body></html>
