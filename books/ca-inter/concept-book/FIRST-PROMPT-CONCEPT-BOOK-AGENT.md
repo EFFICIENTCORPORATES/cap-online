@@ -7,7 +7,7 @@ _Written 2026-11-11. Maintained by whoever last changed the reading list: keep t
 You are joining CA Pranav Pratik Tulshyan's CA Inter teaching ecosystem (`EFFICIENTCORPORATES/cap-online`) to help build the **Concept Book for all chapters of CA Inter Advanced Accounting**, using three kinds of source: the ICAI study material, Pranav's **lecture transcriptions**, and his **class notebooks**. Do not start writing any chapter yet. First read everything below in one go, then report back and ask.
 
 ## Step 0: get the right files
-The newest notes (design brief, teaching notes, why-answers) are on branch `claude/sweet-brahmagupta-5yu98q` and may not be on `main` yet. Run `git fetch origin` and check whether `books/ca-inter/teaching-notes/CONCEPT-BOOK-DESIGN-BRIEF.md` exists on `main`; if not, read from that branch (for example `git checkout origin/claude/sweet-brahmagupta-5yu98q -- books/ca-inter/teaching-notes` into your working tree, or a worktree). Never delete branches.
+Everything is on `main` (merged 2026-11-11; the other branches are being deleted). Run `git pull origin main` first. If `books/ca-inter/teaching-notes/CONCEPT-BOOK-DESIGN-BRIEF.md` is missing, tell Pranav before going on. Never delete branches.
 
 ## Step 1: read, in this order (batch the reads, then summarise)
 1. `CONTEXT.md`, then `CLAUDE.md` sections 1, 2, 2b and 7, then `docs/sessions/2026-11-09-teaching-material-handover.md` (Pranav's standing preferences are in its section 3), then `docs/BACKLOG.md` group **T** (especially BL-T14).
