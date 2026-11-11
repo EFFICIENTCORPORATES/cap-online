@@ -67,7 +67,7 @@ Each of these is written up in full in the notes named; the concept book should 
 - **Recompute every figure** with a throwaway script (scratchpad, not the repo). If a printed answer does not reconcile, report it; do not "correct" ICAI silently.
 - **Mark every inference:** "my reconstruction", "ICAI does not say". Do not invent what Pranav said in class; the scanned class notes (NB01/NB02) are unreadable.
 - **Ask, do not assume.** One concise question when unclear. Do not deploy or open a pull request unless Pranav asks.
-- **Chapters covered so far by the teaching notes:** Ch 14 (Internal Reconstruction), Ch 11 topic 1.6 and Ch 12 (Dividend vs Buy-back; TYK pending), AS 14 and Ch 13 (Amalgamation). Everything else still needs the `chapter-illustration-traps` skill run first.
+- **Chapters covered so far by the teaching notes:** Ch 14 (Internal Reconstruction), Ch 11 topic 1.6 and Ch 12 (Dividend vs Buy-back; Chapter 12 TYK done, Chapter 11 dividend TYK pending), AS 14 and Ch 13 (Amalgamation). Everything else still needs the `chapter-illustration-traps` skill run first.
 
 ## 8. Chapter section template (added)
 
