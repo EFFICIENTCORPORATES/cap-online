@@ -1,4 +1,4 @@
-# Concept Book: build plan (revision 2, 2026-11-13)
+# Concept Book: build plan (revision 3, 2026-11-13)
 
 _Draft for Pranav's review. **Nothing is built yet.** Revision 2 replaces revision 1 after Pranav's second message of 2026-11-13: the unit of work is the **unit file (36 of them), not the topic card (400)**; three pilot chapters; a new illustration framework; handwritten style. It sits on top of `teaching-notes/CONCEPT-BOOK-DESIGN-BRIEF.md` and the two older runbooks in this folder. Decisions marked **(Pranav)** are his own words; everything else is **(proposal)**._
 
@@ -16,7 +16,7 @@ _Draft for Pranav's review. **Nothing is built yet.** Revision 2 replaces revisi
 | Illustration framework | Goal → Concepts triggered → Given → How it is solved → Exam points → Tricky points (the **Error Register / Sanjeevani Booti**); figures where they matter, wording where the concept is the wording |
 | Difficulty | **Easy / Medium / Hard** per illustration; "Hard" may later be renamed **LDR** (last-day-revision) |
 | Stories | **Real class stories first** |
-| Language | **English only** (tips too) |
+| Language | **English** everywhere, **except stories and "things to remember" (memory lines, mnemonics), which are Roman-script Hinglish** (revised 2026-11-13, third message) |
 | Look | **Handwritten style**, like Excalidraw; not typed |
 | Pictures | Real photos found later (e.g. an office building); **HTML/CSS diagrams**; **SVG is allowed** for pictures, judged by effort |
 | Repo | Public is acceptable (it is public; see section 11) |
@@ -208,3 +208,86 @@ These are scanned handwriting with no text layer (earlier finding). A session ca
 5. **LDR:** is it Hard renamed, or a separate last-day flag?
 6. **Sample card:** is the framework and layout in section 5 what you meant?
 7. **Landing work:** branches plus pull requests that you merge, or direct commits to `main` with one-file-per-agent ownership?
+
+## 16. Chapter sequence (index order; Pranav to correct)
+
+This is `teaching_sequence` from file 1, which is the order the repo already uses. Pranav's own notes may differ; **the book will follow whatever order he confirms.** The last column is only a hint: the date the notebook PDF was uploaded to the Drive class-notes folder (not a teaching date; my search was partial, and "not seen" means I did not find one).
+
+| Seq | Unit | Unit ID | Topics | Drive notebook date (hint) |
+|---|---|---|---|---|
+| 1 | Introduction to Accounting Standards | `M1-C1-U0` | 14 | - |
+| 2 | Applicability of Accounting Standards | `M1-C3-U0` | 2 | Oct 22 (notes) |
+| 3 | Framework | `M1-C2-U0` | 11 | Sep 26 |
+| 4 | AS 2 | `M2-C5-U1` | 15 | Jul 20 |
+| 5 | AS 10 | `M2-C5-U2` | 10 | Jul 28 |
+| 6 | AS 26 | `M2-C5-U6` | 27 | Jul 31 |
+| 7 | AS 16 | `M2-C5-U4` | 12 | Aug 4 (NB02) |
+| 8 | AS 19 | `M2-C5-U5` | 10 | not seen |
+| 9 | AS 28 | `M2-C5-U7` | 19 | Aug 8 |
+| 10 | AS 13 | `M2-C5-U3` | 10 | not seen |
+| 11 | AS 29 | `M2-C6-U2` | 20 | Aug 25 |
+| 12 | AS 15 | `M2-C6-U1` | 12 | Aug 29 |
+| 13 | AS 4 | `M2-C7-U1` | 6 | Aug 31 |
+| 14 | AS 5 | `M2-C7-U2` | 5 | Sep 1 |
+| 15 | AS 11 | `M2-C7-U3` | 13 | Sep 12 |
+| 16 | AS 9 | `M2-C8-U2` | 10 | Sep 3 |
+| 17 | AS 7 | `M2-C8-U1` | 11 | Sep 7 |
+| 18 | AS 12 | `M2-C9-U1` | 10 | Sep 8 |
+| 19 | AS 22 | `M2-C7-U4` | 10 | Sep 16 |
+| 20 | AS 20 | `M1-C4-U5` | 12 | Sep 23 |
+| 21 | AS 1 | `M1-C4-U1` | 6 | Oct 23 (notes) |
+| 22 | Ch 11 Unit 1, Preparation of Financial Statements | `M3-C11-U1` | 6 | Oct 2; Nov 9 (divisible profit) |
+| 23A | Ch 11 Unit 2, Cash Flow Statement | `M3-C11-U2` | 7 | Oct 7 |
+| 23B | AS 3, Cash Flow Statement | `M1-C4-U2` | 11 | Oct 6 |
+| 24 | AS 17 | `M1-C4-U3` | 13 | Nov 1 |
+| 25 | AS 18 | `M1-C4-U4` | 8 | Nov 5 |
+| 26 | AS 24 | `M1-C4-U6` | 10 | Nov 6 |
+| 27 | AS 21 | `M2-C10-U1` | 18 | Nov 9 (slides) |
+| 28 | AS 23 | `M2-C10-U2` | 10 | not seen |
+| 29 | AS 27 | `M2-C10-U3` | 13 | not seen |
+| 30A | Ch 13 Amalgamation of Companies | `M3-C13-U0` | 7 | Nov 11 (one notebook with 30B) |
+| 30B | AS 14 | `M2-C9-U2` | 14 | Nov 11 |
+| 31 | AS 25 | `M1-C4-U7` | 15 | Nov 9 |
+| 32 | Ch 12 Buyback | `M3-C12-U0` | 2 | Nov 11 |
+| 33 | Ch 14 Internal Reconstruction | `M3-C14-U0` | 8 | Nov 9, updated Nov 11 |
+| 34 | Ch 15 Branches incl. Foreign Branches | `M3-C15-U0` | 13 | not seen |
+
+Things the Drive dates suggest, for checking (not conclusions): AS 11 was uploaded after AS 9, AS 7 and AS 12 though the index puts it before them; the AS 3 notebook (Oct 6) is before Ch 11 Unit 2 (Oct 7) though the index lists Cash Flow Ch 11 first as 23A; AS 25 (Nov 9) is before Ch 13 / AS 14 (Nov 11) though the index puts it after; Ch 13 and AS 14 share **one** notebook.
+
+## 17. Stories that run across chapters (**proposal**)
+
+A story is not owned by a chapter. Three objects:
+- **Thread:** a story that runs through several units (e.g. Arjun Ltd and Bhim Ltd across the restructuring and consolidation units). One file per thread in `content/_threads/`, written first by a strong model: the cast, the arc, and **which unit carries which beat**, with forward and back links ("continued in M2-C10-U1").
+- **Beat:** the part of a thread that lives inside one unit file, written by that unit's agent. Each beat names its thread, its position, and the beats before and after.
+- **Standalone story:** a story used in one unit only.
+
+Because each unit still has one agent, threads are planned up front and each unit writes only its own beats. The validator checks that every beat listed in a thread exists in its unit, that links resolve both ways, and that every story or beat carries a source tag (lecture, notebook, or agent draft). Real class stories come first; where the thread file proposes a beat that Pranav did not tell in class, it is marked agent draft.
+
+## 18. One-page summary per chapter (**proposal**)
+
+**Goal (Pranav):** every concept of the unit on literally one page, in one single-page PDF; A3 for big units; maximum use of space; creative layout.
+
+- **Content rule:** every topic ID of the unit must appear on the page (the validator checks it), with its exam points, the key formula or flow, and the memory line. It is a summary of the unit file, not new content.
+- **Authoring:** a strong model writes a one-page **spec** from the unit file (blocks, each with topic IDs, priority and a type: flowchart, comparison table, timeline, formula strip, memory line, mini-diagram, trap box). Pranav reviews the spec and the result.
+- **Layout and fitting (script):** HTML/CSS grid in the handwritten theme, rendered in headless Chrome. The script **measures** the page: it scales the type to fill the printable area (target at least 92% used), enforces a **minimum type size**, and checks the PDF has **exactly one page**. If it cannot fit above the minimum, it moves from A4 to **A3**, and if even A3 fails it lists what must be cut or merged. I will not shrink type below a readable size to meet the one-page rule.
+- **Likely A3 units** (my forecast from topic count; the script decides): AS 26 (27 topics), AS 29 (20), AS 28 (19), AS 21 (18), AS 25 (15), AS 2 (15), AS 14 (14), Intro to AS (14).
+- **Files:** HTML source in git; the PDFs are binaries, so they go to R2 with an entry in the manifest (repo rule), one per unit.
+- **Honest limit:** handwriting fonts are less legible at small sizes. Dense one-pagers may need a more legible handwriting face than the body text; the font comparison covers this.
+
+## 19. One ecosystem with the website (**proposal**)
+
+**What already lines up:** Must Practice data files are named by the same unit IDs (`M1-C1-U0.json` … `M3-C15-U0.json`), the topic map is keyed by `unique_topic_id`, the Question Bank uses `final_chapter` in the same format, and the Anatomy pages use the same index. So the join key already exists: **unit ID and topic ID**.
+
+**Proposal: a generated registry, `ecosystem_links.json`**, one entry per unit with: concept-book page, one-page PDF, Must Practice unit, Question Bank chapter book, Anatomy page, slides. Both builds read it, so neither hand-writes a link.
+- **Concept book → website:** each unit shows "Must Practice: N questions" (count computed from the Must Practice data) with a link; each topic carries computed chips ("asked in N attempts", priority band). A small QR or short link on the one-pager points to the unit's Must Practice list.
+- **Website → concept book:** the Must Practice unit page gets "Read the concept sheet" and "Download the one-pager"; the topic table links each topic to its concept section. My search found **no URL-based unit selection** in `must-practice.js`, so deep links need a small change there, and **you deploy** (a cloud session cannot).
+- **Questions grow, concepts stay.** The question corpus stays the single source of questions. When you or an AI add questions, the Must Practice build and the concept book's computed counts and chips update by rebuild; **no concept text is touched**. Generated questions must carry their own provenance label (the topic map already has a `source_kind` column), kept apart from ICAI questions as the Question Book keeps examiner comments apart from author notes.
+- **Edition rule (Pranav):** a new edition adds more questions, better stories and linkages. New concepts are added only when ICAI changes the syllabus. The concept book's illustration and TYK cards belong to an ICAI edition and are rebuilt only then; the practice set around them is the part that grows.
+
+## 20. What the book covers from ICAI's practice material (**proposal**)
+
+The aim is one place for every concept of the CA Inter syllabus, with exam-friendly handling of illustrations and Test Your Knowledge:
+- **Illustrations, examples and scenario (SBQ) questions:** a full card in the framework of section 5.
+- **MCQs (250):** one line each in a per-topic table: reference, the concept it tests, the trap. A full card for each would add little.
+- **Theory questions (99):** what the examiner expects: the heading points to write and the keywords that carry marks, with the topic ID.
+- Same rule for all: no final answers copied from ICAI; figures only where they prove the point.
