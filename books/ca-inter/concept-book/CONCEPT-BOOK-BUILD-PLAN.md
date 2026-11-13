@@ -1,4 +1,4 @@
-# Concept Book: build plan (revision 3, 2026-11-13)
+# Concept Book: build plan (revision 4, 2026-11-13)
 
 _Draft for Pranav's review. **Nothing is built yet.** Revision 2 replaces revision 1 after Pranav's second message of 2026-11-13: the unit of work is the **unit file (36 of them), not the topic card (400)**; three pilot chapters; a new illustration framework; handwritten style. It sits on top of `teaching-notes/CONCEPT-BOOK-DESIGN-BRIEF.md` and the two older runbooks in this folder. Decisions marked **(Pranav)** are his own words; everything else is **(proposal)**._
 
@@ -13,7 +13,7 @@ _Draft for Pranav's review. **Nothing is built yet.** Revision 2 replaces revisi
 | Unit of work | **One file per unit/chapter entry of the index (36)**, not 400 cards. A story may span topics and a big topic may hold several stories, so stories are not tied to topics |
 | Grouping | Related units are grouped into **families** (e.g. the asset-based standards) because their stories link |
 | Pilots | **Internal Reconstruction**, **AS 2 or AS 10** (big, many stories), and **AS 29** (very different; a test of how an agent copes) |
-| Illustration framework | Goal → Concepts triggered → Given → How it is solved → Exam points → Tricky points (the **Error Register / Sanjeevani Booti**); figures where they matter, wording where the concept is the wording |
+| Illustration framework | Goal → Concepts triggered → Given → Approach (short; no number-by-number working) → Exam points → Tricky points (the **Error Register / Sanjeevani Booti**); figures where they matter, wording where the concept is the wording |
 | Difficulty | **Easy / Medium / Hard** per illustration; "Hard" may later be renamed **LDR** (last-day-revision) |
 | Stories | **Real class stories first** |
 | Language | **English** everywhere, **except stories and "things to remember" (memory lines, mnemonics), which are Roman-script Hinglish** (revised 2026-11-13, third message) |
@@ -85,22 +85,24 @@ One Markdown file per unit, named by the file-1 chapter ID: `content/M3-C14-U0.m
 3. **Stories:** `S1…Sn` blocks. Each has: the source (lecture file + timestamp, or notebook page, or `agent-draft`), which topics it covers (many-to-many), the text, and an optional picture reference. A topic may reference several stories; a story may cover several topics.
 4. **Concepts, by topic (anchored by topic ID):** in plain words; **Why** boxes (the doubt and the underlying identity); the exam algorithm; **Exam points**; **Linkages** ("You will also see this in <topic ID>: one line"); the **last-day line**.
 5. **Illustration and TYK cards** in the framework below.
-6. **Error Register:** written inside topics and cards; **collected by a script** into one page per unit (Sanjeevani Booti 2), so each point is written once.
+6. **Most Common Errors page (end of every unit; Pranav, 2026-11-13):** the 4 to 14 Error Register points flagged "most common", collected by a script from the topics and cards (each point is written once), followed by **the rest of the page left blank for the student's own entries** (Sanjeevani Booti 2). Ruled lines belong only on this writing area.
 7. **Last-day page:** generated from the last-day lines.
 
 ### Illustration card (Pranav's framework)
 
-Fields, in this order: **Reference** · **Difficulty** (computed) · **Goal of the question** · **Concepts triggered** (topic IDs) · **Given** · **How it is solved** (the approach in a few steps, with figures where they prove the point) · **Exam points** · **Tricky points** (these are the Error Register entries: wrong move → right move → why).
+Fields, in this order: **Reference** · **Difficulty** (computed) · **Goal of the question** · **Concepts triggered** (topic IDs) · **Given** (only the facts that matter, in words) · **Approach** (the concepts in a few short lines; numbered steps **only** where the order of steps is the point, and figures **only** where a calculation is genuinely tough or the figure is the exam point) · **Exam points** · **Tricky points** (the Error Register entries: wrong move → right move → why).
 
-**Sample (illustrative only; recomputed with a script; Branch Accounts is not a pilot chapter):**
+**Writing rule (Pranav, 2026-11-13): no number-by-number working.** The card says what to do and what to watch, not the whole solution. A sample with the earlier long working was rejected as too verbose.
 
-> **Illustration 5, Best (Jammu branch)** · `M3-C15-U0:ILL-5` · Medium (3 concepts)
+**Sample, revised (illustrative only; Branch Accounts is not a pilot chapter):**
+
+> **Illustration 5, Best (Jammu branch)** · `M3-C15-U0:ILL-5` · Medium
 > **Goal:** the branch's profit for the year, and the stock reserve for unrealised profit.
-> **Concepts triggered:** goods invoiced at cost + loading (`T5 §5.2`); stock reserve on closing stock (`T5 §5.2`); branch Trading A/c at invoice price (`T5 §5.1`).
-> **Given:** invoice price = cost + 20%; sale price = cost + 50%; opening stock ₹2,20,000 and goods sent ₹11,00,000 (both at invoice price); sales ₹12,00,000; expenses ₹45,000.
-> **How it is solved:** (1) three prices per ₹100 of cost: cost 100, invoice 120, sale 150. (2) Goods sold at invoice price = 12,00,000 × 120/150 = 9,60,000. (3) Closing stock at invoice price = 2,20,000 + 11,00,000 − 9,60,000 = 3,60,000. (4) Branch trading at invoice price gives profit 1,95,000. (5) Reserve = 3,60,000 × 20/120 = 60,000.
-> **Exam points:** the loading fraction is margin ÷ invoice price (20/120), not the 20% markup; closing stock is derived, not given.
-> **Tricky points (Error Register):** *Wrong:* reserve = 20% × 3,60,000 = 72,000. *Right:* 20/120 → 60,000. *Why:* the 20 is inside the 120. — *ICAI's 1,95,000 is the branch's profit at invoice price; the business's profit adds the loading realised on goods sold (1,60,000) to make 3,55,000. ICAI does not say this; my reconstruction.*
+> **Concepts triggered:** goods invoiced at cost plus loading; closing stock valued at invoice price; stock reserve (`T5 §5.2`).
+> **Given:** three prices (cost, invoice = cost + 20%, sale = cost + 50%); opening stock and goods sent at invoice price; sales and expenses.
+> **Approach:** bring sales down to invoice price to find the goods sold; closing stock follows from opening stock plus goods sent less goods sold; the reserve is the loading portion of closing stock.
+> **Exam point:** the loading is 20/120 of invoice price.
+> **Tricky points:** *Wrong:* 20% of closing stock. *Right:* 20/120. *Why:* the 20 is inside the 120. ICAI's profit is the branch's profit at invoice price; the business's own profit also includes the loading realised on goods sold (ICAI does not say this; my reconstruction).
 
 **Difficulty is computed**, not authored: by the Question Bank's rule (up to 2 concepts triggered = Easy, 3 to 5 = Medium, over 5 = Hard), with the labels in the style file so renaming "Hard" to "LDR" is one edit. (**Open:** is LDR just Hard renamed, or a separate "solve this on the last day" flag chosen from all difficulties?)
 
@@ -115,7 +117,7 @@ Box types, one colour and one label each, defined once in the style file:
 
 ## 7. Handwritten style (**proposal**, to be proven in the pilot)
 
-- **Look:** a hand-drawn feel like Excalidraw: handwriting font, ruled-paper background, wobbly boxes, arrows, underlines, circled exam points. Real text, not images, so it stays searchable and editable.
+- **Look:** a hand-drawn feel like Excalidraw: handwriting font, wobbly boxes, arrows, underlines, circled exam points, on a **plain background** (see section 21; ruled paper rejected for reading pages). Real text, not images, so it stays searchable and editable.
 - **How:** HTML and CSS, with a small vendored library for sketchy borders if CSS alone is not enough. The existing AS 26 prototype already has the ruled-paper idea, but its font (Comic Neue) is named and **not shipped inside the file**, so it falls back unpredictably on other machines.
 - **Fonts:** vendored locally (the repo rule; binaries not in git, fetched by a script like `tools/fetch_local_fonts.py`). Excalidraw's own font is open source. Candidates to compare in a one-page **font bake-off** before the pilots start: Excalifont, Kalam, Patrick Hand, Caveat.
 - **Readability caution:** long paragraphs in a handwriting font tire the eye in print. Option: the handwriting font everywhere at 16px or larger, with a very legible handwriting face for body text and tables. The bake-off will show it on a real page.
@@ -209,7 +211,7 @@ These are scanned handwriting with no text layer (earlier finding). A session ca
 6. **Sample card:** is the framework and layout in section 5 what you meant?
 7. **Landing work:** branches plus pull requests that you merge, or direct commits to `main` with one-file-per-agent ownership?
 
-## 16. Chapter sequence (index order; Pranav to correct)
+## 16. Chapter sequence (superseded by Pranav's real sequence, below)
 
 This is `teaching_sequence` from file 1, which is the order the repo already uses. Pranav's own notes may differ; **the book will follow whatever order he confirms.** The last column is only a hint: the date the notebook PDF was uploaded to the Drive class-notes folder (not a teaching date; my search was partial, and "not seen" means I did not find one).
 
@@ -263,7 +265,7 @@ A story is not owned by a chapter. Three objects:
 
 Because each unit still has one agent, threads are planned up front and each unit writes only its own beats. The validator checks that every beat listed in a thread exists in its unit, that links resolve both ways, and that every story or beat carries a source tag (lecture, notebook, or agent draft). Real class stories come first; where the thread file proposes a beat that Pranav did not tell in class, it is marked agent draft.
 
-## 18. One-page summary per chapter (**proposal**)
+## 18. One-page summary per chapter (**proposal**; separate PDFs, not part of the book: Pranav, 2026-11-13)
 
 **Goal (Pranav):** every concept of the unit on literally one page, in one single-page PDF; A3 for big units; maximum use of space; creative layout.
 
@@ -271,7 +273,7 @@ Because each unit still has one agent, threads are planned up front and each uni
 - **Authoring:** a strong model writes a one-page **spec** from the unit file (blocks, each with topic IDs, priority and a type: flowchart, comparison table, timeline, formula strip, memory line, mini-diagram, trap box). Pranav reviews the spec and the result.
 - **Layout and fitting (script):** HTML/CSS grid in the handwritten theme, rendered in headless Chrome. The script **measures** the page: it scales the type to fill the printable area (target at least 92% used), enforces a **minimum type size**, and checks the PDF has **exactly one page**. If it cannot fit above the minimum, it moves from A4 to **A3**, and if even A3 fails it lists what must be cut or merged. I will not shrink type below a readable size to meet the one-page rule.
 - **Likely A3 units** (my forecast from topic count; the script decides): AS 26 (27 topics), AS 29 (20), AS 28 (19), AS 21 (18), AS 25 (15), AS 2 (15), AS 14 (14), Intro to AS (14).
-- **Files:** HTML source in git; the PDFs are binaries, so they go to R2 with an entry in the manifest (repo rule), one per unit.
+- **Files:** **separate PDFs handed out on their own; they are not merged into the book** (the book may point to them). HTML source in git; the PDFs are binaries, so they go to R2 with an entry in the manifest (repo rule), one per unit. A split unit (Intro to AS, Ch 11 Unit 1) gets one one-pager, not two.
 - **Honest limit:** handwriting fonts are less legible at small sizes. Dense one-pagers may need a more legible handwriting face than the body text; the font comparison covers this.
 
 ## 19. One ecosystem with the website (**proposal**)
@@ -291,3 +293,82 @@ The aim is one place for every concept of the CA Inter syllabus, with exam-frien
 - **MCQs (250):** one line each in a per-topic table: reference, the concept it tests, the trap. A full card for each would add little.
 - **Theory questions (99):** what the examiner expects: the heading points to write and the keywords that carry marks, with the topic ID.
 - Same rule for all: no final answers copied from ICAI; figures only where they prove the point.
+
+### 16a. The real sequence (Pranav, 2026-11-13): `BOOK-SEQUENCE.csv`
+
+This is the order Pranav teaches in class and recommends to students for reading **and** for revision, so it is the order of the book. It is stored in `books/ca-inter/concept-book/BOOK-SEQUENCE.csv` (38 rows, 36 units). **File 1's `teaching_sequence` is a different order and is left untouched** because the Question Bank's "Final Chapter" logic depends on it; the Concept Book reads its own order from the CSV.
+
+- **Part A, Rules of Swimming (17 units):** AS 2, 10, 26, 16, 28, 19, 13, 29, 15, 4, 5, 9, 7, 12, 11, 22, 20.
+- **Part B, Actual Swimming (12 units):** Intro to AS, Framework, Ch 11 Unit 1, Ch 11 Unit 2 (Cash Flow), AS 3, Applicability, AS 1, AS 17, 18, 24, 25, Ch 12 Buyback.
+- **Part C, Group Companies and Branches (7 units):** Ch 15 Branches, Ch 14 Internal Reconstruction, AS 14, Ch 13 Amalgamation, AS 21, 23, 27.
+- **Two units are taught in two parts:** Intro to AS (position 1, then position 23) and Ch 11 Unit 1 (position 20 without the divisible-profit concept, then position 30 for divisible profits and books of accounts). **One unit file, two parts**, each part placed at its slot in the book and cross-linked. The one-pager is per unit.
+- **The swimming metaphor looks like a book-level thread** (rules, then actually swimming, then the group). It is Pranav's class framing; I will not write it until he tells me the story. (Open.)
+
+## 21. Paper style and font: tested (2026-11-13)
+
+Pranav asked whether ruled paper is a good idea because figures can look inauthentic. I built one test page with identical content on four backgrounds and four fonts and looked at it (the image was sent to Pranav in the session).
+
+| Option | Result |
+|---|---|
+| Plain white | Cleanest and cheapest to print. Best for reading pages |
+| Cream, no lines | Equally clean; looks friendlier on screen. In print it spends ink on a full-page tint, so use it on screen and print it white |
+| **Ruled notebook** | **Rejected for reading pages.** The lines run through boxes, arrows and tables and are not aligned to the text, so figures look pasted onto the paper. This confirms Pranav's worry |
+| Faint dot grid | Better than ruled, but still adds noise behind text and boxes |
+
+**Decision (proposal):** plain white (cream on screen only); the handwritten feel comes from the **font, wobbly borders, arrows and underlines**, not from the paper. **Ruled lines only on the writing area of the Most Common Errors page.**
+
+**Fonts:** Kalam and Patrick Hand are both easy to read at body size; **Patrick Hand is the most compact and most legible for numbers and tables**; Caveat is too tall and curly for body text but good for headings and annotations. Proposal: Patrick Hand (or Kalam) for body and tables, Caveat for headings and margin notes. All are Google fonts (open licence); vendor them locally by script (binaries are not committed).
+
+## 22. Reading the notebooks: options evaluated (**proposal**)
+
+Task: turn scanned handwriting (dense, tables, arrows) into text, with page references, flagged where unclear. The repo's own history shows plain OCR (Tesseract) is useless here.
+
+| Option | Verdict |
+|---|---|
+| Cloudflare Workers AI | Good fit for plumbing (the pages and results can live in R2 on the same account). Its vision models are open models of modest size; **their handwriting quality on accounting notes is unproven here and I expect it to be weaker** than a frontier model. A wrong reading is worse than a flagged one. Use only if it passes the bake-off |
+| GitHub Actions | **Good as the pipeline, not as the reader.** It can fetch the PDFs from Drive (the Drive and R2 secrets already exist for the archive workflows), render each page to an image, count pages, store images in R2, call a vision model, and commit only the resulting **text JSON** (never the images) to a branch. Jobs can run per notebook in parallel and resume per page |
+| A frontier vision model as the reader | Best expected quality. In a Claude session it uses your usage limits; through an API it is billed separately and needs a key stored as a repo secret. Check the provider's data-retention terms for your own notes |
+
+**Recommendation:** Actions for plumbing plus a frontier vision model for reading, decided by a **three-page bake-off** (the same pages through Workers AI, a frontier model and Tesseract, scored by Pranav). For the three pilots, attaching the PDFs in chat is enough. The Action first reports page counts so cost can be estimated before any batch.
+
+## 23. Other AI models and GitHub features (**proposal**)
+
+**Other models (Kimi, ChatGPT and so on) on independent tasks: yes, with conditions.**
+- **Why it works:** the repo is public, so any agent can **fork and open a pull request without write access**. Each gets a role prompt, `AGENT-GUARDRAILS.md`, and one unit or one task.
+- **Suitable (checkable by script):** skeleton drafts from ICAI text for one unit, entity-name and reference checks, transcript clean-up, one-pager specs, lint. **Not suitable:** anything needing Pranav's stories, family spines and threads, final review, and settling conflicts between ICAI and the lecture.
+- **Guardrails:** one branch and one unit per agent; shared files off limits; no story without a source tag; no figure without a script; no invented page numbers; must run `validate_units.py` and attach the result; output is labelled `agent-draft` with the model's name.
+- **Review:** every output is reviewed by a **different** model or by the validator, and by Pranav before a status flips to `pranav-approved`.
+- **Calibration first:** I cannot test other vendors' models from here. Give each the same small reference task (a short unit such as Ch 12 Buyback or Applicability) and compare against the checks before assigning more.
+
+**GitHub features:**
+- **Issues** as work packets: one per unit and stage, with a checklist (sources available, steps, definition of done); labels such as `unit`, `family:B`, `stage:skeleton`, `agent:codex`, `needs-pranav`; milestones for the phases. The repo is public, so issues are public (Pranav accepts this). The existing `tools/backlog_to_issues.py` is a dry-run and BL-R02 (where issues live) is still marked undecided in `CONTEXT.md`, so I will **not create issues until Pranav says go**.
+- **Pull requests** with a template (sources used and not available, provenance, scripts attached) and **Actions running `validate_units.py` and the health check on every PR** (red or green).
+- **CODEOWNERS** so Pranav must approve anything under `content/`, and **branch protection** so nobody (including me) pushes to `main` directly. These settings, and Projects boards, need repo-admin rights in the GitHub UI; my GitHub tools can read and write issues and comments but not change these settings.
+- **Review comments** from a second agent on the PR; Pranav's approval is the gate.
+
+## 24. Recording how the book was made (**proposal**)
+
+Nothing should live only in chat or in issue threads.
+- **`docs/concept-book/DECISIONS.md`:** a dated decision log with Pranav's decisions in his words and the reason (what is in this plan's first table, kept up to date).
+- **`docs/concept-book/PROCESS.md`:** how the book is made, in plain steps, so a newcomer can follow the pipeline end to end.
+- **Per-unit `build record`** (in the unit's front matter): each stage, the agent and model tier, the prompt version, the date, the validator result, the reviewer, and the sources used and not available.
+- **`agent-prompts/`:** every prompt versioned in git, with a version stamp copied into the build record.
+- **Reproducibility:** generated files carry a hash of their inputs; the session notes in `docs/sessions/` are kept.
+- **Issue and PR history** is useful but not the record; important decisions are copied into `DECISIONS.md`.
+
+## 25. Replicating this for other subjects (after about a month)
+
+Design for it now, so the pilots produce a reusable kit and not an Accounts-only build.
+- **Separate the engine from the content.** The scripts, template, validator and prompts read a **`subject.yaml`** (index file, ICAI source folder, edition, unit-naming pattern, card types, the style file) instead of hard-coding Advanced Accounting.
+- **Card types are configurable per subject.** Accounts has illustrations and scenario questions; Law has sections and case laws; Taxation has computations. The Accounts card framework is the first configuration, not the only one.
+- **Harvest after the pilots:** a replication kit (template, prompts, guardrails, validator, checklist, the lessons) written once the three pilots are reviewed.
+- **Open:** which subject is next, and whether each has a topic index of the same shape as file 1.
+
+## 26. Questions still open
+
+1. For the two split units, which topics belong to part 1 and which to part 2 (Intro to AS, Ch 11 Unit 1)?
+2. Is the swimming framing (Part A, B, C) a class story you tell? If so, tell it to me; I will not invent it.
+3. Plain white (cream on screen) with Patrick Hand or Kalam: accepted?
+4. Notebooks: attach the pilot PDFs, or build the Action? Bake-off pages, and an API key if the Action is chosen.
+5. Approve creating GitHub issues (public) for the units, and who sets up branch protection and CODEOWNERS.
+6. Which other AI models do you have access to, and should I draft the guardrails and one calibration task for them?

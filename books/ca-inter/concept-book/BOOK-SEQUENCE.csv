@@ -1,0 +1,39 @@
+book_order,unit_id,unit,part_of_syllabus,taught_in_parts,note,topics_in_unit,index_teaching_sequence
+1,M1-C1-U0,Introduction to AS,Part B - Actual Swimming,part 1 of 2,Initial topics touched upon in the first class,14,1
+2,M2-C5-U1,AS 2,Part A - Rules of Swimming,,,15,4
+3,M2-C5-U2,AS 10,Part A - Rules of Swimming,,,10,5
+4,M2-C5-U6,AS 26,Part A - Rules of Swimming,,,27,6
+5,M2-C5-U4,AS 16,Part A - Rules of Swimming,,,12,7
+6,M2-C5-U7,AS 28,Part A - Rules of Swimming,,,19,9
+7,M2-C5-U5,AS 19,Part A - Rules of Swimming,,,10,8
+8,M2-C5-U3,AS 13,Part A - Rules of Swimming,,,10,10
+9,M2-C6-U2,AS 29,Part A - Rules of Swimming,,,20,11
+10,M2-C6-U1,AS 15,Part A - Rules of Swimming,,,12,12
+11,M2-C7-U1,AS 4,Part A - Rules of Swimming,,,6,13
+12,M2-C7-U2,AS 5,Part A - Rules of Swimming,,,5,14
+13,M2-C8-U2,AS 9,Part A - Rules of Swimming,,,10,16
+14,M2-C8-U1,AS 7,Part A - Rules of Swimming,,,11,17
+15,M2-C9-U1,AS 12,Part A - Rules of Swimming,,,10,18
+16,M2-C7-U3,AS 11,Part A - Rules of Swimming,,,13,15
+17,M2-C7-U4,AS 22,Part A - Rules of Swimming,,,10,19
+18,M1-C4-U5,AS 20,Part A - Rules of Swimming,,,12,20
+19,M1-C2-U0,Framework,Part B - Actual Swimming,,,11,3
+20,M3-C11-U1,Ch 11 U1 Preparation of FS,Part B - Actual Swimming,part 1 of 2,Without the divisible profit concept,6,22
+21,M3-C11-U2,Ch 11 U2 Cash Flow,Part B - Actual Swimming,,,7,23A
+22,M1-C4-U2,AS 3 Cash Flow,Part B - Actual Swimming,,,11,23B
+23,M1-C1-U0,Introduction to AS,Part B - Actual Swimming,part 2 of 2,"Some initial already covered; all the other topics, complete",14,1
+24,M1-C3-U0,Applicability of AS,Part B - Actual Swimming,,,2,2
+25,M1-C4-U1,AS 1,Part B - Actual Swimming,,,6,21
+26,M1-C4-U3,AS 17,Part B - Actual Swimming,,,13,24
+27,M1-C4-U4,AS 18,Part B - Actual Swimming,,,8,25
+28,M1-C4-U6,AS 24,Part B - Actual Swimming,,,10,26
+29,M1-C4-U7,AS 25,Part B - Actual Swimming,,,15,31
+30,M3-C11-U1,Ch 11 U1 Preparation of FS,Part B - Actual Swimming,part 2 of 2,Initial theory part of the divisible profits and books of accounts (Pranav's wording),6,22
+31,M3-C12-U0,Ch 12 Buyback,Part B - Actual Swimming,,,2,32
+32,M3-C15-U0,Ch 15 Branches incl. Foreign,Part C - Group Companies & Branches,,,13,34
+33,M3-C14-U0,Ch 14 Internal Reconstruction,Part C - Group Companies & Branches,,,8,33
+34,M2-C9-U2,AS 14,Part C - Group Companies & Branches,,,14,30B
+35,M3-C13-U0,Ch 13 Amalgamation,Part C - Group Companies & Branches,,,7,30A
+36,M2-C10-U1,AS 21,Part C - Group Companies & Branches,,,18,27
+37,M2-C10-U2,AS 23,Part C - Group Companies & Branches,,,10,28
+38,M2-C10-U3,AS 27,Part C - Group Companies & Branches,,,13,29
