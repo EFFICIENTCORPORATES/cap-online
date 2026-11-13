@@ -87,6 +87,14 @@ The first edition is printed and distributed; nothing here changes a student's c
 | Q-CR-006 | Reader-reported errors have no intake path into the register | P2 | Both | Open |
 | Q-CR-007 | Some questions are printed twice (home chapter and Integrated section) | P3 | Both | Open |
 | Q-CR-008 | PYQ November 2023 Q4 prints as "QNone" | P2 | Agent | Open |
+| Q-CR-009 | Chapter order should follow Pranav's real sequence (`BOOK-SEQUENCE.csv`); decide how the two split units are handled | P2 | Both | Open |
+| Q-CR-010 | Highlight the Must Practice questions separately in each chapter | P2 | Agent | Open |
+| Q-CR-011 | Add MTP and RTP for September 2026 and January 2027 (Jan 2027 availability not verified) | P1 | Both | Open |
+| Q-CR-012 | Typos and trial balances not rendered correctly: audit the 26 trial-balance questions against the PDFs (8 have no table) | P1 | Agent | Open |
+| Q-CR-013 | Remove the repeated accuracy, scope and organisation notes from every chapter; keep them once in the front matter | P2 | Agent | Open |
+| Q-CR-014 | Running header with chapter and unit on every page (cause of the missing header not yet found) | P1 | Agent | Open |
+| Q-CR-015 | Footer on every page: #Newton of Accounts, AIR 1-1-5, Pranav Bhaiya | P2 | Agent | Open |
+| Q-CR-016 | OP/PP tags confirmed for the second edition; run once after the new sittings are added | P2 | Both | Open |
 
 ## T. Teaching material, Kahaani lectures and chapter notes
 

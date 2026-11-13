@@ -1,4 +1,6 @@
-# Concept Book: build plan (revision 4, 2026-11-13)
+# Concept Book: build plan (revision 5, 2026-11-13)
+
+_Decisions are recorded in `docs/concept-book/DECISIONS.md`. Where this plan and section 27 disagree, **section 27 wins**._
 
 _Draft for Pranav's review. **Nothing is built yet.** Revision 2 replaces revision 1 after Pranav's second message of 2026-11-13: the unit of work is the **unit file (36 of them), not the topic card (400)**; three pilot chapters; a new illustration framework; handwritten style. It sits on top of `teaching-notes/CONCEPT-BOOK-DESIGN-BRIEF.md` and the two older runbooks in this folder. Decisions marked **(Pranav)** are his own words; everything else is **(proposal)**._
 
@@ -304,7 +306,7 @@ This is the order Pranav teaches in class and recommends to students for reading
 - **Two units are taught in two parts:** Intro to AS (position 1, then position 23) and Ch 11 Unit 1 (position 20 without the divisible-profit concept, then position 30 for divisible profits and books of accounts). **One unit file, two parts**, each part placed at its slot in the book and cross-linked. The one-pager is per unit.
 - **The swimming metaphor looks like a book-level thread** (rules, then actually swimming, then the group). It is Pranav's class framing; I will not write it until he tells me the story. (Open.)
 
-## 21. Paper style and font: tested (2026-11-13)
+## 21. Paper style and font: tested (2026-11-13; paper decision revised in section 27)
 
 Pranav asked whether ruled paper is a good idea because figures can look inauthentic. I built one test page with identical content on four backgrounds and four fonts and looked at it (the image was sent to Pranav in the session).
 
@@ -372,3 +374,25 @@ Design for it now, so the pilots produce a reusable kit and not an Accounts-only
 4. Notebooks: attach the pilot PDFs, or build the Action? Bake-off pages, and an API key if the Action is chosen.
 5. Approve creating GitHub issues (public) for the units, and who sets up branch protection and CODEOWNERS.
 6. Which other AI models do you have access to, and should I draft the guardrails and one calibration task for them?
+
+## 27. Updates from Pranav's fifth message (2026-11-13; these override earlier sections)
+
+**Paper and boxes**
+- **Ruled lines where there is text, plain where there is a diagram** (Pranav). The earlier test failed because the lines ran through diagrams. So: ruled lines **only inside text blocks**, drawn with the line spacing equal to the text's line height so the writing sits on the lines; **diagrams, tables, formula strips and callout boxes sit on plain white panels** that hide the lines. Lines are a very light blue-grey (cheap to print).
+- **A box per topic, and colour legends: yes, with design rules (proposal).** A thin outer frame for each topic with a **header tab** (topic number and name), so topics are visibly separate. Inner callouts (Exam point, Why, Error Register, Linkage, Story) use a coloured left bar and a light fill, **not another full border**, to avoid boxes inside boxes. No more than about six box types. Each type has a **short label and a small icon as well as a colour**, so it still reads in greyscale print. The **legend** appears in the front matter and as a one-line strip at the start of every unit. A topic box may break across pages with a "continued" tab; only the small callouts are kept unbroken. I will mock this up in the font and layout step of the pilot before anything is built at scale.
+- **Fonts:** Patrick Hand or Kalam for body, Caveat for headings; switch later if needed.
+
+**Split units (agent reading, to be confirmed by Pranav; also written into `BOOK-SEQUENCE.csv`)**
+- **Intro to AS:** part 1 = topics 1 to 3 (Lecture 1); part 2 = topics 4 to 14.
+- **Ch 11 Unit 1:** the ICAI order is topics 1.1 to 1.6, with Examples 1 to 6 under 1.5, Illustration 1 (dividend) at the end of 1.6, then Illustrations 2 to 6 and the Test Your Knowledge. My reading: **part 2 (position 30, "distributable profit")** = topics 1.1 to 1.6 and Illustration 1, and **part 1 (position 20, "without the divisible profit concept")** = the rest, i.e. Illustrations 2 to 6 and the remaining Test Your Knowledge. Pranav names Test Your Knowledge MCQ 5 as belonging to the distributable-profit part, "and maybe one question"; my earlier notes list MCQ 5, 8, 9 and scenario Q15 (Z Ltd). The book's name for part 2: "Distributable Profit".
+- The swimming framing is the **intro to the subject, told once** at the start of the book (not a running thread). Pranav to tell it.
+
+**GitHub and agents (replaces the corresponding lines in section 23)**
+- **No issues until after the pilot.** After it, **I create the major issues**; other AI models work on them within the guardrails and raise pull requests; **I review them and merge those that pass** (Pranav's decision). My conditions for a merge: the validator passes, the change stays inside the issue's unit, every story has a source tag, numbers come from a script, and a different model or I have reviewed it. I report each merge to Pranav. Anything that touches shared files, or that I am unsure about, I leave for Pranav.
+- This replaces the earlier note that Pranav decides on pull requests himself, for Concept Book content pull requests only.
+
+**Reading the handwritten notes (replaces the plan in section 22)**
+- The Drive folders are public, so the PDFs can be downloaded by anyone. **First a deterministic inventory**: `tools/drive_notes_inventory.py` lists both folders (class annotated notes and teacher-annotated ICAI), downloads each PDF one at a time, records pages, size, checksum and whether it has a text layer, deletes it, and writes `sources/handwritten-notes-inventory.csv` and `sources/handwritten-notes-by-unit.md` (one row per unit: NB01, NB02, other notes, annotated ICAI, and what is **missing**). No PDF is committed.
+- **Then any frontier model** can fork the repo, read a unit's pages with its own OCR or vision, and open a pull request with the **text** it read (never images). Output is checked by the validator; every uncertain reading is flagged `needs_pranav`. A short bake-off on three pages decides which model reads best. This avoids building anything on Cloudflare Workers AI unless it wins the bake-off.
+
+**Replication and records:** see sections 24 and 25; the decision log is `docs/concept-book/DECISIONS.md`.

@@ -1,5 +1,5 @@
 book_order,unit_id,unit,part_of_syllabus,taught_in_parts,note,topics_in_unit,index_teaching_sequence
-1,M1-C1-U0,Introduction to AS,Part B - Actual Swimming,part 1 of 2,Initial topics touched upon in the first class,14,1
+1,M1-C1-U0,Introduction to AS,Part B - Actual Swimming,part 1 of 2,Topics 1 to 3 (taught in Lecture 1; Pranav 2026-11-13),14,1
 2,M2-C5-U1,AS 2,Part A - Rules of Swimming,,,15,4
 3,M2-C5-U2,AS 10,Part A - Rules of Swimming,,,10,5
 4,M2-C5-U6,AS 26,Part A - Rules of Swimming,,,27,6
@@ -18,17 +18,17 @@ book_order,unit_id,unit,part_of_syllabus,taught_in_parts,note,topics_in_unit,ind
 17,M2-C7-U4,AS 22,Part A - Rules of Swimming,,,10,19
 18,M1-C4-U5,AS 20,Part A - Rules of Swimming,,,12,20
 19,M1-C2-U0,Framework,Part B - Actual Swimming,,,11,3
-20,M3-C11-U1,Ch 11 U1 Preparation of FS,Part B - Actual Swimming,part 1 of 2,Without the divisible profit concept,6,22
+20,M3-C11-U1,Ch 11 U1 Preparation of FS,Part B - Actual Swimming,part 1 of 2,"Without the distributable-profit concept: Illustrations 2 to 6 and the rest of the unit after Illustration 1 (MY READING, to confirm)",6,22
 21,M3-C11-U2,Ch 11 U2 Cash Flow,Part B - Actual Swimming,,,7,23A
 22,M1-C4-U2,AS 3 Cash Flow,Part B - Actual Swimming,,,11,23B
-23,M1-C1-U0,Introduction to AS,Part B - Actual Swimming,part 2 of 2,"Some initial already covered; all the other topics, complete",14,1
+23,M1-C1-U0,Introduction to AS,Part B - Actual Swimming,part 2 of 2,Topics 4 to 14 (taught in another lecture; Pranav 2026-11-13),14,1
 24,M1-C3-U0,Applicability of AS,Part B - Actual Swimming,,,2,2
 25,M1-C4-U1,AS 1,Part B - Actual Swimming,,,6,21
 26,M1-C4-U3,AS 17,Part B - Actual Swimming,,,13,24
 27,M1-C4-U4,AS 18,Part B - Actual Swimming,,,8,25
 28,M1-C4-U6,AS 24,Part B - Actual Swimming,,,10,26
 29,M1-C4-U7,AS 25,Part B - Actual Swimming,,,15,31
-30,M3-C11-U1,Ch 11 U1 Preparation of FS,Part B - Actual Swimming,part 2 of 2,Initial theory part of the divisible profits and books of accounts (Pranav's wording),6,22
+30,M3-C11-U1,Ch 11 U1 Preparation of FS,Part B - Actual Swimming,part 2 of 2,"Distributable-profit part: topics 1.1 to 1.6 and Illustration 1; TYK MCQ 5 per Pranav, my notes also list MCQ 8, 9 and SBQ 15 Z Ltd (MY READING, to confirm)",6,22
 31,M3-C12-U0,Ch 12 Buyback,Part B - Actual Swimming,,,2,32
 32,M3-C15-U0,Ch 15 Branches incl. Foreign,Part C - Group Companies & Branches,,,13,34
 33,M3-C14-U0,Ch 14 Internal Reconstruction,Part C - Group Companies & Branches,,,8,33

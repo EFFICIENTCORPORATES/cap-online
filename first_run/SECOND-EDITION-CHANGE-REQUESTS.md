@@ -150,6 +150,97 @@ instead; a pipeline bug that did reach the printed page belongs in both.
   `None`. The Must Practice build carries a documented `qno_overrides` entry for this
   question until then.
 
+## CR-009 — Chapter order should follow Pranav's real teaching sequence
+
+- **Severity** S3 · **Status** OPEN · **Logged** 2026-11-13 · **Source** Pranav's request
+- **Where** Whole book: chapter order, the Table of Contents, the Chapter-wise Sitting Summary
+  rows. The order is set by the `CHAPTERS` tuple in `first_run/scripts/qb_merge.py`, which follows file 1's
+  `teaching_sequence`.
+- **What** The book is ordered by an index sequence that is not the order Pranav teaches in class and
+  recommends to students for reading and revision.
+- **Second edition** Re-order by `books/ca-inter/concept-book/BOOK-SEQUENCE.csv` (Part A, B, C; 38 rows, 36
+  units). Two units are taught in two parts (Intro to AS; Ch 11 Unit 1): **decide whether the Question
+  Bank keeps one chapter at the first slot or the second, or splits** (open). Do not edit file 1's
+  `teaching_sequence`: "Final Chapter" placement depends on it. Add the order as a separate input read by
+  `qb_merge.py`, then rebuild the ToC and coverage matrix.
+
+## CR-010 — Must Practice questions should be highlighted separately
+
+- **Severity** S3 · **Status** OPEN · **Logged** 2026-11-13 · **Source** Pranav's request
+- **Where** Every chapter book.
+- **What** The ten Must Practice questions per unit (live on capranav.com) are not marked in the book,
+  so a student cannot see which questions in a chapter are the priority ones.
+- **Second edition** Mark those questions distinctly in each chapter (a badge or box, listed in the
+  legend), and list them together at the start of the chapter. The join already exists: the Must
+  Practice topic map (`books/ca-inter/smat-may-27-edition/practice-with-pranav-bhaiya/data/must_practice_topic_map.csv`)
+  carries `book_id` and `human_id` per question. Study-Material-sourced Must Practice items are not in
+  the book and need a separate pointer.
+
+## CR-011 — Add MTP and RTP for September 2026 and January 2027
+
+- **Severity** S3 · **Status** OPEN · **Logged** 2026-11-13 · **Source** Pranav's request
+- **Where** Question corpus, every chapter book, coverage matrix, front matter statistics.
+- **What** The book's latest MTP and RTP sittings are Sep 2025 / Jan 2026 (plus May 2026 where present).
+  Sep 2026 and Jan 2027 MTP and RTP are to be added. **Not verified:** whether the Jan 2027 papers are
+  published yet as of 2026-11-13; the sources are not in the repo.
+- **Second edition** Source the PDFs (PDF only, never a converted copy: `SKILL-question-bank-verbatim-extraction.md`),
+  build the sitting HTML, tag, extract, rebuild. Related, **ask Pranav**: PYQ September 2026 is not in the
+  book either (the Must Practice build hand-maps it in `SEP_MAP` because its official answers are not
+  integrated).
+
+## CR-012 — Typos and trial balances are not rendered correctly
+
+- **Severity** S2 · **Status** OPEN · **Logged** 2026-11-13 · **Source** Pranav's request
+- **Where** Questions whose text contains a trial balance, and typos elsewhere. A count of
+  `questions_index.json` (2026-11-13): **26** questions mention a trial balance (12 in
+  `M3-C11-U1` Financial Statements of Companies, 8 in `M3-C15-U0` Branches, 4 elsewhere), of which
+  **18** carry an HTML table in the question and **8 do not**, so their figures may have been flattened
+  into running text (for example `CAI-P1-MTP-2026-01-S1-PII-Q5`, `CAI-P1-MTP-2026-01-S1-PII-Q6-c`,
+  `CAI-P1-MTP-2024-09-S1-PII-Q6-c`). **This count is a lead, not a finding: no question has been compared
+  against its source PDF yet.** The specific typos Pranav saw were not itemised.
+- **Second edition** Audit every trial-balance question against its source PDF (debits and credits agree,
+  columns aligned, no flattened figures), fix the sitting HTML, and re-extract. Pranav to list the typos
+  he has seen; each gets its own entry or a line here. Related: CR-008.
+
+## CR-013 — Repeated disclaimers in every chapter should be removed
+
+- **Severity** S4 · **Status** OPEN · **Logged** 2026-11-13 · **Source** Pranav's request
+- **Where** The opening notes of every chapter book: the "A note on accuracy" box, the "Scope of this book"
+  box, and the "How this book is organised" box.
+- **What** The same three notes are printed at the start of all 34 chapters (the scope note even lists every
+  sitting each time), costing pages and diluting the one place they belong.
+- **Second edition** Remove them from the chapter books (`generate_chapter_book.py`). Keep one accuracy
+  note, one scope note and the how-to-read guide **once** in the front matter.
+
+## CR-014 — Every page needs a header naming the chapter and the unit
+
+- **Severity** S2 · **Status** OPEN · **Logged** 2026-11-13 · **Source** Pranav's request
+- **Where** The distributed PDFs. Pranav reports the chapter/unit identification appears only on the first
+  page of a chapter, not on the pages that follow.
+- **What** The merged HTML does define a running header (`.qb-running-header`, `@top-center`, in
+  `first_run/scripts/qb_common.py`) and one per chapter (36 in `QUESTION-BANK-BOOK.html`), so the intended
+  design exists. **Why it does not reach every printed page is not yet determined.** It currently shows
+  the book title and the chapter, not the unit.
+- **Second edition** Find the cause on a real rendered PDF (not from the code: `CLAUDE.md` §7), fix it, and
+  make the header show the chapter name and its unit ID on every page.
+
+## CR-015 — Footer missing: "#Newton of Accounts, AIR-1-1-5, Pranav Bhaiya"
+
+- **Severity** S4 · **Status** OPEN · **Logged** 2026-11-13 · **Source** Pranav's request
+- **Where** The distributed PDFs. A running footer is defined in `qb_common.py` (`.qb-running-footer`,
+  `@bottom-center`; 35 in the merged HTML) but, per Pranav, it is not present in the book.
+- **Second edition** Every page carries the footer **#Newton of Accounts · AIR 1-1-5 · Pranav Bhaiya**
+  (wording as Pranav gave it), plus the page number. Same root-cause check as CR-014; fix both together.
+
+## CR-016 — OP / PP tags confirmed for the second edition
+
+- **Severity** S3 · **Status** OPEN · **Logged** 2026-11-13 · **Source** Pranav's decision
+- **What** Pranav confirmed OP / PP recurring-question tagging is to be done **in the second edition**.
+  This is the decision CR-001 was waiting for; CR-001 stays as the design record. The earlier scope
+  decision that kept OP/PP out of the first edition is unchanged.
+- **Second edition** Build it as CR-001 describes (`SKILL-question-bank-duplicate-detection.md`), run once
+  on the full corpus **after** CR-011 adds the new sittings, so it is not run twice.
+
 ---
 
 *Add new entries at the bottom, numbered in sequence. Never renumber or delete an
