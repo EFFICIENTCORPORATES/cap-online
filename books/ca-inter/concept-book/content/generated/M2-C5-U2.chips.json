@@ -1,0 +1,90 @@
+{
+ "unit": "M2-C5-U2",
+ "topics": {
+  "M2-C5-U2-T2.1": {
+   "topic": "Introduction",
+   "rank": "228",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C5-U2-T2.10": {
+   "topic": "Treatment of Subsequent Costs",
+   "rank": "229",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "1"
+  },
+  "M2-C5-U2-T2.2": {
+   "topic": "Scope of the Standard",
+   "rank": "230",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C5-U2-T2.3": {
+   "topic": "Definition of Property, Plant and Equipment (PPE)",
+   "rank": "231",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C5-U2-T2.4": {
+   "topic": "Other Definitions",
+   "rank": "232",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "2"
+  },
+  "M2-C5-U2-T2.5": {
+   "topic": "Recognition Criteria for PPE",
+   "rank": "92",
+   "band": "Next 50",
+   "pyq_marks": "1.67",
+   "must_practice": "1"
+  },
+  "M2-C5-U2-T2.6": {
+   "topic": "Measurement of PPE",
+   "rank": "68",
+   "band": "Next 50",
+   "pyq_marks": "3.5",
+   "must_practice": "4"
+  },
+  "M2-C5-U2-T2.7": {
+   "topic": "Initial Recognition",
+   "rank": "69",
+   "band": "Next 50",
+   "pyq_marks": "3.5",
+   "must_practice": "3"
+  },
+  "M2-C5-U2-T2.8": {
+   "topic": "Cost of a self-constructed Asset",
+   "rank": "93",
+   "band": "Next 50",
+   "pyq_marks": "1.67",
+   "must_practice": "2"
+  },
+  "M2-C5-U2-T2.9": {
+   "topic": "PPE acquired in Exchange for a Non-monetary Asset or Assets or A combination of Monetary and Non-monetary Assets",
+   "rank": "41",
+   "band": "Top 50",
+   "pyq_marks": "5.0",
+   "must_practice": "2"
+  }
+ },
+ "qb_records": 42,
+ "sittings": [
+  "2023-05",
+  "2023-11",
+  "2024-05",
+  "2024-09",
+  "2025-01",
+  "2025-05",
+  "2025-09",
+  "2026-05",
+  "PYQ-2025-09",
+  "RTP-2025-09",
+  "RTP-2026-01"
+ ],
+ "must_practice": 10
+}
