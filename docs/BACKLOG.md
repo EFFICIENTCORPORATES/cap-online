@@ -95,6 +95,7 @@ The first edition is printed and distributed; nothing here changes a student's c
 | Q-CR-014 | Running header with chapter and unit on every page (cause of the missing header not yet found) | P1 | Agent | Open |
 | Q-CR-015 | Footer on every page: #Newton of Accounts, AIR 1-1-5, Pranav Bhaiya | P2 | Agent | Open |
 | Q-CR-016 | OP/PP tags confirmed for the second edition; run once after the new sittings are added | P2 | Both | Open |
+| Q-CR-017 | Question Bank topic numbers collide with the canonical topic numbers: marks land on the wrong topic (Internal Reconstruction shows full-scheme questions under Alteration of Share Capital); check all 36 chapters and the Must Practice topic map | P1 | Agent | Open |
 
 ## T. Teaching material, Kahaani lectures and chapter notes
 

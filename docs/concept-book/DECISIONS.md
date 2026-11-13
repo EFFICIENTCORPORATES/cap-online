@@ -57,6 +57,17 @@ _Every decision about the Concept Book, with the date, who made it and why, so a
 
 Eight change requests were logged in `first_run/SECOND-EDITION-CHANGE-REQUESTS.md` (CR-009 to CR-016): chapter order, Must Practice highlighting, Sep 2026 and Jan 2027 MTP and RTP, trial balance and typo audit, remove repeated disclaimers, header and footer on every page, OP/PP tags. See that file; they are not Concept Book decisions.
 
+## 2026-11-13 (later): writing style, Internal Reconstruction, next units
+
+| # | Decision | Made by |
+|---|---|---|
+| 27 | **The book carries concepts, not examples.** ICAI already has the examples. Keep each point to the shortcut an exam needs: short fragments that still make sense, not full sentences or long paragraphs | Pranav |
+| 28 | The exam-routine (numbered steps) and the linkages format are right as they are, but written as short fragments. Keep the linkages | Pranav |
+| 29 | Capital Reduction A/c in Pranav's words: **credit all sacrifices (balidaan), debit what they were used for, the balancing figure is Capital Reserve.** P&L debit is written off first with the sacrifices; if still short, General Reserve. A preference dividend that was waived and never recorded needs **no entry**; if anything is issued in lieu, **debit Capital Reduction A/c** | Pranav |
+| 30 | Internal Reconstruction is an easy chapter with few stories. Its stories: the Kahaani deck (slides s01 and s02), the "all stakeholders make a balidaan to save the company" framing, Sections 230 and 233 of the Companies Act, and Tata Finance into Tata Capital. Nothing else | Pranav |
+| 31 | **Next units: AS 2, AS 10 and AS 29**, each with several stories to be read from his notebooks | Pranav |
+| 32 | The Question Bank topic-number collision (marks on the wrong topic) is logged as CR-017; not to be fixed now | Pranav asked for a quick look only |
+
 ## Still open (as of 2026-11-13)
 
 - Confirm the Ch 11 Unit 1 split (decision 10).

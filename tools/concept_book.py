@@ -50,7 +50,7 @@ def entity_in(text):
 
 def build_refs(unit):
     lines = open(icai_file(unit), encoding="utf-8").read().split("\n")
-    items, page, in_scen, qnum = [], None, False, None
+    items, page, in_scen, qnum, last_n = [], None, False, None, 0
     for i, l in enumerate(lines):
         pm = re.search(r'printed_page="([\d\.]+)"', l)
         if pm: page = pm.group(1)
@@ -63,12 +63,13 @@ def build_refs(unit):
             continue
         h = re.match(r"#### TYK-(MCQ|TQ)-(\d+)", l)
         if h:
+            last_n = max(last_n, int(h.group(2)))
             items.append(dict(key=f"TYK-{h.group(1)}-{h.group(2)}", label=("TYK MCQ " if h.group(1) == "MCQ" else "TYK Theory Q") + h.group(2), entity="", page=page))
             continue
-        if re.match(r"\s*Scenario based Questions", l): in_scen = True
+        if re.match(r"\s*Scenario[ -]based Questions", l, re.I): in_scen = True
         if in_scen:
             q = re.match(r"^(\d{1,2})\.?\s+(.*)", l)
-            if q and int(q.group(1)) > 11 and (qnum is None or int(q.group(1)) == qnum + 1):
+            if q and int(q.group(1)) > last_n and (qnum is None or int(q.group(1)) == qnum + 1) and (qnum is not None or int(q.group(1)) == last_n + 1):
                 qnum = int(q.group(1))
                 body = " ".join(x.strip() for x in lines[i:i + 6])
                 items.append(dict(key=f"TYK-Q{qnum}", label=f"TYK Q{qnum}", entity=entity_in(body), page=page))

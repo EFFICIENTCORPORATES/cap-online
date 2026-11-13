@@ -1,0 +1,134 @@
+{
+ "unit": "M2-C6-U2",
+ "edition": "ICAI July 2026 edition (May 2027 attempt)",
+ "source": "M2_C6_U2_ Accounting Standard 29 provisions contingencies_BEAUTIFIED.md",
+ "note": "pages are for placement only and never appear in the book; unchecked against the PDF",
+ "items": [
+  {
+   "key": "EX-1",
+   "label": "Example 1",
+   "entity": "",
+   "page": "6.31"
+  },
+  {
+   "key": "EX-2",
+   "label": "Example 2",
+   "entity": "",
+   "page": "6.31"
+  },
+  {
+   "key": "EX-3",
+   "label": "Example 3",
+   "entity": "X Ltd",
+   "page": "6.34"
+  },
+  {
+   "key": "EX-4",
+   "label": "Example 4",
+   "entity": "Z Ltd",
+   "page": "6.35"
+  },
+  {
+   "key": "EX-5",
+   "label": "Example 5",
+   "entity": "Kell Ltd",
+   "page": "6.36"
+  },
+  {
+   "key": "EX-6",
+   "label": "Example 6",
+   "entity": "AB Ltd",
+   "page": "6.37"
+  },
+  {
+   "key": "EX-7",
+   "label": "Example 7",
+   "entity": "",
+   "page": "6.38"
+  },
+  {
+   "key": "ILL-1",
+   "label": "Illustration 1",
+   "entity": "",
+   "page": "6.46"
+  },
+  {
+   "key": "ILL-2",
+   "label": "Illustration 2",
+   "entity": "EXOX Ltd",
+   "page": "6.47"
+  },
+  {
+   "key": "TYK-MCQ-1",
+   "label": "TYK MCQ 1",
+   "entity": "",
+   "page": "6.49"
+  },
+  {
+   "key": "TYK-MCQ-2",
+   "label": "TYK MCQ 2",
+   "entity": "",
+   "page": "6.49"
+  },
+  {
+   "key": "TYK-MCQ-3",
+   "label": "TYK MCQ 3",
+   "entity": "",
+   "page": "6.49"
+  },
+  {
+   "key": "TYK-MCQ-4",
+   "label": "TYK MCQ 4",
+   "entity": "",
+   "page": "6.49"
+  },
+  {
+   "key": "TYK-MCQ-5",
+   "label": "TYK MCQ 5",
+   "entity": "",
+   "page": "6.50"
+  },
+  {
+   "key": "TYK-MCQ-6",
+   "label": "TYK MCQ 6",
+   "entity": "",
+   "page": "6.50"
+  },
+  {
+   "key": "TYK-MCQ-7",
+   "label": "TYK MCQ 7",
+   "entity": "",
+   "page": "6.51"
+  },
+  {
+   "key": "TYK-MCQ-8",
+   "label": "TYK MCQ 8",
+   "entity": "",
+   "page": "6.51"
+  },
+  {
+   "key": "TYK-TQ-9",
+   "label": "TYK Theory Q9",
+   "entity": "",
+   "page": "6.52"
+  },
+  {
+   "key": "TYK-Q10",
+   "label": "TYK Q10",
+   "entity": "Sun Ltd",
+   "page": "6.52"
+  },
+  {
+   "key": "TYK-Q11",
+   "label": "TYK Q11",
+   "entity": "",
+   "page": "6.53"
+  },
+  {
+   "key": "TYK-Q12",
+   "label": "TYK Q12",
+   "entity": "A Ltd",
+   "page": "6.53"
+  }
+ ]
+}

@@ -241,6 +241,29 @@ instead; a pipeline bug that did reach the printed page belongs in both.
 - **Second edition** Build it as CR-001 describes (`SKILL-question-bank-duplicate-detection.md`), run once
   on the full corpus **after** CR-011 adds the new sittings, so it is not run twice.
 
+## CR-017 — Question Bank topic numbers collide with the canonical topic numbers (marks land on the wrong topic)
+
+- **Severity** S2 · **Status** OPEN · **Logged** 2026-11-13 · **Source** Pranav noticed the skewed marks in the
+  topic table while the Concept Book unit for Internal Reconstruction was being built
+- **Where** The "Topic-wise Marks Mapping" table at the start of each chapter book (seen in
+  `InternalReconstruction_Question_Book.html`), and the Must Practice topic map
+  (`must_practice_topic_map.csv`) that the website uses.
+- **What** The Question Bank tags questions with its own older numbering (`topic-index.json`:
+  `subtopicref` such as 1, 2, 2.1, 2.3/3, 3, 4). The canonical topic index (file 1) numbers the same chapter's topics
+  differently. In Internal Reconstruction, **20 of the 25 records (143 marks)** carry the Question Bank tag "3",
+  whose own title is "Full internal reconstruction scheme: capital reduction, preference conversion, loan-to-equity
+  conversion, write-off of accumulated losses". File 1's topic 3 is **Alteration of Share Capital**. The topic table
+  therefore prints those full-scheme questions under "3: Alteration of Share Capital", and Reduction of Share Capital,
+  Compromise/Arrangements and Surrender of Shares (file 1 topics 5 to 7) show **zero marks**.
+- **Cause (read in the code, not re-run)** `first_run/scripts/build_sheet_jsons.py` resolves a Question Bank
+  `subtopicref` by matching it against file 1's `topic_no`, so equal numbers with different meanings collide
+  (`CLAUDE.md` §6 already warns the two taxonomies must not be mixed).
+- **Not checked** Whether the same collision affects other chapters (likely wherever the two numberings differ) and
+  the website's topic-level importance tables.
+- **Second edition** Map Question Bank tags to file 1's `unique_topic_id` by topic title and paragraph, not by number;
+  re-run for all 36 chapters, check the topic tables, then rebuild the Must Practice map (Pranav deploys). Related:
+  CR-010 (Must Practice highlighting) and the Concept Book's topic-level importance chips, which read the same map.
+
 ---
 
 *Add new entries at the bottom, numbered in sequence. Never renumber or delete an
