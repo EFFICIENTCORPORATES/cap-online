@@ -133,6 +133,20 @@ def validate(unit, fix=False):
         if not re.search(rf"^## {tid}\b", text, re.M): errs.append(f"topic section missing: {tid} {t['topic_name']}")
     # cards
     cards = {m.group(1): m.start() for m in re.finditer(r"^### ((?:ILL|EX|TYK)-[A-Za-z0-9\-]+) ", text, re.M)}
+    if fix:  # rewrite every card's Difficulty line first, re-locating each card after each edit (positions shift)
+        for k in list(cards):
+            s = text.find(f"### {k} ")
+            nxt = [i for i in (text.find("\n### ", s + 1), text.find("\n## ", s + 1)) if i != -1]
+            e = min(nxt) if nxt else len(text)
+            body = text[s:e]
+            m = re.search(r"\*\*Concepts:\*\*\s*(.+)", body)
+            n = len([x for x in re.split(r";\s*", m.group(1)) if x.strip()]) if m else 0
+            line = f"**Difficulty:** {difficulty(n)} (computed from {n} concepts)"
+            if re.search(r"\*\*Difficulty:\*\*[^\n]*", body): body = re.sub(r"\*\*Difficulty:\*\*[^\n]*", lambda mm: line, body, count=1)
+            else: body = re.sub(r"(^### [^\n]*\n)", lambda mm: mm.group(1) + line + "\n", body, count=1)
+            text = text[:s] + body + text[e:]
+        open(p, "w", encoding="utf-8").write(text)
+        cards = {m.group(1): m.start() for m in re.finditer(r"^### ((?:ILL|EX|TYK)-[A-Za-z0-9\-]+) ", text, re.M)}
     mcq_rows = set(re.findall(r"^\| (TYK-MCQ-\d+) \|", text, re.M))
     tq_rows = set(re.findall(r"^\| (TYK-TQ-\d+) \|", text, re.M))
     covered = set(cards) | mcq_rows | tq_rows | set(re.findall(r"^- (TYK-Q\d+) is the same as", text, re.M))

@@ -1,0 +1,128 @@
+{
+ "unit": "M2-C5-U1",
+ "topics": {
+  "M2-C5-U1-T1.1": {
+   "topic": "Introduction",
+   "rank": "219",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C5-U1-T1.10": {
+   "topic": "Cost Formula",
+   "rank": "220",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C5-U1-T1.11": {
+   "topic": "Other techniques of cost measurement",
+   "rank": "75",
+   "band": "Next 50",
+   "pyq_marks": "2.5",
+   "must_practice": "1"
+  },
+  "M2-C5-U1-T1.12": {
+   "topic": "Estimates of Net Realisable Value",
+   "rank": "76",
+   "band": "Next 50",
+   "pyq_marks": "2.5",
+   "must_practice": "1"
+  },
+  "M2-C5-U1-T1.13": {
+   "topic": "Comparison of Cost and Net Realisable Value",
+   "rank": "221",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "2"
+  },
+  "M2-C5-U1-T1.14": {
+   "topic": "NRV of materials held for use or disposal",
+   "rank": "40",
+   "band": "Top 50",
+   "pyq_marks": "5.0",
+   "must_practice": "2"
+  },
+  "M2-C5-U1-T1.15": {
+   "topic": "Disclosures",
+   "rank": "222",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C5-U1-T1.2": {
+   "topic": "Inventories",
+   "rank": "223",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C5-U1-T1.3": {
+   "topic": "Measurement of Inventories",
+   "rank": "224",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "3"
+  },
+  "M2-C5-U1-T1.4": {
+   "topic": "Costs of inventory",
+   "rank": "225",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C5-U1-T1.5": {
+   "topic": "Costs of purchase",
+   "rank": "226",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C5-U1-T1.6": {
+   "topic": "Costs of Conversion",
+   "rank": "66",
+   "band": "Next 50",
+   "pyq_marks": "3.5",
+   "must_practice": "4"
+  },
+  "M2-C5-U1-T1.7": {
+   "topic": "Joint or By-Products",
+   "rank": "67",
+   "band": "Next 50",
+   "pyq_marks": "3.5",
+   "must_practice": "1"
+  },
+  "M2-C5-U1-T1.8": {
+   "topic": "Other Costs",
+   "rank": "227",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C5-U1-T1.9": {
+   "topic": "Exclusions from the cost of inventories",
+   "rank": "55",
+   "band": "Next 50",
+   "pyq_marks": "4.0",
+   "must_practice": "3"
+  }
+ },
+ "qb_records": 46,
+ "sittings": [
+  "2023-05",
+  "2023-11",
+  "2024-05",
+  "2024-09",
+  "2025-01",
+  "2025-05",
+  "2025-09",
+  "2026-01",
+  "2026-05",
+  "MTP-2026-01-S1",
+  "MTP-2026-01-S2",
+  "PYQ-2025-09",
+  "RTP-2025-09",
+  "RTP-2026-01"
+ ],
+ "must_practice": 10
+}
