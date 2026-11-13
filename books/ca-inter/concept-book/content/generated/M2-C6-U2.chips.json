@@ -1,0 +1,157 @@
+{
+ "unit": "M2-C6-U2",
+ "topics": {
+  "M2-C6-U2-T2.1": {
+   "topic": "Introduction",
+   "rank": "301",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.10": {
+   "topic": "Contingent Assets",
+   "rank": "302",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "1"
+  },
+  "M2-C6-U2-T2.11": {
+   "topic": "Measurement: Best Estimate",
+   "rank": "303",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.12": {
+   "topic": "Risks and uncertainties",
+   "rank": "304",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.13": {
+   "topic": "Future Events",
+   "rank": "305",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.14": {
+   "topic": "Expected Disposal of Assets",
+   "rank": "306",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.15": {
+   "topic": "Reimbursements",
+   "rank": "307",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "4"
+  },
+  "M2-C6-U2-T2.16": {
+   "topic": "Table- Reimbursements",
+   "rank": "308",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.17": {
+   "topic": "Changes in Provisions",
+   "rank": "309",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.18": {
+   "topic": "Use of Provisions",
+   "rank": "310",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.19": {
+   "topic": "Application of the Recognition and Measurement Rules",
+   "rank": "311",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.2": {
+   "topic": "Scope",
+   "rank": "312",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.20": {
+   "topic": "Disclosure",
+   "rank": "313",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.3": {
+   "topic": "Definitions",
+   "rank": "314",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.4": {
+   "topic": "Recognition of provision",
+   "rank": "28",
+   "band": "Top 50",
+   "pyq_marks": "7.0",
+   "must_practice": "5"
+  },
+  "M2-C6-U2-T2.5": {
+   "topic": "Present Obligation",
+   "rank": "315",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "1"
+  },
+  "M2-C6-U2-T2.6": {
+   "topic": "Past Event",
+   "rank": "316",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.7": {
+   "topic": "Probable Outflow of Resources Embodying Economic Benefits",
+   "rank": "317",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.8": {
+   "topic": "Reliable Estimate of the Obligation",
+   "rank": "318",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M2-C6-U2-T2.9": {
+   "topic": "Contingent Liabilities",
+   "rank": "319",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "1"
+  }
+ },
+ "qb_records": 15,
+ "sittings": [
+  "2024-05",
+  "2024-09",
+  "2025-01",
+  "2025-05",
+  "2026-01",
+  "2026-05",
+  "MTP-2026-01-S1",
+  "RTP-2026-01"
+ ],
+ "must_practice": 10
+}
