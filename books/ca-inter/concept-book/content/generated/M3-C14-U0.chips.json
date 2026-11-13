@@ -1,0 +1,75 @@
+{
+ "unit": "M3-C14-U0",
+ "topics": {
+  "M3-C14-U0-T1": {
+   "topic": "Meaning of reconstruction",
+   "rank": "391",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M3-C14-U0-T2": {
+   "topic": "Methods of internal reconstruction",
+   "rank": "29",
+   "band": "Top 50",
+   "pyq_marks": "7.0",
+   "must_practice": "3"
+  },
+  "M3-C14-U0-T3": {
+   "topic": "Alteration of Share Capital",
+   "rank": "2",
+   "band": "Top 50",
+   "pyq_marks": "49.0",
+   "must_practice": "7"
+  },
+  "M3-C14-U0-T4": {
+   "topic": "Variation of Shareholders Rights",
+   "rank": "60",
+   "band": "Next 50",
+   "pyq_marks": "4.0",
+   "must_practice": "1"
+  },
+  "M3-C14-U0-T5": {
+   "topic": "Reduction of Share Capital",
+   "rank": "392",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M3-C14-U0-T6": {
+   "topic": "Compromise/Arrangements",
+   "rank": "393",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M3-C14-U0-T7": {
+   "topic": "Surrender of Shares",
+   "rank": "394",
+   "band": "Beyond Top 100",
+   "pyq_marks": "0.0",
+   "must_practice": "0"
+  },
+  "M3-C14-U0-T8": {
+   "topic": "Entries in case of internal reconstruction",
+   "rank": "61",
+   "band": "Next 50",
+   "pyq_marks": "4.0",
+   "must_practice": "0"
+  }
+ },
+ "qb_records": 25,
+ "sittings": [
+  "2024-05",
+  "2024-09",
+  "2025-01",
+  "2025-05",
+  "2025-09",
+  "2026-01",
+  "2026-05",
+  "MTP-2026-01-S1",
+  "MTP-2026-01-S2",
+  "PYQ-2025-09"
+ ],
+ "must_practice": 10
+}
