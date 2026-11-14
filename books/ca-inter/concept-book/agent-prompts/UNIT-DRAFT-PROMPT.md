@@ -19,6 +19,7 @@ You are drafting **one unit file** of Pranav Pratik Tulshyan's CA Inter Advanced
 - Per topic section, in this order: **Concept** · **Exam algorithm** (numbered fragments, only where there is a sequence) · **Exam points** · **Stories** (ids) · **Where ICAI tests it** · **Linkages** (only ones you verified on **both** sides in the ICAI text, with unit/topic IDs) · **Remember** (one Hinglish line).
 - **English everywhere except stories and Remember lines**, which are Roman-script Hinglish.
 - **No page numbers anywhere** (the validator rejects them). Cite topics by ID (`M2-C5-U1-T2.3`) and illustrations by **number and entity name**.
+- **Sample stories use the character universe** (`books/ca-inter/concept-book/characters/character_bible_ca_inter_adv_accounts.md`: BCPL, ECPL, Sethji, CFO Sir, Diya, Rolly, Gurpreet Sir, Pranav), never a neutral placeholder and never a real company. Where Pranav himself names a real company or person as a real-world example in his notes, keep it and flag it for his confirmation.
 - Use Pranav's own wording where he has given it (see DECISIONS.md). Mark anything you wrote as a Remember line `(agent draft)`.
 - Name ICAI's own inconsistencies as such ("ICAI is inconsistent here; follow the method in the question"). Never present one as a rule. Mark every inference: "my reconstruction", "ICAI does not say".
 

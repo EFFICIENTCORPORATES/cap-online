@@ -68,6 +68,17 @@ Eight change requests were logged in `first_run/SECOND-EDITION-CHANGE-REQUESTS.m
 | 31 | **Next units: AS 2, AS 10 and AS 29**, each with several stories to be read from his notebooks | Pranav |
 | 32 | The Question Bank topic-number collision (marks on the wrong topic) is logged as CR-017; not to be fixed now | Pranav asked for a quick look only |
 
+## 2026-11-14: answers on the AS 29 unit, character names, examples
+
+| # | Decision | Made by |
+|---|---|---|
+| 33 | The 19-year-old's viral-video story is the continuation of the naphthalene factory story (engineer warns, repair not done, leak into the river, obligation arises, viral video reaches the DM office, obligation remains). It shows how a contingent liability becomes a provision, and stays contingent when no estimate can be made. Written as story S10 | Pranav |
+| 34 | Class figures for "remote" (about 5 percent) and "probable" (50 to 80 percent) are kept as **teaching aids, not mandatory, not in ICAI** | Pranav |
+| 35 | If the consequence involves **no outflow of resources** (sorry letter, warning letter, small punishment, factory closed 5 days), there is no liability to book | Pranav |
+| 36 | **Sample stories use the character universe**, not neutral names and not real companies: BCPL (Bade Chalo Private Limited, Sethji), ECPL (Efficient Corporates Private Limited, CFO Sir), Diya, Rolly, Gurpreet Sir, Pranav (`books/ca-inter/concept-book/characters/`). Names of people too, as far as possible | Pranav |
+| 37 | "Onerous contract" in class is **ghate ka sauda** | Pranav |
+| 38 | Internal Reconstruction example: Pranav asked for a famous real case, preferably Tata group. A web search found **no verified Tata group Section 66 loss write-off**; nothing added to the unit. Candidates are listed in the unit's open questions | Agent, pending Pranav |
+
 ## Still open (as of 2026-11-13)
 
 - Confirm the Ch 11 Unit 1 split (decision 10).

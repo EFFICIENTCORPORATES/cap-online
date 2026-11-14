@@ -166,3 +166,13 @@ See the Stories list in `content/M2-C6-U2.md`. **Listed, not written:** the 19-y
 6. NB02 page 3: meaning of the struck-out "Profit 1 cr / net off 0.5 cr".
 7. NB02 page 4: the 2% and 3% written under Type A and Type B.
 8. NB01 pages 3 to 4: whether to print the names of a real company and a real person in the profit-smoothing story.
+
+
+## Answers from Pranav, 2026-11-14 (recorded after the notebook reading)
+
+- **NB01 page 7, the viral-video story:** told by Pranav; written as story S10 (the naphthalene story, continued). Engineer's warning, repair not done, leak into the river = present obligation; engineer says he will correct it but cannot; next day a 19-year-old's video goes viral and reaches the DM office; the obligation still arises. Each legal term is explained to show how a contingent liability becomes a provision, and how it stays contingent when no estimate can be made.
+- **Class figures** (remote about 5 percent; probable 50 to 80 percent): keep as teaching aids, not mandatory, not in ICAI.
+- **"Sorry letter, warning letter, small punishment, factory closed for 5 days":** no outflow of resources, so no liability to book. His rule; added to T2.9.
+- **Profit-smoothing story:** use the character-universe names (BCPL, Sethji, Rolly), not neutral and not a real company. Applied to S1 and S3 (S1 had "RJL" in the notebook; changed to BCPL under the same rule: revert if he tells it with RJL).
+- **Loss-making deal:** "ghate ka sauda" (already in S5 and T2.7).
+- **Sun Ltd net-off (NB02 page 3):** he said "the profit of 1 crore netted of 2.5 crore" and is checking the page. **Pothole compensation (NB01 page 10):** he is checking.
