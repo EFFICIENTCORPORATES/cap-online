@@ -162,3 +162,4 @@ node_modules/
 # Comparator: full local mirror of a competitor's website (HTML/CSS/JS/images) --
 # large, binary-heavy, and not our own content; local reference only
 telegram/comparator/sales-agent/coceducation/site-mirror/
+books/ca-inter/concept-book/content/vendor/
